@@ -1,0 +1,11 @@
+{
+  if (handler == null || context == null) {
+    return;
+  }
+  handler.post(new Runnable(){
+    public void run(){
+      ((AuthenticatorActivity)context).onAuthenticationResult(result,message);
+    }
+  }
+);
+}

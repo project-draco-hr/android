@@ -1,0 +1,5 @@
+AccountAuthenticatorResponse response
+String accountType
+String authTokenType
+String[] requiredFeatures
+Bundle options

@@ -1,0 +1,3 @@
+int id
+String hostname
+String uri

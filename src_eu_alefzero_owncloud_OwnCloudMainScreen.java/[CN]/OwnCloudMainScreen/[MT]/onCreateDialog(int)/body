@@ -1,0 +1,8 @@
+{
+switch (id) {
+case DIALOG_CHOOSE_ACCOUNT:
+    return createChooseAccountDialog();
+default :
+  throw new IllegalArgumentException("Unknown dialog id: " + id);
+}
+}

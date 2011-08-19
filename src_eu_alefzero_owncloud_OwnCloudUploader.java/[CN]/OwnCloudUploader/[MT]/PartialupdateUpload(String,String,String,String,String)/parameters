@@ -1,0 +1,5 @@
+String fileLocalPath
+String filename
+String filepath
+String contentType
+String contentLength

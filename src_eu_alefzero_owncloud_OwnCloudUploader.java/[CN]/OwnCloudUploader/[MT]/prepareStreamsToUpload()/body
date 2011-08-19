@@ -1,0 +1,12 @@
+{
+  if (getIntent().getAction().equals(Intent.ACTION_SEND)) {
+    mStreamsToUpload=new ArrayList<Parcelable>();
+    mStreamsToUpload.add(getIntent().getParcelableExtra(Intent.EXTRA_STREAM));
+  }
+ else   if (getIntent().getAction().equals(Intent.ACTION_SEND_MULTIPLE)) {
+    mStreamsToUpload=getIntent().getParcelableArrayListExtra(Intent.EXTRA_STREAM);
+  }
+ else {
+    throw new IllegalArgumentException("Unknown action given: " + getIntent().getAction());
+  }
+}

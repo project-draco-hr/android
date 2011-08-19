@@ -1,0 +1,8 @@
+{
+  super.onCreateContextMenu(menu,v,menuInfo);
+  AdapterContextMenuInfo info=(AdapterContextMenuInfo)menuInfo;
+  mSelectedMenuItem=info.position - 1;
+  menu.setHeaderTitle(mSessions.get(mSelectedMenuItem).getName());
+  MenuInflater inflater=getMenuInflater();
+  inflater.inflate(R.menu.session_context_menu,menu);
+}

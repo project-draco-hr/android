@@ -1,0 +1,18 @@
+{
+  ContentValues cv=new ContentValues();
+  cv.put(ProviderTableMeta.FILE_NAME,filename);
+  cv.put(ProviderTableMeta.FILE_PATH,filepath);
+  cv.put(ProviderTableMeta.FILE_STORAGE_PATH,fileLocalPath);
+  cv.put(ProviderTableMeta.FILE_MODIFIED,WebdavUtils.DISPLAY_DATE_FORMAT.format(new java.util.Date()));
+  cv.put(ProviderTableMeta.FILE_CONTENT_TYPE,contentType);
+  cv.put(ProviderTableMeta.FILE_CONTENT_LENGTH,contentLength);
+  cv.put(ProviderTableMeta.FILE_ACCOUNT_OWNER,mAccount.name);
+  Log.d(TAG,filename + " ++ " + filepath+ " ++ "+ contentLength+ " ++ "+ contentType+ " ++ "+ fileLocalPath);
+  if (!mParents.empty()) {
+    Cursor c=managedQuery(Uri.withAppendedPath(ProviderTableMeta.CONTENT_URI_FILE,mParents.peek()),null,null,null,null);
+    c.moveToFirst();
+    cv.put(ProviderTableMeta.FILE_PARENT,c.getString(c.getColumnIndex(ProviderTableMeta._ID)));
+    c.close();
+  }
+  getContentResolver().insert(ProviderTableMeta.CONTENT_URI_FILE,cv);
+}

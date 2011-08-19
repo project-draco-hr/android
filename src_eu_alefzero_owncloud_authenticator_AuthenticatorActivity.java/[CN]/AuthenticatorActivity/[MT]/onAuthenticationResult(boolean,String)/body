@@ -1,0 +1,32 @@
+{
+  if (result) {
+    TextView username_text=(TextView)findViewById(R.id.account_username), password_text=(TextView)findViewById(R.id.account_password);
+    URL url=null;
+    try {
+      url=new URL(message);
+    }
+ catch (    MalformedURLException e) {
+      Log.e(getClass().getName(),"Malformed URL: " + message);
+      return;
+    }
+    Account account=new Account(username_text.getText().toString() + "@" + url.getHost(),AccountAuthenticator.ACCOUNT_TYPE);
+    AccountManager accManager=AccountManager.get(this);
+    accManager.addAccountExplicitly(account,password_text.getText().toString(),null);
+    final Intent intent=new Intent();
+    intent.putExtra(AccountManager.KEY_ACCOUNT_TYPE,AccountAuthenticator.ACCOUNT_TYPE);
+    intent.putExtra(AccountManager.KEY_ACCOUNT_NAME,account.name);
+    intent.putExtra(AccountManager.KEY_AUTHTOKEN,AccountAuthenticator.ACCOUNT_TYPE);
+    accManager.setUserData(account,AccountAuthenticator.KEY_OC_URL,url.toString());
+    setAccountAuthenticatorResult(intent.getExtras());
+    setResult(RESULT_OK,intent);
+    Bundle bundle=new Bundle();
+    bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL,true);
+    getContentResolver().startSync(ProviderTableMeta.CONTENT_URI,bundle);
+    dismissDialog(0);
+    finish();
+  }
+ else {
+    Toast.makeText(this,message,Toast.LENGTH_LONG).show();
+    dismissDialog(0);
+  }
+}

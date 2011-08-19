@@ -1,0 +1,83 @@
+{
+  final AlertDialog.Builder builder=new Builder(this);
+switch (id) {
+case DIALOG_WAITING:
+    ProgressDialog pDialog=new ProgressDialog(this);
+  pDialog.setIndeterminate(false);
+pDialog.setCancelable(false);
+pDialog.setMessage(getResources().getString(R.string.uploader_info_uploading));
+return pDialog;
+case DIALOG_NO_ACCOUNT:
+builder.setIcon(android.R.drawable.ic_dialog_alert);
+builder.setTitle(R.string.uploader_wrn_no_account_title);
+builder.setMessage(R.string.uploader_wrn_no_account_text);
+builder.setCancelable(false);
+builder.setPositiveButton(R.string.uploader_wrn_no_account_setup_btn_text,new OnClickListener(){
+public void onClick(DialogInterface dialog,int which){
+if (android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.ECLAIR_MR1) {
+Intent intent=new Intent("android.settings.ADD_ACCOUNT_SETTINGS");
+intent.putExtra("authorities",new String[]{AccountAuthenticator.AUTH_TOKEN_TYPE});
+startActivityForResult(intent,REQUEST_CODE_SETUP_ACCOUNT);
+}
+ else {
+Intent intent=new Intent(getBaseContext(),AccountAuthenticator.class);
+startActivityForResult(intent,REQUEST_CODE_SETUP_ACCOUNT);
+}
+}
+}
+);
+builder.setNegativeButton(R.string.uploader_wrn_no_account_quit_btn_text,new OnClickListener(){
+public void onClick(DialogInterface dialog,int which){
+finish();
+}
+}
+);
+return builder.create();
+case DIALOG_GET_DIRNAME:
+final EditText dirName=new EditText(getBaseContext());
+builder.setView(dirName);
+builder.setTitle(R.string.uploader_info_dirname);
+String pathToUpload;
+if (mParents.empty()) {
+pathToUpload="/";
+}
+ else {
+mCursor=managedQuery(Uri.withAppendedPath(ProviderTableMeta.CONTENT_URI_FILE,mParents.peek()),null,null,null,null);
+mCursor.moveToFirst();
+pathToUpload=mCursor.getString(mCursor.getColumnIndex(ProviderTableMeta.FILE_PATH)) + mCursor.getString(mCursor.getColumnIndex(ProviderTableMeta.FILE_NAME)).replace(" ","%20");
+}
+a a=new a(pathToUpload,dirName);
+builder.setPositiveButton(R.string.common_ok,a);
+builder.setNegativeButton(R.string.common_cancel,new OnClickListener(){
+public void onClick(DialogInterface dialog,int which){
+dialog.cancel();
+}
+}
+);
+return builder.create();
+case DIALOG_MULTIPLE_ACCOUNT:
+CharSequence ac[]=new CharSequence[mAccountManager.getAccountsByType(AccountAuthenticator.ACCOUNT_TYPE).length];
+for (int i=0; i < ac.length; ++i) {
+ac[i]=mAccountManager.getAccountsByType(AccountAuthenticator.ACCOUNT_TYPE)[i].name;
+}
+builder.setTitle(R.string.common_choose_account);
+builder.setItems(ac,new OnClickListener(){
+public void onClick(DialogInterface dialog,int which){
+mAccount=mAccountManager.getAccountsByType(AccountAuthenticator.ACCOUNT_TYPE)[which];
+populateDirectoryList();
+}
+}
+);
+builder.setCancelable(true);
+builder.setOnCancelListener(new OnCancelListener(){
+public void onCancel(DialogInterface dialog){
+dialog.cancel();
+finish();
+}
+}
+);
+return builder.create();
+default :
+throw new IllegalArgumentException("Unknown dialog id: " + id);
+}
+}

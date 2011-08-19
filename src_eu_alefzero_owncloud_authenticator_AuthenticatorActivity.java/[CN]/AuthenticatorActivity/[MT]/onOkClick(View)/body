@@ -1,0 +1,46 @@
+{
+  TextView url_text=(TextView)findViewById(R.id.host_URL);
+  TextView username_text=(TextView)findViewById(R.id.account_username);
+  TextView password_text=(TextView)findViewById(R.id.account_password);
+  Log.i(getClass().getName(),"OK clicked");
+  boolean hasErrors=false;
+  URL uri=null;
+  if (url_text.getText().toString().trim().length() == 0) {
+    url_text.setTextColor(Color.RED);
+    hasErrors=true;
+  }
+ else {
+    url_text.setTextColor(Color.BLACK);
+  }
+  try {
+    String url_str=url_text.getText().toString();
+    if (!url_str.startsWith("http://") && !url_str.startsWith("https://")) {
+      url_str="http://" + url_str;
+    }
+    uri=new URL(url_str);
+  }
+ catch (  MalformedURLException e) {
+    url_text.setTextColor(Color.RED);
+    e.printStackTrace();
+    hasErrors=true;
+  }
+  if (username_text.getText().toString().contains(" ") || username_text.getText().toString().trim().length() == 0) {
+    username_text.setTextColor(Color.RED);
+    hasErrors=true;
+  }
+ else {
+    username_text.setTextColor(Color.BLACK);
+  }
+  if (password_text.getText().toString().trim().length() == 0) {
+    password_text.setTextColor(Color.RED);
+    hasErrors=true;
+  }
+ else {
+    password_text.setTextColor(Color.BLACK);
+  }
+  if (hasErrors) {
+    return;
+  }
+  showDialog(0);
+  mAuthThread=AuthUtils.attemptAuth(uri,username_text.getText().toString(),password_text.getText().toString(),mHandler,AuthenticatorActivity.this);
+}

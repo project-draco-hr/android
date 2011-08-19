@@ -1,0 +1,48 @@
+{
+  preShow();
+  int xPos, yPos;
+  int[] location=new int[2];
+  mAnchor.getLocationOnScreen(location);
+  Rect anchorRect=new Rect(location[0],location[1],location[0] + mAnchor.getWidth(),location[1] + mAnchor.getHeight());
+  createActionList();
+  root.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
+  root.measure(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
+  int rootHeight=root.getMeasuredHeight();
+  int rootWidth=root.getMeasuredWidth();
+  int screenWidth=mWManager.getDefaultDisplay().getWidth();
+  int screenHeight=mWManager.getDefaultDisplay().getHeight();
+  if ((anchorRect.left + rootWidth) > screenWidth) {
+    xPos=anchorRect.left - (rootWidth - mAnchor.getWidth());
+  }
+ else {
+    if (mAnchor.getWidth() > rootWidth) {
+      xPos=anchorRect.centerX() - (rootWidth / 2);
+    }
+ else {
+      xPos=anchorRect.left;
+    }
+  }
+  int dyTop=anchorRect.top;
+  int dyBottom=screenHeight - anchorRect.bottom;
+  boolean onTop=(dyTop > dyBottom) ? true : false;
+  if (onTop) {
+    if (rootHeight > dyTop) {
+      yPos=15;
+      LayoutParams l=scroller.getLayoutParams();
+      l.height=dyTop - mAnchor.getHeight();
+    }
+ else {
+      yPos=anchorRect.top - rootHeight;
+    }
+  }
+ else {
+    yPos=anchorRect.bottom;
+    if (rootHeight > dyBottom) {
+      LayoutParams l=scroller.getLayoutParams();
+      l.height=dyBottom;
+    }
+  }
+  showArrow(((onTop) ? R.id.arrow_down : R.id.arrow_up),anchorRect.centerX() - xPos);
+  setAnimationStyle(screenWidth,anchorRect.centerX(),onTop);
+  mWindow.showAtLocation(mAnchor,Gravity.NO_GRAVITY,xPos,yPos);
+}

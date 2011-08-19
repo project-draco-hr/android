@@ -1,0 +1,6 @@
+{
+  ContentValues cv=new ContentValues();
+  cv.put("sessionName",hostname);
+  cv.put("sessionUrl",uri);
+  mDB.update(TABLE_SESSIONS,cv,"_id = ?",new String[]{String.valueOf(id)});
+}

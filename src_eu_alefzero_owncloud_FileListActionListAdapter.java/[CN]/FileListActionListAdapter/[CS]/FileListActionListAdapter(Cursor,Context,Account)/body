@@ -1,0 +1,9 @@
+{
+  mContext=co;
+  mFilename=c.getString(c.getColumnIndex(ProviderTableMeta.FILE_NAME));
+  mFileType=c.getString(c.getColumnIndex(ProviderTableMeta.FILE_CONTENT_TYPE));
+  mFilePath=c.getString(c.getColumnIndex(ProviderTableMeta.FILE_PATH));
+  mFileStoragePath=c.getString(c.getColumnIndex(ProviderTableMeta.FILE_STORAGE_PATH));
+  mItemId=c.getString(c.getColumnIndex(ProviderTableMeta._ID));
+  mAccount=account;
+}

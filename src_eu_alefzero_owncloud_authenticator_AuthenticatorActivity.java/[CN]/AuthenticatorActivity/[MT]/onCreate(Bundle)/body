@@ -1,0 +1,13 @@
+{
+  super.onCreate(savedInstanceState);
+  getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+  setContentView(R.layout.account_setup);
+  if (getIntent().hasExtra(PARAM_USERNAME)) {
+    String username=getIntent().getStringExtra(PARAM_HOSTNAME);
+    TextView host_text, user_text;
+    host_text=(TextView)findViewById(R.id.host_URL);
+    user_text=(TextView)findViewById(R.id.account_username);
+    host_text.setText(host_text.getText() + username.substring(username.lastIndexOf('@')));
+    user_text.setText(user_text.getText() + username.substring(0,username.lastIndexOf('@') - 1));
+  }
+}

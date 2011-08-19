@@ -1,0 +1,5 @@
+{
+  mFailureBundle=new Bundle();
+  mFailureBundle.putInt(AccountManager.KEY_ERROR_CODE,code);
+  mFailureBundle.putString(AccountManager.KEY_ERROR_MESSAGE,errorMsg);
+}

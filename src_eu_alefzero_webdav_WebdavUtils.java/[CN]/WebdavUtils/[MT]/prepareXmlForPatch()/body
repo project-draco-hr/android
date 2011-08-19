@@ -1,0 +1,3 @@
+{
+  return "<?xml version=\"1.0\" ?><D:propertyupdate xmlns:D=\"DAV:\"></D:propertyupdate>";
+}

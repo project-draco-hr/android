@@ -1,0 +1,9 @@
+{
+switch (item.getItemId()) {
+case R.id.settingsItem:
+    Intent i=new Intent(this,Preferences.class);
+  startActivity(i);
+break;
+}
+return true;
+}

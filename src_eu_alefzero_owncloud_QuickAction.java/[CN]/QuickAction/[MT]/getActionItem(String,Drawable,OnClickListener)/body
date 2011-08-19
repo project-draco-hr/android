@@ -1,0 +1,15 @@
+{
+  LinearLayout container=(LinearLayout)inflater.inflate(R.layout.action_item,null);
+  ImageView img=(ImageView)container.findViewById(R.id.icon);
+  TextView text=(TextView)container.findViewById(R.id.title);
+  if (icon != null) {
+    img.setImageDrawable(icon);
+  }
+  if (title != null) {
+    text.setText(title);
+  }
+  if (listener != null) {
+    container.setOnClickListener(listener);
+  }
+  return container;
+}

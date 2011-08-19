@@ -1,0 +1,8 @@
+{
+  String str="TreeNode {";
+  for (  Entry<NodeProperty,String> e : propertyMap_.entrySet()) {
+    str+=e.getKey() + ": " + e.getValue()+ ",";
+  }
+  str+="}";
+  return str;
+}

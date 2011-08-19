@@ -1,0 +1,17 @@
+{
+  preShow();
+  mWindow.setAnimationStyle(android.R.style.Animation_Dialog);
+  int[] location=new int[2];
+  mAnchor.getLocationOnScreen(location);
+  Rect anchorRect=new Rect(location[0],location[1],location[0] + mAnchor.getWidth(),location[1] + mAnchor.getHeight());
+  root.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
+  root.measure(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
+  int rootW=root.getWidth(), rootH=root.getHeight();
+  int screenW=mWManager.getDefaultDisplay().getWidth();
+  int xpos=((screenW - rootW) / 2) + x;
+  int ypos=anchorRect.top - rootH + y;
+  if (rootH > anchorRect.top) {
+    ypos=anchorRect.bottom + y;
+  }
+  mWindow.showAtLocation(mAnchor,Gravity.NO_GRAVITY,xpos,ypos);
+}

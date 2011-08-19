@@ -1,0 +1,42 @@
+{
+  if (mIsDisplayingFile) {
+    mIsDisplayingFile=false;
+    setContentView(R.layout.main);
+    Uri uri;
+    if (mParents.empty()) {
+      uri=ProviderTableMeta.CONTENT_URI;
+    }
+ else {
+      uri=Uri.withAppendedPath(ProviderTableMeta.CONTENT_URI_DIR,mParents.peek());
+    }
+    mCursor=managedQuery(uri,null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?",new String[]{mAccount.name},null);
+    if (mCursor.moveToFirst()) {
+      TextView tv=(TextView)findViewById(R.id.directory_name);
+      tv.setText(mCursor.getString(mCursor.getColumnIndex(ProviderTableMeta.FILE_PATH)));
+    }
+    getListView().setAdapter(new FileListListAdapter(mCursor,this));
+    getListView().invalidate();
+    return;
+  }
+  if (mParents.size() == 0) {
+    super.onBackPressed();
+    return;
+  }
+ else   if (mParents.size() == 1) {
+    mParents.pop();
+    mCursor=managedQuery(ProviderTableMeta.CONTENT_URI,null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?",new String[]{mAccount.name},null);
+  }
+ else {
+    mParents.pop();
+    mCursor=managedQuery(Uri.withAppendedPath(ProviderTableMeta.CONTENT_URI_DIR,mParents.peek()),null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?",new String[]{mAccount.name},null);
+  }
+  setListAdapter(new FileListListAdapter(mCursor,this));
+  getListView().invalidate();
+  TextView tv=(TextView)findViewById(R.id.directory_name);
+  String s=tv.getText().toString();
+  if (s.endsWith("/")) {
+    s=s.substring(0,s.length() - 1);
+  }
+  s=s.substring(0,s.lastIndexOf('/') + 1);
+  tv.setText(s);
+}

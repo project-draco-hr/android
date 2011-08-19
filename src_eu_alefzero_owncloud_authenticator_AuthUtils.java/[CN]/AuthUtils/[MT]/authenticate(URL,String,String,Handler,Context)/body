@@ -1,0 +1,46 @@
+{
+  String strippedPath=url.toString().endsWith("/") ? url.toString().substring(0,url.toString().length() - 1) : url.toString();
+  String webdatPath=strippedPath + WEBDAV_PATH_2_0;
+  URL complete_url=null;
+  try {
+    complete_url=new URL(webdatPath);
+  }
+ catch (  MalformedURLException e) {
+    sendResult(false,handler,context,"URL error");
+    return false;
+  }
+  if (tryGetWebdav(complete_url,username,password,handler,context)) {
+    sendResult(true,handler,context,complete_url.toString());
+    return true;
+  }
+  if (mResultMsg.equals("401")) {
+    sendResult(false,handler,context,"Invalid login or/and password");
+    return false;
+  }
+  if (!mResultMsg.equals("404")) {
+    sendResult(false,handler,context,"Server error: " + mResultMsg);
+    return false;
+  }
+  webdatPath=strippedPath + WEBDAV_PATH_1_2;
+  try {
+    complete_url=new URL(webdatPath);
+  }
+ catch (  MalformedURLException e) {
+    sendResult(false,handler,context,"URL error");
+    return false;
+  }
+  if (tryGetWebdav(complete_url,username,password,handler,context)) {
+    sendResult(true,handler,context,complete_url.toString());
+    return true;
+  }
+  if (mResultMsg.equals("401")) {
+    sendResult(false,handler,context,"Invalid login or/and password");
+    return false;
+  }
+  if (mResultMsg.equals("404")) {
+    sendResult(false,handler,context,"Wrong path given");
+    return false;
+  }
+  sendResult(false,handler,context,"Server error: " + mResultMsg);
+  return false;
+}

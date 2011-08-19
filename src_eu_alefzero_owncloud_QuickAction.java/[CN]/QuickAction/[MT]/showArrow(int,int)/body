@@ -1,0 +1,9 @@
+{
+  final View showArrow=(whichArrow == R.id.arrow_up) ? mArrowUp : mArrowDown;
+  final View hideArrow=(whichArrow == R.id.arrow_up) ? mArrowDown : mArrowUp;
+  final int arrowWidth=mArrowUp.getMeasuredWidth();
+  showArrow.setVisibility(View.VISIBLE);
+  ViewGroup.MarginLayoutParams param=(ViewGroup.MarginLayoutParams)showArrow.getLayoutParams();
+  param.leftMargin=requestedX - arrowWidth / 2;
+  hideArrow.setVisibility(View.INVISIBLE);
+}

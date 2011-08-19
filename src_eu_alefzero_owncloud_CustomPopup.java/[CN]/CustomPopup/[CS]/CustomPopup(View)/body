@@ -1,0 +1,16 @@
+{
+  mAnchor=anchor;
+  mWindow=new PopupWindow(anchor.getContext());
+  mWindow.setTouchInterceptor(new OnTouchListener(){
+    public boolean onTouch(    View v,    MotionEvent event){
+      if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
+        CustomPopup.this.dismiss();
+        return true;
+      }
+      return false;
+    }
+  }
+);
+  mWManager=(WindowManager)anchor.getContext().getSystemService(Context.WINDOW_SERVICE);
+  onCreate();
+}

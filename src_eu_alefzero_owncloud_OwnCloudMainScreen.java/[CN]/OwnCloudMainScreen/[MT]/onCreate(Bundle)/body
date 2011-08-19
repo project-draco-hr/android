@@ -1,0 +1,22 @@
+{
+  super.onCreate(savedInstanceState);
+  mParents=new Stack<String>();
+  mIsDisplayingFile=false;
+  mDBHandler=new DbHandler(getBaseContext());
+  requestWindowFeature(Window.FEATURE_NO_TITLE);
+  setContentView(R.layout.main);
+  AccountManager accMan=AccountManager.get(this);
+  Account[] accounts=accMan.getAccountsByType(AccountAuthenticator.ACCOUNT_TYPE);
+  if (accounts.length == 0) {
+    Intent intent=new Intent("android.settings.ADD_ACCOUNT_SETTINGS");
+    intent.putExtra("authorities",new String[]{AccountAuthenticator.AUTH_TOKEN_TYPE});
+    startActivity(intent);
+  }
+ else   if (accounts.length > 1) {
+    showDialog(DIALOG_CHOOSE_ACCOUNT);
+  }
+ else {
+    mAccount=accounts[0];
+    populateFileList();
+  }
+}

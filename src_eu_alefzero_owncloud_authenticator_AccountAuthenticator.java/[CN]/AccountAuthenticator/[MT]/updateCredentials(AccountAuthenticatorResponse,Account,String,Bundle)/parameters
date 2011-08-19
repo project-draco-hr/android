@@ -1,0 +1,4 @@
+AccountAuthenticatorResponse response
+Account account
+String authTokenType
+Bundle options

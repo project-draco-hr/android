@@ -1,0 +1,12 @@
+{
+  if (!mCursor.moveToPosition(position)) {
+    throw new IndexOutOfBoundsException("Incorrect item selected");
+  }
+  String _id=mCursor.getString(mCursor.getColumnIndex(ProviderTableMeta._ID));
+  mParents.push(_id);
+  mCursor.close();
+  mCursor=managedQuery(Uri.withAppendedPath(ProviderTableMeta.CONTENT_URI_DIR,_id),null,ProviderTableMeta.FILE_CONTENT_TYPE + "=?",new String[]{"DIR"},null);
+  SimpleCursorAdapter sca=new SimpleCursorAdapter(this,R.layout.uploader_list_item_layout,mCursor,new String[]{ProviderTableMeta.FILE_NAME},new int[]{R.id.textView1});
+  setListAdapter(sca);
+  getListView().invalidate();
+}

@@ -1,0 +1,13 @@
+{
+  super(anchor);
+  actionList=new ArrayList<ActionItem>();
+  context=anchor.getContext();
+  inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+  root=(ViewGroup)inflater.inflate(R.layout.popup,null);
+  mArrowDown=(ImageView)root.findViewById(R.id.arrow_down);
+  mArrowUp=(ImageView)root.findViewById(R.id.arrow_up);
+  setContentView(root);
+  mTrack=(ViewGroup)root.findViewById(R.id.tracks);
+  scroller=(ScrollView)root.findViewById(R.id.scroller);
+  animStyle=ANIM_AUTO;
+}

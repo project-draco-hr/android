@@ -1,0 +1,7 @@
+{
+synchronized (sSyncAdapterLock) {
+    if (sSyncAdapter == null) {
+      sSyncAdapter=new SyncAdapter(getApplicationContext(),true);
+    }
+  }
+}

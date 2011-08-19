@@ -1,0 +1,7 @@
+{
+  super.onCreate(savedInstanceState);
+  mDbHandler=new DbHandler(getBaseContext());
+  mSessions=new Vector<OwnCloudSession>();
+  addPreferencesFromResource(R.xml.preferences);
+  registerForContextMenu(getListView());
+}

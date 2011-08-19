@@ -1,0 +1,4 @@
+{
+  mDbHelper=new DataBaseHelper(getContext());
+  return true;
+}

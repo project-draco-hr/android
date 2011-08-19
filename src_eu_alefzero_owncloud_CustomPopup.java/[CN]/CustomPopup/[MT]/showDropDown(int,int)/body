@@ -1,0 +1,5 @@
+{
+  preShow();
+  mWindow.setAnimationStyle(android.R.style.Animation_Dialog);
+  mWindow.showAsDropDown(mAnchor,x,y);
+}

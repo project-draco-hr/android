@@ -1,0 +1,4 @@
+{
+  setResult(Activity.RESULT_CANCELED);
+  super.onBackPressed();
+}

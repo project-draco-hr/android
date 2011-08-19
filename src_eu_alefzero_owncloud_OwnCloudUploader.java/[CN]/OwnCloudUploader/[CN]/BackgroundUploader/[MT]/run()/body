@@ -1,0 +1,70 @@
+{
+  boolean any_failed=false;
+  DefaultHttpClient httpClient=new DefaultHttpClient();
+  Uri uri=Uri.parse(mAccountManager.getUserData(mAccount,AccountAuthenticator.KEY_OC_URL));
+  httpClient.getCredentialsProvider().setCredentials(new AuthScope(uri.getHost(),(uri.getPort() == -1) ? 80 : uri.getPort()),new UsernamePasswordCredentials(mUsername,mPassword));
+  BasicHttpContext httpContext=new BasicHttpContext();
+  BasicScheme basicAuth=new BasicScheme();
+  httpContext.setAttribute("preemptive-auth",basicAuth);
+  HttpHost targetHost=new HttpHost(uri.getHost(),(uri.getPort() == -1) ? 80 : uri.getPort(),(uri.getScheme() == "https") ? "https" : "http");
+  if (mCreateDir) {
+    HttpMkCol method=new HttpMkCol(uri.toString() + mUploadPath + "/");
+    method.setHeader("User-Agent","Android-ownCloud");
+    try {
+      httpClient.execute(targetHost,method,httpContext);
+      Log.i(TAG,"Creating dir completed");
+    }
+ catch (    final Exception e) {
+      e.printStackTrace();
+      mHandler.post(new Runnable(){
+        public void run(){
+          OwnCloudUploader.this.onUploadComplete(false,e.getLocalizedMessage());
+        }
+      }
+);
+      return;
+    }
+  }
+  for (int i=0; i < mUploadStreams.size(); ++i) {
+    final Cursor c=getContentResolver().query((Uri)mUploadStreams.get(i),null,null,null,null);
+    c.moveToFirst();
+    HttpPut method=new HttpPut(uri.toString() + mUploadPath + "/"+ c.getString(c.getColumnIndex(Media.DISPLAY_NAME)).replace(" ","%20"));
+    method.setHeader("Content-type",c.getString(c.getColumnIndex(Media.MIME_TYPE)));
+    method.setHeader("User-Agent","Android-ownCloud");
+    try {
+      FileBody fb=new FileBody(new File(c.getString(c.getColumnIndex(Media.DATA))),c.getString(c.getColumnIndex(Media.MIME_TYPE)));
+      MultipartEntity entity=new MultipartEntity();
+      final FileEntity fileEntity=new FileEntity(new File(c.getString(c.getColumnIndex(Media.DATA))),c.getString(c.getColumnIndex(Media.MIME_TYPE)));
+      entity.addPart(c.getString(c.getColumnIndex(Media.DISPLAY_NAME)).replace(" ","%20"),fb);
+      method.setEntity(fileEntity);
+      Log.i(TAG,"executing:" + method.getRequestLine().toString());
+      httpClient.execute(targetHost,method,httpContext);
+      mHandler.post(new Runnable(){
+        public void run(){
+          OwnCloudUploader.this.PartialupdateUpload(c.getString(c.getColumnIndex(Media.DATA)),c.getString(c.getColumnIndex(Media.DISPLAY_NAME)),mUploadPath + (mUploadPath.equals("/") ? "" : "/"),fileEntity.getContentType().getValue(),fileEntity.getContentLength() + "");
+        }
+      }
+);
+      Log.i(TAG,"Uploading, done");
+    }
+ catch (    final Exception e) {
+      any_failed=true;
+      mHandler.post(new Runnable(){
+        public void run(){
+          OwnCloudUploader.this.onUploadComplete(false,c.getString(c.getColumnIndex(Media.DISPLAY_NAME)) + " " + e.getLocalizedMessage());
+        }
+      }
+);
+    }
+  }
+  if (!any_failed) {
+    mHandler.post(new Runnable(){
+      public void run(){
+        OwnCloudUploader.this.onUploadComplete(true,"Success");
+      }
+    }
+);
+  }
+  Bundle bundle=new Bundle();
+  bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL,true);
+}

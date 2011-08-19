@@ -1,0 +1,11 @@
+{
+  final Intent intent=new Intent(mContext,AuthenticatorActivity.class);
+  intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE,response);
+  intent.putExtra(KEY_ACCOUNT,account);
+  intent.putExtra(KEY_AUTH_TOKEN_TYPE,authTokenType);
+  intent.putExtra(KEY_LOGIN_OPTIONS,options);
+  setIntentFlags(intent);
+  final Bundle bundle=new Bundle();
+  bundle.putParcelable(AccountManager.KEY_INTENT,intent);
+  return bundle;
+}

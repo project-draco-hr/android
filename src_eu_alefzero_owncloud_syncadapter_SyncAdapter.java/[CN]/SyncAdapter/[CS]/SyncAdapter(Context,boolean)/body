@@ -1,0 +1,5 @@
+{
+  super(context,autoInitialize);
+  mContext=context;
+  mAccountManager=AccountManager.get(context);
+}

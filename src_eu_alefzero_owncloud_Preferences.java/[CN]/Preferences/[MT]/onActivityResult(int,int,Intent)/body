@@ -1,0 +1,17 @@
+{
+  super.onActivityResult(requestCode,resultCode,data);
+  if (resultCode == Activity.RESULT_OK) {
+switch (requestCode) {
+case mNewSession:
+      mDbHandler.addSession(data.getStringExtra("sessionName"),data.getStringExtra("sessionURL"));
+    getPreferenceScreen().removeAll();
+  addPreferencesFromResource(R.xml.preferences);
+populateSessionList();
+break;
+case mEditSession:
+mDbHandler.changeSessionFields(data.getIntExtra("sessionId",-1),data.getStringExtra("sessionName"),data.getStringExtra("sessionURL"));
+populateSessionList();
+break;
+}
+}
+}

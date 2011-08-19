@@ -1,0 +1,6 @@
+{
+  super.onCreateOptionsMenu(menu);
+  MenuInflater inflater=getMenuInflater();
+  inflater.inflate(R.menu.prefs_menu,menu);
+  return true;
+}

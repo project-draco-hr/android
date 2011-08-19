@@ -1,0 +1,5 @@
+{
+  mSessionName=name;
+  mSessionUrl=url;
+  mEntryId=entryId;
+}

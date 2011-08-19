@@ -1,0 +1,49 @@
+{
+  mAccount=account;
+  mContentProvider=provider;
+  try {
+    String username=account.name.split("@")[0];
+    String password=mAccountManager.blockingGetAuthToken(account,AccountAuthenticator.AUTH_TOKEN_TYPE,true);
+    if (mAccountManager.getUserData(account,AccountAuthenticator.KEY_OC_URL) == null) {
+      throw new UnknownHostException();
+    }
+    Uri uri=Uri.parse(mAccountManager.getUserData(account,AccountAuthenticator.KEY_OC_URL));
+    Log.i(TAG,"Syncing owncloud account: " + account.name + " on url: "+ uri.toString());
+    DefaultHttpClient client=new DefaultHttpClient();
+    client.getCredentialsProvider().setCredentials(new AuthScope(uri.getHost(),(uri.getPort() == -1) ? 80 : uri.getPort()),new UsernamePasswordCredentials(username,password));
+    client.setKeepAliveStrategy(new ConnectionKeepAliveStrategy(){
+      public long getKeepAliveDuration(      HttpResponse response,      HttpContext context){
+        return 5 * 1000;
+      }
+    }
+);
+    BasicHttpContext httpContext=new BasicHttpContext();
+    BasicScheme basicAuth=new BasicScheme();
+    httpContext.setAttribute("preemptive-auth",basicAuth);
+    HttpHost targetHost=new HttpHost(uri.getHost(),(uri.getPort() == -1) ? 80 : uri.getPort(),(uri.getScheme() == "https") ? "https" : "http");
+    HttpPropFind query=new HttpPropFind(uri.toString());
+    query.setHeader("Content-type","text/xml");
+    query.setHeader("User-Agent","Android-ownCloud");
+    HttpEntity entity=new StringEntity(WebdavUtils.prepareXmlForPropFind());
+    query.setEntity(entity);
+    HttpResponse response=client.execute(targetHost,query,httpContext);
+    TreeNode root=new TreeNode();
+    root.setProperty(TreeNode.NodeProperty.NAME,"/");
+    parseResponse(response,uri,client,targetHost,httpContext,root.getChildList());
+    commitToDatabase(root,null);
+  }
+ catch (  OperationCanceledException e) {
+    e.printStackTrace();
+  }
+catch (  AuthenticatorException e) {
+    syncResult.stats.numAuthExceptions++;
+    e.printStackTrace();
+  }
+catch (  IOException e) {
+    syncResult.stats.numIoExceptions++;
+    e.printStackTrace();
+  }
+catch (  RemoteException e) {
+    e.printStackTrace();
+  }
+}

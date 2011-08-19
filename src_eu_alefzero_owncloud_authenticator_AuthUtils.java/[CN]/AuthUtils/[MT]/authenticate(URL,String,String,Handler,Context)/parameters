@@ -1,0 +1,5 @@
+URL url
+String username
+String password
+Handler handler
+Context context

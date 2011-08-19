@@ -1,0 +1,3 @@
+{
+  return mDbHelper.getWritableDatabase().update(ProviderTableMeta.DB_NAME,values,selection,selectionArgs);
+}

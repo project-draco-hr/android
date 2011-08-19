@@ -1,0 +1,4 @@
+String pathToUpload
+ArrayList<Parcelable> streamsToUpload
+Handler handler
+boolean createDir

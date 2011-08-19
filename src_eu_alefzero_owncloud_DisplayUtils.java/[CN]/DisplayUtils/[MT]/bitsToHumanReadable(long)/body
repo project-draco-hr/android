@@ -1,0 +1,10 @@
+{
+  double result=bitsLen;
+  int attachedsuff=0;
+  while (result > 1024 && attachedsuff < suffixes.length) {
+    result/=1024.;
+    attachedsuff++;
+  }
+  result=((int)(result * 100)) / 100.;
+  return result + suffixes[attachedsuff];
+}

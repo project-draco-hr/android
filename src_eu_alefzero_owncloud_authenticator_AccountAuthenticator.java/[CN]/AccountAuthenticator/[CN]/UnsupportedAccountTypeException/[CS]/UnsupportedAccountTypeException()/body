@@ -1,0 +1,3 @@
+{
+  super(AccountManager.ERROR_CODE_UNSUPPORTED_OPERATION,"Unsupported account type");
+}

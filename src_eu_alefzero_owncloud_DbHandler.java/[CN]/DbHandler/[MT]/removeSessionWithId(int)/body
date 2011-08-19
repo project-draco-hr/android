@@ -1,0 +1,3 @@
+{
+  mDB.delete(TABLE_SESSIONS,"_id = ?",new String[]{String.valueOf(sessionId)});
+}

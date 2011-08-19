@@ -1,0 +1,14 @@
+{
+  Element currentElement=(Element)currentNode;
+  if (currentElement.getElementsByTagName(davPrefix + RESOURCE_TYPE).getLength() != 0 && currentElement.getElementsByTagName(davPrefix + RESOURCE_TYPE).item(0).hasChildNodes()) {
+    resultNode.setProperty(NodeProperty.RESOURCE_TYPE,"DIR");
+  }
+ else {
+    if (currentElement.getElementsByTagName(davPrefix + CONTENT_TYPE).getLength() != 0) {
+      resultNode.setProperty(NodeProperty.RESOURCE_TYPE,currentElement.getElementsByTagName(davPrefix + CONTENT_TYPE).item(0).getFirstChild().getNodeValue());
+    }
+    if (currentElement.getElementsByTagName(davPrefix + CONTENT_LENGTH).getLength() != 0) {
+      resultNode.setProperty(NodeProperty.CONTENT_LENGTH,currentElement.getElementsByTagName(davPrefix + CONTENT_LENGTH).item(0).getFirstChild().getNodeValue());
+    }
+  }
+}

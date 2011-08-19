@@ -1,0 +1,23 @@
+{
+  if (propertyMap_.containsKey(NodeProperty.NAME)) {
+    String name=propertyMap_.get(NodeProperty.NAME);
+    name=name.replace(oc_path,"");
+    String path="";
+    if (name.endsWith("/")) {
+      name=name.substring(0,name.length() - 1);
+    }
+    path=name.substring(0,name.lastIndexOf('/') + 1);
+    name=name.substring(name.lastIndexOf('/') + 1);
+    name=name.replace("%20"," ");
+    if (TextUtils.isEmpty(name)) {
+      name="/";
+    }
+    propertyMap_.remove(NodeProperty.NAME);
+    propertyMap_.put(NodeProperty.NAME,name);
+    propertyMap_.remove(NodeProperty.PATH);
+    propertyMap_.put(NodeProperty.PATH,path);
+    Log.i("TreeNode",toString());
+    return path;
+  }
+  return null;
+}

@@ -1,0 +1,10 @@
+{
+switch (mUriMatcher.match(uri)) {
+case ROOT_DIRECTORY:
+    return ProviderTableMeta.CONTENT_TYPE;
+case SINGLE_FILE:
+  return ProviderTableMeta.CONTENT_TYPE_ITEM;
+default :
+throw new IllegalArgumentException("Unknown Uri id." + uri.toString());
+}
+}

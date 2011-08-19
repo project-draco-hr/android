@@ -1,0 +1,6 @@
+{
+  mUploadStreams=streamsToUpload;
+  mHandler=handler;
+  mUploadPath=pathToUpload.replace(" ","%20");
+  mCreateDir=createDir;
+}

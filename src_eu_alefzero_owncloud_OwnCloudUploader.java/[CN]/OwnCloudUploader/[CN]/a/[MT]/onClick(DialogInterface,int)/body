@@ -1,0 +1,5 @@
+{
+  showDialog(DIALOG_WAITING);
+  mUploadThread=new Thread(new BackgroundUploader(mPath + mDirname.getText().toString(),mStreamsToUpload,mHandler,true));
+  mUploadThread.start();
+}

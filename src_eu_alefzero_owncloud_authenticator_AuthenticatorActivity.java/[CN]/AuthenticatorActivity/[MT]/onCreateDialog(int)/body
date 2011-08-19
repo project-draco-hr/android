@@ -1,0 +1,17 @@
+{
+  final ProgressDialog dialog=new ProgressDialog(this);
+  dialog.setMessage("Trying to login");
+  dialog.setIndeterminate(true);
+  dialog.setCancelable(true);
+  dialog.setOnCancelListener(new DialogInterface.OnCancelListener(){
+    public void onCancel(    DialogInterface dialog){
+      Log.i(getClass().getName(),"Login canceled");
+      if (mAuthThread != null) {
+        mAuthThread.interrupt();
+        finish();
+      }
+    }
+  }
+);
+  return dialog;
+}

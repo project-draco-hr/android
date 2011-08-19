@@ -1,0 +1,3 @@
+Uri uri
+String where
+String[] whereArgs

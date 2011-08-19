@@ -1,0 +1,5 @@
+{
+  if (!authTokenType.equals(AUTH_TOKEN_TYPE)) {
+    throw new UnsupportedAuthTokenTypeException();
+  }
+}

@@ -1,0 +1,23 @@
+{
+switch (v.getId()) {
+case R.id.uploader_choose_folder:
+    String pathToUpload=null;
+  if (mParents.empty()) {
+    pathToUpload="/";
+  }
+ else {
+    mCursor=managedQuery(Uri.withAppendedPath(ProviderTableMeta.CONTENT_URI_FILE,mParents.peek()),null,null,null,null);
+    mCursor.moveToFirst();
+    pathToUpload=mCursor.getString(mCursor.getColumnIndex(ProviderTableMeta.FILE_PATH)) + mCursor.getString(mCursor.getColumnIndex(ProviderTableMeta.FILE_NAME)).replace(" ","%20");
+  }
+showDialog(DIALOG_WAITING);
+mUploadThread=new Thread(new BackgroundUploader(pathToUpload,mStreamsToUpload,mHandler));
+mUploadThread.start();
+break;
+case android.R.id.button1:
+showDialog(DIALOG_GET_DIRNAME);
+break;
+default :
+throw new IllegalArgumentException("Wrong element clicked");
+}
+}

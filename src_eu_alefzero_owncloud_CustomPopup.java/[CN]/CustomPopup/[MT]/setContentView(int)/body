@@ -1,0 +1,4 @@
+{
+  LayoutInflater inflater=(LayoutInflater)mAnchor.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+  setContentView(inflater.inflate(layoutResId,null));
+}

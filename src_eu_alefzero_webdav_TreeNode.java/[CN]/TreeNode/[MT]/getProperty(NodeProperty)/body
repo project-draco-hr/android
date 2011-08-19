@@ -1,0 +1,3 @@
+{
+  return propertyMap_.get(propertyName);
+}

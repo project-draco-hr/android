@@ -1,0 +1,16 @@
+{
+  try {
+    validateAccountType(account.type);
+  }
+ catch (  AuthenticatorException e) {
+    return e.getFailureBundle();
+  }
+  Intent intent=new Intent(mContext,AuthenticatorActivity.class);
+  intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE,response);
+  intent.putExtra(KEY_ACCOUNT,account);
+  intent.putExtra(KEY_LOGIN_OPTIONS,options);
+  setIntentFlags(intent);
+  Bundle resultBundle=new Bundle();
+  resultBundle.putParcelable(AccountManager.KEY_INTENT,intent);
+  return resultBundle;
+}

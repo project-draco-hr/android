@@ -1,0 +1,30 @@
+{
+  LinkedList<TreeNode> rList=new LinkedList<TreeNode>();
+  DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
+  DocumentBuilder builder;
+  try {
+    builder=factory.newDocumentBuilder();
+    Document document=builder.parse(response);
+    String davPrefix=determineDAVPrefix(document.getDocumentElement());
+    NodeList nodes=document.getElementsByTagName(davPrefix + RESPONSE);
+    Log.i("WebdavUtils","Parsing " + nodes.getLength() + " response nodes");
+    for (int i=0; i < nodes.getLength(); ++i) {
+      Node currentNode=nodes.item(i);
+      TreeNode resultNode=new TreeNode();
+      parseResourceType(currentNode,resultNode,davPrefix);
+      parseResourceDates(currentNode,resultNode,davPrefix);
+      parseDisplayName(currentNode,resultNode,davPrefix);
+      rList.add(resultNode);
+    }
+  }
+ catch (  ParserConfigurationException e) {
+    e.printStackTrace();
+  }
+catch (  SAXException e) {
+    e.printStackTrace();
+  }
+catch (  IOException e) {
+    e.printStackTrace();
+  }
+  return rList;
+}

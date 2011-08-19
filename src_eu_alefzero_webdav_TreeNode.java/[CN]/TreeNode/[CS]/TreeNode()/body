@@ -1,0 +1,4 @@
+{
+  propertyMap_=new HashMap<NodeProperty,String>();
+  mChildren=new LinkedList<TreeNode>();
+}
