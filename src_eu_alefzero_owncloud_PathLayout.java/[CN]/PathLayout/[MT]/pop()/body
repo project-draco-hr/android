@@ -1,0 +1,13 @@
+{
+  if (paths.empty()) {
+    return null;
+  }
+  int start=paths.size() * 2 - 2;
+  int count=2;
+  if (paths.size() == 1) {
+    start++;
+    count--;
+  }
+  view.removeViews(start,count);
+  return paths.pop();
+}

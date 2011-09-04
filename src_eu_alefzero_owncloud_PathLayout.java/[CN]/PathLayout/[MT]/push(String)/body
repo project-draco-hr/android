@@ -1,0 +1,15 @@
+{
+  if (!paths.empty()) {
+    ImageView iv=new ImageView(getContext());
+    iv.setImageDrawable(getResources().getDrawable(R.drawable.breadcrumb));
+    iv.setPadding(2,0,2,0);
+    view.addView(iv);
+  }
+  TextView tv=new TextView(getContext());
+  tv.setLayoutParams(getLayoutParams());
+  tv.setText(path);
+  view.addView(tv);
+  HorizontalScrollView hsv=(HorizontalScrollView)internalScroll.getChildAt(0);
+  hsv.smoothScrollTo(hsv.getMaxScrollAmount() * 2,0);
+  paths.push(path);
+}
