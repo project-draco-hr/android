@@ -8,7 +8,7 @@
     if (mCursor.getString(mCursor.getColumnIndex(ProviderTableMeta.FILE_CONTENT_TYPE)).equals("DIR")) {
       String id_=mCursor.getString(mCursor.getColumnIndex(ProviderTableMeta._ID));
       String dirname=mCursor.getString(mCursor.getColumnIndex(ProviderTableMeta.FILE_NAME));
-      pl.push(dirname);
+      pl.push(DisplayUtils.HtmlDecode(dirname));
       mParents.push(id_);
       mCursor=managedQuery(Uri.withAppendedPath(ProviderTableMeta.CONTENT_URI_DIR,id_),null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?",new String[]{mAccount.name},null);
       setListAdapter(new FileListListAdapter(mCursor,this));

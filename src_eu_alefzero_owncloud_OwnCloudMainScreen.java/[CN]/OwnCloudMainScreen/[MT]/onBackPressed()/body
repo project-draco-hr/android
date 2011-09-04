@@ -15,7 +15,7 @@
     if (mCursor.moveToFirst()) {
       String s=mCursor.getString(mCursor.getColumnIndex(ProviderTableMeta.FILE_PATH));
       for (      String str : s.split("/")) {
-        if (!TextUtils.isEmpty(str))         pl.push(str.replace("%20"," "));
+        if (!TextUtils.isEmpty(str))         pl.push(DisplayUtils.HtmlDecode(str));
       }
     }
     getListView().setAdapter(new FileListListAdapter(mCursor,this));
