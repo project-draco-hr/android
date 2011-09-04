@@ -1,6 +1,4 @@
 {
-  TextView tv=(TextView)findViewById(R.id.directory_name);
-  tv.setText("/");
   mCursor=getContentResolver().query(ProviderTableMeta.CONTENT_URI,null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?",new String[]{mAccount.name},null);
   setListAdapter(new FileListListAdapter(mCursor,this));
   getListView().invalidate();
