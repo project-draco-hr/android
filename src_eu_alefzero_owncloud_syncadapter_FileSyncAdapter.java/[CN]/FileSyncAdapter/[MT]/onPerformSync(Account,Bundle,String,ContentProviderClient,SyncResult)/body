@@ -1,0 +1,24 @@
+{
+  try {
+    this.setAccount(account);
+    this.setContentProvider(provider);
+    HttpPropFind query=this.getBasicQuery();
+    query.setEntity(new StringEntity(WebdavUtils.prepareXmlForPropFind()));
+    TreeNode root=this.fireQuery(query);
+    commitToDatabase(root,null);
+  }
+ catch (  OperationCanceledException e) {
+    e.printStackTrace();
+  }
+catch (  AuthenticatorException e) {
+    syncResult.stats.numAuthExceptions++;
+    e.printStackTrace();
+  }
+catch (  IOException e) {
+    syncResult.stats.numIoExceptions++;
+    e.printStackTrace();
+  }
+catch (  RemoteException e) {
+    e.printStackTrace();
+  }
+}

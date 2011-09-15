@@ -1,6 +1,0 @@
-HttpResponse resp
-Uri uri
-DefaultHttpClient client
-HttpHost targetHost
-BasicHttpContext httpContext
-LinkedList<TreeNode> insertList
