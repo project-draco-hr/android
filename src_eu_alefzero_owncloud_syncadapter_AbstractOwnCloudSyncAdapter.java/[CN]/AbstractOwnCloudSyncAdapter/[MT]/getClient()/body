@@ -1,0 +1,16 @@
+{
+  if (this.client == null) {
+    String username=getAccount().name.split("@")[0];
+    String password=this.getAccountManager().blockingGetAuthToken(getAccount(),AccountAuthenticator.AUTH_TOKEN_TYPE,true);
+    if (this.getAccountManager().getUserData(getAccount(),AccountAuthenticator.KEY_OC_URL) == null) {
+      throw new UnknownHostException();
+    }
+    Uri uri=getUri();
+    int port=(uri.getPort() == -1) ? 80 : uri.getPort();
+    this.client=new DefaultHttpClient();
+    this.client.getCredentialsProvider().setCredentials(new AuthScope(uri.getHost(),port),new UsernamePasswordCredentials(username,password));
+    this.client.setKeepAliveStrategy(this.getKeepAliveStrategy());
+    this.host=new HttpHost(uri.getHost(),port,(uri.getScheme() == "https") ? "https" : "http");
+  }
+  return this.client;
+}

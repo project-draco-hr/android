@@ -1,0 +1,16 @@
+{
+  boolean skipFirst=true;
+  for (  TreeNode n : WebdavUtils.parseResponseToNodes(resp.getEntity().getContent())) {
+    String path=n.stripPathFromFilename(uri.getPath());
+    if (skipFirst) {
+      skipFirst=false;
+      continue;
+    }
+    insertList.add(n);
+    if (!TextUtils.isEmpty(n.getProperty(NodeProperty.NAME)) && n.getProperty(NodeProperty.RESOURCE_TYPE).equals("DIR")) {
+      HttpPropFind method=new HttpPropFind(uri.getPath() + path + n.getProperty(NodeProperty.NAME).replace(" ","%20")+ "/");
+      HttpResponse response=client.execute(targetHost,method,httpContext);
+      parseResponse(response,uri,client,targetHost,httpContext,n.getChildList());
+    }
+  }
+}

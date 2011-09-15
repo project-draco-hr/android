@@ -1,0 +1,8 @@
+{
+  return new ConnectionKeepAliveStrategy(){
+    public long getKeepAliveDuration(    HttpResponse response,    HttpContext context){
+      return 5 * 1000;
+    }
+  }
+;
+}

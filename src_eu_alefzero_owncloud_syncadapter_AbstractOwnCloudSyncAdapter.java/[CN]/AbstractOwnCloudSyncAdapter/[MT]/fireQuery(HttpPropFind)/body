@@ -1,0 +1,10 @@
+{
+  BasicHttpContext httpContext=new BasicHttpContext();
+  BasicScheme basicAuth=new BasicScheme();
+  httpContext.setAttribute("preemptive-auth",basicAuth);
+  HttpResponse response=getClient().execute(this.host,query,httpContext);
+  TreeNode root=new TreeNode();
+  root.setProperty(TreeNode.NodeProperty.NAME,"/");
+  this.parseResponse(response,getUri(),getClient(),this.host,httpContext,root.getChildList());
+  return root;
+}

@@ -1,0 +1,4 @@
+{
+  super(context,autoInitialize);
+  this.setAccountManager(AccountManager.get(context));
+}
