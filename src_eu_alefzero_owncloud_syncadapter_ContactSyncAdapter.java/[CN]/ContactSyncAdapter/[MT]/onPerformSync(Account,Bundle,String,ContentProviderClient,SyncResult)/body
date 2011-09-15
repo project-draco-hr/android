@@ -1,0 +1,18 @@
+{
+  this.setAccount(account);
+  this.setContentProvider(provider);
+  Cursor cursor=getContacts();
+  if (cursor != null && cursor.getCount() > 0) {
+    while (cursor.moveToNext()) {
+      String id=cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
+      String lookup=cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY));
+      Log.d(TAG,"Found Contact id: " + id + " with lookupkey: "+ lookup);
+      try {
+        FileInputStream fis=getContactVcard(lookup);
+      }
+ catch (      IOException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+}
