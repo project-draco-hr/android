@@ -1,0 +1,6 @@
+{
+  super.onSaveInstanceState(outState);
+  outState.putSerializable("parentsStack",mParents);
+  outState.putSerializable("path",mPath);
+  outState.putBoolean("isDisplayingFile",mIsDisplayingFile);
+}

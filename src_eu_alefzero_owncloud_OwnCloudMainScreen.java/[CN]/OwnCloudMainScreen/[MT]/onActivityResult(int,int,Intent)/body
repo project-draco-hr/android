@@ -1,0 +1,4 @@
+{
+  super.onActivityResult(requestCode,resultCode,data);
+  Log.i("asd",data + "");
+}

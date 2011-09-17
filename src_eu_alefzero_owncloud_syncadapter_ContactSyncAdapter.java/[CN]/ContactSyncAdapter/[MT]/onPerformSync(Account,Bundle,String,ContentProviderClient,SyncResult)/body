@@ -9,6 +9,7 @@
       Log.d(TAG,"Found Contact id: " + id + " with lookupkey: "+ lookup);
       try {
         FileInputStream fis=getContactVcard(lookup);
+        fis.close();
       }
  catch (      IOException e) {
         e.printStackTrace();

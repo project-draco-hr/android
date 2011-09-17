@@ -28,11 +28,13 @@
   }
  else   if (mParents.size() == 1) {
     mParents.pop();
+    mPath.removeLast();
     pl.pop();
     mCursor=managedQuery(ProviderTableMeta.CONTENT_URI,null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?",new String[]{mAccount.name},null);
   }
  else {
     mParents.pop();
+    mPath.removeLast();
     pl.pop();
     mCursor=managedQuery(Uri.withAppendedPath(ProviderTableMeta.CONTENT_URI_DIR,mParents.peek()),null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?",new String[]{mAccount.name},null);
   }

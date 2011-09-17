@@ -1,5 +1,16 @@
 {
-  mCursor=getContentResolver().query(ProviderTableMeta.CONTENT_URI,null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?",new String[]{mAccount.name},null);
+  if (mParents.empty()) {
+    mCursor=getContentResolver().query(ProviderTableMeta.CONTENT_URI,null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?",new String[]{mAccount.name},null);
+  }
+ else {
+    mCursor=getContentResolver().query(Uri.withAppendedPath(ProviderTableMeta.CONTENT_URI_DIR,mParents.peek()),null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?",new String[]{mAccount.name},null);
+    if (!mIsDisplayingFile) {
+      PathLayout pl=(PathLayout)findViewById(R.id.pathLayout1);
+      for (      String s : mPath) {
+        pl.push(s);
+      }
+    }
+  }
   setListAdapter(new FileListListAdapter(mCursor,this));
   getListView().invalidate();
 }

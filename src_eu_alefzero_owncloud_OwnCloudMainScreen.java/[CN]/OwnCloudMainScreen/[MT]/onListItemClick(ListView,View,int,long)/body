@@ -9,6 +9,7 @@
       String id_=mCursor.getString(mCursor.getColumnIndex(ProviderTableMeta._ID));
       String dirname=mCursor.getString(mCursor.getColumnIndex(ProviderTableMeta.FILE_NAME));
       pl.push(DisplayUtils.HtmlDecode(dirname));
+      mPath.addLast(DisplayUtils.HtmlDecode(dirname));
       mParents.push(id_);
       mCursor=managedQuery(Uri.withAppendedPath(ProviderTableMeta.CONTENT_URI_DIR,id_),null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?",new String[]{mAccount.name},null);
       setListAdapter(new FileListListAdapter(mCursor,this));
@@ -27,7 +28,7 @@
       tv.setText(DisplayUtils.bitsToHumanReadable(mCursor.getLong(mCursor.getColumnIndex(ProviderTableMeta.FILE_CONTENT_LENGTH))));
       tv=(TextView)findViewById(R.id.textView4);
       tv.setText(mCursor.getString(mCursor.getColumnIndex(ProviderTableMeta.FILE_MODIFIED)));
-      if (!TextUtils.isEmpty(mCursor.getString(mCursor.getColumnIndex(ProviderTableMeta.FILE_STORAGE_PATH)))) {
+      if (!TextUtils.isEmpty(mCursor.getString(mCursor.getColumnIndex(ProviderTableMeta.FILE_STORAGE_PATH))) && mCursor.getString(mCursor.getColumnIndex(ProviderTableMeta.FILE_CONTENT_TYPE)).matches("image/*")) {
         ImageView iv=(ImageView)findViewById(R.id.imageView1);
         Bitmap bmp=BitmapFactory.decodeFile(mCursor.getString(mCursor.getColumnIndex(ProviderTableMeta.FILE_STORAGE_PATH)));
         Matrix m=new Matrix();
@@ -49,7 +50,14 @@
  else {
     try {
       Intent i=(Intent)getListAdapter().getItem(position);
-      startActivity(i);
+      if (i.hasExtra("toDownload")) {
+        if (i.getBooleanExtra("toDownload",false)) {
+          startActivityForResult(i,200);
+        }
+ else {
+          startActivity(i);
+        }
+      }
     }
  catch (    ClassCastException e) {
     }

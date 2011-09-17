@@ -1,7 +1,15 @@
 {
   super.onCreate(savedInstanceState);
-  mParents=new Stack<String>();
-  mIsDisplayingFile=false;
+  if (savedInstanceState != null) {
+    mParents=(Stack<String>)savedInstanceState.getSerializable("parentsStack");
+    mIsDisplayingFile=savedInstanceState.getBoolean("isDisplayingFile");
+    mPath=(LinkedList<String>)savedInstanceState.getSerializable("path");
+  }
+ else {
+    mParents=new Stack<String>();
+    mPath=new LinkedList<String>();
+    mIsDisplayingFile=false;
+  }
   mDBHandler=new DbHandler(getBaseContext());
   requestWindowFeature(Window.FEATURE_NO_TITLE);
   setContentView(R.layout.main);
