@@ -9,10 +9,24 @@
       Log.d(TAG,"Found Contact id: " + id + " with lookupkey: "+ lookup);
       try {
         FileInputStream fis=getContactVcard(lookup);
+        HttpPut query=new HttpPut(getUri() + "/addressbooks/" + getAccount().name.split("@")[0]+ "/default/"+ lookup+ ".vcf");
+        byte[] b=new byte[fis.available()];
+        fis.read(b);
+        query.setEntity(new ByteArrayEntity(b));
+        HttpResponse response=fireRawRequest(query);
+        if (201 != response.getStatusLine().getStatusCode()) {
+          syncResult.stats.numIoExceptions++;
+        }
         fis.close();
       }
  catch (      IOException e) {
-        e.printStackTrace();
+        syncResult.stats.numIoExceptions++;
+      }
+catch (      OperationCanceledException e) {
+        return;
+      }
+catch (      AuthenticatorException e) {
+        syncResult.stats.numAuthExceptions++;
       }
     }
   }

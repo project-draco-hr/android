@@ -9,8 +9,8 @@
     insertList.add(n);
     if (!TextUtils.isEmpty(n.getProperty(NodeProperty.NAME)) && n.getProperty(NodeProperty.RESOURCE_TYPE).equals("DIR")) {
       HttpPropFind method=new HttpPropFind(uri.getPath() + path + n.getProperty(NodeProperty.NAME).replace(" ","%20")+ "/");
-      HttpResponse response=client.execute(targetHost,method,httpContext);
-      parseResponse(response,uri,client,targetHost,httpContext,n.getChildList());
+      HttpResponse response=fireRawRequest(method);
+      parseResponse(response,uri,client,targetHost,n.getChildList());
     }
   }
 }

@@ -1,0 +1,4 @@
+{
+  Uri uri=Uri.parse(this.getAccountManager().getUserData(getAccount(),AccountAuthenticator.KEY_CONTACT_URL));
+  return uri;
+}
