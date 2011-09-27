@@ -1,7 +1,7 @@
 {
   if (result) {
     TextView username_text=(TextView)findViewById(R.id.account_username), password_text=(TextView)findViewById(R.id.account_password);
-    URL url=null;
+    URL url;
     try {
       url=new URL(message);
     }
@@ -9,7 +9,8 @@
       Log.e(getClass().getName(),"Malformed URL: " + message);
       return;
     }
-    Account account=new Account(username_text.getText().toString() + "@" + url.getHost(),AccountAuthenticator.ACCOUNT_TYPE);
+    String username=username_text.getText().toString().trim();
+    Account account=new Account(username + "@" + url.getHost(),AccountAuthenticator.ACCOUNT_TYPE);
     AccountManager accManager=AccountManager.get(this);
     accManager.addAccountExplicitly(account,password_text.getText().toString(),null);
     final Intent intent=new Intent();
@@ -17,6 +18,8 @@
     intent.putExtra(AccountManager.KEY_ACCOUNT_NAME,account.name);
     intent.putExtra(AccountManager.KEY_AUTHTOKEN,AccountAuthenticator.ACCOUNT_TYPE);
     accManager.setUserData(account,AccountAuthenticator.KEY_OC_URL,url.toString());
+    intent.putExtra(AccountManager.KEY_USERDATA,username);
+    accManager.setUserData(account,AccountAuthenticator.KEY_CONTACT_URL,url.toString().replace(AuthUtils.WEBDAV_PATH_2_0,AuthUtils.CARDDAV_PATH_2_0));
     setAccountAuthenticatorResult(intent.getExtras());
     setResult(RESULT_OK,intent);
     Bundle bundle=new Bundle();
