@@ -6,7 +6,6 @@
     while (cursor.moveToNext()) {
       String id=cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
       String lookup=cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY));
-      Log.d(TAG,"Found Contact id: " + id + " with lookupkey: "+ lookup);
       try {
         FileInputStream fis=getContactVcard(lookup);
         HttpPut query=new HttpPut(getUri() + "/addressbooks/" + getAccount().name.split("@")[0]+ "/default/"+ lookup+ ".vcf");
