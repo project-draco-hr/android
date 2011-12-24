@@ -1,0 +1,7 @@
+{
+  if ((certificates != null) && (certificates.length == 1)) {
+    certificates[0].checkValidity();
+  }
+ else {
+  }
+}

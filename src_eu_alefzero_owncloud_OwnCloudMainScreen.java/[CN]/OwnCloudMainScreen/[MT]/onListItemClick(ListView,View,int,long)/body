@@ -51,15 +51,22 @@
     try {
       Intent i=(Intent)getListAdapter().getItem(position);
       if (i.hasExtra("toDownload")) {
-        if (i.getBooleanExtra("toDownload",false)) {
-          startActivityForResult(i,200);
-        }
- else {
-          startActivity(i);
-        }
+        Uri data=Uri.parse(Environment.getExternalStorageDirectory().getAbsolutePath() + "/owncloud/filename");
+        Log.d("DUPA",data.toString());
+        File f=new File(data.toString());
+        FileInputStream fis=new FileInputStream(f);
+        byte buffer[]=new byte[512];
+        fis.read(buffer);
+        Log.d("DUPA",new String(buffer));
       }
     }
  catch (    ClassCastException e) {
+    }
+catch (    FileNotFoundException e) {
+      e.printStackTrace();
+    }
+catch (    IOException e) {
+      e.printStackTrace();
     }
   }
 }

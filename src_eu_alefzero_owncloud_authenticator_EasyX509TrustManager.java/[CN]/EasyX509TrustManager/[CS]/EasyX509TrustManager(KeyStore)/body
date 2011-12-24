@@ -1,0 +1,10 @@
+{
+  super();
+  TrustManagerFactory factory=TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+  factory.init(keystore);
+  TrustManager[] trustmanagers=factory.getTrustManagers();
+  if (trustmanagers.length == 0) {
+    throw new NoSuchAlgorithmException("no trust manager found");
+  }
+  this.standardTrustManager=(X509TrustManager)trustmanagers[0];
+}

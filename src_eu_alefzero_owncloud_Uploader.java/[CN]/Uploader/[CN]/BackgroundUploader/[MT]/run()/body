@@ -1,0 +1,26 @@
+{
+  WebdavClient wdc=new WebdavClient(Uri.parse(mAccountManager.getUserData(mAccount,AccountAuthenticator.KEY_OC_URL)));
+  wdc.setCredentials(mUsername,mPassword);
+  wdc.allowUnsignedCertificates();
+  if (mCreateDir) {
+    wdc.createDirectory(mUploadPath);
+  }
+  for (int i=0; i < mUploadStreams.size(); ++i) {
+    final Cursor c=getContentResolver().query((Uri)mUploadStreams.get(i),null,null,null,null);
+    c.moveToFirst();
+    if (!wdc.putFile(c.getString(c.getColumnIndex(Media.DATA)),mUploadPath + "/" + c.getString(c.getColumnIndex(Media.DISPLAY_NAME)),c.getString(c.getColumnIndex(Media.MIME_TYPE)))) {
+      mHandler.post(new Runnable(){
+        public void run(){
+          Uploader.this.onUploadComplete(false,"Error while uploading file: " + c.getString(c.getColumnIndex(Media.DISPLAY_NAME)));
+        }
+      }
+);
+    }
+  }
+  mHandler.post(new Runnable(){
+    public void run(){
+      Uploader.this.onUploadComplete(true,null);
+    }
+  }
+);
+}

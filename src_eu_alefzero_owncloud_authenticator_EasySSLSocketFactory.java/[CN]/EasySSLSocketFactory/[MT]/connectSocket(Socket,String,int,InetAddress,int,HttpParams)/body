@@ -1,0 +1,16 @@
+{
+  int connTimeout=HttpConnectionParams.getConnectionTimeout(params);
+  int soTimeout=HttpConnectionParams.getSoTimeout(params);
+  InetSocketAddress remoteAddress=new InetSocketAddress(host,port);
+  SSLSocket sslsock=(SSLSocket)((sock != null) ? sock : createSocket());
+  if ((localAddress != null) || (localPort > 0)) {
+    if (localPort < 0) {
+      localPort=0;
+    }
+    InetSocketAddress isa=new InetSocketAddress(localAddress,localPort);
+    sslsock.bind(isa);
+  }
+  sslsock.connect(remoteAddress,connTimeout);
+  sslsock.setSoTimeout(soTimeout);
+  return sslsock;
+}

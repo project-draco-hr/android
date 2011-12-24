@@ -1,0 +1,10 @@
+{
+  try {
+    SSLContext context=SSLContext.getInstance("TLS");
+    context.init(null,new TrustManager[]{new EasyX509TrustManager(null)},null);
+    return context;
+  }
+ catch (  Exception e) {
+    throw new IOException(e.getMessage());
+  }
+}

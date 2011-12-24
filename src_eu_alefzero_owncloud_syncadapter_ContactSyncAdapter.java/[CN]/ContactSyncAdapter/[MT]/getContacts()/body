@@ -1,9 +1,0 @@
-{
-  Uri uri=ContactsContract.Contacts.CONTENT_URI;
-  String[] projection=new String[]{ContactsContract.Contacts._ID,ContactsContract.Contacts.LOOKUP_KEY};
-  boolean showInvisible=false;
-  String selection=ContactsContract.Contacts.IN_VISIBLE_GROUP + " = '" + (showInvisible ? "0" : "1")+ "'";
-  String[] selectionArgs=null;
-  String sortOrder=ContactsContract.Contacts._ID + " DESC";
-  return getContext().getContentResolver().query(uri,projection,selection,selectionArgs,sortOrder);
-}

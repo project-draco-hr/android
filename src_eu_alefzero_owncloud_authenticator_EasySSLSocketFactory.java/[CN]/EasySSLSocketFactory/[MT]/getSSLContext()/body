@@ -1,0 +1,6 @@
+{
+  if (this.sslcontext == null) {
+    this.sslcontext=createEasySSLContext();
+  }
+  return this.sslcontext;
+}

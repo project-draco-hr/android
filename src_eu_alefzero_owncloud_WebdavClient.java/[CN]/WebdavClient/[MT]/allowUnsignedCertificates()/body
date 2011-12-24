@@ -1,0 +1,3 @@
+{
+  mSchemeRegistry.register(new Scheme("https",new EasySSLSocketFactory(),443));
+}

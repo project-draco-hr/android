@@ -1,0 +1,5 @@
+{
+  mUri=uri;
+  mSchemeRegistry=new SchemeRegistry();
+  setupHttpClient();
+}
