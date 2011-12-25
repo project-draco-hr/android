@@ -13,7 +13,7 @@
     Log.i(TAG,"Uploading, done");
   }
  catch (  final Exception e) {
-    Log.i(TAG,e.getLocalizedMessage());
+    Log.i(TAG,"" + e.getMessage());
     result=false;
   }
   return result;

@@ -7,10 +7,11 @@
     if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
       return false;
     }
-    InputStreamReader isr=new InputStreamReader(response.getEntity().getContent());
+    BufferedInputStream bis=new BufferedInputStream(response.getEntity().getContent());
     FileOutputStream fos=new FileOutputStream(targetPath);
-    int oneByte;
-    while ((oneByte=isr.read()) != -1)     fos.write(oneByte);
+    byte[] bytes=new byte[512];
+    int readResult;
+    while ((readResult=bis.read(bytes)) != -1)     fos.write(bytes,0,readResult);
   }
  catch (  IOException e) {
     e.printStackTrace();

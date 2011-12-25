@@ -27,7 +27,7 @@
   File sdCard=Environment.getExternalStorageDirectory();
   File dir=new File(sdCard.getAbsolutePath() + "/owncloud");
   dir.mkdirs();
-  File file=new File(dir,"filename");
+  File file=new File(dir,file_path.replace('/','.'));
   wdc.downloadFile(file_path,file);
   return START_NOT_STICKY;
 }
