@@ -1,0 +1,6 @@
+{
+  super.onCreate(savedInstanceState);
+  mAccountManager=(AccountManager)getActivity().getSystemService(Service.ACCOUNT_SERVICE);
+  mAccount=mAccountManager.getAccountsByType(AccountAuthenticator.ACCOUNT_TYPE)[0];
+  populateFileList();
+}

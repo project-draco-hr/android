@@ -1,0 +1,4 @@
+{
+  mCursor=getActivity().getContentResolver().query(ProviderTableMeta.CONTENT_URI,null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?",new String[]{mAccount.name},null);
+  setListAdapter(new FileListListAdapter(mCursor,getActivity()));
+}

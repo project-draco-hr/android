@@ -1,0 +1,4 @@
+{
+  View v=inflater.inflate(R.layout.file_details,container,false);
+  return v;
+}

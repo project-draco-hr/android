@@ -1,0 +1,11 @@
+{
+  FileDetail fd=(FileDetail)getFragmentManager().findFragmentById(R.id.fileDetail);
+  if (fd != null) {
+    fd.use(((TextView)v.findViewById(R.id.Filename)).getText());
+  }
+ else {
+    Intent i=new Intent(getActivity(),FileDetailActivity.class);
+    startActivity(i);
+  }
+  super.onListItemClick(l,v,position,id);
+}

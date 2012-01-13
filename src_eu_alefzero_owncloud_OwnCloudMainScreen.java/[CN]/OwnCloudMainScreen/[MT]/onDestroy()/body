@@ -1,4 +1,0 @@
-{
-  mDBHandler.close();
-  super.onDestroy();
-}

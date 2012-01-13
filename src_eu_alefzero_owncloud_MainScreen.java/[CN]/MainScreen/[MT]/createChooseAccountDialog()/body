@@ -1,0 +1,27 @@
+{
+  final AccountManager accMan=AccountManager.get(this);
+  CharSequence[] items=new CharSequence[accMan.getAccountsByType(AccountAuthenticator.ACCOUNT_TYPE).length];
+  int i=0;
+  for (  Account a : accMan.getAccountsByType(AccountAuthenticator.ACCOUNT_TYPE)) {
+    items[i++]=a.name;
+  }
+  AlertDialog.Builder builder=new AlertDialog.Builder(this);
+  builder.setTitle(R.string.common_choose_account);
+  builder.setCancelable(true);
+  builder.setItems(items,new DialogInterface.OnClickListener(){
+    public void onClick(    DialogInterface dialog,    int item){
+      mAccount=accMan.getAccountsByType(AccountAuthenticator.ACCOUNT_TYPE)[item];
+      dialog.dismiss();
+      populateFileList();
+    }
+  }
+);
+  builder.setOnCancelListener(new OnCancelListener(){
+    public void onCancel(    DialogInterface dialog){
+      MainScreen.this.finish();
+    }
+  }
+);
+  AlertDialog alert=builder.create();
+  return alert;
+}
