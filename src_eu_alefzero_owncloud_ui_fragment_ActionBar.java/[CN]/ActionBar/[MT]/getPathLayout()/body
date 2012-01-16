@@ -1,0 +1,3 @@
+{
+  return (PathLayout)getActivity().findViewById(R.id.pathLayout1);
+}

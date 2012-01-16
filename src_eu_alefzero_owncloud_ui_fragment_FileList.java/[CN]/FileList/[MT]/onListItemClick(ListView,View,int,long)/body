@@ -1,10 +1,28 @@
 {
   FileDetail fd=(FileDetail)getFragmentManager().findFragmentById(R.id.fileDetail);
+  ActionBar ab=(ActionBar)getFragmentManager().findFragmentById(R.id.actionBar);
+  if (!mCursor.moveToPosition(position)) {
+    throw new IndexOutOfBoundsException("Incorrect item selected");
+  }
+  if (mCursor.getString(mCursor.getColumnIndex(ProviderTableMeta.FILE_CONTENT_TYPE)).equals("DIR")) {
+    String id_=mCursor.getString(mCursor.getColumnIndex(ProviderTableMeta._ID));
+    String dirname=mCursor.getString(mCursor.getColumnIndex(ProviderTableMeta.FILE_NAME));
+    mCursor=getActivity().managedQuery(Uri.withAppendedPath(ProviderTableMeta.CONTENT_URI_DIR,id_),null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?",new String[]{mAccount.name},null);
+    setListAdapter(new FileListListAdapter(mCursor,getActivity()));
+    setListShown(false);
+    setListShown(true);
+    super.onListItemClick(l,v,position,id);
+    return;
+  }
+  Intent i=new Intent(getActivity(),FileDetailActivity.class);
+  i.putExtra("FILE_PATH",ab.getCurrentPath());
+  i.putExtra("FILE_NAME",((TextView)v.findViewById(R.id.Filename)).getText());
   if (fd != null) {
-    fd.use(((TextView)v.findViewById(R.id.Filename)).getText());
+    fd.setStuff(i);
   }
  else {
-    Intent i=new Intent(getActivity(),FileDetailActivity.class);
+    i.putExtra("FILE_PATH",ab.getCurrentPath());
+    i.putExtra("FILE_NAME",((TextView)v.findViewById(R.id.Filename)).getText());
     startActivity(i);
   }
   super.onListItemClick(l,v,position,id);

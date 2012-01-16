@@ -1,5 +1,5 @@
 {
-  paths=new Stack<String>();
+  paths=new LinkedList<String>();
   internalScroll=new ScrollView(getContext());
   internalScroll.setFillViewport(true);
   HorizontalScrollView hsv=new HorizontalScrollView(getContext());

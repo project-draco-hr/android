@@ -1,5 +1,5 @@
 {
-  if (!paths.empty()) {
+  if (paths.size() != 0) {
     ImageView iv=new ImageView(getContext());
     iv.setImageDrawable(getResources().getDrawable(R.drawable.breadcrumb));
     iv.setPadding(2,0,2,0);
@@ -11,5 +11,5 @@
   view.addView(tv);
   HorizontalScrollView hsv=(HorizontalScrollView)internalScroll.getChildAt(0);
   hsv.smoothScrollTo(hsv.getMaxScrollAmount() * 2,0);
-  paths.push(path);
+  paths.addLast(path);
 }

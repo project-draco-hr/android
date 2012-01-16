@@ -1,0 +1,4 @@
+{
+  setListAdapter(null);
+  super.onDestroyView();
+}

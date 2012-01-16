@@ -1,0 +1,4 @@
+{
+  TextView tv=(TextView)target_view.findViewById(R.id.textView1);
+  if (tv != null)   tv.setText(filename);
+}

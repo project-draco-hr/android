@@ -1,0 +1,3 @@
+{
+  for (  String s : path.split("/"))   if (s.length() != 0)   push(s);
+}

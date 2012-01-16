@@ -1,0 +1,3 @@
+{
+  if (getPathLayout() != null)   getPathLayout().addPath(path);
+}

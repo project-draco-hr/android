@@ -1,4 +1,3 @@
 {
   super.onCreate(savedInstanceState);
-  Log.e("TEST","TEST");
 }

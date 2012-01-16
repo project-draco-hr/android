@@ -1,4 +1,5 @@
 {
   View v=inflater.inflate(R.layout.file_details,container,false);
+  if (getActivity().getIntent() != null)   setStuff(getActivity().getIntent(),v);
   return v;
 }

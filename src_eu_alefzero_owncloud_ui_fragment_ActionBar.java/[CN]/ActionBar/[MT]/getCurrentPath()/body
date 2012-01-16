@@ -1,0 +1,4 @@
+{
+  if (getPathLayout() != null)   return getPathLayout().getFullPath();
+  return "";
+}

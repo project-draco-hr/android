@@ -1,0 +1,3 @@
+{
+  setFilename(filename,getView());
+}
