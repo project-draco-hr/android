@@ -1,0 +1,6 @@
+{
+  super.onActivityCreated(savedInstanceState);
+  GridView grid=(GridView)getView().findViewById(R.id.gridview);
+  grid.setAdapter(new LandingScreenAdapter(getActivity()));
+  grid.setOnItemClickListener(this);
+}

@@ -1,0 +1,11 @@
+{
+  if (convertView == null) {
+    LayoutInflater inflator=LayoutInflater.from(mContext);
+    convertView=inflator.inflate(R.layout.landing_page_item,null);
+    ImageView icon=(ImageView)convertView.findViewById(R.id.gridImage);
+    TextView iconText=(TextView)convertView.findViewById(R.id.gridText);
+    icon.setImageResource(mLandingScreenIcons[position]);
+    iconText.setText(mLandingScreenTexts[position]);
+  }
+  return convertView;
+}
