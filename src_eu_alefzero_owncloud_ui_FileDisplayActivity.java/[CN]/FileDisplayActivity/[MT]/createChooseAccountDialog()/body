@@ -18,7 +18,7 @@
 );
   builder.setOnCancelListener(new OnCancelListener(){
     public void onCancel(    DialogInterface dialog){
-      MainScreen.this.finish();
+      FileDisplayActivity.this.finish();
     }
   }
 );
