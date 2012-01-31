@@ -1,0 +1,17 @@
+{
+  Dialog dialog;
+switch (id) {
+case DIALOG_SETUP_ACCOUNT:
+    AlertDialog.Builder builder=new AlertDialog.Builder(this);
+  builder.setTitle(R.string.main_tit_accsetup);
+builder.setMessage(R.string.main_wrn_accsetup);
+builder.setCancelable(false);
+builder.setPositiveButton(R.string.common_ok,this);
+builder.setNegativeButton(R.string.common_cancel,this);
+dialog=builder.create();
+break;
+default :
+dialog=null;
+}
+return dialog;
+}

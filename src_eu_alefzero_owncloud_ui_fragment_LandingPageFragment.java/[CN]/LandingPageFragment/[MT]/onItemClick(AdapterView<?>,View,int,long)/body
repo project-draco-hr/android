@@ -1,13 +1,11 @@
 {
   Intent intent;
-  if (accountsAreSetup()) {
-    intent=(Intent)parent.getAdapter().getItem(position);
-    if (intent != null) {
-      startActivity(intent);
-    }
+  intent=(Intent)parent.getAdapter().getItem(position);
+  if (intent != null) {
+    startActivity(intent);
+  }
  else {
-      Toast toast=Toast.makeText(getActivity(),"Not yet implemented!",Toast.LENGTH_SHORT);
-      toast.show();
-    }
+    Toast toast=Toast.makeText(getActivity(),"Not yet implemented!",Toast.LENGTH_SHORT);
+    toast.show();
   }
 }

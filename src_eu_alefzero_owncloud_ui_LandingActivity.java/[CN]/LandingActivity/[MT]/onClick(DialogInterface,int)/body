@@ -1,0 +1,12 @@
+{
+  dialog.dismiss();
+switch (which) {
+case DialogInterface.BUTTON_POSITIVE:
+    Intent intent=new Intent("android.settings.ADD_ACCOUNT_SETTINGS");
+  intent.putExtra("authorities",new String[]{AccountAuthenticator.AUTH_TOKEN_TYPE});
+startActivity(intent);
+break;
+case DialogInterface.BUTTON_NEGATIVE:
+finish();
+}
+}

@@ -1,4 +1,7 @@
 {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.landing_page);
+  if (!accountsAreSetup()) {
+    showDialog(DIALOG_SETUP_ACCOUNT);
+  }
 }
