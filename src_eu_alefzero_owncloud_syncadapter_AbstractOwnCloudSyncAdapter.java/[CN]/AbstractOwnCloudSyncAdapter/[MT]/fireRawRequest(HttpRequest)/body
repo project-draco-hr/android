@@ -2,6 +2,6 @@
   BasicHttpContext httpContext=new BasicHttpContext();
   BasicScheme basicAuth=new BasicScheme();
   httpContext.setAttribute("preemptive-auth",basicAuth);
-  HttpResponse response=getClient().execute(this.host,query,httpContext);
+  HttpResponse response=getClient().execute(mHost,query,httpContext);
   return response;
 }

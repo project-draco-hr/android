@@ -2,6 +2,6 @@
   HttpResponse response=fireRawRequest(query);
   TreeNode root=new TreeNode();
   root.setProperty(TreeNode.NodeProperty.NAME,"/");
-  this.parseResponse(response,getUri(),getClient(),this.host,root.getChildList());
+  this.parseResponse(response,getUri(),getClient(),mHost,root.getChildList());
   return root;
 }
