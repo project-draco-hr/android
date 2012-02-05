@@ -5,7 +5,7 @@
     startActivity(intent);
   }
  else {
-    Toast toast=Toast.makeText(getActivity(),"Not yet implemented!",Toast.LENGTH_SHORT);
+    Toast toast=Toast.makeText(this,"Not yet implemented!",Toast.LENGTH_SHORT);
     toast.show();
   }
 }

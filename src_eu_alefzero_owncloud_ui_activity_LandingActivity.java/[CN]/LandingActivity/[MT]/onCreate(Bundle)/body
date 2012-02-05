@@ -1,6 +1,11 @@
 {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.main);
+  GridView landingScreenItems=(GridView)findViewById(R.id.homeScreenGrid);
+  if (landingScreenItems != null) {
+    landingScreenItems.setAdapter(new LandingScreenAdapter(this));
+    landingScreenItems.setOnItemClickListener(this);
+  }
   if (!accountsAreSetup()) {
     showDialog(DIALOG_SETUP_ACCOUNT);
   }

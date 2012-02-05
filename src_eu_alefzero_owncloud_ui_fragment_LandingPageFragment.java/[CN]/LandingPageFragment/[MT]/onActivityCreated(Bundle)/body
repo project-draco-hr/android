@@ -1,6 +1,6 @@
 {
   super.onActivityCreated(savedInstanceState);
-  GridView grid=(GridView)getView().findViewById(R.id.gridview);
-  grid.setAdapter(new LandingScreenAdapter(getActivity()));
-  grid.setOnItemClickListener(this);
+  ListView landingScreenItems=(ListView)getView().findViewById(R.id.homeScreenList);
+  landingScreenItems.setAdapter(new LandingScreenAdapter(getActivity()));
+  landingScreenItems.setOnItemClickListener((LandingActivity)getActivity());
 }
