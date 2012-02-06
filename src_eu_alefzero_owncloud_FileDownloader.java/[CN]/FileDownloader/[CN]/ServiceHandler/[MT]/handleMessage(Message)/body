@@ -1,0 +1,4 @@
+{
+  downloadFile();
+  stopSelf(msg.arg1);
+}

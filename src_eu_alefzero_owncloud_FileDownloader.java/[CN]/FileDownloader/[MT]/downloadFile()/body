@@ -1,0 +1,25 @@
+{
+  AccountManager am=(AccountManager)getSystemService(ACCOUNT_SERVICE);
+  Uri oc_url=Uri.parse(am.getUserData(mAccount,AccountAuthenticator.KEY_OC_URL));
+  WebdavClient wdc=new WebdavClient(oc_url);
+  String username=mAccount.name.split("@")[0];
+  String password="";
+  try {
+    password=am.blockingGetAuthToken(mAccount,AccountAuthenticator.AUTH_TOKEN_TYPE,true);
+  }
+ catch (  Exception e) {
+    e.printStackTrace();
+  }
+  wdc.setCredentials(username,password);
+  wdc.allowUnsignedCertificates();
+  Notification n=new Notification(R.drawable.icon,"Downloading file",System.currentTimeMillis());
+  PendingIntent pi=PendingIntent.getActivity(this,1,new Intent(this,FileDisplayActivity.class),0);
+  n.setLatestEventInfo(this,"Downloading file","Downloading file " + mFilePath,pi);
+  nm.notify(1,n);
+  File sdCard=Environment.getExternalStorageDirectory();
+  File dir=new File(sdCard.getAbsolutePath() + "/owncloud");
+  dir.mkdirs();
+  File file=new File(dir,mFilePath.replace('/','.'));
+  wdc.downloadFile(mFilePath,file);
+  nm.cancel(1);
+}

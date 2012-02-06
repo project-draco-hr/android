@@ -1,0 +1,8 @@
+{
+  super.onCreate();
+  nm=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+  HandlerThread thread=new HandlerThread("FileDownladerThread",Process.THREAD_PRIORITY_BACKGROUND);
+  thread.start();
+  mServiceLooper=thread.getLooper();
+  mServiceHandler=new ServiceHandler(mServiceLooper);
+}

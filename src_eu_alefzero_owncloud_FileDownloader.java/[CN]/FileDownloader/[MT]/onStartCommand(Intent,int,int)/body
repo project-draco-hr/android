@@ -1,33 +1,12 @@
 {
   if (!intent.hasExtra(EXTRA_ACCOUNT) && !intent.hasExtra(EXTRA_FILE_PATH)) {
     Log.e(TAG,"Not enough information provided in intent");
-    return START_NOT_STICKY;
+    return START_STICKY;
   }
-  nm=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-  Account account=intent.getParcelableExtra(EXTRA_ACCOUNT);
-  String file_path=intent.getStringExtra(EXTRA_FILE_PATH);
-  AccountManager am=(AccountManager)getSystemService(ACCOUNT_SERVICE);
-  Uri oc_url=Uri.parse(am.getUserData(account,AccountAuthenticator.KEY_OC_URL));
-  WebdavClient wdc=new WebdavClient(oc_url);
-  String username=account.name.split("@")[0];
-  String password="";
-  try {
-    password=am.blockingGetAuthToken(account,AccountAuthenticator.AUTH_TOKEN_TYPE,true);
-  }
- catch (  Exception e) {
-    e.printStackTrace();
-    return START_NOT_STICKY;
-  }
-  wdc.setCredentials(username,password);
-  wdc.allowUnsignedCertificates();
-  Notification n=new Notification(R.drawable.icon,"Downloading file",System.currentTimeMillis());
-  PendingIntent pi=PendingIntent.getActivity(this,1,new Intent(this,FileDisplayActivity.class),0);
-  n.setLatestEventInfo(this,"A","B",pi);
-  nm.notify(1,n);
-  File sdCard=Environment.getExternalStorageDirectory();
-  File dir=new File(sdCard.getAbsolutePath() + "/owncloud");
-  dir.mkdirs();
-  File file=new File(dir,file_path.replace('/','.'));
-  wdc.downloadFile(file_path,file);
+  mAccount=intent.getParcelableExtra(EXTRA_ACCOUNT);
+  mFilePath=intent.getStringExtra(EXTRA_FILE_PATH);
+  Message msg=mServiceHandler.obtainMessage();
+  msg.arg1=startId;
+  mServiceHandler.sendMessage(msg);
   return START_NOT_STICKY;
 }
