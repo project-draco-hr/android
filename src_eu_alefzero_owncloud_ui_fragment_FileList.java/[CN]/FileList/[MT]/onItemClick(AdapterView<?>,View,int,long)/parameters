@@ -1,4 +1,4 @@
-ListView l
+AdapterView<?> l
 View v
 int position
 long id

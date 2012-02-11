@@ -1,0 +1,5 @@
+{
+  mList=new ListView(getActivity());
+  mList.setOnItemClickListener(this);
+  super.onCreate(savedInstanceState);
+}

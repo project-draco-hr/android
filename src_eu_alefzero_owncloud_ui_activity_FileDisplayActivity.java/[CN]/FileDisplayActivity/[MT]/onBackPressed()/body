@@ -1,0 +1,7 @@
+{
+  popPath();
+  if (mDirectories.isEmpty()) {
+    super.onBackPressed();
+  }
+  mFileList.onBackPressed();
+}

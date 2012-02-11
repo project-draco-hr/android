@@ -1,5 +1,7 @@
 {
   super.onCreate(savedInstanceState);
+  mParentsIds=new Stack<String>();
+  mDirNames=new Stack<String>();
   mAccountManager=(AccountManager)getActivity().getSystemService(Service.ACCOUNT_SERVICE);
   mAccount=mAccountManager.getAccountsByType(AccountAuthenticator.ACCOUNT_TYPE)[0];
   populateFileList();

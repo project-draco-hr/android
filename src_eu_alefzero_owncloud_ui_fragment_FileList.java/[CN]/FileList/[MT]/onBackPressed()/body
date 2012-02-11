@@ -1,0 +1,15 @@
+{
+  if (!mParentsIds.empty()) {
+    mParentsIds.pop();
+    mDirNames.pop();
+  }
+  if (!mParentsIds.empty()) {
+    String id_=mParentsIds.peek();
+    String dirname=mDirNames.peek();
+    mCursor=getActivity().managedQuery(Uri.withAppendedPath(ProviderTableMeta.CONTENT_URI_DIR,id_),null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?",new String[]{mAccount.name},null);
+    setListAdapter(new FileListListAdapter(mCursor,getActivity()));
+  }
+ else {
+    populateFileList();
+  }
+}
