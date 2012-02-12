@@ -1,0 +1,4 @@
+{
+  mDirName=dirName;
+  mParentId=parentId;
+}

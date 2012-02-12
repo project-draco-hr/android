@@ -12,7 +12,6 @@
     public void onClick(    DialogInterface dialog,    int item){
       mAccount=accMan.getAccountsByType(AccountAuthenticator.ACCOUNT_TYPE)[item];
       dialog.dismiss();
-      populateFileList();
     }
   }
 );

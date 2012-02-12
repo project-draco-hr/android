@@ -2,7 +2,6 @@
   int i=itemPosition;
   while (i-- != 0) {
     popPath();
-    mFileList.onBackPressed();
   }
   return true;
 }

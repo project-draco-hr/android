@@ -8,7 +8,7 @@
   getActionBar().setDisplayShowTitleEnabled(false);
   getActionBar().setListNavigationCallbacks(mDirectories,this);
   FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
-  ft.add(R.id.fileList,mFileList);
+  ft.add(R.id.file_list_container,mFileList);
   if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
     ft.add(R.id.fileDetail,new FileDetail());
   }
