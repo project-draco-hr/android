@@ -2,13 +2,12 @@
   super.onCreate(savedInstanceState);
   mDirectories=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item);
   mDirectories.add("/");
-  mFileList=new FileList();
   setContentView(R.layout.files);
   getActionBar().setNavigationMode(android.support.v4.app.ActionBar.NAVIGATION_MODE_LIST);
   getActionBar().setDisplayShowTitleEnabled(false);
   getActionBar().setListNavigationCallbacks(mDirectories,this);
   FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
-  ft.add(R.id.file_list_container,mFileList);
+  ft.add(R.id.file_list_container,new FileList());
   if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
     ft.add(R.id.fileDetail,new FileDetail());
   }

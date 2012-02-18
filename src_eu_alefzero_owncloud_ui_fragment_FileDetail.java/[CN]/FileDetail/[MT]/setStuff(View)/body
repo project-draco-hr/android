@@ -1,0 +1,10 @@
+{
+  String id=mIntent.getStringExtra("FILE_ID");
+  String account_name=mIntent.getStringExtra("ACCOUNT_NAME");
+  Cursor c=getActivity().managedQuery(Uri.withAppendedPath(ProviderTableMeta.CONTENT_URI_FILE,id),null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?",new String[]{account_name},null);
+  c.moveToFirst();
+  String filename=c.getString(c.getColumnIndex(ProviderTableMeta.FILE_NAME));
+  setFilename(filename,view);
+  String mimetype=c.getString(c.getColumnIndex(ProviderTableMeta.FILE_CONTENT_TYPE));
+  setFiletype(DisplayUtils.convertMIMEtoPrettyPrint(mimetype),view);
+}

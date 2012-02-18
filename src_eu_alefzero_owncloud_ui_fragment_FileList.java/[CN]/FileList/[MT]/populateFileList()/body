@@ -1,9 +1,9 @@
 {
-  if (mParentId == null || mDirName == null) {
+  if (mParentsIds.empty()) {
     mCursor=getActivity().getContentResolver().query(ProviderTableMeta.CONTENT_URI,null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?",new String[]{mAccount.name},null);
   }
  else {
-    mCursor=getActivity().managedQuery(Uri.withAppendedPath(ProviderTableMeta.CONTENT_URI_DIR,mParentId),null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?",new String[]{mAccount.name},null);
+    mCursor=getActivity().managedQuery(Uri.withAppendedPath(ProviderTableMeta.CONTENT_URI_DIR,mParentsIds.peek()),null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?",new String[]{mAccount.name},null);
   }
   setListAdapter(new FileListListAdapter(mCursor,getActivity()));
 }

@@ -1,3 +1,4 @@
 {
-  setStuff(intent,getView());
+  mIntent=intent;
+  setStuff(getView());
 }

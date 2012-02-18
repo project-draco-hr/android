@@ -1,4 +1,8 @@
 {
   popPath();
-  getSupportFragmentManager().popBackStackImmediate();
+  if (mDirectories.getCount() == 0) {
+    super.onBackPressed();
+    return;
+  }
+  ((FileList)getSupportFragmentManager().findFragmentById(id.file_list_container)).onBackPressed();
 }

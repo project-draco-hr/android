@@ -1,5 +1,0 @@
-{
-  String filename=intent.getStringExtra("FILE_NAME");
-  String filepath=intent.getStringExtra("FILE_PATH");
-  setFilename(filename,view);
-}
