@@ -1,7 +1,7 @@
 {
   int i=itemPosition;
   while (i-- != 0) {
-    popPath();
+    onBackPressed();
   }
   return true;
 }

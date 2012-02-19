@@ -1,5 +1,4 @@
 {
   mDirectories.remove(mDirectories.getItem(0));
-  Log.d("TAG","" + getActionBar().getCustomView());
   return !mDirectories.isEmpty();
 }

@@ -1,0 +1,7 @@
+{
+  Toast.makeText(getActivity(),"Downloading",Toast.LENGTH_LONG).show();
+  Intent i=new Intent(getActivity(),FileDownloader.class);
+  i.putExtra(FileDownloader.EXTRA_ACCOUNT,mIntent.getParcelableExtra("ACCOUNT"));
+  i.putExtra(FileDownloader.EXTRA_FILE_PATH,mIntent.getStringExtra("FULL_PATH"));
+  getActivity().startService(i);
+}

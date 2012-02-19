@@ -1,3 +1,4 @@
 {
-  setFiletype(filename,getView());
+  TextView tv=(TextView)getView().findViewById(R.id.textView2);
+  if (tv != null)   tv.setText(mimetype);
 }

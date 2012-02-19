@@ -12,10 +12,12 @@
     return;
   }
   Intent i=new Intent(getActivity(),FileDetailActivity.class);
-  i.putExtra("FILE_NAME",((TextView)v.findViewById(R.id.Filename)).getText());
+  String filename=((TextView)v.findViewById(R.id.Filename)).getText().toString();
+  i.putExtra("FILE_NAME",filename);
+  i.putExtra("FULL_PATH","/" + filename);
   i.putExtra("FILE_ID",id_);
-  i.putExtra("ACCOUNT_NAME",mAccount.name);
-  FileDetail fd=(FileDetail)getFragmentManager().findFragmentById(R.id.fileDetail);
+  i.putExtra("ACCOUNT",mAccount);
+  FileDetail fd=(FileDetail)getSupportFragmentManager().findFragmentById(R.id.fileDetail);
   if (fd != null) {
     fd.setStuff(i);
   }
