@@ -1,4 +1,0 @@
-{
-  URI uri=null;
-  return uri;
-}

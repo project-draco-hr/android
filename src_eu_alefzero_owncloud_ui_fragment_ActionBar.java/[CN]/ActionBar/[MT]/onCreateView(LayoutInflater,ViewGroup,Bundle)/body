@@ -1,4 +1,0 @@
-{
-  View v=inflater.inflate(R.layout.action_bar,container,false);
-  return v;
-}

@@ -1,5 +1,2 @@
 {
-  is_pinned_=false;
-  pathToDownloadedFile_="";
-  lastUpdateDate_=new Date(1970,1,1);
 }

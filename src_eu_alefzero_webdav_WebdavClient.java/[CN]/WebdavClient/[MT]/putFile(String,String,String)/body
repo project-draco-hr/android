@@ -5,7 +5,6 @@
   method.setHeader("Host",mUri.getHost());
   method.setHeader("User-Agent","Android-ownCloud");
   try {
-    FileBody fb=new FileBody(new File(localFile,contentType));
     final FileEntity fileEntity=new FileEntity(new File(localFile),contentType);
     method.setEntity(fileEntity);
     Log.i(TAG,"executing:" + method.getRequestLine().toString());
