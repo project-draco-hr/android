@@ -1,0 +1,10 @@
+{
+  CheckBox checkbox=(CheckBox)findViewById(R.id.show_password);
+  TextView password_text=(TextView)findViewById(R.id.account_password);
+  if (checkbox.isChecked()) {
+    password_text.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+  }
+ else {
+    password_text.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+  }
+}
