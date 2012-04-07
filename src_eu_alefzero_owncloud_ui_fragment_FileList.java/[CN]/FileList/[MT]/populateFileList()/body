@@ -1,4 +1,5 @@
 {
+  Log.d("ASD",mAccount.name + "");
   if (mParentsIds.empty()) {
     mCursor=getActivity().getContentResolver().query(ProviderTableMeta.CONTENT_URI,null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?",new String[]{mAccount.name},null);
   }
