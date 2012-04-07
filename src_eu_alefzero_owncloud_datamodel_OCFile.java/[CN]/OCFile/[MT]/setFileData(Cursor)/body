@@ -6,7 +6,7 @@
   length_=0;
   creation_timestamp_=0;
   modified_timestamp_=0;
-  if (c != null && c.moveToFirst()) {
+  if (c != null) {
     id_=c.getLong(c.getColumnIndex(ProviderTableMeta._ID));
     path_=c.getString(c.getColumnIndex(ProviderTableMeta.FILE_PATH));
     storage_path_=c.getString(c.getColumnIndex(ProviderTableMeta.FILE_STORAGE_PATH));
