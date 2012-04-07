@@ -4,5 +4,5 @@
     super.onBackPressed();
     return;
   }
-  ((FileList)getSupportFragmentManager().findFragmentById(id.file_list_container)).onBackPressed();
+  ((FileList)getSupportFragmentManager().findFragmentById(R.id.fileList)).onBackPressed();
 }

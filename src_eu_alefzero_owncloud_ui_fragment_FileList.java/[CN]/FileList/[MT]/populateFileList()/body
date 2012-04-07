@@ -1,6 +1,9 @@
 {
-  Log.d("ASD",mAccount.name + "");
   if (mParentsIds.empty()) {
+    OCFile file=new OCFile(getActivity().getContentResolver(),mAccount,"/");
+    Log.d("ASD",file.getFileName() + "");
+    Log.d("ASD",file.getFileId() + "");
+    if (file.getDirectoryContent() != null)     Log.d("ASD",file.getDirectoryContent().size() + "");
     mCursor=getActivity().getContentResolver().query(ProviderTableMeta.CONTENT_URI,null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?",new String[]{mAccount.name},null);
   }
  else {
