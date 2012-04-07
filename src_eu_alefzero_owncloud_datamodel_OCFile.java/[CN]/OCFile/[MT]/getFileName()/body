@@ -1,0 +1,7 @@
+{
+  if (path_ != null) {
+    File f=new File(path_);
+    return f.getName();
+  }
+  return null;
+}
