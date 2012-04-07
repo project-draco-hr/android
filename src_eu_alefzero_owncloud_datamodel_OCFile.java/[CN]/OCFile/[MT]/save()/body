@@ -1,0 +1,15 @@
+{
+  ContentValues cv=new ContentValues();
+  cv.put(ProviderTableMeta.FILE_MODIFIED,modified_timestamp_);
+  cv.put(ProviderTableMeta.FILE_CREATION,creation_timestamp_);
+  cv.put(ProviderTableMeta.FILE_CONTENT_LENGTH,length_);
+  cv.put(ProviderTableMeta.CONTENT_TYPE,mimetype_);
+  Uri new_entry=cp_.insert(ProviderTableMeta.CONTENT_URI,cv);
+  try {
+    id_=Integer.parseInt(new_entry.getEncodedPath());
+  }
+ catch (  NumberFormatException e) {
+    Log.e(TAG,"Can't retrieve file id from uri: " + new_entry.toString() + ", reason: "+ e.getMessage());
+    id_=-1;
+  }
+}

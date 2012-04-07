@@ -1,0 +1,18 @@
+{
+  id_=-1;
+  path_=null;
+  storage_path_=null;
+  mimetype_=null;
+  length_=0;
+  creation_timestamp_=0;
+  modified_timestamp_=0;
+  if (c != null && c.moveToFirst()) {
+    id_=c.getLong(c.getColumnIndex(ProviderTableMeta._ID));
+    path_=c.getString(c.getColumnIndex(ProviderTableMeta.FILE_PATH));
+    storage_path_=c.getString(c.getColumnIndex(ProviderTableMeta.FILE_STORAGE_PATH));
+    mimetype_=c.getString(c.getColumnIndex(ProviderTableMeta.FILE_CONTENT_TYPE));
+    length_=c.getLong(c.getColumnIndex(ProviderTableMeta.FILE_CONTENT_LENGTH));
+    creation_timestamp_=c.getLong(c.getColumnIndex(ProviderTableMeta.FILE_CREATION));
+    modified_timestamp_=c.getLong(c.getColumnIndex(ProviderTableMeta.FILE_MODIFIED));
+  }
+}

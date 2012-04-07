@@ -1,0 +1,3 @@
+{
+  return mimetype_ != null && mimetype_.equals("dir");
+}

@@ -1,0 +1,15 @@
+{
+  if (isDirectory() && id_ != -1) {
+    Vector<OCFile> ret=new Vector<OCFile>();
+    Uri req_uri=Uri.withAppendedPath(ProviderTableMeta.CONTENT_URI_DIR,String.valueOf(id_));
+    Cursor c=cp_.query(req_uri,null,null,null,null);
+    if (c.moveToFirst())     do {
+      long id=c.getLong(c.getColumnIndex(ProviderTableMeta._ID));
+      OCFile child=new OCFile(cp_,account_,id);
+      ret.add(child);
+    }
+ while (c.moveToNext());
+    return ret;
+  }
+  return null;
+}
