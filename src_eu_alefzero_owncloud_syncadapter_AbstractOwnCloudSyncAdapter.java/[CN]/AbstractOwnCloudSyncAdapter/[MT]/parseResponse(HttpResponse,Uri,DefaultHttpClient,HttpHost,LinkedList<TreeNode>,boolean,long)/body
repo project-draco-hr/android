@@ -1,0 +1,24 @@
+{
+  boolean skipFirst=sf, override_parent=true;
+  for (  TreeNode n : WebdavUtils.parseResponseToNodes(resp.getEntity().getContent())) {
+    if (skipFirst) {
+      skipFirst=false;
+      continue;
+    }
+    String path=n.stripPathFromFilename(uri.getPath());
+    OCFile new_file=OCFile.createNewFile(getContentProvider(),getAccount(),n.getProperty(NodeProperty.PATH),0,0,0,n.getProperty(NodeProperty.RESOURCE_TYPE),parent_id);
+    new_file.save();
+    Log.e("ASD",new_file.getFileId() + "");
+    Log.e("ASD",new_file.getFileName() + "");
+    Log.e("ASD",new_file.getPath() + "");
+    if (override_parent) {
+      parent_id=new_file.getFileId();
+      override_parent=false;
+    }
+    if (!TextUtils.isEmpty(n.getProperty(NodeProperty.NAME)) && n.getProperty(NodeProperty.RESOURCE_TYPE).equals("DIR")) {
+      HttpPropFind method=new HttpPropFind(uri.getPath() + path + n.getProperty(NodeProperty.NAME).replace(" ","%20")+ "/");
+      HttpResponse response=fireRawRequest(method);
+      parseResponse(response,uri,client,targetHost,n.getChildList(),true,new_file.getFileId());
+    }
+  }
+}

@@ -1,13 +1,7 @@
 {
-  if (mParentsIds.empty()) {
-    OCFile file=new OCFile(getActivity().getContentResolver(),mAccount,"/");
-    Log.d("ASD",file.getFileName() + "");
-    Log.d("ASD",file.getFileId() + "");
-    if (file.getDirectoryContent() != null)     Log.d("ASD",file.getDirectoryContent().size() + "");
-    mCursor=getActivity().getContentResolver().query(ProviderTableMeta.CONTENT_URI,null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?",new String[]{mAccount.name},null);
-  }
- else {
-    mCursor=getActivity().managedQuery(Uri.withAppendedPath(ProviderTableMeta.CONTENT_URI_DIR,mParentsIds.peek()),null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?",new String[]{mAccount.name},null);
-  }
-  setListAdapter(new FileListListAdapter(mCursor,getActivity()));
+  String s="/";
+  for (  String a : mDirNames)   s+=a + "/";
+  OCFile file=new OCFile(getActivity().getContentResolver(),mAccount,s);
+  mFiles=file.getDirectoryContent();
+  setListAdapter(new FileListListAdapter(file,getActivity()));
 }

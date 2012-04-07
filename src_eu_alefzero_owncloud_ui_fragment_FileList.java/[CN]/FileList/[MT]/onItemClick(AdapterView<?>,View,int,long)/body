@@ -1,10 +1,11 @@
 {
-  if (!mCursor.moveToPosition(position)) {
+  if (mFiles.size() <= position) {
     throw new IndexOutOfBoundsException("Incorrect item selected");
   }
-  String id_=mCursor.getString(mCursor.getColumnIndex(ProviderTableMeta._ID));
-  if (mCursor.getString(mCursor.getColumnIndex(ProviderTableMeta.FILE_CONTENT_TYPE)).equals("DIR")) {
-    String dirname=mCursor.getString(mCursor.getColumnIndex(ProviderTableMeta.FILE_NAME));
+  OCFile file=mFiles.get(position);
+  String id_=String.valueOf(file.getFileId());
+  if (file.getMimetype().equals("DIR")) {
+    String dirname=file.getFileName();
     mDirNames.push(dirname);
     mParentsIds.push(id_);
     ((FileDisplayActivity)getActivity()).pushPath(dirname);

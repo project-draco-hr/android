@@ -1,3 +1,4 @@
 {
-  return null;
+  if (mFiles.size() <= position)   return null;
+  return mFiles.get(position);
 }

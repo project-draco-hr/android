@@ -1,0 +1,5 @@
+{
+  mFile=f;
+  mFiles=mFile.getDirectoryContent();
+  mContext=context;
+}

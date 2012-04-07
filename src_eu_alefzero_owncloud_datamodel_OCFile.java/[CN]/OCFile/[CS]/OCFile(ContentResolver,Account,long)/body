@@ -1,6 +1,6 @@
 {
-  cp_=cp;
+  cr_=cr;
   account_=account;
-  Cursor c=cp_.query(ProviderTableMeta.CONTENT_URI_FILE,null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=? AND " + ProviderTableMeta._ID+ "=?",new String[]{account_.name,String.valueOf(id)},null);
+  Cursor c=cr_.query(ProviderTableMeta.CONTENT_URI_FILE,null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=? AND " + ProviderTableMeta._ID+ "=?",new String[]{account_.name,String.valueOf(id)},null);
   if (c.moveToFirst())   setFileData(c);
 }

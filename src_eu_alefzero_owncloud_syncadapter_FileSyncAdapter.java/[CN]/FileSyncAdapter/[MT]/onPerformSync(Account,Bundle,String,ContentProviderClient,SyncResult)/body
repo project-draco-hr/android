@@ -5,7 +5,6 @@
     HttpPropFind query=this.getPropFindQuery();
     query.setEntity(new StringEntity(WebdavUtils.prepareXmlForPropFind()));
     TreeNode root=this.fireRequest(query);
-    commitToDatabase(root,null);
   }
  catch (  OperationCanceledException e) {
     e.printStackTrace();
@@ -16,9 +15,6 @@ catch (  AuthenticatorException e) {
   }
 catch (  IOException e) {
     syncResult.stats.numIoExceptions++;
-    e.printStackTrace();
-  }
-catch (  RemoteException e) {
     e.printStackTrace();
   }
 }

@@ -4,10 +4,11 @@
     LayoutInflater vi=(LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     v=vi.inflate(R.layout.list_layout,null);
   }
-  if (mCursor.moveToPosition(position)) {
+  if (mFiles.size() > position) {
+    OCFile f=mFiles.get(position);
     TextView tv=(TextView)v.findViewById(R.id.Filename);
-    tv.setText(DisplayUtils.HtmlDecode(mCursor.getString(mCursor.getColumnIndex(ProviderMeta.ProviderTableMeta.FILE_NAME))));
-    if (!mCursor.getString(mCursor.getColumnIndex(ProviderTableMeta.FILE_CONTENT_TYPE)).equals("DIR")) {
+    tv.setText(DisplayUtils.HtmlDecode(f.getFileName()));
+    if (!f.getMimetype().equals("DIR")) {
       ImageView iv=(ImageView)v.findViewById(R.id.imageView1);
       iv.setImageResource(R.drawable.file);
     }
