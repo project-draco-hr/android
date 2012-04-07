@@ -7,15 +7,13 @@
   if (file.getMimetype().equals("DIR")) {
     String dirname=file.getFileName();
     mDirNames.push(dirname);
-    mParentsIds.push(id_);
     ((FileDisplayActivity)getActivity()).pushPath(dirname);
     populateFileList();
     return;
   }
   Intent i=new Intent(getActivity(),FileDetailActivity.class);
-  String filename=((TextView)v.findViewById(R.id.Filename)).getText().toString();
-  i.putExtra("FILE_NAME",filename);
-  i.putExtra("FULL_PATH","/" + filename);
+  i.putExtra("FILE_NAME",file.getFileName());
+  i.putExtra("FULL_PATH",file.getPath());
   i.putExtra("FILE_ID",id_);
   i.putExtra("ACCOUNT",mAccount);
   FileDetail fd=(FileDetail)getSupportFragmentManager().findFragmentById(R.id.fileDetail);

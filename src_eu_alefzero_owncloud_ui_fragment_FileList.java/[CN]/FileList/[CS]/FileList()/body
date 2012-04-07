@@ -1,4 +1,3 @@
 {
   mDirNames=new Stack<String>();
-  mParentsIds=new Stack<String>();
 }

@@ -1,5 +1,0 @@
-{
-  account_=account;
-  cr_=cr;
-  resetData();
-}

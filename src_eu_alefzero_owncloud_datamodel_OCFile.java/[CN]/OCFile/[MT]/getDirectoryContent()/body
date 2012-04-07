@@ -21,6 +21,7 @@
       ret.add(child);
     }
  while (c.moveToNext());
+    c.close();
     return ret;
   }
   return null;

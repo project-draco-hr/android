@@ -1,5 +1,4 @@
 {
-  mParentsIds.pop();
   mDirNames.pop();
   populateFileList();
 }
