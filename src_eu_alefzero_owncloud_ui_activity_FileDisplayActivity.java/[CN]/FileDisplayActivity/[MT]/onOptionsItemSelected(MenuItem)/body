@@ -1,9 +1,16 @@
 {
 switch (item.getItemId()) {
 case R.id.settingsItem:
-    Intent i=new Intent(this,Preferences.class);
-  startActivity(i);
-break;
+{
+      Intent i=new Intent(this,Preferences.class);
+      startActivity(i);
+      break;
+    }
+case R.id.createDirectoryItem:
+{
+    showDialog(0);
+    break;
+  }
 }
 return true;
 }

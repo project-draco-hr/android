@@ -1,0 +1,35 @@
+{
+  final AlertDialog.Builder builder=new Builder(this);
+  final EditText dirName=new EditText(getBaseContext());
+  builder.setView(dirName);
+  builder.setTitle(R.string.uploader_info_dirname);
+  builder.setPositiveButton(R.string.common_ok,new OnClickListener(){
+    public void onClick(    DialogInterface dialog,    int which){
+      String s=dirName.getText().toString();
+      if (s.trim().isEmpty()) {
+        dialog.cancel();
+        return;
+      }
+      AccountManager am=(AccountManager)getSystemService(ACCOUNT_SERVICE);
+      Account a=am.getAccountsByType(AccountAuthenticator.ACCOUNT_TYPE)[0];
+      String path="";
+      for (int i=mDirectories.getCount() - 2; i >= 0; --i) {
+        path+="/" + mDirectories.getItem(i);
+      }
+      OCFile parent=new OCFile(getContentResolver(),a,path + "/");
+      path+="/" + s + "/";
+      Thread thread=new Thread(new DirectoryCreator(path,a,am));
+      thread.start();
+      OCFile.createNewFile(getContentResolver(),a,path,0,0,0,"DIR",parent.getFileId()).save();
+      dialog.dismiss();
+    }
+  }
+);
+  builder.setNegativeButton(R.string.common_cancel,new OnClickListener(){
+    public void onClick(    DialogInterface dialog,    int which){
+      dialog.cancel();
+    }
+  }
+);
+  return builder.create();
+}

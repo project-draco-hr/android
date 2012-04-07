@@ -1,0 +1,8 @@
+{
+  WebdavClient wdc=new WebdavClient(Uri.parse(mAm.getUserData(mAccount,AccountAuthenticator.KEY_OC_URL)));
+  String username=mAccount.name.substring(0,mAccount.name.lastIndexOf('@'));
+  String password=mAm.getPassword(mAccount);
+  wdc.setCredentials(username,password);
+  wdc.allowUnsignedCertificates();
+  wdc.createDirectory(mTargetPath);
+}
