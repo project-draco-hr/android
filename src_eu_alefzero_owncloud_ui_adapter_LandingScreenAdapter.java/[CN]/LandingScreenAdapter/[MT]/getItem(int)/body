@@ -3,7 +3,8 @@
 switch (position) {
 case 0:
     intent.setClass(mContext,FileDisplayActivity.class);
-  break;
+  intent.putExtra("ACCOUNT",AuthUtils.getCurrentOwnCloudAccount(mContext));
+break;
 case 5:
 intent.setClass(mContext,Preferences.class);
 break;

@@ -1,0 +1,12 @@
+{
+  AccountManager accMan=AccountManager.get(this);
+  mAccounts=accMan.getAccountsByType(AccountAuthenticator.ACCOUNT_TYPE);
+  ListPreference accountList=(ListPreference)findPreference("select_oc_account");
+  String[] accNames=new String[mAccounts.length];
+  for (int i=0; i < mAccounts.length; i++) {
+    Account account=mAccounts[i];
+    accNames[i]=account.name;
+  }
+  accountList.setEntries(accNames);
+  accountList.setEntryValues(accNames);
+}

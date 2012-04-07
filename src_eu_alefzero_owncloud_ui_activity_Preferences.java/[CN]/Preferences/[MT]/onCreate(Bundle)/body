@@ -4,4 +4,5 @@
   mSessions=new Vector<OwnCloudSession>();
   addPreferencesFromResource(R.xml.preferences);
   registerForContextMenu(getListView());
+  populateAccountList();
 }
