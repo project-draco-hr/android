@@ -1,0 +1,32 @@
+{
+  setAccount(account);
+  setContentProvider(provider);
+  Cursor c=getLocalContacts(false);
+  if (c.moveToFirst()) {
+    do {
+      String lookup=c.getString(c.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY));
+      String a=getAddressBookUri();
+      String uri=a + lookup + ".vcf";
+      FileInputStream f;
+      try {
+        f=getContactVcard(lookup);
+        HttpPut query=new HttpPut(uri);
+        byte[] b=new byte[f.available()];
+        f.read(b);
+        query.setEntity(new ByteArrayEntity(b));
+        HttpResponse response=fireRawRequest(query);
+      }
+ catch (      IOException e) {
+        e.printStackTrace();
+        return;
+      }
+catch (      OperationCanceledException e) {
+        e.printStackTrace();
+      }
+catch (      AuthenticatorException e) {
+        e.printStackTrace();
+      }
+    }
+ while (c.moveToNext());
+  }
+}

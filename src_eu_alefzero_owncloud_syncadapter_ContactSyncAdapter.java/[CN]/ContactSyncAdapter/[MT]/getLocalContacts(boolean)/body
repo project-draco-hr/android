@@ -1,0 +1,3 @@
+{
+  return getContext().getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,new String[]{ContactsContract.Contacts._ID,ContactsContract.Contacts.LOOKUP_KEY},ContactsContract.Contacts.IN_VISIBLE_GROUP + " = ?",new String[]{(include_hidden_contacts ? "0" : "1")},ContactsContract.Contacts._ID + " DESC");
+}

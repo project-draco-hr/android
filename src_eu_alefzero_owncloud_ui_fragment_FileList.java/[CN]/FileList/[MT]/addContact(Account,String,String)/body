@@ -1,0 +1,28 @@
+{
+  Log.i("ASD","Adding contact: " + name);
+  ArrayList<ContentProviderOperation> operationList=new ArrayList<ContentProviderOperation>();
+  ContentProviderOperation.Builder builder=ContentProviderOperation.newInsert(RawContacts.CONTENT_URI);
+  builder.withValue(RawContacts.ACCOUNT_NAME,account.name);
+  builder.withValue(RawContacts.ACCOUNT_TYPE,account.type);
+  builder.withValue(RawContacts.SYNC1,username);
+  operationList.add(builder.build());
+  builder=ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI);
+  builder.withValueBackReference(ContactsContract.CommonDataKinds.StructuredName.RAW_CONTACT_ID,0);
+  builder.withValue(ContactsContract.Data.MIMETYPE,ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE);
+  builder.withValue(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME,name);
+  operationList.add(builder.build());
+  builder=ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI);
+  builder.withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID,0);
+  builder.withValue(ContactsContract.Data.MIMETYPE,"vnd.android.cursor.item/vnd.owncloud.contact.profile");
+  builder.withValue(ContactsContract.Data.DATA1,username);
+  builder.withValue(ContactsContract.Data.DATA2,"Last.fm Profile");
+  builder.withValue(ContactsContract.Data.DATA3,"View profile");
+  operationList.add(builder.build());
+  try {
+    getActivity().getContentResolver().applyBatch(ContactsContract.AUTHORITY,operationList);
+  }
+ catch (  Exception e) {
+    Log.e("ASD","Something went wrong during creation! " + e);
+    e.printStackTrace();
+  }
+}
