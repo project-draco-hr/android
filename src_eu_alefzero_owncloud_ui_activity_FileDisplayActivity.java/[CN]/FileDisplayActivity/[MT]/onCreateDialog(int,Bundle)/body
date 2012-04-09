@@ -1,6 +1,7 @@
 {
   final AlertDialog.Builder builder=new Builder(this);
   final EditText dirName=new EditText(getBaseContext());
+  final Account a=AuthUtils.getCurrentOwnCloudAccount(this);
   builder.setView(dirName);
   builder.setTitle(R.string.uploader_info_dirname);
   builder.setPositiveButton(R.string.common_ok,new OnClickListener(){
@@ -10,15 +11,13 @@
         dialog.cancel();
         return;
       }
-      AccountManager am=(AccountManager)getSystemService(ACCOUNT_SERVICE);
-      Account a=am.getAccountsByType(AccountAuthenticator.ACCOUNT_TYPE)[0];
       String path="";
       for (int i=mDirectories.getCount() - 2; i >= 0; --i) {
         path+="/" + mDirectories.getItem(i);
       }
       OCFile parent=new OCFile(getContentResolver(),a,path + "/");
       path+="/" + s + "/";
-      Thread thread=new Thread(new DirectoryCreator(path,a,am));
+      Thread thread=new Thread(new DirectoryCreator(path,a));
       thread.start();
       OCFile.createNewFile(getContentResolver(),a,path,0,0,0,"DIR",parent.getFileId()).save();
       dialog.dismiss();

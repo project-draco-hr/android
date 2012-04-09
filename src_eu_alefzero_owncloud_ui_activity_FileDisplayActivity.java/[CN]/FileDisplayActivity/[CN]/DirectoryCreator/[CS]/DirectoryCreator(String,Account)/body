@@ -1,0 +1,5 @@
+{
+  mTargetPath=targetPath;
+  mAccount=account;
+  mAm=(AccountManager)getSystemService(ACCOUNT_SERVICE);
+}
