@@ -1,10 +1,11 @@
 {
   super.onCreate(savedInstanceState);
-  mDirectories=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item);
+  mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
   mDirectories.add("/");
   setContentView(R.layout.files);
   ActionBar action_bar=getSupportActionBar();
-  action_bar.setNavigationMode(android.support.v4.app.ActionBar.NAVIGATION_MODE_LIST);
+  action_bar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
   action_bar.setDisplayShowTitleEnabled(false);
   action_bar.setListNavigationCallbacks(mDirectories,this);
+  action_bar.setDisplayHomeAsUpEnabled(true);
 }
