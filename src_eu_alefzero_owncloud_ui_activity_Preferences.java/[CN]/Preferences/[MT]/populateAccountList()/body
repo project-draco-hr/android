@@ -1,16 +1,17 @@
 {
   AccountManager accMan=AccountManager.get(this);
   mAccounts=accMan.getAccountsByType(AccountAuthenticator.ACCOUNT_TYPE);
-  ListPreference accountList=(ListPreference)findPreference("select_oc_account");
+  mAccountList=(ListPreference)findPreference("select_oc_account");
+  mAccountList.setOnPreferenceChangeListener(this);
   Account defaultAccount=AuthUtils.getCurrentOwnCloudAccount(this);
   if (defaultAccount != null) {
-    accountList.setSummary(defaultAccount.name);
+    mAccountList.setSummary(defaultAccount.name);
   }
   String[] accNames=new String[mAccounts.length];
   for (int i=0; i < mAccounts.length; i++) {
     Account account=mAccounts[i];
     accNames[i]=account.name;
   }
-  accountList.setEntries(accNames);
-  accountList.setEntryValues(accNames);
+  mAccountList.setEntries(accNames);
+  mAccountList.setEntryValues(accNames);
 }

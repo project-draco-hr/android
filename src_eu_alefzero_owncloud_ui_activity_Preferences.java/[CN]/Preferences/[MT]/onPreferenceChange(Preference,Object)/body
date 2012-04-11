@@ -1,0 +1,6 @@
+{
+  if (preference.equals(mAccountList)) {
+    mAccountList.setSummary(newValue.toString());
+  }
+  return true;
+}
