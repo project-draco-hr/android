@@ -1,0 +1,6 @@
+{
+  super.onRestoreInstanceState(savedInstanceState);
+  if (!accountsAreSetup()) {
+    showDialog(DIALOG_SETUP_ACCOUNT);
+  }
+}
