@@ -1,0 +1,5 @@
+{
+  mContentProvider=null;
+  mContentResolver=cr;
+  mAccount=account;
+}

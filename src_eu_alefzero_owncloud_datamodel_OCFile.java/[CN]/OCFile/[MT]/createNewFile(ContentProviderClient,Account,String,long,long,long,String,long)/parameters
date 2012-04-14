@@ -1,8 +1,0 @@
-ContentProviderClient providerClient
-Account account
-String path
-long length
-long creation_timestamp
-long modified_timestamp
-String mimetype
-long parent_id

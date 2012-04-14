@@ -1,0 +1,14 @@
+{
+  OCFile file=null;
+  if (c != null) {
+    file=new OCFile(c.getString(c.getColumnIndex(ProviderTableMeta.FILE_PATH)));
+    file.setFileId(c.getLong(c.getColumnIndex(ProviderTableMeta._ID)));
+    file.setParentId(c.getLong(c.getColumnIndex(ProviderTableMeta.FILE_PARENT)));
+    file.setStoragePath(c.getString(c.getColumnIndex(ProviderTableMeta.FILE_STORAGE_PATH)));
+    file.setMimetype(c.getString(c.getColumnIndex(ProviderTableMeta.FILE_CONTENT_TYPE)));
+    file.setFileLength(c.getLong(c.getColumnIndex(ProviderTableMeta.FILE_CONTENT_LENGTH)));
+    file.setCreationTimestamp(c.getLong(c.getColumnIndex(ProviderTableMeta.FILE_CREATION)));
+    file.setModificationTimestamp(c.getLong(c.getColumnIndex(ProviderTableMeta.FILE_MODIFIED)));
+  }
+  return file;
+}

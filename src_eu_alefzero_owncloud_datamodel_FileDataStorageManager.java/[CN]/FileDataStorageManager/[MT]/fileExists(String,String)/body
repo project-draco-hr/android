@@ -1,0 +1,16 @@
+{
+  Cursor c;
+  if (getContentResolver() != null) {
+    c=getContentResolver().query(ProviderTableMeta.CONTENT_URI,null,cmp_key + "=?",new String[]{value},null);
+  }
+ else {
+    try {
+      c=getContentProvider().query(ProviderTableMeta.CONTENT_URI,null,cmp_key + "=?",new String[]{value},null);
+    }
+ catch (    RemoteException e) {
+      Log.e(TAG,"Couldn't determine file existance, assuming non existance: " + e.getMessage());
+      return false;
+    }
+  }
+  return c.moveToFirst();
+}

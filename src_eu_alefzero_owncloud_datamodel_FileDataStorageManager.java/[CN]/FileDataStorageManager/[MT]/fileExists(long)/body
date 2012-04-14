@@ -1,0 +1,3 @@
+{
+  return fileExists(ProviderTableMeta._ID,String.valueOf(id));
+}

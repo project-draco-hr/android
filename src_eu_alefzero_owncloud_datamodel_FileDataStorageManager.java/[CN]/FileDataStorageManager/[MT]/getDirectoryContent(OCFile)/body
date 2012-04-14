@@ -1,0 +1,27 @@
+{
+  if (f.isDirectory() && f.getFileId() != -1) {
+    Vector<OCFile> ret=new Vector<OCFile>();
+    Uri req_uri=Uri.withAppendedPath(ProviderTableMeta.CONTENT_URI_DIR,String.valueOf(f.getFileId()));
+    Cursor c=null;
+    if (getContentProvider() != null) {
+      try {
+        c=getContentProvider().query(req_uri,null,null,null,null);
+      }
+ catch (      RemoteException e) {
+        Log.e(TAG,e.getMessage());
+        return ret;
+      }
+    }
+ else {
+      c=getContentResolver().query(req_uri,null,null,null,null);
+    }
+    if (c.moveToFirst())     do {
+      OCFile child=createFileInstance(c);
+      ret.add(child);
+    }
+ while (c.moveToNext());
+    c.close();
+    return ret;
+  }
+  return null;
+}

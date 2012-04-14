@@ -1,7 +1,8 @@
 {
   String s="/";
   for (  String a : mDirNames)   s+=a + "/";
-  OCFile file=new OCFile(getActivity().getContentResolver(),mAccount,s);
-  mFiles=file.getDirectoryContent();
-  setListAdapter(new FileListListAdapter(file,getActivity()));
+  mStorageManager=new FileDataStorageManager(mAccount,getActivity().getContentResolver());
+  OCFile file=new OCFile(s);
+  mFiles=mStorageManager.getDirectoryContent(file);
+  setListAdapter(new FileListListAdapter(file,mStorageManager,getActivity()));
 }

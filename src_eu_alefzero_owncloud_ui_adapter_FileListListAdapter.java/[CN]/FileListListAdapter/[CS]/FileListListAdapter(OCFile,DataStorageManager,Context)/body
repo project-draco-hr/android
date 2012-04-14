@@ -1,0 +1,6 @@
+{
+  mFile=file;
+  mStorageManager=storage_man;
+  mFiles=mStorageManager.getDirectoryContent(mFile);
+  mContext=context;
+}

@@ -1,0 +1,5 @@
+{
+  Cursor c=getCursorForValue(ProviderTableMeta._ID,String.valueOf(id));
+  if (c.moveToFirst())   return createFileInstance(c);
+  return null;
+}

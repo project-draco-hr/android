@@ -1,5 +1,0 @@
-{
-  account_=account;
-  contentResolver_=contentResolver;
-  resetData();
-}

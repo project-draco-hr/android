@@ -1,5 +1,0 @@
-{
-  account_=account;
-  providerClient_=providerClient;
-  resetData();
-}

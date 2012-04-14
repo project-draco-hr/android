@@ -1,0 +1,16 @@
+{
+  Cursor c=null;
+  if (getContentResolver() != null) {
+    c=getContentResolver().query(ProviderTableMeta.CONTENT_URI,null,key + "=?",new String[]{value},null);
+  }
+ else {
+    try {
+      c=getContentProvider().query(ProviderTableMeta.CONTENT_URI,null,key + "=?",new String[]{value},null);
+    }
+ catch (    RemoteException e) {
+      Log.e(TAG,"Could not get file details: " + e.getMessage());
+      c=null;
+    }
+  }
+  return c;
+}
