@@ -19,6 +19,11 @@ mDbHandler.removeSessionWithId(ocs.getEntryId());
 mSessions.remove(ocs);
 getPreferenceScreen().removePreference(getPreferenceScreen().getPreference(mSelectedMenuItem + 1));
 break;
+case android.R.id.home:
+intent=new Intent(getBaseContext(),LandingActivity.class);
+intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+startActivity(intent);
+break;
 default :
 Log.w(TAG,"Unknown menu item triggered");
 return false;

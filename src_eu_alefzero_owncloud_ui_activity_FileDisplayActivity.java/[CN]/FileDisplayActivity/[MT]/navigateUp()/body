@@ -1,0 +1,10 @@
+{
+  popPath();
+  if (mDirectories.getCount() == 0) {
+    Intent intent=new Intent(this,LandingActivity.class);
+    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    startActivity(intent);
+    return;
+  }
+  ((FileList)getSupportFragmentManager().findFragmentById(R.id.fileList)).onNavigateUp();
+}

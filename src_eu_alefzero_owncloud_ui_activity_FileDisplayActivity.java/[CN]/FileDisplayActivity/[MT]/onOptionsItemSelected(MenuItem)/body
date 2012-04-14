@@ -11,6 +11,11 @@ case R.id.createDirectoryItem:
     showDialog(0);
     break;
   }
+case android.R.id.home:
+{
+  navigateUp();
+  break;
+}
 }
 return true;
 }
