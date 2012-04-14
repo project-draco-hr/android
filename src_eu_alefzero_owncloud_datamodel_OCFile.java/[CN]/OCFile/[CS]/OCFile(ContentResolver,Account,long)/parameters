@@ -1,3 +1,3 @@
-ContentResolver cr
+ContentResolver resolver
 Account account
 long id

@@ -1,2 +1,2 @@
-ContentResolver cr
+ContentResolver contentResolver
 Account account

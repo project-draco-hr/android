@@ -1,6 +1,6 @@
 {
-  OCFile new_file=new OCFile(contentResolver,a);
-  Cursor c=new_file.cr_.query(ProviderTableMeta.CONTENT_URI_FILE,null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=? AND " + ProviderTableMeta.FILE_PATH+ "=?",new String[]{new_file.account_.name,path},null);
+  OCFile new_file=new OCFile(contentResolver,account);
+  Cursor c=new_file.contentResolver_.query(ProviderTableMeta.CONTENT_URI_FILE,null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=? AND " + ProviderTableMeta.FILE_PATH+ "=?",new String[]{new_file.account_.name,path},null);
   if (c.moveToFirst())   new_file.setFileData(c);
   c.close();
   new_file.path_=path;

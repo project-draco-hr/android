@@ -9,10 +9,10 @@
   cv.put(ProviderTableMeta.FILE_PATH,path_);
   cv.put(ProviderTableMeta.FILE_STORAGE_PATH,storage_path_);
   cv.put(ProviderTableMeta.FILE_ACCOUNT_OWNER,account_.name);
-  if (fileExtist()) {
-    if (cp_ != null) {
+  if (fileExists()) {
+    if (providerClient_ != null) {
       try {
-        cp_.update(ProviderTableMeta.CONTENT_URI,cv,ProviderTableMeta._ID + "=?",new String[]{String.valueOf(id_)});
+        providerClient_.update(ProviderTableMeta.CONTENT_URI,cv,ProviderTableMeta._ID + "=?",new String[]{String.valueOf(id_)});
       }
  catch (      RemoteException e) {
         Log.e(TAG,e.getMessage());
@@ -20,14 +20,14 @@
       }
     }
  else {
-      cr_.update(ProviderTableMeta.CONTENT_URI,cv,ProviderTableMeta._ID + "=?",new String[]{String.valueOf(id_)});
+      contentResolver_.update(ProviderTableMeta.CONTENT_URI,cv,ProviderTableMeta._ID + "=?",new String[]{String.valueOf(id_)});
     }
   }
  else {
     Uri new_entry=null;
-    if (cp_ != null) {
+    if (providerClient_ != null) {
       try {
-        new_entry=cp_.insert(ProviderTableMeta.CONTENT_URI_FILE,cv);
+        new_entry=providerClient_.insert(ProviderTableMeta.CONTENT_URI_FILE,cv);
       }
  catch (      RemoteException e) {
         Log.e(TAG,e.getMessage());
@@ -36,7 +36,7 @@
       }
     }
  else {
-      new_entry=cr_.insert(ProviderTableMeta.CONTENT_URI_FILE,cv);
+      new_entry=contentResolver_.insert(ProviderTableMeta.CONTENT_URI_FILE,cv);
     }
     try {
       String p=new_entry.getEncodedPath();

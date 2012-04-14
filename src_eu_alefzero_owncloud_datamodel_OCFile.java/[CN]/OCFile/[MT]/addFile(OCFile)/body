@@ -1,4 +1,8 @@
 {
-  file.parent_id_=id_;
-  file.save();
+  if (isDirectory()) {
+    file.parent_id_=id_;
+    file.save();
+    return;
+  }
+  throw new IllegalStateException("This is not a directory where you can add stuff to!");
 }

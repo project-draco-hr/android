@@ -1,4 +1,4 @@
-ContentProviderClient cr
+ContentProviderClient providerClient
 Account account
 String path
 long length

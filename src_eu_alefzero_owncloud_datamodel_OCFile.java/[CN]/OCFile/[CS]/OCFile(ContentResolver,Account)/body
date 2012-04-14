@@ -1,5 +1,5 @@
 {
   account_=account;
-  cr_=cr;
+  contentResolver_=contentResolver;
   resetData();
 }

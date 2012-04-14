@@ -1,2 +1,2 @@
-ContentProviderClient cp
+ContentProviderClient providerClient
 Account account

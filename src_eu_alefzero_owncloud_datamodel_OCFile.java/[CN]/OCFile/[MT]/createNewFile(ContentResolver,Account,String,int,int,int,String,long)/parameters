@@ -1,5 +1,5 @@
 ContentResolver contentResolver
-Account a
+Account account
 String path
 int length
 int creation_timestamp

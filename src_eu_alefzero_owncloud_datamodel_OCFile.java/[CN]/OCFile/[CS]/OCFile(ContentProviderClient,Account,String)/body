@@ -1,8 +1,8 @@
 {
-  cp_=cp;
+  providerClient_=cp;
   account_=account;
   try {
-    Cursor c=cp_.query(ProviderTableMeta.CONTENT_URI_FILE,null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=? AND " + ProviderTableMeta.FILE_PATH+ "=?",new String[]{account_.name,path},null);
+    Cursor c=providerClient_.query(ProviderTableMeta.CONTENT_URI_FILE,null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=? AND " + ProviderTableMeta.FILE_PATH+ "=?",new String[]{account_.name,path},null);
     if (c.moveToFirst()) {
       setFileData(c);
       if (path_ != null)       path_=path;

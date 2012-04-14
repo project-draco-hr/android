@@ -3,9 +3,9 @@
     Vector<OCFile> ret=new Vector<OCFile>();
     Uri req_uri=Uri.withAppendedPath(ProviderTableMeta.CONTENT_URI_DIR,String.valueOf(id_));
     Cursor c=null;
-    if (cp_ != null) {
+    if (providerClient_ != null) {
       try {
-        c=cp_.query(req_uri,null,null,null,null);
+        c=providerClient_.query(req_uri,null,null,null,null);
       }
  catch (      RemoteException e) {
         Log.e(TAG,e.getMessage());
@@ -13,10 +13,10 @@
       }
     }
  else {
-      c=cr_.query(req_uri,null,null,null,null);
+      c=contentResolver_.query(req_uri,null,null,null,null);
     }
     if (c.moveToFirst())     do {
-      OCFile child=new OCFile(cp_,account_);
+      OCFile child=new OCFile(providerClient_,account_);
       child.setFileData(c);
       ret.add(child);
     }
