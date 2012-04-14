@@ -15,11 +15,13 @@
  else {
       c=getContentResolver().query(req_uri,null,null,null,null);
     }
-    if (c.moveToFirst())     do {
-      OCFile child=createFileInstance(c);
-      ret.add(child);
-    }
+    if (c.moveToFirst()) {
+      do {
+        OCFile child=createFileInstance(c);
+        ret.add(child);
+      }
  while (c.moveToNext());
+    }
     c.close();
     return ret;
   }

@@ -25,16 +25,21 @@
     }
   }
  else {
+    Uri result_uri=null;
     if (getContentResolver() != null) {
-      getContentResolver().insert(ProviderTableMeta.CONTENT_URI_FILE,cv);
+      result_uri=getContentResolver().insert(ProviderTableMeta.CONTENT_URI_FILE,cv);
     }
  else {
       try {
-        getContentProvider().insert(ProviderTableMeta.CONTENT_URI_FILE,cv);
+        result_uri=getContentProvider().insert(ProviderTableMeta.CONTENT_URI_FILE,cv);
       }
  catch (      RemoteException e) {
         Log.e(TAG,"Fail to insert insert file to database " + e.getMessage());
       }
+    }
+    if (result_uri != null) {
+      long new_id=Long.parseLong(result_uri.getPathSegments().get(1));
+      file.setFileId(new_id);
     }
   }
   if (file.isDirectory() && file.needsUpdatingWhileSaving())   for (  OCFile f : getDirectoryContent(file))   saveFile(f);
