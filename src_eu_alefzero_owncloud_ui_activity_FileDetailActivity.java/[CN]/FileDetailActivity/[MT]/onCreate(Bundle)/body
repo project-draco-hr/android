@@ -2,7 +2,7 @@
   super.onCreate(savedInstanceState);
   getWindow().requestFeature(Window.FEATURE_NO_TITLE);
   setContentView(R.layout.file_activity_details);
-  mFileDetail=new FileDetail();
+  mFileDetail=new FileDetailFragment();
   FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
   ft.add(R.id.fileDetail,mFileDetail);
   ft.commit();

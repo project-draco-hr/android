@@ -6,5 +6,5 @@
     startActivity(intent);
     return;
   }
-  ((FileList)getSupportFragmentManager().findFragmentById(R.id.fileList)).onNavigateUp();
+  ((FileListFragment)getSupportFragmentManager().findFragmentById(R.id.fileList)).onNavigateUp();
 }
