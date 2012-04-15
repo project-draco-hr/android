@@ -13,7 +13,7 @@ case R.id.createDirectoryItem:
   }
 case android.R.id.home:
 {
-  navigateUp();
+  onBackPressed();
   break;
 }
 }
