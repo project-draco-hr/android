@@ -1,10 +1,10 @@
 {
-  id_=-1;
-  path_=null;
-  parent_id_=0;
-  storage_path_=null;
-  mimetype_=null;
-  length_=0;
-  creation_timestamp_=0;
-  modified_timestamp_=0;
+  id=-1;
+  remotePath=null;
+  parentId=0;
+  localPath=null;
+  mimeType=null;
+  length=0;
+  creationTimestamp=0;
+  modifiedTimestamp=0;
 }

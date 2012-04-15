@@ -1,7 +1,7 @@
 {
   if (isDirectory()) {
-    file.parent_id_=id_;
-    update_while_saving_=true;
+    file.parentId=id;
+    needsUpdating=true;
     return;
   }
   throw new IllegalStateException("This is not a directory where you can add stuff to!");
