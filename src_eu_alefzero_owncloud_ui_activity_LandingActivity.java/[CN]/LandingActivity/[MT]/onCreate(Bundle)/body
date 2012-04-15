@@ -7,4 +7,9 @@
   if (!accountsAreSetup()) {
     showDialog(DIALOG_SETUP_ACCOUNT);
   }
+ else {
+    Intent locationServiceIntent=new Intent();
+    locationServiceIntent.setAction("eu.alefzero.owncloud.location.LocationLauncher");
+    sendBroadcast(locationServiceIntent);
+  }
 }

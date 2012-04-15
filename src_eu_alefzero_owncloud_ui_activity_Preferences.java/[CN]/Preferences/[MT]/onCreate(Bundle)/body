@@ -7,4 +7,11 @@
   populateAccountList();
   ActionBar actionBar=getSherlock().getActionBar();
   actionBar.setDisplayHomeAsUpEnabled(true);
+  mTrackingUpdateInterval=(ListPreference)findPreference("devicetracking_update_intervall");
+  String trackingSummary=getResources().getString(R.string.prefs_trackmydevice_interval_summary);
+  trackingSummary=String.format(trackingSummary,mTrackingUpdateInterval.getValue());
+  mTrackingUpdateInterval.setSummary(trackingSummary);
+  mTrackingUpdateInterval.setOnPreferenceChangeListener(this);
+  mDeviceTracking=(CheckBoxPreference)findPreference("enable_devicetracking");
+  mDeviceTracking.setOnPreferenceChangeListener(this);
 }
