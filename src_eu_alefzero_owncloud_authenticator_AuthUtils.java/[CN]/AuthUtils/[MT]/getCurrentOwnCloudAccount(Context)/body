@@ -11,5 +11,8 @@
       }
     }
   }
+ else   if (ocAccounts.length != 0) {
+    defaultAccount=ocAccounts[0];
+  }
   return defaultAccount;
 }

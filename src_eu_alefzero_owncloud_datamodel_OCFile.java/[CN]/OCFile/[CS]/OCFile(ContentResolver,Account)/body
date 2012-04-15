@@ -1,5 +1,0 @@
-{
-  this.account=account;
-  this.contentResolver=contentResolver;
-  resetData();
-}

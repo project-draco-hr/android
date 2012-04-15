@@ -15,6 +15,7 @@
   i.putExtra("FILE_NAME",file.getFileName());
   i.putExtra("FULL_PATH",file.getPath());
   i.putExtra("FILE_ID",id_);
+  Log.e("ASD",mAccount + "");
   i.putExtra("ACCOUNT",mAccount);
   FileDetailFragment fd=(FileDetailFragment)getFragmentManager().findFragmentById(R.id.fileDetail);
   if (fd != null) {

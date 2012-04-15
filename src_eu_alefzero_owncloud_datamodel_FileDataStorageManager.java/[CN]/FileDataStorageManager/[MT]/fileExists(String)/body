@@ -1,0 +1,3 @@
+{
+  return fileExists(ProviderTableMeta.FILE_PATH,path);
+}

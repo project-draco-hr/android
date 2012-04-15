@@ -1,0 +1,5 @@
+{
+  resetData();
+  update_while_saving_=false;
+  path_=path;
+}

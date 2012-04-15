@@ -1,6 +1,6 @@
 {
-  if (remotePath != null) {
-    File f=new File(remotePath);
+  if (path_ != null) {
+    File f=new File(path_);
     return f.getName().equals("") ? "/" : f.getName();
   }
   return null;

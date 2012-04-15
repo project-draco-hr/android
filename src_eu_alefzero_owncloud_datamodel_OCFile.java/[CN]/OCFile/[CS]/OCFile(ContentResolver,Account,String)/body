@@ -1,9 +1,0 @@
-{
-  this.contentResolver=contentResolver;
-  this.account=account;
-  Cursor c=this.contentResolver.query(ProviderTableMeta.CONTENT_URI_FILE,null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=? AND " + ProviderTableMeta.FILE_PATH+ "=?",new String[]{this.account.name,path},null);
-  if (c.moveToFirst()) {
-    setFileData(c);
-    if (remotePath != null)     remotePath=path;
-  }
-}

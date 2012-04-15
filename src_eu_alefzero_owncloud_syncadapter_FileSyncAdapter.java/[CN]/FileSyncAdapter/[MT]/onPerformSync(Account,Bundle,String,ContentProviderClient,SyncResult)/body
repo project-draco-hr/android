@@ -2,6 +2,7 @@
   try {
     this.setAccount(account);
     this.setContentProvider(provider);
+    this.setStorageManager(new FileDataStorageManager(account,getContentProvider()));
     HttpPropFind query=this.getPropFindQuery();
     query.setEntity(new StringEntity(WebdavUtils.prepareXmlForPropFind()));
     TreeNode root=this.fireRequest(query);

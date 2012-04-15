@@ -1,8 +1,0 @@
-ContentResolver contentResolver
-Account account
-String path
-int length
-int creation_timestamp
-int modified_timestamp
-String mimetype
-long parent_id

@@ -16,11 +16,14 @@
       for (int i=mDirectories.getCount() - 2; i >= 0; --i) {
         path+="/" + mDirectories.getItem(i);
       }
-      OCFile parent=new OCFile(getContentResolver(),a,path + "/");
-      path+="/" + s + "/";
+      OCFile parent=mStorageManager.getFileByPath(path + "/");
+      path+=s + "/";
       Thread thread=new Thread(new DirectoryCreator(path,a));
       thread.start();
-      OCFile.createNewFile(getContentResolver(),a,path,0,0,0,"DIR",parent.getFileId()).save();
+      OCFile new_file=new OCFile(path);
+      new_file.setMimetype("DIR");
+      new_file.setParentId(parent.getParentId());
+      mStorageManager.saveFile(new_file);
       dialog.dismiss();
     }
   }
