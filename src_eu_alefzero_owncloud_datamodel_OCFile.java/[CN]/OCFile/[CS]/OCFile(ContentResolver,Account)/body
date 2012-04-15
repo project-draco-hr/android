@@ -1,5 +1,5 @@
 {
-  account_=account;
-  contentResolver_=contentResolver;
+  this.account=account;
+  this.contentResolver=contentResolver;
   resetData();
 }

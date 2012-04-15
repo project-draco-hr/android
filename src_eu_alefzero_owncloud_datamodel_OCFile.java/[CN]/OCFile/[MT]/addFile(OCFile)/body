@@ -1,6 +1,6 @@
 {
   if (isDirectory()) {
-    file.parent_id_=id_;
+    file.parentId=id;
     file.save();
     return;
   }

@@ -1,5 +1,5 @@
 {
-  account_=account;
-  providerClient_=providerClient;
+  this.account=account;
+  this.providerClient=providerClient;
   resetData();
 }

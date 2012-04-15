@@ -1,3 +1,3 @@
 {
-  return creation_timestamp_;
+  return creationTimestamp;
 }
