@@ -1,21 +1,6 @@
 {
-  try {
-    this.setAccount(account);
-    this.setContentProvider(provider);
-    this.setStorageManager(new FileDataStorageManager(account,getContentProvider()));
-    HttpPropFind query=this.getPropFindQuery();
-    query.setEntity(new StringEntity(WebdavUtils.prepareXmlForPropFind()));
-    TreeNode root=this.fireRequest(query);
-  }
- catch (  OperationCanceledException e) {
-    e.printStackTrace();
-  }
-catch (  AuthenticatorException e) {
-    syncResult.stats.numAuthExceptions++;
-    e.printStackTrace();
-  }
-catch (  IOException e) {
-    syncResult.stats.numIoExceptions++;
-    e.printStackTrace();
-  }
+  this.setAccount(account);
+  this.setContentProvider(provider);
+  this.setStorageManager(new FileDataStorageManager(account,getContentProvider()));
+  fetchData(getUri().toString(),syncResult,0);
 }

@@ -1,0 +1,33 @@
+{
+  try {
+    PropFindMethod query=new PropFindMethod(uri);
+    getClient().executeMethod(query);
+    MultiStatus resp=null;
+    resp=query.getResponseBodyAsMultiStatus();
+    for (int i=(parentId == 0 ? 0 : 1); i < resp.getResponses().length; ++i) {
+      WebdavEntry we=new WebdavEntry(resp.getResponses()[i]);
+      OCFile file=new OCFile(we.path());
+      file.setCreationTimestamp(we.createTimestamp());
+      file.setFileLength(we.contentLength());
+      file.setMimetype(we.contentType());
+      file.setModificationTimestamp(we.modifiedTimesamp());
+      file.setParentId(parentId);
+      if (we.contentType().equals("DIR"))       fetchData(getUri().toString() + we.path(),syncResult,file.getFileId());
+    }
+  }
+ catch (  OperationCanceledException e) {
+    e.printStackTrace();
+  }
+catch (  AuthenticatorException e) {
+    syncResult.stats.numAuthExceptions++;
+    e.printStackTrace();
+  }
+catch (  IOException e) {
+    syncResult.stats.numIoExceptions++;
+    e.printStackTrace();
+  }
+catch (  DavException e) {
+    syncResult.stats.numIoExceptions++;
+    e.printStackTrace();
+  }
+}

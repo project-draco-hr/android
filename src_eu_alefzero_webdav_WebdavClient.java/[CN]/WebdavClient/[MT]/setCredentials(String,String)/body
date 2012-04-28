@@ -1,6 +1,5 @@
 {
   int targetPort=mTargetHost.getPort() == -1 ? (mUri.getScheme().equals("https") ? 443 : 80) : mUri.getPort();
-  mHttpClient.getCredentialsProvider().setCredentials(new AuthScope(mUri.getHost(),targetPort),new UsernamePasswordCredentials(username,password));
-  BasicScheme basicAuth=new BasicScheme();
-  mHttpContext.setAttribute("preemptive-auth",basicAuth);
+  getParams().setAuthenticationPreemptive(true);
+  getState().setCredentials(AuthScope.ANY,getCredentials(username,password));
 }

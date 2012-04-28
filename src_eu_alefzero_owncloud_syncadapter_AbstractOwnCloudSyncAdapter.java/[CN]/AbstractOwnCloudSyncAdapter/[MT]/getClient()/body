@@ -11,5 +11,5 @@
     mClient.allowUnsignedCertificates();
     mHost=mClient.getTargetHost();
   }
-  return mClient.getHttpClient();
+  return mClient;
 }

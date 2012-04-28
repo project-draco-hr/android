@@ -1,0 +1,4 @@
+{
+  if (mCredentials == null)   mCredentials=new UsernamePasswordCredentials(username,password);
+  return mCredentials;
+}
