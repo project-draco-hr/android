@@ -2,5 +2,34 @@
   this.setAccount(account);
   this.setContentProvider(provider);
   this.setStorageManager(new FileDataStorageManager(account,getContentProvider()));
-  fetchData(getUri().toString(),syncResult,0);
+  PropFindMethod query;
+  try {
+    query=new PropFindMethod(getUri().toString());
+    getClient().executeMethod(query);
+    MultiStatus resp=null;
+    resp=query.getResponseBodyAsMultiStatus();
+    if (resp.getResponses().length > 0) {
+      WebdavEntry we=new WebdavEntry(resp.getResponses()[0]);
+      OCFile file=fillOCFile(we);
+      file.setParentId(0);
+      getStorageManager().saveFile(file);
+      Log.d(TAG,file.getPath() + " " + file.getFileId());
+      fetchData(getUri().toString(),syncResult,file.getFileId());
+    }
+  }
+ catch (  OperationCanceledException e) {
+    e.printStackTrace();
+  }
+catch (  AuthenticatorException e) {
+    syncResult.stats.numAuthExceptions++;
+    e.printStackTrace();
+  }
+catch (  IOException e) {
+    syncResult.stats.numIoExceptions++;
+    e.printStackTrace();
+  }
+catch (  DavException e) {
+    syncResult.stats.numIoExceptions++;
+    e.printStackTrace();
+  }
 }

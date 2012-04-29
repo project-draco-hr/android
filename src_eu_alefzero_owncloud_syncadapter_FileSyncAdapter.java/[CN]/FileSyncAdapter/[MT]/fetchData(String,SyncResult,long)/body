@@ -4,13 +4,9 @@
     getClient().executeMethod(query);
     MultiStatus resp=null;
     resp=query.getResponseBodyAsMultiStatus();
-    for (int i=(parentId == 0 ? 0 : 1); i < resp.getResponses().length; ++i) {
+    for (int i=1; i < resp.getResponses().length; ++i) {
       WebdavEntry we=new WebdavEntry(resp.getResponses()[i]);
-      OCFile file=new OCFile(we.path());
-      file.setCreationTimestamp(we.createTimestamp());
-      file.setFileLength(we.contentLength());
-      file.setMimetype(we.contentType());
-      file.setModificationTimestamp(we.modifiedTimesamp());
+      OCFile file=fillOCFile(we);
       file.setParentId(parentId);
       getStorageManager().saveFile(file);
       if (parentId == 0)       parentId=file.getFileId();
