@@ -1,7 +1,0 @@
-{
-  String[] names=new String[mChildren.size()];
-  for (int i=0; i < mChildren.size(); ++i) {
-    names[i]=mChildren.get(i).getProperty(NodeProperty.NAME);
-  }
-  return names;
-}

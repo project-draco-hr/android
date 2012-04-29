@@ -1,6 +1,0 @@
-{
-  HttpResponse response=fireRawRequest(query);
-  TreeNode root=new TreeNode();
-  root.setProperty(TreeNode.NodeProperty.NAME,"");
-  return root;
-}

@@ -13,7 +13,6 @@
       OCFile file=fillOCFile(we);
       file.setParentId(0);
       getStorageManager().saveFile(file);
-      Log.d(TAG,file.getPath() + " " + file.getFileId());
       fetchData(getUri().toString(),syncResult,file.getFileId());
     }
   }

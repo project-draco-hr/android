@@ -1,7 +1,0 @@
-HttpResponse resp
-Uri uri
-DefaultHttpClient client
-HttpHost targetHost
-LinkedList<TreeNode> insertList
-boolean sf
-long parent_id

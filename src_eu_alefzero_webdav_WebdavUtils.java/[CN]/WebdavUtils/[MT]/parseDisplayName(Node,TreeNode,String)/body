@@ -1,7 +1,0 @@
-{
-  Element currentElement=(Element)currentNode;
-  if (currentElement.getElementsByTagName(davPrefix + HREF).getLength() != 0) {
-    String filepath=currentElement.getElementsByTagName(davPrefix + HREF).item(0).getFirstChild().getNodeValue();
-    resultNode.setProperty(NodeProperty.NAME,filepath);
-  }
-}

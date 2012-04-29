@@ -1,6 +1,0 @@
-{
-  ListIterator<TreeNode> iterator=children_.listIterator();
-  while (iterator.hasNext()) {
-    iterator.next().refreshData(document);
-  }
-}
