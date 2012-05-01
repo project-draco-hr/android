@@ -1,0 +1,3 @@
+{
+  mUseSSLConnection=((TextView)view).getText().equals("SSL");
+}

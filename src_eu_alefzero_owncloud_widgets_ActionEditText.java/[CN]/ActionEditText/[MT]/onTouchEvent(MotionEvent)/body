@@ -12,8 +12,8 @@
         paramtypes[1]=String.class;
         Method method;
         try {
-          method=this.getClass().getMethod(badgeClickCallback,paramtypes);
-          method.invoke(this,this,s);
+          method=getContext().getClass().getMethod(badgeClickCallback,paramtypes);
+          method.invoke(getContext(),this,s);
         }
  catch (        NoSuchMethodException e) {
           e.printStackTrace();
@@ -27,8 +27,8 @@ catch (        IllegalAccessException e) {
 catch (        InvocationTargetException e) {
           e.printStackTrace();
         }
+        invalidate();
       }
-      invalidate();
     }
   }
   return r;
