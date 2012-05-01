@@ -1,0 +1,8 @@
+{
+  TypedArray a=getContext().obtainStyledAttributes(attr,R.styleable.ActionEditText);
+  optionOneString=a.getString(R.styleable.ActionEditText_optionOneString);
+  optionTwoString=a.getString(R.styleable.ActionEditText_optionTwoString);
+  optionOneColor=a.getColor(R.styleable.ActionEditText_optionOneColor,0x00ff00);
+  optionTwoColor=a.getColor(R.styleable.ActionEditText_optionTwoColor,0xff0000);
+  badgeClickCallback=a.getString(R.styleable.ActionEditText_onBadgeClick);
+}

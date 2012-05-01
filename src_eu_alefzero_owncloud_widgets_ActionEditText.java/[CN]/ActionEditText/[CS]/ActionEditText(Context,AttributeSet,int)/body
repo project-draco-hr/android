@@ -1,0 +1,5 @@
+{
+  super(context,attrs,defStyle);
+  getAttrs(attrs);
+  s=optionOneString;
+}

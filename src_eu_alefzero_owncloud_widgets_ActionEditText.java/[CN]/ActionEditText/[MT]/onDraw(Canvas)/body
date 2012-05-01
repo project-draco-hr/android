@@ -1,0 +1,19 @@
+{
+  super.onDraw(canvas);
+  Rect r=new Rect();
+  Paint p=getPaint();
+  Rect text_bounds=new Rect();
+  p.getTextBounds(s,0,s.length(),text_bounds);
+  getDrawingRect(r);
+  r.top+=10;
+  r.bottom-=10;
+  r.left=(int)(getWidth() - text_bounds.width() - 18);
+  r.right=getWidth() - 10;
+  btn_rect=r;
+  if (s.equals(optionOneString))   p.setColor(optionOneColor);
+ else   p.setColor(optionTwoColor);
+  canvas.drawRect(r,p);
+  p.setColor(Color.GRAY);
+  canvas.drawText(s,r.left + 3,r.bottom - (text_bounds.height() / 2),p);
+  invalidate();
+}
