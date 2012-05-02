@@ -1,5 +1,5 @@
 {
-  if (f.isDirectory() && f.getFileId() != -1) {
+  if (f != null && f.isDirectory() && f.getFileId() != -1) {
     Vector<OCFile> ret=new Vector<OCFile>();
     Uri req_uri=Uri.withAppendedPath(ProviderTableMeta.CONTENT_URI_DIR,String.valueOf(f.getFileId()));
     Cursor c=null;

@@ -1,8 +1,56 @@
 {
+  Dialog dialog;
+  AlertDialog.Builder builder;
 switch (id) {
-case DIALOG_CHOOSE_ACCOUNT:
-    return createChooseAccountDialog();
-default :
-  throw new IllegalArgumentException("Unknown dialog id: " + id);
+case DIALOG_SETUP_ACCOUNT:
+    builder=new AlertDialog.Builder(this);
+  builder.setTitle(R.string.main_tit_accsetup);
+builder.setMessage(R.string.main_wrn_accsetup);
+builder.setCancelable(false);
+builder.setPositiveButton(R.string.common_ok,this);
+builder.setNegativeButton(R.string.common_cancel,this);
+dialog=builder.create();
+break;
+case DIALOG_CREATE_DIR:
+{
+builder=new Builder(this);
+final EditText dirName=new EditText(getBaseContext());
+final Account a=AuthUtils.getCurrentOwnCloudAccount(this);
+builder.setView(dirName);
+builder.setTitle(R.string.uploader_info_dirname);
+dirName.setTextColor(R.color.setup_text_typed);
+builder.setPositiveButton(R.string.common_ok,new OnClickListener(){
+public void onClick(DialogInterface dialog,int which){
+String s=dirName.getText().toString();
+if (s.trim().isEmpty()) {
+dialog.cancel();
+return;
 }
+String path="";
+for (int i=mDirectories.getCount() - 2; i >= 0; --i) {
+path+="/" + mDirectories.getItem(i);
+}
+OCFile parent=mStorageManager.getFileByPath(path + "/");
+path+=s + "/";
+Thread thread=new Thread(new DirectoryCreator(path,a));
+thread.start();
+OCFile new_file=new OCFile(path);
+new_file.setMimetype("DIR");
+new_file.setParentId(parent.getParentId());
+mStorageManager.saveFile(new_file);
+dialog.dismiss();
+}
+}
+);
+builder.setNegativeButton(R.string.common_cancel,new OnClickListener(){
+public void onClick(DialogInterface dialog,int which){
+dialog.cancel();
+}
+}
+);
+}
+default :
+dialog=null;
+}
+return dialog;
 }
