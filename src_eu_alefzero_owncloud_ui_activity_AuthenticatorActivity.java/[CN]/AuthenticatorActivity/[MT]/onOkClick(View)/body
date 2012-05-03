@@ -53,6 +53,9 @@
  catch (  MalformedURLException e) {
     e.printStackTrace();
   }
-  showDialog(0);
-  mAuthThread=AuthUtils.attemptAuth(uri,username_text.getText().toString(),password_text.getText().toString(),mHandler,AuthenticatorActivity.this);
+  showDialog(DIALOG_LOGIN_PROGRESS);
+  mAuthRunnable=new AuthenticationRunnable(uri,username_text.getText().toString(),password_text.getText().toString());
+  mAuthRunnable.setOnAuthenticationResultListener(this,mHandler);
+  mAuthThread=new Thread(mAuthRunnable);
+  mAuthThread.start();
 }

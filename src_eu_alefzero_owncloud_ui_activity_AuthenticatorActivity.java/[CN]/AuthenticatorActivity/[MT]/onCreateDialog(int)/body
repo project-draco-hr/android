@@ -1,17 +1,27 @@
 {
-  final ProgressDialog dialog=new ProgressDialog(this);
-  dialog.setMessage("Trying to login");
-  dialog.setIndeterminate(true);
-  dialog.setCancelable(true);
-  dialog.setOnCancelListener(new DialogInterface.OnCancelListener(){
-    public void onCancel(    DialogInterface dialog){
-      Log.i(getClass().getName(),"Login canceled");
-      if (mAuthThread != null) {
-        mAuthThread.interrupt();
-        finish();
+  Dialog dialog=null;
+switch (id) {
+case DIALOG_LOGIN_PROGRESS:
+{
+      ProgressDialog working_dialog=new ProgressDialog(this);
+      dialog=working_dialog;
+      working_dialog.setMessage(getResources().getString(R.string.auth_trying_to_login));
+      working_dialog.setIndeterminate(true);
+      working_dialog.setCancelable(true);
+      working_dialog.setOnCancelListener(new DialogInterface.OnCancelListener(){
+        @Override public void onCancel(        DialogInterface dialog){
+          Log.i(getClass().getName(),"Login canceled");
+          if (mAuthThread != null) {
+            mAuthThread.interrupt();
+            finish();
+          }
+        }
       }
-    }
-  }
 );
-  return dialog;
+      break;
+    }
+default :
+  Log.e(TAG,"Incorrect dialog called with id = " + id);
+}
+return dialog;
 }

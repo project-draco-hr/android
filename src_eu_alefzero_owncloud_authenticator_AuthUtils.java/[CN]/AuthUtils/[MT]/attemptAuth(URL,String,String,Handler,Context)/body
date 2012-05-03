@@ -1,9 +1,0 @@
-{
-  final Runnable r=new Runnable(){
-    public void run(){
-      authenticate(url,username,password,handler,context);
-    }
-  }
-;
-  return performOnBackgroundThread(r);
-}

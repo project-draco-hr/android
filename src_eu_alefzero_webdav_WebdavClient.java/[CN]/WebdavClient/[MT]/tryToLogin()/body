@@ -1,0 +1,11 @@
+{
+  int r=0;
+  HeadMethod head=new HeadMethod(mUri.toString());
+  try {
+    r=executeMethod(head);
+  }
+ catch (  Exception e) {
+    Log.e(TAG,"Error: " + e.getMessage());
+  }
+  return r;
+}

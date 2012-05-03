@@ -1,7 +1,7 @@
 {
   if (mAddrBookUri != null)   return mAddrBookUri;
   AccountManager am=getAccountManager();
-  String uri=am.getUserData(getAccount(),AccountAuthenticator.KEY_OC_URL).replace(AuthUtils.WEBDAV_PATH_2_0,AuthUtils.CARDDAV_PATH_2_0);
+  String uri=am.getUserData(getAccount(),AccountAuthenticator.KEY_OC_URL).replace(AccountUtils.WEBDAV_PATH_2_0,AccountUtils.CARDDAV_PATH_2_0);
   uri+="/addressbooks/" + getAccount().name.substring(0,getAccount().name.lastIndexOf('@')) + "/default/";
   mAddrBookUri=uri;
   return uri;

@@ -1,5 +1,0 @@
-URL url
-String username
-String pwd
-Handler handler
-Context context

@@ -1,5 +1,5 @@
 {
   super.onCreate(savedInstanceState);
-  mAccount=AuthUtils.getCurrentOwnCloudAccount(getActivity());
+  mAccount=AccountUtils.getCurrentOwnCloudAccount(getActivity());
   populateFileList();
 }

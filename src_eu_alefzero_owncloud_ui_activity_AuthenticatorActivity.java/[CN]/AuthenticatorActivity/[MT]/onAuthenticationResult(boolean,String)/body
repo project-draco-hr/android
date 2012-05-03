@@ -1,5 +1,5 @@
 {
-  if (result) {
+  if (success) {
     TextView username_text=(TextView)findViewById(R.id.account_username), password_text=(TextView)findViewById(R.id.account_password);
     URL url;
     try {
@@ -14,7 +14,7 @@
     Account account=new Account(accountName,AccountAuthenticator.ACCOUNT_TYPE);
     AccountManager accManager=AccountManager.get(this);
     accManager.addAccountExplicitly(account,password_text.getText().toString(),null);
-    Account defaultAccount=AuthUtils.getCurrentOwnCloudAccount(this);
+    Account defaultAccount=AccountUtils.getCurrentOwnCloudAccount(this);
     if (defaultAccount == null) {
       SharedPreferences.Editor editor=PreferenceManager.getDefaultSharedPreferences(this).edit();
       editor.putString("select_oc_account",accountName);
@@ -26,7 +26,7 @@
     intent.putExtra(AccountManager.KEY_AUTHTOKEN,AccountAuthenticator.ACCOUNT_TYPE);
     accManager.setUserData(account,AccountAuthenticator.KEY_OC_URL,url.toString());
     intent.putExtra(AccountManager.KEY_USERDATA,username);
-    accManager.setUserData(account,AccountAuthenticator.KEY_CONTACT_URL,url.toString().replace(AuthUtils.WEBDAV_PATH_2_0,AuthUtils.CARDDAV_PATH_2_0));
+    accManager.setUserData(account,AccountAuthenticator.KEY_CONTACT_URL,url.toString().replace(AccountUtils.WEBDAV_PATH_2_0,AccountUtils.CARDDAV_PATH_2_0));
     setAccountAuthenticatorResult(intent.getExtras());
     setResult(RESULT_OK,intent);
     Bundle bundle=new Bundle();

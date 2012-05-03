@@ -15,7 +15,7 @@ case DIALOG_CREATE_DIR:
 {
 builder=new Builder(this);
 final EditText dirName=new EditText(getBaseContext());
-final Account a=AuthUtils.getCurrentOwnCloudAccount(this);
+final Account a=AccountUtils.getCurrentOwnCloudAccount(this);
 builder.setView(dirName);
 builder.setTitle(R.string.uploader_info_dirname);
 dirName.setTextColor(R.color.setup_text_typed);

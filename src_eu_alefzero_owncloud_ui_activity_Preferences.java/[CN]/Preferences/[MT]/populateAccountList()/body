@@ -3,7 +3,7 @@
   mAccounts=accMan.getAccountsByType(AccountAuthenticator.ACCOUNT_TYPE);
   mAccountList=(ListPreference)findPreference("select_oc_account");
   mAccountList.setOnPreferenceChangeListener(this);
-  Account defaultAccount=AuthUtils.getCurrentOwnCloudAccount(this);
+  Account defaultAccount=AccountUtils.getCurrentOwnCloudAccount(this);
   if (defaultAccount != null) {
     mAccountList.setSummary(defaultAccount.name);
   }
