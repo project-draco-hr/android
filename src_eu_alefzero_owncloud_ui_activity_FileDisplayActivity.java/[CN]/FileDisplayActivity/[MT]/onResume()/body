@@ -2,5 +2,10 @@
   super.onResume();
   if (!accountsAreSetup()) {
     showDialog(DIALOG_SETUP_ACCOUNT);
+    return;
   }
+  IntentFilter f=new IntentFilter(FileSyncAdapter.SYNC_MESSAGE);
+  b=new BR();
+  registerReceiver(b,f);
+  setProgressBarIndeterminateVisibility(false);
 }

@@ -1,0 +1,4 @@
+{
+  super.onPause();
+  unregisterReceiver(b);
+}

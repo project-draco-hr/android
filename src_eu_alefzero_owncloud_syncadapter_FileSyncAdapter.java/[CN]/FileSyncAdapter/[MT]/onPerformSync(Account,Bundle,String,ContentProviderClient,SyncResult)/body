@@ -2,6 +2,10 @@
   this.setAccount(account);
   this.setContentProvider(provider);
   this.setStorageManager(new FileDataStorageManager(account,getContentProvider()));
+  Intent i=new Intent(SYNC_MESSAGE);
+  i.putExtra(IN_PROGRESS,true);
+  i.putExtra("ACCOUNT_NAME",account.name);
+  getContext().sendStickyBroadcast(i);
   PropFindMethod query;
   try {
     query=new PropFindMethod(getUri().toString());
@@ -31,4 +35,6 @@ catch (  DavException e) {
     syncResult.stats.numIoExceptions++;
     e.printStackTrace();
   }
+  i.putExtra(IN_PROGRESS,false);
+  getContext().sendStickyBroadcast(i);
 }

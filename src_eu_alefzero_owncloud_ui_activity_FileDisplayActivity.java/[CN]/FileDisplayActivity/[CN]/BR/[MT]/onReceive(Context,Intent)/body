@@ -1,0 +1,10 @@
+{
+  boolean in_progress=intent.getBooleanExtra(FileSyncAdapter.IN_PROGRESS,false);
+  String account_name=intent.getStringExtra(FileSyncAdapter.ACCOUNT_NAME);
+  Log.d("FileDisplay","sync of account " + account_name + " is in_progress: "+ in_progress);
+  setProgressBarIndeterminateVisibility(in_progress);
+  if (!in_progress) {
+    FileListFragment f=(FileListFragment)getSupportFragmentManager().findFragmentById(R.id.fileList);
+    if (f != null)     f.populateFileList();
+  }
+}

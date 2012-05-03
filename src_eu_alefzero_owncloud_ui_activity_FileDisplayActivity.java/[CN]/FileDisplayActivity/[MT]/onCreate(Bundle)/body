@@ -4,6 +4,7 @@
     showDialog(DIALOG_SETUP_ACCOUNT);
     return;
   }
+  requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
   mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
   mDirectories.add("/");
   setContentView(R.layout.files);
