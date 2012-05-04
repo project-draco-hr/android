@@ -2,13 +2,14 @@
   this.setAccount(account);
   this.setContentProvider(provider);
   this.setStorageManager(new FileDataStorageManager(account,getContentProvider()));
-  Intent i=new Intent(SYNC_MESSAGE);
-  i.putExtra(IN_PROGRESS,true);
-  i.putExtra("ACCOUNT_NAME",account.name);
+  Intent i=new Intent(FileSyncService.SYNC_MESSAGE);
+  i.putExtra(FileSyncService.IN_PROGRESS,true);
+  i.putExtra(FileSyncService.ACCOUNT_NAME,account.name);
   getContext().sendStickyBroadcast(i);
   PropFindMethod query;
   try {
-    query=new PropFindMethod(getUri().toString());
+    Log.e("ASD",getUri().toString());
+    query=new PropFindMethod(getUri().toString() + "/");
     getClient().executeMethod(query);
     MultiStatus resp=null;
     resp=query.getResponseBodyAsMultiStatus();
@@ -35,6 +36,6 @@ catch (  DavException e) {
     syncResult.stats.numIoExceptions++;
     e.printStackTrace();
   }
-  i.putExtra(IN_PROGRESS,false);
+  i.putExtra(FileSyncService.IN_PROGRESS,false);
   getContext().sendStickyBroadcast(i);
 }

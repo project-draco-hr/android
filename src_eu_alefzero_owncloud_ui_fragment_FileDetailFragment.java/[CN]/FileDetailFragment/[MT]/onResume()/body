@@ -1,0 +1,6 @@
+{
+  super.onResume();
+  dfr=new DownloadFinishReceiver();
+  IntentFilter filter=new IntentFilter(FileDownloader.DOWNLOAD_FINISH_MESSAGE);
+  getActivity().registerReceiver(dfr,filter);
+}

@@ -25,4 +25,6 @@
   cv.put(ProviderTableMeta.FILE_STORAGE_PATH,file.getAbsolutePath());
   getContentResolver().update(ProviderTableMeta.CONTENT_URI,cv,ProviderTableMeta.FILE_NAME + "=? AND " + ProviderTableMeta.FILE_ACCOUNT_OWNER+ "=?",new String[]{mFilePath.substring(mFilePath.lastIndexOf('/') + 1),mAccount.name});
   nm.cancel(1);
+  Intent end=new Intent(DOWNLOAD_FINISH_MESSAGE);
+  sendBroadcast(end);
 }

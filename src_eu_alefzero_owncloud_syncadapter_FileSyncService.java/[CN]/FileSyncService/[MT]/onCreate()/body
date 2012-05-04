@@ -1,7 +1,5 @@
 {
 synchronized (syncAdapterLock) {
-    if (concretSyncAdapter == null) {
-      concretSyncAdapter=new FileSyncAdapter(getApplicationContext(),true);
-    }
+    if (concretSyncAdapter == null)     concretSyncAdapter=new FileSyncAdapter(getApplicationContext(),true);
   }
 }
