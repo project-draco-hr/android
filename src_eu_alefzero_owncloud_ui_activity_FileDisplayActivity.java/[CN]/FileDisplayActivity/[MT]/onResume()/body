@@ -4,8 +4,8 @@
     showDialog(DIALOG_SETUP_ACCOUNT);
     return;
   }
-  IntentFilter f=new IntentFilter(FileSyncService.SYNC_MESSAGE);
-  b=new BR();
-  registerReceiver(b,f);
+  IntentFilter syncMessageIntentFilter=new IntentFilter(FileSyncService.SYNC_MESSAGE);
+  syncBroadcastRevceiver=new SyncBroadcastReceiver();
+  registerReceiver(syncBroadcastRevceiver,syncMessageIntentFilter);
   setProgressBarIndeterminateVisibility(false);
 }

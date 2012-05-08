@@ -1,4 +1,6 @@
 {
   super.onPause();
-  unregisterReceiver(b);
+  if (syncBroadcastRevceiver != null) {
+    unregisterReceiver(syncBroadcastRevceiver);
+  }
 }
