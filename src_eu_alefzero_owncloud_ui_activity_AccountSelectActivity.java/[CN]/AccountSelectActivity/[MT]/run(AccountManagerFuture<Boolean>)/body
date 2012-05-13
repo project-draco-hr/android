@@ -1,0 +1,6 @@
+{
+  if (future.isDone()) {
+    AccountUtils.setCurrentOwnCloudAccount(this,AccountUtils.getCurrentOwnCloudAccount(this).name);
+    populateAccountList();
+  }
+}

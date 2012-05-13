@@ -1,0 +1,4 @@
+{
+  getMenuInflater().inflate(R.menu.account_picker_long_click,menu);
+  super.onCreateContextMenu(menu,v,menuInfo);
+}

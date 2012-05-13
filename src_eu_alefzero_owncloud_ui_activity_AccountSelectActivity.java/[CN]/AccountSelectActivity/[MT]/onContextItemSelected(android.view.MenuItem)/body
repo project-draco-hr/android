@@ -1,0 +1,14 @@
+{
+  AdapterContextMenuInfo info=(AdapterContextMenuInfo)item.getMenuInfo();
+  int index=info.position;
+  HashMap<String,String> map=(HashMap<String,String>)getListAdapter().getItem(index);
+  String accountName=map.get("NAME");
+  AccountManager am=(AccountManager)getSystemService(ACCOUNT_SERVICE);
+  Account accounts[]=am.getAccountsByType(AccountAuthenticator.ACCOUNT_TYPE);
+  for (  Account a : accounts) {
+    if (a.name.equals(accountName)) {
+      am.removeAccount(a,this,mHandler);
+    }
+  }
+  return false;
+}
