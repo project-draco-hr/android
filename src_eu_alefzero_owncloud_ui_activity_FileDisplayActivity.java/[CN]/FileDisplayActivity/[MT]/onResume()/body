@@ -5,8 +5,8 @@
     return;
   }
   IntentFilter f=new IntentFilter(FileSyncService.SYNC_MESSAGE);
-  b=new BR();
-  registerReceiver(b,f);
+  syncBroadcastRevceiver=new SyncBroadcastReceiver();
+  registerReceiver(syncBroadcastRevceiver,f);
   if (getSupportFragmentManager().findFragmentById(R.id.fileList) == null)   setContentView(R.layout.files);
   mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
   mDirectories.add("/");
