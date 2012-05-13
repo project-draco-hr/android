@@ -1,0 +1,16 @@
+{
+  LinkedList<HashMap<String,String>> ll=new LinkedList<HashMap<String,String>>();
+  for (int i=0; i < a.length(); ++i) {
+    try {
+      ExtensionApplicationEntry ela=new ExtensionApplicationEntry(((JSONObject)a.get(i)));
+      HashMap<String,String> ss=new HashMap<String,String>();
+      ss.put("NAME",ela.getName());
+      ss.put("DESC",ela.getDescription());
+      ll.add(ss);
+    }
+ catch (    JSONException e) {
+      e.printStackTrace();
+    }
+  }
+  setListAdapter(new SimpleAdapter(this,ll,R.layout.simple_list_item_2,new String[]{"NAME","DESC"},new int[]{android.R.id.text1,android.R.id.text2}));
+}

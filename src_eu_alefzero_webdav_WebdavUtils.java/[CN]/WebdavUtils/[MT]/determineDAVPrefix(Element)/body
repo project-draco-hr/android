@@ -1,9 +1,0 @@
-{
-  for (int i=0; i < e.getAttributes().getLength(); ++i) {
-    String attrName=e.getAttributes().item(i).getNodeName();
-    if (e.getAttribute(attrName).equals(DAV_NAMESPACE_PREFIX)) {
-      return attrName.substring(attrName.lastIndexOf(':') + 1) + ":";
-    }
-  }
-  return null;
-}

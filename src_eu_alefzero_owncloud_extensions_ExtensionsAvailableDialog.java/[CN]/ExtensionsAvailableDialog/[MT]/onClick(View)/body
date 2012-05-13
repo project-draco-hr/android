@@ -1,0 +1,16 @@
+{
+switch (v.getId()) {
+case R.id.buttonYes:
+{
+      Intent i=new Intent(getActivity(),ExtensionsListActivity.class);
+      startActivity(i);
+      getActivity().finish();
+    }
+  break;
+case R.id.buttonNo:
+getActivity().finish();
+break;
+default :
+Log.e("EAD","Button with unknown id clicked " + v.getId());
+}
+}

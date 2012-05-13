@@ -1,0 +1,5 @@
+{
+  MenuInflater inflater=getSherlock().getMenuInflater();
+  inflater.inflate(eu.alefzero.owncloud.R.menu.account_picker,menu);
+  return true;
+}

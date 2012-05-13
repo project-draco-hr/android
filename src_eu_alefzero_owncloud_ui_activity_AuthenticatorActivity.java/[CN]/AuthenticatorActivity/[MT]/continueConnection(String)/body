@@ -1,0 +1,21 @@
+{
+  String url=((TextView)findViewById(R.id.host_URL)).getText().toString();
+  String username=((TextView)findViewById(R.id.account_username)).getText().toString();
+  String password=((TextView)findViewById(R.id.account_password)).getText().toString();
+  if (url.endsWith("/"))   url=url.substring(0,url.length() - 1);
+  URL uri=null;
+  String webdav_path=AccountUtils.getWebdavPath(mConnChkRunnable.getDiscoveredVersion());
+  try {
+    mBaseUrl=prefix + url;
+    String url_str=prefix + url + webdav_path;
+    uri=new URL(url_str);
+  }
+ catch (  MalformedURLException e) {
+    e.printStackTrace();
+  }
+  showDialog(DIALOG_LOGIN_PROGRESS);
+  mAuthRunnable=new AuthenticationRunnable(uri,username,password);
+  mAuthRunnable.setOnAuthenticationResultListener(this,mHandler);
+  mAuthThread=new Thread(mAuthRunnable);
+  mAuthThread.start();
+}

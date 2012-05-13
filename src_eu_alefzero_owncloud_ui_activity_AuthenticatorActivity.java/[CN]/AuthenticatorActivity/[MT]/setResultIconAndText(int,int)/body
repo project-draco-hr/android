@@ -1,0 +1,14 @@
+{
+  ImageView iv=(ImageView)findViewById(R.id.action_indicator);
+  TextView tv=(TextView)findViewById(R.id.status_text);
+  if (drawable_id == 0 && text_id == 0) {
+    iv.setVisibility(View.INVISIBLE);
+    tv.setVisibility(View.INVISIBLE);
+  }
+ else {
+    iv.setImageResource(drawable_id);
+    tv.setText(text_id);
+    iv.setVisibility(View.VISIBLE);
+    tv.setVisibility(View.VISIBLE);
+  }
+}

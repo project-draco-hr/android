@@ -4,7 +4,8 @@
     context.init(null,new TrustManager[]{new EasyX509TrustManager(null)},null);
     return context;
   }
- catch (  Exception e) {
-    throw new IOException(e.getMessage());
+ catch (  Exception er) {
+    Log.e(TAG,er.getMessage() + "");
+    throw new HttpClientError(er.toString());
   }
 }

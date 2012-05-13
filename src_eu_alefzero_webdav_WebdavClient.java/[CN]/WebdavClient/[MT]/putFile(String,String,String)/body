@@ -1,14 +1,11 @@
 {
   boolean result=true;
-  HttpPut method=new HttpPut(mUri.toString() + remoteTarget.replace(" ","%20"));
-  method.setHeader("Content-type",contentType);
-  method.setHeader("Host",mUri.getHost());
-  method.setHeader("User-Agent","Android-ownCloud");
   try {
-    final FileEntity fileEntity=new FileEntity(new File(localFile),contentType);
-    method.setEntity(fileEntity);
-    Log.i(TAG,"executing:" + method.getRequestLine().toString());
-    mHttpClient.execute(mTargetHost,method,mHttpContext);
+    FileRequestEntity entity=new FileRequestEntity(new File(localFile),contentType);
+    PutMethod put=new PutMethod(mUri.toString() + remoteTarget.substring(1));
+    put.setRequestEntity(entity);
+    int status=executeMethod(put);
+    Log.d(TAG,"PUT method return with status " + status);
     Log.i(TAG,"Uploading, done");
   }
  catch (  final Exception e) {

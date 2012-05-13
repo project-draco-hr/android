@@ -1,16 +1,18 @@
 {
   Cursor c;
   if (getContentResolver() != null) {
-    c=getContentResolver().query(ProviderTableMeta.CONTENT_URI,null,cmp_key + "=?",new String[]{value},null);
+    c=getContentResolver().query(ProviderTableMeta.CONTENT_URI,null,cmp_key + "=? AND " + ProviderTableMeta.FILE_ACCOUNT_OWNER+ "=?",new String[]{value,mAccount.name},null);
   }
  else {
     try {
-      c=getContentProvider().query(ProviderTableMeta.CONTENT_URI,null,cmp_key + "=?",new String[]{value},null);
+      c=getContentProvider().query(ProviderTableMeta.CONTENT_URI,null,cmp_key + "=? AND " + ProviderTableMeta.FILE_ACCOUNT_OWNER+ "=?",new String[]{value,mAccount.name},null);
     }
  catch (    RemoteException e) {
       Log.e(TAG,"Couldn't determine file existance, assuming non existance: " + e.getMessage());
       return false;
     }
   }
-  return c.moveToFirst();
+  boolean retval=c.moveToFirst();
+  c.close();
+  return retval;
 }

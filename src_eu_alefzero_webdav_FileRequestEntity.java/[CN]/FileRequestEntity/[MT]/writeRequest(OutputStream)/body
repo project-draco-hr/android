@@ -1,0 +1,13 @@
+{
+  byte[] tmp=new byte[4096];
+  int i=0;
+  InputStream instream=new FileInputStream(this.file);
+  try {
+    while ((i=instream.read(tmp)) >= 0) {
+      out.write(tmp,0,i);
+    }
+  }
+  finally {
+    instream.close();
+  }
+}

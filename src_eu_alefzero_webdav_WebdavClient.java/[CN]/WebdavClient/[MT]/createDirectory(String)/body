@@ -1,8 +1,9 @@
 {
-  HttpMkCol method=new HttpMkCol(mUri.toString() + path + "/");
-  method.setHeader("User-Agent","Android-ownCloud");
   try {
-    mHttpClient.execute(mTargetHost,method,mHttpContext);
+    MkColMethod mkcol=new MkColMethod(mUri.toString() + "/" + path+ "/");
+    int status=executeMethod(mkcol);
+    Log.d(TAG,"Status returned " + status);
+    Log.d(TAG,"uri: " + mkcol.getURI().toString());
     Log.i(TAG,"Creating dir completed");
   }
  catch (  final Exception e) {

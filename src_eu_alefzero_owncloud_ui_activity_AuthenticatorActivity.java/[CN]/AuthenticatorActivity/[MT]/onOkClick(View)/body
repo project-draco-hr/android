@@ -1,62 +1,14 @@
 {
-  TextView url_text=(TextView)findViewById(R.id.host_URL);
-  TextView username_text=(TextView)findViewById(R.id.account_username);
-  TextView password_text=(TextView)findViewById(R.id.account_password);
-  Log.i(getClass().getName(),"OK clicked");
-  boolean hasErrors=false;
-  URL uri=null;
-  if (url_text.getText().toString().trim().length() == 0) {
-    url_text.setTextColor(Color.RED);
-    hasErrors=true;
+  String prefix="";
+  String url=((TextView)findViewById(R.id.host_URL)).getText().toString();
+  if (mIsSslConn) {
+    prefix="https://";
   }
  else {
-    url_text.setTextColor(android.R.color.black);
+    prefix="http://";
   }
-  try {
-    String url_str=url_text.getText().toString();
-    if (!url_str.startsWith("http://") && !url_str.startsWith("https://")) {
-      if (mUseSSLConnection)       url_str="https://" + url_str;
- else       url_str="http://" + url_str;
-    }
-    uri=new URL(url_str);
+  if (url.toLowerCase().startsWith("http://") || url.toLowerCase().startsWith("https://")) {
+    prefix="";
   }
- catch (  MalformedURLException e) {
-    url_text.setTextColor(Color.RED);
-    e.printStackTrace();
-    hasErrors=true;
-  }
-  if (username_text.getText().toString().contains(" ") || username_text.getText().toString().trim().length() == 0) {
-    username_text.setTextColor(Color.RED);
-    hasErrors=true;
-  }
- else {
-    username_text.setTextColor(android.R.color.black);
-  }
-  if (password_text.getText().toString().trim().length() == 0) {
-    password_text.setTextColor(Color.RED);
-    hasErrors=true;
-  }
- else {
-    password_text.setTextColor(android.R.color.black);
-  }
-  if (hasErrors) {
-    return;
-  }
-  int new_port=uri.getPort();
-  if (new_port == -1) {
-    if (mUseSSLConnection)     new_port=443;
- else     new_port=80;
-  }
-  try {
-    uri=new URL(uri.getProtocol(),uri.getHost(),new_port,uri.getPath());
-  }
- catch (  MalformedURLException e) {
-    e.printStackTrace();
-  }
-  showDialog(DIALOG_LOGIN_PROGRESS);
-  mAuthRunnable=new AuthenticationRunnable(uri,username_text.getText().toString(),password_text.getText().toString());
-  mAuthRunnable.setOnAuthenticationResultListener(this,mHandler);
-  Log.e(TAG,uri.toString());
-  mAuthThread=new Thread(mAuthRunnable);
-  mAuthThread.start();
+  continueConnection(prefix);
 }

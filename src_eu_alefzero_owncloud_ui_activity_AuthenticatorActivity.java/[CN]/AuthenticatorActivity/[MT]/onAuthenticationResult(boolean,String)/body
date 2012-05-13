@@ -24,19 +24,20 @@
     intent.putExtra(AccountManager.KEY_ACCOUNT_TYPE,AccountAuthenticator.ACCOUNT_TYPE);
     intent.putExtra(AccountManager.KEY_ACCOUNT_NAME,account.name);
     intent.putExtra(AccountManager.KEY_AUTHTOKEN,AccountAuthenticator.ACCOUNT_TYPE);
-    accManager.setUserData(account,AccountAuthenticator.KEY_OC_URL,url.toString());
     intent.putExtra(AccountManager.KEY_USERDATA,username);
-    accManager.setUserData(account,AccountAuthenticator.KEY_CONTACT_URL,url.toString().replace(AccountUtils.WEBDAV_PATH_2_0,AccountUtils.CARDDAV_PATH_2_0));
+    accManager.setUserData(account,AccountAuthenticator.KEY_OC_URL,url.toString());
+    accManager.setUserData(account,AccountAuthenticator.KEY_OC_VERSION,mConnChkRunnable.getDiscoveredVersion().toString());
+    accManager.setUserData(account,AccountAuthenticator.KEY_OC_BASE_URL,mBaseUrl);
     setAccountAuthenticatorResult(intent.getExtras());
     setResult(RESULT_OK,intent);
     Bundle bundle=new Bundle();
     bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL,true);
     getContentResolver().startSync(ProviderTableMeta.CONTENT_URI,bundle);
-    dismissDialog(0);
     finish();
   }
  else {
-    Toast.makeText(this,message,Toast.LENGTH_LONG).show();
-    dismissDialog(0);
+    dismissDialog(DIALOG_LOGIN_PROGRESS);
+    TextView tv=(TextView)findViewById(R.id.account_username);
+    tv.setError(message);
   }
 }

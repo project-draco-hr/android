@@ -1,5 +1,4 @@
 {
   mUri=uri;
-  mSchemeRegistry=new SchemeRegistry();
-  setupHttpClient();
+  getParams().setParameter(HttpMethodParams.USER_AGENT,USER_AGENT);
 }

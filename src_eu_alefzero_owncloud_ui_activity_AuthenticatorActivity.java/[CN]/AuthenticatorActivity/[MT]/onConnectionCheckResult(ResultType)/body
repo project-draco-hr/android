@@ -1,0 +1,56 @@
+{
+  mStatusText=mStatusIcon=0;
+  mStatusCorrect=false;
+  String t_url=((TextView)findViewById(R.id.host_URL)).getText().toString().toLowerCase();
+switch (type) {
+case OK:
+    if (t_url.startsWith("http://") || t_url.startsWith("https://")) {
+      mIsSslConn=t_url.startsWith("http://") ? false : true;
+      mStatusIcon=R.drawable.ic_ok;
+      mStatusText=R.string.auth_connection_established;
+      mStatusCorrect=true;
+    }
+ else {
+      mIsSslConn=true;
+      mStatusIcon=android.R.drawable.ic_secure;
+      mStatusText=R.string.auth_secure_connection;
+      mStatusCorrect=true;
+    }
+  break;
+case OK_NO_SSL:
+mStatusIcon=android.R.drawable.ic_secure;
+mStatusText=R.string.auth_nossl_plain_ok_title;
+mStatusCorrect=true;
+mIsSslConn=false;
+break;
+case TIMEOUT:
+case INORRECT_ADDRESS:
+case SSL_INIT_ERROR:
+case HOST_NOT_AVAILABLE:
+mStatusIcon=R.drawable.common_error;
+mStatusText=R.string.auth_unknow_host_title;
+break;
+case NO_NETWORK_CONNECTION:
+mStatusIcon=R.drawable.no_network;
+mStatusText=R.string.auth_no_net_conn_title;
+break;
+case INSTANCE_NOT_CONFIGURED:
+mStatusIcon=R.drawable.common_error;
+mStatusText=R.string.auth_not_configured_title;
+break;
+case UNKNOWN_ERROR:
+mStatusIcon=R.drawable.common_error;
+mStatusText=R.string.auth_unknow_error;
+break;
+case FILE_NOT_FOUND:
+mStatusIcon=R.drawable.common_error;
+mStatusText=R.string.auth_incorrect_path_title;
+break;
+default :
+Log.e(TAG,"Incorrect connection checker result type: " + type);
+}
+setResultIconAndText(mStatusIcon,mStatusText);
+if (!mStatusCorrect) findViewById(R.id.refreshButton).setVisibility(View.VISIBLE);
+ else findViewById(R.id.refreshButton).setVisibility(View.INVISIBLE);
+findViewById(R.id.buttonOK).setEnabled(mStatusCorrect);
+}

@@ -2,4 +2,6 @@
   super(context,attrs,defStyle);
   getAttrs(attrs);
   s=optionOneString;
+  mTextBounds=new Rect();
+  mButtonRect=new Rect();
 }

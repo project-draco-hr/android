@@ -1,13 +1,12 @@
 {
-  HttpGet get=new HttpGet(mUri.toString() + filepath.replace(" ","%20"));
-  get.setHeader("Host",mUri.getHost());
-  get.setHeader("User-Agent","Android-ownCloud");
+  Log.e("ASD",mUri.toString() + URLDecoder.decode(filepath) + "");
+  GetMethod get=new GetMethod(mUri.toString() + URLDecoder.decode(filepath));
   try {
-    HttpResponse response=mHttpClient.execute(mTargetHost,get,mHttpContext);
-    if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
+    int status=executeMethod(get);
+    if (status != HttpStatus.SC_OK) {
       return false;
     }
-    BufferedInputStream bis=new BufferedInputStream(response.getEntity().getContent());
+    BufferedInputStream bis=new BufferedInputStream(get.getResponseBodyAsStream());
     FileOutputStream fos=new FileOutputStream(targetPath);
     byte[] bytes=new byte[512];
     int readResult;

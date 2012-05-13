@@ -1,0 +1,5 @@
+{
+  super.onCreate(savedInstanceState);
+  mGetterThread=new Thread(new JsonGetter());
+  mGetterThread.start();
+}

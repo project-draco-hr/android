@@ -1,0 +1,31 @@
+{
+  if (view.getId() == R.id.host_URL) {
+    if (!hasFocus) {
+      TextView tv=((TextView)findViewById(R.id.host_URL));
+      String uri=tv.getText().toString();
+      if (uri.length() != 0) {
+        setResultIconAndText(R.drawable.progress_small,R.string.auth_testing_connection);
+        mConnChkRunnable=new ConnectionCheckerRunnable(uri,this);
+        mConnChkRunnable.setListener(this,mHandler);
+        mAuthThread=new Thread(mConnChkRunnable);
+        mAuthThread.start();
+      }
+ else {
+        findViewById(R.id.refreshButton).setVisibility(View.INVISIBLE);
+        setResultIconAndText(0,0);
+      }
+    }
+  }
+ else   if (view.getId() == R.id.account_password) {
+    ImageView iv=(ImageView)findViewById(R.id.viewPassword);
+    if (hasFocus) {
+      iv.setVisibility(View.VISIBLE);
+    }
+ else {
+      TextView v=(TextView)findViewById(R.id.account_password);
+      int input_type=InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
+      v.setInputType(input_type);
+      iv.setVisibility(View.INVISIBLE);
+    }
+  }
+}

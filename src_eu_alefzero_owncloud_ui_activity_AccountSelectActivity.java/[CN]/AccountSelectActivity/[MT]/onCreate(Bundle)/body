@@ -1,0 +1,6 @@
+{
+  super.onCreate(savedInstanceState);
+  ActionBar action_bar=getSupportActionBar();
+  action_bar.setDisplayShowTitleEnabled(true);
+  action_bar.setDisplayHomeAsUpEnabled(false);
+}

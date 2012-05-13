@@ -7,8 +7,8 @@ case DIALOG_SETUP_ACCOUNT:
   builder.setTitle(R.string.main_tit_accsetup);
 builder.setMessage(R.string.main_wrn_accsetup);
 builder.setCancelable(false);
-builder.setPositiveButton(R.string.common_ok,this);
-builder.setNegativeButton(R.string.common_cancel,this);
+builder.setPositiveButton(android.R.string.ok,this);
+builder.setNegativeButton(android.R.string.cancel,this);
 dialog=builder.create();
 break;
 case DIALOG_CREATE_DIR:
@@ -18,11 +18,12 @@ final EditText dirName=new EditText(getBaseContext());
 final Account a=AccountUtils.getCurrentOwnCloudAccount(this);
 builder.setView(dirName);
 builder.setTitle(R.string.uploader_info_dirname);
-dirName.setTextColor(R.color.setup_text_typed);
-builder.setPositiveButton(R.string.common_ok,new OnClickListener(){
+int typed_color=getResources().getColor(R.color.setup_text_typed);
+dirName.setTextColor(typed_color);
+builder.setPositiveButton(android.R.string.ok,new OnClickListener(){
 public void onClick(DialogInterface dialog,int which){
 String s=dirName.getText().toString();
-if (s.trim().isEmpty()) {
+if (s.trim().length() == 0) {
 dialog.cancel();
 return;
 }
@@ -48,6 +49,8 @@ dialog.cancel();
 }
 }
 );
+dialog=builder.create();
+break;
 }
 default :
 dialog=null;

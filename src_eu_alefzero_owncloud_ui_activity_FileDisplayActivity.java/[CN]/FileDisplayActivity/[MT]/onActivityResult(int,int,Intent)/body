@@ -1,0 +1,15 @@
+{
+  if (resultCode == RESULT_OK) {
+    if (requestCode == ACTION_SELECT_FILE) {
+      Uri selectedImageUri=data.getData();
+      String filemanagerstring=selectedImageUri.getPath();
+      String selectedImagePath=getPath(selectedImageUri);
+      if (selectedImagePath != null)       System.out.println(selectedImagePath);
+ else       System.out.println("selectedImagePath is null");
+      if (filemanagerstring != null)       System.out.println(filemanagerstring);
+ else       System.out.println("filemanagerstring is null");
+      if (selectedImagePath != null)       System.out.println("selectedImagePath is the right one for you!");
+ else       System.out.println("filemanagerstring is the right one for you!");
+    }
+  }
+}

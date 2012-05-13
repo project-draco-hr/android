@@ -1,0 +1,8 @@
+{
+  View v=super.getView(position,convertView,parent);
+  CheckedTextView ctv=(CheckedTextView)v.findViewById(android.R.id.text1);
+  if (mPrivateData.get(position).get("NAME").equals(mCurrentAccount.name)) {
+    ctv.setChecked(true);
+  }
+  return v;
+}

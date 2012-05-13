@@ -1,5 +1,7 @@
 {
   super.onCreate(savedInstanceState);
   mAccount=AccountUtils.getCurrentOwnCloudAccount(getActivity());
+  getListView().setDivider(getResources().getDrawable(R.drawable.uploader_list_separator));
+  getListView().setDividerHeight(1);
   populateFileList();
 }

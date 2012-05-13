@@ -20,6 +20,7 @@
   File dir=new File(sdCard.getAbsolutePath() + "/owncloud");
   dir.mkdirs();
   File file=new File(dir,mFilePath.replace('/','.'));
+  Log.e(TAG,file.getAbsolutePath() + " " + oc_url.toString());
   wdc.downloadFile(mFilePath,file);
   ContentValues cv=new ContentValues();
   cv.put(ProviderTableMeta.FILE_STORAGE_PATH,file.getAbsolutePath());

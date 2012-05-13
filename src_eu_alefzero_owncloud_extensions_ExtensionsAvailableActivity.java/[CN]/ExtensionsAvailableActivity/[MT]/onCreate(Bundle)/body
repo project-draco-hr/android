@@ -1,0 +1,6 @@
+{
+  super.onCreate(savedInstanceState);
+  FragmentManager fm=getSupportFragmentManager();
+  ExtensionsAvailableDialog ead=new ExtensionsAvailableDialog();
+  ead.show(fm,"extensions_available_dialog");
+}

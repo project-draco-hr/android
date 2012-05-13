@@ -5,7 +5,7 @@
     Cursor c=null;
     if (getContentProvider() != null) {
       try {
-        c=getContentProvider().query(req_uri,null,null,null,null);
+        c=getContentProvider().query(req_uri,null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?",new String[]{mAccount.name},null);
       }
  catch (      RemoteException e) {
         Log.e(TAG,e.getMessage());
@@ -13,7 +13,7 @@
       }
     }
  else {
-      c=getContentResolver().query(req_uri,null,null,null,null);
+      c=getContentResolver().query(req_uri,null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?",new String[]{mAccount.name},null);
     }
     if (c.moveToFirst()) {
       do {

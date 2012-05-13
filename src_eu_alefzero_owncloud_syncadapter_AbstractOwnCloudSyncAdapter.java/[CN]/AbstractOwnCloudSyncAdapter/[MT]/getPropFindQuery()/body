@@ -1,6 +1,0 @@
-{
-  HttpPropFind query=new HttpPropFind(getUri().toString());
-  query.setHeader("Content-type","text/xml");
-  query.setHeader("User-Agent","Android-ownCloud");
-  return query;
-}

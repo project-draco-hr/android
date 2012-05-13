@@ -1,5 +1,0 @@
-{
-  int input_type=InputType.TYPE_CLASS_TEXT;
-  input_type|=val.equals("Hide") ? InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD : InputType.TYPE_TEXT_VARIATION_PASSWORD;
-  ((TextView)view).setInputType(input_type);
-}

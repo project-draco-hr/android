@@ -1,5 +1,0 @@
-{
-  this.setDepth("1");
-  setURI(URI.create(uri));
-  this.setHeader(HTTP.CONTENT_TYPE,"text/xml" + HTTP.CHARSET_PARAM + HTTP.UTF_8.toLowerCase());
-}

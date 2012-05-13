@@ -1,0 +1,25 @@
+{
+  if (!isOnline()) {
+    postResult(ResultType.NO_NETWORK_CONNECTION);
+    return;
+  }
+  if (mUrl.startsWith("http://") || mUrl.startsWith("https://")) {
+    mLatestResult=ResultType.OK;
+    tryConnection(Uri.parse(mUrl + AccountUtils.STATUS_PATH));
+    postResult(mLatestResult);
+  }
+ else {
+    Uri uri=Uri.parse("https://" + mUrl + AccountUtils.STATUS_PATH);
+    if (tryConnection(uri)) {
+      postResult(ResultType.OK);
+      return;
+    }
+    Log.d(TAG,"establishing secure connection failed, trying non secure connection");
+    uri=Uri.parse("http://" + mUrl + AccountUtils.STATUS_PATH);
+    if (tryConnection(uri)) {
+      postResult(ResultType.OK_NO_SSL);
+      return;
+    }
+    postResult(mLatestResult);
+  }
+}

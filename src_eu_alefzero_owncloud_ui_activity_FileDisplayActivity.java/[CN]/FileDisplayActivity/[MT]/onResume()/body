@@ -7,5 +7,13 @@
   IntentFilter f=new IntentFilter(FileSyncService.SYNC_MESSAGE);
   b=new BR();
   registerReceiver(b,f);
-  setProgressBarIndeterminateVisibility(false);
+  if (getSupportFragmentManager().findFragmentById(R.id.fileList) == null)   setContentView(R.layout.files);
+  mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
+  mDirectories.add("/");
+  mStorageManager=new FileDataStorageManager(AccountUtils.getCurrentOwnCloudAccount(this),getContentResolver());
+  ActionBar action_bar=getSupportActionBar();
+  action_bar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+  action_bar.setDisplayShowTitleEnabled(false);
+  action_bar.setListNavigationCallbacks(mDirectories,this);
+  action_bar.setDisplayHomeAsUpEnabled(true);
 }

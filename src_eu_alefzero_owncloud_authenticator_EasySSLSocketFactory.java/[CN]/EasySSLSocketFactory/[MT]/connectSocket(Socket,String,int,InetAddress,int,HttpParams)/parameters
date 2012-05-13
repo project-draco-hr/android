@@ -1,6 +1,0 @@
-Socket sock
-String host
-int port
-InetAddress localAddress
-int localPort
-HttpParams params

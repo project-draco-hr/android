@@ -1,3 +1,0 @@
-{
-  return getSSLContext().getSocketFactory().createSocket();
-}

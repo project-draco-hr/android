@@ -9,7 +9,6 @@
     mClient=new WebdavClient(uri);
     mClient.setCredentials(username,password);
     mClient.allowUnsignedCertificates();
-    mHost=mClient.getTargetHost();
   }
   return mClient;
 }

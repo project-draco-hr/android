@@ -1,11 +1,11 @@
 {
   Cursor c=null;
   if (getContentResolver() != null) {
-    c=getContentResolver().query(ProviderTableMeta.CONTENT_URI,null,key + "=?",new String[]{value},null);
+    c=getContentResolver().query(ProviderTableMeta.CONTENT_URI,null,key + "=? AND " + ProviderTableMeta.FILE_ACCOUNT_OWNER+ "=?",new String[]{value,mAccount.name},null);
   }
  else {
     try {
-      c=getContentProvider().query(ProviderTableMeta.CONTENT_URI,null,key + "=?",new String[]{value},null);
+      c=getContentProvider().query(ProviderTableMeta.CONTENT_URI,null,key + "=? AND " + ProviderTableMeta.FILE_ACCOUNT_OWNER+ "=?",new String[]{value,mAccount.name},null);
     }
  catch (    RemoteException e) {
       Log.e(TAG,"Could not get file details: " + e.getMessage());

@@ -1,0 +1,7 @@
+{
+  String accountName=((TextView)v.findViewById(android.R.id.text1)).getText().toString();
+  AccountUtils.setCurrentOwnCloudAccount(this,accountName);
+  Intent i=new Intent(this,FileDisplayActivity.class);
+  startActivity(i);
+  finish();
+}

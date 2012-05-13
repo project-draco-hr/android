@@ -1,0 +1,7 @@
+{
+  mListener=null;
+  mHandler=null;
+  mUrl=url;
+  mContext=context;
+  mOCVersion=null;
+}

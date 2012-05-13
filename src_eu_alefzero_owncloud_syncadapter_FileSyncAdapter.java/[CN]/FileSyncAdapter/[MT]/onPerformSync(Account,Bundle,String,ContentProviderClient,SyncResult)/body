@@ -2,6 +2,7 @@
   this.setAccount(account);
   this.setContentProvider(provider);
   this.setStorageManager(new FileDataStorageManager(account,getContentProvider()));
+  Log.d("ASD","syncing owncloud account " + account.name);
   Intent i=new Intent(FileSyncService.SYNC_MESSAGE);
   i.putExtra(FileSyncService.IN_PROGRESS,true);
   i.putExtra(FileSyncService.ACCOUNT_NAME,account.name);

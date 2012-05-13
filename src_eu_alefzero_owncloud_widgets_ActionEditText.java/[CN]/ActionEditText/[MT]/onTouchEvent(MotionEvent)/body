@@ -7,7 +7,7 @@
       if (s.equals(optionTwoString))       s=optionOneString;
  else       s=optionTwoString;
       if (badgeClickCallback != null) {
-        Class[] paramtypes=new Class[2];
+        @SuppressWarnings("rawtypes") Class[] paramtypes=new Class[2];
         paramtypes[0]=android.view.View.class;
         paramtypes[1]=String.class;
         Method method;

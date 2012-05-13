@@ -1,8 +1,8 @@
 {
-  if (mHandler != null) {
+  if (mHandler != null && mListener != null) {
     mHandler.post(new Runnable(){
       @Override public void run(){
-        AuthenticationRunnable.this.mListener.onAuthenticationResult(success,message);
+        mListener.onAuthenticationResult(success,message);
       }
     }
 );

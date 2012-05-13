@@ -1,11 +1,11 @@
 {
-  Log.i(getClass().getName(),"Getting authToken");
   try {
     validateAccountType(account.type);
     validateAuthTokenType(authTokenType);
   }
  catch (  AuthenticatorException e) {
-    Log.w(getClass().getName(),"Validating failded in getAuthToken");
+    Log.e(TAG,"Failed to validate account type " + account.type + ": "+ e.getMessage());
+    e.printStackTrace();
     return e.getFailureBundle();
   }
   final AccountManager am=AccountManager.get(mContext);

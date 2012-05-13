@@ -1,4 +1,7 @@
 {
   super.onPause();
-  unregisterReceiver(b);
+  if (b != null) {
+    unregisterReceiver(b);
+    b=null;
+  }
 }

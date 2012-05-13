@@ -1,0 +1,20 @@
+{
+  HttpClient hc=new HttpClient();
+  GetMethod gm=new GetMethod(packages_url);
+  final JSONArray ar;
+  try {
+    hc.executeMethod(gm);
+    Log.e("ASD",gm.getResponseBodyAsString() + "");
+    ar=new JSONObject(gm.getResponseBodyAsString()).getJSONArray("apps");
+  }
+ catch (  Exception e) {
+    e.printStackTrace();
+    return;
+  }
+  mHandler.post(new Runnable(){
+    @Override public void run(){
+      done(ar);
+    }
+  }
+);
+}

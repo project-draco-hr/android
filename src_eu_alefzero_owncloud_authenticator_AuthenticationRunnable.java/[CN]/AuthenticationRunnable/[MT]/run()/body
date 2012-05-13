@@ -1,5 +1,6 @@
 {
-  Uri uri=Uri.parse(mUrl.toString() + WEBDAV_2_0_PATH);
+  Uri uri;
+  uri=Uri.parse(mUrl.toString());
   WebdavClient client=new WebdavClient(uri);
   client.setCredentials(mUsername,mPassword);
   int login_result=client.tryToLogin();
