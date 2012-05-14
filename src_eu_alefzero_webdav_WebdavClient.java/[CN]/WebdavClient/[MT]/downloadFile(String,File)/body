@@ -1,7 +1,8 @@
 {
   Log.e("ASD",mUri.toString() + URLDecoder.decode(filepath) + "");
-  GetMethod get=new GetMethod(mUri.toString() + URLDecoder.decode(filepath));
+  GetMethod get=new GetMethod(mUri.toString() + URLEncoder.encode(filepath));
   try {
+    Log.e("ASD",get.toString());
     int status=executeMethod(get);
     if (status != HttpStatus.SC_OK) {
       return false;
