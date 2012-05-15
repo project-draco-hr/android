@@ -1,11 +1,11 @@
 {
-  dest.writeLong(id);
-  dest.writeLong(parentId);
-  dest.writeLong(length);
-  dest.writeLong(creationTimestamp);
-  dest.writeLong(modifiedTimestamp);
-  dest.writeString(remotePath);
-  dest.writeString(localPath);
-  dest.writeString(mimeType);
-  dest.writeInt(needsUpdating ? 0 : 1);
+  dest.writeLong(mId);
+  dest.writeLong(mParentId);
+  dest.writeLong(mLength);
+  dest.writeLong(mCreationTimestamp);
+  dest.writeLong(mModifiedTimestamp);
+  dest.writeString(mRemotePath);
+  dest.writeString(mLocalPath);
+  dest.writeString(mMimeType);
+  dest.writeInt(mNeedsUpdating ? 0 : 1);
 }

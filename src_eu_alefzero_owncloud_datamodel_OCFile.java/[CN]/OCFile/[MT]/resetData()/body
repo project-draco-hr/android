@@ -1,10 +1,10 @@
 {
-  id=-1;
-  remotePath=null;
-  parentId=0;
-  localPath=null;
-  mimeType=null;
-  length=0;
-  creationTimestamp=0;
-  modifiedTimestamp=0;
+  mId=-1;
+  mRemotePath=null;
+  mParentId=0;
+  mLocalPath=null;
+  mMimeType=null;
+  mLength=0;
+  mCreationTimestamp=0;
+  mModifiedTimestamp=0;
 }

@@ -1,5 +1,5 @@
 {
   resetData();
-  needsUpdating=false;
-  remotePath=path;
+  mNeedsUpdating=false;
+  mRemotePath=path;
 }
