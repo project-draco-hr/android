@@ -1,0 +1,9 @@
+{
+  super.onCreate();
+  mNotificationManager=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+  HandlerThread thread=new HandlerThread("FileUploaderThread",Process.THREAD_PRIORITY_BACKGROUND);
+  thread.start();
+  mServiceLooper=thread.getLooper();
+  mServiceHandler=new ServiceHandler(mServiceLooper);
+  mAccountManager=AccountManager.get(this);
+}

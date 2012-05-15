@@ -7,7 +7,6 @@
   IntentFilter f=new IntentFilter(FileSyncService.SYNC_MESSAGE);
   syncBroadcastRevceiver=new SyncBroadcastReceiver();
   registerReceiver(syncBroadcastRevceiver,f);
-  if (getSupportFragmentManager().findFragmentById(R.id.fileList) == null)   setContentView(R.layout.files);
   mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
   mDirectories.add("/");
   mStorageManager=new FileDataStorageManager(AccountUtils.getCurrentOwnCloudAccount(this),getContentResolver());

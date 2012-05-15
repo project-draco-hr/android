@@ -1,0 +1,27 @@
+{
+  String baseUrl=mAccountManager.getUserData(mAccount,AccountAuthenticator.KEY_OC_BASE_URL), ocVerStr=mAccountManager.getUserData(mAccount,AccountAuthenticator.KEY_OC_VERSION);
+  OwnCloudVersion ocVer=new OwnCloudVersion(ocVerStr);
+  String webdav_path=AccountUtils.getWebdavPath(ocVer);
+  Uri ocUri=Uri.parse(baseUrl + webdav_path);
+  String username=mAccount.name.substring(0,mAccount.name.lastIndexOf('@'));
+  String password=mAccountManager.getPassword(mAccount);
+  Notification notification=new Notification(eu.alefzero.owncloud.R.drawable.icon,"Uploading...",System.currentTimeMillis());
+  notification.flags|=Notification.FLAG_ONGOING_EVENT;
+  notification.contentView=new RemoteViews(getApplicationContext().getPackageName(),R.layout.progressbar_layout);
+  notification.contentView.setProgressBar(R.id.status_progress,mLocalPaths.length - 1,0,false);
+  notification.contentView.setImageViewResource(R.id.status_icon,R.drawable.icon);
+  mNotificationManager.notify(42,notification);
+  WebdavClient wc=new WebdavClient(ocUri);
+  wc.setCredentials(username,password);
+  for (int i=0; i < mLocalPaths.length; ++i) {
+    String mimeType=MimeTypeMap.getSingleton().getMimeTypeFromExtension(mLocalPaths[i].substring(mLocalPaths[i].lastIndexOf('.') + 1));
+    mResult=false;
+    if (wc.putFile(mLocalPaths[i],mRemotePaths[i],mimeType)) {
+      mResult|=true;
+    }
+    notification.contentView.setProgressBar(R.id.status_progress,mLocalPaths.length - 1,i + 1,false);
+    mNotificationManager.notify(42,notification);
+  }
+  mNotificationManager.cancel(42);
+  run();
+}

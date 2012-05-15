@@ -1,0 +1,29 @@
+{
+  if (!intent.hasExtra(KEY_ACCOUNT) && !intent.hasExtra(KEY_UPLOAD_TYPE)) {
+    Log.e(TAG,"Not enought data in intent provided");
+    return Service.START_NOT_STICKY;
+  }
+  mAccount=intent.getParcelableExtra(KEY_ACCOUNT);
+  mUploadType=intent.getIntExtra(KEY_UPLOAD_TYPE,-1);
+  if (mUploadType == -1) {
+    Log.e(TAG,"Incorrect upload type provided");
+    return Service.START_NOT_STICKY;
+  }
+  if (mUploadType == UPLOAD_SINGLE_FILE) {
+    mLocalPaths=new String[]{intent.getStringExtra(KEY_LOCAL_FILE)};
+    mRemotePaths=new String[]{intent.getStringExtra(KEY_REMOTE_FILE)};
+  }
+ else {
+    mLocalPaths=intent.getStringArrayExtra(KEY_LOCAL_FILE);
+    mRemotePaths=intent.getStringArrayExtra(KEY_REMOTE_FILE);
+  }
+  for (int i=0; i < mRemotePaths.length; ++i)   mRemotePaths[i]=mRemotePaths[i].replace(' ','+');
+  if (mLocalPaths.length != mRemotePaths.length) {
+    Log.e(TAG,"Remote paths and local paths are not equal!");
+    return Service.START_NOT_STICKY;
+  }
+  Message msg=mServiceHandler.obtainMessage();
+  msg.arg1=startId;
+  mServiceHandler.sendMessage(msg);
+  return Service.START_NOT_STICKY;
+}

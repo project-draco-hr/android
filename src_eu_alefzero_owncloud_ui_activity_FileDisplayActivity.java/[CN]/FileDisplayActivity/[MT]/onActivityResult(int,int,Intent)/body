@@ -1,15 +1,30 @@
 {
+  Log.e("ASD",requestCode + " " + resultCode);
   if (resultCode == RESULT_OK) {
     if (requestCode == ACTION_SELECT_FILE) {
       Uri selectedImageUri=data.getData();
       String filemanagerstring=selectedImageUri.getPath();
       String selectedImagePath=getPath(selectedImageUri);
-      if (selectedImagePath != null)       System.out.println(selectedImagePath);
- else       System.out.println("selectedImagePath is null");
-      if (filemanagerstring != null)       System.out.println(filemanagerstring);
- else       System.out.println("filemanagerstring is null");
-      if (selectedImagePath != null)       System.out.println("selectedImagePath is the right one for you!");
- else       System.out.println("filemanagerstring is the right one for you!");
+      String filepath;
+      if (selectedImagePath != null)       filepath=selectedImagePath;
+ else       filepath=filemanagerstring;
+      if (filepath == null) {
+        Log.e("FileDisplay","Couldnt resolve path to file");
+        return;
+      }
+      Intent i=new Intent(this,FileUploader.class);
+      i.putExtra(FileUploader.KEY_ACCOUNT,AccountUtils.getCurrentOwnCloudAccount(this));
+      String remotepath=new String();
+      for (int j=mDirectories.getCount() - 2; j >= 0; --j) {
+        remotepath+="/" + mDirectories.getItem(j);
+      }
+      if (!remotepath.endsWith("/"))       remotepath+="/";
+      remotepath+=new File(filepath).getName();
+      Log.e("ASD",remotepath + "");
+      i.putExtra(FileUploader.KEY_LOCAL_FILE,filepath);
+      i.putExtra(FileUploader.KEY_REMOTE_FILE,remotepath);
+      i.putExtra(FileUploader.KEY_UPLOAD_TYPE,FileUploader.UPLOAD_SINGLE_FILE);
+      startService(i);
     }
   }
 }
