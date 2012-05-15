@@ -3,7 +3,6 @@
     throw new IndexOutOfBoundsException("Incorrect item selected");
   }
   OCFile file=mFiles.get(position);
-  String id_=String.valueOf(file.getFileId());
   if (file.getMimetype().equals("DIR")) {
     String dirname=file.getFileName();
     mDirNames.push(dirname);
@@ -11,17 +10,25 @@
     populateFileList();
     return;
   }
-  Intent i=new Intent(getActivity(),FileDetailActivity.class);
-  i.putExtra("FILE_NAME",file.getFileName());
-  i.putExtra("FULL_PATH",file.getPath());
-  i.putExtra("FILE_ID",id_);
-  Log.e("ASD",mAccount + "");
-  i.putExtra("ACCOUNT",mAccount);
-  FileDetailFragment fd=(FileDetailFragment)getFragmentManager().findFragmentById(R.id.fileDetail);
+  Intent showDetailsIntent=new Intent(getActivity(),FileDetailActivity.class);
+  showDetailsIntent.putExtra(FileDetailFragment.FILE,file);
+  showDetailsIntent.putExtra(FileDownloader.EXTRA_ACCOUNT,mAccount);
+  FileDetailFragment fd=(FileDetailFragment)getFragmentManager().findFragmentByTag("FileDetails");
+  if (fd == null) {
+    fd=(FileDetailFragment)getFragmentManager().findFragmentById(R.id.fileDetail);
+  }
   if (fd != null) {
-    fd.setStuff(i);
+    if (fd.isEmptyLayout()) {
+      fd=new FileDetailFragment(showDetailsIntent);
+      FragmentTransaction transaction=getFragmentManager().beginTransaction();
+      transaction.replace(R.id.file_details_container,fd,"FileDetails");
+      transaction.commit();
+    }
+ else {
+      fd.updateFileDetails(showDetailsIntent);
+    }
   }
  else {
-    startActivity(i);
+    startActivity(showDetailsIntent);
   }
 }

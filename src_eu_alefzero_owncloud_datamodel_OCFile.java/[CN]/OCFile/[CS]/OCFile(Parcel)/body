@@ -1,0 +1,11 @@
+{
+  id=source.readLong();
+  parentId=source.readLong();
+  length=source.readLong();
+  creationTimestamp=source.readLong();
+  modifiedTimestamp=source.readLong();
+  remotePath=source.readString();
+  localPath=source.readString();
+  mimeType=source.readString();
+  needsUpdating=source.readInt() == 0;
+}

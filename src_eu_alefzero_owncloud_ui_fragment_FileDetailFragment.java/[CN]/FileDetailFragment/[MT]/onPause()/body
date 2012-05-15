@@ -1,5 +1,5 @@
 {
   super.onPause();
-  getActivity().unregisterReceiver(dfr);
-  dfr=null;
+  getActivity().unregisterReceiver(mDownloadFinishReceiver);
+  mDownloadFinishReceiver=null;
 }

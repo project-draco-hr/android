@@ -1,0 +1,5 @@
+{
+  mLayout=R.layout.file_details_fragment;
+  mIntent=intent;
+  mEmptyLayout=false;
+}

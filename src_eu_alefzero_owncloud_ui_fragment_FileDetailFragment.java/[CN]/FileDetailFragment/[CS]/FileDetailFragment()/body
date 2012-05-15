@@ -1,0 +1,4 @@
+{
+  mLayout=R.layout.file_details_empty;
+  mEmptyLayout=true;
+}
