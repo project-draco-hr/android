@@ -4,7 +4,7 @@
     setFilename(mFile.getFileName());
     setFiletype(DisplayUtils.convertMIMEtoPrettyPrint(mFile.getMimetype()));
     setFilesize(mFile.getFileLength());
-    VideoView videoView=(VideoView)mView.findViewById(R.id.videoView1);
+    VideoView videoView=(VideoView)getView().findViewById(R.id.videoView1);
     videoView.setVisibility(View.INVISIBLE);
     if (mFile.getStoragePath() == null) {
       ImageView imageView=(ImageView)getView().findViewById(R.id.imageView2);
@@ -13,7 +13,7 @@
     }
  else {
       if (mFile.getMimetype().startsWith("image/")) {
-        ImageView imageView=(ImageView)mView.findViewById(R.id.imageView2);
+        ImageView imageView=(ImageView)getView().findViewById(R.id.imageView2);
         Bitmap bmp=BitmapFactory.decodeFile(mFile.getStoragePath());
         imageView.setImageBitmap(bmp);
       }

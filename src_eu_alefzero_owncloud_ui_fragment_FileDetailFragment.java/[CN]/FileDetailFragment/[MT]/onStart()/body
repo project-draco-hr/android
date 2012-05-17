@@ -1,0 +1,9 @@
+{
+  super.onStart();
+  if (mIntent == null) {
+    mIntent=getActivity().getIntent();
+  }
+  if (!mEmptyLayout) {
+    updateFileDetails();
+  }
+}

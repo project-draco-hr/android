@@ -8,6 +8,7 @@
     mDirNames.push(dirname);
     ((FileDisplayActivity)getActivity()).pushPath(dirname);
     populateFileList();
+    resetFileFragment();
     return;
   }
   Intent showDetailsIntent=new Intent(getActivity(),FileDetailActivity.class);
@@ -19,9 +20,10 @@
   }
   if (fd != null) {
     if (fd.isEmptyLayout()) {
-      fd=new FileDetailFragment(showDetailsIntent);
       FragmentTransaction transaction=getFragmentManager().beginTransaction();
-      transaction.replace(R.id.file_details_container,fd,"FileDetails");
+      fd=new FileDetailFragment(showDetailsIntent);
+      transaction.replace(R.id.fileDetail,fd,"FileDetails");
+      transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
       transaction.commit();
     }
  else {

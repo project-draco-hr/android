@@ -1,10 +1,5 @@
 {
   View view=null;
   view=inflater.inflate(mLayout,container,false);
-  mIntent=getActivity().getIntent();
-  mView=view;
-  if (mEmptyLayout == false) {
-    updateFileDetails();
-  }
   return view;
 }
