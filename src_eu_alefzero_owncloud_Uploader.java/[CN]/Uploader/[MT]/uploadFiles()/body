@@ -21,19 +21,8 @@
     }
  else     if (uri.getScheme().equals("file")) {
       final File file=new File(Uri.decode(uri.toString()).replace(uri.getScheme() + "://",""));
-      FileNameMap fileNameMap=URLConnection.getFileNameMap();
-      String contentType=fileNameMap.getContentTypeFor(uri.toString());
-      if (contentType == null) {
-        contentType="text/plain";
-      }
-      if (!wdc.putFile(file.getAbsolutePath(),mUploadPath + "/" + file.getName(),contentType)) {
-        mHandler.post(new Runnable(){
-          public void run(){
-            Uploader.this.onUploadComplete(false,"Error while uploading file: " + file.getName());
-          }
-        }
-);
-      }
+      local[i]=file.getAbsolutePath();
+      remote[i]=mUploadPath + "/" + file.getName();
     }
   }
   Intent intent=new Intent(getApplicationContext(),FileUploader.class);
