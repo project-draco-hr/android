@@ -2,7 +2,6 @@
   super.onCreate(savedInstanceState);
   getWindow().requestFeature(Window.FEATURE_NO_TITLE);
   mParents=new Stack<String>();
-  mHandler=new Handler();
   if (getIntent().hasExtra(Intent.EXTRA_STREAM)) {
     prepareStreamsToUpload();
     mAccountManager=(AccountManager)getSystemService(Context.ACCOUNT_SERVICE);
