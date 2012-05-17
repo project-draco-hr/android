@@ -11,12 +11,5 @@
     setListAdapter(sca);
     Button btn=(Button)findViewById(R.id.uploader_choose_folder);
     btn.setOnClickListener(this);
-    if (getIntent().getAction().equals(Intent.ACTION_SEND_MULTIPLE)) {
-      Button createDirBtn=new Button(this);
-      createDirBtn.setId(android.R.id.button1);
-      createDirBtn.setText(R.string.uploader_btn_create_dir_text);
-      createDirBtn.setOnClickListener(this);
-      ((LinearLayout)findViewById(R.id.linearLayout1)).addView(createDirBtn,LayoutParams.FILL_PARENT,LayoutParams.WRAP_CONTENT);
-    }
   }
 }
