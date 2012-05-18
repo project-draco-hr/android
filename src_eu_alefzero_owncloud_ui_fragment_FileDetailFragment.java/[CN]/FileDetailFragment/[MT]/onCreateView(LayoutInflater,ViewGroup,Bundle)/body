@@ -3,7 +3,9 @@
   view=inflater.inflate(mLayout,container,false);
   mView=view;
   if (mLayout == R.layout.file_details_fragment) {
-    mIntent=getActivity().getIntent();
+    if (mIntent == null) {
+      mIntent=getActivity().getIntent();
+    }
     updateFileDetails();
   }
   return view;

@@ -1,0 +1,4 @@
+{
+  mIntent=showDetailsIntent;
+  mLayout=R.layout.file_details_fragment;
+}

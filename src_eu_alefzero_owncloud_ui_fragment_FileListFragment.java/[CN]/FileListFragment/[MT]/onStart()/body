@@ -1,5 +1,4 @@
 {
-  mFileDetailsDetailFragment=new FileDetailFragment();
   View fragmentContainer=getActivity().findViewById(R.id.file_details_container);
   if (fragmentContainer != null) {
     mIsLargeDevice=true;
