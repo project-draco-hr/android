@@ -1,0 +1,11 @@
+{
+  mFileDetailsDetailFragment=new FileDetailFragment();
+  View fragmentContainer=getActivity().findViewById(R.id.file_details_container);
+  if (fragmentContainer != null) {
+    mIsLargeDevice=true;
+    FragmentTransaction transaction=getFragmentManager().beginTransaction();
+    transaction.replace(R.id.file_details_container,new FileDetailFragment(true));
+    transaction.commit();
+  }
+  super.onStart();
+}

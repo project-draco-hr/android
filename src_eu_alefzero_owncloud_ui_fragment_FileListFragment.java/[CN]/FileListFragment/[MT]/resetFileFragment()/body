@@ -3,7 +3,7 @@
   if (fileDetails != null) {
     FragmentTransaction transaction=getFragmentManager().beginTransaction();
     transaction.remove(fileDetails);
-    transaction.add(R.id.file_details_container,new FileDetailFragment());
+    transaction.add(R.id.file_details_container,new FileDetailFragment(true));
     transaction.commit();
   }
 }
