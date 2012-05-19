@@ -7,4 +7,5 @@
   mLength=0;
   mCreationTimestamp=0;
   mModifiedTimestamp=0;
+  mLastSyncDate=0;
 }

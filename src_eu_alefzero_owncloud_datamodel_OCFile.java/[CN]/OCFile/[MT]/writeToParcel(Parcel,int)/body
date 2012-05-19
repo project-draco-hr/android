@@ -7,5 +7,6 @@
   dest.writeString(mRemotePath);
   dest.writeString(mLocalPath);
   dest.writeString(mMimeType);
-  dest.writeInt(mNeedsUpdating ? 0 : 1);
+  dest.writeInt(mNeedsUpdating ? 1 : 0);
+  dest.writeLong(mLastSyncDate);
 }
