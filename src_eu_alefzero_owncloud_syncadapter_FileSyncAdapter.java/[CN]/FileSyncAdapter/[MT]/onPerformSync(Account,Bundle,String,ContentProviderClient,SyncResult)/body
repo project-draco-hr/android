@@ -9,7 +9,7 @@
   getContext().sendStickyBroadcast(i);
   PropFindMethod query;
   try {
-    Log.e("ASD",getUri().toString());
+    mCurrentSyncTime=System.currentTimeMillis();
     query=new PropFindMethod(getUri().toString() + "/");
     getClient().executeMethod(query);
     MultiStatus resp=null;

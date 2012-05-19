@@ -12,6 +12,10 @@
       if (parentId == 0)       parentId=file.getFileId();
       if (we.contentType().equals("DIR"))       fetchData(getUri().toString() + we.path(),syncResult,file.getFileId());
     }
+    Vector<OCFile> files=getStorageManager().getDirectoryContent(getStorageManager().getFileById(parentId));
+    for (    OCFile file : files) {
+      if (file.getLastSyncDate() != mCurrentSyncTime && file.getLastSyncDate() != 0)       getStorageManager().removeFile(file);
+    }
   }
  catch (  OperationCanceledException e) {
     e.printStackTrace();
