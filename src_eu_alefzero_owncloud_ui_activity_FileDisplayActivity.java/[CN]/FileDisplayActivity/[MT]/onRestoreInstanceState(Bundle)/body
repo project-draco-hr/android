@@ -4,4 +4,7 @@
     showDialog(DIALOG_SETUP_ACCOUNT);
   }
   mDirs=savedInstanceState.getStringArray(KEY_DIR);
+  mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
+  mDirectories.add("/");
+  if (mDirs != null)   for (  String s : mDirs)   mDirectories.insert(s,0);
 }
