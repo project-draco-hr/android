@@ -1,17 +1,33 @@
 {
   mFile=mIntent.getParcelableExtra(FILE);
+  Button downloadButton=(Button)getView().findViewById(R.id.fdDownloadBtn);
   if (mFile != null) {
     setFilename(mFile.getFileName());
     setFiletype(DisplayUtils.convertMIMEtoPrettyPrint(mFile.getMimetype()));
     setFilesize(mFile.getFileLength());
     if (mFile.getStoragePath() != null) {
-      if (mFile.getMimetype().startsWith("image/")) {
-        ImageView preview=(ImageView)getView().findViewById(R.id.fdPreview);
-        Bitmap bmp=BitmapFactory.decodeFile(mFile.getStoragePath());
-        preview.setImageBitmap(bmp);
+      try {
+        if (mFile.getMimetype().startsWith("image/")) {
+          ImageView preview=(ImageView)getView().findViewById(R.id.fdPreview);
+          Bitmap bmp=BitmapFactory.decodeFile(mFile.getStoragePath());
+          preview.setImageBitmap(bmp);
+        }
       }
+ catch (      OutOfMemoryError e) {
+        Log.e(TAG,"Out of memory occured for file with size " + mFile.getFileLength());
+      }
+      downloadButton.setText("Open file");
+      downloadButton.setOnClickListener(new OnClickListener(){
+        @Override public void onClick(        View v){
+          Intent i=new Intent(Intent.ACTION_VIEW);
+          i.setDataAndType(Uri.parse("file://" + mFile.getStoragePath()),mFile.getMimetype());
+          startActivity(i);
+        }
+      }
+);
     }
-    Button downloadButton=(Button)getView().findViewById(R.id.fdDownloadBtn);
-    downloadButton.setOnClickListener(this);
+ else {
+      downloadButton.setOnClickListener(this);
+    }
   }
 }

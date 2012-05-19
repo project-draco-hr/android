@@ -16,7 +16,7 @@
       i.putExtra(FileUploader.KEY_ACCOUNT,AccountUtils.getCurrentOwnCloudAccount(this));
       String remotepath=new String();
       for (int j=mDirectories.getCount() - 2; j >= 0; --j) {
-        remotepath+="/" + mDirectories.getItem(j);
+        remotepath+="/" + URLDecoder.decode(mDirectories.getItem(j));
       }
       if (!remotepath.endsWith("/"))       remotepath+="/";
       remotepath+=new File(filepath).getName();
