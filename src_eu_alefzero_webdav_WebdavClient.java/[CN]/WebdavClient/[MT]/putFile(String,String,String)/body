@@ -3,7 +3,8 @@
   try {
     Log.e("ASD",contentType + "");
     File f=new File(localFile);
-    RequestEntity entity=new FileRequestEntity(f,contentType);
+    FileRequestEntity entity=new FileRequestEntity(f,contentType);
+    entity.setOnUploadProgressListener(mUploadProgressListener);
     Log.e("ASD",f.exists() + " " + entity.getContentLength());
     PutMethod put=new PutMethod(mUri.toString() + remoteTarget);
     put.setRequestEntity(entity);
