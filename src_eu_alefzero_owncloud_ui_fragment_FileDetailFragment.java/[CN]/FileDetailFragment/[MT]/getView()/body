@@ -1,3 +1,3 @@
 {
-  return mView == null ? super.getView() : mView;
+  return super.getView() == null ? mView : super.getView();
 }

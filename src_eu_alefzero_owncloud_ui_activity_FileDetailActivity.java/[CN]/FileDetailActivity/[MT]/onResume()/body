@@ -1,0 +1,4 @@
+{
+  super.onResume();
+  mFileDetail.updateFileDetails(getIntent());
+}

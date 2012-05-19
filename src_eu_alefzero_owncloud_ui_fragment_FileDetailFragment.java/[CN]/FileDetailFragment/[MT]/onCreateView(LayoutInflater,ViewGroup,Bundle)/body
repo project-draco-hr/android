@@ -1,9 +1,11 @@
 {
   View view=null;
   view=inflater.inflate(mLayout,container,false);
-  mIntent=getActivity().getIntent();
   mView=view;
-  if (mEmptyLayout == false) {
+  if (mLayout == R.layout.file_details_fragment) {
+    if (mIntent == null) {
+      mIntent=getActivity().getIntent();
+    }
     updateFileDetails();
   }
   return view;

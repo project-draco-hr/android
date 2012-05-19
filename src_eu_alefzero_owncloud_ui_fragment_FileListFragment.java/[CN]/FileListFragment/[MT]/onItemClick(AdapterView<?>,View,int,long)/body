@@ -8,24 +8,22 @@
     mDirNames.push(dirname);
     ((FileDisplayActivity)getActivity()).pushPath(dirname);
     populateFileList();
+    resetFileFragment();
     return;
   }
   Intent showDetailsIntent=new Intent(getActivity(),FileDetailActivity.class);
   showDetailsIntent.putExtra(FileDetailFragment.FILE,file);
   showDetailsIntent.putExtra(FileDownloader.EXTRA_ACCOUNT,mAccount);
-  FileDetailFragment fd=(FileDetailFragment)getFragmentManager().findFragmentByTag("FileDetails");
-  if (fd == null) {
-    fd=(FileDetailFragment)getFragmentManager().findFragmentById(R.id.fileDetail);
-  }
-  if (fd != null) {
-    if (fd.isEmptyLayout()) {
-      fd=new FileDetailFragment(showDetailsIntent);
+  if (mIsLargeDevice) {
+    FileDetailFragment fileDetails=(FileDetailFragment)getFragmentManager().findFragmentByTag("FileDetails");
+    if (fileDetails == null) {
       FragmentTransaction transaction=getFragmentManager().beginTransaction();
-      transaction.replace(R.id.file_details_container,fd,"FileDetails");
+      transaction.replace(R.id.file_details_container,new FileDetailFragment(showDetailsIntent),"FileDetails");
+      transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
       transaction.commit();
     }
  else {
-      fd.updateFileDetails(showDetailsIntent);
+      fileDetails.updateFileDetails(showDetailsIntent);
     }
   }
  else {
