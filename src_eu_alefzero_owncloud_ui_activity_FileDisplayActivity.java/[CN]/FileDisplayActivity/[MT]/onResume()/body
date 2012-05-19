@@ -9,6 +9,11 @@
   registerReceiver(syncBroadcastRevceiver,f);
   mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
   mDirectories.add("/");
+  if (mDirs != null) {
+    for (    String s : mDirs)     mDirectories.insert(s,0);
+    FileListFragment fileListFramgent=(FileListFragment)getSupportFragmentManager().findFragmentById(R.id.fileList);
+    if (fileListFramgent != null)     fileListFramgent.populateFileList();
+  }
   mStorageManager=new FileDataStorageManager(AccountUtils.getCurrentOwnCloudAccount(this),getContentResolver());
   ActionBar action_bar=getSupportActionBar();
   action_bar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);

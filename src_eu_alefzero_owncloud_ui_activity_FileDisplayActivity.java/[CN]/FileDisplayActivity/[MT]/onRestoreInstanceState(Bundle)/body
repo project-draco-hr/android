@@ -3,4 +3,5 @@
   if (!accountsAreSetup()) {
     showDialog(DIALOG_SETUP_ACCOUNT);
   }
+  mDirs=savedInstanceState.getStringArray(KEY_DIR);
 }
