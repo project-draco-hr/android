@@ -5,7 +5,7 @@
     MultiStatus resp=null;
     resp=query.getResponseBodyAsMultiStatus();
     for (int i=1; i < resp.getResponses().length; ++i) {
-      WebdavEntry we=new WebdavEntry(resp.getResponses()[i]);
+      WebdavEntry we=new WebdavEntry(resp.getResponses()[i],getUri().getPath());
       OCFile file=fillOCFile(we);
       file.setParentId(parentId);
       getStorageManager().saveFile(file);

@@ -2,7 +2,7 @@
   resetData();
   if (ms.getStatus().length != 0) {
     mUri=ms.getHref();
-    mPath=mUri.split("webdav.php",2)[1];
+    mPath=mUri.split(splitElement,2)[1];
     int status=ms.getStatus()[0].getStatusCode();
     DavPropertySet propSet=ms.getProperties(status);
     @SuppressWarnings("rawtypes") DavProperty prop=propSet.get(DavPropertyName.DISPLAYNAME);
