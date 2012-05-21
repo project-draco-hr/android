@@ -6,5 +6,6 @@
   }
   requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
   setProgressBarIndeterminateVisibility(false);
+  Log.e("ASDaaa","ASDaaa");
   setContentView(R.layout.files);
 }
