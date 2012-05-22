@@ -2,7 +2,7 @@
   super.onMenuItemSelected(featureId,item);
   Intent intent;
 switch (item.getItemId()) {
-case R.id.addSessionItem:
+case 1:
     intent=new Intent(this,PreferencesNewSession.class);
   startActivityForResult(intent,mNewSession);
 break;
