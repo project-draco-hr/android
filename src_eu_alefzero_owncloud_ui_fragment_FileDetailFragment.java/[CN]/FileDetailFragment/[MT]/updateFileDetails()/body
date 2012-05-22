@@ -5,6 +5,8 @@
     setFilename(mFile.getFileName());
     setFiletype(DisplayUtils.convertMIMEtoPrettyPrint(mFile.getMimetype()));
     setFilesize(mFile.getFileLength());
+    setTimeCreated(mFile.getCreationTimestamp());
+    setTimeModified(mFile.getModificationTimestamp());
     if (mFile.getStoragePath() != null) {
       try {
         if (mFile.getMimetype().startsWith("image/")) {

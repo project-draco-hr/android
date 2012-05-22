@@ -1,5 +1,5 @@
 {
-  double result=bitsLen;
+  double result=bytes;
   int attachedsuff=0;
   while (result > 1024 && attachedsuff < suffixes.length) {
     result/=1024.;
