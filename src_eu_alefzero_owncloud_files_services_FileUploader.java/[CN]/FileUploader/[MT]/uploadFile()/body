@@ -5,7 +5,7 @@
   Uri ocUri=Uri.parse(baseUrl + webdav_path);
   String username=mAccount.name.substring(0,mAccount.name.lastIndexOf('@'));
   String password=mAccountManager.getPassword(mAccount);
-  mTotalDataToSend=mSendData=0;
+  mTotalDataToSend=mSendData=mPreviousPercent=0;
   mNotification=new Notification(eu.alefzero.owncloud.R.drawable.icon,"Uploading...",System.currentTimeMillis());
   mNotification.flags|=Notification.FLAG_ONGOING_EVENT;
   mNotification.contentView=new RemoteViews(getApplicationContext().getPackageName(),R.layout.progressbar_layout);
