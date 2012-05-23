@@ -11,4 +11,7 @@
  else {
     getContentResolver().delete(file_uri,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?",new String[]{mAccount.name});
   }
+  if (file.getStoragePath() != null) {
+    new File(file.getStoragePath()).delete();
+  }
 }
