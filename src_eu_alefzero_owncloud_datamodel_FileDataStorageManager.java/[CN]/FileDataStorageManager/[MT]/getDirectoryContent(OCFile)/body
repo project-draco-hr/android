@@ -23,6 +23,7 @@
  while (c.moveToNext());
     }
     c.close();
+    Collections.sort(ret);
     return ret;
   }
   return null;
