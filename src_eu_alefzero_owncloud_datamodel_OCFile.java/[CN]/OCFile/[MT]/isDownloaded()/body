@@ -1,3 +1,3 @@
 {
-  return mLocalPath != null || mLocalPath.equals("");
+  return mLocalPath != null && !mLocalPath.equals("");
 }
