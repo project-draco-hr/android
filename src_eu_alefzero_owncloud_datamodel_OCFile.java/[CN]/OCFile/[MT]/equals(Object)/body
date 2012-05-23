@@ -1,0 +1,4 @@
+{
+  OCFile that=(OCFile)o;
+  return this.mId == that.mId;
+}

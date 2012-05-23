@@ -1,0 +1,5 @@
+{
+  String asString="[id=%s, name=%s, mime=%s, downloaded=%s, local=%s, remote=%s]";
+  asString=String.format(asString,new Long(mId),getFileName(),mMimeType,isDownloaded(),mLocalPath,mRemotePath);
+  return asString;
+}
