@@ -1,5 +1,5 @@
 {
-  mFile=mIntent.getParcelableExtra(FILE);
+  mFile=mIntent.getParcelableExtra(EXTRA_FILE);
   Button downloadButton=(Button)getView().findViewById(R.id.fdDownloadBtn);
   if (mFile != null) {
     setFilename(mFile.getFileName());
@@ -18,7 +18,7 @@
  catch (      OutOfMemoryError e) {
         Log.e(TAG,"Out of memory occured for file with size " + mFile.getFileLength());
       }
-      downloadButton.setText("Open file");
+      downloadButton.setText(R.string.filedetails_open);
       downloadButton.setOnClickListener(new OnClickListener(){
         @Override public void onClick(        View v){
           Intent i=new Intent(Intent.ACTION_VIEW);

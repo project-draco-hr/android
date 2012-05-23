@@ -1,7 +1,11 @@
 {
   super.onCreate(savedInstanceState);
   mAccount=AccountUtils.getCurrentOwnCloudAccount(getActivity());
+  mStorageManager=new FileDataStorageManager(mAccount,getActivity().getContentResolver());
   getListView().setDivider(getResources().getDrawable(R.drawable.uploader_list_separator));
   getListView().setDividerHeight(1);
-  populateFileList();
+  Intent intent=getActivity().getIntent();
+  OCFile directory=intent.getParcelableExtra(FileDetailFragment.EXTRA_FILE);
+  mFile=directory;
+  listDirectory(directory);
 }

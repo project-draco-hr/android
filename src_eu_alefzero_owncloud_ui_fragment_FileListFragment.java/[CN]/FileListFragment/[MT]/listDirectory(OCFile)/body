@@ -1,0 +1,19 @@
+{
+  if (directory == null) {
+    if (mFile != null) {
+      directory=mFile;
+    }
+ else {
+      directory=mStorageManager.getFileByPath("/");
+    }
+  }
+  if (!directory.isDirectory()) {
+    Log.w(TAG,"You see, that is not a directory -> " + directory.toString());
+    directory=mStorageManager.getFileById(directory.getParentId());
+  }
+  mFiles=mStorageManager.getDirectoryContent(directory);
+  if (mFiles == null || mFiles.size() == 0) {
+    Toast.makeText(getActivity(),"There are no files here",Toast.LENGTH_LONG).show();
+  }
+  setListAdapter(new FileListListAdapter(directory,mStorageManager,getActivity()));
+}

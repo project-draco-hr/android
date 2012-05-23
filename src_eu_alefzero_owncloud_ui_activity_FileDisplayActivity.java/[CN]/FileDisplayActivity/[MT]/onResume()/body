@@ -12,7 +12,7 @@
   if (mDirs != null) {
     for (    String s : mDirs)     mDirectories.insert(s,0);
     FileListFragment fileListFramgent=(FileListFragment)getSupportFragmentManager().findFragmentById(R.id.fileList);
-    if (fileListFramgent != null)     fileListFramgent.populateFileList();
+    if (fileListFramgent != null)     fileListFramgent.listDirectory();
   }
   mStorageManager=new FileDataStorageManager(AccountUtils.getCurrentOwnCloudAccount(this),getContentResolver());
   ActionBar action_bar=getSupportActionBar();

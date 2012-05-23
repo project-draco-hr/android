@@ -1,7 +1,8 @@
 {
   super.onCreate(savedInstanceState);
-  getWindow().requestFeature(Window.FEATURE_NO_TITLE);
   setContentView(R.layout.file_activity_details);
+  ActionBar actionBar=getSupportActionBar();
+  actionBar.setDisplayHomeAsUpEnabled(true);
   FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
   mFileDetail=new FileDetailFragment();
   ft.add(R.id.fragment,mFileDetail,"FileDetails");

@@ -1,5 +1,10 @@
 {
   mDirNames.pop();
-  populateFileList();
+  OCFile parentDir=null;
+  if (mFile != null) {
+    parentDir=mStorageManager.getFileById(mFile.getParentId());
+    mFile=parentDir;
+  }
+  listDirectory(parentDir);
   resetFileFragment();
 }

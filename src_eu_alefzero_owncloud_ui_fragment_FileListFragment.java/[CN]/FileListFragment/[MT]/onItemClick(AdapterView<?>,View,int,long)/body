@@ -3,16 +3,17 @@
     throw new IndexOutOfBoundsException("Incorrect item selected");
   }
   OCFile file=mFiles.get(position);
+  mFile=file;
   if (file.getMimetype().equals("DIR")) {
     String dirname=file.getFileName();
     mDirNames.push(dirname);
     ((FileDisplayActivity)getActivity()).pushPath(dirname);
-    populateFileList();
+    listDirectory(file);
     resetFileFragment();
     return;
   }
   Intent showDetailsIntent=new Intent(getActivity(),FileDetailActivity.class);
-  showDetailsIntent.putExtra(FileDetailFragment.FILE,file);
+  showDetailsIntent.putExtra(FileDetailFragment.EXTRA_FILE,file);
   showDetailsIntent.putExtra(FileDownloader.EXTRA_ACCOUNT,mAccount);
   if (mIsLargeDevice) {
     FileDetailFragment fileDetails=(FileDetailFragment)getFragmentManager().findFragmentByTag("FileDetails");
