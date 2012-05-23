@@ -3,9 +3,9 @@
     throw new IndexOutOfBoundsException("Incorrect item selected");
   }
   OCFile file=mFiles.get(position);
-  mFile=file;
   if (file.getMimetype().equals("DIR")) {
     String dirname=file.getFileName();
+    mFile=file;
     mDirNames.push(dirname);
     ((FileDisplayActivity)getActivity()).pushPath(dirname);
     listDirectory(file);
