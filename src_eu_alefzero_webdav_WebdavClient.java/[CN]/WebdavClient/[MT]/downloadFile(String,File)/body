@@ -1,4 +1,10 @@
 {
+  String[] splitted_filepath=filepath.split("/");
+  filepath="";
+  for (  String s : splitted_filepath) {
+    if (s.equals(""))     continue;
+    filepath+="/" + URLEncoder.encode(s);
+  }
   Log.e("ASD",mUri.toString() + filepath.replace(" ","%20") + "");
   GetMethod get=new GetMethod(mUri.toString() + filepath.replace(" ","%20"));
   try {
