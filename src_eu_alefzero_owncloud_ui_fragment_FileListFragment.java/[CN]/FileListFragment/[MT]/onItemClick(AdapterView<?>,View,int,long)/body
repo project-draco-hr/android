@@ -6,7 +6,6 @@
   if (file.getMimetype().equals("DIR")) {
     String dirname=file.getFileName();
     mFile=file;
-    mDirNames.push(dirname);
     ((FileDisplayActivity)getActivity()).pushPath(dirname);
     listDirectory(file);
     resetFileFragment();

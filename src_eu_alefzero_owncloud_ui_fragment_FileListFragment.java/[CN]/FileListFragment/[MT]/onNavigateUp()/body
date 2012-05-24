@@ -1,5 +1,4 @@
 {
-  mDirNames.pop();
   OCFile parentDir=null;
   if (mFile != null) {
     parentDir=mStorageManager.getFileById(mFile.getParentId());
