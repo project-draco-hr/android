@@ -4,9 +4,8 @@
   }
   OCFile file=mFiles.get(position);
   if (file.getMimetype().equals("DIR")) {
-    String dirname=file.getFileName();
     mFile=file;
-    ((FileDisplayActivity)getActivity()).pushPath(dirname);
+    ((FileDisplayActivity)getActivity()).pushDirname(file);
     listDirectory(file);
     resetFileFragment();
     return;

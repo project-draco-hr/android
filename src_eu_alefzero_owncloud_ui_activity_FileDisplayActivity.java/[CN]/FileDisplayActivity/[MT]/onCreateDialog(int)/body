@@ -14,32 +14,29 @@ break;
 case DIALOG_CREATE_DIR:
 {
 builder=new Builder(this);
-final EditText dirName=new EditText(getBaseContext());
+final EditText dirNameInput=new EditText(getBaseContext());
 final Account a=AccountUtils.getCurrentOwnCloudAccount(this);
-builder.setView(dirName);
+builder.setView(dirNameInput);
 builder.setTitle(R.string.uploader_info_dirname);
 int typed_color=getResources().getColor(R.color.setup_text_typed);
-dirName.setTextColor(typed_color);
+dirNameInput.setTextColor(typed_color);
 builder.setPositiveButton(android.R.string.ok,new OnClickListener(){
 public void onClick(DialogInterface dialog,int which){
-String s=dirName.getText().toString();
-if (s.trim().length() == 0) {
+String directoryName=dirNameInput.getText().toString();
+if (directoryName.trim().length() == 0) {
 dialog.cancel();
 return;
 }
-String path="";
-for (int i=mDirectories.getCount() - 2; i >= 0; --i) {
-path+="/" + mDirectories.getItem(i);
-}
-OCFile parent=mStorageManager.getFileByPath(path + "/");
-path+=s + "/";
+String path=mCurrentDir.getRemotePath();
+path+=directoryName + "/";
 Thread thread=new Thread(new DirectoryCreator(path,a));
 thread.start();
-OCFile new_file=new OCFile(path);
-new_file.setMimetype("DIR");
-new_file.setParentId(parent.getParentId());
-mStorageManager.saveFile(new_file);
+OCFile newDir=new OCFile(path);
+newDir.setMimetype("DIR");
+newDir.setParentId(mCurrentDir.getFileId());
+mStorageManager.saveFile(newDir);
 dialog.dismiss();
+mFileList.listDirectory(mCurrentDir);
 }
 }
 );

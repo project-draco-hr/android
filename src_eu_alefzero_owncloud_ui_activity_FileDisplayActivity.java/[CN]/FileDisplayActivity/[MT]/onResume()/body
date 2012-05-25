@@ -4,20 +4,40 @@
     showDialog(DIALOG_SETUP_ACCOUNT);
     return;
   }
-  IntentFilter f=new IntentFilter(FileSyncService.SYNC_MESSAGE);
+  IntentFilter syncIntentFilter=new IntentFilter(FileSyncService.SYNC_MESSAGE);
   syncBroadcastRevceiver=new SyncBroadcastReceiver();
-  registerReceiver(syncBroadcastRevceiver,f);
-  mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
-  mDirectories.add("/");
-  if (mDirs != null) {
-    for (    String s : mDirs)     mDirectories.insert(s,0);
-    FileListFragment fileListFramgent=(FileListFragment)getSupportFragmentManager().findFragmentById(R.id.fileList);
-    if (fileListFramgent != null)     fileListFramgent.listDirectory();
-  }
+  registerReceiver(syncBroadcastRevceiver,syncIntentFilter);
   mStorageManager=new FileDataStorageManager(AccountUtils.getCurrentOwnCloudAccount(this),getContentResolver());
+  mFileList=(FileListFragment)getSupportFragmentManager().findFragmentById(R.id.fileList);
+  if (getIntent().hasExtra(FileDetailFragment.EXTRA_FILE)) {
+    mCurrentDir=(OCFile)getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE);
+    if (!mCurrentDir.isDirectory()) {
+      mCurrentDir=mStorageManager.getFileById(mCurrentDir.getParentId());
+    }
+  }
+  mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
+  if (mCurrentDir != null) {
+    ArrayList<OCFile> files=new ArrayList<OCFile>();
+    OCFile currFile=mCurrentDir;
+    while (currFile != null) {
+      files.add(currFile);
+      currFile=mStorageManager.getFileById(currFile.getParentId());
+    }
+    mDirs=new String[files.size()];
+    for (int i=files.size() - 1; i >= 0; i--) {
+      mDirs[i]=files.get(i).getFileName();
+    }
+  }
+  if (mDirs != null) {
+    for (    String s : mDirs)     mDirectories.add(s);
+  }
+ else {
+    mDirectories.add("/");
+  }
   ActionBar action_bar=getSupportActionBar();
   action_bar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
   action_bar.setDisplayShowTitleEnabled(false);
   action_bar.setListNavigationCallbacks(mDirectories,this);
   action_bar.setDisplayHomeAsUpEnabled(true);
+  mFileList.listDirectory(mCurrentDir);
 }

@@ -3,6 +3,6 @@
     finish();
     return;
   }
-  popPath();
-  ((FileListFragment)getSupportFragmentManager().findFragmentById(R.id.fileList)).onNavigateUp();
+  popDirname();
+  mFileList.onNavigateUp();
 }

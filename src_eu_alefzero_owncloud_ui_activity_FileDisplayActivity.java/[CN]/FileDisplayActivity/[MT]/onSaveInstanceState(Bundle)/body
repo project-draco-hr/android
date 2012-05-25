@@ -6,4 +6,6 @@
       mDirs[i]=mDirectories.getItem(j);
     }
   }
+  outState.putStringArray(KEY_DIR_ARRAY,mDirs);
+  outState.putParcelable(KEY_CURRENT_DIR,mCurrentDir);
 }
