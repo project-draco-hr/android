@@ -1,8 +1,14 @@
 {
   super.onResume();
   if (!accountsAreSetup()) {
-    showDialog(DIALOG_SETUP_ACCOUNT);
+    setContentView(R.layout.no_account_available);
+    setProgressBarIndeterminateVisibility(false);
+    getSupportActionBar().setNavigationMode(ActionBar.DISPLAY_SHOW_TITLE);
+    findViewById(R.id.setup_account).setOnClickListener(this);
     return;
+  }
+ else   if (findViewById(R.id.file_list_view) == null) {
+    setContentView(R.layout.files);
   }
   IntentFilter syncIntentFilter=new IntentFilter(FileSyncService.SYNC_MESSAGE);
   syncBroadcastRevceiver=new SyncBroadcastReceiver();

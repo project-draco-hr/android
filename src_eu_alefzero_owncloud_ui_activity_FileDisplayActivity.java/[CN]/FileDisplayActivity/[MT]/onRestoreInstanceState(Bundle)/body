@@ -1,8 +1,5 @@
 {
   super.onRestoreInstanceState(savedInstanceState);
-  if (!accountsAreSetup()) {
-    showDialog(DIALOG_SETUP_ACCOUNT);
-  }
   mDirs=savedInstanceState.getStringArray(KEY_DIR_ARRAY);
   mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
   mDirectories.add("/");

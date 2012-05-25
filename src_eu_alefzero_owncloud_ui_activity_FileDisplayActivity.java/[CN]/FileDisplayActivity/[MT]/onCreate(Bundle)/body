@@ -1,13 +1,8 @@
 {
   super.onCreate(savedInstanceState);
-  if (!accountsAreSetup()) {
-    showDialog(DIALOG_SETUP_ACCOUNT);
-    return;
-  }
   requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
   setProgressBarIndeterminateVisibility(false);
   if (savedInstanceState != null) {
     mCurrentDir=(OCFile)savedInstanceState.getParcelable(KEY_CURRENT_DIR);
   }
-  setContentView(R.layout.files);
 }

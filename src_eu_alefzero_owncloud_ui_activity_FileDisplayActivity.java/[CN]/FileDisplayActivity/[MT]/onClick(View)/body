@@ -1,0 +1,7 @@
+{
+  if (v.getId() == R.id.setup_account) {
+    Intent intent=new Intent("android.settings.ADD_ACCOUNT_SETTINGS");
+    intent.putExtra("authorities",new String[]{AccountAuthenticator.AUTH_TOKEN_TYPE});
+    startActivity(intent);
+  }
+}
