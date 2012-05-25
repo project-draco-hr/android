@@ -39,6 +39,11 @@
   action_bar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
   action_bar.setDisplayShowTitleEnabled(false);
   action_bar.setListNavigationCallbacks(mDirectories,this);
-  action_bar.setDisplayHomeAsUpEnabled(true);
+  if (mCurrentDir != null && mCurrentDir.getParentId() != 0) {
+    action_bar.setDisplayHomeAsUpEnabled(true);
+  }
+ else {
+    action_bar.setDisplayHomeAsUpEnabled(false);
+  }
   mFileList.listDirectory(mCurrentDir);
 }

@@ -20,11 +20,16 @@ case R.id.action_upload:
   startActivityForResult(Intent.createChooser(action,"Upload file from..."),ACTION_SELECT_FILE);
   break;
 }
+case R.id.action_accounts:
+{
+Intent accountIntent=new Intent(this,AccountSelectActivity.class);
+startActivity(accountIntent);
+}
 case android.R.id.home:
 {
-Intent i=new Intent(this,AccountSelectActivity.class);
-startActivity(i);
-finish();
+if (mCurrentDir != null && mCurrentDir.getParentId() != 0) {
+onBackPressed();
+}
 break;
 }
 default :

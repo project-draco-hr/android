@@ -6,6 +6,8 @@
   if (file.getMimetype().equals("DIR")) {
     mFile=file;
     ((FileDisplayActivity)getActivity()).pushDirname(file);
+    ActionBar actionBar=((FileDisplayActivity)getActivity()).getSupportActionBar();
+    actionBar.setDisplayHomeAsUpEnabled(true);
     listDirectory(file);
     resetFileFragment();
     return;
