@@ -5,4 +5,5 @@
   }
   popDirname();
   mFileList.onNavigateUp();
+  mCurrentDir=mFileList.getCurrentFile();
 }
