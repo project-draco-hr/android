@@ -5,7 +5,7 @@
   try {
     while ((i=instream.read(tmp)) >= 0) {
       out.write(tmp,0,i);
-      if (listener != null)       listener.OnUploadProgress(i);
+      if (listener != null)       listener.transferProgress(i);
     }
   }
   finally {

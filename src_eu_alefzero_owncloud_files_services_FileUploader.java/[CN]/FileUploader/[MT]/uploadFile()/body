@@ -5,6 +5,7 @@
   Uri ocUri=Uri.parse(baseUrl + webdav_path);
   String username=mAccount.name.substring(0,mAccount.name.lastIndexOf('@'));
   String password=mAccountManager.getPassword(mAccount);
+  FileDataStorageManager storageManager=new FileDataStorageManager(mAccount,getContentResolver());
   mTotalDataToSend=mSendData=mPreviousPercent=0;
   mNotification=new Notification(eu.alefzero.owncloud.R.drawable.icon,"Uploading...",System.currentTimeMillis());
   mNotification.flags|=Notification.FLAG_ONGOING_EVENT;
@@ -14,7 +15,7 @@
   mNotificationManager.notify(42,mNotification);
   WebdavClient wc=new WebdavClient(ocUri);
   wc.allowSelfsignedCertificates();
-  wc.setUploadListener(this);
+  wc.setDataTransferProgressListener(this);
   wc.setCredentials(username,password);
   for (int i=0; i < mLocalPaths.length; ++i) {
     File f=new File(mLocalPaths[i]);
@@ -27,6 +28,14 @@
     mCurrentIndexUpload=i;
     if (wc.putFile(mLocalPaths[i],mRemotePaths[i],mimeType)) {
       mResult|=true;
+      OCFile new_file=new OCFile(mRemotePaths[i]);
+      new_file.setMimetype(mimeType);
+      new_file.setFileLength(new File(mLocalPaths[i]).length());
+      new_file.setModificationTimestamp(System.currentTimeMillis());
+      new_file.setLastSyncDate(0);
+      new_file.setStoragePath(mLocalPaths[i]);
+      new_file.setParentId(storageManager.getFileByPath(mRemotePaths[i].substring(0,mRemotePaths[i].lastIndexOf('/') + 1)).getFileId());
+      storageManager.saveFile(new_file);
     }
   }
   mNotificationManager.cancel(42);

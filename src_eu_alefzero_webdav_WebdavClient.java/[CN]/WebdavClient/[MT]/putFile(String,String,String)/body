@@ -4,7 +4,7 @@
     Log.e("ASD",contentType + "");
     File f=new File(localFile);
     FileRequestEntity entity=new FileRequestEntity(f,contentType);
-    entity.setOnUploadProgressListener(mUploadProgressListener);
+    entity.setOnDatatransferProgressListener(mDataTransferListener);
     Log.e("ASD",f.exists() + " " + entity.getContentLength());
     PutMethod put=new PutMethod(mUri.toString() + remoteTarget);
     put.setRequestEntity(entity);
