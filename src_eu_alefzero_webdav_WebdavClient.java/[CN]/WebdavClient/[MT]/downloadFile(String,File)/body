@@ -15,9 +15,12 @@
     }
     BufferedInputStream bis=new BufferedInputStream(get.getResponseBodyAsStream());
     FileOutputStream fos=new FileOutputStream(targetPath);
-    byte[] bytes=new byte[512];
+    byte[] bytes=new byte[4096];
     int readResult;
-    while ((readResult=bis.read(bytes)) != -1)     fos.write(bytes,0,readResult);
+    while ((readResult=bis.read(bytes)) != -1) {
+      if (mDataTransferListener != null)       mDataTransferListener.transferProgress(readResult);
+      fos.write(bytes,0,readResult);
+    }
   }
  catch (  IOException e) {
     e.printStackTrace();

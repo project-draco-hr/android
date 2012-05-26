@@ -5,7 +5,7 @@
   Uri oc_uri=Uri.parse(base_url + webdav_path);
   WebdavClient wdc=new WebdavClient(oc_uri);
   wdc.setCredentials(mUsername,mPassword);
-  wdc.allowUnsignedCertificates();
+  wdc.allowSelfsignedCertificates();
   if (mCreateDir) {
     wdc.createDirectory(mUploadPath);
   }

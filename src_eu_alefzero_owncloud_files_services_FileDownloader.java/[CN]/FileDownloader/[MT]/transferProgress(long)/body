@@ -1,0 +1,10 @@
+{
+  mCurrentDownlodSize+=progressRate;
+  int percent=(int)(100.0 * ((double)mCurrentDownlodSize) / ((double)mTotalDownloadSize));
+  if (percent != mLastPercent) {
+    mNotification.contentView.setProgressBar(R.id.status_progress,100,(int)(100 * mCurrentDownlodSize / mTotalDownloadSize),mTotalDownloadSize == -1);
+    mNotification.contentView.setTextViewText(R.id.status_text,percent + "%");
+    mNotificationMngr.notify(1,mNotification);
+  }
+  mLastPercent=percent;
+}

@@ -15,11 +15,14 @@
     return;
   }
   wdc.setCredentials(username,password);
-  wdc.allowUnsignedCertificates();
-  Notification n=new Notification(R.drawable.icon,"Downloading file",System.currentTimeMillis());
-  PendingIntent pi=PendingIntent.getActivity(this,1,new Intent(this,FileDisplayActivity.class),0);
-  n.setLatestEventInfo(this,"Downloading file","Downloading file " + mFilePath,pi);
-  nm.notify(1,n);
+  wdc.allowSelfsignedCertificates();
+  wdc.setDataTransferProgressListener(this);
+  mNotification=new Notification(R.drawable.icon,"Downloading file",System.currentTimeMillis());
+  mNotification.flags|=Notification.FLAG_ONGOING_EVENT;
+  mNotification.contentView=new RemoteViews(getApplicationContext().getPackageName(),R.layout.progressbar_layout);
+  mNotification.contentView.setProgressBar(R.id.status_progress,100,0,mTotalDownloadSize == -1);
+  mNotification.contentView.setImageViewResource(R.id.status_icon,R.drawable.icon);
+  mNotificationMngr.notify(1,mNotification);
   File sdCard=Environment.getExternalStorageDirectory();
   File dir=new File(sdCard.getAbsolutePath() + "/owncloud");
   dir.mkdirs();
@@ -31,7 +34,7 @@
     cv.put(ProviderTableMeta.FILE_STORAGE_PATH,file.getAbsolutePath());
     getContentResolver().update(ProviderTableMeta.CONTENT_URI,cv,ProviderTableMeta.FILE_NAME + "=? AND " + ProviderTableMeta.FILE_ACCOUNT_OWNER+ "=?",new String[]{mFilePath.substring(mFilePath.lastIndexOf('/') + 1),mAccount.name});
   }
-  nm.cancel(1);
+  mNotificationMngr.cancel(1);
   Intent end=new Intent(DOWNLOAD_FINISH_MESSAGE);
   sendBroadcast(end);
 }

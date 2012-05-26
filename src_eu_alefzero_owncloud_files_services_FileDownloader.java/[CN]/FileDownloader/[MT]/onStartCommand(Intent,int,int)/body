@@ -8,5 +8,7 @@
   Message msg=mServiceHandler.obtainMessage();
   msg.arg1=startId;
   mServiceHandler.sendMessage(msg);
+  mCurrentDownlodSize=mLastPercent=0;
+  mTotalDownloadSize=intent.getLongExtra(EXTRA_FILE_SIZE,-1);
   return START_NOT_STICKY;
 }

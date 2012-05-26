@@ -13,7 +13,7 @@
   mNotification.contentView.setImageViewResource(R.id.status_icon,R.drawable.icon);
   mNotificationManager.notify(42,mNotification);
   WebdavClient wc=new WebdavClient(ocUri);
-  wc.allowUnsignedCertificates();
+  wc.allowSelfsignedCertificates();
   wc.setUploadListener(this);
   wc.setCredentials(username,password);
   for (int i=0; i < mLocalPaths.length; ++i) {

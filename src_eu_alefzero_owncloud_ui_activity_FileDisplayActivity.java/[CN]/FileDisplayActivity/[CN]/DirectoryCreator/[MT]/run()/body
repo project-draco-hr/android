@@ -3,6 +3,6 @@
   String username=mAccount.name.substring(0,mAccount.name.lastIndexOf('@'));
   String password=mAm.getPassword(mAccount);
   wdc.setCredentials(username,password);
-  wdc.allowUnsignedCertificates();
+  wdc.allowSelfsignedCertificates();
   wdc.createDirectory(mTargetPath);
 }

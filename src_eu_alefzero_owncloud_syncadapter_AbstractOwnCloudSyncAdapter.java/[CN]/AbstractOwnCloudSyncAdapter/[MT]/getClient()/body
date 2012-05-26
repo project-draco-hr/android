@@ -8,7 +8,7 @@
     Uri uri=getUri();
     mClient=new WebdavClient(uri);
     mClient.setCredentials(username,password);
-    mClient.allowUnsignedCertificates();
+    mClient.allowSelfsignedCertificates();
   }
   return mClient;
 }

@@ -1,5 +1,5 @@
 {
-  if (mDirectories == null || mDirectories.getCount() == 1) {
+  if (mDirectories == null || mDirectories.getCount() <= 1) {
     finish();
     return;
   }
