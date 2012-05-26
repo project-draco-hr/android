@@ -4,8 +4,15 @@
     file=new OCFile(c.getString(c.getColumnIndex(ProviderTableMeta.FILE_PATH)));
     file.setFileId(c.getLong(c.getColumnIndex(ProviderTableMeta._ID)));
     file.setParentId(c.getLong(c.getColumnIndex(ProviderTableMeta.FILE_PARENT)));
-    file.setStoragePath(c.getString(c.getColumnIndex(ProviderTableMeta.FILE_STORAGE_PATH)));
     file.setMimetype(c.getString(c.getColumnIndex(ProviderTableMeta.FILE_CONTENT_TYPE)));
+    if (!file.isDirectory()) {
+      file.setStoragePath(c.getString(c.getColumnIndex(ProviderTableMeta.FILE_STORAGE_PATH)));
+      if (file.getStoragePath() == null) {
+        File sdCard=Environment.getExternalStorageDirectory();
+        File f=new File(sdCard.getAbsolutePath() + "/owncloud/" + mAccount.name+ file.getRemotePath());
+        if (f.exists())         file.setStoragePath(f.getAbsolutePath());
+      }
+    }
     file.setFileLength(c.getLong(c.getColumnIndex(ProviderTableMeta.FILE_CONTENT_LENGTH)));
     file.setCreationTimestamp(c.getLong(c.getColumnIndex(ProviderTableMeta.FILE_CREATION)));
     file.setModificationTimestamp(c.getLong(c.getColumnIndex(ProviderTableMeta.FILE_MODIFIED)));
