@@ -5,6 +5,7 @@
     }
  else {
       directory=mStorageManager.getFileByPath("/");
+      if (directory == null)       return;
     }
   }
   if (!directory.isDirectory()) {
