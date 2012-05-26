@@ -24,9 +24,13 @@
   mNotification.contentView.setImageViewResource(R.id.status_icon,R.drawable.icon);
   mNotificationMngr.notify(1,mNotification);
   File sdCard=Environment.getExternalStorageDirectory();
-  File dir=new File(sdCard.getAbsolutePath() + "/owncloud");
-  dir.mkdirs();
-  File file=new File(dir,mFilePath.replace('/','.'));
+  File file=new File(sdCard.getAbsolutePath() + "/owncloud/" + mAccount.name+ mFilePath);
+  try {
+    file.createNewFile();
+  }
+ catch (  IOException e) {
+    e.printStackTrace();
+  }
   Log.e(TAG,file.getAbsolutePath() + " " + oc_url.toString());
   Log.e(TAG,mFilePath + "");
   if (wdc.downloadFile(mFilePath,file)) {
