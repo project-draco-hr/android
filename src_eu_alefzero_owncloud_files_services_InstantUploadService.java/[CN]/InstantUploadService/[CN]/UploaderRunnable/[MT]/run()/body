@@ -1,0 +1,32 @@
+{
+  HashMap<String,Object> working_map;
+  AccountManager am=AccountManager.get(getApplicationContext());
+  while ((working_map=getFirstObject()) != null) {
+    Account account=(Account)working_map.get(KEY_ACCOUNT);
+    String username=account.name.substring(0,account.name.lastIndexOf('@'));
+    String password=am.getPassword(account);
+    String filename=(String)working_map.get(KEY_DISPLAY_NAME);
+    String filepath=(String)working_map.get(KEY_FILE_PATH);
+    String mimetype=(String)working_map.get(KEY_MIME_TYPE);
+    String oc_base_url=am.getUserData(account,AccountAuthenticator.KEY_OC_BASE_URL);
+    String oc_version=am.getUserData(account,AccountAuthenticator.KEY_OC_VERSION);
+    OwnCloudVersion ocv=new OwnCloudVersion(oc_version);
+    String webdav_path=AccountUtils.getWebdavPath(ocv);
+    WebdavClient wdc=new WebdavClient(Uri.parse(oc_base_url + webdav_path));
+    wdc.allowSelfsignedCertificates();
+    wdc.setCredentials(username,password);
+    MkColMethod mkcol=new MkColMethod(oc_base_url + webdav_path + INSTANT_UPLOAD_DIR);
+    int status=0;
+    try {
+      status=wdc.executeMethod(mkcol);
+      Log.e(TAG,"mkcol returned " + status);
+      wdc.putFile(filepath,INSTANT_UPLOAD_DIR + "/" + filename,mimetype);
+    }
+ catch (    HttpException e) {
+      e.printStackTrace();
+    }
+catch (    IOException e) {
+      e.printStackTrace();
+    }
+  }
+}

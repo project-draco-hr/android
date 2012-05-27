@@ -1,0 +1,11 @@
+{
+  HashMap<String,Object> new_map=new HashMap<String,Object>();
+  new_map.put(KEY_ACCOUNT,account);
+  new_map.put(KEY_DISPLAY_NAME,filename);
+  new_map.put(KEY_FILE_PATH,filepath);
+  new_map.put(KEY_MIME_TYPE,mimetype);
+  new_map.put(KEY_FILE_SIZE,length);
+synchronized (mLock) {
+    mHashMapList.add(new_map);
+  }
+}

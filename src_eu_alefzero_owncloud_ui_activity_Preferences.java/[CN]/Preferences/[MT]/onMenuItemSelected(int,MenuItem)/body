@@ -20,7 +20,7 @@ mSessions.remove(ocs);
 getPreferenceScreen().removePreference(getPreferenceScreen().getPreference(mSelectedMenuItem + 1));
 break;
 case android.R.id.home:
-intent=new Intent(getBaseContext(),LandingActivity.class);
+intent=new Intent(getBaseContext(),FileDisplayActivity.class);
 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 startActivity(intent);
 break;

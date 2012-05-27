@@ -20,10 +20,10 @@ case R.id.action_upload:
   startActivityForResult(Intent.createChooser(action,"Upload file from..."),ACTION_SELECT_FILE);
   break;
 }
-case R.id.action_accounts:
+case R.id.action_settings:
 {
-Intent accountIntent=new Intent(this,AccountSelectActivity.class);
-startActivity(accountIntent);
+Intent settingsIntent=new Intent(this,Preferences.class);
+startActivity(settingsIntent);
 }
 case android.R.id.home:
 {
