@@ -11,7 +11,9 @@ case R.id.uploader_choose_folder:
     pathToUpload=mCursor.getString(mCursor.getColumnIndex(ProviderTableMeta.FILE_PATH)).replace(" ","%20");
   }
 Log.d(TAG,"Uploading file to dir " + pathToUpload);
-mUploadPath=pathToUpload;
+mUploadPath="";
+for (String s : pathToUpload.split("/")) mUploadPath="/" + URLEncoder.encode(s);
+if (!mUploadPath.endsWith("/")) mUploadPath+="/";
 mCreateDir=false;
 uploadFiles();
 break;
