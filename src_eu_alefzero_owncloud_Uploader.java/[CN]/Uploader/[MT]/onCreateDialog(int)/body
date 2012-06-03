@@ -33,28 +33,6 @@ finish();
 }
 );
 return builder.create();
-case DIALOG_GET_DIRNAME:
-final EditText dirName=new EditText(getBaseContext());
-builder.setView(dirName);
-builder.setTitle(R.string.uploader_info_dirname);
-String pathToUpload;
-if (mParents.empty()) {
-pathToUpload="/";
-}
- else {
-mCursor=managedQuery(Uri.withAppendedPath(ProviderTableMeta.CONTENT_URI_FILE,mParents.peek()),null,null,null,null);
-mCursor.moveToFirst();
-pathToUpload=mCursor.getString(mCursor.getColumnIndex(ProviderTableMeta.FILE_PATH)) + mCursor.getString(mCursor.getColumnIndex(ProviderTableMeta.FILE_NAME)).replace(" ","%20");
-}
-a a=new a(pathToUpload,dirName);
-builder.setPositiveButton(R.string.common_ok,a);
-builder.setNegativeButton(R.string.common_cancel,new OnClickListener(){
-public void onClick(DialogInterface dialog,int which){
-dialog.cancel();
-}
-}
-);
-return builder.create();
 case DIALOG_MULTIPLE_ACCOUNT:
 CharSequence ac[]=new CharSequence[mAccountManager.getAccountsByType(AccountAuthenticator.ACCOUNT_TYPE).length];
 for (int i=0; i < ac.length; ++i) {
@@ -64,6 +42,7 @@ builder.setTitle(R.string.common_choose_account);
 builder.setItems(ac,new OnClickListener(){
 public void onClick(DialogInterface dialog,int which){
 mAccount=mAccountManager.getAccountsByType(AccountAuthenticator.ACCOUNT_TYPE)[which];
+mStorageManager=new FileDataStorageManager(mAccount,getContentResolver());
 populateDirectoryList();
 }
 }

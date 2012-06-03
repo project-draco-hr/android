@@ -1,16 +1,10 @@
 {
-  if (mParents.size() == 0) {
+  if (mParents.size() <= 1) {
     super.onBackPressed();
     return;
   }
- else   if (mParents.size() == 1) {
-    mParents.pop();
-    mCursor=managedQuery(ProviderTableMeta.CONTENT_URI,null,ProviderTableMeta.FILE_CONTENT_TYPE + "=?",new String[]{"DIR"},null);
-  }
  else {
     mParents.pop();
-    mCursor=managedQuery(Uri.withAppendedPath(ProviderTableMeta.CONTENT_URI_DIR,mParents.peek()),null,ProviderTableMeta.FILE_CONTENT_TYPE + "=?",new String[]{"DIR"},null);
+    populateDirectoryList();
   }
-  SimpleCursorAdapter sca=new SimpleCursorAdapter(this,R.layout.uploader_list_item_layout,mCursor,new String[]{ProviderTableMeta.FILE_NAME},new int[]{R.id.textView1});
-  setListAdapter(sca);
 }

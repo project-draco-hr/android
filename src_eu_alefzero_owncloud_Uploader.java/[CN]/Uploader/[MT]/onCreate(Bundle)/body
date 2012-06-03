@@ -2,6 +2,7 @@
   super.onCreate(savedInstanceState);
   getWindow().requestFeature(Window.FEATURE_NO_TITLE);
   mParents=new Stack<String>();
+  mParents.add("");
   if (getIntent().hasExtra(Intent.EXTRA_STREAM)) {
     prepareStreamsToUpload();
     mAccountManager=(AccountManager)getSystemService(Context.ACCOUNT_SERVICE);
@@ -17,6 +18,7 @@
  else {
       mAccount=accounts[0];
       setContentView(R.layout.uploader_layout);
+      mStorageManager=new FileDataStorageManager(mAccount,getContentResolver());
       populateDirectoryList();
     }
   }
