@@ -1,0 +1,6 @@
+{
+  ContentValues cv=new ContentValues();
+  cv.put("path",filepath);
+  cv.put("account",account);
+  return mDB.insert(TABLE_INSTANT_UPLOAD,null,cv) != -1;
+}

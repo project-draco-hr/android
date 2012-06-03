@@ -1,3 +1,3 @@
 {
-  db.execSQL("CREATE TABLE " + TABLE_SESSIONS + " ("+ " _id INTEGER PRIMARY KEY, "+ " sessionName TEXT, "+ " sessionUrl  TEXT);");
+  db.execSQL("CREATE TABLE " + TABLE_INSTANT_UPLOAD + " ("+ " _id INTEGET PRIMARY KEY, "+ " path TEXT,"+ " account TEXT);");
 }

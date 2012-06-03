@@ -13,12 +13,6 @@ intent.putExtra("sessionName",mSessions.get(mSelectedMenuItem).getName());
 intent.putExtra("sessionURL",mSessions.get(mSelectedMenuItem).getUrl());
 startActivityForResult(intent,mEditSession);
 break;
-case R.id.SessionContextRemove:
-OwnCloudSession ocs=mSessions.get(mSelectedMenuItem);
-mDbHandler.removeSessionWithId(ocs.getEntryId());
-mSessions.remove(ocs);
-getPreferenceScreen().removePreference(getPreferenceScreen().getPreference(mSelectedMenuItem + 1));
-break;
 case android.R.id.home:
 intent=new Intent(getBaseContext(),FileDisplayActivity.class);
 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

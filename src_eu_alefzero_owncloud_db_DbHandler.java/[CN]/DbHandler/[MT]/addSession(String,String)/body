@@ -1,6 +1,0 @@
-{
-  ContentValues cv=new ContentValues();
-  cv.put("sessionName",sessionName);
-  cv.put("sessionUrl",uri);
-  mDB.insert(TABLE_SESSIONS,null,cv);
-}

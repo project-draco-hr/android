@@ -1,0 +1,31 @@
+{
+  if (!intent.hasExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY) || isOnline(context)) {
+    DbHandler db=new DbHandler(context);
+    Cursor c=db.getAwaitingFiles();
+    if (c.moveToFirst()) {
+      do {
+        String account_name=c.getString(c.getColumnIndex("account"));
+        String file_path=c.getString(c.getColumnIndex("path"));
+        File f=new File(file_path);
+        if (f.exists()) {
+          Intent upload_intent=new Intent(context,InstantUploadService.class);
+          Account account=new Account(account_name,AccountAuthenticator.ACCOUNT_TYPE);
+          String mimeType=MimeTypeMap.getSingleton().getMimeTypeFromExtension(f.getName().substring(f.getName().lastIndexOf('.') + 1));
+          upload_intent.putExtra(InstantUploadService.KEY_ACCOUNT,account);
+          upload_intent.putExtra(InstantUploadService.KEY_FILE_PATH,file_path);
+          upload_intent.putExtra(InstantUploadService.KEY_DISPLAY_NAME,f.getName());
+          upload_intent.putExtra(InstantUploadService.KEY_FILE_SIZE,f.length());
+          upload_intent.putExtra(InstantUploadService.KEY_MIME_TYPE,mimeType);
+          context.startService(upload_intent);
+        }
+ else {
+          Log.w(TAG,"Instant upload file " + f.getName() + " dont exist anymore");
+        }
+      }
+ while (c.moveToNext());
+      c.close();
+    }
+    db.clearFiles();
+    db.close();
+  }
+}

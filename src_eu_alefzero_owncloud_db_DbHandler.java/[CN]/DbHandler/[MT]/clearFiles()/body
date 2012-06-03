@@ -1,0 +1,3 @@
+{
+  mDB.delete(TABLE_INSTANT_UPLOAD,null,null);
+}
