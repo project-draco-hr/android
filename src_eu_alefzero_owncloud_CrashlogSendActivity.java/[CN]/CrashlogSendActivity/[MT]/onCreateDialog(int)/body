@@ -1,0 +1,12 @@
+{
+  if (id == DIALOG_SUBMIT) {
+    AlertDialog.Builder builder=new AlertDialog.Builder(this);
+    builder.setMessage(R.string.crashlog_message);
+    builder.setNegativeButton(R.string.crashlog_dont_send_report,this);
+    builder.setPositiveButton(R.string.crashlog_send_report,this);
+    builder.setCancelable(true);
+    builder.setOnCancelListener(this);
+    return builder.create();
+  }
+  return super.onCreateDialog(id);
+}

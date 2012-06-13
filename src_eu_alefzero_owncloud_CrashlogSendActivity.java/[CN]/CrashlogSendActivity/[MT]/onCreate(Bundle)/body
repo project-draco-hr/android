@@ -1,0 +1,11 @@
+{
+  super.onCreate(savedInstanceState);
+  mLogFilename=getIntent().getStringExtra(CrashHandler.KEY_CRASH_FILENAME);
+  if (mLogFilename == null) {
+    Log.wtf(TAG,"No file crashlog path given!");
+    finish();
+    return;
+  }
+  Log.i(TAG,"crashlog file path " + mLogFilename);
+  showDialog(DIALOG_SUBMIT);
+}

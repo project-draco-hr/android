@@ -28,9 +28,21 @@
     while ((logline=br.readLine()) != null)     fw.write(logline + "\n");
     br.close();
     fw.close();
+    Intent dataintent=new Intent(mContext,CrashlogSendActivity.class);
+    dataintent.putExtra(KEY_CRASH_FILENAME,crashfile.getAbsolutePath());
+    PendingIntent intent=PendingIntent.getActivity(mContext.getApplicationContext(),0,dataintent,Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+    AlarmManager mngr=(AlarmManager)mContext.getSystemService(Context.ALARM_SERVICE);
+    if (mngr == null) {
+      Log.e(TAG,"Couldn't retrieve alarm manager!");
+      defaultUEH.uncaughtException(thread,ex);
+      return;
+    }
+    mngr.set(AlarmManager.RTC,System.currentTimeMillis(),intent);
+    System.exit(2);
   }
  catch (  Exception e1) {
-    Log.e(TAG,"Crash handler failed to run logcat, WTF!");
+    Log.e(TAG,"Crash handler failed!");
+    Log.e(TAG,e1.toString());
     defaultUEH.uncaughtException(thread,ex);
     return;
   }
