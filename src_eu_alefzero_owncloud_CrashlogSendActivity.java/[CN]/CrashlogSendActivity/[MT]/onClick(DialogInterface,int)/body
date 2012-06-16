@@ -1,4 +1,23 @@
 {
-  new File(mLogFilename).delete();
-  finish();
+  new Thread(new Runnable(){
+    @Override public void run(){
+      File file=new File(mLogFilename);
+      if (which == Dialog.BUTTON_POSITIVE) {
+        try {
+          HttpClient client=new HttpClient();
+          PostMethod post=new PostMethod(CRASHLOG_SUBMIT_URL);
+          Part[] parts={new FilePart("crashfile",file)};
+          post.setRequestEntity(new MultipartRequestEntity(parts,post.getParams()));
+          client.executeMethod(post);
+          post.releaseConnection();
+        }
+ catch (        Exception e) {
+          e.printStackTrace();
+        }
+      }
+      file.delete();
+      finish();
+    }
+  }
+).start();
 }
