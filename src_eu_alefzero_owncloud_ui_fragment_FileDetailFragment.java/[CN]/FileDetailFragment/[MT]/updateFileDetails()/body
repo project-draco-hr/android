@@ -25,7 +25,13 @@
         @Override public void onClick(        View v){
           Intent i=new Intent(Intent.ACTION_VIEW);
           i.setDataAndType(Uri.parse("file://" + mFile.getStoragePath()),mFile.getMimetype());
-          startActivity(i);
+          List list=getActivity().getPackageManager().queryIntentActivities(i,PackageManager.MATCH_DEFAULT_ONLY);
+          if (list.size() > 0) {
+            startActivity(i);
+          }
+ else {
+            Toast.makeText(getActivity(),"There is no application to handle file " + mFile.getFileName(),Toast.LENGTH_SHORT).show();
+          }
         }
       }
 );
