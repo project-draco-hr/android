@@ -27,7 +27,7 @@ if (directoryName.trim().length() == 0) {
 dialog.cancel();
 return;
 }
-String path=mCurrentDir.getRemotePath();
+String path=FileDisplayActivity.this.mCurrentDir.getRemotePath();
 path+=directoryName + "/";
 Thread thread=new Thread(new DirectoryCreator(path,a));
 thread.start();
