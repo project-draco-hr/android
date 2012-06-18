@@ -3,7 +3,7 @@
   OCFile file=null;
   if (c.moveToFirst()) {
     file=createFileInstance(c);
-    c.close();
   }
+  c.close();
   return file;
 }
