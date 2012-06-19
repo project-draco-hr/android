@@ -22,6 +22,7 @@
   mNotification.contentView=new RemoteViews(getApplicationContext().getPackageName(),R.layout.progressbar_layout);
   mNotification.contentView.setProgressBar(R.id.status_progress,100,0,mTotalDownloadSize == -1);
   mNotification.contentView.setImageViewResource(R.id.status_icon,R.drawable.icon);
+  mNotification.contentIntent=PendingIntent.getActivity(getApplicationContext(),0,new Intent(),PendingIntent.FLAG_UPDATE_CURRENT);
   mNotificationMngr.notify(1,mNotification);
   File sdCard=Environment.getExternalStorageDirectory();
   File file=new File(sdCard.getAbsolutePath() + "/owncloud/" + mAccount.name+ mFilePath);
