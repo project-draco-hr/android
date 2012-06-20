@@ -14,7 +14,7 @@
   }
   Intent showDetailsIntent=new Intent(getActivity(),FileDetailActivity.class);
   showDetailsIntent.putExtra(FileDetailFragment.EXTRA_FILE,file);
-  showDetailsIntent.putExtra(FileDownloader.EXTRA_ACCOUNT,mAccount);
+  showDetailsIntent.putExtra(FileDownloader.EXTRA_ACCOUNT,AccountUtils.getCurrentOwnCloudAccount(getActivity()));
   if (mIsLargeDevice) {
     FileDetailFragment fileDetails=(FileDetailFragment)getFragmentManager().findFragmentByTag("FileDetails");
     if (fileDetails == null) {

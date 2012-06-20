@@ -7,7 +7,6 @@
     registerReceiver(syncBroadcastRevceiver,syncIntentFilter);
     mStorageManager=new FileDataStorageManager(AccountUtils.getCurrentOwnCloudAccount(this),getContentResolver());
     mFileList=(FileListFragment)getSupportFragmentManager().findFragmentById(R.id.fileList);
-    mFileList.updateAccount();
     if (getIntent().hasExtra(FileDetailFragment.EXTRA_FILE)) {
       mCurrentDir=(OCFile)getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE);
       if (!mCurrentDir.isDirectory()) {

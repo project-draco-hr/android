@@ -1,7 +1,8 @@
 {
   OCFile parentDir=null;
   if (mFile != null) {
-    parentDir=mStorageManager.getFileById(mFile.getParentId());
+    DataStorageManager storageManager=((FileDisplayActivity)getActivity()).getStorageManager();
+    parentDir=storageManager.getFileById(mFile.getParentId());
     mFile=parentDir;
   }
   listDirectory(parentDir);

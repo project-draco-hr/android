@@ -1,7 +1,5 @@
 {
   super.onCreate(savedInstanceState);
-  mAccount=AccountUtils.getCurrentOwnCloudAccount(getActivity());
-  mStorageManager=new FileDataStorageManager(mAccount,getActivity().getContentResolver());
   Intent intent=getActivity().getIntent();
   OCFile directory=intent.getParcelableExtra(FileDetailFragment.EXTRA_FILE);
   mFile=directory;
