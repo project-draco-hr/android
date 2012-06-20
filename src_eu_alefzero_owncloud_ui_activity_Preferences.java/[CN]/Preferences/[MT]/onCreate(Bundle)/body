@@ -3,7 +3,6 @@
   mDbHandler=new DbHandler(getBaseContext());
   mSessions=new Vector<OwnCloudSession>();
   addPreferencesFromResource(R.xml.preferences);
-  registerForContextMenu(getListView());
   populateAccountList();
   ActionBar actionBar=getSherlock().getActionBar();
   actionBar.setDisplayHomeAsUpEnabled(true);
