@@ -1,0 +1,5 @@
+{
+  Account old=mAccount;
+  mAccount=AccountUtils.getCurrentOwnCloudAccount(getActivity());
+  if (old != mAccount)   mStorageManager=new FileDataStorageManager(mAccount,getActivity().getContentResolver());
+}

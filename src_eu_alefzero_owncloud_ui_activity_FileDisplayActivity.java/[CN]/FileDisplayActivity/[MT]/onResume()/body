@@ -1,58 +1,52 @@
 {
   super.onResume();
-  if (!accountsAreSetup()) {
-    setContentView(R.layout.no_account_available);
-    setProgressBarIndeterminateVisibility(false);
-    getSupportActionBar().setNavigationMode(ActionBar.DISPLAY_SHOW_TITLE);
-    findViewById(R.id.setup_account).setOnClickListener(this);
-    return;
-  }
- else   if (findViewById(R.id.file_list_view) == null) {
-    setContentView(R.layout.files);
-  }
-  IntentFilter syncIntentFilter=new IntentFilter(FileSyncService.SYNC_MESSAGE);
-  syncBroadcastRevceiver=new SyncBroadcastReceiver();
-  registerReceiver(syncBroadcastRevceiver,syncIntentFilter);
-  mStorageManager=new FileDataStorageManager(AccountUtils.getCurrentOwnCloudAccount(this),getContentResolver());
-  mFileList=(FileListFragment)getSupportFragmentManager().findFragmentById(R.id.fileList);
-  if (getIntent().hasExtra(FileDetailFragment.EXTRA_FILE)) {
-    mCurrentDir=(OCFile)getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE);
-    if (!mCurrentDir.isDirectory()) {
-      mCurrentDir=mStorageManager.getFileById(mCurrentDir.getParentId());
+  if (accountsAreSetup()) {
+    setContentView(mLayoutView);
+    IntentFilter syncIntentFilter=new IntentFilter(FileSyncService.SYNC_MESSAGE);
+    syncBroadcastRevceiver=new SyncBroadcastReceiver();
+    registerReceiver(syncBroadcastRevceiver,syncIntentFilter);
+    mStorageManager=new FileDataStorageManager(AccountUtils.getCurrentOwnCloudAccount(this),getContentResolver());
+    mFileList=(FileListFragment)getSupportFragmentManager().findFragmentById(R.id.fileList);
+    mFileList.updateAccount();
+    if (getIntent().hasExtra(FileDetailFragment.EXTRA_FILE)) {
+      mCurrentDir=(OCFile)getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE);
+      if (!mCurrentDir.isDirectory()) {
+        mCurrentDir=mStorageManager.getFileById(mCurrentDir.getParentId());
+      }
+      getIntent().removeExtra(FileDetailFragment.EXTRA_FILE);
     }
-    getIntent().removeExtra(FileDetailFragment.EXTRA_FILE);
-  }
  else {
-    mCurrentDir=mStorageManager.getFileByPath("/");
-  }
-  mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
-  if (mCurrentDir != null) {
-    ArrayList<OCFile> files=new ArrayList<OCFile>();
-    OCFile currFile=mCurrentDir;
-    while (currFile != null) {
-      files.add(currFile);
-      currFile=mStorageManager.getFileById(currFile.getParentId());
+      mCurrentDir=mStorageManager.getFileByPath("/");
     }
-    mDirs=new String[files.size()];
-    for (int i=files.size() - 1; i >= 0; i--) {
-      mDirs[i]=files.get(i).getFileName();
+    mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
+    if (mCurrentDir != null) {
+      ArrayList<OCFile> files=new ArrayList<OCFile>();
+      OCFile currFile=mCurrentDir;
+      while (currFile != null) {
+        files.add(currFile);
+        currFile=mStorageManager.getFileById(currFile.getParentId());
+      }
+      mDirs=new String[files.size()];
+      for (int i=files.size() - 1; i >= 0; i--) {
+        mDirs[i]=files.get(i).getFileName();
+      }
     }
-  }
-  if (mDirs != null) {
-    for (    String s : mDirs)     mDirectories.add(s);
-  }
+    if (mDirs != null) {
+      for (      String s : mDirs)       mDirectories.add(s);
+    }
  else {
-    mDirectories.add("/");
-  }
-  ActionBar action_bar=getSupportActionBar();
-  action_bar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-  action_bar.setDisplayShowTitleEnabled(false);
-  action_bar.setListNavigationCallbacks(mDirectories,this);
-  if (mCurrentDir != null && mCurrentDir.getParentId() != 0) {
-    action_bar.setDisplayHomeAsUpEnabled(true);
-  }
+      mDirectories.add("/");
+    }
+    ActionBar action_bar=getSupportActionBar();
+    action_bar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+    action_bar.setDisplayShowTitleEnabled(false);
+    action_bar.setListNavigationCallbacks(mDirectories,this);
+    if (mCurrentDir != null && mCurrentDir.getParentId() != 0) {
+      action_bar.setDisplayHomeAsUpEnabled(true);
+    }
  else {
-    action_bar.setDisplayHomeAsUpEnabled(false);
+      action_bar.setDisplayHomeAsUpEnabled(false);
+    }
+    mFileList.listDirectory(mCurrentDir);
   }
-  mFileList.listDirectory(mCurrentDir);
 }

@@ -1,0 +1,6 @@
+{
+  super.onCreateView(inflater,container,savedInstanceState);
+  getListView().setDivider(getResources().getDrawable(R.drawable.uploader_list_separator));
+  getListView().setDividerHeight(1);
+  return getListView();
+}

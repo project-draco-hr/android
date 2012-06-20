@@ -1,6 +1,3 @@
 {
-  mList=new ListView(getActivity());
-  mList.setOnItemClickListener(this);
-  mList.setOnItemLongClickListener(this);
   super.onCreate(savedInstanceState);
 }
