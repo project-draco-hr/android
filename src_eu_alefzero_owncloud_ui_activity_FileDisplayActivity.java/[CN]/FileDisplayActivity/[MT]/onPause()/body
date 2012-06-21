@@ -4,4 +4,5 @@
     unregisterReceiver(syncBroadcastRevceiver);
     syncBroadcastRevceiver=null;
   }
+  getIntent().putExtra(FileDetailFragment.EXTRA_FILE,mCurrentDir);
 }
