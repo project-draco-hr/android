@@ -24,6 +24,12 @@ case R.id.action_settings:
 {
 Intent settingsIntent=new Intent(this,Preferences.class);
 startActivity(settingsIntent);
+break;
+}
+case R.id.about_app:
+{
+showDialog(DIALOG_ABOUT_APP);
+break;
 }
 case android.R.id.home:
 {
