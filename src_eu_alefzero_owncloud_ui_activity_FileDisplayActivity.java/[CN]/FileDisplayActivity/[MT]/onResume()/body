@@ -9,7 +9,7 @@
     mFileList=(FileListFragment)getSupportFragmentManager().findFragmentById(R.id.fileList);
     if (getIntent().hasExtra(FileDetailFragment.EXTRA_FILE)) {
       mCurrentDir=(OCFile)getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE);
-      if (!mCurrentDir.isDirectory()) {
+      if (mCurrentDir != null && !mCurrentDir.isDirectory()) {
         mCurrentDir=mStorageManager.getFileById(mCurrentDir.getParentId());
       }
       getIntent().removeExtra(FileDetailFragment.EXTRA_FILE);
