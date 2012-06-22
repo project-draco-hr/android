@@ -29,7 +29,8 @@
     mCurrentIndexUpload=i;
     if (wc.putFile(mLocalPaths[i],mRemotePaths[i],mimeType)) {
       mResult|=true;
-      OCFile new_file=new OCFile(mRemotePaths[i]);
+      String decRemotePath=URLDecoder.decode(mRemotePaths[i]);
+      OCFile new_file=new OCFile(decRemotePath);
       new_file.setMimetype(mimeType);
       new_file.setFileLength(new File(mLocalPaths[i]).length());
       new_file.setModificationTimestamp(System.currentTimeMillis());
