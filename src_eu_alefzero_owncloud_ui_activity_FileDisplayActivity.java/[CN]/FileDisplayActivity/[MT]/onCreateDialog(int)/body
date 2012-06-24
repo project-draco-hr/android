@@ -45,7 +45,19 @@ if (directoryName.trim().length() == 0) {
 dialog.cancel();
 return;
 }
-String path=FileDisplayActivity.this.mCurrentDir.getRemotePath();
+String path;
+if (mCurrentDir == null) {
+if (!mStorageManager.fileExists("/")) {
+OCFile file=new OCFile("/");
+mStorageManager.saveFile(file);
+mCurrentDir=mStorageManager.getFileByPath("/");
+}
+ else {
+Log.wtf("FileDisplay","OMG NO!");
+return;
+}
+}
+path=FileDisplayActivity.this.mCurrentDir.getRemotePath();
 path+=directoryName + "/";
 Thread thread=new Thread(new DirectoryCreator(path,a));
 thread.start();
