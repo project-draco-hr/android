@@ -9,8 +9,9 @@
   String crash_filename=crash_filename_template + System.currentTimeMillis() + ".txt";
   File crashfile=new File(ocdir,crash_filename);
   try {
+    PackageInfo pi=mContext.getPackageManager().getPackageInfo(mContext.getPackageName(),0);
     ConnectivityManager cm=(ConnectivityManager)mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
-    String header=String.format("Model: %s, SDK: %d, Current net: %s\n\n",android.os.Build.MODEL,android.os.Build.VERSION.SDK_INT,cm.getActiveNetworkInfo() != null ? cm.getActiveNetworkInfo().getTypeName() : "NONE");
+    String header=String.format("Model: %s, SDK: %d, Current net: %s AppVersion: %s\n\n",android.os.Build.MODEL,android.os.Build.VERSION.SDK_INT,cm.getActiveNetworkInfo() != null ? cm.getActiveNetworkInfo().getTypeName() : "NONE",pi.versionName);
     Account account=AccountUtils.getCurrentOwnCloudAccount(mContext);
     AccountManager am=AccountManager.get(mContext);
     String header2=String.format("Account: %s, OCUrl: %s, OCVersion: %s\n\n",account.name,am.getUserData(account,AccountAuthenticator.KEY_OC_BASE_URL),am.getUserData(account,AccountAuthenticator.KEY_OC_VERSION));
