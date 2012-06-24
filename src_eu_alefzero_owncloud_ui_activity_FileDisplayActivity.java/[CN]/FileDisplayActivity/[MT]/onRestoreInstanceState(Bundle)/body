@@ -1,5 +1,4 @@
 {
-  Log.e("ASD","restore");
   super.onRestoreInstanceState(savedInstanceState);
   mDirs=savedInstanceState.getStringArray(KEY_DIR_ARRAY);
   mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
