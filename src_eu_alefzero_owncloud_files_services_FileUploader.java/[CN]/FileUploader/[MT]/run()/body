@@ -3,6 +3,6 @@
     Toast.makeText(this,"Upload successfull",Toast.LENGTH_SHORT).show();
   }
  else {
-    Toast.makeText(this,"No i kupa",Toast.LENGTH_SHORT).show();
+    Toast.makeText(this,"Upload could not be completed",Toast.LENGTH_SHORT).show();
   }
 }

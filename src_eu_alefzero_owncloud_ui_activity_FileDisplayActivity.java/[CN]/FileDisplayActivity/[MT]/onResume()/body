@@ -14,9 +14,7 @@
       }
       getIntent().removeExtra(FileDetailFragment.EXTRA_FILE);
     }
- else {
-      mCurrentDir=mStorageManager.getFileByPath("/");
-    }
+    if (mCurrentDir == null)     mCurrentDir=mStorageManager.getFileByPath("/");
     mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
     if (mCurrentDir != null) {
       ArrayList<OCFile> files=new ArrayList<OCFile>();

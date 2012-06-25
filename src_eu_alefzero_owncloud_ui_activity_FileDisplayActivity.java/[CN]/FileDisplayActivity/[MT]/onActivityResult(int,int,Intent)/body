@@ -15,10 +15,11 @@
       i.putExtra(FileUploader.KEY_ACCOUNT,AccountUtils.getCurrentOwnCloudAccount(this));
       String remotepath=new String();
       for (int j=mDirectories.getCount() - 2; j >= 0; --j) {
-        remotepath+="/" + URLEncoder.encode(mDirectories.getItem(j));
+        remotepath+="/" + mDirectories.getItem(j);
       }
       if (!remotepath.endsWith("/"))       remotepath+="/";
-      remotepath+=URLEncoder.encode(new File(filepath).getName());
+      remotepath+=new File(filepath).getName();
+      remotepath=Uri.encode(remotepath,"/");
       i.putExtra(FileUploader.KEY_LOCAL_FILE,filepath);
       i.putExtra(FileUploader.KEY_REMOTE_FILE,remotepath);
       i.putExtra(FileUploader.KEY_UPLOAD_TYPE,FileUploader.UPLOAD_SINGLE_FILE);

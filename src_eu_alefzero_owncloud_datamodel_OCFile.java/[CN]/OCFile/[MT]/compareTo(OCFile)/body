@@ -1,6 +1,6 @@
 {
   if (isDirectory() && another.isDirectory()) {
-    return getFileName().toLowerCase().compareTo(another.getFileName().toLowerCase());
+    return getRemotePath().toLowerCase().compareTo(another.getRemotePath().toLowerCase());
   }
  else   if (isDirectory()) {
     return -1;
@@ -8,5 +8,5 @@
  else   if (another.isDirectory()) {
     return 1;
   }
-  return getFileName().toLowerCase().compareTo(another.getFileName().toLowerCase());
+  return getRemotePath().toLowerCase().compareTo(another.getRemotePath().toLowerCase());
 }
