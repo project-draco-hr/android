@@ -5,6 +5,7 @@
   }
   mAccount=intent.getParcelableExtra(EXTRA_ACCOUNT);
   mFilePath=intent.getStringExtra(EXTRA_FILE_PATH);
+  mRemotePath=intent.getStringExtra(EXTRA_REMOTE_PATH);
   Message msg=mServiceHandler.obtainMessage();
   msg.arg1=startId;
   mServiceHandler.sendMessage(msg);

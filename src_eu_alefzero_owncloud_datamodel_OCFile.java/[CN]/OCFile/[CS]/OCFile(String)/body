@@ -1,5 +1,14 @@
 {
   resetData();
   mNeedsUpdating=false;
+  if (path != null && path.length() > 0) {
+    try {
+      new URL("http://silly.test.com:8888" + path);
+    }
+ catch (    MalformedURLException e) {
+      throw new RuntimeException("Trying to create a OCFile with a non valid remote path: " + path,e);
+    }
+  }
+ else   throw new RuntimeException("Trying to create a OCFile with a non valid remote path: " + path);
   mRemotePath=path;
 }

@@ -1,8 +1,9 @@
 {
 switch (v.getId()) {
 case R.id.uploader_choose_folder:
-    mUploadPath="";
-  for (  String p : mParents)   mUploadPath+=URLEncoder.encode(p) + "/";
+    mUploadPath="/";
+  for (  String p : mParents)   mUploadPath+=p + "/";
+mUploadPath=Uri.encode(mUploadPath,"/");
 Log.d(TAG,"Uploading file to dir " + mUploadPath);
 uploadFiles();
 break;

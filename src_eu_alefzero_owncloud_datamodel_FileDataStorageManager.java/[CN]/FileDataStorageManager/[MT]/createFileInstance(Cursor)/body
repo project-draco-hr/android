@@ -9,7 +9,7 @@
       file.setStoragePath(c.getString(c.getColumnIndex(ProviderTableMeta.FILE_STORAGE_PATH)));
       if (file.getStoragePath() == null) {
         File sdCard=Environment.getExternalStorageDirectory();
-        File f=new File(sdCard.getAbsolutePath() + "/owncloud/" + mAccount.name+ file.getRemotePath());
+        File f=new File(sdCard.getAbsolutePath() + "/owncloud/" + mAccount.name+ file.getURLDecodedRemotePath());
         if (f.exists())         file.setStoragePath(f.getAbsolutePath());
       }
     }

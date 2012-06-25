@@ -58,7 +58,7 @@ return;
 }
 }
 path=FileDisplayActivity.this.mCurrentDir.getRemotePath();
-path+=directoryName + "/";
+path+=Uri.encode(directoryName) + "/";
 Thread thread=new Thread(new DirectoryCreator(path,a));
 thread.start();
 OCFile newDir=new OCFile(path);

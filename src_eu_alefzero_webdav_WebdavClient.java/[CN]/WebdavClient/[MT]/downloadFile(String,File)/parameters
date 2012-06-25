@@ -1,2 +1,2 @@
-String filepath
+String remoteFilepath
 File targetPath
