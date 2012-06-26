@@ -10,5 +10,5 @@
     }
   }
  else   throw new RuntimeException("Trying to create a OCFile with a non valid remote path: " + path);
-  mRemotePath=path;
+  mRemotePath=Uri.encode(Uri.decode(path),"/");
 }
