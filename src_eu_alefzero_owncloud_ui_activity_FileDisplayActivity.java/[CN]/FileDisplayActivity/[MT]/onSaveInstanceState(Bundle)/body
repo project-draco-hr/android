@@ -1,4 +1,5 @@
 {
+  Log.i(getClass().toString(),"onSaveInstanceState() start");
   super.onSaveInstanceState(outState);
   if (mDirectories != null && mDirectories.getCount() != 0) {
     mDirs=new String[mDirectories.getCount() - 1];
@@ -8,4 +9,5 @@
   }
   outState.putStringArray(KEY_DIR_ARRAY,mDirs);
   outState.putParcelable(FileDetailFragment.EXTRA_FILE,mCurrentDir);
+  Log.i(getClass().toString(),"onSaveInstanceState() end");
 }
