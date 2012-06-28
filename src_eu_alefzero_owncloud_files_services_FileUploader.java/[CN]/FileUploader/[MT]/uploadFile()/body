@@ -43,8 +43,12 @@
       new_file.setLastSyncDate(0);
       new_file.setStoragePath(mLocalPaths[i]);
       File f=new File(mRemotePaths[i]);
-      new_file.setParentId(storageManager.getFileByPath(f.getParent().endsWith("/") ? f.getParent() : f.getParent() + "/").getFileId());
+      long parentDirId=storageManager.getFileByPath(f.getParent().endsWith("/") ? f.getParent() : f.getParent() + "/").getFileId();
+      new_file.setParentId(parentDirId);
       storageManager.saveFile(new_file);
+      Intent end=new Intent(UPLOAD_FINISH_MESSAGE);
+      end.putExtra(EXTRA_PARENT_DIR_ID,parentDirId);
+      sendBroadcast(end);
     }
   }
   mNotificationManager.cancel(42);
