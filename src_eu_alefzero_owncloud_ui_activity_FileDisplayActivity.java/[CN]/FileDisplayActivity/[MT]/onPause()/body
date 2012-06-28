@@ -1,9 +1,13 @@
 {
   Log.i(getClass().toString(),"onPause() start");
   super.onPause();
-  if (syncBroadcastReceiver != null) {
-    unregisterReceiver(syncBroadcastReceiver);
-    syncBroadcastReceiver=null;
+  if (mSyncBroadcastReceiver != null) {
+    unregisterReceiver(mSyncBroadcastReceiver);
+    mSyncBroadcastReceiver=null;
+  }
+  if (mUploadFinishReceiver != null) {
+    unregisterReceiver(mUploadFinishReceiver);
+    mUploadFinishReceiver=null;
   }
   getIntent().putExtra(FileDetailFragment.EXTRA_FILE,mCurrentDir);
   Log.i(getClass().toString(),"onPause() end");

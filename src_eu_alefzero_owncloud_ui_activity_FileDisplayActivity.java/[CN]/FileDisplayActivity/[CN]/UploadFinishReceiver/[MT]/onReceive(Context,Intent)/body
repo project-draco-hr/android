@@ -1,0 +1,10 @@
+{
+  long parentDirId=intent.getLongExtra(FileUploader.EXTRA_PARENT_DIR_ID,-1);
+  OCFile parentDir=mStorageManager.getFileById(parentDirId);
+  if (parentDir != null && ((mCurrentDir == null && parentDir.getFileName().equals("/")) || parentDir.equals(mCurrentDir))) {
+    FileListFragment fileListFragment=(FileListFragment)getSupportFragmentManager().findFragmentById(R.id.fileList);
+    if (fileListFragment != null) {
+      fileListFragment.listDirectory();
+    }
+  }
+}
