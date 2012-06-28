@@ -14,6 +14,9 @@
     prop=propSet.get(DavPropertyName.GETCONTENTTYPE);
     if (prop != null) {
       mContentType=(String)prop.getValue();
+      if (mContentType.indexOf(";") >= 0) {
+        mContentType=mContentType.substring(0,mContentType.indexOf(";"));
+      }
     }
  else {
       mContentType="DIR";
