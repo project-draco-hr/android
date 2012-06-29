@@ -4,17 +4,28 @@
     getClient().executeMethod(query);
     MultiStatus resp=null;
     resp=query.getResponseBodyAsMultiStatus();
+    List<String> paths=new ArrayList<String>();
+    List<Long> fileIds=new ArrayList<Long>();
     for (int i=1; i < resp.getResponses().length; ++i) {
       WebdavEntry we=new WebdavEntry(resp.getResponses()[i],getUri().getPath());
       OCFile file=fillOCFile(we);
       file.setParentId(parentId);
       getStorageManager().saveFile(file);
       if (parentId == 0)       parentId=file.getFileId();
-      if (we.contentType().equals("DIR"))       fetchData(getUri().toString() + we.path(),syncResult,file.getFileId());
+      if (we.contentType().equals("DIR")) {
+        paths.add(we.path());
+        fileIds.add(file.getFileId());
+      }
     }
     Vector<OCFile> files=getStorageManager().getDirectoryContent(getStorageManager().getFileById(parentId));
     for (    OCFile file : files) {
       if (file.getLastSyncDate() != mCurrentSyncTime && file.getLastSyncDate() != 0)       getStorageManager().removeFile(file);
+    }
+    sendStickyBroadcast(true,parentId);
+    Iterator<String> pathsIt=paths.iterator();
+    Iterator<Long> fileIdsIt=fileIds.iterator();
+    while (pathsIt.hasNext()) {
+      fetchData(getUri().toString() + pathsIt.next(),syncResult,fileIdsIt.next());
     }
   }
  catch (  OperationCanceledException e) {
