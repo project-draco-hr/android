@@ -4,7 +4,7 @@
     if (ocAccount != null) {
       AccountManager accManager=(AccountManager)getActivity().getSystemService(Context.ACCOUNT_SERVICE);
       OwnCloudVersion ocVersion=new OwnCloudVersion(accManager.getUserData(ocAccount,AccountAuthenticator.KEY_OC_VERSION));
-      if (ocVersion.compareTo(new OwnCloudVersion(0x030004)) >= 0 || ocVersion.compareTo(new OwnCloudVersion(0x040001)) >= 0) {
+      if (ocVersion.compareTo(new OwnCloudVersion(0x030004)) >= 0 || ocVersion.compareTo(new OwnCloudVersion(0x040004)) >= 0) {
         return true;
       }
     }
