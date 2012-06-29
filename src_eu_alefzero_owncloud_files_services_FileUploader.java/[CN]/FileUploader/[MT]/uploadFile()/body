@@ -23,6 +23,7 @@
     mTotalDataToSend+=f.length();
   }
   Log.d(TAG,"Will upload " + mTotalDataToSend + " bytes, with "+ mLocalPaths.length+ " files");
+  mSuccessCounter=0;
   for (int i=0; i < mLocalPaths.length; ++i) {
     String mimeType;
     try {
@@ -32,10 +33,9 @@
       Log.e(TAG,"Trying to find out MIME type of a file without extension: " + mLocalPaths[i]);
       mimeType="application/octet-stream";
     }
-    mResult=false;
     mCurrentIndexUpload=i;
     if (wc.putFile(mLocalPaths[i],mRemotePaths[i],mimeType)) {
-      mResult|=true;
+      mSuccessCounter++;
       OCFile new_file=new OCFile(mRemotePaths[i]);
       new_file.setMimetype(mimeType);
       new_file.setFileLength(new File(mLocalPaths[i]).length());
