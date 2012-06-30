@@ -1,4 +1,6 @@
 {
+  Log.i(getClass().toString(),"onStart() start");
+  super.onStart();
   View fragmentContainer=getActivity().findViewById(R.id.file_details_container);
   if (fragmentContainer != null) {
     mIsLargeDevice=true;
@@ -6,5 +8,5 @@
     transaction.replace(R.id.file_details_container,new FileDetailFragment(true));
     transaction.commit();
   }
-  super.onStart();
+  Log.i(getClass().toString(),"onStart() end");
 }

@@ -1,10 +1,16 @@
 {
+  Log.i(getClass().toString(),"onResume() start");
   super.onResume();
-  if (accountsAreSetup()) {
-    setContentView(mLayoutView);
+  if (!AccountUtils.accountsAreSetup(this)) {
+  }
+ else {
+    if (findViewById(R.id.file_list_view) == null)     setContentView(mLayoutView);
     IntentFilter syncIntentFilter=new IntentFilter(FileSyncService.SYNC_MESSAGE);
-    syncBroadcastRevceiver=new SyncBroadcastReceiver();
-    registerReceiver(syncBroadcastRevceiver,syncIntentFilter);
+    mSyncBroadcastReceiver=new SyncBroadcastReceiver();
+    registerReceiver(mSyncBroadcastReceiver,syncIntentFilter);
+    IntentFilter uploadIntentFilter=new IntentFilter(FileUploader.UPLOAD_FINISH_MESSAGE);
+    mUploadFinishReceiver=new UploadFinishReceiver();
+    registerReceiver(mUploadFinishReceiver,uploadIntentFilter);
     mStorageManager=new FileDataStorageManager(AccountUtils.getCurrentOwnCloudAccount(this),getContentResolver());
     mFileList=(FileListFragment)getSupportFragmentManager().findFragmentById(R.id.fileList);
     if (getIntent().hasExtra(FileDetailFragment.EXTRA_FILE)) {
@@ -46,4 +52,5 @@
     }
     mFileList.listDirectory(mCurrentDir);
   }
+  Log.i(getClass().toString(),"onResume() end");
 }

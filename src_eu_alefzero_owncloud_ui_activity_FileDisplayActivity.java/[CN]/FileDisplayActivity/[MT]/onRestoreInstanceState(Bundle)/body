@@ -1,8 +1,10 @@
 {
+  Log.i(getClass().toString(),"onRestoreInstanceState() start");
   super.onRestoreInstanceState(savedInstanceState);
   mDirs=savedInstanceState.getStringArray(KEY_DIR_ARRAY);
   mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
   mDirectories.add("/");
   if (mDirs != null)   for (  String s : mDirs)   mDirectories.insert(s,0);
   mCurrentDir=savedInstanceState.getParcelable(FileDetailFragment.EXTRA_FILE);
+  Log.i(getClass().toString(),"onRestoreInstanceState() end");
 }

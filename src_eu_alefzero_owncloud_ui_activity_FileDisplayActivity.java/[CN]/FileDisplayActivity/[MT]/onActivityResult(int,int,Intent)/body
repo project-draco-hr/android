@@ -1,6 +1,6 @@
 {
-  if (resultCode == RESULT_OK) {
-    if (requestCode == ACTION_SELECT_FILE) {
+  if (requestCode == ACTION_SELECT_FILE) {
+    if (resultCode == RESULT_OK) {
       Uri selectedImageUri=data.getData();
       String filemanagerstring=selectedImageUri.getPath();
       String selectedImagePath=getPath(selectedImageUri);

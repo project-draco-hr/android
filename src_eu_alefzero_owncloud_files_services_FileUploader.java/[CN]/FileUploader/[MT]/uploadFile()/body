@@ -23,12 +23,19 @@
     mTotalDataToSend+=f.length();
   }
   Log.d(TAG,"Will upload " + mTotalDataToSend + " bytes, with "+ mLocalPaths.length+ " files");
+  mSuccessCounter=0;
   for (int i=0; i < mLocalPaths.length; ++i) {
-    String mimeType=MimeTypeMap.getSingleton().getMimeTypeFromExtension(mLocalPaths[i].substring(mLocalPaths[i].lastIndexOf('.') + 1));
-    mResult=false;
+    String mimeType;
+    try {
+      mimeType=MimeTypeMap.getSingleton().getMimeTypeFromExtension(mLocalPaths[i].substring(mLocalPaths[i].lastIndexOf('.') + 1));
+    }
+ catch (    IndexOutOfBoundsException e) {
+      Log.e(TAG,"Trying to find out MIME type of a file without extension: " + mLocalPaths[i]);
+      mimeType="application/octet-stream";
+    }
     mCurrentIndexUpload=i;
     if (wc.putFile(mLocalPaths[i],mRemotePaths[i],mimeType)) {
-      mResult|=true;
+      mSuccessCounter++;
       OCFile new_file=new OCFile(mRemotePaths[i]);
       new_file.setMimetype(mimeType);
       new_file.setFileLength(new File(mLocalPaths[i]).length());
@@ -36,8 +43,12 @@
       new_file.setLastSyncDate(0);
       new_file.setStoragePath(mLocalPaths[i]);
       File f=new File(mRemotePaths[i]);
-      new_file.setParentId(storageManager.getFileByPath(f.getParent().endsWith("/") ? f.getParent() : f.getParent() + "/").getFileId());
+      long parentDirId=storageManager.getFileByPath(f.getParent().endsWith("/") ? f.getParent() : f.getParent() + "/").getFileId();
+      new_file.setParentId(parentDirId);
       storageManager.saveFile(new_file);
+      Intent end=new Intent(UPLOAD_FINISH_MESSAGE);
+      end.putExtra(EXTRA_PARENT_DIR_ID,parentDirId);
+      sendBroadcast(end);
     }
   }
   mNotificationManager.cancel(42);

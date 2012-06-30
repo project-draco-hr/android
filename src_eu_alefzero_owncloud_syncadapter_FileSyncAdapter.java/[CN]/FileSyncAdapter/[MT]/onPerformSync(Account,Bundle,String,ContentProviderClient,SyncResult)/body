@@ -3,10 +3,7 @@
   this.setContentProvider(provider);
   this.setStorageManager(new FileDataStorageManager(account,getContentProvider()));
   Log.d(TAG,"syncing owncloud account " + account.name);
-  Intent i=new Intent(FileSyncService.SYNC_MESSAGE);
-  i.putExtra(FileSyncService.IN_PROGRESS,true);
-  i.putExtra(FileSyncService.ACCOUNT_NAME,account.name);
-  getContext().sendStickyBroadcast(i);
+  sendStickyBroadcast(true,-1);
   PropFindMethod query;
   try {
     mCurrentSyncTime=System.currentTimeMillis();
@@ -37,6 +34,5 @@ catch (  DavException e) {
     syncResult.stats.numIoExceptions++;
     e.printStackTrace();
   }
-  i.putExtra(FileSyncService.IN_PROGRESS,false);
-  getContext().sendStickyBroadcast(i);
+  sendStickyBroadcast(false,-1);
 }

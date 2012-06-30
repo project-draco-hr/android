@@ -1,6 +1,8 @@
 {
+  Log.i(getClass().toString(),"onCreateView() start");
   super.onCreateView(inflater,container,savedInstanceState);
   getListView().setDivider(getResources().getDrawable(R.drawable.uploader_list_separator));
   getListView().setDividerHeight(1);
+  Log.i(getClass().toString(),"onCreateView() end");
   return getListView();
 }

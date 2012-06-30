@@ -1,4 +1,0 @@
-{
-  super.onSaveInstanceState(outState);
-  outState.putParcelable("ACCOUNT",AccountUtils.getCurrentOwnCloudAccount(getActivity()));
-}

@@ -1,21 +1,21 @@
 {
+  Log.i(getClass().toString(),"onCreate() start");
   super.onCreate(savedInstanceState);
-  if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
-    requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-    setProgressBarIndeterminateVisibility(false);
-  }
+  requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+  setSupportProgressBarIndeterminateVisibility(false);
   Thread.setDefaultUncaughtExceptionHandler(new CrashHandler(getApplicationContext()));
   if (savedInstanceState != null) {
     mCurrentDir=(OCFile)savedInstanceState.getParcelable(KEY_CURRENT_DIR);
   }
-  if (findViewById(R.id.file_list_view) == null)   mLayoutView=getLayoutInflater().inflate(R.layout.files,null);
-  if (!accountsAreSetup()) {
+  mLayoutView=getLayoutInflater().inflate(R.layout.files,null);
+  if (AccountUtils.accountsAreSetup(this)) {
+    setContentView(mLayoutView);
+  }
+ else {
     setContentView(R.layout.no_account_available);
     setProgressBarIndeterminateVisibility(false);
     getSupportActionBar().setNavigationMode(ActionBar.DISPLAY_SHOW_TITLE);
     findViewById(R.id.setup_account).setOnClickListener(this);
   }
- else   if (findViewById(R.id.file_list_view) == null) {
-    setContentView(mLayoutView);
-  }
+  Log.i(getClass().toString(),"onCreate() end");
 }
