@@ -5,5 +5,6 @@
   i.putExtra(FileDownloader.EXTRA_REMOTE_PATH,mFile.getRemotePath());
   i.putExtra(FileDownloader.EXTRA_FILE_PATH,mFile.getURLDecodedRemotePath());
   i.putExtra(FileDownloader.EXTRA_FILE_SIZE,mFile.getFileLength());
+  v.setEnabled(false);
   getActivity().startService(i);
 }
