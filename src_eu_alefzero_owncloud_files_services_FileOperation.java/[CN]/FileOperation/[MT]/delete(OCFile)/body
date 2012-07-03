@@ -1,0 +1,9 @@
+{
+  Account account=AccountUtils.getCurrentOwnCloudAccount(mContext);
+  WebdavClient client=new WebdavClient(account,mContext);
+  if (client.deleteFile(file.getRemotePath())) {
+    File localFile=new File(file.getStoragePath());
+    return localFile.delete();
+  }
+  return false;
+}
