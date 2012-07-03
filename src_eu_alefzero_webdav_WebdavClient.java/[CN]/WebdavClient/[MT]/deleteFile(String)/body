@@ -3,8 +3,8 @@
   try {
     executeMethod(delete);
   }
- catch (  IOException e) {
-    Log.e(TAG,"Logging failed with error: " + e.getMessage(),e);
+ catch (  Throwable e) {
+    Log.e(TAG,"Deleting failed with error: " + e.getMessage(),e);
     return false;
   }
   return true;
