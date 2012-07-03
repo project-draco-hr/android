@@ -1,4 +1,0 @@
-{
-  mUri=uri;
-  getParams().setParameter(HttpMethodParams.USER_AGENT,USER_AGENT);
-}
