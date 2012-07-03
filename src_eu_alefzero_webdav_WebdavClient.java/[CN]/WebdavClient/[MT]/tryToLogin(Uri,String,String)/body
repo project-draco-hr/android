@@ -1,0 +1,12 @@
+{
+  int returnCode=0;
+  setCredentials(username,password);
+  HeadMethod head=new HeadMethod(uri.toString());
+  try {
+    returnCode=executeMethod(head);
+  }
+ catch (  Exception e) {
+    Log.e(TAG,"Error: " + e.getMessage());
+  }
+  return returnCode;
+}
