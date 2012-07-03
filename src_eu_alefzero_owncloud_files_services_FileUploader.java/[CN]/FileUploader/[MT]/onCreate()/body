@@ -5,5 +5,4 @@
   thread.start();
   mServiceLooper=thread.getLooper();
   mServiceHandler=new ServiceHandler(mServiceLooper);
-  mAccountManager=AccountManager.get(this);
 }

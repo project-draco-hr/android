@@ -1,6 +1,4 @@
 {
-  mUsername=mAccount.name.substring(0,mAccount.name.indexOf('@'));
-  mPassword=mAccountManager.getPassword(mAccount);
   setContentView(R.layout.uploader_layout);
   String full_path="";
   for (  String a : mParents)   full_path+=a + "/";

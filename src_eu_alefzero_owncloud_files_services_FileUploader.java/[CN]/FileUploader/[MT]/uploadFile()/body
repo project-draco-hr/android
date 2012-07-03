@@ -1,10 +1,4 @@
 {
-  String baseUrl=mAccountManager.getUserData(mAccount,AccountAuthenticator.KEY_OC_BASE_URL), ocVerStr=mAccountManager.getUserData(mAccount,AccountAuthenticator.KEY_OC_VERSION);
-  OwnCloudVersion ocVer=new OwnCloudVersion(ocVerStr);
-  String webdav_path=AccountUtils.getWebdavPath(ocVer);
-  Uri ocUri=Uri.parse(baseUrl + webdav_path);
-  String username=mAccount.name.substring(0,mAccount.name.lastIndexOf('@'));
-  String password=mAccountManager.getPassword(mAccount);
   FileDataStorageManager storageManager=new FileDataStorageManager(mAccount,getContentResolver());
   mTotalDataToSend=mSendData=mPreviousPercent=0;
   mNotification=new Notification(eu.alefzero.owncloud.R.drawable.icon,"Uploading...",System.currentTimeMillis());
@@ -14,10 +8,8 @@
   mNotification.contentView.setImageViewResource(R.id.status_icon,R.drawable.icon);
   mNotification.contentIntent=PendingIntent.getActivity(getApplicationContext(),0,new Intent(),PendingIntent.FLAG_UPDATE_CURRENT);
   mNotificationManager.notify(42,mNotification);
-  WebdavClient wc=new WebdavClient(ocUri);
-  wc.allowSelfsignedCertificates();
+  WebdavClient wc=new WebdavClient(mAccount,getApplicationContext());
   wc.setDataTransferProgressListener(this);
-  wc.setCredentials(username,password);
   for (int i=0; i < mLocalPaths.length; ++i) {
     File f=new File(mLocalPaths[i]);
     mTotalDataToSend+=f.length();

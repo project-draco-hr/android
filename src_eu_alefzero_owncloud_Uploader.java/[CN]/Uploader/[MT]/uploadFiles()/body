@@ -1,11 +1,5 @@
 {
-  OwnCloudVersion ocv=new OwnCloudVersion(mAccountManager.getUserData(mAccount,AccountAuthenticator.KEY_OC_VERSION));
-  String base_url=mAccountManager.getUserData(mAccount,AccountAuthenticator.KEY_OC_BASE_URL);
-  String webdav_path=AccountUtils.getWebdavPath(ocv);
-  Uri oc_uri=Uri.parse(base_url + webdav_path);
-  WebdavClient wdc=new WebdavClient(oc_uri);
-  wdc.setCredentials(mUsername,mPassword);
-  wdc.allowSelfsignedCertificates();
+  WebdavClient wdc=new WebdavClient(mAccount,getApplicationContext());
   if (mCreateDir) {
     wdc.createDirectory(mUploadPath);
   }

@@ -1,10 +1,6 @@
 {
   AccountManager am=(AccountManager)getSystemService(ACCOUNT_SERVICE);
-  String oc_base_url=am.getUserData(mAccount,AccountAuthenticator.KEY_OC_BASE_URL);
-  OwnCloudVersion ocv=new OwnCloudVersion(am.getUserData(mAccount,AccountAuthenticator.KEY_OC_VERSION));
-  String webdav_path=AccountUtils.getWebdavPath(ocv);
-  Uri oc_url=Uri.parse(oc_base_url + webdav_path);
-  WebdavClient wdc=new WebdavClient(Uri.parse(oc_base_url + webdav_path));
+  WebdavClient wdc=new WebdavClient(mAccount,getApplicationContext());
   String username=mAccount.name.split("@")[0];
   String password="";
   try {
@@ -33,8 +29,6 @@
  catch (  IOException e) {
     e.printStackTrace();
   }
-  Log.e(TAG,file.getAbsolutePath() + " " + oc_url.toString());
-  Log.e(TAG,mFilePath + "");
   String message;
   if (wdc.downloadFile(mRemotePath,file)) {
     ContentValues cv=new ContentValues();

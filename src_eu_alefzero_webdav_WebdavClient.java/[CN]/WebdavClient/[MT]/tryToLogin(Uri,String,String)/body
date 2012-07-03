@@ -1,9 +1,10 @@
 {
   int returnCode=0;
-  setCredentials(username,password);
+  WebdavClient client=new WebdavClient();
+  client.setCredentials(username,password);
   HeadMethod head=new HeadMethod(uri.toString());
   try {
-    returnCode=executeMethod(head);
+    returnCode=client.executeMethod(head);
   }
  catch (  Exception e) {
     Log.e(TAG,"Error: " + e.getMessage());
