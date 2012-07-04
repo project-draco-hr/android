@@ -4,8 +4,8 @@
     getClient().executeMethod(query);
     MultiStatus resp=null;
     resp=query.getResponseBodyAsMultiStatus();
-    List<String> paths=new ArrayList<String>();
-    List<Long> fileIds=new ArrayList<Long>();
+    Queue<String> paths=new LinkedList<String>();
+    Queue<Long> fileIds=new LinkedList<Long>();
     for (int i=1; i < resp.getResponses().length; ++i) {
       WebdavEntry we=new WebdavEntry(resp.getResponses()[i],getUri().getPath());
       OCFile file=fillOCFile(we);
@@ -22,11 +22,11 @@
       if (file.getLastSyncDate() != mCurrentSyncTime && file.getLastSyncDate() != 0)       getStorageManager().removeFile(file);
     }
     sendStickyBroadcast(true,parentId);
-    Iterator<String> pathsIt=paths.iterator();
-    Iterator<Long> fileIdsIt=fileIds.iterator();
-    while (pathsIt.hasNext()) {
-      fetchData(getUri().toString() + pathsIt.next(),syncResult,fileIdsIt.next());
+    while (!paths.isEmpty()) {
+      fetchData(getUri().toString() + paths.remove(),syncResult,fileIds.remove());
     }
+    paths=null;
+    fileIds=null;
   }
  catch (  OperationCanceledException e) {
     e.printStackTrace();
