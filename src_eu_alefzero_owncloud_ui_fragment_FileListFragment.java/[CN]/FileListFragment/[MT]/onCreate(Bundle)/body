@@ -1,9 +1,0 @@
-{
-  Log.i(getClass().toString(),"onCreate() start");
-  super.onCreate(savedInstanceState);
-  Intent intent=getActivity().getIntent();
-  OCFile directory=intent.getParcelableExtra(FileDetailFragment.EXTRA_FILE);
-  mFile=directory;
-  mIsLargeDevice=false;
-  Log.i(getClass().toString(),"onCreate() stop");
-}

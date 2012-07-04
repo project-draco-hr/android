@@ -1,0 +1,14 @@
+{
+  pushDirname(directory);
+  ActionBar actionBar=getSupportActionBar();
+  actionBar.setDisplayHomeAsUpEnabled(true);
+  if (mDualPane) {
+    FileDetailFragment fileDetails=(FileDetailFragment)getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
+    if (fileDetails != null) {
+      FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
+      transaction.remove(fileDetails);
+      transaction.add(R.id.file_details_container,new FileDetailFragment(null,null));
+      transaction.commit();
+    }
+  }
+}

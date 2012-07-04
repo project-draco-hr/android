@@ -1,5 +1,5 @@
 {
-  DataStorageManager storageManager=((FileDisplayActivity)getActivity()).getStorageManager();
+  DataStorageManager storageManager=mContainerActivity.getStorageManager();
   if (directory == null) {
     if (mFile != null) {
       directory=mFile;

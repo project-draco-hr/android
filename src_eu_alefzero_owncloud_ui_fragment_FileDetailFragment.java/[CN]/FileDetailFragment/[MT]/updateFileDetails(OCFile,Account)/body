@@ -1,0 +1,5 @@
+{
+  mFile=file;
+  mAccount=ocAccount;
+  updateFileDetails();
+}

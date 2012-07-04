@@ -1,12 +1,12 @@
 {
+  super.onCreateView(inflater,container,savedInstanceState);
+  if (savedInstanceState != null) {
+    mFile=savedInstanceState.getParcelable(FileDetailFragment.EXTRA_FILE);
+    mAccount=savedInstanceState.getParcelable(FileDetailFragment.EXTRA_ACCOUNT);
+  }
   View view=null;
   view=inflater.inflate(mLayout,container,false);
   mView=view;
-  if (mLayout == R.layout.file_details_fragment) {
-    if (mIntent == null) {
-      mIntent=getActivity().getIntent();
-    }
-    updateFileDetails();
-  }
+  updateFileDetails();
   return view;
 }

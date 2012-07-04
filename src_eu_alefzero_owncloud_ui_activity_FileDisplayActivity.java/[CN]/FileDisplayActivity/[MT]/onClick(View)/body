@@ -1,7 +1,8 @@
 {
   if (v.getId() == R.id.setup_account) {
-    Intent intent=new Intent("android.settings.ADD_ACCOUNT_SETTINGS");
-    intent.putExtra("authorities",new String[]{AccountAuthenticator.AUTH_TOKEN_TYPE});
+    Intent intent=new Intent(android.provider.Settings.ACTION_ADD_ACCOUNT);
+    intent.putExtra(android.provider.Settings.EXTRA_AUTHORITIES,new String[]{AccountAuthenticator.AUTH_TOKEN_TYPE});
     startActivity(intent);
+    mForcedLoginToCreateFirstAccount=true;
   }
 }

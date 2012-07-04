@@ -1,0 +1,20 @@
+{
+  if (mDualPane) {
+    FileDetailFragment fileDetails=(FileDetailFragment)getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
+    if (fileDetails == null) {
+      FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
+      transaction.replace(R.id.file_details_container,new FileDetailFragment(file,AccountUtils.getCurrentOwnCloudAccount(this)),FileDetailFragment.FTAG);
+      transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+      transaction.commit();
+    }
+ else {
+      fileDetails.updateFileDetails(file,AccountUtils.getCurrentOwnCloudAccount(this));
+    }
+  }
+ else {
+    Intent showDetailsIntent=new Intent(this,FileDetailActivity.class);
+    showDetailsIntent.putExtra(FileDetailFragment.EXTRA_FILE,file);
+    showDetailsIntent.putExtra(FileDownloader.EXTRA_ACCOUNT,AccountUtils.getCurrentOwnCloudAccount(this));
+    startActivity(showDetailsIntent);
+  }
+}

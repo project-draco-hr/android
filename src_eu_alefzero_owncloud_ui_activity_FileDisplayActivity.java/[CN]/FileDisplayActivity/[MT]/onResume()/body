@@ -1,10 +1,11 @@
 {
   Log.i(getClass().toString(),"onResume() start");
   super.onResume();
-  if (!AccountUtils.accountsAreSetup(this)) {
-  }
- else {
-    if (findViewById(R.id.file_list_view) == null)     setContentView(mLayoutView);
+  if (AccountUtils.accountsAreSetup(this)) {
+    if (mForcedLoginToCreateFirstAccount) {
+      initDelayedTilAccountAvailabe();
+      mForcedLoginToCreateFirstAccount=false;
+    }
     IntentFilter syncIntentFilter=new IntentFilter(FileSyncService.SYNC_MESSAGE);
     mSyncBroadcastReceiver=new SyncBroadcastReceiver();
     registerReceiver(mSyncBroadcastReceiver,syncIntentFilter);

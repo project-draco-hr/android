@@ -1,8 +1,0 @@
-{
-  if (useEmptyView) {
-    mLayout=R.layout.file_details_empty;
-  }
- else {
-    mLayout=R.layout.file_details_fragment;
-  }
-}

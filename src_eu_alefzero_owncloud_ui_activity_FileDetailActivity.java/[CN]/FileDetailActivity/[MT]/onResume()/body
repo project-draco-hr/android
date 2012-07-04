@@ -1,4 +1,7 @@
 {
   super.onResume();
-  mFileDetail.updateFileDetails(getIntent());
+  if (!mConfigurationChangedToLandscape) {
+    FileDetailFragment fragment=(FileDetailFragment)getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
+    fragment.updateFileDetails();
+  }
 }

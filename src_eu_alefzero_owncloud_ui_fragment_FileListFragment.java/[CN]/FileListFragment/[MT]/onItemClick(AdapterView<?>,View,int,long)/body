@@ -5,29 +5,10 @@
   OCFile file=mFiles.get(position);
   if (file.getMimetype().equals("DIR")) {
     mFile=file;
-    ((FileDisplayActivity)getActivity()).pushDirname(file);
-    ActionBar actionBar=((FileDisplayActivity)getActivity()).getSupportActionBar();
-    actionBar.setDisplayHomeAsUpEnabled(true);
     listDirectory(file);
-    resetFileFragment();
-    return;
-  }
-  Intent showDetailsIntent=new Intent(getActivity(),FileDetailActivity.class);
-  showDetailsIntent.putExtra(FileDetailFragment.EXTRA_FILE,file);
-  showDetailsIntent.putExtra(FileDownloader.EXTRA_ACCOUNT,AccountUtils.getCurrentOwnCloudAccount(getActivity()));
-  if (mIsLargeDevice) {
-    FileDetailFragment fileDetails=(FileDetailFragment)getFragmentManager().findFragmentByTag("FileDetails");
-    if (fileDetails == null) {
-      FragmentTransaction transaction=getFragmentManager().beginTransaction();
-      transaction.replace(R.id.file_details_container,new FileDetailFragment(showDetailsIntent),"FileDetails");
-      transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-      transaction.commit();
-    }
- else {
-      fileDetails.updateFileDetails(showDetailsIntent);
-    }
+    mContainerActivity.onDirectoryClick(file);
   }
  else {
-    startActivity(showDetailsIntent);
+    mContainerActivity.onFileClick(file);
   }
 }

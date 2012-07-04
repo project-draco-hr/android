@@ -1,10 +1,19 @@
 {
   super.onCreate(savedInstanceState);
-  setContentView(R.layout.file_activity_details);
-  ActionBar actionBar=getSupportActionBar();
-  actionBar.setDisplayHomeAsUpEnabled(true);
-  FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
-  mFileDetail=new FileDetailFragment();
-  ft.replace(R.id.fragment,mFileDetail,"FileDetails");
-  ft.commit();
+  Configuration conf=getResources().getConfiguration();
+  mConfigurationChangedToLandscape=(conf.orientation == Configuration.ORIENTATION_LANDSCAPE && (conf.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE);
+  if (!mConfigurationChangedToLandscape) {
+    setContentView(R.layout.file_activity_details);
+    ActionBar actionBar=getSupportActionBar();
+    actionBar.setDisplayHomeAsUpEnabled(true);
+    OCFile file=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE);
+    Account account=getIntent().getParcelableExtra(FileDownloader.EXTRA_ACCOUNT);
+    FileDetailFragment mFileDetail=new FileDetailFragment(file,account);
+    FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
+    ft.replace(R.id.fragment,mFileDetail,FileDetailFragment.FTAG);
+    ft.commit();
+  }
+ else {
+    backToDisplayActivity();
+  }
 }

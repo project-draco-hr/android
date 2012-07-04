@@ -1,7 +1,6 @@
 {
-  mFile=mIntent.getParcelableExtra(EXTRA_FILE);
-  Button downloadButton=(Button)getView().findViewById(R.id.fdDownloadBtn);
-  if (mFile != null) {
+  if (mFile != null && mLayout == R.layout.file_details_fragment) {
+    Button downloadButton=(Button)getView().findViewById(R.id.fdDownloadBtn);
     setFilename(mFile.getFileName());
     setFiletype(DisplayUtils.convertMIMEtoPrettyPrint(mFile.getMimetype()));
     setFilesize(mFile.getFileLength());

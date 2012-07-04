@@ -1,0 +1,8 @@
+{
+  mFile=fileToDetail;
+  mAccount=ocAccount;
+  mLayout=R.layout.file_details_empty;
+  if (fileToDetail != null && ocAccount != null) {
+    mLayout=R.layout.file_details_fragment;
+  }
+}

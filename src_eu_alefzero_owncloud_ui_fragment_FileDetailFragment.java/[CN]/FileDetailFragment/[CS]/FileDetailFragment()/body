@@ -1,3 +1,5 @@
 {
-  mLayout=R.layout.file_details_fragment;
+  mFile=null;
+  mAccount=null;
+  mLayout=R.layout.file_details_empty;
 }
