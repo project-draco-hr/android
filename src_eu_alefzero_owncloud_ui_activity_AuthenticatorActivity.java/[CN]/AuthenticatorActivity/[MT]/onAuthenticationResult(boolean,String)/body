@@ -32,7 +32,7 @@
     setResult(RESULT_OK,intent);
     Bundle bundle=new Bundle();
     bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL,true);
-    ContentResolver.requestSync(account,"org.ownlcoud",bundle);
+    ContentResolver.requestSync(account,"org.owncloud",bundle);
     finish();
   }
  else {
