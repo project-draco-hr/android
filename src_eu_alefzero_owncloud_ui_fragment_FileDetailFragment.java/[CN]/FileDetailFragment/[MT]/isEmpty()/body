@@ -1,0 +1,3 @@
+{
+  return mLayout == R.layout.file_details_empty;
+}

@@ -1,5 +1,5 @@
 {
-  if (mFile != null && mLayout == R.layout.file_details_fragment) {
+  if (mFile != null && mAccount != null && mLayout == R.layout.file_details_fragment) {
     Button downloadButton=(Button)getView().findViewById(R.id.fdDownloadBtn);
     setFilename(mFile.getFileName());
     setFiletype(DisplayUtils.convertMIMEtoPrettyPrint(mFile.getMimetype()));
@@ -10,6 +10,7 @@
     setTimeModified(mFile.getModificationTimestamp());
     if (mFile.getStoragePath() != null) {
       ImageView preview=(ImageView)getView().findViewById(R.id.fdPreview);
+      boolean previewIsSet=false;
       try {
         if (mFile.getMimetype().startsWith("image/")) {
           BitmapFactory.Options options=new Options();
@@ -22,16 +23,21 @@
             options.inMutable=false;
           }
           Bitmap bmp=BitmapFactory.decodeFile(mFile.getStoragePath(),options);
-          int width=options.outWidth;
-          int height=options.outHeight;
-          int scale=1;
-          if (width >= 2048 || height >= 2048) {
-            scale=(int)(Math.ceil(Math.max(height,width) / 2048.));
-            options.inSampleSize=scale;
-            bmp.recycle();
-            bmp=BitmapFactory.decodeFile(mFile.getStoragePath(),options);
+          if (bmp != null) {
+            int width=options.outWidth;
+            int height=options.outHeight;
+            int scale=1;
+            if (width >= 2048 || height >= 2048) {
+              scale=(int)(Math.ceil(Math.max(height,width) / 2048.));
+              options.inSampleSize=scale;
+              bmp.recycle();
+              bmp=BitmapFactory.decodeFile(mFile.getStoragePath(),options);
+            }
           }
-          preview.setImageBitmap(bmp);
+          if (bmp != null) {
+            preview.setImageDrawable(new BitmapDrawable(preview.getResources(),bmp));
+            previewIsSet=true;
+          }
         }
       }
  catch (      OutOfMemoryError e) {
@@ -45,6 +51,11 @@ catch (      NoSuchFieldError e) {
 catch (      Throwable t) {
         preview.setVisibility(View.INVISIBLE);
         Log.e(TAG,"Unexpected error while creating image preview " + mFile.getFileLength(),t);
+      }
+ finally {
+        if (!previewIsSet) {
+          resetPreview();
+        }
       }
       downloadButton.setText(R.string.filedetails_open);
       downloadButton.setOnClickListener(new OnClickListener(){
@@ -91,6 +102,7 @@ catch (            Throwable th) {
     }
  else {
       downloadButton.setOnClickListener(this);
+      resetPreview();
     }
   }
 }
