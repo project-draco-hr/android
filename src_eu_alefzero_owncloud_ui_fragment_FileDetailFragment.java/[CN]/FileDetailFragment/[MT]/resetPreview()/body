@@ -1,4 +1,0 @@
-{
-  ImageView preview=(ImageView)getView().findViewById(R.id.fdPreview);
-  preview.setImageDrawable(getResources().getDrawable(R.drawable.owncloud_logo));
-}

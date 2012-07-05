@@ -10,7 +10,6 @@
     setTimeModified(mFile.getModificationTimestamp());
     if (mFile.getStoragePath() != null) {
       ImageView preview=(ImageView)getView().findViewById(R.id.fdPreview);
-      boolean previewIsSet=false;
       try {
         if (mFile.getMimetype().startsWith("image/")) {
           BitmapFactory.Options options=new Options();
@@ -35,8 +34,7 @@
             }
           }
           if (bmp != null) {
-            preview.setImageDrawable(new BitmapDrawable(preview.getResources(),bmp));
-            previewIsSet=true;
+            preview.setImageBitmap(bmp);
           }
         }
       }
@@ -51,11 +49,6 @@ catch (      NoSuchFieldError e) {
 catch (      Throwable t) {
         preview.setVisibility(View.INVISIBLE);
         Log.e(TAG,"Unexpected error while creating image preview " + mFile.getFileLength(),t);
-      }
- finally {
-        if (!previewIsSet) {
-          resetPreview();
-        }
       }
       downloadButton.setText(R.string.filedetails_open);
       downloadButton.setOnClickListener(new OnClickListener(){
@@ -102,7 +95,6 @@ catch (            Throwable th) {
     }
  else {
       downloadButton.setOnClickListener(this);
-      resetPreview();
     }
   }
 }
