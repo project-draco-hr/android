@@ -37,6 +37,7 @@
     message=DOWNLOAD_FINISH_MESSAGE;
   }
  else {
+    file.delete();
     message=BAD_DOWNLOAD_MESSAGE;
   }
   mNotificationMngr.cancel(1);

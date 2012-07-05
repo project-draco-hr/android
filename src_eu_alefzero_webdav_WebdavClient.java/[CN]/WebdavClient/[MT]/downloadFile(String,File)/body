@@ -1,5 +1,8 @@
 {
   GetMethod get=new GetMethod(mUri.toString() + remoteFilepath);
+  HttpMethodParams params=get.getParams();
+  params.setSoTimeout(0);
+  get.setParams(params);
   try {
     int status=executeMethod(get);
     Log.e(TAG,"status return: " + status);

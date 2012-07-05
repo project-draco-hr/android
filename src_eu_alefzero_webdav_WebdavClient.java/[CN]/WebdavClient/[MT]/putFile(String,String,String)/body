@@ -7,6 +7,9 @@
     entity.setOnDatatransferProgressListener(mDataTransferListener);
     Log.e("ASD",f.exists() + " " + entity.getContentLength());
     PutMethod put=new PutMethod(mUri.toString() + remoteTarget);
+    HttpMethodParams params=put.getParams();
+    params.setSoTimeout(0);
+    put.setParams(params);
     put.setRequestEntity(entity);
     Log.d(TAG,"" + put.getURI().toString());
     int status=executeMethod(put);
