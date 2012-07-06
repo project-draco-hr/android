@@ -1,0 +1,53 @@
+{
+  try {
+    Log.v(TAG,"syncing: fetching " + uri);
+    PropFindMethod query=new PropFindMethod(uri);
+    getClient().executeMethod(query);
+    MultiStatus resp=null;
+    resp=query.getResponseBodyAsMultiStatus();
+    for (int i=1; i < resp.getResponses().length; ++i) {
+      WebdavEntry we=new WebdavEntry(resp.getResponses()[i],getUri().getPath());
+      OCFile file=fillOCFile(we);
+      file.setParentId(parentId);
+      getStorageManager().saveFile(file);
+      if (parentId == 0)       parentId=file.getFileId();
+    }
+    Vector<OCFile> files=getStorageManager().getDirectoryContent(getStorageManager().getFileById(parentId));
+    OCFile file;
+    for (int i=0; i < files.size(); ) {
+      file=files.get(i);
+      if (file.getLastSyncDate() != mCurrentSyncTime && file.getLastSyncDate() != 0) {
+        getStorageManager().removeFile(file);
+        files.remove(i);
+      }
+ else {
+        i++;
+      }
+    }
+    sendStickyBroadcast(true,getStorageManager().getFileById(parentId).getRemotePath());
+    for (    OCFile newFile : files) {
+      if (newFile.getMimetype().equals("DIR")) {
+        fetchData(getUri().toString() + newFile.getRemotePath(),syncResult,newFile.getFileId(),account);
+      }
+    }
+  }
+ catch (  OperationCanceledException e) {
+    e.printStackTrace();
+  }
+catch (  AuthenticatorException e) {
+    syncResult.stats.numAuthExceptions++;
+    e.printStackTrace();
+  }
+catch (  IOException e) {
+    syncResult.stats.numIoExceptions++;
+    e.printStackTrace();
+  }
+catch (  DavException e) {
+    syncResult.stats.numIoExceptions++;
+    e.printStackTrace();
+  }
+catch (  Throwable t) {
+    Log.e(TAG,"problem while synchronizing owncloud account " + account.name,t);
+    t.printStackTrace();
+  }
+}

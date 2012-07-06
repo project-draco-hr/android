@@ -3,7 +3,7 @@
   this.setContentProvider(provider);
   this.setStorageManager(new FileDataStorageManager(account,getContentProvider()));
   Log.d(TAG,"syncing owncloud account " + account.name);
-  sendStickyBroadcast(true,-1);
+  sendStickyBroadcast(true,null);
   PropFindMethod query;
   try {
     mCurrentSyncTime=System.currentTimeMillis();
@@ -16,7 +16,7 @@
       OCFile file=fillOCFile(we);
       file.setParentId(0);
       getStorageManager().saveFile(file);
-      fetchData(getUri().toString(),syncResult,file.getFileId());
+      fetchData(getUri().toString(),syncResult,file.getFileId(),account);
     }
   }
  catch (  OperationCanceledException e) {
@@ -34,9 +34,9 @@ catch (  DavException e) {
     syncResult.stats.numIoExceptions++;
     e.printStackTrace();
   }
-catch (  RuntimeException r) {
-    r.printStackTrace();
-    throw r;
+catch (  Throwable t) {
+    Log.e(TAG,"problem while synchronizing owncloud account " + account.name,t);
+    t.printStackTrace();
   }
-  sendStickyBroadcast(false,-1);
+  sendStickyBroadcast(false,null);
 }

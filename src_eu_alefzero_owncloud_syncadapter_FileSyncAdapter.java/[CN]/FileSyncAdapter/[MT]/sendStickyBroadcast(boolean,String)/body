@@ -2,8 +2,8 @@
   Intent i=new Intent(FileSyncService.SYNC_MESSAGE);
   i.putExtra(FileSyncService.IN_PROGRESS,inProgress);
   i.putExtra(FileSyncService.ACCOUNT_NAME,getAccount().name);
-  if (OCDirId > 0) {
-    i.putExtra(FileSyncService.SYNC_FOLDER,OCDirId);
+  if (dirRemotePath != null) {
+    i.putExtra(FileSyncService.SYNC_FOLDER_REMOTE_PATH,dirRemotePath);
   }
   getContext().sendStickyBroadcast(i);
 }
