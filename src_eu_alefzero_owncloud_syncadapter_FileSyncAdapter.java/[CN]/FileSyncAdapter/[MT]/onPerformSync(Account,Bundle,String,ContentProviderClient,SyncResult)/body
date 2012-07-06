@@ -34,8 +34,9 @@ catch (  DavException e) {
     syncResult.stats.numIoExceptions++;
     e.printStackTrace();
   }
-catch (  Throwable t) {
-    t.printStackTrace();
+catch (  RuntimeException r) {
+    r.printStackTrace();
+    throw r;
   }
   sendStickyBroadcast(false,-1);
 }
