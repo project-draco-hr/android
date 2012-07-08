@@ -8,4 +8,6 @@
   mCreationTimestamp=0;
   mModifiedTimestamp=0;
   mLastSyncDate=0;
+  mKeepInSync=false;
+  mNeedsUpdating=false;
 }

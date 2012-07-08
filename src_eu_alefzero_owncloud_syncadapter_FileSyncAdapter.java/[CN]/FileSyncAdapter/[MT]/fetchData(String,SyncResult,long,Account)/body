@@ -9,6 +9,14 @@
       WebdavEntry we=new WebdavEntry(resp.getResponses()[i],getUri().getPath());
       OCFile file=fillOCFile(we);
       file.setParentId(parentId);
+      if (getStorageManager().getFileByPath(file.getRemotePath()) != null && getStorageManager().getFileByPath(file.getRemotePath()).keepInSync() && file.getModificationTimestamp() > getStorageManager().getFileByPath(file.getRemotePath()).getModificationTimestamp()) {
+        Intent intent=new Intent(this.getContext(),FileDownloader.class);
+        intent.putExtra(FileDownloader.EXTRA_ACCOUNT,getAccount());
+        intent.putExtra(FileDownloader.EXTRA_FILE_PATH,file.getURLDecodedRemotePath());
+        intent.putExtra(FileDownloader.EXTRA_REMOTE_PATH,file.getRemotePath());
+        file.setKeepInSync(true);
+        getContext().startService(intent);
+      }
       getStorageManager().saveFile(file);
       if (parentId == 0)       parentId=file.getFileId();
     }

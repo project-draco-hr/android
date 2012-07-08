@@ -8,4 +8,6 @@
   mLocalPath=source.readString();
   mMimeType=source.readString();
   mNeedsUpdating=source.readInt() == 0;
+  mKeepInSync=source.readInt() == 1;
+  mLastSyncDate=source.readLong();
 }

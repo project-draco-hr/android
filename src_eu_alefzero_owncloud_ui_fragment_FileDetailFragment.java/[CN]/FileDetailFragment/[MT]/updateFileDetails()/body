@@ -8,6 +8,9 @@
       setTimeCreated(mFile.getCreationTimestamp());
     }
     setTimeModified(mFile.getModificationTimestamp());
+    CheckBox cb=(CheckBox)getView().findViewById(R.id.fdKeepInSync);
+    cb.setChecked(mFile.keepInSync());
+    cb.setOnClickListener(this);
     if (mFile.getStoragePath() != null) {
       ImageView preview=(ImageView)getView().findViewById(R.id.fdPreview);
       try {
@@ -26,12 +29,24 @@
             int width=options.outWidth;
             int height=options.outHeight;
             int scale=1;
+            boolean recycle=false;
             if (width >= 2048 || height >= 2048) {
               scale=(int)(Math.ceil(Math.max(height,width) / 2048.));
               options.inSampleSize=scale;
-              bmp.recycle();
-              bmp=BitmapFactory.decodeFile(mFile.getStoragePath(),options);
+              recycle=true;
             }
+            Display display=getActivity().getWindowManager().getDefaultDisplay();
+            Point size=new Point();
+            display.getSize(size);
+            int screenwidth=size.x;
+            Log.e("ASD","W " + width + " SW "+ screenwidth);
+            if (width > screenwidth) {
+              scale=(int)(Math.ceil(Math.max(height,width) / screenwidth));
+              options.inSampleSize=scale;
+              recycle=true;
+            }
+            if (recycle)             bmp.recycle();
+            bmp=BitmapFactory.decodeFile(mFile.getStoragePath(),options);
           }
           if (bmp != null) {
             preview.setImageBitmap(bmp);

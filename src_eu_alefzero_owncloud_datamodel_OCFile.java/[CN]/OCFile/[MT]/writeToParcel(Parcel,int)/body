@@ -8,5 +8,6 @@
   dest.writeString(mLocalPath);
   dest.writeString(mMimeType);
   dest.writeInt(mNeedsUpdating ? 1 : 0);
+  dest.writeInt(mKeepInSync ? 1 : 0);
   dest.writeLong(mLastSyncDate);
 }

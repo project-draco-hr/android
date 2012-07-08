@@ -1,2 +1,5 @@
 {
+  if (oldVersion == 1 && newVersion >= 2) {
+    db.execSQL("ALTER TABLE " + ProviderTableMeta.DB_NAME + " ADD COLUMN "+ ProviderTableMeta.FILE_KEEP_IN_SYNC+ " INTEGER "+ " DEFAULT 0");
+  }
 }

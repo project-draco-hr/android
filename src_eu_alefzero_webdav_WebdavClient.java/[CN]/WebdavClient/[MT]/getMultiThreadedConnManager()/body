@@ -1,0 +1,8 @@
+{
+  if (mConnManager == null) {
+    mConnManager=new MultiThreadedHttpConnectionManager();
+    mConnManager.setMaxConnectionsPerHost(5);
+    mConnManager.setMaxTotalConnections(5);
+  }
+  return mConnManager;
+}
