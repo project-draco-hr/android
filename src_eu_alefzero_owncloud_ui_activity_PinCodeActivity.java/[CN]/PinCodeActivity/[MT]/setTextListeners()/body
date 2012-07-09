@@ -120,7 +120,7 @@
               pinCodeChangeRequest();
             }
  else             if (newPasswordEntered && !confirmingPinCode) {
-              mPinHdr.setText("Confirm your PINCode, please");
+              mPinHdr.setText(R.string.pincode_confirm_your_pincode);
               confirmingPinCode=true;
               clearBoxes();
             }

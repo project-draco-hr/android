@@ -3,7 +3,7 @@
   aBuilder.setMessage("Do yo want to set a new PIN Code").setCancelable(false).setPositiveButton("Yes",new DialogInterface.OnClickListener(){
     @Override public void onClick(    DialogInterface dialog,    int which){
       setChangePincodeView();
-      mPinHdr.setText("Please, insert your new PIN Code");
+      mPinHdr.setText(R.string.pincode_enter_new_pin_code);
       clearBoxes();
       newPasswordEntered=true;
     }

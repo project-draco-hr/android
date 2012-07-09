@@ -18,7 +18,7 @@
     }
 );
     aDialog.show();
-    mPinHdr.setText("Configure your PIN");
+    mPinHdr.setText(R.string.pincode_configure_your_pin);
     clearBoxes();
   }
 }

@@ -1,5 +1,5 @@
 {
   bCancel.setVisibility(View.INVISIBLE);
   bCancel.setVisibility(View.GONE);
-  mPinHdr.setText("Please, Insert your PIN");
+  mPinHdr.setText(R.string.pincode_enter_pin_code);
 }
