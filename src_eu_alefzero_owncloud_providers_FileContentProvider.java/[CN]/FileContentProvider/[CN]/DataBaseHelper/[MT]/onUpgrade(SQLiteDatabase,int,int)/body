@@ -1,5 +1,8 @@
 {
+  Log.i("SQL","Entering in onUpgrade");
   if (oldVersion == 1 && newVersion >= 2) {
+    Log.i("SQL","Entering in the ADD in onUpgrade");
     db.execSQL("ALTER TABLE " + ProviderTableMeta.DB_NAME + " ADD COLUMN "+ ProviderTableMeta.FILE_KEEP_IN_SYNC+ " INTEGER "+ " DEFAULT 0");
   }
+ else   Log.i("SQL","OUT of the ADD in onUpgrade; oldVersion == " + oldVersion + ", newVersion == "+ newVersion);
 }
