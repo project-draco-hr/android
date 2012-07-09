@@ -103,12 +103,12 @@
         if (!pinCodeChecked) {
           pinCodeChecked=checkPincode();
         }
-        if (pinCodeChecked && activity.equals("splash")) {
+        if (pinCodeChecked && activity.equals("FileDisplayActivity")) {
           finish();
         }
  else         if (pinCodeChecked) {
           Intent intent=getIntent();
-          String newState=intent.getStringExtra("pinNewState");
+          String newState=intent.getStringExtra(EXTRA_NEW_STATE);
           if (newState.equals("false")) {
             SharedPreferences.Editor appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
             appPrefs.putBoolean("set_pincode",false);
