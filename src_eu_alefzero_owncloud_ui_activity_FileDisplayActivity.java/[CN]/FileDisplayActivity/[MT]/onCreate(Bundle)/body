@@ -13,6 +13,14 @@
   mLayoutView=getLayoutInflater().inflate(R.layout.files,null);
   if (AccountUtils.accountsAreSetup(this)) {
     initDelayedTilAccountAvailabe();
+    boolean pinStart=false;
+    SharedPreferences appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+    pinStart=appPrefs.getBoolean("set_passcode",false);
+    if (pinStart) {
+      Intent i=new Intent(getApplicationContext(),PinCodeActivity.class);
+      i.putExtra("activity","splash");
+      startActivity(i);
+    }
   }
  else {
     setContentView(R.layout.no_account_available);

@@ -1,0 +1,9 @@
+{
+  mPinHdr.setText("Configure your PIN");
+  bCancel.setOnClickListener(new OnClickListener(){
+    @Override public void onClick(    View v){
+      finish();
+    }
+  }
+);
+}

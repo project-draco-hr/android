@@ -1,0 +1,23 @@
+{
+  super.onCreate(savedInstanceState);
+  setContentView(R.layout.pincodelock);
+  Intent intent=getIntent();
+  activity=intent.getStringExtra("activity");
+  bCancel=(Button)findViewById(R.id.cancel);
+  mPinHdr=(TextView)findViewById(R.id.pinHdr);
+  mText1=(EditText)findViewById(R.id.txt1);
+  mText1.requestFocus();
+  mText2=(EditText)findViewById(R.id.txt2);
+  mText3=(EditText)findViewById(R.id.txt3);
+  mText4=(EditText)findViewById(R.id.txt4);
+  SharedPreferences appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+  if (appPrefs.getString("PrefPinCode1",null) == null) {
+    setChangePincodeView();
+    pinCodeChecked=true;
+    newPasswordEntered=true;
+  }
+ else {
+    setInitView();
+  }
+  setTextListeners();
+}
