@@ -1,0 +1,169 @@
+{
+  mText1.addTextChangedListener(new TextWatcher(){
+    @Override public void onTextChanged(    CharSequence s,    int start,    int before,    int count){
+      if (s.length() > 0) {
+        if (!confirmingPinCode) {
+          tempText[0]=mText1.getText().toString();
+        }
+        mText2.requestFocus();
+      }
+    }
+    @Override public void beforeTextChanged(    CharSequence s,    int start,    int count,    int after){
+    }
+    @Override public void afterTextChanged(    Editable s){
+    }
+  }
+);
+  mText2.addTextChangedListener(new TextWatcher(){
+    @Override public void onTextChanged(    CharSequence s,    int start,    int before,    int count){
+      if (s.length() > 0) {
+        if (!confirmingPinCode) {
+          tempText[1]=mText2.getText().toString();
+        }
+        mText3.requestFocus();
+      }
+    }
+    @Override public void beforeTextChanged(    CharSequence s,    int start,    int count,    int after){
+    }
+    @Override public void afterTextChanged(    Editable s){
+    }
+  }
+);
+  mText2.setOnKeyListener(new OnKeyListener(){
+    @Override public boolean onKey(    View v,    int keyCode,    KeyEvent event){
+      if (keyCode == KeyEvent.KEYCODE_DEL && bChange) {
+        mText1.setText("");
+        mText1.requestFocus();
+        tempText[0]="";
+        bChange=false;
+      }
+ else       if (!bChange) {
+        bChange=true;
+      }
+      return false;
+    }
+  }
+);
+  mText2.setOnFocusChangeListener(new OnFocusChangeListener(){
+    @Override public void onFocusChange(    View v,    boolean hasFocus){
+      if (mText1.getText().toString().equals("")) {
+        mText1.requestFocus();
+      }
+    }
+  }
+);
+  mText3.addTextChangedListener(new TextWatcher(){
+    @Override public void onTextChanged(    CharSequence s,    int start,    int before,    int count){
+      if (s.length() > 0) {
+        if (!confirmingPinCode) {
+          tempText[2]=mText3.getText().toString();
+        }
+        mText4.requestFocus();
+      }
+    }
+    @Override public void beforeTextChanged(    CharSequence s,    int start,    int count,    int after){
+    }
+    @Override public void afterTextChanged(    Editable s){
+    }
+  }
+);
+  mText3.setOnKeyListener(new OnKeyListener(){
+    @Override public boolean onKey(    View v,    int keyCode,    KeyEvent event){
+      if (keyCode == KeyEvent.KEYCODE_DEL && bChange) {
+        mText2.requestFocus();
+        tempText[1]="";
+        mText2.setText("");
+        bChange=false;
+      }
+ else       if (!bChange) {
+        bChange=true;
+      }
+      return false;
+    }
+  }
+);
+  mText3.setOnFocusChangeListener(new OnFocusChangeListener(){
+    @Override public void onFocusChange(    View v,    boolean hasFocus){
+      if (mText1.getText().toString().equals("")) {
+        mText1.requestFocus();
+      }
+ else       if (mText2.getText().toString().equals("")) {
+        mText2.requestFocus();
+      }
+    }
+  }
+);
+  mText4.addTextChangedListener(new TextWatcher(){
+    @Override public void onTextChanged(    CharSequence s,    int start,    int before,    int count){
+      if (s.length() > 0) {
+        if (!confirmingPinCode) {
+          tempText[3]=mText4.getText().toString();
+        }
+        mText1.requestFocus();
+        if (!pinCodeChecked) {
+          pinCodeChecked=checkPincode();
+        }
+        if (pinCodeChecked && activity.equals("splash")) {
+          finish();
+        }
+ else         if (pinCodeChecked) {
+          Intent intent=getIntent();
+          String newState=intent.getStringExtra("pinNewState");
+          if (newState.equals("false")) {
+            SharedPreferences.Editor appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
+            appPrefs.putBoolean("set_pincode",false);
+            appPrefs.commit();
+            finish();
+          }
+ else {
+            if (!confirmingPinCode && !newPasswordEntered) {
+              pinCodeChangeRequest();
+            }
+ else             if (newPasswordEntered && !confirmingPinCode) {
+              mPinHdr.setText("Confirm your PINCode, please");
+              confirmingPinCode=true;
+              clearBoxes();
+            }
+ else {
+              confirmPincode();
+            }
+          }
+        }
+      }
+    }
+    @Override public void beforeTextChanged(    CharSequence s,    int start,    int count,    int after){
+    }
+    @Override public void afterTextChanged(    Editable s){
+    }
+  }
+);
+  mText4.setOnKeyListener(new OnKeyListener(){
+    @Override public boolean onKey(    View v,    int keyCode,    KeyEvent event){
+      if (keyCode == KeyEvent.KEYCODE_DEL && bChange) {
+        mText3.requestFocus();
+        tempText[2]="";
+        mText3.setText("");
+        bChange=false;
+      }
+ else       if (!bChange) {
+        bChange=true;
+      }
+      return false;
+    }
+  }
+);
+  mText4.setOnFocusChangeListener(new OnFocusChangeListener(){
+    @Override public void onFocusChange(    View v,    boolean hasFocus){
+      if (mText1.getText().toString().equals("")) {
+        mText1.requestFocus();
+      }
+ else       if (mText2.getText().toString().equals("")) {
+        mText2.requestFocus();
+      }
+ else       if (mText3.getText().toString().equals("")) {
+        mText3.requestFocus();
+      }
+    }
+  }
+);
+}

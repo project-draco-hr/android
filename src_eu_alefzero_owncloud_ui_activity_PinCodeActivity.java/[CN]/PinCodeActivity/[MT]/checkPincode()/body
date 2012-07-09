@@ -1,0 +1,27 @@
+{
+  SharedPreferences appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+  String pText1=appPrefs.getString("PrefPinCode1",null);
+  String pText2=appPrefs.getString("PrefPinCode2",null);
+  String pText3=appPrefs.getString("PrefPinCode3",null);
+  String pText4=appPrefs.getString("PrefPinCode4",null);
+  if (tempText[0].equals(pText1) && tempText[1].equals(pText2) && tempText[2].equals(pText3)&& tempText[3].equals(pText4)) {
+    return true;
+  }
+ else {
+    AlertDialog aDialog=new AlertDialog.Builder(this).create();
+    aDialog.setTitle("ERROR");
+    aDialog.setMessage("Wrong PIN");
+    aDialog.setButton("OK",new DialogInterface.OnClickListener(){
+      @Override public void onClick(      DialogInterface dialog,      int which){
+        return;
+      }
+    }
+);
+    aDialog.show();
+    clearBoxes();
+    mPinHdr.setText("Configure your PIN");
+    newPasswordEntered=true;
+    confirmingPinCode=false;
+  }
+  return false;
+}
