@@ -1,0 +1,21 @@
+{
+  WebdavClient wc=new WebdavClient(mAccount,getSherlockActivity().getApplicationContext());
+  AccountManager am=AccountManager.get(getSherlockActivity());
+  String baseUrl=am.getUserData(mAccount,AccountAuthenticator.KEY_OC_BASE_URL);
+  OwnCloudVersion ocv=new OwnCloudVersion(am.getUserData(mAccount,AccountAuthenticator.KEY_OC_VERSION));
+  String webdav_path=AccountUtils.getWebdavPath(ocv);
+  Log.d("ASD","" + baseUrl + webdav_path+ mOld.getRemotePath());
+  Log.e("ASD",Uri.parse(baseUrl).getPath() == null ? "" : Uri.parse(baseUrl).getPath() + webdav_path + mNew.getRemotePath());
+  LocalMoveMethod move=new LocalMoveMethod(baseUrl + webdav_path + mOld.getRemotePath(),Uri.parse(baseUrl).getPath() == null ? "" : Uri.parse(baseUrl).getPath() + webdav_path + mNew.getRemotePath());
+  try {
+    int status=wc.executeMethod(move);
+    Log.e("ASD","" + move.getQueryString());
+    Log.d("move","returned status " + status);
+  }
+ catch (  HttpException e) {
+    e.printStackTrace();
+  }
+catch (  IOException e) {
+    e.printStackTrace();
+  }
+}

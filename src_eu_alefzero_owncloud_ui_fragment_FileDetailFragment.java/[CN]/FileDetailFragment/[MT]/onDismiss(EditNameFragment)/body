@@ -1,0 +1,32 @@
+{
+  Log.e("ASD","ondismiss");
+  if (dialog instanceof EditNameFragment) {
+    if (((EditNameFragment)dialog).getResult()) {
+      String newFilename=((EditNameFragment)dialog).getNewFilename();
+      Log.d(TAG,"name edit dialog dismissed with new name " + newFilename);
+      if (!newFilename.equals(mFile.getFileName())) {
+        FileDataStorageManager fdsm=new FileDataStorageManager(mAccount,getActivity().getContentResolver());
+        if (fdsm.getFileById(mFile.getFileId()) != null) {
+          OCFile newFile=new OCFile(fdsm.getFileById(mFile.getParentId()).getRemotePath() + "/" + newFilename);
+          newFile.setCreationTimestamp(mFile.getCreationTimestamp());
+          newFile.setFileId(mFile.getFileId());
+          newFile.setFileLength(mFile.getFileLength());
+          newFile.setKeepInSync(mFile.keepInSync());
+          newFile.setLastSyncDate(mFile.getLastSyncDate());
+          newFile.setMimetype(mFile.getMimetype());
+          newFile.setModificationTimestamp(mFile.getModificationTimestamp());
+          newFile.setParentId(mFile.getParentId());
+          newFile.setStoragePath(mFile.getStoragePath());
+          fdsm.removeFile(mFile);
+          fdsm.saveFile(newFile);
+          new Thread(new RenameRunnable(mFile,newFile,mAccount)).start();
+          mFile=newFile;
+          updateFileDetails(mFile,mAccount);
+        }
+      }
+    }
+  }
+ else {
+    Log.e(TAG,"Unknown dialog intance passed to onDismissDalog: " + dialog.getClass().getCanonicalName());
+  }
+}

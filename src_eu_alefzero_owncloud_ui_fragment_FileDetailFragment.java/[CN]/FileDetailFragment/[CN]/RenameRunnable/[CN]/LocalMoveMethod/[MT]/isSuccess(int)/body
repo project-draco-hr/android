@@ -1,0 +1,3 @@
+{
+  return status == 201 || status == 204;
+}

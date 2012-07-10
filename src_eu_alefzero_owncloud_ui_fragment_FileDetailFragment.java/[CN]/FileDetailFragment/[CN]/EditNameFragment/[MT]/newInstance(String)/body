@@ -1,0 +1,7 @@
+{
+  EditNameFragment f=new EditNameFragment();
+  Bundle args=new Bundle();
+  args.putString("filename",filename);
+  f.setArguments(args);
+  return f;
+}

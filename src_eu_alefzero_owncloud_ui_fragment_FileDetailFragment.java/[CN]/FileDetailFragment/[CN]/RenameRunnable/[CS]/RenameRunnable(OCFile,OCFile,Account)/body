@@ -1,0 +1,5 @@
+{
+  mOld=oldFile;
+  mNew=newFile;
+  mAccount=account;
+}
