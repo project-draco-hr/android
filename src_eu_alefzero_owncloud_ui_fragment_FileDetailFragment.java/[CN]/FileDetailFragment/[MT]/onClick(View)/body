@@ -1,6 +1,5 @@
 {
   if (v.getId() == R.id.fdDownloadBtn) {
-    Toast.makeText(getActivity(),"Downloading",Toast.LENGTH_LONG).show();
     Intent i=new Intent(getActivity(),FileDownloader.class);
     i.putExtra(FileDownloader.EXTRA_ACCOUNT,mAccount);
     i.putExtra(FileDownloader.EXTRA_REMOTE_PATH,mFile.getRemotePath());
