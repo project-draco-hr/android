@@ -17,11 +17,7 @@
           newFile.setModificationTimestamp(mFile.getModificationTimestamp());
           newFile.setParentId(mFile.getParentId());
           newFile.setStoragePath(mFile.getStoragePath());
-          fdsm.removeFile(mFile);
-          fdsm.saveFile(newFile);
-          new Thread(new RenameRunnable(mFile,newFile,mAccount)).start();
-          mFile=newFile;
-          updateFileDetails(mFile,mAccount);
+          new Thread(new RenameRunnable(mFile,newFile,mAccount,new Handler())).start();
         }
       }
     }

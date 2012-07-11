@@ -9,6 +9,18 @@
   LocalMoveMethod move=new LocalMoveMethod(baseUrl + webdav_path + mOld.getRemotePath(),Uri.parse(baseUrl).getPath() == null ? "" : Uri.parse(baseUrl).getPath() + webdav_path + mNew.getRemotePath());
   try {
     int status=wc.executeMethod(move);
+    if (move.succeeded()) {
+      FileDataStorageManager fdsm=new FileDataStorageManager(mAccount,getActivity().getContentResolver());
+      fdsm.removeFile(mOld);
+      fdsm.saveFile(mNew);
+      mFile=mNew;
+      mHandler.post(new Runnable(){
+        @Override public void run(){
+          updateFileDetails(mFile,mAccount);
+        }
+      }
+);
+    }
     Log.e("ASD","" + move.getQueryString());
     Log.d("move","returned status " + status);
   }

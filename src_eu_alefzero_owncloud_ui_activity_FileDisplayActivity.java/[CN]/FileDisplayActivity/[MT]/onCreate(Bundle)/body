@@ -3,6 +3,7 @@
   super.onCreate(savedInstanceState);
   requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
   setSupportProgressBarIndeterminateVisibility(false);
+  Thread.setDefaultUncaughtExceptionHandler(new CrashHandler(getApplicationContext()));
   if (savedInstanceState != null) {
     mDirs=savedInstanceState.getStringArray(KEY_DIR_ARRAY);
     mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
