@@ -1,10 +1,10 @@
 {
   try {
-    Log.v(TAG,"syncing: fetching " + uri);
     PropFindMethod query=new PropFindMethod(uri);
     getClient().executeMethod(query);
     MultiStatus resp=null;
     resp=query.getResponseBodyAsMultiStatus();
+    List<OCFile> updatedFiles=new Vector<OCFile>(resp.getResponses().length - 1);
     for (int i=1; i < resp.getResponses().length; ++i) {
       WebdavEntry we=new WebdavEntry(resp.getResponses()[i],getUri().getPath());
       OCFile file=fillOCFile(we);
@@ -19,9 +19,10 @@
         getContext().startService(intent);
       }
       if (getStorageManager().getFileByPath(file.getRemotePath()) != null)       file.setKeepInSync(getStorageManager().getFileByPath(file.getRemotePath()).keepInSync());
-      getStorageManager().saveFile(file);
+      updatedFiles.add(file);
       if (parentId == 0)       parentId=file.getFileId();
     }
+    getStorageManager().saveFiles(updatedFiles);
     Vector<OCFile> files=getStorageManager().getDirectoryContent(getStorageManager().getFileById(parentId));
     OCFile file;
     for (int i=0; i < files.size(); ) {
