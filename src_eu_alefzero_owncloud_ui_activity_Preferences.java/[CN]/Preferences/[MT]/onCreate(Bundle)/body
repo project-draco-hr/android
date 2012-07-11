@@ -15,7 +15,7 @@
     }
   }
 );
-  CheckBoxPreference pCode=(CheckBoxPreference)findPreference("set_pincode");
+  pCode=(CheckBoxPreference)findPreference("set_pincode");
   if (pCode != null) {
     pCode.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
       @Override public boolean onPreferenceChange(      Preference preference,      Object newValue){

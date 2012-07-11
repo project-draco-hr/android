@@ -113,7 +113,7 @@
             SharedPreferences.Editor appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
             appPrefs.putBoolean("set_pincode",false);
             appPrefs.commit();
-            finish();
+            pinCodeEnd(false);
           }
  else {
             if (!confirmingPinCode && !newPasswordEntered) {

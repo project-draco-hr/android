@@ -1,0 +1,16 @@
+{
+  if (state) {
+    bCancel.setVisibility(View.VISIBLE);
+    bCancel.setOnClickListener(new OnClickListener(){
+      @Override public void onClick(      View v){
+        SharedPreferences.Editor appPrefsE=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
+        SharedPreferences appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        boolean state=appPrefs.getBoolean("set_pincode",false);
+        appPrefsE.putBoolean("set_pincode",!state);
+        appPrefsE.commit();
+        finish();
+      }
+    }
+);
+  }
+}

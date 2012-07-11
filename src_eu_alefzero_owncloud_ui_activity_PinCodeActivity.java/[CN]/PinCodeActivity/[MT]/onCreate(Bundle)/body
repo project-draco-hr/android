@@ -12,13 +12,27 @@
   mText3=(EditText)findViewById(R.id.txt3);
   mText4=(EditText)findViewById(R.id.txt4);
   SharedPreferences appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-  if (appPrefs.getString("PrefPinCode1",null) == null) {
-    setChangePincodeView();
+  if ((appPrefs.getString("PrefPinCode1",null) == null)) {
+    setInitView();
     pinCodeChecked=true;
     newPasswordEntered=true;
   }
+ else   if (appPrefs.getBoolean("set_pincode",false)) {
+    if (activity.equals("preferences")) {
+      mPinHdr.setText(R.string.pincode_configure_your_pin);
+      setChangePincodeView(true);
+    }
  else {
-    setInitView();
+      bCancel.setVisibility(View.INVISIBLE);
+      bCancel.setVisibility(View.GONE);
+      mPinHdr.setText(R.string.pincode_enter_pin_code);
+      setChangePincodeView(false);
+    }
+  }
+ else {
+    mPinHdr.setText(R.string.pincode_enter_pin_code);
+    pinCodeChecked=true;
+    setChangePincodeView(true);
   }
   setTextListeners();
 }

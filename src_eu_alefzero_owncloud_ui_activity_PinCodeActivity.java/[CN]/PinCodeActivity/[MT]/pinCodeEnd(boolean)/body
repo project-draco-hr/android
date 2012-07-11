@@ -1,0 +1,19 @@
+{
+  AlertDialog aDialog=new AlertDialog.Builder(this).create();
+  if (state) {
+    aDialog.setTitle("SAVE & EXIT");
+    aDialog.setMessage("PIN Code Activated");
+  }
+ else {
+    aDialog.setTitle("SAVE & EXIT");
+    aDialog.setMessage("PIN Code Removed");
+  }
+  aDialog.setButton("OK",new DialogInterface.OnClickListener(){
+    @Override public void onClick(    DialogInterface dialog,    int which){
+      finish();
+      return;
+    }
+  }
+);
+  aDialog.show();
+}

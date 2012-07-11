@@ -1,22 +1,5 @@
 {
-  AlertDialog.Builder aBuilder=new AlertDialog.Builder(this);
-  aBuilder.setMessage("Do yo want to set a new PIN Code").setCancelable(false).setPositiveButton("Yes",new DialogInterface.OnClickListener(){
-    @Override public void onClick(    DialogInterface dialog,    int which){
-      setChangePincodeView();
-      mPinHdr.setText(R.string.pincode_enter_new_pin_code);
-      clearBoxes();
-      newPasswordEntered=true;
-    }
-  }
-).setNegativeButton("No",new DialogInterface.OnClickListener(){
-    @Override public void onClick(    DialogInterface dialog,    int which){
-      SharedPreferences.Editor appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
-      appPrefs.putBoolean("set_pincode",false);
-      appPrefs.commit();
-      finish();
-    }
-  }
-);
-  AlertDialog alert=aBuilder.create();
-  alert.show();
+  clearBoxes();
+  mPinHdr.setText(R.string.pincode_confirm_your_pincode);
+  confirmingPinCode=true;
 }
