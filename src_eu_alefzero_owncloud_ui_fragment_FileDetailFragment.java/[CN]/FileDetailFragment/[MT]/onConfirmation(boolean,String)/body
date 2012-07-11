@@ -1,0 +1,4 @@
+{
+  if (confirmation && callerTag.equals("REMOVE_CONFIRMATION_FRAGMENT")) {
+  }
+}

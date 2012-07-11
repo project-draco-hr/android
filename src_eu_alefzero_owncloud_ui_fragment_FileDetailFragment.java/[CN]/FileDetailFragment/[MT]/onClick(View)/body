@@ -29,6 +29,13 @@ case R.id.fdRenameBtn:
   dialog.setOnDismissListener(this);
   break;
 }
+case R.id.fdRemoveBtn:
+{
+ConfirmationDialogFragment confDialog=ConfirmationDialogFragment.newInstance("remove " + mFile.getFileName());
+confDialog.setOnConfirmationListener(this);
+confDialog.show(getFragmentManager(),"REMOVE_CONFIRMATION_FRAGMENT");
+break;
+}
 default :
 Log.e(TAG,"Incorrect view clicked!");
 }

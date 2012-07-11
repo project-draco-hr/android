@@ -1,0 +1,14 @@
+{
+  int confirmationTarget=getArguments().getInt(ARG_CONF_TARGET);
+  return new AlertDialog.Builder(getActivity()).setIcon(android.R.drawable.ic_dialog_alert).setMessage(R.string.confirmation_alert_prefix + confirmationTarget + R.string.confirmation_alert_suffix).setPositiveButton(R.string.common_ok,new DialogInterface.OnClickListener(){
+    public void onClick(    DialogInterface dialog,    int whichButton){
+      mListener.onConfirmation(true,getTag());
+    }
+  }
+).setNegativeButton(R.string.common_cancel,new DialogInterface.OnClickListener(){
+    public void onClick(    DialogInterface dialog,    int whichButton){
+      mListener.onConfirmation(false,getTag());
+    }
+  }
+).create();
+}
