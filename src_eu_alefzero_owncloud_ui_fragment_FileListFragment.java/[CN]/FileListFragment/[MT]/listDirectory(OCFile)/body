@@ -14,6 +14,6 @@
     directory=storageManager.getFileById(directory.getParentId());
   }
   mFile=directory;
-  mFiles=storageManager.getDirectoryContent(directory);
-  setListAdapter(new FileListListAdapter(directory,storageManager,getActivity()));
+  mAdapter=new FileListListAdapter(directory,storageManager,getActivity());
+  setListAdapter(mAdapter);
 }

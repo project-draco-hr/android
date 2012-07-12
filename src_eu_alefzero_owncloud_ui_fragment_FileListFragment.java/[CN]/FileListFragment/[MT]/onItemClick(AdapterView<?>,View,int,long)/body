@@ -1,14 +1,16 @@
 {
-  if (mFiles.size() <= position) {
-    throw new IndexOutOfBoundsException("Incorrect item selected");
-  }
-  OCFile file=mFiles.get(position);
-  if (file.getMimetype().equals("DIR")) {
-    mFile=file;
-    listDirectory(file);
-    mContainerActivity.onDirectoryClick(file);
+  OCFile file=(OCFile)mAdapter.getItem(position);
+  if (file != null) {
+    if (file.getMimetype().equals("DIR")) {
+      mFile=file;
+      listDirectory(file);
+      mContainerActivity.onDirectoryClick(file);
+    }
+ else {
+      mContainerActivity.onFileClick(file);
+    }
   }
  else {
-    mContainerActivity.onFileClick(file);
+    Log.d(TAG,"Null object in ListAdapter!!");
   }
 }
