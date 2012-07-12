@@ -1,0 +1,65 @@
+{
+  WebdavClient wc=new WebdavClient(mAccount,getSherlockActivity().getApplicationContext());
+  AccountManager am=AccountManager.get(getSherlockActivity());
+  String baseUrl=am.getUserData(mAccount,AccountAuthenticator.KEY_OC_BASE_URL);
+  OwnCloudVersion ocv=new OwnCloudVersion(am.getUserData(mAccount,AccountAuthenticator.KEY_OC_VERSION));
+  String webdav_path=AccountUtils.getWebdavPath(ocv);
+  Log.d("ASD","" + baseUrl + webdav_path+ mFileToRemove.getRemotePath());
+  DeleteMethod delete=new DeleteMethod(baseUrl + webdav_path + mFileToRemove.getRemotePath());
+  HttpMethodParams params=delete.getParams();
+  params.setSoTimeout(1000);
+  delete.setParams(params);
+  boolean success=false;
+  try {
+    int status=wc.executeMethod(delete);
+    if (delete.succeeded()) {
+      FileDataStorageManager fdsm=new FileDataStorageManager(mAccount,getActivity().getContentResolver());
+      fdsm.removeFile(mFileToRemove);
+      mHandler.post(new Runnable(){
+        @Override public void run(){
+          try {
+            Toast msg=Toast.makeText(getActivity().getApplicationContext(),R.string.remove_success_msg,Toast.LENGTH_LONG);
+            msg.show();
+            if (getActivity() instanceof FileDisplayActivity) {
+              FragmentTransaction transaction=getActivity().getSupportFragmentManager().beginTransaction();
+              transaction.replace(R.id.file_details_container,new FileDetailFragment(null,null));
+              transaction.commit();
+            }
+ else {
+              getActivity().finish();
+            }
+          }
+ catch (          NotFoundException e) {
+            e.printStackTrace();
+          }
+        }
+      }
+);
+      success=true;
+    }
+    Log.e("ASD","" + delete.getQueryString());
+    Log.d("delete","returned status " + status);
+  }
+ catch (  HttpException e) {
+    e.printStackTrace();
+  }
+catch (  IOException e) {
+    e.printStackTrace();
+  }
+ finally {
+    if (!success) {
+      mHandler.post(new Runnable(){
+        @Override public void run(){
+          try {
+            Toast msg=Toast.makeText(getActivity(),R.string.remove_fail_msg,Toast.LENGTH_LONG);
+            msg.show();
+          }
+ catch (          NotFoundException e) {
+            e.printStackTrace();
+          }
+        }
+      }
+);
+    }
+  }
+}

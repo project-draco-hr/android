@@ -1,4 +1,10 @@
 {
-  if (confirmation && callerTag.equals("REMOVE_CONFIRMATION_FRAGMENT")) {
+  if (confirmation && callerTag.equals(FTAG_CONFIRMATION)) {
+    Log.e("ASD","onConfirmation");
+    FileDataStorageManager fdsm=new FileDataStorageManager(mAccount,getActivity().getContentResolver());
+    if (fdsm.getFileById(mFile.getFileId()) != null) {
+      new Thread(new RemoveRunnable(mFile,mAccount,new Handler())).start();
+    }
   }
+ else   if (!confirmation)   Log.d(TAG,"REMOVAL CANCELED");
 }

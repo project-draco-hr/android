@@ -8,9 +8,9 @@
   view=inflater.inflate(mLayout,container,false);
   mView=view;
   if (mLayout == R.layout.file_details_fragment) {
-    getView().findViewById(R.id.fdKeepInSync).setOnClickListener(this);
-    getView().findViewById(R.id.fdRenameBtn).setOnClickListener(this);
-    getView().findViewById(R.id.fdRemoveBtn).setOnClickListener(this);
+    mView.findViewById(R.id.fdKeepInSync).setOnClickListener(this);
+    mView.findViewById(R.id.fdRenameBtn).setOnClickListener(this);
+    mView.findViewById(R.id.fdRemoveBtn).setOnClickListener(this);
   }
   updateFileDetails();
   return view;
