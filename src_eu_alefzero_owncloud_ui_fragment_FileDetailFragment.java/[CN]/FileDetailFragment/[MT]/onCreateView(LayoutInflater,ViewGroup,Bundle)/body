@@ -11,6 +11,7 @@
     mView.findViewById(R.id.fdKeepInSync).setOnClickListener(this);
     mView.findViewById(R.id.fdRenameBtn).setOnClickListener(this);
     mView.findViewById(R.id.fdRemoveBtn).setOnClickListener(this);
+    mPreview=(ImageView)mView.findViewById(R.id.fdPreview);
   }
   updateFileDetails();
   return view;

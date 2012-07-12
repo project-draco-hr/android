@@ -1,0 +1,5 @@
+{
+  if (result != null) {
+    mPreview.setImageBitmap(result);
+  }
+}
