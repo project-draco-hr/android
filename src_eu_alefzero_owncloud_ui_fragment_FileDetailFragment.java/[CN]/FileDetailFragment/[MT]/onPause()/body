@@ -4,6 +4,5 @@
   mDownloadFinishReceiver=null;
   if (mPreview != null) {
     mPreview=null;
-    System.gc();
   }
 }
