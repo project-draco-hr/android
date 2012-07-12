@@ -31,7 +31,7 @@ case R.id.fdRenameBtn:
 }
 case R.id.fdRemoveBtn:
 {
-ConfirmationDialogFragment confDialog=ConfirmationDialogFragment.newInstance("remove " + mFile.getFileName());
+ConfirmationDialogFragment confDialog=ConfirmationDialogFragment.newInstance("to remove " + mFile.getFileName());
 confDialog.setOnConfirmationListener(this);
 confDialog.show(getFragmentManager(),"REMOVE_CONFIRMATION_FRAGMENT");
 break;

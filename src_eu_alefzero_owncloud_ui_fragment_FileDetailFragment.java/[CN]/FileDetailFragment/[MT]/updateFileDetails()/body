@@ -10,8 +10,6 @@
     setTimeModified(mFile.getModificationTimestamp());
     CheckBox cb=(CheckBox)getView().findViewById(R.id.fdKeepInSync);
     cb.setChecked(mFile.keepInSync());
-    cb.setOnClickListener(this);
-    getView().findViewById(R.id.fdRenameBtn).setOnClickListener(this);
     if (mFile.getStoragePath() != null) {
       ImageView preview=(ImageView)getView().findViewById(R.id.fdPreview);
       try {
