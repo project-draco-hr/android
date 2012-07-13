@@ -2,7 +2,6 @@
   Log.i(getClass().toString(),"onCreate() start");
   super.onCreate(savedInstanceState);
   requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-  setSupportProgressBarIndeterminateVisibility(false);
   Thread.setDefaultUncaughtExceptionHandler(new CrashHandler(getApplicationContext()));
   if (savedInstanceState != null) {
     mDirs=savedInstanceState.getStringArray(KEY_DIR_ARRAY);
@@ -27,5 +26,6 @@
     startActivity(intent);
     mForcedLoginToCreateFirstAccount=true;
   }
+  setSupportProgressBarIndeterminateVisibility(false);
   Log.i(getClass().toString(),"onCreate() end");
 }
