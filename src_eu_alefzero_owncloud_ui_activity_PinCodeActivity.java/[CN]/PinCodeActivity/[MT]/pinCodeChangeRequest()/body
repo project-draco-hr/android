@@ -1,5 +1,5 @@
 {
   clearBoxes();
-  mPinHdr.setText(R.string.pincode_confirm_your_pincode);
+  mPinHdr.setText(R.string.pincode_reenter_your_pincode);
   confirmingPinCode=true;
 }

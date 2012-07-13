@@ -8,6 +8,7 @@
         boolean state=appPrefs.getBoolean("set_pincode",false);
         appPrefsE.putBoolean("set_pincode",!state);
         appPrefsE.commit();
+        setInitVars();
         finish();
       }
     }

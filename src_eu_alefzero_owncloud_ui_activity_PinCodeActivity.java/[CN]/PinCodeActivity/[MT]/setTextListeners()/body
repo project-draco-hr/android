@@ -113,6 +113,7 @@
             SharedPreferences.Editor appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
             appPrefs.putBoolean("set_pincode",false);
             appPrefs.commit();
+            setInitVars();
             pinCodeEnd(false);
           }
  else {
@@ -120,7 +121,7 @@
               pinCodeChangeRequest();
             }
  else             if (newPasswordEntered && !confirmingPinCode) {
-              mPinHdr.setText(R.string.pincode_confirm_your_pincode);
+              mPinHdr.setText(R.string.pincode_reenter_your_pincode);
               confirmingPinCode=true;
               clearBoxes();
             }

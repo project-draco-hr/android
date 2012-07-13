@@ -10,7 +10,8 @@
  else {
     AlertDialog aDialog=new AlertDialog.Builder(this).create();
     aDialog.setTitle("ERROR");
-    aDialog.setMessage("Wrong PIN");
+    CharSequence cseq=getString(R.string.pincode_wrong);
+    aDialog.setMessage(cseq);
     aDialog.setButton("OK",new DialogInterface.OnClickListener(){
       @Override public void onClick(      DialogInterface dialog,      int which){
         return;
@@ -19,7 +20,7 @@
 );
     aDialog.show();
     clearBoxes();
-    mPinHdr.setText(R.string.pincode_configure_your_pin);
+    mPinHdr.setText(R.string.pincode_enter_pin_code);
     newPasswordEntered=true;
     confirmingPinCode=false;
   }

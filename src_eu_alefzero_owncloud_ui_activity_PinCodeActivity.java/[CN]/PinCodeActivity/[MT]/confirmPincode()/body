@@ -10,7 +10,8 @@
  else {
     AlertDialog aDialog=new AlertDialog.Builder(this).create();
     aDialog.setTitle("ERROR");
-    aDialog.setMessage("PIN Code Mismatch");
+    CharSequence cseq=getString(R.string.pincode_mismatch);
+    aDialog.setMessage(cseq);
     aDialog.setButton("OK",new DialogInterface.OnClickListener(){
       @Override public void onClick(      DialogInterface dialog,      int which){
         return;

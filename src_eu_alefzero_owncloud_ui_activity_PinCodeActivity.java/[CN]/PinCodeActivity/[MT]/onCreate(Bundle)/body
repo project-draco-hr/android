@@ -17,22 +17,25 @@
     pinCodeChecked=true;
     newPasswordEntered=true;
   }
- else   if (appPrefs.getBoolean("set_pincode",false)) {
-    if (activity.equals("preferences")) {
-      mPinHdr.setText(R.string.pincode_configure_your_pin);
+ else {
+    if (appPrefs.getBoolean("set_pincode",false)) {
+      if (activity.equals("preferences")) {
+        mPinHdr.setText(R.string.pincode_configure_your_pin);
+        pinCodeChecked=true;
+        setChangePincodeView(true);
+      }
+ else {
+        bCancel.setVisibility(View.INVISIBLE);
+        bCancel.setVisibility(View.GONE);
+        mPinHdr.setText(R.string.pincode_enter_pin_code);
+        setChangePincodeView(false);
+      }
+    }
+ else {
+      mPinHdr.setText(R.string.pincode_enter_pin_code);
+      pinCodeChecked=false;
       setChangePincodeView(true);
     }
- else {
-      bCancel.setVisibility(View.INVISIBLE);
-      bCancel.setVisibility(View.GONE);
-      mPinHdr.setText(R.string.pincode_enter_pin_code);
-      setChangePincodeView(false);
-    }
-  }
- else {
-    mPinHdr.setText(R.string.pincode_enter_pin_code);
-    pinCodeChecked=true;
-    setChangePincodeView(true);
   }
   setTextListeners();
 }
