@@ -6,4 +6,5 @@
     transaction.replace(R.id.file_details_container,new FileDetailFragment(null,null));
     transaction.commit();
   }
+  setSupportProgressBarIndeterminateVisibility(false);
 }

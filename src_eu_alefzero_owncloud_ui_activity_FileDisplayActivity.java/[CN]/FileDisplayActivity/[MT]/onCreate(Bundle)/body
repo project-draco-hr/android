@@ -21,11 +21,11 @@
     setContentView(R.layout.no_account_available);
     getSupportActionBar().setNavigationMode(ActionBar.DISPLAY_SHOW_TITLE);
     findViewById(R.id.setup_account).setOnClickListener(this);
+    setSupportProgressBarIndeterminateVisibility(false);
     Intent intent=new Intent(android.provider.Settings.ACTION_ADD_ACCOUNT);
     intent.putExtra(android.provider.Settings.EXTRA_AUTHORITIES,new String[]{AccountAuthenticator.AUTH_TOKEN_TYPE});
     startActivity(intent);
     mForcedLoginToCreateFirstAccount=true;
   }
-  setSupportProgressBarIndeterminateVisibility(false);
   Log.i(getClass().toString(),"onCreate() end");
 }
