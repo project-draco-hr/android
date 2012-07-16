@@ -1,0 +1,4 @@
+{
+  Log.d(TAG,"sync is being cancelled !! ************************************************");
+  super.onSyncCanceled();
+}
