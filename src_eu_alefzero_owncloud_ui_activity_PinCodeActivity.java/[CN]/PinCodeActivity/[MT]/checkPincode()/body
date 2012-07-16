@@ -8,6 +8,7 @@
     return true;
   }
  else {
+    Arrays.fill(tempText,null);
     AlertDialog aDialog=new AlertDialog.Builder(this).create();
     aDialog.setTitle("ERROR");
     CharSequence cseq=getString(R.string.pincode_wrong);

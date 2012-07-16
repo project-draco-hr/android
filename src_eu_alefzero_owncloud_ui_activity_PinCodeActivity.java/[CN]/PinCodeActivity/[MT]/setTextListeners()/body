@@ -34,7 +34,7 @@
       if (keyCode == KeyEvent.KEYCODE_DEL && bChange) {
         mText1.setText("");
         mText1.requestFocus();
-        tempText[0]="";
+        if (!confirmingPinCode)         tempText[0]="";
         bChange=false;
       }
  else       if (!bChange) {
@@ -48,6 +48,9 @@
     @Override public void onFocusChange(    View v,    boolean hasFocus){
       if (mText1.getText().toString().equals("")) {
         mText1.requestFocus();
+      }
+ else {
+        mText1.append("");
       }
     }
   }
@@ -71,7 +74,7 @@
     @Override public boolean onKey(    View v,    int keyCode,    KeyEvent event){
       if (keyCode == KeyEvent.KEYCODE_DEL && bChange) {
         mText2.requestFocus();
-        tempText[1]="";
+        if (!confirmingPinCode)         tempText[1]="";
         mText2.setText("");
         bChange=false;
       }
@@ -117,13 +120,8 @@
             pinCodeEnd(false);
           }
  else {
-            if (!confirmingPinCode && !newPasswordEntered) {
+            if (!confirmingPinCode) {
               pinCodeChangeRequest();
-            }
- else             if (newPasswordEntered && !confirmingPinCode) {
-              mPinHdr.setText(R.string.pincode_reenter_your_pincode);
-              confirmingPinCode=true;
-              clearBoxes();
             }
  else {
               confirmPincode();
@@ -142,7 +140,7 @@
     @Override public boolean onKey(    View v,    int keyCode,    KeyEvent event){
       if (keyCode == KeyEvent.KEYCODE_DEL && bChange) {
         mText3.requestFocus();
-        tempText[2]="";
+        if (!confirmingPinCode)         tempText[2]="";
         mText3.setText("");
         bChange=false;
       }
