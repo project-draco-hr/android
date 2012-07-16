@@ -1,8 +1,5 @@
 {
-  if (preference.equals(mAccountList)) {
-    mAccountList.setSummary(newValue.toString());
-  }
- else   if (preference.equals(mTrackingUpdateInterval)) {
+  if (preference.equals(mTrackingUpdateInterval)) {
     String trackingSummary=getResources().getString(R.string.prefs_trackmydevice_interval_summary);
     trackingSummary=String.format(trackingSummary,newValue.toString());
     mTrackingUpdateInterval.setSummary(trackingSummary);
