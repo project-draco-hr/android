@@ -1,8 +1,10 @@
 {
-  this.setAccount(account);
+  mCancellation=false;
+  mAccount=account;
+  this.setAccount(mAccount);
   this.setContentProvider(provider);
-  this.setStorageManager(new FileDataStorageManager(account,getContentProvider()));
-  Log.d(TAG,"syncing owncloud account " + account.name);
+  this.setStorageManager(new FileDataStorageManager(mAccount,getContentProvider()));
+  Log.d(TAG,"syncing owncloud account " + mAccount.name);
   sendStickyBroadcast(true,null);
   PropFindMethod query;
   try {
@@ -16,7 +18,9 @@
       OCFile file=fillOCFile(we);
       file.setParentId(0);
       getStorageManager().saveFile(file);
-      fetchData(getUri().toString(),syncResult,file.getFileId(),account);
+      if (!mCancellation) {
+        fetchData(getUri().toString(),syncResult,file.getFileId());
+      }
     }
   }
  catch (  OperationCanceledException e) {

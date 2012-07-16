@@ -1,4 +1,5 @@
 {
-  Log.d(TAG,"sync is being cancelled !! ************************************************");
+  Log.d(TAG,"Synchronization of " + mAccount.name + " has been requested to cancell");
+  mCancellation=true;
   super.onSyncCanceled();
 }

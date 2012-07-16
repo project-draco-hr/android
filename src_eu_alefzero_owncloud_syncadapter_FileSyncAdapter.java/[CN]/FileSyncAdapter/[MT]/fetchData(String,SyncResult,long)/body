@@ -36,11 +36,13 @@
       }
     }
     sendStickyBroadcast(true,getStorageManager().getFileById(parentId).getRemotePath());
-    for (    OCFile newFile : files) {
+    for (int i=0; i < files.size() && !mCancellation; i++) {
+      OCFile newFile=files.get(i);
       if (newFile.getMimetype().equals("DIR")) {
-        fetchData(getUri().toString() + newFile.getRemotePath(),syncResult,newFile.getFileId(),account);
+        fetchData(getUri().toString() + newFile.getRemotePath(),syncResult,newFile.getFileId());
       }
     }
+    if (mCancellation)     Log.d(TAG,"Leaving " + uri + " because cancellation request");
   }
  catch (  OperationCanceledException e) {
     e.printStackTrace();
@@ -58,7 +60,7 @@ catch (  DavException e) {
     e.printStackTrace();
   }
 catch (  Throwable t) {
-    Log.e(TAG,"problem while synchronizing owncloud account " + account.name,t);
+    Log.e(TAG,"problem while synchronizing owncloud account " + mAccount.name,t);
     t.printStackTrace();
   }
 }
