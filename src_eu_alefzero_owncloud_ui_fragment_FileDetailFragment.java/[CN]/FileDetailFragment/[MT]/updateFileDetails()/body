@@ -19,9 +19,10 @@
       downloadButton.setOnClickListener(new OnClickListener(){
         @Override public void onClick(        View v){
           String storagePath=mFile.getStoragePath();
+          String encodedStoragePath=WebdavUtils.encodePath(storagePath);
           try {
             Intent i=new Intent(Intent.ACTION_VIEW);
-            i.setDataAndType(Uri.parse("file://" + storagePath),mFile.getMimetype());
+            i.setDataAndType(Uri.parse("file://" + encodedStoragePath),mFile.getMimetype());
             i.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
             startActivity(i);
           }
@@ -33,7 +34,7 @@
               Intent i=new Intent(Intent.ACTION_VIEW);
               mimeType=MimeTypeMap.getSingleton().getMimeTypeFromExtension(storagePath.substring(storagePath.lastIndexOf('.') + 1));
               if (mimeType != null && !mimeType.equals(mFile.getMimetype())) {
-                i.setDataAndType(Uri.parse("file://" + mFile.getStoragePath()),mimeType);
+                i.setDataAndType(Uri.parse("file://" + encodedStoragePath),mimeType);
                 i.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                 startActivity(i);
                 toastIt=false;

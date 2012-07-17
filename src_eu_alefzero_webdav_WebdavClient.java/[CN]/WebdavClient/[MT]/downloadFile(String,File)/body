@@ -1,6 +1,6 @@
 {
   boolean ret=false;
-  GetMethod get=new GetMethod(mUri.toString() + WebdavUtils.encode(remoteFilepath));
+  GetMethod get=new GetMethod(mUri.toString() + WebdavUtils.encodePath(remoteFilepath));
   HttpMethodParams params=get.getParams();
   params.setSoTimeout(0);
   get.setParams(params);

@@ -4,8 +4,8 @@
   String baseUrl=am.getUserData(mAccount,AccountAuthenticator.KEY_OC_BASE_URL);
   OwnCloudVersion ocv=new OwnCloudVersion(am.getUserData(mAccount,AccountAuthenticator.KEY_OC_VERSION));
   String webdav_path=AccountUtils.getWebdavPath(ocv);
-  Log.d("ASD","" + baseUrl + webdav_path+ WebdavUtils.encode(mFileToRemove.getRemotePath()));
-  DeleteMethod delete=new DeleteMethod(baseUrl + webdav_path + WebdavUtils.encode(mFileToRemove.getRemotePath()));
+  Log.d("ASD","" + baseUrl + webdav_path+ WebdavUtils.encodePath(mFileToRemove.getRemotePath()));
+  DeleteMethod delete=new DeleteMethod(baseUrl + webdav_path + WebdavUtils.encodePath(mFileToRemove.getRemotePath()));
   HttpMethodParams params=delete.getParams();
   params.setSoTimeout(1000);
   delete.setParams(params);

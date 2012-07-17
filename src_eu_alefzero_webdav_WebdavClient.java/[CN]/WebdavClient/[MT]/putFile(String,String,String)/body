@@ -6,7 +6,7 @@
     FileRequestEntity entity=new FileRequestEntity(f,contentType);
     entity.setOnDatatransferProgressListener(mDataTransferListener);
     Log.e("ASD",f.exists() + " " + entity.getContentLength());
-    PutMethod put=new PutMethod(mUri.toString() + WebdavUtils.encode(remoteTarget));
+    PutMethod put=new PutMethod(mUri.toString() + WebdavUtils.encodePath(remoteTarget));
     HttpMethodParams params=put.getParams();
     params.setSoTimeout(0);
     put.setParams(params);
