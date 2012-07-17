@@ -1,14 +1,19 @@
 {
   AlertDialog aDialog=new AlertDialog.Builder(this).create();
   if (state) {
-    aDialog.setTitle("SAVE & EXIT");
-    aDialog.setMessage("PIN Code Activated");
+    CharSequence saveSeq=getString(R.string.common_save_exit);
+    aDialog.setTitle(saveSeq);
+    CharSequence cseq=getString(R.string.pincode_stored);
+    aDialog.setMessage(cseq);
   }
  else {
-    aDialog.setTitle("SAVE & EXIT");
-    aDialog.setMessage("PIN Code Removed");
+    CharSequence saveSeq=getString(R.string.common_save_exit);
+    aDialog.setTitle(saveSeq);
+    CharSequence cseq=getString(R.string.pincode_removed);
+    aDialog.setMessage(cseq);
   }
-  aDialog.setButton("OK",new DialogInterface.OnClickListener(){
+  CharSequence okSeq=getString(R.string.common_ok);
+  aDialog.setButton(okSeq,new DialogInterface.OnClickListener(){
     @Override public void onClick(    DialogInterface dialog,    int which){
       finish();
       return;

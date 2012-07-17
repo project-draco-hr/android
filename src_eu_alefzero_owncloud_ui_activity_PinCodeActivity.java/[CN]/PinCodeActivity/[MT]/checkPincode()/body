@@ -10,10 +10,12 @@
  else {
     Arrays.fill(tempText,null);
     AlertDialog aDialog=new AlertDialog.Builder(this).create();
-    aDialog.setTitle("ERROR");
+    CharSequence errorSeq=getString(R.string.common_error);
+    aDialog.setTitle(errorSeq);
     CharSequence cseq=getString(R.string.pincode_wrong);
     aDialog.setMessage(cseq);
-    aDialog.setButton("OK",new DialogInterface.OnClickListener(){
+    CharSequence okSeq=getString(R.string.common_ok);
+    aDialog.setButton(okSeq,new DialogInterface.OnClickListener(){
       @Override public void onClick(      DialogInterface dialog,      int which){
         return;
       }

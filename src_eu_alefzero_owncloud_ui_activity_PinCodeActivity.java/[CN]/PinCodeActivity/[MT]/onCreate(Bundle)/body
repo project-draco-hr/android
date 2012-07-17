@@ -32,7 +32,7 @@
       }
     }
  else {
-      mPinHdr.setText(R.string.pincode_enter_pin_code);
+      mPinHdr.setText(R.string.pincode_remove_your_pincode);
       pinCodeChecked=false;
       setChangePincodeView(true);
     }

@@ -5,6 +5,7 @@
         if (!confirmingPinCode) {
           tempText[0]=mText1.getText().toString();
         }
+        mText1.setTransformationMethod(new PasswordTransformationMethod());
         mText2.requestFocus();
       }
     }
@@ -48,9 +49,6 @@
     @Override public void onFocusChange(    View v,    boolean hasFocus){
       if (mText1.getText().toString().equals("")) {
         mText1.requestFocus();
-      }
- else {
-        mText1.append("");
       }
     }
   }
