@@ -6,7 +6,7 @@
   if (savedInstanceState != null) {
     mDirs=savedInstanceState.getStringArray(KEY_DIR_ARRAY);
     mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
-    mDirectories.add("/");
+    mDirectories.add(OCFile.PATH_SEPARATOR);
     if (mDirs != null)     for (    String s : mDirs)     mDirectories.insert(s,0);
     mCurrentDir=savedInstanceState.getParcelable(FileDetailFragment.EXTRA_FILE);
   }

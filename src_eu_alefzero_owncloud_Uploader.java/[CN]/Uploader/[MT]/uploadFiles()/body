@@ -11,12 +11,12 @@
       if (!c.moveToFirst())       continue;
       final String display_name=c.getString(c.getColumnIndex(Media.DISPLAY_NAME)), data=c.getString(c.getColumnIndex(Media.DATA));
       local[i]=data;
-      remote[i]=mUploadPath + Uri.encode(display_name);
+      remote[i]=mUploadPath + display_name;
     }
  else     if (uri.getScheme().equals("file")) {
       final File file=new File(Uri.decode(uri.toString()).replace(uri.getScheme() + "://",""));
       local[i]=file.getAbsolutePath();
-      remote[i]=mUploadPath + Uri.encode(file.getName());
+      remote[i]=mUploadPath + file.getName();
     }
   }
   Intent intent=new Intent(getApplicationContext(),FileUploader.class);

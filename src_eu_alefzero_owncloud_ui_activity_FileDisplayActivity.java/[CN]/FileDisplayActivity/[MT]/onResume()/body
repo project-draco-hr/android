@@ -39,7 +39,7 @@
       for (      String s : mDirs)       mDirectories.add(s);
     }
  else {
-      mDirectories.add("/");
+      mDirectories.add(OCFile.PATH_SEPARATOR);
     }
     ActionBar action_bar=getSupportActionBar();
     action_bar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);

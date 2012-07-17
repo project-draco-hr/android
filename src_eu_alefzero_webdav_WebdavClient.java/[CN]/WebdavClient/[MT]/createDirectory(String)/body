@@ -1,6 +1,6 @@
 {
   try {
-    MkColMethod mkcol=new MkColMethod(mUri.toString() + path);
+    MkColMethod mkcol=new MkColMethod(mUri.toString() + WebdavUtils.encode(path));
     int status=executeMethod(mkcol);
     Log.d(TAG,"Status returned " + status);
     Log.d(TAG,"uri: " + mkcol.getURI().toString());

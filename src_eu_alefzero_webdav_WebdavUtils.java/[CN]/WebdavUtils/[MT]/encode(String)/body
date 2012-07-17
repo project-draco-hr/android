@@ -1,0 +1,5 @@
+{
+  String encodedPath=Uri.encode(remoteFilePath,"/");
+  if (!encodedPath.startsWith("/"))   encodedPath="/" + encodedPath;
+  return encodedPath;
+}

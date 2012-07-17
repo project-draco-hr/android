@@ -7,7 +7,7 @@
       if (!newFilename.equals(mFile.getFileName())) {
         FileDataStorageManager fdsm=new FileDataStorageManager(mAccount,getActivity().getContentResolver());
         if (fdsm.getFileById(mFile.getFileId()) != null) {
-          OCFile newFile=new OCFile(fdsm.getFileById(mFile.getParentId()).getRemotePath() + "/" + newFilename);
+          OCFile newFile=new OCFile(fdsm.getFileById(mFile.getParentId()).getRemotePath() + OCFile.PATH_SEPARATOR + newFilename);
           newFile.setCreationTimestamp(mFile.getCreationTimestamp());
           newFile.setFileId(mFile.getFileId());
           newFile.setFileLength(mFile.getFileLength());

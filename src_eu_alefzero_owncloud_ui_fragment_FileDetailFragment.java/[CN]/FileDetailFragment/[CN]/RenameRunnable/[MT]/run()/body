@@ -4,9 +4,9 @@
   String baseUrl=am.getUserData(mAccount,AccountAuthenticator.KEY_OC_BASE_URL);
   OwnCloudVersion ocv=new OwnCloudVersion(am.getUserData(mAccount,AccountAuthenticator.KEY_OC_VERSION));
   String webdav_path=AccountUtils.getWebdavPath(ocv);
-  Log.d("ASD","" + baseUrl + webdav_path+ mOld.getRemotePath());
-  Log.e("ASD",Uri.parse(baseUrl).getPath() == null ? "" : Uri.parse(baseUrl).getPath() + webdav_path + mNew.getRemotePath());
-  LocalMoveMethod move=new LocalMoveMethod(baseUrl + webdav_path + mOld.getRemotePath(),Uri.parse(baseUrl).getPath() == null ? "" : Uri.parse(baseUrl).getPath() + webdav_path + mNew.getRemotePath());
+  Log.d("ASD","" + baseUrl + webdav_path+ WebdavUtils.encode(mOld.getRemotePath()));
+  Log.e("ASD",Uri.parse(baseUrl).getPath() == null ? "" : Uri.parse(baseUrl).getPath() + webdav_path + WebdavUtils.encode(mNew.getRemotePath()));
+  LocalMoveMethod move=new LocalMoveMethod(baseUrl + webdav_path + WebdavUtils.encode(mOld.getRemotePath()),Uri.parse(baseUrl).getPath() == null ? "" : Uri.parse(baseUrl).getPath() + webdav_path + WebdavUtils.encode(mNew.getRemotePath()));
   try {
     int status=wc.executeMethod(move);
     if (move.succeeded()) {

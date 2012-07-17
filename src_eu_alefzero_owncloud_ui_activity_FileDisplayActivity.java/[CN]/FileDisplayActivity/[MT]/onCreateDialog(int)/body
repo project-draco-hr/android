@@ -47,14 +47,14 @@ return;
 }
 String path;
 if (mCurrentDir == null) {
-if (!mStorageManager.fileExists("/")) {
-OCFile file=new OCFile("/");
+if (!mStorageManager.fileExists(OCFile.PATH_SEPARATOR)) {
+OCFile file=new OCFile(OCFile.PATH_SEPARATOR);
 mStorageManager.saveFile(file);
 }
-mCurrentDir=mStorageManager.getFileByPath("/");
+mCurrentDir=mStorageManager.getFileByPath(OCFile.PATH_SEPARATOR);
 }
 path=FileDisplayActivity.this.mCurrentDir.getRemotePath();
-path+=Uri.encode(directoryName) + "/";
+path+=directoryName + OCFile.PATH_SEPARATOR;
 Thread thread=new Thread(new DirectoryCreator(path,a));
 thread.start();
 OCFile newDir=new OCFile(path);

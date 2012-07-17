@@ -1,5 +1,5 @@
 {
-  DavMethod delete=new DeleteMethod(mUri.toString() + remoteFilePath);
+  DavMethod delete=new DeleteMethod(mUri.toString() + WebdavUtils.encode(remoteFilePath));
   try {
     executeMethod(delete);
   }
