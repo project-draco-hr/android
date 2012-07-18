@@ -1,11 +1,8 @@
 {
   boolean ret=false;
   GetMethod get=new GetMethod(mUri.toString() + WebdavUtils.encodePath(remoteFilepath));
-  HttpMethodParams params=get.getParams();
-  params.setSoTimeout(0);
-  get.setParams(params);
   try {
-    int status=executeMethod(get);
+    int status=executeMethod(get,0);
     Log.e(TAG,"status return: " + status);
     if (status == HttpStatus.SC_OK) {
       targetPath.createNewFile();

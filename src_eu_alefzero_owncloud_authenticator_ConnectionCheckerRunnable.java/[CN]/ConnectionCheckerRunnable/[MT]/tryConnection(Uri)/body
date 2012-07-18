@@ -4,7 +4,7 @@
   GetMethod get=new GetMethod(uri.toString());
   boolean retval=false;
   try {
-    int status=wc.executeMethod(get);
+    int status=wc.executeMethod(get,TRY_CONNECTION_TIMEOUT);
 switch (status) {
 case HttpStatus.SC_OK:
 {
@@ -31,7 +31,7 @@ Log.e(TAG,"Not handled status received from server: " + status);
 }
 }
  catch (Exception e) {
-if (e instanceof UnknownHostException || e instanceof ConnectException) {
+if (e instanceof UnknownHostException || e instanceof ConnectException || e instanceof SocketTimeoutException) {
 mLatestResult=ResultType.HOST_NOT_AVAILABLE;
 }
  else if (e instanceof JSONException) {

@@ -1,0 +1,16 @@
+{
+  int oldSoTimeout=getParams().getSoTimeout();
+  try {
+    if (readTimeout < 0) {
+      readTimeout=0;
+    }
+    HttpMethodParams params=method.getParams();
+    params.setSoTimeout(readTimeout);
+    method.setParams(params);
+    getParams().setSoTimeout(readTimeout);
+    return executeMethod(method);
+  }
+  finally {
+    getParams().setSoTimeout(oldSoTimeout);
+  }
+}

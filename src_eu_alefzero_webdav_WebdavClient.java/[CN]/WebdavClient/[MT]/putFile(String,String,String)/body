@@ -7,12 +7,9 @@
     entity.setOnDatatransferProgressListener(mDataTransferListener);
     Log.e("ASD",f.exists() + " " + entity.getContentLength());
     PutMethod put=new PutMethod(mUri.toString() + WebdavUtils.encodePath(remoteTarget));
-    HttpMethodParams params=put.getParams();
-    params.setSoTimeout(0);
-    put.setParams(params);
     put.setRequestEntity(entity);
     Log.d(TAG,"" + put.getURI().toString());
-    int status=executeMethod(put);
+    int status=executeMethod(put,0);
     Log.d(TAG,"PUT method return with status " + status);
     Log.i(TAG,"Uploading, done");
   }
