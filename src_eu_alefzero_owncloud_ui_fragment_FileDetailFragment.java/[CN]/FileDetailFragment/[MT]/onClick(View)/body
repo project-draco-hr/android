@@ -17,7 +17,7 @@ case R.id.fdKeepInSync:
     mFile.setKeepInSync(cb.isChecked());
     FileDataStorageManager fdsm=new FileDataStorageManager(mAccount,getActivity().getApplicationContext().getContentResolver());
     fdsm.saveFile(mFile);
-    if (mFile.keepInSync() && !mFile.isDownloaded()) {
+    if (mFile.keepInSync()) {
       onClick(getView().findViewById(R.id.fdDownloadBtn));
     }
     break;

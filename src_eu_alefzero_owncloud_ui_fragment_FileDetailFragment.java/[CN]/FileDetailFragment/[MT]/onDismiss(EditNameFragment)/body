@@ -1,5 +1,4 @@
 {
-  Log.e("ASD","ondismiss");
   if (dialog instanceof EditNameFragment) {
     if (((EditNameFragment)dialog).getResult()) {
       String newFilename=((EditNameFragment)dialog).getNewFilename();
@@ -16,7 +15,13 @@
           newFile.setMimetype(mFile.getMimetype());
           newFile.setModificationTimestamp(mFile.getModificationTimestamp());
           newFile.setParentId(mFile.getParentId());
-          newFile.setStoragePath(mFile.getStoragePath());
+          if (mFile.isDownloaded()) {
+            File f=new File(mFile.getStoragePath());
+            Log.e(TAG,f.getAbsolutePath() + "");
+            f.renameTo(new File(f.getParent() + "/" + newFilename));
+            Log.e(TAG,f.getAbsolutePath() + "");
+            newFile.setStoragePath(f.getAbsolutePath());
+          }
           new Thread(new RenameRunnable(mFile,newFile,mAccount,new Handler())).start();
         }
       }
