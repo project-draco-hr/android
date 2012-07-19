@@ -1,3 +1,4 @@
 {
+  getParams().setAuthenticationPreemptive(true);
   getState().setCredentials(AuthScope.ANY,getCredentials(username,password));
 }
