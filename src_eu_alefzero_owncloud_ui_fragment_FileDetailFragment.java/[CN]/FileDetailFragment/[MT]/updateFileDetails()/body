@@ -1,6 +1,5 @@
 {
   if (mFile != null && mAccount != null && mLayout == R.layout.file_details_fragment) {
-    Button downloadButton=(Button)getView().findViewById(R.id.fdDownloadBtn);
     setFilename(mFile.getFileName());
     setFiletype(DisplayUtils.convertMIMEtoPrettyPrint(mFile.getMimetype()));
     setFilesize(mFile.getFileLength());
@@ -10,57 +9,18 @@
     setTimeModified(mFile.getModificationTimestamp());
     CheckBox cb=(CheckBox)getView().findViewById(R.id.fdKeepInSync);
     cb.setChecked(mFile.keepInSync());
-    if (mFile.getStoragePath() != null) {
+    if (mFile.isDownloading()) {
+      setButtonsForDownloading();
+    }
+ else     if (mFile.isDown()) {
       if (mFile.getMimetype().startsWith("image/")) {
         BitmapLoader bl=new BitmapLoader();
         bl.execute(new String[]{mFile.getStoragePath()});
       }
-      downloadButton.setText(R.string.filedetails_open);
-      downloadButton.setOnClickListener(new OnClickListener(){
-        @Override public void onClick(        View v){
-          String storagePath=mFile.getStoragePath();
-          String encodedStoragePath=WebdavUtils.encodePath(storagePath);
-          try {
-            Intent i=new Intent(Intent.ACTION_VIEW);
-            i.setDataAndType(Uri.parse("file://" + encodedStoragePath),mFile.getMimetype());
-            i.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-            startActivity(i);
-          }
- catch (          Throwable t) {
-            Log.e(TAG,"Fail when trying to open with the mimeType provided from the ownCloud server: " + mFile.getMimetype());
-            boolean toastIt=true;
-            String mimeType="";
-            try {
-              Intent i=new Intent(Intent.ACTION_VIEW);
-              mimeType=MimeTypeMap.getSingleton().getMimeTypeFromExtension(storagePath.substring(storagePath.lastIndexOf('.') + 1));
-              if (mimeType != null && !mimeType.equals(mFile.getMimetype())) {
-                i.setDataAndType(Uri.parse("file://" + encodedStoragePath),mimeType);
-                i.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-                startActivity(i);
-                toastIt=false;
-              }
-            }
- catch (            IndexOutOfBoundsException e) {
-              Log.e(TAG,"Trying to find out MIME type of a file without extension: " + storagePath);
-            }
-catch (            ActivityNotFoundException e) {
-              Log.e(TAG,"No activity found to handle: " + storagePath + " with MIME type "+ mimeType+ " obtained from extension");
-            }
-catch (            Throwable th) {
-              Log.e(TAG,"Unexpected problem when opening: " + storagePath,th);
-            }
- finally {
-              if (toastIt) {
-                Toast.makeText(getActivity(),"There is no application to handle file " + mFile.getFileName(),Toast.LENGTH_SHORT).show();
-              }
-            }
-          }
-        }
-      }
-);
+      setButtonsForDown();
     }
  else {
-      downloadButton.setOnClickListener(this);
+      setButtonsForRemote();
     }
   }
 }

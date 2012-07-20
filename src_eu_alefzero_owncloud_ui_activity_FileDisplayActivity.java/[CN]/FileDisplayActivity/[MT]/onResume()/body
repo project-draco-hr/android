@@ -12,6 +12,9 @@
     IntentFilter uploadIntentFilter=new IntentFilter(FileUploader.UPLOAD_FINISH_MESSAGE);
     mUploadFinishReceiver=new UploadFinishReceiver();
     registerReceiver(mUploadFinishReceiver,uploadIntentFilter);
+    IntentFilter downloadIntentFilter=new IntentFilter(FileDownloader.DOWNLOAD_FINISH_MESSAGE);
+    mDownloadFinishReceiver=new DownloadFinishReceiver();
+    registerReceiver(mDownloadFinishReceiver,downloadIntentFilter);
     mStorageManager=new FileDataStorageManager(AccountUtils.getCurrentOwnCloudAccount(this),getContentResolver());
     mFileList=(FileListFragment)getSupportFragmentManager().findFragmentById(R.id.fileList);
     if (getIntent().hasExtra(FileDetailFragment.EXTRA_FILE)) {

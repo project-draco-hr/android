@@ -32,7 +32,14 @@
   }
   mNotificationMngr.cancel(1);
   Intent end=new Intent(DOWNLOAD_FINISH_MESSAGE);
+  end.putExtra(EXTRA_REMOTE_PATH,mRemotePath);
   end.putExtra(EXTRA_FILE_PATH,file.getAbsolutePath());
   end.putExtra(EXTRA_DOWNLOAD_RESULT,download_result);
   sendBroadcast(end);
+  if (download_result) {
+    Toast.makeText(this,R.string.downloader_download_succeed,Toast.LENGTH_SHORT).show();
+  }
+ else {
+    Toast.makeText(this,R.string.downloader_download_failed,Toast.LENGTH_SHORT).show();
+  }
 }

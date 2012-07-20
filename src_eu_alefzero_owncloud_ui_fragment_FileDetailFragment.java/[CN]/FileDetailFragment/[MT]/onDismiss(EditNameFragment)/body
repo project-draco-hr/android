@@ -15,11 +15,11 @@
           newFile.setMimetype(mFile.getMimetype());
           newFile.setModificationTimestamp(mFile.getModificationTimestamp());
           newFile.setParentId(mFile.getParentId());
-          if (mFile.isDownloaded()) {
+          if (mFile.isDown()) {
             File f=new File(mFile.getStoragePath());
-            Log.e(TAG,f.getAbsolutePath() + "");
+            Log.e(TAG,f.getAbsolutePath());
             f.renameTo(new File(f.getParent() + "/" + newFilename));
-            Log.e(TAG,f.getAbsolutePath() + "");
+            Log.e(TAG,f.getAbsolutePath());
             newFile.setStoragePath(f.getAbsolutePath());
           }
           new Thread(new RenameRunnable(mFile,newFile,mAccount,new Handler())).start();
@@ -28,6 +28,6 @@
     }
   }
  else {
-    Log.e(TAG,"Unknown dialog intance passed to onDismissDalog: " + dialog.getClass().getCanonicalName());
+    Log.e(TAG,"Unknown dialog instance passed to onDismissDalog: " + dialog.getClass().getCanonicalName());
   }
 }

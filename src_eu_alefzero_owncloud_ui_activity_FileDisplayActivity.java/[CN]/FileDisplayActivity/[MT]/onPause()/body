@@ -9,6 +9,10 @@
     unregisterReceiver(mUploadFinishReceiver);
     mUploadFinishReceiver=null;
   }
+  if (mDownloadFinishReceiver != null) {
+    unregisterReceiver(mDownloadFinishReceiver);
+    mDownloadFinishReceiver=null;
+  }
   getIntent().putExtra(FileDetailFragment.EXTRA_FILE,mCurrentDir);
   Log.i(getClass().toString(),"onPause() end");
 }

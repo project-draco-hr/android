@@ -1,0 +1,10 @@
+{
+  boolean downloadWasFine=intent.getBooleanExtra(FileDownloader.EXTRA_DOWNLOAD_RESULT,false);
+  String downloadedRemotePath=intent.getStringExtra(FileDownloader.EXTRA_REMOTE_PATH);
+  if (downloadWasFine && mCurrentDir != null && mCurrentDir.getFileId() == mStorageManager.getFileByPath(downloadedRemotePath).getParentId()) {
+    FileListFragment fileListFragment=(FileListFragment)getSupportFragmentManager().findFragmentById(R.id.fileList);
+    if (fileListFragment != null) {
+      fileListFragment.listDirectory();
+    }
+  }
+}

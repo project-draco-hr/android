@@ -1,10 +1,12 @@
 {
-  if (getView() != null && getView().findViewById(R.id.fdDownloadBtn) != null)   getView().findViewById(R.id.fdDownloadBtn).setEnabled(true);
-  if (intent.getBooleanExtra(FileDownloader.EXTRA_DOWNLOAD_RESULT,false)) {
-    mFile.setStoragePath(intent.getStringExtra(FileDownloader.EXTRA_FILE_PATH));
-    updateFileDetails();
-  }
- else   if (intent.getAction().equals(FileDownloader.DOWNLOAD_FINISH_MESSAGE)) {
-    Toast.makeText(context,R.string.downloader_download_failed,Toast.LENGTH_SHORT).show();
+  if (mFile != null) {
+    boolean downloadWasFine=intent.getBooleanExtra(FileDownloader.EXTRA_DOWNLOAD_RESULT,false);
+    String downloadedRemotePath=intent.getStringExtra(FileDownloader.EXTRA_REMOTE_PATH);
+    if (mFile.getRemotePath().equals(downloadedRemotePath)) {
+      if (downloadWasFine) {
+        mFile.setStoragePath(intent.getStringExtra(FileDownloader.EXTRA_FILE_PATH));
+      }
+      updateFileDetails();
+    }
   }
 }
