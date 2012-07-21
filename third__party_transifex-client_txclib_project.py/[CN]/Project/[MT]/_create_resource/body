@@ -1,0 +1,43 @@
+def _create_resource(self, resource, pslug, fileinfo, filename, **kwargs):
+    'Create a resource.\n\n        Args:\n            resource: The full resource name.\n            pslug: The slug of the project.\n            fileinfo: The information of the resource.\n            filename: The name of the file.\n        Raises:\n            URLError, in case of a problem.\n        '
+    multipart = True
+    method = 'POST'
+    api_call = 'create_resource'
+    host = self.url_info['host']
+    try:
+        username = self.txrc.get(host, 'username')
+        passwd = self.txrc.get(host, 'password')
+        token = self.txrc.get(host, 'token')
+        hostname = self.txrc.get(host, 'hostname')
+    except ConfigParser.NoSectionError:
+        raise Exception(('No user credentials found for host %s. Edit ~/.transifexrc and add the appropriate info in there.' % host))
+    kwargs['hostname'] = hostname
+    kwargs.update(self.url_info)
+    kwargs['project'] = pslug
+    url = (API_URLS[api_call] % kwargs).encode('UTF-8')
+    opener = None
+    headers = None
+    req = None
+    i18n_type = self._get_option(resource, 'type')
+    if (i18n_type is None):
+        logger.error('Please define the resource type in .tx/config (eg. type = PO). More info: http://bit.ly/txcl-rt')
+    opener = urllib2.build_opener(MultipartPostHandler)
+    data = {'slug': fileinfo.split(';')[0], 'name': fileinfo.split(';')[0], 'uploaded_file': open(filename, 'rb'), 'i18n_type': i18n_type, }
+    urllib2.install_opener(opener)
+    req = RequestWithMethod(url=url, data=data, method=method)
+    base64string = base64.encodestring(('%s:%s' % (username, passwd)))[:(-1)]
+    authheader = ('Basic %s' % base64string)
+    req.add_header('Authorization', authheader)
+    try:
+        fh = urllib2.urlopen(req)
+    except urllib2.HTTPError as e:
+        if (e.code in [401, 403, 404]):
+            raise e
+        else:
+            raise Exception(('Remote server replied: %s' % e.read()))
+    except urllib2.URLError as e:
+        error = e.args[0]
+        raise Exception(('Remote server replied: %s' % error[1]))
+    raw = fh.read()
+    fh.close()
+    return raw

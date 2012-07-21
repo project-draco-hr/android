@@ -1,0 +1,11 @@
+def cmd_delete(argv, path_to_tx):
+    'Delete an accessible resource or translation in a remote server.'
+    parser = delete_parser()
+    (options, args) = parser.parse_args(argv)
+    languages = parse_csv_option(options.languages)
+    resources = parse_csv_option(options.resources)
+    skip = options.skip_errors
+    force = options.force_delete
+    prj = project.Project(path_to_tx)
+    prj.delete(resources, languages, skip, force)
+    logger.info('Done.')

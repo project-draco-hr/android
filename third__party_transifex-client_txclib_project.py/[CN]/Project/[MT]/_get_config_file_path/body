@@ -1,0 +1,8 @@
+def _get_config_file_path(self, root_path):
+    'Check the .tx/config file exists.'
+    config_file = os.path.join(root_path, '.tx', 'config')
+    logger.debug(('Config file is %s' % config_file))
+    if (not os.path.exists(config_file)):
+        msg = 'Cannot find the config file (.tx/config)!'
+        raise ProjectNotInit(msg)
+    return config_file

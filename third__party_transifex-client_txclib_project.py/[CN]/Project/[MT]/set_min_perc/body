@@ -1,0 +1,3 @@
+def set_min_perc(self, resources, perc):
+    'Set the minimum percentage for the resources.'
+    self._set_resource_option(resources, key='minimum_perc', value=perc)

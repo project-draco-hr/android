@@ -1,0 +1,30 @@
+def _delete_resource(self, project_details, resource, stats, *args):
+    'Delete a resource from Transifex.'
+    (project_slug, resource_slug) = resource.split('.')
+    project_resource_slugs = [r['slug'] for r in project_details['resources']]
+    logger.info(('Deleting resource %s:' % resource))
+    if (resource_slug not in project_resource_slugs):
+        if (not self.skip):
+            msg = 'Skipping: %s : Resource does not exist.'
+            logger.info((msg % resource))
+        return
+    if (not self.force):
+        slang = self.get_resource_option(resource, 'source_lang')
+        for language in stats:
+            if (language == slang):
+                continue
+            if (int(stats[language]['translated_entities']) > 0):
+                msg = 'Skipping: %s : Unable to delete resource because it has a not empty %s translation.\nPlease use -f or --force option to delete this resource.'
+                logger.info((msg % (resource, language)))
+                return
+    try:
+        self.do_url_request('delete_resource', method='DELETE')
+        self.config.remove_section(resource)
+        self.save()
+        msg = 'Deleted resource %s of project %s.'
+        logger.info((msg % (resource_slug, project_slug)))
+    except Exception as e:
+        msg = 'Unable to delete resource %s of project %s.'
+        logger.error((msg % (resource_slug, project_slug)))
+        if (not self.skip):
+            raise

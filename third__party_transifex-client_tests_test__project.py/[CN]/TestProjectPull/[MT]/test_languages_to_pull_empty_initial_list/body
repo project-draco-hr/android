@@ -1,0 +1,17 @@
+def test_languages_to_pull_empty_initial_list(self):
+    'Test determining the languages to pull, when the initial\n        list is empty.\n        '
+    languages = []
+    force = False
+    res = self.p._languages_to_pull(languages, self.files, self.lang_map, self.stats, force)
+    existing = res[0]
+    new = res[1]
+    self.assertEquals(existing, set(['el', 'en', 'pt']))
+    self.assertFalse(new)
+    del self.files['el']
+    self.files['el-gr'] = None
+    self.lang_map['el'] = 'el-gr'
+    res = self.p._languages_to_pull(languages, self.files, self.lang_map, self.stats, force)
+    existing = res[0]
+    new = res[1]
+    self.assertEquals(existing, set(['el', 'en', 'pt']))
+    self.assertFalse(new)

@@ -1,0 +1,12 @@
+def set_remote_resource(self, resource, source_lang, i18n_type, host, file_filter='translations<sep>%(proj)s.%(res)s<sep><lang>.%(extension)s'):
+    '\n        Method to handle the add/conf of a remote resource.\n        '
+    if (not self.config.has_section(resource)):
+        self.config.add_section(resource)
+    (p_slug, r_slug) = resource.split('.')
+    file_filter = file_filter.replace('<sep>', ('%s' % os.path.sep))
+    self.url_info = {'host': host, 'project': p_slug, 'resource': r_slug, }
+    extension = self._extension_for(i18n_type)[1:]
+    self.config.set(resource, 'source_lang', source_lang)
+    self.config.set(resource, 'file_filter', (file_filter % {'proj': p_slug, 'res': r_slug, 'extension': extension, }))
+    if (host != self.config.get('main', 'host')):
+        self.config.set(resource, 'host', host)

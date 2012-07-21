@@ -1,0 +1,11 @@
+def hostname_ssl_migration(hostname):
+    '\n    Migrate Transifex hostnames to use HTTPS.\n\n    :param hostname: The hostname to migrate (if needed).\n    :returns: A https hostname (if needed).\n    '
+    parts = urlparse.urlparse(hostname)
+    is_transifex = ((parts.hostname[(-14):(-3)] == '.transifex.') or (parts.hostname == 'transifex.net') or (parts.hostname == 'transifex.com'))
+    is_https = (parts.scheme == 'https')
+    if (is_transifex and (not is_https)):
+        if (not parts.scheme):
+            hostname = ('https:' + hostname)
+        else:
+            hostname = hostname.replace(parts.scheme, 'https', 1)
+    return hostname

@@ -1,0 +1,12 @@
+def test_local_only(self):
+    'Test the case where the local option is lower than the global.'
+    results = itertools.cycle([None, 70])
+
+    def side_effect(*args):
+        return results.next()
+    with patch.object(self.p, 'get_resource_option') as mock:
+        mock.side_effect = side_effect
+        self.assertFalse(self.p._satisfies_min_translated({'completed': '60%', }))
+        self.assertTrue(self.p._satisfies_min_translated({'completed': '70%', }))
+        self.assertTrue(self.p._satisfies_min_translated({'completed': '80%', }))
+        self.assertTrue(self.p._satisfies_min_translated({'completed': '90%', }))

@@ -1,0 +1,3 @@
+@classmethod
+def fromkeys(cls, keys, value=None):
+    return cls(dict.fromkeys(keys, value))

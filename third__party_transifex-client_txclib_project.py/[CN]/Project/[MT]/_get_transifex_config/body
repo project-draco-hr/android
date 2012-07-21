@@ -1,0 +1,10 @@
+def _get_transifex_config(self, txrc_file):
+    'Read the configuration from the .transifexrc file.'
+    txrc = OrderedRawConfigParser()
+    try:
+        txrc.read(txrc_file)
+    except Exception as e:
+        msg = ('Cannot read global configuration file: %s' % e)
+        raise ProjectNotInit(msg)
+    self._migrate_txrc_file(txrc)
+    return txrc

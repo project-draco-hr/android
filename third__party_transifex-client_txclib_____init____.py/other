@@ -1,0 +1,2 @@
+'\nCopyright (C) 2010 by Indifex (www.indifex.com), see AUTHORS.\nLicense: BSD, see LICENSE for details.\n\nFor further information visit http://code.indifex.com/transifex-client\n'
+VERSION = (0, 9, 0, 'devel')

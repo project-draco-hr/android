@@ -1,0 +1,13 @@
+def _set_project_option(resource, name, value, path_to_tx, func_name):
+    'Save the option to the project config file.'
+    if (value is None):
+        return
+    if (not resource):
+        logger.debug(('Setting the %s for all resources.' % name))
+        resources = []
+    else:
+        logger.debug(('Setting the %s for resource %s.' % (name, resource)))
+        resources = [resource]
+    prj = project.Project(path_to_tx)
+    getattr(prj, func_name)(resources, value)
+    prj.save()

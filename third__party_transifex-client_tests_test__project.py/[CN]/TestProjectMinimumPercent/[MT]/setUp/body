@@ -1,0 +1,5 @@
+def setUp(self):
+    super(TestProjectMinimumPercent, self).setUp()
+    self.p = Project(init=False)
+    self.p.minimum_perc = None
+    self.p.resource = 'resource'

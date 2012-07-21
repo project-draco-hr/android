@@ -1,0 +1,22 @@
+def _set_translation(path_to_tx, resource, lang, path_to_file):
+    'Reusable method to set translation file.'
+    (proj, res) = resource.split('.')
+    if ((not project) or (not resource)):
+        raise Exception(('"%s" is not a valid resource identifier. It should be in the following format project_slug.resource_slug.' % resource))
+    try:
+        _go_to_dir(path_to_tx)
+    except UnInitializedError as e:
+        utils.logger.error(e)
+        return
+    if (not os.path.exists(path_to_file)):
+        logger.info(("Warning: File '%s' doesn't exist." % path_to_file))
+    prj = project.Project(path_to_tx)
+    root_dir = os.path.abspath(path_to_tx)
+    if (root_dir not in os.path.normpath(os.path.abspath(path_to_file))):
+        raise Exception('File must be under the project root directory.')
+    if (lang == prj.config.get(('%s.%s' % (proj, res)), 'source_lang')):
+        raise Exception('tx: You cannot set translation file for the source language. Source languages contain the strings which will be translated!')
+    logger.info(('Updating translations for resource %s ( %s -> %s ).' % (resource, lang, path_to_file)))
+    path_to_file = relpath(path_to_file, root_dir)
+    prj.config.set(('%s.%s' % (proj, res)), ('trans.%s' % lang), path_to_file)
+    prj.save()

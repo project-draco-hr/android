@@ -1,0 +1,6 @@
+def help_parser():
+    'Return the command-line parser for the help command.'
+    usage = 'usage: %prog help command'
+    description = 'Lists all available commands in the transifex command client. If a command is specified, the help page of the specific command is displayed instead.'
+    parser = OptionParser(usage=usage, description=description)
+    return parser

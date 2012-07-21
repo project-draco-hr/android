@@ -1,0 +1,5 @@
+def visit_hostname(hostname):
+    '\n    Have a chance to visit a hostname before actually using it.\n\n    :param hostname: The original hostname.\n    :returns: The hostname with the necessary changes.\n    '
+    for processor in [hostname_ssl_migration, hostname_tld_migration]:
+        hostname = processor(hostname)
+    return hostname

@@ -1,0 +1,9 @@
+def __setitem__(self, key, val):
+    k = self._flip.get(val, _NOTFOUND)
+    if (not ((k is _NOTFOUND) or (k == key))):
+        raise KeyError(('(key,val) would erase mapping for value %r' % val))
+    v = self.get(key, _NOTFOUND)
+    if (v is not _NOTFOUND):
+        dict.__delitem__(self._flip, v)
+    dict.__setitem__(self, key, val)
+    dict.__setitem__(self._flip, val, key)

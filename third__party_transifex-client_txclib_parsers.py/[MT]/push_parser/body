@@ -1,0 +1,13 @@
+def push_parser():
+    'Return the command-line parser for the push command.'
+    usage = 'usage: %prog [tx_options] push [options]'
+    description = "This command pushes all local files that have been added to Transifex to the remote server. All new translations are merged with existing ones and if a language doesn't exists then it gets created. If you want to push the source file as well (either because this is your first time running the client or because you just have updated with new entries), use the -f|--force option. By default, this command will push all files which are watched by Transifex but you can filter this per resource or/and language."
+    parser = OptionParser(usage=usage, description=description)
+    parser.add_option('-l', '--language', action='store', dest='languages', default=None, help='Specify which translations you want to push (defaults to all)')
+    parser.add_option('-r', '--resource', action='store', dest='resources', default=None, help='Specify the resource for which you want to push the translations (defaults to all)')
+    parser.add_option('-f', '--force', action='store_true', dest='force_creation', default=False, help='Push source files without checking modification times.')
+    parser.add_option('--skip', action='store_true', dest='skip_errors', default=False, help="Don't stop on errors. Useful when pushing many files concurrently.")
+    parser.add_option('-s', '--source', action='store_true', dest='push_source', default=False, help='Push the source file to the server.')
+    parser.add_option('-t', '--translations', action='store_true', dest='push_translations', default=False, help='Push the translation files to the server')
+    parser.add_option('--no-interactive', action='store_true', dest='no_interactive', default=False, help="Don't require user input when forcing a push.")
+    return parser

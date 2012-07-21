@@ -1,0 +1,20 @@
+def set_parser():
+    'Return the command-line parser for the set command.'
+    usage = 'usage: %prog [tx_options] set [options] [args]'
+    description = 'This command can be used to create a mapping between files and projects either using local files or using files from a remote Transifex server.'
+    epilog = "\nExamples:\n To set the source file:\n  $ tx set -r project.resource --source -l en <file>\n\n To set a single translation file:\n  $ tx set -r project.resource -l de <file>\n\n To automatically detect and assign the source files and translations:\n  $ tx set --auto-local -r project.resource 'expr' --source-lang en\n\n To set a specific file as a source and auto detect translations:\n  $ tx set --auto-local -r project.resource 'expr' --source-lang en --source-file <file>\n\n To set a remote release/resource/project:\n  $ tx set --auto-remote <transifex-url>\n"
+    parser = EpilogParser(usage=usage, description=description, epilog=epilog)
+    parser.add_option('--auto-local', action='store_true', dest='local', default=False, help='Used when auto configuring local project.')
+    parser.add_option('--auto-remote', action='store_true', dest='remote', default=False, help='Used when adding remote files from Transifex server.')
+    parser.add_option('-r', '--resource', action='store', dest='resource', default=None, help="Specify the slug of the resource that you're setting up (This must be in the following format: `project_slug.resource_slug`).")
+    parser.add_option('--source', action='store_true', dest='is_source', default=False, help="Specify that the given file is a source file [doesn't work with the --auto-* commands].")
+    parser.add_option('-l', '--language', action='store', dest='language', default=None, help="Specify which translations you want to pull [doesn't work with the --auto-* commands].")
+    parser.add_option('-t', '--type', action='store', dest='i18n_type', help='Specify the i18n type of the resource(s). This is only needed, if the resource(s) does not exist yet in Transifex. For a list of available i18n types, see http://help.transifex.com/features/formats.html')
+    parser.add_option('--minimum-perc', action='store', dest='minimum_perc', help='Specify the minimum acceptable percentage of a translation in order to download it.')
+    parser.add_option('--mode', action='store', dest='mode', help="Specify the mode of the translation file to pull (e.g. 'reviewed'). See http://help.transifex.com/features/client/index.html#defining-the-mode-of-the-translated-file for theavailable values.")
+    group = OptionGroup(parser, 'Extended options', 'These options can only be used with the --auto-local command.')
+    group.add_option('-s', '--source-language', action='store', dest='source_language', default=None, help='Specify the source language of a resource [requires --auto-local].')
+    group.add_option('-f', '--source-file', action='store', dest='source_file', default=None, help='Specify the source file of a resource [requires --auto-local].')
+    group.add_option('--execute', action='store_true', dest='execute', default=False, help='Execute commands [requires --auto-local].')
+    parser.add_option_group(group)
+    return parser

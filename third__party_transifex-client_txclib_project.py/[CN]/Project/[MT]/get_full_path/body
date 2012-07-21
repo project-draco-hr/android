@@ -1,0 +1,5 @@
+def get_full_path(self, relpath):
+    if (relpath[0] == '/'):
+        return relpath
+    else:
+        return os.path.join(self.root, relpath)

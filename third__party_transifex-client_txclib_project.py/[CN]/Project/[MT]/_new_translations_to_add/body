@@ -1,0 +1,15 @@
+def _new_translations_to_add(self, files, slang, lang_map, stats, force=False):
+    'Return a list of translations which are new to the\n        local installation.\n        '
+    new_translations = []
+    timestamp = time.time()
+    langs = stats.keys()
+    logger.debug(('Available languages are: %s' % langs))
+    for lang in langs:
+        lang_exists = (lang in files.keys())
+        lang_is_source = (lang == slang)
+        mapped_lang_exists = ((lang in lang_map) and (lang_map[lang] in files.keys()))
+        if (lang_exists or lang_is_source or mapped_lang_exists):
+            continue
+        if self._should_add_translation(lang, stats, force):
+            new_translations.append(lang)
+    return set(new_translations)

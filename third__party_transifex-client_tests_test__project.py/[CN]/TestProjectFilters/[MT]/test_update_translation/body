@@ -1,0 +1,39 @@
+def test_update_translation(self):
+    'Test filters for updating a translation.\n\n        We do not test here for minimum percentages.\n        '
+    with patch.object(self.p, 'get_resource_option') as mock:
+        mock.return_value = None
+        should_update = self.p._should_update_translation
+        force = True
+        for lang in self.langs:
+            self.assertTrue(should_update(lang, self.stats, 'foo', force))
+        force = False
+        local_file = 'foo'
+        self.assertFalse(should_update('es', self.stats, local_file))
+        with patch.object(self.p, '_get_time_of_local_file') as time_mock:
+            time_mock.return_value = None
+            with patch.object(self.p, 'get_full_path') as path_mock:
+                path_mock.return_value = 'foo'
+                for lang in self.langs:
+                    self.assertTrue(should_update(lang, self.stats, local_file))
+        local_times = [self.p._generate_timestamp('2011-11-01 14:00:59')]
+        results = itertools.cycle(local_times)
+
+        def side_effect(*args):
+            return results.next()
+        with patch.object(self.p, '_get_time_of_local_file') as time_mock:
+            time_mock.side_effect = side_effect
+            with patch.object(self.p, 'get_full_path') as path_mock:
+                path_mock.return_value = 'foo'
+                for lang in self.langs:
+                    self.assertTrue(should_update(lang, self.stats, local_file))
+        local_times = [self.p._generate_timestamp('2011-11-01 15:01:59')]
+        results = itertools.cycle(local_times)
+
+        def side_effect(*args):
+            return results.next()
+        with patch.object(self.p, '_get_time_of_local_file') as time_mock:
+            time_mock.side_effect = side_effect
+            with patch.object(self.p, 'get_full_path') as path_mock:
+                path_mock.return_value = 'foo'
+                for lang in self.langs:
+                    self.assertFalse(should_update(lang, self.stats, local_file))

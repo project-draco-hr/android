@@ -1,0 +1,9 @@
+def _gzip_decode(gzip_data):
+    '\n    Unzip gzipped data and return them.\n\n    :param gzip_data: Gzipped data.\n    :returns: The actual data.\n    '
+    try:
+        gzip_data = StringIO.StringIO(gzip_data)
+        gzip_file = gzip.GzipFile(fileobj=gzip_data)
+        data = gzip_file.read()
+        return data
+    finally:
+        gzip_data.close()

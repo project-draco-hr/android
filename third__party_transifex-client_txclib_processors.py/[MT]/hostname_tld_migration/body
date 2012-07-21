@@ -1,0 +1,6 @@
+def hostname_tld_migration(hostname):
+    '\n    Migrate transifex.net to transifex.com.\n\n    :param hostname: The hostname to migrate (if needed).\n    :returns: A hostname with the transifex.com domain (if needed).\n    '
+    parts = urlparse.urlparse(hostname)
+    if parts.hostname.endswith('transifex.net'):
+        hostname = hostname.replace('transifex.net', 'transifex.com', 1)
+    return hostname

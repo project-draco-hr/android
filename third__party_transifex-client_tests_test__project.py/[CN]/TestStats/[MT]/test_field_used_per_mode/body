@@ -1,0 +1,6 @@
+def test_field_used_per_mode(self):
+    'Test the fields used for each mode.'
+    Project._extract_completed(self.stats, 'translate')
+    self.stats.__getitem__.assert_called_with('completed')
+    Project._extract_completed(self.stats, 'reviewed')
+    self.stats.__getitem__.assert_called_with('reviewed_percentage')

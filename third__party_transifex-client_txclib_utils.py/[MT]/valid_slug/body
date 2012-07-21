@@ -1,0 +1,10 @@
+def valid_slug(slug):
+    '\n    Check if a slug contains only valid characters.\n\n    Valid chars include [-_\\w]\n    '
+    try:
+        (a, b) = slug.split('.')
+    except ValueError:
+        return False
+    else:
+        if (re.match('^[A-Za-z0-9_-]*$', a) and re.match('^[A-Za-z0-9_-]*$', b)):
+            return True
+        return False

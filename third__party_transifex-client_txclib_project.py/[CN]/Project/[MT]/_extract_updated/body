@@ -1,0 +1,7 @@
+@classmethod
+def _extract_updated(cls, stats):
+    'Extract the  information for the last update of a translation.\n\n        Args:\n            stats: The stats object for a language as returned by Transifex.\n        Returns:\n            The last update field.\n        '
+    try:
+        return stats['last_update']
+    except KeyError as e:
+        return None

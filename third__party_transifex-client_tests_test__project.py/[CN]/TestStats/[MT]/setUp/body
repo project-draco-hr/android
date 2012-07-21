@@ -1,0 +1,4 @@
+def setUp(self):
+    self.stats = Mock()
+    self.stats.__getitem__ = Mock()
+    self.stats.__getitem__.return_value = '12%'

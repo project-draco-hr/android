@@ -1,0 +1,37 @@
+def get_resource_files(self, resource):
+    "\n        Get a dict for all files assigned to a resource. First we calculate the\n        files matching the file expression and then we apply all translation\n        excpetions. The resulting dict will be in this format:\n\n        { 'en': 'path/foo/en/bar.po', 'de': 'path/foo/de/bar.po', 'es': 'path/exceptions/es.po'}\n\n        NOTE: All paths are relative to the root of the project\n        "
+    tr_files = {}
+    if self.config.has_section(resource):
+        try:
+            file_filter = self.config.get(resource, 'file_filter')
+        except ConfigParser.NoOptionError:
+            file_filter = '$^'
+        source_lang = self.config.get(resource, 'source_lang')
+        source_file = (self.get_resource_option(resource, 'source_file') or None)
+        expr_re = regex_from_filefilter(file_filter, self.root)
+        expr_rec = re.compile(expr_re)
+        for (root, dirs, files) in os.walk(self.root):
+            for f in files:
+                f_path = os.path.abspath(os.path.join(root, f))
+                match = expr_rec.match(f_path)
+                if match:
+                    lang = match.group(1)
+                    if (lang != source_lang):
+                        f_path = relpath(f_path, self.root)
+                        if (f_path != source_file):
+                            tr_files.update({lang: f_path, })
+        for (name, value) in self.config.items(resource):
+            if name.startswith('trans.'):
+                lang = name.split('.')[1]
+                if (value in tr_files.values()):
+                    keys = []
+                    for (k, v) in tr_files.iteritems():
+                        if (v == value):
+                            keys.append(k)
+                    if (len(keys) == 1):
+                        del tr_files[keys[0]]
+                    else:
+                        raise Exception('Your configuration seems wrong. You have multiple languages pointing to the same file.')
+                tr_files.update({lang: value, })
+        return tr_files
+    return None

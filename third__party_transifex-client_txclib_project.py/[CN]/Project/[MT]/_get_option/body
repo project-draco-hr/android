@@ -1,0 +1,7 @@
+def _get_option(self, resource, option):
+    'Get the value for the option in the config file.\n\n        If the option is not in the resource section, look for it in\n        the project.\n\n        Args:\n            resource: The resource name.\n            option: The option the value of which we are interested in.\n        Returns:\n            The option value or None, if it does not exist.\n        '
+    value = self.get_resource_option(resource, option)
+    if (value is None):
+        if self.config.has_option('main', option):
+            return self.config.get('main', option)
+    return value

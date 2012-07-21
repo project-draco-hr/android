@@ -1,0 +1,45 @@
+def cmd_init(argv, path_to_tx):
+    'Initialize a new transifex project.'
+    parser = init_parser()
+    (options, args) = parser.parse_args(argv)
+    if (len(args) > 1):
+        parser.error('Too many arguments were provided. Aborting...')
+    if args:
+        path_to_tx = args[0]
+    else:
+        path_to_tx = os.getcwd()
+    if os.path.isdir(os.path.join(path_to_tx, '.tx')):
+        logger.info('tx: There is already a tx folder!')
+        reinit = raw_input('Do you want to delete it and reinit the project? [y/N]: ')
+        while ((reinit != 'y') and (reinit != 'Y') and (reinit != 'N') and (reinit != 'n') and (reinit != '')):
+            reinit = raw_input('Do you want to delete it and reinit the project? [y/N]: ')
+        if ((not reinit) or (reinit in ['N', 'n', 'NO', 'no', 'No'])):
+            return
+        else:
+            rm_dir = os.path.join(path_to_tx, '.tx')
+            shutil.rmtree(rm_dir)
+    logger.info('Creating .tx folder...')
+    os.mkdir(os.path.join(path_to_tx, '.tx'))
+    home = os.path.expanduser('~')
+    txrc = os.path.join(home, '.transifexrc')
+    config = OrderedRawConfigParser()
+    default_transifex = 'https://www.transifex.com'
+    transifex_host = (options.host or raw_input(('Transifex instance [%s]: ' % default_transifex)))
+    if (not transifex_host):
+        transifex_host = default_transifex
+    if (not transifex_host.startswith(('http://', 'https://'))):
+        transifex_host = ('https://' + transifex_host)
+    config_file = os.path.join(path_to_tx, '.tx', 'config')
+    if (not os.path.exists(config_file)):
+        logger.info('Creating skeleton...')
+        config = OrderedRawConfigParser()
+        config.add_section('main')
+        config.set('main', 'host', transifex_host)
+        logger.info('Creating config file...')
+        fh = open(config_file, 'w')
+        config.write(fh)
+        fh.close()
+    prj = project.Project(path_to_tx)
+    prj.getset_host_credentials(transifex_host, user=options.user, password=options.password)
+    prj.save()
+    logger.info('Done.')

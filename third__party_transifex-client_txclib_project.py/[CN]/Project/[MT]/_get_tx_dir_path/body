@@ -1,0 +1,8 @@
+def _get_tx_dir_path(self, path_to_tx):
+    'Check the .tx directory exists.'
+    root_path = (path_to_tx or find_dot_tx())
+    logger.debug(('Path to tx is %s.' % root_path))
+    if (not root_path):
+        msg = 'Cannot find any .tx directory!'
+        raise ProjectNotInit(msg)
+    return root_path

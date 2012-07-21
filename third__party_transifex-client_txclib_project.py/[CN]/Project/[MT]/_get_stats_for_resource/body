@@ -1,0 +1,13 @@
+def _get_stats_for_resource(self):
+    'Get the statistics information for a resource.'
+    try:
+        r = self.do_url_request('resource_stats')
+        logger.debug(('Statistics response is %s' % r))
+        stats = parse_json(r)
+    except urllib2.HTTPError as e:
+        logger.debug(('Resource not found: %s' % e))
+        stats = {}
+    except Exception as e:
+        logger.debug(('Network error: %s' % e))
+        raise
+    return stats

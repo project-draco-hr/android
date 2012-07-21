@@ -1,0 +1,13 @@
+def _get_transifex_file(self, directory=None):
+    'Fetch the path of the .transifexrc file.\n\n        It is in the home directory ofthe user by default.\n        '
+    if (directory is None):
+        directory = os.path.expanduser('~')
+    txrc_file = os.path.join(directory, '.transifexrc')
+    logger.debug(('.transifexrc file is at %s' % directory))
+    if (not os.path.exists(txrc_file)):
+        msg = 'No authentication data found.'
+        logger.info(msg)
+        mask = os.umask(63)
+        open(txrc_file, 'w').close()
+        os.umask(mask)
+    return txrc_file

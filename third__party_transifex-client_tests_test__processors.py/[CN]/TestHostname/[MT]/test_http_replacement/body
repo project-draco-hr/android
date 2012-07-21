@@ -1,0 +1,7 @@
+def test_http_replacement(self):
+    'Test the replacement of http with https.'
+    hostnames = ['http://transifex.com', 'http://transifex.net/http/', 'http://www.transifex.com/path/']
+    for h in hostnames:
+        hostname = hostname_ssl_migration(h)
+        self.assertEqual(hostname[:8], 'https://')
+        self.assertEqual(hostname[7:], h[6:])

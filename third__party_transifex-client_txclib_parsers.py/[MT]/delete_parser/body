@@ -1,0 +1,11 @@
+def delete_parser():
+    'Return the command-line parser for the delete command.'
+    usage = 'usage: %prog [tx_options] delete OPTION [OPTIONS]'
+    description = 'This command deletes translations for a resource in the remote server.'
+    epilog = '\nExamples:\n To delete a translation:\n  $ tx delete -r project.resource -l <lang_code>\n\n To delete a resource:\n  $ tx delete -r project.resource\n'
+    parser = EpilogParser(usage=usage, description=description, epilog=epilog)
+    parser.add_option('-r', '--resource', action='store', dest='resources', default=None, help='Specify the resource you want to delete (defaults to all)')
+    parser.add_option('-l', '--language', action='store', dest='languages', default=None, help='Specify the translation you want to delete')
+    parser.add_option('--skip', action='store_true', dest='skip_errors', default=False, help="Don't stop on errors.")
+    parser.add_option('-f', '--force', action='store_true', dest='force_delete', default=False, help='Delete an entity forcefully.')
+    return parser

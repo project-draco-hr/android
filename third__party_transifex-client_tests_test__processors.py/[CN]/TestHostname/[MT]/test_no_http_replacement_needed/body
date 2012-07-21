@@ -1,0 +1,5 @@
+def test_no_http_replacement_needed(self):
+    'Test that http will not be replaces with https, when not needed.'
+    for h in ['http://example.com', 'http://example.com/http/']:
+        hostname = hostname_ssl_migration(h)
+        self.assertEqual(hostname, hostname)

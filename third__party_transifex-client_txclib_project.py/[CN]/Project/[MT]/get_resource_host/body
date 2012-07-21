@@ -1,0 +1,5 @@
+def get_resource_host(self, resource):
+    '\n        Returns the host that the resource is configured to use. If there is no\n        such option we return the default one\n        '
+    if self.config.has_option(resource, 'host'):
+        return self.config.get(resource, 'host')
+    return self.config.get('main', 'host')
