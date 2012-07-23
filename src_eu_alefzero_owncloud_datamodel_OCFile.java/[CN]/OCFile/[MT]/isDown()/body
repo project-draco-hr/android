@@ -1,7 +1,7 @@
 {
   if (mLocalPath != null && mLocalPath.length() > 0) {
     File file=new File(mLocalPath);
-    return (file.exists() && file.length() == mLength);
+    return (file.exists());
   }
   return false;
 }
