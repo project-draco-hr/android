@@ -13,7 +13,7 @@
   mText4=(EditText)findViewById(R.id.txt4);
   SharedPreferences appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
   if ((appPrefs.getString("PrefPinCode1",null) == null)) {
-    setInitView();
+    setChangePincodeView(true);
     pinCodeChecked=true;
     newPasswordEntered=true;
   }
