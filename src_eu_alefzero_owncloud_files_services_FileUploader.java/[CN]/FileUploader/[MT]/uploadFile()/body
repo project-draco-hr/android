@@ -41,6 +41,7 @@
       storageManager.saveFile(new_file);
       Intent end=new Intent(UPLOAD_FINISH_MESSAGE);
       end.putExtra(EXTRA_PARENT_DIR_ID,parentDirId);
+      end.putExtra(ACCOUNT_NAME,mAccount.name);
       sendBroadcast(end);
     }
   }

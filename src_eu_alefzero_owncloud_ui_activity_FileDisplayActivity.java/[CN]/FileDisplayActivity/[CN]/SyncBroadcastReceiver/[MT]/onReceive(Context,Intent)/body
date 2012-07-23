@@ -1,8 +1,8 @@
 {
   boolean inProgress=intent.getBooleanExtra(FileSyncService.IN_PROGRESS,false);
-  String account_name=intent.getStringExtra(FileSyncService.ACCOUNT_NAME);
-  Log.d("FileDisplay","sync of account " + account_name + " is in_progress: "+ inProgress);
-  if (account_name.equals(AccountUtils.getCurrentOwnCloudAccount(context).name)) {
+  String accountName=intent.getStringExtra(FileSyncService.ACCOUNT_NAME);
+  Log.d("FileDisplay","sync of account " + accountName + " is in_progress: "+ inProgress);
+  if (accountName.equals(AccountUtils.getCurrentOwnCloudAccount(context).name)) {
     String synchFolderRemotePath=intent.getStringExtra(FileSyncService.SYNC_FOLDER_REMOTE_PATH);
     boolean fillBlankRoot=false;
     if (mCurrentDir == null) {

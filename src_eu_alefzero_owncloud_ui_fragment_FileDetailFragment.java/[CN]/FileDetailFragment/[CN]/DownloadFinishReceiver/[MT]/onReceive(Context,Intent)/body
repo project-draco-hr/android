@@ -1,5 +1,6 @@
 {
-  if (mFile != null) {
+  String accountName=intent.getStringExtra(FileDownloader.ACCOUNT_NAME);
+  if (accountName.equals(mAccount.name) && mFile != null) {
     boolean downloadWasFine=intent.getBooleanExtra(FileDownloader.EXTRA_DOWNLOAD_RESULT,false);
     String downloadedRemotePath=intent.getStringExtra(FileDownloader.EXTRA_REMOTE_PATH);
     if (mFile.getRemotePath().equals(downloadedRemotePath)) {
