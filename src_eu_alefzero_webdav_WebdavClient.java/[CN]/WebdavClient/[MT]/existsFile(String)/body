@@ -1,0 +1,11 @@
+{
+  try {
+    HeadMethod head=new HeadMethod(mUri.toString() + WebdavUtils.encodePath(path));
+    int status=executeMethod(head);
+    return (status == HttpStatus.SC_OK);
+  }
+ catch (  Exception e) {
+    e.printStackTrace();
+    return null;
+  }
+}

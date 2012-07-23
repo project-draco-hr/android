@@ -1,0 +1,32 @@
+{
+  Boolean check=wc.existsFile(remotePath);
+  if (check == null) {
+    return null;
+  }
+ else   if (!check) {
+    return remotePath;
+  }
+  int pos=remotePath.lastIndexOf(".");
+  String suffix="";
+  String extension="";
+  if (pos >= 0) {
+    extension=remotePath.substring(pos + 1);
+    remotePath=remotePath.substring(0,pos);
+  }
+  int count=2;
+  while (check != null && check) {
+    suffix=" (" + count + ")";
+    if (pos >= 0)     check=wc.existsFile(remotePath + suffix + "."+ extension);
+ else     check=wc.existsFile(remotePath + suffix);
+    count++;
+  }
+  if (check == null) {
+    return null;
+  }
+ else   if (pos >= 0) {
+    return remotePath + suffix + "."+ extension;
+  }
+ else {
+    return remotePath + suffix;
+  }
+}

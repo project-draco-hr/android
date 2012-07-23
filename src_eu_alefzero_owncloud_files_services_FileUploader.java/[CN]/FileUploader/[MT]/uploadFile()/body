@@ -26,7 +26,8 @@
     }
     if (mimeType == null)     mimeType="application/octet-stream";
     mCurrentIndexUpload=i;
-    if (wc.putFile(mLocalPaths[i],mRemotePaths[i],mimeType)) {
+    mRemotePaths[i]=getAvailableRemotePath(wc,mRemotePaths[i]);
+    if (mRemotePaths[i] != null && wc.putFile(mLocalPaths[i],mRemotePaths[i],mimeType)) {
       mSuccessCounter++;
       OCFile new_file=new OCFile(mRemotePaths[i]);
       new_file.setMimetype(mimeType);
