@@ -1,4 +1,5 @@
 {
+  setDefaultTimeouts();
   OwnCloudVersion ownCloudVersion=new OwnCloudVersion(AccountManager.get(context).getUserData(account,AccountAuthenticator.KEY_OC_VERSION));
   String baseUrl=AccountManager.get(context).getUserData(account,AccountAuthenticator.KEY_OC_BASE_URL);
   String webDavPath=AccountUtils.getWebdavPath(ownCloudVersion);
