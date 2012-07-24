@@ -1,0 +1,3 @@
+{
+  return (mDownloadsInProgress.get(buildRemoteName(account.name,remotePath)) != null);
+}

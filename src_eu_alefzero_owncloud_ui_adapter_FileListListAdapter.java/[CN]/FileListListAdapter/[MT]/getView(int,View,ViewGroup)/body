@@ -18,7 +18,7 @@
     }
     ImageView downloaded=(ImageView)view.findViewById(R.id.imageView2);
     ImageView downloading=(ImageView)view.findViewById(R.id.imageView4);
-    if (file.isDownloading()) {
+    if (FileDownloader.isDownloading(mAccount,file.getRemotePath())) {
       downloaded.setVisibility(View.INVISIBLE);
       downloading.setVisibility(View.VISIBLE);
     }

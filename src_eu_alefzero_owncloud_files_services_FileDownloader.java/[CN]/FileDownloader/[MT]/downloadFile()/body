@@ -22,6 +22,7 @@
   mNotificationMngr.notify(1,mNotification);
   File tmpFile=new File(getTemporalPath() + mAccount.name + mFilePath);
   tmpFile.getParentFile().mkdirs();
+  mDownloadsInProgress.put(buildRemoteName(mAccount.name,mRemotePath),tmpFile.getAbsolutePath());
   boolean download_result=false;
   File newFile=null;
   if (wdc.downloadFile(mRemotePath,tmpFile)) {
@@ -35,6 +36,7 @@
       download_result=true;
     }
   }
+  mDownloadsInProgress.remove(buildRemoteName(mAccount.name,mRemotePath));
   mNotificationMngr.cancel(1);
   Intent end=new Intent(DOWNLOAD_FINISH_MESSAGE);
   end.putExtra(EXTRA_DOWNLOAD_RESULT,download_result);

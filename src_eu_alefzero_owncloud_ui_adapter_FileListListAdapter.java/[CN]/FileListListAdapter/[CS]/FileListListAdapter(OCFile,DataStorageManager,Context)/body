@@ -3,4 +3,5 @@
   mStorageManager=storage_man;
   mFiles=mStorageManager.getDirectoryContent(mFile);
   mContext=context;
+  mAccount=AccountUtils.getCurrentOwnCloudAccount(mContext);
 }

@@ -9,7 +9,7 @@
     setTimeModified(mFile.getModificationTimestamp());
     CheckBox cb=(CheckBox)getView().findViewById(R.id.fdKeepInSync);
     cb.setChecked(mFile.keepInSync());
-    if (mFile.isDownloading()) {
+    if (FileDownloader.isDownloading(mAccount,mFile.getRemotePath())) {
       setButtonsForDownloading();
     }
  else     if (mFile.isDown()) {

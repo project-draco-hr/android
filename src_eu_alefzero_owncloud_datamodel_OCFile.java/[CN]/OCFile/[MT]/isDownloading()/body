@@ -1,8 +1,0 @@
-{
-  if (mLocalPath != null && mLocalPath.length() > 0) {
-    String savePath=FileDownloader.getSavePath();
-    File file=new File(FileDownloader.getTemporalPath() + mLocalPath.substring(savePath.length()));
-    return (file.exists());
-  }
-  return false;
-}
