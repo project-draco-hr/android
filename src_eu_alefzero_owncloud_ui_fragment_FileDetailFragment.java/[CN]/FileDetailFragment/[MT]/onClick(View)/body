@@ -7,7 +7,6 @@ case R.id.fdDownloadBtn:
       i.putExtra(FileDownloader.EXTRA_REMOTE_PATH,mFile.getRemotePath());
       i.putExtra(FileDownloader.EXTRA_FILE_PATH,mFile.getRemotePath());
       i.putExtra(FileDownloader.EXTRA_FILE_SIZE,mFile.getFileLength());
-      Toast.makeText(getActivity(),"Downloading",Toast.LENGTH_LONG).show();
       setButtonsForDownloading();
       getActivity().startService(i);
       break;

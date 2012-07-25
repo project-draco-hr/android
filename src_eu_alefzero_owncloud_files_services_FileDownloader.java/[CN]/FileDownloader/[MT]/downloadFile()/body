@@ -1,29 +1,31 @@
 {
+  boolean downloadResult=false;
   AccountManager am=(AccountManager)getSystemService(ACCOUNT_SERVICE);
   WebdavClient wdc=new WebdavClient(mAccount,getApplicationContext());
   String username=mAccount.name.split("@")[0];
-  String password="";
+  String password=null;
   try {
     password=am.blockingGetAuthToken(mAccount,AccountAuthenticator.AUTH_TOKEN_TYPE,true);
   }
  catch (  Exception e) {
-    e.printStackTrace();
+    Log.e(TAG,"Access to account credentials failed",e);
+    sendFinalBroadcast(downloadResult,null);
     return;
   }
   wdc.setCredentials(username,password);
   wdc.allowSelfsignedCertificates();
   wdc.setDataTransferProgressListener(this);
-  mNotification=new Notification(R.drawable.icon,"Downloading file",System.currentTimeMillis());
+  File tmpFile=new File(getTemporalPath() + mAccount.name + mFilePath);
+  mNotification=new Notification(R.drawable.icon,getString(R.string.downloader_download_in_progress_ticker),System.currentTimeMillis());
   mNotification.flags|=Notification.FLAG_ONGOING_EVENT;
   mNotification.contentView=new RemoteViews(getApplicationContext().getPackageName(),R.layout.progressbar_layout);
   mNotification.contentView.setProgressBar(R.id.status_progress,100,0,mTotalDownloadSize == -1);
+  mNotification.contentView.setTextViewText(R.id.status_text,String.format(getString(R.string.downloader_download_in_progress_content),0,tmpFile.getName()));
   mNotification.contentView.setImageViewResource(R.id.status_icon,R.drawable.icon);
   mNotification.contentIntent=PendingIntent.getActivity(getApplicationContext(),0,new Intent(),PendingIntent.FLAG_UPDATE_CURRENT);
-  mNotificationMngr.notify(1,mNotification);
-  File tmpFile=new File(getTemporalPath() + mAccount.name + mFilePath);
+  mNotificationMngr.notify(R.string.downloader_download_in_progress_ticker,mNotification);
   tmpFile.getParentFile().mkdirs();
   mDownloadsInProgress.put(buildRemoteName(mAccount.name,mRemotePath),tmpFile.getAbsolutePath());
-  boolean download_result=false;
   File newFile=null;
   if (wdc.downloadFile(mRemotePath,tmpFile)) {
     newFile=new File(getSavePath() + mAccount.name + mFilePath);
@@ -33,23 +35,17 @@
       ContentValues cv=new ContentValues();
       cv.put(ProviderTableMeta.FILE_STORAGE_PATH,newFile.getAbsolutePath());
       getContentResolver().update(ProviderTableMeta.CONTENT_URI,cv,ProviderTableMeta.FILE_NAME + "=? AND " + ProviderTableMeta.FILE_ACCOUNT_OWNER+ "=?",new String[]{mFilePath.substring(mFilePath.lastIndexOf('/') + 1),mAccount.name});
-      download_result=true;
+      downloadResult=true;
     }
   }
   mDownloadsInProgress.remove(buildRemoteName(mAccount.name,mRemotePath));
-  mNotificationMngr.cancel(1);
-  Intent end=new Intent(DOWNLOAD_FINISH_MESSAGE);
-  end.putExtra(EXTRA_DOWNLOAD_RESULT,download_result);
-  end.putExtra(ACCOUNT_NAME,mAccount.name);
-  end.putExtra(EXTRA_REMOTE_PATH,mRemotePath);
-  if (download_result) {
-    end.putExtra(EXTRA_FILE_PATH,newFile.getAbsolutePath());
-  }
-  sendBroadcast(end);
-  if (download_result) {
-    Toast.makeText(this,R.string.downloader_download_succeed,Toast.LENGTH_SHORT).show();
-  }
- else {
-    Toast.makeText(this,R.string.downloader_download_failed,Toast.LENGTH_SHORT).show();
-  }
+  mNotificationMngr.cancel(R.string.downloader_download_in_progress_ticker);
+  int tickerId=(downloadResult) ? R.string.downloader_download_succeed_ticker : R.string.downloader_download_failed_ticker;
+  int contentId=(downloadResult) ? R.string.downloader_download_succeed_content : R.string.downloader_download_failed_content;
+  Notification finalNotification=new Notification(R.drawable.icon,getString(tickerId),System.currentTimeMillis());
+  finalNotification.flags|=Notification.FLAG_AUTO_CANCEL;
+  finalNotification.contentIntent=PendingIntent.getActivity(getApplicationContext(),0,new Intent(),PendingIntent.FLAG_UPDATE_CURRENT);
+  finalNotification.setLatestEventInfo(getApplicationContext(),getString(tickerId),String.format(getString(contentId),tmpFile.getName()),finalNotification.contentIntent);
+  mNotificationMngr.notify(tickerId,finalNotification);
+  sendFinalBroadcast(downloadResult,(downloadResult) ? newFile.getAbsolutePath() : null);
 }

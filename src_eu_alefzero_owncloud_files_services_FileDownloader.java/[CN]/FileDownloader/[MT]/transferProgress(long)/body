@@ -1,10 +1,10 @@
 {
-  mCurrentDownlodSize+=progressRate;
-  int percent=(int)(100.0 * ((double)mCurrentDownlodSize) / ((double)mTotalDownloadSize));
+  mCurrentDownloadSize+=progressRate;
+  int percent=(int)(100.0 * ((double)mCurrentDownloadSize) / ((double)mTotalDownloadSize));
   if (percent != mLastPercent) {
-    mNotification.contentView.setProgressBar(R.id.status_progress,100,(int)(100 * mCurrentDownlodSize / mTotalDownloadSize),mTotalDownloadSize == -1);
-    mNotification.contentView.setTextViewText(R.id.status_text,percent + "%");
-    mNotificationMngr.notify(1,mNotification);
+    mNotification.contentView.setProgressBar(R.id.status_progress,100,(int)(100 * mCurrentDownloadSize / mTotalDownloadSize),mTotalDownloadSize == -1);
+    mNotification.contentView.setTextViewText(R.id.status_text,String.format(getString(R.string.downloader_download_in_progress_content),percent,new File(mFilePath).getName()));
+    mNotificationMngr.notify(R.string.downloader_download_in_progress_ticker,mNotification);
   }
   mLastPercent=percent;
 }

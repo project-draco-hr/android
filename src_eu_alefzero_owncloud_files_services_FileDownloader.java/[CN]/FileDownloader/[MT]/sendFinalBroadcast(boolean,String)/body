@@ -1,0 +1,10 @@
+{
+  Intent end=new Intent(DOWNLOAD_FINISH_MESSAGE);
+  end.putExtra(EXTRA_DOWNLOAD_RESULT,downloadResult);
+  end.putExtra(ACCOUNT_NAME,mAccount.name);
+  end.putExtra(EXTRA_REMOTE_PATH,mRemotePath);
+  if (downloadResult) {
+    end.putExtra(EXTRA_FILE_PATH,newFilePath);
+  }
+  sendBroadcast(end);
+}
