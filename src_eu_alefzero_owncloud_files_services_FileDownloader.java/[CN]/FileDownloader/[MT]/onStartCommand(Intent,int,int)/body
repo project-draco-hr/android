@@ -1,7 +1,7 @@
 {
   if (!intent.hasExtra(EXTRA_ACCOUNT) || !intent.hasExtra(EXTRA_FILE_PATH) || !intent.hasExtra(EXTRA_REMOTE_PATH)) {
     Log.e(TAG,"Not enough information provided in intent");
-    return START_STICKY;
+    return START_NOT_STICKY;
   }
   mAccount=intent.getParcelableExtra(EXTRA_ACCOUNT);
   mFilePath=intent.getStringExtra(EXTRA_FILE_PATH);

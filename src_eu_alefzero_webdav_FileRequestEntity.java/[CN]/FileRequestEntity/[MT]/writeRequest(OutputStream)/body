@@ -8,7 +8,11 @@
       if (listener != null)       listener.transferProgress(i);
     }
   }
-  finally {
+ catch (  IOException io) {
+    Log.e("FileRequestException",io.getMessage());
+    throw new RuntimeException("Ugly solution to workaround the default policy of retries when the server falls while uploading ; temporal fix; really",io);
+  }
+ finally {
     instream.close();
   }
 }

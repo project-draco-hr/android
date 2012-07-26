@@ -1,19 +1,21 @@
 {
   FileDataStorageManager storageManager=new FileDataStorageManager(mAccount,getContentResolver());
   mTotalDataToSend=mSendData=mPreviousPercent=0;
-  mNotification=new Notification(eu.alefzero.owncloud.R.drawable.icon,"Uploading...",System.currentTimeMillis());
+  WebdavClient wc=new WebdavClient(mAccount,getApplicationContext());
+  wc.allowSelfsignedCertificates();
+  wc.setDataTransferProgressListener(this);
+  mNotification=new Notification(eu.alefzero.owncloud.R.drawable.icon,getString(R.string.uploader_upload_in_progress_ticker),System.currentTimeMillis());
   mNotification.flags|=Notification.FLAG_ONGOING_EVENT;
+  RemoteViews oldContentView=mNotification.contentView;
   mNotification.contentView=new RemoteViews(getApplicationContext().getPackageName(),R.layout.progressbar_layout);
   mNotification.contentView.setProgressBar(R.id.status_progress,100,0,false);
   mNotification.contentView.setImageViewResource(R.id.status_icon,R.drawable.icon);
   mNotification.contentIntent=PendingIntent.getActivity(getApplicationContext(),0,new Intent(),PendingIntent.FLAG_UPDATE_CURRENT);
-  mNotificationManager.notify(42,mNotification);
-  WebdavClient wc=new WebdavClient(mAccount,getApplicationContext());
-  wc.allowSelfsignedCertificates();
-  wc.setDataTransferProgressListener(this);
+  mNotificationManager.notify(R.string.uploader_upload_in_progress_ticker,mNotification);
+  File[] localFiles=new File[mLocalPaths.length];
   for (int i=0; i < mLocalPaths.length; ++i) {
-    File f=new File(mLocalPaths[i]);
-    mTotalDataToSend+=f.length();
+    localFiles[i]=new File(mLocalPaths[i]);
+    mTotalDataToSend+=localFiles[i].length();
   }
   Log.d(TAG,"Will upload " + mTotalDataToSend + " bytes, with "+ mLocalPaths.length+ " files");
   mSuccessCounter=0;
@@ -28,24 +30,51 @@
     if (mimeType == null)     mimeType="application/octet-stream";
     mCurrentIndexUpload=i;
     mRemotePaths[i]=getAvailableRemotePath(wc,mRemotePaths[i]);
+    mUploadsInProgress.put(buildRemoteName(mAccount.name,mRemotePaths[i]),mLocalPaths[i]);
+    long parentDirId=-1;
     if (mRemotePaths[i] != null && wc.putFile(mLocalPaths[i],mRemotePaths[i],mimeType)) {
       mSuccessCounter++;
       OCFile new_file=new OCFile(mRemotePaths[i]);
       new_file.setMimetype(mimeType);
-      new_file.setFileLength(new File(mLocalPaths[i]).length());
+      new_file.setFileLength(localFiles[i].length());
       new_file.setModificationTimestamp(System.currentTimeMillis());
       new_file.setLastSyncDate(0);
       new_file.setStoragePath(mLocalPaths[i]);
       File f=new File(mRemotePaths[i]);
-      long parentDirId=storageManager.getFileByPath(f.getParent().endsWith("/") ? f.getParent() : f.getParent() + "/").getFileId();
+      parentDirId=storageManager.getFileByPath(f.getParent().endsWith("/") ? f.getParent() : f.getParent() + "/").getFileId();
       new_file.setParentId(parentDirId);
       storageManager.saveFile(new_file);
-      Intent end=new Intent(UPLOAD_FINISH_MESSAGE);
-      end.putExtra(EXTRA_PARENT_DIR_ID,parentDirId);
-      end.putExtra(ACCOUNT_NAME,mAccount.name);
-      sendBroadcast(end);
     }
+    mUploadsInProgress.remove(buildRemoteName(mAccount.name,mRemotePaths[i]));
+    Intent end=new Intent(UPLOAD_FINISH_MESSAGE);
+    end.putExtra(EXTRA_PARENT_DIR_ID,parentDirId);
+    end.putExtra(ACCOUNT_NAME,mAccount.name);
+    sendBroadcast(end);
   }
-  mNotificationManager.cancel(42);
-  run();
+  if (mSuccessCounter == mLocalPaths.length) {
+    mNotification.flags^=Notification.FLAG_ONGOING_EVENT;
+    mNotification.flags|=Notification.FLAG_AUTO_CANCEL;
+    mNotification.contentView=oldContentView;
+    mNotification.contentIntent=PendingIntent.getActivity(getApplicationContext(),0,new Intent(),PendingIntent.FLAG_UPDATE_CURRENT);
+    if (mLocalPaths.length == 1) {
+      mNotification.setLatestEventInfo(getApplicationContext(),getString(R.string.uploader_upload_succeeded_ticker),String.format(getString(R.string.uploader_upload_succeeded_content_single),localFiles[0].getName()),mNotification.contentIntent);
+    }
+ else {
+      mNotification.setLatestEventInfo(getApplicationContext(),getString(R.string.uploader_upload_succeeded_ticker),String.format(getString(R.string.uploader_upload_succeeded_content_multiple),mSuccessCounter),mNotification.contentIntent);
+    }
+    mNotificationManager.notify(R.string.uploader_upload_in_progress_ticker,mNotification);
+  }
+ else {
+    mNotificationManager.cancel(R.string.uploader_upload_in_progress_ticker);
+    Notification finalNotification=new Notification(R.drawable.icon,getString(R.string.uploader_upload_failed_ticker),System.currentTimeMillis());
+    finalNotification.flags|=Notification.FLAG_AUTO_CANCEL;
+    finalNotification.contentIntent=PendingIntent.getActivity(getApplicationContext(),0,new Intent(),PendingIntent.FLAG_UPDATE_CURRENT);
+    if (mLocalPaths.length == 1) {
+      finalNotification.setLatestEventInfo(getApplicationContext(),getString(R.string.uploader_upload_failed_ticker),String.format(getString(R.string.uploader_upload_failed_content_single),localFiles[0].getName()),finalNotification.contentIntent);
+    }
+ else {
+      finalNotification.setLatestEventInfo(getApplicationContext(),getString(R.string.uploader_upload_failed_ticker),String.format(getString(R.string.uploader_upload_failed_content_multiple),mSuccessCounter,mLocalPaths.length),finalNotification.contentIntent);
+    }
+    mNotificationManager.notify(R.string.uploader_upload_failed_ticker,finalNotification);
+  }
 }

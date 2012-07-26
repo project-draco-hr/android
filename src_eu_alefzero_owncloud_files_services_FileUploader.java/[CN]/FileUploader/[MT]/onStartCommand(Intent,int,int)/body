@@ -1,6 +1,6 @@
 {
   if (!intent.hasExtra(KEY_ACCOUNT) && !intent.hasExtra(KEY_UPLOAD_TYPE)) {
-    Log.e(TAG,"Not enought data in intent provided");
+    Log.e(TAG,"Not enough information provided in intent");
     return Service.START_NOT_STICKY;
   }
   mAccount=intent.getParcelableExtra(KEY_ACCOUNT);
@@ -18,7 +18,7 @@
     mRemotePaths=intent.getStringArrayExtra(KEY_REMOTE_FILE);
   }
   if (mLocalPaths.length != mRemotePaths.length) {
-    Log.e(TAG,"Remote paths and local paths are not equal!");
+    Log.e(TAG,"Different number of remote paths and local paths!");
     return Service.START_NOT_STICKY;
   }
   Message msg=mServiceHandler.obtainMessage();

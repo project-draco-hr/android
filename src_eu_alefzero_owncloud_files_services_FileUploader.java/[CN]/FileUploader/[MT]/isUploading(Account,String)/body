@@ -1,0 +1,3 @@
+{
+  return (mUploadsInProgress.get(buildRemoteName(account.name,remotePath)) != null);
+}

@@ -1,24 +1,29 @@
 {
   boolean result=false;
+  boolean caughtException=false;
+  int status=0;
   try {
-    Log.e("ASD",contentType + "");
     File f=new File(localFile);
     FileRequestEntity entity=new FileRequestEntity(f,contentType);
     entity.setOnDatatransferProgressListener(mDataTransferListener);
-    Log.e("ASD",f.exists() + " " + entity.getContentLength());
     PutMethod put=new PutMethod(mUri.toString() + WebdavUtils.encodePath(remoteTarget));
     put.setRequestEntity(entity);
-    Log.d(TAG,"" + put.getURI().toString());
-    int status=executeMethod(put,0);
-    Log.d(TAG,"PUT method return with status " + status);
-    if (status == HttpStatus.SC_OK || status == HttpStatus.SC_CREATED || status == HttpStatus.SC_NO_CONTENT) {
-      result=true;
-      Log.i(TAG,"Uploading, done");
-    }
+    status=executeMethod(put);
+    result=(status == HttpStatus.SC_OK || status == HttpStatus.SC_CREATED || status == HttpStatus.SC_NO_CONTENT);
+    Log.d(TAG,"PUT response for " + remoteTarget + " finished with HTTP status "+ status);
   }
- catch (  final Exception e) {
-    Log.i(TAG,"" + e.getMessage());
-    result=false;
+ catch (  HttpException e) {
+    Log.e(TAG,"HTTP exception uploading " + localFile + " to "+ remoteTarget,e);
+    caughtException=true;
   }
+catch (  IOException e) {
+    Log.e(TAG,"I/O exception uploading " + localFile + " to "+ remoteTarget,e);
+    caughtException=true;
+  }
+catch (  Exception e) {
+    Log.e(TAG,"Unexpected exception uploading " + localFile + " to "+ remoteTarget,e);
+    caughtException=true;
+  }
+  if (!result && !caughtException)   Log.e(TAG,"Upload of " + localFile + " to "+ remoteTarget+ " FAILED with HTTP status "+ status);
   return result;
 }
