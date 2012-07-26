@@ -1,5 +1,6 @@
 {
   WebdavClient wdc=new WebdavClient(mAccount,getApplicationContext());
+  wdc.allowSelfsignedCertificates();
   if (mCreateDir) {
     wdc.createDirectory(mUploadPath);
   }

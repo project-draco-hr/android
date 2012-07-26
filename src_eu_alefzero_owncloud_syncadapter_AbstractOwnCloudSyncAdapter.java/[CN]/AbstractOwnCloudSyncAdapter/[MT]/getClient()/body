@@ -4,6 +4,7 @@
       throw new UnknownHostException();
     }
     mClient=new WebdavClient(account,getContext());
+    mClient.allowSelfsignedCertificates();
   }
   return mClient;
 }

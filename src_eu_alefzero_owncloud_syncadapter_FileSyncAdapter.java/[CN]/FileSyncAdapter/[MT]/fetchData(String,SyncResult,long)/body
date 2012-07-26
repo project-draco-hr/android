@@ -1,5 +1,6 @@
 {
   try {
+    Log.d(TAG,"fetching " + uri);
     PropFindMethod query=new PropFindMethod(uri);
     getClient().executeMethod(query);
     MultiStatus resp=null;
@@ -19,6 +20,7 @@
         getContext().startService(intent);
       }
       if (getStorageManager().getFileByPath(file.getRemotePath()) != null)       file.setKeepInSync(getStorageManager().getFileByPath(file.getRemotePath()).keepInSync());
+      Log.v(TAG,"adding file: " + file);
       updatedFiles.add(file);
       if (parentId == 0)       parentId=file.getFileId();
     }
@@ -28,6 +30,7 @@
     for (int i=0; i < files.size(); ) {
       file=files.get(i);
       if (file.getLastSyncDate() != mCurrentSyncTime) {
+        Log.v(TAG,"removing file: " + file);
         getStorageManager().removeFile(file);
         files.remove(i);
       }
@@ -42,7 +45,7 @@
         fetchData(getUri().toString() + WebdavUtils.encodePath(newFile.getRemotePath()),syncResult,newFile.getFileId());
       }
     }
-    if (mCancellation)     Log.d(TAG,"Leaving " + uri + " because cancellation request");
+    if (mCancellation)     Log.d(TAG,"Leaving " + uri + " because cancelation request");
   }
  catch (  OperationCanceledException e) {
     e.printStackTrace();
