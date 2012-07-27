@@ -18,7 +18,6 @@
     int width=options.outWidth;
     int height=options.outHeight;
     int scale=1;
-    boolean recycle=false;
     if (width >= 2048 || height >= 2048) {
       scale=(int)Math.ceil((Math.ceil(Math.max(height,width) / 2048.)));
       options.inSampleSize=scale;

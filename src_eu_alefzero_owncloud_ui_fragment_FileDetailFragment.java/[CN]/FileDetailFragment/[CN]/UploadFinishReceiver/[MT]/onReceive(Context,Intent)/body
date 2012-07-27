@@ -1,0 +1,14 @@
+{
+  String accountName=intent.getStringExtra(FileUploader.ACCOUNT_NAME);
+  if (!isEmpty() && accountName.equals(mAccount.name)) {
+    boolean uploadWasFine=intent.getBooleanExtra(FileUploader.EXTRA_UPLOAD_RESULT,false);
+    String uploadRemotePath=intent.getStringExtra(FileUploader.EXTRA_REMOTE_PATH);
+    if (mFile.getRemotePath().equals(uploadRemotePath)) {
+      if (uploadWasFine) {
+        FileDataStorageManager fdsm=new FileDataStorageManager(mAccount,getActivity().getApplicationContext().getContentResolver());
+        mFile=fdsm.getFileByPath(mFile.getRemotePath());
+      }
+      updateFileDetails();
+    }
+  }
+}

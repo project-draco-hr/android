@@ -27,18 +27,22 @@
   tmpFile.getParentFile().mkdirs();
   mDownloadsInProgress.put(buildRemoteName(mAccount.name,mRemotePath),tmpFile.getAbsolutePath());
   File newFile=null;
-  if (wdc.downloadFile(mRemotePath,tmpFile)) {
-    newFile=new File(getSavePath() + mAccount.name + mFilePath);
-    newFile.getParentFile().mkdirs();
-    boolean moved=tmpFile.renameTo(newFile);
-    if (moved) {
-      ContentValues cv=new ContentValues();
-      cv.put(ProviderTableMeta.FILE_STORAGE_PATH,newFile.getAbsolutePath());
-      getContentResolver().update(ProviderTableMeta.CONTENT_URI,cv,ProviderTableMeta.FILE_NAME + "=? AND " + ProviderTableMeta.FILE_ACCOUNT_OWNER+ "=?",new String[]{mFilePath.substring(mFilePath.lastIndexOf('/') + 1),mAccount.name});
-      downloadResult=true;
+  try {
+    if (wdc.downloadFile(mRemotePath,tmpFile)) {
+      newFile=new File(getSavePath() + mAccount.name + mFilePath);
+      newFile.getParentFile().mkdirs();
+      boolean moved=tmpFile.renameTo(newFile);
+      if (moved) {
+        ContentValues cv=new ContentValues();
+        cv.put(ProviderTableMeta.FILE_STORAGE_PATH,newFile.getAbsolutePath());
+        getContentResolver().update(ProviderTableMeta.CONTENT_URI,cv,ProviderTableMeta.FILE_NAME + "=? AND " + ProviderTableMeta.FILE_ACCOUNT_OWNER+ "=?",new String[]{mFilePath.substring(mFilePath.lastIndexOf('/') + 1),mAccount.name});
+        downloadResult=true;
+      }
     }
   }
-  mDownloadsInProgress.remove(buildRemoteName(mAccount.name,mRemotePath));
+  finally {
+    mDownloadsInProgress.remove(buildRemoteName(mAccount.name,mRemotePath));
+  }
   mNotificationMngr.cancel(R.string.downloader_download_in_progress_ticker);
   int tickerId=(downloadResult) ? R.string.downloader_download_succeeded_ticker : R.string.downloader_download_failed_ticker;
   int contentId=(downloadResult) ? R.string.downloader_download_succeeded_content : R.string.downloader_download_failed_content;

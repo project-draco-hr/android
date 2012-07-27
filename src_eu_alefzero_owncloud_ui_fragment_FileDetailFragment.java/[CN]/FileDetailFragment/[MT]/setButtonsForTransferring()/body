@@ -1,7 +1,6 @@
 {
   if (!isEmpty()) {
     Button downloadButton=(Button)getView().findViewById(R.id.fdDownloadBtn);
-    downloadButton.setText(R.string.filedetails_download_in_progress);
     downloadButton.setEnabled(false);
     ((Button)getView().findViewById(R.id.fdOpenBtn)).setEnabled(false);
     ((Button)getView().findViewById(R.id.fdRenameBtn)).setEnabled(false);

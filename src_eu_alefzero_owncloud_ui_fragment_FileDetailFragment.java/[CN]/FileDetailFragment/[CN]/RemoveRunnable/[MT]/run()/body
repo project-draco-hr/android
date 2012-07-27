@@ -22,6 +22,7 @@
               FragmentTransaction transaction=getActivity().getSupportFragmentManager().beginTransaction();
               transaction.replace(R.id.file_details_container,new FileDetailFragment(null,null));
               transaction.commit();
+              mContainerActivity.onFileStateChanged();
             }
  else {
               getActivity().finish();

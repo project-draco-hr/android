@@ -9,8 +9,8 @@
     setTimeModified(mFile.getModificationTimestamp());
     CheckBox cb=(CheckBox)getView().findViewById(R.id.fdKeepInSync);
     cb.setChecked(mFile.keepInSync());
-    if (FileDownloader.isDownloading(mAccount,mFile.getRemotePath())) {
-      setButtonsForDownloading();
+    if (FileDownloader.isDownloading(mAccount,mFile.getRemotePath()) || FileUploader.isUploading(mAccount,mFile.getRemotePath())) {
+      setButtonsForTransferring();
     }
  else     if (mFile.isDown()) {
       if (mFile.getMimetype().startsWith("image/")) {

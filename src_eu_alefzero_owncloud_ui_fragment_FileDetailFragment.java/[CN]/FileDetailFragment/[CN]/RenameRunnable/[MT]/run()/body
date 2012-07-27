@@ -18,6 +18,7 @@
       mHandler.post(new Runnable(){
         @Override public void run(){
           updateFileDetails(mFile,mAccount);
+          mContainerActivity.onFileStateChanged();
         }
       }
 );

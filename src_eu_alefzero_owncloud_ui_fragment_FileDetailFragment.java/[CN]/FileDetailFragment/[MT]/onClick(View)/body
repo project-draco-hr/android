@@ -7,8 +7,9 @@ case R.id.fdDownloadBtn:
       i.putExtra(FileDownloader.EXTRA_REMOTE_PATH,mFile.getRemotePath());
       i.putExtra(FileDownloader.EXTRA_FILE_PATH,mFile.getRemotePath());
       i.putExtra(FileDownloader.EXTRA_FILE_SIZE,mFile.getFileLength());
-      setButtonsForDownloading();
+      setButtonsForTransferring();
       getActivity().startService(i);
+      mContainerActivity.onFileStateChanged();
       break;
     }
 case R.id.fdKeepInSync:
@@ -19,6 +20,9 @@ case R.id.fdKeepInSync:
     fdsm.saveFile(mFile);
     if (mFile.keepInSync()) {
       onClick(getView().findViewById(R.id.fdDownloadBtn));
+    }
+ else {
+      mContainerActivity.onFileStateChanged();
     }
     break;
   }
