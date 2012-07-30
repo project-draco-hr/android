@@ -8,7 +8,10 @@
     Log.wtf(getTag(),"Calling confirmation dialog without resource or arguments");
     return null;
   }
-  AlertDialog.Builder builder=new AlertDialog.Builder(getActivity()).setIcon(android.R.drawable.ic_dialog_alert).setMessage(String.format(getString(resourceId),confirmationTarget)).setIconAttribute(android.R.attr.alertDialogIcon).setTitle(android.R.string.dialog_alert_title);
+  AlertDialog.Builder builder=new AlertDialog.Builder(getActivity()).setIcon(android.R.drawable.ic_dialog_alert).setMessage(String.format(getString(resourceId),confirmationTarget)).setTitle(android.R.string.dialog_alert_title);
+  if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
+    builder.setIconAttribute(android.R.attr.alertDialogIcon);
+  }
   if (posBtn != -1)   builder.setPositiveButton(posBtn,new DialogInterface.OnClickListener(){
     public void onClick(    DialogInterface dialog,    int whichButton){
       mListener.onConfirmation(getTag());
