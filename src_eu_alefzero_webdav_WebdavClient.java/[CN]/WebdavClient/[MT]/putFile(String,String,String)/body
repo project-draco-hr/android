@@ -1,7 +1,6 @@
 {
   boolean result=false;
-  boolean caughtException=false;
-  int status=0;
+  int status=-1;
   try {
     File f=new File(localFile);
     FileRequestEntity entity=new FileRequestEntity(f,contentType);
@@ -14,16 +13,13 @@
   }
  catch (  HttpException e) {
     Log.e(TAG,"HTTP exception uploading " + localFile + " to "+ remoteTarget,e);
-    caughtException=true;
   }
 catch (  IOException e) {
     Log.e(TAG,"I/O exception uploading " + localFile + " to "+ remoteTarget,e);
-    caughtException=true;
   }
 catch (  Exception e) {
     Log.e(TAG,"Unexpected exception uploading " + localFile + " to "+ remoteTarget,e);
-    caughtException=true;
   }
-  if (!result && !caughtException)   Log.e(TAG,"Upload of " + localFile + " to "+ remoteTarget+ " FAILED with HTTP status "+ status);
+  if (!result && status >= 0)   Log.e(TAG,"Upload of " + localFile + " to "+ remoteTarget+ " FAILED with HTTP status "+ status);
   return result;
 }

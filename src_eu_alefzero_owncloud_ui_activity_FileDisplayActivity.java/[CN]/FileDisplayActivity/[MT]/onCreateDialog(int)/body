@@ -25,7 +25,7 @@ dialog=builder.create();
  catch (NameNotFoundException e) {
 builder=null;
 dialog=null;
-e.printStackTrace();
+Log.e(TAG,"Error while showing about dialog",e);
 }
 break;
 }
@@ -55,14 +55,10 @@ mCurrentDir=mStorageManager.getFileByPath(OCFile.PATH_SEPARATOR);
 }
 path=FileDisplayActivity.this.mCurrentDir.getRemotePath();
 path+=directoryName + OCFile.PATH_SEPARATOR;
-Thread thread=new Thread(new DirectoryCreator(path,a));
+Thread thread=new Thread(new DirectoryCreator(path,a,new Handler()));
 thread.start();
-OCFile newDir=new OCFile(path);
-newDir.setMimetype("DIR");
-newDir.setParentId(mCurrentDir.getFileId());
-mStorageManager.saveFile(newDir);
 dialog.dismiss();
-mFileList.listDirectory(mCurrentDir);
+showDialog(DIALOG_SHORT_WAIT);
 }
 }
 );
@@ -73,6 +69,15 @@ dialog.cancel();
 }
 );
 dialog=builder.create();
+break;
+}
+case DIALOG_SHORT_WAIT:
+{
+ProgressDialog working_dialog=new ProgressDialog(this);
+working_dialog.setMessage(getResources().getString(R.string.wait_a_moment));
+working_dialog.setIndeterminate(true);
+working_dialog.setCancelable(false);
+dialog=working_dialog;
 break;
 }
 default :

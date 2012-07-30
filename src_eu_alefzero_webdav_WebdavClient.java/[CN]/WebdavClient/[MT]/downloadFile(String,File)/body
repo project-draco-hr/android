@@ -1,6 +1,5 @@
 {
   boolean ret=false;
-  boolean caughtException=false;
   GetMethod get=new GetMethod(mUri.toString() + WebdavUtils.encodePath(remoteFilepath));
   int status=-1;
   try {
@@ -20,19 +19,16 @@
   }
  catch (  HttpException e) {
     Log.e(TAG,"HTTP exception downloading " + remoteFilepath,e);
-    caughtException=true;
   }
 catch (  IOException e) {
     Log.e(TAG,"I/O exception downloading " + remoteFilepath,e);
-    caughtException=true;
   }
 catch (  Exception e) {
     Log.e(TAG,"Unexpected exception downloading " + remoteFilepath,e);
-    caughtException=true;
   }
  finally {
     if (!ret) {
-      if (!caughtException) {
+      if (status >= 0) {
         Log.e(TAG,"Download of " + remoteFilepath + " to "+ targetFile+ " failed with HTTP status "+ status);
       }
       if (targetFile.exists()) {
