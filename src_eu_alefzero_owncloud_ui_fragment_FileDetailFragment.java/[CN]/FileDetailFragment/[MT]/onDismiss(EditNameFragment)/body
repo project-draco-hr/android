@@ -15,14 +15,23 @@
           newFile.setMimetype(mFile.getMimetype());
           newFile.setModificationTimestamp(mFile.getModificationTimestamp());
           newFile.setParentId(mFile.getParentId());
+          boolean localRenameFails=false;
           if (mFile.isDown()) {
             File f=new File(mFile.getStoragePath());
             Log.e(TAG,f.getAbsolutePath());
-            f.renameTo(new File(f.getParent() + File.separator + newFilename));
+            localRenameFails=!(f.renameTo(new File(f.getParent() + File.separator + newFilename)));
             Log.e(TAG,f.getParent() + File.separator + newFilename);
             newFile.setStoragePath(f.getParent() + File.separator + newFilename);
           }
-          new Thread(new RenameRunnable(mFile,newFile,mAccount,new Handler())).start();
+          if (localRenameFails) {
+            Toast msg=Toast.makeText(getActivity(),R.string.rename_local_fail_msg,Toast.LENGTH_LONG);
+            msg.show();
+          }
+ else {
+            new Thread(new RenameRunnable(mFile,newFile,mAccount,new Handler())).start();
+            boolean inDisplayActivity=getActivity() instanceof FileDisplayActivity;
+            getActivity().showDialog((inDisplayActivity) ? FileDisplayActivity.DIALOG_SHORT_WAIT : FileDetailActivity.DIALOG_SHORT_WAIT);
+          }
         }
       }
     }

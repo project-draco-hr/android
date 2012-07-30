@@ -1,9 +1,10 @@
 {
   if (callerTag.equals(FTAG_CONFIRMATION)) {
-    Log.e("ASD","onConfirmation");
     FileDataStorageManager fdsm=new FileDataStorageManager(mAccount,getActivity().getContentResolver());
     if (fdsm.getFileById(mFile.getFileId()) != null) {
       new Thread(new RemoveRunnable(mFile,mAccount,new Handler())).start();
+      boolean inDisplayActivity=getActivity() instanceof FileDisplayActivity;
+      getActivity().showDialog((inDisplayActivity) ? FileDisplayActivity.DIALOG_SHORT_WAIT : FileDetailActivity.DIALOG_SHORT_WAIT);
     }
   }
 }

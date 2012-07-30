@@ -8,57 +8,62 @@
   Log.d("ASD","" + baseUrl + webdav_path+ WebdavUtils.encodePath(mFileToRemove.getRemotePath()));
   DeleteMethod delete=new DeleteMethod(baseUrl + webdav_path + WebdavUtils.encodePath(mFileToRemove.getRemotePath()));
   boolean success=false;
+  int status=-1;
   try {
-    int status=wc.executeMethod(delete,DELETION_TIMEOUT);
-    if (delete.succeeded()) {
-      FileDataStorageManager fdsm=new FileDataStorageManager(mAccount,getActivity().getContentResolver());
-      fdsm.removeFile(mFileToRemove);
-      mHandler.post(new Runnable(){
-        @Override public void run(){
-          try {
-            Toast msg=Toast.makeText(getActivity().getApplicationContext(),R.string.remove_success_msg,Toast.LENGTH_LONG);
-            msg.show();
-            if (getActivity() instanceof FileDisplayActivity) {
-              FragmentTransaction transaction=getActivity().getSupportFragmentManager().beginTransaction();
-              transaction.replace(R.id.file_details_container,new FileDetailFragment(null,null));
-              transaction.commit();
-              mContainerActivity.onFileStateChanged();
-            }
- else {
-              getActivity().finish();
-            }
-          }
- catch (          NotFoundException e) {
-            e.printStackTrace();
-          }
-        }
-      }
-);
-      success=true;
-    }
-    Log.e("ASD","" + delete.getQueryString());
-    Log.d("delete","returned status " + status);
+    status=wc.executeMethod(delete);
+    success=(delete.succeeded());
+    Log.d(TAG,"Delete: returned status " + status);
   }
  catch (  HttpException e) {
-    e.printStackTrace();
+    Log.e(TAG,"HTTP Exception removing file " + mFileToRemove.getRemotePath(),e);
   }
 catch (  IOException e) {
-    e.printStackTrace();
+    Log.e(TAG,"I/O Exception removing file " + mFileToRemove.getRemotePath(),e);
   }
- finally {
-    if (!success) {
-      mHandler.post(new Runnable(){
-        @Override public void run(){
-          try {
-            Toast msg=Toast.makeText(getActivity(),R.string.remove_fail_msg,Toast.LENGTH_LONG);
-            msg.show();
+catch (  Exception e) {
+    Log.e(TAG,"Unexpected exception removing file " + mFileToRemove.getRemotePath(),e);
+  }
+  if (success) {
+    FileDataStorageManager fdsm=new FileDataStorageManager(mAccount,getActivity().getContentResolver());
+    fdsm.removeFile(mFileToRemove);
+    mHandler.post(new Runnable(){
+      @Override public void run(){
+        boolean inDisplayActivity=getActivity() instanceof FileDisplayActivity;
+        getActivity().dismissDialog((inDisplayActivity) ? FileDisplayActivity.DIALOG_SHORT_WAIT : FileDetailActivity.DIALOG_SHORT_WAIT);
+        try {
+          Toast msg=Toast.makeText(getActivity().getApplicationContext(),R.string.remove_success_msg,Toast.LENGTH_LONG);
+          msg.show();
+          if (inDisplayActivity) {
+            FragmentTransaction transaction=getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.file_details_container,new FileDetailFragment(null,null));
+            transaction.commit();
+            mContainerActivity.onFileStateChanged();
           }
- catch (          NotFoundException e) {
-            e.printStackTrace();
+ else {
+            getActivity().finish();
           }
         }
+ catch (        NotFoundException e) {
+          e.printStackTrace();
+        }
       }
-);
     }
+);
+  }
+ else {
+    mHandler.post(new Runnable(){
+      @Override public void run(){
+        boolean inDisplayActivity=getActivity() instanceof FileDisplayActivity;
+        getActivity().dismissDialog((inDisplayActivity) ? FileDisplayActivity.DIALOG_SHORT_WAIT : FileDetailActivity.DIALOG_SHORT_WAIT);
+        try {
+          Toast msg=Toast.makeText(getActivity(),R.string.remove_fail_msg,Toast.LENGTH_LONG);
+          msg.show();
+        }
+ catch (        NotFoundException e) {
+          e.printStackTrace();
+        }
+      }
+    }
+);
   }
 }
