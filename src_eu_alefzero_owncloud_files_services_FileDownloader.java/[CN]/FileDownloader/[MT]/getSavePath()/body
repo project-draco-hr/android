@@ -1,4 +1,0 @@
-{
-  File sdCard=Environment.getExternalStorageDirectory();
-  return sdCard.getAbsolutePath() + "/owncloud/";
-}

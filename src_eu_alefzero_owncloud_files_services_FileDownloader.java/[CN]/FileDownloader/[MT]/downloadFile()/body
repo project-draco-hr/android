@@ -15,7 +15,7 @@
   wdc.setCredentials(username,password);
   wdc.allowSelfsignedCertificates();
   wdc.setDataTransferProgressListener(this);
-  File tmpFile=new File(getTemporalPath() + mAccount.name + mFilePath);
+  File tmpFile=new File(getTemporalPath(mAccount.name) + mFilePath);
   mNotification=new Notification(R.drawable.icon,getString(R.string.downloader_download_in_progress_ticker),System.currentTimeMillis());
   mNotification.flags|=Notification.FLAG_ONGOING_EVENT;
   mNotification.contentView=new RemoteViews(getApplicationContext().getPackageName(),R.layout.progressbar_layout);
@@ -29,7 +29,7 @@
   File newFile=null;
   try {
     if (wdc.downloadFile(mRemotePath,tmpFile)) {
-      newFile=new File(getSavePath() + mAccount.name + mFilePath);
+      newFile=new File(getSavePath(mAccount.name) + mFilePath);
       newFile.getParentFile().mkdirs();
       boolean moved=tmpFile.renameTo(newFile);
       if (moved) {
