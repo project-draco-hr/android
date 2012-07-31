@@ -1,0 +1,6 @@
+{
+  mContext=context;
+  mNotificationMap=new HashMap<Integer,NotificationTypePair>();
+  mNM=(NotificationManager)mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+  mNotificationCounter=0;
+}

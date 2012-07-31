@@ -1,0 +1,4 @@
+String text
+String subtitle
+int percent
+boolean ongoing

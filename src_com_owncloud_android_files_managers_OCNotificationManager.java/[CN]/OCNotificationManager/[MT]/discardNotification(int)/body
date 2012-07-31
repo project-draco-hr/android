@@ -1,0 +1,4 @@
+{
+  mNM.cancel(notification_id);
+  mNotificationMap.remove(notification_id);
+}

@@ -1,0 +1,23 @@
+{
+  mNotificationCounter++;
+  Notification notification=null;
+switch (type) {
+case NOTIFICATION_SIMPLE:
+    notification=new Notification(R.drawable.icon,data.getText(),System.currentTimeMillis());
+  break;
+case NOTIFICATION_PROGRESS:
+notification=new Notification();
+notification.contentView=new RemoteViews(mContext.getPackageName(),R.layout.progressbar_layout);
+notification.contentView.setTextViewText(R.id.status_text,data.getText());
+notification.contentView.setImageViewResource(R.id.status_icon,R.id.icon);
+notification.contentView.setProgressBar(R.id.status_progress,100,data.getPercent(),false);
+break;
+default :
+return -1;
+}
+if (data.getOngoing()) {
+notification.flags|=notification.flags | Notification.FLAG_ONGOING_EVENT;
+}
+mNotificationMap.put(mNotificationCounter,new NotificationTypePair(notification,type));
+return mNotificationCounter;
+}

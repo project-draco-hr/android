@@ -1,0 +1,6 @@
+{
+  mText=text;
+  mPercent=percent;
+  mSubtitle=subtitle;
+  mOngoing=ongoing;
+}

@@ -1,0 +1,5 @@
+{
+  MenuInflater inflater=getSherlock().getMenuInflater();
+  inflater.inflate(R.menu.account_picker,menu);
+  return true;
+}
