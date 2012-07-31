@@ -41,6 +41,14 @@ catch (  Exception e) {
  else {
     mHandler.post(new Runnable(){
       @Override public void run(){
+        if (mNew.isDown()) {
+          File f=new File(mNew.getStoragePath());
+          if (!f.renameTo(new File(mOld.getStoragePath()))) {
+            mFile.setStoragePath(mNew.getStoragePath());
+            FileDataStorageManager fdsm=new FileDataStorageManager(mAccount,getActivity().getContentResolver());
+            fdsm.saveFile(mFile);
+          }
+        }
         boolean inDisplayActivity=getActivity() instanceof FileDisplayActivity;
         getActivity().dismissDialog((inDisplayActivity) ? FileDisplayActivity.DIALOG_SHORT_WAIT : FileDetailActivity.DIALOG_SHORT_WAIT);
         try {
