@@ -1,6 +1,6 @@
 {
   Intent deviceTrackingIntent=new Intent();
-  deviceTrackingIntent.setAction("eu.alefzero.owncloud.location.LocationUpdateService");
+  deviceTrackingIntent.setAction("com.owncloud.android.location.LocationUpdateService");
   if (!isDeviceTrackingServiceRunning(context) && trackDevice) {
     Log.d(TAG,"Starting device tracker service");
     context.startService(deviceTrackingIntent);

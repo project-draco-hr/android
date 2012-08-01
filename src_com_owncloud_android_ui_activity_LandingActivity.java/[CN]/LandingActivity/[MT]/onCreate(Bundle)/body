@@ -9,7 +9,7 @@
   }
  else {
     Intent locationServiceIntent=new Intent();
-    locationServiceIntent.setAction("eu.alefzero.owncloud.location.LocationLauncher");
+    locationServiceIntent.setAction("com.owncloud.android.location.LocationLauncher");
     sendBroadcast(locationServiceIntent);
   }
 }

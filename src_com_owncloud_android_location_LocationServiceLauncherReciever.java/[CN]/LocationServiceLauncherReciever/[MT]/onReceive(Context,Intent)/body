@@ -1,6 +1,6 @@
 {
   Intent deviceTrackingIntent=new Intent();
-  deviceTrackingIntent.setAction("eu.alefzero.owncloud.location.LocationUpdateService");
+  deviceTrackingIntent.setAction("com.owncloud.android.location.LocationUpdateService");
   SharedPreferences preferences=PreferenceManager.getDefaultSharedPreferences(context);
   boolean trackDevice=preferences.getBoolean("enable_devicetracking",true);
   if (intent.hasExtra("TRACKING_SETTING")) {
