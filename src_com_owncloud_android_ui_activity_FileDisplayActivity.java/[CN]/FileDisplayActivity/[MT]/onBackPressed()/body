@@ -6,6 +6,15 @@
   popDirname();
   mFileList.onNavigateUp();
   mCurrentDir=mFileList.getCurrentFile();
+  if (mDualPane) {
+    FileDetailFragment fileDetails=(FileDetailFragment)getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
+    if (fileDetails != null && !fileDetails.isEmpty()) {
+      FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
+      transaction.remove(fileDetails);
+      transaction.add(R.id.file_details_container,new FileDetailFragment(null,null));
+      transaction.commit();
+    }
+  }
   if (mCurrentDir.getParentId() == 0) {
     ActionBar actionBar=getSupportActionBar();
     actionBar.setDisplayHomeAsUpEnabled(false);

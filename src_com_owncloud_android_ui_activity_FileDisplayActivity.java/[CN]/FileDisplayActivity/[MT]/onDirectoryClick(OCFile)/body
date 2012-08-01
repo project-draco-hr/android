@@ -4,7 +4,7 @@
   actionBar.setDisplayHomeAsUpEnabled(true);
   if (mDualPane) {
     FileDetailFragment fileDetails=(FileDetailFragment)getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
-    if (fileDetails != null) {
+    if (fileDetails != null && !fileDetails.isEmpty()) {
       FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
       transaction.remove(fileDetails);
       transaction.add(R.id.file_details_container,new FileDetailFragment(null,null));
