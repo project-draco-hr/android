@@ -1,5 +1,5 @@
 {
-  String url=((TextView)findViewById(R.id.host_URL)).getText().toString();
+  String url=((TextView)findViewById(R.id.host_URL)).getText().toString().trim();
   String username=((TextView)findViewById(R.id.account_username)).getText().toString();
   String password=((TextView)findViewById(R.id.account_password)).getText().toString();
   if (url.endsWith("/"))   url=url.substring(0,url.length() - 1);

@@ -1,9 +1,9 @@
 {
   int returnCode=0;
-  WebdavClient client=new WebdavClient();
-  client.setCredentials(username,password);
-  HeadMethod head=new HeadMethod(uri.toString());
   try {
+    WebdavClient client=new WebdavClient();
+    client.setCredentials(username,password);
+    HeadMethod head=new HeadMethod(uri.toString());
     returnCode=client.executeMethod(head);
   }
  catch (  HttpException e) {

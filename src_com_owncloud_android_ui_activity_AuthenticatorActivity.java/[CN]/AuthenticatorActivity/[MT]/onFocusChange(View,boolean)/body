@@ -2,7 +2,7 @@
   if (view.getId() == R.id.host_URL) {
     if (!hasFocus) {
       TextView tv=((TextView)findViewById(R.id.host_URL));
-      String uri=tv.getText().toString();
+      String uri=tv.getText().toString().trim();
       if (uri.length() != 0) {
         setResultIconAndText(R.drawable.progress_small,R.string.auth_testing_connection);
         findViewById(R.id.buttonOK).setEnabled(false);
