@@ -1,6 +1,6 @@
 {
   String prefix="";
-  String url=((TextView)findViewById(R.id.host_URL)).getText().toString();
+  String url=((TextView)findViewById(R.id.host_URL)).getText().toString().trim();
   if (mIsSslConn) {
     prefix="https://";
   }
