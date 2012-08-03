@@ -1,4 +1,5 @@
 {
+  Log.d(TAG,"Creating Easy SSL Context");
   try {
     SSLContext context=SSLContext.getInstance("TLS");
     context.init(null,new TrustManager[]{new EasyX509TrustManager(null)},null);

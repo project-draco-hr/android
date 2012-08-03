@@ -1,4 +1,5 @@
 {
+  Log.d(TAG,"Getting Easy SSL Context");
   if (this.sslcontext == null) {
     this.sslcontext=createEasySSLContext();
   }
