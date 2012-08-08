@@ -1,11 +1,7 @@
 {
-  if (mDirectories.getCount() <= 1) {
-    finish();
-    return;
-  }
-  popDirname();
-  mFileList.onNavigateUp();
-  mCurrentDir=mFileList.getCurrentFile();
+  pushDirname(directory);
+  ActionBar actionBar=getSupportActionBar();
+  actionBar.setDisplayHomeAsUpEnabled(true);
   if (mDualPane) {
     FileDetailFragment fileDetails=(FileDetailFragment)getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
     if (fileDetails != null && !fileDetails.isEmpty()) {
@@ -14,9 +10,5 @@
       transaction.add(R.id.file_details_container,new FileDetailFragment(null,null));
       transaction.commit();
     }
-  }
-  if (mCurrentDir.getParentId() == 0) {
-    ActionBar actionBar=getSupportActionBar();
-    actionBar.setDisplayHomeAsUpEnabled(false);
   }
 }

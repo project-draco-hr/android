@@ -1,13 +1,6 @@
 {
-  Log.i(getClass().toString(),"onSaveInstanceState() start");
+  Log.d(getClass().toString(),"onSaveInstanceState() start");
   super.onSaveInstanceState(outState);
-  if (mDirectories != null && mDirectories.getCount() != 0) {
-    mDirs=new String[mDirectories.getCount() - 1];
-    for (int j=mDirectories.getCount() - 2, i=0; j >= 0; --j, ++i) {
-      mDirs[i]=mDirectories.getItem(j);
-    }
-  }
-  outState.putStringArray(KEY_DIR_ARRAY,mDirs);
   outState.putParcelable(FileDetailFragment.EXTRA_FILE,mCurrentDir);
-  Log.i(getClass().toString(),"onSaveInstanceState() end");
+  Log.d(getClass().toString(),"onSaveInstanceState() end");
 }

@@ -3,73 +3,87 @@
   AlertDialog.Builder builder;
 switch (id) {
 case DIALOG_SETUP_ACCOUNT:
-    builder=new AlertDialog.Builder(this);
-  builder.setTitle(R.string.main_tit_accsetup);
-builder.setMessage(R.string.main_wrn_accsetup);
-builder.setCancelable(false);
-builder.setPositiveButton(android.R.string.ok,this);
-builder.setNegativeButton(android.R.string.cancel,this);
-dialog=builder.create();
-break;
+{
+      builder=new AlertDialog.Builder(this);
+      builder.setTitle(R.string.main_tit_accsetup);
+      builder.setMessage(R.string.main_wrn_accsetup);
+      builder.setCancelable(false);
+      builder.setPositiveButton(android.R.string.ok,new OnClickListener(){
+        public void onClick(        DialogInterface dialog,        int which){
+          createFirstAccount();
+          dialog.dismiss();
+        }
+      }
+);
+      builder.setNegativeButton(R.string.common_exit,new OnClickListener(){
+        public void onClick(        DialogInterface dialog,        int which){
+          dialog.dismiss();
+          finish();
+        }
+      }
+);
+      dialog=builder.create();
+      break;
+    }
 case DIALOG_ABOUT_APP:
 {
-builder=new AlertDialog.Builder(this);
-builder.setTitle(getString(R.string.about_title));
-PackageInfo pkg;
-try {
-pkg=getPackageManager().getPackageInfo(getPackageName(),0);
-builder.setMessage("ownCloud android client\n\nversion: " + pkg.versionName);
-builder.setIcon(android.R.drawable.ic_menu_info_details);
-dialog=builder.create();
-}
- catch (NameNotFoundException e) {
-builder=null;
-dialog=null;
-Log.e(TAG,"Error while showing about dialog",e);
-}
-break;
-}
+    builder=new AlertDialog.Builder(this);
+    builder.setTitle(getString(R.string.about_title));
+    PackageInfo pkg;
+    try {
+      pkg=getPackageManager().getPackageInfo(getPackageName(),0);
+      builder.setMessage("ownCloud android client\n\nversion: " + pkg.versionName);
+      builder.setIcon(android.R.drawable.ic_menu_info_details);
+      dialog=builder.create();
+    }
+ catch (    NameNotFoundException e) {
+      builder=null;
+      dialog=null;
+      Log.e(TAG,"Error while showing about dialog",e);
+    }
+    break;
+  }
 case DIALOG_CREATE_DIR:
 {
-builder=new Builder(this);
-final EditText dirNameInput=new EditText(getBaseContext());
-final Account a=AccountUtils.getCurrentOwnCloudAccount(this);
-builder.setView(dirNameInput);
-builder.setTitle(R.string.uploader_info_dirname);
-int typed_color=getResources().getColor(R.color.setup_text_typed);
-dirNameInput.setTextColor(typed_color);
-builder.setPositiveButton(android.R.string.ok,new OnClickListener(){
-public void onClick(DialogInterface dialog,int which){
-String directoryName=dirNameInput.getText().toString();
-if (directoryName.trim().length() == 0) {
-dialog.cancel();
-return;
-}
-String path;
-if (mCurrentDir == null) {
-if (!mStorageManager.fileExists(OCFile.PATH_SEPARATOR)) {
-OCFile file=new OCFile(OCFile.PATH_SEPARATOR);
-mStorageManager.saveFile(file);
-}
-mCurrentDir=mStorageManager.getFileByPath(OCFile.PATH_SEPARATOR);
-}
-path=FileDisplayActivity.this.mCurrentDir.getRemotePath();
-path+=directoryName + OCFile.PATH_SEPARATOR;
-Thread thread=new Thread(new DirectoryCreator(path,a,new Handler()));
-thread.start();
-dialog.dismiss();
-showDialog(DIALOG_SHORT_WAIT);
-}
-}
+  builder=new Builder(this);
+  final EditText dirNameInput=new EditText(getBaseContext());
+  final Account a=AccountUtils.getCurrentOwnCloudAccount(this);
+  builder.setView(dirNameInput);
+  builder.setTitle(R.string.uploader_info_dirname);
+  int typed_color=getResources().getColor(R.color.setup_text_typed);
+  dirNameInput.setTextColor(typed_color);
+  builder.setPositiveButton(android.R.string.ok,new OnClickListener(){
+    public void onClick(    DialogInterface dialog,    int which){
+      String directoryName=dirNameInput.getText().toString();
+      if (directoryName.trim().length() == 0) {
+        dialog.cancel();
+        return;
+      }
+      String path;
+      if (mCurrentDir == null) {
+        if (!mStorageManager.fileExists(OCFile.PATH_SEPARATOR)) {
+          OCFile file=new OCFile(OCFile.PATH_SEPARATOR);
+          mStorageManager.saveFile(file);
+        }
+        mCurrentDir=mStorageManager.getFileByPath(OCFile.PATH_SEPARATOR);
+      }
+      path=FileDisplayActivity.this.mCurrentDir.getRemotePath();
+      path+=directoryName + OCFile.PATH_SEPARATOR;
+      Thread thread=new Thread(new DirectoryCreator(path,a,new Handler()));
+      thread.start();
+      dialog.dismiss();
+      showDialog(DIALOG_SHORT_WAIT);
+    }
+  }
 );
-builder.setNegativeButton(R.string.common_cancel,new OnClickListener(){
-public void onClick(DialogInterface dialog,int which){
-dialog.cancel();
-}
-}
+  builder.setNegativeButton(R.string.common_cancel,new OnClickListener(){
+    public void onClick(    DialogInterface dialog,    int which){
+      dialog.cancel();
+    }
+  }
 );
-dialog=builder.create();
-break;
+  dialog=builder.create();
+  break;
 }
 case DIALOG_SHORT_WAIT:
 {

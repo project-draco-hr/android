@@ -1,0 +1,31 @@
+{
+  Log.i(getClass().toString(),"onCreate() start");
+  super.onCreate(savedInstanceState);
+  requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+  Thread.setDefaultUncaughtExceptionHandler(new CrashHandler(getApplicationContext()));
+  if (savedInstanceState != null) {
+    mDirs=savedInstanceState.getStringArray(KEY_DIR_ARRAY);
+    mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
+    mDirectories.add(OCFile.PATH_SEPARATOR);
+    if (mDirs != null)     for (    String s : mDirs)     mDirectories.insert(s,0);
+    mCurrentDir=savedInstanceState.getParcelable(FileDetailFragment.EXTRA_FILE);
+  }
+  mLayoutView=getLayoutInflater().inflate(R.layout.files,null);
+  if (AccountUtils.accountsAreSetup(this)) {
+    initDelayedTilAccountAvailabe();
+    if (getIntent().getAction() != null && getIntent().getAction().equals(Intent.ACTION_MAIN) && savedInstanceState == null) {
+      requestPinCode();
+    }
+  }
+ else {
+    setContentView(R.layout.no_account_available);
+    getSupportActionBar().setNavigationMode(ActionBar.DISPLAY_SHOW_TITLE);
+    findViewById(R.id.setup_account).setOnClickListener(this);
+    setSupportProgressBarIndeterminateVisibility(false);
+    Intent intent=new Intent(android.provider.Settings.ACTION_ADD_ACCOUNT);
+    intent.putExtra(android.provider.Settings.EXTRA_AUTHORITIES,new String[]{AccountAuthenticator.AUTH_TOKEN_TYPE});
+    startActivity(intent);
+    mForcedLoginToCreateFirstAccount=true;
+  }
+  Log.i(getClass().toString(),"onCreate() end");
+}

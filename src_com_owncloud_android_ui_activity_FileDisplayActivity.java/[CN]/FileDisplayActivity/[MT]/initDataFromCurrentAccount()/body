@@ -1,0 +1,11 @@
+{
+  mStorageManager=new FileDataStorageManager(AccountUtils.getCurrentOwnCloudAccount(this),getContentResolver());
+  if (getIntent().hasExtra(FileDetailFragment.EXTRA_FILE)) {
+    mCurrentDir=(OCFile)getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE);
+    if (mCurrentDir != null && !mCurrentDir.isDirectory()) {
+      mCurrentDir=mStorageManager.getFileById(mCurrentDir.getParentId());
+    }
+    getIntent().removeExtra(FileDetailFragment.EXTRA_FILE);
+  }
+  if (mCurrentDir == null)   mCurrentDir=mStorageManager.getFileByPath("/");
+}

@@ -1,0 +1,46 @@
+{
+  boolean retval=true;
+switch (item.getItemId()) {
+case R.id.createDirectoryItem:
+{
+      showDialog(DIALOG_CREATE_DIR);
+      break;
+    }
+case R.id.startSync:
+{
+    ContentResolver.cancelSync(null,"org.owncloud");
+    Bundle bundle=new Bundle();
+    bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL,true);
+    ContentResolver.requestSync(AccountUtils.getCurrentOwnCloudAccount(this),"org.owncloud",bundle);
+    break;
+  }
+case R.id.action_upload:
+{
+  Intent action=new Intent(Intent.ACTION_GET_CONTENT);
+  action=action.setType("*/*").addCategory(Intent.CATEGORY_OPENABLE);
+  startActivityForResult(Intent.createChooser(action,getString(R.string.upload_chooser_title)),ACTION_SELECT_FILE);
+  break;
+}
+case R.id.action_settings:
+{
+Intent settingsIntent=new Intent(this,Preferences.class);
+startActivity(settingsIntent);
+break;
+}
+case R.id.about_app:
+{
+showDialog(DIALOG_ABOUT_APP);
+break;
+}
+case android.R.id.home:
+{
+if (mCurrentDir != null && mCurrentDir.getParentId() != 0) {
+onBackPressed();
+}
+break;
+}
+default :
+retval=false;
+}
+return retval;
+}

@@ -3,6 +3,5 @@
   while (i-- != 0) {
     onBackPressed();
   }
-  if (itemPosition != 0)   getSupportActionBar().setSelectedNavigationItem(0);
   return true;
 }

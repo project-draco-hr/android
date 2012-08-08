@@ -1,10 +1,9 @@
 {
-  Log.i(getClass().toString(),"onResume() start");
+  Log.d(getClass().toString(),"onResume() start");
   super.onResume();
   if (AccountUtils.accountsAreSetup(this)) {
-    if (mForcedLoginToCreateFirstAccount) {
-      initDelayedTilAccountAvailabe();
-      mForcedLoginToCreateFirstAccount=false;
+    if (mStorageManager == null) {
+      initDataFromCurrentAccount();
     }
     IntentFilter syncIntentFilter=new IntentFilter(FileSyncService.SYNC_MESSAGE);
     mSyncBroadcastReceiver=new SyncBroadcastReceiver();
@@ -15,46 +14,11 @@
     IntentFilter downloadIntentFilter=new IntentFilter(FileDownloader.DOWNLOAD_FINISH_MESSAGE);
     mDownloadFinishReceiver=new DownloadFinishReceiver();
     registerReceiver(mDownloadFinishReceiver,downloadIntentFilter);
-    mStorageManager=new FileDataStorageManager(AccountUtils.getCurrentOwnCloudAccount(this),getContentResolver());
-    mFileList=(FileListFragment)getSupportFragmentManager().findFragmentById(R.id.fileList);
-    if (getIntent().hasExtra(FileDetailFragment.EXTRA_FILE)) {
-      mCurrentDir=(OCFile)getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE);
-      if (mCurrentDir != null && !mCurrentDir.isDirectory()) {
-        mCurrentDir=mStorageManager.getFileById(mCurrentDir.getParentId());
-      }
-      getIntent().removeExtra(FileDetailFragment.EXTRA_FILE);
-    }
-    if (mCurrentDir == null)     mCurrentDir=mStorageManager.getFileByPath("/");
-    mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
-    if (mCurrentDir != null) {
-      ArrayList<OCFile> files=new ArrayList<OCFile>();
-      OCFile currFile=mCurrentDir;
-      while (currFile != null) {
-        files.add(currFile);
-        currFile=mStorageManager.getFileById(currFile.getParentId());
-      }
-      mDirs=new String[files.size()];
-      for (int i=files.size() - 1; i >= 0; i--) {
-        mDirs[i]=files.get(i).getFileName();
-      }
-    }
-    if (mDirs != null) {
-      for (      String s : mDirs)       mDirectories.add(s);
-    }
- else {
-      mDirectories.add(OCFile.PATH_SEPARATOR);
-    }
-    ActionBar action_bar=getSupportActionBar();
-    action_bar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-    action_bar.setDisplayShowTitleEnabled(false);
-    action_bar.setListNavigationCallbacks(mDirectories,this);
-    if (mCurrentDir != null && mCurrentDir.getParentId() != 0) {
-      action_bar.setDisplayHomeAsUpEnabled(true);
-    }
- else {
-      action_bar.setDisplayHomeAsUpEnabled(false);
-    }
     mFileList.listDirectory(mCurrentDir);
   }
-  Log.i(getClass().toString(),"onResume() end");
+ else {
+    mStorageManager=null;
+    showDialog(DIALOG_SETUP_ACCOUNT);
+  }
+  Log.d(getClass().toString(),"onResume() end");
 }
