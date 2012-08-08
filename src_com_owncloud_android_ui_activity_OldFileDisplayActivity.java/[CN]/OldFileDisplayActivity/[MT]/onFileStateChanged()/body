@@ -1,6 +1,0 @@
-{
-  FileListFragment fileListFragment=(FileListFragment)getSupportFragmentManager().findFragmentById(R.id.fileList);
-  if (fileListFragment != null) {
-    fileListFragment.listDirectory();
-  }
-}

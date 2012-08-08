@@ -1,5 +1,0 @@
-{
-  MenuInflater inflater=getSherlock().getMenuInflater();
-  inflater.inflate(R.menu.menu,menu);
-  return true;
-}
