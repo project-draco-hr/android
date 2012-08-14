@@ -1,0 +1,5 @@
+{
+  pushDirname(directory);
+  ActionBar actionBar=getSupportActionBar();
+  actionBar.setDisplayHomeAsUpEnabled(true);
+}

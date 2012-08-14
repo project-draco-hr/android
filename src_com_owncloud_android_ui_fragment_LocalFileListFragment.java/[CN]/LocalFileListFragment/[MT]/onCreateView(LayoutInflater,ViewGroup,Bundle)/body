@@ -1,0 +1,11 @@
+{
+  Log.i(getClass().toString(),"onCreateView() start");
+  super.onCreateView(inflater,container,savedInstanceState);
+  getListView().setDivider(getResources().getDrawable(R.drawable.uploader_list_separator));
+  getListView().setDividerHeight(1);
+  getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+  if (savedInstanceState != null) {
+  }
+  Log.i(getClass().toString(),"onCreateView() end");
+  return getListView();
+}

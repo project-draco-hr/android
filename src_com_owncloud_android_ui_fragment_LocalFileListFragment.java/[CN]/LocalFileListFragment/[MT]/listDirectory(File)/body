@@ -1,0 +1,24 @@
+{
+  if (directory == null) {
+    if (mDirectory != null) {
+      directory=mDirectory;
+    }
+ else {
+      directory=Environment.getExternalStorageDirectory();
+      if (directory == null)       return;
+    }
+  }
+  if (!directory.isDirectory()) {
+    Log.w(TAG,"You see, that is not a directory -> " + directory.toString());
+    directory=directory.getParentFile();
+  }
+  mDirectory=directory;
+  if (mAdapter == null) {
+    mAdapter=new LocalFileListAdapter(mDirectory,getActivity());
+    setListAdapter(mAdapter);
+  }
+ else {
+    mList.clearChoices();
+    mAdapter.swapDirectory(mDirectory);
+  }
+}

@@ -1,0 +1,26 @@
+{
+  String[] filePaths=data.getStringArrayExtra(UploadFilesActivity.EXTRA_CHOSEN_FILES);
+  if (filePaths != null) {
+    String[] remotePaths=new String[filePaths.length];
+    String remotePathBase="";
+    for (int j=mDirectories.getCount() - 2; j >= 0; --j) {
+      remotePathBase+=OCFile.PATH_SEPARATOR + mDirectories.getItem(j);
+    }
+    if (!remotePathBase.endsWith(OCFile.PATH_SEPARATOR))     remotePathBase+=OCFile.PATH_SEPARATOR;
+    for (int j=0; j < remotePaths.length; j++) {
+      remotePaths[j]=remotePathBase + (new File(filePaths[j])).getName();
+    }
+    Intent i=new Intent(this,FileUploader.class);
+    i.putExtra(FileUploader.KEY_ACCOUNT,AccountUtils.getCurrentOwnCloudAccount(this));
+    i.putExtra(FileUploader.KEY_LOCAL_FILE,filePaths);
+    i.putExtra(FileUploader.KEY_REMOTE_FILE,remotePaths);
+    i.putExtra(FileUploader.KEY_UPLOAD_TYPE,FileUploader.UPLOAD_MULTIPLE_FILES);
+    startService(i);
+  }
+ else {
+    Log.d("FileDisplay","User clicked on 'Update' with no selection");
+    Toast t=Toast.makeText(this,getString(R.string.filedisplay_no_file_selected),Toast.LENGTH_LONG);
+    t.show();
+    return;
+  }
+}

@@ -16,9 +16,7 @@ case R.id.startSync:
   }
 case R.id.action_upload:
 {
-  Intent action=new Intent(Intent.ACTION_GET_CONTENT);
-  action=action.setType("*/*").addCategory(Intent.CATEGORY_OPENABLE);
-  startActivityForResult(Intent.createChooser(action,getString(R.string.upload_chooser_title)),ACTION_SELECT_FILE);
+  showDialog(DIALOG_CHOOSE_UPLOAD_SOURCE);
   break;
 }
 case R.id.action_settings:

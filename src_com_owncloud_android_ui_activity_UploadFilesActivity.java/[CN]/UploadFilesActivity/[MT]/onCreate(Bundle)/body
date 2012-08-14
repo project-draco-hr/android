@@ -1,0 +1,30 @@
+{
+  Log.d(TAG,"onCreate() start");
+  super.onCreate(savedInstanceState);
+  if (savedInstanceState != null) {
+    mCurrentDir=new File(savedInstanceState.getString(UploadFilesActivity.EXTRA_DIRECTORY_PATH));
+  }
+ else {
+    mCurrentDir=Environment.getExternalStorageDirectory();
+  }
+  mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
+  File currDir=mCurrentDir;
+  while (currDir != null && currDir.getParentFile() != null) {
+    mDirectories.add(currDir.getName());
+    currDir=currDir.getParentFile();
+  }
+  mDirectories.add(File.separator);
+  setContentView(R.layout.upload_files_layout);
+  mFileListFragment=(LocalFileListFragment)getSupportFragmentManager().findFragmentById(R.id.local_files_list);
+  mCancelBtn=(Button)findViewById(R.id.upload_files_btn_cancel);
+  mCancelBtn.setOnClickListener(this);
+  mUploadBtn=(Button)findViewById(R.id.upload_files_btn_upload);
+  mUploadBtn.setOnClickListener(this);
+  ActionBar actionBar=getSupportActionBar();
+  actionBar.setHomeButtonEnabled(true);
+  actionBar.setDisplayHomeAsUpEnabled(mCurrentDir != null && mCurrentDir.getName() != null);
+  actionBar.setDisplayShowTitleEnabled(false);
+  actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+  actionBar.setListNavigationCallbacks(mDirectories,this);
+  Log.d(TAG,"onCreate() end");
+}

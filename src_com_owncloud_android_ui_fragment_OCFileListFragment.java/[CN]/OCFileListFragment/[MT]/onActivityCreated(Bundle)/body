@@ -1,0 +1,5 @@
+{
+  Log.i(getClass().toString(),"onActivityCreated() start");
+  super.onCreate(savedInstanceState);
+  Log.i(getClass().toString(),"onActivityCreated() stop");
+}

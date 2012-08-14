@@ -1,0 +1,3 @@
+{
+  mObservers.add(observer);
+}

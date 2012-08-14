@@ -3,7 +3,7 @@
   OCFile parentDir=mStorageManager.getFileById(parentDirId);
   String accountName=intent.getStringExtra(FileUploader.ACCOUNT_NAME);
   if (accountName.equals(AccountUtils.getCurrentOwnCloudAccount(context).name) && parentDir != null && ((mCurrentDir == null && parentDir.getFileName().equals("/")) || parentDir.equals(mCurrentDir))) {
-    FileListFragment fileListFragment=(FileListFragment)getSupportFragmentManager().findFragmentById(R.id.fileList);
+    OCFileListFragment fileListFragment=(OCFileListFragment)getSupportFragmentManager().findFragmentById(R.id.fileList);
     if (fileListFragment != null) {
       fileListFragment.listDirectory();
     }

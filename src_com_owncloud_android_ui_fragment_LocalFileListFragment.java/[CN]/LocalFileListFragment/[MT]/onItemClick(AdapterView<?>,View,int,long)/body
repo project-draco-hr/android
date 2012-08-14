@@ -1,0 +1,15 @@
+{
+  File file=(File)mAdapter.getItem(position);
+  if (file != null) {
+    if (file.isDirectory()) {
+      listDirectory(file);
+      mContainerActivity.onDirectoryClick(file);
+    }
+ else {
+      mContainerActivity.onFileClick(file);
+    }
+  }
+ else {
+    Log.w(TAG,"Null object in ListAdapter!!");
+  }
+}

@@ -1,0 +1,13 @@
+{
+  if (mDirectories.getCount() <= 1) {
+    finish();
+    return;
+  }
+  popDirname();
+  mFileListFragment.onNavigateUp();
+  mCurrentDir=mFileListFragment.getCurrentDirectory();
+  if (mCurrentDir.getParentFile() == null) {
+    ActionBar actionBar=getSupportActionBar();
+    actionBar.setDisplayHomeAsUpEnabled(false);
+  }
+}

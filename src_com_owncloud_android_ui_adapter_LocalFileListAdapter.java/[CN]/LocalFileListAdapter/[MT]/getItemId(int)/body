@@ -1,0 +1,3 @@
+{
+  return mFiles != null && mFiles.length <= position ? position : -1;
+}

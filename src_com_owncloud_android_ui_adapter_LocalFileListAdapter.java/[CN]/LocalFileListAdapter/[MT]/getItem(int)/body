@@ -1,0 +1,4 @@
+{
+  if (mFiles == null || mFiles.length <= position)   return null;
+  return mFiles[position];
+}

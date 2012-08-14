@@ -1,0 +1,12 @@
+{
+  if (v.getId() == R.id.upload_files_btn_cancel) {
+    setResult(RESULT_CANCELED);
+    finish();
+  }
+ else   if (v.getId() == R.id.upload_files_btn_upload) {
+    Intent data=new Intent();
+    data.putExtra(EXTRA_CHOSEN_FILES,mFileListFragment.getCheckedFilePaths());
+    setResult(RESULT_OK,data);
+    finish();
+  }
+}

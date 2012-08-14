@@ -19,12 +19,12 @@
   mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
   OCFile currFile=mCurrentDir;
   while (currFile != null && currFile.getFileName() != OCFile.PATH_SEPARATOR) {
-    mDirectories.insert(currFile.getFileName(),0);
+    mDirectories.add(currFile.getFileName());
     currFile=mStorageManager.getFileById(currFile.getParentId());
   }
-  mDirectories.insert(OCFile.PATH_SEPARATOR,0);
+  mDirectories.add(OCFile.PATH_SEPARATOR);
   setContentView(R.layout.files);
-  mFileList=(FileListFragment)getSupportFragmentManager().findFragmentById(R.id.fileList);
+  mFileList=(OCFileListFragment)getSupportFragmentManager().findFragmentById(R.id.fileList);
   mDualPane=(findViewById(R.id.file_details_container) != null);
   if (mDualPane && getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG) == null) {
     FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();

@@ -47,7 +47,6 @@ case DIALOG_CREATE_DIR:
 {
   builder=new Builder(this);
   final EditText dirNameInput=new EditText(getBaseContext());
-  final Account a=AccountUtils.getCurrentOwnCloudAccount(this);
   builder.setView(dirNameInput);
   builder.setTitle(R.string.uploader_info_dirname);
   int typed_color=getResources().getColor(R.color.setup_text_typed);
@@ -69,7 +68,7 @@ case DIALOG_CREATE_DIR:
       }
       path=FileDisplayActivity.this.mCurrentDir.getRemotePath();
       path+=directoryName + OCFile.PATH_SEPARATOR;
-      Thread thread=new Thread(new DirectoryCreator(path,a,new Handler()));
+      Thread thread=new Thread(new DirectoryCreator(path,AccountUtils.getCurrentOwnCloudAccount(FileDisplayActivity.this),new Handler()));
       thread.start();
       dialog.dismiss();
       showDialog(DIALOG_SHORT_WAIT);
@@ -92,6 +91,28 @@ working_dialog.setMessage(getResources().getString(R.string.wait_a_moment));
 working_dialog.setIndeterminate(true);
 working_dialog.setCancelable(false);
 dialog=working_dialog;
+break;
+}
+case DIALOG_CHOOSE_UPLOAD_SOURCE:
+{
+final String[] items={getString(R.string.actionbar_upload_files),getString(R.string.actionbar_upload_from_apps)};
+builder=new AlertDialog.Builder(this);
+builder.setTitle(R.string.actionbar_upload);
+builder.setItems(items,new DialogInterface.OnClickListener(){
+public void onClick(DialogInterface dialog,int item){
+  if (item == 0) {
+    Intent action=new Intent(FileDisplayActivity.this,UploadFilesActivity.class);
+    startActivityForResult(action,ACTION_SELECT_MULTIPLE_FILES);
+  }
+ else   if (item == 1) {
+    Intent action=new Intent(Intent.ACTION_GET_CONTENT);
+    action=action.setType("*/*").addCategory(Intent.CATEGORY_OPENABLE);
+    startActivityForResult(Intent.createChooser(action,getString(R.string.upload_chooser_title)),ACTION_SELECT_CONTENT_FROM_APPS);
+  }
+}
+}
+);
+dialog=builder.create();
 break;
 }
 default :

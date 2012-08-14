@@ -1,0 +1,7 @@
+{
+  if (!directory.isDirectory()) {
+    throw new IllegalArgumentException("Only directories may be pushed!");
+  }
+  mDirectories.insert(directory.getName(),0);
+  mCurrentDir=directory;
+}
