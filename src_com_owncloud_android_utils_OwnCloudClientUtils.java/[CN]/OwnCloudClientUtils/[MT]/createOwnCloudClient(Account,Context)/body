@@ -1,12 +1,11 @@
 {
   Log.d(TAG,"Creating WebdavClient associated to " + account.name);
-  setDefaultTimeouts();
-  OwnCloudVersion ownCloudVersion=new OwnCloudVersion(AccountManager.get(context).getUserData(account,AccountAuthenticator.KEY_OC_VERSION));
   String baseUrl=AccountManager.get(context).getUserData(account,AccountAuthenticator.KEY_OC_BASE_URL);
+  OwnCloudVersion ownCloudVersion=new OwnCloudVersion(AccountManager.get(context).getUserData(account,AccountAuthenticator.KEY_OC_VERSION));
   String webDavPath=AccountUtils.getWebdavPath(ownCloudVersion);
+  WebdavClient client=createOwnCloudClient(Uri.parse(baseUrl + webDavPath));
   String username=account.name.substring(0,account.name.lastIndexOf('@'));
   String password=AccountManager.get(context).getPassword(account);
-  mUri=Uri.parse(baseUrl + webDavPath);
-  Log.e("ASD","" + username);
-  setCredentials(username,password);
+  client.setCredentials(username,password);
+  return client;
 }

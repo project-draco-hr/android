@@ -1,0 +1,14 @@
+{
+  Protocol pr=null;
+  try {
+    pr=Protocol.getProtocol("https");
+  }
+ catch (  IllegalStateException e) {
+  }
+  boolean isAllowed=(pr != null && pr.getSocketFactory() instanceof EasySSLSocketFactory);
+  if (allow && !isAllowed) {
+    Protocol.registerProtocol("https",new Protocol("https",new EasySSLSocketFactory(),443));
+  }
+ else   if (!allow && isAllowed) {
+  }
+}

@@ -1,8 +1,7 @@
 {
   FileDataStorageManager storageManager=new FileDataStorageManager(mAccount,getContentResolver());
   mTotalDataToSend=mSendData=mPreviousPercent=0;
-  WebdavClient wc=new WebdavClient(mAccount,getApplicationContext());
-  wc.allowSelfsignedCertificates();
+  WebdavClient wc=OwnCloudClientUtils.createOwnCloudClient(mAccount,getApplicationContext());
   wc.setDataTransferProgressListener(this);
   mNotification=new Notification(R.drawable.icon,getString(R.string.uploader_upload_in_progress_ticker),System.currentTimeMillis());
   mNotification.flags|=Notification.FLAG_ONGOING_EVENT;

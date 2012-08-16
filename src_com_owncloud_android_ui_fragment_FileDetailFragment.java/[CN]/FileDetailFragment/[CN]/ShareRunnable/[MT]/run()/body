@@ -10,7 +10,7 @@
     String SHARED_PATH="/apps/files_sharing/get.php?token=";
     final String WEBDAV_SCRIPT="webdav.php";
     final String WEBDAV_FILES_LOCATION="/files/";
-    WebdavClient wc=new WebdavClient();
+    WebdavClient wc=OwnCloudClientUtils.createOwnCloudClient(account,getActivity().getApplicationContext());
     HttpConnectionManagerParams params=new HttpConnectionManagerParams();
     params.setMaxConnectionsPerHost(wc.getHostConfiguration(),5);
     PostMethod post=new PostMethod(am.getUserData(account,AccountAuthenticator.KEY_OC_BASE_URL) + APPS_PATH + SHARE_PATH);
@@ -27,7 +27,6 @@
       PropFindMethod find=new PropFindMethod(url + "/");
       find.addRequestHeader("Referer",am.getUserData(account,AccountAuthenticator.KEY_OC_BASE_URL));
       Log.d("sharer","" + url + "/");
-      wc.setCredentials(account.name.substring(0,account.name.lastIndexOf('@')),am.getPassword(account));
       for (      org.apache.commons.httpclient.Header a : find.getRequestHeaders()) {
         Log.d("sharer-h",a.getName() + ":" + a.getValue());
       }

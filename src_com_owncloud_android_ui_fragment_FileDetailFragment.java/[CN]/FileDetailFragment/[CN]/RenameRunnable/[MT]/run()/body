@@ -1,6 +1,5 @@
 {
-  WebdavClient wc=new WebdavClient(mAccount,getSherlockActivity().getApplicationContext());
-  wc.allowSelfsignedCertificates();
+  WebdavClient wc=OwnCloudClientUtils.createOwnCloudClient(mAccount,getSherlockActivity().getApplicationContext());
   AccountManager am=AccountManager.get(getSherlockActivity());
   String baseUrl=am.getUserData(mAccount,AccountAuthenticator.KEY_OC_BASE_URL);
   OwnCloudVersion ocv=new OwnCloudVersion(am.getUserData(mAccount,AccountAuthenticator.KEY_OC_VERSION));
@@ -12,6 +11,7 @@
   try {
     int status=wc.executeMethod(move);
     success=move.succeeded();
+    move.getResponseBodyAsString();
     Log.d(TAG,"Move returned status: " + status);
   }
  catch (  HttpException e) {
@@ -22,6 +22,9 @@ catch (  IOException e) {
   }
 catch (  Exception e) {
     Log.e(TAG,"Unexpected exception renaming file " + mOld.getRemotePath() + " to "+ mNew.getRemotePath(),e);
+  }
+ finally {
+    move.releaseConnection();
   }
   if (success) {
     FileDataStorageManager fdsm=new FileDataStorageManager(mAccount,getActivity().getContentResolver());

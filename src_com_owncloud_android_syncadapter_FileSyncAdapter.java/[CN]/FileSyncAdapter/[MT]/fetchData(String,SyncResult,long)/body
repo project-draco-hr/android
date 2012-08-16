@@ -1,7 +1,8 @@
 {
+  PropFindMethod query=null;
   try {
     Log.d(TAG,"fetching " + uri);
-    PropFindMethod query=new PropFindMethod(uri);
+    query=new PropFindMethod(uri);
     getClient().executeMethod(query);
     MultiStatus resp=null;
     resp=query.getResponseBodyAsMultiStatus();
@@ -64,5 +65,8 @@ catch (  DavException e) {
 catch (  Throwable t) {
     Log.e(TAG,"problem while synchronizing owncloud account " + mAccount.name,t);
     t.printStackTrace();
+  }
+ finally {
+    if (query != null)     query.releaseConnection();
   }
 }

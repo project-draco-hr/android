@@ -3,8 +3,7 @@
     if (this.getAccountManager().getUserData(getAccount(),AccountAuthenticator.KEY_OC_URL) == null) {
       throw new UnknownHostException();
     }
-    mClient=new WebdavClient(account,getContext());
-    mClient.allowSelfsignedCertificates();
+    mClient=OwnCloudClientUtils.createOwnCloudClient(account,getContext());
   }
   return mClient;
 }

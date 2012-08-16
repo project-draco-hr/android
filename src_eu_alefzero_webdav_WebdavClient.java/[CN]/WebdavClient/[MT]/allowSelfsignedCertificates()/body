@@ -1,3 +1,0 @@
-{
-  Protocol.registerProtocol("https",new Protocol("https",new EasySSLSocketFactory(),443));
-}

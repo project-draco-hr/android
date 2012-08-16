@@ -1,11 +1,16 @@
 {
+  HeadMethod head=new HeadMethod(mUri.toString() + WebdavUtils.encodePath(path));
   try {
-    HeadMethod head=new HeadMethod(mUri.toString() + WebdavUtils.encodePath(path));
     int status=executeMethod(head);
+    Log.d(TAG,"HEAD to " + path + " finished with HTTP status "+ status+ ((status != HttpStatus.SC_OK) ? "(FAIL)" : ""));
+    exhaustResponse(head.getResponseBodyAsStream());
     return (status == HttpStatus.SC_OK);
   }
  catch (  Exception e) {
-    e.printStackTrace();
+    logException(e,"checking existence of " + path);
     return null;
+  }
+ finally {
+    head.releaseConnection();
   }
 }

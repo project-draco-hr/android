@@ -1,7 +1,6 @@
 {
   try {
-    WebdavClient wdc=new WebdavClient(mAccount,getApplicationContext());
-    wdc.allowSelfsignedCertificates();
+    WebdavClient wdc=OwnCloudClientUtils.createOwnCloudClient(mAccount,getApplicationContext());
     if (mCreateDir) {
       wdc.createDirectory(mUploadPath);
     }

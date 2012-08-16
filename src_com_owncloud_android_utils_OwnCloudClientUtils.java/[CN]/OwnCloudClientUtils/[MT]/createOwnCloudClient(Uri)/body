@@ -1,0 +1,9 @@
+{
+  Log.d(TAG,"Creating WebdavClient for " + uri);
+  allowSelfsignedCertificates(true);
+  WebdavClient client=new WebdavClient(getMultiThreadedConnManager());
+  allowSelfsignedCertificates(true);
+  client.setDefaultTimeouts(DEFAULT_DATA_TIMEOUT,DEFAULT_CONNECTION_TIMEOUT);
+  client.setBaseUri(uri);
+  return client;
+}

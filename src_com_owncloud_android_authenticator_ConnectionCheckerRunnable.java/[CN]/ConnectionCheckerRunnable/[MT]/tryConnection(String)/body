@@ -1,15 +1,14 @@
 {
   boolean retval=false;
+  GetMethod get=null;
   try {
-    WebdavClient wc=new WebdavClient();
-    wc.allowSelfsignedCertificates();
-    URL url=new URL(urlSt);
-    GetMethod get=new GetMethod(url.toString());
-    int status=wc.executeMethod(get,TRY_CONNECTION_TIMEOUT);
+    WebdavClient wc=OwnCloudClientUtils.createOwnCloudClient(Uri.parse(urlSt));
+    get=new GetMethod(urlSt);
+    int status=wc.executeMethod(get,TRY_CONNECTION_TIMEOUT,TRY_CONNECTION_TIMEOUT);
+    String response=get.getResponseBodyAsString();
 switch (status) {
 case HttpStatus.SC_OK:
 {
-        String response=get.getResponseBodyAsString();
         JSONObject json=new JSONObject(response);
         if (!json.getBoolean("installed")) {
           mLatestResult=ResultType.INSTANCE_NOT_CONFIGURED;
@@ -62,6 +61,10 @@ catch (SSLException e) {
 mLatestResult=ResultType.SSL_INIT_ERROR;
 Log.e(TAG,"SSL exception while trying connection",e);
 }
+catch (ConnectTimeoutException e) {
+mLatestResult=ResultType.TIMEOUT;
+Log.e(TAG,"Socket timeout exception while trying connection",e);
+}
 catch (HttpException e) {
 mLatestResult=ResultType.UNKNOWN_ERROR;
 Log.e(TAG,"HTTP exception while trying connection",e);
@@ -73,6 +76,9 @@ Log.e(TAG,"I/O exception while trying connection",e);
 catch (Exception e) {
 mLatestResult=ResultType.UNKNOWN_ERROR;
 Log.e(TAG,"Unexpected exception while trying connection",e);
+}
+ finally {
+if (get != null) get.releaseConnection();
 }
 return retval;
 }

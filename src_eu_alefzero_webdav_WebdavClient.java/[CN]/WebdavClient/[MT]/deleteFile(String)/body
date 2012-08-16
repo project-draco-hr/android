@@ -1,11 +1,17 @@
 {
+  boolean ret=false;
   DavMethod delete=new DeleteMethod(mUri.toString() + WebdavUtils.encodePath(remoteFilePath));
   try {
-    executeMethod(delete);
+    int status=executeMethod(delete);
+    ret=(status == HttpStatus.SC_OK || status == HttpStatus.SC_ACCEPTED || status == HttpStatus.SC_NO_CONTENT);
+    exhaustResponse(delete.getResponseBodyAsStream());
+    Log.e(TAG,"DELETE of " + remoteFilePath + " finished with HTTP status "+ status+ (!ret ? "(FAIL)" : ""));
   }
- catch (  Throwable e) {
-    Log.e(TAG,"Deleting failed with error: " + e.getMessage(),e);
-    return false;
+ catch (  Exception e) {
+    logException(e,"deleting " + remoteFilePath);
   }
-  return true;
+ finally {
+    delete.releaseConnection();
+  }
+  return ret;
 }

@@ -1,0 +1,17 @@
+{
+  int status=0;
+  HeadMethod head=new HeadMethod(mUri.toString());
+  try {
+    status=executeMethod(head);
+    boolean result=status == HttpStatus.SC_OK;
+    Log.d(TAG,"HEAD for " + mUri + " finished with HTTP status "+ status+ (!result ? "(FAIL)" : ""));
+    exhaustResponse(head.getResponseBodyAsStream());
+  }
+ catch (  Exception e) {
+    logException(e,"trying to login at " + mUri.toString());
+  }
+ finally {
+    head.releaseConnection();
+  }
+  return status;
+}

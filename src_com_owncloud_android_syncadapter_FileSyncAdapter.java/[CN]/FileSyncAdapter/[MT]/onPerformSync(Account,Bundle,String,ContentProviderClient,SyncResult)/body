@@ -6,7 +6,7 @@
   this.setStorageManager(new FileDataStorageManager(mAccount,getContentProvider()));
   Log.d(TAG,"syncing owncloud account " + mAccount.name);
   sendStickyBroadcast(true,null);
-  PropFindMethod query;
+  PropFindMethod query=null;
   try {
     mCurrentSyncTime=System.currentTimeMillis();
     query=new PropFindMethod(getUri().toString() + "/");
@@ -41,6 +41,9 @@ catch (  DavException e) {
 catch (  Throwable t) {
     Log.e(TAG,"problem while synchronizing owncloud account " + account.name,t);
     t.printStackTrace();
+  }
+ finally {
+    if (query != null)     query.releaseConnection();
   }
   sendStickyBroadcast(false,null);
 }

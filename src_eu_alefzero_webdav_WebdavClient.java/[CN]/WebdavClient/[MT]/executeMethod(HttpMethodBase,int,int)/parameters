@@ -1,2 +1,3 @@
 HttpMethodBase method
 int readTimeout
+int connectionTimeout

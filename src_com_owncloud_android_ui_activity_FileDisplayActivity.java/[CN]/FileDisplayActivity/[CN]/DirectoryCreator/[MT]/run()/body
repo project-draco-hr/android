@@ -1,9 +1,5 @@
 {
-  WebdavClient wdc=new WebdavClient(mAccount,getApplicationContext());
-  String username=mAccount.name.substring(0,mAccount.name.lastIndexOf('@'));
-  String password=mAm.getPassword(mAccount);
-  wdc.setCredentials(username,password);
-  wdc.allowSelfsignedCertificates();
+  WebdavClient wdc=OwnCloudClientUtils.createOwnCloudClient(mAccount,getApplicationContext());
   boolean created=wdc.createDirectory(mTargetPath);
   if (created) {
     mHandler.post(new Runnable(){

@@ -1,19 +1,6 @@
 {
   boolean downloadResult=false;
-  AccountManager am=(AccountManager)getSystemService(ACCOUNT_SERVICE);
-  WebdavClient wdc=new WebdavClient(mAccount,getApplicationContext());
-  String username=mAccount.name.split("@")[0];
-  String password=null;
-  try {
-    password=am.blockingGetAuthToken(mAccount,AccountAuthenticator.AUTH_TOKEN_TYPE,true);
-  }
- catch (  Exception e) {
-    Log.e(TAG,"Access to account credentials failed",e);
-    sendFinalBroadcast(downloadResult,null);
-    return;
-  }
-  wdc.setCredentials(username,password);
-  wdc.allowSelfsignedCertificates();
+  WebdavClient wdc=OwnCloudClientUtils.createOwnCloudClient(mAccount,getApplicationContext());
   wdc.setDataTransferProgressListener(this);
   File tmpFile=new File(getTemporalPath(mAccount.name) + mFilePath);
   mNotification=new Notification(R.drawable.icon,getString(R.string.downloader_download_in_progress_ticker),System.currentTimeMillis());

@@ -1,9 +1,8 @@
 {
   boolean ret=false;
-  GetMethod get=new GetMethod(mUri.toString() + WebdavUtils.encodePath(remoteFilepath));
-  int status=-1;
+  GetMethod get=new GetMethod(mUri.toString() + WebdavUtils.encodePath(remoteFilePath));
   try {
-    status=executeMethod(get);
+    int status=executeMethod(get);
     if (status == HttpStatus.SC_OK) {
       targetFile.createNewFile();
       BufferedInputStream bis=new BufferedInputStream(get.getResponseBodyAsStream());
@@ -16,25 +15,19 @@
       }
       ret=true;
     }
+ else {
+      exhaustResponse(get.getResponseBodyAsStream());
+    }
+    Log.e(TAG,"Download of " + remoteFilePath + " to "+ targetFile+ " finished with HTTP status "+ status+ (!ret ? "(FAIL)" : ""));
   }
- catch (  HttpException e) {
-    Log.e(TAG,"HTTP exception downloading " + remoteFilepath,e);
-  }
-catch (  IOException e) {
-    Log.e(TAG,"I/O exception downloading " + remoteFilepath,e);
-  }
-catch (  Exception e) {
-    Log.e(TAG,"Unexpected exception downloading " + remoteFilepath,e);
+ catch (  Exception e) {
+    logException(e,"dowloading " + remoteFilePath);
   }
  finally {
-    if (!ret) {
-      if (status >= 0) {
-        Log.e(TAG,"Download of " + remoteFilepath + " to "+ targetFile+ " failed with HTTP status "+ status);
-      }
-      if (targetFile.exists()) {
-        targetFile.delete();
-      }
+    if (!ret && targetFile.exists()) {
+      targetFile.delete();
     }
+    get.releaseConnection();
   }
   return ret;
 }

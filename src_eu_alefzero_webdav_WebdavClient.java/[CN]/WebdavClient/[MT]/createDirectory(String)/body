@@ -1,24 +1,20 @@
 {
   boolean result=false;
   int status=-1;
+  MkColMethod mkcol=new MkColMethod(mUri.toString() + WebdavUtils.encodePath(path));
   try {
-    MkColMethod mkcol=new MkColMethod(mUri.toString() + WebdavUtils.encodePath(path));
     Log.d(TAG,"Creating directory " + path);
     status=executeMethod(mkcol);
     Log.d(TAG,"Status returned: " + status);
     result=mkcol.succeeded();
+    Log.d(TAG,"MKCOL to " + path + " finished with HTTP status "+ status+ (!result ? "(FAIL)" : ""));
+    exhaustResponse(mkcol.getResponseBodyAsStream());
   }
- catch (  HttpException e) {
-    Log.e(TAG,"HTTP exception creating directory " + path,e);
+ catch (  Exception e) {
+    logException(e,"creating directory " + path);
   }
-catch (  IOException e) {
-    Log.e(TAG,"I/O exception creating directory " + path,e);
-  }
-catch (  Exception e) {
-    Log.e(TAG,"Unexpected exception creating directory " + path,e);
-  }
-  if (!result && status >= 0) {
-    Log.e(TAG,"Creation of directory " + path + " failed with HTTP status "+ status);
+ finally {
+    mkcol.releaseConnection();
   }
   return result;
 }
