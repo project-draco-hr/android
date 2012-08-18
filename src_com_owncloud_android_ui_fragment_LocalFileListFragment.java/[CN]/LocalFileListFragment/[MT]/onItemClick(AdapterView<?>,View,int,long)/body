@@ -6,6 +6,15 @@
       mContainerActivity.onDirectoryClick(file);
     }
  else {
+      ImageView checkBoxV=(ImageView)v.findViewById(R.id.custom_checkbox);
+      if (checkBoxV != null) {
+        if (getListView().isItemChecked(position)) {
+          checkBoxV.setImageResource(android.R.drawable.checkbox_on_background);
+        }
+ else {
+          checkBoxV.setImageResource(android.R.drawable.checkbox_off_background);
+        }
+      }
       mContainerActivity.onFileClick(file);
     }
   }
