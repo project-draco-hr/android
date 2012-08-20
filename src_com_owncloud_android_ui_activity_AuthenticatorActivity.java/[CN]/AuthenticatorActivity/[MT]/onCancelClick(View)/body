@@ -1,3 +1,4 @@
 {
+  setResult(RESULT_CANCELED);
   finish();
 }

@@ -1,0 +1,5 @@
+{
+  Intent register=new Intent(Intent.ACTION_VIEW,Uri.parse("https://owncloud.com/mobile/new"));
+  setResult(RESULT_CANCELED);
+  startActivity(register);
+}
