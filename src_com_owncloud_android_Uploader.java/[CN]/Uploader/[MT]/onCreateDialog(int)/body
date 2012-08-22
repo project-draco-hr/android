@@ -56,6 +56,18 @@ finish();
 }
 );
 return builder.create();
+case DIALOG_NO_STREAM:
+builder.setIcon(android.R.drawable.ic_dialog_alert);
+builder.setTitle(R.string.uploader_wrn_no_content_title);
+builder.setMessage(R.string.uploader_wrn_no_content_text);
+builder.setCancelable(false);
+builder.setNegativeButton(R.string.common_cancel,new OnClickListener(){
+public void onClick(DialogInterface dialog,int which){
+finish();
+}
+}
+);
+return builder.create();
 default :
 throw new IllegalArgumentException("Unknown dialog id: " + id);
 }

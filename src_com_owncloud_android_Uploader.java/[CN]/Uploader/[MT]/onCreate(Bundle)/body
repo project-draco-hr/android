@@ -17,7 +17,6 @@
     }
  else {
       mAccount=accounts[0];
-      setContentView(R.layout.uploader_layout);
       mStorageManager=new FileDataStorageManager(mAccount,getContentResolver());
       populateDirectoryList();
     }

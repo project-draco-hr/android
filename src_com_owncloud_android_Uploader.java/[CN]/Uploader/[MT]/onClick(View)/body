@@ -6,9 +6,6 @@ case R.id.uploader_choose_folder:
 Log.d(TAG,"Uploading file to dir " + mUploadPath);
 uploadFiles();
 break;
-case android.R.id.button1:
-showDialog(DIALOG_GET_DIRNAME);
-break;
 default :
 throw new IllegalArgumentException("Wrong element clicked");
 }
