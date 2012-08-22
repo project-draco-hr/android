@@ -12,15 +12,18 @@
   if (mUploadType == UPLOAD_SINGLE_FILE) {
     mLocalPaths=new String[]{intent.getStringExtra(KEY_LOCAL_FILE)};
     mRemotePaths=new String[]{intent.getStringExtra(KEY_REMOTE_FILE)};
+    mMimeTypes=new String[]{intent.getStringExtra(KEY_MIME_TYPE)};
   }
  else {
     mLocalPaths=intent.getStringArrayExtra(KEY_LOCAL_FILE);
     mRemotePaths=intent.getStringArrayExtra(KEY_REMOTE_FILE);
+    mMimeTypes=intent.getStringArrayExtra(KEY_MIME_TYPE);
   }
   if (mLocalPaths.length != mRemotePaths.length) {
     Log.e(TAG,"Different number of remote paths and local paths!");
     return Service.START_NOT_STICKY;
   }
+  mIsInstant=intent.getBooleanExtra(KEY_INSTANT_UPLOAD,false);
   Message msg=mServiceHandler.obtainMessage();
   msg.arg1=startId;
   mServiceHandler.sendMessage(msg);

@@ -11,6 +11,16 @@
   mNotification.contentView.setImageViewResource(R.id.status_icon,R.drawable.icon);
   mNotification.contentIntent=PendingIntent.getActivity(getApplicationContext(),0,new Intent(),PendingIntent.FLAG_UPDATE_CURRENT);
   mNotificationManager.notify(R.string.uploader_upload_in_progress_ticker,mNotification);
+  if (mIsInstant) {
+    OCFile instantUploadDir=storageManager.getFileByPath(PhotoTakenBroadcastReceiver.INSTANT_UPLOAD_DIR);
+    if (instantUploadDir == null) {
+      wc.createDirectory(PhotoTakenBroadcastReceiver.INSTANT_UPLOAD_DIR);
+      OCFile newDir=new OCFile(PhotoTakenBroadcastReceiver.INSTANT_UPLOAD_DIR);
+      newDir.setMimetype("DIR");
+      newDir.setParentId(storageManager.getFileByPath(OCFile.PATH_SEPARATOR).getFileId());
+      storageManager.saveFile(newDir);
+    }
+  }
   File[] localFiles=new File[mLocalPaths.length];
   for (int i=0; i < mLocalPaths.length; ++i) {
     localFiles[i]=new File(mLocalPaths[i]);
@@ -19,12 +29,14 @@
   Log.d(TAG,"Will upload " + mTotalDataToSend + " bytes, with "+ mLocalPaths.length+ " files");
   mSuccessCounter=0;
   for (int i=0; i < mLocalPaths.length; ++i) {
-    String mimeType=null;
-    try {
-      mimeType=MimeTypeMap.getSingleton().getMimeTypeFromExtension(mLocalPaths[i].substring(mLocalPaths[i].lastIndexOf('.') + 1));
-    }
- catch (    IndexOutOfBoundsException e) {
-      Log.e(TAG,"Trying to find out MIME type of a file without extension: " + mLocalPaths[i]);
+    String mimeType=(mMimeTypes != null) ? mMimeTypes[i] : null;
+    if (mimeType == null) {
+      try {
+        mimeType=MimeTypeMap.getSingleton().getMimeTypeFromExtension(mLocalPaths[i].substring(mLocalPaths[i].lastIndexOf('.') + 1));
+      }
+ catch (      IndexOutOfBoundsException e) {
+        Log.e(TAG,"Trying to find out MIME type of a file without extension: " + mLocalPaths[i]);
+      }
     }
     if (mimeType == null)     mimeType="application/octet-stream";
     mCurrentIndexUpload=i;

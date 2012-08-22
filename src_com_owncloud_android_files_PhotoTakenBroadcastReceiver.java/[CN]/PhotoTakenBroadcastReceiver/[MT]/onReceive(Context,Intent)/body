@@ -7,7 +7,7 @@
     handleConnectivityAction(context,intent);
   }
  else   if (intent.getAction().equals(NEW_PHOTO_ACTION)) {
-    handleNewPhontoAction(context,intent);
+    handleNewPhotoAction(context,intent);
   }
  else {
     Log.e(TAG,"Incorrect intent sent: " + intent.getAction());

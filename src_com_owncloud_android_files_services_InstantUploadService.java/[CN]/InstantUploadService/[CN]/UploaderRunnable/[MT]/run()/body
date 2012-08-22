@@ -6,9 +6,7 @@
     String filepath=(String)working_map.get(KEY_FILE_PATH);
     String mimetype=(String)working_map.get(KEY_MIME_TYPE);
     WebdavClient wdc=OwnCloudClientUtils.createOwnCloudClient(account,getApplicationContext());
-    int status=0;
     wdc.createDirectory(INSTANT_UPLOAD_DIR);
-    Log.e(TAG,"mkcol returned " + status);
     wdc.putFile(filepath,INSTANT_UPLOAD_DIR + "/" + filename,mimetype);
   }
 }
