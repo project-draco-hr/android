@@ -39,7 +39,11 @@
     finish();
   }
  else {
-    dismissDialog(DIALOG_LOGIN_PROGRESS);
+    try {
+      dismissDialog(DIALOG_LOGIN_PROGRESS);
+    }
+ catch (    IllegalArgumentException e) {
+    }
     TextView tv=(TextView)findViewById(R.id.account_username);
     tv.setError(message);
   }

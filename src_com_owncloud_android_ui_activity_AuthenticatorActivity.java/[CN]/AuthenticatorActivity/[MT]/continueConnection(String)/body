@@ -5,13 +5,18 @@
   if (url.endsWith("/"))   url=url.substring(0,url.length() - 1);
   URL uri=null;
   String webdav_path=AccountUtils.getWebdavPath(mConnChkRunnable.getDiscoveredVersion());
+  if (webdav_path == null) {
+    onAuthenticationResult(false,getString(R.string.auth_bad_oc_version_title));
+    return;
+  }
   try {
     mBaseUrl=prefix + url;
     String url_str=prefix + url + webdav_path;
     uri=new URL(url_str);
   }
  catch (  MalformedURLException e) {
-    e.printStackTrace();
+    onAuthenticationResult(false,getString(R.string.auth_incorrect_address_title));
+    return;
   }
   showDialog(DIALOG_LOGIN_PROGRESS);
   mAuthRunnable=new AuthenticationRunnable(uri,username,password);
