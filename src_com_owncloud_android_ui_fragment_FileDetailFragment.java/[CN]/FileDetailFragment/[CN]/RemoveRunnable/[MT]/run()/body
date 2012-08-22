@@ -28,7 +28,7 @@ catch (  Exception e) {
   }
   if (success) {
     FileDataStorageManager fdsm=new FileDataStorageManager(mAccount,getActivity().getContentResolver());
-    fdsm.removeFile(mFileToRemove);
+    fdsm.removeFile(mFileToRemove,true);
     mHandler.post(new Runnable(){
       @Override public void run(){
         boolean inDisplayActivity=getActivity() instanceof FileDisplayActivity;

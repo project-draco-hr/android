@@ -28,7 +28,7 @@ catch (  Exception e) {
   }
   if (success) {
     FileDataStorageManager fdsm=new FileDataStorageManager(mAccount,getActivity().getContentResolver());
-    fdsm.removeFile(mOld);
+    fdsm.removeFile(mOld,false);
     fdsm.saveFile(mNew);
     mFile=mNew;
     mHandler.post(new Runnable(){
