@@ -1,0 +1,30 @@
+{
+  if (mObservers != null)   return;
+  mObservers=new ArrayList<OwnCloudFileObserver>();
+  mDownloadReceivers=new ArrayList<DownloadCompletedReceiver>();
+  Cursor c=getContentResolver().query(ProviderTableMeta.CONTENT_URI,null,ProviderTableMeta.FILE_KEEP_IN_SYNC + " = ?",new String[]{String.valueOf(1)},null);
+  if (!c.moveToFirst())   return;
+  AccountManager acm=AccountManager.get(this);
+  Account[] accounts=acm.getAccounts();
+  do {
+    Account account=null;
+    for (    Account a : accounts)     if (a.name.equals(c.getString(c.getColumnIndex(ProviderTableMeta.FILE_ACCOUNT_OWNER)))) {
+      account=a;
+      break;
+    }
+    if (account == null)     continue;
+    FileDataStorageManager storage=new FileDataStorageManager(account,getContentResolver());
+    if (!storage.fileExists(c.getString(c.getColumnIndex(ProviderTableMeta.FILE_PATH))))     continue;
+    String path=c.getString(c.getColumnIndex(ProviderTableMeta.FILE_STORAGE_PATH));
+    OwnCloudFileObserver observer=new OwnCloudFileObserver(path,OwnCloudFileObserver.CHANGES_ONLY);
+    observer.setContext(getBaseContext());
+    observer.setAccount(account);
+    observer.setStorageManager(storage);
+    observer.setOCFile(storage.getFileByPath(c.getString(c.getColumnIndex(ProviderTableMeta.FILE_PATH))));
+    observer.startWatching();
+    mObservers.add(observer);
+    Log.d(TAG,"Started watching file " + path);
+  }
+ while (c.moveToNext());
+  c.close();
+}

@@ -42,7 +42,8 @@
     mCurrentIndexUpload=i;
     long parentDirId=-1;
     boolean uploadResult=false;
-    String availablePath=getAvailableRemotePath(wc,mRemotePaths[i]);
+    String availablePath=mRemotePaths[i];
+    if (!force_override)     availablePath=getAvailableRemotePath(wc,mRemotePaths[i]);
     try {
       File f=new File(mRemotePaths[i]);
       parentDirId=storageManager.getFileByPath(f.getParent().endsWith("/") ? f.getParent() : f.getParent() + "/").getFileId();
@@ -57,6 +58,7 @@
           new_file.setLastSyncDate(0);
           new_file.setStoragePath(mLocalPaths[i]);
           new_file.setParentId(parentDirId);
+          if (force_override)           new_file.setKeepInSync(true);
           storageManager.saveFile(new_file);
           mSuccessCounter++;
           uploadResult=true;

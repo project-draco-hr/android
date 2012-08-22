@@ -1,4 +1,4 @@
 {
-  uploadFile();
+  uploadFile(msg.arg2 == 1 ? true : false);
   stopSelf(msg.arg1);
 }

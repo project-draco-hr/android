@@ -1,0 +1,4 @@
+{
+  if (o instanceof DownloadCompletedReceiver)   return mPath.equals(((DownloadCompletedReceiver)o).mPath);
+  return super.equals(o);
+}

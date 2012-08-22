@@ -1,0 +1,6 @@
+{
+  if (mObservers == null)   return;
+  for (int i=0; i < mObservers.size(); ++i)   mObservers.get(i).stopWatching();
+  mObservers.clear();
+  mObservers=null;
+}

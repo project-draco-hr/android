@@ -1,0 +1,5 @@
+{
+  super(path,mask);
+  mPath=path;
+  mMask=mask;
+}

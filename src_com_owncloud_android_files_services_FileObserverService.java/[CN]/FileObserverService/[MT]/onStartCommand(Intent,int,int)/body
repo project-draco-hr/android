@@ -1,0 +1,20 @@
+{
+  if (!intent.hasExtra(KEY_FILE_CMD)) {
+    Log.e(TAG,"No KEY_FILE_CMD argument given");
+    return Service.START_STICKY;
+  }
+switch (intent.getIntExtra(KEY_FILE_CMD,-1)) {
+case CMD_INIT_OBSERVED_LIST:
+    initializeObservedList();
+  break;
+case CMD_ADD_OBSERVED_FILE:
+addObservedFile(intent.getStringExtra(KEY_CMD_ARG));
+break;
+case CMD_DEL_OBSERVED_FILE:
+removeObservedFile(intent.getStringExtra(KEY_CMD_ARG));
+break;
+default :
+Log.wtf(TAG,"Incorrect key given");
+}
+return Service.START_STICKY;
+}

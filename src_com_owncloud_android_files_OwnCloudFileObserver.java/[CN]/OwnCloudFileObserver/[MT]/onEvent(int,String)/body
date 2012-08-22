@@ -1,0 +1,13 @@
+{
+  if ((event | mMask) == 0) {
+    Log.wtf(TAG,"Incorrect event " + event + " sent for file "+ path+ " with registered for "+ mMask+ " and original path "+ mPath);
+    return;
+  }
+  Intent i=new Intent(mContext,FileUploader.class);
+  i.putExtra(FileUploader.KEY_ACCOUNT,mOCAccount);
+  i.putExtra(FileUploader.KEY_REMOTE_FILE,mFile.getRemotePath());
+  i.putExtra(FileUploader.KEY_LOCAL_FILE,mPath);
+  i.putExtra(FileUploader.KEY_UPLOAD_TYPE,FileUploader.UPLOAD_SINGLE_FILE);
+  i.putExtra(FileUploader.KEY_FORCE_OVERWRITE,true);
+  mContext.startService(i);
+}

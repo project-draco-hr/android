@@ -26,6 +26,7 @@
   mIsInstant=intent.getBooleanExtra(KEY_INSTANT_UPLOAD,false);
   Message msg=mServiceHandler.obtainMessage();
   msg.arg1=startId;
+  msg.arg2=intent.getBooleanExtra(KEY_FORCE_OVERWRITE,false) ? 1 : 0;
   mServiceHandler.sendMessage(msg);
   return Service.START_NOT_STICKY;
 }

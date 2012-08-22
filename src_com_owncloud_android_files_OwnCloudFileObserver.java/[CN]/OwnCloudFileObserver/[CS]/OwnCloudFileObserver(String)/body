@@ -1,0 +1,3 @@
+{
+  this(path,ALL_EVENTS);
+}

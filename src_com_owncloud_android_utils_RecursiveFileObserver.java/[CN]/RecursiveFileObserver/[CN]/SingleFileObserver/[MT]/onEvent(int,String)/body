@@ -1,0 +1,4 @@
+{
+  String newPath=mPath + "/" + path;
+  RecursiveFileObserver.this.onEvent(event,newPath);
+}
