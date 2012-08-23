@@ -1,5 +1,11 @@
 {
   super.onCreate(savedInstanceState);
+  if (savedInstanceState != null) {
+    mPreviousAccount=savedInstanceState.getParcelable(PREVIOUS_ACCOUNT_KEY);
+  }
+ else {
+    mPreviousAccount=AccountUtils.getCurrentOwnCloudAccount(this);
+  }
   ActionBar action_bar=getSupportActionBar();
   action_bar.setDisplayShowTitleEnabled(true);
   action_bar.setDisplayHomeAsUpEnabled(false);

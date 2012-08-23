@@ -1,12 +1,5 @@
 {
   String accountName=((TextView)v.findViewById(android.R.id.text1)).getText().toString();
   AccountUtils.setCurrentOwnCloudAccount(this,accountName);
-  ContentResolver.cancelSync(null,"org.owncloud");
-  Bundle bundle=new Bundle();
-  bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL,true);
-  ContentResolver.requestSync(AccountUtils.getCurrentOwnCloudAccount(this),"org.owncloud",bundle);
-  Intent i=new Intent(this,FileDisplayActivity.class);
-  i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-  startActivity(i);
   finish();
 }
