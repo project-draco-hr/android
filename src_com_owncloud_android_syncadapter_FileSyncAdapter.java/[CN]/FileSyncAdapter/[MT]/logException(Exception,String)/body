@@ -1,0 +1,11 @@
+{
+  if (e instanceof IOException) {
+    Log.e(TAG,"Unrecovered transport exception while synchronizing " + uri + " at "+ getAccount().name,e);
+  }
+ else   if (e instanceof DavException) {
+    Log.e(TAG,"Unexpected WebDAV exception while synchronizing " + uri + " at "+ getAccount().name,e);
+  }
+ else {
+    Log.e(TAG,"Unexpected exception while synchronizing " + uri + " at "+ getAccount().name,e);
+  }
+}

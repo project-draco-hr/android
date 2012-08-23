@@ -3,71 +3,68 @@
   try {
     Log.d(TAG,"fetching " + uri);
     query=new PropFindMethod(uri);
-    getClient().executeMethod(query);
-    MultiStatus resp=null;
-    resp=query.getResponseBodyAsMultiStatus();
-    List<OCFile> updatedFiles=new Vector<OCFile>(resp.getResponses().length - 1);
-    for (int i=1; i < resp.getResponses().length; ++i) {
-      WebdavEntry we=new WebdavEntry(resp.getResponses()[i],getUri().getPath());
-      OCFile file=fillOCFile(we);
-      file.setParentId(parentId);
-      if (getStorageManager().getFileByPath(file.getRemotePath()) != null && getStorageManager().getFileByPath(file.getRemotePath()).keepInSync() && file.getModificationTimestamp() > getStorageManager().getFileByPath(file.getRemotePath()).getModificationTimestamp()) {
-        Intent intent=new Intent(this.getContext(),FileDownloader.class);
-        intent.putExtra(FileDownloader.EXTRA_ACCOUNT,getAccount());
-        intent.putExtra(FileDownloader.EXTRA_FILE_PATH,file.getRemotePath());
-        intent.putExtra(FileDownloader.EXTRA_REMOTE_PATH,file.getRemotePath());
-        intent.putExtra(FileDownloader.EXTRA_FILE_SIZE,file.getFileLength());
-        file.setKeepInSync(true);
-        getContext().startService(intent);
+    int status=getClient().executeMethod(query);
+    if (status != HttpStatus.SC_UNAUTHORIZED) {
+      MultiStatus resp=query.getResponseBodyAsMultiStatus();
+      List<OCFile> updatedFiles=new Vector<OCFile>(resp.getResponses().length - 1);
+      for (int i=1; i < resp.getResponses().length; ++i) {
+        WebdavEntry we=new WebdavEntry(resp.getResponses()[i],getUri().getPath());
+        OCFile file=fillOCFile(we);
+        file.setParentId(parentId);
+        if (getStorageManager().getFileByPath(file.getRemotePath()) != null && getStorageManager().getFileByPath(file.getRemotePath()).keepInSync() && file.getModificationTimestamp() > getStorageManager().getFileByPath(file.getRemotePath()).getModificationTimestamp()) {
+          Intent intent=new Intent(this.getContext(),FileDownloader.class);
+          intent.putExtra(FileDownloader.EXTRA_ACCOUNT,getAccount());
+          intent.putExtra(FileDownloader.EXTRA_FILE_PATH,file.getRemotePath());
+          intent.putExtra(FileDownloader.EXTRA_REMOTE_PATH,file.getRemotePath());
+          intent.putExtra(FileDownloader.EXTRA_FILE_SIZE,file.getFileLength());
+          file.setKeepInSync(true);
+          getContext().startService(intent);
+        }
+        if (getStorageManager().getFileByPath(file.getRemotePath()) != null)         file.setKeepInSync(getStorageManager().getFileByPath(file.getRemotePath()).keepInSync());
+        updatedFiles.add(file);
+        if (parentId == 0)         parentId=file.getFileId();
       }
-      if (getStorageManager().getFileByPath(file.getRemotePath()) != null)       file.setKeepInSync(getStorageManager().getFileByPath(file.getRemotePath()).keepInSync());
-      updatedFiles.add(file);
-      if (parentId == 0)       parentId=file.getFileId();
-    }
-    getStorageManager().saveFiles(updatedFiles);
-    Vector<OCFile> files=getStorageManager().getDirectoryContent(getStorageManager().getFileById(parentId));
-    OCFile file;
-    String currentSavePath=FileDownloader.getSavePath(mAccount.name);
-    for (int i=0; i < files.size(); ) {
-      file=files.get(i);
-      if (file.getLastSyncDate() != mCurrentSyncTime) {
-        Log.v(TAG,"removing file: " + file);
-        getStorageManager().removeFile(file,(file.isDown() && file.getStoragePath().startsWith(currentSavePath)));
-        files.remove(i);
-      }
+      getStorageManager().saveFiles(updatedFiles);
+      Vector<OCFile> files=getStorageManager().getDirectoryContent(getStorageManager().getFileById(parentId));
+      OCFile file;
+      String currentSavePath=FileDownloader.getSavePath(getAccount().name);
+      for (int i=0; i < files.size(); ) {
+        file=files.get(i);
+        if (file.getLastSyncDate() != mCurrentSyncTime) {
+          Log.v(TAG,"removing file: " + file);
+          getStorageManager().removeFile(file,(file.isDown() && file.getStoragePath().startsWith(currentSavePath)));
+          files.remove(i);
+        }
  else {
-        i++;
+          i++;
+        }
       }
-    }
-    sendStickyBroadcast(true,getStorageManager().getFileById(parentId).getRemotePath());
-    for (int i=0; i < files.size() && !mCancellation; i++) {
-      OCFile newFile=files.get(i);
-      if (newFile.getMimetype().equals("DIR")) {
-        fetchData(getUri().toString() + WebdavUtils.encodePath(newFile.getRemotePath()),syncResult,newFile.getFileId());
+      for (int i=0; i < files.size() && !mCancellation; i++) {
+        OCFile newFile=files.get(i);
+        if (newFile.getMimetype().equals("DIR")) {
+          fetchData(getUri().toString() + WebdavUtils.encodePath(newFile.getRemotePath()),syncResult,newFile.getFileId());
+        }
       }
+      if (mCancellation)       Log.d(TAG,"Leaving " + uri + " because cancelation request");
     }
-    if (mCancellation)     Log.d(TAG,"Leaving " + uri + " because cancelation request");
+ else {
+      syncResult.stats.numAuthExceptions++;
+    }
   }
- catch (  OperationCanceledException e) {
-    e.printStackTrace();
-  }
-catch (  AuthenticatorException e) {
-    syncResult.stats.numAuthExceptions++;
-    e.printStackTrace();
-  }
-catch (  IOException e) {
+ catch (  IOException e) {
     syncResult.stats.numIoExceptions++;
-    e.printStackTrace();
+    logException(e,uri);
   }
 catch (  DavException e) {
-    syncResult.stats.numIoExceptions++;
-    e.printStackTrace();
+    syncResult.stats.numParseExceptions++;
+    logException(e,uri);
   }
-catch (  Throwable t) {
-    Log.e(TAG,"problem while synchronizing owncloud account " + mAccount.name,t);
-    t.printStackTrace();
+catch (  Exception e) {
+    mRightSync=false;
+    logException(e,uri);
   }
  finally {
     if (query != null)     query.releaseConnection();
+    sendStickyBroadcast(true,getStorageManager().getFileById(parentId).getRemotePath());
   }
 }

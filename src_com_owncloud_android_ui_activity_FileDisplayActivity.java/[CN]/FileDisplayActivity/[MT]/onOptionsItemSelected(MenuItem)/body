@@ -8,10 +8,10 @@ case R.id.createDirectoryItem:
     }
 case R.id.startSync:
 {
-    ContentResolver.cancelSync(null,"org.owncloud");
+    ContentResolver.cancelSync(null,AccountAuthenticator.AUTH_TOKEN_TYPE);
     Bundle bundle=new Bundle();
     bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL,true);
-    ContentResolver.requestSync(AccountUtils.getCurrentOwnCloudAccount(this),"org.owncloud",bundle);
+    ContentResolver.requestSync(AccountUtils.getCurrentOwnCloudAccount(this),AccountAuthenticator.AUTH_TOKEN_TYPE,bundle);
     break;
   }
 case R.id.action_upload:

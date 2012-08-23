@@ -1,49 +1,57 @@
 {
   mCancellation=false;
-  mAccount=account;
-  this.setAccount(mAccount);
+  mIsManualSync=extras.getBoolean(ContentResolver.SYNC_EXTRAS_MANUAL,false);
+  mRightSync=true;
+  this.setAccount(account);
   this.setContentProvider(provider);
-  this.setStorageManager(new FileDataStorageManager(mAccount,getContentProvider()));
-  Log.d(TAG,"syncing owncloud account " + mAccount.name);
+  this.setStorageManager(new FileDataStorageManager(account,getContentProvider()));
+  Log.d(TAG,"syncing owncloud account " + account.name);
   sendStickyBroadcast(true,null);
+  String uri=getUri().toString();
   PropFindMethod query=null;
   try {
     mCurrentSyncTime=System.currentTimeMillis();
-    query=new PropFindMethod(getUri().toString() + "/");
-    getClient().executeMethod(query);
-    MultiStatus resp=null;
-    resp=query.getResponseBodyAsMultiStatus();
-    if (resp.getResponses().length > 0) {
-      WebdavEntry we=new WebdavEntry(resp.getResponses()[0],getUri().getPath());
-      OCFile file=fillOCFile(we);
-      file.setParentId(0);
-      getStorageManager().saveFile(file);
-      if (!mCancellation) {
-        fetchData(getUri().toString(),syncResult,file.getFileId());
+    query=new PropFindMethod(uri + "/");
+    int status=getClient().executeMethod(query);
+    if (status != HttpStatus.SC_UNAUTHORIZED) {
+      MultiStatus resp=query.getResponseBodyAsMultiStatus();
+      if (resp.getResponses().length > 0) {
+        WebdavEntry we=new WebdavEntry(resp.getResponses()[0],getUri().getPath());
+        OCFile file=fillOCFile(we);
+        file.setParentId(0);
+        getStorageManager().saveFile(file);
+        if (!mCancellation) {
+          fetchData(uri,syncResult,file.getFileId());
+        }
       }
     }
+ else {
+      syncResult.stats.numAuthExceptions++;
+    }
   }
- catch (  OperationCanceledException e) {
-    e.printStackTrace();
-  }
-catch (  AuthenticatorException e) {
-    syncResult.stats.numAuthExceptions++;
-    e.printStackTrace();
-  }
-catch (  IOException e) {
+ catch (  IOException e) {
     syncResult.stats.numIoExceptions++;
-    e.printStackTrace();
+    logException(e,uri + "/");
   }
 catch (  DavException e) {
-    syncResult.stats.numIoExceptions++;
-    e.printStackTrace();
+    syncResult.stats.numParseExceptions++;
+    logException(e,uri + "/");
   }
-catch (  Throwable t) {
-    Log.e(TAG,"problem while synchronizing owncloud account " + account.name,t);
-    t.printStackTrace();
+catch (  Exception e) {
+    logException(e,uri + "/");
+    mRightSync=false;
   }
  finally {
     if (query != null)     query.releaseConnection();
+    mRightSync&=(syncResult.stats.numIoExceptions == 0 && syncResult.stats.numAuthExceptions == 0 && syncResult.stats.numParseExceptions == 0);
+    if (!mRightSync && mIsManualSync) {
+      syncResult.tooManyRetries=true;
+      Notification notification=new Notification(R.drawable.icon,getContext().getString(R.string.sync_fail_ticker),System.currentTimeMillis());
+      notification.flags|=Notification.FLAG_AUTO_CANCEL;
+      notification.contentIntent=PendingIntent.getActivity(getContext().getApplicationContext(),0,new Intent(),PendingIntent.FLAG_UPDATE_CURRENT);
+      notification.setLatestEventInfo(getContext().getApplicationContext(),getContext().getString(R.string.sync_fail_ticker),String.format(getContext().getString(R.string.sync_fail_content),account.name),notification.contentIntent);
+      ((NotificationManager)getContext().getSystemService(Context.NOTIFICATION_SERVICE)).notify(R.string.sync_fail_ticker,notification);
+    }
+    sendStickyBroadcast(false,null);
   }
-  sendStickyBroadcast(false,null);
 }
