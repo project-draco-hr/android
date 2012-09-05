@@ -1,0 +1,4 @@
+Uri uri
+String username
+String password
+Context context

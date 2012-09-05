@@ -1,0 +1,6 @@
+{
+  if (!isKnownServer(certificates[0])) {
+    Log.d(TAG,"checkClientTrusted() with standard trust manager...");
+    mStandardTrustManager.checkClientTrusted(certificates,authType);
+  }
+}

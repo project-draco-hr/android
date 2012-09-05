@@ -1,0 +1,22 @@
+{
+  Exception ret=null;
+  SSLException e=(SSLException)result.getException();
+  Throwable cause=null;
+  if (e != null) {
+    if (e instanceof SSLPeerUnverifiedException) {
+      ret=e;
+    }
+ else {
+      cause=e.getCause();
+      Throwable previousCause=null;
+      boolean recoverableCertException=false;
+      while (cause != null && cause != previousCause && !recoverableCertException) {
+        recoverableCertException=(cause instanceof CertPathValidatorException || cause instanceof CertificateExpiredException || cause instanceof CertificateNotYetValidException);
+        if (recoverableCertException)         ret=(Exception)cause;
+        previousCause=cause;
+        cause=cause.getCause();
+      }
+    }
+  }
+  return ret;
+}

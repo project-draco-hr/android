@@ -1,0 +1,24 @@
+{
+  mException=e;
+  if (e instanceof SocketException) {
+    mCode=ResultCode.WRONG_CONNECTION;
+  }
+ else   if (e instanceof SocketTimeoutException) {
+    mCode=ResultCode.TIMEOUT;
+  }
+ else   if (e instanceof ConnectTimeoutException) {
+    mCode=ResultCode.TIMEOUT;
+  }
+ else   if (e instanceof MalformedURLException) {
+    mCode=ResultCode.INCORRECT_ADDRESS;
+  }
+ else   if (e instanceof UnknownHostException) {
+    mCode=ResultCode.HOST_NOT_AVAILABLE;
+  }
+ else   if (e instanceof SSLException) {
+    mCode=ResultCode.SSL_ERROR;
+  }
+ else {
+    mCode=ResultCode.UNKNOWN_ERROR;
+  }
+}

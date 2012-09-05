@@ -2,7 +2,7 @@
   boolean retval=false;
   GetMethod get=null;
   try {
-    WebdavClient wc=OwnCloudClientUtils.createOwnCloudClient(Uri.parse(urlSt));
+    WebdavClient wc=OwnCloudClientUtils.createOwnCloudClient(Uri.parse(urlSt),mContext);
     get=new GetMethod(urlSt);
     int status=wc.executeMethod(get,TRY_CONNECTION_TIMEOUT,TRY_CONNECTION_TIMEOUT);
     String response=get.getResponseBodyAsString();

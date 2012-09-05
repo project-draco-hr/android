@@ -1,0 +1,3 @@
+{
+  return AdvancedSslSocketFactory.class.hashCode();
+}

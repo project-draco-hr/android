@@ -1,0 +1,17 @@
+{
+  Log.d(TAG,"Creating SSL Socket with remote " + host + ":"+ port+ ", local "+ localAddress+ ":"+ localPort+ ", params: "+ params);
+  if (params == null) {
+    throw new IllegalArgumentException("Parameters may not be null");
+  }
+  int timeout=params.getConnectionTimeout();
+  SocketFactory socketfactory=mSslContext.getSocketFactory();
+  Log.d(TAG," ... with connection timeout " + timeout + " and socket timeout "+ params.getSoTimeout());
+  Socket socket=socketfactory.createSocket();
+  SocketAddress localaddr=new InetSocketAddress(localAddress,localPort);
+  SocketAddress remoteaddr=new InetSocketAddress(host,port);
+  socket.setSoTimeout(params.getSoTimeout());
+  socket.bind(localaddr);
+  socket.connect(remoteaddr,timeout);
+  verifyHostname(host,socket);
+  return socket;
+}

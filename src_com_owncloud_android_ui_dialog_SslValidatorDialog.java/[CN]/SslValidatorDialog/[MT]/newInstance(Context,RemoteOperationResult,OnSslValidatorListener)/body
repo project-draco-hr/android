@@ -1,0 +1,10 @@
+{
+  Exception e=SslAnalyzer.getRecoverableException(result);
+  if (e != null) {
+    SslValidatorDialog dialog=new SslValidatorDialog(context,listener);
+    return dialog;
+  }
+ else {
+    return null;
+  }
+}

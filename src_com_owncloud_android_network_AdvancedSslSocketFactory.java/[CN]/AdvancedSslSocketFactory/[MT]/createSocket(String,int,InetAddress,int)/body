@@ -1,0 +1,5 @@
+{
+  Socket socket=mSslContext.getSocketFactory().createSocket(host,port,clientHost,clientPort);
+  verifyHostname(host,socket);
+  return socket;
+}

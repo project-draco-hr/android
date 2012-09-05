@@ -1,0 +1,5 @@
+{
+  mUrl=url;
+  mContext=context;
+  mOCVersion=null;
+}

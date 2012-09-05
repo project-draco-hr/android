@@ -1,0 +1,5 @@
+{
+  if (sslContext == null)   throw new IllegalArgumentException("AdvancedSslSocketFactory can not be created with a null SSLContext");
+  mSslContext=sslContext;
+  mHostnameVerifier=hostnameVerifier;
+}

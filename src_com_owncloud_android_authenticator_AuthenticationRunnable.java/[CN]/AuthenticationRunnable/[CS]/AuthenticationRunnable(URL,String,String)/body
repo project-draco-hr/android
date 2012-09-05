@@ -1,6 +1,0 @@
-{
-  mListener=null;
-  mUrl=url;
-  mUsername=username;
-  mPassword=password;
-}

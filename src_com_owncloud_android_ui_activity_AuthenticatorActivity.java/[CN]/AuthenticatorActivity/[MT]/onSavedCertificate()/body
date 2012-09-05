@@ -1,0 +1,3 @@
+{
+  mAuthThread=mConnChkRunnable.retry(this,mHandler);
+}

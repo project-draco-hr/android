@@ -1,6 +1,0 @@
-{
-  Log.d(TAG,"Creating WebdavClient for " + username + "@"+ uri);
-  WebdavClient client=createOwnCloudClient(uri);
-  client.setCredentials(username,password);
-  return client;
-}

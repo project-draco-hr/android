@@ -1,0 +1,37 @@
+{
+  boolean retval=false;
+  GetMethod get=null;
+  try {
+    get=new GetMethod(urlSt);
+    int status=wc.executeMethod(get,TRY_CONNECTION_TIMEOUT,TRY_CONNECTION_TIMEOUT);
+    String response=get.getResponseBodyAsString();
+    if (status == HttpStatus.SC_OK) {
+      JSONObject json=new JSONObject(response);
+      if (!json.getBoolean("installed")) {
+        mLatestResult=new RemoteOperationResult(RemoteOperationResult.ResultCode.INSTANCE_NOT_CONFIGURED);
+      }
+ else {
+        mOCVersion=new OwnCloudVersion(json.getString("version"));
+        if (!mOCVersion.isVersionValid()) {
+          mLatestResult=new RemoteOperationResult(RemoteOperationResult.ResultCode.BAD_OC_VERSION);
+        }
+ else {
+          retval=true;
+        }
+      }
+    }
+ else {
+      mLatestResult=new RemoteOperationResult(false,status);
+    }
+  }
+ catch (  JSONException e) {
+    mLatestResult=new RemoteOperationResult(RemoteOperationResult.ResultCode.INSTANCE_NOT_CONFIGURED);
+  }
+catch (  Exception e) {
+    mLatestResult=new RemoteOperationResult(e);
+  }
+ finally {
+    if (get != null)     get.releaseConnection();
+  }
+  return retval;
+}

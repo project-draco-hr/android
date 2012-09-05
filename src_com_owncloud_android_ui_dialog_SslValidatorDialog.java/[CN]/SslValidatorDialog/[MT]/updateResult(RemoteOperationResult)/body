@@ -1,0 +1,28 @@
+{
+  mException=SslAnalyzer.getRecoverableException(result);
+  if (mException instanceof CertPathValidatorException) {
+    showCertificateData(((CertPathValidatorException)mException).getCertPath());
+    ((TextView)mView.findViewById(R.id.reason_cert_not_trusted)).setVisibility(View.VISIBLE);
+    ((TextView)mView.findViewById(R.id.reason_cert_expired)).setVisibility(View.GONE);
+    ((TextView)mView.findViewById(R.id.reason_cert_not_yet_valid)).setVisibility(View.GONE);
+    ((TextView)mView.findViewById(R.id.reason_hostname_not_vertified)).setVisibility(View.GONE);
+  }
+ else   if (mException instanceof CertificateExpiredException) {
+    ((TextView)mView.findViewById(R.id.reason_cert_not_trusted)).setVisibility(View.GONE);
+    ((TextView)mView.findViewById(R.id.reason_cert_expired)).setVisibility(View.VISIBLE);
+    ((TextView)mView.findViewById(R.id.reason_cert_not_yet_valid)).setVisibility(View.GONE);
+    ((TextView)mView.findViewById(R.id.reason_hostname_not_vertified)).setVisibility(View.GONE);
+  }
+ else   if (mException instanceof CertificateNotYetValidException) {
+    ((TextView)mView.findViewById(R.id.reason_cert_not_trusted)).setVisibility(View.GONE);
+    ((TextView)mView.findViewById(R.id.reason_cert_expired)).setVisibility(View.GONE);
+    ((TextView)mView.findViewById(R.id.reason_cert_not_yet_valid)).setVisibility(View.VISIBLE);
+    ((TextView)mView.findViewById(R.id.reason_hostname_not_vertified)).setVisibility(View.GONE);
+  }
+ else   if (mException instanceof SSLPeerUnverifiedException) {
+    ((TextView)mView.findViewById(R.id.reason_cert_not_trusted)).setVisibility(View.GONE);
+    ((TextView)mView.findViewById(R.id.reason_cert_expired)).setVisibility(View.GONE);
+    ((TextView)mView.findViewById(R.id.reason_cert_not_yet_valid)).setVisibility(View.GONE);
+    ((TextView)mView.findViewById(R.id.reason_hostname_not_vertified)).setVisibility(View.VISIBLE);
+  }
+}

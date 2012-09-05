@@ -1,0 +1,11 @@
+{
+  final RemoteOperationResult result=execute(mClient);
+  if (mListenerHandler != null && mListener != null) {
+    mListenerHandler.post(new Runnable(){
+      @Override public void run(){
+        mListener.onRemoteOperationFinish(RemoteOperation.this,result);
+      }
+    }
+);
+  }
+}

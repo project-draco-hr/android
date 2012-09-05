@@ -1,0 +1,14 @@
+{
+switch (id) {
+case DIALOG_LOGIN_PROGRESS:
+case DIALOG_CERT_NOT_SAVED:
+    break;
+case DIALOG_SSL_VALIDATOR:
+{
+    ((SslValidatorDialog)dialog).updateResult(mLastSslFailedResult);
+    break;
+  }
+default :
+Log.e(TAG,"Incorrect dialog called with id = " + id);
+}
+}
