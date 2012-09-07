@@ -12,6 +12,6 @@
   socket.setSoTimeout(params.getSoTimeout());
   socket.bind(localaddr);
   socket.connect(remoteaddr,timeout);
-  verifyHostname(host,socket);
+  verifyPeerIdentity(host,port,socket);
   return socket;
 }

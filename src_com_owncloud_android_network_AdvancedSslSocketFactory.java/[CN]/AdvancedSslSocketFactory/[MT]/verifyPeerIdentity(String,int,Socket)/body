@@ -1,0 +1,78 @@
+{
+  try {
+    IOException failInHandshake=null;
+    try {
+      SSLSocket sock=(SSLSocket)socket;
+      sock.startHandshake();
+    }
+ catch (    IOException e) {
+      failInHandshake=e;
+      if (!(e.getCause() instanceof CertificateCombinedException)) {
+        throw e;
+      }
+    }
+    SSLSession newSession=null;
+    boolean verifiedHostname=true;
+    if (mHostnameVerifier != null) {
+      if (failInHandshake != null) {
+        X509Certificate serverCert=((CertificateCombinedException)failInHandshake.getCause()).getServerCertificate();
+        try {
+          mHostnameVerifier.verify(host,serverCert);
+        }
+ catch (        SSLException e) {
+          verifiedHostname=false;
+        }
+      }
+ else {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
+          newSession=((SSLSocket)socket).getSession();
+          if (!mTrustManager.isKnownServer((X509Certificate)(newSession.getPeerCertificates()[0])))           verifiedHostname=mHostnameVerifier.verify(host,newSession);
+        }
+ else {
+          SSLSessionContext sessionContext=mSslContext.getClientSessionContext();
+          if (sessionContext != null) {
+            SSLSession session=null;
+synchronized (sessionContext) {
+              Enumeration<byte[]> ids=sessionContext.getIds();
+              while (ids.hasMoreElements()) {
+                session=sessionContext.getSession(ids.nextElement());
+                if (session.getPeerHost().equals(host) && session.getPeerPort() == port && (newSession == null || newSession.getCreationTime() < session.getCreationTime())) {
+                  newSession=session;
+                }
+              }
+            }
+            if (newSession != null) {
+              if (!mTrustManager.isKnownServer((X509Certificate)(newSession.getPeerCertificates()[0]))) {
+                verifiedHostname=mHostnameVerifier.verify(host,newSession);
+              }
+            }
+ else {
+              Log.d(TAG,"Hostname verification could not be performed because the new SSLSession was not found");
+            }
+          }
+        }
+      }
+    }
+    if (failInHandshake != null) {
+      if (!verifiedHostname) {
+        ((CertificateCombinedException)failInHandshake.getCause()).setSslPeerUnverifiedException(new SSLPeerUnverifiedException(host));
+      }
+      throw failInHandshake;
+    }
+ else     if (!verifiedHostname) {
+      CertificateCombinedException ce=new CertificateCombinedException((X509Certificate)newSession.getPeerCertificates()[0]);
+      SSLPeerUnverifiedException pue=new SSLPeerUnverifiedException(host);
+      ce.setSslPeerUnverifiedException(pue);
+      pue.initCause(ce);
+      throw pue;
+    }
+  }
+ catch (  IOException io) {
+    try {
+      socket.close();
+    }
+ catch (    Exception x) {
+    }
+    throw io;
+  }
+}

@@ -22,8 +22,7 @@ case DIALOG_LOGIN_PROGRESS:
     }
 case DIALOG_SSL_VALIDATOR:
 {
-    SslValidatorDialog sslValidator=SslValidatorDialog.newInstance(this,mLastSslFailedResult,this);
-    if (sslValidator != null)     dialog=sslValidator;
+    dialog=SslValidatorDialog.newInstance(this,mLastSslFailedResult,this);
     break;
   }
 case DIALOG_CERT_NOT_SAVED:

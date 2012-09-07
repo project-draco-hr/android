@@ -1,0 +1,3 @@
+SSLContext sslContext
+AdvancedX509TrustManager trustManager
+X509HostnameVerifier hostnameVerifier

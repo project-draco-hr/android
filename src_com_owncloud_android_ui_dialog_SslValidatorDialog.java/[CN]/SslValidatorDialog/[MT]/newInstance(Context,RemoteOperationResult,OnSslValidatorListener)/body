@@ -1,5 +1,5 @@
 {
-  if (SslAnalyzer.isRecoverable(result)) {
+  if (result.isSslRecoverableException()) {
     SslValidatorDialog dialog=new SslValidatorDialog(context,listener);
     return dialog;
   }

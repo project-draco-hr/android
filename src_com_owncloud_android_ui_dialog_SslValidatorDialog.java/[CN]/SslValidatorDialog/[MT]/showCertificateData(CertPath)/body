@@ -1,9 +1,0 @@
-{
-  final List<? extends Certificate> certs=certPath.getCertificates();
-  if (certs.size() > 0) {
-    X509Certificate serverCert=(X509Certificate)certs.get(0);
-    String text=serverCert.getSubjectDN().getName();
-    text=text.substring(text.indexOf(",") + 1);
-    ((TextView)mView.findViewById(R.id.issuer)).setText(text);
-  }
-}

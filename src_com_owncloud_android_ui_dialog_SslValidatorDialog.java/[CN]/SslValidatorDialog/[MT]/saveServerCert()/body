@@ -1,5 +1,5 @@
 {
-  if (mException instanceof CertPathValidatorException) {
-    OwnCloudClientUtils.addCertToKnownServersStore(((CertPathValidatorException)mException).getCertPath().getCertificates().get(0),getContext());
+  if (mException.getServerCertificate() != null) {
+    OwnCloudClientUtils.addCertToKnownServersStore(mException.getServerCertificate(),getContext());
   }
 }

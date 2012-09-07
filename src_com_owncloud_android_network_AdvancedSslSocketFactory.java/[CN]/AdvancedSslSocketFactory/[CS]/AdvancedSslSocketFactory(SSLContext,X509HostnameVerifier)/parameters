@@ -1,2 +1,0 @@
-SSLContext sslContext
-X509HostnameVerifier hostnameVerifier

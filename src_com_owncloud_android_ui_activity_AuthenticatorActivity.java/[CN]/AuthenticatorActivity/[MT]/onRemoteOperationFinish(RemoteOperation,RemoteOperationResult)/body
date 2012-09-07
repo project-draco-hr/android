@@ -43,7 +43,7 @@ case SSL_ERROR:
 mStatusIcon=R.drawable.common_error;
 mStatusText=R.string.auth_ssl_general_error_title;
 mLastSslFailedResult=result;
-showDialog(DIALOG_SSL_VALIDATOR);
+if (mLastSslFailedResult.isSslRecoverableException()) showDialog(DIALOG_SSL_VALIDATOR);
 break;
 case HOST_NOT_AVAILABLE:
 mStatusIcon=R.drawable.common_error;

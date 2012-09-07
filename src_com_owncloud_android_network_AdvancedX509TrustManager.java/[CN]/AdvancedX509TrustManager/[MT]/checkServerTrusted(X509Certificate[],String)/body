@@ -1,6 +1,32 @@
 {
   if (!isKnownServer(certificates[0])) {
-    Log.d(TAG,"checkClientTrusted() with standard trust manager...");
-    mStandardTrustManager.checkClientTrusted(certificates,authType);
+    CertificateCombinedException result=new CertificateCombinedException(certificates[0]);
+    try {
+      certificates[0].checkValidity();
+    }
+ catch (    CertificateExpiredException c) {
+      result.setCertificateExpiredException(c);
+    }
+catch (    CertificateNotYetValidException c) {
+      result.setCertificateNotYetException(c);
+    }
+    try {
+      mStandardTrustManager.checkServerTrusted(certificates,authType);
+    }
+ catch (    CertificateException c) {
+      Throwable cause=c.getCause();
+      Throwable previousCause=null;
+      while (cause != null && cause != previousCause && !(cause instanceof CertPathValidatorException)) {
+        previousCause=cause;
+        cause=cause.getCause();
+      }
+      if (cause != null && cause instanceof CertPathValidatorException) {
+        result.setCertPathValidatorException((CertPathValidatorException)cause);
+      }
+ else {
+        result.setOtherCertificateException(c);
+      }
+    }
+    if (result.isException())     throw result;
   }
 }

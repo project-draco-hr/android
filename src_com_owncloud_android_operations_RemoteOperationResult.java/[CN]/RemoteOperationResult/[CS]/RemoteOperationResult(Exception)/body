@@ -2,23 +2,30 @@
   mException=e;
   if (e instanceof SocketException) {
     mCode=ResultCode.WRONG_CONNECTION;
+    Log.e(TAG,"Socket exception",e);
   }
  else   if (e instanceof SocketTimeoutException) {
     mCode=ResultCode.TIMEOUT;
+    Log.e(TAG,"Socket timeout exception",e);
   }
  else   if (e instanceof ConnectTimeoutException) {
     mCode=ResultCode.TIMEOUT;
+    Log.e(TAG,"Connect timeout exception",e);
   }
  else   if (e instanceof MalformedURLException) {
     mCode=ResultCode.INCORRECT_ADDRESS;
+    Log.e(TAG,"Malformed URL exception",e);
   }
  else   if (e instanceof UnknownHostException) {
     mCode=ResultCode.HOST_NOT_AVAILABLE;
+    Log.e(TAG,"Unknown host exception",e);
   }
  else   if (e instanceof SSLException) {
     mCode=ResultCode.SSL_ERROR;
+    Log.e(TAG,"SSL exception",e);
   }
  else {
     mCode=ResultCode.UNKNOWN_ERROR;
+    Log.e(TAG,"Unknown exception",e);
   }
 }

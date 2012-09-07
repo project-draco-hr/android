@@ -5,7 +5,8 @@
     TrustManager[] tms=new TrustManager[]{trustMgr};
     SSLContext sslContext=SSLContext.getInstance("TLS");
     sslContext.init(null,tms,null);
-    mAdvancedSslSocketFactory=new AdvancedSslSocketFactory(sslContext,null);
+    mHostnameVerifier=new BrowserCompatHostnameVerifier();
+    mAdvancedSslSocketFactory=new AdvancedSslSocketFactory(sslContext,trustMgr,mHostnameVerifier);
   }
   return mAdvancedSslSocketFactory;
 }
