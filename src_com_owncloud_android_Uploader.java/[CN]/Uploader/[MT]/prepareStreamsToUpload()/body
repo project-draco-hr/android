@@ -6,7 +6,5 @@
  else   if (getIntent().getAction().equals(Intent.ACTION_SEND_MULTIPLE)) {
     mStreamsToUpload=getIntent().getParcelableArrayListExtra(Intent.EXTRA_STREAM);
   }
- else {
-    throw new IllegalArgumentException("Unknown action given: " + getIntent().getAction());
-  }
+  return (mStreamsToUpload != null && mStreamsToUpload.get(0) != null);
 }

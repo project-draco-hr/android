@@ -3,8 +3,7 @@
   getWindow().requestFeature(Window.FEATURE_NO_TITLE);
   mParents=new Stack<String>();
   mParents.add("");
-  if (getIntent().hasExtra(Intent.EXTRA_STREAM)) {
-    prepareStreamsToUpload();
+  if (prepareStreamsToUpload()) {
     mAccountManager=(AccountManager)getSystemService(Context.ACCOUNT_SERVICE);
     Account[] accounts=mAccountManager.getAccountsByType(AccountAuthenticator.ACCOUNT_TYPE);
     if (accounts.length == 0) {
