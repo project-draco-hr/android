@@ -1,0 +1,49 @@
+{
+  mTotalDataToSend=mSendData=mPreviousPercent=0;
+  Iterator<UploadFileOperation> it=mUploads.iterator();
+  while (it.hasNext()) {
+    mTotalDataToSend+=new File(it.next().getLocalPath()).length();
+  }
+  mTotalFilesToSend=mUploads.size();
+  Log.d(TAG,"Will upload " + mTotalDataToSend + " bytes, with "+ mUploads.size()+ " files");
+  notifyUploadStart();
+  UploadFileOperation currentUpload;
+  Account currentAccount, lastAccount=null;
+  FileDataStorageManager storageManager=null;
+  WebdavClient wc=null;
+  mSuccessCounter=0;
+  boolean createdInstantDir=false;
+  for (mCurrentIndexUpload=0; mCurrentIndexUpload < mUploads.size(); mCurrentIndexUpload++) {
+    currentUpload=mUploads.get(mCurrentIndexUpload);
+    currentAccount=mAccounts.get(mCurrentIndexUpload);
+    if (lastAccount == null || !lastAccount.equals(currentAccount)) {
+      storageManager=new FileDataStorageManager(currentAccount,getContentResolver());
+      wc=OwnCloudClientUtils.createOwnCloudClient(currentAccount,getApplicationContext());
+      wc.setDataTransferProgressListener(this);
+    }
+    if (currentUpload.isInstant() && !createdInstantDir) {
+      createdInstantDir=createRemoteFolderForInstantUploads(wc,storageManager);
+    }
+    long parentDirId=-1;
+    RemoteOperationResult uploadResult=null;
+    boolean updateResult=false;
+    try {
+      File remote=new File(currentUpload.getRemotePath());
+      parentDirId=storageManager.getFileByPath(remote.getParent().endsWith("/") ? remote.getParent() : remote.getParent() + "/").getFileId();
+      File local=new File(currentUpload.getLocalPath());
+      long size=local.length();
+      mUploadsInProgress.put(buildRemoteName(currentAccount.name,currentUpload.getRemotePath()),currentUpload.getLocalPath());
+      uploadResult=currentUpload.execute(wc);
+      if (uploadResult.isSuccess()) {
+        saveNewOCFile(currentUpload,storageManager,parentDirId,size);
+        mSuccessCounter++;
+        updateResult=true;
+      }
+    }
+  finally {
+      mUploadsInProgress.remove(buildRemoteName(currentAccount.name,currentUpload.getRemotePath()));
+      broadcastUploadEnd(currentUpload,currentAccount,updateResult,parentDirId);
+    }
+  }
+  notifyUploadEndOverview();
+}

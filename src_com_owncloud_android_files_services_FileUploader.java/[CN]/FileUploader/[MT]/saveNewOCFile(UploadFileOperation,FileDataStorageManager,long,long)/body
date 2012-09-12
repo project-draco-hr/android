@@ -1,0 +1,11 @@
+{
+  OCFile newFile=new OCFile(upload.getRemotePath());
+  newFile.setMimetype(upload.getMimeType());
+  newFile.setFileLength(size);
+  newFile.setModificationTimestamp(System.currentTimeMillis());
+  newFile.setLastSyncDate(0);
+  newFile.setStoragePath(upload.getLocalPath());
+  newFile.setParentId(parentDirId);
+  if (upload.getForceOverwrite())   newFile.setKeepInSync(true);
+  storageManager.saveFile(newFile);
+}

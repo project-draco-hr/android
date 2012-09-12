@@ -7,6 +7,10 @@
     String mimetype=(String)working_map.get(KEY_MIME_TYPE);
     WebdavClient wdc=OwnCloudClientUtils.createOwnCloudClient(account,getApplicationContext());
     wdc.createDirectory(INSTANT_UPLOAD_DIR);
-    wdc.putFile(filepath,INSTANT_UPLOAD_DIR + "/" + filename,mimetype);
+    try {
+      wdc.putFile(filepath,INSTANT_UPLOAD_DIR + "/" + filename,mimetype);
+    }
+ catch (    Exception e) {
+    }
   }
 }

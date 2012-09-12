@@ -1,0 +1,16 @@
+{
+  int readCount=0;
+  try {
+    mChannel.position(mOffset);
+    while (mChannel.position() < mOffset + mSize) {
+      readCount=mChannel.read(mBuffer);
+      out.write(mBuffer.array(),0,readCount);
+      mBuffer.clear();
+      if (mListener != null)       mListener.transferProgress(readCount);
+    }
+  }
+ catch (  IOException io) {
+    Log.e(TAG,io.getMessage());
+    throw new RuntimeException("Ugly solution to workaround the default policy of retries when the server falls while uploading ; temporal fix; really",io);
+  }
+}

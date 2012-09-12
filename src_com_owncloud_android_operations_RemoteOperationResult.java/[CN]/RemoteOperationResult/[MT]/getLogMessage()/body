@@ -1,0 +1,32 @@
+{
+  if (mException != null) {
+    if (mException instanceof SocketException) {
+      return "Socket exception";
+    }
+ else     if (mException instanceof SocketTimeoutException) {
+      return "Socket timeout exception";
+    }
+ else     if (mException instanceof ConnectTimeoutException) {
+      return "Connect timeout exception";
+    }
+ else     if (mException instanceof MalformedURLException) {
+      return "Malformed URL exception";
+    }
+ else     if (mException instanceof UnknownHostException) {
+      return "Unknown host exception";
+    }
+ else     if (mException instanceof SSLException) {
+      return "SSL exception";
+    }
+ else     if (mException instanceof HttpException) {
+      return "HTTP violation";
+    }
+ else     if (mException instanceof IOException) {
+      return "Unrecovered transport exception";
+    }
+ else {
+      return "Unexpected exception";
+    }
+  }
+  return "Operation finished with HTTP status code " + mHttpCode + " ("+ (isSuccess() ? "success" : "fail")+ ")";
+}

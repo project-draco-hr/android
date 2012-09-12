@@ -3,30 +3,45 @@
     Log.e(TAG,"Not enough information provided in intent");
     return Service.START_NOT_STICKY;
   }
-  mAccount=intent.getParcelableExtra(KEY_ACCOUNT);
-  mUploadType=intent.getIntExtra(KEY_UPLOAD_TYPE,-1);
-  if (mUploadType == -1) {
+  Account account=intent.getParcelableExtra(KEY_ACCOUNT);
+  if (account == null) {
+    Log.e(TAG,"Bad account information provided in upload intent");
+    return Service.START_NOT_STICKY;
+  }
+  int uploadType=intent.getIntExtra(KEY_UPLOAD_TYPE,-1);
+  if (uploadType == -1) {
     Log.e(TAG,"Incorrect upload type provided");
     return Service.START_NOT_STICKY;
   }
-  if (mUploadType == UPLOAD_SINGLE_FILE) {
-    mLocalPaths=new String[]{intent.getStringExtra(KEY_LOCAL_FILE)};
-    mRemotePaths=new String[]{intent.getStringExtra(KEY_REMOTE_FILE)};
-    mMimeTypes=new String[]{intent.getStringExtra(KEY_MIME_TYPE)};
+  String[] localPaths, remotePaths, mimeTypes;
+  if (uploadType == UPLOAD_SINGLE_FILE) {
+    localPaths=new String[]{intent.getStringExtra(KEY_LOCAL_FILE)};
+    remotePaths=new String[]{intent.getStringExtra(KEY_REMOTE_FILE)};
+    mimeTypes=new String[]{intent.getStringExtra(KEY_MIME_TYPE)};
   }
  else {
-    mLocalPaths=intent.getStringArrayExtra(KEY_LOCAL_FILE);
-    mRemotePaths=intent.getStringArrayExtra(KEY_REMOTE_FILE);
-    mMimeTypes=intent.getStringArrayExtra(KEY_MIME_TYPE);
+    localPaths=intent.getStringArrayExtra(KEY_LOCAL_FILE);
+    remotePaths=intent.getStringArrayExtra(KEY_REMOTE_FILE);
+    mimeTypes=intent.getStringArrayExtra(KEY_MIME_TYPE);
   }
-  if (mLocalPaths.length != mRemotePaths.length) {
+  if (localPaths.length != remotePaths.length) {
     Log.e(TAG,"Different number of remote paths and local paths!");
     return Service.START_NOT_STICKY;
   }
-  mIsInstant=intent.getBooleanExtra(KEY_INSTANT_UPLOAD,false);
+  boolean isInstant=intent.getBooleanExtra(KEY_INSTANT_UPLOAD,false);
+  boolean forceOverwrite=intent.getBooleanExtra(KEY_FORCE_OVERWRITE,false);
+  for (int i=0; i < localPaths.length; i++) {
+    OwnCloudVersion ocv=new OwnCloudVersion(AccountManager.get(this).getUserData(account,AccountAuthenticator.KEY_OC_VERSION));
+    if (FileUploader.chunkedUploadIsSupported(ocv)) {
+      mUploads.add(new ChunkedUploadFileOperation(localPaths[i],remotePaths[i],((mimeTypes != null) ? mimeTypes[i] : ""),isInstant,forceOverwrite,this));
+    }
+ else {
+      mUploads.add(new UploadFileOperation(localPaths[i],remotePaths[i],(mimeTypes != null ? mimeTypes[i] : ""),isInstant,forceOverwrite,this));
+    }
+    mAccounts.add(account);
+  }
   Message msg=mServiceHandler.obtainMessage();
   msg.arg1=startId;
-  msg.arg2=intent.getBooleanExtra(KEY_FORCE_OVERWRITE,false) ? 1 : 0;
   mServiceHandler.sendMessage(msg);
   return Service.START_NOT_STICKY;
 }

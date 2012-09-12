@@ -1,9 +1,6 @@
 {
-  Boolean check=wc.existsFile(remotePath);
-  if (check == null) {
-    return null;
-  }
- else   if (!check) {
+  boolean check=wc.existsFile(remotePath);
+  if (!check) {
     return remotePath;
   }
   int pos=remotePath.lastIndexOf(".");
@@ -14,16 +11,14 @@
     remotePath=remotePath.substring(0,pos);
   }
   int count=2;
-  while (check != null && check) {
+  do {
     suffix=" (" + count + ")";
     if (pos >= 0)     check=wc.existsFile(remotePath + suffix + "."+ extension);
  else     check=wc.existsFile(remotePath + suffix);
     count++;
   }
-  if (check == null) {
-    return null;
-  }
- else   if (pos >= 0) {
+ while (check);
+  if (pos >= 0) {
     return remotePath + suffix + "."+ extension;
   }
  else {

@@ -1,0 +1,18 @@
+{
+  RemoteOperationResult result=null;
+  boolean nameCheckPassed=false;
+  try {
+    if (!mForceOverwrite) {
+      mRemotePath=getAvailableRemotePath(client,mRemotePath);
+    }
+    nameCheckPassed=true;
+    int status=uploadFile(client);
+    result=new RemoteOperationResult(isSuccess(status),status);
+    Log.i(TAG,"Upload of " + mLocalPath + " to "+ mRemotePath+ ": "+ result.getLogMessage());
+  }
+ catch (  Exception e) {
+    result=new RemoteOperationResult(e);
+    Log.e(TAG,"Upload of " + mLocalPath + " to "+ mRemotePath+ ": "+ result.getLogMessage()+ (nameCheckPassed ? "" : " (while checking file existence in server)"),e);
+  }
+  return result;
+}

@@ -1,5 +1,4 @@
 {
-  boolean result=false;
   int status=-1;
   PutMethod put=new PutMethod(mUri.toString() + WebdavUtils.encodePath(remoteTarget));
   try {
@@ -8,15 +7,10 @@
     entity.setOnDatatransferProgressListener(mDataTransferListener);
     put.setRequestEntity(entity);
     status=executeMethod(put);
-    result=(status == HttpStatus.SC_OK || status == HttpStatus.SC_CREATED || status == HttpStatus.SC_NO_CONTENT);
-    Log.d(TAG,"PUT to " + remoteTarget + " finished with HTTP status "+ status+ (!result ? "(FAIL)" : ""));
     exhaustResponse(put.getResponseBodyAsStream());
   }
- catch (  Exception e) {
-    logException(e,"uploading " + localFile + " to "+ remoteTarget);
-  }
- finally {
+  finally {
     put.releaseConnection();
   }
-  return result;
+  return status;
 }

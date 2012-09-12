@@ -6,11 +6,7 @@
     exhaustResponse(head.getResponseBodyAsStream());
     return (status == HttpStatus.SC_OK);
   }
- catch (  Exception e) {
-    logException(e,"checking existence of " + path);
-    return null;
-  }
- finally {
+  finally {
     head.releaseConnection();
   }
 }
