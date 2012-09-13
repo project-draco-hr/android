@@ -1,7 +1,6 @@
 {
   Log.d(getClass().toString(),"onCreate() start");
   super.onCreate(savedInstanceState);
-  Thread.setDefaultUncaughtExceptionHandler(new CrashHandler(getApplicationContext()));
   if (savedInstanceState != null) {
     mCurrentDir=savedInstanceState.getParcelable(FileDetailFragment.EXTRA_FILE);
   }
