@@ -16,6 +16,7 @@
           mLatestResult=new RemoteOperationResult(RemoteOperationResult.ResultCode.BAD_OC_VERSION);
         }
  else {
+          mLatestResult=new RemoteOperationResult(urlSt.startsWith("https://") ? RemoteOperationResult.ResultCode.OK_SSL : RemoteOperationResult.ResultCode.OK_NO_SSL);
           retval=true;
         }
       }
