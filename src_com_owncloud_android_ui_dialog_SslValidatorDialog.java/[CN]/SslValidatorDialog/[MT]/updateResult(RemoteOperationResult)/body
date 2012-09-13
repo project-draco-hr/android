@@ -1,6 +1,6 @@
 {
-  mException=result.getSslRecoverableException();
-  if (mException != null) {
+  if (result.isSslRecoverableException()) {
+    mException=(CertificateCombinedException)result.getException();
     ((TextView)mView.findViewById(R.id.reason_cert_not_trusted)).setVisibility(View.GONE);
     ((TextView)mView.findViewById(R.id.reason_cert_expired)).setVisibility(View.GONE);
     ((TextView)mView.findViewById(R.id.reason_cert_not_yet_valid)).setVisibility(View.GONE);

@@ -39,11 +39,15 @@ case INCORRECT_ADDRESS:
 mStatusIcon=R.drawable.common_error;
 mStatusText=R.string.auth_incorrect_address_title;
 break;
+case SSL_RECOVERABLE_PEER_UNVERIFIED:
+mStatusIcon=R.drawable.common_error;
+mStatusText=R.string.auth_ssl_unverified_server_title;
+mLastSslUntrustedServerResult=result;
+showDialog(DIALOG_SSL_VALIDATOR);
+break;
 case SSL_ERROR:
 mStatusIcon=R.drawable.common_error;
 mStatusText=R.string.auth_ssl_general_error_title;
-mLastSslFailedResult=result;
-if (mLastSslFailedResult.isSslRecoverableException()) showDialog(DIALOG_SSL_VALIDATOR);
 break;
 case HOST_NOT_AVAILABLE:
 mStatusIcon=R.drawable.common_error;
@@ -67,7 +71,7 @@ mStatusIcon=R.drawable.common_error;
 mStatusText=R.string.auth_unknown_error_title;
 break;
 default :
-Log.e(TAG,"Incorrect connection checker result type: " + operation);
+Log.e(TAG,"Incorrect connection checker result type: " + result.getHttpCode());
 }
 setResultIconAndText(mStatusIcon,mStatusText);
 if (!mStatusCorrect) findViewById(R.id.refreshButton).setVisibility(View.VISIBLE);

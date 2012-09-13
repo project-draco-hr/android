@@ -15,8 +15,17 @@
  else   if (e instanceof UnknownHostException) {
     mCode=ResultCode.HOST_NOT_AVAILABLE;
   }
- else   if (e instanceof SSLException) {
-    mCode=ResultCode.SSL_ERROR;
+ else   if (e instanceof SSLException || e instanceof RuntimeException) {
+    CertificateCombinedException se=getCertificateCombinedException(e);
+    if (se != null) {
+      mException=se;
+      if (se.isRecoverable()) {
+        mCode=ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED;
+      }
+    }
+ else {
+      mCode=ResultCode.SSL_ERROR;
+    }
   }
  else {
     mCode=ResultCode.UNKNOWN_ERROR;

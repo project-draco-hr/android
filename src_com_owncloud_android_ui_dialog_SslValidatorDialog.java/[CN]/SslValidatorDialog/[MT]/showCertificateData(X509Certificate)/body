@@ -6,4 +6,7 @@
     subject.setVisibility(View.VISIBLE);
     subject.setText(text);
   }
+ else {
+    subject.setText(R.string.ssl_validator_certificate_not_available);
+  }
 }

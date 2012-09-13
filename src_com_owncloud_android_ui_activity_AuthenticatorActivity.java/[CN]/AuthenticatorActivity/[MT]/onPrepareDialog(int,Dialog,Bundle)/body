@@ -5,7 +5,7 @@ case DIALOG_CERT_NOT_SAVED:
     break;
 case DIALOG_SSL_VALIDATOR:
 {
-    ((SslValidatorDialog)dialog).updateResult(mLastSslFailedResult);
+    ((SslValidatorDialog)dialog).updateResult(mLastSslUntrustedServerResult);
     break;
   }
 default :
