@@ -24,10 +24,6 @@ case R.id.fdKeepInSync:
  else {
       mContainerActivity.onFileStateChanged();
     }
-    Intent intent=new Intent(getActivity().getApplicationContext(),FileObserverService.class);
-    intent.putExtra(FileObserverService.KEY_FILE_CMD,(cb.isChecked() ? FileObserverService.CMD_ADD_OBSERVED_FILE : FileObserverService.CMD_DEL_OBSERVED_FILE));
-    intent.putExtra(FileObserverService.KEY_CMD_ARG,mFile.getStoragePath());
-    getActivity().startService(intent);
     break;
   }
 case R.id.fdRenameBtn:
