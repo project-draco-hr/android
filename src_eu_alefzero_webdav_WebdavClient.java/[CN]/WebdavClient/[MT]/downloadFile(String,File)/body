@@ -13,6 +13,7 @@
         if (mDataTransferListener != null)         mDataTransferListener.transferProgress(readResult);
         fos.write(bytes,0,readResult);
       }
+      fos.close();
       ret=true;
     }
  else {

@@ -14,7 +14,7 @@
         byte[] b=new byte[f.available()];
         f.read(b);
         query.setEntity(new ByteArrayEntity(b));
-        HttpResponse response=fireRawRequest(query);
+        fireRawRequest(query);
       }
  catch (      IOException e) {
         e.printStackTrace();

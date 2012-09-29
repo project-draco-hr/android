@@ -1,7 +1,14 @@
 {
   AdapterContextMenuInfo info=(AdapterContextMenuInfo)item.getMenuInfo();
   int index=info.position;
-  HashMap<String,String> map=(HashMap<String,String>)getListAdapter().getItem(index);
+  HashMap<String,String> map=null;
+  try {
+    map=(HashMap<String,String>)getListAdapter().getItem(index);
+  }
+ catch (  ClassCastException e) {
+    Log.wtf(TAG,"getitem(index) from list adapter did not return hashmap, bailing out");
+    return false;
+  }
   String accountName=map.get("NAME");
   AccountManager am=(AccountManager)getSystemService(ACCOUNT_SERVICE);
   Account accounts[]=am.getAccountsByType(AccountAuthenticator.ACCOUNT_TYPE);

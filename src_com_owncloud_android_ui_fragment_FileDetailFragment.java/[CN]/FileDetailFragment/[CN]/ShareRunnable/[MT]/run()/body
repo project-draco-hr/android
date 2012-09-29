@@ -61,16 +61,7 @@
       String uri=am.getUserData(account,AccountAuthenticator.KEY_OC_BASE_URL) + SHARED_PATH + token;
       Log.d("Actions:shareFile ok","url: " + uri);
     }
- catch (    HttpException e) {
-      e.printStackTrace();
-    }
-catch (    IOException e) {
-      e.printStackTrace();
-    }
-catch (    JSONException e) {
-      e.printStackTrace();
-    }
-catch (    Exception e) {
+ catch (    Exception e) {
       e.printStackTrace();
     }
   }
