@@ -1,13 +1,14 @@
 {
   ByteBuffer tmp=ByteBuffer.allocate(4096);
   int i=0;
-  FileChannel channel=new RandomAccessFile(this.file,"rw").getChannel();
+  RandomAccessFile raf=new RandomAccessFile(mFile,"rw");
+  FileChannel channel=raf.getChannel();
   FileLock lock=channel.tryLock();
   try {
     while ((i=channel.read(tmp)) >= 0) {
       out.write(tmp.array(),0,i);
       tmp.clear();
-      if (listener != null)       listener.transferProgress(i);
+      if (mListener != null)       mListener.transferProgress(i);
     }
   }
  catch (  IOException io) {
@@ -17,5 +18,6 @@
  finally {
     lock.release();
     channel.close();
+    raf.close();
   }
 }

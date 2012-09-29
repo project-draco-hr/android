@@ -13,7 +13,7 @@ builder.setTitle(R.string.uploader_wrn_no_account_title);
 builder.setMessage(R.string.uploader_wrn_no_account_text);
 builder.setCancelable(false);
 builder.setPositiveButton(R.string.uploader_wrn_no_account_setup_btn_text,new OnClickListener(){
-public void onClick(DialogInterface dialog,int which){
+@Override public void onClick(DialogInterface dialog,int which){
 if (android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.ECLAIR_MR1) {
 Intent intent=new Intent("android.settings.ADD_ACCOUNT_SETTINGS");
 intent.putExtra("authorities",new String[]{AccountAuthenticator.AUTH_TOKEN_TYPE});
@@ -27,7 +27,7 @@ startActivityForResult(intent,REQUEST_CODE_SETUP_ACCOUNT);
 }
 );
 builder.setNegativeButton(R.string.uploader_wrn_no_account_quit_btn_text,new OnClickListener(){
-public void onClick(DialogInterface dialog,int which){
+@Override public void onClick(DialogInterface dialog,int which){
 finish();
 }
 }
@@ -40,7 +40,7 @@ ac[i]=mAccountManager.getAccountsByType(AccountAuthenticator.ACCOUNT_TYPE)[i].na
 }
 builder.setTitle(R.string.common_choose_account);
 builder.setItems(ac,new OnClickListener(){
-public void onClick(DialogInterface dialog,int which){
+@Override public void onClick(DialogInterface dialog,int which){
 mAccount=mAccountManager.getAccountsByType(AccountAuthenticator.ACCOUNT_TYPE)[which];
 mStorageManager=new FileDataStorageManager(mAccount,getContentResolver());
 populateDirectoryList();
@@ -49,7 +49,7 @@ populateDirectoryList();
 );
 builder.setCancelable(true);
 builder.setOnCancelListener(new OnCancelListener(){
-public void onCancel(DialogInterface dialog){
+@Override public void onCancel(DialogInterface dialog){
 dialog.cancel();
 finish();
 }
@@ -62,7 +62,7 @@ builder.setTitle(R.string.uploader_wrn_no_content_title);
 builder.setMessage(R.string.uploader_wrn_no_content_text);
 builder.setCancelable(false);
 builder.setNegativeButton(R.string.common_cancel,new OnClickListener(){
-public void onClick(DialogInterface dialog,int which){
+@Override public void onClick(DialogInterface dialog,int which){
 finish();
 }
 }

@@ -4,7 +4,7 @@
     if (TextUtils.isEmpty(mFileStoragePath)) {
       intent.putExtra("toDownload",true);
       AccountManager accm=(AccountManager)mContext.getSystemService(Context.ACCOUNT_SERVICE);
-      String ocurl=accm.getUserData(mAccount,AccountAuthenticator.KEY_OC_URL);
+      String ocurl=accm.getUserData(mAccount,AccountUtils.constructFullURLForAccount(mContext,mAccount));
       ocurl+=WebdavUtils.encodePath(mFilePath + mFilename);
       intent.setData(Uri.parse(ocurl));
     }

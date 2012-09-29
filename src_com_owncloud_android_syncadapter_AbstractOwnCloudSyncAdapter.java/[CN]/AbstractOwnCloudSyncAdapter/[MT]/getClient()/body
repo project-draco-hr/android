@@ -1,6 +1,6 @@
 {
   if (mClient == null) {
-    if (this.getAccountManager().getUserData(getAccount(),AccountAuthenticator.KEY_OC_URL) == null) {
+    if (AccountUtils.constructFullURLForAccount(getContext(),getAccount()) == null) {
       throw new UnknownHostException();
     }
     mClient=OwnCloudClientUtils.createOwnCloudClient(account,getContext());
