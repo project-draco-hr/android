@@ -1,4 +1,0 @@
-{
-  new File(mLogFilename).delete();
-  finish();
-}

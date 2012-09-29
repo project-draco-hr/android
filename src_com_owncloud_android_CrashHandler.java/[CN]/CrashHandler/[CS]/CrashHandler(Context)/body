@@ -1,4 +1,0 @@
-{
-  mContext=context;
-  defaultUEH=Thread.getDefaultUncaughtExceptionHandler();
-}
