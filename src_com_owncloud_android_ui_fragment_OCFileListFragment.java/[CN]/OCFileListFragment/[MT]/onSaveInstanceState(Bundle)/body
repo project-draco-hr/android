@@ -1,0 +1,5 @@
+{
+  Log.i(TAG,"onSaveInstanceState() start");
+  savedInstanceState.putInt("LIST_POSITION",getListView().getFirstVisiblePosition());
+  Log.i(TAG,"onSaveInstanceState() stop");
+}

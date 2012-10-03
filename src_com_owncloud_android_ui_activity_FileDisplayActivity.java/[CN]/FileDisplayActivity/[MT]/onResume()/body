@@ -14,7 +14,6 @@
     IntentFilter downloadIntentFilter=new IntentFilter(FileDownloader.DOWNLOAD_FINISH_MESSAGE);
     mDownloadFinishReceiver=new DownloadFinishReceiver();
     registerReceiver(mDownloadFinishReceiver,downloadIntentFilter);
-    mFileList.listDirectory(mCurrentDir);
   }
  else {
     mStorageManager=null;

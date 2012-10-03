@@ -1,0 +1,5 @@
+{
+  mFile=directory;
+  mFiles=mStorageManager.getDirectoryContent(mFile);
+  notifyDataSetChanged();
+}

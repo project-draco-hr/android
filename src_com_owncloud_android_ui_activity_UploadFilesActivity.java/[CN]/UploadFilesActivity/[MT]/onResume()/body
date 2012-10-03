@@ -1,6 +1,0 @@
-{
-  Log.d(TAG,"onResume() start");
-  super.onResume();
-  mFileListFragment.listDirectory(mCurrentDir);
-  Log.d(TAG,"onResume() end");
-}

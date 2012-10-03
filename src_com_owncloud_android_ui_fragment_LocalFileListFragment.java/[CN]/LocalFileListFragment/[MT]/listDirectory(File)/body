@@ -13,12 +13,7 @@
     directory=directory.getParentFile();
   }
   mDirectory=directory;
-  if (mAdapter == null) {
-    mAdapter=new LocalFileListAdapter(mDirectory,getActivity());
-    setListAdapter(mAdapter);
-  }
- else {
-    mList.clearChoices();
-    mAdapter.swapDirectory(mDirectory);
-  }
+  mList.clearChoices();
+  mAdapter.swapDirectory(mDirectory);
+  mList.setSelectionFromTop(0,0);
 }

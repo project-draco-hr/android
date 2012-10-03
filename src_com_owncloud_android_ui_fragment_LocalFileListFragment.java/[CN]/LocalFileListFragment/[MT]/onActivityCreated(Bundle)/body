@@ -1,5 +1,12 @@
 {
-  Log.i(getClass().toString(),"onActivityCreated() start");
+  Log.i(TAG,"onActivityCreated() start");
   super.onCreate(savedInstanceState);
-  Log.i(getClass().toString(),"onActivityCreated() stop");
+  mAdapter=new LocalFileListAdapter(mContainerActivity.getInitialDirectory(),getActivity());
+  setListAdapter(mAdapter);
+  if (savedInstanceState != null) {
+    Log.i(TAG,"savedInstanceState is not null");
+    int position=savedInstanceState.getInt("LIST_POSITION");
+    getListView().setSelectionFromTop(position,0);
+  }
+  Log.i(TAG,"onActivityCreated() stop");
 }

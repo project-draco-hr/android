@@ -4,7 +4,7 @@
     LayoutInflater inflator=(LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     view=inflator.inflate(R.layout.list_layout,null);
   }
-  if (mFiles.size() > position) {
+  if (mFiles != null && mFiles.size() > position) {
     OCFile file=mFiles.get(position);
     TextView fileName=(TextView)view.findViewById(R.id.Filename);
     String name=file.getFileName();

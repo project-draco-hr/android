@@ -1,6 +1,6 @@
 {
   mDirectory=directory;
-  mFiles=mDirectory.listFiles();
+  mFiles=(mDirectory != null ? mDirectory.listFiles() : null);
   if (mFiles != null) {
     Arrays.sort(mFiles,new Comparator<File>(){
       @Override public int compare(      File lhs,      File rhs){
@@ -18,8 +18,5 @@
     }
 );
   }
-  Iterator<DataSetObserver> it=mObservers.iterator();
-  while (it.hasNext()) {
-    it.next().onChanged();
-  }
+  notifyDataSetChanged();
 }
