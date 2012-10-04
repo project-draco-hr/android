@@ -1,5 +1,10 @@
 {
   mFile=directory;
-  mFiles=mStorageManager.getDirectoryContent(mFile);
+  if (mStorageManager != null) {
+    mFiles=mStorageManager.getDirectoryContent(mFile);
+  }
+ else {
+    mFiles=null;
+  }
   notifyDataSetChanged();
 }
