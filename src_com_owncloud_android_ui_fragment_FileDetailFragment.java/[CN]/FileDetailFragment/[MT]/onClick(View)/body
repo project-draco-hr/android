@@ -2,14 +2,24 @@
 switch (v.getId()) {
 case R.id.fdDownloadBtn:
 {
-      Intent i=new Intent(getActivity(),FileDownloader.class);
-      i.putExtra(FileDownloader.EXTRA_ACCOUNT,mAccount);
-      i.putExtra(FileDownloader.EXTRA_REMOTE_PATH,mFile.getRemotePath());
-      i.putExtra(FileDownloader.EXTRA_FILE_PATH,mFile.getRemotePath());
-      i.putExtra(FileDownloader.EXTRA_FILE_SIZE,mFile.getFileLength());
-      setButtonsForTransferring();
-      getActivity().startService(i);
-      mContainerActivity.onFileStateChanged();
+      if (FileDownloader.isDownloading(mAccount,mFile.getRemotePath())) {
+        if (mFile.isDown()) {
+          setButtonsForDown();
+        }
+ else {
+          setButtonsForRemote();
+        }
+      }
+ else {
+        Intent i=new Intent(getActivity(),FileDownloader.class);
+        i.putExtra(FileDownloader.EXTRA_ACCOUNT,mAccount);
+        i.putExtra(FileDownloader.EXTRA_REMOTE_PATH,mFile.getRemotePath());
+        i.putExtra(FileDownloader.EXTRA_FILE_PATH,mFile.getRemotePath());
+        i.putExtra(FileDownloader.EXTRA_FILE_SIZE,mFile.getFileLength());
+        setButtonsForTransferring();
+        getActivity().startService(i);
+        mContainerActivity.onFileStateChanged();
+      }
       break;
     }
 case R.id.fdKeepInSync:

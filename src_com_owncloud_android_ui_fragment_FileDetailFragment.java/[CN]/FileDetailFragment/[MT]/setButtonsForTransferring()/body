@@ -1,7 +1,7 @@
 {
   if (!isEmpty()) {
     Button downloadButton=(Button)getView().findViewById(R.id.fdDownloadBtn);
-    downloadButton.setEnabled(false);
+    downloadButton.setText(R.string.common_cancel);
     ((Button)getView().findViewById(R.id.fdOpenBtn)).setEnabled(false);
     ((Button)getView().findViewById(R.id.fdRenameBtn)).setEnabled(false);
     ((Button)getView().findViewById(R.id.fdRemoveBtn)).setEnabled(false);
