@@ -1,5 +1,6 @@
 {
-  if (!PreferenceManager.getDefaultSharedPreferences(context).getBoolean("instant_uploading",false)) {
+  boolean iu_enabled=PreferenceManager.getDefaultSharedPreferences(context).getBoolean("instant_uploading",false);
+  if (!iu_enabled) {
     Log.d(TAG,"Instant upload disabled, abording uploading");
     return;
   }
