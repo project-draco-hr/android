@@ -1,5 +1,9 @@
 {
-  if (!intent.hasExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY) || isOnline(context)) {
+  if (!instantUploadEnabled(context)) {
+    Log.d(TAG,"Instant upload disabled, abording uploading");
+    return;
+  }
+  if (!intent.hasExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY) && isOnline(context) && (!instantUploadViaWiFiOnly(context) || (instantUploadViaWiFiOnly(context) == isConnectedViaWiFi(context) == true))) {
     DbHandler db=new DbHandler(context);
     Cursor c=db.getAwaitingFiles();
     if (c.moveToFirst()) {
@@ -13,7 +17,7 @@
           try {
             mimeType=MimeTypeMap.getSingleton().getMimeTypeFromExtension(f.getName().substring(f.getName().lastIndexOf('.') + 1));
           }
- catch (          IndexOutOfBoundsException e) {
+ catch (          Throwable e) {
             Log.e(TAG,"Trying to find out MIME type of a file without extension: " + f.getName());
           }
           if (mimeType == null)           mimeType="application/octet-stream";
@@ -26,13 +30,12 @@
           context.startService(i);
         }
  else {
-          Log.w(TAG,"Instant upload file " + f.getName() + " dont exist anymore");
+          Log.w(TAG,"Instant upload file " + f.getAbsolutePath() + " dont exist anymore");
         }
       }
  while (c.moveToNext());
-      c.close();
     }
-    db.clearFiles();
+    c.close();
     db.close();
   }
 }

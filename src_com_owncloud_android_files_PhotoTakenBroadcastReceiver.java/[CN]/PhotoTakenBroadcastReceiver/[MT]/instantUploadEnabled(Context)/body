@@ -1,0 +1,3 @@
+{
+  return PreferenceManager.getDefaultSharedPreferences(context).getBoolean("instant_uploading",false);
+}
