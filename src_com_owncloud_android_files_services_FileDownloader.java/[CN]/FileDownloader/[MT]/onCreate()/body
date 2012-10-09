@@ -5,4 +5,5 @@
   thread.start();
   mServiceLooper=thread.getLooper();
   mServiceHandler=new ServiceHandler(mServiceLooper);
+  mBinder=new FileDownloaderBinder();
 }

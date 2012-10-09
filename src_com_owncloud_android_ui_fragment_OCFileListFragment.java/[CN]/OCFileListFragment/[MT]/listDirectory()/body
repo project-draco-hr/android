@@ -1,3 +1,5 @@
 {
+  int position=mList.getFirstVisiblePosition();
   listDirectory(null);
+  mList.setSelectionFromTop(position,0);
 }

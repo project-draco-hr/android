@@ -1,0 +1,6 @@
+Account account
+String localPath
+String remotePath
+String mimeType
+long size
+boolean forceOverwrite

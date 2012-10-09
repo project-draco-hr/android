@@ -1,4 +1,10 @@
 {
-  downloadFile();
+  @SuppressWarnings("unchecked") AbstractList<String> requestedDownloads=(AbstractList<String>)msg.obj;
+  if (msg.obj != null) {
+    Iterator<String> it=requestedDownloads.iterator();
+    while (it.hasNext()) {
+      downloadFile(it.next());
+    }
+  }
   stopSelf(msg.arg1);
 }

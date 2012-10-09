@@ -3,13 +3,27 @@
     Log.e(TAG,"Not enough information provided in intent");
     return START_NOT_STICKY;
   }
-  mAccount=intent.getParcelableExtra(EXTRA_ACCOUNT);
-  mFilePath=intent.getStringExtra(EXTRA_FILE_PATH);
-  mRemotePath=intent.getStringExtra(EXTRA_REMOTE_PATH);
-  mTotalDownloadSize=intent.getLongExtra(EXTRA_FILE_SIZE,-1);
-  mCurrentDownloadSize=mLastPercent=0;
-  Message msg=mServiceHandler.obtainMessage();
-  msg.arg1=startId;
-  mServiceHandler.sendMessage(msg);
+  Account account=intent.getParcelableExtra(EXTRA_ACCOUNT);
+  String filePath=intent.getStringExtra(EXTRA_FILE_PATH);
+  String remotePath=intent.getStringExtra(EXTRA_REMOTE_PATH);
+  long totalDownloadSize=intent.getLongExtra(EXTRA_FILE_SIZE,-1);
+  AbstractList<String> requestedDownloads=new Vector<String>();
+  String downloadKey=buildRemoteName(account.name,remotePath);
+  try {
+    DownloadFileOperation newDownload=new DownloadFileOperation(account,filePath,remotePath,(String)null,totalDownloadSize,false);
+    mPendingDownloads.putIfAbsent(downloadKey,newDownload);
+    newDownload.addDatatransferProgressListener(this);
+    requestedDownloads.add(downloadKey);
+  }
+ catch (  IllegalArgumentException e) {
+    Log.e(TAG,"Not enough information provided in intent: " + e.getMessage());
+    return START_NOT_STICKY;
+  }
+  if (requestedDownloads.size() > 0) {
+    Message msg=mServiceHandler.obtainMessage();
+    msg.arg1=startId;
+    msg.obj=requestedDownloads;
+    mServiceHandler.sendMessage(msg);
+  }
   return START_NOT_STICKY;
 }

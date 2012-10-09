@@ -1,6 +1,9 @@
 {
   if (mException != null) {
-    if (mException instanceof SocketException) {
+    if (mException instanceof OperationCancelledException) {
+      return "Operation cancelled by the caller";
+    }
+ else     if (mException instanceof SocketException) {
       return "Socket exception";
     }
  else     if (mException instanceof SocketTimeoutException) {
@@ -37,6 +40,9 @@
   }
  else   if (mCode == ResultCode.BAD_OC_VERSION) {
     return "No valid ownCloud version was found at the server";
+  }
+ else   if (mCode == ResultCode.STORAGE_ERROR_MOVING_FROM_TMP) {
+    return "Error while moving file from temporal to final directory";
   }
   return "Operation finished with HTTP status code " + mHttpCode + " ("+ (isSuccess() ? "success" : "fail")+ ")";
 }

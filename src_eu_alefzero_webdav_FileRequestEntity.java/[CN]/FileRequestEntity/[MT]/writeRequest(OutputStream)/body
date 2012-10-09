@@ -4,11 +4,15 @@
   RandomAccessFile raf=new RandomAccessFile(mFile,"rw");
   FileChannel channel=raf.getChannel();
   FileLock lock=channel.tryLock();
+  Iterator<OnDatatransferProgressListener> it=null;
   try {
     while ((i=channel.read(tmp)) >= 0) {
       out.write(tmp.array(),0,i);
       tmp.clear();
-      if (mListener != null)       mListener.transferProgress(i);
+      it=mListeners.iterator();
+      while (it.hasNext()) {
+        it.next().onTransferProgress(i);
+      }
     }
   }
  catch (  IOException io) {

@@ -9,6 +9,7 @@
     createFirstAccount();
   }
  else {
+    bindService(new Intent(this,FileDownloader.class),mConnection,Context.BIND_AUTO_CREATE);
     initDataFromCurrentAccount();
   }
   if (getIntent().getAction() != null && getIntent().getAction().equals(Intent.ACTION_MAIN) && savedInstanceState == null) {

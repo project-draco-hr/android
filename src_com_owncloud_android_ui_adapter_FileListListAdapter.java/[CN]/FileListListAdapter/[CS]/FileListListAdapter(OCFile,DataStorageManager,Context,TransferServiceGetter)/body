@@ -1,0 +1,7 @@
+{
+  mStorageManager=storage_man;
+  mContext=context;
+  mAccount=AccountUtils.getCurrentOwnCloudAccount(mContext);
+  mTransferServiceGetter=transferServiceGetter;
+  swapDirectory(file);
+}

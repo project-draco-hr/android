@@ -1,6 +1,9 @@
 {
   mException=e;
-  if (e instanceof SocketException) {
+  if (e instanceof OperationCancelledException) {
+    mCode=ResultCode.CANCELLED;
+  }
+ else   if (e instanceof SocketException) {
     mCode=ResultCode.WRONG_CONNECTION;
   }
  else   if (e instanceof SocketTimeoutException) {

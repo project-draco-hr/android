@@ -16,4 +16,5 @@
   mFile=directory;
   mAdapter.swapDirectory(mFile);
   mList.setSelectionFromTop(0,0);
+  mList.invalidate();
 }

@@ -6,7 +6,7 @@
       readCount=mChannel.read(mBuffer);
       out.write(mBuffer.array(),0,readCount);
       mBuffer.clear();
-      if (mListener != null)       mListener.transferProgress(readCount);
+      if (mListener != null)       mListener.onTransferProgress(readCount);
     }
   }
  catch (  IOException io) {

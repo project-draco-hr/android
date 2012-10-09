@@ -10,7 +10,7 @@
       byte[] bytes=new byte[4096];
       int readResult;
       while ((readResult=bis.read(bytes)) != -1) {
-        if (mDataTransferListener != null)         mDataTransferListener.transferProgress(readResult);
+        if (mDataTransferListener != null)         mDataTransferListener.onTransferProgress(readResult);
         fos.write(bytes,0,readResult);
       }
       fos.close();

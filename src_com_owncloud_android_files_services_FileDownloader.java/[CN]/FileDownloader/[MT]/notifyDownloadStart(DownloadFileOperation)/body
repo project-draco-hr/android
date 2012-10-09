@@ -1,0 +1,11 @@
+{
+  mLastPercent=0;
+  mNotification=new Notification(R.drawable.icon,getString(R.string.downloader_download_in_progress_ticker),System.currentTimeMillis());
+  mNotification.flags|=Notification.FLAG_ONGOING_EVENT;
+  mNotification.contentView=new RemoteViews(getApplicationContext().getPackageName(),R.layout.progressbar_layout);
+  mNotification.contentView.setProgressBar(R.id.status_progress,100,0,download.getSize() == -1);
+  mNotification.contentView.setTextViewText(R.id.status_text,String.format(getString(R.string.downloader_download_in_progress_content),0,new File(download.getLocalPath()).getName()));
+  mNotification.contentView.setImageViewResource(R.id.status_icon,R.drawable.icon);
+  mNotification.contentIntent=PendingIntent.getActivity(getApplicationContext(),0,new Intent(),PendingIntent.FLAG_UPDATE_CURRENT);
+  mNotificationMngr.notify(R.string.downloader_download_in_progress_ticker,mNotification);
+}

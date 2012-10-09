@@ -17,7 +17,8 @@
       fileIcon.setImageResource(R.drawable.ic_menu_archive);
     }
     ImageView localStateView=(ImageView)view.findViewById(R.id.imageView2);
-    if (FileDownloader.isDownloading(mAccount,file.getRemotePath())) {
+    FileDownloaderBinder downloaderBinder=mTransferServiceGetter.getFileDownloaderBinder();
+    if (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,file.getRemotePath())) {
       localStateView.setImageResource(R.drawable.downloading_file_indicator);
       localStateView.setVisibility(View.VISIBLE);
     }

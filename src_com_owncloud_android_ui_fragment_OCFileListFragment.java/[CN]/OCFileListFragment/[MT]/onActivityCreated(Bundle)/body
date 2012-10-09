@@ -1,7 +1,7 @@
 {
   Log.i(TAG,"onActivityCreated() start");
-  super.onCreate(savedInstanceState);
-  mAdapter=new FileListListAdapter(mContainerActivity.getInitialDirectory(),mContainerActivity.getStorageManager(),getActivity());
+  super.onActivityCreated(savedInstanceState);
+  mAdapter=new FileListListAdapter(mContainerActivity.getInitialDirectory(),mContainerActivity.getStorageManager(),getActivity(),mContainerActivity);
   setListAdapter(mAdapter);
   if (savedInstanceState != null) {
     Log.i(TAG,"savedInstanceState is not null");

@@ -2,7 +2,9 @@
 switch (v.getId()) {
 case R.id.fdDownloadBtn:
 {
-      if (FileDownloader.isDownloading(mAccount,mFile.getRemotePath())) {
+      FileDownloaderBinder downloaderBinder=mContainerActivity.getFileDownloaderBinder();
+      if (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,mFile.getRemotePath())) {
+        downloaderBinder.cancel(mAccount,mFile.getRemotePath());
         if (mFile.isDown()) {
           setButtonsForDown();
         }
