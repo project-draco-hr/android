@@ -7,6 +7,7 @@
   this.setStorageManager(new FileDataStorageManager(account,getContentProvider()));
   Log.d(TAG,"syncing owncloud account " + account.name);
   sendStickyBroadcast(true,null);
+  updateOCVersion();
   String uri=getUri().toString();
   PropFindMethod query=null;
   try {
