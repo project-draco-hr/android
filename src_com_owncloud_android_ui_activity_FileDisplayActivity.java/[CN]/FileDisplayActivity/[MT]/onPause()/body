@@ -16,6 +16,5 @@
   if (!AccountUtils.accountsAreSetup(this)) {
     dismissDialog(DIALOG_SETUP_ACCOUNT);
   }
-  getIntent().putExtra(FileDetailFragment.EXTRA_FILE,mCurrentDir);
   Log.d(getClass().toString(),"onPause() end");
 }

@@ -8,7 +8,7 @@
  else {
     Intent showDetailsIntent=new Intent(this,FileDetailActivity.class);
     showDetailsIntent.putExtra(FileDetailFragment.EXTRA_FILE,file);
-    showDetailsIntent.putExtra(FileDownloader.EXTRA_ACCOUNT,AccountUtils.getCurrentOwnCloudAccount(this));
+    showDetailsIntent.putExtra(FileDetailFragment.EXTRA_ACCOUNT,AccountUtils.getCurrentOwnCloudAccount(this));
     startActivity(showDetailsIntent);
   }
 }

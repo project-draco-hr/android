@@ -8,7 +8,7 @@
   mNotification.contentView.setImageViewResource(R.id.status_icon,R.drawable.icon);
   Intent showDetailsIntent=new Intent(this,FileDetailActivity.class);
   showDetailsIntent.putExtra(FileDetailFragment.EXTRA_FILE,download.getFile());
-  showDetailsIntent.putExtra(FileDownloader.EXTRA_ACCOUNT,download.getAccount());
+  showDetailsIntent.putExtra(FileDetailFragment.EXTRA_ACCOUNT,download.getAccount());
   showDetailsIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
   mNotification.contentIntent=PendingIntent.getActivity(getApplicationContext(),0,showDetailsIntent,PendingIntent.FLAG_UPDATE_CURRENT);
   mNotificationMngr.notify(R.string.downloader_download_in_progress_ticker,mNotification);

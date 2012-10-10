@@ -1,6 +1,9 @@
 {
   Log.d(getClass().toString(),"onCreate() start");
   super.onCreate(savedInstanceState);
+  mCurrentDir=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE);
+  Account account=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_ACCOUNT);
+  if (account != null)   AccountUtils.setCurrentOwnCloudAccount(this,account.name);
   if (savedInstanceState != null) {
     mCurrentDir=savedInstanceState.getParcelable(FileDetailFragment.EXTRA_FILE);
   }
@@ -9,9 +12,9 @@
     createFirstAccount();
   }
  else {
-    bindService(new Intent(this,FileDownloader.class),mConnection,Context.BIND_AUTO_CREATE);
     initDataFromCurrentAccount();
   }
+  bindService(new Intent(this,FileDownloader.class),mConnection,Context.BIND_AUTO_CREATE);
   if (getIntent().getAction() != null && getIntent().getAction().equals(Intent.ACTION_MAIN) && savedInstanceState == null) {
     requestPinCode();
   }
@@ -26,10 +29,8 @@
   setContentView(R.layout.files);
   mFileList=(OCFileListFragment)getSupportFragmentManager().findFragmentById(R.id.fileList);
   mDualPane=(findViewById(R.id.file_details_container) != null);
-  if (mDualPane && getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG) == null) {
-    FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
-    transaction.replace(R.id.file_details_container,new FileDetailFragment(null,null));
-    transaction.commit();
+  if (mDualPane) {
+    initFileDetailsInDualPane();
   }
   ActionBar actionBar=getSupportActionBar();
   actionBar.setHomeButtonEnabled(true);

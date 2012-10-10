@@ -9,7 +9,7 @@
     ActionBar actionBar=getSupportActionBar();
     actionBar.setDisplayHomeAsUpEnabled(true);
     OCFile file=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE);
-    Account account=getIntent().getParcelableExtra(FileDownloader.EXTRA_ACCOUNT);
+    Account account=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_ACCOUNT);
     FileDetailFragment mFileDetail=new FileDetailFragment(file,account);
     FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
     ft.replace(R.id.fragment,mFileDetail,FileDetailFragment.FTAG);

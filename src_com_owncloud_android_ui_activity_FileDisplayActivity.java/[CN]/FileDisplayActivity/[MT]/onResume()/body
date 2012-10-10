@@ -4,6 +4,9 @@
   if (AccountUtils.accountsAreSetup(this)) {
     if (mStorageManager == null) {
       initDataFromCurrentAccount();
+      if (mDualPane) {
+        initFileDetailsInDualPane();
+      }
     }
     IntentFilter syncIntentFilter=new IntentFilter(FileSyncService.SYNC_MESSAGE);
     mSyncBroadcastReceiver=new SyncBroadcastReceiver();

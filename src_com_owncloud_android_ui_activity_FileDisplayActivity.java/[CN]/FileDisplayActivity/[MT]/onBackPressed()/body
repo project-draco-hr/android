@@ -11,7 +11,7 @@
     if (fileDetails != null && !fileDetails.isEmpty()) {
       FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
       transaction.remove(fileDetails);
-      transaction.add(R.id.file_details_container,new FileDetailFragment(null,null));
+      transaction.add(R.id.file_details_container,new FileDetailFragment(null,null),FileDetailFragment.FTAG);
       transaction.commit();
     }
   }
