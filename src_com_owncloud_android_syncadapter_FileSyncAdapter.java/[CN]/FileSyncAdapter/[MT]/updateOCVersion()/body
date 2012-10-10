@@ -26,6 +26,6 @@
     }
   }
  catch (  Exception e) {
-    Log.e(TAG,"ASDASD",e);
+    Log.e(TAG,"Problem getting response from server",e);
   }
 }
