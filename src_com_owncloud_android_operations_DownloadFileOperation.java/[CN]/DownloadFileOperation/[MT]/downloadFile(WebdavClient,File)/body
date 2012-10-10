@@ -1,7 +1,7 @@
 {
   int status=-1;
   boolean savedFile=false;
-  GetMethod get=new GetMethod(client.getBaseUri() + WebdavUtils.encodePath(mRemotePath));
+  GetMethod get=new GetMethod(client.getBaseUri() + WebdavUtils.encodePath(mFile.getRemotePath()));
   Iterator<OnDatatransferProgressListener> it=null;
   FileOutputStream fos=null;
   try {
@@ -24,7 +24,7 @@ synchronized (mCancellationRequested) {
         transferred+=readResult;
         it=mDataTransferListeners.iterator();
         while (it.hasNext()) {
-          it.next().onTransferProgress(readResult,transferred,mSize,targetFile.getName());
+          it.next().onTransferProgress(readResult,transferred,mFile.getFileLength(),targetFile.getName());
         }
       }
       savedFile=true;

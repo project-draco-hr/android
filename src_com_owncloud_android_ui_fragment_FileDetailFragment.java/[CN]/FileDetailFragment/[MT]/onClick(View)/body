@@ -3,8 +3,8 @@ switch (v.getId()) {
 case R.id.fdDownloadBtn:
 {
       FileDownloaderBinder downloaderBinder=mContainerActivity.getFileDownloaderBinder();
-      if (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,mFile.getRemotePath())) {
-        downloaderBinder.cancel(mAccount,mFile.getRemotePath());
+      if (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,mFile)) {
+        downloaderBinder.cancel(mAccount,mFile);
         if (mFile.isDown()) {
           setButtonsForDown();
         }
@@ -15,9 +15,7 @@ case R.id.fdDownloadBtn:
  else {
         Intent i=new Intent(getActivity(),FileDownloader.class);
         i.putExtra(FileDownloader.EXTRA_ACCOUNT,mAccount);
-        i.putExtra(FileDownloader.EXTRA_REMOTE_PATH,mFile.getRemotePath());
-        i.putExtra(FileDownloader.EXTRA_FILE_PATH,mFile.getRemotePath());
-        i.putExtra(FileDownloader.EXTRA_FILE_SIZE,mFile.getFileLength());
+        i.putExtra(FileDownloader.EXTRA_FILE,mFile);
         setButtonsForTransferring();
         getActivity().startService(i);
         mContainerActivity.onFileStateChanged();

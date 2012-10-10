@@ -1,3 +1,15 @@
 {
-  return mMimeType;
+  String mimeType=mFile.getMimetype();
+  if (mimeType == null || mimeType.length() <= 0) {
+    try {
+      mimeType=MimeTypeMap.getSingleton().getMimeTypeFromExtension(mFile.getRemotePath().substring(mFile.getRemotePath().lastIndexOf('.') + 1));
+    }
+ catch (    IndexOutOfBoundsException e) {
+      Log.e(TAG,"Trying to find out MIME type of a file without extension: " + mFile.getRemotePath());
+    }
+  }
+  if (mimeType == null) {
+    mimeType="application/octet-stream";
+  }
+  return mimeType;
 }

@@ -18,7 +18,7 @@
     }
     ImageView localStateView=(ImageView)view.findViewById(R.id.imageView2);
     FileDownloaderBinder downloaderBinder=mTransferServiceGetter.getFileDownloaderBinder();
-    if (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,file.getRemotePath())) {
+    if (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,file)) {
       localStateView.setImageResource(R.drawable.downloading_file_indicator);
       localStateView.setVisibility(View.VISIBLE);
     }

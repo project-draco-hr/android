@@ -1,3 +1,2 @@
 DownloadFileOperation download
 RemoteOperationResult downloadResult
-String newFilePath
