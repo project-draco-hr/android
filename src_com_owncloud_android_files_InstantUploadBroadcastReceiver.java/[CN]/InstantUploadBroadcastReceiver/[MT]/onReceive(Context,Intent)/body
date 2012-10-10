@@ -1,4 +1,5 @@
 {
+  Log.d(TAG,"Received: " + intent.getAction());
   if (intent.getAction().equals(android.net.ConnectivityManager.CONNECTIVITY_ACTION)) {
     handleConnectivityAction(context,intent);
   }
