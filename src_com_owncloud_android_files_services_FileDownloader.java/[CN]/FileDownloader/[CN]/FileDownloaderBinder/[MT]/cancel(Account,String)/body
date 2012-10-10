@@ -1,8 +1,9 @@
 {
+  DownloadFileOperation download=null;
 synchronized (mPendingDownloads) {
-    DownloadFileOperation download=mPendingDownloads.remove(buildRemoteName(account.name,remotePath));
-    if (download != null) {
-      download.cancel();
-    }
+    download=mPendingDownloads.remove(buildRemoteName(account.name,remotePath));
+  }
+  if (download != null) {
+    download.cancel();
   }
 }

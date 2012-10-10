@@ -3,18 +3,20 @@
   boolean savedFile=false;
   GetMethod get=new GetMethod(client.getBaseUri() + WebdavUtils.encodePath(mRemotePath));
   Iterator<OnDatatransferProgressListener> it=null;
+  FileOutputStream fos=null;
   try {
     status=client.executeMethod(get);
     if (isSuccess(status)) {
       targetFile.createNewFile();
       BufferedInputStream bis=new BufferedInputStream(get.getResponseBodyAsStream());
-      FileOutputStream fos=new FileOutputStream(targetFile);
+      fos=new FileOutputStream(targetFile);
       long transferred=0;
       byte[] bytes=new byte[4096];
       int readResult=0;
       while ((readResult=bis.read(bytes)) != -1) {
 synchronized (mCancellationRequested) {
-          if (mCancellationRequested) {
+          if (mCancellationRequested.get()) {
+            get.abort();
             throw new OperationCancelledException();
           }
         }
@@ -25,7 +27,6 @@ synchronized (mCancellationRequested) {
           it.next().onTransferProgress(readResult,transferred,mSize,targetFile.getName());
         }
       }
-      fos.close();
       savedFile=true;
     }
  else {
@@ -33,6 +34,7 @@ synchronized (mCancellationRequested) {
     }
   }
   finally {
+    if (fos != null)     fos.close();
     if (!savedFile && targetFile.exists()) {
       targetFile.delete();
     }

@@ -1,5 +1,3 @@
 {
-synchronized (mCancellationRequested) {
-    mCancellationRequested=true;
-  }
+  mCancellationRequested.set(true);
 }
