@@ -1,0 +1,5 @@
+{
+  mDownloaderBinder=(FileDownloaderBinder)service;
+  FileDetailFragment fragment=(FileDetailFragment)getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
+  if (fragment != null)   fragment.updateFileDetails();
+}
