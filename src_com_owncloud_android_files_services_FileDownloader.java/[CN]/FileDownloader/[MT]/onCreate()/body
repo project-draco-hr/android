@@ -1,9 +1,9 @@
 {
   super.onCreate();
-  mNotificationMngr=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-  HandlerThread thread=new HandlerThread("FileDownladerThread",Process.THREAD_PRIORITY_BACKGROUND);
+  mNotificationManager=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+  HandlerThread thread=new HandlerThread("FileDownloaderThread",Process.THREAD_PRIORITY_BACKGROUND);
   thread.start();
   mServiceLooper=thread.getLooper();
-  mServiceHandler=new ServiceHandler(mServiceLooper);
+  mServiceHandler=new ServiceHandler(mServiceLooper,this);
   mBinder=new FileDownloaderBinder();
 }

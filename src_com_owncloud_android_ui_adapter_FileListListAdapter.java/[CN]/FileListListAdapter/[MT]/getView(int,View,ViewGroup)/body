@@ -18,11 +18,12 @@
     }
     ImageView localStateView=(ImageView)view.findViewById(R.id.imageView2);
     FileDownloaderBinder downloaderBinder=mTransferServiceGetter.getFileDownloaderBinder();
+    FileUploaderBinder uploaderBinder=mTransferServiceGetter.getFileUploaderBinder();
     if (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,file)) {
       localStateView.setImageResource(R.drawable.downloading_file_indicator);
       localStateView.setVisibility(View.VISIBLE);
     }
- else     if (FileUploader.isUploading(mAccount,file.getRemotePath())) {
+ else     if (uploaderBinder != null && uploaderBinder.isUploading(mAccount,file)) {
       localStateView.setImageResource(R.drawable.uploading_file_indicator);
       localStateView.setVisibility(View.VISIBLE);
     }

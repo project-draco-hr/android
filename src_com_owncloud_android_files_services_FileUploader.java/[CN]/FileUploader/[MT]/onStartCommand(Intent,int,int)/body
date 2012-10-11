@@ -1,11 +1,6 @@
 {
-  if (!intent.hasExtra(KEY_ACCOUNT) && !intent.hasExtra(KEY_UPLOAD_TYPE)) {
+  if (!intent.hasExtra(KEY_ACCOUNT) || !intent.hasExtra(KEY_UPLOAD_TYPE)) {
     Log.e(TAG,"Not enough information provided in intent");
-    return Service.START_NOT_STICKY;
-  }
-  Account account=intent.getParcelableExtra(KEY_ACCOUNT);
-  if (account == null) {
-    Log.e(TAG,"Bad account information provided in upload intent");
     return Service.START_NOT_STICKY;
   }
   int uploadType=intent.getIntExtra(KEY_UPLOAD_TYPE,-1);
@@ -13,6 +8,7 @@
     Log.e(TAG,"Incorrect upload type provided");
     return Service.START_NOT_STICKY;
   }
+  Account account=intent.getParcelableExtra(KEY_ACCOUNT);
   String[] localPaths, remotePaths, mimeTypes;
   if (uploadType == UPLOAD_SINGLE_FILE) {
     localPaths=new String[]{intent.getStringExtra(KEY_LOCAL_FILE)};
@@ -24,24 +20,48 @@
     remotePaths=intent.getStringArrayExtra(KEY_REMOTE_FILE);
     mimeTypes=intent.getStringArrayExtra(KEY_MIME_TYPE);
   }
+  if (localPaths == null) {
+    Log.e(TAG,"Incorrect array for local paths provided in upload intent");
+    return Service.START_NOT_STICKY;
+  }
+  if (remotePaths == null) {
+    Log.e(TAG,"Incorrect array for remote paths provided in upload intent");
+    return Service.START_NOT_STICKY;
+  }
   if (localPaths.length != remotePaths.length) {
     Log.e(TAG,"Different number of remote paths and local paths!");
     return Service.START_NOT_STICKY;
   }
   boolean isInstant=intent.getBooleanExtra(KEY_INSTANT_UPLOAD,false);
   boolean forceOverwrite=intent.getBooleanExtra(KEY_FORCE_OVERWRITE,false);
-  for (int i=0; i < localPaths.length; i++) {
-    OwnCloudVersion ocv=new OwnCloudVersion(AccountManager.get(this).getUserData(account,AccountAuthenticator.KEY_OC_VERSION));
-    if (FileUploader.chunkedUploadIsSupported(ocv)) {
-      mUploads.add(new ChunkedUploadFileOperation(localPaths[i],remotePaths[i],((mimeTypes != null) ? mimeTypes[i] : ""),isInstant,forceOverwrite,this));
-    }
+  OwnCloudVersion ocv=new OwnCloudVersion(AccountManager.get(this).getUserData(account,AccountAuthenticator.KEY_OC_VERSION));
+  boolean chunked=FileUploader.chunkedUploadIsSupported(ocv);
+  AbstractList<String> requestedUploads=new Vector<String>();
+  String uploadKey=null;
+  UploadFileOperation newUpload=null;
+  try {
+    for (int i=0; i < localPaths.length; i++) {
+      uploadKey=buildRemoteName(account,remotePaths[i]);
+      if (chunked) {
+        newUpload=new ChunkedUploadFileOperation(account,localPaths[i],remotePaths[i],((mimeTypes != null) ? mimeTypes[i] : (String)null),isInstant,forceOverwrite);
+      }
  else {
-      mUploads.add(new UploadFileOperation(localPaths[i],remotePaths[i],(mimeTypes != null ? mimeTypes[i] : ""),isInstant,forceOverwrite,this));
+        newUpload=new UploadFileOperation(account,localPaths[i],remotePaths[i],(mimeTypes != null ? mimeTypes[i] : (String)null),isInstant,forceOverwrite);
+      }
+      mPendingUploads.putIfAbsent(uploadKey,newUpload);
+      newUpload.addDatatransferProgressListener(this);
+      requestedUploads.add(uploadKey);
     }
-    mAccounts.add(account);
   }
-  Message msg=mServiceHandler.obtainMessage();
-  msg.arg1=startId;
-  mServiceHandler.sendMessage(msg);
+ catch (  IllegalArgumentException e) {
+    Log.e(TAG,"Not enough information provided in intent: " + e.getMessage());
+    return START_NOT_STICKY;
+  }
+  if (requestedUploads.size() > 0) {
+    Message msg=mServiceHandler.obtainMessage();
+    msg.arg1=startId;
+    msg.obj=requestedUploads;
+    mServiceHandler.sendMessage(msg);
+  }
   return Service.START_NOT_STICKY;
 }

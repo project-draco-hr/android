@@ -10,7 +10,7 @@
     channel=raf.getChannel();
     lock=channel.tryLock();
     ChunkFromFileChannelRequestEntity entity=new ChunkFromFileChannelRequestEntity(channel,getMimeType(),CHUNK_SIZE);
-    entity.setOnDatatransferProgressListener(getDataTransferListener());
+    entity.addOnDatatransferProgressListeners(getDataTransferListeners());
     long offset=0;
     String uriPrefix=client.getBaseUri() + WebdavUtils.encodePath(getRemotePath()) + "-chunking-"+ Math.abs((new Random()).nextInt(9000) + 1000)+ "-";
     long chunkCount=(long)Math.ceil((double)file.length() / CHUNK_SIZE);

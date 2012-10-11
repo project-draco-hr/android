@@ -14,7 +14,10 @@
  else {
     initDataFromCurrentAccount();
   }
-  bindService(new Intent(this,FileDownloader.class),mConnection,Context.BIND_AUTO_CREATE);
+  mUploadConnection=new ListServiceConnection();
+  mDownloadConnection=new ListServiceConnection();
+  bindService(new Intent(this,FileUploader.class),mUploadConnection,Context.BIND_AUTO_CREATE);
+  bindService(new Intent(this,FileDownloader.class),mDownloadConnection,Context.BIND_AUTO_CREATE);
   if (getIntent().getAction() != null && getIntent().getAction().equals(Intent.ACTION_MAIN) && savedInstanceState == null) {
     requestPinCode();
   }

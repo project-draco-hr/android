@@ -1,6 +1,0 @@
-String localPath
-String remotePath
-String mimeType
-boolean isInstant
-boolean forceOverwrite
-OnDatatransferProgressListener dataTransferProgressListener

@@ -1,4 +1,5 @@
 {
   super.onDestroy();
-  unbindService(mConnection);
+  if (mDownloadConnection != null)   unbindService(mDownloadConnection);
+  if (mUploadConnection != null)   unbindService(mUploadConnection);
 }

@@ -10,7 +10,8 @@
     CheckBox cb=(CheckBox)getView().findViewById(R.id.fdKeepInSync);
     cb.setChecked(mFile.keepInSync());
     FileDownloaderBinder downloaderBinder=mContainerActivity.getFileDownloaderBinder();
-    if ((downloaderBinder != null && downloaderBinder.isDownloading(mAccount,mFile)) || FileUploader.isUploading(mAccount,mFile.getRemotePath())) {
+    FileUploaderBinder uploaderBinder=mContainerActivity.getFileUploaderBinder();
+    if ((downloaderBinder != null && downloaderBinder.isDownloading(mAccount,mFile)) || (uploaderBinder != null && uploaderBinder.isUploading(mAccount,mFile))) {
       setButtonsForTransferring();
     }
  else     if (mFile.isDown()) {

@@ -1,12 +1,16 @@
 {
   int readCount=0;
+  Iterator<OnDatatransferProgressListener> it=null;
   try {
     mChannel.position(mOffset);
     while (mChannel.position() < mOffset + mSize && mChannel.position() < mChannel.size()) {
       readCount=mChannel.read(mBuffer);
       out.write(mBuffer.array(),0,readCount);
       mBuffer.clear();
-      if (mListener != null)       mListener.onTransferProgress(readCount);
+      it=mListeners.iterator();
+      while (it.hasNext()) {
+        it.next().onTransferProgress(readCount);
+      }
     }
   }
  catch (  IOException io) {

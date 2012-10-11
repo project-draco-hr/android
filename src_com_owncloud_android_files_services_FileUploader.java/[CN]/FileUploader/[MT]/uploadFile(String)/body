@@ -1,0 +1,36 @@
+{
+synchronized (mPendingUploads) {
+    mCurrentUpload=mPendingUploads.get(uploadKey);
+  }
+  if (mCurrentUpload != null) {
+    notifyUploadStart(mCurrentUpload);
+    if (mUploadClient == null || !mLastAccount.equals(mCurrentUpload.getAccount())) {
+      mLastAccount=mCurrentUpload.getAccount();
+      mStorageManager=new FileDataStorageManager(mLastAccount,getContentResolver());
+      mUploadClient=OwnCloudClientUtils.createOwnCloudClient(mLastAccount,getApplicationContext());
+    }
+    if (mCurrentUpload.isInstant() && !mLastAccountWhereInstantFolderWasCreated.equals(mCurrentUpload.getAccount())) {
+      mLastAccountWhereInstantFolderWasCreated=mCurrentUpload.getAccount();
+      createRemoteFolderForInstantUploads(mUploadClient,mStorageManager);
+    }
+    RemoteOperationResult uploadResult=null;
+    long parentDirId=-1;
+    try {
+      File remote=new File(mCurrentUpload.getRemotePath());
+      parentDirId=mStorageManager.getFileByPath(remote.getParent().endsWith("/") ? remote.getParent() : remote.getParent() + "/").getFileId();
+      File local=new File(mCurrentUpload.getLocalPath());
+      long size=local.length();
+      uploadResult=mCurrentUpload.execute(mUploadClient);
+      if (uploadResult.isSuccess()) {
+        saveNewOCFile(mCurrentUpload,mStorageManager,parentDirId,size);
+      }
+    }
+  finally {
+synchronized (mPendingUploads) {
+        mPendingUploads.remove(uploadKey);
+      }
+    }
+    notifyUploadResult(uploadResult,mCurrentUpload);
+    sendFinalBroadcast(mCurrentUpload,uploadResult,parentDirId);
+  }
+}

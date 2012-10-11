@@ -1,0 +1,5 @@
+{
+synchronized (mPendingUploads) {
+    return (mPendingUploads.containsKey(buildRemoteName(account,file)));
+  }
+}

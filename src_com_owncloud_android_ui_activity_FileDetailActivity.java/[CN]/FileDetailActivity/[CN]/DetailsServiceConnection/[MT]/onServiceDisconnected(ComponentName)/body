@@ -1,3 +1,10 @@
 {
-  mDownloaderBinder=null;
+  if (component.equals(new ComponentName(FileDetailActivity.this,FileDownloader.class))) {
+    Log.d(TAG,"Download service disconnected");
+    mDownloaderBinder=null;
+  }
+ else   if (component.equals(new ComponentName(FileDetailActivity.this,FileUploader.class))) {
+    Log.d(TAG,"Upload service disconnected");
+    mUploaderBinder=null;
+  }
 }

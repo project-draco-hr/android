@@ -4,7 +4,7 @@ synchronized (mPendingDownloads) {
   }
   if (mCurrentDownload != null) {
     notifyDownloadStart(mCurrentDownload);
-    if (mDownloadClient == null || mLastAccount != mCurrentDownload.getAccount()) {
+    if (mDownloadClient == null || !mLastAccount.equals(mCurrentDownload.getAccount())) {
       mLastAccount=mCurrentDownload.getAccount();
       mDownloadClient=OwnCloudClientUtils.createOwnCloudClient(mLastAccount,getApplicationContext());
     }
@@ -18,7 +18,9 @@ synchronized (mPendingDownloads) {
       }
     }
   finally {
-      mPendingDownloads.remove(downloadKey);
+synchronized (mPendingDownloads) {
+        mPendingDownloads.remove(downloadKey);
+      }
     }
     notifyDownloadResult(mCurrentDownload,downloadResult);
     sendFinalBroadcast(mCurrentDownload,downloadResult);

@@ -1,11 +1,2 @@
 {
-  mSendData+=progressRate;
-  int percent=(int)(100 * ((double)mSendData) / ((double)mTotalDataToSend));
-  if (percent != mPreviousPercent) {
-    String text=String.format(getString(R.string.uploader_upload_in_progress_content),percent,new File(mUploads.get(mCurrentIndexUpload).getLocalPath()).getName());
-    mNotification.contentView.setProgressBar(R.id.status_progress,100,percent,false);
-    mNotification.contentView.setTextViewText(R.id.status_text,text);
-    mNotificationManager.notify(R.string.uploader_upload_in_progress_ticker,mNotification);
-  }
-  mPreviousPercent=percent;
 }

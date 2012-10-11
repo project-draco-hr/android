@@ -4,7 +4,7 @@
   try {
     File f=new File(mLocalPath);
     FileRequestEntity entity=new FileRequestEntity(f,mMimeType);
-    entity.addOnDatatransferProgressListener(mDataTransferListener);
+    entity.addOnDatatransferProgressListeners(mDataTransferListeners);
     put.setRequestEntity(entity);
     status=client.executeMethod(put);
     client.exhaustResponse(put.getResponseBodyAsStream());
