@@ -17,6 +17,7 @@
   String file_name=c.getString(c.getColumnIndex(Media.DISPLAY_NAME));
   String mime_type=c.getString(c.getColumnIndex(Media.MIME_TYPE));
   c.close();
+  Log.e(TAG,file_path + "");
   if (!isOnline(context) || (instantUploadViaWiFiOnly(context) && !isConnectedViaWiFi(context))) {
     DbHandler db=new DbHandler(context);
     db.putFileForLater(file_path,account.name);
@@ -24,7 +25,7 @@
     return;
   }
   IntentFilter filter=new IntentFilter(FileUploader.UPLOAD_FINISH_MESSAGE);
-  context.registerReceiver(this,filter);
+  context.getApplicationContext().registerReceiver(this,filter);
   Intent i=new Intent(context,FileUploader.class);
   i.putExtra(FileUploader.KEY_ACCOUNT,account);
   i.putExtra(FileUploader.KEY_LOCAL_FILE,file_path);
