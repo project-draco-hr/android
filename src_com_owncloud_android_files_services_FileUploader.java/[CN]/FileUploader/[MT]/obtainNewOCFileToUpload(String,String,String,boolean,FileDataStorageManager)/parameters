@@ -1,6 +1,5 @@
-Account account
-String localPath
 String remotePath
+String localPath
 String mimeType
-boolean isInstant
 boolean forceOverwrite
+FileDataStorageManager storageManager

@@ -1,16 +1,15 @@
 {
   int status=-1;
-  PutMethod put=new PutMethod(client.getBaseUri() + WebdavUtils.encodePath(mRemotePath));
   try {
-    File f=new File(mLocalPath);
-    FileRequestEntity entity=new FileRequestEntity(f,mMimeType);
+    File f=new File(mFile.getStoragePath());
+    FileRequestEntity entity=new FileRequestEntity(f,getMimeType());
     entity.addOnDatatransferProgressListeners(mDataTransferListeners);
-    put.setRequestEntity(entity);
-    status=client.executeMethod(put);
-    client.exhaustResponse(put.getResponseBodyAsStream());
+    mPutMethod.setRequestEntity(entity);
+    status=client.executeMethod(mPutMethod);
+    client.exhaustResponse(mPutMethod.getResponseBodyAsStream());
   }
   finally {
-    put.releaseConnection();
+    mPutMethod.releaseConnection();
   }
   return status;
 }

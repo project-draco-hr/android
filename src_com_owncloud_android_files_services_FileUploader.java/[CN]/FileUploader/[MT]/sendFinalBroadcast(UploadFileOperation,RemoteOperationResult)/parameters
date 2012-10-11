@@ -1,3 +1,2 @@
 UploadFileOperation upload
 RemoteOperationResult uploadResult
-long parentDirId

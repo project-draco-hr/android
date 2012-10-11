@@ -8,7 +8,9 @@
     mCurrentDir=mStorageManager.getFileByPath(mCurrentDir.getRemotePath());
   }
   if (mCurrentFile != null) {
-    mCurrentFile=mStorageManager.getFileByPath(mCurrentFile.getRemotePath());
+    if (mCurrentFile.fileExists()) {
+      mCurrentFile=mStorageManager.getFileByPath(mCurrentFile.getRemotePath());
+    }
   }
   if (mCurrentDir == null) {
     mCurrentDir=mStorageManager.getFileByPath("/");

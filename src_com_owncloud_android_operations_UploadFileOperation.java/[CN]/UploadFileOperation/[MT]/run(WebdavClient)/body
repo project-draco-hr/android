@@ -6,13 +6,26 @@
       mRemotePath=getAvailableRemotePath(client,mRemotePath);
     }
     nameCheckPassed=true;
+synchronized (mCancellationRequested) {
+      if (mCancellationRequested.get()) {
+        throw new OperationCancelledException();
+      }
+ else {
+        mPutMethod=new PutMethod(client.getBaseUri() + WebdavUtils.encodePath(mRemotePath));
+      }
+    }
     int status=uploadFile(client);
     result=new RemoteOperationResult(isSuccess(status),status);
-    Log.i(TAG,"Upload of " + mLocalPath + " to "+ mRemotePath+ ": "+ result.getLogMessage());
+    Log.i(TAG,"Upload of " + mFile.getStoragePath() + " to "+ mRemotePath+ ": "+ result.getLogMessage());
   }
  catch (  Exception e) {
-    result=new RemoteOperationResult(e);
-    Log.e(TAG,"Upload of " + mLocalPath + " to "+ mRemotePath+ ": "+ result.getLogMessage()+ (nameCheckPassed ? "" : " (while checking file existence in server)"),e);
+    if (mCancellationRequested.get()) {
+      result=new RemoteOperationResult(new OperationCancelledException());
+    }
+ else {
+      result=new RemoteOperationResult(e);
+    }
+    Log.e(TAG,"Upload of " + mFile.getStoragePath() + " to "+ mRemotePath+ ": "+ result.getLogMessage()+ (nameCheckPassed ? "" : " (while checking file existence in server)"),result.getException());
   }
   return result;
 }

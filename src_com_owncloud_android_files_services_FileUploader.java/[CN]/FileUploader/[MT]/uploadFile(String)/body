@@ -14,15 +14,10 @@ synchronized (mPendingUploads) {
       createRemoteFolderForInstantUploads(mUploadClient,mStorageManager);
     }
     RemoteOperationResult uploadResult=null;
-    long parentDirId=-1;
     try {
-      File remote=new File(mCurrentUpload.getRemotePath());
-      parentDirId=mStorageManager.getFileByPath(remote.getParent().endsWith("/") ? remote.getParent() : remote.getParent() + "/").getFileId();
-      File local=new File(mCurrentUpload.getLocalPath());
-      long size=local.length();
       uploadResult=mCurrentUpload.execute(mUploadClient);
       if (uploadResult.isSuccess()) {
-        saveNewOCFile(mCurrentUpload,mStorageManager,parentDirId,size);
+        saveUploadedFile(mCurrentUpload.getFile(),mStorageManager);
       }
     }
   finally {
@@ -31,6 +26,6 @@ synchronized (mPendingUploads) {
       }
     }
     notifyUploadResult(uploadResult,mCurrentUpload);
-    sendFinalBroadcast(mCurrentUpload,uploadResult,parentDirId);
+    sendFinalBroadcast(mCurrentUpload,uploadResult);
   }
 }

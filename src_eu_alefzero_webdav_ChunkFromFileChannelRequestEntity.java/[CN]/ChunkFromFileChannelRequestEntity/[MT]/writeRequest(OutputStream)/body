@@ -3,13 +3,16 @@
   Iterator<OnDatatransferProgressListener> it=null;
   try {
     mChannel.position(mOffset);
-    while (mChannel.position() < mOffset + mSize && mChannel.position() < mChannel.size()) {
+    long size=mFile.length();
+    if (size == 0)     size=-1;
+    while (mChannel.position() < mOffset + mChunkSize && mChannel.position() < mChannel.size()) {
       readCount=mChannel.read(mBuffer);
       out.write(mBuffer.array(),0,readCount);
       mBuffer.clear();
-      it=mListeners.iterator();
+      mTransferred+=readCount;
+      it=mDataTransferListeners.iterator();
       while (it.hasNext()) {
-        it.next().onTransferProgress(readCount);
+        it.next().onTransferProgress(readCount,mTransferred,size,mFile.getName());
       }
     }
   }

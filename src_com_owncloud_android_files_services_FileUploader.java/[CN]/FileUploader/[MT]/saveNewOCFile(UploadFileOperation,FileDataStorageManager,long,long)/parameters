@@ -1,4 +1,0 @@
-UploadFileOperation upload
-FileDataStorageManager storageManager
-long parentDirId
-long size

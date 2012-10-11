@@ -3,9 +3,30 @@ switch (v.getId()) {
 case R.id.fdDownloadBtn:
 {
       FileDownloaderBinder downloaderBinder=mContainerActivity.getFileDownloaderBinder();
+      FileUploaderBinder uploaderBinder=mContainerActivity.getFileUploaderBinder();
       if (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,mFile)) {
         downloaderBinder.cancel(mAccount,mFile);
         if (mFile.isDown()) {
+          setButtonsForDown();
+        }
+ else {
+          setButtonsForRemote();
+        }
+      }
+ else       if (uploaderBinder != null && uploaderBinder.isUploading(mAccount,mFile)) {
+        uploaderBinder.cancel(mAccount,mFile);
+        if (!mFile.fileExists()) {
+          if (getActivity() instanceof FileDisplayActivity) {
+            FragmentTransaction transaction=getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.file_details_container,new FileDetailFragment(null,null),FTAG);
+            transaction.commit();
+            mContainerActivity.onFileStateChanged();
+          }
+ else {
+            getActivity().finish();
+          }
+        }
+ else         if (mFile.isDown()) {
           setButtonsForDown();
         }
  else {

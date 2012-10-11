@@ -39,14 +39,17 @@
   AbstractList<String> requestedUploads=new Vector<String>();
   String uploadKey=null;
   UploadFileOperation newUpload=null;
+  OCFile file=null;
+  FileDataStorageManager storageManager=new FileDataStorageManager(account,getContentResolver());
   try {
     for (int i=0; i < localPaths.length; i++) {
       uploadKey=buildRemoteName(account,remotePaths[i]);
+      file=obtainNewOCFileToUpload(remotePaths[i],localPaths[i],((mimeTypes != null) ? mimeTypes[i] : (String)null),forceOverwrite,storageManager);
       if (chunked) {
-        newUpload=new ChunkedUploadFileOperation(account,localPaths[i],remotePaths[i],((mimeTypes != null) ? mimeTypes[i] : (String)null),isInstant,forceOverwrite);
+        newUpload=new ChunkedUploadFileOperation(account,file,isInstant,forceOverwrite);
       }
  else {
-        newUpload=new UploadFileOperation(account,localPaths[i],remotePaths[i],(mimeTypes != null ? mimeTypes[i] : (String)null),isInstant,forceOverwrite);
+        newUpload=new UploadFileOperation(account,file,isInstant,forceOverwrite);
       }
       mPendingUploads.putIfAbsent(uploadKey,newUpload);
       newUpload.addDatatransferProgressListener(this);

@@ -4,9 +4,11 @@
   outState.putParcelable(FileDetailFragment.EXTRA_FILE,mCurrentDir);
   if (mDualPane) {
     FileDetailFragment fragment=(FileDetailFragment)getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
-    OCFile file=fragment.getDisplayedFile();
-    if (file != null) {
-      outState.putParcelable(FileDetailFragment.EXTRA_FILE,file);
+    if (fragment != null) {
+      OCFile file=fragment.getDisplayedFile();
+      if (file != null) {
+        outState.putParcelable(FileDetailFragment.EXTRA_FILE,file);
+      }
     }
   }
   Log.d(getClass().toString(),"onSaveInstanceState() end");

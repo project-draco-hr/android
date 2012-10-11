@@ -1,6 +1,4 @@
 Account account
-String localPath
-String remotePath
-String mimeType
+OCFile file
 boolean isInstant
 boolean forceOverwrite

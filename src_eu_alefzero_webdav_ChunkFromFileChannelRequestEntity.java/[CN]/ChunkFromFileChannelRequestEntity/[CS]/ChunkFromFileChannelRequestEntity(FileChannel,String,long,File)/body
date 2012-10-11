@@ -3,11 +3,13 @@
   if (channel == null) {
     throw new IllegalArgumentException("File may not be null");
   }
-  if (size <= 0) {
-    throw new IllegalArgumentException("Size must be greater than zero");
+  if (chunkSize <= 0) {
+    throw new IllegalArgumentException("Chunk size must be greater than zero");
   }
   mChannel=channel;
   mContentType=contentType;
-  mSize=size;
+  mChunkSize=chunkSize;
+  mFile=file;
   mOffset=0;
+  mTransferred=0;
 }
