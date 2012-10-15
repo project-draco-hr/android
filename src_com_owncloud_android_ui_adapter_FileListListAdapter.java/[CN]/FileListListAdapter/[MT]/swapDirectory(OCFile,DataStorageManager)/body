@@ -1,0 +1,14 @@
+{
+  mFile=directory;
+  if (updatedStorageManager != null && updatedStorageManager != mStorageManager) {
+    mStorageManager=updatedStorageManager;
+    mAccount=AccountUtils.getCurrentOwnCloudAccount(mContext);
+  }
+  if (mStorageManager != null) {
+    mFiles=mStorageManager.getDirectoryContent(mFile);
+  }
+ else {
+    mFiles=null;
+  }
+  notifyDataSetChanged();
+}

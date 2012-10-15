@@ -3,5 +3,5 @@
   mContext=context;
   mAccount=AccountUtils.getCurrentOwnCloudAccount(mContext);
   mTransferServiceGetter=transferServiceGetter;
-  swapDirectory(file);
+  swapDirectory(file,mStorageManager);
 }
