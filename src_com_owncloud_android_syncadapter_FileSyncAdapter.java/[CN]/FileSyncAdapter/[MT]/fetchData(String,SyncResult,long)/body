@@ -1,5 +1,6 @@
 {
   PropFindMethod query=null;
+  Vector<OCFile> children=null;
   try {
     Log.d(TAG,"fetching " + uri);
     query=new PropFindMethod(uri);
@@ -20,30 +21,22 @@
         }
         if (getStorageManager().getFileByPath(file.getRemotePath()) != null)         file.setKeepInSync(getStorageManager().getFileByPath(file.getRemotePath()).keepInSync());
         updatedFiles.add(file);
-        if (parentId == 0)         parentId=file.getFileId();
       }
       getStorageManager().saveFiles(updatedFiles);
-      Vector<OCFile> files=getStorageManager().getDirectoryContent(getStorageManager().getFileById(parentId));
+      children=getStorageManager().getDirectoryContent(getStorageManager().getFileById(parentId));
       OCFile file;
       String currentSavePath=FileDownloader.getSavePath(getAccount().name);
-      for (int i=0; i < files.size(); ) {
-        file=files.get(i);
+      for (int i=0; i < children.size(); ) {
+        file=children.get(i);
         if (file.getLastSyncDate() != mCurrentSyncTime) {
           Log.v(TAG,"removing file: " + file);
           getStorageManager().removeFile(file,(file.isDown() && file.getStoragePath().startsWith(currentSavePath)));
-          files.remove(i);
+          children.remove(i);
         }
  else {
           i++;
         }
       }
-      for (int i=0; i < files.size() && !mCancellation; i++) {
-        OCFile newFile=files.get(i);
-        if (newFile.getMimetype().equals("DIR")) {
-          fetchData(getUri().toString() + WebdavUtils.encodePath(newFile.getRemotePath()),syncResult,newFile.getFileId());
-        }
-      }
-      if (mCancellation)       Log.d(TAG,"Leaving " + uri + " because cancelation request");
     }
  else {
       syncResult.stats.numAuthExceptions++;
@@ -65,4 +58,6 @@ catch (  Exception e) {
     if (query != null)     query.releaseConnection();
     sendStickyBroadcast(true,getStorageManager().getFileById(parentId).getRemotePath());
   }
+  fetchChildren(children,syncResult);
+  if (mCancellation)   Log.d(TAG,"Leaving " + uri + " because cancelation request");
 }
