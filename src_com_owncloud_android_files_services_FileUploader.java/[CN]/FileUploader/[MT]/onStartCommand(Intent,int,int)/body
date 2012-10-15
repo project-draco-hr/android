@@ -41,15 +41,22 @@
   UploadFileOperation newUpload=null;
   OCFile file=null;
   FileDataStorageManager storageManager=new FileDataStorageManager(account,getContentResolver());
+  boolean fixed=false;
+  if (isInstant) {
+    fixed=checkAndFixInstantUploadDirectory(storageManager);
+  }
   try {
     for (int i=0; i < localPaths.length; i++) {
       uploadKey=buildRemoteName(account,remotePaths[i]);
-      file=obtainNewOCFileToUpload(remotePaths[i],localPaths[i],((mimeTypes != null) ? mimeTypes[i] : (String)null),forceOverwrite,storageManager);
+      file=obtainNewOCFileToUpload(remotePaths[i],localPaths[i],((mimeTypes != null) ? mimeTypes[i] : (String)null),isInstant,forceOverwrite,storageManager);
       if (chunked) {
         newUpload=new ChunkedUploadFileOperation(account,file,isInstant,forceOverwrite);
       }
  else {
         newUpload=new UploadFileOperation(account,file,isInstant,forceOverwrite);
+      }
+      if (fixed && i == 0) {
+        newUpload.setRemoteFolderToBeCreated();
       }
       mPendingUploads.putIfAbsent(uploadKey,newUpload);
       newUpload.addDatatransferProgressListener(this);
@@ -58,6 +65,14 @@
   }
  catch (  IllegalArgumentException e) {
     Log.e(TAG,"Not enough information provided in intent: " + e.getMessage());
+    return START_NOT_STICKY;
+  }
+catch (  IllegalStateException e) {
+    Log.e(TAG,"Bad information provided in intent: " + e.getMessage());
+    return START_NOT_STICKY;
+  }
+catch (  Exception e) {
+    Log.e(TAG,"Unexpected exception while processing upload intent",e);
     return START_NOT_STICKY;
   }
   if (requestedUploads.size() > 0) {

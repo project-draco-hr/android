@@ -1,12 +1,11 @@
 {
-  boolean result=true;
   OCFile instantUploadDir=storageManager.getFileByPath(InstantUploadBroadcastReceiver.INSTANT_UPLOAD_DIR);
   if (instantUploadDir == null) {
-    result=client.createDirectory(InstantUploadBroadcastReceiver.INSTANT_UPLOAD_DIR);
     OCFile newDir=new OCFile(InstantUploadBroadcastReceiver.INSTANT_UPLOAD_DIR);
     newDir.setMimetype("DIR");
     newDir.setParentId(storageManager.getFileByPath(OCFile.PATH_SEPARATOR).getFileId());
     storageManager.saveFile(newDir);
+    return true;
   }
-  return result;
+  return false;
 }
