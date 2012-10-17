@@ -1,9 +1,7 @@
 {
   Log.i(TAG,"onCreateView() start");
-  super.onCreateView(inflater,container,savedInstanceState);
-  getListView().setDivider(getResources().getDrawable(R.drawable.uploader_list_separator));
-  getListView().setDividerHeight(1);
+  View v=super.onCreateView(inflater,container,savedInstanceState);
   getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
   Log.i(TAG,"onCreateView() end");
-  return getListView();
+  return v;
 }

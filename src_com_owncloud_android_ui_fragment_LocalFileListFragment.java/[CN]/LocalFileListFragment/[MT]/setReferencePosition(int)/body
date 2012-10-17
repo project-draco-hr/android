@@ -1,3 +1,0 @@
-{
-  ((ExtendedListView)getListView()).setAndCenterSelection(position);
-}

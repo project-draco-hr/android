@@ -1,3 +1,0 @@
-{
-  return (getListView().getFirstVisiblePosition() + getListView().getLastVisiblePosition()) / 2;
-}

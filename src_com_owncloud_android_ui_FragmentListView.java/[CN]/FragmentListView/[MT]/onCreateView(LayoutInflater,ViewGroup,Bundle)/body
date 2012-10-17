@@ -1,6 +1,10 @@
 {
-  mList=new ExtendedListView(getActivity());
+  View v=inflater.inflate(R.layout.list_fragment,null);
+  mList=(ExtendedListView)(v.findViewById(R.id.list_root));
   mList.setOnItemClickListener(this);
   mList.setOnItemLongClickListener(this);
-  return mList;
+  mList.setEmptyView(v.findViewById(R.id.empty_list_view));
+  mList.setDivider(getResources().getDrawable(R.drawable.uploader_list_separator));
+  mList.setDividerHeight(1);
+  return v;
 }
