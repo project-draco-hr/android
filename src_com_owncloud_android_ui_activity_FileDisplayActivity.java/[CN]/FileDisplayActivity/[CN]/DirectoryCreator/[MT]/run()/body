@@ -9,7 +9,7 @@
         newDir.setMimetype("DIR");
         newDir.setParentId(mCurrentDir.getFileId());
         mStorageManager.saveFile(newDir);
-        mFileList.listDirectory(mCurrentDir);
+        mFileList.listDirectory();
       }
     }
 );

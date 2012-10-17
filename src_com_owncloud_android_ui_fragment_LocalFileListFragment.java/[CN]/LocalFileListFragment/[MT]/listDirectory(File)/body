@@ -12,8 +12,10 @@
     Log.w(TAG,"You see, that is not a directory -> " + directory.toString());
     directory=directory.getParentFile();
   }
-  mDirectory=directory;
   mList.clearChoices();
-  mAdapter.swapDirectory(mDirectory);
-  mList.setSelectionFromTop(0,0);
+  mAdapter.swapDirectory(directory);
+  if (mDirectory == null || !mDirectory.equals(directory)) {
+    mList.setSelectionFromTop(0,0);
+  }
+  mDirectory=directory;
 }

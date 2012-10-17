@@ -5,8 +5,8 @@
   setListAdapter(mAdapter);
   if (savedInstanceState != null) {
     Log.i(TAG,"savedInstanceState is not null");
-    int position=savedInstanceState.getInt("LIST_POSITION");
-    getListView().setSelectionFromTop(position,0);
+    int position=savedInstanceState.getInt(SAVED_LIST_POSITION);
+    setReferencePosition(position);
   }
   Log.i(TAG,"onActivityCreated() stop");
 }
