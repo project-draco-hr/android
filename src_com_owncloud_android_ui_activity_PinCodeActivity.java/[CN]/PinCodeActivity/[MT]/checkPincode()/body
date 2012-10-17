@@ -24,6 +24,7 @@
     aDialog.show();
     clearBoxes();
     mPinHdr.setText(R.string.pincode_enter_pin_code);
+    mPinHdrExplanation.setVisibility(View.INVISIBLE);
     newPasswordEntered=true;
     confirmingPinCode=false;
   }

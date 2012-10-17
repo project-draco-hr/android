@@ -1,5 +1,6 @@
 {
   clearBoxes();
   mPinHdr.setText(R.string.pincode_reenter_your_pincode);
+  mPinHdrExplanation.setVisibility(View.INVISIBLE);
   confirmingPinCode=true;
 }
