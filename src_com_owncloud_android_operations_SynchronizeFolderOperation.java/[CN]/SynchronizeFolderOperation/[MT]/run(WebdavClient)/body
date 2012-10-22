@@ -6,7 +6,7 @@
     Log.d(TAG,"Fetching files in " + mRemotePath);
     query=new PropFindMethod(client.getBaseUri() + WebdavUtils.encodePath(mRemotePath));
     int status=client.executeMethod(query);
-    if (isSuccess(status)) {
+    if (isMultiStatus(status)) {
       MultiStatus resp=query.getResponseBodyAsMultiStatus();
       List<OCFile> updatedFiles=new Vector<OCFile>(resp.getResponses().length - 1);
       for (int i=1; i < resp.getResponses().length; ++i) {
@@ -16,7 +16,7 @@
         OCFile oldFile=mStorageManager.getFileByPath(file.getRemotePath());
         if (oldFile != null) {
           if (oldFile.keepInSync() && file.getModificationTimestamp() > oldFile.getModificationTimestamp()) {
-            requestContentDownload();
+            requestContentDownload(file);
           }
           file.setKeepInSync(oldFile.keepInSync());
         }
@@ -38,29 +38,18 @@
         }
       }
     }
- else     if (status == HttpStatus.SC_UNAUTHORIZED) {
-      syncResult.stats.numAuthExceptions++;
-    }
  else {
+      client.exhaustResponse(query.getResponseBodyAsStream());
     }
-    result=new RemoteOperationResult(isSuccess(status),status);
+    result=new RemoteOperationResult(isMultiStatus(status),status);
     Log.i(TAG,"Synchronization of " + mRemotePath + ": "+ result.getLogMessage());
   }
- catch (  IOException e) {
-    syncResult.stats.numIoExceptions++;
-    logException(e,uri);
-  }
-catch (  DavException e) {
-    syncResult.stats.numParseExceptions++;
-    logException(e,uri);
-  }
-catch (  Exception e) {
-    mRightSync=false;
-    logException(e,uri);
+ catch (  Exception e) {
+    result=new RemoteOperationResult(e);
+    Log.e(TAG,"Synchronization of " + mRemotePath + ": "+ result.getLogMessage(),result.getException());
   }
  finally {
     if (query != null)     query.releaseConnection();
-    sendStickyBroadcast(true,getStorageManager().getFileById(parentId).getRemotePath());
   }
   return result;
 }
