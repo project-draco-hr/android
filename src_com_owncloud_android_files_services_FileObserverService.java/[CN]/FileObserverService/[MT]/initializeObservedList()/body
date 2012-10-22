@@ -17,7 +17,7 @@
     if (!storage.fileExists(c.getString(c.getColumnIndex(ProviderTableMeta.FILE_PATH))))     continue;
     String path=c.getString(c.getColumnIndex(ProviderTableMeta.FILE_STORAGE_PATH));
     OwnCloudFileObserver observer=new OwnCloudFileObserver(path,OwnCloudFileObserver.CHANGES_ONLY);
-    observer.setContext(getBaseContext());
+    observer.setContext(getApplicationContext());
     observer.setAccount(account);
     observer.setStorageManager(storage);
     observer.setOCFile(storage.getFileByPath(c.getString(c.getColumnIndex(ProviderTableMeta.FILE_PATH))));

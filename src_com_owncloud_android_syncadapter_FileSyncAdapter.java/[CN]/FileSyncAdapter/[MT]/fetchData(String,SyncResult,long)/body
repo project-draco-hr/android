@@ -13,7 +13,12 @@
         OCFile file=fillOCFile(we);
         file.setParentId(parentId);
         if (getStorageManager().getFileByPath(file.getRemotePath()) != null && getStorageManager().getFileByPath(file.getRemotePath()).keepInSync() && file.getModificationTimestamp() > getStorageManager().getFileByPath(file.getRemotePath()).getModificationTimestamp()) {
-          Intent intent=new Intent(this.getContext(),FileDownloader.class);
+          Log.d(TAG,"Disabling observation of remote file" + file.getRemotePath());
+          Intent intent=new Intent(getContext(),FileObserverService.class);
+          intent.putExtra(FileObserverService.KEY_FILE_CMD,FileObserverService.CMD_ADD_DOWNLOADING_FILE);
+          intent.putExtra(FileObserverService.KEY_CMD_ARG,file.getRemotePath());
+          getContext().startService(intent);
+          intent=new Intent(this.getContext(),FileDownloader.class);
           intent.putExtra(FileDownloader.EXTRA_ACCOUNT,getAccount());
           intent.putExtra(FileDownloader.EXTRA_FILE,file);
           file.setKeepInSync(true);
