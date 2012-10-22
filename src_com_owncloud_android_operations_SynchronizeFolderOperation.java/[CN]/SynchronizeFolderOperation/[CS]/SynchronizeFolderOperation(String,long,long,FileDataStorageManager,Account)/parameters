@@ -1,0 +1,5 @@
+String remotePath
+long currentSyncTime
+long parentId
+FileDataStorageManager storageManager
+Account account

@@ -1,0 +1,7 @@
+{
+  Intent intent=new Intent(this.getContext(),FileDownloader.class);
+  intent.putExtra(FileDownloader.EXTRA_ACCOUNT,getAccount());
+  intent.putExtra(FileDownloader.EXTRA_FILE,file);
+  file.setKeepInSync(true);
+  getContext().startService(intent);
+}

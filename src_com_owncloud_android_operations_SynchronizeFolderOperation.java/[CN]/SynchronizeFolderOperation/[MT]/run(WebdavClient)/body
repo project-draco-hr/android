@@ -1,0 +1,66 @@
+{
+  RemoteOperationResult result=null;
+  PropFindMethod query=null;
+  Vector<OCFile> children=null;
+  try {
+    Log.d(TAG,"Fetching files in " + mRemotePath);
+    query=new PropFindMethod(client.getBaseUri() + WebdavUtils.encodePath(mRemotePath));
+    int status=client.executeMethod(query);
+    if (isSuccess(status)) {
+      MultiStatus resp=query.getResponseBodyAsMultiStatus();
+      List<OCFile> updatedFiles=new Vector<OCFile>(resp.getResponses().length - 1);
+      for (int i=1; i < resp.getResponses().length; ++i) {
+        WebdavEntry we=new WebdavEntry(resp.getResponses()[i],client.getBaseUri().getPath());
+        OCFile file=fillOCFile(we);
+        file.setParentId(mParentId);
+        OCFile oldFile=mStorageManager.getFileByPath(file.getRemotePath());
+        if (oldFile != null) {
+          if (oldFile.keepInSync() && file.getModificationTimestamp() > oldFile.getModificationTimestamp()) {
+            requestContentDownload();
+          }
+          file.setKeepInSync(oldFile.keepInSync());
+        }
+        updatedFiles.add(file);
+      }
+      mStorageManager.saveFiles(updatedFiles);
+      children=mStorageManager.getDirectoryContent(mStorageManager.getFileById(mParentId));
+      OCFile file;
+      String currentSavePath=FileDownloader.getSavePath(mAccount.name);
+      for (int i=0; i < children.size(); ) {
+        file=children.get(i);
+        if (file.getLastSyncDate() != mCurrentSyncTime) {
+          Log.d(TAG,"removing file: " + file);
+          mStorageManager.removeFile(file,(file.isDown() && file.getStoragePath().startsWith(currentSavePath)));
+          children.remove(i);
+        }
+ else {
+          i++;
+        }
+      }
+    }
+ else     if (status == HttpStatus.SC_UNAUTHORIZED) {
+      syncResult.stats.numAuthExceptions++;
+    }
+ else {
+    }
+    result=new RemoteOperationResult(isSuccess(status),status);
+    Log.i(TAG,"Synchronization of " + mRemotePath + ": "+ result.getLogMessage());
+  }
+ catch (  IOException e) {
+    syncResult.stats.numIoExceptions++;
+    logException(e,uri);
+  }
+catch (  DavException e) {
+    syncResult.stats.numParseExceptions++;
+    logException(e,uri);
+  }
+catch (  Exception e) {
+    mRightSync=false;
+    logException(e,uri);
+  }
+ finally {
+    if (query != null)     query.releaseConnection();
+    sendStickyBroadcast(true,getStorageManager().getFileById(parentId).getRemotePath());
+  }
+  return result;
+}

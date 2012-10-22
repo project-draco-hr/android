@@ -6,11 +6,14 @@
   }
  else   if (httpCode > 0) {
 switch (httpCode) {
-case HttpStatus.SC_NOT_FOUND:
-      mCode=ResultCode.FILE_NOT_FOUND;
+case HttpStatus.SC_UNAUTHORIZED:
+      mCode=ResultCode.UNAUTHORIZED;
     break;
+case HttpStatus.SC_NOT_FOUND:
+  mCode=ResultCode.FILE_NOT_FOUND;
+break;
 case HttpStatus.SC_INTERNAL_SERVER_ERROR:
-  mCode=ResultCode.INSTANCE_NOT_CONFIGURED;
+mCode=ResultCode.INSTANCE_NOT_CONFIGURED;
 break;
 default :
 mCode=ResultCode.UNHANDLED_HTTP_CODE;

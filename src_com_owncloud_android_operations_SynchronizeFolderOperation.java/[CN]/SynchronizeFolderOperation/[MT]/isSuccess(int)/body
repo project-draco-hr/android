@@ -1,0 +1,3 @@
+{
+  return (status == HttpStatus.SC_MULTI_STATUS);
+}

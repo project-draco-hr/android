@@ -1,0 +1,7 @@
+{
+  mRemotePath=remotePath;
+  mCurrentSyncTime=currentSyncTime;
+  mParentId=parentId;
+  mStorageManager=storageManager;
+  mAccount=account;
+}
