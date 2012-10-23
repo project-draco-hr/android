@@ -1,2 +1,2 @@
-Vector<OCFile> files
+List<OCFile> files
 SyncResult syncResult

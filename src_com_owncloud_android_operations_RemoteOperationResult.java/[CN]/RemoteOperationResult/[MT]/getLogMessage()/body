@@ -22,6 +22,9 @@
       if (mCode == ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED)       return "SSL recoverable exception";
  else       return "SSL exception";
     }
+ else     if (mException instanceof DavException) {
+      return "Unexpected WebDAV exception";
+    }
  else     if (mException instanceof HttpException) {
       return "HTTP violation";
     }

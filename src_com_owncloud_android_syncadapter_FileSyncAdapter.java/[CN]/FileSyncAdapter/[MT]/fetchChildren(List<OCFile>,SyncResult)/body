@@ -1,0 +1,10 @@
+{
+  int i;
+  for (i=0; i < files.size() && !mCancellation; i++) {
+    OCFile newFile=files.get(i);
+    if (newFile.isDirectory()) {
+      fetchData(newFile.getRemotePath(),syncResult,newFile.getFileId());
+    }
+  }
+  if (mCancellation && i < files.size())   Log.d(TAG,"Leaving synchronization before synchronizing " + files.get(i).getRemotePath() + " because cancelation request");
+}

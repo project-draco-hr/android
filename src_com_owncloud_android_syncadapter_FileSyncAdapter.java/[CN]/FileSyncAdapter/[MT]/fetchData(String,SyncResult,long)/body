@@ -1,63 +1,32 @@
 {
-  PropFindMethod query=null;
-  Vector<OCFile> children=null;
+  WebdavClient client=null;
   try {
-    Log.d(TAG,"fetching " + uri);
-    query=new PropFindMethod(uri);
-    int status=getClient().executeMethod(query);
-    if (status != HttpStatus.SC_UNAUTHORIZED) {
-      MultiStatus resp=query.getResponseBodyAsMultiStatus();
-      List<OCFile> updatedFiles=new Vector<OCFile>(resp.getResponses().length - 1);
-      for (int i=1; i < resp.getResponses().length; ++i) {
-        WebdavEntry we=new WebdavEntry(resp.getResponses()[i],getUri().getPath());
-        OCFile file=fillOCFile(we);
-        file.setParentId(parentId);
-        if (getStorageManager().getFileByPath(file.getRemotePath()) != null && getStorageManager().getFileByPath(file.getRemotePath()).keepInSync() && file.getModificationTimestamp() > getStorageManager().getFileByPath(file.getRemotePath()).getModificationTimestamp()) {
-          Intent intent=new Intent(this.getContext(),FileDownloader.class);
-          intent.putExtra(FileDownloader.EXTRA_ACCOUNT,getAccount());
-          intent.putExtra(FileDownloader.EXTRA_FILE,file);
-          file.setKeepInSync(true);
-          getContext().startService(intent);
-        }
-        if (getStorageManager().getFileByPath(file.getRemotePath()) != null)         file.setKeepInSync(getStorageManager().getFileByPath(file.getRemotePath()).keepInSync());
-        updatedFiles.add(file);
-      }
-      getStorageManager().saveFiles(updatedFiles);
-      children=getStorageManager().getDirectoryContent(getStorageManager().getFileById(parentId));
-      OCFile file;
-      String currentSavePath=FileDownloader.getSavePath(getAccount().name);
-      for (int i=0; i < children.size(); ) {
-        file=children.get(i);
-        if (file.getLastSyncDate() != mCurrentSyncTime) {
-          Log.v(TAG,"removing file: " + file);
-          getStorageManager().removeFile(file,(file.isDown() && file.getStoragePath().startsWith(currentSavePath)));
-          children.remove(i);
-        }
- else {
-          i++;
-        }
-      }
-    }
- else {
-      syncResult.stats.numAuthExceptions++;
-    }
+    client=getClient();
   }
  catch (  IOException e) {
     syncResult.stats.numIoExceptions++;
-    logException(e,uri);
+    Log.d(TAG,"Could not get client object while trying to synchronize - impossible to continue");
+    return;
   }
-catch (  DavException e) {
-    syncResult.stats.numParseExceptions++;
-    logException(e,uri);
+  SynchronizeFolderOperation synchFolderOp=new SynchronizeFolderOperation(remotePath,mCurrentSyncTime,parentId,getStorageManager(),getAccount(),getContext());
+  RemoteOperationResult result=synchFolderOp.execute(client);
+  sendStickyBroadcast(true,remotePath);
+  if (result.isSuccess()) {
+    List<OCFile> children=synchFolderOp.getChildren();
+    fetchChildren(children,syncResult);
   }
-catch (  Exception e) {
-    mRightSync=false;
-    logException(e,uri);
+ else {
+    if (result.getCode() == RemoteOperationResult.ResultCode.UNAUTHORIZED) {
+      syncResult.stats.numAuthExceptions++;
+    }
+ else     if (result.getException() instanceof DavException) {
+      syncResult.stats.numParseExceptions++;
+    }
+ else     if (result.getException() instanceof IOException) {
+      syncResult.stats.numIoExceptions++;
+    }
+ else     if (result.getException() != null) {
+      mRightSync=false;
+    }
   }
- finally {
-    if (query != null)     query.releaseConnection();
-    sendStickyBroadcast(true,getStorageManager().getFileById(parentId).getRemotePath());
-  }
-  fetchChildren(children,syncResult);
-  if (mCancellation)   Log.d(TAG,"Leaving " + uri + " because cancelation request");
 }

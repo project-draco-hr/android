@@ -7,51 +7,21 @@
   this.setStorageManager(new FileDataStorageManager(account,getContentProvider()));
   Log.d(TAG,"syncing owncloud account " + account.name);
   sendStickyBroadcast(true,null);
-  updateOCVersion();
-  String uri=getUri().toString();
-  PropFindMethod query=null;
   try {
+    updateOCVersion();
     mCurrentSyncTime=System.currentTimeMillis();
-    query=new PropFindMethod(uri + "/");
-    int status=getClient().executeMethod(query);
-    if (status != HttpStatus.SC_UNAUTHORIZED) {
-      MultiStatus resp=query.getResponseBodyAsMultiStatus();
-      if (resp.getResponses().length > 0) {
-        WebdavEntry we=new WebdavEntry(resp.getResponses()[0],getUri().getPath());
-        OCFile file=fillOCFile(we);
-        file.setParentId(0);
-        getStorageManager().saveFile(file);
-        if (!mCancellation) {
-          fetchData(uri,syncResult,file.getFileId());
-        }
-      }
+    if (!mCancellation) {
+      fetchData(OCFile.PATH_SEPARATOR,syncResult,DataStorageManager.ROOT_PARENT_ID);
     }
  else {
-      syncResult.stats.numAuthExceptions++;
+      Log.d(TAG,"Leaving synchronization before any remote request due to cancellation was requested");
     }
   }
- catch (  IOException e) {
-    syncResult.stats.numIoExceptions++;
-    logException(e,uri + "/");
-  }
-catch (  DavException e) {
-    syncResult.stats.numParseExceptions++;
-    logException(e,uri + "/");
-  }
-catch (  Exception e) {
-    logException(e,uri + "/");
-    mRightSync=false;
-  }
- finally {
-    if (query != null)     query.releaseConnection();
+  finally {
     mRightSync&=(syncResult.stats.numIoExceptions == 0 && syncResult.stats.numAuthExceptions == 0 && syncResult.stats.numParseExceptions == 0);
     if (!mRightSync && mIsManualSync) {
       syncResult.tooManyRetries=true;
-      Notification notification=new Notification(R.drawable.icon,getContext().getString(R.string.sync_fail_ticker),System.currentTimeMillis());
-      notification.flags|=Notification.FLAG_AUTO_CANCEL;
-      notification.contentIntent=PendingIntent.getActivity(getContext().getApplicationContext(),(int)System.currentTimeMillis(),new Intent(),0);
-      notification.setLatestEventInfo(getContext().getApplicationContext(),getContext().getString(R.string.sync_fail_ticker),String.format(getContext().getString(R.string.sync_fail_content),account.name),notification.contentIntent);
-      ((NotificationManager)getContext().getSystemService(Context.NOTIFICATION_SERVICE)).notify(R.string.sync_fail_ticker,notification);
+      notifyFailedSynchronization();
     }
     sendStickyBroadcast(false,null);
   }
