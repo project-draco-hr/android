@@ -1,12 +1,13 @@
 {
   mCancellation=false;
   mIsManualSync=extras.getBoolean(ContentResolver.SYNC_EXTRAS_MANUAL,false);
-  mRightSync=true;
+  mFailedResultsCounter=0;
+  mLastFailedResult=null;
   this.setAccount(account);
   this.setContentProvider(provider);
   this.setStorageManager(new FileDataStorageManager(account,getContentProvider()));
   Log.d(TAG,"syncing owncloud account " + account.name);
-  sendStickyBroadcast(true,null);
+  sendStickyBroadcast(true,null,null);
   try {
     updateOCVersion();
     mCurrentSyncTime=System.currentTimeMillis();
@@ -18,11 +19,10 @@
     }
   }
   finally {
-    mRightSync&=(syncResult.stats.numIoExceptions == 0 && syncResult.stats.numAuthExceptions == 0 && syncResult.stats.numParseExceptions == 0);
-    if (!mRightSync && mIsManualSync) {
+    if (mFailedResultsCounter > 0 && mIsManualSync) {
       syncResult.tooManyRetries=true;
       notifyFailedSynchronization();
     }
-    sendStickyBroadcast(false,null);
+    sendStickyBroadcast(false,null,mLastFailedResult);
   }
 }

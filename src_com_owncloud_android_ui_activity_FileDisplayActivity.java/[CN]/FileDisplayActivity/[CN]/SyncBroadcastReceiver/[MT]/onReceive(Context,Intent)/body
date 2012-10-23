@@ -18,4 +18,11 @@
     }
     setSupportProgressBarIndeterminateVisibility(inProgress);
   }
+  RemoteOperationResult synchResult=(RemoteOperationResult)intent.getSerializableExtra(FileSyncService.SYNC_RESULT);
+  if (synchResult != null) {
+    if (synchResult.getCode().equals(RemoteOperationResult.ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED)) {
+      mLastSslUntrustedServerResult=synchResult;
+      showDialog(DIALOG_SSL_VALIDATOR);
+    }
+  }
 }

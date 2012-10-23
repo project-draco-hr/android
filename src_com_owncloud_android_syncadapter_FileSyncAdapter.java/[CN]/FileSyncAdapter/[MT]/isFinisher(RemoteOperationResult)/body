@@ -1,0 +1,7 @@
+{
+  if (failedResult != null) {
+    RemoteOperationResult.ResultCode code=failedResult.getCode();
+    return (code.equals(RemoteOperationResult.ResultCode.SSL_ERROR) || code.equals(RemoteOperationResult.ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED) || code.equals(RemoteOperationResult.ResultCode.BAD_OC_VERSION)|| code.equals(RemoteOperationResult.ResultCode.INSTANCE_NOT_CONFIGURED));
+  }
+  return false;
+}

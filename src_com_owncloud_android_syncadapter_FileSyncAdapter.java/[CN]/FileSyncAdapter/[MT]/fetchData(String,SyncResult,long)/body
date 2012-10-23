@@ -1,4 +1,5 @@
 {
+  if (mFailedResultsCounter > MAX_FAILED_RESULTS && isFinisher(mLastFailedResult))   return;
   WebdavClient client=null;
   try {
     client=getClient();
@@ -10,7 +11,7 @@
   }
   SynchronizeFolderOperation synchFolderOp=new SynchronizeFolderOperation(remotePath,mCurrentSyncTime,parentId,getStorageManager(),getAccount(),getContext());
   RemoteOperationResult result=synchFolderOp.execute(client);
-  sendStickyBroadcast(true,remotePath);
+  sendStickyBroadcast(true,remotePath,null);
   if (result.isSuccess()) {
     List<OCFile> children=synchFolderOp.getChildren();
     fetchChildren(children,syncResult);
@@ -25,8 +26,7 @@
  else     if (result.getException() instanceof IOException) {
       syncResult.stats.numIoExceptions++;
     }
- else     if (result.getException() != null) {
-      mRightSync=false;
-    }
+    mFailedResultsCounter++;
+    mLastFailedResult=result;
   }
 }
