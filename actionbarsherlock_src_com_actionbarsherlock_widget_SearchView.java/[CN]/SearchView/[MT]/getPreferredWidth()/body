@@ -1,0 +1,3 @@
+{
+  return getContext().getResources().getDimensionPixelSize(R.dimen.abs__search_view_preferred_width);
+}

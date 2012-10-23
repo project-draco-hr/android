@@ -1,0 +1,9 @@
+{
+  mSubtitle=subtitle;
+  if (mSubtitleView != null) {
+    mSubtitleView.setText(subtitle);
+    mSubtitleView.setVisibility(subtitle != null ? VISIBLE : GONE);
+    final boolean visible=mExpandedActionView == null && (mDisplayOptions & ActionBar.DISPLAY_SHOW_TITLE) != 0 && (!TextUtils.isEmpty(mTitle) || !TextUtils.isEmpty(mSubtitle));
+    mTitleLayout.setVisibility(visible ? VISIBLE : GONE);
+  }
+}

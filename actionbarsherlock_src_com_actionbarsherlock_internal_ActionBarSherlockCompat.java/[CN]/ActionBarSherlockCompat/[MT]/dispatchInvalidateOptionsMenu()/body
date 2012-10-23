@@ -1,0 +1,18 @@
+{
+  if (DEBUG)   Log.d(TAG,"[dispatchInvalidateOptionsMenu]");
+  Bundle savedActionViewStates=null;
+  if (mMenu != null) {
+    savedActionViewStates=new Bundle();
+    mMenu.saveActionViewStates(savedActionViewStates);
+    if (savedActionViewStates.size() > 0) {
+      mMenuFrozenActionViewState=savedActionViewStates;
+    }
+    mMenu.stopDispatchingItemsChanged();
+    mMenu.clear();
+  }
+  mMenuRefreshContent=true;
+  if (wActionBar != null) {
+    mMenuIsPrepared=false;
+    preparePanel();
+  }
+}

@@ -1,0 +1,3 @@
+boolean focused
+int direction
+Rect previouslyFocusedRect

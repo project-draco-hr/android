@@ -1,0 +1,11 @@
+{
+  if (mOnItemClickListener != null) {
+    playSoundEffect(SoundEffectConstants.CLICK);
+    if (view != null) {
+      view.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_CLICKED);
+    }
+    mOnItemClickListener.onItemClick(null,view,position,id);
+    return true;
+  }
+  return false;
+}

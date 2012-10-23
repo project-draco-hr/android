@@ -1,0 +1,5 @@
+{
+  boolean visible=!TextUtils.isEmpty(mTextButton.getText());
+  visible&=mImageButton.getDrawable() == null || (mItemData.showsTextAsAction() && (mAllowTextWithIcon || mExpandedFormat));
+  mTextButton.setVisibility(visible ? VISIBLE : GONE);
+}

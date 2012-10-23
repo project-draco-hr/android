@@ -1,0 +1,10 @@
+{
+  if (mCallback == null) {
+    return false;
+  }
+  if (!subMenu.hasVisibleItems()) {
+    return true;
+  }
+  new MenuPopupHelper(getThemedContext(),subMenu).show();
+  return true;
+}

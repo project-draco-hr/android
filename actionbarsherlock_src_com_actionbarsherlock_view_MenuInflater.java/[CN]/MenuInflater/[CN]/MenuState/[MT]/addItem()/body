@@ -1,0 +1,4 @@
+{
+  itemAdded=true;
+  setItem(menu.add(groupId,itemId,itemCategoryOrder,itemTitle));
+}

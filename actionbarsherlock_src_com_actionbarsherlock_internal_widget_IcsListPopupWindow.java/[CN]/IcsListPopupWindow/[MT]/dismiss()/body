@@ -1,0 +1,13 @@
+{
+  mPopup.dismiss();
+  if (mPromptView != null) {
+    final ViewParent parent=mPromptView.getParent();
+    if (parent instanceof ViewGroup) {
+      final ViewGroup group=(ViewGroup)parent;
+      group.removeView(mPromptView);
+    }
+  }
+  mPopup.setContentView(null);
+  mDropDownList=null;
+  mHandler.removeCallbacks(mResizePopupRunnable);
+}

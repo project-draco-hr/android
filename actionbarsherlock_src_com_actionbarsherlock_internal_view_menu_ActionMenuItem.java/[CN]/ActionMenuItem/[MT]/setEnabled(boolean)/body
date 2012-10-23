@@ -1,0 +1,4 @@
+{
+  mFlags=(mFlags & ~ENABLED) | (enabled ? ENABLED : 0);
+  return this;
+}

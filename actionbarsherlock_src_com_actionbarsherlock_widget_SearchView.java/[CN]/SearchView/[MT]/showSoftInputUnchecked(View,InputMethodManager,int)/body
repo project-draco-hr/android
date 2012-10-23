@@ -1,0 +1,10 @@
+{
+  try {
+    Method method=imm.getClass().getMethod("showSoftInputUnchecked",int.class,ResultReceiver.class);
+    method.setAccessible(true);
+    method.invoke(imm,flags,null);
+  }
+ catch (  Exception e) {
+    imm.showSoftInput(view,flags);
+  }
+}

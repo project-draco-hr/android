@@ -1,0 +1,3 @@
+{
+  return (child.getMeasuredWidth() & View.MEASURED_STATE_MASK) | ((child.getMeasuredHeight() >> View.MEASURED_HEIGHT_STATE_SHIFT) & (View.MEASURED_STATE_MASK >> View.MEASURED_HEIGHT_STATE_SHIFT));
+}

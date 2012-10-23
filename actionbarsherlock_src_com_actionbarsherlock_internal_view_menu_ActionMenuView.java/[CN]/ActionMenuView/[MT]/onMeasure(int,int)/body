@@ -1,0 +1,18 @@
+{
+  final boolean wasFormatted=mFormatItems;
+  mFormatItems=MeasureSpec.getMode(widthMeasureSpec) == MeasureSpec.EXACTLY;
+  if (wasFormatted != mFormatItems) {
+    mFormatItemsWidth=0;
+  }
+  final int widthSize=MeasureSpec.getMode(widthMeasureSpec);
+  if (mFormatItems && mMenu != null && widthSize != mFormatItemsWidth) {
+    mFormatItemsWidth=widthSize;
+    mMenu.onItemsChanged(true);
+  }
+  if (mFormatItems) {
+    onMeasureExactFormat(widthMeasureSpec,heightMeasureSpec);
+  }
+ else {
+    super.onMeasure(widthMeasureSpec,heightMeasureSpec);
+  }
+}

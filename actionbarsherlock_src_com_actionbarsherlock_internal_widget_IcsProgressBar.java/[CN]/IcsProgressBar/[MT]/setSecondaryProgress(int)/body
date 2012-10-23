@@ -1,0 +1,15 @@
+{
+  if (mIndeterminate) {
+    return;
+  }
+  if (secondaryProgress < 0) {
+    secondaryProgress=0;
+  }
+  if (secondaryProgress > mMax) {
+    secondaryProgress=mMax;
+  }
+  if (secondaryProgress != mSecondaryProgress) {
+    mSecondaryProgress=secondaryProgress;
+    refreshProgress(android.R.id.secondaryProgress,mSecondaryProgress,false);
+  }
+}

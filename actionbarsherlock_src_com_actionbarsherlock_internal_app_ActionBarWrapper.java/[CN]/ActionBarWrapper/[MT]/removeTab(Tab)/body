@@ -1,0 +1,3 @@
+{
+  mActionBar.removeTab(((TabWrapper)tab).mNativeTab);
+}

@@ -1,0 +1,6 @@
+{
+  if (!mPreventDispatchingItemsChanged) {
+    mPreventDispatchingItemsChanged=true;
+    mItemsChangedWhileDispatchPrevented=false;
+  }
+}

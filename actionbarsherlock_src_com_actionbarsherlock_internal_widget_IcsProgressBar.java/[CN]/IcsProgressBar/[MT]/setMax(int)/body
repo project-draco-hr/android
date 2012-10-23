@@ -1,0 +1,13 @@
+{
+  if (max < 0) {
+    max=0;
+  }
+  if (max != mMax) {
+    mMax=max;
+    postInvalidate();
+    if (mProgress > max) {
+      mProgress=max;
+    }
+    refreshProgress(android.R.id.progress,mProgress,false);
+  }
+}

@@ -1,0 +1,14 @@
+{
+  List<HistoricalRecord> choiceRecords=mHistoricalRecords;
+  final int pruneCount=choiceRecords.size() - mHistoryMaxSize;
+  if (pruneCount <= 0) {
+    return;
+  }
+  mHistoricalRecordsChanged=true;
+  for (int i=0; i < pruneCount; i++) {
+    HistoricalRecord prunedRecord=choiceRecords.remove(0);
+    if (DEBUG) {
+      Log.i(LOG_TAG,"Pruned: " + prunedRecord);
+    }
+  }
+}

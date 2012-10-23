@@ -1,0 +1,25 @@
+{
+  final int index=indexOfChild(child);
+  final int orientation=getOrientation();
+  final LayoutParams params=(LayoutParams)child.getLayoutParams();
+  if (hasDividerBeforeChildAt(index)) {
+    if (orientation == VERTICAL) {
+      params.topMargin=mDividerHeight;
+    }
+ else {
+      params.leftMargin=mDividerWidth;
+    }
+  }
+  final int count=getChildCount();
+  if (index == count - 1) {
+    if (hasDividerBeforeChildAt(count)) {
+      if (orientation == VERTICAL) {
+        params.bottomMargin=mDividerHeight;
+      }
+ else {
+        params.rightMargin=mDividerWidth;
+      }
+    }
+  }
+  super.measureChildWithMargins(child,parentWidthMeasureSpec,widthUsed,parentHeightMeasureSpec,heightUsed);
+}

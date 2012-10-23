@@ -1,0 +1,7 @@
+{
+  super(context,null,R.attr.actionOverflowButtonStyle);
+  setClickable(true);
+  setFocusable(true);
+  setVisibility(VISIBLE);
+  setEnabled(true);
+}

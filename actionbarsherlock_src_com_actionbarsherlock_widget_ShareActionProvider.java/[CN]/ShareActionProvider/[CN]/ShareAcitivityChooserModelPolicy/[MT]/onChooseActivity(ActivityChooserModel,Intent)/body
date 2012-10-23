@@ -1,0 +1,6 @@
+{
+  if (mOnShareTargetSelectedListener != null) {
+    return mOnShareTargetSelectedListener.onShareTargetSelected(ShareActionProvider.this,intent);
+  }
+  return false;
+}

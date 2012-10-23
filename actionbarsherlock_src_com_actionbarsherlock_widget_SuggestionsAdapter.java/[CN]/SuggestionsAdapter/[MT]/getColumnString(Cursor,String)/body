@@ -1,0 +1,4 @@
+{
+  int col=cursor.getColumnIndex(columnName);
+  return getStringOrNull(cursor,col);
+}

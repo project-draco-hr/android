@@ -1,0 +1,5 @@
+{
+  LayoutInflater inflater=getInflater();
+  mCheckBox=(CheckBox)inflater.inflate(R.layout.abs__list_menu_item_checkbox,this,false);
+  addView(mCheckBox);
+}

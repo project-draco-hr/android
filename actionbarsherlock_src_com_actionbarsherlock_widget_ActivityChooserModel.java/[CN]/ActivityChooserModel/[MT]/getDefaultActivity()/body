@@ -1,0 +1,8 @@
+{
+synchronized (mInstanceLock) {
+    if (!mActivites.isEmpty()) {
+      return mActivites.get(0).resolveInfo;
+    }
+  }
+  return null;
+}

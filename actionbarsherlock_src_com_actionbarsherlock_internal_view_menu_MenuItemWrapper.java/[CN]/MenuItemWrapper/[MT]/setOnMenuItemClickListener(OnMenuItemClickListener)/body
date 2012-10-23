@@ -1,0 +1,5 @@
+{
+  mMenuItemClickListener=menuItemClickListener;
+  mNativeItem.setOnMenuItemClickListener(this);
+  return this;
+}

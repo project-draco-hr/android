@@ -1,0 +1,4 @@
+{
+  mFinalVisibility=visibility;
+  return this;
+}

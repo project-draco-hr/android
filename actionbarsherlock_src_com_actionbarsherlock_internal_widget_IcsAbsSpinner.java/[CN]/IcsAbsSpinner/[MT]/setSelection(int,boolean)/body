@@ -1,0 +1,4 @@
+{
+  boolean shouldAnimate=animate && mFirstPosition <= position && position <= mFirstPosition + getChildCount() - 1;
+  setSelectionInt(position,shouldAnimate);
+}

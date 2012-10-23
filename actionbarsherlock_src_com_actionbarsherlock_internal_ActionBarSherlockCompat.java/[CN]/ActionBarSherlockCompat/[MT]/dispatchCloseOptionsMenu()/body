@@ -1,0 +1,10 @@
+{
+  if (DEBUG)   Log.d(TAG,"[dispatchCloseOptionsMenu]");
+  if (!isReservingOverflow()) {
+    return false;
+  }
+  if (wActionBar != null) {
+    return wActionBar.hideOverflowMenu();
+  }
+  return false;
+}

@@ -1,0 +1,4 @@
+{
+  mNativeMap.clear();
+  mNativeMenu.clear();
+}

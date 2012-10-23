@@ -1,0 +1,8 @@
+{
+  mNextSelectedPosition=position;
+  mNextSelectedRowId=getItemIdAtPosition(position);
+  if (mNeedSync && mSyncMode == SYNC_SELECTED_POSITION && position >= 0) {
+    mSyncPosition=position;
+    mSyncRowId=mNextSelectedRowId;
+  }
+}

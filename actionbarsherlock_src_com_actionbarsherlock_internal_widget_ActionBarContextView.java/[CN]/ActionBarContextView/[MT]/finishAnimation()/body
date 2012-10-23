@@ -1,0 +1,7 @@
+{
+  final Animator a=mCurrentAnimation;
+  if (a != null) {
+    mCurrentAnimation=null;
+    a.end();
+  }
+}

@@ -1,0 +1,4 @@
+{
+  mNativeItem.setAlphabeticShortcut(alphaChar);
+  return this;
+}

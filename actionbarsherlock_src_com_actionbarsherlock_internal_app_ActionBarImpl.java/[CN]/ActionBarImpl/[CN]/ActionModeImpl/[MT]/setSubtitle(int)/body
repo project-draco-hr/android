@@ -1,0 +1,3 @@
+{
+  setSubtitle(mContext.getResources().getString(resId));
+}

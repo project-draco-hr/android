@@ -1,0 +1,10 @@
+{
+  mNativeItem.setActionView(resId);
+  if (resId != 0) {
+    View view=mNativeItem.getActionView();
+    if (view instanceof CollapsibleActionView) {
+      mNativeItem.setActionView(new CollapsibleActionViewWrapper(view));
+    }
+  }
+  return this;
+}

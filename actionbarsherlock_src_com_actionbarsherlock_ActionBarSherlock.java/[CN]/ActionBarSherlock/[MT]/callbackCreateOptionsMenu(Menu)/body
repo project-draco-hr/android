@@ -1,0 +1,14 @@
+{
+  if (DEBUG)   Log.d(TAG,"[callbackCreateOptionsMenu] menu: " + menu);
+  boolean result=true;
+  if (mActivity instanceof OnCreatePanelMenuListener) {
+    OnCreatePanelMenuListener listener=(OnCreatePanelMenuListener)mActivity;
+    result=listener.onCreatePanelMenu(Window.FEATURE_OPTIONS_PANEL,menu);
+  }
+ else   if (mActivity instanceof OnCreateOptionsMenuListener) {
+    OnCreateOptionsMenuListener listener=(OnCreateOptionsMenuListener)mActivity;
+    result=listener.onCreateOptionsMenu(menu);
+  }
+  if (DEBUG)   Log.d(TAG,"[callbackCreateOptionsMenu] returning " + result);
+  return result;
+}

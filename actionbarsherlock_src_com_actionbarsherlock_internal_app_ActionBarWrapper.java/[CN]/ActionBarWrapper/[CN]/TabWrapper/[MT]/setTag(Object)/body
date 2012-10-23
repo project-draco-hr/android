@@ -1,0 +1,4 @@
+{
+  mTag=obj;
+  return this;
+}

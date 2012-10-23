@@ -1,0 +1,10 @@
+{
+  super.onMeasure(widthMeasureSpec,heightMeasureSpec);
+  final int widthMode=MeasureSpec.getMode(widthMeasureSpec);
+  final int specSize=MeasureSpec.getSize(widthMeasureSpec);
+  final int oldMeasuredWidth=getMeasuredWidth();
+  final int targetWidth=widthMode == MeasureSpec.AT_MOST ? Math.min(specSize,mMinWidth) : mMinWidth;
+  if (widthMode != MeasureSpec.EXACTLY && mMinWidth > 0 && oldMeasuredWidth < targetWidth) {
+    super.onMeasure(MeasureSpec.makeMeasureSpec(targetWidth,MeasureSpec.EXACTLY),heightMeasureSpec);
+  }
+}

@@ -1,0 +1,20 @@
+{
+  if (mPresenters.isEmpty())   return;
+  SparseArray<Parcelable> presenterStates=new SparseArray<Parcelable>();
+  for (  WeakReference<MenuPresenter> ref : mPresenters) {
+    final MenuPresenter presenter=ref.get();
+    if (presenter == null) {
+      mPresenters.remove(ref);
+    }
+ else {
+      final int id=presenter.getId();
+      if (id > 0) {
+        final Parcelable state=presenter.onSaveInstanceState();
+        if (state != null) {
+          presenterStates.put(id,state);
+        }
+      }
+    }
+  }
+  outState.putSparseParcelableArray(PRESENTER_KEY,presenterStates);
+}

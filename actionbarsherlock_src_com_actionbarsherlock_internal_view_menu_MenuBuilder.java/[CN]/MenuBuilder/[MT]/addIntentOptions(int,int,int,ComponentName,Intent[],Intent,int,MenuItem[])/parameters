@@ -1,0 +1,8 @@
+int group
+int id
+int categoryOrder
+ComponentName caller
+Intent[] specifics
+Intent intent
+int flags
+MenuItem[] outSpecificItems

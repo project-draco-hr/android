@@ -1,0 +1,4 @@
+{
+  android.view.MenuItem nativeItem=mNativeMenu.getItem(index);
+  return findItem(nativeItem);
+}

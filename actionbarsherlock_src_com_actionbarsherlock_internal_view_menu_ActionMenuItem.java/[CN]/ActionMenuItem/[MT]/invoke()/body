@@ -1,0 +1,10 @@
+{
+  if (mClickListener != null && mClickListener.onMenuItemClick(this)) {
+    return true;
+  }
+  if (mIntent != null) {
+    mContext.startActivity(mIntent);
+    return true;
+  }
+  return false;
+}

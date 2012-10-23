@@ -1,0 +1,7 @@
+{
+  if (DEBUG) {
+    Log.d(TAG,"[dispatchCreateOptionsMenu] android.view.Menu: " + menu);
+    Log.d(TAG,"[dispatchCreateOptionsMenu] returning true");
+  }
+  return true;
+}

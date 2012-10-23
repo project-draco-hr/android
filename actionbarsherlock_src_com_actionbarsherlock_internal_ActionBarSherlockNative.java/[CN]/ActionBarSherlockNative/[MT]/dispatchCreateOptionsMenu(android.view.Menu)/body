@@ -1,0 +1,9 @@
+{
+  if (DEBUG)   Log.d(TAG,"[dispatchCreateOptionsMenu] menu: " + menu);
+  if (mMenu == null || menu != mMenu.unwrap()) {
+    mMenu=new MenuWrapper(menu);
+  }
+  final boolean result=callbackCreateOptionsMenu(mMenu);
+  if (DEBUG)   Log.d(TAG,"[dispatchCreateOptionsMenu] returning " + result);
+  return result;
+}

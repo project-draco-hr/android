@@ -1,0 +1,5 @@
+{
+  ObjectAnimator anim=new ObjectAnimator(target,propertyName);
+  anim.setIntValues(values);
+  return anim;
+}

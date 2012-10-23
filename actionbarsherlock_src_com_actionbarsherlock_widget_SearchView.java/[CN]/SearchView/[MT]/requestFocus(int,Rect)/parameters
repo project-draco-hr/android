@@ -1,0 +1,2 @@
+int direction
+Rect previouslyFocusedRect

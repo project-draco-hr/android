@@ -1,0 +1,9 @@
+{
+  if (position != mOldSelectedPosition) {
+    mBlockLayoutRequests=true;
+    int delta=position - mSelectedPosition;
+    setNextSelectedPositionInt(position);
+    layout(delta,animate);
+    mBlockLayoutRequests=false;
+  }
+}

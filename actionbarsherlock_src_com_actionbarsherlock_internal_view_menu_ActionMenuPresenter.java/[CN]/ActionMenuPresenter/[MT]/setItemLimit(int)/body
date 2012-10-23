@@ -1,0 +1,4 @@
+{
+  mMaxItems=itemCount;
+  mMaxItemsSet=true;
+}

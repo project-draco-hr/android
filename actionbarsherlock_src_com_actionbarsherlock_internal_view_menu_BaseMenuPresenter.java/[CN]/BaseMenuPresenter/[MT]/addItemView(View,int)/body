@@ -1,0 +1,7 @@
+{
+  final ViewGroup currentParent=(ViewGroup)itemView.getParent();
+  if (currentParent != null) {
+    currentParent.removeView(itemView);
+  }
+  ((ViewGroup)mMenuView).addView(itemView,childIndex);
+}

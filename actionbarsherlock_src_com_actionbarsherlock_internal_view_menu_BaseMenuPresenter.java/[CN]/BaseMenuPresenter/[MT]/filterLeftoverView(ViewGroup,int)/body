@@ -1,0 +1,4 @@
+{
+  parent.removeViewAt(childIndex);
+  return true;
+}

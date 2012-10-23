@@ -1,0 +1,10 @@
+{
+  initAnimation();
+  long currentTime=AnimationUtils.currentAnimationTimeMillis();
+  if (mPlayingState != RUNNING) {
+    mSeekTime=playTime;
+    mPlayingState=SEEKED;
+  }
+  mStartTime=currentTime - playTime;
+  animationFrame(currentTime);
+}

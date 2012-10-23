@@ -1,0 +1,6 @@
+{
+  if (mShowFooterView != showFooterView) {
+    mShowFooterView=showFooterView;
+    notifyDataSetChanged();
+  }
+}

@@ -1,0 +1,4 @@
+{
+  mNativeTab.setCustomView(view);
+  return this;
+}

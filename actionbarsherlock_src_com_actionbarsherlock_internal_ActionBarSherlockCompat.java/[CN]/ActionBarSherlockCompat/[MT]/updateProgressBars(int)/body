@@ -1,0 +1,42 @@
+{
+  IcsProgressBar circularProgressBar=getCircularProgressBar(true);
+  IcsProgressBar horizontalProgressBar=getHorizontalProgressBar(true);
+  final int features=mFeatures;
+  if (value == Window.PROGRESS_VISIBILITY_ON) {
+    if ((features & (1 << Window.FEATURE_PROGRESS)) != 0) {
+      int level=horizontalProgressBar.getProgress();
+      int visibility=(horizontalProgressBar.isIndeterminate() || level < 10000) ? View.VISIBLE : View.INVISIBLE;
+      horizontalProgressBar.setVisibility(visibility);
+    }
+    if ((features & (1 << Window.FEATURE_INDETERMINATE_PROGRESS)) != 0) {
+      circularProgressBar.setVisibility(View.VISIBLE);
+    }
+  }
+ else   if (value == Window.PROGRESS_VISIBILITY_OFF) {
+    if ((features & (1 << Window.FEATURE_PROGRESS)) != 0) {
+      horizontalProgressBar.setVisibility(View.GONE);
+    }
+    if ((features & (1 << Window.FEATURE_INDETERMINATE_PROGRESS)) != 0) {
+      circularProgressBar.setVisibility(View.GONE);
+    }
+  }
+ else   if (value == Window.PROGRESS_INDETERMINATE_ON) {
+    horizontalProgressBar.setIndeterminate(true);
+  }
+ else   if (value == Window.PROGRESS_INDETERMINATE_OFF) {
+    horizontalProgressBar.setIndeterminate(false);
+  }
+ else   if (Window.PROGRESS_START <= value && value <= Window.PROGRESS_END) {
+    horizontalProgressBar.setProgress(value - Window.PROGRESS_START);
+    if (value < Window.PROGRESS_END) {
+      showProgressBars(horizontalProgressBar,circularProgressBar);
+    }
+ else {
+      hideProgressBars(horizontalProgressBar,circularProgressBar);
+    }
+  }
+ else   if (Window.PROGRESS_SECONDARY_START <= value && value <= Window.PROGRESS_SECONDARY_END) {
+    horizontalProgressBar.setSecondaryProgress(value - Window.PROGRESS_SECONDARY_START);
+    showProgressBars(horizontalProgressBar,circularProgressBar);
+  }
+}

@@ -1,0 +1,11 @@
+{
+  Node node=mNodeMap.get(anim);
+  if (node == null) {
+    node=new Node(anim);
+    mNodeMap.put(anim,node);
+    mNodes.add(node);
+  }
+  Dependency dependency=new Dependency(mCurrentNode,Dependency.AFTER);
+  node.addDependency(dependency);
+  return this;
+}

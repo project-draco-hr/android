@@ -1,0 +1,4 @@
+{
+  getSherlock().dispatchPause();
+  super.onPause();
+}

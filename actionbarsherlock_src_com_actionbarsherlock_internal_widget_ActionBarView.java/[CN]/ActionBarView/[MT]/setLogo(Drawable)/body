@@ -1,0 +1,6 @@
+{
+  mLogo=logo;
+  if (logo != null && (mDisplayOptions & ActionBar.DISPLAY_USE_LOGO) != 0) {
+    mHomeLayout.setIcon(logo);
+  }
+}

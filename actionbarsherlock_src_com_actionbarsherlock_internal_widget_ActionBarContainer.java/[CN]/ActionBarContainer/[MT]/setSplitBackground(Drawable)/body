@@ -1,0 +1,4 @@
+{
+  mSplitBackground=bg;
+  invalidate();
+}

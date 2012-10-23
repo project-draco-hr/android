@@ -1,0 +1,35 @@
+{
+  int childrenLeft=mSpinnerPadding.left;
+  int childrenWidth=getRight() - getLeft() - mSpinnerPadding.left- mSpinnerPadding.right;
+  if (mDataChanged) {
+    handleDataChanged();
+  }
+  if (mItemCount == 0) {
+    resetList();
+    return;
+  }
+  if (mNextSelectedPosition >= 0) {
+    setSelectedPositionInt(mNextSelectedPosition);
+  }
+  recycleAllViews();
+  removeAllViewsInLayout();
+  mFirstPosition=mSelectedPosition;
+  View sel=makeAndAddView(mSelectedPosition);
+  int width=sel.getMeasuredWidth();
+  int selectedOffset=childrenLeft;
+switch (mGravity & Gravity.HORIZONTAL_GRAVITY_MASK) {
+case Gravity.CENTER_HORIZONTAL:
+    selectedOffset=childrenLeft + (childrenWidth / 2) - (width / 2);
+  break;
+case Gravity.RIGHT:
+selectedOffset=childrenLeft + childrenWidth - width;
+break;
+}
+sel.offsetLeftAndRight(selectedOffset);
+mRecycler.clear();
+invalidate();
+checkSelectionChanged();
+mDataChanged=false;
+mNeedSync=false;
+setNextSelectedPositionInt(mSelectedPosition);
+}

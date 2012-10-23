@@ -1,0 +1,5 @@
+{
+  if ((index < 0) || (index >= mItems.size()))   return;
+  mItems.remove(index);
+  if (updateChildrenOnMenuViews)   onItemsChanged(true);
+}

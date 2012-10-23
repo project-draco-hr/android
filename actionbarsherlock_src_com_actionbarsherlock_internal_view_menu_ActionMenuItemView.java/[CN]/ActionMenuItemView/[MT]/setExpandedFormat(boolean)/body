@@ -1,0 +1,8 @@
+{
+  if (mExpandedFormat != expandedFormat) {
+    mExpandedFormat=expandedFormat;
+    if (mItemData != null) {
+      mItemData.actionFormatChanged();
+    }
+  }
+}

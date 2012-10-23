@@ -1,0 +1,8 @@
+{
+  if (shortcutString == null) {
+    return 0;
+  }
+ else {
+    return shortcutString.charAt(0);
+  }
+}

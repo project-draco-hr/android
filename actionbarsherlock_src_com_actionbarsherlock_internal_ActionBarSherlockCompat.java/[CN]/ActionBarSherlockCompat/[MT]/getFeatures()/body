@@ -1,0 +1,4 @@
+{
+  if (DEBUG)   Log.d(TAG,"[getFeatures] returning " + mFeatures);
+  return mFeatures;
+}

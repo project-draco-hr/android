@@ -1,0 +1,14 @@
+{
+  if (mCustomView != null) {
+    removeView(mCustomView);
+  }
+  mCustomView=view;
+  if (mTitleLayout != null) {
+    removeView(mTitleLayout);
+    mTitleLayout=null;
+  }
+  if (view != null) {
+    addView(view);
+  }
+  requestLayout();
+}

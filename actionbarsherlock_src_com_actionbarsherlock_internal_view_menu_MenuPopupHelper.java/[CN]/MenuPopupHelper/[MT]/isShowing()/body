@@ -1,0 +1,3 @@
+{
+  return mPopup != null && mPopup.isShowing();
+}

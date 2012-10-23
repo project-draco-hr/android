@@ -1,0 +1,8 @@
+{
+  if (mValues == null || mValues.length == 0) {
+    setValues(PropertyValuesHolder.ofFloat(mPropertyName,values));
+  }
+ else {
+    super.setFloatValues(values);
+  }
+}

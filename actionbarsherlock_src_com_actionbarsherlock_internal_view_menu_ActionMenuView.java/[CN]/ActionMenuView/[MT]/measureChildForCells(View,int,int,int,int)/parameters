@@ -1,0 +1,5 @@
+View child
+int cellSize
+int cellsRemaining
+int parentHeightMeasureSpec
+int parentHeightPadding

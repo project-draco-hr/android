@@ -1,0 +1,6 @@
+{
+  clearFocus();
+  updateViewsVisibility(true);
+  mQueryTextView.setImeOptions(mCollapsedImeOptions);
+  mExpandedInActionView=false;
+}

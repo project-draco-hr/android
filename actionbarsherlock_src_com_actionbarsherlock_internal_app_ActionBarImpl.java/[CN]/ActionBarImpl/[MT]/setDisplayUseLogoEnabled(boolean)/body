@@ -1,0 +1,3 @@
+{
+  setDisplayOptions(useLogo ? DISPLAY_USE_LOGO : 0,DISPLAY_USE_LOGO);
+}

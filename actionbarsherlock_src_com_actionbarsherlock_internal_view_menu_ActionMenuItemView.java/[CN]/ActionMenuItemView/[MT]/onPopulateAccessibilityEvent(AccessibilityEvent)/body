@@ -1,0 +1,9 @@
+{
+  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+    super.onPopulateAccessibilityEvent(event);
+  }
+  final CharSequence cdesc=getContentDescription();
+  if (!TextUtils.isEmpty(cdesc)) {
+    event.getText().add(cdesc);
+  }
+}

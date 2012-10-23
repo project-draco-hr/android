@@ -1,0 +1,4 @@
+{
+  final float[] roundedCorners=new float[]{5,5,5,5,5,5,5,5};
+  return new RoundRectShape(roundedCorners,null,null);
+}

@@ -1,0 +1,8 @@
+{
+  if (mCanceled)   return;
+  mVisibilityAnim=null;
+  setVisibility(mFinalVisibility);
+  if (mSplitView != null && mMenuView != null) {
+    mMenuView.setVisibility(mFinalVisibility);
+  }
+}

@@ -1,0 +1,12 @@
+{
+synchronized (mInstanceLock) {
+    final boolean added=mHistoricalRecords.add(historicalRecord);
+    if (added) {
+      mHistoricalRecordsChanged=true;
+      pruneExcessiveHistoricalRecordsLocked();
+      persistHistoricalData();
+      sortActivities();
+    }
+    return added;
+  }
+}

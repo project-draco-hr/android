@@ -1,0 +1,15 @@
+{
+  mDataChanged=true;
+  if (IcsAdapterView.this.getAdapter().hasStableIds()) {
+    mInstanceState=IcsAdapterView.this.onSaveInstanceState();
+  }
+  mOldItemCount=mItemCount;
+  mItemCount=0;
+  mSelectedPosition=INVALID_POSITION;
+  mSelectedRowId=INVALID_ROW_ID;
+  mNextSelectedPosition=INVALID_POSITION;
+  mNextSelectedRowId=INVALID_ROW_ID;
+  mNeedSync=false;
+  checkFocus();
+  requestLayout();
+}

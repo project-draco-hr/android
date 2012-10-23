@@ -1,0 +1,4 @@
+{
+  if (DEBUG)   Log.d(TAG,"[setUiOptions] uiOptions: " + uiOptions + ", mask: "+ mask);
+  mActivity.getWindow().setUiOptions(uiOptions,mask);
+}

@@ -1,0 +1,15 @@
+{
+  if (DEBUG)   Log.d(TAG,"[setContentView] view: " + view + ", params: "+ params);
+  if (mContentParent == null) {
+    installDecor();
+  }
+ else {
+    mContentParent.removeAllViews();
+  }
+  mContentParent.addView(view,params);
+  android.view.Window.Callback callback=mActivity.getWindow().getCallback();
+  if (callback != null) {
+    callback.onContentChanged();
+  }
+  initActionBar();
+}

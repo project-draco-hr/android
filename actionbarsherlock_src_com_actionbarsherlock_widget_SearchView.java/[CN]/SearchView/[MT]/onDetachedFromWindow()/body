@@ -1,0 +1,5 @@
+{
+  removeCallbacks(mUpdateDrawableStateRunnable);
+  post(mReleaseCursorRunnable);
+  super.onDetachedFromWindow();
+}

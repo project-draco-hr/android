@@ -1,0 +1,10 @@
+{
+  mDataChanged=false;
+  mNeedSync=false;
+  removeAllViewsInLayout();
+  mOldSelectedPosition=INVALID_POSITION;
+  mOldSelectedRowId=INVALID_ROW_ID;
+  setSelectedPositionInt(INVALID_POSITION);
+  setNextSelectedPositionInt(INVALID_POSITION);
+  invalidate();
+}

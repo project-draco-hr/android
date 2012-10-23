@@ -1,0 +1,42 @@
+{
+  super.onLayout(changed,l,t,r,b);
+  final boolean hasTabs=mTabContainer != null && mTabContainer.getVisibility() != GONE;
+  if (mTabContainer != null && mTabContainer.getVisibility() != GONE) {
+    final int containerHeight=getMeasuredHeight();
+    final int tabHeight=mTabContainer.getMeasuredHeight();
+    if ((mActionBarView.getDisplayOptions() & ActionBar.DISPLAY_SHOW_HOME) == 0) {
+      final int count=getChildCount();
+      for (int i=0; i < count; i++) {
+        final View child=getChildAt(i);
+        if (child == mTabContainer)         continue;
+        if (!mActionBarView.isCollapsed()) {
+          child.offsetTopAndBottom(tabHeight);
+        }
+      }
+      mTabContainer.layout(l,0,r,tabHeight);
+    }
+ else {
+      mTabContainer.layout(l,containerHeight - tabHeight,r,containerHeight);
+    }
+  }
+  boolean needsInvalidate=false;
+  if (mIsSplit) {
+    if (mSplitBackground != null) {
+      mSplitBackground.setBounds(0,0,getMeasuredWidth(),getMeasuredHeight());
+      needsInvalidate=true;
+    }
+  }
+ else {
+    if (mBackground != null) {
+      mBackground.setBounds(mActionBarView.getLeft(),mActionBarView.getTop(),mActionBarView.getRight(),mActionBarView.getBottom());
+      needsInvalidate=true;
+    }
+    if ((mIsStacked=hasTabs && mStackedBackground != null)) {
+      mStackedBackground.setBounds(mTabContainer.getLeft(),mTabContainer.getTop(),mTabContainer.getRight(),mTabContainer.getBottom());
+      needsInvalidate=true;
+    }
+  }
+  if (needsInvalidate) {
+    invalidate();
+  }
+}

@@ -1,0 +1,13 @@
+{
+  super.onFinishInflate();
+  addView(mHomeLayout);
+  if (mCustomNavView != null && (mDisplayOptions & ActionBar.DISPLAY_SHOW_CUSTOM) != 0) {
+    final ViewParent parent=mCustomNavView.getParent();
+    if (parent != this) {
+      if (parent instanceof ViewGroup) {
+        ((ViewGroup)parent).removeView(mCustomNavView);
+      }
+      addView(mCustomNavView);
+    }
+  }
+}

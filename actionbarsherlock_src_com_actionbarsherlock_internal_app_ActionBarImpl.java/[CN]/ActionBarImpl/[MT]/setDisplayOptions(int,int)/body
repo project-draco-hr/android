@@ -1,0 +1,4 @@
+{
+  final int current=mActionView.getDisplayOptions();
+  mActionView.setDisplayOptions((options & mask) | (current & ~mask));
+}

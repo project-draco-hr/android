@@ -1,0 +1,5 @@
+{
+  this.activity=activityName;
+  this.time=time;
+  this.weight=weight;
+}

@@ -1,0 +1,3 @@
+{
+  return (mPlayingState == RUNNING || mRunning);
+}

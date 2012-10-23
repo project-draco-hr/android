@@ -1,0 +1,6 @@
+{
+  mSystemContext=context;
+  mSystemInflater=LayoutInflater.from(context);
+  mMenuLayoutRes=menuLayoutRes;
+  mItemLayoutRes=itemLayoutRes;
+}

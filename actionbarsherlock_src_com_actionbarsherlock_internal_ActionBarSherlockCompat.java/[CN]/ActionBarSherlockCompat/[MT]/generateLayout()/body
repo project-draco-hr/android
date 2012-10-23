@@ -1,0 +1,59 @@
+{
+  if (DEBUG)   Log.d(TAG,"[generateLayout]");
+  TypedArray a=mActivity.getTheme().obtainStyledAttributes(R.styleable.SherlockTheme);
+  mIsFloating=a.getBoolean(R.styleable.SherlockTheme_android_windowIsFloating,false);
+  if (!a.hasValue(R.styleable.SherlockTheme_windowActionBar)) {
+    throw new IllegalStateException("You must use Theme.Sherlock, Theme.Sherlock.Light, Theme.Sherlock.Light.DarkActionBar, or a derivative.");
+  }
+  if (a.getBoolean(R.styleable.SherlockTheme_windowNoTitle,false)) {
+    requestFeature(Window.FEATURE_NO_TITLE);
+  }
+ else   if (a.getBoolean(R.styleable.SherlockTheme_windowActionBar,false)) {
+    requestFeature(Window.FEATURE_ACTION_BAR);
+  }
+  if (a.getBoolean(R.styleable.SherlockTheme_windowActionBarOverlay,false)) {
+    requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+  }
+  if (a.getBoolean(R.styleable.SherlockTheme_windowActionModeOverlay,false)) {
+    requestFeature(Window.FEATURE_ACTION_MODE_OVERLAY);
+  }
+  a.recycle();
+  int layoutResource;
+  if (!hasFeature(Window.FEATURE_NO_TITLE)) {
+    if (mIsFloating) {
+      mDecor=(ViewGroup)mDecor.getParent();
+      mDecor.removeAllViews();
+      layoutResource=R.layout.abs__dialog_title_holo;
+    }
+ else {
+      if (hasFeature(Window.FEATURE_ACTION_BAR_OVERLAY)) {
+        layoutResource=R.layout.abs__screen_action_bar_overlay;
+      }
+ else {
+        layoutResource=R.layout.abs__screen_action_bar;
+      }
+    }
+  }
+ else   if (hasFeature(Window.FEATURE_ACTION_MODE_OVERLAY) && !hasFeature(Window.FEATURE_NO_TITLE)) {
+    layoutResource=R.layout.abs__screen_simple_overlay_action_mode;
+  }
+ else {
+    layoutResource=R.layout.abs__screen_simple;
+  }
+  if (DEBUG)   Log.d(TAG,"[generateLayout] using screen XML " + mActivity.getResources().getString(layoutResource));
+  View in=mActivity.getLayoutInflater().inflate(layoutResource,null);
+  mDecor.addView(in,new ViewGroup.LayoutParams(MATCH_PARENT,MATCH_PARENT));
+  ViewGroup contentParent=(ViewGroup)mDecor.findViewById(R.id.abs__content);
+  if (contentParent == null) {
+    throw new RuntimeException("Couldn't find content container view");
+  }
+  mDecor.setId(View.NO_ID);
+  contentParent.setId(android.R.id.content);
+  if (hasFeature(Window.FEATURE_INDETERMINATE_PROGRESS)) {
+    IcsProgressBar progress=getCircularProgressBar(false);
+    if (progress != null) {
+      progress.setIndeterminate(true);
+    }
+  }
+  return contentParent;
+}

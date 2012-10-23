@@ -1,0 +1,11 @@
+{
+  if (mPlayingState != STOPPED || sPendingAnimations.get().contains(this) || sDelayedAnims.get().contains(this)) {
+    if (mRunning && mListeners != null) {
+      ArrayList<AnimatorListener> tmpListeners=(ArrayList<AnimatorListener>)mListeners.clone();
+      for (      AnimatorListener listener : tmpListeners) {
+        listener.onAnimationCancel(this);
+      }
+    }
+    endAnimation();
+  }
+}

@@ -1,0 +1,7 @@
+{
+  ActionMenuItem item=findItemWithShortcut(keyCode,event);
+  if (item == null) {
+    return false;
+  }
+  return item.invoke();
+}

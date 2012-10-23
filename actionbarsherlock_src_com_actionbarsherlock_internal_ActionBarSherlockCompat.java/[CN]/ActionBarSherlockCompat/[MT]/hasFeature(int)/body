@@ -1,0 +1,6 @@
+{
+  if (DEBUG)   Log.d(TAG,"[hasFeature] featureId: " + featureId);
+  boolean result=(mFeatures & (1 << featureId)) != 0;
+  if (DEBUG)   Log.d(TAG,"[hasFeature] returning " + result);
+  return result;
+}

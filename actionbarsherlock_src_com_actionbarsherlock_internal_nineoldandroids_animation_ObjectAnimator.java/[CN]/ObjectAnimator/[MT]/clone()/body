@@ -1,0 +1,4 @@
+{
+  final ObjectAnimator anim=(ObjectAnimator)super.clone();
+  return anim;
+}

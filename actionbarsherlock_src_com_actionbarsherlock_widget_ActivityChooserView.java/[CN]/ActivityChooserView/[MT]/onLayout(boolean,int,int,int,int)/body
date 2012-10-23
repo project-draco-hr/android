@@ -1,0 +1,9 @@
+{
+  mActivityChooserContent.layout(0,0,right - left,bottom - top);
+  if (getListPopupWindow().isShowing()) {
+    showPopupUnchecked(mAdapter.getMaxActivityCount());
+  }
+ else {
+    dismissPopup();
+  }
+}

@@ -1,0 +1,8 @@
+{
+  if (AnimatorProxy.NEEDS_PROXY) {
+    return mProxy.getTranslationY();
+  }
+ else {
+    return super.getTranslationY();
+  }
+}

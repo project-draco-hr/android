@@ -1,0 +1,14 @@
+{
+  mContext=decor.getContext();
+  mActionView=(ActionBarView)decor.findViewById(R.id.abs__action_bar);
+  mContextView=(ActionBarContextView)decor.findViewById(R.id.abs__action_context_bar);
+  mContainerView=(ActionBarContainer)decor.findViewById(R.id.abs__action_bar_container);
+  mSplitView=(ActionBarContainer)decor.findViewById(R.id.abs__split_action_bar);
+  if (mActionView == null || mContextView == null || mContainerView == null) {
+    throw new IllegalStateException(getClass().getSimpleName() + " can only be used " + "with a compatible window decor layout");
+  }
+  mActionView.setContextView(mContextView);
+  mContextDisplayMode=mActionView.isSplitActionBar() ? CONTEXT_DISPLAY_SPLIT : CONTEXT_DISPLAY_NORMAL;
+  setHomeButtonEnabled(mContext.getApplicationInfo().targetSdkVersion < 14);
+  setHasEmbeddedTabs(getResources_getBoolean(mContext,R.bool.abs__action_bar_embed_tabs));
+}

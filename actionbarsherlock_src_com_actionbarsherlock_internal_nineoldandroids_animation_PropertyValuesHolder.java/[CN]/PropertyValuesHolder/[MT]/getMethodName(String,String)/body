@@ -1,0 +1,8 @@
+{
+  if (propertyName == null || propertyName.length() == 0) {
+    return prefix;
+  }
+  char firstLetter=Character.toUpperCase(propertyName.charAt(0));
+  String theRest=propertyName.substring(1);
+  return prefix + firstLetter + theRest;
+}

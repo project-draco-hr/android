@@ -1,0 +1,5 @@
+{
+  MenuView result=super.getMenuView(root);
+  ((ActionMenuView)result).setPresenter(this);
+  return result;
+}

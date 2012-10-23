@@ -1,0 +1,33 @@
+{
+  if (mExpandedActionView instanceof CollapsibleActionView) {
+    ((CollapsibleActionView)mExpandedActionView).onActionViewCollapsed();
+  }
+  removeView(mExpandedActionView);
+  removeView(mExpandedHomeLayout);
+  mExpandedActionView=null;
+  if ((mDisplayOptions & ActionBar.DISPLAY_SHOW_HOME) != 0) {
+    mHomeLayout.setVisibility(VISIBLE);
+  }
+  if ((mDisplayOptions & ActionBar.DISPLAY_SHOW_TITLE) != 0) {
+    if (mTitleLayout == null) {
+      initTitle();
+    }
+ else {
+      mTitleLayout.setVisibility(VISIBLE);
+    }
+  }
+  if (mTabScrollView != null && mNavigationMode == ActionBar.NAVIGATION_MODE_TABS) {
+    mTabScrollView.setVisibility(VISIBLE);
+  }
+  if (mSpinner != null && mNavigationMode == ActionBar.NAVIGATION_MODE_LIST) {
+    mSpinner.setVisibility(VISIBLE);
+  }
+  if (mCustomNavView != null && (mDisplayOptions & ActionBar.DISPLAY_SHOW_CUSTOM) != 0) {
+    mCustomNavView.setVisibility(VISIBLE);
+  }
+  mExpandedHomeLayout.setIcon(null);
+  mCurrentExpandedItem=null;
+  requestLayout();
+  item.setActionViewExpanded(false);
+  return true;
+}

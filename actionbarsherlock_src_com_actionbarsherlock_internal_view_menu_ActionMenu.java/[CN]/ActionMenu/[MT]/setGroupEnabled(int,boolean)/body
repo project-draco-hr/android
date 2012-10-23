@@ -1,0 +1,10 @@
+{
+  final ArrayList<ActionMenuItem> items=mItems;
+  final int itemCount=items.size();
+  for (int i=0; i < itemCount; i++) {
+    ActionMenuItem item=items.get(i);
+    if (item.getGroupId() == group) {
+      item.setEnabled(enabled);
+    }
+  }
+}

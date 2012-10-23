@@ -1,0 +1,14 @@
+{
+  try {
+    if (mMethod.getReturnType() == Boolean.TYPE) {
+      return (Boolean)mMethod.invoke(mRealOwner,item);
+    }
+ else {
+      mMethod.invoke(mRealOwner,item);
+      return true;
+    }
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+}

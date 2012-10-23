@@ -1,0 +1,13 @@
+{
+  final int features=mFeatures;
+  Animation anim=AnimationUtils.loadAnimation(mActivity,android.R.anim.fade_out);
+  anim.setDuration(1000);
+  if ((features & (1 << Window.FEATURE_INDETERMINATE_PROGRESS)) != 0 && spinnyProgressBar.getVisibility() == View.VISIBLE) {
+    spinnyProgressBar.startAnimation(anim);
+    spinnyProgressBar.setVisibility(View.INVISIBLE);
+  }
+  if ((features & (1 << Window.FEATURE_PROGRESS)) != 0 && horizontalProgressBar.getVisibility() == View.VISIBLE) {
+    horizontalProgressBar.startAnimation(anim);
+    horizontalProgressBar.setVisibility(View.INVISIBLE);
+  }
+}

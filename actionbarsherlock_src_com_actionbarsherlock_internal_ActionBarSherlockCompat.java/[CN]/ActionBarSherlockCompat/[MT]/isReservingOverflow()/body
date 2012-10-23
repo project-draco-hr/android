@@ -1,0 +1,7 @@
+{
+  if (!mReserveOverflowSet) {
+    mReserveOverflow=ActionMenuPresenter.reserveOverflow(mActivity);
+    mReserveOverflowSet=true;
+  }
+  return mReserveOverflow;
+}

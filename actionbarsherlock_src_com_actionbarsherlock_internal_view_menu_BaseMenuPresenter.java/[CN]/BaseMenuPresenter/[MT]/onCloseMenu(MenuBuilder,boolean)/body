@@ -1,0 +1,5 @@
+{
+  if (mCallback != null) {
+    mCallback.onCloseMenu(menu,allMenusAreClosing);
+  }
+}

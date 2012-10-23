@@ -1,0 +1,10 @@
+{
+  final int childCount=getChildCount();
+  final IcsAbsSpinner.RecycleBin recycleBin=mRecycler;
+  final int position=mFirstPosition;
+  for (int i=0; i < childCount; i++) {
+    View v=getChildAt(i);
+    int index=position + i;
+    recycleBin.put(index,v);
+  }
+}

@@ -1,0 +1,7 @@
+{
+  mAdapter.setDataModel(dataModel);
+  if (isShowingPopup()) {
+    dismissPopup();
+    showPopup();
+  }
+}

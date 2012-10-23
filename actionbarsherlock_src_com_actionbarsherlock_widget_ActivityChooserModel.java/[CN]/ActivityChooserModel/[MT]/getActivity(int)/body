@@ -1,0 +1,5 @@
+{
+synchronized (mInstanceLock) {
+    return mActivites.get(index).resolveInfo;
+  }
+}

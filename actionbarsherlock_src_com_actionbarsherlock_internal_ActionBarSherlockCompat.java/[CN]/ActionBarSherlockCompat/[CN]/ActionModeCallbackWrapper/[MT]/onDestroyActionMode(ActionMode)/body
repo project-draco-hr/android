@@ -1,0 +1,11 @@
+{
+  mWrapped.onDestroyActionMode(mode);
+  if (mActionModeView != null) {
+    mActionModeView.setVisibility(View.GONE);
+    mActionModeView.removeAllViews();
+  }
+  if (mActivity instanceof OnActionModeFinishedListener) {
+    ((OnActionModeFinishedListener)mActivity).onActionModeFinished(mActionMode);
+  }
+  mActionMode=null;
+}

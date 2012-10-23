@@ -1,0 +1,4 @@
+{
+  mNativeSubMenu.setHeaderTitle(title);
+  return this;
+}

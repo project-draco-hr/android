@@ -1,0 +1,10 @@
+{
+  if (mTarget != target) {
+    final Object oldTarget=mTarget;
+    mTarget=target;
+    if (oldTarget != null && target != null && oldTarget.getClass() == target.getClass()) {
+      return;
+    }
+    mInitialized=false;
+  }
+}

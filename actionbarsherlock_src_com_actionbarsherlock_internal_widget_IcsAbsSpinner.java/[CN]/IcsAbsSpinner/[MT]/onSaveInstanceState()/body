@@ -1,0 +1,12 @@
+{
+  Parcelable superState=super.onSaveInstanceState();
+  SavedState ss=new SavedState(superState);
+  ss.selectedId=getSelectedItemId();
+  if (ss.selectedId >= 0) {
+    ss.position=getSelectedItemPosition();
+  }
+ else {
+    ss.position=INVALID_POSITION;
+  }
+  return ss;
+}

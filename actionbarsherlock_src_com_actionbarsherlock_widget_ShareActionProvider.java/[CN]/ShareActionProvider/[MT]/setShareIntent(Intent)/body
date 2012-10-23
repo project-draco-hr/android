@@ -1,0 +1,4 @@
+{
+  ActivityChooserModel dataModel=ActivityChooserModel.get(mContext,mShareHistoryFileName);
+  dataModel.setIntent(shareIntent);
+}

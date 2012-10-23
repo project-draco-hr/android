@@ -1,0 +1,12 @@
+{
+  mIconified=collapsed;
+  final int visCollapsed=collapsed ? VISIBLE : GONE;
+  final boolean hasText=!TextUtils.isEmpty(mQueryTextView.getText());
+  mSearchButton.setVisibility(visCollapsed);
+  updateSubmitButton(hasText);
+  mSearchEditFrame.setVisibility(collapsed ? GONE : VISIBLE);
+  mSearchHintIcon.setVisibility(mIconifiedByDefault ? GONE : VISIBLE);
+  updateCloseButton();
+  updateVoiceButton(!hasText);
+  updateSubmitArea();
+}

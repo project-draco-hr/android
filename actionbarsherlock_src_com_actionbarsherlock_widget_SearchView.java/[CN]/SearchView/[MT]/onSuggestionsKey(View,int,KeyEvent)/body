@@ -1,0 +1,26 @@
+{
+  if (mSearchable == null) {
+    return false;
+  }
+  if (mSuggestionsAdapter == null) {
+    return false;
+  }
+  if (event.getAction() == KeyEvent.ACTION_DOWN && KeyEventCompat.hasNoModifiers(event)) {
+    if (keyCode == KeyEvent.KEYCODE_ENTER || keyCode == KeyEvent.KEYCODE_SEARCH || keyCode == KeyEvent.KEYCODE_TAB) {
+      int position=mQueryTextView.getListSelection();
+      return onItemClicked(position,KeyEvent.KEYCODE_UNKNOWN,null);
+    }
+    if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT || keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
+      int selPoint=(keyCode == KeyEvent.KEYCODE_DPAD_LEFT) ? 0 : mQueryTextView.length();
+      mQueryTextView.setSelection(selPoint);
+      mQueryTextView.setListSelection(0);
+      mQueryTextView.clearListSelection();
+      ensureImeVisible(mQueryTextView,true);
+      return true;
+    }
+    if (keyCode == KeyEvent.KEYCODE_DPAD_UP && 0 == mQueryTextView.getListSelection()) {
+      return false;
+    }
+  }
+  return false;
+}

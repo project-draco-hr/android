@@ -1,0 +1,7 @@
+{
+  if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_MENU) {
+    dismiss();
+    return true;
+  }
+  return false;
+}

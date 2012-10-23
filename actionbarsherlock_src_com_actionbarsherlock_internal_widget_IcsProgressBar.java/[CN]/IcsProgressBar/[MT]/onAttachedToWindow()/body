@@ -1,0 +1,6 @@
+{
+  super.onAttachedToWindow();
+  if (mIndeterminate) {
+    startAnimation();
+  }
+}

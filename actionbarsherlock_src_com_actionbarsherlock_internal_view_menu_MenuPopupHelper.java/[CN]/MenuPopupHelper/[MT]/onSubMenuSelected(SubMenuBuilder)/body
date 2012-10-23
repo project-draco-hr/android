@@ -1,0 +1,23 @@
+{
+  if (subMenu.hasVisibleItems()) {
+    MenuPopupHelper subPopup=new MenuPopupHelper(mContext,subMenu,mAnchorView,false);
+    subPopup.setCallback(mPresenterCallback);
+    boolean preserveIconSpacing=false;
+    final int count=subMenu.size();
+    for (int i=0; i < count; i++) {
+      MenuItem childItem=subMenu.getItem(i);
+      if (childItem.isVisible() && childItem.getIcon() != null) {
+        preserveIconSpacing=true;
+        break;
+      }
+    }
+    subPopup.setForceShowIcon(preserveIconSpacing);
+    if (subPopup.tryShow()) {
+      if (mPresenterCallback != null) {
+        mPresenterCallback.onOpenSubMenu(subMenu);
+      }
+      return true;
+    }
+  }
+  return false;
+}

@@ -1,0 +1,9 @@
+{
+  super.onFinishInflate();
+  setBackgroundDrawable(mBackground);
+  mTitleView=(TextView)findViewById(R.id.abs__title);
+  if (mTextAppearance != -1) {
+    mTitleView.setTextAppearance(mTextAppearanceContext,mTextAppearance);
+  }
+  mShortcutView=(TextView)findViewById(R.id.abs__shortcut);
+}

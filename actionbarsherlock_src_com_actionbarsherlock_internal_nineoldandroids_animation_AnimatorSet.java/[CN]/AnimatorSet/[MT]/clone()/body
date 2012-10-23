@@ -1,0 +1,49 @@
+{
+  final AnimatorSet anim=(AnimatorSet)super.clone();
+  anim.mNeedsSort=true;
+  anim.mTerminated=false;
+  anim.mStarted=false;
+  anim.mPlayingSet=new ArrayList<Animator>();
+  anim.mNodeMap=new HashMap<Animator,Node>();
+  anim.mNodes=new ArrayList<Node>();
+  anim.mSortedNodes=new ArrayList<Node>();
+  HashMap<Node,Node> nodeCloneMap=new HashMap<Node,Node>();
+  for (  Node node : mNodes) {
+    Node nodeClone=node.clone();
+    nodeCloneMap.put(node,nodeClone);
+    anim.mNodes.add(nodeClone);
+    anim.mNodeMap.put(nodeClone.animation,nodeClone);
+    nodeClone.dependencies=null;
+    nodeClone.tmpDependencies=null;
+    nodeClone.nodeDependents=null;
+    nodeClone.nodeDependencies=null;
+    ArrayList<AnimatorListener> cloneListeners=nodeClone.animation.getListeners();
+    if (cloneListeners != null) {
+      ArrayList<AnimatorListener> listenersToRemove=null;
+      for (      AnimatorListener listener : cloneListeners) {
+        if (listener instanceof AnimatorSetListener) {
+          if (listenersToRemove == null) {
+            listenersToRemove=new ArrayList<AnimatorListener>();
+          }
+          listenersToRemove.add(listener);
+        }
+      }
+      if (listenersToRemove != null) {
+        for (        AnimatorListener listener : listenersToRemove) {
+          cloneListeners.remove(listener);
+        }
+      }
+    }
+  }
+  for (  Node node : mNodes) {
+    Node nodeClone=nodeCloneMap.get(node);
+    if (node.dependencies != null) {
+      for (      Dependency dependency : node.dependencies) {
+        Node clonedDependencyNode=nodeCloneMap.get(dependency.node);
+        Dependency cloneDependency=new Dependency(clonedDependencyNode,dependency.rule);
+        nodeClone.addDependency(cloneDependency);
+      }
+    }
+  }
+  return anim;
+}

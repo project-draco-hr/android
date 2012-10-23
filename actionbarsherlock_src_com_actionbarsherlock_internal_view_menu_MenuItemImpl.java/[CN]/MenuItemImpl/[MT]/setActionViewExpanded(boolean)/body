@@ -1,0 +1,4 @@
+{
+  mIsActionViewExpanded=isExpanded;
+  mMenu.onItemsChanged(false);
+}

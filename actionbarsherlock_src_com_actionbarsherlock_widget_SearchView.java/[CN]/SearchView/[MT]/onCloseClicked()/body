@@ -1,0 +1,16 @@
+{
+  CharSequence text=mQueryTextView.getText();
+  if (TextUtils.isEmpty(text)) {
+    if (mIconifiedByDefault) {
+      if (mOnCloseListener == null || !mOnCloseListener.onClose()) {
+        clearFocus();
+        updateViewsVisibility(true);
+      }
+    }
+  }
+ else {
+    mQueryTextView.setText("");
+    mQueryTextView.requestFocus();
+    setImeVisibility(true);
+  }
+}

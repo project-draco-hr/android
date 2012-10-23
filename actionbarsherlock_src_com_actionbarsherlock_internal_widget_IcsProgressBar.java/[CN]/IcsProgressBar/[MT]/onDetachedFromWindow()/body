@@ -1,0 +1,12 @@
+{
+  if (mIndeterminate) {
+    stopAnimation();
+  }
+  if (mRefreshProgressRunnable != null) {
+    removeCallbacks(mRefreshProgressRunnable);
+  }
+  if (mAccessibilityEventSender != null) {
+    removeCallbacks(mAccessibilityEventSender);
+  }
+  super.onDetachedFromWindow();
+}

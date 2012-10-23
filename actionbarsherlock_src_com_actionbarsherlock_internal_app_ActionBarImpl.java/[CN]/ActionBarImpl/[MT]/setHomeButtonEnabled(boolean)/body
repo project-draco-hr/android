@@ -1,0 +1,3 @@
+{
+  mActionView.setHomeButtonEnabled(enable);
+}

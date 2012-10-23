@@ -1,0 +1,8 @@
+{
+  groupId=defaultGroupId;
+  groupCategory=defaultItemCategory;
+  groupOrder=defaultItemOrder;
+  groupCheckable=defaultItemCheckable;
+  groupVisible=defaultItemVisible;
+  groupEnabled=defaultItemEnabled;
+}

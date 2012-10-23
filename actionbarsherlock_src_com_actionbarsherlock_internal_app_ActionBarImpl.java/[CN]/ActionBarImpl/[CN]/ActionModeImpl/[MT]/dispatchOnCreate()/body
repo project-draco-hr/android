@@ -1,0 +1,9 @@
+{
+  mMenu.stopDispatchingItemsChanged();
+  try {
+    return mCallback.onCreateActionMode(this,mMenu);
+  }
+  finally {
+    mMenu.startDispatchingItemsChanged();
+  }
+}

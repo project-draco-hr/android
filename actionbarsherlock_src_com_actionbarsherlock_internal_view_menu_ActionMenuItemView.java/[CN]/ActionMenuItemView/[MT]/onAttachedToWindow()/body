@@ -1,0 +1,6 @@
+{
+  super.onAttachedToWindow();
+  for (  View_OnAttachStateChangeListener listener : mListeners) {
+    listener.onViewAttachedToWindow(this);
+  }
+}

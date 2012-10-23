@@ -1,0 +1,9 @@
+{
+  Parcelable superState=super.onSaveInstanceState();
+  SavedState state=new SavedState(superState);
+  if (mExpandedMenuPresenter != null && mExpandedMenuPresenter.mCurrentExpandedItem != null) {
+    state.expandedMenuItemId=mExpandedMenuPresenter.mCurrentExpandedItem.getItemId();
+  }
+  state.isOverflowOpen=isOverflowMenuShowing();
+  return state;
+}

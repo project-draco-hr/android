@@ -1,0 +1,3 @@
+ActionBar.Tab tab
+int position
+boolean setSelected

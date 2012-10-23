@@ -1,0 +1,15 @@
+{
+  KeyframeSet keyframeSet=KeyframeSet.ofKeyframe(values);
+  if (keyframeSet instanceof IntKeyframeSet) {
+    return new IntPropertyValuesHolder(propertyName,(IntKeyframeSet)keyframeSet);
+  }
+ else   if (keyframeSet instanceof FloatKeyframeSet) {
+    return new FloatPropertyValuesHolder(propertyName,(FloatKeyframeSet)keyframeSet);
+  }
+ else {
+    PropertyValuesHolder pvh=new PropertyValuesHolder(propertyName);
+    pvh.mKeyframeSet=keyframeSet;
+    pvh.mValueType=values[0].getType();
+    return pvh;
+  }
+}

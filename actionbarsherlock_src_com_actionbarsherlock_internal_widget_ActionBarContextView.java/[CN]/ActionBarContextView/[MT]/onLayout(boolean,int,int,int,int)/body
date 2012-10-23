@@ -1,0 +1,27 @@
+{
+  int x=getPaddingLeft();
+  final int y=getPaddingTop();
+  final int contentHeight=b - t - getPaddingTop()- getPaddingBottom();
+  if (mClose != null && mClose.getVisibility() != GONE) {
+    MarginLayoutParams lp=(MarginLayoutParams)mClose.getLayoutParams();
+    x+=lp.leftMargin;
+    x+=positionChild(mClose,x,y,contentHeight);
+    x+=lp.rightMargin;
+    if (mAnimateInOnLayout) {
+      mAnimationMode=ANIMATE_IN;
+      mCurrentAnimation=makeInAnimation();
+      mCurrentAnimation.start();
+      mAnimateInOnLayout=false;
+    }
+  }
+  if (mTitleLayout != null && mCustomView == null) {
+    x+=positionChild(mTitleLayout,x,y,contentHeight);
+  }
+  if (mCustomView != null) {
+    x+=positionChild(mCustomView,x,y,contentHeight);
+  }
+  x=r - l - getPaddingRight();
+  if (mMenuView != null) {
+    x-=positionChildInverse(mMenuView,x,y,contentHeight);
+  }
+}

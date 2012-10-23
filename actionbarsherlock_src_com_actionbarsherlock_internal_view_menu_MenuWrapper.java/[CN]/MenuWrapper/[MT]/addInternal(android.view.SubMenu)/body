@@ -1,0 +1,7 @@
+{
+  SubMenu subMenu=new SubMenuWrapper(nativeSubMenu);
+  android.view.MenuItem nativeItem=nativeSubMenu.getItem();
+  MenuItem item=subMenu.getItem();
+  mNativeMap.put(nativeItem,item);
+  return subMenu;
+}

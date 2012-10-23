@@ -1,0 +1,10 @@
+{
+  if (mListener != null) {
+    FragmentTransaction trans=null;
+    if (mActivity instanceof FragmentActivity) {
+      trans=((FragmentActivity)mActivity).getSupportFragmentManager().beginTransaction().disallowAddToBackStack();
+      mFragmentTransaction=trans;
+    }
+    mListener.onTabUnselected(this,trans);
+  }
+}

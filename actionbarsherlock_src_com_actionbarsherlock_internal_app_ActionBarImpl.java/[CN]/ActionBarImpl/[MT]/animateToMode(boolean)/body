@@ -1,0 +1,13 @@
+{
+  if (toActionMode) {
+    show(false);
+  }
+  if (mCurrentModeAnim != null) {
+    mCurrentModeAnim.end();
+  }
+  mActionView.animateToVisibility(toActionMode ? View.GONE : View.VISIBLE);
+  mContextView.animateToVisibility(toActionMode ? View.VISIBLE : View.GONE);
+  if (mTabScrollView != null && !mActionView.hasEmbeddedTabs() && mActionView.isCollapsed()) {
+    mTabScrollView.animateToVisibility(toActionMode ? View.GONE : View.VISIBLE);
+  }
+}

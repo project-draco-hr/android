@@ -1,0 +1,30 @@
+{
+  ActivityChooserViewAdapter adapter=(ActivityChooserViewAdapter)parent.getAdapter();
+  final int itemViewType=adapter.getItemViewType(position);
+switch (itemViewType) {
+case ActivityChooserViewAdapter.ITEM_VIEW_TYPE_FOOTER:
+{
+      showPopupUnchecked(ActivityChooserViewAdapter.MAX_ACTIVITY_COUNT_UNLIMITED);
+    }
+  break;
+case ActivityChooserViewAdapter.ITEM_VIEW_TYPE_ACTIVITY:
+{
+  dismissPopup();
+  if (mIsSelectingDefaultActivity) {
+    if (position > 0) {
+      mAdapter.getDataModel().setDefaultActivity(position);
+    }
+  }
+ else {
+    position=mAdapter.getShowDefaultActivity() ? position : position + 1;
+    Intent launchIntent=mAdapter.getDataModel().chooseActivity(position);
+    if (launchIntent != null) {
+      mContext.startActivity(launchIntent);
+    }
+  }
+}
+break;
+default :
+throw new IllegalArgumentException();
+}
+}

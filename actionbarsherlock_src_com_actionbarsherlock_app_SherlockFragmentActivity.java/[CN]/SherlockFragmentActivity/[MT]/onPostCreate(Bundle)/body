@@ -1,0 +1,4 @@
+{
+  getSherlock().dispatchPostCreate(savedInstanceState);
+  super.onPostCreate(savedInstanceState);
+}

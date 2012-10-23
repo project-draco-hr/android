@@ -1,0 +1,14 @@
+{
+  final ArrayList<ActionMenuItem> items=mItems;
+  int itemCount=items.size();
+  int i=0;
+  while (i < itemCount) {
+    if (items.get(i).getGroupId() == groupId) {
+      items.remove(i);
+      itemCount--;
+    }
+ else {
+      i++;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  mDataChanged=true;
+  mOldItemCount=mItemCount;
+  mItemCount=getAdapter().getCount();
+  if (IcsAdapterView.this.getAdapter().hasStableIds() && mInstanceState != null && mOldItemCount == 0 && mItemCount > 0) {
+    IcsAdapterView.this.onRestoreInstanceState(mInstanceState);
+    mInstanceState=null;
+  }
+ else {
+    rememberSyncState();
+  }
+  checkFocus();
+  requestLayout();
+}

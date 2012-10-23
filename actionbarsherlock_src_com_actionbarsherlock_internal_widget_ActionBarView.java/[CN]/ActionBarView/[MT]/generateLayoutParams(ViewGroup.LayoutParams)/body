@@ -1,0 +1,6 @@
+{
+  if (lp == null) {
+    lp=generateDefaultLayoutParams();
+  }
+  return lp;
+}

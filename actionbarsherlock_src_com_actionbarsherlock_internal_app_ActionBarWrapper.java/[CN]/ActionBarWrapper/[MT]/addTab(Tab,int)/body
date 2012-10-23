@@ -1,0 +1,3 @@
+{
+  mActionBar.addTab(((TabWrapper)tab).mNativeTab,position);
+}

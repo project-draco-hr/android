@@ -1,0 +1,4 @@
+{
+  super(width,height);
+  this.gravity=Gravity.CENTER_VERTICAL | Gravity.LEFT;
+}

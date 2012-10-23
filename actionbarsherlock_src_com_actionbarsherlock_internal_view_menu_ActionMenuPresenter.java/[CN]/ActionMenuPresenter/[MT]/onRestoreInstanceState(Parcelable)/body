@@ -1,0 +1,10 @@
+{
+  SavedState saved=(SavedState)state;
+  if (saved.openSubMenuId > 0) {
+    MenuItem item=mMenu.findItem(saved.openSubMenuId);
+    if (item != null) {
+      SubMenuBuilder subMenu=(SubMenuBuilder)item.getSubMenu();
+      onSubMenuSelected(subMenu);
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  if (DEBUG)   Log.d(TAG,"[requestFeature] featureId: " + featureId);
+  if (mContentParent != null) {
+    throw new AndroidRuntimeException("requestFeature() must be called before adding content");
+  }
+switch (featureId) {
+case Window.FEATURE_ACTION_BAR:
+case Window.FEATURE_ACTION_BAR_OVERLAY:
+case Window.FEATURE_ACTION_MODE_OVERLAY:
+case Window.FEATURE_INDETERMINATE_PROGRESS:
+case Window.FEATURE_NO_TITLE:
+case Window.FEATURE_PROGRESS:
+    mFeatures|=(1 << featureId);
+  return true;
+default :
+return false;
+}
+}

@@ -1,0 +1,4 @@
+{
+  mIntent=intent;
+  return this;
+}

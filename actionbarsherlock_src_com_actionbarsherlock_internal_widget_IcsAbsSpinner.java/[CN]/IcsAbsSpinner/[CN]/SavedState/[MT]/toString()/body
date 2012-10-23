@@ -1,0 +1,3 @@
+{
+  return "AbsSpinner.SavedState{" + Integer.toHexString(System.identityHashCode(this)) + " selectedId="+ selectedId+ " position="+ position+ "}";
+}

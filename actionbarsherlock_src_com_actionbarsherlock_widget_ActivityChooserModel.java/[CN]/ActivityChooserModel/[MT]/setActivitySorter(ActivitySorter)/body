@@ -1,0 +1,9 @@
+{
+synchronized (mInstanceLock) {
+    if (mActivitySorter == activitySorter) {
+      return;
+    }
+    mActivitySorter=activitySorter;
+    sortActivities();
+  }
+}

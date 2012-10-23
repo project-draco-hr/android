@@ -1,0 +1,4 @@
+{
+  if (DEBUG)   Log.d(TAG,"[getSupportMenuInflater]");
+  return getSherlock().getMenuInflater();
+}

@@ -1,0 +1,18 @@
+{
+  Drawable d=mCurrentDrawable;
+  int dw=0;
+  int dh=0;
+  if (d != null) {
+    dw=Math.max(mMinWidth,Math.min(mMaxWidth,d.getIntrinsicWidth()));
+    dh=Math.max(mMinHeight,Math.min(mMaxHeight,d.getIntrinsicHeight()));
+  }
+  updateDrawableState();
+  dw+=getPaddingLeft() + getPaddingRight();
+  dh+=getPaddingTop() + getPaddingBottom();
+  if (IS_HONEYCOMB) {
+    setMeasuredDimension(View.resolveSizeAndState(dw,widthMeasureSpec,0),View.resolveSizeAndState(dh,heightMeasureSpec,0));
+  }
+ else {
+    setMeasuredDimension(View.resolveSize(dw,widthMeasureSpec),View.resolveSize(dh,heightMeasureSpec));
+  }
+}

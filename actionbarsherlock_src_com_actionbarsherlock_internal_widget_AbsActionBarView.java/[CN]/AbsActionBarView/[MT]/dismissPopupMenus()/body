@@ -1,0 +1,5 @@
+{
+  if (mActionMenuPresenter != null) {
+    mActionMenuPresenter.dismissPopupMenus();
+  }
+}

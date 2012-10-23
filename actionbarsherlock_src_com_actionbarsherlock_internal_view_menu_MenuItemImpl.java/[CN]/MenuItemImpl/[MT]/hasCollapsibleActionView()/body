@@ -1,0 +1,3 @@
+{
+  return (mShowAsAction & SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW) != 0 && mActionView != null;
+}

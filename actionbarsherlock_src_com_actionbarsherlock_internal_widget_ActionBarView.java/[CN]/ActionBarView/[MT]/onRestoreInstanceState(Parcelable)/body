@@ -1,0 +1,13 @@
+{
+  SavedState state=(SavedState)p;
+  super.onRestoreInstanceState(state.getSuperState());
+  if (state.expandedMenuItemId != 0 && mExpandedMenuPresenter != null && mOptionsMenu != null) {
+    final MenuItem item=mOptionsMenu.findItem(state.expandedMenuItemId);
+    if (item != null) {
+      item.expandActionView();
+    }
+  }
+  if (state.isOverflowOpen) {
+    postShowOverflowMenu();
+  }
+}

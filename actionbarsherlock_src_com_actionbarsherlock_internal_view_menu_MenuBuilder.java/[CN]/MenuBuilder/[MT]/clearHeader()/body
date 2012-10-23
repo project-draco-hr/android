@@ -1,0 +1,6 @@
+{
+  mHeaderIcon=null;
+  mHeaderTitle=null;
+  mHeaderView=null;
+  onItemsChanged(false);
+}

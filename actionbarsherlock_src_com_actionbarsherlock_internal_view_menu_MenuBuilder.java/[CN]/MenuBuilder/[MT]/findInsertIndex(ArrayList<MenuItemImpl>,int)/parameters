@@ -1,0 +1,2 @@
+ArrayList<MenuItemImpl> items
+int ordering

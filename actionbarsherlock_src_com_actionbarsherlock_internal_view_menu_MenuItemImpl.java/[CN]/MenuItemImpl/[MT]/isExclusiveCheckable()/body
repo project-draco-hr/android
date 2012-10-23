@@ -1,0 +1,3 @@
+{
+  return (mFlags & EXCLUSIVE) != 0;
+}

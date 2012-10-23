@@ -1,0 +1,9 @@
+{
+  ActivityChooserModel dataModel=ActivityChooserModel.get(mContext,mShareHistoryFileName);
+  final int itemId=item.getItemId();
+  Intent launchIntent=dataModel.chooseActivity(itemId);
+  if (launchIntent != null) {
+    mContext.startActivity(launchIntent);
+  }
+  return true;
+}

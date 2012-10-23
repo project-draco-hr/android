@@ -1,0 +1,10 @@
+{
+  super(context);
+  setHorizontalScrollBarEnabled(false);
+  TypedArray a=getContext().obtainStyledAttributes(null,R.styleable.SherlockActionBar,R.attr.actionBarStyle,0);
+  setContentHeight(a.getLayoutDimension(R.styleable.SherlockActionBar_height,0));
+  a.recycle();
+  mInflater=LayoutInflater.from(context);
+  mTabLayout=createTabLayout();
+  addView(mTabLayout,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.MATCH_PARENT));
+}

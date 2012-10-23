@@ -1,0 +1,10 @@
+{
+  mQueryTextView.setText(query);
+  if (query != null) {
+    mQueryTextView.setSelection(mQueryTextView.length());
+    mUserQuery=query;
+  }
+  if (submit && !TextUtils.isEmpty(query)) {
+    onSubmitQuery();
+  }
+}

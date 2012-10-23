@@ -1,0 +1,5 @@
+{
+  TypedValue outValue=new TypedValue();
+  getContext().getTheme().resolveAttribute(R.attr.searchViewSearchIcon,outValue,true);
+  return outValue.resourceId;
+}

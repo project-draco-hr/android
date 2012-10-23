@@ -1,0 +1,16 @@
+{
+  if (getWidth() == 0 || getHeight() == 0) {
+    return;
+  }
+  if (mIsSplit) {
+    if (mSplitBackground != null)     mSplitBackground.draw(canvas);
+  }
+ else {
+    if (mBackground != null) {
+      mBackground.draw(canvas);
+    }
+    if (mStackedBackground != null && mIsStacked) {
+      mStackedBackground.draw(canvas);
+    }
+  }
+}

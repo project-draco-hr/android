@@ -1,0 +1,18 @@
+{
+  View child=null;
+  if (getChildCount() > 0) {
+    child=getChildAt(0);
+  }
+ else   if (mAdapter != null && mAdapter.getCount() > 0) {
+    child=makeAndAddView(0);
+    mRecycler.put(0,child);
+    removeAllViewsInLayout();
+  }
+  if (child != null) {
+    final int childBaseline=child.getBaseline();
+    return childBaseline >= 0 ? child.getTop() + childBaseline : -1;
+  }
+ else {
+    return -1;
+  }
+}

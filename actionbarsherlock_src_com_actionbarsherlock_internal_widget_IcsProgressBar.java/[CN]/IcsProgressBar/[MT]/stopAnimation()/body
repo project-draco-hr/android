@@ -1,0 +1,9 @@
+{
+  mAnimation=null;
+  mTransformation=null;
+  if (mIndeterminateDrawable instanceof Animatable) {
+    ((Animatable)mIndeterminateDrawable).stop();
+    mShouldStartAnimationDrawable=false;
+  }
+  postInvalidate();
+}

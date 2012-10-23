@@ -1,0 +1,24 @@
+{
+  SparseArray<Parcelable> viewStates=null;
+  final int itemCount=size();
+  for (int i=0; i < itemCount; i++) {
+    final MenuItem item=getItem(i);
+    final View v=item.getActionView();
+    if (v != null && v.getId() != View.NO_ID) {
+      if (viewStates == null) {
+        viewStates=new SparseArray<Parcelable>();
+      }
+      v.saveHierarchyState(viewStates);
+      if (item.isActionViewExpanded()) {
+        outStates.putInt(EXPANDED_ACTION_VIEW_ID,item.getItemId());
+      }
+    }
+    if (item.hasSubMenu()) {
+      final SubMenuBuilder subMenu=(SubMenuBuilder)item.getSubMenu();
+      subMenu.saveActionViewStates(outStates);
+    }
+  }
+  if (viewStates != null) {
+    outStates.putSparseParcelableArray(getActionViewStatesKey(),viewStates);
+  }
+}

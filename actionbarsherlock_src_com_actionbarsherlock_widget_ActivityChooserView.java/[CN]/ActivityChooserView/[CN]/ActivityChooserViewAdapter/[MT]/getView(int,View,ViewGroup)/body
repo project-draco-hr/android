@@ -1,0 +1,34 @@
+{
+  final int itemViewType=getItemViewType(position);
+switch (itemViewType) {
+case ITEM_VIEW_TYPE_FOOTER:
+    if (convertView == null || convertView.getId() != ITEM_VIEW_TYPE_FOOTER) {
+      convertView=LayoutInflater.from(getContext()).inflate(R.layout.abs__activity_chooser_view_list_item,parent,false);
+      convertView.setId(ITEM_VIEW_TYPE_FOOTER);
+      TextView titleView=(TextView)convertView.findViewById(R.id.abs__title);
+      titleView.setText(mContext.getString(R.string.abs__activity_chooser_view_see_all));
+    }
+  return convertView;
+case ITEM_VIEW_TYPE_ACTIVITY:
+if (convertView == null || convertView.getId() != R.id.abs__list_item) {
+  convertView=LayoutInflater.from(getContext()).inflate(R.layout.abs__activity_chooser_view_list_item,parent,false);
+}
+PackageManager packageManager=mContext.getPackageManager();
+ImageView iconView=(ImageView)convertView.findViewById(R.id.abs__icon);
+ResolveInfo activity=(ResolveInfo)getItem(position);
+iconView.setImageDrawable(activity.loadIcon(packageManager));
+TextView titleView=(TextView)convertView.findViewById(R.id.abs__title);
+titleView.setText(activity.loadLabel(packageManager));
+if (IS_HONEYCOMB) {
+if (mShowDefaultActivity && position == 0 && mHighlightDefaultActivity) {
+SetActivated.invoke(convertView,true);
+}
+ else {
+SetActivated.invoke(convertView,false);
+}
+}
+return convertView;
+default :
+throw new IllegalArgumentException();
+}
+}

@@ -1,0 +1,24 @@
+{
+  if (mTitleLayout == null) {
+    LayoutInflater inflater=LayoutInflater.from(getContext());
+    inflater.inflate(R.layout.abs__action_bar_title_item,this);
+    mTitleLayout=(LinearLayout)getChildAt(getChildCount() - 1);
+    mTitleView=(TextView)mTitleLayout.findViewById(R.id.abs__action_bar_title);
+    mSubtitleView=(TextView)mTitleLayout.findViewById(R.id.abs__action_bar_subtitle);
+    if (mTitleStyleRes != 0) {
+      mTitleView.setTextAppearance(mContext,mTitleStyleRes);
+    }
+    if (mSubtitleStyleRes != 0) {
+      mSubtitleView.setTextAppearance(mContext,mSubtitleStyleRes);
+    }
+  }
+  mTitleView.setText(mTitle);
+  mSubtitleView.setText(mSubtitle);
+  final boolean hasTitle=!TextUtils.isEmpty(mTitle);
+  final boolean hasSubtitle=!TextUtils.isEmpty(mSubtitle);
+  mSubtitleView.setVisibility(hasSubtitle ? VISIBLE : GONE);
+  mTitleLayout.setVisibility(hasTitle || hasSubtitle ? VISIBLE : GONE);
+  if (mTitleLayout.getParent() == null) {
+    addView(mTitleLayout);
+  }
+}

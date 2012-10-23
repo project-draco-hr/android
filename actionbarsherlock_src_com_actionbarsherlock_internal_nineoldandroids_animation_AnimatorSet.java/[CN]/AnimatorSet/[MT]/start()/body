@@ -1,0 +1,82 @@
+{
+  mTerminated=false;
+  mStarted=true;
+  sortNodes();
+  int numSortedNodes=mSortedNodes.size();
+  for (int i=0; i < numSortedNodes; ++i) {
+    Node node=mSortedNodes.get(i);
+    ArrayList<AnimatorListener> oldListeners=node.animation.getListeners();
+    if (oldListeners != null && oldListeners.size() > 0) {
+      final ArrayList<AnimatorListener> clonedListeners=new ArrayList<AnimatorListener>(oldListeners);
+      for (      AnimatorListener listener : clonedListeners) {
+        if (listener instanceof DependencyListener || listener instanceof AnimatorSetListener) {
+          node.animation.removeListener(listener);
+        }
+      }
+    }
+  }
+  final ArrayList<Node> nodesToStart=new ArrayList<Node>();
+  for (int i=0; i < numSortedNodes; ++i) {
+    Node node=mSortedNodes.get(i);
+    if (mSetListener == null) {
+      mSetListener=new AnimatorSetListener(this);
+    }
+    if (node.dependencies == null || node.dependencies.size() == 0) {
+      nodesToStart.add(node);
+    }
+ else {
+      int numDependencies=node.dependencies.size();
+      for (int j=0; j < numDependencies; ++j) {
+        Dependency dependency=node.dependencies.get(j);
+        dependency.node.animation.addListener(new DependencyListener(this,node,dependency.rule));
+      }
+      node.tmpDependencies=(ArrayList<Dependency>)node.dependencies.clone();
+    }
+    node.animation.addListener(mSetListener);
+  }
+  if (mStartDelay <= 0) {
+    for (    Node node : nodesToStart) {
+      node.animation.start();
+      mPlayingSet.add(node.animation);
+    }
+  }
+ else {
+    mDelayAnim=ValueAnimator.ofFloat(0f,1f);
+    mDelayAnim.setDuration(mStartDelay);
+    mDelayAnim.addListener(new AnimatorListenerAdapter(){
+      boolean canceled=false;
+      public void onAnimationCancel(      Animator anim){
+        canceled=true;
+      }
+      public void onAnimationEnd(      Animator anim){
+        if (!canceled) {
+          int numNodes=nodesToStart.size();
+          for (int i=0; i < numNodes; ++i) {
+            Node node=nodesToStart.get(i);
+            node.animation.start();
+            mPlayingSet.add(node.animation);
+          }
+        }
+      }
+    }
+);
+    mDelayAnim.start();
+  }
+  if (mListeners != null) {
+    ArrayList<AnimatorListener> tmpListeners=(ArrayList<AnimatorListener>)mListeners.clone();
+    int numListeners=tmpListeners.size();
+    for (int i=0; i < numListeners; ++i) {
+      tmpListeners.get(i).onAnimationStart(this);
+    }
+  }
+  if (mNodes.size() == 0 && mStartDelay == 0) {
+    mStarted=false;
+    if (mListeners != null) {
+      ArrayList<AnimatorListener> tmpListeners=(ArrayList<AnimatorListener>)mListeners.clone();
+      int numListeners=tmpListeners.size();
+      for (int i=0; i < numListeners; ++i) {
+        tmpListeners.get(i).onAnimationEnd(this);
+      }
+    }
+  }
+}

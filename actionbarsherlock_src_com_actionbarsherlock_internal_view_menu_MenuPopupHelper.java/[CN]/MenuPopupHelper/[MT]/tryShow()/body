@@ -1,0 +1,24 @@
+{
+  mPopup=new IcsListPopupWindow(mContext,null,R.attr.popupMenuStyle);
+  mPopup.setOnDismissListener(this);
+  mPopup.setOnItemClickListener(this);
+  mAdapter=new MenuAdapter(mMenu);
+  mPopup.setAdapter(mAdapter);
+  mPopup.setModal(true);
+  View anchor=mAnchorView;
+  if (anchor != null) {
+    final boolean addGlobalListener=mTreeObserver == null;
+    mTreeObserver=anchor.getViewTreeObserver();
+    if (addGlobalListener)     mTreeObserver.addOnGlobalLayoutListener(this);
+    ((View_HasStateListenerSupport)anchor).addOnAttachStateChangeListener(this);
+    mPopup.setAnchorView(anchor);
+  }
+ else {
+    return false;
+  }
+  mPopup.setContentWidth(Math.min(measureContentWidth(mAdapter),mPopupMaxWidth));
+  mPopup.setInputMethodMode(PopupWindow.INPUT_METHOD_NOT_NEEDED);
+  mPopup.show();
+  mPopup.getListView().setOnKeyListener(this);
+  return true;
+}

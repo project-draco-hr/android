@@ -1,0 +1,6 @@
+{
+  mActionView=null;
+  mActionProvider=actionProvider;
+  mMenu.onItemsChanged(true);
+  return this;
+}

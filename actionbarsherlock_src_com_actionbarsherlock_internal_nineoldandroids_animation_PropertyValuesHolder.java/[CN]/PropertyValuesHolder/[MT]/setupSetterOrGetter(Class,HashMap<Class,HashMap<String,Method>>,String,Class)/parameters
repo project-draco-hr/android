@@ -1,0 +1,4 @@
+Class targetClass
+HashMap<Class,HashMap<String,Method>> propertyMapMap
+String prefix
+Class valueType

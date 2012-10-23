@@ -1,0 +1,3 @@
+{
+  mSpinner.setSelection(position);
+}

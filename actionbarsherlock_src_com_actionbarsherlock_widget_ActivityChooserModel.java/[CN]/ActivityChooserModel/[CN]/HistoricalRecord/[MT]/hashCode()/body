@@ -1,0 +1,8 @@
+{
+  final int prime=31;
+  int result=1;
+  result=prime * result + ((activity == null) ? 0 : activity.hashCode());
+  result=prime * result + (int)(time ^ (time >>> 32));
+  result=prime * result + Float.floatToIntBits(weight);
+  return result;
+}

@@ -1,0 +1,4 @@
+{
+  mContext=context;
+  mItems=new ArrayList<ActionMenuItem>();
+}

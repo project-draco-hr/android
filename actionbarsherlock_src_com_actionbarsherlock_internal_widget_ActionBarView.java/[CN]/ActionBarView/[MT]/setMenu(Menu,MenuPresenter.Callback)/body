@@ -1,0 +1,53 @@
+{
+  if (menu == mOptionsMenu)   return;
+  if (mOptionsMenu != null) {
+    mOptionsMenu.removeMenuPresenter(mActionMenuPresenter);
+    mOptionsMenu.removeMenuPresenter(mExpandedMenuPresenter);
+  }
+  MenuBuilder builder=(MenuBuilder)menu;
+  mOptionsMenu=builder;
+  if (mMenuView != null) {
+    final ViewGroup oldParent=(ViewGroup)mMenuView.getParent();
+    if (oldParent != null) {
+      oldParent.removeView(mMenuView);
+    }
+  }
+  if (mActionMenuPresenter == null) {
+    mActionMenuPresenter=new ActionMenuPresenter(mContext);
+    mActionMenuPresenter.setCallback(cb);
+    mActionMenuPresenter.setId(R.id.abs__action_menu_presenter);
+    mExpandedMenuPresenter=new ExpandedActionViewMenuPresenter();
+  }
+  ActionMenuView menuView;
+  final LayoutParams layoutParams=new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.MATCH_PARENT);
+  if (!mSplitActionBar) {
+    mActionMenuPresenter.setExpandedActionViewsExclusive(getResources_getBoolean(getContext(),R.bool.abs__action_bar_expanded_action_views_exclusive));
+    configPresenters(builder);
+    menuView=(ActionMenuView)mActionMenuPresenter.getMenuView(this);
+    final ViewGroup oldParent=(ViewGroup)menuView.getParent();
+    if (oldParent != null && oldParent != this) {
+      oldParent.removeView(menuView);
+    }
+    addView(menuView,layoutParams);
+  }
+ else {
+    mActionMenuPresenter.setExpandedActionViewsExclusive(false);
+    mActionMenuPresenter.setWidthLimit(getContext().getResources().getDisplayMetrics().widthPixels,true);
+    mActionMenuPresenter.setItemLimit(Integer.MAX_VALUE);
+    layoutParams.width=LayoutParams.MATCH_PARENT;
+    configPresenters(builder);
+    menuView=(ActionMenuView)mActionMenuPresenter.getMenuView(this);
+    if (mSplitView != null) {
+      final ViewGroup oldParent=(ViewGroup)menuView.getParent();
+      if (oldParent != null && oldParent != mSplitView) {
+        oldParent.removeView(menuView);
+      }
+      menuView.setVisibility(getAnimatedVisibility());
+      mSplitView.addView(menuView,layoutParams);
+    }
+ else {
+      menuView.setLayoutParams(layoutParams);
+    }
+  }
+  mMenuView=menuView;
+}

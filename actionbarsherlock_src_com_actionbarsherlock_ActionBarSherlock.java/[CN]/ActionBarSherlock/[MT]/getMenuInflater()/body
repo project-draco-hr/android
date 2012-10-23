@@ -1,0 +1,12 @@
+{
+  if (DEBUG)   Log.d(TAG,"[getMenuInflater]");
+  if (mMenuInflater == null) {
+    if (getActionBar() != null) {
+      mMenuInflater=new MenuInflater(getThemedContext(),mActivity);
+    }
+ else {
+      mMenuInflater=new MenuInflater(mActivity);
+    }
+  }
+  return mMenuInflater;
+}

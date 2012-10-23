@@ -1,0 +1,8 @@
+{
+  mItemData=itemData;
+  setIcon(itemData.getIcon());
+  setTitle(itemData.getTitleForItemView(this));
+  setId(itemData.getItemId());
+  setVisibility(itemData.isVisible() ? View.VISIBLE : View.GONE);
+  setEnabled(itemData.isEnabled());
+}

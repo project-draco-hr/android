@@ -1,0 +1,15 @@
+{
+  if (DEBUG)   Log.d(TAG,"[setContentView] layoutResId: " + layoutResId);
+  if (mContentParent == null) {
+    installDecor();
+  }
+ else {
+    mContentParent.removeAllViews();
+  }
+  mActivity.getLayoutInflater().inflate(layoutResId,mContentParent);
+  android.view.Window.Callback callback=mActivity.getWindow().getCallback();
+  if (callback != null) {
+    callback.onContentChanged();
+  }
+  initActionBar();
+}

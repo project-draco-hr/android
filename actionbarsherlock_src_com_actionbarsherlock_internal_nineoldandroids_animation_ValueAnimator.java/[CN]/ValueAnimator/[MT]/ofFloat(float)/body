@@ -1,0 +1,5 @@
+{
+  ValueAnimator anim=new ValueAnimator();
+  anim.setFloatValues(values);
+  return anim;
+}

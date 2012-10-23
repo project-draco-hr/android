@@ -1,0 +1,3 @@
+{
+  return mTitleCondensed != null ? mTitleCondensed : mTitle;
+}

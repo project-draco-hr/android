@@ -1,0 +1,10 @@
+{
+  final int ordering=getOrdering(categoryOrder);
+  final MenuItemImpl item=new MenuItemImpl(this,group,id,categoryOrder,ordering,title,mDefaultShowAsAction);
+  if (mCurrentMenuInfo != null) {
+    item.setMenuInfo(mCurrentMenuInfo);
+  }
+  mItems.add(findInsertIndex(mItems,ordering),item);
+  onItemsChanged(true);
+  return item;
+}

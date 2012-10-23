@@ -1,0 +1,10 @@
+{
+  if (mIconView != null && mPreserveIconSpacing) {
+    ViewGroup.LayoutParams lp=getLayoutParams();
+    LayoutParams iconLp=(LayoutParams)mIconView.getLayoutParams();
+    if (lp.height > 0 && iconLp.width <= 0) {
+      iconLp.width=lp.height;
+    }
+  }
+  super.onMeasure(widthMeasureSpec,heightMeasureSpec);
+}

@@ -1,0 +1,4 @@
+{
+  mShareHistoryFileName=shareHistoryFile;
+  setActivityChooserPolicyIfNeeded();
+}

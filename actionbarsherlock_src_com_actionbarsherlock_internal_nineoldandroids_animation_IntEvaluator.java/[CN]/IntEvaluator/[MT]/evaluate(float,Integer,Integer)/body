@@ -1,0 +1,4 @@
+{
+  int startInt=startValue;
+  return (int)(startInt + fraction * (endValue - startInt));
+}

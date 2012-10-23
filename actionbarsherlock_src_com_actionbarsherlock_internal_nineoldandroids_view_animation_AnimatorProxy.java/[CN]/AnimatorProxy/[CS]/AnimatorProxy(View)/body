@@ -1,0 +1,6 @@
+{
+  setDuration(0);
+  setFillAfter(true);
+  view.setAnimation(this);
+  mView=new WeakReference<View>(view);
+}

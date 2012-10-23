@@ -1,0 +1,6 @@
+{
+  final boolean hasText=!TextUtils.isEmpty(mQueryTextView.getText());
+  final boolean showClose=hasText || (mIconifiedByDefault && !mExpandedInActionView);
+  mCloseButton.setVisibility(showClose ? VISIBLE : GONE);
+  mCloseButton.getDrawable().setState(hasText ? ENABLED_STATE_SET : EMPTY_STATE_SET);
+}

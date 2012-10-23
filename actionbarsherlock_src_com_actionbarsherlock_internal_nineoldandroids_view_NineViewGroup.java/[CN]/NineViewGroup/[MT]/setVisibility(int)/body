@@ -1,0 +1,11 @@
+{
+  if (mProxy != null) {
+    if (visibility == GONE) {
+      clearAnimation();
+    }
+ else     if (visibility == VISIBLE) {
+      setAnimation(mProxy);
+    }
+  }
+  super.setVisibility(visibility);
+}

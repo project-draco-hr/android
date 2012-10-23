@@ -1,0 +1,4 @@
+{
+  if (setVisibleInt(shown))   mMenu.onItemVisibleChanged(this);
+  return this;
+}

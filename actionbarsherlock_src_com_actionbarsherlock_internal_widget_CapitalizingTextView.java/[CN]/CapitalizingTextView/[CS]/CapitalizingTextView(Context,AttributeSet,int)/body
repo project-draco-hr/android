@@ -1,0 +1,6 @@
+{
+  super(context,attrs,defStyle);
+  TypedArray a=context.obtainStyledAttributes(attrs,R_styleable_TextView,defStyle,0);
+  mAllCaps=a.getBoolean(R_styleable_TextView_textAllCaps,true);
+  a.recycle();
+}

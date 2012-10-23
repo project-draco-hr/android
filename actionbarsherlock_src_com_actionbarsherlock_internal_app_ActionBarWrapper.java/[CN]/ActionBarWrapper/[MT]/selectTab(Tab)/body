@@ -1,0 +1,3 @@
+{
+  mActionBar.selectTab(((TabWrapper)tab).mNativeTab);
+}

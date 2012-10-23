@@ -1,0 +1,3 @@
+{
+  return mContainerView.getVisibility() == View.VISIBLE;
+}

@@ -1,0 +1,11 @@
+{
+synchronized (sRegistryLock) {
+    ActivityChooserModel dataModel=sDataModelRegistry.get(historyFileName);
+    if (dataModel == null) {
+      dataModel=new ActivityChooserModel(context,historyFileName);
+      sDataModelRegistry.put(historyFileName,dataModel);
+    }
+    dataModel.readHistoricalData();
+    return dataModel;
+  }
+}

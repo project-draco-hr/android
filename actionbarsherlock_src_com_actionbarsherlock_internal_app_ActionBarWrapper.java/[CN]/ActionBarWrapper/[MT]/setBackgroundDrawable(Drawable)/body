@@ -1,0 +1,3 @@
+{
+  mActionBar.setBackgroundDrawable(d);
+}

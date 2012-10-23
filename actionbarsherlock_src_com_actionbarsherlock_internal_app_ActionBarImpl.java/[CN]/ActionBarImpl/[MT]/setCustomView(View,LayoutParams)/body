@@ -1,0 +1,4 @@
+{
+  view.setLayoutParams(layoutParams);
+  mActionView.setCustomNavigationView(view);
+}

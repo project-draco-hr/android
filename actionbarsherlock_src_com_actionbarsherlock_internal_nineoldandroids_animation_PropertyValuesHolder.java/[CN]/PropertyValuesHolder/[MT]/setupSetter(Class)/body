@@ -1,0 +1,3 @@
+{
+  mSetter=setupSetterOrGetter(targetClass,sSetterPropertyMap,"set",mValueType);
+}

@@ -1,0 +1,7 @@
+{
+  updateViewsVisibility(isIconified());
+  postUpdateFocusedState();
+  if (mQueryTextView.hasFocus()) {
+    forceSuggestionQuery();
+  }
+}

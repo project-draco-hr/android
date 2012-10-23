@@ -1,0 +1,15 @@
+{
+  if (mTabScrollView != null) {
+    return;
+  }
+  ScrollingTabContainerView tabScroller=new ScrollingTabContainerView(mContext);
+  if (mHasEmbeddedTabs) {
+    tabScroller.setVisibility(View.VISIBLE);
+    mActionView.setEmbeddedTabView(tabScroller);
+  }
+ else {
+    tabScroller.setVisibility(getNavigationMode() == NAVIGATION_MODE_TABS ? View.VISIBLE : View.GONE);
+    mContainerView.setTabContainer(tabScroller);
+  }
+  mTabScrollView=tabScroller;
+}

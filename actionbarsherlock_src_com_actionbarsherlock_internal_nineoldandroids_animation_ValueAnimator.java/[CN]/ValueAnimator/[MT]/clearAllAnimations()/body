@@ -1,0 +1,5 @@
+{
+  sAnimations.get().clear();
+  sPendingAnimations.get().clear();
+  sDelayedAnims.get().clear();
+}

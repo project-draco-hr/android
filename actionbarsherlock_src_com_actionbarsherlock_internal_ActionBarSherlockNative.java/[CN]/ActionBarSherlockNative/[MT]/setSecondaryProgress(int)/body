@@ -1,0 +1,4 @@
+{
+  if (DEBUG)   Log.d(TAG,"[setSecondaryProgress] secondaryProgress: " + secondaryProgress);
+  mActivity.setSecondaryProgress(secondaryProgress);
+}

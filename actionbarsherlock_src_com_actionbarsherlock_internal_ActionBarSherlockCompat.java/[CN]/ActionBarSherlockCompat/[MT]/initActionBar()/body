@@ -1,0 +1,13 @@
+{
+  if (DEBUG)   Log.d(TAG,"[initActionBar]");
+  if (mDecor == null) {
+    installDecor();
+  }
+  if ((aActionBar != null) || !hasFeature(Window.FEATURE_ACTION_BAR) || hasFeature(Window.FEATURE_NO_TITLE)|| mActivity.isChild()) {
+    return;
+  }
+  aActionBar=new ActionBarImpl(mActivity,mFeatures);
+  if (!mIsDelegate) {
+    wActionBar.setWindowTitle(mActivity.getTitle());
+  }
+}

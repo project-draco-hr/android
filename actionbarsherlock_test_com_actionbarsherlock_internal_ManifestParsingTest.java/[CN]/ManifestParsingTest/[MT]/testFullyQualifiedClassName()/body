@@ -1,0 +1,5 @@
+{
+  String expected="com.other.package.SomeClass";
+  String actual=cleanActivityName("com.jakewharton.test","com.other.package.SomeClass");
+  assertThat(expected,equalTo(actual));
+}

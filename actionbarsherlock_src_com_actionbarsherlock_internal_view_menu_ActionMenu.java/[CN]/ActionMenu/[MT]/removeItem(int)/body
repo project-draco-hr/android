@@ -1,0 +1,3 @@
+{
+  mItems.remove(findItemIndex(id));
+}

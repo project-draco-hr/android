@@ -1,0 +1,15 @@
+{
+  mActivites.clear();
+  if (mIntent != null) {
+    List<ResolveInfo> resolveInfos=mContext.getPackageManager().queryIntentActivities(mIntent,0);
+    final int resolveInfoCount=resolveInfos.size();
+    for (int i=0; i < resolveInfoCount; i++) {
+      ResolveInfo resolveInfo=resolveInfos.get(i);
+      mActivites.add(new ActivityResolveInfo(resolveInfo));
+    }
+    sortActivities();
+  }
+ else {
+    notifyChanged();
+  }
+}

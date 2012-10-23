@@ -1,0 +1,10 @@
+{
+  TypedArray a=mContext.obtainStyledAttributes(attrs,R.styleable.SherlockMenuGroup);
+  groupId=a.getResourceId(R.styleable.SherlockMenuGroup_android_id,defaultGroupId);
+  groupCategory=a.getInt(R.styleable.SherlockMenuGroup_android_menuCategory,defaultItemCategory);
+  groupOrder=a.getInt(R.styleable.SherlockMenuGroup_android_orderInCategory,defaultItemOrder);
+  groupCheckable=a.getInt(R.styleable.SherlockMenuGroup_android_checkableBehavior,defaultItemCheckable);
+  groupVisible=a.getBoolean(R.styleable.SherlockMenuGroup_android_visible,defaultItemVisible);
+  groupEnabled=a.getBoolean(R.styleable.SherlockMenuGroup_android_enabled,defaultItemEnabled);
+  a.recycle();
+}

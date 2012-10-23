@@ -1,0 +1,23 @@
+{
+  if (keyCode == KeyEvent.KEYCODE_BACK) {
+    if (event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {
+      KeyEvent.DispatcherState state=getKeyDispatcherState();
+      if (state != null) {
+        state.startTracking(event,this);
+      }
+      return true;
+    }
+ else     if (event.getAction() == KeyEvent.ACTION_UP) {
+      KeyEvent.DispatcherState state=getKeyDispatcherState();
+      if (state != null) {
+        state.handleUpEvent(event);
+      }
+      if (event.isTracking() && !event.isCanceled()) {
+        mSearchView.clearFocus();
+        mSearchView.setImeVisibility(false);
+        return true;
+      }
+    }
+  }
+  return super.onKeyPreIme(keyCode,event);
+}

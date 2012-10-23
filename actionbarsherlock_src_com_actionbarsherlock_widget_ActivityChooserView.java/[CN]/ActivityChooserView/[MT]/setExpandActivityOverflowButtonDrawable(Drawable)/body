@@ -1,0 +1,3 @@
+{
+  mExpandActivityOverflowButtonImage.setImageDrawable(drawable);
+}

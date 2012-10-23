@@ -1,0 +1,12 @@
+{
+  if ((mShowAsAction & SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW) == 0) {
+    return false;
+  }
+  if (mActionView == null) {
+    return true;
+  }
+  if (mOnActionExpandListener == null || mOnActionExpandListener.onMenuItemActionCollapse(this)) {
+    return mMenu.collapseItemActionView(this);
+  }
+  return false;
+}

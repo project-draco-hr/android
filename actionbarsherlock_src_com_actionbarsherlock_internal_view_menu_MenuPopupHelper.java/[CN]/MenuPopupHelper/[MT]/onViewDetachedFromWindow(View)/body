@@ -1,0 +1,7 @@
+{
+  if (mTreeObserver != null) {
+    if (!mTreeObserver.isAlive())     mTreeObserver=v.getViewTreeObserver();
+    mTreeObserver.removeGlobalOnLayoutListener(this);
+  }
+  ((View_HasStateListenerSupport)v).removeOnAttachStateChangeListener(this);
+}

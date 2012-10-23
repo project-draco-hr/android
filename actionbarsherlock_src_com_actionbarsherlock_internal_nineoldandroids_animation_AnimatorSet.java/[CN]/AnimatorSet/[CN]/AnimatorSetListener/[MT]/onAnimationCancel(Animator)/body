@@ -1,0 +1,12 @@
+{
+  if (!mTerminated) {
+    if (mPlayingSet.size() == 0) {
+      if (mListeners != null) {
+        int numListeners=mListeners.size();
+        for (int i=0; i < numListeners; ++i) {
+          mListeners.get(i).onAnimationCancel(mAnimatorSet);
+        }
+      }
+    }
+  }
+}

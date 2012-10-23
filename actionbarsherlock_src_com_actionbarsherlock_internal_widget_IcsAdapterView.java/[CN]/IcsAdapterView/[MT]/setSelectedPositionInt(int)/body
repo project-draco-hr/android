@@ -1,0 +1,4 @@
+{
+  mSelectedPosition=position;
+  mSelectedRowId=getItemIdAtPosition(position);
+}

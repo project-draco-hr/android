@@ -1,0 +1,4 @@
+{
+  mNativeItem.setActionProvider(new ActionProviderWrapper(actionProvider));
+  return this;
+}

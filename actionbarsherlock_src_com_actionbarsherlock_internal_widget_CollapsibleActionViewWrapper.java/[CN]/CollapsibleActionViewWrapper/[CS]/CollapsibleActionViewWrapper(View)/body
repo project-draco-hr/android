@@ -1,0 +1,5 @@
+{
+  super(child.getContext());
+  this.child=(CollapsibleActionView)child;
+  addView(child);
+}

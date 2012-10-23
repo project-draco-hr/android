@@ -1,0 +1,143 @@
+{
+  final int childCount=getChildCount();
+  if (mIsCollapsable) {
+    int visibleChildren=0;
+    for (int i=0; i < childCount; i++) {
+      final View child=getChildAt(i);
+      if (child.getVisibility() != GONE && !(child == mMenuView && mMenuView.getChildCount() == 0)) {
+        visibleChildren++;
+      }
+    }
+    if (visibleChildren == 0) {
+      setMeasuredDimension(0,0);
+      mIsCollapsed=true;
+      return;
+    }
+  }
+  mIsCollapsed=false;
+  int widthMode=MeasureSpec.getMode(widthMeasureSpec);
+  if (widthMode != MeasureSpec.EXACTLY) {
+    throw new IllegalStateException(getClass().getSimpleName() + " can only be used " + "with android:layout_width=\"match_parent\" (or fill_parent)");
+  }
+  int heightMode=MeasureSpec.getMode(heightMeasureSpec);
+  if (heightMode != MeasureSpec.AT_MOST) {
+    throw new IllegalStateException(getClass().getSimpleName() + " can only be used " + "with android:layout_height=\"wrap_content\"");
+  }
+  int contentWidth=MeasureSpec.getSize(widthMeasureSpec);
+  int maxHeight=mContentHeight > 0 ? mContentHeight : MeasureSpec.getSize(heightMeasureSpec);
+  final int verticalPadding=getPaddingTop() + getPaddingBottom();
+  final int paddingLeft=getPaddingLeft();
+  final int paddingRight=getPaddingRight();
+  final int height=maxHeight - verticalPadding;
+  final int childSpecHeight=MeasureSpec.makeMeasureSpec(height,MeasureSpec.AT_MOST);
+  int availableWidth=contentWidth - paddingLeft - paddingRight;
+  int leftOfCenter=availableWidth / 2;
+  int rightOfCenter=leftOfCenter;
+  HomeView homeLayout=mExpandedActionView != null ? mExpandedHomeLayout : mHomeLayout;
+  if (homeLayout.getVisibility() != GONE) {
+    final ViewGroup.LayoutParams lp=homeLayout.getLayoutParams();
+    int homeWidthSpec;
+    if (lp.width < 0) {
+      homeWidthSpec=MeasureSpec.makeMeasureSpec(availableWidth,MeasureSpec.AT_MOST);
+    }
+ else {
+      homeWidthSpec=MeasureSpec.makeMeasureSpec(lp.width,MeasureSpec.EXACTLY);
+    }
+    homeLayout.measure(homeWidthSpec,MeasureSpec.makeMeasureSpec(height,MeasureSpec.EXACTLY));
+    final int homeWidth=homeLayout.getMeasuredWidth() + homeLayout.getLeftOffset();
+    availableWidth=Math.max(0,availableWidth - homeWidth);
+    leftOfCenter=Math.max(0,availableWidth - homeWidth);
+  }
+  if (mMenuView != null && mMenuView.getParent() == this) {
+    availableWidth=measureChildView(mMenuView,availableWidth,childSpecHeight,0);
+    rightOfCenter=Math.max(0,rightOfCenter - mMenuView.getMeasuredWidth());
+  }
+  if (mIndeterminateProgressView != null && mIndeterminateProgressView.getVisibility() != GONE) {
+    availableWidth=measureChildView(mIndeterminateProgressView,availableWidth,childSpecHeight,0);
+    rightOfCenter=Math.max(0,rightOfCenter - mIndeterminateProgressView.getMeasuredWidth());
+  }
+  final boolean showTitle=mTitleLayout != null && mTitleLayout.getVisibility() != GONE && (mDisplayOptions & ActionBar.DISPLAY_SHOW_TITLE) != 0;
+  if (mExpandedActionView == null) {
+switch (mNavigationMode) {
+case ActionBar.NAVIGATION_MODE_LIST:
+      if (mListNavLayout != null) {
+        final int itemPaddingSize=showTitle ? mItemPadding * 2 : mItemPadding;
+        availableWidth=Math.max(0,availableWidth - itemPaddingSize);
+        leftOfCenter=Math.max(0,leftOfCenter - itemPaddingSize);
+        mListNavLayout.measure(MeasureSpec.makeMeasureSpec(availableWidth,MeasureSpec.AT_MOST),MeasureSpec.makeMeasureSpec(height,MeasureSpec.EXACTLY));
+        final int listNavWidth=mListNavLayout.getMeasuredWidth();
+        availableWidth=Math.max(0,availableWidth - listNavWidth);
+        leftOfCenter=Math.max(0,leftOfCenter - listNavWidth);
+      }
+    break;
+case ActionBar.NAVIGATION_MODE_TABS:
+  if (mTabScrollView != null) {
+    final int itemPaddingSize=showTitle ? mItemPadding * 2 : mItemPadding;
+    availableWidth=Math.max(0,availableWidth - itemPaddingSize);
+    leftOfCenter=Math.max(0,leftOfCenter - itemPaddingSize);
+    mTabScrollView.measure(MeasureSpec.makeMeasureSpec(availableWidth,MeasureSpec.AT_MOST),MeasureSpec.makeMeasureSpec(height,MeasureSpec.EXACTLY));
+    final int tabWidth=mTabScrollView.getMeasuredWidth();
+    availableWidth=Math.max(0,availableWidth - tabWidth);
+    leftOfCenter=Math.max(0,leftOfCenter - tabWidth);
+  }
+break;
+}
+}
+View customView=null;
+if (mExpandedActionView != null) {
+customView=mExpandedActionView;
+}
+ else if ((mDisplayOptions & ActionBar.DISPLAY_SHOW_CUSTOM) != 0 && mCustomNavView != null) {
+customView=mCustomNavView;
+}
+if (customView != null) {
+final ViewGroup.LayoutParams lp=generateLayoutParams(customView.getLayoutParams());
+final ActionBar.LayoutParams ablp=lp instanceof ActionBar.LayoutParams ? (ActionBar.LayoutParams)lp : null;
+int horizontalMargin=0;
+int verticalMargin=0;
+if (ablp != null) {
+horizontalMargin=ablp.leftMargin + ablp.rightMargin;
+verticalMargin=ablp.topMargin + ablp.bottomMargin;
+}
+int customNavHeightMode;
+if (mContentHeight <= 0) {
+customNavHeightMode=MeasureSpec.AT_MOST;
+}
+ else {
+customNavHeightMode=lp.height != LayoutParams.WRAP_CONTENT ? MeasureSpec.EXACTLY : MeasureSpec.AT_MOST;
+}
+final int customNavHeight=Math.max(0,(lp.height >= 0 ? Math.min(lp.height,height) : height) - verticalMargin);
+final int customNavWidthMode=lp.width != LayoutParams.WRAP_CONTENT ? MeasureSpec.EXACTLY : MeasureSpec.AT_MOST;
+int customNavWidth=Math.max(0,(lp.width >= 0 ? Math.min(lp.width,availableWidth) : availableWidth) - horizontalMargin);
+final int hgrav=(ablp != null ? ablp.gravity : DEFAULT_CUSTOM_GRAVITY) & Gravity.HORIZONTAL_GRAVITY_MASK;
+if (hgrav == Gravity.CENTER_HORIZONTAL && lp.width == LayoutParams.MATCH_PARENT) {
+customNavWidth=Math.min(leftOfCenter,rightOfCenter) * 2;
+}
+customView.measure(MeasureSpec.makeMeasureSpec(customNavWidth,customNavWidthMode),MeasureSpec.makeMeasureSpec(customNavHeight,customNavHeightMode));
+availableWidth-=horizontalMargin + customView.getMeasuredWidth();
+}
+if (mExpandedActionView == null && showTitle) {
+availableWidth=measureChildView(mTitleLayout,availableWidth,MeasureSpec.makeMeasureSpec(mContentHeight,MeasureSpec.EXACTLY),0);
+leftOfCenter=Math.max(0,leftOfCenter - mTitleLayout.getMeasuredWidth());
+}
+if (mContentHeight <= 0) {
+int measuredHeight=0;
+for (int i=0; i < childCount; i++) {
+View v=getChildAt(i);
+int paddedViewHeight=v.getMeasuredHeight() + verticalPadding;
+if (paddedViewHeight > measuredHeight) {
+measuredHeight=paddedViewHeight;
+}
+}
+setMeasuredDimension(contentWidth,measuredHeight);
+}
+ else {
+setMeasuredDimension(contentWidth,maxHeight);
+}
+if (mContextView != null) {
+mContextView.setContentHeight(getMeasuredHeight());
+}
+if (mProgressView != null && mProgressView.getVisibility() != GONE) {
+mProgressView.measure(MeasureSpec.makeMeasureSpec(contentWidth - mProgressBarPadding * 2,MeasureSpec.EXACTLY),MeasureSpec.makeMeasureSpec(getMeasuredHeight(),MeasureSpec.AT_MOST));
+}
+}

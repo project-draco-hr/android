@@ -1,0 +1,10 @@
+{
+  final boolean showCustom=(mDisplayOptions & ActionBar.DISPLAY_SHOW_CUSTOM) != 0;
+  if (mCustomNavView != null && showCustom) {
+    removeView(mCustomNavView);
+  }
+  mCustomNavView=view;
+  if (mCustomNavView != null && showCustom) {
+    addView(mCustomNavView);
+  }
+}

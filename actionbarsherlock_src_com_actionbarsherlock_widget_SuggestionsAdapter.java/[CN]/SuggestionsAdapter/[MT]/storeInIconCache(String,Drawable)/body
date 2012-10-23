@@ -1,0 +1,5 @@
+{
+  if (drawable != null) {
+    mOutsideDrawablesCache.put(resourceUri,drawable.getConstantState());
+  }
+}

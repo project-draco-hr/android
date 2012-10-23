@@ -1,0 +1,13 @@
+{
+  final boolean qwerty=mIsQwerty;
+  final ArrayList<ActionMenuItem> items=mItems;
+  final int itemCount=items.size();
+  for (int i=0; i < itemCount; i++) {
+    ActionMenuItem item=items.get(i);
+    final char shortcut=qwerty ? item.getAlphabeticShortcut() : item.getNumericShortcut();
+    if (keyCode == shortcut) {
+      return item;
+    }
+  }
+  return null;
+}

@@ -1,0 +1,3 @@
+{
+  return (mMenu.isQwertyMode() ? mShortcutAlphabeticChar : mShortcutNumericChar);
+}

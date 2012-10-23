@@ -1,0 +1,14 @@
+{
+  if (mQueryHint != null) {
+    return mQueryHint;
+  }
+ else   if (mSearchable != null) {
+    CharSequence hint=null;
+    int hintId=mSearchable.getHintId();
+    if (hintId != 0) {
+      hint=getContext().getString(hintId);
+    }
+    return hint;
+  }
+  return null;
+}

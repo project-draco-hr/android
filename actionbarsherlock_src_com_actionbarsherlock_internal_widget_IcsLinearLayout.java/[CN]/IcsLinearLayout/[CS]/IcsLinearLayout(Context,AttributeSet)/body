@@ -1,0 +1,9 @@
+{
+  super(context,attrs);
+  TypedArray a=context.obtainStyledAttributes(attrs,R_styleable_LinearLayout);
+  setDividerDrawable(a.getDrawable(LinearLayout_divider));
+  mShowDividers=a.getInt(LinearLayout_showDividers,SHOW_DIVIDER_NONE);
+  mDividerPadding=a.getDimensionPixelSize(LinearLayout_dividerPadding,0);
+  mUseLargestChild=a.getBoolean(LinearLayout_measureWithLargestChild,false);
+  a.recycle();
+}

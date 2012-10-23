@@ -1,0 +1,3 @@
+{
+  setupValue(target,mKeyframeSet.mKeyframes.get(mKeyframeSet.mKeyframes.size() - 1));
+}

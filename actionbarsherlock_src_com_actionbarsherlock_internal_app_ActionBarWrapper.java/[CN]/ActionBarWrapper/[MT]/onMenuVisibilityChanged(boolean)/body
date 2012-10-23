@@ -1,0 +1,5 @@
+{
+  for (  OnMenuVisibilityListener listener : mMenuVisibilityListeners) {
+    listener.onMenuVisibilityChanged(isVisible);
+  }
+}

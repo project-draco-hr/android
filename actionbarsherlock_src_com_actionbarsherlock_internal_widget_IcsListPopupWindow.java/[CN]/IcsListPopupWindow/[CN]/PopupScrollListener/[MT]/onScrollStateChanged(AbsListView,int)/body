@@ -1,0 +1,6 @@
+{
+  if (scrollState == SCROLL_STATE_TOUCH_SCROLL && !isInputMethodNotNeeded() && mPopup.getContentView() != null) {
+    mHandler.removeCallbacks(mResizePopupRunnable);
+    mResizePopupRunnable.run();
+  }
+}

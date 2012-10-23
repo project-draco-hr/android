@@ -1,0 +1,11 @@
+{
+  for (  Node node : mNodes) {
+    Animator animation=node.animation;
+    if (animation instanceof AnimatorSet) {
+      ((AnimatorSet)animation).setTarget(target);
+    }
+ else     if (animation instanceof ObjectAnimator) {
+      ((ObjectAnimator)animation).setTarget(target);
+    }
+  }
+}

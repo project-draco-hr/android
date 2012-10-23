@@ -1,0 +1,9 @@
+{
+  mActivity=activity;
+  Window window=activity.getWindow();
+  View decor=window.getDecorView();
+  init(decor);
+  if ((features & (1 << Window.FEATURE_ACTION_BAR_OVERLAY)) == 0) {
+    mContentView=(NineFrameLayout)decor.findViewById(android.R.id.content);
+  }
+}

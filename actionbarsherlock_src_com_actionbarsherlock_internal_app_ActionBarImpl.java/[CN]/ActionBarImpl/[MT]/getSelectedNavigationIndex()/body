@@ -1,0 +1,10 @@
+{
+switch (mActionView.getNavigationMode()) {
+case NAVIGATION_MODE_TABS:
+    return mSelectedTab != null ? mSelectedTab.getPosition() : -1;
+case NAVIGATION_MODE_LIST:
+  return mActionView.getDropdownSelectedPosition();
+default :
+return -1;
+}
+}

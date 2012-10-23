@@ -1,0 +1,5 @@
+{
+  mShortcutNumericChar=numericChar;
+  mShortcutAlphabeticChar=alphaChar;
+  return this;
+}

@@ -1,0 +1,3 @@
+{
+  mFlags=(mFlags & ~EXCLUSIVE) | (exclusive ? EXCLUSIVE : 0);
+}

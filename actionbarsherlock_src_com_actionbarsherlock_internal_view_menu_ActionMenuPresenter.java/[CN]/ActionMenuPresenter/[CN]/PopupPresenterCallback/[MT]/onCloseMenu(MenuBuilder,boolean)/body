@@ -1,0 +1,5 @@
+{
+  if (menu instanceof SubMenuBuilder) {
+    ((SubMenuBuilder)menu).getRootMenu().close(false);
+  }
+}

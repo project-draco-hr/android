@@ -1,0 +1,31 @@
+{
+  if (mTitleLayout == null) {
+    LayoutInflater inflater=LayoutInflater.from(getContext());
+    mTitleLayout=(LinearLayout)inflater.inflate(R.layout.abs__action_bar_title_item,this,false);
+    mTitleView=(TextView)mTitleLayout.findViewById(R.id.abs__action_bar_title);
+    mSubtitleView=(TextView)mTitleLayout.findViewById(R.id.abs__action_bar_subtitle);
+    mTitleUpView=mTitleLayout.findViewById(R.id.abs__up);
+    mTitleLayout.setOnClickListener(mUpClickListener);
+    if (mTitleStyleRes != 0) {
+      mTitleView.setTextAppearance(mContext,mTitleStyleRes);
+    }
+    if (mTitle != null) {
+      mTitleView.setText(mTitle);
+    }
+    if (mSubtitleStyleRes != 0) {
+      mSubtitleView.setTextAppearance(mContext,mSubtitleStyleRes);
+    }
+    if (mSubtitle != null) {
+      mSubtitleView.setText(mSubtitle);
+      mSubtitleView.setVisibility(VISIBLE);
+    }
+    final boolean homeAsUp=(mDisplayOptions & ActionBar.DISPLAY_HOME_AS_UP) != 0;
+    final boolean showHome=(mDisplayOptions & ActionBar.DISPLAY_SHOW_HOME) != 0;
+    mTitleUpView.setVisibility(!showHome ? (homeAsUp ? VISIBLE : INVISIBLE) : GONE);
+    mTitleLayout.setEnabled(homeAsUp && !showHome);
+  }
+  addView(mTitleLayout);
+  if (mExpandedActionView != null || (TextUtils.isEmpty(mTitle) && TextUtils.isEmpty(mSubtitle))) {
+    mTitleLayout.setVisibility(GONE);
+  }
+}

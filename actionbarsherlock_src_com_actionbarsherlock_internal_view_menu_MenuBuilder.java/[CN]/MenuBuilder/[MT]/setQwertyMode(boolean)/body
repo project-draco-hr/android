@@ -1,0 +1,4 @@
+{
+  mQwertyMode=isQwerty;
+  onItemsChanged(false);
+}

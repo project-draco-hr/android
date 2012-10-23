@@ -1,0 +1,10 @@
+{
+  try {
+    Node node=(Node)super.clone();
+    node.animation=animation.clone();
+    return node;
+  }
+ catch (  CloneNotSupportedException e) {
+    throw new AssertionError();
+  }
+}

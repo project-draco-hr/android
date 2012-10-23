@@ -1,0 +1,12 @@
+{
+  if (DEBUG)   Log.d(TAG,"[dispatchTitleChanged] title: " + title + ", color: "+ color);
+  if (!mIsDelegate || mIsTitleReady) {
+    if (mTitleView != null) {
+      mTitleView.setText(title);
+    }
+ else     if (wActionBar != null) {
+      wActionBar.setWindowTitle(title);
+    }
+  }
+  mTitle=title;
+}

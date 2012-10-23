@@ -1,0 +1,7 @@
+{
+  super(context,attrs);
+  setBaselineAligned(false);
+  final float density=context.getResources().getDisplayMetrics().density;
+  mMinCellSize=(int)(MIN_CELL_SIZE * density);
+  mGeneratedItemPadding=(int)(GENERATED_ITEM_PADDING * density);
+}

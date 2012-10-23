@@ -1,0 +1,6 @@
+{
+  mIconResId=NO_ICON;
+  mIconDrawable=icon;
+  mMenu.onItemsChanged(false);
+  return this;
+}

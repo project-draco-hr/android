@@ -1,0 +1,5 @@
+{
+  setVisibility(VISIBLE);
+  mVisibilityAnim=animation;
+  mCanceled=false;
+}

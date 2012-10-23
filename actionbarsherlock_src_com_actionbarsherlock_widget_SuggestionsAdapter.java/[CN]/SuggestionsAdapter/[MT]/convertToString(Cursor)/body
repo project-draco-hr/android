@@ -1,0 +1,10 @@
+{
+  if (cursor == null) {
+    return null;
+  }
+  String query=getColumnString(cursor,SearchManager.SUGGEST_COLUMN_QUERY);
+  if (query != null) {
+    return query;
+  }
+  return null;
+}

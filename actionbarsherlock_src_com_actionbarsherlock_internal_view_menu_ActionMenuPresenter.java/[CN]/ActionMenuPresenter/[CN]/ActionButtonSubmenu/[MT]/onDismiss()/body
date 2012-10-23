@@ -1,0 +1,5 @@
+{
+  super.onDismiss();
+  mActionButtonPopup=null;
+  mOpenSubMenuId=0;
+}

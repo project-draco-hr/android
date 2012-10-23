@@ -1,0 +1,6 @@
+{
+  itemView.initialize(item,0);
+  final ActionMenuView menuView=(ActionMenuView)mMenuView;
+  ActionMenuItemView actionItemView=(ActionMenuItemView)itemView;
+  actionItemView.setItemInvoker(menuView);
+}

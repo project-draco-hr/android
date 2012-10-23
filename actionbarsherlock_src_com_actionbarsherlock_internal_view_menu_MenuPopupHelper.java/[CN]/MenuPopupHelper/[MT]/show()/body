@@ -1,0 +1,5 @@
+{
+  if (!tryShow()) {
+    throw new IllegalStateException("MenuPopupHelper cannot be used without an anchor");
+  }
+}

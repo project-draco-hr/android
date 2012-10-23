@@ -1,0 +1,6 @@
+{
+  if (mVisibilityAnim != null) {
+    mVisibilityAnim.end();
+  }
+  super.setVisibility(visibility);
+}

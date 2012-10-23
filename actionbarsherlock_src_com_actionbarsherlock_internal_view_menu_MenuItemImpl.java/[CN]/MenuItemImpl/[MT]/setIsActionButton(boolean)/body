@@ -1,0 +1,8 @@
+{
+  if (isActionButton) {
+    mFlags|=IS_ACTION;
+  }
+ else {
+    mFlags&=~IS_ACTION;
+  }
+}

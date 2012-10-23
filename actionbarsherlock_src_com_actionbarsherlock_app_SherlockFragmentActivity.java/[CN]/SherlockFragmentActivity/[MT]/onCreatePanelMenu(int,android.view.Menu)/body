@@ -1,0 +1,11 @@
+{
+  if (DEBUG)   Log.d(TAG,"[onCreatePanelMenu] featureId: " + featureId + ", menu: "+ menu);
+  if (featureId == Window.FEATURE_OPTIONS_PANEL && !mIgnoreNativeCreate) {
+    mIgnoreNativeCreate=true;
+    boolean result=getSherlock().dispatchCreateOptionsMenu(menu);
+    mIgnoreNativeCreate=false;
+    if (DEBUG)     Log.d(TAG,"[onCreatePanelMenu] returning " + result);
+    return result;
+  }
+  return super.onCreatePanelMenu(featureId,menu);
+}

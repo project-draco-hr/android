@@ -1,0 +1,12 @@
+{
+switch (mActionView.getNavigationMode()) {
+case NAVIGATION_MODE_TABS:
+    selectTab(mTabs.get(position));
+  break;
+case NAVIGATION_MODE_LIST:
+mActionView.setDropdownSelectedPosition(position);
+break;
+default :
+throw new IllegalStateException("setSelectedNavigationIndex not valid for current navigation mode");
+}
+}

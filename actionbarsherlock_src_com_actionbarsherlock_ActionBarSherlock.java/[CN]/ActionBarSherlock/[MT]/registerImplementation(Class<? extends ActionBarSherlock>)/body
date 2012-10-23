@@ -1,0 +1,12 @@
+{
+  if (!implementationClass.isAnnotationPresent(Implementation.class)) {
+    throw new IllegalArgumentException("Class " + implementationClass.getSimpleName() + " is not annotated with @Implementation");
+  }
+ else   if (IMPLEMENTATIONS.containsValue(implementationClass)) {
+    if (DEBUG)     Log.w(TAG,"Class " + implementationClass.getSimpleName() + " already registered");
+    return;
+  }
+  Implementation impl=implementationClass.getAnnotation(Implementation.class);
+  if (DEBUG)   Log.i(TAG,"Registering " + implementationClass.getSimpleName() + " with qualifier "+ impl);
+  IMPLEMENTATIONS.put(impl,implementationClass);
+}

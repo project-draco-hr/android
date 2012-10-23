@@ -1,0 +1,28 @@
+{
+  final DisplayMetrics metrics=getContext().getResources().getDisplayMetrics();
+  final boolean isPortrait=metrics.widthPixels < metrics.heightPixels;
+  super.onMeasure(widthMeasureSpec,heightMeasureSpec);
+  int width=getMeasuredWidth();
+  boolean measure=false;
+  widthMeasureSpec=MeasureSpec.makeMeasureSpec(width,EXACTLY);
+  final TypedValue tv=isPortrait ? mMinWidthMinor : mMinWidthMajor;
+  if (tv.type != TypedValue.TYPE_NULL) {
+    final int min;
+    if (tv.type == TypedValue.TYPE_DIMENSION) {
+      min=(int)tv.getDimension(metrics);
+    }
+ else     if (tv.type == TypedValue.TYPE_FRACTION) {
+      min=(int)tv.getFraction(metrics.widthPixels,metrics.widthPixels);
+    }
+ else {
+      min=0;
+    }
+    if (width < min) {
+      widthMeasureSpec=MeasureSpec.makeMeasureSpec(min,EXACTLY);
+      measure=true;
+    }
+  }
+  if (measure) {
+    super.onMeasure(widthMeasureSpec,heightMeasureSpec);
+  }
+}

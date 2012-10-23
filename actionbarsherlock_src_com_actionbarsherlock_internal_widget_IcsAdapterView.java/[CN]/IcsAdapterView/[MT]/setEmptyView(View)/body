@@ -1,0 +1,6 @@
+{
+  mEmptyView=emptyView;
+  final T adapter=getAdapter();
+  final boolean empty=((adapter == null) || adapter.isEmpty());
+  updateEmptyStatus(empty);
+}

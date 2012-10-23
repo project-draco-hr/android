@@ -1,0 +1,4 @@
+{
+  setShowAsAction(actionEnum);
+  return this;
+}

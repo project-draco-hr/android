@@ -1,0 +1,4 @@
+{
+  mStackedBackground=bg;
+  invalidate();
+}

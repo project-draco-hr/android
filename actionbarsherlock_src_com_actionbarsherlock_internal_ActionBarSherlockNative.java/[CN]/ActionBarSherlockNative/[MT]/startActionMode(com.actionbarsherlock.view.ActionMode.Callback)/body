@@ -1,0 +1,17 @@
+{
+  if (DEBUG)   Log.d(TAG,"[startActionMode] callback: " + callback);
+  if (mActionMode != null) {
+    mActionMode.finish();
+  }
+  ActionModeCallbackWrapper wrapped=null;
+  if (callback != null) {
+    wrapped=new ActionModeCallbackWrapper(callback);
+  }
+  if (mActivity.startActionMode(wrapped) == null) {
+    mActionMode=null;
+  }
+  if (mActivity instanceof OnActionModeStartedListener && mActionMode != null) {
+    ((OnActionModeStartedListener)mActivity).onActionModeStarted(mActionMode);
+  }
+  return mActionMode;
+}

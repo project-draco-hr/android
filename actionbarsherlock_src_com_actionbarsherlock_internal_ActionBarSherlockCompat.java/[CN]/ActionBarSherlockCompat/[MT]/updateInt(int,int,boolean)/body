@@ -1,0 +1,10 @@
+{
+  if (mContentParent == null) {
+    return;
+  }
+  final int featureMask=1 << featureId;
+  if ((getFeatures() & featureMask) == 0 && !fromResume) {
+    return;
+  }
+  onIntChanged(featureId,value);
+}

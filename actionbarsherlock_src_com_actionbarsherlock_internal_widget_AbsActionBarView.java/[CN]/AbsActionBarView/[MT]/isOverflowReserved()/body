@@ -1,0 +1,3 @@
+{
+  return mActionMenuPresenter != null && mActionMenuPresenter.isOverflowReserved();
+}

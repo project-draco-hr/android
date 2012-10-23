@@ -1,0 +1,14 @@
+{
+  if (mListener != null) {
+    if (mFragmentTransaction == null && mActivity instanceof FragmentActivity) {
+      mFragmentTransaction=((FragmentActivity)mActivity).getSupportFragmentManager().beginTransaction().disallowAddToBackStack();
+    }
+    mListener.onTabSelected(this,mFragmentTransaction);
+    if (mFragmentTransaction != null) {
+      if (!mFragmentTransaction.isEmpty()) {
+        mFragmentTransaction.commit();
+      }
+      mFragmentTransaction=null;
+    }
+  }
+}

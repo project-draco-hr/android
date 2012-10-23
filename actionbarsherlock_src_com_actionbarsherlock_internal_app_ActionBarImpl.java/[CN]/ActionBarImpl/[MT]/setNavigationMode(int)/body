@@ -1,0 +1,22 @@
+{
+  final int oldMode=mActionView.getNavigationMode();
+switch (oldMode) {
+case NAVIGATION_MODE_TABS:
+    mSavedTabPosition=getSelectedNavigationIndex();
+  selectTab(null);
+mTabScrollView.setVisibility(View.GONE);
+break;
+}
+mActionView.setNavigationMode(mode);
+switch (mode) {
+case NAVIGATION_MODE_TABS:
+ensureTabsExist();
+mTabScrollView.setVisibility(View.VISIBLE);
+if (mSavedTabPosition != INVALID_POSITION) {
+setSelectedNavigationItem(mSavedTabPosition);
+mSavedTabPosition=INVALID_POSITION;
+}
+break;
+}
+mActionView.setCollapsable(mode == NAVIGATION_MODE_TABS && !mHasEmbeddedTabs);
+}

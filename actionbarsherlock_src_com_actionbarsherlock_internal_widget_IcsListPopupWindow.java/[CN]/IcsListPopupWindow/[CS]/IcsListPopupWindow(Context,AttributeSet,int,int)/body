@@ -1,0 +1,11 @@
+{
+  mContext=context;
+  if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+    Context wrapped=new ContextThemeWrapper(context,defStyleRes);
+    mPopup=new PopupWindow(wrapped,attrs,defStyleAttr);
+  }
+ else {
+    mPopup=new PopupWindow(context,attrs,defStyleAttr,defStyleRes);
+  }
+  mPopup.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
+}

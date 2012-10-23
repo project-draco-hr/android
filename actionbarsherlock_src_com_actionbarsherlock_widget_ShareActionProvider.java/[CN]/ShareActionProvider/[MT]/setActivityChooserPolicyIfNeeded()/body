@@ -1,0 +1,10 @@
+{
+  if (mOnShareTargetSelectedListener == null) {
+    return;
+  }
+  if (mOnChooseActivityListener == null) {
+    mOnChooseActivityListener=new ShareAcitivityChooserModelPolicy();
+  }
+  ActivityChooserModel dataModel=ActivityChooserModel.get(mContext,mShareHistoryFileName);
+  dataModel.setOnChooseActivityListener(mOnChooseActivityListener);
+}

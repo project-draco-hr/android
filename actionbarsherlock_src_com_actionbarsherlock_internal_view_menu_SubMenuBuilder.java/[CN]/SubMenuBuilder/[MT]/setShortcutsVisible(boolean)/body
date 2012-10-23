@@ -1,0 +1,3 @@
+{
+  mParentMenu.setShortcutsVisible(shortcutsVisible);
+}

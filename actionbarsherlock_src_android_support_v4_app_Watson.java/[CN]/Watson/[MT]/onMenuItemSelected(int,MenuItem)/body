@@ -1,0 +1,19 @@
+{
+  if (DEBUG)   Log.d(TAG,"[onMenuItemSelected] featureId: " + featureId + ", item: "+ item);
+  if (featureId == Window.FEATURE_OPTIONS_PANEL) {
+    if (onOptionsItemSelected(item)) {
+      return true;
+    }
+    if (mFragments.mAdded != null) {
+      for (int i=0; i < mFragments.mAdded.size(); i++) {
+        Fragment f=mFragments.mAdded.get(i);
+        if (f != null && !f.mHidden && f.mHasMenu && f.mMenuVisible && f instanceof OnOptionsItemSelectedListener) {
+          if (((OnOptionsItemSelectedListener)f).onOptionsItemSelected(item)) {
+            return true;
+          }
+        }
+      }
+    }
+  }
+  return false;
+}

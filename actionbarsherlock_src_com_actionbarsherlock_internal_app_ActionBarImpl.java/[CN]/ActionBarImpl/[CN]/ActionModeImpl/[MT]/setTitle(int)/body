@@ -1,0 +1,3 @@
+{
+  setTitle(mContext.getResources().getString(resId));
+}

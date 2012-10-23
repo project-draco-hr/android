@@ -1,0 +1,14 @@
+{
+  if (DEBUG)   Log.d(TAG,"[callbackOptionsItemSelected] item: " + item.getTitleCondensed());
+  boolean result=false;
+  if (mActivity instanceof OnMenuItemSelectedListener) {
+    OnMenuItemSelectedListener listener=(OnMenuItemSelectedListener)mActivity;
+    result=listener.onMenuItemSelected(Window.FEATURE_OPTIONS_PANEL,item);
+  }
+ else   if (mActivity instanceof OnOptionsItemSelectedListener) {
+    OnOptionsItemSelectedListener listener=(OnOptionsItemSelectedListener)mActivity;
+    result=listener.onOptionsItemSelected(item);
+  }
+  if (DEBUG)   Log.d(TAG,"[callbackOptionsItemSelected] returning " + result);
+  return result;
+}

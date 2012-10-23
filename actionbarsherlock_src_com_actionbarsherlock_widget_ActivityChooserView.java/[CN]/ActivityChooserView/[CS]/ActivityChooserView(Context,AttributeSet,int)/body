@@ -1,0 +1,31 @@
+{
+  super(context,attrs,defStyle);
+  mContext=context;
+  TypedArray attributesArray=context.obtainStyledAttributes(attrs,R.styleable.SherlockActivityChooserView,defStyle,0);
+  mInitialActivityCount=attributesArray.getInt(R.styleable.SherlockActivityChooserView_initialActivityCount,ActivityChooserViewAdapter.MAX_ACTIVITY_COUNT_DEFAULT);
+  Drawable expandActivityOverflowButtonDrawable=attributesArray.getDrawable(R.styleable.SherlockActivityChooserView_expandActivityOverflowButtonDrawable);
+  attributesArray.recycle();
+  LayoutInflater inflater=LayoutInflater.from(mContext);
+  inflater.inflate(R.layout.abs__activity_chooser_view,this,true);
+  mCallbacks=new Callbacks();
+  mActivityChooserContent=(IcsLinearLayout)findViewById(R.id.abs__activity_chooser_view_content);
+  mActivityChooserContentBackground=mActivityChooserContent.getBackground();
+  mDefaultActivityButton=(FrameLayout)findViewById(R.id.abs__default_activity_button);
+  mDefaultActivityButton.setOnClickListener(mCallbacks);
+  mDefaultActivityButton.setOnLongClickListener(mCallbacks);
+  mDefaultActivityButtonImage=(ImageView)mDefaultActivityButton.findViewById(R.id.abs__image);
+  mExpandActivityOverflowButton=(FrameLayout)findViewById(R.id.abs__expand_activities_button);
+  mExpandActivityOverflowButton.setOnClickListener(mCallbacks);
+  mExpandActivityOverflowButtonImage=(ImageView)mExpandActivityOverflowButton.findViewById(R.id.abs__image);
+  mExpandActivityOverflowButtonImage.setImageDrawable(expandActivityOverflowButtonDrawable);
+  mAdapter=new ActivityChooserViewAdapter();
+  mAdapter.registerDataSetObserver(new DataSetObserver(){
+    @Override public void onChanged(){
+      super.onChanged();
+      updateAppearance();
+    }
+  }
+);
+  Resources resources=context.getResources();
+  mListPopupMaxWidth=Math.max(resources.getDisplayMetrics().widthPixels / 2,resources.getDimensionPixelSize(R.dimen.abs__config_prefDialogWidth));
+}

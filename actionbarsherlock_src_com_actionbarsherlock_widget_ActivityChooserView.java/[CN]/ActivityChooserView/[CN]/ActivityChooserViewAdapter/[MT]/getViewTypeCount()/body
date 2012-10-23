@@ -1,0 +1,3 @@
+{
+  return ITEM_VIEW_TYPE_COUNT;
+}

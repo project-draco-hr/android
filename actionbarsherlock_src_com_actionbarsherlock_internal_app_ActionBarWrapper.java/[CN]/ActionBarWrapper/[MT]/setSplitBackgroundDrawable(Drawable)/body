@@ -1,0 +1,3 @@
+{
+  mActionBar.setSplitBackgroundDrawable(d);
+}

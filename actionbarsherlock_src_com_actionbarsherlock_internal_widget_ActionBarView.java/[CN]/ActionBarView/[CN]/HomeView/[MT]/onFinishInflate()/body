@@ -1,0 +1,4 @@
+{
+  mUpView=findViewById(R.id.abs__up);
+  mIconView=(ImageView)findViewById(R.id.abs__home);
+}

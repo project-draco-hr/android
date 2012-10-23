@@ -1,0 +1,12 @@
+{
+  if (!mPreventDispatchingItemsChanged) {
+    if (structureChanged) {
+      mIsVisibleItemsStale=true;
+      mIsActionItemsStale=true;
+    }
+    dispatchPresenterUpdate(structureChanged);
+  }
+ else {
+    mItemsChangedWhileDispatchPrevented=true;
+  }
+}

@@ -1,0 +1,14 @@
+{
+  if (items != null && items.size() > 0) {
+    mNeedsSort=true;
+    Builder builder=null;
+    for (    Animator anim : items) {
+      if (builder == null) {
+        builder=play(anim);
+      }
+ else {
+        builder.with(anim);
+      }
+    }
+  }
+}

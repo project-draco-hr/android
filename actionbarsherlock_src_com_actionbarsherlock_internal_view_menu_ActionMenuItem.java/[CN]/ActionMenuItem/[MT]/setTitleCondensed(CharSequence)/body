@@ -1,0 +1,4 @@
+{
+  mTitleCondensed=title;
+  return this;
+}

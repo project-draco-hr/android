@@ -1,0 +1,5 @@
+{
+  if (mAdapter != null) {
+    mAdapter.registerDataSetObserver(observer);
+  }
+}

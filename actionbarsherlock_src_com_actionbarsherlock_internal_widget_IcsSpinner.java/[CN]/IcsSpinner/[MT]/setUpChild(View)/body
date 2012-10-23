@@ -1,0 +1,22 @@
+{
+  ViewGroup.LayoutParams lp=child.getLayoutParams();
+  if (lp == null) {
+    lp=generateDefaultLayoutParams();
+  }
+  addViewInLayout(child,0,lp);
+  child.setSelected(hasFocus());
+  if (mDisableChildrenWhenDisabled) {
+    child.setEnabled(isEnabled());
+  }
+  int childHeightSpec=ViewGroup.getChildMeasureSpec(mHeightMeasureSpec,mSpinnerPadding.top + mSpinnerPadding.bottom,lp.height);
+  int childWidthSpec=ViewGroup.getChildMeasureSpec(mWidthMeasureSpec,mSpinnerPadding.left + mSpinnerPadding.right,lp.width);
+  child.measure(childWidthSpec,childHeightSpec);
+  int childLeft;
+  int childRight;
+  int childTop=mSpinnerPadding.top + ((getMeasuredHeight() - mSpinnerPadding.bottom - mSpinnerPadding.top- child.getMeasuredHeight()) / 2);
+  int childBottom=childTop + child.getMeasuredHeight();
+  int width=child.getMeasuredWidth();
+  childLeft=0;
+  childRight=childLeft + width;
+  child.layout(childLeft,childTop,childRight,childBottom);
+}

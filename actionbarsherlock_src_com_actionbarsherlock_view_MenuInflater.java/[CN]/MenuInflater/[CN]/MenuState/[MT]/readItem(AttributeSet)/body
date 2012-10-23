@@ -1,0 +1,44 @@
+{
+  TypedArray a=mContext.obtainStyledAttributes(attrs,R.styleable.SherlockMenuItem);
+  itemId=a.getResourceId(R.styleable.SherlockMenuItem_android_id,defaultItemId);
+  final int category=a.getInt(R.styleable.SherlockMenuItem_android_menuCategory,groupCategory);
+  final int order=a.getInt(R.styleable.SherlockMenuItem_android_orderInCategory,groupOrder);
+  itemCategoryOrder=(category & Menu.CATEGORY_MASK) | (order & Menu.USER_MASK);
+  itemTitle=a.getText(R.styleable.SherlockMenuItem_android_title);
+  itemTitleCondensed=a.getText(R.styleable.SherlockMenuItem_android_titleCondensed);
+  itemIconResId=a.getResourceId(R.styleable.SherlockMenuItem_android_icon,0);
+  itemAlphabeticShortcut=getShortcut(a.getString(R.styleable.SherlockMenuItem_android_alphabeticShortcut));
+  itemNumericShortcut=getShortcut(a.getString(R.styleable.SherlockMenuItem_android_numericShortcut));
+  if (a.hasValue(R.styleable.SherlockMenuItem_android_checkable)) {
+    itemCheckable=a.getBoolean(R.styleable.SherlockMenuItem_android_checkable,false) ? 1 : 0;
+  }
+ else {
+    itemCheckable=groupCheckable;
+  }
+  itemChecked=a.getBoolean(R.styleable.SherlockMenuItem_android_checked,defaultItemChecked);
+  itemVisible=a.getBoolean(R.styleable.SherlockMenuItem_android_visible,groupVisible);
+  itemEnabled=a.getBoolean(R.styleable.SherlockMenuItem_android_enabled,groupEnabled);
+  TypedValue value=new TypedValue();
+  a.getValue(R.styleable.SherlockMenuItem_android_showAsAction,value);
+  itemShowAsAction=value.type == TypedValue.TYPE_INT_HEX ? value.data : -1;
+  itemListenerMethodName=a.getString(R.styleable.SherlockMenuItem_android_onClick);
+  itemActionViewLayout=a.getResourceId(R.styleable.SherlockMenuItem_android_actionLayout,0);
+  value=new TypedValue();
+  a.getValue(R.styleable.SherlockMenuItem_android_actionViewClass,value);
+  itemActionViewClassName=value.type == TypedValue.TYPE_STRING ? value.string.toString() : null;
+  value=new TypedValue();
+  a.getValue(R.styleable.SherlockMenuItem_android_actionProviderClass,value);
+  itemActionProviderClassName=value.type == TypedValue.TYPE_STRING ? value.string.toString() : null;
+  final boolean hasActionProvider=itemActionProviderClassName != null;
+  if (hasActionProvider && itemActionViewLayout == 0 && itemActionViewClassName == null) {
+    itemActionProvider=newInstance(itemActionProviderClassName,ACTION_PROVIDER_CONSTRUCTOR_SIGNATURE,mActionProviderConstructorArguments);
+  }
+ else {
+    if (hasActionProvider) {
+      Log.w(LOG_TAG,"Ignoring attribute 'actionProviderClass'." + " Action view already specified.");
+    }
+    itemActionProvider=null;
+  }
+  a.recycle();
+  itemAdded=false;
+}

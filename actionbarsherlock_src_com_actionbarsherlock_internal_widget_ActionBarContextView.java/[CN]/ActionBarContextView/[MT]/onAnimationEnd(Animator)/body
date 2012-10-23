@@ -1,0 +1,6 @@
+{
+  if (mAnimationMode == ANIMATE_OUT) {
+    killMode();
+  }
+  mAnimationMode=ANIMATE_IDLE;
+}

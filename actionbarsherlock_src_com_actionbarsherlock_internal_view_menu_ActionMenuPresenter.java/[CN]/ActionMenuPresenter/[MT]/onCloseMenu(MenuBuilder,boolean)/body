@@ -1,0 +1,4 @@
+{
+  dismissPopupMenus();
+  super.onCloseMenu(menu,allMenusAreClosing);
+}

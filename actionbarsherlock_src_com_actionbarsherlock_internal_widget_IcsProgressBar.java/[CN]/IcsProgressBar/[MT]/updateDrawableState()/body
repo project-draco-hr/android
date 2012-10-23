@@ -1,0 +1,9 @@
+{
+  int[] state=getDrawableState();
+  if (mProgressDrawable != null && mProgressDrawable.isStateful()) {
+    mProgressDrawable.setState(state);
+  }
+  if (mIndeterminateDrawable != null && mIndeterminateDrawable.isStateful()) {
+    mIndeterminateDrawable.setState(state);
+  }
+}

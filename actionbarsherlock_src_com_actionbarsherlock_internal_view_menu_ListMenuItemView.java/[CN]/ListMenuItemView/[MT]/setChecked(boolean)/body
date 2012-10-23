@@ -1,0 +1,16 @@
+{
+  CompoundButton compoundButton;
+  if (mItemData.isExclusiveCheckable()) {
+    if (mRadioButton == null) {
+      insertRadioButton();
+    }
+    compoundButton=mRadioButton;
+  }
+ else {
+    if (mCheckBox == null) {
+      insertCheckBox();
+    }
+    compoundButton=mCheckBox;
+  }
+  compoundButton.setChecked(checked);
+}

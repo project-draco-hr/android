@@ -1,0 +1,12 @@
+{
+  mPlayingBackwards=!mPlayingBackwards;
+  if (mPlayingState == RUNNING) {
+    long currentTime=AnimationUtils.currentAnimationTimeMillis();
+    long currentPlayTime=currentTime - mStartTime;
+    long timeLeft=mDuration - currentPlayTime;
+    mStartTime=currentTime - timeLeft;
+  }
+ else {
+    start(true);
+  }
+}

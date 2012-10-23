@@ -1,0 +1,22 @@
+{
+  if (mVisibilityAnim != null) {
+    mVisibilityAnim.cancel();
+  }
+  if (visibility == VISIBLE) {
+    if (getVisibility() != VISIBLE) {
+      setAlpha(0);
+    }
+    ObjectAnimator anim=ObjectAnimator.ofFloat(this,"alpha",1);
+    anim.setDuration(FADE_DURATION);
+    anim.setInterpolator(sAlphaInterpolator);
+    anim.addListener(mVisAnimListener.withFinalVisibility(visibility));
+    anim.start();
+  }
+ else {
+    ObjectAnimator anim=ObjectAnimator.ofFloat(this,"alpha",0);
+    anim.setDuration(FADE_DURATION);
+    anim.setInterpolator(sAlphaInterpolator);
+    anim.addListener(mVisAnimListener.withFinalVisibility(visibility));
+    anim.start();
+  }
+}

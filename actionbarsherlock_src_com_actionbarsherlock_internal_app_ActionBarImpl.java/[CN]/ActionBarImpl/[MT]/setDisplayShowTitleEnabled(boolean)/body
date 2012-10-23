@@ -1,0 +1,3 @@
+{
+  setDisplayOptions(showTitle ? DISPLAY_SHOW_TITLE : 0,DISPLAY_SHOW_TITLE);
+}

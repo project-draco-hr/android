@@ -1,0 +1,7 @@
+{
+  mActivity=activity;
+  mActionBar=activity.getActionBar();
+  if (mActionBar != null) {
+    mActionBar.addOnMenuVisibilityListener(this);
+  }
+}

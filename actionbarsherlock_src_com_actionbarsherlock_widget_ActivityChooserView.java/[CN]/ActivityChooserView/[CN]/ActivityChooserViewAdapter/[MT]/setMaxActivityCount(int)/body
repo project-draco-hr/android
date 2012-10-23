@@ -1,0 +1,6 @@
+{
+  if (mMaxActivityCount != maxActivityCount) {
+    mMaxActivityCount=maxActivityCount;
+    notifyDataSetChanged();
+  }
+}

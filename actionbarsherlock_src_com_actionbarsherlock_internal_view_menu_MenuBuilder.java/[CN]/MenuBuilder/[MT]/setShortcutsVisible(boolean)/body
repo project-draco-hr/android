@@ -1,0 +1,5 @@
+{
+  if (mShortcutsVisible == shortcutsVisible)   return;
+  setShortcutsVisibleInner(shortcutsVisible);
+  onItemsChanged(false);
+}

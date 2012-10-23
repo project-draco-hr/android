@@ -1,0 +1,14 @@
+{
+  if (mPresenters.isEmpty())   return false;
+  boolean result=false;
+  for (  WeakReference<MenuPresenter> ref : mPresenters) {
+    final MenuPresenter presenter=ref.get();
+    if (presenter == null) {
+      mPresenters.remove(ref);
+    }
+ else     if (!result) {
+      result=presenter.onSubMenuSelected(subMenu);
+    }
+  }
+  return result;
+}

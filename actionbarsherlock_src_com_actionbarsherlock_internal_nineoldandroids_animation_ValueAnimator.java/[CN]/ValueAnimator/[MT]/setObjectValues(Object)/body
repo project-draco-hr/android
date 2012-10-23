@@ -1,0 +1,13 @@
+{
+  if (values == null || values.length == 0) {
+    return;
+  }
+  if (mValues == null || mValues.length == 0) {
+    setValues(new PropertyValuesHolder[]{PropertyValuesHolder.ofObject("",(TypeEvaluator)null,values)});
+  }
+ else {
+    PropertyValuesHolder valuesHolder=mValues[0];
+    valuesHolder.setObjectValues(values);
+  }
+  mInitialized=false;
+}

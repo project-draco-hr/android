@@ -1,0 +1,18 @@
+{
+  if (SANS_ICE_CREAM && mAllCaps && text != null) {
+    if (IS_GINGERBREAD) {
+      try {
+        setText(text.toString().toUpperCase(Locale.ROOT));
+      }
+ catch (      NoSuchFieldError e) {
+        setText(text.toString().toUpperCase());
+      }
+    }
+ else {
+      setText(text.toString().toUpperCase());
+    }
+  }
+ else {
+    setText(text);
+  }
+}

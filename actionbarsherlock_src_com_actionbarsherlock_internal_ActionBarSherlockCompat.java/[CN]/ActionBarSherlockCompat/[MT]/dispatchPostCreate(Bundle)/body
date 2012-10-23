@@ -1,0 +1,9 @@
+{
+  if (DEBUG)   Log.d(TAG,"[dispatchOnPostCreate]");
+  if (mIsDelegate) {
+    mIsTitleReady=true;
+  }
+  if (mDecor == null) {
+    initActionBar();
+  }
+}

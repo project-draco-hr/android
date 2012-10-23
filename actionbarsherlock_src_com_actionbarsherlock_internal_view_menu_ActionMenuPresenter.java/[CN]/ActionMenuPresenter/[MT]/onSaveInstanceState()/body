@@ -1,0 +1,5 @@
+{
+  SavedState state=new SavedState();
+  state.openSubMenuId=mOpenSubMenuId;
+  return state;
+}

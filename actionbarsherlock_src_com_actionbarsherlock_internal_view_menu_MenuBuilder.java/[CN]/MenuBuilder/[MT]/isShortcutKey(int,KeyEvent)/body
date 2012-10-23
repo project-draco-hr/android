@@ -1,0 +1,3 @@
+{
+  return findItemWithShortcutForKey(keyCode,event) != null;
+}

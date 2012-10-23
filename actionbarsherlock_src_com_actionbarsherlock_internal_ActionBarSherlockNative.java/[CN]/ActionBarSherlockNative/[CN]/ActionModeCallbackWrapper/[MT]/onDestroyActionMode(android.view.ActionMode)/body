@@ -1,0 +1,6 @@
+{
+  mCallback.onDestroyActionMode(mActionMode);
+  if (mActivity instanceof OnActionModeFinishedListener) {
+    ((OnActionModeFinishedListener)mActivity).onActionModeFinished(mActionMode);
+  }
+}

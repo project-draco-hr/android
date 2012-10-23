@@ -1,0 +1,10 @@
+{
+  if (IS_FROYO) {
+    super.onConfigurationChanged(newConfig);
+  }
+  mPresenter.updateMenuView(false);
+  if (mPresenter != null && mPresenter.isOverflowMenuShowing()) {
+    mPresenter.hideOverflowMenu();
+    mPresenter.showOverflowMenu();
+  }
+}

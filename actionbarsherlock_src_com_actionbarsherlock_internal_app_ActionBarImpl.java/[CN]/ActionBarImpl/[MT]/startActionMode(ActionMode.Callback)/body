@@ -1,0 +1,22 @@
+{
+  boolean wasHidden=false;
+  if (mActionMode != null) {
+    wasHidden=mWasHiddenBeforeMode;
+    mActionMode.finish();
+  }
+  mContextView.killMode();
+  ActionModeImpl mode=new ActionModeImpl(callback);
+  if (mode.dispatchOnCreate()) {
+    mWasHiddenBeforeMode=!isShowing() || wasHidden;
+    mode.invalidate();
+    mContextView.initForMode(mode);
+    animateToMode(true);
+    if (mSplitView != null && mContextDisplayMode == CONTEXT_DISPLAY_SPLIT) {
+      mSplitView.setVisibility(View.VISIBLE);
+    }
+    mContextView.sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
+    mActionMode=mode;
+    return mode;
+  }
+  return null;
+}

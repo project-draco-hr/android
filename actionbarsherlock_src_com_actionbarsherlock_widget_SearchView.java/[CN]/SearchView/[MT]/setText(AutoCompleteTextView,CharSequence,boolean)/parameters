@@ -1,0 +1,3 @@
+AutoCompleteTextView view
+CharSequence text
+boolean filter

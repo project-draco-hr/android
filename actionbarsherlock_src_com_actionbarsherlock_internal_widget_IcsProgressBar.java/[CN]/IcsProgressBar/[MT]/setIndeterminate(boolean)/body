@@ -1,0 +1,13 @@
+{
+  if ((!mOnlyIndeterminate || !mIndeterminate) && indeterminate != mIndeterminate) {
+    mIndeterminate=indeterminate;
+    if (indeterminate) {
+      mCurrentDrawable=mIndeterminateDrawable;
+      startAnimation();
+    }
+ else {
+      mCurrentDrawable=mProgressDrawable;
+      stopAnimation();
+    }
+  }
+}

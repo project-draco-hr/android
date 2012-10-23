@@ -1,0 +1,3 @@
+{
+  sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_SELECTED);
+}

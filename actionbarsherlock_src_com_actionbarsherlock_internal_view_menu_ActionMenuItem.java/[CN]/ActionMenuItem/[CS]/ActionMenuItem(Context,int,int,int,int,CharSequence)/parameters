@@ -1,0 +1,6 @@
+Context context
+int group
+int id
+int categoryOrder
+int ordering
+CharSequence title

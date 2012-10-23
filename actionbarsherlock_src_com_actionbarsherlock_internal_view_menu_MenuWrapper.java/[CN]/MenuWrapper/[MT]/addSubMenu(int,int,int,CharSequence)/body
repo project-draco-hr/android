@@ -1,0 +1,3 @@
+{
+  return addInternal(mNativeMenu.addSubMenu(groupId,itemId,order,title));
+}

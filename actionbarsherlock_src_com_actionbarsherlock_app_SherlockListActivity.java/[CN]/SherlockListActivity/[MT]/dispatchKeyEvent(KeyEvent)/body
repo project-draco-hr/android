@@ -1,0 +1,6 @@
+{
+  if (getSherlock().dispatchKeyEvent(event)) {
+    return true;
+  }
+  return super.dispatchKeyEvent(event);
+}

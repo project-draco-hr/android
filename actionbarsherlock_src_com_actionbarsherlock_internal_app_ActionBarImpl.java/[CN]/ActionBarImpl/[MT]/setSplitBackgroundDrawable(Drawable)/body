@@ -1,0 +1,5 @@
+{
+  if (mSplitView != null) {
+    mSplitView.setSplitBackground(d);
+  }
+}

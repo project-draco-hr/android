@@ -1,0 +1,12 @@
+{
+  if (builder != null) {
+    builder.addMenuPresenter(mActionMenuPresenter);
+    builder.addMenuPresenter(mExpandedMenuPresenter);
+  }
+ else {
+    mActionMenuPresenter.initForMenu(mContext,null);
+    mExpandedMenuPresenter.initForMenu(mContext,null);
+    mActionMenuPresenter.updateMenuView(true);
+    mExpandedMenuPresenter.updateMenuView(true);
+  }
+}

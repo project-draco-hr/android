@@ -1,0 +1,22 @@
+{
+  mExpandedActionView=item.getActionView();
+  mExpandedHomeLayout.setIcon(mIcon.getConstantState().newDrawable());
+  mCurrentExpandedItem=item;
+  if (mExpandedActionView.getParent() != ActionBarView.this) {
+    addView(mExpandedActionView);
+  }
+  if (mExpandedHomeLayout.getParent() != ActionBarView.this) {
+    addView(mExpandedHomeLayout);
+  }
+  mHomeLayout.setVisibility(GONE);
+  if (mTitleLayout != null)   mTitleLayout.setVisibility(GONE);
+  if (mTabScrollView != null)   mTabScrollView.setVisibility(GONE);
+  if (mSpinner != null)   mSpinner.setVisibility(GONE);
+  if (mCustomNavView != null)   mCustomNavView.setVisibility(GONE);
+  requestLayout();
+  item.setActionViewExpanded(true);
+  if (mExpandedActionView instanceof CollapsibleActionView) {
+    ((CollapsibleActionView)mExpandedActionView).onActionViewExpanded();
+  }
+  return true;
+}

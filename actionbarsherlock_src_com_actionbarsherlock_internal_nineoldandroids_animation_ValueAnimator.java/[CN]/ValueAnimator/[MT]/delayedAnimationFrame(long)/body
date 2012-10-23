@@ -1,0 +1,15 @@
+{
+  if (!mStartedDelay) {
+    mStartedDelay=true;
+    mDelayStartTime=currentTime;
+  }
+ else {
+    long deltaTime=currentTime - mDelayStartTime;
+    if (deltaTime > mStartDelay) {
+      mStartTime=currentTime - (deltaTime - mStartDelay);
+      mPlayingState=RUNNING;
+      return true;
+    }
+  }
+  return false;
+}

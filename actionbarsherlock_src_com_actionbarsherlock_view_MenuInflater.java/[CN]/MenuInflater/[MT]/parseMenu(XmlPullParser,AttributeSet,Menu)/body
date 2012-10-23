@@ -1,0 +1,70 @@
+{
+  MenuState menuState=new MenuState(menu);
+  int eventType=parser.getEventType();
+  String tagName;
+  boolean lookingForEndOfUnknownTag=false;
+  String unknownTagName=null;
+  do {
+    if (eventType == XmlPullParser.START_TAG) {
+      tagName=parser.getName();
+      if (tagName.equals(XML_MENU)) {
+        eventType=parser.next();
+        break;
+      }
+      throw new RuntimeException("Expecting menu, got " + tagName);
+    }
+    eventType=parser.next();
+  }
+ while (eventType != XmlPullParser.END_DOCUMENT);
+  boolean reachedEndOfMenu=false;
+  while (!reachedEndOfMenu) {
+switch (eventType) {
+case XmlPullParser.START_TAG:
+      if (lookingForEndOfUnknownTag) {
+        break;
+      }
+    tagName=parser.getName();
+  if (tagName.equals(XML_GROUP)) {
+    menuState.readGroup(attrs);
+  }
+ else   if (tagName.equals(XML_ITEM)) {
+    menuState.readItem(attrs);
+  }
+ else   if (tagName.equals(XML_MENU)) {
+    SubMenu subMenu=menuState.addSubMenuItem();
+    parseMenu(parser,attrs,subMenu);
+  }
+ else {
+    lookingForEndOfUnknownTag=true;
+    unknownTagName=tagName;
+  }
+break;
+case XmlPullParser.END_TAG:
+tagName=parser.getName();
+if (lookingForEndOfUnknownTag && tagName.equals(unknownTagName)) {
+lookingForEndOfUnknownTag=false;
+unknownTagName=null;
+}
+ else if (tagName.equals(XML_GROUP)) {
+menuState.resetGroup();
+}
+ else if (tagName.equals(XML_ITEM)) {
+if (!menuState.hasAddedItem()) {
+if (menuState.itemActionProvider != null && menuState.itemActionProvider.hasSubMenu()) {
+  menuState.addSubMenuItem();
+}
+ else {
+  menuState.addItem();
+}
+}
+}
+ else if (tagName.equals(XML_MENU)) {
+reachedEndOfMenu=true;
+}
+break;
+case XmlPullParser.END_DOCUMENT:
+throw new RuntimeException("Unexpected end of document");
+}
+eventType=parser.next();
+}
+}

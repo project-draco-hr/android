@@ -1,0 +1,6 @@
+{
+  boolean focused=mQueryTextView.hasFocus();
+  mSearchPlate.getBackground().setState(focused ? FOCUSED_STATE_SET : EMPTY_STATE_SET);
+  mSubmitArea.getBackground().setState(focused ? FOCUSED_STATE_SET : EMPTY_STATE_SET);
+  invalidate();
+}

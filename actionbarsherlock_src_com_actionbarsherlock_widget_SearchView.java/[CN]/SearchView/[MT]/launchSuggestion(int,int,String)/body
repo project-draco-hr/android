@@ -1,0 +1,9 @@
+{
+  Cursor c=mSuggestionsAdapter.getCursor();
+  if ((c != null) && c.moveToPosition(position)) {
+    Intent intent=createIntentFromSuggestion(c,actionKey,actionMsg);
+    launchIntent(intent);
+    return true;
+  }
+  return false;
+}

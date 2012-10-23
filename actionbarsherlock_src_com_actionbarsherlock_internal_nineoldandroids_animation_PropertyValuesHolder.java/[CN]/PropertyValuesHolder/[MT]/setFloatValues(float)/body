@@ -1,0 +1,4 @@
+{
+  mValueType=float.class;
+  mKeyframeSet=KeyframeSet.ofFloat(values);
+}

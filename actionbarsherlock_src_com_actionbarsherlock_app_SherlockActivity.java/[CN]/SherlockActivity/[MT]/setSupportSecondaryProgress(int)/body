@@ -1,0 +1,3 @@
+{
+  getSherlock().setSecondaryProgress(secondaryProgress);
+}

@@ -1,0 +1,26 @@
+{
+  mTerminated=true;
+  if (isStarted()) {
+    ArrayList<AnimatorListener> tmpListeners=null;
+    if (mListeners != null) {
+      tmpListeners=(ArrayList<AnimatorListener>)mListeners.clone();
+      for (      AnimatorListener listener : tmpListeners) {
+        listener.onAnimationCancel(this);
+      }
+    }
+    if (mDelayAnim != null && mDelayAnim.isRunning()) {
+      mDelayAnim.cancel();
+    }
+ else     if (mSortedNodes.size() > 0) {
+      for (      Node node : mSortedNodes) {
+        node.animation.cancel();
+      }
+    }
+    if (tmpListeners != null) {
+      for (      AnimatorListener listener : tmpListeners) {
+        listener.onAnimationEnd(this);
+      }
+    }
+    mStarted=false;
+  }
+}

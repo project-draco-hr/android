@@ -1,0 +1,42 @@
+{
+  Method returnVal=null;
+  String methodName=getMethodName(prefix,mPropertyName);
+  Class args[]=null;
+  if (valueType == null) {
+    try {
+      returnVal=targetClass.getMethod(methodName,args);
+    }
+ catch (    NoSuchMethodException e) {
+      Log.e("PropertyValuesHolder",targetClass.getSimpleName() + " - " + "Couldn't find no-arg method for property "+ mPropertyName+ ": "+ e);
+    }
+  }
+ else {
+    args=new Class[1];
+    Class typeVariants[];
+    if (mValueType.equals(Float.class)) {
+      typeVariants=FLOAT_VARIANTS;
+    }
+ else     if (mValueType.equals(Integer.class)) {
+      typeVariants=INTEGER_VARIANTS;
+    }
+ else     if (mValueType.equals(Double.class)) {
+      typeVariants=DOUBLE_VARIANTS;
+    }
+ else {
+      typeVariants=new Class[1];
+      typeVariants[0]=mValueType;
+    }
+    for (    Class typeVariant : typeVariants) {
+      args[0]=typeVariant;
+      try {
+        returnVal=targetClass.getMethod(methodName,args);
+        mValueType=typeVariant;
+        return returnVal;
+      }
+ catch (      NoSuchMethodException e) {
+      }
+    }
+    Log.e("PropertyValuesHolder","Couldn't find " + prefix + "ter property "+ mPropertyName+ " for "+ targetClass.getSimpleName()+ " with value type "+ mValueType);
+  }
+  return returnVal;
+}

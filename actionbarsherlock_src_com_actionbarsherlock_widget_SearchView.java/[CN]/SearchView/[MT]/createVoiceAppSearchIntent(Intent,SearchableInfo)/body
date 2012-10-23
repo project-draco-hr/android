@@ -1,0 +1,33 @@
+{
+  ComponentName searchActivity=searchable.getSearchActivity();
+  Intent queryIntent=new Intent(Intent.ACTION_SEARCH);
+  queryIntent.setComponent(searchActivity);
+  PendingIntent pending=PendingIntent.getActivity(getContext(),0,queryIntent,PendingIntent.FLAG_ONE_SHOT);
+  Bundle queryExtras=new Bundle();
+  Intent voiceIntent=new Intent(baseIntent);
+  String languageModel=RecognizerIntent.LANGUAGE_MODEL_FREE_FORM;
+  String prompt=null;
+  String language=null;
+  int maxResults=1;
+  Resources resources=getResources();
+  if (searchable.getVoiceLanguageModeId() != 0) {
+    languageModel=resources.getString(searchable.getVoiceLanguageModeId());
+  }
+  if (searchable.getVoicePromptTextId() != 0) {
+    prompt=resources.getString(searchable.getVoicePromptTextId());
+  }
+  if (searchable.getVoiceLanguageId() != 0) {
+    language=resources.getString(searchable.getVoiceLanguageId());
+  }
+  if (searchable.getVoiceMaxResults() != 0) {
+    maxResults=searchable.getVoiceMaxResults();
+  }
+  voiceIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,languageModel);
+  voiceIntent.putExtra(RecognizerIntent.EXTRA_PROMPT,prompt);
+  voiceIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,language);
+  voiceIntent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS,maxResults);
+  voiceIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,searchActivity == null ? null : searchActivity.flattenToShortString());
+  voiceIntent.putExtra(RecognizerIntent.EXTRA_RESULTS_PENDINGINTENT,pending);
+  voiceIntent.putExtra(RecognizerIntent.EXTRA_RESULTS_PENDINGINTENT_BUNDLE,queryExtras);
+  return voiceIntent;
+}

@@ -1,0 +1,10 @@
+{
+  super(context,attrs);
+  mContext=context;
+  TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.SherlockMenuView,defStyle,0);
+  mBackground=a.getDrawable(R.styleable.SherlockMenuView_itemBackground);
+  mTextAppearance=a.getResourceId(R.styleable.SherlockMenuView_itemTextAppearance,-1);
+  mPreserveIconSpacing=a.getBoolean(R.styleable.SherlockMenuView_preserveIconSpacing,false);
+  mTextAppearanceContext=context;
+  a.recycle();
+}

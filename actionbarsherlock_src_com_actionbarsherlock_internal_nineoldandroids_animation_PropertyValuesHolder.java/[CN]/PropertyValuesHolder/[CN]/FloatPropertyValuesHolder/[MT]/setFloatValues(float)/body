@@ -1,0 +1,4 @@
+{
+  super.setFloatValues(values);
+  mFloatKeyframeSet=(FloatKeyframeSet)mKeyframeSet;
+}

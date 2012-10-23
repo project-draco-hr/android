@@ -1,0 +1,6 @@
+{
+  ObjectAnimator anim=new ObjectAnimator();
+  anim.mTarget=target;
+  anim.setValues(values);
+  return anim;
+}

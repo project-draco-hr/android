@@ -1,0 +1,4 @@
+{
+  MenuAdapter adapter=mAdapter;
+  adapter.mAdapterMenu.performItemAction(adapter.getItem(position),0);
+}

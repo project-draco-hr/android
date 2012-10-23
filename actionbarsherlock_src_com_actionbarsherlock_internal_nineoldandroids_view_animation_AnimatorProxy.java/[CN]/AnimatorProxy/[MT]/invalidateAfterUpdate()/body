@@ -1,0 +1,15 @@
+{
+  View view=mView.get();
+  if (view == null) {
+    return;
+  }
+  View parent=(View)view.getParent();
+  if (parent == null) {
+    return;
+  }
+  view.setAnimation(this);
+  final RectF after=mAfter;
+  computeRect(after,view);
+  after.union(mBefore);
+  parent.invalidate((int)FloatMath.floor(after.left),(int)FloatMath.floor(after.top),(int)FloatMath.ceil(after.right),(int)FloatMath.ceil(after.bottom));
+}

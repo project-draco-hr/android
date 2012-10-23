@@ -1,0 +1,4 @@
+{
+  mNativeTab=nativeTab;
+  mNativeTab.setTag(this);
+}

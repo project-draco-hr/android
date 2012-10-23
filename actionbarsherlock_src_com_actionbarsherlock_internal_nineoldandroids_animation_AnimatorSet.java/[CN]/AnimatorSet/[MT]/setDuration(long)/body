@@ -1,0 +1,10 @@
+{
+  if (duration < 0) {
+    throw new IllegalArgumentException("duration must be a value of zero or greater");
+  }
+  for (  Node node : mNodes) {
+    node.animation.setDuration(duration);
+  }
+  mDuration=duration;
+  return this;
+}

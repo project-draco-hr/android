@@ -1,0 +1,15 @@
+{
+synchronized (mInstanceLock) {
+    if (!mReadShareHistoryCalled) {
+      throw new IllegalStateException("No preceding call to #readHistoricalData");
+    }
+    if (!mHistoricalRecordsChanged) {
+      return;
+    }
+    mHistoricalRecordsChanged=false;
+    mCanReadHistoricalData=true;
+    if (!TextUtils.isEmpty(mHistoryFileName)) {
+      SERIAL_EXECUTOR.execute(new HistoryPersister());
+    }
+  }
+}

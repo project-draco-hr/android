@@ -1,0 +1,3 @@
+Intent intent
+List<ActivityResolveInfo> activities
+List<HistoricalRecord> historicalRecords

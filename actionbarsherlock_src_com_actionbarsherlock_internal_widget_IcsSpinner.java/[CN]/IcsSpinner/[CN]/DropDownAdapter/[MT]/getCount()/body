@@ -1,0 +1,3 @@
+{
+  return mAdapter == null ? 0 : mAdapter.getCount();
+}

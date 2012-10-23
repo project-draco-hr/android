@@ -1,0 +1,6 @@
+{
+  if (mListeners == null) {
+    mListeners=new ArrayList<AnimatorListener>();
+  }
+  mListeners.add(listener);
+}

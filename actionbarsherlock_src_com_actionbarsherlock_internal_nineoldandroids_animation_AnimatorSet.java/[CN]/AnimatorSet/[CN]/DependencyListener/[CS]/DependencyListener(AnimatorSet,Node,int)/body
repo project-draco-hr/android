@@ -1,0 +1,5 @@
+{
+  this.mAnimatorSet=animatorSet;
+  this.mNode=node;
+  this.mRule=rule;
+}

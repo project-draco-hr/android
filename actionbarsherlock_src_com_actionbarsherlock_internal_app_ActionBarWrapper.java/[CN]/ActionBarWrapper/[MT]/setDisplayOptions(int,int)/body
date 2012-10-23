@@ -1,0 +1,3 @@
+{
+  mActionBar.setDisplayOptions(options,mask);
+}

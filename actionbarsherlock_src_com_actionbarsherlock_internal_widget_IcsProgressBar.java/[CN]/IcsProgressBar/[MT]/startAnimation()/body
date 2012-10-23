@@ -1,0 +1,22 @@
+{
+  if (getVisibility() != VISIBLE) {
+    return;
+  }
+  if (mIndeterminateDrawable instanceof Animatable) {
+    mShouldStartAnimationDrawable=true;
+    mAnimation=null;
+  }
+ else {
+    if (mInterpolator == null) {
+      mInterpolator=new LinearInterpolator();
+    }
+    mTransformation=new Transformation();
+    mAnimation=new AlphaAnimation(0.0f,1.0f);
+    mAnimation.setRepeatMode(mBehavior);
+    mAnimation.setRepeatCount(Animation.INFINITE);
+    mAnimation.setDuration(mDuration);
+    mAnimation.setInterpolator(mInterpolator);
+    mAnimation.setStartTime(Animation.START_ON_FIRST_FRAME);
+  }
+  postInvalidate();
+}

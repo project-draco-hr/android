@@ -1,0 +1,3 @@
+{
+  return mWrapped.onCreateActionMode(mode,menu);
+}

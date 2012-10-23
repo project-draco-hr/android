@@ -1,0 +1,17 @@
+{
+  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO) {
+    super.onConfigurationChanged(newConfig);
+  }
+ else   if (mMenuView != null) {
+    mMenuView.onConfigurationChanged(newConfig);
+  }
+  TypedArray a=getContext().obtainStyledAttributes(null,R.styleable.SherlockActionBar,R.attr.actionBarStyle,0);
+  setContentHeight(a.getLayoutDimension(R.styleable.SherlockActionBar_height,0));
+  a.recycle();
+  if (mSplitWhenNarrow) {
+    setSplitActionBar(getResources_getBoolean(getContext(),R.bool.abs__split_action_bar_is_narrow));
+  }
+  if (mActionMenuPresenter != null) {
+    mActionMenuPresenter.onConfigurationChanged(newConfig);
+  }
+}

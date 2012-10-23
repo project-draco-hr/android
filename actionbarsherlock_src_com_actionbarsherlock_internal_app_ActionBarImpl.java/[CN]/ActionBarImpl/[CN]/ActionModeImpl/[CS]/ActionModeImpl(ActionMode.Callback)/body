@@ -1,0 +1,5 @@
+{
+  mCallback=callback;
+  mMenu=new MenuBuilder(getThemedContext()).setDefaultShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+  mMenu.setCallback(this);
+}

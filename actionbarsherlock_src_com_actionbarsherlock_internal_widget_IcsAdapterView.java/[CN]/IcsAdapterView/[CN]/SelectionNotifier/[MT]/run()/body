@@ -1,0 +1,10 @@
+{
+  if (mDataChanged) {
+    if (getAdapter() != null) {
+      post(this);
+    }
+  }
+ else {
+    fireOnSelected();
+  }
+}

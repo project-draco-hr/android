@@ -1,0 +1,4 @@
+{
+  mNavigationListener=callback;
+  mActionBar.setListNavigationCallbacks(adapter,(callback != null) ? this : null);
+}

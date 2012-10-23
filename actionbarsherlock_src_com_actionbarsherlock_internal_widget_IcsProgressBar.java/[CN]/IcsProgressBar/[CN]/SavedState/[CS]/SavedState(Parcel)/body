@@ -1,0 +1,5 @@
+{
+  super(in);
+  progress=in.readInt();
+  secondaryProgress=in.readInt();
+}

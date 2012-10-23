@@ -1,0 +1,50 @@
+{
+  final int widthMode=MeasureSpec.getMode(widthMeasureSpec);
+  if (widthMode != MeasureSpec.EXACTLY) {
+    throw new IllegalStateException(getClass().getSimpleName() + " can only be used " + "with android:layout_width=\"match_parent\" (or fill_parent)");
+  }
+  final int heightMode=MeasureSpec.getMode(heightMeasureSpec);
+  if (heightMode == MeasureSpec.UNSPECIFIED) {
+    throw new IllegalStateException(getClass().getSimpleName() + " can only be used " + "with android:layout_height=\"wrap_content\"");
+  }
+  final int contentWidth=MeasureSpec.getSize(widthMeasureSpec);
+  int maxHeight=mContentHeight > 0 ? mContentHeight : MeasureSpec.getSize(heightMeasureSpec);
+  final int verticalPadding=getPaddingTop() + getPaddingBottom();
+  int availableWidth=contentWidth - getPaddingLeft() - getPaddingRight();
+  final int height=maxHeight - verticalPadding;
+  final int childSpecHeight=MeasureSpec.makeMeasureSpec(height,MeasureSpec.AT_MOST);
+  if (mClose != null) {
+    availableWidth=measureChildView(mClose,availableWidth,childSpecHeight,0);
+    MarginLayoutParams lp=(MarginLayoutParams)mClose.getLayoutParams();
+    availableWidth-=lp.leftMargin + lp.rightMargin;
+  }
+  if (mMenuView != null && mMenuView.getParent() == this) {
+    availableWidth=measureChildView(mMenuView,availableWidth,childSpecHeight,0);
+  }
+  if (mTitleLayout != null && mCustomView == null) {
+    availableWidth=measureChildView(mTitleLayout,availableWidth,childSpecHeight,0);
+  }
+  if (mCustomView != null) {
+    ViewGroup.LayoutParams lp=mCustomView.getLayoutParams();
+    final int customWidthMode=lp.width != LayoutParams.WRAP_CONTENT ? MeasureSpec.EXACTLY : MeasureSpec.AT_MOST;
+    final int customWidth=lp.width >= 0 ? Math.min(lp.width,availableWidth) : availableWidth;
+    final int customHeightMode=lp.height != LayoutParams.WRAP_CONTENT ? MeasureSpec.EXACTLY : MeasureSpec.AT_MOST;
+    final int customHeight=lp.height >= 0 ? Math.min(lp.height,height) : height;
+    mCustomView.measure(MeasureSpec.makeMeasureSpec(customWidth,customWidthMode),MeasureSpec.makeMeasureSpec(customHeight,customHeightMode));
+  }
+  if (mContentHeight <= 0) {
+    int measuredHeight=0;
+    final int count=getChildCount();
+    for (int i=0; i < count; i++) {
+      View v=getChildAt(i);
+      int paddedViewHeight=v.getMeasuredHeight() + verticalPadding;
+      if (paddedViewHeight > measuredHeight) {
+        measuredHeight=paddedViewHeight;
+      }
+    }
+    setMeasuredDimension(contentWidth,measuredHeight);
+  }
+ else {
+    setMeasuredDimension(contentWidth,maxHeight);
+  }
+}

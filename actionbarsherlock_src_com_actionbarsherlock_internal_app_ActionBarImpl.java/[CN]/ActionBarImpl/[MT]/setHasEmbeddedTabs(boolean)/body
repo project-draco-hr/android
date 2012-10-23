@@ -1,0 +1,16 @@
+{
+  mHasEmbeddedTabs=hasEmbeddedTabs;
+  if (!mHasEmbeddedTabs) {
+    mActionView.setEmbeddedTabView(null);
+    mContainerView.setTabContainer(mTabScrollView);
+  }
+ else {
+    mContainerView.setTabContainer(null);
+    mActionView.setEmbeddedTabView(mTabScrollView);
+  }
+  final boolean isInTabMode=getNavigationMode() == NAVIGATION_MODE_TABS;
+  if (mTabScrollView != null) {
+    mTabScrollView.setVisibility(isInTabMode ? View.VISIBLE : View.GONE);
+  }
+  mActionView.setCollapsable(!mHasEmbeddedTabs && isInTabMode);
+}

@@ -1,0 +1,4 @@
+{
+  setSelection(which);
+  dialog.dismiss();
+}

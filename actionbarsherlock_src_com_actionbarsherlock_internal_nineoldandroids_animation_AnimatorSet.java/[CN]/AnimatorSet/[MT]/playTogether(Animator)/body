@@ -1,0 +1,9 @@
+{
+  if (items != null) {
+    mNeedsSort=true;
+    Builder builder=play(items[0]);
+    for (int i=1; i < items.length; ++i) {
+      builder.with(items[i]);
+    }
+  }
+}

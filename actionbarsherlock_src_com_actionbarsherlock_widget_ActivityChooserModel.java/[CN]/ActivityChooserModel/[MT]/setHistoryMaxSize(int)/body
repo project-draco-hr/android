@@ -1,0 +1,10 @@
+{
+synchronized (mInstanceLock) {
+    if (mHistoryMaxSize == historyMaxSize) {
+      return;
+    }
+    mHistoryMaxSize=historyMaxSize;
+    pruneExcessiveHistoricalRecordsLocked();
+    sortActivities();
+  }
+}

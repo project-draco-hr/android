@@ -1,0 +1,13 @@
+{
+  if (mAnimationMode == ANIMATE_OUT) {
+    return;
+  }
+  if (mClose == null) {
+    killMode();
+    return;
+  }
+  finishAnimation();
+  mAnimationMode=ANIMATE_OUT;
+  mCurrentAnimation=makeOutAnimation();
+  mCurrentAnimation.start();
+}

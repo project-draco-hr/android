@@ -1,0 +1,15 @@
+{
+  if (wActionBar != null && wActionBar.isOverflowReserved()) {
+    if (!wActionBar.isOverflowMenuShowing() || !toggleMenuMode) {
+      if (wActionBar.getVisibility() == View.VISIBLE) {
+        if (callbackPrepareOptionsMenu(mMenu)) {
+          wActionBar.showOverflowMenu();
+        }
+      }
+    }
+ else {
+      wActionBar.hideOverflowMenu();
+    }
+    return;
+  }
+}

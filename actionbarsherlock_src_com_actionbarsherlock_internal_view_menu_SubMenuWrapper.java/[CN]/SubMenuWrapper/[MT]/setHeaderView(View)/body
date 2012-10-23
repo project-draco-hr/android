@@ -1,0 +1,4 @@
+{
+  mNativeSubMenu.setHeaderView(view);
+  return this;
+}

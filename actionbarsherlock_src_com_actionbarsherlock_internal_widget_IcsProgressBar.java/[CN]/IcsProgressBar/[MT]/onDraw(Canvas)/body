@@ -1,0 +1,30 @@
+{
+  super.onDraw(canvas);
+  Drawable d=mCurrentDrawable;
+  if (d != null) {
+    canvas.save();
+    canvas.translate(getPaddingLeft() + mIndeterminateRealLeft,getPaddingTop() + mIndeterminateRealTop);
+    long time=getDrawingTime();
+    if (mAnimation != null) {
+      mAnimation.getTransformation(time,mTransformation);
+      float scale=mTransformation.getAlpha();
+      try {
+        mInDrawing=true;
+        d.setLevel((int)(scale * MAX_LEVEL));
+      }
+  finally {
+        mInDrawing=false;
+      }
+      if (SystemClock.uptimeMillis() - mLastDrawTime >= mAnimationResolution) {
+        mLastDrawTime=SystemClock.uptimeMillis();
+        postInvalidateDelayed(mAnimationResolution);
+      }
+    }
+    d.draw(canvas);
+    canvas.restore();
+    if (mShouldStartAnimationDrawable && d instanceof Animatable) {
+      ((Animatable)d).start();
+      mShouldStartAnimationDrawable=false;
+    }
+  }
+}

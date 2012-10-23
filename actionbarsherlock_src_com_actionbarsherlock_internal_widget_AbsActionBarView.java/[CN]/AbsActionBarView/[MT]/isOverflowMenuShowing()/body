@@ -1,0 +1,6 @@
+{
+  if (mActionMenuPresenter != null) {
+    return mActionMenuPresenter.isOverflowMenuShowing();
+  }
+  return false;
+}

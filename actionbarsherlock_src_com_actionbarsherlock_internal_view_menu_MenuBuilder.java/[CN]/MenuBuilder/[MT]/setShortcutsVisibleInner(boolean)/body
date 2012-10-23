@@ -1,0 +1,3 @@
+{
+  mShortcutsVisible=shortcutsVisible && mResources.getConfiguration().keyboard != Configuration.KEYBOARD_NOKEYS && mResources.getBoolean(R.bool.abs__config_showMenuShortcutsWhenKeyboardPresent);
+}

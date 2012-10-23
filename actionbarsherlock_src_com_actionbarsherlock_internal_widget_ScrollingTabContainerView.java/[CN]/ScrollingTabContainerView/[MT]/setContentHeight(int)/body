@@ -1,0 +1,4 @@
+{
+  mContentHeight=contentHeight;
+  requestLayout();
+}

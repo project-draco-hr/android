@@ -1,0 +1,10 @@
+{
+  super(context,attrs,defStyle);
+  TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.SherlockActionMode,defStyle,0);
+  setBackgroundDrawable(a.getDrawable(R.styleable.SherlockActionMode_background));
+  mTitleStyleRes=a.getResourceId(R.styleable.SherlockActionMode_titleTextStyle,0);
+  mSubtitleStyleRes=a.getResourceId(R.styleable.SherlockActionMode_subtitleTextStyle,0);
+  mContentHeight=a.getLayoutDimension(R.styleable.SherlockActionMode_height,0);
+  mSplitBackground=a.getDrawable(R.styleable.SherlockActionMode_backgroundSplit);
+  a.recycle();
+}

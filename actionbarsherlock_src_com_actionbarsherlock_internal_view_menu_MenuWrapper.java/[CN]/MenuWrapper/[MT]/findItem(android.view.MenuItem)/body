@@ -1,0 +1,10 @@
+{
+  if (nativeItem == null) {
+    return null;
+  }
+  MenuItem wrapped=mNativeMap.get(nativeItem);
+  if (wrapped != null) {
+    return wrapped;
+  }
+  return addInternal(nativeItem);
+}

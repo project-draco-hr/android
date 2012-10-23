@@ -1,0 +1,10 @@
+{
+  if (enabled) {
+    mFlags|=ENABLED;
+  }
+ else {
+    mFlags&=~ENABLED;
+  }
+  mMenu.onItemsChanged(false);
+  return this;
+}

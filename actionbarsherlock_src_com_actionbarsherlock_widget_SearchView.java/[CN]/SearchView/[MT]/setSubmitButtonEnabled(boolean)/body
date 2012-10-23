@@ -1,0 +1,4 @@
+{
+  mSubmitButtonEnabled=enabled;
+  updateViewsVisibility(isIconified());
+}

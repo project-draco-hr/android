@@ -1,0 +1,10 @@
+{
+  Drawable popupBackground=mPopup.getBackground();
+  if (popupBackground != null) {
+    popupBackground.getPadding(mTempRect);
+    mDropDownWidth=mTempRect.left + mTempRect.right + width;
+  }
+ else {
+    mDropDownWidth=width;
+  }
+}

@@ -1,0 +1,6 @@
+{
+  if (mShortcutNumericChar == numericChar)   return this;
+  mShortcutNumericChar=numericChar;
+  mMenu.onItemsChanged(false);
+  return this;
+}

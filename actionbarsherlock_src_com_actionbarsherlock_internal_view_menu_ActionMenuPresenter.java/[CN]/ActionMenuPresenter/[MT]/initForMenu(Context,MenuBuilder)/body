@@ -1,0 +1,28 @@
+{
+  super.initForMenu(context,menu);
+  final Resources res=context.getResources();
+  if (!mReserveOverflowSet) {
+    mReserveOverflow=reserveOverflow(mContext);
+  }
+  if (!mWidthLimitSet) {
+    mWidthLimit=res.getDisplayMetrics().widthPixels / 2;
+  }
+  if (!mMaxItemsSet) {
+    mMaxItems=getResources_getInteger(context,R.integer.abs__max_action_buttons);
+  }
+  int width=mWidthLimit;
+  if (mReserveOverflow) {
+    if (mOverflowButton == null) {
+      mOverflowButton=new OverflowMenuButton(mSystemContext);
+      final int spec=MeasureSpec.makeMeasureSpec(0,MeasureSpec.UNSPECIFIED);
+      mOverflowButton.measure(spec,spec);
+    }
+    width-=mOverflowButton.getMeasuredWidth();
+  }
+ else {
+    mOverflowButton=null;
+  }
+  mActionItemWidthLimit=width;
+  mMinCellSize=(int)(ActionMenuView.MIN_CELL_SIZE * res.getDisplayMetrics().density);
+  mScrapActionButtonView=null;
+}

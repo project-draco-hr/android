@@ -1,0 +1,4 @@
+int group
+int id
+int categoryOrder
+int title

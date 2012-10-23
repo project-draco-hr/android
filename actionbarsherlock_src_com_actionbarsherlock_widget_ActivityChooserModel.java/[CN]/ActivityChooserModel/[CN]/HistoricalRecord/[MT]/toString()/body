@@ -1,0 +1,9 @@
+{
+  StringBuilder builder=new StringBuilder();
+  builder.append("[");
+  builder.append("; activity:").append(activity);
+  builder.append("; time:").append(time);
+  builder.append("; weight:").append(new BigDecimal(weight));
+  builder.append("]");
+  return builder.toString();
+}

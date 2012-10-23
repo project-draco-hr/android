@@ -1,0 +1,6 @@
+{
+  super(c,attrs);
+  TypedArray a=c.obtainStyledAttributes(attrs,ATTRS);
+  gravity=a.getInt(0,-1);
+  a.recycle();
+}

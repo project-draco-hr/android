@@ -1,0 +1,10 @@
+{
+  if (d != null) {
+    d.setCallback(this);
+  }
+  mIndeterminateDrawable=d;
+  if (mIndeterminate) {
+    mCurrentDrawable=d;
+    postInvalidate();
+  }
+}

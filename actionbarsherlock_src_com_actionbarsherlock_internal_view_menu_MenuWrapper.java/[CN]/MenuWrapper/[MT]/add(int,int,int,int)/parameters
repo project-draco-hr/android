@@ -1,0 +1,4 @@
+int groupId
+int itemId
+int order
+int titleRes

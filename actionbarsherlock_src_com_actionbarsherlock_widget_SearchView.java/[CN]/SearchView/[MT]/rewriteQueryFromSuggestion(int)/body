@@ -1,0 +1,19 @@
+{
+  CharSequence oldQuery=mQueryTextView.getText();
+  Cursor c=mSuggestionsAdapter.getCursor();
+  if (c == null) {
+    return;
+  }
+  if (c.moveToPosition(position)) {
+    CharSequence newQuery=mSuggestionsAdapter.convertToString(c);
+    if (newQuery != null) {
+      setQuery(newQuery);
+    }
+ else {
+      setQuery(oldQuery);
+    }
+  }
+ else {
+    setQuery(oldQuery);
+  }
+}

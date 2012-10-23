@@ -1,0 +1,12 @@
+{
+synchronized (mInstanceLock) {
+    if (!mCanReadHistoricalData || !mHistoricalRecordsChanged) {
+      return;
+    }
+    mCanReadHistoricalData=false;
+    mReadShareHistoryCalled=true;
+    if (!TextUtils.isEmpty(mHistoryFileName)) {
+      SERIAL_EXECUTOR.execute(new HistoryLoader());
+    }
+  }
+}

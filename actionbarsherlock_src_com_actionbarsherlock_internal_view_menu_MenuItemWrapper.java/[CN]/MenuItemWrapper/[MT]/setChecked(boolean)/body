@@ -1,0 +1,4 @@
+{
+  mNativeItem.setChecked(checked);
+  return this;
+}

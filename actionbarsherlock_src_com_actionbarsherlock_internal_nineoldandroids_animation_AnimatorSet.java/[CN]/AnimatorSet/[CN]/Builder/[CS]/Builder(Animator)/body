@@ -1,0 +1,8 @@
+{
+  mCurrentNode=mNodeMap.get(anim);
+  if (mCurrentNode == null) {
+    mCurrentNode=new Node(anim);
+    mNodeMap.put(anim,mCurrentNode);
+    mNodes.add(mCurrentNode);
+  }
+}

@@ -1,0 +1,17 @@
+{
+  if (mUiThreadId == Thread.currentThread().getId()) {
+    doRefreshProgress(id,progress,fromUser,true);
+  }
+ else {
+    RefreshProgressRunnable r;
+    if (mRefreshProgressRunnable != null) {
+      r=mRefreshProgressRunnable;
+      mRefreshProgressRunnable=null;
+      r.setup(id,progress,fromUser);
+    }
+ else {
+      r=new RefreshProgressRunnable(id,progress,fromUser);
+    }
+    post(r);
+  }
+}

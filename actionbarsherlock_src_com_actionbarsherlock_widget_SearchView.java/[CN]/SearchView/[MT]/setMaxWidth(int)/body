@@ -1,0 +1,4 @@
+{
+  mMaxWidth=maxpixels;
+  requestLayout();
+}

@@ -1,0 +1,6 @@
+{
+  if (featureId == Window.FEATURE_OPTIONS_PANEL) {
+    return onPrepareOptionsMenu(menu);
+  }
+  return false;
+}

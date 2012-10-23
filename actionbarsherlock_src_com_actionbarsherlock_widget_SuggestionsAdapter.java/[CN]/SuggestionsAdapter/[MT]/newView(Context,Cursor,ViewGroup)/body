@@ -1,0 +1,5 @@
+{
+  View v=super.newView(context,cursor,parent);
+  v.setTag(new ChildViewCache(v));
+  return v;
+}

@@ -1,0 +1,3 @@
+{
+  dispatchThawSelfOnly(container);
+}

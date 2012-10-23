@@ -1,0 +1,23 @@
+{
+  Intent intent=new Intent(action);
+  intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+  if (data != null) {
+    intent.setData(data);
+  }
+  intent.putExtra(SearchManager.USER_QUERY,mUserQuery);
+  if (query != null) {
+    intent.putExtra(SearchManager.QUERY,query);
+  }
+  if (extraData != null) {
+    intent.putExtra(SearchManager.EXTRA_DATA_KEY,extraData);
+  }
+  if (mAppSearchData != null) {
+    intent.putExtra(SearchManager.APP_DATA,mAppSearchData);
+  }
+  if (actionKey != KeyEvent.KEYCODE_UNKNOWN) {
+    intent.putExtra(SearchManager.ACTION_KEY,actionKey);
+    intent.putExtra(SearchManager.ACTION_MSG,actionMsg);
+  }
+  intent.setComponent(mSearchable.getSearchActivity());
+  return intent;
+}

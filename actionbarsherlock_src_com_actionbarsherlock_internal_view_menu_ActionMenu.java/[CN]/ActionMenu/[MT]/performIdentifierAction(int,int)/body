@@ -1,0 +1,7 @@
+{
+  final int index=findItemIndex(id);
+  if (index < 0) {
+    return false;
+  }
+  return mItems.get(index).invoke();
+}

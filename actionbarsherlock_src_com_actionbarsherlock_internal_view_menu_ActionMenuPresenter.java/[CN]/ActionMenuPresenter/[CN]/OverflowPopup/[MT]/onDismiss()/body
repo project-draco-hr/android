@@ -1,0 +1,5 @@
+{
+  super.onDismiss();
+  mMenu.close();
+  mOverflowPopup=null;
+}

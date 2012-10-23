@@ -1,0 +1,19 @@
+{
+  final Rect displayFrame=new Rect();
+  anchor.getWindowVisibleDisplayFrame(displayFrame);
+  final int[] anchorPos=new int[2];
+  anchor.getLocationOnScreen(anchorPos);
+  int bottomEdge=displayFrame.bottom;
+  if (ignoreBottomDecorations) {
+    Resources res=anchor.getContext().getResources();
+    bottomEdge=res.getDisplayMetrics().heightPixels;
+  }
+  final int distanceToBottom=bottomEdge - (anchorPos[1] + anchor.getHeight()) - yOffset;
+  final int distanceToTop=anchorPos[1] - displayFrame.top + yOffset;
+  int returnedHeight=Math.max(distanceToBottom,distanceToTop);
+  if (mPopup.getBackground() != null) {
+    mPopup.getBackground().getPadding(mTempRect);
+    returnedHeight-=mTempRect.top + mTempRect.bottom;
+  }
+  return returnedHeight;
+}

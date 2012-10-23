@@ -1,0 +1,10 @@
+{
+  if (mSelectedTab != null) {
+    selectTab(null);
+  }
+  mTabs.clear();
+  if (mTabScrollView != null) {
+    mTabScrollView.removeAllTabs();
+  }
+  mSavedTabPosition=INVALID_POSITION;
+}

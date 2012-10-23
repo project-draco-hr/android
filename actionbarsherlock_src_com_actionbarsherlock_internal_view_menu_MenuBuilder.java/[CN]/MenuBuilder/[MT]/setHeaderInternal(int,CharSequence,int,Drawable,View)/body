@@ -1,0 +1,24 @@
+{
+  final Resources r=getResources();
+  if (view != null) {
+    mHeaderView=view;
+    mHeaderTitle=null;
+    mHeaderIcon=null;
+  }
+ else {
+    if (titleRes > 0) {
+      mHeaderTitle=r.getText(titleRes);
+    }
+ else     if (title != null) {
+      mHeaderTitle=title;
+    }
+    if (iconRes > 0) {
+      mHeaderIcon=r.getDrawable(iconRes);
+    }
+ else     if (icon != null) {
+      mHeaderIcon=icon;
+    }
+    mHeaderView=null;
+  }
+  onItemsChanged(false);
+}

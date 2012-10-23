@@ -1,0 +1,5 @@
+{
+  mWidthLimit=width;
+  mStrictWidthLimit=strict;
+  mWidthLimitSet=true;
+}

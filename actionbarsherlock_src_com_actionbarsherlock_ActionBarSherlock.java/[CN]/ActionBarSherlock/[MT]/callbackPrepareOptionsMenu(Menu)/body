@@ -1,0 +1,14 @@
+{
+  if (DEBUG)   Log.d(TAG,"[callbackPrepareOptionsMenu] menu: " + menu);
+  boolean result=true;
+  if (mActivity instanceof OnPreparePanelListener) {
+    OnPreparePanelListener listener=(OnPreparePanelListener)mActivity;
+    result=listener.onPreparePanel(Window.FEATURE_OPTIONS_PANEL,null,menu);
+  }
+ else   if (mActivity instanceof OnPrepareOptionsMenuListener) {
+    OnPrepareOptionsMenuListener listener=(OnPrepareOptionsMenuListener)mActivity;
+    result=listener.onPrepareOptionsMenu(menu);
+  }
+  if (DEBUG)   Log.d(TAG,"[callbackPrepareOptionsMenu] returning " + result);
+  return result;
+}

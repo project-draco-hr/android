@@ -1,0 +1,3 @@
+{
+  mNativeMenu.setGroupEnabled(group,enabled);
+}

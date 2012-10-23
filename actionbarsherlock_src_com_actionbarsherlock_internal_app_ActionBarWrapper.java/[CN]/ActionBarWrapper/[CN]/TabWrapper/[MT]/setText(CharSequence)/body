@@ -1,0 +1,4 @@
+{
+  mNativeTab.setText(text);
+  return this;
+}

@@ -1,0 +1,3 @@
+{
+  mActionBar.setTitle(resId);
+}

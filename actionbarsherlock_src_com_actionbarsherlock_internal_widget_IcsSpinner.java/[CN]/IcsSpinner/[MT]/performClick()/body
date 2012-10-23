@@ -1,0 +1,10 @@
+{
+  boolean handled=super.performClick();
+  if (!handled) {
+    handled=true;
+    if (!mPopup.isShowing()) {
+      mPopup.show();
+    }
+  }
+  return handled;
+}

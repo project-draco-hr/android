@@ -1,0 +1,11 @@
+{
+  if (mDivider != null) {
+    if (getOrientation() == VERTICAL) {
+      drawDividersVertical(canvas);
+    }
+ else {
+      drawDividersHorizontal(canvas);
+    }
+  }
+  super.onDraw(canvas);
+}

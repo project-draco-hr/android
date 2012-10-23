@@ -1,0 +1,9 @@
+{
+  super.setAdapter(adapter);
+  if (mPopup != null) {
+    mPopup.setAdapter(new DropDownAdapter(adapter));
+  }
+ else {
+    mTempAdapter=new DropDownAdapter(adapter);
+  }
+}

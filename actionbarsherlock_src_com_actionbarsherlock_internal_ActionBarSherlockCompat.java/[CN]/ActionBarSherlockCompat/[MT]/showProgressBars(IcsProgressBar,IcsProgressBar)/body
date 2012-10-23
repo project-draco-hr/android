@@ -1,0 +1,9 @@
+{
+  final int features=mFeatures;
+  if ((features & (1 << Window.FEATURE_INDETERMINATE_PROGRESS)) != 0 && spinnyProgressBar.getVisibility() == View.INVISIBLE) {
+    spinnyProgressBar.setVisibility(View.VISIBLE);
+  }
+  if ((features & (1 << Window.FEATURE_PROGRESS)) != 0 && horizontalProgressBar.getProgress() < 10000) {
+    horizontalProgressBar.setVisibility(View.VISIBLE);
+  }
+}

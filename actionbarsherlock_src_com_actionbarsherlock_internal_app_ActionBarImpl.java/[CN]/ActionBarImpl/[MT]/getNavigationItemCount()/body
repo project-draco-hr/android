@@ -1,0 +1,11 @@
+{
+switch (mActionView.getNavigationMode()) {
+case NAVIGATION_MODE_TABS:
+    return mTabs.size();
+case NAVIGATION_MODE_LIST:
+  SpinnerAdapter adapter=mActionView.getDropdownAdapter();
+return adapter != null ? adapter.getCount() : 0;
+default :
+return 0;
+}
+}

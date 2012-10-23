@@ -1,0 +1,113 @@
+{
+  final ArrayList<MenuItemImpl> visibleItems=mMenu.getVisibleItems();
+  final int itemsSize=visibleItems.size();
+  int maxActions=mMaxItems;
+  int widthLimit=mActionItemWidthLimit;
+  final int querySpec=MeasureSpec.makeMeasureSpec(0,MeasureSpec.UNSPECIFIED);
+  final ViewGroup parent=(ViewGroup)mMenuView;
+  int requiredItems=0;
+  int requestedItems=0;
+  int firstActionWidth=0;
+  boolean hasOverflow=false;
+  for (int i=0; i < itemsSize; i++) {
+    MenuItemImpl item=visibleItems.get(i);
+    if (item.requiresActionButton()) {
+      requiredItems++;
+    }
+ else     if (item.requestsActionButton()) {
+      requestedItems++;
+    }
+ else {
+      hasOverflow=true;
+    }
+    if (mExpandedActionViewsExclusive && item.isActionViewExpanded()) {
+      maxActions=0;
+    }
+  }
+  if (mReserveOverflow && (hasOverflow || requiredItems + requestedItems > maxActions)) {
+    maxActions--;
+  }
+  maxActions-=requiredItems;
+  final SparseBooleanArray seenGroups=mActionButtonGroups;
+  seenGroups.clear();
+  int cellSize=0;
+  int cellsRemaining=0;
+  if (mStrictWidthLimit) {
+    cellsRemaining=widthLimit / mMinCellSize;
+    final int cellSizeRemaining=widthLimit % mMinCellSize;
+    cellSize=mMinCellSize + cellSizeRemaining / cellsRemaining;
+  }
+  for (int i=0; i < itemsSize; i++) {
+    MenuItemImpl item=visibleItems.get(i);
+    if (item.requiresActionButton()) {
+      View v=getItemView(item,mScrapActionButtonView,parent);
+      if (mScrapActionButtonView == null) {
+        mScrapActionButtonView=v;
+      }
+      if (mStrictWidthLimit) {
+        cellsRemaining-=ActionMenuView.measureChildForCells(v,cellSize,cellsRemaining,querySpec,0);
+      }
+ else {
+        v.measure(querySpec,querySpec);
+      }
+      final int measuredWidth=v.getMeasuredWidth();
+      widthLimit-=measuredWidth;
+      if (firstActionWidth == 0) {
+        firstActionWidth=measuredWidth;
+      }
+      final int groupId=item.getGroupId();
+      if (groupId != 0) {
+        seenGroups.put(groupId,true);
+      }
+      item.setIsActionButton(true);
+    }
+ else     if (item.requestsActionButton()) {
+      final int groupId=item.getGroupId();
+      final boolean inGroup=seenGroups.get(groupId);
+      boolean isAction=(maxActions > 0 || inGroup) && widthLimit > 0 && (!mStrictWidthLimit || cellsRemaining > 0);
+      if (isAction) {
+        View v=getItemView(item,mScrapActionButtonView,parent);
+        if (mScrapActionButtonView == null) {
+          mScrapActionButtonView=v;
+        }
+        if (mStrictWidthLimit) {
+          final int cells=ActionMenuView.measureChildForCells(v,cellSize,cellsRemaining,querySpec,0);
+          cellsRemaining-=cells;
+          if (cells == 0) {
+            isAction=false;
+          }
+        }
+ else {
+          v.measure(querySpec,querySpec);
+        }
+        final int measuredWidth=v.getMeasuredWidth();
+        widthLimit-=measuredWidth;
+        if (firstActionWidth == 0) {
+          firstActionWidth=measuredWidth;
+        }
+        if (mStrictWidthLimit) {
+          isAction&=widthLimit >= 0;
+        }
+ else {
+          isAction&=widthLimit + firstActionWidth > 0;
+        }
+      }
+      if (isAction && groupId != 0) {
+        seenGroups.put(groupId,true);
+      }
+ else       if (inGroup) {
+        seenGroups.put(groupId,false);
+        for (int j=0; j < i; j++) {
+          MenuItemImpl areYouMyGroupie=visibleItems.get(j);
+          if (areYouMyGroupie.getGroupId() == groupId) {
+            if (areYouMyGroupie.isActionButton())             maxActions++;
+            areYouMyGroupie.setIsActionButton(false);
+          }
+        }
+      }
+      if (isAction)       maxActions--;
+      item.setIsActionButton(isAction);
+    }
+  }
+  return true;
+}

@@ -1,0 +1,3 @@
+View anchor
+int yOffset
+boolean ignoreBottomDecorations

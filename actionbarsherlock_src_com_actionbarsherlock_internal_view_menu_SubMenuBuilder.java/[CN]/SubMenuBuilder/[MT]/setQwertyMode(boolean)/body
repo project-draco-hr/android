@@ -1,0 +1,3 @@
+{
+  mParentMenu.setQwertyMode(isQwerty);
+}

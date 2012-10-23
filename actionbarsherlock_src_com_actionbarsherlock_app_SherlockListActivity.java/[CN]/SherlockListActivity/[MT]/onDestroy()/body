@@ -1,0 +1,4 @@
+{
+  getSherlock().dispatchDestroy();
+  super.onDestroy();
+}

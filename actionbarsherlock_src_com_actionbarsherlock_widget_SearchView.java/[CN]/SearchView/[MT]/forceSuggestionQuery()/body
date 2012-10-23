@@ -1,0 +1,12 @@
+{
+  try {
+    Method before=SearchAutoComplete.class.getMethod("doBeforeTextChanged");
+    Method after=SearchAutoComplete.class.getMethod("doAfterTextChanged");
+    before.setAccessible(true);
+    after.setAccessible(true);
+    before.invoke(mQueryTextView);
+    after.invoke(mQueryTextView);
+  }
+ catch (  Exception e) {
+  }
+}

@@ -1,0 +1,3 @@
+{
+  return (mShowAsAction & SHOW_AS_ACTION_IF_ROOM) == SHOW_AS_ACTION_IF_ROOM;
+}

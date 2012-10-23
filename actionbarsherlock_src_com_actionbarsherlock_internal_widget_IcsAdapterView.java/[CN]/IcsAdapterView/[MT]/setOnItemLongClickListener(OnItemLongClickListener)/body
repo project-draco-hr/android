@@ -1,0 +1,6 @@
+{
+  if (!isLongClickable()) {
+    setLongClickable(true);
+  }
+  mOnItemLongClickListener=listener;
+}

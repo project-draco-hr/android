@@ -1,0 +1,5 @@
+{
+  super.writeToParcel(out,flags);
+  out.writeLong(selectedId);
+  out.writeInt(position);
+}

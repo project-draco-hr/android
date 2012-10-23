@@ -1,0 +1,21 @@
+{
+  final LayoutParams lp=(LayoutParams)child.getLayoutParams();
+  final int childHeightSize=MeasureSpec.getSize(parentHeightMeasureSpec) - parentHeightPadding;
+  final int childHeightMode=MeasureSpec.getMode(parentHeightMeasureSpec);
+  final int childHeightSpec=MeasureSpec.makeMeasureSpec(childHeightSize,childHeightMode);
+  int cellsUsed=0;
+  if (cellsRemaining > 0) {
+    final int childWidthSpec=MeasureSpec.makeMeasureSpec(cellSize * cellsRemaining,MeasureSpec.AT_MOST);
+    child.measure(childWidthSpec,childHeightSpec);
+    final int measuredWidth=child.getMeasuredWidth();
+    cellsUsed=measuredWidth / cellSize;
+    if (measuredWidth % cellSize != 0)     cellsUsed++;
+  }
+  final ActionMenuItemView itemView=child instanceof ActionMenuItemView ? (ActionMenuItemView)child : null;
+  final boolean expandable=!lp.isOverflowButton && itemView != null && itemView.hasText();
+  lp.expandable=expandable;
+  lp.cellsUsed=cellsUsed;
+  final int targetWidth=cellsUsed * cellSize;
+  child.measure(MeasureSpec.makeMeasureSpec(targetWidth,MeasureSpec.EXACTLY),childHeightSpec);
+  return cellsUsed;
+}

@@ -1,0 +1,3 @@
+{
+  setInterpolator(AnimationUtils.loadInterpolator(context,resID));
+}

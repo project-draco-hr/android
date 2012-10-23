@@ -1,0 +1,22 @@
+{
+  Method setterOrGetter=null;
+  try {
+    mPropertyMapLock.writeLock().lock();
+    HashMap<String,Method> propertyMap=propertyMapMap.get(targetClass);
+    if (propertyMap != null) {
+      setterOrGetter=propertyMap.get(mPropertyName);
+    }
+    if (setterOrGetter == null) {
+      setterOrGetter=getPropertyFunction(targetClass,prefix,valueType);
+      if (propertyMap == null) {
+        propertyMap=new HashMap<String,Method>();
+        propertyMapMap.put(targetClass,propertyMap);
+      }
+      propertyMap.put(mPropertyName,setterOrGetter);
+    }
+  }
+  finally {
+    mPropertyMapLock.writeLock().unlock();
+  }
+  return setterOrGetter;
+}

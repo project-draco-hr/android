@@ -1,0 +1,3 @@
+{
+  return mIsTransitioning || super.onInterceptTouchEvent(ev);
+}

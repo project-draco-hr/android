@@ -1,0 +1,85 @@
+{
+  FileInputStream fis=null;
+  try {
+    fis=mContext.openFileInput(mHistoryFileName);
+  }
+ catch (  FileNotFoundException fnfe) {
+    if (DEBUG) {
+      Log.i(LOG_TAG,"Could not open historical records file: " + mHistoryFileName);
+    }
+    return;
+  }
+  try {
+    XmlPullParser parser=Xml.newPullParser();
+    parser.setInput(fis,null);
+    int type=XmlPullParser.START_DOCUMENT;
+    while (type != XmlPullParser.END_DOCUMENT && type != XmlPullParser.START_TAG) {
+      type=parser.next();
+    }
+    if (!TAG_HISTORICAL_RECORDS.equals(parser.getName())) {
+      throw new XmlPullParserException("Share records file does not start with " + TAG_HISTORICAL_RECORDS + " tag.");
+    }
+    List<HistoricalRecord> readRecords=new ArrayList<HistoricalRecord>();
+    while (true) {
+      type=parser.next();
+      if (type == XmlPullParser.END_DOCUMENT) {
+        break;
+      }
+      if (type == XmlPullParser.END_TAG || type == XmlPullParser.TEXT) {
+        continue;
+      }
+      String nodeName=parser.getName();
+      if (!TAG_HISTORICAL_RECORD.equals(nodeName)) {
+        throw new XmlPullParserException("Share records file not well-formed.");
+      }
+      String activity=parser.getAttributeValue(null,ATTRIBUTE_ACTIVITY);
+      final long time=Long.parseLong(parser.getAttributeValue(null,ATTRIBUTE_TIME));
+      final float weight=Float.parseFloat(parser.getAttributeValue(null,ATTRIBUTE_WEIGHT));
+      HistoricalRecord readRecord=new HistoricalRecord(activity,time,weight);
+      readRecords.add(readRecord);
+      if (DEBUG) {
+        Log.i(LOG_TAG,"Read " + readRecord.toString());
+      }
+    }
+    if (DEBUG) {
+      Log.i(LOG_TAG,"Read " + readRecords.size() + " historical records.");
+    }
+synchronized (mInstanceLock) {
+      Set<HistoricalRecord> uniqueShareRecords=new LinkedHashSet<HistoricalRecord>(readRecords);
+      List<HistoricalRecord> historicalRecords=mHistoricalRecords;
+      final int historicalRecordsCount=historicalRecords.size();
+      for (int i=historicalRecordsCount - 1; i >= 0; i--) {
+        HistoricalRecord historicalRecord=historicalRecords.get(i);
+        uniqueShareRecords.add(historicalRecord);
+      }
+      if (historicalRecords.size() == uniqueShareRecords.size()) {
+        return;
+      }
+      historicalRecords.clear();
+      historicalRecords.addAll(uniqueShareRecords);
+      mHistoricalRecordsChanged=true;
+      mHandler.post(new Runnable(){
+        public void run(){
+          pruneExcessiveHistoricalRecordsLocked();
+          sortActivities();
+        }
+      }
+);
+    }
+  }
+ catch (  XmlPullParserException xppe) {
+    Log.e(LOG_TAG,"Error reading historical recrod file: " + mHistoryFileName,xppe);
+  }
+catch (  IOException ioe) {
+    Log.e(LOG_TAG,"Error reading historical recrod file: " + mHistoryFileName,ioe);
+  }
+ finally {
+    if (fis != null) {
+      try {
+        fis.close();
+      }
+ catch (      IOException ioe) {
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+{
+  mIndeterminateProgressView=new IcsProgressBar(mContext,null,0,mIndeterminateProgressStyle);
+  mIndeterminateProgressView.setId(R.id.abs__progress_circular);
+  addView(mIndeterminateProgressView);
+}

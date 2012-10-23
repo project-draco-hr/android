@@ -1,0 +1,9 @@
+{
+  if (mGravity != gravity) {
+    if ((gravity & Gravity.HORIZONTAL_GRAVITY_MASK) == 0) {
+      gravity|=Gravity.LEFT;
+    }
+    mGravity=gravity;
+    requestLayout();
+  }
+}

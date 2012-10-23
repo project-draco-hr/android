@@ -1,0 +1,22 @@
+{
+  if (mSplitActionBar != splitActionBar) {
+    if (mMenuView != null) {
+      final ViewGroup oldParent=(ViewGroup)mMenuView.getParent();
+      if (oldParent != null) {
+        oldParent.removeView(mMenuView);
+      }
+      if (splitActionBar) {
+        if (mSplitView != null) {
+          mSplitView.addView(mMenuView);
+        }
+      }
+ else {
+        addView(mMenuView);
+      }
+    }
+    if (mSplitView != null) {
+      mSplitView.setVisibility(splitActionBar ? VISIBLE : GONE);
+    }
+    super.setSplitActionBar(splitActionBar);
+  }
+}

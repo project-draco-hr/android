@@ -1,0 +1,14 @@
+{
+  ActivityResolveInfo newDefaultActivity=mActivites.get(index);
+  ActivityResolveInfo oldDefaultActivity=mActivites.get(0);
+  final float weight;
+  if (oldDefaultActivity != null) {
+    weight=oldDefaultActivity.weight - newDefaultActivity.weight + DEFAULT_ACTIVITY_INFLATION;
+  }
+ else {
+    weight=DEFAULT_HISTORICAL_RECORD_WEIGHT;
+  }
+  ComponentName defaultName=new ComponentName(newDefaultActivity.resolveInfo.activityInfo.packageName,newDefaultActivity.resolveInfo.activityInfo.name);
+  HistoricalRecord historicalRecord=new HistoricalRecord(defaultName,System.currentTimeMillis(),weight);
+  addHisoricalRecord(historicalRecord);
+}

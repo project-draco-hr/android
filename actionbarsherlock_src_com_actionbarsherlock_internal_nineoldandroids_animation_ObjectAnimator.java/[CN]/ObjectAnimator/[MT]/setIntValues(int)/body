@@ -1,0 +1,8 @@
+{
+  if (mValues == null || mValues.length == 0) {
+    setValues(PropertyValuesHolder.ofInt(mPropertyName,values));
+  }
+ else {
+    super.setIntValues(values);
+  }
+}

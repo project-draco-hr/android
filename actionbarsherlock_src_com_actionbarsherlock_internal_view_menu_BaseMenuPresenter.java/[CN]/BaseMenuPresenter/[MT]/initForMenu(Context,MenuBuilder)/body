@@ -1,0 +1,5 @@
+{
+  mContext=context;
+  mInflater=LayoutInflater.from(mContext);
+  mMenu=menu;
+}

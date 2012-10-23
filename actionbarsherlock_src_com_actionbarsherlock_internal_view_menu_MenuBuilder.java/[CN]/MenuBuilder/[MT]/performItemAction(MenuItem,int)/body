@@ -1,0 +1,27 @@
+{
+  MenuItemImpl itemImpl=(MenuItemImpl)item;
+  if (itemImpl == null || !itemImpl.isEnabled()) {
+    return false;
+  }
+  boolean invoked=itemImpl.invoke();
+  if (itemImpl.hasCollapsibleActionView()) {
+    invoked|=itemImpl.expandActionView();
+    if (invoked)     close(true);
+  }
+ else   if (item.hasSubMenu()) {
+    close(false);
+    final SubMenuBuilder subMenu=(SubMenuBuilder)item.getSubMenu();
+    final ActionProvider provider=item.getActionProvider();
+    if (provider != null && provider.hasSubMenu()) {
+      provider.onPrepareSubMenu(subMenu);
+    }
+    invoked|=dispatchSubMenuSelected(subMenu);
+    if (!invoked)     close(true);
+  }
+ else {
+    if ((flags & FLAG_PERFORM_NO_CLOSE) == 0) {
+      close(true);
+    }
+  }
+  return invoked;
+}

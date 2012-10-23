@@ -1,0 +1,11 @@
+{
+  initAnimation();
+  sAnimations.get().add(this);
+  if (mStartDelay > 0 && mListeners != null) {
+    ArrayList<AnimatorListener> tmpListeners=(ArrayList<AnimatorListener>)mListeners.clone();
+    int numListeners=tmpListeners.size();
+    for (int i=0; i < numListeners; ++i) {
+      tmpListeners.get(i).onAnimationStart(this);
+    }
+  }
+}

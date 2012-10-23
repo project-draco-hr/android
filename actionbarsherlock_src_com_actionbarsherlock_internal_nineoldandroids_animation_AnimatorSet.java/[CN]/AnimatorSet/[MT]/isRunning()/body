@@ -1,0 +1,8 @@
+{
+  for (  Node node : mNodes) {
+    if (node.animation.isRunning()) {
+      return true;
+    }
+  }
+  return false;
+}

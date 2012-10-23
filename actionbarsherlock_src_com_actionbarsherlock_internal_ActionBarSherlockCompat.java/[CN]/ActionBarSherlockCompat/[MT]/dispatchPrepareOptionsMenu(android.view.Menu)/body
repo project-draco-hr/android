@@ -1,0 +1,25 @@
+{
+  if (DEBUG)   Log.d(TAG,"[dispatchPrepareOptionsMenu] android.view.Menu: " + menu);
+  if (mActionMode != null) {
+    return false;
+  }
+  mMenuIsPrepared=false;
+  if (!preparePanel()) {
+    return false;
+  }
+  if (isReservingOverflow()) {
+    return false;
+  }
+  if (mNativeItemMap == null) {
+    mNativeItemMap=new HashMap<android.view.MenuItem,MenuItemImpl>();
+  }
+ else {
+    mNativeItemMap.clear();
+  }
+  if (mMenu == null) {
+    return false;
+  }
+  boolean result=mMenu.bindNativeOverflow(menu,this,mNativeItemMap);
+  if (DEBUG)   Log.d(TAG,"[dispatchPrepareOptionsMenu] returning " + result);
+  return result;
+}

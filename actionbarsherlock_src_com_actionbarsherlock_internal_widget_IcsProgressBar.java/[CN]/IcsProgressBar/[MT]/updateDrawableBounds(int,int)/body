@@ -1,0 +1,32 @@
+{
+  int right=w - getPaddingRight() - getPaddingLeft();
+  int bottom=h - getPaddingBottom() - getPaddingTop();
+  int top=0;
+  int left=0;
+  if (mIndeterminateDrawable != null) {
+    if (mOnlyIndeterminate && !(mIndeterminateDrawable instanceof AnimationDrawable)) {
+      final int intrinsicWidth=mIndeterminateDrawable.getIntrinsicWidth();
+      final int intrinsicHeight=mIndeterminateDrawable.getIntrinsicHeight();
+      final float intrinsicAspect=(float)intrinsicWidth / intrinsicHeight;
+      final float boundAspect=(float)w / h;
+      if (intrinsicAspect != boundAspect) {
+        if (boundAspect > intrinsicAspect) {
+          final int width=(int)(h * intrinsicAspect);
+          left=(w - width) / 2;
+          right=left + width;
+        }
+ else {
+          final int height=(int)(w * (1 / intrinsicAspect));
+          top=(h - height) / 2;
+          bottom=top + height;
+        }
+      }
+    }
+    mIndeterminateDrawable.setBounds(0,0,right - left,bottom - top);
+    mIndeterminateRealLeft=left;
+    mIndeterminateRealTop=top;
+  }
+  if (mProgressDrawable != null) {
+    mProgressDrawable.setBounds(0,0,right,bottom);
+  }
+}

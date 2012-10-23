@@ -1,0 +1,3 @@
+{
+  return mAdapter == null ? null : mAdapter.getDropDownView(position,convertView,parent);
+}

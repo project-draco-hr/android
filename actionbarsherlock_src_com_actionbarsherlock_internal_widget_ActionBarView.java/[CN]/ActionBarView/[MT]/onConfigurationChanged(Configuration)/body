@@ -1,0 +1,21 @@
+{
+  super.onConfigurationChanged(newConfig);
+  mTitleView=null;
+  mSubtitleView=null;
+  mTitleUpView=null;
+  if (mTitleLayout != null && mTitleLayout.getParent() == this) {
+    removeView(mTitleLayout);
+  }
+  mTitleLayout=null;
+  if ((mDisplayOptions & ActionBar.DISPLAY_SHOW_TITLE) != 0) {
+    initTitle();
+  }
+  if (mTabScrollView != null && mIncludeTabs) {
+    ViewGroup.LayoutParams lp=mTabScrollView.getLayoutParams();
+    if (lp != null) {
+      lp.width=LayoutParams.WRAP_CONTENT;
+      lp.height=LayoutParams.MATCH_PARENT;
+    }
+    mTabScrollView.setAllowCollapse(true);
+  }
+}

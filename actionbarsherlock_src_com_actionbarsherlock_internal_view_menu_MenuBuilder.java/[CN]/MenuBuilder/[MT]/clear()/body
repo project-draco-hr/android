@@ -1,0 +1,7 @@
+{
+  if (mExpandedItem != null) {
+    collapseItemActionView(mExpandedItem);
+  }
+  mItems.clear();
+  onItemsChanged(true);
+}

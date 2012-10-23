@@ -1,0 +1,16 @@
+{
+  super.onDetachedFromWindow();
+  ActivityChooserModel dataModel=mAdapter.getDataModel();
+  if (dataModel != null) {
+    try {
+      dataModel.unregisterObserver(mModelDataSetOberver);
+    }
+ catch (    IllegalStateException e) {
+    }
+  }
+  ViewTreeObserver viewTreeObserver=getViewTreeObserver();
+  if (viewTreeObserver.isAlive()) {
+    viewTreeObserver.removeGlobalOnLayoutListener(mOnGlobalLayoutListener);
+  }
+  mIsAttachedToWindow=false;
+}

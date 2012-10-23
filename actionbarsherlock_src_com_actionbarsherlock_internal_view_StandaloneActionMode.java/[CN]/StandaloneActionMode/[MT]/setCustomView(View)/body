@@ -1,0 +1,4 @@
+{
+  mContextView.setCustomView(view);
+  mCustomView=view != null ? new WeakReference<View>(view) : null;
+}

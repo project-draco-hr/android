@@ -1,0 +1,4 @@
+{
+  if (DEBUG)   Log.d(TAG,"[setProgress] progress: " + progress);
+  setFeatureInt(Window.FEATURE_PROGRESS,progress + Window.PROGRESS_START);
+}

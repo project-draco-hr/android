@@ -1,0 +1,10 @@
+{
+  if (isShowingPopup()) {
+    getListPopupWindow().dismiss();
+    ViewTreeObserver viewTreeObserver=getViewTreeObserver();
+    if (viewTreeObserver.isAlive()) {
+      viewTreeObserver.removeGlobalOnLayoutListener(mOnGlobalLayoutListener);
+    }
+  }
+  return true;
+}
