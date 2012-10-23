@@ -1,4 +1,0 @@
-{
-  mSubMenu=subMenu;
-  subMenu.setHeaderTitle(getTitle());
-}

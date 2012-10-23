@@ -1,4 +1,0 @@
-{
-  getSherlock().dispatchTitleChanged(title,color);
-  super.onTitleChanged(title,color);
-}

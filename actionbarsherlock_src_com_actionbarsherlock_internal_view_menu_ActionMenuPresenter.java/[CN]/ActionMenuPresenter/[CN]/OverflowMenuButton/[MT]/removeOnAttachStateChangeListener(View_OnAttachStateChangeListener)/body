@@ -1,3 +1,0 @@
-{
-  mListeners.remove(listener);
-}

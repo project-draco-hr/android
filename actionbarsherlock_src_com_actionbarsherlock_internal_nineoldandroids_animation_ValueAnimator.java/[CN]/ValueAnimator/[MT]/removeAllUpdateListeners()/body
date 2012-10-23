@@ -1,7 +1,0 @@
-{
-  if (mUpdateListeners == null) {
-    return;
-  }
-  mUpdateListeners.clear();
-  mUpdateListeners=null;
-}

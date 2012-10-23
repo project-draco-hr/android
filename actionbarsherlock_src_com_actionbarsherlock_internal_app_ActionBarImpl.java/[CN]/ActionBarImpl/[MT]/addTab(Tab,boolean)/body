@@ -1,8 +1,0 @@
-{
-  ensureTabsExist();
-  mTabScrollView.addTab(tab,setSelected);
-  configureTab(tab,mTabs.size());
-  if (setSelected) {
-    selectTab(tab);
-  }
-}

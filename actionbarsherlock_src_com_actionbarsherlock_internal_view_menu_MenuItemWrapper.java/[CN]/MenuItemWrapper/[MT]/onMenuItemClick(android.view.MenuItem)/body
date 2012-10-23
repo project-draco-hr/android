@@ -1,6 +1,0 @@
-{
-  if (mMenuItemClickListener != null) {
-    return mMenuItemClickListener.onMenuItemClick(this);
-  }
-  return false;
-}

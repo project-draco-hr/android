@@ -1,3 +1,0 @@
-{
-  return mExpandedMenuPresenter != null && mExpandedMenuPresenter.mCurrentExpandedItem != null;
-}

@@ -1,5 +1,0 @@
-{
-  super(context);
-  mParentMenu=parentMenu;
-  mItem=item;
-}

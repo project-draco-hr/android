@@ -1,6 +1,0 @@
-{
-  if ((color >>> 24) != 0) {
-    paint.setColor(color);
-    canvas.drawRect(getBounds(),paint);
-  }
-}

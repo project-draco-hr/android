@@ -1,5 +1,0 @@
-{
-  if (DEBUG)   Log.d(TAG,"[getActionBar]");
-  initActionBar();
-  return mActionBar;
-}

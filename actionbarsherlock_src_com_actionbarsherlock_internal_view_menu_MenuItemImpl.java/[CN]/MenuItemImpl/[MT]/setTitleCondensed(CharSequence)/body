@@ -1,8 +1,0 @@
-{
-  mTitleCondensed=title;
-  if (title == null) {
-    title=mTitle;
-  }
-  mMenu.onItemsChanged(false);
-  return this;
-}

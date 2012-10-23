@@ -1,5 +1,0 @@
-{
-  LayoutInflater inflater=getInflater();
-  mRadioButton=(RadioButton)inflater.inflate(R.layout.abs__list_menu_item_radio,this,false);
-  addView(mRadioButton);
-}

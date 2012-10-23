@@ -1,6 +1,0 @@
-{
-  if (mItem == null) {
-    mItem=new MenuItemWrapper(mNativeSubMenu.getItem());
-  }
-  return mItem;
-}

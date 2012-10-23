@@ -1,4 +1,0 @@
-{
-  mTitle=title;
-  return this;
-}

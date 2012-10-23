@@ -1,9 +1,0 @@
-{
-  v.setText(text);
-  if (TextUtils.isEmpty(text)) {
-    v.setVisibility(View.GONE);
-  }
- else {
-    v.setVisibility(View.VISIBLE);
-  }
-}

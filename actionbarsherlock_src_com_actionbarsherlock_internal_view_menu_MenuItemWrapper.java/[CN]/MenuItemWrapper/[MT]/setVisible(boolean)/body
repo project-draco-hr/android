@@ -1,4 +1,0 @@
-{
-  mNativeItem.setVisible(visible);
-  return this;
-}

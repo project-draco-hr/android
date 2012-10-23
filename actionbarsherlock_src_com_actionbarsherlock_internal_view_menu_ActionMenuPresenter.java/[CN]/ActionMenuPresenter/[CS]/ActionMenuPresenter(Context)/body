@@ -1,3 +1,0 @@
-{
-  super(context,R.layout.abs__action_menu_layout,R.layout.abs__action_menu_item_layout);
-}

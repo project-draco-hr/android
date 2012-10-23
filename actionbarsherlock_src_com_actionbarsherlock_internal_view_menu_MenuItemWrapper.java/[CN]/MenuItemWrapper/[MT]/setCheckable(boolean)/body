@@ -1,4 +1,0 @@
-{
-  mNativeItem.setCheckable(checkable);
-  return this;
-}

@@ -1,4 +1,0 @@
-{
-  super.onRestoreInstanceState(savedInstanceState);
-  getSherlock().dispatchRestoreInstanceState(savedInstanceState);
-}

@@ -1,6 +1,0 @@
-{
-  final IcsSpinner spinner=new IcsSpinner(getContext(),null,R.attr.actionDropDownStyle);
-  spinner.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.MATCH_PARENT));
-  spinner.setOnItemSelectedListener(this);
-  return spinner;
-}

@@ -1,3 +1,0 @@
-{
-  mMenuFrozenActionViewState=savedInstanceState.getParcelable(PANELS_TAG);
-}

@@ -1,4 +1,0 @@
-{
-  super((LinearLayout.LayoutParams)other);
-  isOverflowButton=other.isOverflowButton;
-}

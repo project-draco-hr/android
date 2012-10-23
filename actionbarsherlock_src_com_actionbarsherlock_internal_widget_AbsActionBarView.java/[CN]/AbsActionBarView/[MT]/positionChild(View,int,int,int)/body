@@ -1,7 +1,0 @@
-{
-  int childWidth=child.getMeasuredWidth();
-  int childHeight=child.getMeasuredHeight();
-  int childTop=y + (contentHeight - childHeight) / 2;
-  child.layout(x,childTop,x + childWidth,childTop + childHeight);
-  return childWidth;
-}

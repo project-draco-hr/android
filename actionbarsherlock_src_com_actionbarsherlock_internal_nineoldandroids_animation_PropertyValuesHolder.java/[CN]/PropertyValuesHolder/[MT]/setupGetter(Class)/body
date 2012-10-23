@@ -1,3 +1,0 @@
-{
-  mGetter=setupSetterOrGetter(targetClass,sGetterPropertyMap,"get",null);
-}

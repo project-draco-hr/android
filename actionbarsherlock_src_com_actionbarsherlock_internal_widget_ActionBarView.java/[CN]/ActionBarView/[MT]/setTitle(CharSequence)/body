@@ -1,4 +1,0 @@
-{
-  mUserTitle=true;
-  setTitleImpl(title);
-}

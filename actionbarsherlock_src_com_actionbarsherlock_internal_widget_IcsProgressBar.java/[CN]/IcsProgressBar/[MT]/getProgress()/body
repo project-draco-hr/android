@@ -1,3 +1,0 @@
-{
-  return mIndeterminate ? 0 : mProgress;
-}

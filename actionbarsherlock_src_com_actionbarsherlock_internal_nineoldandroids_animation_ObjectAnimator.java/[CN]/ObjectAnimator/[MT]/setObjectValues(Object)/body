@@ -1,8 +1,0 @@
-{
-  if (mValues == null || mValues.length == 0) {
-    setValues(PropertyValuesHolder.ofObject(mPropertyName,(TypeEvaluator)null,values));
-  }
- else {
-    super.setObjectValues(values);
-  }
-}

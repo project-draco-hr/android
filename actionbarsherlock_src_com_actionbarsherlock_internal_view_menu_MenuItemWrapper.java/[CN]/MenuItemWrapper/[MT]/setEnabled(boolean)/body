@@ -1,4 +1,0 @@
-{
-  mNativeItem.setEnabled(enabled);
-  return this;
-}

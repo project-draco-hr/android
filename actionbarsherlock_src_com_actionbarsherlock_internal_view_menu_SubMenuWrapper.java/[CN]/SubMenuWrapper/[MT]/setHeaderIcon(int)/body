@@ -1,4 +1,0 @@
-{
-  mNativeSubMenu.setHeaderIcon(iconRes);
-  return this;
-}

@@ -1,4 +1,0 @@
-int groupId
-int itemId
-int order
-CharSequence title

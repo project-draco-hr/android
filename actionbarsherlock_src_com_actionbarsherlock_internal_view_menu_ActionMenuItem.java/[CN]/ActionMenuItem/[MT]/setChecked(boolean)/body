@@ -1,4 +1,0 @@
-{
-  mFlags=(mFlags & ~CHECKED) | (checked ? CHECKED : 0);
-  return this;
-}

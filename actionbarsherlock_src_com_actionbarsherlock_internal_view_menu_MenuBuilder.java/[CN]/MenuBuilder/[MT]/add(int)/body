@@ -1,3 +1,0 @@
-{
-  return addInternal(0,0,0,mResources.getString(titleRes));
-}

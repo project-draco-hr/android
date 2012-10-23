@@ -1,4 +1,0 @@
-{
-  mIsVisibleItemsStale=true;
-  onItemsChanged(true);
-}

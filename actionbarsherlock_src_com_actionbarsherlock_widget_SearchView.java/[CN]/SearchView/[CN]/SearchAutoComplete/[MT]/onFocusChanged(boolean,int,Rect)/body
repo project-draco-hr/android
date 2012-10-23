@@ -1,4 +1,0 @@
-{
-  super.onFocusChanged(focused,direction,previouslyFocusedRect);
-  mSearchView.onTextFocusChanged();
-}

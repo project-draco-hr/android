@@ -1,8 +1,0 @@
-{
-  if (AnimatorProxy.NEEDS_PROXY) {
-    mProxy.setAlpha(alpha);
-  }
- else {
-    super.setAlpha(alpha);
-  }
-}

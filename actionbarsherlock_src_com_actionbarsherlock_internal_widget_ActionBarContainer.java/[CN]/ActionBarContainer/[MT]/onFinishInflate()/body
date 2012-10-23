@@ -1,4 +1,0 @@
-{
-  super.onFinishInflate();
-  mActionBarView=(ActionBarView)findViewById(R.id.abs__action_bar);
-}

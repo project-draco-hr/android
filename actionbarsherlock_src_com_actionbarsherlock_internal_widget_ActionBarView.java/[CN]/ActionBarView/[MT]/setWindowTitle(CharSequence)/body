@@ -1,5 +1,0 @@
-{
-  if (!mUserTitle) {
-    setTitleImpl(title);
-  }
-}

@@ -1,3 +1,0 @@
-{
-  return ((itemView != null) && itemView.prefersCondensedTitle()) ? getTitleCondensed() : getTitle();
-}

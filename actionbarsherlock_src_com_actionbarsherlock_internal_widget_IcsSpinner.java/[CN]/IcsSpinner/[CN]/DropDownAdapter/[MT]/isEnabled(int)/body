@@ -1,9 +1,0 @@
-{
-  final ListAdapter adapter=mListAdapter;
-  if (adapter != null) {
-    return adapter.isEnabled(position);
-  }
- else {
-    return true;
-  }
-}

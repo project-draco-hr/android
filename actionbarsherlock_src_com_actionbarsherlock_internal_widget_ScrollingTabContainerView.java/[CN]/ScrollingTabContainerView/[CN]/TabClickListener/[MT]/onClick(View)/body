@@ -1,9 +1,0 @@
-{
-  TabView tabView=(TabView)view;
-  tabView.getTab().select();
-  final int tabCount=mTabLayout.getChildCount();
-  for (int i=0; i < tabCount; i++) {
-    final View child=mTabLayout.getChildAt(i);
-    child.setSelected(child == view);
-  }
-}

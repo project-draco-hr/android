@@ -1,5 +1,0 @@
-{
-  if (featureId == Window.FEATURE_PROGRESS || featureId == Window.FEATURE_INDETERMINATE_PROGRESS) {
-    updateProgressBars(value);
-  }
-}

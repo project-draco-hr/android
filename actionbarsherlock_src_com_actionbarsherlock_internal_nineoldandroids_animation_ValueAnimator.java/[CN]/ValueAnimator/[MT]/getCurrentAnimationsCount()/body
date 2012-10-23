@@ -1,3 +1,0 @@
-{
-  return sAnimations.get().size();
-}

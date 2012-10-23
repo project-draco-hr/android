@@ -1,5 +1,0 @@
-{
-  MenuItem item=new MenuItemWrapper(nativeItem);
-  mNativeMap.put(nativeItem,item);
-  return item;
-}

@@ -1,3 +1,0 @@
-{
-  return add(groupId,itemId,order,mContext.getResources().getString(titleRes));
-}

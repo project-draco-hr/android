@@ -1,8 +1,0 @@
-{
-  mTitle=title;
-  mMenu.onItemsChanged(false);
-  if (mSubMenu != null) {
-    mSubMenu.setHeaderTitle(title);
-  }
-  return this;
-}

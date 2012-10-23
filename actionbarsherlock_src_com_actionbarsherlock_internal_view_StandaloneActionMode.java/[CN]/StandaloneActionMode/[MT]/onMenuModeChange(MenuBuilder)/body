@@ -1,4 +1,0 @@
-{
-  invalidate();
-  mContextView.showOverflowMenu();
-}

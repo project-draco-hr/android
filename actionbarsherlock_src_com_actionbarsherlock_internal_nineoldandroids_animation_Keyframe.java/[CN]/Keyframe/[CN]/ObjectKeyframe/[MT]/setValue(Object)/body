@@ -1,4 +1,0 @@
-{
-  mValue=value;
-  mHasValue=(value != null);
-}

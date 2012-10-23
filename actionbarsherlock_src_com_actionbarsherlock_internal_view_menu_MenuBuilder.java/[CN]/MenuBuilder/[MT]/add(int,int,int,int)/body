@@ -1,3 +1,0 @@
-{
-  return addInternal(group,id,categoryOrder,mResources.getString(title));
-}

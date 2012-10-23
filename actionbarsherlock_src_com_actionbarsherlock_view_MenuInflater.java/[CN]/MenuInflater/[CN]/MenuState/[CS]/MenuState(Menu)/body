@@ -1,4 +1,0 @@
-{
-  this.menu=menu;
-  resetGroup();
-}

@@ -1,3 +1,0 @@
-{
-  setSecondaryProgress(mSecondaryProgress + diff);
-}

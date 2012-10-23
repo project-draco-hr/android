@@ -1,4 +1,0 @@
-{
-  if (parent.getChildAt(childIndex) == mOverflowButton)   return false;
-  return super.filterLeftoverView(parent,childIndex);
-}

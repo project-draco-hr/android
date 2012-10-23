@@ -1,5 +1,0 @@
-{
-  super(context,null,R.attr.dropDownListViewStyle);
-  mHijackFocus=hijackFocus;
-  setCacheColorHint(0);
-}

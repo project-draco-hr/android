@@ -1,3 +1,0 @@
-{
-  return mNativeMenu.performShortcut(keyCode,event,flags);
-}

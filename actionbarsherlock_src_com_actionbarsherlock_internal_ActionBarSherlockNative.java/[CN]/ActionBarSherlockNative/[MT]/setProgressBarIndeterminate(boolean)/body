@@ -1,4 +1,0 @@
-{
-  if (DEBUG)   Log.d(TAG,"[setProgressBarIndeterminate] indeterminate: " + indeterminate);
-  mActivity.setProgressBarIndeterminate(indeterminate);
-}

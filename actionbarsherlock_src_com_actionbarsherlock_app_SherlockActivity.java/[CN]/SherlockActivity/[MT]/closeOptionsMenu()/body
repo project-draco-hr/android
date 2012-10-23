@@ -1,5 +1,0 @@
-{
-  if (!getSherlock().dispatchCloseOptionsMenu()) {
-    super.closeOptionsMenu();
-  }
-}

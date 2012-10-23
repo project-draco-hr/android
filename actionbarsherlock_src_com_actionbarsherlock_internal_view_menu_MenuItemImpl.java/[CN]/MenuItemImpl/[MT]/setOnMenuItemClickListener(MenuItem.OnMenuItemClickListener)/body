@@ -1,4 +1,0 @@
-{
-  mClickListener=clickListener;
-  return this;
-}

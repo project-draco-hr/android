@@ -1,5 +1,0 @@
-{
-  if (mAdapter != null) {
-    mAdapter.unregisterDataSetObserver(observer);
-  }
-}

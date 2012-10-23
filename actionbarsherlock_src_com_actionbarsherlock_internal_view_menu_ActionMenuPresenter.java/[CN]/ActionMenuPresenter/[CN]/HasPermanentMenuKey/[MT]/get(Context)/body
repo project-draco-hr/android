@@ -1,3 +1,0 @@
-{
-  return ViewConfiguration.get(context).hasPermanentMenuKey();
-}

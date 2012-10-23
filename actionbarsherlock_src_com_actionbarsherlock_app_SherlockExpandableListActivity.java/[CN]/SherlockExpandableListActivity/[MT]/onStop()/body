@@ -1,4 +1,0 @@
-{
-  getSherlock().dispatchStop();
-  super.onStop();
-}

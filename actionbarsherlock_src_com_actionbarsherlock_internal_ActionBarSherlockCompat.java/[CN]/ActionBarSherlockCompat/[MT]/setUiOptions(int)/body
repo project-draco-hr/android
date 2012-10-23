@@ -1,4 +1,0 @@
-{
-  if (DEBUG)   Log.d(TAG,"[setUiOptions] uiOptions: " + uiOptions);
-  mUiOptions=uiOptions;
-}

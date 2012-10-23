@@ -1,3 +1,0 @@
-{
-  mUpView.setVisibility(isUp ? VISIBLE : GONE);
-}

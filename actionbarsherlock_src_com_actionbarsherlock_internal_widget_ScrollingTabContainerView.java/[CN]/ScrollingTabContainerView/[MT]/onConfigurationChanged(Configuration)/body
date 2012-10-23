@@ -1,6 +1,0 @@
-{
-  super.onConfigurationChanged(newConfig);
-  TypedArray a=getContext().obtainStyledAttributes(null,R.styleable.SherlockActionBar,R.attr.actionBarStyle,0);
-  setContentHeight(a.getLayoutDimension(R.styleable.SherlockActionBar_height,0));
-  a.recycle();
-}

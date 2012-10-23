@@ -1,3 +1,0 @@
-{
-  init(dialog.getWindow().getDecorView());
-}

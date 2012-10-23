@@ -1,5 +1,0 @@
-{
-  mNativeTab.setTabListener(listener != null ? this : null);
-  mListener=listener;
-  return this;
-}

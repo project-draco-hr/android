@@ -1,7 +1,0 @@
-{
-  if (showDividers != mShowDividers) {
-    requestLayout();
-    invalidate();
-  }
-  mShowDividers=showDividers;
-}

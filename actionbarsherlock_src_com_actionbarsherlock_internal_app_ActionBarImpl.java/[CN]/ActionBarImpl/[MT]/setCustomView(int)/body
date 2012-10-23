@@ -1,3 +1,0 @@
-{
-  setCustomView(LayoutInflater.from(getThemedContext()).inflate(resId,mActionView,false));
-}

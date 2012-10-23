@@ -1,4 +1,0 @@
-{
-  mFinalVisibility=visibility;
-  return this;
-}

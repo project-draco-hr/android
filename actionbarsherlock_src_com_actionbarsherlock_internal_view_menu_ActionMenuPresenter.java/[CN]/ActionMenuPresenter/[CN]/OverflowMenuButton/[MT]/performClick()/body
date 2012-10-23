@@ -1,8 +1,0 @@
-{
-  if (super.performClick()) {
-    return true;
-  }
-  playSoundEffect(SoundEffectConstants.CLICK);
-  showOverflowMenu();
-  return true;
-}

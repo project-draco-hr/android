@@ -1,8 +1,0 @@
-{
-  if (mClosingActionMenu) {
-    return;
-  }
-  mClosingActionMenu=true;
-  wActionBar.dismissPopupMenus();
-  mClosingActionMenu=false;
-}

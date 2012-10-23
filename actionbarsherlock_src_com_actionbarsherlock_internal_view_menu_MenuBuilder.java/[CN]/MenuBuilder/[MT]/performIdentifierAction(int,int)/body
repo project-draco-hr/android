@@ -1,3 +1,0 @@
-{
-  return performItemAction(findItem(id),flags);
-}

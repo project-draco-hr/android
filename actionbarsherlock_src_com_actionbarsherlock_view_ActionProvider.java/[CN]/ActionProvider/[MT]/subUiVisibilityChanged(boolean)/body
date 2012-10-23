@@ -1,5 +1,0 @@
-{
-  if (mSubUiVisibilityListener != null) {
-    mSubUiVisibilityListener.onSubUiVisibilityChanged(isVisible);
-  }
-}

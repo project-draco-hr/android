@@ -1,7 +1,0 @@
-{
-  if (mMenu != null) {
-    mMenuFrozenActionViewState=new Bundle();
-    mMenu.saveActionViewStates(mMenuFrozenActionViewState);
-  }
-  outState.putParcelable(PANELS_TAG,mMenuFrozenActionViewState);
-}

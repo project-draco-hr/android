@@ -1,5 +1,0 @@
-{
-  super.writeToParcel(out,flags);
-  out.writeInt(expandedMenuItemId);
-  out.writeInt(isOverflowOpen ? 1 : 0);
-}

@@ -1,7 +1,0 @@
-{
-  ArrayList<Animator> childList=new ArrayList<Animator>();
-  for (  Node node : mNodes) {
-    childList.add(node.animation);
-  }
-  return childList;
-}

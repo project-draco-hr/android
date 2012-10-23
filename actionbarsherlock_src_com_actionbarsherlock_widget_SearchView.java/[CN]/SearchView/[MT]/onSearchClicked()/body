@@ -1,8 +1,0 @@
-{
-  updateViewsVisibility(false);
-  mQueryTextView.requestFocus();
-  setImeVisibility(true);
-  if (mOnSearchClickListener != null) {
-    mOnSearchClickListener.onClick(this);
-  }
-}

@@ -1,6 +1,0 @@
-{
-  if (hasSubMenu() && (mSubMenu == null)) {
-    mSubMenu=new SubMenuWrapper(mNativeItem.getSubMenu());
-  }
-  return mSubMenu;
-}

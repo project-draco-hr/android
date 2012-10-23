@@ -1,6 +1,0 @@
-{
-  super.onMeasure(widthMeasureSpec,heightMeasureSpec);
-  if (mParent.mMaxTabWidth > 0 && getMeasuredWidth() > mParent.mMaxTabWidth) {
-    super.onMeasure(MeasureSpec.makeMeasureSpec(mParent.mMaxTabWidth,MeasureSpec.EXACTLY),heightMeasureSpec);
-  }
-}

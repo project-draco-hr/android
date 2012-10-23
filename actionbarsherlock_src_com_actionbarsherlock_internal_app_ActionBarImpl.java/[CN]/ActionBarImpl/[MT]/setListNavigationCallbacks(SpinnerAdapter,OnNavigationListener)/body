@@ -1,4 +1,0 @@
-{
-  mActionView.setDropdownAdapter(adapter);
-  mActionView.setCallback(callback);
-}

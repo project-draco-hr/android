@@ -1,3 +1,0 @@
-{
-  getSherlock().setProgressBarIndeterminateVisibility(visible);
-}

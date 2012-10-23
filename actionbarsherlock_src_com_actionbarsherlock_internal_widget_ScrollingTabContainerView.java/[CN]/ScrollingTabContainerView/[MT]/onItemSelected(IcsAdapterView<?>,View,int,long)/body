@@ -1,4 +1,0 @@
-{
-  TabView tabView=(TabView)view;
-  tabView.getTab().select();
-}

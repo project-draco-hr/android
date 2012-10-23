@@ -1,7 +1,0 @@
-{
-  mText1=(TextView)v.findViewById(android.R.id.text1);
-  mText2=(TextView)v.findViewById(android.R.id.text2);
-  mIcon1=(ImageView)v.findViewById(android.R.id.icon1);
-  mIcon2=(ImageView)v.findViewById(android.R.id.icon2);
-  mIconRefine=(ImageView)v.findViewById(R.id.edit_query);
-}

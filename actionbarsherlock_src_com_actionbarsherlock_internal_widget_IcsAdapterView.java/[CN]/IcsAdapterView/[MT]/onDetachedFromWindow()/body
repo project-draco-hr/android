@@ -1,4 +1,0 @@
-{
-  super.onDetachedFromWindow();
-  removeCallbacks(mSelectionNotifier);
-}

@@ -1,9 +1,0 @@
-{
-  if (title != null) {
-    mTitleView.setText(title);
-    if (mTitleView.getVisibility() != VISIBLE)     mTitleView.setVisibility(VISIBLE);
-  }
- else {
-    if (mTitleView.getVisibility() != GONE)     mTitleView.setVisibility(GONE);
-  }
-}

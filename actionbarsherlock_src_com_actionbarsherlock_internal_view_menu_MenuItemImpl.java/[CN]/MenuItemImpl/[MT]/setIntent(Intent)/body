@@ -1,4 +1,0 @@
-{
-  mIntent=intent;
-  return this;
-}

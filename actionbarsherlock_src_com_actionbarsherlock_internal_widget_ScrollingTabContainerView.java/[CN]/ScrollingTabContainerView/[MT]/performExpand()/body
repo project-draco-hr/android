@@ -1,7 +1,0 @@
-{
-  if (!isCollapsed())   return false;
-  removeView(mTabSpinner);
-  addView(mTabLayout,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.MATCH_PARENT));
-  setTabSelected(mTabSpinner.getSelectedItemPosition());
-  return false;
-}

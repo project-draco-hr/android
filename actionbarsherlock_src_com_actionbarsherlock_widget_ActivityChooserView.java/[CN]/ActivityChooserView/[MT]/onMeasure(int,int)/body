@@ -1,8 +1,0 @@
-{
-  View child=mActivityChooserContent;
-  if (mDefaultActivityButton.getVisibility() != VISIBLE) {
-    heightMeasureSpec=MeasureSpec.makeMeasureSpec(MeasureSpec.getSize(heightMeasureSpec),MeasureSpec.EXACTLY);
-  }
-  measureChild(child,widthMeasureSpec,heightMeasureSpec);
-  setMeasuredDimension(child.getMeasuredWidth(),child.getMeasuredHeight());
-}

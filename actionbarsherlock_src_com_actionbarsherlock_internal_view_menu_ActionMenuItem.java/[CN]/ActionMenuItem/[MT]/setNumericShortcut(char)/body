@@ -1,4 +1,0 @@
-{
-  mShortcutNumericChar=numericChar;
-  return this;
-}

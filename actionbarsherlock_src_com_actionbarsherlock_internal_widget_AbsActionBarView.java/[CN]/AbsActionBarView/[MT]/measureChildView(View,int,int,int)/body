@@ -1,6 +1,0 @@
-{
-  child.measure(MeasureSpec.makeMeasureSpec(availableWidth,MeasureSpec.AT_MOST),childSpecHeight);
-  availableWidth-=child.getMeasuredWidth();
-  availableWidth-=spacing;
-  return Math.max(0,availableWidth);
-}

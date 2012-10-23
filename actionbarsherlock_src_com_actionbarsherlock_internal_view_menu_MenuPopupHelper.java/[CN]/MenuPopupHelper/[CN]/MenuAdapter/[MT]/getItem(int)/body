@@ -1,7 +1,0 @@
-{
-  ArrayList<MenuItemImpl> items=mOverflowOnly ? mAdapterMenu.getNonActionItems() : mAdapterMenu.getVisibleItems();
-  if (mExpandedIndex >= 0 && position >= mExpandedIndex) {
-    position++;
-  }
-  return items.get(position);
-}

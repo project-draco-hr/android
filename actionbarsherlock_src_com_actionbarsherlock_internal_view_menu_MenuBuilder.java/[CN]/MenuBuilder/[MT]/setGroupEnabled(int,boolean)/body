@@ -1,9 +1,0 @@
-{
-  final int N=mItems.size();
-  for (int i=0; i < N; i++) {
-    MenuItemImpl item=mItems.get(i);
-    if (item.getGroupId() == group) {
-      item.setEnabled(enabled);
-    }
-  }
-}

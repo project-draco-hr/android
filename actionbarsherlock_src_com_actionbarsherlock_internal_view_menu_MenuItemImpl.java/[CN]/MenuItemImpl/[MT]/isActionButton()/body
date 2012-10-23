@@ -1,3 +1,0 @@
-{
-  return (mFlags & IS_ACTION) == IS_ACTION;
-}

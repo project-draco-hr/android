@@ -1,9 +1,0 @@
-{
-  try {
-    Method method=AutoCompleteTextView.class.getMethod("ensureImeVisible",boolean.class);
-    method.setAccessible(true);
-    method.invoke(view,visible);
-  }
- catch (  Exception e) {
-  }
-}

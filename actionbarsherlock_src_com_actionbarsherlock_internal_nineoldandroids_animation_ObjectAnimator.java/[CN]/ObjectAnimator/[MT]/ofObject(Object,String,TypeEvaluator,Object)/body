@@ -1,6 +1,0 @@
-{
-  ObjectAnimator anim=new ObjectAnimator(target,propertyName);
-  anim.setObjectValues(values);
-  anim.setEvaluator(evaluator);
-  return anim;
-}

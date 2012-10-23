@@ -1,9 +1,0 @@
-{
-  if (mIconDrawable != null) {
-    return mIconDrawable;
-  }
-  if (mIconResId != NO_ICON) {
-    return mMenu.getResources().getDrawable(mIconResId);
-  }
-  return null;
-}

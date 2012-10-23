@@ -1,3 +1,0 @@
-{
-  return mTextButton.getVisibility() != GONE;
-}

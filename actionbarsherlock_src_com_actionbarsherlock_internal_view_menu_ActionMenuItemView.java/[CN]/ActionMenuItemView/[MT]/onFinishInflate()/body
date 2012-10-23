@@ -1,9 +1,0 @@
-{
-  mImageButton=(ImageButton)findViewById(R.id.abs__imageButton);
-  mTextButton=(CapitalizingButton)findViewById(R.id.abs__textButton);
-  mImageButton.setOnClickListener(this);
-  mTextButton.setOnClickListener(this);
-  mImageButton.setOnLongClickListener(this);
-  setOnClickListener(this);
-  setOnLongClickListener(this);
-}

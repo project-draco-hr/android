@@ -1,6 +1,0 @@
-{
-  if (mActionBar != null || mActivity.getActionBar() == null) {
-    return;
-  }
-  mActionBar=new ActionBarWrapper(mActivity);
-}

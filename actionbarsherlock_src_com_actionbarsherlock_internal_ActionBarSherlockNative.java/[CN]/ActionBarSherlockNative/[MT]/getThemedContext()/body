@@ -1,9 +1,0 @@
-{
-  Context context=mActivity;
-  TypedValue outValue=new TypedValue();
-  mActivity.getTheme().resolveAttribute(android.R.attr.actionBarWidgetTheme,outValue,true);
-  if (outValue.resourceId != 0) {
-    context=new ContextThemeWrapper(context,outValue.resourceId);
-  }
-  return context;
-}

@@ -1,3 +1,0 @@
-{
-  return mTabSpinner != null && mTabSpinner.getParent() == this;
-}

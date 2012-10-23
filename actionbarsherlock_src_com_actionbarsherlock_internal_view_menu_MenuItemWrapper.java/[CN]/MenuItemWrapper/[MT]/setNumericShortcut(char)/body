@@ -1,4 +1,0 @@
-{
-  mNativeItem.setNumericShortcut(numericChar);
-  return this;
-}

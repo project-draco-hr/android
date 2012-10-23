@@ -1,7 +1,0 @@
-{
-  if ((mSelectedPosition != mOldSelectedPosition) || (mSelectedRowId != mOldSelectedRowId)) {
-    selectionChanged();
-    mOldSelectedPosition=mSelectedPosition;
-    mOldSelectedRowId=mSelectedRowId;
-  }
-}

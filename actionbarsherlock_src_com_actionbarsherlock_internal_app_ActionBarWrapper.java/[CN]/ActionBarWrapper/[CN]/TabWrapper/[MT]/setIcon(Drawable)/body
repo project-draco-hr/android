@@ -1,4 +1,0 @@
-{
-  mNativeTab.setIcon(icon);
-  return this;
-}

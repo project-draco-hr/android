@@ -1,5 +1,0 @@
-{
-  super.setEnabled(enabled);
-  mImageButton.setEnabled(enabled);
-  mTextButton.setEnabled(enabled);
-}

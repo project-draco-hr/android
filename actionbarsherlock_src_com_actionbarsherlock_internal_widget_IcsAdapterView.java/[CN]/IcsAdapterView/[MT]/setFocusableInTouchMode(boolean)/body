@@ -1,9 +1,0 @@
-{
-  final T adapter=getAdapter();
-  final boolean empty=adapter == null || adapter.getCount() == 0;
-  mDesiredFocusableInTouchModeState=focusable;
-  if (focusable) {
-    mDesiredFocusableState=true;
-  }
-  super.setFocusableInTouchMode(focusable && (!empty || isInFilterMode()));
-}

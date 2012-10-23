@@ -1,5 +1,0 @@
-{
-  if (mRule == Dependency.AFTER) {
-    startIfReady(animation);
-  }
-}

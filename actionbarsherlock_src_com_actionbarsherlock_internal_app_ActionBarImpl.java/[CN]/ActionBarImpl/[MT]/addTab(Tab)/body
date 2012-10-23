@@ -1,3 +1,0 @@
-{
-  addTab(tab,mTabs.isEmpty());
-}

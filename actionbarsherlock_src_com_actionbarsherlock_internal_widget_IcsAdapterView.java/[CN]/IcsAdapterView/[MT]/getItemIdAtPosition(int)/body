@@ -1,4 +1,0 @@
-{
-  T adapter=getAdapter();
-  return (adapter == null || position < 0) ? INVALID_ROW_ID : adapter.getItemId(position);
-}

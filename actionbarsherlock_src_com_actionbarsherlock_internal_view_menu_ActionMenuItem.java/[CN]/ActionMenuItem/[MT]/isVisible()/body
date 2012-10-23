@@ -1,3 +1,0 @@
-{
-  return (mFlags & HIDDEN) == 0;
-}

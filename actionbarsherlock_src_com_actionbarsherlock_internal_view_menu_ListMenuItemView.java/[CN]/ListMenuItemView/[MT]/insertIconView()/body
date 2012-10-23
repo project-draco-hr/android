@@ -1,5 +1,0 @@
-{
-  LayoutInflater inflater=getInflater();
-  mIconView=(ImageView)inflater.inflate(R.layout.abs__list_menu_item_icon,this,false);
-  addView(mIconView,0);
-}

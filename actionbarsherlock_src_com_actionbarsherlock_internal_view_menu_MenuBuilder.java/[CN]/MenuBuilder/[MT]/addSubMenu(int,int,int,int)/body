@@ -1,3 +1,0 @@
-{
-  return addSubMenu(group,id,categoryOrder,mResources.getString(title));
-}

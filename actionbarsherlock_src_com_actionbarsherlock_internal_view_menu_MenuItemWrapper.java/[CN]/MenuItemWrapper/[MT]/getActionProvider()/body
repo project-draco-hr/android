@@ -1,7 +1,0 @@
-{
-  android.view.ActionProvider nativeProvider=mNativeItem.getActionProvider();
-  if (nativeProvider != null && nativeProvider instanceof ActionProviderWrapper) {
-    return ((ActionProviderWrapper)nativeProvider).unwrap();
-  }
-  return null;
-}

@@ -1,9 +1,0 @@
-{
-  setHasEmbeddedTabs(getResources_getBoolean(mContext,R.bool.abs__action_bar_embed_tabs));
-  if (Build.VERSION.SDK_INT < Build.VERSION_CODES.FROYO) {
-    mActionView.onConfigurationChanged(newConfig);
-    if (mContextView != null) {
-      mContextView.onConfigurationChanged(newConfig);
-    }
-  }
-}

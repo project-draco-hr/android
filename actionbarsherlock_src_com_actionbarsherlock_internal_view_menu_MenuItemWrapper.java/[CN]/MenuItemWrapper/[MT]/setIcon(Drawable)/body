@@ -1,4 +1,0 @@
-{
-  mNativeItem.setIcon(icon);
-  return this;
-}

@@ -1,6 +1,0 @@
-{
-  if (DEBUG)   Log.d(TAG,"[dispatchStop]");
-  if (aActionBar != null) {
-    aActionBar.setShowHideAnimationEnabled(false);
-  }
-}

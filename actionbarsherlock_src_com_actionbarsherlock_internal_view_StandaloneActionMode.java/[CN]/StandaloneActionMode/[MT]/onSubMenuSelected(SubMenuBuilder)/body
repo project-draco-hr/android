@@ -1,7 +1,0 @@
-{
-  if (!subMenu.hasVisibleItems()) {
-    return true;
-  }
-  new MenuPopupHelper(mContext,subMenu).show();
-  return true;
-}

@@ -1,5 +1,0 @@
-{
-  super.writeToParcel(out,flags);
-  out.writeInt(progress);
-  out.writeInt(secondaryProgress);
-}

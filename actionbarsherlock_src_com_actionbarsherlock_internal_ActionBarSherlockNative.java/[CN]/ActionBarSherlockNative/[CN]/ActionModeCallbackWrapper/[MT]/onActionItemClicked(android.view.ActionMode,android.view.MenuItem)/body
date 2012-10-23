@@ -1,3 +1,0 @@
-{
-  return mCallback.onActionItemClicked(mActionMode,mActionMode.getMenu().findItem(item));
-}

@@ -1,6 +1,0 @@
-{
-  if (mInflater == null) {
-    mInflater=LayoutInflater.from(mContext);
-  }
-  return mInflater;
-}

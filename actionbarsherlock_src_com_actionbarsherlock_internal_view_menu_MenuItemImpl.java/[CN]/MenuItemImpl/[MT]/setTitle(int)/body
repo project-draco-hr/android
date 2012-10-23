@@ -1,3 +1,0 @@
-{
-  return setTitle(mMenu.getContext().getString(title));
-}

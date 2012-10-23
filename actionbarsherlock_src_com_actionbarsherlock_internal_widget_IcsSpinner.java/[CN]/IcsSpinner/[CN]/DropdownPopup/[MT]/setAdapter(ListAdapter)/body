@@ -1,4 +1,0 @@
-{
-  super.setAdapter(adapter);
-  mAdapter=adapter;
-}

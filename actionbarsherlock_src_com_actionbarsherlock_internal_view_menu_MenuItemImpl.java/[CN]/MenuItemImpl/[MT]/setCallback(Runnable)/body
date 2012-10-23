@@ -1,4 +1,0 @@
-{
-  mItemCallback=callback;
-  return this;
-}

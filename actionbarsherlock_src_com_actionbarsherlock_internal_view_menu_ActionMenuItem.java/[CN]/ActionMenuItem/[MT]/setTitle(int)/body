@@ -1,4 +1,0 @@
-{
-  mTitle=mContext.getResources().getString(title);
-  return this;
-}

@@ -1,6 +1,0 @@
-{
-  super.onDetachedFromWindow();
-  if (mTabSelector != null) {
-    removeCallbacks(mTabSelector);
-  }
-}

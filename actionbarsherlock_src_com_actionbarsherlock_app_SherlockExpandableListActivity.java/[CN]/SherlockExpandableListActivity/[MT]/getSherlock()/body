@@ -1,6 +1,0 @@
-{
-  if (mSherlock == null) {
-    mSherlock=ActionBarSherlock.wrap(this,ActionBarSherlock.FLAG_DELEGATE);
-  }
-  return mSherlock;
-}

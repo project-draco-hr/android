@@ -1,5 +1,0 @@
-{
-  if (isShowing()) {
-    show();
-  }
-}

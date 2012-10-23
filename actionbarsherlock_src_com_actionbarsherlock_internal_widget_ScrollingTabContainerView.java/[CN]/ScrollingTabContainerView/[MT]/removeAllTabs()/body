@@ -1,9 +1,0 @@
-{
-  mTabLayout.removeAllViews();
-  if (mTabSpinner != null) {
-    ((TabAdapter)mTabSpinner.getAdapter()).notifyDataSetChanged();
-  }
-  if (mAllowCollapse) {
-    requestLayout();
-  }
-}

@@ -1,3 +1,0 @@
-{
-  mPopup.setOnDismissListener(listener);
-}

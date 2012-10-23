@@ -1,4 +1,0 @@
-{
-  super.onInitializeAccessibilityEvent(event);
-  event.setClassName(SearchView.class.getName());
-}

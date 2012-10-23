@@ -1,7 +1,0 @@
-{
-  if (view != null && view instanceof CollapsibleActionView) {
-    view=new CollapsibleActionViewWrapper(view);
-  }
-  mNativeItem.setActionView(view);
-  return this;
-}

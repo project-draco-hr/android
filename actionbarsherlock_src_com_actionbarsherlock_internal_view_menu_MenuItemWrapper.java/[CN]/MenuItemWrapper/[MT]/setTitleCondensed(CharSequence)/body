@@ -1,4 +1,0 @@
-{
-  mNativeItem.setTitleCondensed(title);
-  return this;
-}

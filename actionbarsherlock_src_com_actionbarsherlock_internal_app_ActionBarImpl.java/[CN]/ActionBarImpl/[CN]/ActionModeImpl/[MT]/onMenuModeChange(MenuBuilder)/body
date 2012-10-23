@@ -1,7 +1,0 @@
-{
-  if (mCallback == null) {
-    return;
-  }
-  invalidate();
-  mContextView.showOverflowMenu();
-}

@@ -1,3 +1,0 @@
-{
-  return setContentDescription(mContext.getResources().getText(resId));
-}

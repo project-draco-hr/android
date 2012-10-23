@@ -1,9 +1,0 @@
-{
-  if ((mFlags & EXCLUSIVE) != 0) {
-    mMenu.setExclusiveItemChecked(this);
-  }
- else {
-    setCheckedInt(checked);
-  }
-  return this;
-}

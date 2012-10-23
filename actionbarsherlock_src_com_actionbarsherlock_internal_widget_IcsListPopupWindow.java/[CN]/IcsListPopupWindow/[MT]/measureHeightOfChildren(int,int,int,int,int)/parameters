@@ -1,5 +1,0 @@
-int widthMeasureSpec
-int startPosition
-int endPosition
-int maxHeight
-int disallowPartialChildPosition

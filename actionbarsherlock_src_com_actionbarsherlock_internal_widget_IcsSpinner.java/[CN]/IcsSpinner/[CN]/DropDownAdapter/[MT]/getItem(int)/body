@@ -1,3 +1,0 @@
-{
-  return mAdapter == null ? null : mAdapter.getItem(position);
-}

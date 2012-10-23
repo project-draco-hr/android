@@ -1,3 +1,0 @@
-{
-  throw new UnsupportedOperationException("addView(View, LayoutParams) " + "is not supported in AdapterView");
-}

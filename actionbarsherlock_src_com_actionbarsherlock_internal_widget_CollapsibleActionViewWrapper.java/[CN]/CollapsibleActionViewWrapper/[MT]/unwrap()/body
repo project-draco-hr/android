@@ -1,3 +1,0 @@
-{
-  return getChildAt(0);
-}

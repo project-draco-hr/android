@@ -1,3 +1,0 @@
-{
-  throw new IllegalStateException("Native callback invoked. Create a test case and report!");
-}

@@ -1,4 +1,0 @@
-{
-  mCallback=callback;
-  return this;
-}

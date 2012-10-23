@@ -1,4 +1,0 @@
-{
-  mOnActionExpandListener=listener;
-  return this;
-}

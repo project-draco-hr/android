@@ -1,7 +1,0 @@
-{
-  if (mShowDefaultActivity != showDefaultActivity || mHighlightDefaultActivity != highlightDefaultActivity) {
-    mShowDefaultActivity=showDefaultActivity;
-    mHighlightDefaultActivity=highlightDefaultActivity;
-    notifyDataSetChanged();
-  }
-}

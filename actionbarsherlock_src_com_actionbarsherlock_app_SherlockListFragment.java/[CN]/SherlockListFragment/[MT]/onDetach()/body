@@ -1,4 +1,0 @@
-{
-  mActivity=null;
-  super.onDetach();
-}

@@ -1,4 +1,0 @@
-{
-  super(context,attrs);
-  mProxy=AnimatorProxy.NEEDS_PROXY ? AnimatorProxy.wrap(this) : null;
-}

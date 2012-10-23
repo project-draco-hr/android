@@ -1,4 +1,0 @@
-{
-  mItem.setIcon(iconRes);
-  return this;
-}

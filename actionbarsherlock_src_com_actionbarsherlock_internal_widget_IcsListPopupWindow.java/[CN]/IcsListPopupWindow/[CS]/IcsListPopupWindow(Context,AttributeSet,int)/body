@@ -1,5 +1,0 @@
-{
-  mContext=context;
-  mPopup=new PopupWindow(context,attrs,defStyleAttr);
-  mPopup.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
-}

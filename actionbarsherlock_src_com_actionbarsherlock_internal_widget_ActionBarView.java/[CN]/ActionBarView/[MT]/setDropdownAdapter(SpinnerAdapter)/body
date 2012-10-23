@@ -1,6 +1,0 @@
-{
-  mSpinnerAdapter=adapter;
-  if (mSpinner != null) {
-    mSpinner.setAdapter(adapter);
-  }
-}

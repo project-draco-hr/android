@@ -1,8 +1,0 @@
-{
-  if (AnimatorProxy.NEEDS_PROXY) {
-    return mProxy.getAlpha();
-  }
- else {
-    return super.getAlpha();
-  }
-}

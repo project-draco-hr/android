@@ -1,6 +1,0 @@
-String action
-Uri data
-String extraData
-String query
-int actionKey
-String actionMsg

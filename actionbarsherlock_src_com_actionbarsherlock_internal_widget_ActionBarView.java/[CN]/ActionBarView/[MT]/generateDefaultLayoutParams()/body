@@ -1,3 +1,0 @@
-{
-  return new ActionBar.LayoutParams(DEFAULT_CUSTOM_GRAVITY);
-}

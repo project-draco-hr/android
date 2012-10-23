@@ -1,4 +1,0 @@
-{
-  if (DEBUG)   Log.d(TAG,"[setSecondaryProgress] secondaryProgress: " + secondaryProgress);
-  setFeatureInt(Window.FEATURE_PROGRESS,secondaryProgress + Window.PROGRESS_SECONDARY_START);
-}

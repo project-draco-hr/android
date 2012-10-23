@@ -1,3 +1,0 @@
-{
-  return new FloatPropertyValuesHolder(propertyName,values);
-}

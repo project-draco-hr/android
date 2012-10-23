@@ -1,4 +1,0 @@
-{
-  mIconDrawable=icon;
-  return this;
-}

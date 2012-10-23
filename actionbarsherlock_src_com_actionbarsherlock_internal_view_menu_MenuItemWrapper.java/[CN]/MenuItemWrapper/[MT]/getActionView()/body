@@ -1,7 +1,0 @@
-{
-  View actionView=mNativeItem.getActionView();
-  if (actionView instanceof CollapsibleActionViewWrapper) {
-    return ((CollapsibleActionViewWrapper)actionView).unwrap();
-  }
-  return actionView;
-}

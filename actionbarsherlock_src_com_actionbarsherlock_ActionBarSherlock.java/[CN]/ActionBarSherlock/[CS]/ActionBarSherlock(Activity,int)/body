@@ -1,5 +1,0 @@
-{
-  if (DEBUG)   Log.d(TAG,"[<ctor>] activity: " + activity + ", flags: "+ flags);
-  mActivity=activity;
-  mIsDelegate=(flags & FLAG_DELEGATE) != 0;
-}

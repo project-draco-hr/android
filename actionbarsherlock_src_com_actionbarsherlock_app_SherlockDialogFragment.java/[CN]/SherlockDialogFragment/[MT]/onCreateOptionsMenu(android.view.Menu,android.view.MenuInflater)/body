@@ -1,3 +1,0 @@
-{
-  onCreateOptionsMenu(new MenuWrapper(menu),mActivity.getSupportMenuInflater());
-}

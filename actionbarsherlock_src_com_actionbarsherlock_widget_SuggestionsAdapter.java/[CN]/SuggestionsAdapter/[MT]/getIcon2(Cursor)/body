@@ -1,7 +1,0 @@
-{
-  if (mIconName2Col == INVALID_INDEX) {
-    return null;
-  }
-  String value=cursor.getString(mIconName2Col);
-  return getDrawableFromResourceValue(value);
-}

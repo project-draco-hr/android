@@ -1,4 +1,0 @@
-{
-  setText(mQueryTextView,query,true);
-  mQueryTextView.setSelection(TextUtils.isEmpty(query) ? 0 : query.length());
-}

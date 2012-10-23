@@ -1,6 +1,0 @@
-{
-  if (nativeItem == null) {
-    throw new IllegalStateException("Wrapped menu item cannot be null.");
-  }
-  mNativeItem=nativeItem;
-}

@@ -1,9 +1,0 @@
-{
-  mMenu=menu;
-  mId=id;
-  mGroup=group;
-  mCategoryOrder=categoryOrder;
-  mOrdering=ordering;
-  mTitle=title;
-  mShowAsAction=showAsAction;
-}

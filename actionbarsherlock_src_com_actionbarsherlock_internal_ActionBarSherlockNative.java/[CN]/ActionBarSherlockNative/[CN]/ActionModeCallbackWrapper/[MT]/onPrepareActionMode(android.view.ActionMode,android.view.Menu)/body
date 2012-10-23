@@ -1,3 +1,0 @@
-{
-  return mCallback.onPrepareActionMode(mActionMode,mActionMode.getMenu());
-}

@@ -1,4 +1,0 @@
-{
-  mBackground=bg;
-  invalidate();
-}

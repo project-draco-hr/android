@@ -1,6 +1,0 @@
-{
-  Intent voiceIntent=new Intent(baseIntent);
-  ComponentName searchActivity=searchable.getSearchActivity();
-  voiceIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,searchActivity == null ? null : searchActivity.flattenToShortString());
-  return voiceIntent;
-}

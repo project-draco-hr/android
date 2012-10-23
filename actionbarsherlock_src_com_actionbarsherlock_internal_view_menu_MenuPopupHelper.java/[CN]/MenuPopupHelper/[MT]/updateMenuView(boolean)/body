@@ -1,3 +1,0 @@
-{
-  if (mAdapter != null)   mAdapter.notifyDataSetChanged();
-}

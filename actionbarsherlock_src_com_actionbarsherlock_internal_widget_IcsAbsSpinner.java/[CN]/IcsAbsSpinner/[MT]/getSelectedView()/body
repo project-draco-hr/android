@@ -1,8 +1,0 @@
-{
-  if (mItemCount > 0 && mSelectedPosition >= 0) {
-    return getChildAt(mSelectedPosition - mFirstPosition);
-  }
- else {
-    return null;
-  }
-}

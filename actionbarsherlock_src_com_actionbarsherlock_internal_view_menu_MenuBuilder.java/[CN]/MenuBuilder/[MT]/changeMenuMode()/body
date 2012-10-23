@@ -1,5 +1,0 @@
-{
-  if (mCallback != null) {
-    mCallback.onMenuModeChange(this);
-  }
-}

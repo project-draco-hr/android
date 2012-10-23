@@ -1,6 +1,0 @@
-{
-  SavedState ss=(SavedState)state;
-  super.onRestoreInstanceState(ss.getSuperState());
-  setProgress(ss.progress);
-  setSecondaryProgress(ss.secondaryProgress);
-}

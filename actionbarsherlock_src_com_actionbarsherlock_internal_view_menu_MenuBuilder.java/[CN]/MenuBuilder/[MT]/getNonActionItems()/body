@@ -1,4 +1,0 @@
-{
-  flagActionItems();
-  return mNonActionItems;
-}

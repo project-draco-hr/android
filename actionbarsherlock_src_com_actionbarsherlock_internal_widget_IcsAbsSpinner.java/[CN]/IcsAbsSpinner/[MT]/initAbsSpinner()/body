@@ -1,4 +1,0 @@
-{
-  setFocusable(true);
-  setWillNotDraw(false);
-}

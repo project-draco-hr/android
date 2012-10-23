@@ -1,9 +1,0 @@
-{
-  android.app.ActionBar.LayoutParams lp=new android.app.ActionBar.LayoutParams(layoutParams);
-  lp.gravity=layoutParams.gravity;
-  lp.bottomMargin=layoutParams.bottomMargin;
-  lp.topMargin=layoutParams.topMargin;
-  lp.leftMargin=layoutParams.leftMargin;
-  lp.rightMargin=layoutParams.rightMargin;
-  mActionBar.setCustomView(view,lp);
-}

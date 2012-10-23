@@ -1,6 +1,0 @@
-{
-  super.onAttachedToWindow();
-  if (mTabSelector != null) {
-    post(mTabSelector);
-  }
-}

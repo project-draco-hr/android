@@ -1,8 +1,0 @@
-{
-  super.onAttachedToWindow();
-  ActivityChooserModel dataModel=mAdapter.getDataModel();
-  if (dataModel != null) {
-    dataModel.registerObserver(mModelDataSetOberver);
-  }
-  mIsAttachedToWindow=true;
-}

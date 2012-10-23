@@ -1,3 +1,0 @@
-{
-  return mThreshold <= 0 || super.enoughToFilter();
-}

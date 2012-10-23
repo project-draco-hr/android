@@ -1,6 +1,0 @@
-{
-  mShortcutNumericChar=numericChar;
-  mShortcutAlphabeticChar=Character.toLowerCase(alphaChar);
-  mMenu.onItemsChanged(false);
-  return this;
-}

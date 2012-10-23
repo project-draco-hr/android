@@ -1,7 +1,0 @@
-{
-  if (mScaleX != scaleX) {
-    prepareForUpdate();
-    mScaleX=scaleX;
-    invalidateAfterUpdate();
-  }
-}

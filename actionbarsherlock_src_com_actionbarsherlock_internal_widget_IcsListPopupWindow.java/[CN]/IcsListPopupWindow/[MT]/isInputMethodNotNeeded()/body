@@ -1,3 +1,0 @@
-{
-  return mPopup.getInputMethodMode() == PopupWindow.INPUT_METHOD_NOT_NEEDED;
-}

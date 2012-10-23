@@ -1,8 +1,0 @@
-{
-  final int oldFlags=mFlags;
-  mFlags=(mFlags & ~CHECKABLE) | (checkable ? CHECKABLE : 0);
-  if (oldFlags != mFlags) {
-    mMenu.onItemsChanged(false);
-  }
-  return this;
-}

@@ -1,4 +1,0 @@
-{
-  mNativeItem.setShowAsActionFlags(actionEnum);
-  return this;
-}

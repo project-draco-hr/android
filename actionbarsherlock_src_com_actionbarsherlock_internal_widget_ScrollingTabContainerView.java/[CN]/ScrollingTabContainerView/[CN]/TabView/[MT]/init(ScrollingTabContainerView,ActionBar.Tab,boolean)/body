@@ -1,8 +1,0 @@
-{
-  mParent=parent;
-  mTab=tab;
-  if (forList) {
-    setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-  }
-  update();
-}

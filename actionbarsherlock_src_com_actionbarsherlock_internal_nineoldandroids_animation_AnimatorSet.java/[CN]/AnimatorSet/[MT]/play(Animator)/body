@@ -1,7 +1,0 @@
-{
-  if (anim != null) {
-    mNeedsSort=true;
-    return new Builder(anim);
-  }
-  return null;
-}

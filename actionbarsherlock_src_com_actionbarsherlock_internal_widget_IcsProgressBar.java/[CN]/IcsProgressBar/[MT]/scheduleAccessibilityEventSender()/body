@@ -1,9 +1,0 @@
-{
-  if (mAccessibilityEventSender == null) {
-    mAccessibilityEventSender=new AccessibilityEventSender();
-  }
- else {
-    removeCallbacks(mAccessibilityEventSender);
-  }
-  postDelayed(mAccessibilityEventSender,TIMEOUT_SEND_ACCESSIBILITY_EVENT);
-}

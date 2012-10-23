@@ -1,3 +1,0 @@
-{
-  return setCustomView(LayoutInflater.from(getThemedContext()).inflate(layoutResId,null));
-}

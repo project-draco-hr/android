@@ -1,9 +1,0 @@
-{
-  mContext=context.getApplicationContext();
-  if (!TextUtils.isEmpty(historyFileName) && !historyFileName.endsWith(HISTORY_FILE_EXTENSION)) {
-    mHistoryFileName=historyFileName + HISTORY_FILE_EXTENSION;
-  }
- else {
-    mHistoryFileName=historyFileName;
-  }
-}

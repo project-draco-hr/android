@@ -1,6 +1,0 @@
-{
-  if (mMenu == null) {
-    mMenu=new MenuWrapper(mActionMode.getMenu());
-  }
-  return mMenu;
-}

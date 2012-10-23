@@ -1,4 +1,0 @@
-{
-  mSuggestionsAdapter=adapter;
-  mQueryTextView.setAdapter(mSuggestionsAdapter);
-}

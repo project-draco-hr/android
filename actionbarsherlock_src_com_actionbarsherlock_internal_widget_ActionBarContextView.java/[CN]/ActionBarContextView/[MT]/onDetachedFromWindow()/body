@@ -1,7 +1,0 @@
-{
-  super.onDetachedFromWindow();
-  if (mActionMenuPresenter != null) {
-    mActionMenuPresenter.hideOverflowMenu();
-    mActionMenuPresenter.hideSubMenus();
-  }
-}

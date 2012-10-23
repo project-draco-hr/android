@@ -1,6 +1,0 @@
-{
-  if (alpha != (color >>> 24)) {
-    color=(color & 0x00FFFFFF) & (alpha << 24);
-    invalidateSelf();
-  }
-}

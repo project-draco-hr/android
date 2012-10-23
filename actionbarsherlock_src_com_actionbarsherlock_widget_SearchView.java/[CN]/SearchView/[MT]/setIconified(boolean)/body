@@ -1,8 +1,0 @@
-{
-  if (iconify) {
-    onCloseClicked();
-  }
- else {
-    onSearchClicked();
-  }
-}

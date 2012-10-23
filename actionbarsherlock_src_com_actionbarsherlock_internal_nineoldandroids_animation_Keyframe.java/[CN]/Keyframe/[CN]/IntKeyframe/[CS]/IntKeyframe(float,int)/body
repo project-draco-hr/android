@@ -1,6 +1,0 @@
-{
-  mFraction=fraction;
-  mValue=value;
-  mValueType=int.class;
-  mHasValue=true;
-}

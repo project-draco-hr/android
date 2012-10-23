@@ -1,3 +1,0 @@
-{
-  mActionMode.setTitle(resId);
-}

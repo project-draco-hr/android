@@ -1,5 +1,0 @@
-{
-  if (!mBlockLayoutRequests) {
-    super.requestLayout();
-  }
-}

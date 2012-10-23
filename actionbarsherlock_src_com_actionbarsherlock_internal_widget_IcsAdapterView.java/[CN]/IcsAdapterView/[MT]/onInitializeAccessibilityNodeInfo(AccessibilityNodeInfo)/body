@@ -1,8 +1,0 @@
-{
-  super.onInitializeAccessibilityNodeInfo(info);
-  info.setScrollable(isScrollableForAccessibility());
-  View selectedView=getSelectedView();
-  if (selectedView != null) {
-    info.setEnabled(selectedView.isEnabled());
-  }
-}

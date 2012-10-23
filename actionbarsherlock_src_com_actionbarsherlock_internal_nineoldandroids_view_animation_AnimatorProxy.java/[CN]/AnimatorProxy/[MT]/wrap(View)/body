@@ -1,8 +1,0 @@
-{
-  AnimatorProxy proxy=PROXIES.get(view);
-  if (proxy == null) {
-    proxy=new AnimatorProxy(view);
-    PROXIES.put(view,proxy);
-  }
-  return proxy;
-}

@@ -1,7 +1,0 @@
-{
-  mClearingFocus=true;
-  setImeVisibility(false);
-  super.clearFocus();
-  mQueryTextView.clearFocus();
-  mClearingFocus=false;
-}

@@ -1,7 +1,0 @@
-{
-  if (mScaleY != scaleY) {
-    prepareForUpdate();
-    mScaleY=scaleY;
-    invalidateAfterUpdate();
-  }
-}

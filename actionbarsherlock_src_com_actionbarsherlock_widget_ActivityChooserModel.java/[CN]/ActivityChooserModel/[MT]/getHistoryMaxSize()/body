@@ -1,5 +1,0 @@
-{
-synchronized (mInstanceLock) {
-    return mHistoryMaxSize;
-  }
-}

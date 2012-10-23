@@ -1,8 +1,0 @@
-{
-synchronized (mInstanceLock) {
-    if (mActivitySorter != null && !mActivites.isEmpty()) {
-      mActivitySorter.sort(mIntent,mActivites,Collections.unmodifiableList(mHistoricalRecords));
-      notifyChanged();
-    }
-  }
-}

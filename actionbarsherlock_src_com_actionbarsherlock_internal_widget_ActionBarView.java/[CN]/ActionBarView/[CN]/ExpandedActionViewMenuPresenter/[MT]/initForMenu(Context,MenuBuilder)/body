@@ -1,6 +1,0 @@
-{
-  if (mMenu != null && mCurrentExpandedItem != null) {
-    mMenu.collapseItemActionView(mCurrentExpandedItem);
-  }
-  mMenu=menu;
-}

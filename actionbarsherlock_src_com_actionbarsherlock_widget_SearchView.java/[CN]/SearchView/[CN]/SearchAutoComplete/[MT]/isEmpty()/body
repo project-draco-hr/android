@@ -1,3 +1,0 @@
-{
-  return TextUtils.getTrimmedLength(getText()) == 0;
-}

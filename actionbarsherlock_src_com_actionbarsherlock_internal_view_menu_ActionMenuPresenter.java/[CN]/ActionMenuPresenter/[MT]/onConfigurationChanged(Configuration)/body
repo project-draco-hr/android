@@ -1,8 +1,0 @@
-{
-  if (!mMaxItemsSet) {
-    mMaxItems=getResources_getInteger(mContext,R.integer.abs__max_action_buttons);
-    if (mMenu != null) {
-      mMenu.onItemsChanged(true);
-    }
-  }
-}

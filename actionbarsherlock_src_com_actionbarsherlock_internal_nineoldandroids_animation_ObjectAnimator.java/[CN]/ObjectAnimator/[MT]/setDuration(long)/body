@@ -1,4 +1,0 @@
-{
-  super.setDuration(duration);
-  return this;
-}

@@ -1,6 +1,0 @@
-{
-  Object tag=v.getTag();
-  if (tag instanceof CharSequence) {
-    mSearchView.onQueryRefine((CharSequence)tag);
-  }
-}

@@ -1,6 +1,0 @@
-{
-  if (mUpdateListeners == null) {
-    mUpdateListeners=new ArrayList<AnimatorUpdateListener>();
-  }
-  mUpdateListeners.add(listener);
-}

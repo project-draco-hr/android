@@ -1,8 +1,0 @@
-{
-  if (mShowFooterView && position == getCount() - 1) {
-    return ITEM_VIEW_TYPE_FOOTER;
-  }
- else {
-    return ITEM_VIEW_TYPE_ACTIVITY;
-  }
-}

@@ -1,3 +1,0 @@
-{
-  return mFirstPosition + getChildCount() - 1;
-}

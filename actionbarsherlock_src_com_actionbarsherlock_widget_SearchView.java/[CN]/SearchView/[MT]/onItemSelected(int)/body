@@ -1,7 +1,0 @@
-{
-  if (mOnSuggestionListener == null || !mOnSuggestionListener.onSuggestionSelect(position)) {
-    rewriteQueryFromSuggestion(position);
-    return true;
-  }
-  return false;
-}

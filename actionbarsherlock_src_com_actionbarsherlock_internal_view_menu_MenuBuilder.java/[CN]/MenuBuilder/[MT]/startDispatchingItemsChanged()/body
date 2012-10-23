@@ -1,7 +1,0 @@
-{
-  mPreventDispatchingItemsChanged=false;
-  if (mItemsChangedWhileDispatchPrevented) {
-    mItemsChangedWhileDispatchPrevented=false;
-    onItemsChanged(true);
-  }
-}

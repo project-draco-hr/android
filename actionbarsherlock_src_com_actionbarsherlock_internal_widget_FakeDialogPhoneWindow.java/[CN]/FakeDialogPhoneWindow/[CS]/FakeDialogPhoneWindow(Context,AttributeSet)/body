@@ -1,7 +1,0 @@
-{
-  super(context,attrs);
-  TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.SherlockTheme);
-  a.getValue(R.styleable.SherlockTheme_windowMinWidthMajor,mMinWidthMajor);
-  a.getValue(R.styleable.SherlockTheme_windowMinWidthMinor,mMinWidthMinor);
-  a.recycle();
-}

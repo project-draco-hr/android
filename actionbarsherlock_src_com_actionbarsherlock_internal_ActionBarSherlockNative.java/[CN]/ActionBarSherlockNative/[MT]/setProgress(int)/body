@@ -1,4 +1,0 @@
-{
-  if (DEBUG)   Log.d(TAG,"[setProgress] progress: " + progress);
-  mActivity.setProgress(progress);
-}

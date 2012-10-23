@@ -1,3 +1,0 @@
-{
-  return mUpView.getVisibility() == GONE ? mUpWidth : 0;
-}

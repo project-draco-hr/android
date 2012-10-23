@@ -1,4 +1,0 @@
-{
-  super(nativeSubMenu);
-  mNativeSubMenu=nativeSubMenu;
-}

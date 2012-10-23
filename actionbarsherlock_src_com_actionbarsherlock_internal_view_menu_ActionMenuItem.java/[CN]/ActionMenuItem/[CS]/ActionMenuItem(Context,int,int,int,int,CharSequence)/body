@@ -1,7 +1,0 @@
-{
-  mContext=context;
-  mId=id;
-  mGroup=group;
-  mOrdering=ordering;
-  mTitle=title;
-}

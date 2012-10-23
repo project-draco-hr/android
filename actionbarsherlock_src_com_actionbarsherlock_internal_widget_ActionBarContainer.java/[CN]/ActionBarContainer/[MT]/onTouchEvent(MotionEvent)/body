@@ -1,4 +1,0 @@
-{
-  super.onTouchEvent(ev);
-  return true;
-}

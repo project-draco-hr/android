@@ -1,4 +1,0 @@
-{
-  mDivider.setBounds(getPaddingLeft() + mDividerPadding,top,getWidth() - getPaddingRight() - mDividerPadding,top + mDividerHeight);
-  mDivider.draw(canvas);
-}

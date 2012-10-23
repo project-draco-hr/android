@@ -1,4 +1,0 @@
-{
-  if (DEBUG)   Log.d(TAG,"[setContentView] view: " + view);
-  setContentView(view,new ViewGroup.LayoutParams(MATCH_PARENT,MATCH_PARENT));
-}

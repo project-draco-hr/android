@@ -1,6 +1,0 @@
-{
-  if (mCallback != null) {
-    return mCallback.onOpenSubMenu(menu);
-  }
-  return false;
-}

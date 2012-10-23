@@ -1,7 +1,0 @@
-{
-  if (mTranslationX != translationX) {
-    prepareForUpdate();
-    mTranslationX=translationX;
-    invalidateAfterUpdate();
-  }
-}

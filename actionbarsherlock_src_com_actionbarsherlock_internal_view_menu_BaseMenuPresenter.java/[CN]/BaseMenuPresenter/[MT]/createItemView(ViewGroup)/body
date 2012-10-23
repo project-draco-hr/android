@@ -1,3 +1,0 @@
-{
-  return (MenuView.ItemView)mSystemInflater.inflate(mItemLayoutRes,parent,false);
-}

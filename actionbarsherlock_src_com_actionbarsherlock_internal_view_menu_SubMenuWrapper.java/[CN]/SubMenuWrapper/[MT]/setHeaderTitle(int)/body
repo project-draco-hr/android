@@ -1,4 +1,0 @@
-{
-  mNativeSubMenu.setHeaderTitle(titleRes);
-  return this;
-}

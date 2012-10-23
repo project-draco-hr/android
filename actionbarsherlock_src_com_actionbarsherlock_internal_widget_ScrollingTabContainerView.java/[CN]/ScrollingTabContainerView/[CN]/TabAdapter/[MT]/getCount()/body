@@ -1,3 +1,0 @@
-{
-  return mTabLayout.getChildCount();
-}

@@ -1,6 +1,0 @@
-{
-  super.onLayout(changed,l,t,r,b);
-  mInLayout=true;
-  layout(0,false);
-  mInLayout=false;
-}

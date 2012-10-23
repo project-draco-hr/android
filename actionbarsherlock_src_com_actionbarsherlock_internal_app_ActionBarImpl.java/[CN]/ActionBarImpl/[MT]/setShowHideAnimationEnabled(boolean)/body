@@ -1,6 +1,0 @@
-{
-  mShowHideAnimationEnabled=enabled;
-  if (!enabled && mCurrentShowAnim != null) {
-    mCurrentShowAnim.end();
-  }
-}

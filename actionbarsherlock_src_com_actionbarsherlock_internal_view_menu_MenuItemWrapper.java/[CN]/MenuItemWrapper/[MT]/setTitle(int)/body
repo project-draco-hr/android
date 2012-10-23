@@ -1,4 +1,0 @@
-{
-  mNativeItem.setTitle(title);
-  return this;
-}

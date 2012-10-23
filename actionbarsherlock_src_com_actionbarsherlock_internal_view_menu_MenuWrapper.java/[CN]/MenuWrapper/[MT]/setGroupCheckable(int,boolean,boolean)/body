@@ -1,3 +1,0 @@
-{
-  mNativeMenu.setGroupCheckable(group,checkable,exclusive);
-}

@@ -1,5 +1,0 @@
-{
-  if (DBG)   Log.d(LOG_TAG,"notifyDataSetChanged");
-  super.notifyDataSetChanged();
-  updateSpinnerState(getCursor());
-}

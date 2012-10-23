@@ -1,8 +1,0 @@
-{
-  if (mMenuView == null) {
-    mMenuView=(MenuView)mSystemInflater.inflate(mMenuLayoutRes,root,false);
-    mMenuView.initialize(mMenu);
-    updateMenuView(true);
-  }
-  return mMenuView;
-}

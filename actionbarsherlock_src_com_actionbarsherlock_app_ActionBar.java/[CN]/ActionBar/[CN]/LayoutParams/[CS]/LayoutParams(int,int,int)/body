@@ -1,4 +1,0 @@
-{
-  super(width,height);
-  this.gravity=gravity;
-}

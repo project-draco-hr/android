@@ -1,3 +1,0 @@
-{
-  return (mShowAsAction & SHOW_AS_ACTION_ALWAYS) == SHOW_AS_ACTION_ALWAYS;
-}

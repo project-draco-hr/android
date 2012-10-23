@@ -1,3 +1,0 @@
-{
-  mNativeMenu.setGroupVisible(group,visible);
-}

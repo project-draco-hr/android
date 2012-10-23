@@ -1,3 +1,0 @@
-{
-  mIntAnimatedValue=mIntKeyframeSet.getIntValue(fraction);
-}

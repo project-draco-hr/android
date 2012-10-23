@@ -1,8 +1,0 @@
-{
-  Drawable.ConstantState cached=mOutsideDrawablesCache.get(resourceUri);
-  if (cached == null) {
-    return null;
-  }
-  if (DBG)   Log.d(LOG_TAG,"Found icon in cache: " + resourceUri);
-  return cached.newDrawable();
-}

@@ -1,7 +1,0 @@
-{
-  mIcon=icon;
-  if (mPosition >= 0) {
-    mTabScrollView.updateTab(mPosition);
-  }
-  return this;
-}

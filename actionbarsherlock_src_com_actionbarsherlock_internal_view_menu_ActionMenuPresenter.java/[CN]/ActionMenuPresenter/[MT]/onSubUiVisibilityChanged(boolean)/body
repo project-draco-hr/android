@@ -1,8 +1,0 @@
-{
-  if (isVisible) {
-    super.onSubMenuSelected(null);
-  }
- else {
-    mMenu.close(false);
-  }
-}

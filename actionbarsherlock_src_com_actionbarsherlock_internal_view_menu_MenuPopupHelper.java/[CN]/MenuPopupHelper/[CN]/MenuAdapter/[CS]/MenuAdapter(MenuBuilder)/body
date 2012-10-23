@@ -1,5 +1,0 @@
-{
-  mAdapterMenu=menu;
-  registerDataSetObserver(new ExpandedIndexObserver());
-  findExpandedIndex();
-}

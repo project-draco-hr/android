@@ -1,3 +1,0 @@
-{
-  return mWrapped.onActionItemClicked(mode,item);
-}

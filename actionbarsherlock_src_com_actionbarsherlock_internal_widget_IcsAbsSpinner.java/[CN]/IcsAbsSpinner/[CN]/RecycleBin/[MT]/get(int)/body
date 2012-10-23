@@ -1,9 +1,0 @@
-{
-  View result=mScrapHeap.get(position);
-  if (result != null) {
-    mScrapHeap.delete(position);
-  }
- else {
-  }
-  return result;
-}

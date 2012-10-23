@@ -1,7 +1,0 @@
-{
-  final int index=(categoryOrder & CATEGORY_MASK) >> CATEGORY_SHIFT;
-  if (index < 0 || index >= sCategoryToOrder.length) {
-    throw new IllegalArgumentException("order does not contain a valid category.");
-  }
-  return (sCategoryToOrder[index] << CATEGORY_SHIFT) | (categoryOrder & USER_MASK);
-}

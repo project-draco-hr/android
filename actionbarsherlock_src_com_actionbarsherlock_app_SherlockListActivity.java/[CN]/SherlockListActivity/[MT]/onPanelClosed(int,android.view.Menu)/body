@@ -1,4 +1,0 @@
-{
-  getSherlock().dispatchPanelClosed(featureId,menu);
-  super.onPanelClosed(featureId,menu);
-}

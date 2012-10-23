@@ -1,3 +1,0 @@
-{
-  this(context,attrs,android.R.attr.progressBarStyle);
-}

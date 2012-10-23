@@ -1,6 +1,0 @@
-{
-  if (DEBUG)   Log.d(TAG,"[dispatchPause]");
-  if (wActionBar != null && wActionBar.isOverflowMenuShowing()) {
-    wActionBar.hideOverflowMenu();
-  }
-}

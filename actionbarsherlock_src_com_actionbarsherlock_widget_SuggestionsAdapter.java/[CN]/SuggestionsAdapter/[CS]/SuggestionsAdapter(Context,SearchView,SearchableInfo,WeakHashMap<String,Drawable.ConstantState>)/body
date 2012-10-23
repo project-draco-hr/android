@@ -1,7 +1,0 @@
-{
-  super(context,R.layout.abs__search_dropdown_item_icons_2line,null,true);
-  mSearchManager=(SearchManager)mContext.getSystemService(Context.SEARCH_SERVICE);
-  mProviderContext=mContext;
-  mSearchView=searchView;
-  mOutsideDrawablesCache=outsideDrawablesCache;
-}

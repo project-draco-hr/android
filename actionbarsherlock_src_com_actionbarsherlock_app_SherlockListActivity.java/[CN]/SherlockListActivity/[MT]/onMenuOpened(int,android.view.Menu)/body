@@ -1,6 +1,0 @@
-{
-  if (getSherlock().dispatchMenuOpened(featureId,menu)) {
-    return true;
-  }
-  return super.onMenuOpened(featureId,menu);
-}

@@ -1,3 +1,0 @@
-{
-  return setText(mContext.getResources().getText(resId));
-}

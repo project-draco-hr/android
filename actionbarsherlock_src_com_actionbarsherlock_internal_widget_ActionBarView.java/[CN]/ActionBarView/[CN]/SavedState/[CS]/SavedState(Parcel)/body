@@ -1,5 +1,0 @@
-{
-  super(in);
-  expandedMenuItemId=in.readInt();
-  isOverflowOpen=in.readInt() != 0;
-}

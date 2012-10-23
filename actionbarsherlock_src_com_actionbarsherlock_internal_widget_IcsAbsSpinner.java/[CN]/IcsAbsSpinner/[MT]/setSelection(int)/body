@@ -1,5 +1,0 @@
-{
-  setNextSelectedPositionInt(position);
-  requestLayout();
-  invalidate();
-}

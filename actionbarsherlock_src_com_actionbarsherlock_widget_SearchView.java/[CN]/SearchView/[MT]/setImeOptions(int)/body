@@ -1,3 +1,0 @@
-{
-  mQueryTextView.setImeOptions(imeOptions);
-}

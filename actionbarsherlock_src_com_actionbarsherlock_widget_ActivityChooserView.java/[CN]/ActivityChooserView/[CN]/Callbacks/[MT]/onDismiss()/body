@@ -1,6 +1,0 @@
-{
-  notifyOnDismissListener();
-  if (mProvider != null) {
-    mProvider.subUiVisibilityChanged(false);
-  }
-}

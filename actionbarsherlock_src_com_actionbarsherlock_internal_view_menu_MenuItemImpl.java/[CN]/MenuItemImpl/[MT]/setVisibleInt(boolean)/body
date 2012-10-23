@@ -1,5 +1,0 @@
-{
-  final int oldFlags=mFlags;
-  mFlags=(mFlags & ~HIDDEN) | (shown ? 0 : HIDDEN);
-  return oldFlags != mFlags;
-}

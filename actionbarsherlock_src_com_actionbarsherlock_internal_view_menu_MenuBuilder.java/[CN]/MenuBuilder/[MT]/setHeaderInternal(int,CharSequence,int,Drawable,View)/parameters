@@ -1,5 +1,0 @@
-int titleRes
-CharSequence title
-int iconRes
-Drawable icon
-View view

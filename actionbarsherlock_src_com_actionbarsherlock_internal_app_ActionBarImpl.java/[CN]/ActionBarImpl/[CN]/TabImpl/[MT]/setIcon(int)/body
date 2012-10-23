@@ -1,3 +1,0 @@
-{
-  return setIcon(mContext.getResources().getDrawable(resId));
-}

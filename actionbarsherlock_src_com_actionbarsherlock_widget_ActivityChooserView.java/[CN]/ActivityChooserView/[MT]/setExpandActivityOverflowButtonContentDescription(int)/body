@@ -1,4 +1,0 @@
-{
-  CharSequence contentDescription=mContext.getString(resourceId);
-  mExpandActivityOverflowButtonImage.setContentDescription(contentDescription);
-}

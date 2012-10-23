@@ -1,4 +1,0 @@
-{
-  onPopulateAccessibilityEvent(event);
-  return true;
-}

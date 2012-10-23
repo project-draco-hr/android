@@ -1,4 +1,0 @@
-{
-  float startFloat=startValue.floatValue();
-  return startFloat + fraction * (endValue.floatValue() - startFloat);
-}

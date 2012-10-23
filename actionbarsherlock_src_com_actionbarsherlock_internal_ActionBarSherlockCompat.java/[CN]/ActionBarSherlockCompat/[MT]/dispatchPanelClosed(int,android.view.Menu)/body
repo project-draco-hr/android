@@ -1,8 +1,0 @@
-{
-  if (DEBUG)   Log.d(TAG,"[dispatchPanelClosed] featureId: " + featureId + ", menu: "+ menu);
-  if (featureId == Window.FEATURE_ACTION_BAR || featureId == Window.FEATURE_OPTIONS_PANEL) {
-    if (aActionBar != null) {
-      aActionBar.dispatchMenuVisibilityChanged(false);
-    }
-  }
-}

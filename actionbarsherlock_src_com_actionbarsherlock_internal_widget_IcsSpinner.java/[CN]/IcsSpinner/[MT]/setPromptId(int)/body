@@ -1,3 +1,0 @@
-{
-  setPrompt(getContext().getText(promptId));
-}

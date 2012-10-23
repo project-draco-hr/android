@@ -1,9 +1,0 @@
-{
-  if (activityName.charAt(0) == '.') {
-    return manifestPackage + activityName;
-  }
-  if (activityName.indexOf('.',1) == -1) {
-    return manifestPackage + "." + activityName;
-  }
-  return activityName;
-}

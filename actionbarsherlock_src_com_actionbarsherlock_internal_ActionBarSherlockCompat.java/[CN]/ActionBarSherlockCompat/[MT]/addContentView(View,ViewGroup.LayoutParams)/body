@@ -1,8 +1,0 @@
-{
-  if (DEBUG)   Log.d(TAG,"[addContentView] view: " + view + ", params: "+ params);
-  if (mContentParent == null) {
-    installDecor();
-  }
-  mContentParent.addView(view,params);
-  initActionBar();
-}

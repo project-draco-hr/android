@@ -1,5 +1,0 @@
-{
-  if (mCanceled)   return;
-  mVisibilityAnim=null;
-  setVisibility(mFinalVisibility);
-}

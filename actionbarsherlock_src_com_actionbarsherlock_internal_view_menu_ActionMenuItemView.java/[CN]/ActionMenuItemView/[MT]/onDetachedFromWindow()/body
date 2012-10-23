@@ -1,6 +1,0 @@
-{
-  super.onDetachedFromWindow();
-  for (  View_OnAttachStateChangeListener listener : mListeners) {
-    listener.onViewDetachedFromWindow(this);
-  }
-}

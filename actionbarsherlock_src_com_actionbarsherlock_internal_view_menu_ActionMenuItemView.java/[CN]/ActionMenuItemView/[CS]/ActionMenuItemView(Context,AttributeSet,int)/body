@@ -1,7 +1,0 @@
-{
-  super(context,attrs);
-  mAllowTextWithIcon=getResources_getBoolean(context,R.bool.abs__config_allowActionMenuItemTextWithIcon);
-  TypedArray a=context.obtainStyledAttributes(attrs,R.styleable.SherlockActionMenuItemView,0,0);
-  mMinWidth=a.getDimensionPixelSize(R.styleable.SherlockActionMenuItemView_android_minWidth,0);
-  a.recycle();
-}

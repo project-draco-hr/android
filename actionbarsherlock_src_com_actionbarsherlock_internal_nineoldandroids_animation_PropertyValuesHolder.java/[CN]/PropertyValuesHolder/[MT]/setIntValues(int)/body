@@ -1,4 +1,0 @@
-{
-  mValueType=int.class;
-  mKeyframeSet=KeyframeSet.ofInt(values);
-}

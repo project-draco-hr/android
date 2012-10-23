@@ -1,9 +1,0 @@
-{
-  ((TabView)mTabLayout.getChildAt(position)).update();
-  if (mTabSpinner != null) {
-    ((TabAdapter)mTabSpinner.getAdapter()).notifyDataSetChanged();
-  }
-  if (mAllowCollapse) {
-    requestLayout();
-  }
-}

@@ -1,5 +1,0 @@
-{
-  if (DBG)   Log.d(LOG_TAG,"close()");
-  changeCursor(null);
-  mClosed=true;
-}

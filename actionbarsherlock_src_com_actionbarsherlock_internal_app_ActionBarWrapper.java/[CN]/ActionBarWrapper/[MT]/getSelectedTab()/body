@@ -1,4 +1,0 @@
-{
-  android.app.ActionBar.Tab selected=mActionBar.getSelectedTab();
-  return (selected != null) ? (Tab)selected.getTag() : null;
-}

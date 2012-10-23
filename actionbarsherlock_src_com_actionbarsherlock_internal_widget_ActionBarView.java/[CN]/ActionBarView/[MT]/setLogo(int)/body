@@ -1,3 +1,0 @@
-{
-  setLogo(mContext.getResources().getDrawable(resId));
-}

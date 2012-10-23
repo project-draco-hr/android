@@ -1,5 +1,0 @@
-{
-  if (mRule == Dependency.WITH) {
-    startIfReady(animation);
-  }
-}

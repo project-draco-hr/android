@@ -1,4 +1,0 @@
-{
-  mFlags=(mFlags & HIDDEN) | (visible ? 0 : HIDDEN);
-  return this;
-}

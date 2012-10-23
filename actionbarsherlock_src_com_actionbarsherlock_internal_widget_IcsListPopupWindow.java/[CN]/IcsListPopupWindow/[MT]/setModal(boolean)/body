@@ -1,4 +1,0 @@
-{
-  mModal=true;
-  mPopup.setFocusable(modal);
-}

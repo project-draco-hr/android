@@ -1,4 +1,0 @@
-{
-  super.setIntValues(values);
-  mIntKeyframeSet=(IntKeyframeSet)mKeyframeSet;
-}

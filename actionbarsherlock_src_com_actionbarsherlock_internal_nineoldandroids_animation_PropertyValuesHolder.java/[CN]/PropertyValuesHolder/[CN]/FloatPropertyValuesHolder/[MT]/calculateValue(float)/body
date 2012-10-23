@@ -1,3 +1,0 @@
-{
-  mFloatAnimatedValue=mFloatKeyframeSet.getFloatValue(fraction);
-}

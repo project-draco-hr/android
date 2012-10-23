@@ -1,4 +1,0 @@
-{
-  setHeaderInternal(0,title,0,null,null);
-  return this;
-}

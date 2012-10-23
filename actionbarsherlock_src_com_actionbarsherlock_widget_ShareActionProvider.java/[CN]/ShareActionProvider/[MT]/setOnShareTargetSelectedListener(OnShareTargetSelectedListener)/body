@@ -1,4 +1,0 @@
-{
-  mOnShareTargetSelectedListener=listener;
-  setActivityChooserPolicyIfNeeded();
-}

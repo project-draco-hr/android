@@ -1,9 +1,0 @@
-{
-  if (convertView == null) {
-    convertView=createTabView((ActionBar.Tab)getItem(position),true);
-  }
- else {
-    ((TabView)convertView).bindTab((ActionBar.Tab)getItem(position));
-  }
-  return convertView;
-}

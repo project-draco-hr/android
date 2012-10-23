@@ -1,4 +1,0 @@
-{
-  mNativeItem.setIntent(intent);
-  return this;
-}

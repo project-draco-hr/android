@@ -1,4 +1,0 @@
-{
-  mQueryHint=hint;
-  updateQueryHint();
-}

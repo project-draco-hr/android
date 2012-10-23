@@ -1,6 +1,0 @@
-{
-  if (DEBUG)   Log.d(TAG,"[requestFeature] featureId: " + featureId);
-  final boolean result=mActivity.getWindow().requestFeature(featureId);
-  if (DEBUG)   Log.d(TAG,"[requestFeature] returning " + result);
-  return result;
-}

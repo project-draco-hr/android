@@ -1,3 +1,0 @@
-{
-  throw new RuntimeException("setOnItemClickListener cannot be used with a spinner.");
-}

@@ -1,4 +1,0 @@
-{
-  mNativeTab.setContentDescription(resId);
-  return this;
-}

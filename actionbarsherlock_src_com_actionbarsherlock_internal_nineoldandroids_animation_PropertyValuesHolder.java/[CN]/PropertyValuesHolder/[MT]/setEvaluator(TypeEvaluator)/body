@@ -1,4 +1,0 @@
-{
-  mEvaluator=evaluator;
-  mKeyframeSet.setEvaluator(evaluator);
-}

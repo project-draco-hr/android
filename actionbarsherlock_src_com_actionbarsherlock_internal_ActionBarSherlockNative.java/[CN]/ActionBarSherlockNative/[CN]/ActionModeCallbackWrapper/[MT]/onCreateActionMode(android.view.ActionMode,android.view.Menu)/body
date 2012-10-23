@@ -1,4 +1,0 @@
-{
-  mActionMode=new ActionModeWrapper(mode);
-  return mCallback.onCreateActionMode(mActionMode,mActionMode.getMenu());
-}

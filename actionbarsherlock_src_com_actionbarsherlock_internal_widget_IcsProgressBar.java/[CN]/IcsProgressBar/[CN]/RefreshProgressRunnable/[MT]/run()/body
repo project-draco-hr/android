@@ -1,4 +1,0 @@
-{
-  doRefreshProgress(mId,mProgress,mFromUser,true);
-  mRefreshProgressRunnable=this;
-}

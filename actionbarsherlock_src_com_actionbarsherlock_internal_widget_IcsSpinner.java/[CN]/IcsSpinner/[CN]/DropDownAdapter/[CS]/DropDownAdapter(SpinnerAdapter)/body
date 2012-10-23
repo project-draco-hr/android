@@ -1,6 +1,0 @@
-{
-  this.mAdapter=adapter;
-  if (adapter instanceof ListAdapter) {
-    this.mListAdapter=(ListAdapter)adapter;
-  }
-}

@@ -1,4 +1,0 @@
-{
-  mTag=tag;
-  return this;
-}

@@ -1,3 +1,0 @@
-{
-  return ((TabView)mTabLayout.getChildAt(position)).getTab();
-}

@@ -1,3 +1,0 @@
-{
-  setDisplayOptions(showHomeAsUp ? DISPLAY_HOME_AS_UP : 0,DISPLAY_HOME_AS_UP);
-}

@@ -1,5 +1,0 @@
-{
-  boolean result=hideOverflowMenu();
-  result|=hideSubMenus();
-  return result;
-}

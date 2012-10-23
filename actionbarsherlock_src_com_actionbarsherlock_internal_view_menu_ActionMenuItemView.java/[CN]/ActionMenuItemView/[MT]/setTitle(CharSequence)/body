@@ -1,6 +1,0 @@
-{
-  mTitle=title;
-  mTextButton.setTextCompat(mTitle);
-  setContentDescription(mTitle);
-  updateTextButtonVisibility();
-}

@@ -1,4 +1,0 @@
-{
-  mClickListener=menuItemClickListener;
-  return this;
-}

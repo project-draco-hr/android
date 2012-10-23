@@ -1,6 +1,0 @@
-{
-  super.onDetachedFromWindow();
-  if (mPopup != null && mPopup.isShowing()) {
-    mPopup.dismiss();
-  }
-}

@@ -1,3 +1,0 @@
-{
-  return who == mProgressDrawable || who == mIndeterminateDrawable || super.verifyDrawable(who);
-}

@@ -1,7 +1,0 @@
-{
-  int visibility=GONE;
-  if (mSubmitButtonEnabled && isSubmitAreaEnabled() && hasFocus()&& (hasText || !mVoiceButtonEnabled)) {
-    visibility=VISIBLE;
-  }
-  mSubmitButton.setVisibility(visibility);
-}
