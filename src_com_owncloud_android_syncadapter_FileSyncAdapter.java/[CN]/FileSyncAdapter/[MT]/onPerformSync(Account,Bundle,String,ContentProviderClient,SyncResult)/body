@@ -3,16 +3,25 @@
   mIsManualSync=extras.getBoolean(ContentResolver.SYNC_EXTRAS_MANUAL,false);
   mFailedResultsCounter=0;
   mLastFailedResult=null;
+  mSyncResult=syncResult;
   this.setAccount(account);
   this.setContentProvider(provider);
   this.setStorageManager(new FileDataStorageManager(account,getContentProvider()));
-  Log.d(TAG,"syncing owncloud account " + account.name);
+  try {
+    this.initClientForCurrentAccount();
+  }
+ catch (  UnknownHostException e) {
+    mSyncResult.tooManyRetries=true;
+    notifyFailedSynchronization();
+    return;
+  }
+  Log.d(TAG,"Synchronization of ownCloud account " + account.name + " starting");
   sendStickyBroadcast(true,null,null);
   try {
     updateOCVersion();
     mCurrentSyncTime=System.currentTimeMillis();
     if (!mCancellation) {
-      fetchData(OCFile.PATH_SEPARATOR,syncResult,DataStorageManager.ROOT_PARENT_ID);
+      fetchData(OCFile.PATH_SEPARATOR,DataStorageManager.ROOT_PARENT_ID);
     }
  else {
       Log.d(TAG,"Leaving synchronization before any remote request due to cancellation was requested");
@@ -20,7 +29,7 @@
   }
   finally {
     if (mFailedResultsCounter > 0 && mIsManualSync) {
-      syncResult.tooManyRetries=true;
+      mSyncResult.tooManyRetries=true;
       notifyFailedSynchronization();
     }
     sendStickyBroadcast(false,null,mLastFailedResult);

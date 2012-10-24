@@ -1,7 +1,7 @@
 {
   RemoteOperationResult result=null;
   File newFile=null;
-  boolean moved=false;
+  boolean moved=true;
   File tmpFile=new File(getTmpPath());
   try {
     tmpFile.getParentFile().mkdirs();

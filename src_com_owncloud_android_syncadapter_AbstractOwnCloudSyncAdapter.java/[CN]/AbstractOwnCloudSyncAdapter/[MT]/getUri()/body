@@ -1,3 +1,0 @@
-{
-  return Uri.parse(AccountUtils.constructFullURLForAccount(getContext(),getAccount()));
-}

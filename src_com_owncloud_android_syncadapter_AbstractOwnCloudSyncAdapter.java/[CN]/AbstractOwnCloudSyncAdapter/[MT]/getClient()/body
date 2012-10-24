@@ -1,9 +1,3 @@
 {
-  if (mClient == null) {
-    if (AccountUtils.constructFullURLForAccount(getContext(),getAccount()) == null) {
-      throw new UnknownHostException();
-    }
-    mClient=OwnCloudClientUtils.createOwnCloudClient(account,getContext());
-  }
   return mClient;
 }
