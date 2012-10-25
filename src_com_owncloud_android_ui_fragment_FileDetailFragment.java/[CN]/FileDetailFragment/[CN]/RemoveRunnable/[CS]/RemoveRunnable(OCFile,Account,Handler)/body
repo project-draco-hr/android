@@ -1,5 +1,0 @@
-{
-  mFileToRemove=fileToRemove;
-  mAccount=account;
-  mHandler=handler;
-}
