@@ -64,9 +64,9 @@ case R.id.fdKeepInSync:
   }
 case R.id.fdRenameBtn:
 {
-  EditNameFragment dialog=EditNameFragment.newInstance(mFile.getFileName());
-  dialog.show(getFragmentManager(),"nameeditdialog");
+  EditNameDialog dialog=EditNameDialog.newInstance(mFile.getFileName());
   dialog.setOnDismissListener(this);
+  dialog.show(getFragmentManager(),"nameeditdialog");
   break;
 }
 case R.id.fdRemoveBtn:

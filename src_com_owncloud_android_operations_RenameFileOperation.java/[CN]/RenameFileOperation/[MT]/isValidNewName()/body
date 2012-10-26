@@ -1,0 +1,17 @@
+{
+  if (mNewName == null || mNewName.length() <= 0 || mNewName.contains(File.separator)) {
+    return false;
+  }
+  String tmpFolder=FileDownloader.getTemporalPath("");
+  File testFile=new File(tmpFolder + mNewName);
+  try {
+    testFile.createNewFile();
+  }
+ catch (  IOException e) {
+    Log.i(TAG,"Test for validity of name " + mNewName + " in the file system failed");
+    return false;
+  }
+  boolean result=(testFile.exists() && testFile.isFile());
+  testFile.delete();
+  return result;
+}

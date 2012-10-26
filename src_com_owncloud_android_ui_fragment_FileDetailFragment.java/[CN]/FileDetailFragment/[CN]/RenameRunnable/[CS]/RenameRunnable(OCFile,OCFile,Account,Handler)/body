@@ -1,6 +1,0 @@
-{
-  mOld=oldFile;
-  mNew=newFile;
-  mAccount=account;
-  mHandler=handler;
-}
