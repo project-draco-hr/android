@@ -1,5 +1,5 @@
 {
-  if (mNewName == null || mNewName.length() <= 0 || mNewName.contains(File.separator)) {
+  if (mNewName == null || mNewName.length() <= 0 || mNewName.contains(File.separator) || mNewName.contains("%")) {
     return false;
   }
   String tmpFolder=FileDownloader.getTemporalPath("");
