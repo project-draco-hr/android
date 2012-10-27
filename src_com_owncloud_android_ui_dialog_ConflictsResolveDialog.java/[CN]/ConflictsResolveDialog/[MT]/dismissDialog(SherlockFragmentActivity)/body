@@ -1,5 +1,5 @@
 {
-  Fragment prev=activity.getSupportFragmentManager().findFragmentByTag(tag);
+  Fragment prev=activity.getSupportFragmentManager().findFragmentByTag(getTag());
   if (prev != null) {
     FragmentTransaction ft=activity.getSupportFragmentManager().beginTransaction();
     ft.remove(prev);
