@@ -1,0 +1,8 @@
+{
+  ConflictsResolveDialog f=new ConflictsResolveDialog();
+  Bundle args=new Bundle();
+  args.putString("remotepath",path);
+  f.setArguments(args);
+  f.mListener=listener;
+  return f;
+}

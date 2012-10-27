@@ -1,0 +1,8 @@
+{
+  super.onCreate(savedInstanceState);
+  mRemotePath=getIntent().getStringExtra("remotepath");
+  mLocalPath=getIntent().getStringExtra("localpath");
+  mOCAccount=getIntent().getParcelableExtra("account");
+  ConflictsResolveDialog d=ConflictsResolveDialog.newInstance(mRemotePath,this);
+  d.showDialog(this);
+}

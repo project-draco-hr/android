@@ -1,0 +1,33 @@
+{
+  PropFindMethod propfind=null;
+  RemoteOperationResult result=null;
+  try {
+    propfind=new PropFindMethod(client.getBaseUri() + WebdavUtils.encodePath(mRemotePath));
+    int status=client.executeMethod(propfind);
+    boolean isMultiStatus=status == HttpStatus.SC_MULTI_STATUS;
+    Boolean isConflict=Boolean.FALSE;
+    if (isMultiStatus) {
+      MultiStatus resp=propfind.getResponseBodyAsMultiStatus();
+      WebdavEntry we=new WebdavEntry(resp.getResponses()[0],client.getBaseUri().getPath());
+      OCFile file=fillOCFile(we);
+      OCFile oldFile=mStorageManager.getFileByPath(file.getRemotePath());
+      if (oldFile.getFileLength() != file.getFileLength() || oldFile.getModificationTimestamp() != file.getModificationTimestamp()) {
+        isConflict=Boolean.TRUE;
+      }
+    }
+ else {
+      client.exhaustResponse(propfind.getResponseBodyAsStream());
+    }
+    result=new RemoteOperationResult(isMultiStatus,status);
+    result.setExtraData(isConflict);
+    Log.i(TAG,"Synchronizing " + mAccount.name + ", file "+ mRemotePath+ ": "+ result.getLogMessage());
+  }
+ catch (  Exception e) {
+    result=new RemoteOperationResult(e);
+    Log.e(TAG,"Synchronizing " + mAccount.name + ", file "+ mRemotePath+ ": "+ result.getLogMessage(),result.getException());
+  }
+ finally {
+    if (propfind != null)     propfind.releaseConnection();
+  }
+  return result;
+}

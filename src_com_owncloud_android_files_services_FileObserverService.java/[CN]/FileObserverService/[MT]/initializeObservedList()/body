@@ -21,6 +21,7 @@
     observer.setAccount(account);
     observer.setStorageManager(storage);
     observer.setOCFile(storage.getFileByPath(c.getString(c.getColumnIndex(ProviderTableMeta.FILE_PATH))));
+    observer.addObserverStatusListener(this);
     observer.startWatching();
     mObservers.add(observer);
     Log.d(TAG,"Started watching file " + path);

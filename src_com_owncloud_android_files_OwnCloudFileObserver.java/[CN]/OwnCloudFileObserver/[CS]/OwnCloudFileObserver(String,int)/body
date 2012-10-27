@@ -2,4 +2,5 @@
   super(path,mask);
   mPath=path;
   mMask=mask;
+  mListeners=new LinkedList<FileObserverStatusListener>();
 }

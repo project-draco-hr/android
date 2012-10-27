@@ -2,8 +2,17 @@
   Log.d(TAG,"Got file modified with event " + event + " and path "+ path);
   if ((event & mMask) == 0) {
     Log.wtf(TAG,"Incorrect event " + event + " sent for file "+ path+ " with registered for "+ mMask+ " and original path "+ mPath);
+    for (    FileObserverStatusListener l : mListeners)     l.OnObservedFileStatusUpdate(mPath,getRemotePath(),mOCAccount,Status.INCORRECT_MASK);
     return;
   }
+  WebdavClient wc=OwnCloudClientUtils.createOwnCloudClient(mOCAccount,mContext);
+  SynchronizeFileOperation sfo=new SynchronizeFileOperation(mFile.getRemotePath(),mStorage,mOCAccount,mContext);
+  RemoteOperationResult result=sfo.execute(wc);
+  if (result.getExtraData() == Boolean.TRUE) {
+    for (    FileObserverStatusListener l : mListeners)     l.OnObservedFileStatusUpdate(mPath,getRemotePath(),mOCAccount,Status.CONFLICT);
+    return;
+  }
+  for (  FileObserverStatusListener l : mListeners)   l.OnObservedFileStatusUpdate(mPath,getRemotePath(),mOCAccount,Status.SENDING_TO_UPLOADER);
   Intent i=new Intent(mContext,FileUploader.class);
   i.putExtra(FileUploader.KEY_ACCOUNT,mOCAccount);
   i.putExtra(FileUploader.KEY_REMOTE_FILE,mFile.getRemotePath());

@@ -1,0 +1,8 @@
+{
+  Fragment prev=activity.getSupportFragmentManager().findFragmentByTag(tag);
+  if (prev != null) {
+    FragmentTransaction ft=activity.getSupportFragmentManager().beginTransaction();
+    ft.remove(prev);
+    ft.commit();
+  }
+}

@@ -18,6 +18,7 @@
   FileDataStorageManager storage=new FileDataStorageManager(account,getContentResolver());
   observer.setStorageManager(storage);
   observer.setOCFile(storage.getFileByLocalPath(path));
+  observer.addObserverStatusListener(this);
   DownloadCompletedReceiver receiver=new DownloadCompletedReceiver(path,observer);
   registerReceiver(receiver,new IntentFilter(FileDownloader.DOWNLOAD_FINISH_MESSAGE));
   mObservers.add(observer);

@@ -1,0 +1,9 @@
+{
+  Fragment prev=activity.getSupportFragmentManager().findFragmentByTag("dialog");
+  FragmentTransaction ft=activity.getSupportFragmentManager().beginTransaction();
+  if (prev != null) {
+    ft.remove(prev);
+  }
+  ft.addToBackStack(null);
+  this.show(ft,"dialog");
+}

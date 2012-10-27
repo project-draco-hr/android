@@ -1,7 +1,7 @@
 {
   ByteBuffer tmp=ByteBuffer.allocate(4096);
   int readResult=0;
-  RandomAccessFile raf=new RandomAccessFile(mFile,"rw");
+  RandomAccessFile raf=new RandomAccessFile(mFile,"r");
   FileChannel channel=raf.getChannel();
   FileLock lock=channel.tryLock();
   Iterator<OnDatatransferProgressListener> it=null;
