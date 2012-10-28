@@ -3,7 +3,6 @@
   int readResult=0;
   RandomAccessFile raf=new RandomAccessFile(mFile,"r");
   FileChannel channel=raf.getChannel();
-  FileLock lock=channel.tryLock();
   Iterator<OnDatatransferProgressListener> it=null;
   long transferred=0;
   long size=mFile.length();
@@ -24,7 +23,6 @@
     throw new RuntimeException("Ugly solution to workaround the default policy of retries when the server falls while uploading ; temporal fix; really",io);
   }
  finally {
-    lock.release();
     channel.close();
     raf.close();
   }

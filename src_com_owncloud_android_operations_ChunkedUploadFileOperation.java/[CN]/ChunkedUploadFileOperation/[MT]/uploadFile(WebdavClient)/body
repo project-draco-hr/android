@@ -1,7 +1,6 @@
 {
   int status=-1;
   FileChannel channel=null;
-  FileLock lock=null;
   RandomAccessFile raf=null;
   try {
     File file=new File(getStoragePath());
@@ -24,7 +23,6 @@
     }
   }
   finally {
-    if (lock != null)     lock.release();
     if (channel != null)     channel.close();
     if (raf != null)     raf.close();
     if (mPutMethod != null)     mPutMethod.releaseConnection();
