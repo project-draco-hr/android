@@ -1,0 +1,6 @@
+{
+  TextView fromView=((TextView)mView.findViewById(R.id.value_validity_from));
+  TextView toView=((TextView)mView.findViewById(R.id.value_validity_to));
+  fromView.setText(notBefore.toLocaleString());
+  toView.setText(notAfter.toLocaleString());
+}

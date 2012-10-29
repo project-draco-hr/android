@@ -1,12 +1,10 @@
 {
-  TextView subject=(TextView)mView.findViewById(R.id.subject);
   if (cert != null) {
-    String text=cert.getSubjectDN().getName();
-    text=text.substring(text.indexOf(",") + 1);
-    subject.setVisibility(View.VISIBLE);
-    subject.setText(text);
+    showSubject(cert.getSubjectX500Principal());
+    showIssuer(cert.getIssuerX500Principal());
+    showValidity(cert.getNotBefore(),cert.getNotAfter());
+    showSignature(cert);
   }
  else {
-    subject.setText(R.string.ssl_validator_certificate_not_available);
   }
 }

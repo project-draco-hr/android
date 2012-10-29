@@ -25,4 +25,18 @@
     }
   }
 );
+  mView.findViewById(R.id.details_btn).setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      View detailsScroll=findViewById(R.id.details_scroll);
+      if (detailsScroll.getVisibility() == View.VISIBLE) {
+        detailsScroll.setVisibility(View.GONE);
+        ((Button)v).setText(R.string.ssl_validator_btn_details_see);
+      }
+ else {
+        detailsScroll.setVisibility(View.VISIBLE);
+        ((Button)v).setText(R.string.ssl_validator_btn_details_hide);
+      }
+    }
+  }
+);
 }
