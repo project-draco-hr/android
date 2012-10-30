@@ -18,8 +18,12 @@
         mContentType=mContentType.substring(0,mContentType.indexOf(";"));
       }
     }
- else {
-      mContentType="DIR";
+    prop=propSet.get(DavPropertyName.RESOURCETYPE);
+    if (prop != null) {
+      Object value=prop.getValue();
+      if (value != null) {
+        mContentType="DIR";
+      }
     }
     prop=propSet.get(DavPropertyName.GETCONTENTLENGTH);
     if (prop != null)     mContentLength=Long.parseLong((String)prop.getValue());
