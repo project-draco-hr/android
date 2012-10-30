@@ -11,6 +11,7 @@
       String[] tmp=mPath.split("/");
       if (tmp.length > 0)       mName=tmp[tmp.length - 1];
     }
+    mContentType="application/octet-stream";
     prop=propSet.get(DavPropertyName.GETCONTENTTYPE);
     if (prop != null) {
       mContentType=(String)prop.getValue();
