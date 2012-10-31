@@ -1,0 +1,19 @@
+{
+  Bundle param=intent.getExtras();
+  if (param != null) {
+    String mUrl=param.getString(TOKEN_BASE_URI);
+    if (!mUrl.startsWith("http://") || !mUrl.startsWith("https://")) {
+      requestBaseURI="https://" + mUrl;
+    }
+    requestDeviceCode=param.getString(TOKEN_DEVICE_CODE);
+    requestInterval=param.getInt(TOKEN_INTERVAL);
+    Log.d(TAG,"onBind -> baseURI=" + requestBaseURI);
+    Log.d(TAG,"onBind -> requestDeviceCode=" + requestDeviceCode);
+    Log.d(TAG,"onBind -> requestInterval=" + requestInterval);
+  }
+ else {
+    Log.e(TAG,"onBind -> params could not be null");
+  }
+  startService();
+  return Service.START_NOT_STICKY;
+}

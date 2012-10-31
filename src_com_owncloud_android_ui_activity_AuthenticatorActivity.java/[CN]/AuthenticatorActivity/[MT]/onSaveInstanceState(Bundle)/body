@@ -2,5 +2,17 @@
   outState.putInt(STATUS_ICON,mStatusIcon);
   outState.putInt(STATUS_TEXT,mStatusText);
   outState.putBoolean(STATUS_CORRECT,mStatusCorrect);
+  outState.putInt(OAUTH2_STATUS_ICON,mOAuth2StatusIcon);
+  outState.putInt(OAUTH2_STATUS_TEXT,mOAuth2StatusText);
+  CheckBox oAuth2Check=(CheckBox)findViewById(R.id.oauth_onOff_check);
+  outState.putBoolean(OAUTH2_IS_CHECKED,oAuth2Check.isChecked());
+  if (codeResponseJson != null) {
+    outState.putString(OAUTH2_CODE_RESULT,codeResponseJson.toString());
+  }
+  outState.putString(OAUTH2_BASE_URL,oAuth2BaseUrl);
+  outState.putString(HOST_URL_TEXT,((TextView)findViewById(R.id.host_URL)).getText().toString().trim());
+  outState.putString(OAUTH2_URL_TEXT,((TextView)findViewById(R.id.oAuth_URL)).getText().toString().trim());
+  outState.putString(ACCOUNT_USERNAME,((TextView)findViewById(R.id.account_username)).getText().toString().trim());
+  outState.putString(ACCOUNT_PASSWORD,((TextView)findViewById(R.id.account_password)).getText().toString().trim());
   super.onSaveInstanceState(outState);
 }

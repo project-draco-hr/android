@@ -1,0 +1,30 @@
+{
+  UrlEncodedFormEntity params=null;
+  connectorOAuth2=new ConnectorOAuth2();
+  if (requestBaseURI == null || requestBaseURI.trim().equals("")) {
+    Log.e(TAG,"run -> request URI could not be null");
+    postResult(null);
+  }
+  if (requestInterval == -1) {
+    Log.e(TAG,"run -> request Interval must have valid positive value");
+    postResult(null);
+  }
+  if (requestDeviceCode == null || requestDeviceCode.trim().equals("")) {
+    Log.e(TAG,"run -> request DeviceCode could not be null");
+    postResult(null);
+  }
+  try {
+    connectorOAuth2.setConnectorOAuth2Url(requestBaseURI + OAuth2Context.OAUTH2_DEVICE_GETTOKEN_URL);
+    List<NameValuePair> nameValuePairs=new ArrayList<NameValuePair>(2);
+    nameValuePairs.add(new BasicNameValuePair("client_id",OAuth2Context.OAUTH2_DEVICE_CLIENT_ID));
+    nameValuePairs.add(new BasicNameValuePair("client_secret",OAuth2Context.OAUTH2_DEVICE_CLIENT_SECRET));
+    nameValuePairs.add(new BasicNameValuePair("code",requestDeviceCode));
+    nameValuePairs.add(new BasicNameValuePair("grant_type",OAuth2Context.OAUTH_DEVICE_GETTOKEN_GRANT_TYPE));
+    params=new UrlEncodedFormEntity(nameValuePairs);
+  }
+ catch (  Exception ex1) {
+    Log.w(TAG,ex1.toString());
+    postResult(null);
+  }
+  return params;
+}

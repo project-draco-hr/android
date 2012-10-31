@@ -1,0 +1,10 @@
+{
+  Intent tokenService=new Intent(this,OAuth2GetTokenService.class);
+  stopService(tokenService);
+  if (tokenReceiver != null) {
+    unregisterReceiver(tokenReceiver);
+    tokenReceiver=null;
+    finish();
+  }
+  super.onDestroy();
+}

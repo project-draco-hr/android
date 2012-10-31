@@ -1,0 +1,35 @@
+{
+  String deviceCode=null;
+  String verificationUrl=null;
+  String userCode=null;
+  int expiresIn=-1;
+  int interval=-1;
+  Log.d(TAG,"ResponseOAuth2->" + codeResponseJson.toString());
+  try {
+    verificationUrl=codeResponseJson.getString(OAuth2GetCodeRunnable.CODE_VERIFICATION_URL);
+    userCode=codeResponseJson.getString(OAuth2GetCodeRunnable.CODE_USER_CODE);
+    expiresIn=codeResponseJson.getInt(OAuth2GetCodeRunnable.CODE_EXPIRES_IN);
+    deviceCode=codeResponseJson.getString(OAuth2GetCodeRunnable.CODE_DEVICE_CODE);
+    interval=codeResponseJson.getInt(OAuth2GetCodeRunnable.CODE_INTERVAL);
+  }
+ catch (  JSONException e) {
+    Log.e(TAG,"Exception accesing data in Json object" + e.toString());
+  }
+  setOAuth2ResultIconAndText(R.drawable.ic_ok,R.string.auth_connection_established);
+  showDialog(OAUTH2_LOGIN_PROGRESS);
+  Log.d(TAG,"verificationUrl->" + verificationUrl);
+  Log.d(TAG,"userCode->" + userCode);
+  Log.d(TAG,"deviceCode->" + deviceCode);
+  Log.d(TAG,"expiresIn->" + expiresIn);
+  Log.d(TAG,"interval->" + interval);
+  try {
+    Intent tokenService=new Intent(this,OAuth2GetTokenService.class);
+    tokenService.putExtra(OAuth2GetTokenService.TOKEN_BASE_URI,oAuth2BaseUrl);
+    tokenService.putExtra(OAuth2GetTokenService.TOKEN_DEVICE_CODE,deviceCode);
+    tokenService.putExtra(OAuth2GetTokenService.TOKEN_INTERVAL,interval);
+    startService(tokenService);
+  }
+ catch (  Exception e) {
+    Log.e(TAG,"tokenService creation problem :",e);
+  }
+}

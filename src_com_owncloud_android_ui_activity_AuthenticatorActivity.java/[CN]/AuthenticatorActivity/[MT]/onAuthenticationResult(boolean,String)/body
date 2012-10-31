@@ -28,6 +28,7 @@
     intent.putExtra(AccountManager.KEY_ACCOUNT_NAME,account.name);
     intent.putExtra(AccountManager.KEY_AUTHTOKEN,AccountAuthenticator.ACCOUNT_TYPE);
     intent.putExtra(AccountManager.KEY_USERDATA,username);
+    accManager.setUserData(account,AccountAuthenticator.KEY_OC_URL,url.toString());
     accManager.setUserData(account,AccountAuthenticator.KEY_OC_VERSION,mConnChkRunnable.getDiscoveredVersion().toString());
     accManager.setUserData(account,AccountAuthenticator.KEY_OC_BASE_URL,mBaseUrl);
     setAccountAuthenticatorResult(intent.getExtras());

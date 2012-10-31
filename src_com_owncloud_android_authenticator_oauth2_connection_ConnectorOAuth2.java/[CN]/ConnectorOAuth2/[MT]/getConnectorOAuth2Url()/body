@@ -1,0 +1,3 @@
+{
+  return ConnectorOAuth2Url;
+}

@@ -1,0 +1,10 @@
+{
+  final UrlEncodedFormEntity params=prepareComm();
+  timer.scheduleAtFixedRate(new TimerTask(){
+    public void run(){
+      requestToken(params);
+    }
+  }
+,0,requestInterval * 1000);
+  Log.d(TAG,"startService -> Timer started");
+}
