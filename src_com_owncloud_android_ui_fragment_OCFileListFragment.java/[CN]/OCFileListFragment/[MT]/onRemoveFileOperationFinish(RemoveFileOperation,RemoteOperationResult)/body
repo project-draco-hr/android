@@ -1,0 +1,19 @@
+{
+  getActivity().dismissDialog(FileDisplayActivity.DIALOG_SHORT_WAIT);
+  if (result.isSuccess()) {
+    Toast msg=Toast.makeText(getActivity().getApplicationContext(),R.string.remove_success_msg,Toast.LENGTH_LONG);
+    msg.show();
+    if (mIsLargeLayout) {
+      FragmentTransaction transaction=getActivity().getSupportFragmentManager().beginTransaction();
+      transaction.replace(R.id.file_details_container,new FileDetailFragment(null,null));
+      transaction.commit();
+    }
+    listDirectory();
+  }
+ else {
+    Toast msg=Toast.makeText(getActivity(),R.string.remove_fail_msg,Toast.LENGTH_LONG);
+    msg.show();
+    if (result.isSslRecoverableException()) {
+    }
+  }
+}

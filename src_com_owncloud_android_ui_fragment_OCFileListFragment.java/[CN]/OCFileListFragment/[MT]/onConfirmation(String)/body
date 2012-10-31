@@ -1,0 +1,10 @@
+{
+  if (callerTag.equals(FileDetailFragment.FTAG_CONFIRMATION)) {
+    if (mContainerActivity.getStorageManager().getFileById(mTargetFile.getFileId()) != null) {
+      RemoteOperation operation=new RemoveFileOperation(mTargetFile,true,mContainerActivity.getStorageManager());
+      WebdavClient wc=OwnCloudClientUtils.createOwnCloudClient(AccountUtils.getCurrentOwnCloudAccount(getSherlockActivity()),getSherlockActivity().getApplicationContext());
+      operation.execute(wc,this,mHandler);
+      getActivity().showDialog(FileDisplayActivity.DIALOG_SHORT_WAIT);
+    }
+  }
+}

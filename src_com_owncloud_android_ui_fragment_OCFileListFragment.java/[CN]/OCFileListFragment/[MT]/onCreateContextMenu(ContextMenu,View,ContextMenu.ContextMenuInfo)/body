@@ -1,0 +1,6 @@
+{
+  super.onCreateContextMenu(menu,v,menuInfo);
+  MenuInflater inflater=getActivity().getMenuInflater();
+  inflater.inflate(R.menu.file_context_menu,menu);
+  AdapterContextMenuInfo info=(AdapterContextMenuInfo)menuInfo;
+}
