@@ -14,4 +14,10 @@
   if (file.isDown() && removeLocalCopy) {
     new File(file.getStoragePath()).delete();
   }
+  if (file.isDirectory() && removeLocalCopy) {
+    File f=new File(FileDownloader.getSavePath(mAccount.name) + file.getRemotePath());
+    if (f.exists() && f.isDirectory() && (f.list() == null || f.list().length == 0)) {
+      f.delete();
+    }
+  }
 }
