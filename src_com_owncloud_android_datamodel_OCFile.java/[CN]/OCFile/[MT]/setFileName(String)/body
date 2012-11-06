@@ -1,0 +1,8 @@
+{
+  if (name != null && name.length() > 0 && !name.contains(PATH_SEPARATOR) && !mRemotePath.equals(PATH_SEPARATOR)) {
+    mRemotePath=(new File(getRemotePath())).getParent() + name;
+    if (isDirectory()) {
+      mRemotePath+=PATH_SEPARATOR;
+    }
+  }
+}

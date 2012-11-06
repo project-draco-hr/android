@@ -10,23 +10,20 @@
     if (!isValidNewName()) {
       return new RemoteOperationResult(ResultCode.INVALID_LOCAL_FILE_NAME);
     }
-    if (client.existsFile(newRemotePath)) {
+    if (client.existsFile(newRemotePath) || mStorageManager.getFileByPath(newRemotePath) != null) {
       return new RemoteOperationResult(ResultCode.INVALID_OVERWRITE);
     }
     move=new LocalMoveMethod(client.getBaseUri() + WebdavUtils.encodePath(mFile.getRemotePath()),client.getBaseUri() + WebdavUtils.encodePath(newRemotePath));
     int status=client.executeMethod(move,RENAME_READ_TIMEOUT,RENAME_CONNECTION_TIMEOUT);
     if (move.succeeded()) {
-      OCFile newFile=obtainUpdatedFile();
-      OCFile oldFile=mFile;
-      mFile=newFile;
-      if (oldFile.isDown()) {
-        File f=new File(oldFile.getStoragePath());
+      mFile.setFileName(mNewName);
+      if (mFile.isDown()) {
+        File f=new File(mFile.getStoragePath());
         String newStoragePath=f.getParent() + mNewName;
         if (f.renameTo(new File(newStoragePath))) {
           mFile.setStoragePath(newStoragePath);
         }
       }
-      mStorageManager.removeFile(oldFile,false);
       mStorageManager.saveFile(mFile);
     }
     move.getResponseBodyAsString();
