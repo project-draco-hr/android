@@ -35,7 +35,7 @@ onBackPressed();
 break;
 }
 default :
-retval=false;
+retval=super.onOptionsItemSelected(item);
 }
 return retval;
 }
