@@ -8,7 +8,7 @@
         FileDataStorageManager fdsm=new FileDataStorageManager(mAccount,getActivity().getApplicationContext().getContentResolver());
         mFile=fdsm.getFileByPath(mFile.getRemotePath());
       }
-      updateFileDetails();
+      updateFileDetails(false);
     }
   }
 }

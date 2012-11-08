@@ -6,7 +6,9 @@
     if (mNewName.equals(mFile.getFileName())) {
       return new RemoteOperationResult(ResultCode.OK);
     }
-    newRemotePath=(new File(mFile.getRemotePath())).getParent() + mNewName;
+    String parent=(new File(mFile.getRemotePath())).getParent();
+    parent=(parent.endsWith(OCFile.PATH_SEPARATOR)) ? parent : parent + OCFile.PATH_SEPARATOR;
+    newRemotePath=parent + mNewName;
     if (!isValidNewName()) {
       return new RemoteOperationResult(ResultCode.INVALID_LOCAL_FILE_NAME);
     }

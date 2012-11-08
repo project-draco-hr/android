@@ -4,7 +4,7 @@
     Log.d(TAG,"name edit dialog dismissed with new name " + newFilename);
     RemoteOperation operation=new RenameFileOperation(mTargetFile,newFilename,mContainerActivity.getStorageManager());
     WebdavClient wc=OwnCloudClientUtils.createOwnCloudClient(AccountUtils.getCurrentOwnCloudAccount(getSherlockActivity()),getSherlockActivity().getApplicationContext());
-    operation.execute(wc,this,mHandler);
+    operation.execute(wc,mContainerActivity,mHandler);
     getActivity().showDialog(FileDisplayActivity.DIALOG_SHORT_WAIT);
   }
 }

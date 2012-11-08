@@ -7,7 +7,7 @@
       if (downloadWasFine) {
         mFile.setStoragePath(intent.getStringExtra(FileDownloader.EXTRA_FILE_PATH));
       }
-      updateFileDetails();
+      updateFileDetails(false);
     }
   }
 }

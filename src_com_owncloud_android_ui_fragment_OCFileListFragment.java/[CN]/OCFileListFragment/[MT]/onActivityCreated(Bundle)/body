@@ -10,7 +10,6 @@
   }
   registerForContextMenu(getListView());
   getListView().setOnCreateContextMenuListener(this);
-  mIsLargeLayout=getResources().getBoolean(R.bool.large_layout);
   mHandler=new Handler();
   Log.i(TAG,"onActivityCreated() stop");
 }

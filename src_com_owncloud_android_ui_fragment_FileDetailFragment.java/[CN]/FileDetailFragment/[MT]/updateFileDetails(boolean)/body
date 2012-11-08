@@ -11,7 +11,7 @@
     cb.setChecked(mFile.keepInSync());
     FileDownloaderBinder downloaderBinder=mContainerActivity.getFileDownloaderBinder();
     FileUploaderBinder uploaderBinder=mContainerActivity.getFileUploaderBinder();
-    if ((downloaderBinder != null && downloaderBinder.isDownloading(mAccount,mFile)) || (uploaderBinder != null && uploaderBinder.isUploading(mAccount,mFile))) {
+    if (transferring || (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,mFile)) || (uploaderBinder != null && uploaderBinder.isUploading(mAccount,mFile))) {
       setButtonsForTransferring();
     }
  else     if (mFile.isDown()) {
@@ -25,4 +25,5 @@
       setButtonsForRemote();
     }
   }
+  getView().invalidate();
 }

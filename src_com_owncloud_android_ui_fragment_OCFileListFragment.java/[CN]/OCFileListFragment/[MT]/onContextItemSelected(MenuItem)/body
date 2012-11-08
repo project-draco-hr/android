@@ -6,8 +6,7 @@ case R.id.rename_file_item:
 {
       EditNameDialog dialog=EditNameDialog.newInstance(mTargetFile.getFileName());
       dialog.setOnDismissListener(this);
-      dialog.show(getFragmentManager(),"nameeditdialog");
-      Log.d(TAG,"RENAME SELECTED, item " + info.id + " at position "+ info.position);
+      dialog.show(getFragmentManager(),EditNameDialog.TAG);
       return true;
     }
 case R.id.remove_file_item:
@@ -27,7 +26,6 @@ case R.id.remove_file_item:
     ConfirmationDialogFragment confDialog=ConfirmationDialogFragment.newInstance(messageStringId,new String[]{mTargetFile.getFileName()},posBtnStringId,neuBtnStringId,R.string.common_cancel);
     confDialog.setOnConfirmationListener(this);
     confDialog.show(getFragmentManager(),FileDetailFragment.FTAG_CONFIRMATION);
-    Log.d(TAG,"REMOVE SELECTED, item " + info.id + " at position "+ info.position);
     return true;
   }
 case R.id.open_file_item:
@@ -84,6 +82,7 @@ i.putExtra(FileDownloader.EXTRA_ACCOUNT,account);
 i.putExtra(FileDownloader.EXTRA_FILE,mTargetFile);
 getActivity().startService(i);
 listDirectory();
+mContainerActivity.onTransferStateChanged(mTargetFile,true,false);
 return true;
 }
 case R.id.cancel_download_item:
@@ -93,6 +92,7 @@ Account account=AccountUtils.getCurrentOwnCloudAccount(getActivity());
 if (downloaderBinder != null && downloaderBinder.isDownloading(account,mTargetFile)) {
 downloaderBinder.cancel(account,mTargetFile);
 listDirectory();
+mContainerActivity.onTransferStateChanged(mTargetFile,false,false);
 }
 return true;
 }
@@ -103,6 +103,7 @@ Account account=AccountUtils.getCurrentOwnCloudAccount(getActivity());
 if (uploaderBinder != null && uploaderBinder.isUploading(account,mTargetFile)) {
 uploaderBinder.cancel(account,mTargetFile);
 listDirectory();
+mContainerActivity.onTransferStateChanged(mTargetFile,false,false);
 }
 return true;
 }
