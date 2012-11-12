@@ -57,7 +57,11 @@ case R.id.fdKeepInSync:
     }
     Intent intent=new Intent(getActivity().getApplicationContext(),FileObserverService.class);
     intent.putExtra(FileObserverService.KEY_FILE_CMD,(cb.isChecked() ? FileObserverService.CMD_ADD_OBSERVED_FILE : FileObserverService.CMD_DEL_OBSERVED_FILE));
-    intent.putExtra(FileObserverService.KEY_CMD_ARG,mFile.getStoragePath());
+    String localPath=mFile.getStoragePath();
+    if (localPath == null || localPath.length() <= 0) {
+      localPath=FileStorageUtils.getDefaultSavePathFor(mAccount.name,mFile);
+    }
+    intent.putExtra(FileObserverService.KEY_CMD_ARG,localPath);
     Log.e(TAG,"starting observer service");
     getActivity().startService(intent);
     break;

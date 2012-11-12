@@ -2,7 +2,7 @@
   if (mNewName == null || mNewName.length() <= 0 || mNewName.contains(File.separator) || mNewName.contains("%")) {
     return false;
   }
-  String tmpFolder=FileDownloader.getTemporalPath("");
+  String tmpFolder=FileStorageUtils.getTemporalPath("");
   File testFile=new File(tmpFolder + mNewName);
   try {
     testFile.createNewFile();

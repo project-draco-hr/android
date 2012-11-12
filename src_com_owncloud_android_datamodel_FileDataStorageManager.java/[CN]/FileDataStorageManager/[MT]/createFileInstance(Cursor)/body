@@ -8,7 +8,7 @@
     if (!file.isDirectory()) {
       file.setStoragePath(c.getString(c.getColumnIndex(ProviderTableMeta.FILE_STORAGE_PATH)));
       if (file.getStoragePath() == null) {
-        File f=new File(FileDownloader.getSavePath(mAccount.name) + file.getRemotePath());
+        File f=new File(FileStorageUtils.getDefaultSavePathFor(mAccount.name,file));
         if (f.exists())         file.setStoragePath(f.getAbsolutePath());
       }
     }
