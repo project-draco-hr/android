@@ -1,4 +1,0 @@
-{
-  file.setModificationTimestamp(System.currentTimeMillis());
-  storageManager.saveFile(file);
-}

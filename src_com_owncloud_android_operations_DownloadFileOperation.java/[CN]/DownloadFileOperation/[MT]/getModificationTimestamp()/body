@@ -1,0 +1,3 @@
+{
+  return (mModificationTimestamp > 0) ? mModificationTimestamp : mFile.getModificationTimestamp();
+}

@@ -1,0 +1,9 @@
+{
+  OCFile file=mCurrentDownload.getFile();
+  file.setLastSyncDate(System.currentTimeMillis());
+  file.setModificationTimestamp(mCurrentDownload.getModificationTimestamp());
+  file.setMimetype(mCurrentDownload.getMimeType());
+  file.setStoragePath(mCurrentDownload.getSavePath());
+  file.setFileLength((new File(mCurrentDownload.getSavePath()).length()));
+  mStorageManager.saveFile(file);
+}
