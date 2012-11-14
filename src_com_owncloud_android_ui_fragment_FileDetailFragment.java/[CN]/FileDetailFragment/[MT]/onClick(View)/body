@@ -49,21 +49,13 @@ case R.id.fdKeepInSync:
     mFile.setKeepInSync(cb.isChecked());
     FileDataStorageManager fdsm=new FileDataStorageManager(mAccount,getActivity().getApplicationContext().getContentResolver());
     fdsm.saveFile(mFile);
-    if (mFile.keepInSync()) {
-      onClick(getView().findViewById(R.id.fdDownloadBtn));
-    }
- else {
-      mContainerActivity.onFileStateChanged();
-    }
     Intent intent=new Intent(getActivity().getApplicationContext(),FileObserverService.class);
     intent.putExtra(FileObserverService.KEY_FILE_CMD,(cb.isChecked() ? FileObserverService.CMD_ADD_OBSERVED_FILE : FileObserverService.CMD_DEL_OBSERVED_FILE));
-    String localPath=mFile.getStoragePath();
-    if (localPath == null || localPath.length() <= 0) {
-      localPath=FileStorageUtils.getDefaultSavePathFor(mAccount.name,mFile);
-    }
-    intent.putExtra(FileObserverService.KEY_CMD_ARG,localPath);
+    intent.putExtra(FileObserverService.KEY_CMD_ARG_FILE,mFile);
+    intent.putExtra(FileObserverService.KEY_CMD_ARG_ACCOUNT,mAccount);
     Log.e(TAG,"starting observer service");
     getActivity().startService(intent);
+    mContainerActivity.onFileStateChanged();
     break;
   }
 case R.id.fdRenameBtn:

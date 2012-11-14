@@ -1,13 +1,13 @@
 {
   OwnCloudFileObserver observer=null;
   for (  OwnCloudFileObserver o : mObservers) {
-    if (o.getRemotePath().equals(remotePath)) {
+    if (o.getRemotePath().equals(file.getRemotePath()) && o.getAccount().equals(account)) {
       observer=o;
       break;
     }
   }
   if (observer == null) {
-    Log.e(TAG,"Couldn't find observer for remote file " + remotePath);
+    Log.e(TAG,"Couldn't find observer for remote file " + file.getRemotePath());
     return;
   }
   observer.stopWatching();

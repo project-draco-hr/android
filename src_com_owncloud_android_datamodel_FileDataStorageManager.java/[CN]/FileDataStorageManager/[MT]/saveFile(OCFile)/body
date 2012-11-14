@@ -14,7 +14,7 @@
   cv.put(ProviderTableMeta.FILE_KEEP_IN_SYNC,file.keepInSync() ? 1 : 0);
   if (fileExists(file.getRemotePath())) {
     OCFile oldFile=getFileByPath(file.getRemotePath());
-    if (file.getStoragePath() == null && oldFile.getStoragePath() != null)     file.setStoragePath(oldFile.getStoragePath());
+    if (file.getStoragePath() == null && oldFile.isDown())     file.setStoragePath(oldFile.getStoragePath());
     if (!file.isDirectory())     ;
     cv.put(ProviderTableMeta.FILE_STORAGE_PATH,file.getStoragePath());
     file.setFileId(oldFile.getFileId());

@@ -1,0 +1,46 @@
+{
+  if (file == null) {
+    Log.e(TAG,"Trying to observe a NULL file");
+    return;
+  }
+  if (mObservers == null) {
+    initializeObservedList();
+  }
+  String localPath=file.getStoragePath();
+  if (!file.isDown()) {
+    localPath=FileStorageUtils.getDefaultSavePathFor(account.name,file);
+  }
+  OwnCloudFileObserver tmpObserver=null, observer=null;
+  for (int i=0; i < mObservers.size(); ++i) {
+    tmpObserver=mObservers.get(i);
+    if (tmpObserver.getPath().equals(localPath)) {
+      observer=tmpObserver;
+    }
+    tmpObserver.setContext(getApplicationContext());
+  }
+  if (observer == null) {
+    observer=new OwnCloudFileObserver(localPath,OwnCloudFileObserver.CHANGES_ONLY);
+    observer.setAccount(account);
+    FileDataStorageManager storage=new FileDataStorageManager(account,getContentResolver());
+    observer.setStorageManager(storage);
+    observer.setOCFile(file);
+    observer.addObserverStatusListener(this);
+    observer.setContext(getApplicationContext());
+  }
+ else {
+  }
+  mObservers.add(observer);
+  Log.d(TAG,"Observer added for path " + localPath);
+  if (!file.isDown()) {
+    DownloadCompletedReceiver receiver=new DownloadCompletedReceiver(localPath,observer);
+    registerReceiver(receiver,new IntentFilter(FileDownloader.DOWNLOAD_FINISH_MESSAGE));
+    Intent i=new Intent(this,FileDownloader.class);
+    i.putExtra(FileDownloader.EXTRA_ACCOUNT,account);
+    i.putExtra(FileDownloader.EXTRA_FILE,file);
+    startService(i);
+  }
+ else {
+    observer.startWatching();
+    Log.d(TAG,"Started watching " + localPath);
+  }
+}
