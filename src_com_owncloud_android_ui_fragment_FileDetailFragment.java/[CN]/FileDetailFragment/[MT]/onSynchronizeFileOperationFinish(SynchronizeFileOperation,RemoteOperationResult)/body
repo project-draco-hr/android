@@ -1,0 +1,32 @@
+{
+  boolean inDisplayActivity=getActivity() instanceof FileDisplayActivity;
+  getActivity().dismissDialog((inDisplayActivity) ? FileDisplayActivity.DIALOG_SHORT_WAIT : FileDetailActivity.DIALOG_SHORT_WAIT);
+  if (!result.isSuccess()) {
+    if (result.getCode() == ResultCode.SYNC_CONFLICT) {
+      Intent i=new Intent(getActivity(),ConflictsResolveActivity.class);
+      i.putExtra("remotepath",mFile.getRemotePath());
+      i.putExtra("localpath",mFile.getStoragePath());
+      i.putExtra("account",mAccount);
+      startActivity(i);
+    }
+ else {
+      Toast msg=Toast.makeText(getActivity(),R.string.sync_file_fail_msg,Toast.LENGTH_LONG);
+      msg.show();
+    }
+  }
+ else {
+    if (operation.transferWasRequested()) {
+      mContainerActivity.onFileStateChanged();
+    }
+ else {
+      Toast msg=Toast.makeText(getActivity(),R.string.sync_file_nothing_to_do_msg,Toast.LENGTH_LONG);
+      msg.show();
+      if (mFile.isDown()) {
+        setButtonsForDown();
+      }
+ else {
+        setButtonsForRemote();
+      }
+    }
+  }
+}

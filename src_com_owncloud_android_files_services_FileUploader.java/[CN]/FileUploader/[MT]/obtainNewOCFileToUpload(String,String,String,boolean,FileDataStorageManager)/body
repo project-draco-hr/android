@@ -1,8 +1,8 @@
 {
   OCFile newFile=new OCFile(remotePath);
   newFile.setStoragePath(localPath);
-  newFile.setLastSyncDate(0);
-  newFile.setKeepInSync(forceOverwrite);
+  newFile.setLastSyncDateForProperties(0);
+  newFile.setLastSyncDateForData(0);
   if (localPath != null && localPath.length() > 0) {
     File localFile=new File(localPath);
     newFile.setFileLength(localFile.length());

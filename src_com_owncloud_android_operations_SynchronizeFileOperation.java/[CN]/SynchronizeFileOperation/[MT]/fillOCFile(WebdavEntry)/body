@@ -4,6 +4,7 @@
   file.setFileLength(we.contentLength());
   file.setMimetype(we.contentType());
   file.setModificationTimestamp(we.modifiedTimesamp());
-  file.setLastSyncDate(System.currentTimeMillis());
+  file.setLastSyncDateForProperties(System.currentTimeMillis());
+  file.setLastSyncDateForData(0);
   return file;
 }

@@ -1,6 +1,8 @@
 {
   OCFile file=mCurrentDownload.getFile();
-  file.setLastSyncDate(System.currentTimeMillis());
+  long syncDate=System.currentTimeMillis();
+  file.setLastSyncDateForProperties(syncDate);
+  file.setLastSyncDateForData(syncDate);
   file.setModificationTimestamp(mCurrentDownload.getModificationTimestamp());
   file.setMimetype(mCurrentDownload.getMimeType());
   file.setStoragePath(mCurrentDownload.getSavePath());

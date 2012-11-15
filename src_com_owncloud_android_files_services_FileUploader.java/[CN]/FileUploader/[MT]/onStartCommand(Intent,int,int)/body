@@ -48,7 +48,14 @@
   try {
     for (int i=0; i < localPaths.length; i++) {
       uploadKey=buildRemoteName(account,remotePaths[i]);
-      file=obtainNewOCFileToUpload(remotePaths[i],localPaths[i],((mimeTypes != null) ? mimeTypes[i] : (String)null),isInstant,forceOverwrite,storageManager);
+      file=storageManager.getFileByLocalPath(remotePaths[i]);
+      if (file != null) {
+        Log.d(TAG,"Upload of file already in server: " + remotePaths[i]);
+      }
+ else {
+        Log.d(TAG,"Upload of new file: " + remotePaths[i]);
+        file=obtainNewOCFileToUpload(remotePaths[i],localPaths[i],((mimeTypes != null) ? mimeTypes[i] : (String)null),isInstant,storageManager);
+      }
       if (chunked) {
         newUpload=new ChunkedUploadFileOperation(account,file,isInstant,forceOverwrite);
       }

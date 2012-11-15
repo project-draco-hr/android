@@ -1,4 +1,4 @@
 String localPath
 String remotePath
 Account account
-FileObserverStatusListener.Status status
+RemoteOperationResult result

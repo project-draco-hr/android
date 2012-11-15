@@ -1,25 +1,60 @@
 {
   PropFindMethod propfind=null;
   RemoteOperationResult result=null;
+  mTransferWasRequested=false;
   try {
-    propfind=new PropFindMethod(client.getBaseUri() + WebdavUtils.encodePath(mRemotePath));
-    int status=client.executeMethod(propfind);
-    boolean isMultiStatus=status == HttpStatus.SC_MULTI_STATUS;
-    Boolean isConflict=Boolean.FALSE;
-    if (isMultiStatus) {
-      MultiStatus resp=propfind.getResponseBodyAsMultiStatus();
-      WebdavEntry we=new WebdavEntry(resp.getResponses()[0],client.getBaseUri().getPath());
-      OCFile file=fillOCFile(we);
-      OCFile oldFile=mStorageManager.getFileByPath(file.getRemotePath());
-      if (oldFile.getFileLength() != file.getFileLength() || oldFile.getModificationTimestamp() != file.getModificationTimestamp()) {
-        isConflict=Boolean.TRUE;
-      }
+    OCFile localFile=mStorageManager.getFileByPath(mRemotePath);
+    if (!localFile.isDown()) {
+      requestForDownload(localFile);
+      result=new RemoteOperationResult(ResultCode.OK);
     }
  else {
-      client.exhaustResponse(propfind.getResponseBodyAsStream());
+      propfind=new PropFindMethod(client.getBaseUri() + WebdavUtils.encodePath(mRemotePath));
+      int status=client.executeMethod(propfind);
+      boolean isMultiStatus=status == HttpStatus.SC_MULTI_STATUS;
+      if (isMultiStatus) {
+        MultiStatus resp=propfind.getResponseBodyAsMultiStatus();
+        WebdavEntry we=new WebdavEntry(resp.getResponses()[0],client.getBaseUri().getPath());
+        OCFile serverFile=fillOCFile(we);
+        boolean serverChanged=false;
+        if (serverFile.getEtag() != null) {
+          serverChanged=(!serverFile.getEtag().equals(localFile.getEtag()));
+        }
+ else {
+          serverChanged=(serverFile.getModificationTimestamp() > localFile.getModificationTimestamp());
+        }
+        boolean localChanged=(mLocalChangeAlreadyKnown || localFile.getLocalModificationTimestamp() > localFile.getLastSyncDateForData());
+        if (localChanged && serverChanged) {
+          result=new RemoteOperationResult(ResultCode.SYNC_CONFLICT);
+        }
+ else         if (localChanged) {
+          if (mSyncFileContents) {
+            requestForUpload(localFile);
+          }
+ else {
+          }
+          result=new RemoteOperationResult(ResultCode.OK);
+        }
+ else         if (serverChanged) {
+          if (mSyncFileContents) {
+            requestForDownload(serverFile);
+          }
+ else {
+            serverFile.setKeepInSync(localFile.keepInSync());
+            serverFile.setParentId(localFile.getParentId());
+            mStorageManager.saveFile(serverFile);
+          }
+          result=new RemoteOperationResult(ResultCode.OK);
+        }
+ else {
+          result=new RemoteOperationResult(ResultCode.OK);
+        }
+      }
+ else {
+        client.exhaustResponse(propfind.getResponseBodyAsStream());
+        result=new RemoteOperationResult(false,status);
+      }
     }
-    result=new RemoteOperationResult(isMultiStatus,status);
-    result.setExtraData(isConflict);
     Log.i(TAG,"Synchronizing " + mAccount.name + ", file "+ mRemotePath+ ": "+ result.getLogMessage());
   }
  catch (  Exception e) {

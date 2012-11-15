@@ -7,7 +7,8 @@
   mLength=0;
   mCreationTimestamp=0;
   mModifiedTimestamp=0;
-  mLastSyncDate=0;
+  mLastSyncDateForProperties=0;
+  mLastSyncDateForData=0;
   mKeepInSync=false;
   mNeedsUpdating=false;
 }

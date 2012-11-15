@@ -1,0 +1,10 @@
+{
+  Intent i=new Intent(mContext,FileUploader.class);
+  i.putExtra(FileUploader.KEY_ACCOUNT,mAccount);
+  i.putExtra(FileUploader.KEY_REMOTE_FILE,mRemotePath);
+  i.putExtra(FileUploader.KEY_LOCAL_FILE,localFile.getStoragePath());
+  i.putExtra(FileUploader.KEY_UPLOAD_TYPE,FileUploader.UPLOAD_SINGLE_FILE);
+  i.putExtra(FileUploader.KEY_FORCE_OVERWRITE,true);
+  mContext.startService(i);
+  mTransferWasRequested=true;
+}

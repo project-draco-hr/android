@@ -27,16 +27,22 @@
  finally {
     if (propfind != null)     propfind.releaseConnection();
   }
-  if (!result.isSuccess()) {
+  long syncDate=System.currentTimeMillis();
+  if (result.isSuccess()) {
+    file.setLastSyncDateForProperties(syncDate);
+  }
+ else {
     if (!mCurrentUpload.getRemotePath().equals(file.getRemotePath())) {
       OCFile newFile=new OCFile(mCurrentUpload.getRemotePath());
       newFile.setCreationTimestamp(file.getCreationTimestamp());
       newFile.setFileLength(file.getFileLength());
       newFile.setMimetype(file.getMimetype());
       newFile.setModificationTimestamp(file.getModificationTimestamp());
+      newFile.setLastSyncDateForProperties(file.getLastSyncDateForProperties());
+      newFile.setKeepInSync(file.keepInSync());
       file=newFile;
     }
   }
-  file.setLastSyncDate(System.currentTimeMillis());
+  file.setLastSyncDateForData(syncDate);
   mStorageManager.saveFile(file);
 }
