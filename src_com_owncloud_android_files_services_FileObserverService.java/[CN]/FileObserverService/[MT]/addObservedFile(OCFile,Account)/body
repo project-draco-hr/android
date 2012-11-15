@@ -34,10 +34,6 @@
   if (!file.isDown()) {
     DownloadCompletedReceiver receiver=new DownloadCompletedReceiver(localPath,observer);
     registerReceiver(receiver,new IntentFilter(FileDownloader.DOWNLOAD_FINISH_MESSAGE));
-    Intent i=new Intent(this,FileDownloader.class);
-    i.putExtra(FileDownloader.EXTRA_ACCOUNT,account);
-    i.putExtra(FileDownloader.EXTRA_FILE,file);
-    startService(i);
   }
  else {
     observer.startWatching();

@@ -35,7 +35,7 @@ case R.id.fdDownloadBtn:
         }
       }
  else {
-        mLastRemoteOperation=new SynchronizeFileOperation(mFile.getRemotePath(),fdsm,mAccount,true,false,getActivity());
+        mLastRemoteOperation=new SynchronizeFileOperation(mFile,fdsm,mAccount,true,false,getActivity());
         WebdavClient wc=OwnCloudClientUtils.createOwnCloudClient(mAccount,getSherlockActivity().getApplicationContext());
         mLastRemoteOperation.execute(wc,this,mHandler);
         boolean inDisplayActivity=getActivity() instanceof FileDisplayActivity;
@@ -55,7 +55,9 @@ case R.id.fdKeepInSync:
     intent.putExtra(FileObserverService.KEY_CMD_ARG_ACCOUNT,mAccount);
     Log.e(TAG,"starting observer service");
     getActivity().startService(intent);
-    mContainerActivity.onFileStateChanged();
+    if (mFile.keepInSync()) {
+      onClick(getView().findViewById(R.id.fdDownloadBtn));
+    }
     break;
   }
 case R.id.fdRenameBtn:

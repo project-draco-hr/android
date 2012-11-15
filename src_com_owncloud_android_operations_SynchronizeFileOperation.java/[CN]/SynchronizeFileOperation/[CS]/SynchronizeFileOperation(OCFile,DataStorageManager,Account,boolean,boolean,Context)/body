@@ -1,5 +1,5 @@
 {
-  mRemotePath=remotePath;
+  mLocalFile=localFile;
   mStorageManager=dataStorageManager;
   mAccount=account;
   mSyncFileContents=syncFileContents;
