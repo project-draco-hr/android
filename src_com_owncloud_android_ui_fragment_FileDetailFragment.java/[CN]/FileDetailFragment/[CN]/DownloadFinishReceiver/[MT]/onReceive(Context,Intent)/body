@@ -5,7 +5,7 @@
     String downloadedRemotePath=intent.getStringExtra(FileDownloader.EXTRA_REMOTE_PATH);
     if (mFile.getRemotePath().equals(downloadedRemotePath)) {
       if (downloadWasFine) {
-        mFile.setStoragePath(intent.getStringExtra(FileDownloader.EXTRA_FILE_PATH));
+        mFile=mStorageManager.getFileByPath(downloadedRemotePath);
       }
       updateFileDetails();
     }

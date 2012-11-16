@@ -1,10 +1,9 @@
 {
-  FileDataStorageManager fdsm=new FileDataStorageManager(mAccount,getActivity().getContentResolver());
   File f=null;
   if (mFile.isDown() && (f=new File(mFile.getStoragePath())).exists()) {
     f.delete();
     mFile.setStoragePath(null);
-    fdsm.saveFile(mFile);
+    mStorageManager.saveFile(mFile);
     updateFileDetails(mFile,mAccount);
   }
 }
