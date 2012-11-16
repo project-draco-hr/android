@@ -1,24 +1,16 @@
 {
   if (file == null) {
-    Log.e(TAG,"Trying to unobserve a NULL file");
+    Log.e(TAG,"Trying to remove a NULL file");
     return;
   }
-  if (mObservers == null) {
-    initializeObservedList();
-  }
   String localPath=file.getStoragePath();
-  if (!file.isDown()) {
+  if (localPath == null || localPath.length() <= 0) {
     localPath=FileStorageUtils.getDefaultSavePathFor(account.name,file);
   }
-  for (int i=0; i < mObservers.size(); ++i) {
-    OwnCloudFileObserver observer=mObservers.get(i);
-    if (observer.getPath().equals(localPath)) {
-      observer.stopWatching();
-      mObservers.remove(i);
-      if (!file.isDown()) {
-      }
-      Log.d(TAG,"Stopped watching " + localPath);
-      break;
-    }
+  OwnCloudFileObserver observer=mObserversMap.get(localPath);
+  if (observer != null) {
+    observer.stopWatching();
+    mObserversMap.remove(observer);
+    Log.d(TAG,"Stopped watching " + localPath);
   }
 }

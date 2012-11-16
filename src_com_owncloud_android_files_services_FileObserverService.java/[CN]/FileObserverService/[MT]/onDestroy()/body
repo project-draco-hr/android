@@ -1,0 +1,5 @@
+{
+  super.onDestroy();
+  unregisterReceiver(mDownloadReceiver);
+  mObserversMap=null;
+}

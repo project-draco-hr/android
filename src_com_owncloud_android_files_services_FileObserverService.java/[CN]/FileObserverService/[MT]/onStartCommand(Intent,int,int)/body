@@ -17,9 +17,6 @@ break;
 case CMD_DEL_OBSERVED_FILE:
 removeObservedFile((OCFile)intent.getParcelableExtra(KEY_CMD_ARG_FILE),(Account)intent.getParcelableExtra(KEY_CMD_ARG_ACCOUNT));
 break;
-case CMD_ADD_DOWNLOADING_FILE:
-addDownloadingFile((OCFile)intent.getParcelableExtra(KEY_CMD_ARG_FILE),(Account)intent.getParcelableExtra(KEY_CMD_ARG_ACCOUNT));
-break;
 default :
 Log.wtf(TAG,"Incorrect key given");
 }

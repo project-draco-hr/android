@@ -1,6 +1,0 @@
-OCFile localFile
-DataStorageManager dataStorageManager
-Account account
-boolean syncFileContents
-boolean localChangeAlreadyKnown
-Context context

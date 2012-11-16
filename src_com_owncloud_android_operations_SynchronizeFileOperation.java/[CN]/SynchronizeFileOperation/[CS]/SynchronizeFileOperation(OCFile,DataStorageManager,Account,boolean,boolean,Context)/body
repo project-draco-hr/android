@@ -1,8 +1,0 @@
-{
-  mLocalFile=localFile;
-  mStorageManager=dataStorageManager;
-  mAccount=account;
-  mSyncFileContents=syncFileContents;
-  mLocalChangeAlreadyKnown=localChangeAlreadyKnown;
-  mContext=context;
-}

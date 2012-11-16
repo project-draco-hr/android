@@ -1,0 +1,5 @@
+{
+  Intent end=new Intent(DOWNLOAD_ADDED_MESSAGE);
+  end.putExtra(EXTRA_FILE_PATH,download.getSavePath());
+  sendBroadcast(end);
+}

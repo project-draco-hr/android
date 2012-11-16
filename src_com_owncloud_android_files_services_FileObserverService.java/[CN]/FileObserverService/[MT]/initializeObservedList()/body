@@ -1,7 +1,5 @@
 {
-  if (mObservers != null)   return;
-  mObservers=new ArrayList<OwnCloudFileObserver>();
-  mDownloadReceivers=new ArrayList<DownloadCompletedReceiver>();
+  mObserversMap.clear();
   Cursor c=getContentResolver().query(ProviderTableMeta.CONTENT_URI,null,ProviderTableMeta.FILE_KEEP_IN_SYNC + " = ?",new String[]{String.valueOf(1)},null);
   if (!c.moveToFirst())   return;
   AccountManager acm=AccountManager.get(this);
@@ -22,9 +20,11 @@
     observer.setStorageManager(storage);
     observer.setOCFile(storage.getFileByPath(c.getString(c.getColumnIndex(ProviderTableMeta.FILE_PATH))));
     observer.addObserverStatusListener(this);
-    observer.startWatching();
-    mObservers.add(observer);
-    Log.d(TAG,"Started watching file " + path);
+    mObserversMap.put(path,observer);
+    if (new File(path).exists()) {
+      observer.startWatching();
+      Log.d(TAG,"Started watching file " + path);
+    }
   }
  while (c.moveToNext());
   c.close();
