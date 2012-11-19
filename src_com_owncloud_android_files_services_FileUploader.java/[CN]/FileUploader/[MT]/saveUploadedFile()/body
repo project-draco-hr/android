@@ -2,16 +2,18 @@
   OCFile file=mCurrentUpload.getFile();
   PropFindMethod propfind=null;
   RemoteOperationResult result=null;
+  long syncDate=System.currentTimeMillis();
   try {
     propfind=new PropFindMethod(mUploadClient.getBaseUri() + WebdavUtils.encodePath(mCurrentUpload.getRemotePath()));
     int status=mUploadClient.executeMethod(propfind);
-    boolean isMultiStatus=status == HttpStatus.SC_MULTI_STATUS;
+    boolean isMultiStatus=(status == HttpStatus.SC_MULTI_STATUS);
     if (isMultiStatus) {
       MultiStatus resp=propfind.getResponseBodyAsMultiStatus();
       WebdavEntry we=new WebdavEntry(resp.getResponses()[0],mUploadClient.getBaseUri().getPath());
       OCFile newFile=fillOCFile(we);
       newFile.setStoragePath(file.getStoragePath());
       newFile.setKeepInSync(file.keepInSync());
+      newFile.setLastSyncDateForProperties(syncDate);
       file=newFile;
     }
  else {
@@ -27,22 +29,17 @@
  finally {
     if (propfind != null)     propfind.releaseConnection();
   }
-  long syncDate=System.currentTimeMillis();
-  if (result.isSuccess()) {
-    file.setLastSyncDateForProperties(syncDate);
-  }
- else {
-    if (!mCurrentUpload.getRemotePath().equals(file.getRemotePath())) {
-      OCFile newFile=new OCFile(mCurrentUpload.getRemotePath());
-      newFile.setCreationTimestamp(file.getCreationTimestamp());
-      newFile.setFileLength(file.getFileLength());
-      newFile.setMimetype(file.getMimetype());
-      newFile.setModificationTimestamp(file.getModificationTimestamp());
-      newFile.setLastSyncDateForProperties(file.getLastSyncDateForProperties());
-      newFile.setKeepInSync(file.keepInSync());
-      file=newFile;
-    }
-  }
   file.setLastSyncDateForData(syncDate);
+  if (!result.isSuccess() && !mCurrentUpload.getRemotePath().equals(file.getRemotePath())) {
+    OCFile newFile=new OCFile(mCurrentUpload.getRemotePath());
+    newFile.setCreationTimestamp(file.getCreationTimestamp());
+    newFile.setFileLength(file.getFileLength());
+    newFile.setMimetype(file.getMimetype());
+    newFile.setModificationTimestamp(file.getModificationTimestamp());
+    newFile.setLastSyncDateForProperties(file.getLastSyncDateForProperties());
+    newFile.setStoragePath(file.getStoragePath());
+    newFile.setKeepInSync(file.keepInSync());
+    file=newFile;
+  }
   mStorageManager.saveFile(file);
 }

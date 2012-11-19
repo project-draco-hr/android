@@ -20,14 +20,23 @@
       for (int i=1; i < resp.getResponses().length; ++i) {
         WebdavEntry we=new WebdavEntry(resp.getResponses()[i],client.getBaseUri().getPath());
         OCFile file=fillOCFile(we);
+        file.setLastSyncDateForProperties(mCurrentSyncTime);
         OCFile oldFile=mStorageManager.getFileByPath(file.getRemotePath());
         if (oldFile != null) {
           file.setKeepInSync(oldFile.keepInSync());
           file.setLastSyncDateForData(oldFile.getLastSyncDateForData());
-          if (file.keepInSync()) {
-            SynchronizeFileOperation operation=new SynchronizeFileOperation(oldFile,file,mStorageManager,mAccount,true,false,mContext);
-            filesToSyncContents.add(operation);
+          file.setStoragePath(oldFile.getStoragePath());
+        }
+        if (file.getStoragePath() == null && !file.isDirectory()) {
+          File f=new File(FileStorageUtils.getDefaultSavePathFor(mAccount.name,file));
+          if (f.exists()) {
+            file.setStoragePath(f.getAbsolutePath());
+            file.setLastSyncDateForData(f.lastModified());
           }
+        }
+        if (file.keepInSync()) {
+          SynchronizeFileOperation operation=new SynchronizeFileOperation(oldFile,file,mStorageManager,mAccount,true,false,mContext);
+          filesToSyncContents.add(operation);
         }
         updatedFiles.add(file);
       }

@@ -1,0 +1,13 @@
+{
+  super(path,mask);
+  if (path == null)   throw new IllegalArgumentException("NULL path argument received");
+  if (file == null)   throw new IllegalArgumentException("NULL file argument received");
+  if (account == null)   throw new IllegalArgumentException("NULL account argument received");
+  if (context == null)   throw new IllegalArgumentException("NULL context argument received");
+  if (!path.equals(file.getStoragePath()) && !path.equals(FileStorageUtils.getDefaultSavePathFor(account.name,file)))   throw new IllegalArgumentException("File argument is not linked to the local file set in path argument");
+  mPath=path;
+  mFile=file;
+  mOCAccount=account;
+  mContext=context;
+  mMask=mask;
+}

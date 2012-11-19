@@ -9,13 +9,7 @@
   }
   OwnCloudFileObserver observer=mObserversMap.get(localPath);
   if (observer == null) {
-    observer=new OwnCloudFileObserver(localPath,OwnCloudFileObserver.CHANGES_ONLY);
-    observer.setAccount(account);
-    FileDataStorageManager storage=new FileDataStorageManager(account,getContentResolver());
-    observer.setStorageManager(storage);
-    observer.setOCFile(file);
-    observer.addObserverStatusListener(this);
-    observer.setContext(getApplicationContext());
+    observer=new OwnCloudFileObserver(localPath,file,account,getApplicationContext(),OwnCloudFileObserver.CHANGES_ONLY);
     mObserversMap.put(localPath,observer);
     Log.d(TAG,"Observer added for path " + localPath);
     if (file.isDown()) {

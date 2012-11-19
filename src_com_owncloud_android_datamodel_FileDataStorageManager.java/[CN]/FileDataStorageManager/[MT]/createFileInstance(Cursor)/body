@@ -9,7 +9,10 @@
       file.setStoragePath(c.getString(c.getColumnIndex(ProviderTableMeta.FILE_STORAGE_PATH)));
       if (file.getStoragePath() == null) {
         File f=new File(FileStorageUtils.getDefaultSavePathFor(mAccount.name,file));
-        if (f.exists())         file.setStoragePath(f.getAbsolutePath());
+        if (f.exists()) {
+          file.setStoragePath(f.getAbsolutePath());
+          file.setLastSyncDateForData(f.lastModified());
+        }
       }
     }
     file.setFileLength(c.getLong(c.getColumnIndex(ProviderTableMeta.FILE_CONTENT_LENGTH)));

@@ -16,6 +16,7 @@
           MultiStatus resp=propfind.getResponseBodyAsMultiStatus();
           WebdavEntry we=new WebdavEntry(resp.getResponses()[0],client.getBaseUri().getPath());
           mServerFile=fillOCFile(we);
+          mServerFile.setLastSyncDateForProperties(System.currentTimeMillis());
         }
  else {
           client.exhaustResponse(propfind.getResponseBodyAsStream());
@@ -48,6 +49,8 @@
           }
  else {
             mServerFile.setKeepInSync(mLocalFile.keepInSync());
+            mServerFile.setLastSyncDateForData(mLocalFile.getLastSyncDateForData());
+            mServerFile.setStoragePath(mLocalFile.getStoragePath());
             mServerFile.setParentId(mLocalFile.getParentId());
             mStorageManager.saveFile(mServerFile);
           }
