@@ -1,8 +1,7 @@
 {
   super.onCreate(savedInstanceState);
-  mRemotePath=getIntent().getStringExtra("remotepath");
-  mLocalPath=getIntent().getStringExtra("localpath");
-  mOCAccount=getIntent().getParcelableExtra("account");
-  ConflictsResolveDialog d=ConflictsResolveDialog.newInstance(mRemotePath,this);
+  mFile=getIntent().getParcelableExtra(EXTRA_FILE);
+  mOCAccount=getIntent().getParcelableExtra(EXTRA_ACCOUNT);
+  ConflictsResolveDialog d=ConflictsResolveDialog.newInstance(mFile.getRemotePath(),this);
   d.showDialog(this);
 }
