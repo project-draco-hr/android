@@ -2,9 +2,10 @@
   Intent i=new Intent(getApplicationContext(),FileUploader.class);
 switch (decision) {
 case CANCEL:
-    return;
+    finish();
+  return;
 case OVERWRITE:
-  i.putExtra(FileUploader.KEY_FORCE_OVERWRITE,true);
+i.putExtra(FileUploader.KEY_FORCE_OVERWRITE,true);
 case KEEP_BOTH:
 break;
 default :
