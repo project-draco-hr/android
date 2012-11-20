@@ -5,12 +5,14 @@
     return;
   }
   WebdavClient wc=OwnCloudClientUtils.createOwnCloudClient(mOCAccount,mContext);
-  SynchronizeFileOperation sfo=new SynchronizeFileOperation(mFile,null,new FileDataStorageManager(mOCAccount,mContext.getContentResolver()),mOCAccount,true,true,mContext);
+  FileDataStorageManager storageManager=new FileDataStorageManager(mOCAccount,mContext.getContentResolver());
+  OCFile file=storageManager.getFileByLocalPath(mPath);
+  SynchronizeFileOperation sfo=new SynchronizeFileOperation(file,null,storageManager,mOCAccount,true,true,mContext);
   RemoteOperationResult result=sfo.execute(wc);
   if (result.getCode() == ResultCode.SYNC_CONFLICT) {
     Intent i=new Intent(mContext,ConflictsResolveActivity.class);
     i.setFlags(i.getFlags() | Intent.FLAG_ACTIVITY_NEW_TASK);
-    i.putExtra("remotepath",mFile.getRemotePath());
+    i.putExtra("remotepath",file.getRemotePath());
     i.putExtra("localpath",mPath);
     i.putExtra("account",mOCAccount);
     mContext.startActivity(i);
