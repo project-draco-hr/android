@@ -6,6 +6,7 @@
   if (localPath != null && localPath.length() > 0) {
     File localFile=new File(localPath);
     newFile.setFileLength(localFile.length());
+    newFile.setLastSyncDateForData(localFile.lastModified());
   }
   if (mimeType == null || mimeType.length() <= 0) {
     try {
