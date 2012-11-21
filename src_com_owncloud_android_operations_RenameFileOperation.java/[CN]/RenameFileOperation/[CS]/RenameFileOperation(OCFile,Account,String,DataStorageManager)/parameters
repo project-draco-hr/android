@@ -1,3 +1,4 @@
 OCFile file
+Account account
 String newName
 DataStorageManager storageManager
