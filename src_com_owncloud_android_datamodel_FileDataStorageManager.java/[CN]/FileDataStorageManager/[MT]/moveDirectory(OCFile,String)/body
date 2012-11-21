@@ -13,12 +13,12 @@
       c=getContentResolver().query(ProviderTableMeta.CONTENT_URI,null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=? AND " + ProviderTableMeta.FILE_PATH+ " LIKE ?",new String[]{mAccount.name,dir.getRemotePath() + "%"},null);
     }
     ArrayList<ContentProviderOperation> operations=new ArrayList<ContentProviderOperation>(c.getCount());
-    ContentValues cv=new ContentValues();
     int lengthOfOldPath=dir.getRemotePath().length();
     String defaultSavePath=FileDownloader.getSavePath(mAccount.name);
     int lengthOfOldStoragePath=defaultSavePath.length() + lengthOfOldPath;
     if (c.moveToFirst()) {
       do {
+        ContentValues cv=new ContentValues();
         OCFile child=createFileInstance(c);
         cv.put(ProviderTableMeta.FILE_PATH,newPath + child.getRemotePath().substring(lengthOfOldPath));
         if (child.getStoragePath() != null && child.getStoragePath().startsWith(defaultSavePath)) {
