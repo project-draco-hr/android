@@ -1,5 +1,16 @@
 {
+  String targetKey=buildRemoteName(account,file);
 synchronized (mPendingUploads) {
-    return (mPendingUploads.containsKey(buildRemoteName(account,file)));
+    if (file.isDirectory()) {
+      Iterator<String> it=mPendingUploads.keySet().iterator();
+      boolean found=false;
+      while (it.hasNext() && !found) {
+        found=it.next().startsWith(targetKey);
+      }
+      return found;
+    }
+ else {
+      return (mPendingUploads.containsKey(targetKey));
+    }
   }
 }
