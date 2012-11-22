@@ -1,7 +1,8 @@
 {
   String downloadedRemotePath=intent.getStringExtra(FileDownloader.EXTRA_REMOTE_PATH);
   String accountName=intent.getStringExtra(FileDownloader.ACCOUNT_NAME);
-  if (accountName.equals(AccountUtils.getCurrentOwnCloudAccount(context).name) && mCurrentDir != null && mCurrentDir.getFileId() == mStorageManager.getFileByPath(downloadedRemotePath).getParentId()) {
+  OCFile downloadedFile=mStorageManager.getFileByPath(downloadedRemotePath);
+  if (accountName.equals(AccountUtils.getCurrentOwnCloudAccount(context).name) && mCurrentDir != null && downloadedFile != null && mCurrentDir.getFileId() == downloadedFile.getParentId()) {
     OCFileListFragment fileListFragment=(OCFileListFragment)getSupportFragmentManager().findFragmentById(R.id.fileList);
     if (fileListFragment != null) {
       fileListFragment.listDirectory();
