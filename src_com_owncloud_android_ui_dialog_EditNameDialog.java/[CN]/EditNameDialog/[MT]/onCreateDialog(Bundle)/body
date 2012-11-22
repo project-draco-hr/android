@@ -1,0 +1,19 @@
+{
+  String currentName=getArguments().getString(ARG_NAME);
+  if (currentName == null)   currentName="";
+  String title=getArguments().getString(ARG_TITLE);
+  LayoutInflater inflater=getSherlockActivity().getLayoutInflater();
+  View v=inflater.inflate(R.layout.edit_box_dialog,null);
+  TextView inputText=((TextView)v.findViewById(R.id.user_input));
+  inputText.setText(currentName);
+  AlertDialog.Builder builder=new AlertDialog.Builder(getSherlockActivity());
+  builder.setView(v).setPositiveButton(R.string.common_ok,this).setNegativeButton(R.string.common_cancel,this);
+  if (title != null) {
+    builder.setTitle(title);
+  }
+  mResult=false;
+  Dialog d=builder.create();
+  inputText.requestFocus();
+  d.getWindow().setSoftInputMode(LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+  return d;
+}
