@@ -1,4 +1,5 @@
 {
+  Log.d(TAG,"Received broacast! : " + intent.getStringExtra(FileUploader.EXTRA_REMOTE_PATH));
   String accountName=intent.getStringExtra(FileUploader.ACCOUNT_NAME);
   if (!isEmpty() && accountName.equals(mAccount.name)) {
     boolean uploadWasFine=intent.getBooleanExtra(FileUploader.EXTRA_UPLOAD_RESULT,false);

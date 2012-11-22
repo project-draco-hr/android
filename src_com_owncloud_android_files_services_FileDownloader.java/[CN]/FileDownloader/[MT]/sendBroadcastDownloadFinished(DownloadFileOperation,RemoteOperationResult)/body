@@ -4,5 +4,5 @@
   end.putExtra(ACCOUNT_NAME,download.getAccount().name);
   end.putExtra(EXTRA_REMOTE_PATH,download.getRemotePath());
   end.putExtra(EXTRA_FILE_PATH,download.getSavePath());
-  sendBroadcast(end);
+  sendStickyBroadcast(end);
 }
