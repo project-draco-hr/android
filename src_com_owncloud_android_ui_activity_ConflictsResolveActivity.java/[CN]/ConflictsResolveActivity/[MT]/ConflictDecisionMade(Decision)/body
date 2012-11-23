@@ -2,9 +2,10 @@
   Intent i=new Intent(getApplicationContext(),FileUploader.class);
 switch (decision) {
 case CANCEL:
-    return;
+    finish();
+  return;
 case OVERWRITE:
-  i.putExtra(FileUploader.KEY_FORCE_OVERWRITE,true);
+i.putExtra(FileUploader.KEY_FORCE_OVERWRITE,true);
 case KEEP_BOTH:
 break;
 default :
@@ -12,8 +13,7 @@ Log.wtf(TAG,"Unhandled conflict decision " + decision);
 return;
 }
 i.putExtra(FileUploader.KEY_ACCOUNT,mOCAccount);
-i.putExtra(FileUploader.KEY_REMOTE_FILE,mRemotePath);
-i.putExtra(FileUploader.KEY_LOCAL_FILE,mLocalPath);
+i.putExtra(FileUploader.KEY_FILE,mFile);
 i.putExtra(FileUploader.KEY_UPLOAD_TYPE,FileUploader.UPLOAD_SINGLE_FILE);
 startService(i);
 finish();

@@ -34,12 +34,12 @@ case R.id.fdDownloadBtn:
         }
       }
  else {
-        Intent i=new Intent(getActivity(),FileDownloader.class);
-        i.putExtra(FileDownloader.EXTRA_ACCOUNT,mAccount);
-        i.putExtra(FileDownloader.EXTRA_FILE,mFile);
+        mLastRemoteOperation=new SynchronizeFileOperation(mFile,null,mStorageManager,mAccount,true,false,getActivity());
+        WebdavClient wc=OwnCloudClientUtils.createOwnCloudClient(mAccount,getSherlockActivity().getApplicationContext());
+        mLastRemoteOperation.execute(wc,this,mHandler);
+        boolean inDisplayActivity=getActivity() instanceof FileDisplayActivity;
+        getActivity().showDialog((inDisplayActivity) ? FileDisplayActivity.DIALOG_SHORT_WAIT : FileDetailActivity.DIALOG_SHORT_WAIT);
         setButtonsForTransferring();
-        getActivity().startService(i);
-        mContainerActivity.onFileStateChanged();
       }
       break;
     }
@@ -47,19 +47,16 @@ case R.id.fdKeepInSync:
 {
     CheckBox cb=(CheckBox)getView().findViewById(R.id.fdKeepInSync);
     mFile.setKeepInSync(cb.isChecked());
-    FileDataStorageManager fdsm=new FileDataStorageManager(mAccount,getActivity().getApplicationContext().getContentResolver());
-    fdsm.saveFile(mFile);
+    mStorageManager.saveFile(mFile);
+    Intent intent=new Intent(getActivity().getApplicationContext(),FileObserverService.class);
+    intent.putExtra(FileObserverService.KEY_FILE_CMD,(cb.isChecked() ? FileObserverService.CMD_ADD_OBSERVED_FILE : FileObserverService.CMD_DEL_OBSERVED_FILE));
+    intent.putExtra(FileObserverService.KEY_CMD_ARG_FILE,mFile);
+    intent.putExtra(FileObserverService.KEY_CMD_ARG_ACCOUNT,mAccount);
+    Log.e(TAG,"starting observer service");
+    getActivity().startService(intent);
     if (mFile.keepInSync()) {
       onClick(getView().findViewById(R.id.fdDownloadBtn));
     }
- else {
-      mContainerActivity.onFileStateChanged();
-    }
-    Intent intent=new Intent(getActivity().getApplicationContext(),FileObserverService.class);
-    intent.putExtra(FileObserverService.KEY_FILE_CMD,(cb.isChecked() ? FileObserverService.CMD_ADD_OBSERVED_FILE : FileObserverService.CMD_DEL_OBSERVED_FILE));
-    intent.putExtra(FileObserverService.KEY_CMD_ARG,mFile.getStoragePath());
-    Log.e(TAG,"starting observer service");
-    getActivity().startService(intent);
     break;
   }
 case R.id.fdRenameBtn:

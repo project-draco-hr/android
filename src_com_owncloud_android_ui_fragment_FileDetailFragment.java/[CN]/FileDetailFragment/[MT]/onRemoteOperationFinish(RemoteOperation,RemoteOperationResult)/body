@@ -6,5 +6,8 @@
  else     if (operation instanceof RenameFileOperation) {
       onRenameFileOperationFinish((RenameFileOperation)operation,result);
     }
+ else     if (operation instanceof SynchronizeFileOperation) {
+      onSynchronizeFileOperationFinish((SynchronizeFileOperation)operation,result);
+    }
   }
 }

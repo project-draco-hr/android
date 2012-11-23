@@ -3,7 +3,11 @@
   boolean nameCheckPassed=false;
   try {
     if (!mForceOverwrite) {
-      mRemotePath=getAvailableRemotePath(client,mRemotePath);
+      String remotePath=getAvailableRemotePath(client,mRemotePath);
+      mWasRenamed=!remotePath.equals(mRemotePath);
+      if (mWasRenamed) {
+        createNewOCFile(remotePath);
+      }
     }
     nameCheckPassed=true;
 synchronized (mCancellationRequested) {

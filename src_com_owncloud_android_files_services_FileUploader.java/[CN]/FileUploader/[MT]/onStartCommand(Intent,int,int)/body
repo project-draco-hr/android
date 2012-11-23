@@ -1,5 +1,5 @@
 {
-  if (!intent.hasExtra(KEY_ACCOUNT) || !intent.hasExtra(KEY_UPLOAD_TYPE)) {
+  if (!intent.hasExtra(KEY_ACCOUNT) || !intent.hasExtra(KEY_UPLOAD_TYPE) || !(intent.hasExtra(KEY_LOCAL_FILE) || intent.hasExtra(KEY_FILE))) {
     Log.e(TAG,"Not enough information provided in intent");
     return Service.START_NOT_STICKY;
   }
@@ -9,51 +9,70 @@
     return Service.START_NOT_STICKY;
   }
   Account account=intent.getParcelableExtra(KEY_ACCOUNT);
-  String[] localPaths, remotePaths, mimeTypes;
+  String[] localPaths=null, remotePaths=null, mimeTypes=null;
+  OCFile[] files=null;
   if (uploadType == UPLOAD_SINGLE_FILE) {
-    localPaths=new String[]{intent.getStringExtra(KEY_LOCAL_FILE)};
-    remotePaths=new String[]{intent.getStringExtra(KEY_REMOTE_FILE)};
-    mimeTypes=new String[]{intent.getStringExtra(KEY_MIME_TYPE)};
+    if (intent.hasExtra(KEY_FILE)) {
+      files=new OCFile[]{intent.getParcelableExtra(KEY_FILE)};
+    }
+ else {
+      localPaths=new String[]{intent.getStringExtra(KEY_LOCAL_FILE)};
+      remotePaths=new String[]{intent.getStringExtra(KEY_REMOTE_FILE)};
+      mimeTypes=new String[]{intent.getStringExtra(KEY_MIME_TYPE)};
+    }
   }
  else {
-    localPaths=intent.getStringArrayExtra(KEY_LOCAL_FILE);
-    remotePaths=intent.getStringArrayExtra(KEY_REMOTE_FILE);
-    mimeTypes=intent.getStringArrayExtra(KEY_MIME_TYPE);
+    if (intent.hasExtra(KEY_FILE)) {
+      files=(OCFile[])intent.getParcelableArrayExtra(KEY_FILE);
+    }
+ else {
+      localPaths=intent.getStringArrayExtra(KEY_LOCAL_FILE);
+      remotePaths=intent.getStringArrayExtra(KEY_REMOTE_FILE);
+      mimeTypes=intent.getStringArrayExtra(KEY_MIME_TYPE);
+    }
   }
-  if (localPaths == null) {
-    Log.e(TAG,"Incorrect array for local paths provided in upload intent");
-    return Service.START_NOT_STICKY;
-  }
-  if (remotePaths == null) {
-    Log.e(TAG,"Incorrect array for remote paths provided in upload intent");
-    return Service.START_NOT_STICKY;
-  }
-  if (localPaths.length != remotePaths.length) {
-    Log.e(TAG,"Different number of remote paths and local paths!");
-    return Service.START_NOT_STICKY;
-  }
-  boolean isInstant=intent.getBooleanExtra(KEY_INSTANT_UPLOAD,false);
+  FileDataStorageManager storageManager=new FileDataStorageManager(account,getContentResolver());
   boolean forceOverwrite=intent.getBooleanExtra(KEY_FORCE_OVERWRITE,false);
+  boolean isInstant=intent.getBooleanExtra(KEY_INSTANT_UPLOAD,false);
+  boolean fixed=false;
+  if (isInstant) {
+    fixed=checkAndFixInstantUploadDirectory(storageManager);
+  }
+  if (intent.hasExtra(KEY_FILE) && files == null) {
+    Log.e(TAG,"Incorrect array for OCFiles provided in upload intent");
+    return Service.START_NOT_STICKY;
+  }
+ else   if (!intent.hasExtra(KEY_FILE)) {
+    if (localPaths == null) {
+      Log.e(TAG,"Incorrect array for local paths provided in upload intent");
+      return Service.START_NOT_STICKY;
+    }
+    if (remotePaths == null) {
+      Log.e(TAG,"Incorrect array for remote paths provided in upload intent");
+      return Service.START_NOT_STICKY;
+    }
+    if (localPaths.length != remotePaths.length) {
+      Log.e(TAG,"Different number of remote paths and local paths!");
+      return Service.START_NOT_STICKY;
+    }
+    files=new OCFile[localPaths.length];
+    for (int i=0; i < localPaths.length; i++) {
+      files[i]=obtainNewOCFileToUpload(remotePaths[i],localPaths[i],((mimeTypes != null) ? mimeTypes[i] : (String)null),storageManager);
+    }
+  }
   OwnCloudVersion ocv=new OwnCloudVersion(AccountManager.get(this).getUserData(account,AccountAuthenticator.KEY_OC_VERSION));
   boolean chunked=FileUploader.chunkedUploadIsSupported(ocv);
   AbstractList<String> requestedUploads=new Vector<String>();
   String uploadKey=null;
   UploadFileOperation newUpload=null;
-  OCFile file=null;
-  FileDataStorageManager storageManager=new FileDataStorageManager(account,getContentResolver());
-  boolean fixed=false;
-  if (isInstant) {
-    fixed=checkAndFixInstantUploadDirectory(storageManager);
-  }
   try {
-    for (int i=0; i < localPaths.length; i++) {
-      uploadKey=buildRemoteName(account,remotePaths[i]);
-      file=obtainNewOCFileToUpload(remotePaths[i],localPaths[i],((mimeTypes != null) ? mimeTypes[i] : (String)null),isInstant,forceOverwrite,storageManager);
+    for (int i=0; i < files.length; i++) {
+      uploadKey=buildRemoteName(account,files[i].getRemotePath());
       if (chunked) {
-        newUpload=new ChunkedUploadFileOperation(account,file,isInstant,forceOverwrite);
+        newUpload=new ChunkedUploadFileOperation(account,files[i],isInstant,forceOverwrite);
       }
  else {
-        newUpload=new UploadFileOperation(account,file,isInstant,forceOverwrite);
+        newUpload=new UploadFileOperation(account,files[i],isInstant,forceOverwrite);
       }
       if (fixed && i == 0) {
         newUpload.setRemoteFolderToBeCreated();

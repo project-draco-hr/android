@@ -1,8 +1,8 @@
 {
   mStorageManager.moveDirectory(mFile,mNewRemotePath);
-  String localPath=FileDownloader.getSavePath(mAccount.name) + mFile.getRemotePath();
+  String localPath=FileStorageUtils.getDefaultSavePathFor(mAccount.name,mFile);
   File localDir=new File(localPath);
   if (localDir.exists()) {
-    localDir.renameTo(new File(FileDownloader.getSavePath(mAccount.name) + mNewRemotePath));
+    localDir.renameTo(new File(FileStorageUtils.getSavePath(mAccount.name) + mNewRemotePath));
   }
 }

@@ -9,5 +9,6 @@
   dest.writeString(mMimeType);
   dest.writeInt(mNeedsUpdating ? 1 : 0);
   dest.writeInt(mKeepInSync ? 1 : 0);
-  dest.writeLong(mLastSyncDate);
+  dest.writeLong(mLastSyncDateForProperties);
+  dest.writeLong(mLastSyncDateForData);
 }

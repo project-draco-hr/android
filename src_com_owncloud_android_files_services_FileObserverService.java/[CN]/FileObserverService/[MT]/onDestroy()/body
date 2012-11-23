@@ -1,0 +1,6 @@
+{
+  super.onDestroy();
+  unregisterReceiver(mDownloadReceiver);
+  mObserversMap=null;
+  Log.d(TAG,"Bye, bye");
+}

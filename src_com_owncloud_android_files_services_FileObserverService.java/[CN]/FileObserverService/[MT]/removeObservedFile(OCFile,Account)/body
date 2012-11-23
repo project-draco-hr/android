@@ -1,0 +1,16 @@
+{
+  if (file == null) {
+    Log.e(TAG,"Trying to remove a NULL file");
+    return;
+  }
+  String localPath=file.getStoragePath();
+  if (localPath == null || localPath.length() <= 0) {
+    localPath=FileStorageUtils.getDefaultSavePathFor(account.name,file);
+  }
+  OwnCloudFileObserver observer=mObserversMap.get(localPath);
+  if (observer != null) {
+    observer.stopWatching();
+    mObserversMap.remove(observer);
+    Log.d(TAG,"Stopped watching " + localPath);
+  }
+}

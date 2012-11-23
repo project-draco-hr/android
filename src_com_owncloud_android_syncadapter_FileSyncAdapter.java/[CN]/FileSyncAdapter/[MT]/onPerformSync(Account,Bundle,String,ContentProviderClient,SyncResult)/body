@@ -3,7 +3,11 @@
   mIsManualSync=extras.getBoolean(ContentResolver.SYNC_EXTRAS_MANUAL,false);
   mFailedResultsCounter=0;
   mLastFailedResult=null;
+  mConflictsFound=0;
+  mFailsInFavouritesFound=0;
   mSyncResult=syncResult;
+  mSyncResult.fullSyncRequested=false;
+  mSyncResult.delayUntil=60 * 60 * 24;
   this.setAccount(account);
   this.setContentProvider(provider);
   this.setStorageManager(new FileDataStorageManager(account,getContentProvider()));
@@ -31,6 +35,9 @@
     if (mFailedResultsCounter > 0 && mIsManualSync) {
       mSyncResult.tooManyRetries=true;
       notifyFailedSynchronization();
+    }
+ else     if (mConflictsFound > 0 || mFailsInFavouritesFound > 0) {
+      notifyFailsInFavourites();
     }
     sendStickyBroadcast(false,null,mLastFailedResult);
   }

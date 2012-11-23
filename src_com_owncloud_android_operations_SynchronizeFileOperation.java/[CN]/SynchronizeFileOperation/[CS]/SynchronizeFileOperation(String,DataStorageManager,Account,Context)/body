@@ -1,5 +1,0 @@
-{
-  mRemotePath=remotePath;
-  mStorageManager=dataStorageManager;
-  mAccount=account;
-}

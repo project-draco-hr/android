@@ -1,0 +1,7 @@
+OCFile localFile
+OCFile serverFile
+DataStorageManager storageManager
+Account account
+boolean syncFileContents
+boolean localChangeAlreadyKnown
+Context context

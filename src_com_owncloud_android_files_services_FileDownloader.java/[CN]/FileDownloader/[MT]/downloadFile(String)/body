@@ -6,15 +6,14 @@ synchronized (mPendingDownloads) {
     notifyDownloadStart(mCurrentDownload);
     if (mDownloadClient == null || !mLastAccount.equals(mCurrentDownload.getAccount())) {
       mLastAccount=mCurrentDownload.getAccount();
+      mStorageManager=new FileDataStorageManager(mLastAccount,getContentResolver());
       mDownloadClient=OwnCloudClientUtils.createOwnCloudClient(mLastAccount,getApplicationContext());
     }
     RemoteOperationResult downloadResult=null;
     try {
       downloadResult=mCurrentDownload.execute(mDownloadClient);
       if (downloadResult.isSuccess()) {
-        ContentValues cv=new ContentValues();
-        cv.put(ProviderTableMeta.FILE_STORAGE_PATH,mCurrentDownload.getSavePath());
-        getContentResolver().update(ProviderTableMeta.CONTENT_URI,cv,ProviderTableMeta.FILE_NAME + "=? AND " + ProviderTableMeta.FILE_ACCOUNT_OWNER+ "=?",new String[]{mCurrentDownload.getSavePath().substring(mCurrentDownload.getSavePath().lastIndexOf('/') + 1),mLastAccount.name});
+        saveDownloadedFile();
       }
     }
   finally {
@@ -23,6 +22,6 @@ synchronized (mPendingDownloads) {
       }
     }
     notifyDownloadResult(mCurrentDownload,downloadResult);
-    sendFinalBroadcast(mCurrentDownload,downloadResult);
+    sendBroadcastDownloadFinished(mCurrentDownload,downloadResult);
   }
 }

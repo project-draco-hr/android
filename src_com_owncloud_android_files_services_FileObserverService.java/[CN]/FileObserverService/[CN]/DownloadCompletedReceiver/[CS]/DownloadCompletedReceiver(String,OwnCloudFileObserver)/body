@@ -1,5 +1,0 @@
-{
-  mPath=path;
-  mObserver=observer;
-  addReceiverToList(this);
-}

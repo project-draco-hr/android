@@ -1,0 +1,20 @@
+{
+  if (file == null) {
+    Log.e(TAG,"Trying to add a NULL file to observer");
+    return;
+  }
+  String localPath=file.getStoragePath();
+  if (localPath == null || localPath.length() <= 0) {
+    localPath=FileStorageUtils.getDefaultSavePathFor(account.name,file);
+  }
+  OwnCloudFileObserver observer=mObserversMap.get(localPath);
+  if (observer == null) {
+    observer=new OwnCloudFileObserver(localPath,account,getApplicationContext(),OwnCloudFileObserver.CHANGES_ONLY);
+    mObserversMap.put(localPath,observer);
+    Log.d(TAG,"Observer added for path " + localPath);
+    if (file.isDown()) {
+      observer.startWatching();
+      Log.d(TAG,"Started watching " + localPath);
+    }
+  }
+}

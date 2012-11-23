@@ -12,6 +12,7 @@
     mPendingDownloads.putIfAbsent(downloadKey,newDownload);
     newDownload.addDatatransferProgressListener(this);
     requestedDownloads.add(downloadKey);
+    sendBroadcastNewDownload(newDownload);
   }
  catch (  IllegalArgumentException e) {
     Log.e(TAG,"Not enough information provided in intent: " + e.getMessage());

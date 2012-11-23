@@ -1,9 +1,0 @@
-{
-  if (mPath.equals(intent.getStringExtra(FileDownloader.EXTRA_FILE_PATH))) {
-    context.unregisterReceiver(this);
-    removeReceiverFromList(this);
-    mObserver.startWatching();
-    Log.d(TAG,"Started watching " + mPath);
-    return;
-  }
-}

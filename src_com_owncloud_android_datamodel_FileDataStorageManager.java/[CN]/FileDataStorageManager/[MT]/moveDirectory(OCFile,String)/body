@@ -14,7 +14,7 @@
     }
     ArrayList<ContentProviderOperation> operations=new ArrayList<ContentProviderOperation>(c.getCount());
     int lengthOfOldPath=dir.getRemotePath().length();
-    String defaultSavePath=FileDownloader.getSavePath(mAccount.name);
+    String defaultSavePath=FileStorageUtils.getSavePath(mAccount.name);
     int lengthOfOldStoragePath=defaultSavePath.length() + lengthOfOldPath;
     if (c.moveToFirst()) {
       do {
