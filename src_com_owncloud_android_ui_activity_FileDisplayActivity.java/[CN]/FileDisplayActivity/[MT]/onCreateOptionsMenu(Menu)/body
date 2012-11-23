@@ -1,5 +1,6 @@
 {
   MenuInflater inflater=getSherlock().getMenuInflater();
   inflater.inflate(R.menu.menu,menu);
+  patchHiddenAccents(menu);
   return true;
 }

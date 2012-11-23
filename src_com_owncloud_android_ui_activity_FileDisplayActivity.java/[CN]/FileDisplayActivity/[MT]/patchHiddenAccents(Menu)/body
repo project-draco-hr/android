@@ -1,0 +1,12 @@
+{
+  for (int i=0; i < mMenuIdentifiersToPatch.length; i++) {
+    MenuItem aboutItem=menu.findItem(mMenuIdentifiersToPatch[i]);
+    if (aboutItem != null && aboutItem.getIcon() instanceof BitmapDrawable) {
+      Bitmap original=((BitmapDrawable)aboutItem.getIcon()).getBitmap();
+      float scale=getResources().getDisplayMetrics().density;
+      int clippedHeight=(int)(original.getHeight() - (3 * scale));
+      Bitmap scaled=Bitmap.createBitmap(original,0,0,original.getWidth(),clippedHeight);
+      aboutItem.setIcon(new BitmapDrawable(getResources(),scaled));
+    }
+  }
+}
