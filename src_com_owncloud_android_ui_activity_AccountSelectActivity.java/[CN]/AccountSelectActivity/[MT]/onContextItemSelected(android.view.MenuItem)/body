@@ -17,5 +17,5 @@
       am.removeAccount(a,this,mHandler);
     }
   }
-  return false;
+  return true;
 }

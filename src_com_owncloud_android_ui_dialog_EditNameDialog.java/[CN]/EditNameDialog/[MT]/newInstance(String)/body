@@ -1,7 +1,0 @@
-{
-  EditNameDialog f=new EditNameDialog();
-  Bundle args=new Bundle();
-  args.putString("filename",filename);
-  f.setArguments(args);
-  return f;
-}

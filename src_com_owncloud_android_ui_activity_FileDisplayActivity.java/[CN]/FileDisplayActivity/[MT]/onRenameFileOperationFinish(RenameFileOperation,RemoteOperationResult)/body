@@ -1,0 +1,29 @@
+{
+  dismissDialog(DIALOG_SHORT_WAIT);
+  OCFile renamedFile=operation.getFile();
+  if (result.isSuccess()) {
+    if (mDualPane) {
+      FileDetailFragment details=(FileDetailFragment)getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
+      if (details != null && renamedFile.equals(details.getDisplayedFile())) {
+        details.updateFileDetails(renamedFile,AccountUtils.getCurrentOwnCloudAccount(this));
+      }
+    }
+    if (mStorageManager.getFileById(renamedFile.getParentId()).equals(mCurrentDir)) {
+      mFileList.listDirectory();
+    }
+  }
+ else {
+    if (result.getCode().equals(ResultCode.INVALID_LOCAL_FILE_NAME)) {
+      Toast msg=Toast.makeText(this,R.string.rename_local_fail_msg,Toast.LENGTH_LONG);
+      msg.show();
+    }
+ else {
+      Toast msg=Toast.makeText(this,R.string.rename_server_fail_msg,Toast.LENGTH_LONG);
+      msg.show();
+      if (result.isSslRecoverableException()) {
+        mLastSslUntrustedServerResult=result;
+        showDialog(DIALOG_SSL_VALIDATOR);
+      }
+    }
+  }
+}

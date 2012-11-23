@@ -7,7 +7,7 @@
       if (downloadWasFine) {
         mFile=mStorageManager.getFileByPath(downloadedRemotePath);
       }
-      updateFileDetails();
+      updateFileDetails(false);
     }
   }
 }

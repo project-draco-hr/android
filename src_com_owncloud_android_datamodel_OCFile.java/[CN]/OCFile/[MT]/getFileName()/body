@@ -1,4 +1,4 @@
 {
   File f=new File(getRemotePath());
-  return f.getName().length() == 0 ? "/" : f.getName();
+  return f.getName().length() == 0 ? PATH_SEPARATOR : f.getName();
 }

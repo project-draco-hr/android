@@ -8,5 +8,8 @@
     int position=savedInstanceState.getInt(SAVED_LIST_POSITION);
     setReferencePosition(position);
   }
+  registerForContextMenu(getListView());
+  getListView().setOnCreateContextMenuListener(this);
+  mHandler=new Handler();
   Log.i(TAG,"onActivityCreated() stop");
 }

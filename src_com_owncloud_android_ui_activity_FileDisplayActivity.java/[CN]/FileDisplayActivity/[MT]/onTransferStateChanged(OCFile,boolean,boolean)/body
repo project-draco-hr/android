@@ -1,0 +1,13 @@
+{
+  if (mDualPane) {
+    FileDetailFragment details=(FileDetailFragment)getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
+    if (details != null && file.equals(details.getDisplayedFile())) {
+      if (downloading || uploading) {
+        details.updateFileDetails(file,AccountUtils.getCurrentOwnCloudAccount(this));
+      }
+ else {
+        details.updateFileDetails(downloading || uploading);
+      }
+    }
+  }
+}

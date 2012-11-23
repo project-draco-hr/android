@@ -1,5 +1,0 @@
-{
-  mFile=file;
-  mNewName=newName;
-  mStorageManager=storageManager;
-}
