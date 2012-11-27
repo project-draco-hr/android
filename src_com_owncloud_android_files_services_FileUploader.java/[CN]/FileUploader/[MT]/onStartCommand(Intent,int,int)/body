@@ -69,10 +69,10 @@
     for (int i=0; i < files.length; i++) {
       uploadKey=buildRemoteName(account,files[i].getRemotePath());
       if (chunked) {
-        newUpload=new ChunkedUploadFileOperation(account,files[i],isInstant,forceOverwrite);
+        newUpload=new ChunkedUploadFileOperation(account,files[i],isInstant,forceOverwrite,false);
       }
  else {
-        newUpload=new UploadFileOperation(account,files[i],isInstant,forceOverwrite);
+        newUpload=new UploadFileOperation(account,files[i],isInstant,forceOverwrite,false);
       }
       if (fixed && i == 0) {
         newUpload.setRemoteFolderToBeCreated();

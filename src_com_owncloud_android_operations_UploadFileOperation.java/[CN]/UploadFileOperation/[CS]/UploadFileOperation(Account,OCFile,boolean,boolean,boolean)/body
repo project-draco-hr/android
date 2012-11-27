@@ -9,4 +9,5 @@
   mRemotePath=file.getRemotePath();
   mIsInstant=isInstant;
   mForceOverwrite=forceOverwrite;
+  mMoveLocalFile=moveLocalFile;
 }

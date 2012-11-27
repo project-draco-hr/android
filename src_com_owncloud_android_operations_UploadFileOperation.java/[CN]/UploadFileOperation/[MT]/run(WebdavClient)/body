@@ -1,6 +1,8 @@
 {
   RemoteOperationResult result=null;
-  boolean nameCheckPassed=false;
+  boolean localCopyPassed=false, nameCheckPassed=false;
+  File temporalFile=null, originalFile=null;
+  String originalStoragePath=mFile.getStoragePath();
   try {
     if (!mForceOverwrite) {
       String remotePath=getAvailableRemotePath(client,mRemotePath);
@@ -10,17 +12,60 @@
       }
     }
     nameCheckPassed=true;
+    String targetLocalPath=FileStorageUtils.getDefaultSavePathFor(mAccount.name,mFile);
+    if (!originalStoragePath.equals(targetLocalPath)) {
+      File ocLocalFolder=new File(FileStorageUtils.getSavePath(mAccount.name));
+      originalFile=new File(originalStoragePath);
+      if (!mMoveLocalFile) {
+        if (ocLocalFolder.getUsableSpace() < originalFile.length()) {
+          result=new RemoteOperationResult(ResultCode.LOCAL_STORAGE_FULL);
+          return result;
+        }
+ else {
+          String temporalPath=FileStorageUtils.getTemporalPath(mAccount.name) + mFile.getRemotePath();
+          mFile.setStoragePath(temporalPath);
+          temporalFile=new File(temporalPath);
+          if (!originalStoragePath.equals(temporalPath)) {
+            InputStream in=new FileInputStream(originalFile);
+            OutputStream out=new FileOutputStream(temporalFile);
+            byte[] buf=new byte[1024];
+            int len;
+            while ((len=in.read(buf)) > 0) {
+              out.write(buf,0,len);
+            }
+            in.close();
+            out.close();
+          }
+        }
+      }
+    }
+    localCopyPassed=true;
 synchronized (mCancellationRequested) {
       if (mCancellationRequested.get()) {
         throw new OperationCancelledException();
       }
  else {
-        mPutMethod=new PutMethod(client.getBaseUri() + WebdavUtils.encodePath(mRemotePath));
+        mPutMethod=new PutMethod(client.getBaseUri() + WebdavUtils.encodePath(mFile.getRemotePath()));
       }
     }
     int status=uploadFile(client);
-    result=new RemoteOperationResult(isSuccess(status),status);
-    Log.i(TAG,"Upload of " + mFile.getStoragePath() + " to "+ mRemotePath+ ": "+ result.getLogMessage());
+    if (isSuccess(status)) {
+      File fileToMove=null;
+      if (temporalFile != null) {
+        fileToMove=temporalFile;
+      }
+ else       if (originalFile != null) {
+        fileToMove=originalFile;
+      }
+      if (fileToMove != null) {
+        mFile.setStoragePath(FileStorageUtils.getDefaultSavePathFor(mAccount.name,mFile));
+        File finalFile=new File(mFile.getStoragePath());
+        if (!fileToMove.renameTo(finalFile)) {
+          result=new RemoteOperationResult(ResultCode.LOCAL_STORAGE_NOT_MOVED);
+        }
+      }
+    }
+    if (result == null)     result=new RemoteOperationResult(isSuccess(status),status);
   }
  catch (  Exception e) {
     if (mCancellationRequested.get()) {
@@ -29,7 +74,29 @@ synchronized (mCancellationRequested) {
  else {
       result=new RemoteOperationResult(e);
     }
-    Log.e(TAG,"Upload of " + mFile.getStoragePath() + " to "+ mRemotePath+ ": "+ result.getLogMessage()+ (nameCheckPassed ? "" : " (while checking file existence in server)"),result.getException());
+  }
+ finally {
+    if (temporalFile != null && !originalFile.equals(temporalFile)) {
+      temporalFile.delete();
+    }
+    if (result.isSuccess()) {
+      Log.i(TAG,"Upload of " + originalStoragePath + " to "+ mRemotePath+ ": "+ result.getLogMessage());
+    }
+ else {
+      if (result.getException() != null) {
+        String complement="";
+        if (!nameCheckPassed) {
+          complement=" (while checking file existence in server)";
+        }
+ else         if (!localCopyPassed) {
+          complement=" (while copying local file to " + FileStorageUtils.getSavePath(mAccount.name) + ")";
+        }
+        Log.e(TAG,"Upload of " + originalStoragePath + " to "+ mRemotePath+ ": "+ result.getLogMessage()+ complement,result.getException());
+      }
+ else {
+        Log.e(TAG,"Upload of " + originalStoragePath + " to "+ mRemotePath+ ": "+ result.getLogMessage());
+      }
+    }
   }
   return result;
 }
