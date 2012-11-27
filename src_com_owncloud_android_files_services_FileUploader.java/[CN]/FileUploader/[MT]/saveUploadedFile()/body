@@ -30,10 +30,6 @@
   if (mCurrentUpload.wasRenamed()) {
     OCFile oldFile=mCurrentUpload.getOldFile();
     if (oldFile.fileExists()) {
-      if (oldFile.isDown()) {
-        File oldLocalFile=new File(oldFile.getStoragePath());
-        oldLocalFile.delete();
-      }
       oldFile.setStoragePath(null);
       mStorageManager.saveFile(oldFile);
     }

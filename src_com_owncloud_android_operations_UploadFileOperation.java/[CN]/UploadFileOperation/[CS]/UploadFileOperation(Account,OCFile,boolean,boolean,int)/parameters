@@ -2,4 +2,4 @@ Account account
 OCFile file
 boolean isInstant
 boolean forceOverwrite
-boolean moveLocalFile
+int localBehaviour
