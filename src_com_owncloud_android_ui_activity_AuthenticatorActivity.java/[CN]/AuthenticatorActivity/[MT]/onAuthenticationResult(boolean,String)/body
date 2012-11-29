@@ -44,6 +44,6 @@
  catch (    IllegalArgumentException e) {
     }
     TextView tv=(TextView)findViewById(R.id.account_username);
-    tv.setError(message);
+    tv.setError(message + "        ");
   }
 }
