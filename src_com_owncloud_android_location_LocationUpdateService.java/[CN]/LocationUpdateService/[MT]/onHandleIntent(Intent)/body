@@ -5,7 +5,8 @@
   criteria.setPowerRequirement(Criteria.POWER_LOW);
   mLocationProvider=mLocationManager.getProvider(mLocationManager.getBestProvider(criteria,true));
   if (mLocationProvider == null) {
-    Toast.makeText(this,R.string.location_no_provider,Toast.LENGTH_LONG);
+    String message=String.format(getString(R.string.location_no_provider),getString(R.string.app_name));
+    Toast.makeText(this,message,Toast.LENGTH_LONG).show();
     stopSelf();
     return;
   }

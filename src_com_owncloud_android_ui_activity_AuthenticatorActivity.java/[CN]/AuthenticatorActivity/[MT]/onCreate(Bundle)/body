@@ -25,4 +25,8 @@
   iv2.setOnClickListener(this);
   tv.setOnFocusChangeListener(this);
   tv2.setOnFocusChangeListener(this);
+  Button b=(Button)findViewById(R.id.account_register);
+  if (b != null) {
+    b.setText(String.format(getString(R.string.auth_register),getString(R.string.app_name)));
+  }
 }
