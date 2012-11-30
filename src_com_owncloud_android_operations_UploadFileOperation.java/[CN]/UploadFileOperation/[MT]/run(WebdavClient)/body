@@ -36,7 +36,11 @@
               out.write(buf,0,len);
             }
           }
-  finally {
+ catch (          Exception e) {
+            result=new RemoteOperationResult(ResultCode.LOCAL_STORAGE_NOT_COPIED);
+            return result;
+          }
+ finally {
             try {
               if (in != null)               in.close();
             }
@@ -78,8 +82,7 @@ synchronized (mCancellationRequested) {
         }
         expectedFile=new File(mFile.getStoragePath());
         if (!expectedFile.equals(fileToMove) && !fileToMove.renameTo(expectedFile)) {
-          result=new RemoteOperationResult(ResultCode.LOCAL_STORAGE_NOT_MOVED);
-          return result;
+          mFile.setStoragePath(null);
         }
       }
     }
