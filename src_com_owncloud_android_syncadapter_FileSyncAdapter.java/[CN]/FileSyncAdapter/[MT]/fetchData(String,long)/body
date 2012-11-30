@@ -8,6 +8,9 @@
       mConflictsFound+=synchFolderOp.getConflictsFound();
       mFailsInFavouritesFound+=synchFolderOp.getFailsInFavouritesFound();
     }
+    if (synchFolderOp.getForgottenLocalFiles().size() > 0) {
+      mForgottenLocalFiles.putAll(synchFolderOp.getForgottenLocalFiles());
+    }
     List<OCFile> children=synchFolderOp.getChildren();
     fetchChildren(children);
   }

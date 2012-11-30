@@ -5,6 +5,7 @@
   mLastFailedResult=null;
   mConflictsFound=0;
   mFailsInFavouritesFound=0;
+  mForgottenLocalFiles=new HashMap<String,String>();
   mSyncResult=syncResult;
   mSyncResult.fullSyncRequested=false;
   mSyncResult.delayUntil=60 * 60 * 24;
@@ -36,8 +37,11 @@
       mSyncResult.tooManyRetries=true;
       notifyFailedSynchronization();
     }
- else     if (mConflictsFound > 0 || mFailsInFavouritesFound > 0) {
+    if (mConflictsFound > 0 || mFailsInFavouritesFound > 0) {
       notifyFailsInFavourites();
+    }
+    if (mForgottenLocalFiles.size() > 0) {
+      notifyForgottenLocalFiles();
     }
     sendStickyBroadcast(false,null,mLastFailedResult);
   }
