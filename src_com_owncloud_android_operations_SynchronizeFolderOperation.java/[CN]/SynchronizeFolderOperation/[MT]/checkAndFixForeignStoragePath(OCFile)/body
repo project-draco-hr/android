@@ -4,6 +4,42 @@
   File ocLocalFolder=new File(FileStorageUtils.getSavePath(mAccount.name));
   if (storagePath != null && !storagePath.equals(expectedPath)) {
     File originalFile=new File(storagePath);
-    mForgottenLocalFiles.put(file.getRemotePath(),storagePath);
+    if (ocLocalFolder.getUsableSpace() < originalFile.length()) {
+      mForgottenLocalFiles.put(file.getRemotePath(),storagePath);
+      file.setStoragePath(null);
+    }
+ else {
+      InputStream in=null;
+      OutputStream out=null;
+      try {
+        File expectedFile=new File(expectedPath);
+        in=new FileInputStream(originalFile);
+        out=new FileOutputStream(expectedFile);
+        byte[] buf=new byte[1024];
+        int len;
+        while ((len=in.read(buf)) > 0) {
+          out.write(buf,0,len);
+        }
+        file.setStoragePath(expectedPath);
+      }
+ catch (      Exception e) {
+        mForgottenLocalFiles.put(file.getRemotePath(),storagePath);
+        file.setStoragePath(null);
+      }
+ finally {
+        try {
+          if (in != null)           in.close();
+        }
+ catch (        Exception e) {
+          Log.d(TAG,"Weird exception while closing input stream for " + storagePath + " (ignoring)",e);
+        }
+        try {
+          if (out != null)           out.close();
+        }
+ catch (        Exception e) {
+          Log.d(TAG,"Weird exception while closing output stream for " + expectedPath + " (ignoring)",e);
+        }
+      }
+    }
   }
 }
