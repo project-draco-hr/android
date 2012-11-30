@@ -12,6 +12,7 @@
         String newName=(new File(uploadRemotePath)).getName();
         Toast msg=Toast.makeText(getActivity().getApplicationContext(),String.format(getString(R.string.filedetails_renamed_in_upload_msg),newName),Toast.LENGTH_LONG);
         msg.show();
+        getSherlockActivity().removeStickyBroadcast(intent);
       }
       updateFileDetails(false);
     }
