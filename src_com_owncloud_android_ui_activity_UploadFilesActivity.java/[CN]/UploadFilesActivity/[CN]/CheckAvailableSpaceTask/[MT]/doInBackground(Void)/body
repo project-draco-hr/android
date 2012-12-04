@@ -1,0 +1,12 @@
+{
+  String[] checkedFilePaths=mFileListFragment.getCheckedFilePaths();
+  long total=0;
+  for (int i=0; i < checkedFilePaths.length; i++) {
+    String localPath=checkedFilePaths[i];
+    File localFile=new File(localPath);
+    total+=localFile.length();
+  }
+  String savePath=FileStorageUtils.getSavePath(mAccount.name);
+  File saveDir=new File(savePath);
+  return (saveDir.getUsableSpace() >= total);
+}

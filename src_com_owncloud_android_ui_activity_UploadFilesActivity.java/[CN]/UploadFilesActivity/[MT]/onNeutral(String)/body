@@ -1,0 +1,4 @@
+{
+  Log.d(TAG,"Phantom neutral button in dialog was clicked; dialog tag is " + callerTag);
+  mCurrentDialog=null;
+}

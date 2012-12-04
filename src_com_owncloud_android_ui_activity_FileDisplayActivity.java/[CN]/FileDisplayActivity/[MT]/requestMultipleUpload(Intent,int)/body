@@ -15,6 +15,7 @@
     i.putExtra(FileUploader.KEY_LOCAL_FILE,filePaths);
     i.putExtra(FileUploader.KEY_REMOTE_FILE,remotePaths);
     i.putExtra(FileUploader.KEY_UPLOAD_TYPE,FileUploader.UPLOAD_MULTIPLE_FILES);
+    if (resultCode == UploadFilesActivity.RESULT_OK_AND_MOVE)     i.putExtra(FileUploader.KEY_LOCAL_BEHAVIOUR,FileUploader.LOCAL_BEHAVIOUR_MOVE);
     startService(i);
   }
  else {

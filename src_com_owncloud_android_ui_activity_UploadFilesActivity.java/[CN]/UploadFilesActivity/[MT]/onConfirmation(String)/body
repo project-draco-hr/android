@@ -1,0 +1,10 @@
+{
+  Log.d(TAG,"Positive button in dialog was clicked; dialog tag is " + callerTag);
+  if (callerTag.equals(QUERY_TO_MOVE_DIALOG_TAG)) {
+    Intent data=new Intent();
+    data.putExtra(EXTRA_CHOSEN_FILES,mFileListFragment.getCheckedFilePaths());
+    setResult(RESULT_OK_AND_MOVE,data);
+    finish();
+  }
+  mCurrentDialog=null;
+}

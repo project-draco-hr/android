@@ -1,0 +1,4 @@
+{
+  Log.d(TAG,"Negative button in dialog was clicked; dialog tag is " + callerTag);
+  mCurrentDialog=null;
+}

@@ -1,6 +1,6 @@
 {
   Log.d(TAG,"onSaveInstanceState() start");
   super.onSaveInstanceState(outState);
-  outState.putString(UploadFilesActivity.EXTRA_DIRECTORY_PATH,mCurrentDir.getAbsolutePath());
+  outState.putString(UploadFilesActivity.KEY_DIRECTORY_PATH,mCurrentDir.getAbsolutePath());
   Log.d(TAG,"onSaveInstanceState() end");
 }
