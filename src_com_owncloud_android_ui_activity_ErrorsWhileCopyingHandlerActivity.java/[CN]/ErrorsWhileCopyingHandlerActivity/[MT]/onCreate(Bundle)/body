@@ -1,0 +1,33 @@
+{
+  super.onCreate(savedInstanceState);
+  Intent intent=getIntent();
+  mAccount=intent.getParcelableExtra(EXTRA_ACCOUNT);
+  mRemotePaths=intent.getStringArrayListExtra(EXTRA_REMOTE_PATHS);
+  mLocalPaths=intent.getStringArrayListExtra(EXTRA_LOCAL_PATHS);
+  mStorageManager=new FileDataStorageManager(mAccount,getContentResolver());
+  mHandler=new Handler();
+  if (mCurrentDialog != null) {
+    mCurrentDialog.dismiss();
+    mCurrentDialog=null;
+  }
+  setContentView(R.layout.generic_explanation);
+  TextView textView=(TextView)findViewById(R.id.message);
+  String appName=getString(R.string.app_name);
+  String message=String.format(getString(R.string.sync_foreign_files_forgotten_explanation),appName,appName,appName,appName,mAccount.name);
+  textView.setText(message);
+  textView.setMovementMethod(new ScrollingMovementMethod());
+  ListView listView=(ListView)findViewById(R.id.list);
+  if (mLocalPaths != null && mLocalPaths.size() > 0) {
+    mAdapter=new ErrorsWhileCopyingListAdapter();
+    listView.setAdapter(mAdapter);
+  }
+ else {
+    listView.setVisibility(View.GONE);
+    mAdapter=null;
+  }
+  Button cancelBtn=(Button)findViewById(R.id.cancel);
+  Button okBtn=(Button)findViewById(R.id.ok);
+  okBtn.setText(R.string.foreign_files_move);
+  cancelBtn.setOnClickListener(this);
+  okBtn.setOnClickListener(this);
+}

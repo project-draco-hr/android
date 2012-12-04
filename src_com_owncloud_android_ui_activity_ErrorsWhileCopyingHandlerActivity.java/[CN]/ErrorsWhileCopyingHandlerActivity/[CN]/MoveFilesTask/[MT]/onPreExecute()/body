@@ -1,0 +1,5 @@
+{
+  mCurrentDialog=IndeterminateProgressDialog.newInstance(R.string.wait_a_moment,false);
+  mCurrentDialog.show(getSupportFragmentManager(),WAIT_DIALOG_TAG);
+  findViewById(R.id.ok).setEnabled(false);
+}
