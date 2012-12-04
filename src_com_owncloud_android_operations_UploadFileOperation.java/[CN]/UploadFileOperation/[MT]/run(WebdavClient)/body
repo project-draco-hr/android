@@ -15,8 +15,7 @@
     String expectedPath=FileStorageUtils.getDefaultSavePathFor(mAccount.name,mFile);
     expectedFile=new File(expectedPath);
     if (!originalStoragePath.equals(expectedPath) && mLocalBehaviour == FileUploader.LOCAL_BEHAVIOUR_COPY) {
-      File ocLocalFolder=new File(FileStorageUtils.getSavePath(mAccount.name));
-      if (ocLocalFolder.getUsableSpace() < originalFile.length()) {
+      if (FileStorageUtils.getUsableSpace(mAccount.name) < originalFile.length()) {
         result=new RemoteOperationResult(ResultCode.LOCAL_STORAGE_FULL);
         return result;
       }
