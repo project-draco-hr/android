@@ -4,6 +4,7 @@
   mLength=source.readLong();
   mCreationTimestamp=source.readLong();
   mModifiedTimestamp=source.readLong();
+  mModifiedTimestampAtLastSyncForData=source.readLong();
   mRemotePath=source.readString();
   mLocalPath=source.readString();
   mMimeType=source.readString();
