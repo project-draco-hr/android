@@ -69,7 +69,8 @@ case R.id.fdRemoveBtn:
 {
 ConfirmationDialogFragment confDialog=ConfirmationDialogFragment.newInstance(R.string.confirmation_remove_alert,new String[]{mFile.getFileName()},mFile.isDown() ? R.string.confirmation_remove_remote_and_local : R.string.confirmation_remove_remote,mFile.isDown() ? R.string.confirmation_remove_local : -1,R.string.common_cancel);
 confDialog.setOnConfirmationListener(this);
-confDialog.show(getFragmentManager(),FTAG_CONFIRMATION);
+mCurrentDialog=confDialog;
+mCurrentDialog.show(getFragmentManager(),FTAG_CONFIRMATION);
 break;
 }
 case R.id.fdOpenBtn:

@@ -8,6 +8,8 @@
     mTargetFile.setStoragePath(null);
     mContainerActivity.getStorageManager().saveFile(mTargetFile);
   }
+  mCurrentDialog.dismiss();
+  mCurrentDialog=null;
   listDirectory();
   mContainerActivity.onTransferStateChanged(mTargetFile,false,false);
 }

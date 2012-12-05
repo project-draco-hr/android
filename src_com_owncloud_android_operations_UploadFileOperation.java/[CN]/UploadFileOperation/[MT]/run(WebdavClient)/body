@@ -1,8 +1,7 @@
 {
   RemoteOperationResult result=null;
   boolean localCopyPassed=false, nameCheckPassed=false;
-  String originalStoragePath=mFile.getStoragePath();
-  File temporalFile=null, originalFile=new File(originalStoragePath), expectedFile=null;
+  File temporalFile=null, originalFile=new File(mOriginalStoragePath), expectedFile=null;
   try {
     if (!mForceOverwrite) {
       String remotePath=getAvailableRemotePath(client,mRemotePath);
@@ -14,7 +13,7 @@
     nameCheckPassed=true;
     String expectedPath=FileStorageUtils.getDefaultSavePathFor(mAccount.name,mFile);
     expectedFile=new File(expectedPath);
-    if (!originalStoragePath.equals(expectedPath) && mLocalBehaviour == FileUploader.LOCAL_BEHAVIOUR_COPY) {
+    if (!mOriginalStoragePath.equals(expectedPath) && mLocalBehaviour == FileUploader.LOCAL_BEHAVIOUR_COPY) {
       if (FileStorageUtils.getUsableSpace(mAccount.name) < originalFile.length()) {
         result=new RemoteOperationResult(ResultCode.LOCAL_STORAGE_FULL);
         return result;
@@ -23,7 +22,7 @@
         String temporalPath=FileStorageUtils.getTemporalPath(mAccount.name) + mFile.getRemotePath();
         mFile.setStoragePath(temporalPath);
         temporalFile=new File(temporalPath);
-        if (!originalStoragePath.equals(temporalPath)) {
+        if (!mOriginalStoragePath.equals(temporalPath)) {
           InputStream in=null;
           OutputStream out=null;
           try {
@@ -44,7 +43,7 @@
               if (in != null)               in.close();
             }
  catch (            Exception e) {
-              Log.d(TAG,"Weird exception while closing input stream for " + originalStoragePath + " (ignoring)",e);
+              Log.d(TAG,"Weird exception while closing input stream for " + mOriginalStoragePath + " (ignoring)",e);
             }
             try {
               if (out != null)               out.close();
@@ -79,7 +78,6 @@ synchronized (mCancellationRequested) {
  else {
           fileToMove=originalFile;
         }
-        expectedFile=new File(mFile.getStoragePath());
         if (!expectedFile.equals(fileToMove) && !fileToMove.renameTo(expectedFile)) {
           mFile.setStoragePath(null);
         }
@@ -100,7 +98,7 @@ synchronized (mCancellationRequested) {
       temporalFile.delete();
     }
     if (result.isSuccess()) {
-      Log.i(TAG,"Upload of " + originalStoragePath + " to "+ mRemotePath+ ": "+ result.getLogMessage());
+      Log.i(TAG,"Upload of " + mOriginalStoragePath + " to "+ mRemotePath+ ": "+ result.getLogMessage());
     }
  else {
       if (result.getException() != null) {
@@ -111,10 +109,10 @@ synchronized (mCancellationRequested) {
  else         if (!localCopyPassed) {
           complement=" (while copying local file to " + FileStorageUtils.getSavePath(mAccount.name) + ")";
         }
-        Log.e(TAG,"Upload of " + originalStoragePath + " to "+ mRemotePath+ ": "+ result.getLogMessage()+ complement,result.getException());
+        Log.e(TAG,"Upload of " + mOriginalStoragePath + " to "+ mRemotePath+ ": "+ result.getLogMessage()+ complement,result.getException());
       }
  else {
-        Log.e(TAG,"Upload of " + originalStoragePath + " to "+ mRemotePath+ ": "+ result.getLogMessage());
+        Log.e(TAG,"Upload of " + mOriginalStoragePath + " to "+ mRemotePath+ ": "+ result.getLogMessage());
       }
     }
   }

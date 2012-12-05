@@ -24,7 +24,8 @@ case R.id.remove_file_item:
     }
     ConfirmationDialogFragment confDialog=ConfirmationDialogFragment.newInstance(messageStringId,new String[]{mTargetFile.getFileName()},posBtnStringId,neuBtnStringId,R.string.common_cancel);
     confDialog.setOnConfirmationListener(this);
-    confDialog.show(getFragmentManager(),FileDetailFragment.FTAG_CONFIRMATION);
+    mCurrentDialog=confDialog;
+    mCurrentDialog.show(getFragmentManager(),FileDetailFragment.FTAG_CONFIRMATION);
     return true;
   }
 case R.id.open_file_item:
