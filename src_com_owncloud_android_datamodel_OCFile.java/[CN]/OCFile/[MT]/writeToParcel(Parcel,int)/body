@@ -4,6 +4,7 @@
   dest.writeLong(mLength);
   dest.writeLong(mCreationTimestamp);
   dest.writeLong(mModifiedTimestamp);
+  dest.writeLong(mModifiedTimestampAtLastSyncForData);
   dest.writeString(mRemotePath);
   dest.writeString(mLocalPath);
   dest.writeString(mMimeType);

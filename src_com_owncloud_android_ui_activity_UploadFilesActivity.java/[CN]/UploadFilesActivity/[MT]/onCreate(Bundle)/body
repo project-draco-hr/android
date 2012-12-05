@@ -2,11 +2,12 @@
   Log.d(TAG,"onCreate() start");
   super.onCreate(savedInstanceState);
   if (savedInstanceState != null) {
-    mCurrentDir=new File(savedInstanceState.getString(UploadFilesActivity.EXTRA_DIRECTORY_PATH));
+    mCurrentDir=new File(savedInstanceState.getString(UploadFilesActivity.KEY_DIRECTORY_PATH));
   }
  else {
     mCurrentDir=Environment.getExternalStorageDirectory();
   }
+  mAccount=getIntent().getParcelableExtra(EXTRA_ACCOUNT);
   mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
   File currDir=mCurrentDir;
   while (currDir != null && currDir.getParentFile() != null) {
@@ -26,5 +27,9 @@
   actionBar.setDisplayShowTitleEnabled(false);
   actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
   actionBar.setListNavigationCallbacks(mDirectories,this);
+  if (mCurrentDialog != null) {
+    mCurrentDialog.dismiss();
+    mCurrentDialog=null;
+  }
   Log.d(TAG,"onCreate() end");
 }

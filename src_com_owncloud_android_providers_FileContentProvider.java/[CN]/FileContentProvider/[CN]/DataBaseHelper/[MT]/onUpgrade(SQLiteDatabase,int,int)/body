@@ -11,5 +11,10 @@
     db.execSQL("ALTER TABLE " + ProviderTableMeta.DB_NAME + " ADD COLUMN "+ ProviderTableMeta.FILE_LAST_SYNC_DATE_FOR_DATA+ " INTEGER "+ " DEFAULT 0");
     upgraded=true;
   }
+  if (oldVersion < 4 && newVersion >= 4) {
+    Log.i("SQL","Entering in the #3 ADD in onUpgrade");
+    db.execSQL("ALTER TABLE " + ProviderTableMeta.DB_NAME + " ADD COLUMN "+ ProviderTableMeta.FILE_MODIFIED_AT_LAST_SYNC_FOR_DATA+ " INTEGER "+ " DEFAULT 0");
+    upgraded=true;
+  }
   if (!upgraded)   Log.i("SQL","OUT of the ADD in onUpgrade; oldVersion == " + oldVersion + ", newVersion == "+ newVersion);
 }

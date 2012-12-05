@@ -103,6 +103,7 @@ builder.setItems(items,new DialogInterface.OnClickListener(){
 public void onClick(DialogInterface dialog,int item){
   if (item == 0) {
     Intent action=new Intent(FileDisplayActivity.this,UploadFilesActivity.class);
+    action.putExtra(UploadFilesActivity.EXTRA_ACCOUNT,AccountUtils.getCurrentOwnCloudAccount(FileDisplayActivity.this));
     startActivityForResult(action,ACTION_SELECT_MULTIPLE_FILES);
   }
  else   if (item == 1) {

@@ -6,5 +6,9 @@
       operation.execute(wc,mContainerActivity,mHandler);
       getActivity().showDialog(FileDisplayActivity.DIALOG_SHORT_WAIT);
     }
+    if (mCurrentDialog != null) {
+      mCurrentDialog.dismiss();
+      mCurrentDialog=null;
+    }
   }
 }

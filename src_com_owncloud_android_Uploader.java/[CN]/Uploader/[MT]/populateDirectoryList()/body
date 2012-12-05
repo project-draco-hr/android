@@ -6,7 +6,7 @@
   mFile=mStorageManager.getFileByPath(full_path);
   if (mFile != null) {
     Vector<OCFile> files=mStorageManager.getDirectoryContent(mFile);
-    if (files != null) {
+    if (files.size() > 0) {
       List<HashMap<String,Object>> data=new LinkedList<HashMap<String,Object>>();
       for (      OCFile f : files) {
         HashMap<String,Object> h=new HashMap<String,Object>();

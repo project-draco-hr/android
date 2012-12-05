@@ -29,7 +29,7 @@
           serverChanged=(!mServerFile.getEtag().equals(mLocalFile.getEtag()));
         }
  else {
-          serverChanged=(mServerFile.getModificationTimestamp() > mLocalFile.getModificationTimestamp());
+          serverChanged=(mServerFile.getModificationTimestamp() > mLocalFile.getModificationTimestampAtLastSyncForData());
         }
         boolean localChanged=(mLocalChangeAlreadyKnown || mLocalFile.getLocalModificationTimestamp() > mLocalFile.getLastSyncDateForData());
         if (localChanged && serverChanged) {

@@ -1,0 +1,21 @@
+{
+  super.onCreate(savedInstanceState);
+  Intent intent=getIntent();
+  String message=intent.getStringExtra(MESSAGE);
+  ArrayList<String> list=intent.getStringArrayListExtra(EXTRA_LIST);
+  ArrayList<String> list2=intent.getStringArrayListExtra(EXTRA_LIST_2);
+  setContentView(R.layout.generic_explanation);
+  if (message != null) {
+    TextView textView=(TextView)findViewById(R.id.message);
+    textView.setText(message);
+    textView.setMovementMethod(new ScrollingMovementMethod());
+  }
+  ListView listView=(ListView)findViewById(R.id.list);
+  if (list != null && list.size() > 0) {
+    ListAdapter adapter=new ExplanationListAdapterView(this,list,list2);
+    listView.setAdapter(adapter);
+  }
+ else {
+    listView.setVisibility(View.GONE);
+  }
+}

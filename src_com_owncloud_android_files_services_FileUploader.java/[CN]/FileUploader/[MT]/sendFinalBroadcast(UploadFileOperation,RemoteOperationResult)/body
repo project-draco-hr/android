@@ -4,7 +4,7 @@
   if (upload.wasRenamed()) {
     end.putExtra(EXTRA_OLD_REMOTE_PATH,upload.getOldFile().getRemotePath());
   }
-  end.putExtra(EXTRA_FILE_PATH,upload.getStoragePath());
+  end.putExtra(EXTRA_OLD_FILE_PATH,upload.getOriginalStoragePath());
   end.putExtra(ACCOUNT_NAME,upload.getAccount().name);
   end.putExtra(EXTRA_UPLOAD_RESULT,uploadResult.isSuccess());
   sendStickyBroadcast(end);

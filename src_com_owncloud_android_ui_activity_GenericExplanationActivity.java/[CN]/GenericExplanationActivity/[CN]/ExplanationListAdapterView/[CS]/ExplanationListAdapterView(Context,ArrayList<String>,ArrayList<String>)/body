@@ -1,0 +1,5 @@
+{
+  super(context,android.R.layout.two_line_list_item,android.R.id.text1,list);
+  mList=list;
+  mList2=list2;
+}

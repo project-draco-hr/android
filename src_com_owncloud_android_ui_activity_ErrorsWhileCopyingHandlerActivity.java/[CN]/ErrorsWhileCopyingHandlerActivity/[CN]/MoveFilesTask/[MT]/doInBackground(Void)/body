@@ -1,0 +1,19 @@
+{
+  while (!mLocalPaths.isEmpty()) {
+    String currentPath=mLocalPaths.get(0);
+    File currentFile=new File(currentPath);
+    String expectedPath=FileStorageUtils.getSavePath(mAccount.name) + mRemotePaths.get(0);
+    File expectedFile=new File(expectedPath);
+    if (expectedFile.equals(currentFile) || currentFile.renameTo(expectedFile)) {
+      OCFile file=mStorageManager.getFileByPath(mRemotePaths.get(0));
+      file.setStoragePath(expectedPath);
+      mStorageManager.saveFile(file);
+      mRemotePaths.remove(0);
+      mLocalPaths.remove(0);
+    }
+ else {
+      return false;
+    }
+  }
+  return true;
+}

@@ -6,4 +6,6 @@
     mStorageManager.saveFile(mFile);
     updateFileDetails(mFile,mAccount);
   }
+  mCurrentDialog.dismiss();
+  mCurrentDialog=null;
 }

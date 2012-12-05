@@ -1,7 +1,7 @@
 {
   Log.d(TAG,"on item click");
   Vector<OCFile> tmpfiles=mStorageManager.getDirectoryContent(mFile);
-  if (tmpfiles == null)   return;
+  if (tmpfiles.size() <= 0)   return;
   Vector<OCFile> files=new Vector<OCFile>();
   for (  OCFile f : tmpfiles)   if (f.isDirectory())   files.add(f);
   if (files.size() < position) {

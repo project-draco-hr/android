@@ -4,6 +4,7 @@
   file.setLastSyncDateForProperties(syncDate);
   file.setLastSyncDateForData(syncDate);
   file.setModificationTimestamp(mCurrentDownload.getModificationTimestamp());
+  file.setModificationTimestampAtLastSyncForData(mCurrentDownload.getModificationTimestamp());
   file.setMimetype(mCurrentDownload.getMimeType());
   file.setStoragePath(mCurrentDownload.getSavePath());
   file.setFileLength((new File(mCurrentDownload.getSavePath()).length()));

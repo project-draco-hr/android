@@ -22,27 +22,14 @@
   }
  catch (  Exception e) {
     result=new RemoteOperationResult(e);
-    Log.i(TAG,"Update: synchronizing properties for uploaded " + mCurrentUpload.getRemotePath() + ": "+ result.getLogMessage(),e);
+    Log.e(TAG,"Update: synchronizing properties for uploaded " + mCurrentUpload.getRemotePath() + ": "+ result.getLogMessage(),e);
   }
  finally {
     if (propfind != null)     propfind.releaseConnection();
   }
   if (mCurrentUpload.wasRenamed()) {
     OCFile oldFile=mCurrentUpload.getOldFile();
-    if (!oldFile.fileExists()) {
-      file.setStoragePath(oldFile.getStoragePath());
-    }
- else {
-      File localFile=new File(oldFile.getStoragePath());
-      File newLocalFile=new File(FileStorageUtils.getDefaultSavePathFor(mCurrentUpload.getAccount().name,file));
-      boolean renameSuccessed=localFile.renameTo(newLocalFile);
-      if (renameSuccessed) {
-        file.setStoragePath(newLocalFile.getAbsolutePath());
-      }
- else {
-        Log.d(TAG,"DAMN IT: local rename failed after uploading a file with a new name already existing both in the remote account and the local database (should be due to a conflict solved with 'keep both'");
-        file.setStoragePath(null);
-      }
+    if (oldFile.fileExists()) {
       oldFile.setStoragePath(null);
       mStorageManager.saveFile(oldFile);
     }
