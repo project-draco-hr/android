@@ -78,8 +78,12 @@ synchronized (mCancellationRequested) {
  else {
           fileToMove=originalFile;
         }
-        if (!expectedFile.equals(fileToMove) && !fileToMove.renameTo(expectedFile)) {
-          mFile.setStoragePath(null);
+        if (!expectedFile.equals(fileToMove)) {
+          File expectedFolder=expectedFile.getParentFile();
+          expectedFolder.mkdirs();
+          if (!expectedFolder.isDirectory() || !fileToMove.renameTo(expectedFile)) {
+            mFile.setStoragePath(null);
+          }
         }
       }
     }
