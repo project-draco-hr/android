@@ -26,6 +26,7 @@
         if (oldFile != null) {
           file.setKeepInSync(oldFile.keepInSync());
           file.setLastSyncDateForData(oldFile.getLastSyncDateForData());
+          file.setModificationTimestampAtLastSyncForData(oldFile.getModificationTimestampAtLastSyncForData());
           checkAndFixForeignStoragePath(oldFile);
           file.setStoragePath(oldFile.getStoragePath());
         }
