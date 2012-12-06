@@ -25,8 +25,18 @@
         OCFile oldFile=mStorageManager.getFileByPath(file.getRemotePath());
         if (oldFile != null) {
           file.setKeepInSync(oldFile.keepInSync());
-          file.setLastSyncDateForData(oldFile.getLastSyncDateForData());
-          file.setModificationTimestampAtLastSyncForData(oldFile.getModificationTimestampAtLastSyncForData());
+          if (oldFile.isDown() && oldFile.getLastSyncDateForData() == 0) {
+            file.setLastSyncDateForData(oldFile.getLocalModificationTimestamp());
+          }
+ else {
+            file.setLastSyncDateForData(oldFile.getLastSyncDateForData());
+          }
+          if (oldFile.isDown() && oldFile.getModificationTimestampAtLastSyncForData() == 0) {
+            file.setModificationTimestampAtLastSyncForData(oldFile.getModificationTimestamp());
+          }
+ else {
+            file.setModificationTimestampAtLastSyncForData(oldFile.getModificationTimestampAtLastSyncForData());
+          }
           checkAndFixForeignStoragePath(oldFile);
           file.setStoragePath(oldFile.getStoragePath());
         }
