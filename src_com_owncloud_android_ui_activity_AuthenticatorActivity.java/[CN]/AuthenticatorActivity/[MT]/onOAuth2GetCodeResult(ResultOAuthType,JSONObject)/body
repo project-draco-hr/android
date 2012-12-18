@@ -1,7 +1,9 @@
 {
   if ((type == ResultOAuthType.OK_SSL) || (type == ResultOAuthType.OK_NO_SSL)) {
     codeResponseJson=responseJson;
-    startOAuth2Authentication();
+    if (codeResponseJson != null) {
+      getOAuth2AccessTokenFromJsonResponse();
+    }
   }
  else   if (type == ResultOAuthType.HOST_NOT_AVAILABLE) {
     setOAuth2ResultIconAndText(R.drawable.common_error,R.string.oauth_connection_url_unavailable);

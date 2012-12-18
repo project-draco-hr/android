@@ -1,0 +1,36 @@
+{
+  Map<String,String> responseValues=new HashMap<String,String>();
+  String queryParameters=mNewCapturedUriFromOAuth2Redirection.getQuery();
+  mNewCapturedUriFromOAuth2Redirection=null;
+  Log.v(TAG,"Queryparameters (Code) = " + queryParameters);
+  String[] pairs=queryParameters.split("&");
+  Log.v(TAG,"Pairs (Code) = " + pairs.toString());
+  int i=0;
+  String key="";
+  String value="";
+  StringBuilder sb=new StringBuilder();
+  while (pairs.length > i) {
+    int j=0;
+    String[] part=pairs[i].split("=");
+    while (part.length > j) {
+      String p=part[j];
+      if (j == 0) {
+        key=p;
+        sb.append(key + " = ");
+      }
+ else       if (j == 1) {
+        value=p;
+        responseValues.put(key,value);
+        sb.append(value + "\n");
+      }
+      Log.v(TAG,"[" + i + ","+ j+ "] = "+ p);
+      j++;
+    }
+    i++;
+  }
+  setOAuth2ResultIconAndText(R.drawable.ic_ok,R.string.auth_connection_established);
+  showDialog(OAUTH2_LOGIN_PROGRESS);
+  RemoteOperation operation=new GetOAuth2AccessToken(responseValues);
+  WebdavClient client=OwnCloudClientUtils.createOwnCloudClient(Uri.parse(OAuth2Context.OAUTH2_F_TOKEN_ENDPOINT_URL),getApplicationContext());
+  operation.execute(client,this,mHandler);
+}

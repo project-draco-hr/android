@@ -6,7 +6,8 @@
   ImageView iv2=(ImageView)findViewById(R.id.viewPassword);
   TextView tv=(TextView)findViewById(R.id.host_URL);
   TextView tv2=(TextView)findViewById(R.id.account_password);
-  TextView tv3=(TextView)findViewById(R.id.oAuth_URL);
+  EditText oauth2Url=(EditText)findViewById(R.id.oAuth_URL);
+  oauth2Url.setText("OWNCLOUD AUTHORIZATION PROVIDER IN TEST");
   if (savedInstanceState != null) {
     mStatusIcon=savedInstanceState.getInt(STATUS_ICON);
     mStatusText=savedInstanceState.getInt(STATUS_TEXT);
@@ -16,10 +17,11 @@
     findViewById(R.id.buttonOK).setEnabled(mStatusCorrect);
     if (!mStatusCorrect)     iv.setVisibility(View.VISIBLE);
  else     iv.setVisibility(View.INVISIBLE);
+    String ocVersion=savedInstanceState.getString(OC_VERSION,null);
+    if (ocVersion != null)     mDiscoveredVersion=new OwnCloudVersion(ocVersion);
     mOAuth2StatusIcon=savedInstanceState.getInt(OAUTH2_STATUS_ICON);
     mOAuth2StatusText=savedInstanceState.getInt(OAUTH2_STATUS_TEXT);
     changeViewByOAuth2Check(savedInstanceState.getBoolean(OAUTH2_IS_CHECKED));
-    oAuth2BaseUrl=savedInstanceState.getString(OAUTH2_BASE_URL);
     try {
       if (savedInstanceState.containsKey(OAUTH2_CODE_RESULT)) {
         codeResponseJson=new JSONObject(savedInstanceState.getString(OAUTH2_CODE_RESULT));
@@ -30,8 +32,6 @@
     }
     EditText hostUrl=(EditText)findViewById(R.id.host_URL);
     hostUrl.setText(savedInstanceState.getString(HOST_URL_TEXT),TextView.BufferType.EDITABLE);
-    EditText oauth2Url=(EditText)findViewById(R.id.oAuth_URL);
-    oauth2Url.setText(savedInstanceState.getString(OAUTH2_URL_TEXT),TextView.BufferType.EDITABLE);
     EditText accountUsername=(EditText)findViewById(R.id.account_username);
     accountUsername.setText(savedInstanceState.getString(ACCOUNT_USERNAME),TextView.BufferType.EDITABLE);
     EditText accountPassword=(EditText)findViewById(R.id.account_password);
@@ -46,6 +46,6 @@
   iv2.setOnClickListener(this);
   tv.setOnFocusChangeListener(this);
   tv2.setOnFocusChangeListener(this);
-  tv3.setOnFocusChangeListener(this);
-  super.onCreate(savedInstanceState);
+  mNewCapturedUriFromOAuth2Redirection=null;
+  Log.d(TAG,"onCreate");
 }

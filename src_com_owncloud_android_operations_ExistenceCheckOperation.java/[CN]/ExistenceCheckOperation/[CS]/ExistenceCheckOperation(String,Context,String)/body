@@ -1,0 +1,4 @@
+{
+  this(path,context,false);
+  mAccessToken=accessToken;
+}

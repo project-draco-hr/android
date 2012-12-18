@@ -5,5 +5,8 @@
     tokenReceiver=new TokenReceiver();
     this.registerReceiver(tokenReceiver,tokenFilter);
   }
+  if (mNewCapturedUriFromOAuth2Redirection != null) {
+    getOAuth2AccessTokenFromCapturedRedirection();
+  }
   super.onResume();
 }

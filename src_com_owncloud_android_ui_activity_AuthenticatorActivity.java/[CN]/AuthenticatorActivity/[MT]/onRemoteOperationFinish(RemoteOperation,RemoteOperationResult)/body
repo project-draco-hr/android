@@ -1,5 +1,5 @@
 {
-  if (operation.equals(mConnChkRunnable)) {
+  if (operation instanceof ConnectionCheckOperation) {
     mStatusText=mStatusIcon=0;
     mStatusCorrect=false;
     String t_url=((TextView)findViewById(R.id.host_URL)).getText().toString().trim().toLowerCase();
@@ -77,5 +77,63 @@ setResultIconAndText(mStatusIcon,mStatusText);
 if (!mStatusCorrect) findViewById(R.id.refreshButton).setVisibility(View.VISIBLE);
  else findViewById(R.id.refreshButton).setVisibility(View.INVISIBLE);
 findViewById(R.id.buttonOK).setEnabled(mStatusCorrect);
+}
+ else if (operation instanceof GetOAuth2AccessToken) {
+try {
+dismissDialog(OAUTH2_LOGIN_PROGRESS);
+}
+ catch (IllegalArgumentException e) {
+}
+if (result.isSuccess()) {
+String url=((TextView)findViewById(R.id.host_URL)).getText().toString().trim();
+if (url.endsWith("/")) url=url.substring(0,url.length() - 1);
+Uri uri=null;
+String prefix="";
+if (mIsSslConn) {
+prefix="https://";
+}
+ else {
+prefix="http://";
+}
+if (url.toLowerCase().startsWith("http://") || url.toLowerCase().startsWith("https://")) {
+prefix="";
+}
+try {
+mBaseUrl=prefix + url;
+String url_str=prefix + url + "/remote.php/odav";
+uri=Uri.parse(url_str);
+}
+ catch (Exception e) {
+onAuthenticationResult(false,getString(R.string.auth_incorrect_address_title));
+return;
+}
+showDialog(DIALOG_LOGIN_PROGRESS);
+String accessToken=((GetOAuth2AccessToken)operation).getResultTokenMap().get(OAuth2Context.KEY_ACCESS_TOKEN);
+Log.d(TAG,"ACCESS TOKEN: " + accessToken);
+mAuthChkOperation=new ExistenceCheckOperation("",this,accessToken);
+WebdavClient client=OwnCloudClientUtils.createOwnCloudClient(uri,getApplicationContext());
+mAuthChkOperation.execute(client,this,mHandler);
+}
+ else {
+TextView tv=(TextView)findViewById(R.id.oAuth_URL);
+tv.setError("A valid authorization could not be obtained");
+}
+}
+ else if (operation instanceof ExistenceCheckOperation) {
+try {
+dismissDialog(DIALOG_LOGIN_PROGRESS);
+}
+ catch (IllegalArgumentException e) {
+}
+if (result.isSuccess()) {
+TextView tv=(TextView)findViewById(R.id.oAuth_URL);
+tv.setError("OOOOOKKKKKK");
+Log.d(TAG,"OOOOK!!!!");
+}
+ else {
+TextView tv=(TextView)findViewById(R.id.oAuth_URL);
+tv.setError(result.getLogMessage());
+Log.d(TAG,"NOOOOO " + result.getLogMessage());
+}
 }
 }

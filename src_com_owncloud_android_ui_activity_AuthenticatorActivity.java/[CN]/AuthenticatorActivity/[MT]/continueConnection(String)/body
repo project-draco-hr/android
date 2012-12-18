@@ -4,7 +4,8 @@
   String password=((TextView)findViewById(R.id.account_password)).getText().toString();
   if (url.endsWith("/"))   url=url.substring(0,url.length() - 1);
   URL uri=null;
-  String webdav_path=AccountUtils.getWebdavPath(mConnChkRunnable.getDiscoveredVersion());
+  mDiscoveredVersion=mConnChkRunnable.getDiscoveredVersion();
+  String webdav_path=AccountUtils.getWebdavPath(mDiscoveredVersion);
   if (webdav_path == null) {
     onAuthenticationResult(false,getString(R.string.auth_bad_oc_version_title));
     return;

@@ -1,0 +1,7 @@
+{
+  setOAuth2ResultIconAndText(R.drawable.progress_small,R.string.oauth_login_connection);
+  mOAuth2GetCodeRunnable=new OAuth2GetCodeRunnable(OAuth2Context.OAUTH2_F_AUTHORIZATION_ENDPOINT_URL,this);
+  mOAuth2GetCodeRunnable.setListener(this,mHandler);
+  mOAuth2GetCodeThread=new Thread(mOAuth2GetCodeRunnable);
+  mOAuth2GetCodeThread.start();
+}

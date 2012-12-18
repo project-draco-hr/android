@@ -1,5 +1,4 @@
 {
-  Log.d(TAG,"Creating WebdavClient for " + uri);
   try {
     registerAdvancedSslContext(true,context);
   }

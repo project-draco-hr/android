@@ -24,7 +24,7 @@
   Log.d(TAG,"interval->" + interval);
   try {
     Intent tokenService=new Intent(this,OAuth2GetTokenService.class);
-    tokenService.putExtra(OAuth2GetTokenService.TOKEN_BASE_URI,oAuth2BaseUrl);
+    tokenService.putExtra(OAuth2GetTokenService.TOKEN_URI,OAuth2Context.OAUTH2_G_DEVICE_GETTOKEN_URL);
     tokenService.putExtra(OAuth2GetTokenService.TOKEN_DEVICE_CODE,deviceCode);
     tokenService.putExtra(OAuth2GetTokenService.TOKEN_INTERVAL,interval);
     startService(tokenService);

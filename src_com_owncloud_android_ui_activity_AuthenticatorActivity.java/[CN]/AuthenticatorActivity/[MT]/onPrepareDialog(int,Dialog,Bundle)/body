@@ -2,6 +2,7 @@
 switch (id) {
 case DIALOG_LOGIN_PROGRESS:
 case DIALOG_CERT_NOT_SAVED:
+case OAUTH2_LOGIN_PROGRESS:
     break;
 case DIALOG_SSL_VALIDATOR:
 {

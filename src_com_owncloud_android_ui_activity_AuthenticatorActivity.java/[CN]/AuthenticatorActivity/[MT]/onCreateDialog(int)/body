@@ -24,7 +24,12 @@ case OAUTH2_LOGIN_PROGRESS:
 {
     ProgressDialog working_dialog=new ProgressDialog(this);
     try {
-      working_dialog.setMessage(String.format(getString(R.string.oauth_code_validation_message),codeResponseJson.getString(OAuth2GetCodeRunnable.CODE_VERIFICATION_URL),codeResponseJson.getString(OAuth2GetCodeRunnable.CODE_USER_CODE)));
+      if (codeResponseJson != null && codeResponseJson.has(OAuth2GetCodeRunnable.CODE_VERIFICATION_URL)) {
+        working_dialog.setMessage(String.format(getString(R.string.oauth_code_validation_message),codeResponseJson.getString(OAuth2GetCodeRunnable.CODE_VERIFICATION_URL),codeResponseJson.getString(OAuth2GetCodeRunnable.CODE_USER_CODE)));
+      }
+ else {
+        working_dialog.setMessage(String.format("Getting authorization"));
+      }
     }
  catch (    JSONException e) {
       Log.e(TAG,"onCreateDialog->JSONException: " + e.toString());

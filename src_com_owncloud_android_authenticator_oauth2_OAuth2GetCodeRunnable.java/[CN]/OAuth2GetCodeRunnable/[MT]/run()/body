@@ -1,7 +1,4 @@
 {
-  ResultOAuthType mLatestResult;
-  String targetURI=null;
-  JSONObject codeResponseJson=null;
   if (!isOnline()) {
     postResult(ResultOAuthType.NO_NETWORK_CONNECTION,null);
     return;
@@ -13,26 +10,10 @@
     mUrl="https://" + mUrl;
     mLatestResult=ResultOAuthType.OK_SSL;
   }
-  targetURI=mUrl + OAuth2Context.OAUTH2_DEVICE_GETCODE_URL;
-  ConnectorOAuth2 connectorOAuth2=new ConnectorOAuth2(targetURI);
-  try {
-    List<NameValuePair> nameValuePairs=new ArrayList<NameValuePair>(2);
-    nameValuePairs.add(new BasicNameValuePair(CODE_CLIENT_ID,OAuth2Context.OAUTH2_DEVICE_CLIENT_ID));
-    nameValuePairs.add(new BasicNameValuePair(CODE_CLIENT_SCOPE,OAuth2Context.OAUTH2_DEVICE_GETCODE_SCOPES));
-    UrlEncodedFormEntity params=new UrlEncodedFormEntity(nameValuePairs);
-    codeResponseJson=new JSONObject(connectorOAuth2.connPost(params));
+  if (mGrantType.equals(OAuth2Context.OAUTH2_AUTH_CODE_GRANT_TYPE)) {
+    requestBrowserToGetAuthorizationCode();
   }
- catch (  JSONException e) {
-    Log.e(TAG,"JSONException converting to Json: " + e.toString());
+ else   if (mGrantType.equals(OAuth2Context.OAUTH_G_DEVICE_GETTOKEN_GRANT_TYPE)) {
+    getAuthorizationCode();
   }
-catch (  UnsupportedEncodingException e) {
-    Log.e(TAG,"UnsupportedEncodingException encoding URL values: " + e.toString());
-  }
-catch (  Exception e) {
-    Log.e(TAG,"Exception : " + e.toString());
-  }
-  if (codeResponseJson == null) {
-    mLatestResult=ResultOAuthType.HOST_NOT_AVAILABLE;
-  }
-  postResult(mLatestResult,codeResponseJson);
 }

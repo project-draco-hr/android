@@ -7,6 +7,7 @@
         setResultIconAndText(R.drawable.progress_small,R.string.auth_testing_connection);
         mConnChkRunnable=new ConnectionCheckOperation(uri,this);
         WebdavClient client=OwnCloudClientUtils.createOwnCloudClient(Uri.parse(uri),this);
+        mDiscoveredVersion=null;
         mAuthThread=mConnChkRunnable.execute(client,this,mHandler);
       }
  else {
@@ -28,26 +29,6 @@
       int input_type=InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
       v.setInputType(input_type);
       iv.setVisibility(View.INVISIBLE);
-    }
-  }
- else   if (view.getId() == R.id.oAuth_URL) {
-    if (!hasFocus) {
-      TextView tv3=((TextView)findViewById(R.id.oAuth_URL));
-      oAuth2BaseUrl=tv3.getText().toString().trim();
-      if (oAuth2BaseUrl.length() != 0) {
-        setOAuth2ResultIconAndText(R.drawable.progress_small,R.string.oauth_login_connection);
-        mOAuth2GetCodeRunnable=new OAuth2GetCodeRunnable(oAuth2BaseUrl,this);
-        mOAuth2GetCodeRunnable.setListener(this,mHandler);
-        mOAuth2GetCodeThread=new Thread(mOAuth2GetCodeRunnable);
-        mOAuth2GetCodeThread.start();
-      }
- else {
-        findViewById(R.id.refreshButton).setVisibility(View.INVISIBLE);
-        setOAuth2ResultIconAndText(0,0);
-      }
-    }
- else {
-      findViewById(R.id.buttonOK).setEnabled(false);
     }
   }
 }

@@ -14,12 +14,12 @@
     postResult(null);
   }
   try {
-    connectorOAuth2.setConnectorOAuth2Url(requestBaseURI + OAuth2Context.OAUTH2_DEVICE_GETTOKEN_URL);
+    connectorOAuth2.setConnectorOAuth2Url(requestBaseURI + OAuth2Context.OAUTH2_G_DEVICE_GETTOKEN_URL);
     List<NameValuePair> nameValuePairs=new ArrayList<NameValuePair>(2);
-    nameValuePairs.add(new BasicNameValuePair("client_id",OAuth2Context.OAUTH2_DEVICE_CLIENT_ID));
-    nameValuePairs.add(new BasicNameValuePair("client_secret",OAuth2Context.OAUTH2_DEVICE_CLIENT_SECRET));
+    nameValuePairs.add(new BasicNameValuePair("client_id",OAuth2Context.OAUTH2_G_DEVICE_CLIENT_ID));
+    nameValuePairs.add(new BasicNameValuePair("client_secret",OAuth2Context.OAUTH2_G_DEVICE_CLIENT_SECRET));
     nameValuePairs.add(new BasicNameValuePair("code",requestDeviceCode));
-    nameValuePairs.add(new BasicNameValuePair("grant_type",OAuth2Context.OAUTH_DEVICE_GETTOKEN_GRANT_TYPE));
+    nameValuePairs.add(new BasicNameValuePair("grant_type",OAuth2Context.OAUTH_G_DEVICE_GETTOKEN_GRANT_TYPE));
     params=new UrlEncodedFormEntity(nameValuePairs);
   }
  catch (  Exception ex1) {
