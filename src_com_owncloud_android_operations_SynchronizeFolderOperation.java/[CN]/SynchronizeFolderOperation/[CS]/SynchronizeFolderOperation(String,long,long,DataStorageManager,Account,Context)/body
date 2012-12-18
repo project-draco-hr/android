@@ -5,4 +5,5 @@
   mStorageManager=dataStorageManager;
   mAccount=account;
   mContext=context;
+  mForgottenLocalFiles=new HashMap<String,String>();
 }

@@ -1,0 +1,7 @@
+{
+  Log.d(TAG,"REMOVAL CANCELED");
+  if (mCurrentDialog != null) {
+    mCurrentDialog.dismiss();
+    mCurrentDialog=null;
+  }
+}

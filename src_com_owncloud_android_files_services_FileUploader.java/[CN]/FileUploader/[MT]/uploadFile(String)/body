@@ -16,7 +16,7 @@ synchronized (mPendingUploads) {
     try {
       uploadResult=mCurrentUpload.execute(mUploadClient);
       if (uploadResult.isSuccess()) {
-        saveUploadedFile(mCurrentUpload.getFile(),mStorageManager);
+        saveUploadedFile();
       }
     }
   finally {

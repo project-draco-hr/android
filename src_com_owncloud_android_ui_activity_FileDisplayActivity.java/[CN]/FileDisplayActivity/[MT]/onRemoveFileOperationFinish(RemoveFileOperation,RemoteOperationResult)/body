@@ -1,0 +1,27 @@
+{
+  dismissDialog(DIALOG_SHORT_WAIT);
+  if (result.isSuccess()) {
+    Toast msg=Toast.makeText(this,R.string.remove_success_msg,Toast.LENGTH_LONG);
+    msg.show();
+    OCFile removedFile=operation.getFile();
+    if (mDualPane) {
+      FileDetailFragment details=(FileDetailFragment)getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
+      if (details != null && removedFile.equals(details.getDisplayedFile())) {
+        FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.file_details_container,new FileDetailFragment(null,null));
+        transaction.commit();
+      }
+    }
+    if (mStorageManager.getFileById(removedFile.getParentId()).equals(mCurrentDir)) {
+      mFileList.listDirectory();
+    }
+  }
+ else {
+    Toast msg=Toast.makeText(this,R.string.remove_fail_msg,Toast.LENGTH_LONG);
+    msg.show();
+    if (result.isSslRecoverableException()) {
+      mLastSslUntrustedServerResult=result;
+      showDialog(DIALOG_SSL_VALIDATOR);
+    }
+  }
+}

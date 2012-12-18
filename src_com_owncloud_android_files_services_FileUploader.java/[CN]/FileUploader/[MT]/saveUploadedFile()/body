@@ -1,0 +1,38 @@
+{
+  OCFile file=mCurrentUpload.getFile();
+  long syncDate=System.currentTimeMillis();
+  file.setLastSyncDateForData(syncDate);
+  PropFindMethod propfind=null;
+  RemoteOperationResult result=null;
+  try {
+    propfind=new PropFindMethod(mUploadClient.getBaseUri() + WebdavUtils.encodePath(mCurrentUpload.getRemotePath()));
+    int status=mUploadClient.executeMethod(propfind);
+    boolean isMultiStatus=(status == HttpStatus.SC_MULTI_STATUS);
+    if (isMultiStatus) {
+      MultiStatus resp=propfind.getResponseBodyAsMultiStatus();
+      WebdavEntry we=new WebdavEntry(resp.getResponses()[0],mUploadClient.getBaseUri().getPath());
+      updateOCFile(file,we);
+      file.setLastSyncDateForProperties(syncDate);
+    }
+ else {
+      mUploadClient.exhaustResponse(propfind.getResponseBodyAsStream());
+    }
+    result=new RemoteOperationResult(isMultiStatus,status);
+    Log.i(TAG,"Update: synchronizing properties for uploaded " + mCurrentUpload.getRemotePath() + ": "+ result.getLogMessage());
+  }
+ catch (  Exception e) {
+    result=new RemoteOperationResult(e);
+    Log.e(TAG,"Update: synchronizing properties for uploaded " + mCurrentUpload.getRemotePath() + ": "+ result.getLogMessage(),e);
+  }
+ finally {
+    if (propfind != null)     propfind.releaseConnection();
+  }
+  if (mCurrentUpload.wasRenamed()) {
+    OCFile oldFile=mCurrentUpload.getOldFile();
+    if (oldFile.fileExists()) {
+      oldFile.setStoragePath(null);
+      mStorageManager.saveFile(oldFile);
+    }
+  }
+  mStorageManager.saveFile(file);
+}

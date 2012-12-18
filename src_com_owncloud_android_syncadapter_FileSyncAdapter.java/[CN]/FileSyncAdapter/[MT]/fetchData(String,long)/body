@@ -3,7 +3,14 @@
   SynchronizeFolderOperation synchFolderOp=new SynchronizeFolderOperation(remotePath,mCurrentSyncTime,parentId,getStorageManager(),getAccount(),getContext());
   RemoteOperationResult result=synchFolderOp.execute(getClient());
   sendStickyBroadcast(true,remotePath,null);
-  if (result.isSuccess()) {
+  if (result.isSuccess() || result.getCode() == ResultCode.SYNC_CONFLICT) {
+    if (result.getCode() == ResultCode.SYNC_CONFLICT) {
+      mConflictsFound+=synchFolderOp.getConflictsFound();
+      mFailsInFavouritesFound+=synchFolderOp.getFailsInFavouritesFound();
+    }
+    if (synchFolderOp.getForgottenLocalFiles().size() > 0) {
+      mForgottenLocalFiles.putAll(synchFolderOp.getForgottenLocalFiles());
+    }
     List<OCFile> children=synchFolderOp.getChildren();
     fetchChildren(children);
   }

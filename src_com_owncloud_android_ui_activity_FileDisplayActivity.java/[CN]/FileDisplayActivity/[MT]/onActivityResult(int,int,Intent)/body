@@ -1,8 +1,8 @@
 {
-  if (requestCode == ACTION_SELECT_CONTENT_FROM_APPS && resultCode == RESULT_OK) {
-    requestSimpleUpload(data);
+  if (requestCode == ACTION_SELECT_CONTENT_FROM_APPS && (resultCode == RESULT_OK || resultCode == UploadFilesActivity.RESULT_OK_AND_MOVE)) {
+    requestSimpleUpload(data,resultCode);
   }
- else   if (requestCode == ACTION_SELECT_MULTIPLE_FILES && resultCode == RESULT_OK) {
-    requestMultipleUpload(data);
+ else   if (requestCode == ACTION_SELECT_MULTIPLE_FILES && (resultCode == RESULT_OK || resultCode == UploadFilesActivity.RESULT_OK_AND_MOVE)) {
+    requestMultipleUpload(data,resultCode);
   }
 }

@@ -29,6 +29,7 @@
     finish();
   }
  catch (  SecurityException e) {
-    Toast.makeText(this,getString(R.string.uploader_error_forbidden_content),Toast.LENGTH_LONG).show();
+    String message=String.format(getString(R.string.uploader_error_forbidden_content),getString(R.string.app_name));
+    Toast.makeText(this,message,Toast.LENGTH_LONG).show();
   }
 }

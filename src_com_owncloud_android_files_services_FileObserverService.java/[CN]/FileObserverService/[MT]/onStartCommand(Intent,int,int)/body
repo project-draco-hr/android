@@ -12,13 +12,10 @@ case CMD_INIT_OBSERVED_LIST:
     initializeObservedList();
   break;
 case CMD_ADD_OBSERVED_FILE:
-addObservedFile(intent.getStringExtra(KEY_CMD_ARG));
+addObservedFile((OCFile)intent.getParcelableExtra(KEY_CMD_ARG_FILE),(Account)intent.getParcelableExtra(KEY_CMD_ARG_ACCOUNT));
 break;
 case CMD_DEL_OBSERVED_FILE:
-removeObservedFile(intent.getStringExtra(KEY_CMD_ARG));
-break;
-case CMD_ADD_DOWNLOADING_FILE:
-addDownloadingFile(intent.getStringExtra(KEY_CMD_ARG));
+removeObservedFile((OCFile)intent.getParcelableExtra(KEY_CMD_ARG_FILE),(Account)intent.getParcelableExtra(KEY_CMD_ARG_ACCOUNT));
 break;
 default :
 Log.wtf(TAG,"Incorrect key given");

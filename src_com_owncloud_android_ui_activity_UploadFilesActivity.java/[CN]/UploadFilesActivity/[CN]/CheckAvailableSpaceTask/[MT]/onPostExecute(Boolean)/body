@@ -1,0 +1,17 @@
+{
+  mCurrentDialog.dismiss();
+  mCurrentDialog=null;
+  if (result) {
+    Intent data=new Intent();
+    data.putExtra(EXTRA_CHOSEN_FILES,mFileListFragment.getCheckedFilePaths());
+    setResult(RESULT_OK,data);
+    finish();
+  }
+ else {
+    String[] args={getString(R.string.app_name)};
+    ConfirmationDialogFragment dialog=ConfirmationDialogFragment.newInstance(R.string.upload_query_move_foreign_files,args,R.string.common_yes,-1,R.string.common_no);
+    dialog.setOnConfirmationListener(UploadFilesActivity.this);
+    mCurrentDialog=dialog;
+    mCurrentDialog.show(getSupportFragmentManager(),QUERY_TO_MOVE_DIALOG_TAG);
+  }
+}

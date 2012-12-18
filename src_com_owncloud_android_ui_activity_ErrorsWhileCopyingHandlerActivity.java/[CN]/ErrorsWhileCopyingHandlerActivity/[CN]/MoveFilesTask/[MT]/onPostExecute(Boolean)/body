@@ -1,0 +1,15 @@
+{
+  mAdapter.notifyDataSetChanged();
+  mCurrentDialog.dismiss();
+  mCurrentDialog=null;
+  findViewById(R.id.ok).setEnabled(true);
+  if (result) {
+    Toast t=Toast.makeText(ErrorsWhileCopyingHandlerActivity.this,getString(R.string.foreign_files_success),Toast.LENGTH_LONG);
+    t.show();
+    finish();
+  }
+ else {
+    Toast t=Toast.makeText(ErrorsWhileCopyingHandlerActivity.this,getString(R.string.foreign_files_fail),Toast.LENGTH_LONG);
+    t.show();
+  }
+}

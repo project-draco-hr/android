@@ -4,10 +4,12 @@
   mLength=source.readLong();
   mCreationTimestamp=source.readLong();
   mModifiedTimestamp=source.readLong();
+  mModifiedTimestampAtLastSyncForData=source.readLong();
   mRemotePath=source.readString();
   mLocalPath=source.readString();
   mMimeType=source.readString();
   mNeedsUpdating=source.readInt() == 0;
   mKeepInSync=source.readInt() == 1;
-  mLastSyncDate=source.readLong();
+  mLastSyncDateForProperties=source.readLong();
+  mLastSyncDateForData=source.readLong();
 }

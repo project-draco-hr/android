@@ -1,0 +1,64 @@
+{
+  super.onCreateContextMenu(menu,v,menuInfo);
+  MenuInflater inflater=getActivity().getMenuInflater();
+  inflater.inflate(R.menu.file_context_menu,menu);
+  AdapterContextMenuInfo info=(AdapterContextMenuInfo)menuInfo;
+  OCFile targetFile=(OCFile)mAdapter.getItem(info.position);
+  List<Integer> toHide=new ArrayList<Integer>();
+  List<Integer> toDisable=new ArrayList<Integer>();
+  MenuItem item=null;
+  if (targetFile.isDirectory()) {
+    toHide.add(R.id.open_file_item);
+    toHide.add(R.id.download_file_item);
+    toHide.add(R.id.cancel_download_item);
+    toHide.add(R.id.cancel_upload_item);
+    if (mContainerActivity.getFileDownloaderBinder().isDownloading(AccountUtils.getCurrentOwnCloudAccount(getActivity()),targetFile) || mContainerActivity.getFileUploaderBinder().isUploading(AccountUtils.getCurrentOwnCloudAccount(getActivity()),targetFile)) {
+      toDisable.add(R.id.rename_file_item);
+      toDisable.add(R.id.remove_file_item);
+    }
+  }
+ else {
+    if (targetFile.isDown()) {
+      toHide.add(R.id.cancel_download_item);
+      toHide.add(R.id.cancel_upload_item);
+      item=menu.findItem(R.id.download_file_item);
+      if (item != null) {
+        item.setTitle(R.string.filedetails_sync_file);
+      }
+    }
+ else {
+      toHide.add(R.id.open_file_item);
+    }
+    if (mContainerActivity.getFileDownloaderBinder().isDownloading(AccountUtils.getCurrentOwnCloudAccount(getActivity()),targetFile)) {
+      toHide.add(R.id.download_file_item);
+      toHide.add(R.id.cancel_upload_item);
+      toDisable.add(R.id.open_file_item);
+      toDisable.add(R.id.rename_file_item);
+      toDisable.add(R.id.remove_file_item);
+    }
+ else     if (mContainerActivity.getFileUploaderBinder().isUploading(AccountUtils.getCurrentOwnCloudAccount(getActivity()),targetFile)) {
+      toHide.add(R.id.download_file_item);
+      toHide.add(R.id.cancel_download_item);
+      toDisable.add(R.id.open_file_item);
+      toDisable.add(R.id.rename_file_item);
+      toDisable.add(R.id.remove_file_item);
+    }
+ else {
+      toHide.add(R.id.cancel_download_item);
+      toHide.add(R.id.cancel_upload_item);
+    }
+  }
+  for (  int i : toHide) {
+    item=menu.findItem(i);
+    if (item != null) {
+      item.setVisible(false);
+      item.setEnabled(false);
+    }
+  }
+  for (  int i : toDisable) {
+    item=menu.findItem(i);
+    if (item != null) {
+      item.setEnabled(false);
+    }
+  }
+}

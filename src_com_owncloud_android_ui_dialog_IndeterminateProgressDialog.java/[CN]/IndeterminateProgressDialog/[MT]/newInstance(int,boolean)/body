@@ -1,0 +1,8 @@
+{
+  IndeterminateProgressDialog fragment=new IndeterminateProgressDialog();
+  Bundle args=new Bundle();
+  args.putInt(ARG_MESSAGE_ID,messageId);
+  args.putBoolean(ARG_CANCELABLE,cancelable);
+  fragment.setArguments(args);
+  return fragment;
+}

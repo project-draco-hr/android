@@ -1,0 +1,7 @@
+{
+  if (mLocalPath != null && mLocalPath.length() > 0) {
+    File f=new File(mLocalPath);
+    return f.lastModified();
+  }
+  return 0;
+}

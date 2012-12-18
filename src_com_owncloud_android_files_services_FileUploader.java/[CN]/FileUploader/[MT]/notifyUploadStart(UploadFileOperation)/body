@@ -5,7 +5,7 @@
   mDefaultNotificationContentView=mNotification.contentView;
   mNotification.contentView=new RemoteViews(getApplicationContext().getPackageName(),R.layout.progressbar_layout);
   mNotification.contentView.setProgressBar(R.id.status_progress,100,0,false);
-  mNotification.contentView.setTextViewText(R.id.status_text,String.format(getString(R.string.uploader_upload_in_progress_content),0,new File(upload.getStoragePath()).getName()));
+  mNotification.contentView.setTextViewText(R.id.status_text,String.format(getString(R.string.uploader_upload_in_progress_content),0,upload.getFileName()));
   mNotification.contentView.setImageViewResource(R.id.status_icon,R.drawable.icon);
   Intent showDetailsIntent=new Intent(this,FileDetailActivity.class);
   showDetailsIntent.putExtra(FileDetailFragment.EXTRA_FILE,upload.getFile());

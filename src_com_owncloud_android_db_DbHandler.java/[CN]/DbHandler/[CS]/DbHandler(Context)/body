@@ -1,4 +1,4 @@
 {
-  mHelper=new OpenerHepler(context);
+  mHelper=new OpenerHelper(context);
   mDB=mHelper.getWritableDatabase();
 }

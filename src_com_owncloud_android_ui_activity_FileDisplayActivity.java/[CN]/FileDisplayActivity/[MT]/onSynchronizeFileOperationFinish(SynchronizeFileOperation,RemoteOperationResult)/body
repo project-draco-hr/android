@@ -1,0 +1,26 @@
+{
+  dismissDialog(DIALOG_SHORT_WAIT);
+  OCFile syncedFile=operation.getLocalFile();
+  if (!result.isSuccess()) {
+    if (result.getCode() == ResultCode.SYNC_CONFLICT) {
+      Intent i=new Intent(this,ConflictsResolveActivity.class);
+      i.putExtra(ConflictsResolveActivity.EXTRA_FILE,syncedFile);
+      i.putExtra(ConflictsResolveActivity.EXTRA_ACCOUNT,AccountUtils.getCurrentOwnCloudAccount(this));
+      startActivity(i);
+    }
+ else {
+      Toast msg=Toast.makeText(this,R.string.sync_file_fail_msg,Toast.LENGTH_LONG);
+      msg.show();
+    }
+  }
+ else {
+    if (operation.transferWasRequested()) {
+      mFileList.listDirectory();
+      onTransferStateChanged(syncedFile,true,true);
+    }
+ else {
+      Toast msg=Toast.makeText(this,R.string.sync_file_nothing_to_do_msg,Toast.LENGTH_LONG);
+      msg.show();
+    }
+  }
+}

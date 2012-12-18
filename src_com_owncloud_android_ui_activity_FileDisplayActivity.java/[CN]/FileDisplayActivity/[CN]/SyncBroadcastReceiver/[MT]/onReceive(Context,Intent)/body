@@ -17,6 +17,7 @@
       }
     }
     setSupportProgressBarIndeterminateVisibility(inProgress);
+    removeStickyBroadcast(intent);
   }
   RemoteOperationResult synchResult=(RemoteOperationResult)intent.getSerializableExtra(FileSyncService.SYNC_RESULT);
   if (synchResult != null) {

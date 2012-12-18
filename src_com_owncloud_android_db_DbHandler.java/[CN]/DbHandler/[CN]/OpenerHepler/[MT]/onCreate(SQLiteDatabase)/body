@@ -1,3 +1,0 @@
-{
-  db.execSQL("CREATE TABLE " + TABLE_INSTANT_UPLOAD + " ("+ " _id INTEGET PRIMARY KEY, "+ " path TEXT,"+ " account TEXT);");
-}

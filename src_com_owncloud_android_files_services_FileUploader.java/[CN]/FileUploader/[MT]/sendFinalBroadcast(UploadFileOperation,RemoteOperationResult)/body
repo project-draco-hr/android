@@ -1,9 +1,11 @@
 {
   Intent end=new Intent(UPLOAD_FINISH_MESSAGE);
   end.putExtra(EXTRA_REMOTE_PATH,upload.getRemotePath());
-  end.putExtra(EXTRA_FILE_PATH,upload.getStoragePath());
+  if (upload.wasRenamed()) {
+    end.putExtra(EXTRA_OLD_REMOTE_PATH,upload.getOldFile().getRemotePath());
+  }
+  end.putExtra(EXTRA_OLD_FILE_PATH,upload.getOriginalStoragePath());
   end.putExtra(ACCOUNT_NAME,upload.getAccount().name);
   end.putExtra(EXTRA_UPLOAD_RESULT,uploadResult.isSuccess());
-  end.putExtra(EXTRA_PARENT_DIR_ID,upload.getFile().getParentId());
-  sendBroadcast(end);
+  sendStickyBroadcast(end);
 }

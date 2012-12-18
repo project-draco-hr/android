@@ -1,6 +1,6 @@
 {
+  Vector<OCFile> ret=new Vector<OCFile>();
   if (f != null && f.isDirectory() && f.getFileId() != -1) {
-    Vector<OCFile> ret=new Vector<OCFile>();
     Uri req_uri=Uri.withAppendedPath(ProviderTableMeta.CONTENT_URI_DIR,String.valueOf(f.getFileId()));
     Cursor c=null;
     if (getContentProvider() != null) {
@@ -24,7 +24,6 @@
     }
     c.close();
     Collections.sort(ret);
-    return ret;
   }
-  return null;
+  return ret;
 }

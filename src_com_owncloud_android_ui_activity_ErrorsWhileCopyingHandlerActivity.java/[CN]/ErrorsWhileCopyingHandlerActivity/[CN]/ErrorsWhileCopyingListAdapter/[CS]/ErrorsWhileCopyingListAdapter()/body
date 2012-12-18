@@ -1,0 +1,3 @@
+{
+  super(ErrorsWhileCopyingHandlerActivity.this,android.R.layout.two_line_list_item,android.R.id.text1,mLocalPaths);
+}

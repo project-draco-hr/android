@@ -1,0 +1,14 @@
+{
+  String downloadPath=intent.getStringExtra(FileDownloader.EXTRA_FILE_PATH);
+  OwnCloudFileObserver observer=mObserversMap.get(downloadPath);
+  if (observer != null) {
+    if (intent.getAction().equals(FileDownloader.DOWNLOAD_FINISH_MESSAGE) && new File(downloadPath).exists()) {
+      observer.startWatching();
+      Log.d(TAG,"Watching again " + downloadPath);
+    }
+ else     if (intent.getAction().equals(FileDownloader.DOWNLOAD_ADDED_MESSAGE)) {
+      observer.stopWatching();
+      Log.d(TAG,"Disabling observance of " + downloadPath);
+    }
+  }
+}
