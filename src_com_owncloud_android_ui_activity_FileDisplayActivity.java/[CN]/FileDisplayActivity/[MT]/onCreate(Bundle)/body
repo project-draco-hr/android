@@ -1,6 +1,7 @@
 {
   Log.d(getClass().toString(),"onCreate() start");
   super.onCreate(savedInstanceState);
+  mHandler=new Handler();
   mCurrentDir=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE);
   Account account=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_ACCOUNT);
   if (account != null)   AccountUtils.setCurrentOwnCloudAccount(this,account.name);

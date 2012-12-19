@@ -1,0 +1,14 @@
+{
+  Log.d(TAG,"enter BearerScheme.authenticate(Credentials, HttpMethod)");
+  if (method == null) {
+    throw new IllegalArgumentException("Method may not be null");
+  }
+  BearerCredentials bearer=null;
+  try {
+    bearer=(BearerCredentials)credentials;
+  }
+ catch (  ClassCastException e) {
+    throw new InvalidCredentialsException("Credentials cannot be used for bearer authentication: " + credentials.getClass().getName());
+  }
+  return BearerAuthScheme.authenticate(bearer,method.getParams().getCredentialCharset());
+}

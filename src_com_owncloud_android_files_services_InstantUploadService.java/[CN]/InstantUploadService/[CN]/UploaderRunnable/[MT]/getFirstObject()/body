@@ -1,8 +1,0 @@
-{
-synchronized (mLock) {
-    if (mHashMapList.size() == 0)     return null;
-    HashMap<String,Object> ret=mHashMapList.get(0);
-    mHashMapList.remove(0);
-    return ret;
-  }
-}

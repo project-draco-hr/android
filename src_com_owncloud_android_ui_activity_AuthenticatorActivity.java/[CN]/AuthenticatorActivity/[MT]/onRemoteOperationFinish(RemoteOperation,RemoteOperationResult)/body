@@ -109,7 +109,7 @@ return;
 }
 showDialog(DIALOG_LOGIN_PROGRESS);
 String accessToken=((GetOAuth2AccessToken)operation).getResultTokenMap().get(OAuth2Context.KEY_ACCESS_TOKEN);
-Log.d(TAG,"ACCESS TOKEN: " + accessToken);
+Log.d(TAG,"Got ACCESS TOKEN: " + accessToken);
 mAuthChkOperation=new ExistenceCheckOperation("",this,accessToken);
 WebdavClient client=OwnCloudClientUtils.createOwnCloudClient(uri,getApplicationContext());
 mAuthChkOperation.execute(client,this,mHandler);
@@ -127,13 +127,41 @@ dismissDialog(DIALOG_LOGIN_PROGRESS);
 }
 if (result.isSuccess()) {
 TextView tv=(TextView)findViewById(R.id.oAuth_URL);
-tv.setError("OOOOOKKKKKK");
-Log.d(TAG,"OOOOK!!!!");
+Log.d(TAG,"Checked access - time to save the account");
+Uri uri=Uri.parse(mBaseUrl);
+String username="OAuth_user" + (new java.util.Random(System.currentTimeMillis())).nextLong();
+String accountName=username + "@" + uri.getHost();
+if (uri.getPort() >= 0) {
+accountName+=":" + uri.getPort();
+}
+Account account=new Account(accountName,AccountAuthenticator.ACCOUNT_TYPE);
+AccountManager accManager=AccountManager.get(this);
+accManager.addAccountExplicitly(account,"",null);
+Account defaultAccount=AccountUtils.getCurrentOwnCloudAccount(this);
+if (defaultAccount == null) {
+SharedPreferences.Editor editor=PreferenceManager.getDefaultSharedPreferences(this).edit();
+editor.putString("select_oc_account",accountName);
+editor.commit();
+}
+final Intent intent=new Intent();
+intent.putExtra(AccountManager.KEY_ACCOUNT_TYPE,AccountAuthenticator.ACCOUNT_TYPE);
+intent.putExtra(AccountManager.KEY_ACCOUNT_NAME,account.name);
+intent.putExtra(AccountManager.KEY_USERDATA,username);
+accManager.setAuthToken(account,AccountAuthenticator.AUTH_TOKEN_TYPE_ACCESS_TOKEN,((ExistenceCheckOperation)operation).getAccessToken());
+accManager.setUserData(account,AccountAuthenticator.KEY_OC_VERSION,mConnChkRunnable.getDiscoveredVersion().toString());
+accManager.setUserData(account,AccountAuthenticator.KEY_OC_BASE_URL,mBaseUrl);
+accManager.setUserData(account,AccountAuthenticator.KEY_SUPPORTS_OAUTH2,"TRUE");
+setAccountAuthenticatorResult(intent.getExtras());
+setResult(RESULT_OK,intent);
+Bundle bundle=new Bundle();
+bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL,true);
+ContentResolver.requestSync(account,"org.owncloud",bundle);
+finish();
 }
  else {
 TextView tv=(TextView)findViewById(R.id.oAuth_URL);
 tv.setError(result.getLogMessage());
-Log.d(TAG,"NOOOOO " + result.getLogMessage());
+Log.d(TAG,"Access failed: " + result.getLogMessage());
 }
 }
 }

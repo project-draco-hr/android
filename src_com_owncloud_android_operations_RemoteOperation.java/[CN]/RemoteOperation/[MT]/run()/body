@@ -1,9 +1,29 @@
 {
-  final RemoteOperationResult result=execute(mClient);
+  RemoteOperationResult result=null;
+  try {
+    if (mClient == null) {
+      if (mAccount != null && mContext != null) {
+        mClient=OwnCloudClientUtils.createOwnCloudClient(mAccount,mContext);
+      }
+ else {
+        throw new IllegalStateException("Trying to run a remote operation asynchronously with no client instance or account");
+      }
+    }
+    result=run(mClient);
+  }
+ catch (  IOException e) {
+    Log.e(TAG,"Error while trying to access to " + mAccount.name,e);
+    result=new RemoteOperationResult(e);
+  }
+catch (  AccountsException e) {
+    Log.e(TAG,"Error while trying to access to " + mAccount.name,e);
+    result=new RemoteOperationResult(e);
+  }
+  final RemoteOperationResult resultToSend=result;
   if (mListenerHandler != null && mListener != null) {
     mListenerHandler.post(new Runnable(){
       @Override public void run(){
-        mListener.onRemoteOperationFinish(RemoteOperation.this,result);
+        mListener.onRemoteOperationFinish(RemoteOperation.this,resultToSend);
       }
     }
 );

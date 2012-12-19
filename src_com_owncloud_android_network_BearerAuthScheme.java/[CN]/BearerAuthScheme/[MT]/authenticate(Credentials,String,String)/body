@@ -1,0 +1,11 @@
+{
+  Log.d(TAG,"enter BearerScheme.authenticate(Credentials, String, String)");
+  BearerCredentials bearer=null;
+  try {
+    bearer=(BearerCredentials)credentials;
+  }
+ catch (  ClassCastException e) {
+    throw new InvalidCredentialsException("Credentials cannot be used for bearer authentication: " + credentials.getClass().getName());
+  }
+  return BearerAuthScheme.authenticate(bearer);
+}

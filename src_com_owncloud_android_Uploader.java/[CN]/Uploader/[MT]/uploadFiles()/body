@@ -1,9 +1,5 @@
 {
   try {
-    WebdavClient wdc=OwnCloudClientUtils.createOwnCloudClient(mAccount,getApplicationContext());
-    if (mCreateDir) {
-      wdc.createDirectory(mUploadPath);
-    }
     String[] local=new String[mStreamsToUpload.size()], remote=new String[mStreamsToUpload.size()];
     for (int i=0; i < mStreamsToUpload.size(); ++i) {
       Uri uri=(Uri)mStreamsToUpload.get(i);

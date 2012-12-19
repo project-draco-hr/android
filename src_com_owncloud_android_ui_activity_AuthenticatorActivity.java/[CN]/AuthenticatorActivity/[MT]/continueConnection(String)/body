@@ -5,7 +5,7 @@
   if (url.endsWith("/"))   url=url.substring(0,url.length() - 1);
   URL uri=null;
   mDiscoveredVersion=mConnChkRunnable.getDiscoveredVersion();
-  String webdav_path=AccountUtils.getWebdavPath(mDiscoveredVersion);
+  String webdav_path=AccountUtils.getWebdavPath(mDiscoveredVersion,false);
   if (webdav_path == null) {
     onAuthenticationResult(false,getString(R.string.auth_bad_oc_version_title));
     return;

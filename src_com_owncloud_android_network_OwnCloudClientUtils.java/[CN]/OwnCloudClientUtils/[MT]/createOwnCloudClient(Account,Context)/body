@@ -1,8 +1,15 @@
 {
-  Uri uri=Uri.parse(AccountUtils.constructFullURLForAccount(context,account));
-  WebdavClient client=createOwnCloudClient(uri,context);
-  String username=account.name.substring(0,account.name.lastIndexOf('@'));
-  String password=AccountManager.get(context).getPassword(account);
-  client.setCredentials(username,password);
+  Uri uri=Uri.parse(AccountUtils.constructFullURLForAccount(appContext,account));
+  WebdavClient client=createOwnCloudClient(uri,appContext);
+  AccountManager am=AccountManager.get(appContext);
+  if (am.getUserData(account,AccountAuthenticator.KEY_SUPPORTS_OAUTH2) != null) {
+    String accessToken=am.blockingGetAuthToken(account,AccountAuthenticator.AUTH_TOKEN_TYPE_ACCESS_TOKEN,false);
+    client.setBearerCredentials(accessToken);
+  }
+ else {
+    String username=account.name.substring(0,account.name.lastIndexOf('@'));
+    String password=am.blockingGetAuthToken(account,AccountAuthenticator.AUTH_TOKEN_TYPE_PASSWORD,false);
+    client.setBasicCredentials(username,password);
+  }
   return client;
 }
