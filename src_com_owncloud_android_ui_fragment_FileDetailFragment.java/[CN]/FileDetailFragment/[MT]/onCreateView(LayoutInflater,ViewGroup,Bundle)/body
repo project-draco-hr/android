@@ -4,6 +4,9 @@
     mFile=savedInstanceState.getParcelable(FileDetailFragment.EXTRA_FILE);
     mAccount=savedInstanceState.getParcelable(FileDetailFragment.EXTRA_ACCOUNT);
   }
+  if (mFile != null && mAccount != null) {
+    mLayout=R.layout.file_details_fragment;
+  }
   View view=null;
   view=inflater.inflate(mLayout,container,false);
   mView=view;

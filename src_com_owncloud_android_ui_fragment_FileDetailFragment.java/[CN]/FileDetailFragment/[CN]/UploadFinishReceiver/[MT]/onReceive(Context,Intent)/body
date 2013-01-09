@@ -6,14 +6,14 @@
     boolean renamedInUpload=mFile.getRemotePath().equals(intent.getStringExtra(FileUploader.EXTRA_OLD_REMOTE_PATH));
     if (mFile.getRemotePath().equals(uploadRemotePath) || renamedInUpload) {
       if (uploadWasFine) {
-        mFile=mStorageManager.getFileByPath(mFile.getRemotePath());
+        mFile=mStorageManager.getFileByPath(uploadRemotePath);
       }
       if (renamedInUpload) {
         String newName=(new File(uploadRemotePath)).getName();
         Toast msg=Toast.makeText(getActivity().getApplicationContext(),String.format(getString(R.string.filedetails_renamed_in_upload_msg),newName),Toast.LENGTH_LONG);
         msg.show();
-        getSherlockActivity().removeStickyBroadcast(intent);
       }
+      getSherlockActivity().removeStickyBroadcast(intent);
       updateFileDetails(false);
     }
   }
