@@ -19,9 +19,9 @@
           }
         }
       }
-      if (removeDBData) {
-        removeFile(dir,true);
-      }
+    }
+    if (removeDBData) {
+      removeFile(dir,true);
     }
   }
 }
