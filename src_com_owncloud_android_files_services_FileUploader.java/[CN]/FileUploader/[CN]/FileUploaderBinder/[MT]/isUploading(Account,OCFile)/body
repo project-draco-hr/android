@@ -1,4 +1,5 @@
 {
+  if (account == null || file == null)   return false;
   String targetKey=buildRemoteName(account,file);
 synchronized (mPendingUploads) {
     if (file.isDirectory()) {

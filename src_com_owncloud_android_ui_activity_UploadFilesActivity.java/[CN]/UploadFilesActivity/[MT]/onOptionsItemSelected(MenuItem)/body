@@ -9,7 +9,7 @@ case android.R.id.home:
       break;
     }
 default :
-  retval=onOptionsItemSelected(item);
+  retval=super.onOptionsItemSelected(item);
 }
 return retval;
 }
