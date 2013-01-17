@@ -3,6 +3,7 @@
   if (context == null)   throw new IllegalArgumentException("Trying to execute a remote operation with a NULL Context");
   mAccount=account;
   mContext=context.getApplicationContext();
+  mCallerActivity=callerActivity;
   mClient=null;
   if (listener == null) {
     throw new IllegalArgumentException("Trying to execute a remote operation asynchronously without a listener to notiy the result");

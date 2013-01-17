@@ -70,7 +70,7 @@ case DIALOG_CREATE_DIR:
       path=FileDisplayActivity.this.mCurrentDir.getRemotePath();
       path+=directoryName + OCFile.PATH_SEPARATOR;
       RemoteOperation operation=new CreateFolderOperation(path,mCurrentDir.getFileId(),mStorageManager);
-      operation.execute(AccountUtils.getCurrentOwnCloudAccount(FileDisplayActivity.this),FileDisplayActivity.this,FileDisplayActivity.this,mHandler);
+      operation.execute(AccountUtils.getCurrentOwnCloudAccount(FileDisplayActivity.this),FileDisplayActivity.this,FileDisplayActivity.this,mHandler,FileDisplayActivity.this);
       dialog.dismiss();
       showDialog(DIALOG_SHORT_WAIT);
     }

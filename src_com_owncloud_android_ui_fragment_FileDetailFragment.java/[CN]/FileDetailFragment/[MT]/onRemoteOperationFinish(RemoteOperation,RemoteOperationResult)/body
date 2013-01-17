@@ -1,5 +1,16 @@
 {
-  if (operation.equals(mLastRemoteOperation)) {
+  if (!result.isSuccess() && result.getCode() == ResultCode.UNAUTHORIZED) {
+    AccountManager am=AccountManager.get(getSherlockActivity());
+    Credentials cred=operation.getClient().getCredentials();
+    if (cred instanceof BearerCredentials) {
+      am.invalidateAuthToken(AccountAuthenticator.ACCOUNT_TYPE,((BearerCredentials)cred).getAccessToken());
+    }
+ else {
+      am.clearPassword(mAccount);
+    }
+    operation.execute(mAccount,getSherlockActivity(),this,mHandler,getSherlockActivity());
+  }
+ else {
     if (operation instanceof RemoveFileOperation) {
       onRemoveFileOperationFinish((RemoveFileOperation)operation,result);
     }

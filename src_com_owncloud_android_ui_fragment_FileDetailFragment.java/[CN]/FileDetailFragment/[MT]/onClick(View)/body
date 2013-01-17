@@ -35,7 +35,7 @@ case R.id.fdDownloadBtn:
       }
  else {
         mLastRemoteOperation=new SynchronizeFileOperation(mFile,null,mStorageManager,mAccount,true,false,getActivity());
-        mLastRemoteOperation.execute(mAccount,getSherlockActivity(),this,mHandler);
+        mLastRemoteOperation.execute(mAccount,getSherlockActivity(),this,mHandler,getSherlockActivity());
         boolean inDisplayActivity=getActivity() instanceof FileDisplayActivity;
         getActivity().showDialog((inDisplayActivity) ? FileDisplayActivity.DIALOG_SHORT_WAIT : FileDetailActivity.DIALOG_SHORT_WAIT);
         setButtonsForTransferring();
