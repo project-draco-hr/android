@@ -1,0 +1,6 @@
+{
+  Bundle resultBundle=new Bundle();
+  resultBundle.putInt(AccountManager.KEY_ERROR_CODE,AccountManager.ERROR_CODE_UNSUPPORTED_OPERATION);
+  resultBundle.putString(AccountManager.KEY_ERROR_MESSAGE,"This is just a workaround, not a real account authenticator");
+  return resultBundle;
+}
