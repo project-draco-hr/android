@@ -1,0 +1,34 @@
+{
+  if (mimetype == null || "DIR".equals(mimetype)) {
+    return R.drawable.ic_menu_archive;
+  }
+ else {
+    String[] parts=mimetype.split("/");
+    String type=parts[0];
+    String subtype=parts[1];
+    if (TYPE_TXT.equals(type)) {
+      return R.drawable.file_doc;
+    }
+ else     if (TYPE_IMAGE.equals(type)) {
+      return R.drawable.file_image;
+    }
+ else     if (TYPE_VIDEO.equals(type)) {
+      return R.drawable.file_movie;
+    }
+ else     if (TYPE_AUDIO.equals(type)) {
+      return R.drawable.file_sound;
+    }
+ else     if (TYPE_APPLICATION.equals(type)) {
+      if (SUBTYPE_PDF.equals(subtype)) {
+        return R.drawable.file_pdf;
+      }
+ else       if (SUBTYPES_DOCUMENT_SET.contains(subtype)) {
+        return R.drawable.file_doc;
+      }
+ else       if (SUBTYPES_COMPRESSED_SET.contains(subtype)) {
+        return R.drawable.file_zip;
+      }
+    }
+  }
+  return R.drawable.file;
+}

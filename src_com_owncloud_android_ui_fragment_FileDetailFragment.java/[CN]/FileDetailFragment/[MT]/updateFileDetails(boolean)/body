@@ -1,7 +1,7 @@
 {
   if (mFile != null && mAccount != null && mLayout == R.layout.file_details_fragment) {
     setFilename(mFile.getFileName());
-    setFiletype(DisplayUtils.convertMIMEtoPrettyPrint(mFile.getMimetype()));
+    setFiletype(mFile.getMimetype());
     setFilesize(mFile.getFileLength());
     if (ocVersionSupportsTimeCreated()) {
       setTimeCreated(mFile.getCreationTimestamp());
