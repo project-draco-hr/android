@@ -1,6 +1,0 @@
-{
-  Intent intent=new Intent(TOKEN_RECEIVED_MESSAGE);
-  intent.putExtra(TOKEN_RECEIVED_DATA,tokenResponse);
-  sendBroadcast(intent);
-  shutdownService();
-}

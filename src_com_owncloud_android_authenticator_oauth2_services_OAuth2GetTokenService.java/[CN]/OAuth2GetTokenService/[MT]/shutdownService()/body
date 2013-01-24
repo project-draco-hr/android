@@ -1,4 +1,0 @@
-{
-  if (timer != null)   timer.cancel();
-  Log.d(TAG,"shutdownService -> Timer stopped");
-}

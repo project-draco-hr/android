@@ -12,5 +12,4 @@
   mHostBaseUrl=savedInstanceState.getString(KEY_HOST_URL_TEXT);
   mOAuth2StatusIcon=savedInstanceState.getInt(KEY_OAUTH2_STATUS_ICON);
   mOAuth2StatusText=savedInstanceState.getInt(KEY_OAUTH2_STATUS_TEXT);
-  changeViewByOAuth2Check(mOAuth2Check.isChecked());
 }

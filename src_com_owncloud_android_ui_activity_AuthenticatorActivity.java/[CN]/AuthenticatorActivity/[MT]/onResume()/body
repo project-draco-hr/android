@@ -1,5 +1,6 @@
 {
   super.onResume();
+  changeViewByOAuth2Check(mOAuth2Check.isChecked());
   if (mNewCapturedUriFromOAuth2Redirection != null) {
     getOAuth2AccessTokenFromCapturedRedirection();
   }

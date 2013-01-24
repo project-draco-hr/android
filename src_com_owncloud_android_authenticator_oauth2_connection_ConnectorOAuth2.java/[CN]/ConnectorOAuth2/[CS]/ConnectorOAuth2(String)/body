@@ -1,4 +1,0 @@
-{
-  prepareConn();
-  setConnectorOAuth2Url(destUrl);
-}

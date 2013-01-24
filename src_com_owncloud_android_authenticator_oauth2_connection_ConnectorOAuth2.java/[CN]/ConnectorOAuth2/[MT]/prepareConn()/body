@@ -1,7 +1,0 @@
-{
-  HttpParams localParams=new BasicHttpParams();
-  HttpConnectionParams.setConnectionTimeout(localParams,TRY_CONNECTION_TIMEOUT);
-  HttpConnectionParams.setSoTimeout(localParams,TRY_CONNECTION_TIMEOUT);
-  httpClient=new DefaultHttpClient(localParams);
-  localContext=new BasicHttpContext();
-}
