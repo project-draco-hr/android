@@ -1,12 +1,6 @@
 {
-  Log.d(TAG,"onResume() start");
-  if (tokenReceiver == null) {
-    IntentFilter tokenFilter=new IntentFilter(OAuth2GetTokenService.TOKEN_RECEIVED_MESSAGE);
-    tokenReceiver=new TokenReceiver();
-    this.registerReceiver(tokenReceiver,tokenFilter);
-  }
+  super.onResume();
   if (mNewCapturedUriFromOAuth2Redirection != null) {
     getOAuth2AccessTokenFromCapturedRedirection();
   }
-  super.onResume();
 }

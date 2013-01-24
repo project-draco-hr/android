@@ -1,7 +1,13 @@
 {
-  setOAuth2ResultIconAndText(R.drawable.progress_small,R.string.oauth_login_connection);
-  mOAuth2GetCodeRunnable=new OAuth2GetCodeRunnable(OAuth2Context.OAUTH2_F_AUTHORIZATION_ENDPOINT_URL,this);
-  mOAuth2GetCodeRunnable.setListener(this,mHandler);
-  mOAuth2GetCodeThread=new Thread(mOAuth2GetCodeRunnable);
-  mOAuth2GetCodeThread.start();
+  updateOAuth2IconAndText(R.drawable.progress_small,R.string.oauth_login_connection);
+  Uri uri=Uri.parse(getString(R.string.oauth_url_endpoint_auth));
+  Uri.Builder uriBuilder=uri.buildUpon();
+  uriBuilder.appendQueryParameter(OAuth2Context.CODE_RESPONSE_TYPE,OAuth2Context.OAUTH2_CODE_RESPONSE_TYPE);
+  uriBuilder.appendQueryParameter(OAuth2Context.CODE_REDIRECT_URI,OAuth2Context.MY_REDIRECT_URI);
+  uriBuilder.appendQueryParameter(OAuth2Context.CODE_CLIENT_ID,OAuth2Context.OAUTH2_F_CLIENT_ID);
+  uriBuilder.appendQueryParameter(OAuth2Context.CODE_SCOPE,OAuth2Context.OAUTH2_F_SCOPE);
+  uri=uriBuilder.build();
+  Log.d(TAG,"Starting browser to view " + uri.toString());
+  Intent i=new Intent(Intent.ACTION_VIEW,uri);
+  startActivity(i);
 }

@@ -2,64 +2,45 @@
   super.onCreate(savedInstanceState);
   getWindow().requestFeature(Window.FEATURE_NO_TITLE);
   setContentView(R.layout.account_setup);
-  ImageView iv=(ImageView)findViewById(R.id.refreshButton);
-  ImageView iv2=(ImageView)findViewById(R.id.viewPassword);
-  TextView tv=(TextView)findViewById(R.id.host_URL);
-  TextView tv2=(TextView)findViewById(R.id.account_password);
-  EditText oauth2Url=(EditText)findViewById(R.id.oAuth_URL);
-  oauth2Url.setText("OWNCLOUD AUTHORIZATION PROVIDER IN TEST");
-  if (savedInstanceState != null) {
-    mStatusIcon=savedInstanceState.getInt(STATUS_ICON);
-    mStatusText=savedInstanceState.getInt(STATUS_TEXT);
-    mStatusCorrect=savedInstanceState.getBoolean(STATUS_CORRECT);
-    mIsSslConn=savedInstanceState.getBoolean(IS_SSL_CONN);
-    setResultIconAndText(mStatusIcon,mStatusText);
-    findViewById(R.id.buttonOK).setEnabled(mStatusCorrect);
-    if (!mStatusCorrect)     iv.setVisibility(View.VISIBLE);
- else     iv.setVisibility(View.INVISIBLE);
-    String ocVersion=savedInstanceState.getString(OC_VERSION,null);
-    if (ocVersion != null)     mDiscoveredVersion=new OwnCloudVersion(ocVersion);
-    mOAuth2StatusIcon=savedInstanceState.getInt(OAUTH2_STATUS_ICON);
-    mOAuth2StatusText=savedInstanceState.getInt(OAUTH2_STATUS_TEXT);
-    changeViewByOAuth2Check(savedInstanceState.getBoolean(OAUTH2_IS_CHECKED));
-    try {
-      if (savedInstanceState.containsKey(OAUTH2_CODE_RESULT)) {
-        codeResponseJson=new JSONObject(savedInstanceState.getString(OAUTH2_CODE_RESULT));
-      }
-    }
- catch (    JSONException e) {
-      Log.e(TAG,"onCreate->JSONException: " + e.toString());
-    }
-    EditText hostUrl=(EditText)findViewById(R.id.host_URL);
-    hostUrl.setText(savedInstanceState.getString(HOST_URL_TEXT),TextView.BufferType.EDITABLE);
-    EditText accountUsername=(EditText)findViewById(R.id.account_username);
-    accountUsername.setText(savedInstanceState.getString(ACCOUNT_USERNAME),TextView.BufferType.EDITABLE);
-    EditText accountPassword=(EditText)findViewById(R.id.account_password);
-    accountPassword.setText(savedInstanceState.getString(ACCOUNT_PASSWORD),TextView.BufferType.EDITABLE);
-  }
- else {
-    mStatusText=mStatusIcon=0;
-    mStatusCorrect=false;
-    mIsSslConn=false;
-    String accountName=getIntent().getExtras().getString(PARAM_ACCOUNTNAME);
-    String tokenType=getIntent().getExtras().getString(AccountAuthenticator.KEY_AUTH_TOKEN_TYPE);
-    if (AccountAuthenticator.AUTH_TOKEN_TYPE_ACCESS_TOKEN.equals(tokenType)) {
-      CheckBox oAuth2Check=(CheckBox)findViewById(R.id.oauth_onOff_check);
-      oAuth2Check.setChecked(true);
-      changeViewByOAuth2Check(true);
-    }
-    if (accountName != null) {
-      ((TextView)findViewById(R.id.account_username)).setText(accountName.substring(0,accountName.lastIndexOf('@')));
-      tv.setText(accountName.substring(accountName.lastIndexOf('@') + 1));
-    }
-  }
-  iv.setOnClickListener(this);
-  iv2.setOnClickListener(this);
-  tv.setOnFocusChangeListener(this);
-  tv2.setOnFocusChangeListener(this);
+  mRefreshButton=(ImageView)findViewById(R.id.refreshButton);
+  mViewPasswordButton=(ImageView)findViewById(R.id.viewPasswordButton);
+  mHostUrlInput=(EditText)findViewById(R.id.hostUrlInput);
+  mUsernameInput=(EditText)findViewById(R.id.account_username);
+  mPasswordInput=(EditText)findViewById(R.id.account_password);
+  mOAuthAuthEndpointText=(TextView)findViewById(R.id.oAuthEntryPoint_1);
+  mOAuthTokenEndpointText=(TextView)findViewById(R.id.oAuthEntryPoint_2);
+  mOAuth2Check=(CheckBox)findViewById(R.id.oauth_onOff_check);
+  mOkButton=findViewById(R.id.buttonOK);
   Button b=(Button)findViewById(R.id.account_register);
   if (b != null) {
     b.setText(String.format(getString(R.string.auth_register),getString(R.string.app_name)));
   }
+  mHostUrlInput.setOnFocusChangeListener(this);
+  mPasswordInput.setOnFocusChangeListener(this);
+  mAccountMgr=AccountManager.get(this);
   mNewCapturedUriFromOAuth2Redirection=null;
+  if (savedInstanceState == null) {
+    mStatusText=mStatusIcon=0;
+    mStatusCorrect=false;
+    mIsSslConn=false;
+    String tokenType=getIntent().getExtras().getString(AccountAuthenticator.KEY_AUTH_TOKEN_TYPE);
+    boolean oAuthRequired=AccountAuthenticator.AUTH_TOKEN_TYPE_ACCESS_TOKEN.equals(tokenType);
+    mOAuth2Check.setChecked(oAuthRequired);
+    changeViewByOAuth2Check(oAuthRequired);
+    Account account=getIntent().getExtras().getParcelable(EXTRA_ACCOUNT);
+    if (account != null) {
+      String ocVersion=mAccountMgr.getUserData(account,AccountAuthenticator.KEY_OC_VERSION);
+      if (ocVersion != null) {
+        mDiscoveredVersion=new OwnCloudVersion(ocVersion);
+      }
+      mHostBaseUrl=mAccountMgr.getUserData(account,AccountAuthenticator.KEY_OC_BASE_URL);
+      mHostUrlInput.setText(mHostBaseUrl);
+      String userName=account.name.substring(0,account.name.lastIndexOf('@'));
+      mUsernameInput.setText(userName);
+    }
+  }
+ else {
+    loadSavedInstanceState(savedInstanceState);
+  }
+  mPasswordInput.setText("");
 }

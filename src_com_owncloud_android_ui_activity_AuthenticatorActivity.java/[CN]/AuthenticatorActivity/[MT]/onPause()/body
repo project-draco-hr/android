@@ -1,4 +1,0 @@
-{
-  Log.d(TAG,"onPause() start");
-  super.onPause();
-}

@@ -9,31 +9,25 @@
     return e.getFailureBundle();
   }
   final AccountManager am=AccountManager.get(mContext);
-  if (authTokenType.equals(AUTH_TOKEN_TYPE_ACCESS_TOKEN)) {
-    final String accessToken=am.peekAuthToken(account,authTokenType);
-    if (accessToken != null) {
-      final Bundle result=new Bundle();
-      result.putString(AccountManager.KEY_ACCOUNT_NAME,account.name);
-      result.putString(AccountManager.KEY_ACCOUNT_TYPE,ACCOUNT_TYPE);
-      result.putString(AccountManager.KEY_AUTHTOKEN,accessToken);
-      return result;
-    }
+  String accessToken;
+  if (authTokenType.equals(AUTH_TOKEN_TYPE_PASSWORD)) {
+    accessToken=am.getPassword(account);
   }
- else   if (authTokenType.equals(AUTH_TOKEN_TYPE_PASSWORD)) {
-    final String password=am.getPassword(account);
-    if (password != null) {
-      final Bundle result=new Bundle();
-      result.putString(AccountManager.KEY_ACCOUNT_NAME,account.name);
-      result.putString(AccountManager.KEY_ACCOUNT_TYPE,ACCOUNT_TYPE);
-      result.putString(AccountManager.KEY_AUTHTOKEN,password);
-      return result;
-    }
+ else {
+    accessToken=am.peekAuthToken(account,authTokenType);
+  }
+  if (accessToken != null) {
+    final Bundle result=new Bundle();
+    result.putString(AccountManager.KEY_ACCOUNT_NAME,account.name);
+    result.putString(AccountManager.KEY_ACCOUNT_TYPE,ACCOUNT_TYPE);
+    result.putString(AccountManager.KEY_AUTHTOKEN,accessToken);
+    return result;
   }
   final Intent intent=new Intent(mContext,AuthenticatorActivity.class);
   intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE,response);
   intent.putExtra(KEY_AUTH_TOKEN_TYPE,authTokenType);
   intent.putExtra(KEY_LOGIN_OPTIONS,options);
-  intent.putExtra(AuthenticatorActivity.PARAM_USERNAME,account.name);
+  intent.putExtra(AuthenticatorActivity.EXTRA_ACCOUNT,account);
   final Bundle bundle=new Bundle();
   bundle.putParcelable(AccountManager.KEY_INTENT,intent);
   return bundle;

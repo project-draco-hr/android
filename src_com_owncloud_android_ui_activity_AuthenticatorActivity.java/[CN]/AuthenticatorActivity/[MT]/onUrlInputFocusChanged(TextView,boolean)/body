@@ -1,0 +1,24 @@
+{
+  if (!hasFocus) {
+    String uri=hostInput.getText().toString().trim();
+    if (uri.length() != 0) {
+      mStatusText=R.string.auth_testing_connection;
+      mStatusIcon=R.drawable.progress_small;
+      updateOcServerCheckIconAndText();
+      mOcServerChkOperation=new OwnCloudServerCheckOperation(uri,this);
+      WebdavClient client=OwnCloudClientUtils.createOwnCloudClient(Uri.parse(uri),this);
+      mHostBaseUrl="";
+      mDiscoveredVersion=null;
+      mOperationThread=mOcServerChkOperation.execute(client,this,mHandler);
+    }
+ else {
+      mRefreshButton.setVisibility(View.INVISIBLE);
+      mStatusText=0;
+      mStatusIcon=0;
+      updateOcServerCheckIconAndText();
+    }
+  }
+ else {
+    mOkButton.setEnabled(false);
+  }
+}

@@ -1,5 +1,0 @@
-{
-  @SuppressWarnings("unchecked") HashMap<String,String> tokenResponse=(HashMap<String,String>)intent.getExtras().get(OAuth2GetTokenService.TOKEN_RECEIVED_DATA);
-  Log.d(TAG,"TokenReceiver->" + tokenResponse.get(OAuth2GetTokenService.TOKEN_ACCESS_TOKEN));
-  dismissDialog(OAUTH2_LOGIN_PROGRESS);
-}

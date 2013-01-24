@@ -1,5 +1,0 @@
-{
-  WebdavClient client=createOwnCloudClient(uri,context);
-  client.setBasicCredentials(username,password);
-  return client;
-}

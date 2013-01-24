@@ -1,20 +1,16 @@
 {
-  String prefix="";
-  String url=((TextView)findViewById(R.id.host_URL)).getText().toString().trim();
-  if (mIsSslConn) {
-    prefix="https://";
+  if (mDiscoveredVersion == null || !mDiscoveredVersion.isVersionValid() || mHostBaseUrl == null || mHostBaseUrl.length() == 0) {
+    mStatusIcon=R.drawable.common_error;
+    mStatusText=R.string.auth_wtf_reenter_URL;
+    updateOcServerCheckIconAndText();
+    mOkButton.setEnabled(false);
+    Log.wtf(TAG,"The user was allowed to click 'connect' to an unchecked server!!");
+    return;
   }
- else {
-    prefix="http://";
-  }
-  if (url.toLowerCase().startsWith("http://") || url.toLowerCase().startsWith("https://")) {
-    prefix="";
-  }
-  CheckBox oAuth2Check=(CheckBox)findViewById(R.id.oauth_onOff_check);
-  if (oAuth2Check != null && oAuth2Check.isChecked()) {
+  if (mOAuth2Check.isChecked()) {
     startOauthorization();
   }
  else {
-    continueConnection(prefix);
+    checkBasicAuthorization();
   }
 }
