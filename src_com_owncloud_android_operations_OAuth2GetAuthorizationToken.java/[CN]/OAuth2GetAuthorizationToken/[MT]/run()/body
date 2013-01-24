@@ -1,0 +1,16 @@
+{
+  if (!isOnline()) {
+    postResult(ResultOAuthType.NO_NETWORK_CONNECTION,null);
+    return;
+  }
+  if (mUrl.startsWith("http://") || mUrl.startsWith("https://")) {
+    mLatestResult=(mUrl.startsWith("https://")) ? ResultOAuthType.OK_SSL : ResultOAuthType.OK_NO_SSL;
+  }
+ else {
+    mUrl="https://" + mUrl;
+    mLatestResult=ResultOAuthType.OK_SSL;
+  }
+  if (mGrantType.equals(OAuth2Context.OAUTH2_AUTH_CODE_GRANT_TYPE)) {
+    requestBrowserToGetAuthorizationCode();
+  }
+}
