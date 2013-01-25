@@ -3,7 +3,7 @@
   mIsSslConn=savedInstanceState.getBoolean(KEY_IS_SSL_CONN);
   mStatusText=savedInstanceState.getInt(KEY_STATUS_TEXT);
   mStatusIcon=savedInstanceState.getInt(KEY_STATUS_ICON);
-  updateOcServerCheckIconAndText();
+  updateConnStatus();
   mOkButton.setEnabled(mStatusCorrect);
   if (!mStatusCorrect)   mRefreshButton.setVisibility(View.VISIBLE);
  else   mRefreshButton.setVisibility(View.INVISIBLE);

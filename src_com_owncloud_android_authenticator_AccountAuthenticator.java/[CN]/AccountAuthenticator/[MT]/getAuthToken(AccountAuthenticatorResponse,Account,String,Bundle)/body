@@ -28,6 +28,7 @@
   intent.putExtra(KEY_AUTH_TOKEN_TYPE,authTokenType);
   intent.putExtra(KEY_LOGIN_OPTIONS,options);
   intent.putExtra(AuthenticatorActivity.EXTRA_ACCOUNT,account);
+  intent.putExtra(AuthenticatorActivity.EXTRA_ACTION,AuthenticatorActivity.ACTION_UPDATE_TOKEN);
   final Bundle bundle=new Bundle();
   bundle.putParcelable(AccountManager.KEY_INTENT,intent);
   return bundle;

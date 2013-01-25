@@ -11,6 +11,7 @@
   mOAuthTokenEndpointText=(TextView)findViewById(R.id.oAuthEntryPoint_2);
   mOAuth2Check=(CheckBox)findViewById(R.id.oauth_onOff_check);
   mOkButton=findViewById(R.id.buttonOK);
+  mAuthStatusLayout=(TextView)findViewById(R.id.auth_status_text);
   Button b=(Button)findViewById(R.id.account_register);
   if (b != null) {
     b.setText(String.format(getString(R.string.auth_register),getString(R.string.app_name)));
@@ -41,6 +42,12 @@
   }
  else {
     loadSavedInstanceState(savedInstanceState);
+  }
+  if (getIntent().getByteExtra(EXTRA_ACTION,ACTION_CREATE) == ACTION_UPDATE_TOKEN) {
+    mHostUrlInput.setEnabled(false);
+    mUsernameInput.setEnabled(false);
+    mOAuth2Check.setVisibility(View.GONE);
+    checkOcServer();
   }
   mPasswordInput.setText("");
 }

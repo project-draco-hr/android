@@ -1,14 +1,10 @@
 {
-  ImageView auth2ActionIndicator=(ImageView)findViewById(R.id.auth2_action_indicator);
-  TextView oauth2StatusText=(TextView)findViewById(R.id.oauth2_status_text);
   if (checked) {
     mOAuthAuthEndpointText.setVisibility(View.VISIBLE);
     mOAuthTokenEndpointText.setVisibility(View.VISIBLE);
     mUsernameInput.setVisibility(View.GONE);
     mPasswordInput.setVisibility(View.GONE);
     mViewPasswordButton.setVisibility(View.GONE);
-    auth2ActionIndicator.setVisibility(View.INVISIBLE);
-    oauth2StatusText.setVisibility(View.INVISIBLE);
   }
  else {
     mOAuthAuthEndpointText.setVisibility(View.GONE);
@@ -16,7 +12,5 @@
     mUsernameInput.setVisibility(View.VISIBLE);
     mPasswordInput.setVisibility(View.VISIBLE);
     mViewPasswordButton.setVisibility(View.INVISIBLE);
-    auth2ActionIndicator.setVisibility(View.GONE);
-    oauth2StatusText.setVisibility(View.GONE);
   }
 }

@@ -26,7 +26,6 @@
     }
     i++;
   }
-  updateOAuth2IconAndText(R.drawable.ic_ok,R.string.auth_connection_established);
   showDialog(DIALOG_OAUTH2_LOGIN_PROGRESS);
   RemoteOperation operation=new OAuth2GetAccessToken(responseValues);
   WebdavClient client=OwnCloudClientUtils.createOwnCloudClient(Uri.parse(getString(R.string.oauth_url_endpoint_access)),getApplicationContext());

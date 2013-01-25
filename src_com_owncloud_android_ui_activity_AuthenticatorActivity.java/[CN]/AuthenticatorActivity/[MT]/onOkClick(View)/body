@@ -2,7 +2,7 @@
   if (mDiscoveredVersion == null || !mDiscoveredVersion.isVersionValid() || mHostBaseUrl == null || mHostBaseUrl.length() == 0) {
     mStatusIcon=R.drawable.common_error;
     mStatusText=R.string.auth_wtf_reenter_URL;
-    updateOcServerCheckIconAndText();
+    updateConnStatus();
     mOkButton.setEnabled(false);
     Log.wtf(TAG,"The user was allowed to click 'connect' to an unchecked server!!");
     return;
