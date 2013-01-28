@@ -50,4 +50,5 @@
     checkOcServer();
   }
   mPasswordInput.setText("");
+  mJustCreated=true;
 }

@@ -15,11 +15,8 @@
     mAuthCheckOperation.execute(client,this,mHandler);
   }
  else {
-    if (webdav_path != null) {
-      mOAuthAuthEndpointText.setError("A valid authorization could not be obtained");
-    }
- else {
-      mOAuthAuthEndpointText.setError(getString(R.string.auth_bad_oc_version_title));
-    }
+    updateStatusIconAndText(result);
+    updateAuthStatus();
+    Log.d(TAG,"Access failed: " + result.getLogMessage());
   }
 }

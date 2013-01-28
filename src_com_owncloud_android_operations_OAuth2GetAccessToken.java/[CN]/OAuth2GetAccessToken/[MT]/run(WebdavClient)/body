@@ -2,27 +2,39 @@
   RemoteOperationResult result=null;
   PostMethod postMethod=null;
   try {
-    NameValuePair[] nameValuePairs=new NameValuePair[5];
-    nameValuePairs[0]=new NameValuePair(OAuth2Context.KEY_CLIENT_ID,OAuth2Context.OAUTH2_F_CLIENT_ID);
-    nameValuePairs[1]=new NameValuePair(OAuth2Context.KEY_CODE,mOAuth2AuthorizationResponse.get(OAuth2Context.KEY_CODE));
-    nameValuePairs[2]=new NameValuePair(OAuth2Context.KEY_SCOPE,mOAuth2AuthorizationResponse.get(OAuth2Context.KEY_SCOPE));
-    nameValuePairs[3]=new NameValuePair(OAuth2Context.KEY_REDIRECT_URI,OAuth2Context.MY_REDIRECT_URI);
-    nameValuePairs[4]=new NameValuePair(OAuth2Context.KEY_GRANT_TYPE,OAuth2Context.OAUTH2_AUTH_CODE_GRANT_TYPE);
-    postMethod=new PostMethod(client.getBaseUri().toString());
-    postMethod.setRequestBody(nameValuePairs);
-    int status=client.executeMethod(postMethod);
-    if (status >= 300) {
-      client.exhaustResponse(postMethod.getResponseBodyAsStream());
-      result=new RemoteOperationResult(false,status);
-    }
- else {
-      JSONObject tokenJson=new JSONObject(postMethod.getResponseBodyAsString());
-      parseResult(tokenJson);
-      if (mResultTokenMap.get(OAuth2Context.OAUTH2_TOKEN_RECEIVED_ERROR) != null) {
-        result=new RemoteOperationResult(ResultCode.OAUTH2_ERROR);
+    parseAuthorizationResponse();
+    if (mOAuth2ParsedAuthorizationResponse.keySet().contains(OAuth2Context.KEY_ERROR)) {
+      if (OAuth2Context.ERROR_ACCESS_DENIED.equals(mOAuth2ParsedAuthorizationResponse.get(OAuth2Context.KEY_ERROR))) {
+        result=new RemoteOperationResult(ResultCode.OAUTH2_ERROR_ACCESS_DENIED);
       }
  else {
-        result=new RemoteOperationResult(true,status);
+        result=new RemoteOperationResult(ResultCode.OAUTH2_ERROR);
+      }
+    }
+    if (result == null) {
+      NameValuePair[] nameValuePairs=new NameValuePair[5];
+      nameValuePairs[0]=new NameValuePair(OAuth2Context.KEY_CLIENT_ID,OAuth2Context.OAUTH2_F_CLIENT_ID);
+      nameValuePairs[1]=new NameValuePair(OAuth2Context.KEY_CODE,mOAuth2ParsedAuthorizationResponse.get(OAuth2Context.KEY_CODE));
+      nameValuePairs[2]=new NameValuePair(OAuth2Context.KEY_SCOPE,mOAuth2ParsedAuthorizationResponse.get(OAuth2Context.KEY_SCOPE));
+      nameValuePairs[3]=new NameValuePair(OAuth2Context.KEY_REDIRECT_URI,OAuth2Context.MY_REDIRECT_URI);
+      nameValuePairs[4]=new NameValuePair(OAuth2Context.KEY_GRANT_TYPE,OAuth2Context.OAUTH2_AUTH_CODE_GRANT_TYPE);
+      postMethod=new PostMethod(client.getBaseUri().toString());
+      postMethod.setRequestBody(nameValuePairs);
+      int status=client.executeMethod(postMethod);
+      String response=postMethod.getResponseBodyAsString();
+      if (response != null && response.length() > 0) {
+        JSONObject tokenJson=new JSONObject(response);
+        parseAccessTokenResult(tokenJson);
+        if (mResultTokenMap.get(OAuth2Context.OAUTH2_TOKEN_RECEIVED_ERROR) != null || mResultTokenMap.get(OAuth2Context.KEY_ACCESS_TOKEN) == null) {
+          result=new RemoteOperationResult(ResultCode.OAUTH2_ERROR);
+        }
+ else {
+          result=new RemoteOperationResult(true,status);
+        }
+      }
+ else {
+        client.exhaustResponse(postMethod.getResponseBodyAsStream());
+        result=new RemoteOperationResult(false,status);
       }
     }
   }
@@ -32,16 +44,16 @@
  finally {
     if (postMethod != null)     postMethod.releaseConnection();
     if (result.isSuccess()) {
-      Log.i(TAG,"OAuth2 TOKEN REQUEST with code " + mOAuth2AuthorizationResponse.get("code") + " to "+ client.getBaseUri()+ ": "+ result.getLogMessage());
+      Log.i(TAG,"OAuth2 TOKEN REQUEST with auth code " + mOAuth2ParsedAuthorizationResponse.get("code") + " to "+ client.getBaseUri()+ ": "+ result.getLogMessage());
     }
  else     if (result.getException() != null) {
-      Log.e(TAG,"OAuth2 TOKEN REQUEST with code " + mOAuth2AuthorizationResponse.get("code") + " to "+ client.getBaseUri()+ ": "+ result.getLogMessage(),result.getException());
+      Log.e(TAG,"OAuth2 TOKEN REQUEST with auth code " + mOAuth2ParsedAuthorizationResponse.get("code") + " to "+ client.getBaseUri()+ ": "+ result.getLogMessage(),result.getException());
     }
  else     if (result.getCode() == ResultCode.OAUTH2_ERROR) {
-      Log.e(TAG,"OAuth2 TOKEN REQUEST with code " + mOAuth2AuthorizationResponse.get("code") + " to "+ client.getBaseUri()+ ": "+ mResultTokenMap.get(OAuth2Context.OAUTH2_TOKEN_RECEIVED_ERROR));
+      Log.e(TAG,"OAuth2 TOKEN REQUEST with auth code " + mOAuth2ParsedAuthorizationResponse.get("code") + " to "+ client.getBaseUri()+ ": "+ mResultTokenMap.get(OAuth2Context.OAUTH2_TOKEN_RECEIVED_ERROR));
     }
  else {
-      Log.e(TAG,"OAuth2 TOKEN REQUEST with code " + mOAuth2AuthorizationResponse.get("code") + " to "+ client.getBaseUri()+ ": "+ result.getLogMessage());
+      Log.e(TAG,"OAuth2 TOKEN REQUEST with auth code " + mOAuth2ParsedAuthorizationResponse.get("code") + " to "+ client.getBaseUri()+ ": "+ result.getLogMessage());
     }
   }
   return result;
