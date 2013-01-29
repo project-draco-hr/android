@@ -4,45 +4,14 @@
   }
  catch (  IllegalArgumentException e) {
   }
-  boolean isOAuth=mOAuth2Check.isChecked();
   if (result.isSuccess()) {
     Log.d(TAG,"Successful access - time to save the account");
-    Uri uri=Uri.parse(mHostBaseUrl);
-    String username=isOAuth ? "OAuth_user" + (new java.util.Random(System.currentTimeMillis())).nextLong() : mUsernameInput.getText().toString().trim();
-    String accountName=username + "@" + uri.getHost();
-    if (uri.getPort() >= 0) {
-      accountName+=":" + uri.getPort();
-    }
-    Account account=new Account(accountName,AccountAuthenticator.ACCOUNT_TYPE);
-    AccountManager accManager=AccountManager.get(this);
-    if (isOAuth) {
-      accManager.addAccountExplicitly(account,"",null);
+    if (mAction == ACTION_CREATE) {
+      createAccount();
     }
  else {
-      accManager.addAccountExplicitly(account,mPasswordInput.getText().toString(),null);
+      updateToken();
     }
-    Account defaultAccount=AccountUtils.getCurrentOwnCloudAccount(this);
-    if (defaultAccount == null) {
-      SharedPreferences.Editor editor=PreferenceManager.getDefaultSharedPreferences(this).edit();
-      editor.putString("select_oc_account",accountName);
-      editor.commit();
-    }
-    final Intent intent=new Intent();
-    intent.putExtra(AccountManager.KEY_ACCOUNT_TYPE,AccountAuthenticator.ACCOUNT_TYPE);
-    intent.putExtra(AccountManager.KEY_ACCOUNT_NAME,account.name);
-    if (!isOAuth)     intent.putExtra(AccountManager.KEY_AUTHTOKEN,AccountAuthenticator.ACCOUNT_TYPE);
-    intent.putExtra(AccountManager.KEY_USERDATA,username);
-    if (isOAuth) {
-      accManager.setAuthToken(account,AccountAuthenticator.AUTH_TOKEN_TYPE_ACCESS_TOKEN,mOAuthAccessToken);
-    }
-    accManager.setUserData(account,AccountAuthenticator.KEY_OC_VERSION,mDiscoveredVersion.toString());
-    accManager.setUserData(account,AccountAuthenticator.KEY_OC_BASE_URL,mHostBaseUrl);
-    if (isOAuth)     accManager.setUserData(account,AccountAuthenticator.KEY_SUPPORTS_OAUTH2,"TRUE");
-    setAccountAuthenticatorResult(intent.getExtras());
-    setResult(RESULT_OK,intent);
-    Bundle bundle=new Bundle();
-    bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL,true);
-    ContentResolver.requestSync(account,AccountAuthenticator.AUTHORITY,bundle);
     finish();
   }
  else {

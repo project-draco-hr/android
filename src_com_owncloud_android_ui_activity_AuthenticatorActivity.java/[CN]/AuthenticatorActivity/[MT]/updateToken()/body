@@ -1,0 +1,14 @@
+{
+  Bundle response=new Bundle();
+  response.putString(AccountManager.KEY_ACCOUNT_NAME,mAccount.name);
+  response.putString(AccountManager.KEY_ACCOUNT_TYPE,mAccount.type);
+  boolean isOAuth=mOAuth2Check.isChecked();
+  if (isOAuth) {
+    response.putString(AccountManager.KEY_AUTHTOKEN,mOAuthAccessToken);
+  }
+ else {
+    response.putString(AccountManager.KEY_AUTHTOKEN,mPasswordInput.getText().toString());
+    mAccountMgr.setPassword(mAccount,mPasswordInput.getText().toString());
+  }
+  setAccountAuthenticatorResult(response);
+}

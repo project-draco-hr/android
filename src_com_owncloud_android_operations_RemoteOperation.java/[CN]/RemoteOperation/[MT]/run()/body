@@ -38,6 +38,7 @@ catch (    AccountsException e) {
       }
       mClient=null;
       repeat=true;
+      result=null;
     }
   }
  while (repeat);
