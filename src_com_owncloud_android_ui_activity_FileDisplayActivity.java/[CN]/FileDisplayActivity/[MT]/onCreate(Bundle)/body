@@ -45,5 +45,6 @@
   actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
   actionBar.setListNavigationCallbacks(mDirectories,this);
   setSupportProgressBarIndeterminateVisibility(false);
+  showChangeLog();
   Log.d(getClass().toString(),"onCreate() end");
 }

@@ -1,0 +1,7 @@
+{
+  ChangelogDialog fragment=new ChangelogDialog();
+  Bundle args=new Bundle();
+  args.putBoolean(ARG_CANCELABLE,cancelable);
+  fragment.setArguments(args);
+  return fragment;
+}
