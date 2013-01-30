@@ -1,10 +1,10 @@
 {
   double result=bytes;
   int attachedsuff=0;
-  while (result > 1024 && attachedsuff < suffixes.length) {
+  while (result > 1024 && attachedsuff < sizeSuffixes.length) {
     result/=1024.;
     attachedsuff++;
   }
   result=((int)(result * 100)) / 100.;
-  return result + " " + suffixes[attachedsuff];
+  return result + " " + sizeSuffixes[attachedsuff];
 }
