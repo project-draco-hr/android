@@ -1,0 +1,7 @@
+{
+  Intent i=new Intent(getActivity(),MediaService.class);
+  i.putExtra(MediaService.EXTRA_ACCOUNT,mAccount);
+  i.putExtra(MediaService.EXTRA_FILE,mFile);
+  i.setAction(MediaService.ACTION_PLAY_FILE);
+  getActivity().startService(i);
+}

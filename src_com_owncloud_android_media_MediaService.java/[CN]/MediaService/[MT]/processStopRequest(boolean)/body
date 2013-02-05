@@ -1,0 +1,8 @@
+{
+  if (mState == State.PLAYING || mState == State.PAUSED || force) {
+    mState=State.STOPPED;
+    releaseResources(true);
+    giveUpAudioFocus();
+    stopSelf();
+  }
+}

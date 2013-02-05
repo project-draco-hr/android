@@ -1,0 +1,11 @@
+{
+  tryToGetAudioFocus();
+  if (mState == State.STOPPED) {
+    playMedia();
+  }
+ else   if (mState == State.PAUSED) {
+    mState=State.PLAYING;
+    setUpAsForeground(String.format(getString(R.string.media_state_playing),mFile.getFileName()));
+    configAndStartMediaPlayer();
+  }
+}

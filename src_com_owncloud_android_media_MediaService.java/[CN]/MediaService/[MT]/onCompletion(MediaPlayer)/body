@@ -1,0 +1,5 @@
+{
+  Toast.makeText(this,String.format(getString(R.string.media_event_done,mFile.getFileName())),Toast.LENGTH_LONG).show();
+  processStopRequest(true);
+  return;
+}

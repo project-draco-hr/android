@@ -1,0 +1,5 @@
+long id
+String artist
+String title
+String album
+long duration

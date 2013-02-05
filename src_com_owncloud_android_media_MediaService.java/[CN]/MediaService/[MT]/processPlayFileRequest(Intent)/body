@@ -1,0 +1,8 @@
+{
+  if (mState == State.PLAYING || mState == State.PAUSED || mState == State.STOPPED) {
+    mFile=intent.getExtras().getParcelable(EXTRA_FILE);
+    mAccount=intent.getExtras().getParcelable(EXTRA_ACCOUNT);
+    tryToGetAudioFocus();
+    playMedia();
+  }
+}

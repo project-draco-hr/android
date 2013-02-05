@@ -1,0 +1,5 @@
+{
+  if (mState == State.PLAYING || mState == State.PAUSED) {
+    mPlayer.seekTo(0);
+  }
+}

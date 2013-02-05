@@ -1,0 +1,5 @@
+{
+  mState=State.PLAYING;
+  updateNotification(String.format(getString(R.string.media_state_playing),mFile.getFileName()));
+  configAndStartMediaPlayer();
+}
