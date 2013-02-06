@@ -1,6 +1,8 @@
 {
-  if (mState == State.PLAYING || mState == State.PAUSED || force) {
+  if (mState == State.PLAYING || mState == State.PAUSED || mState == State.STOPPED || force) {
     mState=State.STOPPED;
+    mFile=null;
+    mAccount=null;
     releaseResources(true);
     giveUpAudioFocus();
     stopSelf();

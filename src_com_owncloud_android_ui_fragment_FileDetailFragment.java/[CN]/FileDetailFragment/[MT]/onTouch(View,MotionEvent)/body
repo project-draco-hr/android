@@ -1,0 +1,18 @@
+{
+  if (v == mPreview && event.getAction() == MotionEvent.ACTION_DOWN && mFile != null && mFile.isDown() && mFile.isAudio()) {
+    if (!mMediaServiceBinder.isPlaying(mFile)) {
+      Log.d(TAG,"starting playback of " + mFile.getStoragePath());
+      mMediaServiceBinder.start(mAccount,mFile);
+      mMediaController.postDelayed(new Runnable(){
+        @Override public void run(){
+          mMediaController.show(0);
+        }
+      }
+,300);
+    }
+ else {
+      mMediaController.show(0);
+    }
+  }
+  return false;
+}

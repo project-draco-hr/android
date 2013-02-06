@@ -7,4 +7,7 @@
   if (mPreview != null) {
     mPreview=null;
   }
+  if (mMediaController != null) {
+    mMediaController.hide();
+  }
 }

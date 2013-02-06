@@ -1,0 +1,6 @@
+{
+  if (service == null) {
+    throw new IllegalArgumentException("Argument 'service' can not be null");
+  }
+  mService=service;
+}

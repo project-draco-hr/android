@@ -1,5 +1,5 @@
 {
-  if (mFile != null && mAccount != null && mLayout == R.layout.file_details_fragment) {
+  if (readyToShow()) {
     setFilename(mFile.getFileName());
     setFiletype(mFile.getMimetype());
     setFilesize(mFile.getFileLength());

@@ -1,0 +1,18 @@
+{
+  if (component.equals(new ComponentName(getActivity(),MediaService.class))) {
+    Log.d(TAG,"Media service connected");
+    mMediaServiceBinder=(MediaServiceBinder)service;
+    if (mMediaServiceBinder != null) {
+      if (mMediaController == null) {
+        mMediaController=new MediaController(getSherlockActivity());
+      }
+      mMediaController.setMediaPlayer(mMediaServiceBinder);
+      mMediaController.setAnchorView(mPreview);
+      mMediaController.setEnabled(true);
+      Log.d(TAG,"Successfully bound to MediaService, MediaController ready");
+    }
+ else {
+      Log.e(TAG,"Unexpected response from MediaService while binding");
+    }
+  }
+}

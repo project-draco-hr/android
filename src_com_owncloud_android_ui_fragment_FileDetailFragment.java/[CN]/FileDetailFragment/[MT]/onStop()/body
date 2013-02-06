@@ -1,0 +1,9 @@
+{
+  super.onStop();
+  if (mMediaServiceConnection != null) {
+    Log.d(TAG,"Unbinding from MediaService ...");
+    getActivity().unbindService(mMediaServiceConnection);
+    mMediaServiceBinder=null;
+    mMediaController=null;
+  }
+}

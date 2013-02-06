@@ -1,0 +1,6 @@
+{
+  super.onStart();
+  if (mFile != null && mFile.isAudio()) {
+    bindMediaService();
+  }
+}
