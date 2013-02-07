@@ -1,0 +1,10 @@
+{
+  super.onCreate(savedInstanceState);
+  setContentView(R.layout.video_layout);
+  mPathToFile=getIntent().getExtras().getString(EXTRA_PATH);
+  mVideoPlayer=(VideoView)findViewById(R.id.videoPlayer);
+  mVideoPlayer.setOnPreparedListener(this);
+  mVideoPlayer.setOnCompletionListener(this);
+  mVideoPlayer.setKeepScreenOn(true);
+  mVideoPlayer.setVideoPath(mPathToFile);
+}

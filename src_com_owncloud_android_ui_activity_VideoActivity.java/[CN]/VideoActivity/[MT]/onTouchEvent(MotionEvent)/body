@@ -1,0 +1,14 @@
+{
+  if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+    if (mVideoPlayer.isPlaying()) {
+      mVideoPlayer.pause();
+    }
+ else {
+      mVideoPlayer.start();
+    }
+    return true;
+  }
+ else {
+    return false;
+  }
+}

@@ -1,0 +1,5 @@
+{
+  Intent i=new Intent(getActivity(),VideoActivity.class);
+  i.putExtra(VideoActivity.EXTRA_PATH,mFile.getStoragePath());
+  startActivity(i);
+}
