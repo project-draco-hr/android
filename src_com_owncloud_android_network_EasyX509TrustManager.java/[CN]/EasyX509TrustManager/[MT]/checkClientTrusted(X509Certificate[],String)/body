@@ -1,3 +1,0 @@
-{
-  standardTrustManager.checkClientTrusted(certificates,authType);
-}

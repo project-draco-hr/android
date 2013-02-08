@@ -1,3 +1,0 @@
-{
-  return ((obj != null) && obj.getClass().equals(EasySSLSocketFactory.class));
-}
