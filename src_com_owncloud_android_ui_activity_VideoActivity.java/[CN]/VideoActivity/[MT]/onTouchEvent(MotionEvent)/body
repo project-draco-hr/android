@@ -1,11 +1,6 @@
 {
   if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-    if (mVideoPlayer.isPlaying()) {
-      mVideoPlayer.pause();
-    }
- else {
-      mVideoPlayer.start();
-    }
+    mMediaController.show(MEDIA_CONTOL_LIFE);
     return true;
   }
  else {

@@ -1,0 +1,25 @@
+{
+  Log.e(TAG,"Error in video playback, what = " + what + ", extra = "+ extra);
+  if (mMediaController != null) {
+    mMediaController.hide();
+  }
+  if (mVideoPlayer.getWindowToken() != null) {
+    int messageId;
+    if (what == OC_MEDIA_ERROR) {
+      messageId=extra;
+    }
+ else     if (what == MediaPlayer.MEDIA_ERROR_NOT_VALID_FOR_PROGRESSIVE_PLAYBACK) {
+      messageId=android.R.string.VideoView_error_text_invalid_progressive_playback;
+    }
+ else {
+      messageId=android.R.string.VideoView_error_text_unknown;
+    }
+    new AlertDialog.Builder(this).setMessage(messageId).setPositiveButton(android.R.string.VideoView_error_button,new DialogInterface.OnClickListener(){
+      public void onClick(      DialogInterface dialog,      int whichButton){
+        VideoActivity.this.onCompletion(null);
+      }
+    }
+).setCancelable(false).show();
+  }
+  return true;
+}
