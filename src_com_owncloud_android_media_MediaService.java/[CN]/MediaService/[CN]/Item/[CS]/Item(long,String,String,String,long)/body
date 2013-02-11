@@ -1,7 +1,0 @@
-{
-  this.id=id;
-  this.artist=artist;
-  this.title=title;
-  this.album=album;
-  this.duration=duration;
-}

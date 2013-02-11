@@ -1,8 +1,0 @@
-{
-  if (mState == State.PAUSED || mState == State.STOPPED) {
-    processPlayRequest();
-  }
- else {
-    processPauseRequest();
-  }
-}

@@ -1,6 +1,5 @@
 {
   if (mState == State.PAUSED || mState == State.STOPPED) {
-    Log.d(TAG,"Stopping service due to unbind in pause");
     processStopRequest(false);
   }
   return false;

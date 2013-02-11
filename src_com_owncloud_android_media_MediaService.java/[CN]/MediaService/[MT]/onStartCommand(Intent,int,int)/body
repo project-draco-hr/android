@@ -3,20 +3,5 @@
   if (action.equals(ACTION_PLAY_FILE)) {
     processPlayFileRequest(intent);
   }
- else   if (action.equals(ACTION_PLAY)) {
-    processPlayRequest();
-  }
- else   if (action.equals(ACTION_TOGGLE_PLAYBACK)) {
-    processTogglePlaybackRequest();
-  }
- else   if (action.equals(ACTION_PAUSE)) {
-    processPauseRequest();
-  }
- else   if (action.equals(ACTION_STOP)) {
-    processStopRequest();
-  }
- else   if (action.equals(ACTION_REWIND)) {
-    processRewindRequest();
-  }
   return START_NOT_STICKY;
 }
