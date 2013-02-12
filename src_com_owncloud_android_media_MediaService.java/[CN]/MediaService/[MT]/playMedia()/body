@@ -15,10 +15,7 @@
     createMediaPlayerIfNeeded();
     mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
     String url=mFile.getStoragePath();
-    if (url == null || url.length() <= 0) {
-      url=AccountUtils.constructFullURLForAccount(this,mAccount) + mFile.getRemotePath();
-    }
-    mIsStreaming=url.startsWith("http:") || url.startsWith("https:");
+    mIsStreaming=false;
     mPlayer.setDataSource(url);
     mState=State.PREPARING;
     setUpAsForeground(String.format(getString(R.string.media_state_loading),mFile.getFileName()));
