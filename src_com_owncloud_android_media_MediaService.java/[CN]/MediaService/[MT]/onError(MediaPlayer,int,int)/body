@@ -3,17 +3,8 @@
   if (mMediaController != null) {
     mMediaController.hide();
   }
-  int messageId;
-  if (what == OC_MEDIA_ERROR) {
-    messageId=extra;
-  }
- else   if (what == MediaPlayer.MEDIA_ERROR_NOT_VALID_FOR_PROGRESSIVE_PLAYBACK) {
-    messageId=R.string.media_err_invalid_progressive_playback;
-  }
- else {
-    messageId=R.string.media_err_unknown;
-  }
-  Toast.makeText(getApplicationContext(),messageId,Toast.LENGTH_SHORT).show();
+  String message=getMessageForMediaError(this,what,extra);
+  Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
   processStopRequest(true);
   return true;
 }
