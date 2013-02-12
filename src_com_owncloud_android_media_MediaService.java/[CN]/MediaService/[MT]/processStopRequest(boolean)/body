@@ -1,5 +1,5 @@
 {
-  if (mState == State.PLAYING || mState == State.PAUSED || mState == State.STOPPED || force) {
+  if (mState != State.PREPARING || force) {
     mState=State.STOPPED;
     mFile=null;
     mAccount=null;

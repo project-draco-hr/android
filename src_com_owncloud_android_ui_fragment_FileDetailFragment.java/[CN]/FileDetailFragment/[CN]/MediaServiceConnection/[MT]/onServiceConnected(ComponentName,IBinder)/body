@@ -6,9 +6,7 @@
       if (mMediaController == null) {
         mMediaController=new MediaController(getSherlockActivity());
       }
-      mMediaController.setMediaPlayer(mMediaServiceBinder);
-      mMediaController.setAnchorView(mPreview);
-      mMediaController.setEnabled(true);
+      prepareMediaController();
       Log.d(TAG,"Successfully bound to MediaService, MediaController ready");
     }
  else {

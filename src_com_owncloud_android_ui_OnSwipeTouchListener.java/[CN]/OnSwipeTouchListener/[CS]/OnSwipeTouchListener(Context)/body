@@ -1,0 +1,4 @@
+{
+  mContext=context;
+  mGestureDetector=new GestureDetector(context,new GestureListener());
+}

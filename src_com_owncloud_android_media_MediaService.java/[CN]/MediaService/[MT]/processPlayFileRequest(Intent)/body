@@ -1,5 +1,5 @@
 {
-  if (mState == State.PLAYING || mState == State.PAUSED || mState == State.STOPPED) {
+  if (mState != State.PREPARING) {
     mFile=intent.getExtras().getParcelable(EXTRA_FILE);
     mAccount=intent.getExtras().getParcelable(EXTRA_ACCOUNT);
     tryToGetAudioFocus();

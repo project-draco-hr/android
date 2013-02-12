@@ -5,7 +5,7 @@
   }
   if (mVideoPlayer.getWindowToken() != null) {
     int messageId;
-    if (what == OC_MEDIA_ERROR) {
+    if (what == MediaService.OC_MEDIA_ERROR) {
       messageId=extra;
     }
  else     if (what == MediaPlayer.MEDIA_ERROR_NOT_VALID_FOR_PROGRESSIVE_PLAYBACK) {

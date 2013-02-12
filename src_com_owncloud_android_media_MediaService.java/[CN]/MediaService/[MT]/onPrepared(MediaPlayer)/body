@@ -1,5 +1,11 @@
 {
   mState=State.PLAYING;
   updateNotification(String.format(getString(R.string.media_state_playing),mFile.getFileName()));
+  if (mMediaController != null) {
+    mMediaController.setEnabled(true);
+  }
   configAndStartMediaPlayer();
+  if (mMediaController != null) {
+    mMediaController.show(MEDIA_CONTROL_LIFE);
+  }
 }

@@ -17,7 +17,7 @@
       mVideoPlayer.setVideoURI(Uri.parse(url));
     }
  else {
-      onError(null,OC_MEDIA_ERROR,R.string.media_err_no_account);
+      onError(null,MediaService.OC_MEDIA_ERROR,R.string.media_err_no_account);
     }
     mMediaController=new MediaController(this);
     mMediaController.setMediaPlayer(mVideoPlayer);
@@ -25,6 +25,6 @@
     mVideoPlayer.setMediaController(mMediaController);
   }
  else {
-    onError(null,OC_MEDIA_ERROR,R.string.media_err_nothing_to_play);
+    onError(null,MediaService.OC_MEDIA_ERROR,R.string.media_err_nothing_to_play);
   }
 }

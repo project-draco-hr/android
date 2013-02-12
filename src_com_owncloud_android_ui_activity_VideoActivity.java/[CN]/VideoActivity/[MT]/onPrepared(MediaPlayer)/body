@@ -1,3 +1,4 @@
 {
   mVideoPlayer.start();
+  mMediaController.show(5000);
 }

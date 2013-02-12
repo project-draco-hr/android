@@ -1,0 +1,4 @@
+{
+  MediaService.State currentState=mService.getState();
+  return (currentState == MediaService.State.PLAYING || currentState == MediaService.State.PAUSED);
+}

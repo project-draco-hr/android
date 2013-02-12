@@ -1,8 +1,19 @@
 {
-  Toast.makeText(getApplicationContext(),"Media player error! Resetting.",Toast.LENGTH_SHORT).show();
-  Log.e(TAG,"Error: what=" + String.valueOf(what) + ", extra="+ String.valueOf(extra));
-  mState=State.STOPPED;
-  releaseResources(true);
-  giveUpAudioFocus();
+  Log.e(TAG,"Error in audio playback, what = " + what + ", extra = "+ extra);
+  if (mMediaController != null) {
+    mMediaController.hide();
+  }
+  int messageId;
+  if (what == OC_MEDIA_ERROR) {
+    messageId=extra;
+  }
+ else   if (what == MediaPlayer.MEDIA_ERROR_NOT_VALID_FOR_PROGRESSIVE_PLAYBACK) {
+    messageId=R.string.media_err_invalid_progressive_playback;
+  }
+ else {
+    messageId=R.string.media_err_unknown;
+  }
+  Toast.makeText(getApplicationContext(),messageId,Toast.LENGTH_SHORT).show();
+  processStopRequest(true);
   return true;
 }
