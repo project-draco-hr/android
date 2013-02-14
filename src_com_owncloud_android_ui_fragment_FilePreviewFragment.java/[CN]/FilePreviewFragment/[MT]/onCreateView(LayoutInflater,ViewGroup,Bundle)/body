@@ -1,0 +1,8 @@
+{
+  super.onCreateView(inflater,container,savedInstanceState);
+  mView=inflater.inflate(R.layout.file_preview,container,false);
+  mImagePreview=(ImageView)mView.findViewById(R.id.image_preview);
+  mImagePreview.setOnTouchListener(this);
+  mVideoPreview=(VideoView)mView.findViewById(R.id.video_preview);
+  return mView;
+}

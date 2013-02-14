@@ -1,0 +1,7 @@
+{
+  mVideoPreview.setVideoPath(mFile.getStoragePath());
+  mMediaController=new MediaController(getActivity());
+  mMediaController.setMediaPlayer(mVideoPreview);
+  mMediaController.setAnchorView(mVideoPreview);
+  mVideoPreview.setMediaController(mMediaController);
+}

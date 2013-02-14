@@ -1,0 +1,14 @@
+{
+  if (!mMediaServiceBinder.isPlaying(mFile)) {
+    Log.d(TAG,"starting playback of " + mFile.getStoragePath());
+    mMediaServiceBinder.start(mAccount,mFile);
+  }
+ else {
+    if (!mMediaServiceBinder.isPlaying()) {
+      mMediaServiceBinder.start();
+    }
+    if (!mMediaController.isShowing() && isVisible()) {
+      mMediaController.show(MediaService.MEDIA_CONTROL_PERMANENT);
+    }
+  }
+}

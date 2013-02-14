@@ -1,20 +1,6 @@
 {
   if (v == mPreview && event.getAction() == MotionEvent.ACTION_DOWN && mFile != null && mFile.isDown()) {
-    if (mFile.isAudio()) {
-      if (!mMediaServiceBinder.isPlaying(mFile)) {
-        Log.d(TAG,"starting playback of " + mFile.getStoragePath());
-        mMediaServiceBinder.start(mAccount,mFile);
-      }
- else {
-        if (mMediaController.isShowing()) {
-          mMediaController.hide();
-        }
- else {
-          mMediaController.show(MediaService.MEDIA_CONTROL_LIFE);
-        }
-      }
-    }
- else     if (mFile.isVideo()) {
+    if (mFile.isVideo()) {
       startVideoActivity();
     }
   }

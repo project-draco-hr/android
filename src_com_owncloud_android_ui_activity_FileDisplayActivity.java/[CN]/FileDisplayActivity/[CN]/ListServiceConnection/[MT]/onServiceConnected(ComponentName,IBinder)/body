@@ -12,7 +12,9 @@
   }
   if (mFileList != null)   mFileList.listDirectory();
   if (mDualPane) {
-    FileDetailFragment fragment=(FileDetailFragment)getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
-    if (fragment != null)     fragment.updateFileDetails(false);
+    Fragment fragment=getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
+    if (fragment != null && fragment instanceof FileDetailFragment) {
+      ((FileDetailFragment)fragment).updateFileDetails(false);
+    }
   }
 }

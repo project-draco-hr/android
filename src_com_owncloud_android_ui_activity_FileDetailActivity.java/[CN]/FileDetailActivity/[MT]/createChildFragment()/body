@@ -1,0 +1,14 @@
+{
+  OCFile file=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE);
+  Account account=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_ACCOUNT);
+  Fragment newFragment=null;
+  if (FilePreviewFragment.canBePreviewed(file)) {
+    newFragment=new FilePreviewFragment(file,account);
+  }
+ else {
+    newFragment=new FileDetailFragment(file,account);
+  }
+  FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
+  ft.replace(R.id.fragment,newFragment,FileDetailFragment.FTAG);
+  ft.commit();
+}

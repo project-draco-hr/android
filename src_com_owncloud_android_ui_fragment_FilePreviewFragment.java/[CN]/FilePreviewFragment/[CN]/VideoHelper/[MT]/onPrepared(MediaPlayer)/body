@@ -1,0 +1,5 @@
+{
+  mVideoPreview.seekTo(mSavedPlaybackPosition);
+  mVideoPreview.start();
+  mMediaController.show(MediaService.MEDIA_CONTROL_SHORT_LIFE);
+}

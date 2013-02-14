@@ -1,8 +1,12 @@
 {
   if (mDualPane) {
     FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
-    transaction.replace(R.id.file_details_container,new FileDetailFragment(file,AccountUtils.getCurrentOwnCloudAccount(this)),FileDetailFragment.FTAG);
-    transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+    if (FilePreviewFragment.canBePreviewed(file)) {
+      transaction.replace(R.id.file_details_container,new FilePreviewFragment(file,AccountUtils.getCurrentOwnCloudAccount(this)),FileDetailFragment.FTAG);
+    }
+ else {
+      transaction.replace(R.id.file_details_container,new FileDetailFragment(file,AccountUtils.getCurrentOwnCloudAccount(this)),FileDetailFragment.FTAG);
+    }
     transaction.commit();
   }
  else {

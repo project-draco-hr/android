@@ -1,0 +1,7 @@
+{
+  if (result != null && mImageViewRef != null) {
+    final ImageView imageView=mImageViewRef.get();
+    imageView.setImageBitmap(result);
+    mBitmap=result;
+  }
+}

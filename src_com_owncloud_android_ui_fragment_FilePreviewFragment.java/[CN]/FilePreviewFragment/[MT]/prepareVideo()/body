@@ -1,0 +1,6 @@
+{
+  mVideoHelper=new VideoHelper(mSavedPlaybackPosition);
+  mVideoPreview.setOnPreparedListener(mVideoHelper);
+  mVideoPreview.setOnCompletionListener(mVideoHelper);
+  mVideoPreview.setOnErrorListener(mVideoHelper);
+}

@@ -10,12 +10,9 @@
     setContentView(R.layout.file_activity_details);
     ActionBar actionBar=getSupportActionBar();
     actionBar.setDisplayHomeAsUpEnabled(true);
-    OCFile file=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE);
-    Account account=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_ACCOUNT);
-    FileDetailFragment mFileDetail=new FileDetailFragment(file,account);
-    FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
-    ft.replace(R.id.fragment,mFileDetail,FileDetailFragment.FTAG);
-    ft.commit();
+    if (savedInstanceState == null) {
+      createChildFragment();
+    }
   }
  else {
     backToDisplayActivity();

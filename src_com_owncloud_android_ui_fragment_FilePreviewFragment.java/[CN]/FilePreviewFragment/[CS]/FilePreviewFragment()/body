@@ -1,0 +1,5 @@
+{
+  mFile=null;
+  mAccount=null;
+  mSavedPlaybackPosition=0;
+}

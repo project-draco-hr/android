@@ -1,0 +1,8 @@
+{
+  if (mMediaController.isShowing()) {
+    mMediaController.hide();
+  }
+ else {
+    mMediaController.show(time);
+  }
+}

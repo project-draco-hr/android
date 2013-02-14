@@ -1,12 +1,12 @@
 {
   if (mDualPane) {
-    FileDetailFragment details=(FileDetailFragment)getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
-    if (details != null && file.equals(details.getDisplayedFile())) {
+    FileFragment details=(FileFragment)getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
+    if (details != null && details instanceof FileDetailFragment && file.equals(details.getFile())) {
       if (downloading || uploading) {
-        details.updateFileDetails(file,AccountUtils.getCurrentOwnCloudAccount(this));
+        ((FileDetailFragment)details).updateFileDetails(file,AccountUtils.getCurrentOwnCloudAccount(this));
       }
  else {
-        details.updateFileDetails(downloading || uploading);
+        ((FileDetailFragment)details).updateFileDetails(downloading || uploading);
       }
     }
   }

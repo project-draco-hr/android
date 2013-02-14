@@ -1,6 +1,6 @@
 {
   if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-    mMediaController.show(MediaService.MEDIA_CONTROL_LIFE);
+    mMediaController.show(MediaService.MEDIA_CONTROL_SHORT_LIFE);
     return true;
   }
  else {
