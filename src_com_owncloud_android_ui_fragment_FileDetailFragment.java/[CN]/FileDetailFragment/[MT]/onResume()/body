@@ -6,5 +6,4 @@
   mUploadFinishReceiver=new UploadFinishReceiver();
   filter=new IntentFilter(FileUploader.UPLOAD_FINISH_MESSAGE);
   getActivity().registerReceiver(mUploadFinishReceiver,filter);
-  mPreview=(ImageView)mView.findViewById(R.id.fdPreview);
 }

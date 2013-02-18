@@ -16,8 +16,6 @@
     mView.findViewById(R.id.fdDownloadBtn).setOnClickListener(this);
     mView.findViewById(R.id.fdOpenBtn).setOnClickListener(this);
     mView.findViewById(R.id.fdRemoveBtn).setOnClickListener(this);
-    mPreview=(ImageView)mView.findViewById(R.id.fdPreview);
-    mPreview.setOnTouchListener(this);
   }
   updateFileDetails(false);
   return view;

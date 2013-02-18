@@ -1,12 +1,12 @@
 {
   boolean retval=true;
 switch (item.getItemId()) {
-case R.id.createDirectoryItem:
+case R.id.action_create_dir:
 {
       showDialog(DIALOG_CREATE_DIR);
       break;
     }
-case R.id.startSync:
+case R.id.action_sync_account:
 {
     startSynchronization();
     break;
@@ -22,7 +22,7 @@ Intent settingsIntent=new Intent(this,Preferences.class);
 startActivity(settingsIntent);
 break;
 }
-case R.id.about_app:
+case R.id.action_about_app:
 {
 showDialog(DIALOG_ABOUT_APP);
 break;

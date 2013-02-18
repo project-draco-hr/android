@@ -4,7 +4,4 @@
   mDownloadFinishReceiver=null;
   getActivity().unregisterReceiver(mUploadFinishReceiver);
   mUploadFinishReceiver=null;
-  if (mPreview != null) {
-    mPreview=null;
-  }
 }

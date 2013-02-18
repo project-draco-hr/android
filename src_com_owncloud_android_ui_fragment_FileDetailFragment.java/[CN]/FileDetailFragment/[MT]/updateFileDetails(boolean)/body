@@ -15,10 +15,6 @@
       setButtonsForTransferring();
     }
  else     if (mFile.isDown()) {
-      if (mFile.getMimetype().startsWith("image/")) {
-        BitmapLoader bl=new BitmapLoader();
-        bl.execute(new String[]{mFile.getStoragePath()});
-      }
       setButtonsForDown();
     }
  else {

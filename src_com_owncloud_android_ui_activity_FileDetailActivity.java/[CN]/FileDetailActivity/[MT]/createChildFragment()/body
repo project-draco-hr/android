@@ -1,8 +1,9 @@
 {
   OCFile file=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE);
   Account account=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_ACCOUNT);
+  int mode=getIntent().getIntExtra(EXTRA_MODE,MODE_PREVIEW);
   Fragment newFragment=null;
-  if (FilePreviewFragment.canBePreviewed(file)) {
+  if (FilePreviewFragment.canBePreviewed(file) && mode == MODE_PREVIEW) {
     newFragment=new FilePreviewFragment(file,account);
   }
  else {

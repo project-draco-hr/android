@@ -13,7 +13,4 @@
       mMediaController=null;
     }
   }
-  if (mBitmap != null) {
-    mBitmap.recycle();
-  }
 }

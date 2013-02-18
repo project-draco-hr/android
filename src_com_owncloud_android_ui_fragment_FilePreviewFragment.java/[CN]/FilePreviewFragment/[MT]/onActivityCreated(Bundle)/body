@@ -1,5 +1,6 @@
 {
   super.onActivityCreated(savedInstanceState);
+  mStorageManager=new FileDataStorageManager(mAccount,getActivity().getApplicationContext().getContentResolver());
   if (savedInstanceState != null) {
     mFile=savedInstanceState.getParcelable(FilePreviewFragment.EXTRA_FILE);
     mAccount=savedInstanceState.getParcelable(FilePreviewFragment.EXTRA_ACCOUNT);

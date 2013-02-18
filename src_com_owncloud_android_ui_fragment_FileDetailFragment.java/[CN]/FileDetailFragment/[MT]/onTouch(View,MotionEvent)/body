@@ -1,8 +1,0 @@
-{
-  if (v == mPreview && event.getAction() == MotionEvent.ACTION_DOWN && mFile != null && mFile.isDown()) {
-    if (mFile.isVideo()) {
-      startVideoActivity();
-    }
-  }
-  return false;
-}
