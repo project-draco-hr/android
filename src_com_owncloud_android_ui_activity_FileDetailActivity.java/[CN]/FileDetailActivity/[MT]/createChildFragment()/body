@@ -4,7 +4,13 @@
   int mode=getIntent().getIntExtra(EXTRA_MODE,MODE_PREVIEW);
   Fragment newFragment=null;
   if (FilePreviewFragment.canBePreviewed(file) && mode == MODE_PREVIEW) {
-    newFragment=new FilePreviewFragment(file,account);
+    if (file.isDown()) {
+      newFragment=new FilePreviewFragment(file,account);
+    }
+ else {
+      newFragment=new FileDetailFragment(file,account);
+      mWaitingToPreview=true;
+    }
   }
  else {
     newFragment=new FileDetailFragment(file,account);

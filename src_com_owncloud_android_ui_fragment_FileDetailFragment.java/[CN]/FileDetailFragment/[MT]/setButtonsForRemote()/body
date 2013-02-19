@@ -6,5 +6,7 @@
     ((Button)getView().findViewById(R.id.fdRenameBtn)).setEnabled(true);
     ((Button)getView().findViewById(R.id.fdRemoveBtn)).setEnabled(true);
     getView().findViewById(R.id.fdKeepInSync).setEnabled(true);
+    ProgressBar progressBar=(ProgressBar)getView().findViewById(R.id.fdProgressBar);
+    progressBar.setVisibility(View.GONE);
   }
 }

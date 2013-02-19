@@ -1,7 +1,7 @@
 {
   if (mDualPane) {
     FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
-    if (FilePreviewFragment.canBePreviewed(file)) {
+    if (file != null && file.isDown() && FilePreviewFragment.canBePreviewed(file)) {
       transaction.replace(R.id.file_details_container,new FilePreviewFragment(file,AccountUtils.getCurrentOwnCloudAccount(this)),FileDetailFragment.FTAG);
     }
  else {

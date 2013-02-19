@@ -1,5 +1,5 @@
 {
 synchronized (mDataTransferListeners) {
-    mDataTransferListeners.add(listener);
+    mDataTransferListeners.addAll(listeners);
   }
 }

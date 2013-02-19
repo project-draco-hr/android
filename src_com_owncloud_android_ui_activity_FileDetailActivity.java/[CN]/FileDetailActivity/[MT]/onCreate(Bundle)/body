@@ -11,7 +11,11 @@
     ActionBar actionBar=getSupportActionBar();
     actionBar.setDisplayHomeAsUpEnabled(true);
     if (savedInstanceState == null) {
+      mWaitingToPreview=false;
       createChildFragment();
+    }
+ else {
+      mWaitingToPreview=savedInstanceState.getBoolean(KEY_WAITING_TO_PREVIEW);
     }
   }
  else {

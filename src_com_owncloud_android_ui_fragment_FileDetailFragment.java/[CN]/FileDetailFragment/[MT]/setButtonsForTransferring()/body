@@ -6,5 +6,17 @@
     ((Button)getView().findViewById(R.id.fdRenameBtn)).setEnabled(false);
     ((Button)getView().findViewById(R.id.fdRemoveBtn)).setEnabled(false);
     getView().findViewById(R.id.fdKeepInSync).setEnabled(false);
+    ProgressBar progressBar=(ProgressBar)getView().findViewById(R.id.fdProgressBar);
+    progressBar.setVisibility(View.VISIBLE);
+    TextView progressText=(TextView)getView().findViewById(R.id.fdProgressText);
+    progressText.setVisibility(View.VISIBLE);
+    FileDownloaderBinder downloaderBinder=mContainerActivity.getFileDownloaderBinder();
+    FileUploaderBinder uploaderBinder=mContainerActivity.getFileUploaderBinder();
+    if (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,mFile)) {
+      progressText.setText(R.string.downloader_download_in_progress_ticker);
+    }
+ else     if (uploaderBinder != null && uploaderBinder.isUploading(mAccount,mFile)) {
+      progressText.setText(R.string.uploader_upload_in_progress_ticker);
+    }
   }
 }

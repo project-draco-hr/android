@@ -1,0 +1,9 @@
+{
+  View v=getView();
+  if (v != null) {
+    return (ProgressBar)v.findViewById(R.id.fdProgressBar);
+  }
+ else {
+    return null;
+  }
+}

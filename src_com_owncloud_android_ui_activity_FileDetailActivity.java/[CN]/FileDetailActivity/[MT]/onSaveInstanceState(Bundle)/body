@@ -1,0 +1,3 @@
+{
+  outState.putBoolean(KEY_WAITING_TO_PREVIEW,mWaitingToPreview);
+}

@@ -1,0 +1,15 @@
+{
+  if (account == null || file == null)   return;
+  String targetKey=buildRemoteName(account,file);
+  UploadFileOperation target=null;
+synchronized (mPendingUploads) {
+    if (!file.isDirectory()) {
+      target=mPendingUploads.get(targetKey);
+    }
+ else {
+    }
+  }
+  if (target != null) {
+    target.addDatatransferProgressListener(listener);
+  }
+}
