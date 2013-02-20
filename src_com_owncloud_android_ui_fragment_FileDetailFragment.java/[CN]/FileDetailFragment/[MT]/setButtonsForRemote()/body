@@ -8,5 +8,7 @@
     getView().findViewById(R.id.fdKeepInSync).setEnabled(true);
     ProgressBar progressBar=(ProgressBar)getView().findViewById(R.id.fdProgressBar);
     progressBar.setVisibility(View.GONE);
+    TextView progressText=(TextView)getView().findViewById(R.id.fdProgressText);
+    progressText.setVisibility(View.GONE);
   }
 }
