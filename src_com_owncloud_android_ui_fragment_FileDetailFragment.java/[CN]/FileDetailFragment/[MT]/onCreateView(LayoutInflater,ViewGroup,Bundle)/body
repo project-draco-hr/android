@@ -16,6 +16,8 @@
     mView.findViewById(R.id.fdDownloadBtn).setOnClickListener(this);
     mView.findViewById(R.id.fdOpenBtn).setOnClickListener(this);
     mView.findViewById(R.id.fdRemoveBtn).setOnClickListener(this);
+    ProgressBar progressBar=(ProgressBar)mView.findViewById(R.id.fdProgressBar);
+    mProgressListener=new ProgressListener(progressBar);
   }
   updateFileDetails(false);
   return view;

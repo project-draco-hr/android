@@ -1,0 +1,4 @@
+{
+  ((FileDownloaderBinder)mBinder).clearListeners();
+  return false;
+}

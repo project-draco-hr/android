@@ -1,26 +1,19 @@
 {
-  Fragment fragment=getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
-  FileDetailFragment detailsFragment=(fragment instanceof FileDetailFragment) ? (FileDetailFragment)fragment : null;
   if (component.equals(new ComponentName(FileDetailActivity.this,FileDownloader.class))) {
     Log.d(TAG,"Download service connected");
     mDownloaderBinder=(FileDownloaderBinder)service;
-    if (detailsFragment != null) {
-      mProgressListener=new ProgressListener(detailsFragment.getProgressBar());
-      mDownloaderBinder.addDatatransferProgressListener(mProgressListener,(Account)getIntent().getParcelableExtra(FileDetailFragment.EXTRA_ACCOUNT),(OCFile)getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE));
-    }
   }
  else   if (component.equals(new ComponentName(FileDetailActivity.this,FileUploader.class))) {
     Log.d(TAG,"Upload service connected");
     mUploaderBinder=(FileUploaderBinder)service;
-    if (detailsFragment != null) {
-      mProgressListener=new ProgressListener(detailsFragment.getProgressBar());
-      mUploaderBinder.addDatatransferProgressListener(mProgressListener,(Account)getIntent().getParcelableExtra(FileDetailFragment.EXTRA_ACCOUNT),(OCFile)getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE));
-    }
   }
  else {
     return;
   }
+  Fragment fragment=getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
+  FileDetailFragment detailsFragment=(fragment instanceof FileDetailFragment) ? (FileDetailFragment)fragment : null;
   if (detailsFragment != null) {
+    detailsFragment.listenForTransferProgress();
     detailsFragment.updateFileDetails(false);
   }
 }

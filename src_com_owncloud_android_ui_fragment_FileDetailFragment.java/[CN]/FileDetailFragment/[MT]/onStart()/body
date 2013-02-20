@@ -3,4 +3,5 @@
   if (mFile != null && mFile.isAudio()) {
     bindMediaService();
   }
+  listenForTransferProgress();
 }

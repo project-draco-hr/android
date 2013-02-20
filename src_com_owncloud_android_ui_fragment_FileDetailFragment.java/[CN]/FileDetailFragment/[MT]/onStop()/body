@@ -12,4 +12,5 @@
       mMediaController=null;
     }
   }
+  leaveTransferProgress();
 }
