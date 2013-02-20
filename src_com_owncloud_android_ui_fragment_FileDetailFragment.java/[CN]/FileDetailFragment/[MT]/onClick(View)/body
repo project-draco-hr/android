@@ -51,7 +51,6 @@ case R.id.fdKeepInSync:
     intent.putExtra(FileObserverService.KEY_FILE_CMD,(cb.isChecked() ? FileObserverService.CMD_ADD_OBSERVED_FILE : FileObserverService.CMD_DEL_OBSERVED_FILE));
     intent.putExtra(FileObserverService.KEY_CMD_ARG_FILE,mFile);
     intent.putExtra(FileObserverService.KEY_CMD_ARG_ACCOUNT,mAccount);
-    Log.e(TAG,"starting observer service");
     getActivity().startService(intent);
     if (mFile.keepInSync()) {
       onClick(getView().findViewById(R.id.fdDownloadBtn));
