@@ -1,4 +1,4 @@
 {
-  ((FileDownloaderBinder)mBinder).clearListeners();
+  ((FileUploaderBinder)mBinder).clearListeners();
   return false;
 }
