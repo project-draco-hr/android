@@ -6,6 +6,8 @@
     if (mFile.getRemotePath().equals(downloadedRemotePath)) {
       if (downloadWasFine) {
         mFile=mStorageManager.getFileByPath(downloadedRemotePath);
+        mContainerActivity.notifySuccessfulDownload(mFile);
+        getActivity().removeStickyBroadcast(intent);
       }
       updateFileDetails(false);
     }

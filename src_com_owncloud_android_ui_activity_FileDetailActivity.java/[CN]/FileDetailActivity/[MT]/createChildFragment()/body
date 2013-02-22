@@ -1,19 +1,17 @@
 {
-  OCFile file=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE);
-  Account account=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_ACCOUNT);
   int mode=getIntent().getIntExtra(EXTRA_MODE,MODE_PREVIEW);
   Fragment newFragment=null;
-  if (FilePreviewFragment.canBePreviewed(file) && mode == MODE_PREVIEW) {
-    if (file.isDown()) {
-      newFragment=new FilePreviewFragment(file,account);
+  if (FilePreviewFragment.canBePreviewed(mFile) && mode == MODE_PREVIEW) {
+    if (mFile.isDown()) {
+      newFragment=new FilePreviewFragment(mFile,mAccount);
     }
  else {
-      newFragment=new FileDetailFragment(file,account);
+      newFragment=new FileDetailFragment(mFile,mAccount);
       mWaitingToPreview=true;
     }
   }
  else {
-    newFragment=new FileDetailFragment(file,account);
+    newFragment=new FileDetailFragment(mFile,mAccount);
   }
   FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
   ft.replace(R.id.fragment,newFragment,FileDetailFragment.FTAG);

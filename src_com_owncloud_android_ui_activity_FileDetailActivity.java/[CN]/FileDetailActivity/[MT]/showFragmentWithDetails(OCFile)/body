@@ -1,5 +1,5 @@
 {
   FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
-  transaction.replace(R.id.fragment,new FileDetailFragment(file,(Account)getIntent().getParcelableExtra(FileDetailFragment.EXTRA_ACCOUNT)),FileDetailFragment.FTAG);
+  transaction.replace(R.id.fragment,new FileDetailFragment(file,mAccount),FileDetailFragment.FTAG);
   transaction.commit();
 }
