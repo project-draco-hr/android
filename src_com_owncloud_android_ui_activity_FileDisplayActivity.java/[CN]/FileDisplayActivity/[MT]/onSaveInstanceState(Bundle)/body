@@ -11,5 +11,6 @@
       }
     }
   }
+  outState.putParcelable(FileDetailActivity.KEY_WAITING_TO_PREVIEW,mWaitingToPreview);
   Log.d(getClass().toString(),"onSaveInstanceState() end");
 }

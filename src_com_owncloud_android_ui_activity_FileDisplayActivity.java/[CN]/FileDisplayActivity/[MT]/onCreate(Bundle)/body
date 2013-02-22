@@ -6,6 +6,10 @@
   if (account != null)   AccountUtils.setCurrentOwnCloudAccount(this,account.name);
   if (savedInstanceState != null) {
     mCurrentDir=savedInstanceState.getParcelable(FileDetailFragment.EXTRA_FILE);
+    mWaitingToPreview=(OCFile)savedInstanceState.getParcelable(FileDetailActivity.KEY_WAITING_TO_PREVIEW);
+  }
+ else {
+    mWaitingToPreview=null;
   }
   if (!AccountUtils.accountsAreSetup(this)) {
     mStorageManager=null;

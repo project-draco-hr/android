@@ -1,8 +1,0 @@
-{
-  if (mWaitingToPreview) {
-    FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
-    transaction.replace(R.id.fragment,new FilePreviewFragment(file,mAccount),FileDetailFragment.FTAG);
-    transaction.commit();
-    mWaitingToPreview=false;
-  }
-}
