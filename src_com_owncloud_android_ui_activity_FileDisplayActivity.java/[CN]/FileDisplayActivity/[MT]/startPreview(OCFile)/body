@@ -1,0 +1,19 @@
+{
+  if (mDualPane && !file.isImage()) {
+    FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
+    transaction.replace(R.id.file_details_container,new FilePreviewFragment(file,AccountUtils.getCurrentOwnCloudAccount(this)),FileDetailFragment.FTAG);
+    transaction.commit();
+  }
+ else   if (file.isImage()) {
+    Intent showDetailsIntent=new Intent(this,PreviewImageActivity.class);
+    showDetailsIntent.putExtra(FileDetailFragment.EXTRA_FILE,file);
+    showDetailsIntent.putExtra(FileDetailFragment.EXTRA_ACCOUNT,AccountUtils.getCurrentOwnCloudAccount(this));
+    startActivity(showDetailsIntent);
+  }
+ else {
+    Intent showDetailsIntent=new Intent(this,FileDetailActivity.class);
+    showDetailsIntent.putExtra(FileDetailFragment.EXTRA_FILE,file);
+    showDetailsIntent.putExtra(FileDetailFragment.EXTRA_ACCOUNT,AccountUtils.getCurrentOwnCloudAccount(this));
+    startActivity(showDetailsIntent);
+  }
+}

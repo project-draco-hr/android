@@ -1,0 +1,22 @@
+{
+  if (component.equals(new ComponentName(PreviewImageActivity.this,FileDownloader.class))) {
+    Log.d(TAG,"Download service connected");
+    mDownloaderBinder=(FileDownloaderBinder)service;
+    if (mWaitingToPreview) {
+      requestForDownload();
+    }
+  }
+ else   if (component.equals(new ComponentName(PreviewImageActivity.this,FileUploader.class))) {
+    Log.d(TAG,"Upload service connected");
+    mUploaderBinder=(FileUploaderBinder)service;
+  }
+ else {
+    return;
+  }
+  Fragment fragment=getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
+  FileDetailFragment detailsFragment=(fragment instanceof FileDetailFragment) ? (FileDetailFragment)fragment : null;
+  if (detailsFragment != null) {
+    detailsFragment.listenForTransferProgress();
+    detailsFragment.updateFileDetails(mWaitingToPreview);
+  }
+}

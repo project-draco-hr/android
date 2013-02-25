@@ -1,0 +1,7 @@
+{
+  super.onStart();
+  if (mFile != null) {
+    BitmapLoader bl=new BitmapLoader(mImageView);
+    bl.execute(new String[]{mFile.getStoragePath()});
+  }
+}

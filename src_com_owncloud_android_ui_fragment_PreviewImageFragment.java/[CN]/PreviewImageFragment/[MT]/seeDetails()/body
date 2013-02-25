@@ -1,0 +1,3 @@
+{
+  ((FileFragment.ContainerActivity)getActivity()).showFragmentWithDetails(mFile);
+}

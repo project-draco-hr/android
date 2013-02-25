@@ -1,0 +1,30 @@
+{
+  super.onCreate(savedInstanceState);
+  mFile=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE);
+  mAccount=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_ACCOUNT);
+  if (mFile == null) {
+    throw new IllegalStateException("Instanced with a NULL OCFile");
+  }
+  if (mAccount == null) {
+    throw new IllegalStateException("Instanced with a NULL ownCloud Account");
+  }
+  if (!mFile.isImage()) {
+    throw new IllegalArgumentException("Non-image file passed as argument");
+  }
+  setContentView(R.layout.preview_image_activity);
+  ActionBar actionBar=getSupportActionBar();
+  actionBar.setDisplayHomeAsUpEnabled(true);
+  actionBar.setDisplayShowTitleEnabled(true);
+  actionBar.setTitle(mFile.getFileName());
+  if (savedInstanceState == null) {
+    mWaitingToPreview=false;
+    createChildFragment();
+  }
+ else {
+    mWaitingToPreview=savedInstanceState.getBoolean(KEY_WAITING_TO_PREVIEW);
+  }
+  mDownloadConnection=new DetailsServiceConnection();
+  bindService(new Intent(this,FileDownloader.class),mDownloadConnection,Context.BIND_AUTO_CREATE);
+  mUploadConnection=new DetailsServiceConnection();
+  bindService(new Intent(this,FileUploader.class),mUploadConnection,Context.BIND_AUTO_CREATE);
+}

@@ -1,0 +1,5 @@
+{
+  mFile=fileToDetail;
+  mAccount=ocAccount;
+  mStorageManager=null;
+}
