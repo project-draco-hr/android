@@ -1,0 +1,34 @@
+{
+  DbHandler db=new DbHandler(getApplicationContext());
+  Cursor c=db.getFailedFiles();
+  if (reset) {
+    fileList=new SparseArray<String>();
+    listView.removeAllViews();
+    lastLoadImageIdx=0;
+  }
+  if (c != null) {
+    try {
+      c.moveToPosition(lastLoadImageIdx);
+      while (c.moveToNext()) {
+        lastLoadImageIdx++;
+        String imp_path=c.getString(1);
+        fileList.put(lastLoadImageIdx,imp_path);
+        LinearLayout rowLayout=getLinearLayout(lastLoadImageIdx);
+        rowLayout.addView(getFileCheckbox(lastLoadImageIdx));
+        rowLayout.addView(getImageButton(imp_path,lastLoadImageIdx));
+        rowLayout.addView(getFileButton(imp_path,lastLoadImageIdx));
+        listView.addView(rowLayout);
+        Log.d(LOG_TAG,imp_path + " on idx: " + lastLoadImageIdx);
+        if (lastLoadImageIdx % MAX_LOAD_IMAGES == 0) {
+          break;
+        }
+      }
+      if (lastLoadImageIdx > 0) {
+        addLoadMoreButton(listView);
+      }
+    }
+  finally {
+      db.close();
+    }
+  }
+}

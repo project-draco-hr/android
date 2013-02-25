@@ -1,0 +1,11 @@
+{
+  return new OnCheckedChangeListener(){
+    @Override public void onCheckedChanged(    CompoundButton buttonView,    boolean isChecked){
+      List<CheckBox> list=getCheckboxList();
+      for (      CheckBox checkbox : list) {
+        ((CheckBox)checkbox).setChecked(isChecked);
+      }
+    }
+  }
+;
+}

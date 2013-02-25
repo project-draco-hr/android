@@ -24,7 +24,9 @@
   parentPath=parentPath.endsWith(OCFile.PATH_SEPARATOR) ? parentPath : parentPath + OCFile.PATH_SEPARATOR;
   OCFile parentDir=storageManager.getFileByPath(parentPath);
   if (parentDir == null) {
-    throw new IllegalStateException("Can not upload a file to a non existing remote location: " + parentPath);
+    Toast t=Toast.makeText(getApplicationContext(),"The first time the InstantUpload is running you must be online, so the target folder can successfully created by the upload process",30);
+    t.show();
+    return null;
   }
   long parentDirId=parentDir.getFileId();
   newFile.setParentId(parentDirId);

@@ -1,4 +1,5 @@
 {
+  Log.d(TAG,"NotifyUploadResult with resultCode: " + uploadResult.getCode());
   if (uploadResult.isCancelled()) {
     mNotificationManager.cancel(R.string.uploader_upload_in_progress_ticker);
   }
@@ -13,12 +14,17 @@
     mNotification.contentIntent=PendingIntent.getActivity(getApplicationContext(),(int)System.currentTimeMillis(),showDetailsIntent,0);
     mNotification.setLatestEventInfo(getApplicationContext(),getString(R.string.uploader_upload_succeeded_ticker),String.format(getString(R.string.uploader_upload_succeeded_content_single),upload.getFileName()),mNotification.contentIntent);
     mNotificationManager.notify(R.string.uploader_upload_in_progress_ticker,mNotification);
+    DbHandler db=new DbHandler(this.getBaseContext());
+    db.removeIUPendingFile(mCurrentUpload.getFile().getStoragePath());
+    db.close();
   }
  else {
     mNotificationManager.cancel(R.string.uploader_upload_in_progress_ticker);
     Notification finalNotification=new Notification(R.drawable.icon,getString(R.string.uploader_upload_failed_ticker),System.currentTimeMillis());
     finalNotification.flags|=Notification.FLAG_AUTO_CANCEL;
-    finalNotification.contentIntent=PendingIntent.getActivity(getApplicationContext(),(int)System.currentTimeMillis(),new Intent(),0);
+    Intent detailUploudIntent=new Intent(this,InstantUploadActivity.class);
+    detailUploudIntent.putExtra(FileUploader.KEY_ACCOUNT,upload.getAccount());
+    finalNotification.contentIntent=PendingIntent.getActivity(getApplicationContext(),(int)System.currentTimeMillis(),detailUploudIntent,PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_ONE_SHOT);
     String content=null;
     if (uploadResult.getCode() == ResultCode.LOCAL_STORAGE_FULL || uploadResult.getCode() == ResultCode.LOCAL_STORAGE_NOT_COPIED) {
       content=String.format(getString(R.string.error__upload__local_file_not_copied),upload.getFileName(),getString(R.string.app_name));
@@ -28,5 +34,10 @@
     }
     finalNotification.setLatestEventInfo(getApplicationContext(),getString(R.string.uploader_upload_failed_ticker),content,finalNotification.contentIntent);
     mNotificationManager.notify(R.string.uploader_upload_failed_ticker,finalNotification);
+    DbHandler db=new DbHandler(this.getBaseContext());
+    if (db.updateFileState(upload.getOriginalStoragePath(),DbHandler.UPLOAD_STATUS_UPLOAD_FAILED) == 0) {
+      db.putFileForLater(upload.getOriginalStoragePath(),upload.getAccount().name);
+    }
+    db.close();
   }
 }

@@ -1,0 +1,24 @@
+{
+  return new OnClickListener(){
+    @Override public void onClick(    View v){
+      try {
+        List<CheckBox> list=getCheckboxList();
+        for (        CheckBox checkbox : list) {
+          boolean to_retry=checkbox.isChecked();
+          Log.d(LOG_TAG,"Checkbox for " + checkbox.getId() + " was checked: "+ to_retry);
+          String img_path=fileList.get(checkbox.getId());
+          if (to_retry) {
+            final String msg="Image-Path " + checkbox.getId() + " was checked: "+ img_path;
+            Log.d(LOG_TAG,msg);
+            startUpload(img_path);
+          }
+        }
+      }
+  finally {
+        listView.removeAllViews();
+        loadListView(true);
+      }
+    }
+  }
+;
+}

@@ -1,0 +1,26 @@
+{
+  return new OnClickListener(){
+    @Override public void onClick(    View v){
+      final DbHandler dbh=new DbHandler(getApplicationContext());
+      try {
+        List<CheckBox> list=getCheckboxList();
+        for (        CheckBox checkbox : list) {
+          boolean to_be_delete=checkbox.isChecked();
+          Log.d(LOG_TAG,"Checkbox for " + checkbox.getId() + " was checked: "+ to_be_delete);
+          String img_path=fileList.get(checkbox.getId());
+          Log.d(LOG_TAG,"Image-Path " + checkbox.getId() + " was checked: "+ img_path);
+          if (to_be_delete) {
+            boolean deleted=dbh.removeIUPendingFile(img_path);
+            Log.d(LOG_TAG,"removing " + checkbox.getId() + " was : "+ deleted);
+          }
+        }
+      }
+  finally {
+        dbh.close();
+        listView.removeAllViews();
+        loadListView(true);
+      }
+    }
+  }
+;
+}

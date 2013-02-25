@@ -59,6 +59,9 @@
     files=new OCFile[localPaths.length];
     for (int i=0; i < localPaths.length; i++) {
       files[i]=obtainNewOCFileToUpload(remotePaths[i],localPaths[i],((mimeTypes != null) ? mimeTypes[i] : (String)null),storageManager);
+      if (files[i] == null) {
+        return Service.START_NOT_STICKY;
+      }
     }
   }
   OwnCloudVersion ocv=new OwnCloudVersion(AccountManager.get(this).getUserData(account,AccountAuthenticator.KEY_OC_VERSION));
@@ -101,5 +104,6 @@ catch (  Exception e) {
     msg.obj=requestedUploads;
     mServiceHandler.sendMessage(msg);
   }
+  Log.i(TAG,"mPendingUploads size:" + mPendingUploads.size());
   return Service.START_NOT_STICKY;
 }

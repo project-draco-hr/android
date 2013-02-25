@@ -1,2 +1,3 @@
 {
+  db.execSQL("ALTER TABLE " + TABLE_INSTANT_UPLOAD + " ADD COLUMN attempt;");
 }

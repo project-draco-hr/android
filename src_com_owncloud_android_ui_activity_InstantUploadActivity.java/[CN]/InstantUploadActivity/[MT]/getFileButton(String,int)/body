@@ -1,0 +1,9 @@
+{
+  Button retryButton=new Button(this);
+  retryButton.setId(id);
+  retryButton.setText(img_path);
+  retryButton.setBackgroundResource(R.color.owncloud_white);
+  retryButton.setTextSize(8);
+  retryButton.setOnClickListener(getImageButtonOnClickListener(img_path));
+  return retryButton;
+}

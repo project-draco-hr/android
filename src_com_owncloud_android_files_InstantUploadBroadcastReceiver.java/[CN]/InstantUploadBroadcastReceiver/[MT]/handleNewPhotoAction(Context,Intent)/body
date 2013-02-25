@@ -18,10 +18,10 @@
   String mime_type=c.getString(c.getColumnIndex(Media.MIME_TYPE));
   c.close();
   Log.e(TAG,file_path + "");
+  DbHandler db=new DbHandler(context);
+  db.putFileForLater(file_path,account.name);
+  db.close();
   if (!isOnline(context) || (instantUploadViaWiFiOnly(context) && !isConnectedViaWiFi(context))) {
-    DbHandler db=new DbHandler(context);
-    db.putFileForLater(file_path,account.name);
-    db.close();
     return;
   }
   IntentFilter filter=new IntentFilter(FileUploader.UPLOAD_FINISH_MESSAGE);

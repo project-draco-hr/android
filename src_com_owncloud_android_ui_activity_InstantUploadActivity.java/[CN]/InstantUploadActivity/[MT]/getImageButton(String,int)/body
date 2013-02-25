@@ -1,0 +1,35 @@
+{
+  ImageButton imageButton=new ImageButton(this);
+  imageButton.setId(id);
+  imageButton.setClickable(true);
+  imageButton.setOnClickListener(getImageButtonOnClickListener(img_path));
+  int base_scale_size=32;
+  if (img_path != null) {
+    Log.d(LOG_TAG,"add " + img_path + " to Image Button");
+    BitmapFactory.Options options=new BitmapFactory.Options();
+    options.inJustDecodeBounds=true;
+    Bitmap bitmap=BitmapFactory.decodeFile(img_path,options);
+    int width_tpm=options.outWidth, height_tmp=options.outHeight;
+    int scale=3;
+    while (true) {
+      if (width_tpm / 2 < base_scale_size || height_tmp / 2 < base_scale_size) {
+        break;
+      }
+      width_tpm/=2;
+      height_tmp/=2;
+      scale++;
+    }
+    Log.d(LOG_TAG,"scale Imgae with: " + scale);
+    BitmapFactory.Options options2=new BitmapFactory.Options();
+    options2.inSampleSize=scale;
+    bitmap=BitmapFactory.decodeFile(img_path,options2);
+    if (bitmap != null) {
+      Log.d(LOG_TAG,"loaded Bitmap Bytes: " + bitmap.getRowBytes());
+      imageButton.setImageBitmap(bitmap);
+    }
+ else {
+      Log.d(LOG_TAG,"could not load imgage: " + img_path);
+    }
+  }
+  return imageButton;
+}
