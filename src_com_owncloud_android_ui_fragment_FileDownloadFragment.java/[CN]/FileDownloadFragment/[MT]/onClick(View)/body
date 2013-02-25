@@ -1,9 +1,8 @@
 {
 switch (v.getId()) {
-case R.id.fdDownloadBtn:
+case R.id.cancelBtn:
 {
       FileDownloaderBinder downloaderBinder=mContainerActivity.getFileDownloaderBinder();
-      FileUploaderBinder uploaderBinder=mContainerActivity.getFileUploaderBinder();
       if (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,mFile)) {
         downloaderBinder.cancel(mAccount,mFile);
         if (mFile.isDown()) {
@@ -13,69 +12,9 @@ case R.id.fdDownloadBtn:
           setButtonsForRemote();
         }
       }
- else       if (uploaderBinder != null && uploaderBinder.isUploading(mAccount,mFile)) {
-        uploaderBinder.cancel(mAccount,mFile);
-        if (!mFile.fileExists()) {
-          if (getActivity() instanceof FileDisplayActivity) {
-            FragmentTransaction transaction=getActivity().getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.file_details_container,new FileDownloadFragment(null,null),FTAG);
-            transaction.commit();
-            mContainerActivity.onFileStateChanged();
-          }
- else {
-            getActivity().finish();
-          }
-        }
- else         if (mFile.isDown()) {
-          setButtonsForDown();
-        }
- else {
-          setButtonsForRemote();
-        }
-      }
- else {
-        mLastRemoteOperation=new SynchronizeFileOperation(mFile,null,mStorageManager,mAccount,true,false,getActivity());
-        WebdavClient wc=OwnCloudClientUtils.createOwnCloudClient(mAccount,getSherlockActivity().getApplicationContext());
-        mLastRemoteOperation.execute(wc,this,mHandler);
-        boolean inDisplayActivity=getActivity() instanceof FileDisplayActivity;
-        getActivity().showDialog((inDisplayActivity) ? FileDisplayActivity.DIALOG_SHORT_WAIT : FileDetailActivity.DIALOG_SHORT_WAIT);
-      }
       break;
     }
-case R.id.fdKeepInSync:
-{
-    CheckBox cb=(CheckBox)getView().findViewById(R.id.fdKeepInSync);
-    mFile.setKeepInSync(cb.isChecked());
-    mStorageManager.saveFile(mFile);
-    Intent intent=new Intent(getActivity().getApplicationContext(),FileObserverService.class);
-    intent.putExtra(FileObserverService.KEY_FILE_CMD,(cb.isChecked() ? FileObserverService.CMD_ADD_OBSERVED_FILE : FileObserverService.CMD_DEL_OBSERVED_FILE));
-    intent.putExtra(FileObserverService.KEY_CMD_ARG_FILE,mFile);
-    intent.putExtra(FileObserverService.KEY_CMD_ARG_ACCOUNT,mAccount);
-    getActivity().startService(intent);
-    if (mFile.keepInSync()) {
-      onClick(getView().findViewById(R.id.fdDownloadBtn));
-    }
-    break;
-  }
-case R.id.fdRenameBtn:
-{
-  EditNameDialog dialog=EditNameDialog.newInstance(getString(R.string.rename_dialog_title),mFile.getFileName(),this);
-  dialog.show(getFragmentManager(),"nameeditdialog");
-  break;
-}
-case R.id.fdRemoveBtn:
-{
-ConfirmationDialogFragment confDialog=ConfirmationDialogFragment.newInstance(R.string.confirmation_remove_alert,new String[]{mFile.getFileName()},mFile.isDown() ? R.string.confirmation_remove_remote_and_local : R.string.confirmation_remove_remote,mFile.isDown() ? R.string.confirmation_remove_local : -1,R.string.common_cancel);
-confDialog.setOnConfirmationListener(this);
-confDialog.show(getFragmentManager(),FTAG_CONFIRMATION);
-break;
-}
-case R.id.fdOpenBtn:
-{
-openFile();
-break;
-}
 default :
-Log.e(TAG,"Incorrect view clicked!");
+  Log.e(TAG,"Incorrect view clicked!");
 }
 }

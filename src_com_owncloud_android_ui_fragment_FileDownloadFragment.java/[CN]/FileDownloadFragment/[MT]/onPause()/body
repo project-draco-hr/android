@@ -3,6 +3,4 @@
   Log.e(TAG,"PREVIEW_DOWNLOAD_FRAGMENT ONPAUSE " + mFile.getFileName());
   getActivity().unregisterReceiver(mDownloadFinishReceiver);
   mDownloadFinishReceiver=null;
-  getActivity().unregisterReceiver(mUploadFinishReceiver);
-  mUploadFinishReceiver=null;
 }

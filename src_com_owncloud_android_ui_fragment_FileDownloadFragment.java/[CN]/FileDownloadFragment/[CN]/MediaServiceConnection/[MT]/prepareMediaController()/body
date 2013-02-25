@@ -1,6 +1,0 @@
-{
-  mMediaServiceBinder.registerMediaController(mMediaController);
-  mMediaController.setMediaPlayer(mMediaServiceBinder);
-  mMediaController.setAnchorView(getView());
-  mMediaController.setEnabled(mMediaServiceBinder.isInPlaybackState());
-}

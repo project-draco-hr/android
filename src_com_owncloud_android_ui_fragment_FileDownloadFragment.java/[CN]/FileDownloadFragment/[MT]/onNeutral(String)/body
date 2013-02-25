@@ -1,9 +1,0 @@
-{
-  File f=null;
-  if (mFile.isDown() && (f=new File(mFile.getStoragePath())).exists()) {
-    f.delete();
-    mFile.setStoragePath(null);
-    mStorageManager.saveFile(mFile);
-    updateFileDetails(mFile,mAccount);
-  }
-}

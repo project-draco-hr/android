@@ -1,6 +1,0 @@
-{
-  Intent i=new Intent(getActivity(),PreviewVideoActivity.class);
-  i.putExtra(PreviewVideoActivity.EXTRA_FILE,mFile);
-  i.putExtra(PreviewVideoActivity.EXTRA_ACCOUNT,mAccount);
-  startActivity(i);
-}

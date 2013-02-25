@@ -1,0 +1,13 @@
+{
+  FileDownloaderBinder downloaderBinder=mContainerActivity.getFileDownloaderBinder();
+  if (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,mFile)) {
+    setButtonsForTransferring();
+  }
+ else   if (mFile.isDown()) {
+    setButtonsForDown();
+  }
+ else {
+    setButtonsForRemote();
+  }
+  getView().invalidate();
+}
