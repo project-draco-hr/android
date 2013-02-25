@@ -1,0 +1,17 @@
+{
+  super.onStop();
+  Log.e(TAG,"FILE_DOWNLOAD_FRAGMENT ONSTOP " + mFile.getFileName());
+  if (mMediaServiceConnection != null) {
+    Log.d(TAG,"Unbinding from MediaService ...");
+    if (mMediaServiceBinder != null && mMediaController != null) {
+      mMediaServiceBinder.unregisterMediaController(mMediaController);
+    }
+    getActivity().unbindService(mMediaServiceConnection);
+    mMediaServiceBinder=null;
+    if (mMediaController != null) {
+      mMediaController.hide();
+      mMediaController=null;
+    }
+  }
+  leaveTransferProgress();
+}

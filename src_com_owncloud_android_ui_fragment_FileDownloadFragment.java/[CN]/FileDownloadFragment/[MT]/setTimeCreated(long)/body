@@ -1,0 +1,9 @@
+{
+  TextView tv=(TextView)getView().findViewById(R.id.fdCreated);
+  TextView tvLabel=(TextView)getView().findViewById(R.id.fdCreatedLabel);
+  if (tv != null) {
+    tv.setText(DisplayUtils.unixTimeToHumanReadable(milliseconds));
+    tv.setVisibility(View.VISIBLE);
+    tvLabel.setVisibility(View.VISIBLE);
+  }
+}

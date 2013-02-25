@@ -1,0 +1,5 @@
+{
+  super.onCreate(savedInstanceState);
+  Log.e(TAG,"PREVIEW_DOWNLOAD_FRAGMENT ONCREATE " + ((mFile == null) ? "(NULL)" : mFile.getFileName()));
+  mHandler=new Handler();
+}

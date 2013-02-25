@@ -1,0 +1,4 @@
+{
+  super(fm);
+  mImageFiles=mStorageManager.getDirectoryImages(parentFolder);
+}

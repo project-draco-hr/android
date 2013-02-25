@@ -14,11 +14,15 @@
   setContentView(R.layout.preview_image_activity);
   ActionBar actionBar=getSupportActionBar();
   actionBar.setDisplayHomeAsUpEnabled(true);
-  actionBar.setDisplayShowTitleEnabled(true);
   actionBar.setTitle(mFile.getFileName());
+  mStorageManager=new FileDataStorageManager(mAccount,getContentResolver());
+  mParentFolder=mStorageManager.getFileById(mFile.getParentId());
+  if (mParentFolder == null) {
+    mParentFolder=mStorageManager.getFileByPath(OCFile.PATH_SEPARATOR);
+  }
   if (savedInstanceState == null) {
     mWaitingToPreview=false;
-    createChildFragment();
+    createViewPager();
   }
  else {
     mWaitingToPreview=savedInstanceState.getBoolean(KEY_WAITING_TO_PREVIEW);

@@ -1,5 +1,6 @@
 {
   super.onCreate(savedInstanceState);
+  Log.e(TAG,"PREVIEW_IMAGE_FRAGMENT ONCREATE " + ((mFile == null) ? "(NULL)" : mFile.getFileName()));
   mHandler=new Handler();
   setHasOptionsMenu(true);
 }

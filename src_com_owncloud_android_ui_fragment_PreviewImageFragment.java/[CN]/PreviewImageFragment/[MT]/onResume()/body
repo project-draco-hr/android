@@ -1,3 +1,4 @@
 {
   super.onResume();
+  Log.e(TAG,"PREVIEW_IMAGE_FRAGMENT ONRESUME " + mFile.getFileName());
 }

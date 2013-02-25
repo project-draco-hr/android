@@ -1,0 +1,15 @@
+{
+  String accountName=intent.getStringExtra(FileDownloader.ACCOUNT_NAME);
+  if (!isEmpty() && accountName.equals(mAccount.name)) {
+    boolean downloadWasFine=intent.getBooleanExtra(FileDownloader.EXTRA_DOWNLOAD_RESULT,false);
+    String downloadedRemotePath=intent.getStringExtra(FileDownloader.EXTRA_REMOTE_PATH);
+    if (mFile.getRemotePath().equals(downloadedRemotePath)) {
+      if (downloadWasFine) {
+        mFile=mStorageManager.getFileByPath(downloadedRemotePath);
+      }
+      mContainerActivity.notifySuccessfulDownload(mFile,intent,downloadWasFine);
+      getActivity().removeStickyBroadcast(intent);
+      updateFileDetails(false);
+    }
+  }
+}

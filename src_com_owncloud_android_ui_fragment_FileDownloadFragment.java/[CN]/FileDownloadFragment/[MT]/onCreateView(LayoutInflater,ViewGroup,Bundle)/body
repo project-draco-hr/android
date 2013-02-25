@@ -1,0 +1,23 @@
+{
+  super.onCreateView(inflater,container,savedInstanceState);
+  if (savedInstanceState != null) {
+    mFile=savedInstanceState.getParcelable(FileDownloadFragment.EXTRA_FILE);
+    mAccount=savedInstanceState.getParcelable(FileDownloadFragment.EXTRA_ACCOUNT);
+  }
+  if (mFile != null && mAccount != null) {
+  }
+  View view=null;
+  view=inflater.inflate(mLayout,container,false);
+  mView=view;
+  if (mLayout == R.layout.file_details_fragment) {
+    mView.findViewById(R.id.fdKeepInSync).setOnClickListener(this);
+    mView.findViewById(R.id.fdRenameBtn).setOnClickListener(this);
+    mView.findViewById(R.id.fdDownloadBtn).setOnClickListener(this);
+    mView.findViewById(R.id.fdOpenBtn).setOnClickListener(this);
+    mView.findViewById(R.id.fdRemoveBtn).setOnClickListener(this);
+    ProgressBar progressBar=(ProgressBar)mView.findViewById(R.id.fdProgressBar);
+    mProgressListener=new ProgressListener(progressBar);
+  }
+  updateFileDetails(false);
+  return view;
+}

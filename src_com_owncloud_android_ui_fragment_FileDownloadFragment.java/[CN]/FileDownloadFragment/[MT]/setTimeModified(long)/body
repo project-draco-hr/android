@@ -1,0 +1,6 @@
+{
+  TextView tv=(TextView)getView().findViewById(R.id.fdModified);
+  if (tv != null) {
+    tv.setText(DisplayUtils.unixTimeToHumanReadable(milliseconds));
+  }
+}
