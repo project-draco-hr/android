@@ -20,13 +20,11 @@
   if (mParentFolder == null) {
     mParentFolder=mStorageManager.getFileByPath(OCFile.PATH_SEPARATOR);
   }
-  createViewPager();
-  if (savedInstanceState == null) {
-    mWaitingToPreview=(mFile.isDown()) ? null : mFile;
-  }
- else {
+  mWaitingToPreview=null;
+  if (savedInstanceState != null) {
     mWaitingToPreview=(OCFile)savedInstanceState.getParcelable(KEY_WAITING_TO_PREVIEW);
   }
+  createViewPager();
   mDownloadConnection=new PreviewImageServiceConnection();
   bindService(new Intent(this,FileDownloader.class),mDownloadConnection,Context.BIND_AUTO_CREATE);
   mUploadConnection=new PreviewImageServiceConnection();

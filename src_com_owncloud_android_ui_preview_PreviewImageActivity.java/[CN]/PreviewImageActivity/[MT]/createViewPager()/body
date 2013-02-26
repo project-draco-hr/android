@@ -1,6 +1,9 @@
 {
   mPreviewImagePagerAdapter=new PreviewImagePagerAdapter(getSupportFragmentManager(),mParentFolder,mAccount,mStorageManager);
   mViewPager=(ViewPager)findViewById(R.id.fragmentPager);
+  int position=mPreviewImagePagerAdapter.getFilePosition(mFile);
+  Log.e(TAG,"Setting initial position " + position);
   mViewPager.setAdapter(mPreviewImagePagerAdapter);
   mViewPager.setOnPageChangeListener(this);
+  mViewPager.setCurrentItem((position >= 0) ? position : 0);
 }

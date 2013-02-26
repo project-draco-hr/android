@@ -1,4 +1,5 @@
 {
+  Log.e(TAG,"onPageSelected " + position);
   OCFile currentFile=mPreviewImagePagerAdapter.getFileAt(position);
   getSupportActionBar().setTitle(currentFile.getFileName());
   if (currentFile.isDown()) {

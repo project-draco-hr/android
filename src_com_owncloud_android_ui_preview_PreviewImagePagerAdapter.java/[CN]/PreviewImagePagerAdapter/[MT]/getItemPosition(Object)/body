@@ -1,6 +1,7 @@
 {
   Log.e(TAG,"getItemPosition ");
   if (mObsoleteFragments.contains(object)) {
+    mObsoleteFragments.remove(object);
     return POSITION_NONE;
   }
   return super.getItemPosition(object);
