@@ -1,8 +1,0 @@
-{
-  super.onSaveInstanceState(outState);
-  outState.putParcelable(FilePreviewFragment.EXTRA_FILE,mFile);
-  outState.putParcelable(FilePreviewFragment.EXTRA_ACCOUNT,mAccount);
-  if (mVideoPreview.isPlaying()) {
-    outState.putInt(FilePreviewFragment.EXTRA_PLAY_POSITION,mVideoPreview.getCurrentPosition());
-  }
-}

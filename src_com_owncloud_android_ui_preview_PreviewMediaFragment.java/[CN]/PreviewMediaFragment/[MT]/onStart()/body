@@ -4,10 +4,6 @@
     if (mFile.isAudio()) {
       bindMediaService();
     }
- else     if (mFile.isImage()) {
-      BitmapLoader bl=new BitmapLoader(mImagePreview);
-      bl.execute(new String[]{mFile.getStoragePath()});
-    }
  else     if (mFile.isVideo()) {
       playVideo();
     }

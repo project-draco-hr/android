@@ -1,9 +1,9 @@
 {
   int mode=getIntent().getIntExtra(EXTRA_MODE,MODE_PREVIEW);
   Fragment newFragment=null;
-  if (FilePreviewFragment.canBePreviewed(mFile) && mode == MODE_PREVIEW) {
+  if (PreviewMediaFragment.canBePreviewed(mFile) && mode == MODE_PREVIEW) {
     if (mFile.isDown()) {
-      newFragment=new FilePreviewFragment(mFile,mAccount);
+      newFragment=new PreviewMediaFragment(mFile,mAccount);
     }
  else {
       newFragment=new FileDetailFragment(mFile,mAccount);

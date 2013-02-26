@@ -2,9 +2,9 @@
   if (mDualPane && getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG) == null) {
     FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
     if (mCurrentFile != null) {
-      if (FilePreviewFragment.canBePreviewed(mCurrentFile)) {
+      if (PreviewMediaFragment.canBePreviewed(mCurrentFile)) {
         if (mCurrentFile.isDown()) {
-          transaction.replace(R.id.file_details_container,new FilePreviewFragment(mCurrentFile,AccountUtils.getCurrentOwnCloudAccount(this)),FileDetailFragment.FTAG);
+          transaction.replace(R.id.file_details_container,new PreviewMediaFragment(mCurrentFile,AccountUtils.getCurrentOwnCloudAccount(this)),FileDetailFragment.FTAG);
         }
  else {
           transaction.replace(R.id.file_details_container,new FileDetailFragment(mCurrentFile,AccountUtils.getCurrentOwnCloudAccount(this)),FileDetailFragment.FTAG);
