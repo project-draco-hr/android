@@ -1,9 +1,13 @@
 {
   Log.e(TAG,"REQUEST FOR DOWNLOAD : " + mWaitingToPreview.getFileName());
-  if (!mDownloaderBinder.isDownloading(mAccount,mWaitingToPreview)) {
+  if (mDownloaderBinder == null) {
+    mRequestWaitingForBinder=true;
+  }
+ else   if (!mDownloaderBinder.isDownloading(mAccount,mWaitingToPreview)) {
     Intent i=new Intent(this,FileDownloader.class);
     i.putExtra(FileDownloader.EXTRA_ACCOUNT,mAccount);
     i.putExtra(FileDownloader.EXTRA_FILE,mWaitingToPreview);
     startService(i);
   }
+  mViewPager.invalidate();
 }

@@ -1,7 +1,10 @@
 {
   if (file != null && FilePreviewFragment.canBePreviewed(file)) {
-    if (file.isDown()) {
-      startPreview(file);
+    if (file.isImage()) {
+      startPreviewImage(file);
+    }
+ else     if (file.isDown()) {
+      startOtherPreview(file);
     }
  else {
       startDownloadForPreview(file);

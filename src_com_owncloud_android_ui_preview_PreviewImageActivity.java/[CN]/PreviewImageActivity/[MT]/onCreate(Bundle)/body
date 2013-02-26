@@ -20,9 +20,13 @@
   if (mParentFolder == null) {
     mParentFolder=mStorageManager.getFileByPath(OCFile.PATH_SEPARATOR);
   }
-  mWaitingToPreview=null;
   if (savedInstanceState != null) {
     mWaitingToPreview=(OCFile)savedInstanceState.getParcelable(KEY_WAITING_TO_PREVIEW);
+    mRequestWaitingForBinder=savedInstanceState.getBoolean(KEY_WAITING_FOR_BINDER);
+  }
+ else {
+    mWaitingToPreview=null;
+    mRequestWaitingForBinder=false;
   }
   createViewPager();
   mDownloadConnection=new PreviewImageServiceConnection();

@@ -8,6 +8,5 @@
  else {
     mWaitingToPreview=currentFile;
     requestForDownload();
-    mViewPager.invalidate();
   }
 }
