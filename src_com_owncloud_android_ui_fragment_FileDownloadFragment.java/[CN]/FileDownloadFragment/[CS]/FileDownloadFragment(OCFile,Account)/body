@@ -3,4 +3,5 @@
   mAccount=ocAccount;
   mStorageManager=null;
   mProgressListener=null;
+  mListening=false;
 }

@@ -1,4 +1,0 @@
-{
-  OCFile currentFile=((FileFragment)mPreviewImagePagerAdapter.getItem(position)).getFile();
-  getSupportActionBar().setTitle(currentFile.getFileName());
-}

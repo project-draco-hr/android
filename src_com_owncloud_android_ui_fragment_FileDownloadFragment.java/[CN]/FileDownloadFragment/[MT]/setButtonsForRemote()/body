@@ -1,8 +1,8 @@
 {
   Button downloadButton=(Button)getView().findViewById(R.id.cancelBtn);
   downloadButton.setVisibility(View.GONE);
-  ProgressBar progressBar=(ProgressBar)getView().findViewById(R.id.fdProgressBar);
+  ProgressBar progressBar=(ProgressBar)getView().findViewById(R.id.progressBar);
   progressBar.setVisibility(View.GONE);
-  TextView progressText=(TextView)getView().findViewById(R.id.fdProgressText);
+  TextView progressText=(TextView)getView().findViewById(R.id.progressText);
   progressText.setText(R.string.downloader_not_downloaded_yet);
 }

@@ -7,9 +7,9 @@
       if (downloadWasFine) {
         mFile=mStorageManager.getFileByPath(downloadedRemotePath);
       }
-      mContainerActivity.notifySuccessfulDownload(mFile,intent,downloadWasFine);
+      updateView(false);
       getActivity().removeStickyBroadcast(intent);
-      updateView();
+      mContainerActivity.notifySuccessfulDownload(mFile,intent,downloadWasFine);
     }
   }
 }

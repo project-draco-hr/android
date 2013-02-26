@@ -1,7 +1,0 @@
-{
-  super.onResume();
-  Fragment fragment=getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
-  if (fragment != null && fragment instanceof FileDetailFragment) {
-    ((FileDetailFragment)fragment).updateFileDetails(false);
-  }
-}

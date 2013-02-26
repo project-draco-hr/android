@@ -9,7 +9,7 @@
   View view=null;
   view=inflater.inflate(R.layout.file_download_fragment,container,false);
   mView=view;
-  ProgressBar progressBar=(ProgressBar)mView.findViewById(R.id.fdProgressBar);
+  ProgressBar progressBar=(ProgressBar)mView.findViewById(R.id.progressBar);
   mProgressListener=new ProgressListener(progressBar);
   return view;
 }

@@ -3,4 +3,5 @@
   mAccount=null;
   mStorageManager=null;
   mProgressListener=null;
+  mListening=false;
 }

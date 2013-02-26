@@ -1,0 +1,12 @@
+{
+  Log.e(TAG,"GETTING PAGE " + i);
+  OCFile file=mImageFiles.get(i);
+  Fragment fragment=null;
+  if (file.isDown()) {
+    fragment=new PreviewImageFragment(file,mAccount);
+  }
+ else {
+    fragment=new FileDownloadFragment(file,mAccount);
+  }
+  return fragment;
+}

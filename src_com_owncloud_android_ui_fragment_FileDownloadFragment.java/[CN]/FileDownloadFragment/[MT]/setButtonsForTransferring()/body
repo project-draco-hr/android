@@ -1,8 +1,8 @@
 {
   Button downloadButton=(Button)getView().findViewById(R.id.cancelBtn);
   downloadButton.setText(R.string.common_cancel);
-  ProgressBar progressBar=(ProgressBar)getView().findViewById(R.id.fdProgressBar);
+  ProgressBar progressBar=(ProgressBar)getView().findViewById(R.id.progressBar);
   progressBar.setVisibility(View.VISIBLE);
-  TextView progressText=(TextView)getView().findViewById(R.id.fdProgressText);
+  TextView progressText=(TextView)getView().findViewById(R.id.progressText);
   progressText.setText(R.string.downloader_download_in_progress_ticker);
 }

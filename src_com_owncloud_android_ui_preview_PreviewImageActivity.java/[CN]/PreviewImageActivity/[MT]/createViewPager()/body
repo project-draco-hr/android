@@ -1,0 +1,6 @@
+{
+  mPreviewImagePagerAdapter=new PreviewImagePagerAdapter(getSupportFragmentManager(),mParentFolder,mAccount,mStorageManager);
+  mViewPager=(ViewPager)findViewById(R.id.fragmentPager);
+  mViewPager.setAdapter(mPreviewImagePagerAdapter);
+  mViewPager.setOnPageChangeListener(this);
+}

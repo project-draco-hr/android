@@ -1,5 +1,6 @@
 {
   super.onActivityCreated(savedInstanceState);
+  Log.e(TAG,"PREVIEW_DOWNLOAD_FRAGMENT ONACTIVITYCREATED " + ((mFile == null) ? " (NULL)" : mFile.getFileName()));
   if (mAccount != null) {
     mStorageManager=new FileDataStorageManager(mAccount,getActivity().getApplicationContext().getContentResolver());
     ;
