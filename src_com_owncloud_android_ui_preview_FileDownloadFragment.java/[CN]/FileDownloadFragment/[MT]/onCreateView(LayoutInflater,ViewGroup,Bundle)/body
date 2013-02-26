@@ -4,12 +4,11 @@
     mFile=savedInstanceState.getParcelable(FileDownloadFragment.EXTRA_FILE);
     mAccount=savedInstanceState.getParcelable(FileDownloadFragment.EXTRA_ACCOUNT);
   }
-  if (mFile != null && mAccount != null) {
-  }
   View view=null;
   view=inflater.inflate(R.layout.file_download_fragment,container,false);
   mView=view;
   ProgressBar progressBar=(ProgressBar)mView.findViewById(R.id.progressBar);
   mProgressListener=new ProgressListener(progressBar);
+  ((Button)mView.findViewById(R.id.cancelBtn)).setOnClickListener(this);
   return view;
 }

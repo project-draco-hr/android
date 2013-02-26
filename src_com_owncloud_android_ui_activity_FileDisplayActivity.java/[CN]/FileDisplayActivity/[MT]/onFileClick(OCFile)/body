@@ -1,10 +1,10 @@
 {
-  if (file != null && PreviewMediaFragment.canBePreviewed(file)) {
-    if (file.isImage()) {
-      startPreviewImage(file);
-    }
- else     if (file.isDown()) {
-      startOtherPreview(file);
+  if (file != null && PreviewImageFragment.canBePreviewed(file)) {
+    startPreviewImage(file);
+  }
+ else   if (file != null && PreviewMediaFragment.canBePreviewed(file)) {
+    if (file.isDown()) {
+      startMediaPreview(file);
     }
  else {
       startDownloadForPreview(file);
