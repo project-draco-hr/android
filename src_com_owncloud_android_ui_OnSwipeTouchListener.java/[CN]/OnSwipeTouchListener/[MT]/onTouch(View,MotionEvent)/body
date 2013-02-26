@@ -1,4 +1,0 @@
-{
-  Log.d("SWIPE","Swipe listener touched");
-  return mGestureDetector.onTouchEvent(event);
-}

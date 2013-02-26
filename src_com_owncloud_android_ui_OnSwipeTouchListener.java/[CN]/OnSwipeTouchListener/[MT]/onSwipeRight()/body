@@ -1,3 +1,0 @@
-{
-  Toast.makeText(mContext,"right",Toast.LENGTH_SHORT).show();
-}
