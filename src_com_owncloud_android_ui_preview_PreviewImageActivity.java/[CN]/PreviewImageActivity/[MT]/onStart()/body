@@ -1,4 +1,8 @@
 {
   super.onStart();
   Log.e(TAG,"PREVIEW ACTIVITY ON START");
+  mDownloadConnection=new PreviewImageServiceConnection();
+  bindService(new Intent(this,FileDownloader.class),mDownloadConnection,Context.BIND_AUTO_CREATE);
+  mUploadConnection=new PreviewImageServiceConnection();
+  bindService(new Intent(this,FileUploader.class),mUploadConnection,Context.BIND_AUTO_CREATE);
 }
