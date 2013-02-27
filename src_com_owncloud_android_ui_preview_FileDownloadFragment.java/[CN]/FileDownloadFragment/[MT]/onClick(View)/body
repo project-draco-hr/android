@@ -5,13 +5,7 @@ case R.id.cancelBtn:
       FileDownloaderBinder downloaderBinder=mContainerActivity.getFileDownloaderBinder();
       if (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,mFile)) {
         downloaderBinder.cancel(mAccount,mFile);
-        leaveTransferProgress();
-        if (mFile.isDown()) {
-          setButtonsForDown();
-        }
- else {
-          setButtonsForRemote();
-        }
+        getActivity().finish();
       }
       break;
     }
