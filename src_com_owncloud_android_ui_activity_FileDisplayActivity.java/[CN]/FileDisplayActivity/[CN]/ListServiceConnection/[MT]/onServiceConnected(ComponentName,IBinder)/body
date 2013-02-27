@@ -19,7 +19,7 @@
     if (fragment != null && fragment instanceof FileDetailFragment) {
       FileDetailFragment detailFragment=(FileDetailFragment)fragment;
       detailFragment.listenForTransferProgress();
-      detailFragment.updateFileDetails(false);
+      detailFragment.updateFileDetails(false,false);
     }
   }
 }

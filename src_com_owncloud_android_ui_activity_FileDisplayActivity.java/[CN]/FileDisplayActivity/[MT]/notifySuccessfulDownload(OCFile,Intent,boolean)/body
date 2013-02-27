@@ -1,11 +1,2 @@
 {
-  if (success) {
-    if (mWaitingToPreview != null) {
-      FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
-      transaction.replace(R.id.file_details_container,new PreviewMediaFragment(file,AccountUtils.getCurrentOwnCloudAccount(this)),FileDetailFragment.FTAG);
-      transaction.commit();
-      mWaitingToPreview=null;
-    }
-  }
-  mDownloadFinishReceiver.onReceive(this,intent);
 }

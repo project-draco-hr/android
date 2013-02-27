@@ -1,9 +1,6 @@
 {
   super.onResume();
-  mDownloadFinishReceiver=new DownloadFinishReceiver();
-  IntentFilter filter=new IntentFilter(FileDownloader.DOWNLOAD_FINISH_MESSAGE);
-  getActivity().registerReceiver(mDownloadFinishReceiver,filter);
   mUploadFinishReceiver=new UploadFinishReceiver();
-  filter=new IntentFilter(FileUploader.UPLOAD_FINISH_MESSAGE);
+  IntentFilter filter=new IntentFilter(FileUploader.UPLOAD_FINISH_MESSAGE);
   getActivity().registerReceiver(mUploadFinishReceiver,filter);
 }

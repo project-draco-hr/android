@@ -6,7 +6,7 @@
         ((FileDetailFragment)details).updateFileDetails(file,AccountUtils.getCurrentOwnCloudAccount(this));
       }
  else {
-        ((FileDetailFragment)details).updateFileDetails(downloading || uploading);
+        ((FileDetailFragment)details).updateFileDetails(false,true);
       }
     }
   }

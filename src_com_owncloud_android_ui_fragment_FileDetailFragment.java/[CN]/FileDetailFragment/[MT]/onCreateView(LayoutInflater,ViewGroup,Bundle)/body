@@ -19,6 +19,6 @@
     ProgressBar progressBar=(ProgressBar)mView.findViewById(R.id.fdProgressBar);
     mProgressListener=new ProgressListener(progressBar);
   }
-  updateFileDetails(false);
+  updateFileDetails(false,false);
   return view;
 }

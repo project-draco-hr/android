@@ -14,7 +14,7 @@
         msg.show();
       }
       getSherlockActivity().removeStickyBroadcast(intent);
-      updateFileDetails(false);
+      updateFileDetails(false,false);
     }
   }
 }

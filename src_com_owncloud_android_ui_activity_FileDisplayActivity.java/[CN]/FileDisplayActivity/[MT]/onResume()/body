@@ -15,6 +15,7 @@
     mUploadFinishReceiver=new UploadFinishReceiver();
     registerReceiver(mUploadFinishReceiver,uploadIntentFilter);
     IntentFilter downloadIntentFilter=new IntentFilter(FileDownloader.DOWNLOAD_ADDED_MESSAGE);
+    downloadIntentFilter.addAction(FileDownloader.DOWNLOAD_FINISH_MESSAGE);
     mDownloadFinishReceiver=new DownloadFinishReceiver();
     registerReceiver(mDownloadFinishReceiver,downloadIntentFilter);
     mFileList.listDirectory(mCurrentDir);

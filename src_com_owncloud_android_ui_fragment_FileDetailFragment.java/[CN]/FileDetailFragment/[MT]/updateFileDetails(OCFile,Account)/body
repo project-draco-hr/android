@@ -4,5 +4,5 @@
     mStorageManager=new FileDataStorageManager(ocAccount,getActivity().getApplicationContext().getContentResolver());
   }
   mAccount=ocAccount;
-  updateFileDetails(false);
+  updateFileDetails(false,false);
 }

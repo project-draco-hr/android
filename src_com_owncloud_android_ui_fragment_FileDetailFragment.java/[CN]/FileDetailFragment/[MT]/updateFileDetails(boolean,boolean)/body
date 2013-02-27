@@ -1,5 +1,8 @@
 {
   if (readyToShow()) {
+    if (refresh && mStorageManager != null) {
+      mFile=mStorageManager.getFileByPath(mFile.getRemotePath());
+    }
     setFilename(mFile.getFileName());
     setFiletype(mFile.getMimetype());
     setFilesize(mFile.getFileLength());

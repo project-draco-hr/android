@@ -17,6 +17,6 @@
   FileDetailFragment detailsFragment=(fragment instanceof FileDetailFragment) ? (FileDetailFragment)fragment : null;
   if (detailsFragment != null) {
     detailsFragment.listenForTransferProgress();
-    detailsFragment.updateFileDetails(mWaitingToPreview);
+    detailsFragment.updateFileDetails(mWaitingToPreview,false);
   }
 }

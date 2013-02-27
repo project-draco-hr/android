@@ -1,7 +1,7 @@
 {
   super.onPause();
-  getActivity().unregisterReceiver(mDownloadFinishReceiver);
-  mDownloadFinishReceiver=null;
-  getActivity().unregisterReceiver(mUploadFinishReceiver);
-  mUploadFinishReceiver=null;
+  if (mUploadFinishReceiver != null) {
+    getActivity().unregisterReceiver(mUploadFinishReceiver);
+    mUploadFinishReceiver=null;
+  }
 }
