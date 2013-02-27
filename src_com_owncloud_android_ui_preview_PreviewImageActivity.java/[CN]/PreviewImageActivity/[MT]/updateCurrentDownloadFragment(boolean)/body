@@ -1,0 +1,6 @@
+{
+  FileFragment fragment=mPreviewImagePagerAdapter.getFragmentAt(mViewPager.getCurrentItem());
+  if (fragment instanceof FileDownloadFragment) {
+    ((FileDownloadFragment)fragment).updateView(transferring);
+  }
+}

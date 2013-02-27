@@ -8,7 +8,6 @@
   Log.e(TAG,"Setting initial position " + position);
   mViewPager.setCurrentItem(position);
   if (position == 0 && !mFile.isDown()) {
-    mWaitingToPreview=mFile;
     mRequestWaitingForBinder=true;
   }
 }

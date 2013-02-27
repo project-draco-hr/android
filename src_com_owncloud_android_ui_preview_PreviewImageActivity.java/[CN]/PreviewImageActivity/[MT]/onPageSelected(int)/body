@@ -1,12 +1,13 @@
 {
   Log.e(TAG,"onPageSelected " + position);
-  OCFile currentFile=mPreviewImagePagerAdapter.getFileAt(position);
-  getSupportActionBar().setTitle(currentFile.getFileName());
-  if (currentFile.isDown()) {
-    mWaitingToPreview=null;
+  if (mDownloaderBinder == null) {
+    mRequestWaitingForBinder=true;
   }
  else {
-    mWaitingToPreview=currentFile;
-    requestForDownload();
+    OCFile currentFile=mPreviewImagePagerAdapter.getFileAt(position);
+    getSupportActionBar().setTitle(currentFile.getFileName());
+    if (!currentFile.isDown()) {
+      requestForDownload(currentFile);
+    }
   }
 }

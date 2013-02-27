@@ -4,4 +4,5 @@
   mStorageManager=null;
   mProgressListener=null;
   mListening=false;
+  mIgnoreFirstSavedState=ignoreFirstSavedState;
 }

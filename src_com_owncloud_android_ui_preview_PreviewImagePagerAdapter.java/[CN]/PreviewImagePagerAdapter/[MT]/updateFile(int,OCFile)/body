@@ -1,4 +1,5 @@
 {
-  mImageFiles.set(position,file);
   mObsoleteFragments.add(instantiateItem(null,position));
+  mObsoletePositions.add(Integer.valueOf(position));
+  mImageFiles.set(position,file);
 }

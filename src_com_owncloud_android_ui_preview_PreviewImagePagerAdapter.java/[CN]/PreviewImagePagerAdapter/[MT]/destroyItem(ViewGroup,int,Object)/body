@@ -1,0 +1,14 @@
+{
+  Log.e(TAG,"** destroyItem " + position);
+  Fragment fragment=(Fragment)object;
+  if (mCurTransaction == null) {
+    mCurTransaction=mFragmentManager.beginTransaction();
+  }
+  Log.e(TAG,"** \t removing fragment at position " + position);
+  while (mSavedState.size() <= position) {
+    mSavedState.add(null);
+  }
+  mSavedState.set(position,mFragmentManager.saveFragmentInstanceState(fragment));
+  mFragments.set(position,null);
+  mCurTransaction.remove(fragment);
+}

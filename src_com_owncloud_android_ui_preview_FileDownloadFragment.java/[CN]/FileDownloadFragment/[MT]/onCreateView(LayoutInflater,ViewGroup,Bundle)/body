@@ -1,8 +1,13 @@
 {
   super.onCreateView(inflater,container,savedInstanceState);
   if (savedInstanceState != null) {
-    mFile=savedInstanceState.getParcelable(FileDownloadFragment.EXTRA_FILE);
-    mAccount=savedInstanceState.getParcelable(FileDownloadFragment.EXTRA_ACCOUNT);
+    if (!mIgnoreFirstSavedState) {
+      mFile=savedInstanceState.getParcelable(FileDownloadFragment.EXTRA_FILE);
+      mAccount=savedInstanceState.getParcelable(FileDownloadFragment.EXTRA_ACCOUNT);
+    }
+ else {
+      mIgnoreFirstSavedState=false;
+    }
   }
   View view=null;
   view=inflater.inflate(R.layout.file_download_fragment,container,false);

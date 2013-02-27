@@ -1,5 +1,4 @@
 {
   super.onSaveInstanceState(outState);
-  outState.putParcelable(KEY_WAITING_TO_PREVIEW,mWaitingToPreview);
   outState.putBoolean(KEY_WAITING_FOR_BINDER,mRequestWaitingForBinder);
 }

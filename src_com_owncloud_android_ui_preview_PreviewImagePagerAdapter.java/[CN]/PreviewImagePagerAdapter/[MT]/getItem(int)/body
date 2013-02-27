@@ -3,10 +3,10 @@
   OCFile file=mImageFiles.get(i);
   Fragment fragment=null;
   if (file.isDown()) {
-    fragment=new PreviewImageFragment(file,mAccount);
+    fragment=new PreviewImageFragment(file,mAccount,mObsoletePositions.contains(Integer.valueOf(i)));
   }
  else {
-    fragment=new FileDownloadFragment(file,mAccount);
+    fragment=new FileDownloadFragment(file,mAccount,mObsoletePositions.contains(Integer.valueOf(i)));
   }
   return fragment;
 }

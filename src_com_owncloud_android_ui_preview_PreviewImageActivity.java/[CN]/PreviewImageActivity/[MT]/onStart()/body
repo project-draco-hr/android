@@ -1,0 +1,4 @@
+{
+  super.onStart();
+  Log.e(TAG,"PREVIEW ACTIVITY ON START");
+}

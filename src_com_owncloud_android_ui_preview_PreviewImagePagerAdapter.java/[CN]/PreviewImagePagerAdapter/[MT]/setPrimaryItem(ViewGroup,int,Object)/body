@@ -1,0 +1,12 @@
+{
+  Fragment fragment=(Fragment)object;
+  if (fragment != mCurrentPrimaryItem) {
+    if (mCurrentPrimaryItem != null) {
+      mCurrentPrimaryItem.setMenuVisibility(false);
+    }
+    if (fragment != null) {
+      fragment.setMenuVisibility(true);
+    }
+    mCurrentPrimaryItem=fragment;
+  }
+}

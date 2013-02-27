@@ -1,0 +1,3 @@
+{
+  Log.e(TAG,"** startUpdate");
+}

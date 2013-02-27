@@ -3,10 +3,9 @@
     Log.e(TAG,"PREVIEW_IMAGE Download service connected");
     mDownloaderBinder=(FileDownloaderBinder)service;
     if (mRequestWaitingForBinder) {
-      if (mWaitingToPreview != null) {
-        requestForDownload();
-      }
       mRequestWaitingForBinder=false;
+      Log.e(TAG,"Simulating reselection of current page after connection of download binder");
+      onPageSelected(mViewPager.getCurrentItem());
     }
   }
  else   if (component.equals(new ComponentName(PreviewImageActivity.this,FileUploader.class))) {
