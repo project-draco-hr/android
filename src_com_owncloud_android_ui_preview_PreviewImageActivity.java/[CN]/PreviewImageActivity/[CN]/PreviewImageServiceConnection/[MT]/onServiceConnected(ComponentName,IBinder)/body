@@ -1,6 +1,6 @@
 {
   if (component.equals(new ComponentName(PreviewImageActivity.this,FileDownloader.class))) {
-    Log.d(TAG,"Download service connected");
+    Log.e(TAG,"PREVIEW_IMAGE Download service connected");
     mDownloaderBinder=(FileDownloaderBinder)service;
     if (mRequestWaitingForBinder) {
       if (mWaitingToPreview != null) {
