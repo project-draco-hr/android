@@ -11,10 +11,13 @@
   if (!mFile.isImage()) {
     throw new IllegalArgumentException("Non-image file passed as argument");
   }
+  requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
   setContentView(R.layout.preview_image_activity);
   ActionBar actionBar=getSupportActionBar();
   actionBar.setDisplayHomeAsUpEnabled(true);
   actionBar.setTitle(mFile.getFileName());
+  actionBar.hide();
+  mFullScreen=true;
   mStorageManager=new FileDataStorageManager(mAccount,getContentResolver());
   mParentFolder=mStorageManager.getFileById(mFile.getParentId());
   if (mParentFolder == null) {

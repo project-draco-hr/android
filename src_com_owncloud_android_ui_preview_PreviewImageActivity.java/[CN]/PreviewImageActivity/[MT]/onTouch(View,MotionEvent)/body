@@ -1,0 +1,14 @@
+{
+  Log.e(TAG,"TOUCH!!! **********************");
+  if (event.getAction() == MotionEvent.ACTION_DOWN) {
+    Log.e(TAG,"TOUCH DOWN!!! **********************");
+  }
+ else   if (event.getAction() == MotionEvent.ACTION_UP) {
+    Log.e(TAG,"TOUCH UP!!! **********************");
+    toggleFullScreen();
+  }
+ else   if (event.getAction() == MotionEvent.ACTION_MOVE) {
+    Log.e(TAG,"TOUCH MOVE!!! **********************");
+  }
+  return true;
+}
