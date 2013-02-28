@@ -1,4 +1,0 @@
-{
-  super.onStop();
-  Log.e(TAG,"PREVIEW_IMAGE_FRAGMENT ONSTOP " + mFile.getFileName());
-}

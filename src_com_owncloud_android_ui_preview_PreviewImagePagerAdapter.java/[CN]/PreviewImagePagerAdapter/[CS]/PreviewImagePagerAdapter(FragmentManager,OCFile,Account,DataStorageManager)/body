@@ -1,4 +1,5 @@
 {
+  super(fragmentManager);
   if (fragmentManager == null) {
     throw new IllegalArgumentException("NULL FragmentManager instance");
   }
@@ -13,5 +14,4 @@
   mImageFiles=mStorageManager.getDirectoryImages(parentFolder);
   mObsoleteFragments=new HashSet<Object>();
   mObsoletePositions=new HashSet<Integer>();
-  mFragmentManager=fragmentManager;
 }

@@ -5,7 +5,6 @@
   position=(position >= 0) ? position : 0;
   mViewPager.setAdapter(mPreviewImagePagerAdapter);
   mViewPager.setOnPageChangeListener(this);
-  Log.e(TAG,"Setting initial position " + position);
   mViewPager.setCurrentItem(position);
   if (position == 0 && !mFile.isDown()) {
     mRequestWaitingForBinder=true;

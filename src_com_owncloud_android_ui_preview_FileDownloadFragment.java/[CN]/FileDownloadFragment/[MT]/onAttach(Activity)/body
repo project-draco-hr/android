@@ -1,6 +1,5 @@
 {
   super.onAttach(activity);
-  Log.e(TAG,"PREVIEW_DOWNLOAD_FRAGMENT ONATTACH " + ((mFile == null) ? " (NULL)" : mFile.getFileName()));
   try {
     mContainerActivity=(ContainerActivity)activity;
   }

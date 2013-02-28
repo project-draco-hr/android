@@ -1,5 +1,4 @@
 {
   super.onStop();
-  Log.e(TAG,"FILE_DOWNLOAD_FRAGMENT ONSTOP " + mFile.getFileName());
   leaveTransferProgress();
 }

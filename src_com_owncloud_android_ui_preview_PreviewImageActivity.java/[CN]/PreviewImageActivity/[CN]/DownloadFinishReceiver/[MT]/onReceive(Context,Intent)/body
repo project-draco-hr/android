@@ -7,7 +7,6 @@
     boolean downloadWasFine=intent.getBooleanExtra(FileDownloader.EXTRA_DOWNLOAD_RESULT,false);
     boolean isCurrent=(mViewPager.getCurrentItem() == position);
     if (position >= 0) {
-      Log.e(TAG,"downloaded file FOUND in adapter");
       if (downloadWasFine) {
         mPreviewImagePagerAdapter.updateFile(position,file);
         mPreviewImagePagerAdapter.notifyDataSetChanged();

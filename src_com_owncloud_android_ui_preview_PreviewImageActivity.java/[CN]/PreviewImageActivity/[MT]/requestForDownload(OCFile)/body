@@ -1,7 +1,6 @@
 {
-  Log.e(TAG,"REQUEST FOR DOWNLOAD : " + file.getFileName());
   if (mDownloaderBinder == null) {
-    Log.e(TAG,"requestForDownload called without binder to download service");
+    Log.d(TAG,"requestForDownload called without binder to download service");
   }
  else   if (!mDownloaderBinder.isDownloading(mAccount,file)) {
     Intent i=new Intent(this,FileDownloader.class);

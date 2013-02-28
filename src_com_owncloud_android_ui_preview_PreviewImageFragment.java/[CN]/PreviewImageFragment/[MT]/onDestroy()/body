@@ -1,6 +1,5 @@
 {
   super.onDestroy();
-  Log.e(TAG,"PREVIEW_IMAGE_FRAGMENT ONDESTROY " + mFile.getFileName());
   if (mBitmap != null) {
     mBitmap.recycle();
   }

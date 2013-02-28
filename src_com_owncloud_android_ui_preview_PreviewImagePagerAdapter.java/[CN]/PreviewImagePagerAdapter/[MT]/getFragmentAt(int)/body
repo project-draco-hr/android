@@ -3,7 +3,6 @@
     return (FileFragment)instantiateItem(null,position);
   }
  catch (  Exception e) {
-    Log.e(TAG,"Wrong access to fragment in gallery ",e);
     return null;
   }
 }

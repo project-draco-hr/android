@@ -1,4 +1,3 @@
 {
   super.onPostResume();
-  Log.e(TAG,"PREVIEW ACTIVITY ONPOSTRESUME");
 }

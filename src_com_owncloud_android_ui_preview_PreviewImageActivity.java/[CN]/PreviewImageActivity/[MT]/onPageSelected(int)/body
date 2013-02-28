@@ -1,5 +1,4 @@
 {
-  Log.e(TAG,"onPageSelected " + position);
   if (mDownloaderBinder == null) {
     mRequestWaitingForBinder=true;
   }

@@ -1,6 +1,5 @@
 {
   super.onStart();
-  Log.e(TAG,"PREVIEW_IMAGE_FRAGMENT ONSTART " + mFile.getFileName());
   if (mFile != null) {
     BitmapLoader bl=new BitmapLoader(mImageView);
     bl.execute(new String[]{mFile.getStoragePath()});

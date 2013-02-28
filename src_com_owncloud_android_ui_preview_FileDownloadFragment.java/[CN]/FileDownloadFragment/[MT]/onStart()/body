@@ -1,5 +1,4 @@
 {
   super.onStart();
-  Log.e(TAG,"FILE_DOWNLOAD_FRAGMENT ONSTART " + mFile.getFileName());
   listenForTransferProgress();
 }

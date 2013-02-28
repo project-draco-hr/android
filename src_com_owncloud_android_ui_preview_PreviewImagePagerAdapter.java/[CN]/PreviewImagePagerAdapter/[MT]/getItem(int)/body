@@ -1,5 +1,4 @@
 {
-  Log.e(TAG,"GETTING PAGE " + i);
   OCFile file=mImageFiles.get(i);
   Fragment fragment=null;
   if (file.isDown()) {
