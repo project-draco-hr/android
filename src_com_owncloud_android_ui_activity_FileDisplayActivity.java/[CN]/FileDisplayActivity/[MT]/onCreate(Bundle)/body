@@ -42,6 +42,18 @@
   if (mDualPane) {
     initFileDetailsInDualPane();
   }
+ else {
+    if (mCurrentFile != null) {
+      onFileClick(mCurrentFile);
+      mCurrentFile=null;
+    }
+    Fragment rightPanel=getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
+    if (rightPanel != null) {
+      FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
+      transaction.remove(rightPanel);
+      transaction.commit();
+    }
+  }
   ActionBar actionBar=getSupportActionBar();
   actionBar.setHomeButtonEnabled(true);
   actionBar.setDisplayHomeAsUpEnabled(mCurrentDir != null && mCurrentDir.getParentId() != 0);
