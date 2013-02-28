@@ -2,6 +2,7 @@
   super.onCreate(savedInstanceState);
   mFile=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE);
   mAccount=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_ACCOUNT);
+  mStorageManager=new FileDataStorageManager(mAccount,getContentResolver());
   Configuration conf=getResources().getConfiguration();
   mConfigurationChangedToLandscape=(conf.orientation == Configuration.ORIENTATION_LANDSCAPE && (conf.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE);
   if (!mConfigurationChangedToLandscape) {

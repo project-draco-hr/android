@@ -2,6 +2,5 @@
   super.onActivityCreated(savedInstanceState);
   if (mAccount != null) {
     mStorageManager=new FileDataStorageManager(mAccount,getActivity().getApplicationContext().getContentResolver());
-    ;
   }
 }

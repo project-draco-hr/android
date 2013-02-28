@@ -6,4 +6,8 @@
       ((FileDetailFragment)fragment).updateFileDetails(false,false);
     }
   }
+  IntentFilter downloadIntentFilter=new IntentFilter(FileDownloader.DOWNLOAD_ADDED_MESSAGE);
+  downloadIntentFilter.addAction(FileDownloader.DOWNLOAD_FINISH_MESSAGE);
+  mDownloadFinishReceiver=new DownloadFinishReceiver();
+  registerReceiver(mDownloadFinishReceiver,downloadIntentFilter);
 }
