@@ -1,5 +1,5 @@
 {
-  FileDownloaderBinder downloaderBinder=mContainerActivity.getFileDownloaderBinder();
+  FileDownloaderBinder downloaderBinder=(mContainerActivity == null) ? null : mContainerActivity.getFileDownloaderBinder();
   if (transferring || (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,mFile))) {
     setButtonsForTransferring();
   }

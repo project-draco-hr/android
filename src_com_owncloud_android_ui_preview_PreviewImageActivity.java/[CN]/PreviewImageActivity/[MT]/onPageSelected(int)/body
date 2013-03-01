@@ -6,7 +6,9 @@
     OCFile currentFile=mPreviewImagePagerAdapter.getFileAt(position);
     getSupportActionBar().setTitle(currentFile.getFileName());
     if (!currentFile.isDown()) {
-      requestForDownload(currentFile);
+      if (!mPreviewImagePagerAdapter.pendingErrorAt(position)) {
+        requestForDownload(currentFile);
+      }
     }
   }
 }

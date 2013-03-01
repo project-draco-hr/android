@@ -3,6 +3,5 @@
   if (fragmentToUpdate != null) {
     mObsoleteFragments.add(fragmentToUpdate);
   }
-  mObsoletePositions.add(Integer.valueOf(position));
-  mImageFiles.set(position,file);
+  mDownloadErrors.add(Integer.valueOf(position));
 }

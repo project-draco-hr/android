@@ -1,8 +1,0 @@
-{
-  try {
-    return (FileFragment)instantiateItem(null,position);
-  }
- catch (  Exception e) {
-    return null;
-  }
-}

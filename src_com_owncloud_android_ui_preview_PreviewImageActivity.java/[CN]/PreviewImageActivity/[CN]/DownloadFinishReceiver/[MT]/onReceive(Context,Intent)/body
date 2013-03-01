@@ -5,18 +5,17 @@
     OCFile file=mStorageManager.getFileByPath(downloadedRemotePath);
     int position=mPreviewImagePagerAdapter.getFilePosition(file);
     boolean downloadWasFine=intent.getBooleanExtra(FileDownloader.EXTRA_DOWNLOAD_RESULT,false);
-    boolean isCurrent=(mViewPager.getCurrentItem() == position);
     if (position >= 0) {
       if (downloadWasFine) {
         mPreviewImagePagerAdapter.updateFile(position,file);
-        mPreviewImagePagerAdapter.notifyDataSetChanged();
       }
- else       if (isCurrent) {
-        updateCurrentDownloadFragment(false);
+ else {
+        mPreviewImagePagerAdapter.updateWithDownloadError(position);
       }
+      mPreviewImagePagerAdapter.notifyDataSetChanged();
     }
  else {
-      Log.e(TAG,"DOWNLOADED FILE NOT FOUND IN ADAPTER ");
+      Log.d(TAG,"Download finished, but the fragment is offscreen");
     }
   }
   removeStickyBroadcast(intent);

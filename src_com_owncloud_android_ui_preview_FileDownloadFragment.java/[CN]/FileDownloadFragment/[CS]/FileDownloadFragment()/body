@@ -5,4 +5,5 @@
   mProgressListener=null;
   mListening=false;
   mIgnoreFirstSavedState=false;
+  mError=false;
 }
