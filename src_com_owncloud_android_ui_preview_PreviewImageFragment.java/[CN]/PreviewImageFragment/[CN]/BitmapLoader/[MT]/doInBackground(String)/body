@@ -31,12 +31,12 @@
       screenHeight=display.getHeight();
     }
     if (width > screenWidth) {
-      scale=(int)Math.ceil((float)width / screenWidth);
-      options.inSampleSize=scale;
+      scale=(int)Math.floor((float)width / screenWidth);
     }
     if (height > screenHeight) {
-      scale=Math.max(scale,(int)Math.ceil((float)height / screenHeight));
+      scale=Math.max(scale,(int)Math.floor((float)height / screenHeight));
     }
+    options.inSampleSize=scale;
     options.inJustDecodeBounds=false;
     result=BitmapFactory.decodeFile(storagePath,options);
     if (result == null) {

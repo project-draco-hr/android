@@ -1,4 +1,3 @@
 {
-  Log.e(TAG,"ACTIVITY, ONPOSTRESUME");
   super.onPostResume();
 }
