@@ -1,3 +1,0 @@
-{
-  mImageViewRef=new WeakReference<ImageView>(imageView);
-}

@@ -1,7 +1,39 @@
 {
-  if (result != null && mImageViewRef != null) {
+  if (mImageViewRef != null && result != null) {
     final ImageView imageView=mImageViewRef.get();
-    imageView.setImageBitmap(result);
-    mBitmap=result;
+    if (imageView != null) {
+      imageView.setImageBitmap(result);
+      mBitmap=result;
+      if (mMessageViewRef != null) {
+        final TextView messageView=mMessageViewRef.get();
+        if (messageView != null) {
+          messageView.setVisibility(View.GONE);
+        }
+      }
+    }
+  }
+ else   if (mMessageViewRef != null && result == null) {
+    int messageId;
+    if (mThrowable == null) {
+      messageId=R.string.preview_image_error_unknown_format;
+      Log.e(TAG,"File could not be loaded as a bitmap: " + mFile.getStoragePath());
+    }
+ else     if (mThrowable instanceof OutOfMemoryError) {
+      messageId=R.string.preview_image_error_unknown_format;
+      Log.e(TAG,"Out of memory occured for file " + mFile.getStoragePath(),mThrowable);
+    }
+ else     if (mThrowable instanceof NoSuchFieldError) {
+      messageId=R.string.common_error_unknown;
+      Log.e(TAG,"Error from access to unexisting field despite protection; file " + mFile.getStoragePath(),mThrowable);
+    }
+ else {
+      messageId=R.string.common_error_unknown;
+      Log.e(TAG,"Unexpected error loading " + mFile.getStoragePath(),mThrowable);
+    }
+    final TextView messageView=mMessageViewRef.get();
+    if (messageView != null) {
+      messageView.setText(messageId);
+      messageView.setVisibility(View.VISIBLE);
+    }
   }
 }

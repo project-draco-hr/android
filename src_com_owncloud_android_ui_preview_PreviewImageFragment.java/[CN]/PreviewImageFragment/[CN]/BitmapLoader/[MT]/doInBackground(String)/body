@@ -17,39 +17,32 @@
     int width=options.outWidth;
     int height=options.outHeight;
     int scale=1;
-    if (width >= 2048 || height >= 2048) {
-      scale=(int)Math.ceil((Math.ceil(Math.max(height,width) / 2048.)));
-      options.inSampleSize=scale;
-    }
     Display display=getActivity().getWindowManager().getDefaultDisplay();
     Point size=new Point();
-    int screenwidth;
+    int screenWidth;
+    int screenHeight;
     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB_MR2) {
       display.getSize(size);
-      screenwidth=size.x;
+      screenWidth=size.x;
+      screenHeight=size.y;
     }
  else {
-      screenwidth=display.getWidth();
+      screenWidth=display.getWidth();
+      screenHeight=display.getHeight();
     }
-    Log.d(TAG,"image width: " + width + ", screen width: "+ screenwidth);
-    if (width > screenwidth) {
-      scale=(int)Math.ceil((float)width / screenwidth);
+    if (width > screenWidth) {
+      scale=(int)Math.ceil((float)width / screenWidth);
       options.inSampleSize=scale;
+    }
+    if (height > screenHeight) {
+      scale=Math.max(scale,(int)Math.ceil((float)height / screenHeight));
     }
     options.inJustDecodeBounds=false;
     result=BitmapFactory.decodeFile(storagePath,options);
-    Log.e(TAG,"loaded width: " + options.outWidth + ", loaded height: "+ options.outHeight);
   }
- catch (  OutOfMemoryError e) {
+ catch (  Throwable t) {
     result=null;
-    Log.e(TAG,"Out of memory occured for file with size " + storagePath);
-  }
-catch (  NoSuchFieldError e) {
-    result=null;
-    Log.e(TAG,"Error from access to unexisting field despite protection " + storagePath);
-  }
-catch (  Throwable t) {
-    result=null;
+    mThrowable=t;
     Log.e(TAG,"Unexpected error while creating image preview " + storagePath,t);
   }
   return result;
