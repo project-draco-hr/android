@@ -4,4 +4,6 @@
   showDetailsIntent.putExtra(FileDetailFragment.EXTRA_ACCOUNT,AccountUtils.getCurrentOwnCloudAccount(this));
   showDetailsIntent.putExtra(FileDetailActivity.EXTRA_MODE,FileDetailActivity.MODE_DETAILS);
   startActivity(showDetailsIntent);
+  int pos=mPreviewImagePagerAdapter.getFilePosition(file);
+  file=mPreviewImagePagerAdapter.getFileAt(pos);
 }
