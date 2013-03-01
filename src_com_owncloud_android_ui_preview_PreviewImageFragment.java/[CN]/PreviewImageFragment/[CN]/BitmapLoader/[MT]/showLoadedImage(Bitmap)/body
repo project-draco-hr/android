@@ -1,0 +1,16 @@
+{
+  if (mImageViewRef != null) {
+    final ImageView imageView=mImageViewRef.get();
+    if (imageView != null) {
+      imageView.setImageBitmap(result);
+      imageView.setVisibility(View.VISIBLE);
+      mBitmap=result;
+    }
+  }
+  if (mMessageViewRef != null) {
+    final TextView messageView=mMessageViewRef.get();
+    if (messageView != null) {
+      messageView.setVisibility(View.GONE);
+    }
+  }
+}

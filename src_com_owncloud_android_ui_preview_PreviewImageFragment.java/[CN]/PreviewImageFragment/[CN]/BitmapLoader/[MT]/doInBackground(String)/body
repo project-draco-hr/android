@@ -39,11 +39,22 @@
     }
     options.inJustDecodeBounds=false;
     result=BitmapFactory.decodeFile(storagePath,options);
+    if (result == null) {
+      mErrorMessageId=R.string.preview_image_error_unknown_format;
+      Log.e(TAG,"File could not be loaded as a bitmap: " + storagePath);
+    }
   }
- catch (  Throwable t) {
-    result=null;
-    mThrowable=t;
-    Log.e(TAG,"Unexpected error while creating image preview " + storagePath,t);
+ catch (  OutOfMemoryError e) {
+    mErrorMessageId=R.string.preview_image_error_unknown_format;
+    Log.e(TAG,"Out of memory occured for file " + storagePath,e);
+  }
+catch (  NoSuchFieldError e) {
+    mErrorMessageId=R.string.common_error_unknown;
+    Log.e(TAG,"Error from access to unexisting field despite protection; file " + storagePath,e);
+  }
+catch (  Throwable t) {
+    mErrorMessageId=R.string.common_error_unknown;
+    Log.e(TAG,"Unexpected error loading " + mFile.getStoragePath(),t);
   }
   return result;
 }

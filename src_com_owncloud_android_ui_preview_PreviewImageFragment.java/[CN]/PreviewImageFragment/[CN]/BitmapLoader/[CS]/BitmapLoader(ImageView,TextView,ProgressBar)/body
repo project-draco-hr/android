@@ -1,5 +1,5 @@
 {
   mImageViewRef=new WeakReference<ImageView>(imageView);
   mMessageViewRef=new WeakReference<TextView>(messageView);
-  mThrowable=null;
+  mProgressWheelRef=new WeakReference<ProgressBar>(progressWheel);
 }
