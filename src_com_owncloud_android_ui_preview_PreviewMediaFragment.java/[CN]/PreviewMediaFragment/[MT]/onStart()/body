@@ -5,6 +5,7 @@
       bindMediaService();
     }
  else     if (mFile.isVideo()) {
+      stopAudio();
       playVideo();
     }
   }

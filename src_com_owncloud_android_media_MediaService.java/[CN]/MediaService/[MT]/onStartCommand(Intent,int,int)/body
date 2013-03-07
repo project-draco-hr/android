@@ -3,5 +3,8 @@
   if (action.equals(ACTION_PLAY_FILE)) {
     processPlayFileRequest(intent);
   }
+ else   if (action.equals(ACTION_STOP_ALL)) {
+    processStopRequest(true);
+  }
   return START_NOT_STICKY;
 }
