@@ -1,9 +1,10 @@
 {
   Log.d(getClass().toString(),"onCreate() start");
   super.onCreate(savedInstanceState);
-  mCurrentDir=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE);
   Account account=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_ACCOUNT);
-  if (account != null)   AccountUtils.setCurrentOwnCloudAccount(this,account.name);
+  if (account != null && AccountUtils.setCurrentOwnCloudAccount(this,account.name)) {
+    mCurrentDir=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE);
+  }
   if (savedInstanceState != null) {
     mCurrentDir=savedInstanceState.getParcelable(FileDetailFragment.EXTRA_FILE);
   }
@@ -27,7 +28,7 @@
   requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
   mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
   OCFile currFile=mCurrentDir;
-  while (currFile != null && currFile.getFileName() != OCFile.PATH_SEPARATOR) {
+  while (mStorageManager != null && currFile != null && currFile.getFileName() != OCFile.PATH_SEPARATOR) {
     mDirectories.add(currFile.getFileName());
     currFile=mStorageManager.getFileById(currFile.getParentId());
   }
