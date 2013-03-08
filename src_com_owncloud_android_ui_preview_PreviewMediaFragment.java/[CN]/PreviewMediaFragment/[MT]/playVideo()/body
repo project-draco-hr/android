@@ -1,7 +1,9 @@
 {
   mVideoPreview.setVideoPath(mFile.getStoragePath());
-  mMediaController=new MediaController(getActivity());
-  mMediaController.setMediaPlayer(mVideoPreview);
-  mMediaController.setAnchorView(mVideoPreview);
-  mVideoPreview.setMediaController(mMediaController);
+  if (mMediaController != null) {
+    mMediaController.setMediaPlayer(mVideoPreview);
+  }
+ else {
+    Toast.makeText(getActivity(),"No media controller to play video",Toast.LENGTH_SHORT).show();
+  }
 }

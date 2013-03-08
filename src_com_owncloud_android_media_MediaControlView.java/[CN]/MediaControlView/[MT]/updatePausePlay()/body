@@ -1,0 +1,9 @@
+{
+  if (mRoot == null || mPauseButton == null)   return;
+  if (mPlayer.isPlaying()) {
+    mPauseButton.setImageResource(android.R.drawable.ic_media_pause);
+  }
+ else {
+    mPauseButton.setImageResource(android.R.drawable.ic_media_play);
+  }
+}

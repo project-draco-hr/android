@@ -3,9 +3,6 @@
     Log.d(TAG,"Media service connected");
     mMediaServiceBinder=(MediaServiceBinder)service;
     if (mMediaServiceBinder != null) {
-      if (mMediaController == null) {
-        mMediaController=new MediaController(getSherlockActivity());
-      }
       prepareMediaController();
       playAudio();
       Log.d(TAG,"Successfully bound to MediaService, MediaController ready");

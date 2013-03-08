@@ -4,5 +4,6 @@
   mImagePreview=(ImageView)mView.findViewById(R.id.image_preview);
   mImagePreview.setOnTouchListener(this);
   mVideoPreview=(VideoView)mView.findViewById(R.id.video_preview);
+  mMediaController=(MediaControlView)mView.findViewById(R.id.media_controller);
   return mView;
 }

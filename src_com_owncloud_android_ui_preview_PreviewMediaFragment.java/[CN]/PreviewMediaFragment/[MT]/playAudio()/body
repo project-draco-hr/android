@@ -8,7 +8,6 @@
       mMediaServiceBinder.start();
     }
     if (!mMediaController.isShowing() && isVisible()) {
-      mMediaController.show(MediaService.MEDIA_CONTROL_PERMANENT);
     }
   }
 }

@@ -1,0 +1,14 @@
+{
+  mNextListener=next;
+  mPrevListener=prev;
+  mListenersSet=true;
+  if (mRoot != null) {
+    installPrevNextListeners();
+    if (mNextButton != null && !mFromXml) {
+      mNextButton.setVisibility(View.VISIBLE);
+    }
+    if (mPrevButton != null && !mFromXml) {
+      mPrevButton.setVisibility(View.VISIBLE);
+    }
+  }
+}

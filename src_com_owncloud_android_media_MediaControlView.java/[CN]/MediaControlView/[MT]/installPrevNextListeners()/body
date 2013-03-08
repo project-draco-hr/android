@@ -1,0 +1,10 @@
+{
+  if (mNextButton != null) {
+    mNextButton.setOnClickListener(mNextListener);
+    mNextButton.setEnabled(mNextListener != null);
+  }
+  if (mPrevButton != null) {
+    mPrevButton.setOnClickListener(mPrevListener);
+    mPrevButton.setEnabled(mPrevListener != null);
+  }
+}

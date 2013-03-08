@@ -1,0 +1,7 @@
+{
+  int[] anchorPos=new int[2];
+  mAnchor.getLocationOnScreen(anchorPos);
+  WindowManager.LayoutParams p=mDecorLayoutParams;
+  p.width=mAnchor.getWidth();
+  p.y=anchorPos[1] + mAnchor.getHeight();
+}

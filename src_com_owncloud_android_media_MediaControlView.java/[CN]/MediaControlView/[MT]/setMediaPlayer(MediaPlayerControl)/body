@@ -1,0 +1,4 @@
+{
+  mPlayer=player;
+  updatePausePlay();
+}
