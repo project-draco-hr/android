@@ -1,9 +1,7 @@
 {
   if (mMediaController != null) {
     mMediaController.setMediaPlayer(mMediaServiceBinder);
-    mMediaController.setEnabled(mMediaServiceBinder.isInPlaybackState());
-  }
- else {
-    Toast.makeText(getActivity(),"No media controller to prepare when connected to media service",Toast.LENGTH_SHORT).show();
+    mMediaController.setEnabled(true);
+    mMediaController.updatePausePlay();
   }
 }

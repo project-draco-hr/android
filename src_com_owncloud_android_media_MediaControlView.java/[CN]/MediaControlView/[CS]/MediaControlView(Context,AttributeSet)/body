@@ -1,9 +1,6 @@
 {
   super(context,attrs);
   mContext=context;
-  mUseFastForward=true;
-  mFromXml=true;
-  mWindowManager=(WindowManager)mContext.getSystemService(Context.WINDOW_SERVICE);
   FrameLayout.LayoutParams frameParams=new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
   LayoutInflater inflate=(LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
   mRoot=inflate.inflate(R.layout.media_control,null);

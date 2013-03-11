@@ -1,0 +1,9 @@
+{
+  if (!fromUser) {
+    return;
+  }
+  long duration=mPlayer.getDuration();
+  long newposition=(duration * progress) / 1000L;
+  mPlayer.seekTo((int)newposition);
+  if (mCurrentTime != null)   mCurrentTime.setText(stringForTime((int)newposition));
+}

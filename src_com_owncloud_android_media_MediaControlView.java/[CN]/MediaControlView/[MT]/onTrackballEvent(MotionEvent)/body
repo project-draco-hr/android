@@ -1,4 +1,0 @@
-{
-  show(sDefaultTimeout);
-  return false;
-}

@@ -8,12 +8,6 @@
   if (mRewButton != null) {
     mRewButton.setEnabled(enabled);
   }
-  if (mNextButton != null) {
-    mNextButton.setEnabled(enabled && mNextListener != null);
-  }
-  if (mPrevButton != null) {
-    mPrevButton.setEnabled(enabled && mPrevListener != null);
-  }
   if (mProgress != null) {
     mProgress.setEnabled(enabled);
   }

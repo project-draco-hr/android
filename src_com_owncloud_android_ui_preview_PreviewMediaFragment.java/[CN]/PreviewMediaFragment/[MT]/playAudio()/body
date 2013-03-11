@@ -7,7 +7,5 @@
     if (!mMediaServiceBinder.isPlaying()) {
       mMediaServiceBinder.start();
     }
-    if (!mMediaController.isShowing() && isVisible()) {
-    }
   }
 }
