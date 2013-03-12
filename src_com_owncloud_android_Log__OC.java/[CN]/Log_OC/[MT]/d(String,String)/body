@@ -1,0 +1,4 @@
+{
+  Log.d(TAG,message);
+  appendLog(TAG + " : " + message);
+}

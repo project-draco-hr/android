@@ -1,0 +1,19 @@
+{
+  folder=new File(logPath + File.separator + "log");
+  logFile=new File(folder + File.separator + "log.txt");
+  if (!folder.exists()) {
+    folder.mkdirs();
+  }
+  if (logFile.exists()) {
+    logFile.delete();
+  }
+  try {
+    logFile.createNewFile();
+    buf=new BufferedWriter(new FileWriter(logFile,true));
+    isEnabled=true;
+    appendPhoneInfo();
+  }
+ catch (  IOException e) {
+    e.printStackTrace();
+  }
+}
