@@ -1,6 +1,4 @@
 {
-  if (mMediaController != null) {
-  }
   if (mFile.isAudio() && stopAudio) {
     mMediaServiceBinder.pause();
   }

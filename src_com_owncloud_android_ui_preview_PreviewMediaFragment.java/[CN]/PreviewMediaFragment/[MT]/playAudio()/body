@@ -6,6 +6,7 @@
  else {
     if (!mMediaServiceBinder.isPlaying()) {
       mMediaServiceBinder.start();
+      mMediaController.updatePausePlay();
     }
   }
 }

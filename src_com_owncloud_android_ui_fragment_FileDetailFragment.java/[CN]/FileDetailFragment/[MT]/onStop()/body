@@ -1,16 +1,4 @@
 {
   super.onStop();
-  if (mMediaServiceConnection != null) {
-    Log.d(TAG,"Unbinding from MediaService ...");
-    if (mMediaServiceBinder != null && mMediaController != null) {
-      mMediaServiceBinder.unregisterMediaController(mMediaController);
-    }
-    getActivity().unbindService(mMediaServiceConnection);
-    mMediaServiceBinder=null;
-    if (mMediaController != null) {
-      mMediaController.hide();
-      mMediaController=null;
-    }
-  }
   leaveTransferProgress();
 }

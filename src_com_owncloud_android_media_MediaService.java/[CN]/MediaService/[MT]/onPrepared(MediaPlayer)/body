@@ -6,6 +6,6 @@
   }
   configAndStartMediaPlayer();
   if (mMediaController != null) {
-    mMediaController.show(MEDIA_CONTROL_PERMANENT);
+    mMediaController.updatePausePlay();
   }
 }

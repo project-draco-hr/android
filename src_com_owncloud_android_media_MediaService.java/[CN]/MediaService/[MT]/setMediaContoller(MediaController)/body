@@ -1,6 +1,0 @@
-{
-  if (mMediaController != null) {
-    mMediaController.hide();
-  }
-  mMediaController=mediaController;
-}
