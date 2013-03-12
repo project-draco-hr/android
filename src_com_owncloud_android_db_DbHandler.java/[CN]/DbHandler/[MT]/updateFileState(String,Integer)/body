@@ -2,6 +2,6 @@
   ContentValues cv=new ContentValues();
   cv.put("attempt",status);
   int result=mDB.update(TABLE_INSTANT_UPLOAD,cv,"path=?",new String[]{filepath});
-  Log.d(TABLE_INSTANT_UPLOAD,"updateFileState returns with: " + result + " for file: "+ filepath);
+  Log_OC.d(TABLE_INSTANT_UPLOAD,"updateFileState returns with: " + result + " for file: "+ filepath);
   return result;
 }

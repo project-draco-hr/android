@@ -9,6 +9,6 @@ case DIALOG_SSL_VALIDATOR:
     break;
   }
 default :
-Log.e(TAG,"Incorrect dialog called with id = " + id);
+Log_OC.e(TAG,"Incorrect dialog called with id = " + id);
 }
 }

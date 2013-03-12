@@ -1,5 +1,5 @@
 {
-  Log.d(TAG,"Phantom neutral button in dialog was clicked; dialog tag is " + callerTag);
+  Log_OC.d(TAG,"Phantom neutral button in dialog was clicked; dialog tag is " + callerTag);
   mCurrentDialog.dismiss();
   mCurrentDialog=null;
 }

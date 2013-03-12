@@ -1,5 +1,5 @@
 {
-  Log.d(getClass().toString(),"onCreate() start");
+  Log_OC.d(getClass().toString(),"onCreate() start");
   super.onCreate(savedInstanceState);
   mCurrentDir=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE);
   Account account=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_ACCOUNT);
@@ -46,5 +46,5 @@
   actionBar.setListNavigationCallbacks(mDirectories,this);
   setSupportProgressBarIndeterminateVisibility(false);
   showChangeLog();
-  Log.d(getClass().toString(),"onCreate() end");
+  Log_OC.d(getClass().toString(),"onCreate() end");
 }

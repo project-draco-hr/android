@@ -3,7 +3,7 @@ switch (v.getId()) {
 case R.id.uploader_choose_folder:
     mUploadPath="";
   for (  String p : mParents)   mUploadPath+=p + OCFile.PATH_SEPARATOR;
-Log.d(TAG,"Uploading file to dir " + mUploadPath);
+Log_OC.d(TAG,"Uploading file to dir " + mUploadPath);
 uploadFiles();
 break;
 default :

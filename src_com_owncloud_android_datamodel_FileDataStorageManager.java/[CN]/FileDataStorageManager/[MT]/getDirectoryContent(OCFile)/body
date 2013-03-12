@@ -8,7 +8,7 @@
         c=getContentProvider().query(req_uri,null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?",new String[]{mAccount.name},null);
       }
  catch (      RemoteException e) {
-        Log.e(TAG,e.getMessage());
+        Log_OC.e(TAG,e.getMessage());
         return ret;
       }
     }

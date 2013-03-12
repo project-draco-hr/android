@@ -19,7 +19,7 @@
  else {
       exhaustResponse(get.getResponseBodyAsStream());
     }
-    Log.e(TAG,"Download of " + remoteFilePath + " to "+ targetFile+ " finished with HTTP status "+ status+ (!ret ? "(FAIL)" : ""));
+    Log_OC.e(TAG,"Download of " + remoteFilePath + " to "+ targetFile+ " finished with HTTP status "+ status+ (!ret ? "(FAIL)" : ""));
   }
  catch (  Exception e) {
     logException(e,"dowloading " + remoteFilePath);

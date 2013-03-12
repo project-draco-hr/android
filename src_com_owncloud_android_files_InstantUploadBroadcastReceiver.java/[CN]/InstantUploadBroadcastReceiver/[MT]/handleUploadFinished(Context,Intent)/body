@@ -3,7 +3,7 @@
     DbHandler db=new DbHandler(context);
     String localPath=intent.getStringExtra(FileUploader.EXTRA_OLD_FILE_PATH);
     if (!db.removeIUPendingFile(localPath)) {
-      Log.w(TAG,"Tried to remove non existing instant upload file " + localPath);
+      Log_OC.w(TAG,"Tried to remove non existing instant upload file " + localPath);
     }
     db.close();
   }

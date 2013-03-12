@@ -3,7 +3,7 @@
   Account account=AccountUtils.getCurrentOwnCloudAccount(getActivity());
   OwnCloudVersion ocv=new OwnCloudVersion(am.getUserData(account,AccountAuthenticator.KEY_OC_VERSION));
   String url=am.getUserData(account,AccountAuthenticator.KEY_OC_BASE_URL) + AccountUtils.getWebdavPath(ocv);
-  Log.d("share","sharing for version " + ocv.toString());
+  Log_OC.d("share","sharing for version " + ocv.toString());
   if (ocv.compareTo(new OwnCloudVersion(0x040000)) >= 0) {
     String APPS_PATH="/apps/files_sharing/";
     String SHARE_PATH="ajax/share.php";
@@ -17,7 +17,7 @@
     post.addRequestHeader("Content-type","application/x-www-form-urlencoded; charset=UTF-8");
     post.addRequestHeader("Referer",am.getUserData(account,AccountAuthenticator.KEY_OC_BASE_URL));
     List<NameValuePair> formparams=new ArrayList<NameValuePair>();
-    Log.d("share",mPath + "");
+    Log_OC.d("share",mPath + "");
     formparams.add(new BasicNameValuePair("sources",mPath));
     formparams.add(new BasicNameValuePair("uid_shared_with","public"));
     formparams.add(new BasicNameValuePair("permissions","0"));
@@ -26,31 +26,31 @@
     try {
       PropFindMethod find=new PropFindMethod(url + "/");
       find.addRequestHeader("Referer",am.getUserData(account,AccountAuthenticator.KEY_OC_BASE_URL));
-      Log.d("sharer","" + url + "/");
+      Log_OC.d("sharer","" + url + "/");
       for (      org.apache.commons.httpclient.Header a : find.getRequestHeaders()) {
-        Log.d("sharer-h",a.getName() + ":" + a.getValue());
+        Log_OC.d("sharer-h",a.getName() + ":" + a.getValue());
       }
       int status2=wc.executeMethod(find);
-      Log.d("sharer","propstatus " + status2);
+      Log_OC.d("sharer","propstatus " + status2);
       GetMethod get=new GetMethod(am.getUserData(account,AccountAuthenticator.KEY_OC_BASE_URL) + "/");
       get.addRequestHeader("Referer",am.getUserData(account,AccountAuthenticator.KEY_OC_BASE_URL));
       status2=wc.executeMethod(get);
-      Log.d("sharer","getstatus " + status2);
-      Log.d("sharer","" + get.getResponseBodyAsString());
+      Log_OC.d("sharer","getstatus " + status2);
+      Log_OC.d("sharer","" + get.getResponseBodyAsString());
       for (      org.apache.commons.httpclient.Header a : get.getResponseHeaders()) {
-        Log.d("sharer",a.getName() + ":" + a.getValue());
+        Log_OC.d("sharer",a.getName() + ":" + a.getValue());
       }
       status=wc.executeMethod(post);
       for (      org.apache.commons.httpclient.Header a : post.getRequestHeaders()) {
-        Log.d("sharer-h",a.getName() + ":" + a.getValue());
+        Log_OC.d("sharer-h",a.getName() + ":" + a.getValue());
       }
       for (      org.apache.commons.httpclient.Header a : post.getResponseHeaders()) {
-        Log.d("sharer",a.getName() + ":" + a.getValue());
+        Log_OC.d("sharer",a.getName() + ":" + a.getValue());
       }
       String resp=post.getResponseBodyAsString();
-      Log.d("share","" + post.getURI().toString());
-      Log.d("share","returned status " + status);
-      Log.d("share"," " + resp);
+      Log_OC.d("share","" + post.getURI().toString());
+      Log_OC.d("share","returned status " + status);
+      Log_OC.d("share"," " + resp);
       if (status != HttpStatus.SC_OK || resp == null || resp.equals("") || resp.startsWith("false")) {
         return;
       }
@@ -59,7 +59,7 @@
       if (!jsonStatus.equals("success"))       throw new Exception("Error while sharing file status != success");
       String token=jsonObject.getString("data");
       String uri=am.getUserData(account,AccountAuthenticator.KEY_OC_BASE_URL) + SHARED_PATH + token;
-      Log.d("Actions:shareFile ok","url: " + uri);
+      Log_OC.d("Actions:shareFile ok","url: " + uri);
     }
  catch (    Exception e) {
       e.printStackTrace();

@@ -1,5 +1,5 @@
 {
-  Log.d(TAG,"REMOVAL CANCELED");
+  Log_OC.d(TAG,"REMOVAL CANCELED");
   mCurrentDialog.dismiss();
   mCurrentDialog=null;
 }

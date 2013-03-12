@@ -35,8 +35,27 @@
         pAboutApp.setSummary(getString(R.string.about_version) + " " + pkg.versionName);
       }
  catch (      NameNotFoundException e) {
-        Log.e(TAG,"Error while showing about dialog",e);
+        Log_OC.e(TAG,"Error while showing about dialog",e);
       }
+    }
+    pLogging=(CheckBoxPreference)findPreference("log_to_file");
+    if (pLogging != null) {
+      pLogging.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
+        @Override public boolean onPreferenceChange(        Preference preference,        Object newValue){
+          String logpath=getApplicationContext().getFilesDir().getAbsolutePath();
+          if (!pLogging.isChecked()) {
+            Log_OC.d("Debug","start logging");
+            Log_OC.v("PATH",logpath);
+            Log_OC.startLogging(logpath);
+          }
+ else {
+            Log_OC.d("Debug","stop logging");
+            Log_OC.stopLogging();
+          }
+          return true;
+        }
+      }
+);
     }
   }
 }

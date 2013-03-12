@@ -4,7 +4,7 @@
   final JSONArray ar;
   try {
     hc.executeMethod(gm);
-    Log.e("ASD",gm.getResponseBodyAsString() + "");
+    Log_OC.e("ASD",gm.getResponseBodyAsString() + "");
     ar=new JSONObject(gm.getResponseBodyAsString()).getJSONArray("apps");
   }
  catch (  Exception e) {

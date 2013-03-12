@@ -3,11 +3,11 @@
   int status=-1;
   MkColMethod mkcol=new MkColMethod(mUri.toString() + WebdavUtils.encodePath(path));
   try {
-    Log.d(TAG,"Creating directory " + path);
+    Log_OC.d(TAG,"Creating directory " + path);
     status=executeMethod(mkcol);
-    Log.d(TAG,"Status returned: " + status);
+    Log_OC.d(TAG,"Status returned: " + status);
     result=mkcol.succeeded();
-    Log.d(TAG,"MKCOL to " + path + " finished with HTTP status "+ status+ (!result ? "(FAIL)" : ""));
+    Log_OC.d(TAG,"MKCOL to " + path + " finished with HTTP status "+ status+ (!result ? "(FAIL)" : ""));
     exhaustResponse(mkcol.getResponseBodyAsStream());
   }
  catch (  Exception e) {

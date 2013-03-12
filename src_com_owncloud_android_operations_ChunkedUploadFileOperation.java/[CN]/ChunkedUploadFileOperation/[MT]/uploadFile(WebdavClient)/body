@@ -18,7 +18,7 @@
       mPutMethod.setRequestEntity(entity);
       status=client.executeMethod(mPutMethod);
       client.exhaustResponse(mPutMethod.getResponseBodyAsStream());
-      Log.d(TAG,"Upload of " + getStoragePath() + " to "+ getRemotePath()+ ", chunk index "+ chunkIndex+ ", count "+ chunkCount+ ", HTTP result status "+ status);
+      Log_OC.d(TAG,"Upload of " + getStoragePath() + " to "+ getRemotePath()+ ", chunk index "+ chunkIndex+ ", count "+ chunkCount+ ", HTTP result status "+ status);
       if (!isSuccess(status))       break;
     }
   }

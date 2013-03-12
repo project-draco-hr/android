@@ -19,7 +19,7 @@ intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 startActivity(intent);
 break;
 default :
-Log.w(TAG,"Unknown menu item triggered");
+Log_OC.w(TAG,"Unknown menu item triggered");
 return false;
 }
 return true;

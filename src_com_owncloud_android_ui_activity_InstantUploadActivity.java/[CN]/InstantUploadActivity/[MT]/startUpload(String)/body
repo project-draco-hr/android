@@ -16,7 +16,7 @@
     i.putExtra(FileUploader.KEY_UPLOAD_TYPE,FileUploader.UPLOAD_SINGLE_FILE);
     i.putExtra(com.owncloud.android.files.services.FileUploader.KEY_INSTANT_UPLOAD,true);
     final String msg="try to upload file with name :" + filename;
-    Log.d(LOG_TAG,msg);
+    Log_OC.d(LOG_TAG,msg);
     Toast toast=Toast.makeText(InstantUploadActivity.this,getString(R.string.failed_upload_retry_text) + filename,Toast.LENGTH_LONG);
     toast.show();
     startService(i);

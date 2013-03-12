@@ -44,10 +44,10 @@
     }
   }
  catch (  OperationApplicationException e) {
-    Log.e(TAG,"Fail to update/insert list of files to database " + e.getMessage());
+    Log_OC.e(TAG,"Fail to update/insert list of files to database " + e.getMessage());
   }
 catch (  RemoteException e) {
-    Log.e(TAG,"Fail to update/insert list of files to database " + e.getMessage());
+    Log_OC.e(TAG,"Fail to update/insert list of files to database " + e.getMessage());
   }
   if (results != null) {
     long newId;

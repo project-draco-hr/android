@@ -1,5 +1,5 @@
 {
-  Log.d(TAG,"OCFile name changin from " + mRemotePath);
+  Log_OC.d(TAG,"OCFile name changin from " + mRemotePath);
   if (name != null && name.length() > 0 && !name.contains(PATH_SEPARATOR) && !mRemotePath.equals(PATH_SEPARATOR)) {
     String parent=(new File(getRemotePath())).getParent();
     parent=(parent.endsWith(PATH_SEPARATOR)) ? parent : parent + PATH_SEPARATOR;
@@ -7,6 +7,6 @@
     if (isDirectory()) {
       mRemotePath+=PATH_SEPARATOR;
     }
-    Log.d(TAG,"OCFile name changed to " + mRemotePath);
+    Log_OC.d(TAG,"OCFile name changed to " + mRemotePath);
   }
 }

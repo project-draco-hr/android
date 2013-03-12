@@ -1,5 +1,5 @@
 {
-  Log.d(TAG,"Received: " + intent.getAction());
+  Log_OC.d(TAG,"Received: " + intent.getAction());
   if (intent.getAction().equals(android.net.ConnectivityManager.CONNECTIVITY_ACTION)) {
     handleConnectivityAction(context,intent);
   }
@@ -10,6 +10,6 @@
     handleUploadFinished(context,intent);
   }
  else {
-    Log.e(TAG,"Incorrect intent sent: " + intent.getAction());
+    Log_OC.e(TAG,"Incorrect intent sent: " + intent.getAction());
   }
 }

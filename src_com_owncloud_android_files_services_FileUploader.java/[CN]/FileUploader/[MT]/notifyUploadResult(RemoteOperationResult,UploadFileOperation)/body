@@ -1,5 +1,5 @@
 {
-  Log.d(TAG,"NotifyUploadResult with resultCode: " + uploadResult.getCode());
+  Log_OC.d(TAG,"NotifyUploadResult with resultCode: " + uploadResult.getCode());
   if (uploadResult.isCancelled()) {
     mNotificationManager.cancel(R.string.uploader_upload_in_progress_ticker);
   }

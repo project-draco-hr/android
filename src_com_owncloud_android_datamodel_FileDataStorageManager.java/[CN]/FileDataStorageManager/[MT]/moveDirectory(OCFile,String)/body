@@ -6,7 +6,7 @@
         c=getContentProvider().query(ProviderTableMeta.CONTENT_URI,null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=? AND " + ProviderTableMeta.FILE_PATH+ " LIKE ?",new String[]{mAccount.name,dir.getRemotePath() + "%"},null);
       }
  catch (      RemoteException e) {
-        Log.e(TAG,e.getMessage());
+        Log_OC.e(TAG,e.getMessage());
       }
     }
  else {
@@ -38,10 +38,10 @@
       }
     }
  catch (    OperationApplicationException e) {
-      Log.e(TAG,"Fail to update descendants of " + dir.getFileId() + " in database",e);
+      Log_OC.e(TAG,"Fail to update descendants of " + dir.getFileId() + " in database",e);
     }
 catch (    RemoteException e) {
-      Log.e(TAG,"Fail to update desendants of " + dir.getFileId() + " in database",e);
+      Log_OC.e(TAG,"Fail to update desendants of " + dir.getFileId() + " in database",e);
     }
   }
 }

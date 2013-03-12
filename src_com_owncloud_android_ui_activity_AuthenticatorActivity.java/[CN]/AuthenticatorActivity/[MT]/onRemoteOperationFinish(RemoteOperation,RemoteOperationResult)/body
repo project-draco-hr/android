@@ -71,7 +71,7 @@ mStatusIcon=R.drawable.common_error;
 mStatusText=R.string.auth_unknown_error_title;
 break;
 default :
-Log.e(TAG,"Incorrect connection checker result type: " + result.getHttpCode());
+Log_OC.e(TAG,"Incorrect connection checker result type: " + result.getHttpCode());
 }
 setResultIconAndText(mStatusIcon,mStatusText);
 if (!mStatusCorrect) findViewById(R.id.refreshButton).setVisibility(View.VISIBLE);

@@ -1,5 +1,5 @@
 {
-  Log.d(TAG,"Creating WebdavClient for " + username + "@"+ uri);
+  Log_OC.d(TAG,"Creating WebdavClient for " + username + "@"+ uri);
   WebdavClient client=createOwnCloudClient(uri,context);
   client.setCredentials(username,password);
   return client;

@@ -6,7 +6,7 @@
       url=new URL(message);
     }
  catch (    MalformedURLException e) {
-      Log.e(getClass().getName(),"Malformed URL: " + message);
+      Log_OC.e(getClass().getName(),"Malformed URL: " + message);
       return;
     }
     String username=username_text.getText().toString().trim();

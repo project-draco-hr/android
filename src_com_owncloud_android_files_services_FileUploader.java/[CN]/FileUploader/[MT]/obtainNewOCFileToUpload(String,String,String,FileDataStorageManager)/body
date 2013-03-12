@@ -13,7 +13,7 @@
       mimeType=MimeTypeMap.getSingleton().getMimeTypeFromExtension(remotePath.substring(remotePath.lastIndexOf('.') + 1));
     }
  catch (    IndexOutOfBoundsException e) {
-      Log.e(TAG,"Trying to find out MIME type of a file without extension: " + remotePath);
+      Log_OC.e(TAG,"Trying to find out MIME type of a file without extension: " + remotePath);
     }
   }
   if (mimeType == null) {

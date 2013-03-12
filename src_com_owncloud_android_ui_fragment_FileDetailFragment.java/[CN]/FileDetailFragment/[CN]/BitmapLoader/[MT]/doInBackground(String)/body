@@ -32,25 +32,25 @@
  else {
       screenwidth=display.getWidth();
     }
-    Log.e("ASD","W " + width + " SW "+ screenwidth);
+    Log_OC.e("ASD","W " + width + " SW "+ screenwidth);
     if (width > screenwidth) {
       scale=(int)Math.ceil((float)width / screenwidth);
       options.inSampleSize=scale;
     }
     result=BitmapFactory.decodeFile(storagePath,options);
-    Log.e("ASD","W " + options.outWidth + " SW "+ options.outHeight);
+    Log_OC.e("ASD","W " + options.outWidth + " SW "+ options.outHeight);
   }
  catch (  OutOfMemoryError e) {
     result=null;
-    Log.e(TAG,"Out of memory occured for file with size " + storagePath);
+    Log_OC.e(TAG,"Out of memory occured for file with size " + storagePath);
   }
 catch (  NoSuchFieldError e) {
     result=null;
-    Log.e(TAG,"Error from access to unexisting field despite protection " + storagePath);
+    Log_OC.e(TAG,"Error from access to unexisting field despite protection " + storagePath);
   }
 catch (  Throwable t) {
     result=null;
-    Log.e(TAG,"Unexpected error while creating image preview " + storagePath,t);
+    Log_OC.e(TAG,"Unexpected error while creating image preview " + storagePath,t);
   }
   return result;
 }

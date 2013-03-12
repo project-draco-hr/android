@@ -6,7 +6,7 @@
     map=(HashMap<String,String>)getListAdapter().getItem(index);
   }
  catch (  ClassCastException e) {
-    Log.wtf(TAG,"getitem(index) from list adapter did not return hashmap, bailing out");
+    Log_OC.wtf(TAG,"getitem(index) from list adapter did not return hashmap, bailing out");
     return false;
   }
   String accountName=map.get("NAME");

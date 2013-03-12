@@ -5,7 +5,7 @@
   int neuBtn=getArguments().getInt(ARG_NEUTRAL_BTN_RES,-1);
   int negBtn=getArguments().getInt(ARG_NEGATIVE_BTN_RES,-1);
   if (confirmationTarget == null || resourceId == -1) {
-    Log.wtf(getTag(),"Calling confirmation dialog without resource or arguments");
+    Log_OC.wtf(getTag(),"Calling confirmation dialog without resource or arguments");
     return null;
   }
   AlertDialog.Builder builder=new AlertDialog.Builder(getActivity()).setIcon(android.R.drawable.ic_dialog_alert).setMessage(String.format(getString(resourceId),confirmationTarget)).setTitle(android.R.string.dialog_alert_title);

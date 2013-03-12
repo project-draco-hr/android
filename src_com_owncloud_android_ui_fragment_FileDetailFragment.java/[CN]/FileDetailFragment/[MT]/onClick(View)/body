@@ -52,7 +52,7 @@ case R.id.fdKeepInSync:
     intent.putExtra(FileObserverService.KEY_FILE_CMD,(cb.isChecked() ? FileObserverService.CMD_ADD_OBSERVED_FILE : FileObserverService.CMD_DEL_OBSERVED_FILE));
     intent.putExtra(FileObserverService.KEY_CMD_ARG_FILE,mFile);
     intent.putExtra(FileObserverService.KEY_CMD_ARG_ACCOUNT,mAccount);
-    Log.e(TAG,"starting observer service");
+    Log_OC.e(TAG,"starting observer service");
     getActivity().startService(intent);
     if (mFile.keepInSync()) {
       onClick(getView().findViewById(R.id.fdDownloadBtn));
@@ -84,7 +84,7 @@ i.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_P
 startActivity(i);
 }
  catch (Throwable t) {
-Log.e(TAG,"Fail when trying to open with the mimeType provided from the ownCloud server: " + mFile.getMimetype());
+Log_OC.e(TAG,"Fail when trying to open with the mimeType provided from the ownCloud server: " + mFile.getMimetype());
 boolean toastIt=true;
 String mimeType="";
 try {
@@ -103,13 +103,13 @@ try {
   }
 }
  catch (IndexOutOfBoundsException e) {
-  Log.e(TAG,"Trying to find out MIME type of a file without extension: " + storagePath);
+  Log_OC.e(TAG,"Trying to find out MIME type of a file without extension: " + storagePath);
 }
 catch (ActivityNotFoundException e) {
-  Log.e(TAG,"No activity found to handle: " + storagePath + " with MIME type "+ mimeType+ " obtained from extension");
+  Log_OC.e(TAG,"No activity found to handle: " + storagePath + " with MIME type "+ mimeType+ " obtained from extension");
 }
 catch (Throwable th) {
-  Log.e(TAG,"Unexpected problem when opening: " + storagePath,th);
+  Log_OC.e(TAG,"Unexpected problem when opening: " + storagePath,th);
 }
  finally {
   if (toastIt) {
@@ -120,6 +120,6 @@ catch (Throwable th) {
 break;
 }
 default :
-Log.e(TAG,"Incorrect view clicked!");
+Log_OC.e(TAG,"Incorrect view clicked!");
 }
 }

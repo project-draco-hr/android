@@ -35,13 +35,13 @@ catch (  Exception e) {
     if (get != null)     get.releaseConnection();
   }
   if (mLatestResult.isSuccess()) {
-    Log.i(TAG,"Connection check at " + urlSt + ": "+ mLatestResult.getLogMessage());
+    Log_OC.i(TAG,"Connection check at " + urlSt + ": "+ mLatestResult.getLogMessage());
   }
  else   if (mLatestResult.getException() != null) {
-    Log.e(TAG,"Connection check at " + urlSt + ": "+ mLatestResult.getLogMessage(),mLatestResult.getException());
+    Log_OC.e(TAG,"Connection check at " + urlSt + ": "+ mLatestResult.getLogMessage(),mLatestResult.getException());
   }
  else {
-    Log.e(TAG,"Connection check at " + urlSt + ": "+ mLatestResult.getLogMessage());
+    Log_OC.e(TAG,"Connection check at " + urlSt + ": "+ mLatestResult.getLogMessage());
   }
   return retval;
 }

@@ -18,11 +18,11 @@
       mUploadClient.exhaustResponse(propfind.getResponseBodyAsStream());
     }
     result=new RemoteOperationResult(isMultiStatus,status);
-    Log.i(TAG,"Update: synchronizing properties for uploaded " + mCurrentUpload.getRemotePath() + ": "+ result.getLogMessage());
+    Log_OC.i(TAG,"Update: synchronizing properties for uploaded " + mCurrentUpload.getRemotePath() + ": "+ result.getLogMessage());
   }
  catch (  Exception e) {
     result=new RemoteOperationResult(e);
-    Log.e(TAG,"Update: synchronizing properties for uploaded " + mCurrentUpload.getRemotePath() + ": "+ result.getLogMessage(),e);
+    Log_OC.e(TAG,"Update: synchronizing properties for uploaded " + mCurrentUpload.getRemotePath() + ": "+ result.getLogMessage(),e);
   }
  finally {
     if (propfind != null)     propfind.releaseConnection();

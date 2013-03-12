@@ -8,7 +8,7 @@
     testFile.createNewFile();
   }
  catch (  IOException e) {
-    Log.i(TAG,"Test for validity of name " + mNewName + " in the file system failed");
+    Log_OC.i(TAG,"Test for validity of name " + mNewName + " in the file system failed");
     return false;
   }
   boolean result=(testFile.exists() && testFile.isFile());
