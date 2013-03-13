@@ -1,6 +1,8 @@
 {
   mVideoPreview.seekTo(mSavedPlaybackPosition);
-  mVideoPreview.start();
+  if (mAutoplay) {
+    mVideoPreview.start();
+  }
   mMediaController.setEnabled(true);
   mMediaController.updatePausePlay();
 }

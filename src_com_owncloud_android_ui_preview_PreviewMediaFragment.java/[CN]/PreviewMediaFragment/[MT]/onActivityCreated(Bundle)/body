@@ -5,6 +5,7 @@
     mFile=savedInstanceState.getParcelable(PreviewMediaFragment.EXTRA_FILE);
     mAccount=savedInstanceState.getParcelable(PreviewMediaFragment.EXTRA_ACCOUNT);
     mSavedPlaybackPosition=savedInstanceState.getInt(PreviewMediaFragment.EXTRA_PLAY_POSITION);
+    mAutoplay=savedInstanceState.getBoolean(PreviewMediaFragment.EXTRA_PLAYING);
   }
   if (mFile == null) {
     throw new IllegalStateException("Instanced with a NULL OCFile");

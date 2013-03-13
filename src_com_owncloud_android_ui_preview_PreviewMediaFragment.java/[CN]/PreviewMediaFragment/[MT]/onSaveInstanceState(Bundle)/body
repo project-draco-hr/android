@@ -2,7 +2,8 @@
   super.onSaveInstanceState(outState);
   outState.putParcelable(PreviewMediaFragment.EXTRA_FILE,mFile);
   outState.putParcelable(PreviewMediaFragment.EXTRA_ACCOUNT,mAccount);
-  if (mVideoPreview.isPlaying()) {
+  if (mFile.isVideo()) {
     outState.putInt(PreviewMediaFragment.EXTRA_PLAY_POSITION,mVideoPreview.getCurrentPosition());
+    outState.putBoolean(PreviewMediaFragment.EXTRA_PLAYING,mVideoPreview.isPlaying());
   }
 }
