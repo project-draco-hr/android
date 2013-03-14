@@ -1,8 +1,11 @@
 {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.video_layout);
-  mFile=getIntent().getExtras().getParcelable(EXTRA_FILE);
-  mAccount=getIntent().getExtras().getParcelable(EXTRA_ACCOUNT);
+  Bundle extras=getIntent().getExtras();
+  mFile=extras.getParcelable(EXTRA_FILE);
+  mAccount=extras.getParcelable(EXTRA_ACCOUNT);
+  mSavedPlaybackPosition=extras.getInt(EXTRA_START_POSITION);
+  mAutoplay=extras.getBoolean(EXTRA_AUTOPLAY);
   mVideoPlayer=(VideoView)findViewById(R.id.videoPlayer);
   mVideoPlayer.setOnPreparedListener(this);
   mVideoPlayer.setOnCompletionListener(this);

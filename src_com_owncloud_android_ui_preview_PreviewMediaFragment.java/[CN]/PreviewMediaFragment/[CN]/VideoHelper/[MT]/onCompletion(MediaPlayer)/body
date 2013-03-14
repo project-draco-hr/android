@@ -1,2 +1,4 @@
 {
+  mVideoPreview.seekTo(0);
+  mMediaController.updatePausePlay();
 }
