@@ -8,7 +8,7 @@
     WebdavClient wdc=OwnCloudClientUtils.createOwnCloudClient(account,getApplicationContext());
     wdc.createDirectory(INSTANT_UPLOAD_DIR);
     try {
-      wdc.putFile(filepath,INSTANT_UPLOAD_DIR + "/" + filename,mimetype);
+      wdc.putFile(filepath,FileStorageUtils.getInstantUploadFilePath(filename),mimetype);
     }
  catch (    Exception e) {
     }

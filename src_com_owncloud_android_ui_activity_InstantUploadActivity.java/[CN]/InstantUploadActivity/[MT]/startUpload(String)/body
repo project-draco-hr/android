@@ -1,10 +1,10 @@
 {
-  String filename=img_path.substring(img_path.lastIndexOf('/'),img_path.length());
+  String filename=FileStorageUtils.getInstantUploadFilePath(img_path);
   if (canInstantUpload()) {
     Account account=AccountUtils.getCurrentOwnCloudAccount(InstantUploadActivity.this);
     DbHandler db=new DbHandler(InstantUploadActivity.this);
     try {
-      db.updateFileState(img_path,DbHandler.UPLOAD_STATUS_UPLOAD_LATER);
+      db.updateFileState(img_path,DbHandler.UPLOAD_STATUS_UPLOAD_LATER,null);
     }
   finally {
       db.close();
@@ -12,7 +12,7 @@
     Intent i=new Intent(InstantUploadActivity.this,FileUploader.class);
     i.putExtra(FileUploader.KEY_ACCOUNT,account);
     i.putExtra(FileUploader.KEY_LOCAL_FILE,img_path);
-    i.putExtra(FileUploader.KEY_REMOTE_FILE,InstantUploadService.INSTANT_UPLOAD_DIR + "/" + filename);
+    i.putExtra(FileUploader.KEY_REMOTE_FILE,filename);
     i.putExtra(FileUploader.KEY_UPLOAD_TYPE,FileUploader.UPLOAD_SINGLE_FILE);
     i.putExtra(com.owncloud.android.files.services.FileUploader.KEY_INSTANT_UPLOAD,true);
     final String msg="try to upload file with name :" + filename;

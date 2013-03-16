@@ -10,7 +10,7 @@ synchronized (mPendingUploads) {
       mUploadClient=OwnCloudClientUtils.createOwnCloudClient(mLastAccount,getApplicationContext());
     }
     if (mCurrentUpload.isRemoteFolderToBeCreated()) {
-      mUploadClient.createDirectory(InstantUploadBroadcastReceiver.INSTANT_UPLOAD_DIR);
+      mUploadClient.createDirectory(InstantUploadService.INSTANT_UPLOAD_DIR);
     }
     RemoteOperationResult uploadResult=null;
     try {

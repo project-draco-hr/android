@@ -1,7 +1,7 @@
 {
-  OCFile instantUploadDir=storageManager.getFileByPath(InstantUploadBroadcastReceiver.INSTANT_UPLOAD_DIR);
+  OCFile instantUploadDir=storageManager.getFileByPath(InstantUploadService.INSTANT_UPLOAD_DIR);
   if (instantUploadDir == null) {
-    OCFile newDir=new OCFile(InstantUploadBroadcastReceiver.INSTANT_UPLOAD_DIR);
+    OCFile newDir=new OCFile(InstantUploadService.INSTANT_UPLOAD_DIR);
     newDir.setMimetype("DIR");
     OCFile path=storageManager.getFileByPath(OCFile.PATH_SEPARATOR);
     if (path != null) {

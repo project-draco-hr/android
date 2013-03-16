@@ -3,6 +3,7 @@
   cv.put("path",filepath);
   cv.put("account",account);
   cv.put("attempt",UPLOAD_STATUS_UPLOAD_LATER);
+  cv.put("message",message);
   long result=mDB.insert(TABLE_INSTANT_UPLOAD,null,cv);
   Log.d(TABLE_INSTANT_UPLOAD,"putFileForLater returns with: " + result + " for file: "+ filepath);
   return result != -1;
