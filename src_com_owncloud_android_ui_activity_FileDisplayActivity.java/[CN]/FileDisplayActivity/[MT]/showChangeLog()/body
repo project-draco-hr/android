@@ -1,0 +1,20 @@
+{
+  if (android.os.Build.VERSION.SDK_INT == android.os.Build.VERSION_CODES.JELLY_BEAN) {
+    final String KEY_VERSION="version";
+    SharedPreferences sharedPref=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+    int currentVersionNumber=0;
+    int savedVersionNumber=sharedPref.getInt(KEY_VERSION,0);
+    try {
+      PackageInfo pi=getPackageManager().getPackageInfo(getPackageName(),0);
+      currentVersionNumber=pi.versionCode;
+    }
+ catch (    Exception e) {
+    }
+    if (currentVersionNumber > savedVersionNumber) {
+      ChangelogDialog.newInstance(true).show(getSupportFragmentManager(),DIALOG_CHANGELOG_TAG);
+      Editor editor=sharedPref.edit();
+      editor.putInt(KEY_VERSION,currentVersionNumber);
+      editor.commit();
+    }
+  }
+}

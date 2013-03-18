@@ -1,4 +1,0 @@
-{
-  Log.d(TAG,"Creating SSL Socket from other shocket " + socket + " to remote "+ host+ ":"+ port);
-  return getSSLContext().getSocketFactory().createSocket(socket,host,port,autoClose);
-}

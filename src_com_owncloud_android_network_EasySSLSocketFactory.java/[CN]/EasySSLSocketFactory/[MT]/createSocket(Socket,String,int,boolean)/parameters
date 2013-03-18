@@ -1,4 +1,0 @@
-Socket socket
-String host
-int port
-boolean autoClose

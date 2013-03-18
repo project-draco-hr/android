@@ -1,5 +1,5 @@
 {
   final Bundle result=new Bundle();
-  result.putBoolean(AccountManager.KEY_BOOLEAN_RESULT,false);
+  result.putBoolean(AccountManager.KEY_BOOLEAN_RESULT,true);
   return result;
 }
