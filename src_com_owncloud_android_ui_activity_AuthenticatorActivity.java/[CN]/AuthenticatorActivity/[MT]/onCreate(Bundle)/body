@@ -28,8 +28,6 @@
     mIsSslConn=false;
     String tokenType=getIntent().getExtras().getString(AccountAuthenticator.KEY_AUTH_TOKEN_TYPE);
     boolean oAuthRequired=AccountAuthenticator.AUTH_TOKEN_TYPE_ACCESS_TOKEN.equals(tokenType);
-    mOAuth2Check.setChecked(oAuthRequired);
-    changeViewByOAuth2Check(oAuthRequired);
     mAccount=getIntent().getExtras().getParcelable(EXTRA_ACCOUNT);
     if (mAccount != null) {
       String ocVersion=mAccountMgr.getUserData(mAccount,AccountAuthenticator.KEY_OC_VERSION);
@@ -40,7 +38,10 @@
       mHostUrlInput.setText(mHostBaseUrl);
       String userName=mAccount.name.substring(0,mAccount.name.lastIndexOf('@'));
       mUsernameInput.setText(userName);
+      oAuthRequired=(mAccountMgr.getUserData(mAccount,AccountAuthenticator.KEY_SUPPORTS_OAUTH2) != null);
     }
+    mOAuth2Check.setChecked(oAuthRequired);
+    changeViewByOAuth2Check(oAuthRequired);
   }
  else {
     loadSavedInstanceState(savedInstanceState);

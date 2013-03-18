@@ -1,7 +1,21 @@
 {
   Notification notification=new Notification(R.drawable.icon,getContext().getString(R.string.sync_fail_ticker),System.currentTimeMillis());
   notification.flags|=Notification.FLAG_AUTO_CANCEL;
+  boolean needsToUpdateCredentials=(mLastFailedResult != null && mLastFailedResult.getCode() == ResultCode.UNAUTHORIZED);
   notification.contentIntent=PendingIntent.getActivity(getContext().getApplicationContext(),(int)System.currentTimeMillis(),new Intent(),0);
-  notification.setLatestEventInfo(getContext().getApplicationContext(),getContext().getString(R.string.sync_fail_ticker),String.format(getContext().getString(R.string.sync_fail_content),getAccount().name),notification.contentIntent);
+  if (needsToUpdateCredentials) {
+    Intent updateAccountCredentials=new Intent(getContext(),AuthenticatorActivity.class);
+    updateAccountCredentials.putExtra(AuthenticatorActivity.EXTRA_ACCOUNT,getAccount());
+    updateAccountCredentials.putExtra(AuthenticatorActivity.EXTRA_ACTION,AuthenticatorActivity.ACTION_UPDATE_TOKEN);
+    updateAccountCredentials.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    updateAccountCredentials.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+    updateAccountCredentials.addFlags(Intent.FLAG_FROM_BACKGROUND);
+    notification.contentIntent=PendingIntent.getActivity(getContext(),(int)System.currentTimeMillis(),updateAccountCredentials,PendingIntent.FLAG_ONE_SHOT);
+    notification.setLatestEventInfo(getContext().getApplicationContext(),getContext().getString(R.string.sync_fail_ticker),String.format(getContext().getString(R.string.sync_fail_content_unauthorized),getAccount().name),notification.contentIntent);
+    Log.e(TAG,"NEEDS TO UPDATE CREDENTIALS");
+  }
+ else {
+    notification.setLatestEventInfo(getContext().getApplicationContext(),getContext().getString(R.string.sync_fail_ticker),String.format(getContext().getString(R.string.sync_fail_content),getAccount().name),notification.contentIntent);
+  }
   ((NotificationManager)getContext().getSystemService(Context.NOTIFICATION_SERVICE)).notify(R.string.sync_fail_ticker,notification);
 }

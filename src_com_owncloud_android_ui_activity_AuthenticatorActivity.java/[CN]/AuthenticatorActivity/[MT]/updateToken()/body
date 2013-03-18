@@ -5,6 +5,7 @@
   boolean isOAuth=mOAuth2Check.isChecked();
   if (isOAuth) {
     response.putString(AccountManager.KEY_AUTHTOKEN,mOAuthAccessToken);
+    mAccountMgr.setAuthToken(mAccount,AccountAuthenticator.AUTH_TOKEN_TYPE_ACCESS_TOKEN,mOAuthAccessToken);
   }
  else {
     response.putString(AccountManager.KEY_AUTHTOKEN,mPasswordInput.getText().toString());
