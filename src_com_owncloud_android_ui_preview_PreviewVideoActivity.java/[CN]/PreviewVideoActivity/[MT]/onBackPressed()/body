@@ -1,4 +1,5 @@
 {
+  Log.e(TAG,"onBackPressed");
   Intent i=new Intent();
   i.putExtra(EXTRA_AUTOPLAY,mVideoPlayer.isPlaying());
   i.putExtra(EXTRA_START_POSITION,mVideoPlayer.getCurrentPosition());
