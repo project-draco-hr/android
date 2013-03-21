@@ -1,27 +1,27 @@
 {
   mResultTokenMap=new HashMap<String,String>();
-  if (tokenJson.has(OAuth2Context.KEY_ACCESS_TOKEN)) {
-    mResultTokenMap.put(OAuth2Context.KEY_ACCESS_TOKEN,tokenJson.getString(OAuth2Context.KEY_ACCESS_TOKEN));
+  if (tokenJson.has(OAuth2Constants.KEY_ACCESS_TOKEN)) {
+    mResultTokenMap.put(OAuth2Constants.KEY_ACCESS_TOKEN,tokenJson.getString(OAuth2Constants.KEY_ACCESS_TOKEN));
   }
-  if (tokenJson.has(OAuth2Context.KEY_TOKEN_TYPE)) {
-    mResultTokenMap.put(OAuth2Context.KEY_TOKEN_TYPE,tokenJson.getString(OAuth2Context.KEY_TOKEN_TYPE));
+  if (tokenJson.has(OAuth2Constants.KEY_TOKEN_TYPE)) {
+    mResultTokenMap.put(OAuth2Constants.KEY_TOKEN_TYPE,tokenJson.getString(OAuth2Constants.KEY_TOKEN_TYPE));
   }
-  if (tokenJson.has(OAuth2Context.KEY_EXPIRES_IN)) {
-    mResultTokenMap.put(OAuth2Context.KEY_EXPIRES_IN,tokenJson.getString(OAuth2Context.KEY_EXPIRES_IN));
+  if (tokenJson.has(OAuth2Constants.KEY_EXPIRES_IN)) {
+    mResultTokenMap.put(OAuth2Constants.KEY_EXPIRES_IN,tokenJson.getString(OAuth2Constants.KEY_EXPIRES_IN));
   }
-  if (tokenJson.has(OAuth2Context.KEY_REFRESH_TOKEN)) {
-    mResultTokenMap.put(OAuth2Context.KEY_REFRESH_TOKEN,tokenJson.getString(OAuth2Context.KEY_REFRESH_TOKEN));
+  if (tokenJson.has(OAuth2Constants.KEY_REFRESH_TOKEN)) {
+    mResultTokenMap.put(OAuth2Constants.KEY_REFRESH_TOKEN,tokenJson.getString(OAuth2Constants.KEY_REFRESH_TOKEN));
   }
-  if (tokenJson.has(OAuth2Context.KEY_SCOPE)) {
-    mResultTokenMap.put(OAuth2Context.KEY_SCOPE,tokenJson.getString(OAuth2Context.KEY_SCOPE));
+  if (tokenJson.has(OAuth2Constants.KEY_SCOPE)) {
+    mResultTokenMap.put(OAuth2Constants.KEY_SCOPE,tokenJson.getString(OAuth2Constants.KEY_SCOPE));
   }
-  if (tokenJson.has(OAuth2Context.KEY_ERROR)) {
-    mResultTokenMap.put(OAuth2Context.KEY_ERROR,tokenJson.getString(OAuth2Context.KEY_ERROR));
+  if (tokenJson.has(OAuth2Constants.KEY_ERROR)) {
+    mResultTokenMap.put(OAuth2Constants.KEY_ERROR,tokenJson.getString(OAuth2Constants.KEY_ERROR));
   }
-  if (tokenJson.has(OAuth2Context.KEY_ERROR_DESCRIPTION)) {
-    mResultTokenMap.put(OAuth2Context.KEY_ERROR_DESCRIPTION,tokenJson.getString(OAuth2Context.KEY_ERROR_DESCRIPTION));
+  if (tokenJson.has(OAuth2Constants.KEY_ERROR_DESCRIPTION)) {
+    mResultTokenMap.put(OAuth2Constants.KEY_ERROR_DESCRIPTION,tokenJson.getString(OAuth2Constants.KEY_ERROR_DESCRIPTION));
   }
-  if (tokenJson.has(OAuth2Context.KEY_ERROR_URI)) {
-    mResultTokenMap.put(OAuth2Context.KEY_ERROR_URI,tokenJson.getString(OAuth2Context.KEY_ERROR_URI));
+  if (tokenJson.has(OAuth2Constants.KEY_ERROR_URI)) {
+    mResultTokenMap.put(OAuth2Constants.KEY_ERROR_URI,tokenJson.getString(OAuth2Constants.KEY_ERROR_URI));
   }
 }

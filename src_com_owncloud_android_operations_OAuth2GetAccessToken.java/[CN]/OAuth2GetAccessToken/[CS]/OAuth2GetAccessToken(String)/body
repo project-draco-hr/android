@@ -1,5 +1,0 @@
-{
-  mOAuth2AuthorizationResponse=oAuth2AuthorizationResponse;
-  mOAuth2ParsedAuthorizationResponse=new HashMap<String,String>();
-  mResultTokenMap=null;
-}

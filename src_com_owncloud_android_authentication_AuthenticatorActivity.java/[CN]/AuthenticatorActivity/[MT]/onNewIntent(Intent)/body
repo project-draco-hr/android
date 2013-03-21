@@ -1,0 +1,7 @@
+{
+  Log.d(TAG,"onNewIntent()");
+  Uri data=intent.getData();
+  if (data != null && data.toString().startsWith(getString(R.string.oauth2_redirect_uri))) {
+    mNewCapturedUriFromOAuth2Redirection=data;
+  }
+}

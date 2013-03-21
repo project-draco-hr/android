@@ -1,0 +1,15 @@
+{
+  mStatusIcon=R.drawable.progress_small;
+  mStatusText=R.string.oauth_login_connection;
+  updateAuthStatus();
+  Uri uri=Uri.parse(getString(R.string.oauth2_url_endpoint_auth));
+  Uri.Builder uriBuilder=uri.buildUpon();
+  uriBuilder.appendQueryParameter(OAuth2Constants.KEY_RESPONSE_TYPE,getString(R.string.oauth2_response_type));
+  uriBuilder.appendQueryParameter(OAuth2Constants.KEY_REDIRECT_URI,getString(R.string.oauth2_redirect_uri));
+  uriBuilder.appendQueryParameter(OAuth2Constants.KEY_CLIENT_ID,getString(R.string.oauth2_client_id));
+  uriBuilder.appendQueryParameter(OAuth2Constants.KEY_SCOPE,getString(R.string.oauth2_scope));
+  uri=uriBuilder.build();
+  Log.d(TAG,"Starting browser to view " + uri.toString());
+  Intent i=new Intent(Intent.ACTION_VIEW,uri);
+  startActivity(i);
+}
