@@ -4,7 +4,11 @@
   if (mMediaController != null) {
     mMediaController.setEnabled(true);
   }
+  player.seekTo(mStartPosition);
   configAndStartMediaPlayer();
+  if (!mPlayOnPrepared) {
+    processPauseRequest();
+  }
   if (mMediaController != null) {
     mMediaController.updatePausePlay();
   }

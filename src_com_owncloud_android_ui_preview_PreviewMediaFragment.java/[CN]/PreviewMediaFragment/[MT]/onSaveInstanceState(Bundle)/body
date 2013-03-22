@@ -6,4 +6,8 @@
     outState.putInt(PreviewMediaFragment.EXTRA_PLAY_POSITION,mVideoPreview.getCurrentPosition());
     outState.putBoolean(PreviewMediaFragment.EXTRA_PLAYING,mVideoPreview.isPlaying());
   }
+ else {
+    outState.putInt(PreviewMediaFragment.EXTRA_PLAY_POSITION,mMediaServiceBinder.getCurrentPosition());
+    outState.putBoolean(PreviewMediaFragment.EXTRA_PLAYING,mMediaServiceBinder.isPlaying());
+  }
 }

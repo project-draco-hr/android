@@ -2,6 +2,8 @@
   if (mState != State.PREPARING) {
     mFile=intent.getExtras().getParcelable(EXTRA_FILE);
     mAccount=intent.getExtras().getParcelable(EXTRA_ACCOUNT);
+    mPlayOnPrepared=intent.getExtras().getBoolean(EXTRA_PLAY_ON_LOAD,false);
+    mStartPosition=intent.getExtras().getInt(EXTRA_START_POSITION,0);
     tryToGetAudioFocus();
     playMedia();
   }

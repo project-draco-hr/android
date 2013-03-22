@@ -1,4 +1,4 @@
 {
   MediaService.State currentState=mService.getState();
-  return (currentState == State.PLAYING || currentState == State.PREPARING);
+  return (currentState == State.PLAYING || (currentState == State.PREPARING && mService.mPlayOnPrepared));
 }
