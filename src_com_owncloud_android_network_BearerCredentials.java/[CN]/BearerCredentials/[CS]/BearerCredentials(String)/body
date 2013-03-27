@@ -1,6 +1,3 @@
 {
-  if (token == null) {
-    throw new IllegalArgumentException("Bearer token may not be null");
-  }
-  mAccessToken=token;
+  mAccessToken=(token == null) ? "" : token;
 }
