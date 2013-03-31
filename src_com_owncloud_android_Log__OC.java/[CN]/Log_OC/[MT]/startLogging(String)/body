@@ -1,5 +1,5 @@
 {
-  folder=new File(logPath + File.separator + "log");
+  folder=new File(logPath);
   logFile=new File(folder + File.separator + "log.txt");
   if (!folder.exists()) {
     folder.mkdirs();

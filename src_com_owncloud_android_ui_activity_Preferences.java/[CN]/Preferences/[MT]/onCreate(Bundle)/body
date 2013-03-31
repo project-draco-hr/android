@@ -42,7 +42,7 @@
     if (pLogging != null) {
       pLogging.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
         @Override public boolean onPreferenceChange(        Preference preference,        Object newValue){
-          String logpath=getApplicationContext().getFilesDir().getAbsolutePath();
+          String logpath=Environment.getExternalStorageDirectory() + File.separator + "owncloud"+ File.separator+ "log";
           if (!pLogging.isChecked()) {
             Log_OC.d("Debug","start logging");
             Log_OC.v("PATH",logpath);
@@ -52,6 +52,17 @@
             Log_OC.d("Debug","stop logging");
             Log_OC.stopLogging();
           }
+          return true;
+        }
+      }
+);
+    }
+    pLoggingHistory=(Preference)findPreference("log_history");
+    if (pLoggingHistory != null) {
+      pLoggingHistory.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+        @Override public boolean onPreferenceClick(        Preference preference){
+          Intent intent=new Intent(getApplicationContext(),LogHistoryActivity.class);
+          startActivity(intent);
           return true;
         }
       }
