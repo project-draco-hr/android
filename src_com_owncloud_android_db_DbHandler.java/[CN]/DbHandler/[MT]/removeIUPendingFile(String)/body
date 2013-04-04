@@ -1,0 +1,5 @@
+{
+  long result=mDB.delete(TABLE_INSTANT_UPLOAD,"path = ?",new String[]{localPath});
+  Log.d(TABLE_INSTANT_UPLOAD,"delete returns with: " + result + " for file: "+ localPath);
+  return result != 0;
+}

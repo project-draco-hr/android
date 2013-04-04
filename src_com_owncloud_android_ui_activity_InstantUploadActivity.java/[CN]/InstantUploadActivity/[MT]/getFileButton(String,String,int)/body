@@ -1,0 +1,20 @@
+{
+  TextView failureTextView=new TextView(this);
+  failureTextView.setText(getString(R.string.failed_upload_failure_text) + message);
+  failureTextView.setBackgroundResource(R.color.owncloud_white);
+  failureTextView.setTextSize(8);
+  failureTextView.setOnLongClickListener(getOnLongClickListener(message));
+  failureTextView.setPadding(5,5,5,10);
+  TextView retryButton=new TextView(this);
+  retryButton.setId(id);
+  retryButton.setText(img_path);
+  retryButton.setBackgroundResource(R.color.owncloud_white);
+  retryButton.setTextSize(8);
+  retryButton.setOnClickListener(getImageButtonOnClickListener(img_path));
+  retryButton.setOnLongClickListener(getOnLongClickListener(message));
+  retryButton.setPadding(5,5,5,10);
+  LinearLayout verticalLayout=getVerticalLinearLayout();
+  verticalLayout.addView(retryButton);
+  verticalLayout.addView(failureTextView);
+  return verticalLayout;
+}

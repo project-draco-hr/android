@@ -1,3 +1,0 @@
-{
-  return mDB.delete(TABLE_INSTANT_UPLOAD,"path = ?",new String[]{localPath}) != 0;
-}

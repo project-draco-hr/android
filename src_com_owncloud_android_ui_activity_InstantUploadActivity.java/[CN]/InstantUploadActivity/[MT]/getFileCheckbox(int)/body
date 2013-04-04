@@ -1,0 +1,8 @@
+{
+  CheckBox retryCB=new CheckBox(this);
+  retryCB.setId(id);
+  retryCB.setBackgroundResource(R.color.owncloud_white);
+  retryCB.setTextSize(8);
+  retryCB.setTag(retry_chexbox_tag);
+  return retryCB;
+}

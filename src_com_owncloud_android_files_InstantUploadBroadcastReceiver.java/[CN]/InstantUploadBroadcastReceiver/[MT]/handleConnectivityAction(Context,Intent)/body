@@ -26,7 +26,7 @@
           Intent i=new Intent(context,FileUploader.class);
           i.putExtra(FileUploader.KEY_ACCOUNT,account);
           i.putExtra(FileUploader.KEY_LOCAL_FILE,file_path);
-          i.putExtra(FileUploader.KEY_REMOTE_FILE,INSTANT_UPLOAD_DIR + f.getName());
+          i.putExtra(FileUploader.KEY_REMOTE_FILE,FileStorageUtils.getInstantUploadFilePath(f.getName()));
           i.putExtra(FileUploader.KEY_UPLOAD_TYPE,FileUploader.UPLOAD_SINGLE_FILE);
           i.putExtra(FileUploader.KEY_INSTANT_UPLOAD,true);
           context.startService(i);
