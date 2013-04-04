@@ -3,7 +3,8 @@
 switch (item.getItemId()) {
 case R.id.action_create_dir:
 {
-      showDialog(DIALOG_CREATE_DIR);
+      EditNameDialog dialog=EditNameDialog.newInstance(getString(R.string.uploader_info_dirname),"",this);
+      dialog.show(getSupportFragmentManager(),"createdirdialog");
       break;
     }
 case R.id.action_sync_account:
