@@ -22,6 +22,6 @@
     bindService(new Intent(this,FileUploader.class),mUploadConnection,Context.BIND_AUTO_CREATE);
   }
  else {
-    backToDisplayActivity();
+    backToDisplayActivity(false);
   }
 }
