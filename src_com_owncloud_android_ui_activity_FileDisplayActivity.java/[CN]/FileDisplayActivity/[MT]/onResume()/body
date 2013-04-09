@@ -7,6 +7,7 @@
       if (mDualPane) {
         initFileDetailsInDualPane();
       }
+      mBackFromCreatingFirstAccount=true;
     }
     IntentFilter syncIntentFilter=new IntentFilter(FileSyncService.SYNC_MESSAGE);
     mSyncBroadcastReceiver=new SyncBroadcastReceiver();
