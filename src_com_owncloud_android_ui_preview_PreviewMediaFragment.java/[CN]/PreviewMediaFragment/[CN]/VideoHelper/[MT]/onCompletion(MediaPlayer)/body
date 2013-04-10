@@ -1,4 +1,17 @@
 {
-  mVideoPreview.seekTo(0);
+  Log.e(TAG,"completed");
+  if (mp != null) {
+    mVideoPreview.seekTo(0);
+    if (Build.VERSION.SDK_INT == Build.VERSION_CODES.GINGERBREAD) {
+      mVideoPreview.pause();
+    }
+ else     if (Build.VERSION.SDK_INT == Build.VERSION_CODES.GINGERBREAD_MR1) {
+      mMediaController.setEnabled(false);
+      mVideoPreview.stopPlayback();
+      mAutoplay=false;
+      mSavedPlaybackPosition=0;
+      mVideoPreview.setVideoPath(mFile.getStoragePath());
+    }
+  }
   mMediaController.updatePausePlay();
 }
