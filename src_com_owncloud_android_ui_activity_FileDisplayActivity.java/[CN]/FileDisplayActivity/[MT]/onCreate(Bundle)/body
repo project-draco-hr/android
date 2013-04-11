@@ -41,7 +41,7 @@
   mFileList=(OCFileListFragment)getSupportFragmentManager().findFragmentById(R.id.fileList);
   mDualPane=(findViewById(R.id.file_details_container) != null);
   if (mDualPane) {
-    initFileDetailsInDualPane();
+    if (savedInstanceState == null)     initFileDetailsInDualPane();
   }
  else {
     if (mCurrentFile != null) {
