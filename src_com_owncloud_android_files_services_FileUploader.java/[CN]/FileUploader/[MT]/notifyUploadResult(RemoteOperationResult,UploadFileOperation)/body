@@ -7,7 +7,14 @@
     mNotification.flags^=Notification.FLAG_ONGOING_EVENT;
     mNotification.flags|=Notification.FLAG_AUTO_CANCEL;
     mNotification.contentView=mDefaultNotificationContentView;
-    Intent showDetailsIntent=new Intent(this,FileDetailActivity.class);
+    Intent showDetailsIntent=null;
+    if (PreviewImageFragment.canBePreviewed(upload.getFile())) {
+      showDetailsIntent=new Intent(this,PreviewImageActivity.class);
+    }
+ else {
+      showDetailsIntent=new Intent(this,FileDetailActivity.class);
+      showDetailsIntent.putExtra(FileDetailActivity.EXTRA_MODE,FileDetailActivity.MODE_DETAILS);
+    }
     showDetailsIntent.putExtra(FileDetailFragment.EXTRA_FILE,upload.getFile());
     showDetailsIntent.putExtra(FileDetailFragment.EXTRA_ACCOUNT,upload.getAccount());
     showDetailsIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -33,7 +40,7 @@
       content=String.format(getString(R.string.uploader_upload_failed_content_single),upload.getFileName());
     }
     Intent detailUploadIntent=null;
-    if (upload.isInstant()) {
+    if (upload.isInstant() && InstantUploadActivity.IS_ENABLED) {
       detailUploadIntent=new Intent(this,InstantUploadActivity.class);
       detailUploadIntent.putExtra(FileUploader.KEY_ACCOUNT,upload.getAccount());
     }

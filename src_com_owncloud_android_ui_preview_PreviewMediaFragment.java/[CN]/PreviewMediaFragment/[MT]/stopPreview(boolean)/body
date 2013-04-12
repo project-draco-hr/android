@@ -1,0 +1,8 @@
+{
+  if (mFile.isAudio() && stopAudio) {
+    mMediaServiceBinder.pause();
+  }
+ else   if (mFile.isVideo()) {
+    mVideoPreview.stopPlayback();
+  }
+}

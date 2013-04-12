@@ -1,0 +1,3 @@
+{
+  mProgressBar=new WeakReference<ProgressBar>(progressBar);
+}

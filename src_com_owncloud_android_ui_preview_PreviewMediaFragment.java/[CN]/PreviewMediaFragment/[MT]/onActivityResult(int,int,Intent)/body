@@ -1,0 +1,7 @@
+{
+  super.onActivityResult(requestCode,resultCode,data);
+  if (resultCode == Activity.RESULT_OK) {
+    mSavedPlaybackPosition=data.getExtras().getInt(PreviewVideoActivity.EXTRA_START_POSITION);
+    mAutoplay=data.getExtras().getBoolean(PreviewVideoActivity.EXTRA_AUTOPLAY);
+  }
+}

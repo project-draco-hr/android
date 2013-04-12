@@ -10,9 +10,11 @@
       out.write(mBuffer.array(),0,readCount);
       mBuffer.clear();
       mTransferred+=readCount;
-      it=mDataTransferListeners.iterator();
-      while (it.hasNext()) {
-        it.next().onTransferProgress(readCount,mTransferred,size,mFile.getName());
+synchronized (mDataTransferListeners) {
+        it=mDataTransferListeners.iterator();
+        while (it.hasNext()) {
+          it.next().onTransferProgress(readCount,mTransferred,size,mFile.getName());
+        }
       }
     }
   }

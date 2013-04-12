@@ -1,0 +1,9 @@
+{
+  MediaPlayer currentPlayer=mService.getPlayer();
+  if (currentPlayer != null) {
+    return 100;
+  }
+ else {
+    return 0;
+  }
+}

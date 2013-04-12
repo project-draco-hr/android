@@ -1,0 +1,13 @@
+{
+  super(context,attrs);
+  mContext=context;
+  FrameLayout.LayoutParams frameParams=new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+  LayoutInflater inflate=(LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+  mRoot=inflate.inflate(R.layout.media_control,null);
+  initControllerView(mRoot);
+  addView(mRoot,frameParams);
+  setFocusable(true);
+  setFocusableInTouchMode(true);
+  setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
+  requestFocus();
+}

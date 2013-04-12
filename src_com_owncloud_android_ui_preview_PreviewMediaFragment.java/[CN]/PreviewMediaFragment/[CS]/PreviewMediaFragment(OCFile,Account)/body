@@ -1,0 +1,7 @@
+{
+  mFile=fileToDetail;
+  mAccount=ocAccount;
+  mSavedPlaybackPosition=0;
+  mStorageManager=null;
+  mAutoplay=true;
+}

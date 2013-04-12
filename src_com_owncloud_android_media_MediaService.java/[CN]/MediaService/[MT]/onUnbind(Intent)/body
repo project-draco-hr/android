@@ -1,0 +1,6 @@
+{
+  if (mState == State.PAUSED || mState == State.STOPPED) {
+    processStopRequest(false);
+  }
+  return false;
+}

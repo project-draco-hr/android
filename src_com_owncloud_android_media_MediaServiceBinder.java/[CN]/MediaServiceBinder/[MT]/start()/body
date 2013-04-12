@@ -1,0 +1,4 @@
+{
+  Log.d(TAG,"Starting through binder...");
+  mService.processPlayRequest();
+}

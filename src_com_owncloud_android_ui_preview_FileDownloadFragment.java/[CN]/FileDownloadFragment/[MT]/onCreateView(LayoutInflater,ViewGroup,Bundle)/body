@@ -1,0 +1,26 @@
+{
+  super.onCreateView(inflater,container,savedInstanceState);
+  if (savedInstanceState != null) {
+    if (!mIgnoreFirstSavedState) {
+      mFile=savedInstanceState.getParcelable(FileDownloadFragment.EXTRA_FILE);
+      mAccount=savedInstanceState.getParcelable(FileDownloadFragment.EXTRA_ACCOUNT);
+      mError=savedInstanceState.getBoolean(FileDownloadFragment.EXTRA_ERROR);
+    }
+ else {
+      mIgnoreFirstSavedState=false;
+    }
+  }
+  View view=null;
+  view=inflater.inflate(R.layout.file_download_fragment,container,false);
+  mView=view;
+  ProgressBar progressBar=(ProgressBar)mView.findViewById(R.id.progressBar);
+  mProgressListener=new ProgressListener(progressBar);
+  ((Button)mView.findViewById(R.id.cancelBtn)).setOnClickListener(this);
+  if (mError) {
+    setButtonsForRemote();
+  }
+ else {
+    setButtonsForTransferring();
+  }
+  return view;
+}

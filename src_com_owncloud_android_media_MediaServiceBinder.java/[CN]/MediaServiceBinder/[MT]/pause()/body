@@ -1,0 +1,4 @@
+{
+  Log.d(TAG,"Pausing through binder...");
+  mService.processPauseRequest();
+}

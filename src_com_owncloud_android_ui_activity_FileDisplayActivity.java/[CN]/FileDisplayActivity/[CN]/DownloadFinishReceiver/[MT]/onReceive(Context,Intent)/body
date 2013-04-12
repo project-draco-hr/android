@@ -1,12 +1,12 @@
 {
+  boolean sameAccount=isSameAccount(context,intent);
   String downloadedRemotePath=intent.getStringExtra(FileDownloader.EXTRA_REMOTE_PATH);
-  String accountName=intent.getStringExtra(FileDownloader.ACCOUNT_NAME);
-  boolean sameAccount=accountName.equals(AccountUtils.getCurrentOwnCloudAccount(context).name);
-  boolean isDescendant=(mCurrentDir != null) && (downloadedRemotePath != null) && (downloadedRemotePath.startsWith(mCurrentDir.getRemotePath()));
+  boolean isDescendant=isDescendant(downloadedRemotePath);
   if (sameAccount && isDescendant) {
-    OCFileListFragment fileListFragment=(OCFileListFragment)getSupportFragmentManager().findFragmentById(R.id.fileList);
-    if (fileListFragment != null) {
-      fileListFragment.listDirectory();
+    updateLeftPanel();
+    if (mDualPane) {
+      updateRightPanel(intent.getAction(),downloadedRemotePath,intent.getBooleanExtra(FileDownloader.EXTRA_DOWNLOAD_RESULT,false));
     }
   }
+  removeStickyBroadcast(intent);
 }

@@ -1,0 +1,25 @@
+{
+  int messageId;
+  if (what == OC_MEDIA_ERROR) {
+    messageId=extra;
+  }
+ else   if (extra == MediaPlayer.MEDIA_ERROR_UNSUPPORTED) {
+    messageId=R.string.media_err_unsupported;
+  }
+ else   if (extra == MediaPlayer.MEDIA_ERROR_IO) {
+    messageId=R.string.media_err_io;
+  }
+ else   if (extra == MediaPlayer.MEDIA_ERROR_MALFORMED) {
+    messageId=R.string.media_err_malformed;
+  }
+ else   if (extra == MediaPlayer.MEDIA_ERROR_TIMED_OUT) {
+    messageId=R.string.media_err_timeout;
+  }
+ else   if (what == MediaPlayer.MEDIA_ERROR_NOT_VALID_FOR_PROGRESSIVE_PLAYBACK) {
+    messageId=R.string.media_err_invalid_progressive_playback;
+  }
+ else {
+    messageId=R.string.media_err_unknown;
+  }
+  return context.getString(messageId);
+}

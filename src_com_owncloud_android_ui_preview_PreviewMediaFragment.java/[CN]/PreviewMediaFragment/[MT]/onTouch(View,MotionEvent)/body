@@ -1,0 +1,7 @@
+{
+  if (event.getAction() == MotionEvent.ACTION_DOWN && v == mVideoPreview) {
+    startFullScreenVideo();
+    return true;
+  }
+  return false;
+}

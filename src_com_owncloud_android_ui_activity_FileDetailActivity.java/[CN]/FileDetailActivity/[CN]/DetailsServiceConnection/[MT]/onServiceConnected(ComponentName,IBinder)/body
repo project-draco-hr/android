@@ -2,6 +2,9 @@
   if (component.equals(new ComponentName(FileDetailActivity.this,FileDownloader.class))) {
     Log.d(TAG,"Download service connected");
     mDownloaderBinder=(FileDownloaderBinder)service;
+    if (mWaitingToPreview) {
+      requestForDownload();
+    }
   }
  else   if (component.equals(new ComponentName(FileDetailActivity.this,FileUploader.class))) {
     Log.d(TAG,"Upload service connected");
@@ -10,6 +13,10 @@
  else {
     return;
   }
-  FileDetailFragment fragment=(FileDetailFragment)getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
-  if (fragment != null)   fragment.updateFileDetails(false);
+  Fragment fragment=getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
+  FileDetailFragment detailsFragment=(fragment instanceof FileDetailFragment) ? (FileDetailFragment)fragment : null;
+  if (detailsFragment != null) {
+    detailsFragment.listenForTransferProgress();
+    detailsFragment.updateFileDetails(mWaitingToPreview,false);
+  }
 }

@@ -1,0 +1,4 @@
+FragmentManager fragmentManager
+OCFile parentFolder
+Account account
+DataStorageManager storageManager

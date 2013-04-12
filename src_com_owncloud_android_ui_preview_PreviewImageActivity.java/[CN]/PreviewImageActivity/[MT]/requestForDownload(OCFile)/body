@@ -1,0 +1,11 @@
+{
+  if (mDownloaderBinder == null) {
+    Log.d(TAG,"requestForDownload called without binder to download service");
+  }
+ else   if (!mDownloaderBinder.isDownloading(mAccount,file)) {
+    Intent i=new Intent(this,FileDownloader.class);
+    i.putExtra(FileDownloader.EXTRA_ACCOUNT,mAccount);
+    i.putExtra(FileDownloader.EXTRA_FILE,file);
+    startService(i);
+  }
+}

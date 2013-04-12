@@ -1,0 +1,10 @@
+{
+  if (mProgressListener != null) {
+    if (mContainerActivity.getFileDownloaderBinder() != null) {
+      mContainerActivity.getFileDownloaderBinder().addDatatransferProgressListener(mProgressListener,mAccount,mFile);
+    }
+    if (mContainerActivity.getFileUploaderBinder() != null) {
+      mContainerActivity.getFileUploaderBinder().addDatatransferProgressListener(mProgressListener,mAccount,mFile);
+    }
+  }
+}

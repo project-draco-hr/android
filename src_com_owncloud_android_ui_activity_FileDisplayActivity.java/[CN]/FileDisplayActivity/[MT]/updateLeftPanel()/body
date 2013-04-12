@@ -1,0 +1,6 @@
+{
+  OCFileListFragment fileListFragment=(OCFileListFragment)getSupportFragmentManager().findFragmentById(R.id.fileList);
+  if (fileListFragment != null) {
+    fileListFragment.listDirectory();
+  }
+}

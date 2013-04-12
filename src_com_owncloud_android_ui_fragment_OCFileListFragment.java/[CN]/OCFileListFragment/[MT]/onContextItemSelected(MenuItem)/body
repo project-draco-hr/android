@@ -2,13 +2,13 @@
   AdapterContextMenuInfo info=(AdapterContextMenuInfo)item.getMenuInfo();
   mTargetFile=(OCFile)mAdapter.getItem(info.position);
 switch (item.getItemId()) {
-case R.id.rename_file_item:
+case R.id.action_rename_file:
 {
       EditNameDialog dialog=EditNameDialog.newInstance(getString(R.string.rename_dialog_title),mTargetFile.getFileName(),this);
       dialog.show(getFragmentManager(),EditNameDialog.TAG);
       return true;
     }
-case R.id.remove_file_item:
+case R.id.action_remove_file:
 {
     int messageStringId=R.string.confirmation_remove_alert;
     int posBtnStringId=R.string.confirmation_remove_remote;
@@ -24,11 +24,10 @@ case R.id.remove_file_item:
     }
     ConfirmationDialogFragment confDialog=ConfirmationDialogFragment.newInstance(messageStringId,new String[]{mTargetFile.getFileName()},posBtnStringId,neuBtnStringId,R.string.common_cancel);
     confDialog.setOnConfirmationListener(this);
-    mCurrentDialog=confDialog;
-    mCurrentDialog.show(getFragmentManager(),FileDetailFragment.FTAG_CONFIRMATION);
+    confDialog.show(getFragmentManager(),FileDetailFragment.FTAG_CONFIRMATION);
     return true;
   }
-case R.id.open_file_item:
+case R.id.action_open_file_with:
 {
   String storagePath=mTargetFile.getStoragePath();
   String encodedStoragePath=WebdavUtils.encodePath(storagePath);
@@ -74,7 +73,7 @@ catch (    Throwable th) {
   }
   return true;
 }
-case R.id.download_file_item:
+case R.id.action_download_file:
 {
 Account account=AccountUtils.getCurrentOwnCloudAccount(getSherlockActivity());
 RemoteOperation operation=new SynchronizeFileOperation(mTargetFile,null,mContainerActivity.getStorageManager(),account,true,false,getSherlockActivity());
@@ -83,7 +82,7 @@ operation.execute(wc,mContainerActivity,mHandler);
 getSherlockActivity().showDialog(FileDisplayActivity.DIALOG_SHORT_WAIT);
 return true;
 }
-case R.id.cancel_download_item:
+case R.id.action_cancel_download:
 {
 FileDownloaderBinder downloaderBinder=mContainerActivity.getFileDownloaderBinder();
 Account account=AccountUtils.getCurrentOwnCloudAccount(getActivity());
@@ -94,7 +93,7 @@ mContainerActivity.onTransferStateChanged(mTargetFile,false,false);
 }
 return true;
 }
-case R.id.cancel_upload_item:
+case R.id.action_cancel_upload:
 {
 FileUploaderBinder uploaderBinder=mContainerActivity.getFileUploaderBinder();
 Account account=AccountUtils.getCurrentOwnCloudAccount(getActivity());
@@ -103,6 +102,11 @@ uploaderBinder.cancel(account,mTargetFile);
 listDirectory();
 mContainerActivity.onTransferStateChanged(mTargetFile,false,false);
 }
+return true;
+}
+case R.id.action_see_details:
+{
+((FileFragment.ContainerActivity)getActivity()).showFragmentWithDetails(mTargetFile);
 return true;
 }
 default :

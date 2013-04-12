@@ -1,0 +1,10 @@
+{
+  Log.d(TAG,"Loading and starting through binder...");
+  Intent i=new Intent(mService,MediaService.class);
+  i.putExtra(MediaService.EXTRA_ACCOUNT,account);
+  i.putExtra(MediaService.EXTRA_FILE,file);
+  i.putExtra(MediaService.EXTRA_PLAY_ON_LOAD,playImmediately);
+  i.putExtra(MediaService.EXTRA_START_POSITION,position);
+  i.setAction(MediaService.ACTION_PLAY_FILE);
+  mService.startService(i);
+}

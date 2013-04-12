@@ -1,8 +1,0 @@
-{
-  Intent intent=new Intent(this,FileDisplayActivity.class);
-  intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-  intent.putExtra(FileDetailFragment.EXTRA_FILE,getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE));
-  intent.putExtra(FileDetailFragment.EXTRA_ACCOUNT,getIntent().getParcelableExtra(FileDetailFragment.EXTRA_ACCOUNT));
-  startActivity(intent);
-  finish();
-}

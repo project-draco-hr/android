@@ -1,0 +1,6 @@
+{
+  mDragging=false;
+  setProgress();
+  updatePausePlay();
+  mHandler.sendEmptyMessage(SHOW_PROGRESS);
+}
