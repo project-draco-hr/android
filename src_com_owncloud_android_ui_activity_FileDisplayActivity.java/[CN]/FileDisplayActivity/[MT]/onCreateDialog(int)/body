@@ -96,7 +96,7 @@ break;
 }
 case DIALOG_CHOOSE_UPLOAD_SOURCE:
 {
-final String[] items={getString(R.string.actionbar_upload_files),getString(R.string.actionbar_upload_from_apps),getString(R.string.actionbar_failed_instant_upload)};
+final String[] items={getString(R.string.actionbar_upload_files),getString(R.string.actionbar_upload_from_apps)};
 builder=new AlertDialog.Builder(this);
 builder.setTitle(R.string.actionbar_upload);
 builder.setItems(items,new DialogInterface.OnClickListener(){
