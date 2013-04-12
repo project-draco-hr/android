@@ -58,8 +58,11 @@
       }
     }
  else {
-      fileSizeV.setVisibility(View.GONE);
-      lastModV.setVisibility(View.GONE);
+      fileSizeV.setVisibility(View.VISIBLE);
+      getDirectorySizeNumber(file,true);
+      fileSizeV.setText(DisplayUtils.bytesToHumanReadable((totalSizeOfDirectoriesRecursive == null) ? 0 : totalSizeOfDirectoriesRecursive));
+      lastModV.setVisibility(View.VISIBLE);
+      lastModV.setText(DisplayUtils.unixTimeToHumanReadable((lastModifiedOfAllSubdirectories == null) ? 0 : lastModifiedOfAllSubdirectories));
       checkBoxV.setVisibility(View.GONE);
       view.findViewById(R.id.imageView3).setVisibility(View.GONE);
     }
