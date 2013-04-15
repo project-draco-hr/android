@@ -1,3 +1,5 @@
 String title
 String name
+int selectionStart
+int selectionEnd
 EditNameDialogListener listener

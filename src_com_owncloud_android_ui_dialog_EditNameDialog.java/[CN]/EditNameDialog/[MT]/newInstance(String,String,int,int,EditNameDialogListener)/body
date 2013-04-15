@@ -3,6 +3,8 @@
   Bundle args=new Bundle();
   args.putString(ARG_TITLE,title);
   args.putString(ARG_NAME,name);
+  args.putInt(ARG_SELECTION_START,selectionStart);
+  args.putInt(ARG_SELECTION_END,selectionEnd);
   f.setArguments(args);
   f.setOnDismissListener(listener);
   return f;

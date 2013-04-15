@@ -4,7 +4,7 @@
   String title=getArguments().getString(ARG_TITLE);
   LayoutInflater inflater=getSherlockActivity().getLayoutInflater();
   View v=inflater.inflate(R.layout.edit_box_dialog,null);
-  TextView inputText=((TextView)v.findViewById(R.id.user_input));
+  EditText inputText=((EditText)v.findViewById(R.id.user_input));
   inputText.setText(currentName);
   AlertDialog.Builder builder=new AlertDialog.Builder(getSherlockActivity());
   builder.setView(v).setPositiveButton(R.string.common_ok,this).setNegativeButton(R.string.common_cancel,this);
@@ -14,6 +14,11 @@
   mResult=false;
   Dialog d=builder.create();
   inputText.requestFocus();
+  int selectionStart=getArguments().getInt(ARG_SELECTION_START,-1);
+  int selectionEnd=getArguments().getInt(ARG_SELECTION_END,-1);
+  if (selectionStart >= 0 && selectionEnd >= 0) {
+    inputText.setSelection(Math.min(selectionStart,selectionEnd),Math.max(selectionStart,selectionEnd));
+  }
   d.getWindow().setSoftInputMode(LayoutParams.SOFT_INPUT_STATE_VISIBLE);
   return d;
 }
