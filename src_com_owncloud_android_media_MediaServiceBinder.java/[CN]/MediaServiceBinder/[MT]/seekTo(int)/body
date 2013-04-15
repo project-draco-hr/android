@@ -1,5 +1,5 @@
 {
-  Log.d(TAG,"Seeking " + pos + " through binder...");
+  Log_OC.d(TAG,"Seeking " + pos + " through binder...");
   MediaPlayer currentPlayer=mService.getPlayer();
   MediaService.State currentState=mService.getState();
   if (currentPlayer != null && currentState != State.PREPARING && currentState != State.STOPPED) {
