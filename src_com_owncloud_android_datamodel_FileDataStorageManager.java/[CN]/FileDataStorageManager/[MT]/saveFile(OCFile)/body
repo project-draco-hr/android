@@ -29,7 +29,7 @@
         getContentProvider().update(ProviderTableMeta.CONTENT_URI,cv,ProviderTableMeta._ID + "=?",new String[]{String.valueOf(file.getFileId())});
       }
  catch (      RemoteException e) {
-        Log.e(TAG,"Fail to insert insert file to database " + e.getMessage());
+        Log_OC.e(TAG,"Fail to insert insert file to database " + e.getMessage());
       }
     }
   }
@@ -43,7 +43,7 @@
         result_uri=getContentProvider().insert(ProviderTableMeta.CONTENT_URI_FILE,cv);
       }
  catch (      RemoteException e) {
-        Log.e(TAG,"Fail to insert insert file to database " + e.getMessage());
+        Log_OC.e(TAG,"Fail to insert insert file to database " + e.getMessage());
       }
     }
     if (result_uri != null) {

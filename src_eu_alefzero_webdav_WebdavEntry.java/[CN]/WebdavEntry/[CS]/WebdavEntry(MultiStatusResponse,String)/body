@@ -40,6 +40,6 @@
     }
   }
  else {
-    Log.e("WebdavEntry","General fuckup, no status for webdav response");
+    Log_OC.e("WebdavEntry","General fuckup, no status for webdav response");
   }
 }

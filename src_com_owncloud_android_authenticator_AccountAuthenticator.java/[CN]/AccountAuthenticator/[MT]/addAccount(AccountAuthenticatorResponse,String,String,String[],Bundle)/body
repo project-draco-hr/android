@@ -1,10 +1,10 @@
 {
-  Log.i(TAG,"Adding account with type " + accountType + " and auth token "+ authTokenType);
+  Log_OC.i(TAG,"Adding account with type " + accountType + " and auth token "+ authTokenType);
   try {
     validateAccountType(accountType);
   }
  catch (  AuthenticatorException e) {
-    Log.e(TAG,"Failed to validate account type " + accountType + ": "+ e.getMessage());
+    Log_OC.e(TAG,"Failed to validate account type " + accountType + ": "+ e.getMessage());
     e.printStackTrace();
     return e.getFailureBundle();
   }

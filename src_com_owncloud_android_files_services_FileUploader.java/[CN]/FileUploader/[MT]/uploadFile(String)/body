@@ -22,7 +22,7 @@ synchronized (mPendingUploads) {
   finally {
 synchronized (mPendingUploads) {
         mPendingUploads.remove(uploadKey);
-        Log.i(TAG,"Remove CurrentUploadItem from pending upload Item Map.");
+        Log_OC.i(TAG,"Remove CurrentUploadItem from pending upload Item Map.");
       }
     }
     notifyUploadResult(uploadResult,mCurrentUpload);

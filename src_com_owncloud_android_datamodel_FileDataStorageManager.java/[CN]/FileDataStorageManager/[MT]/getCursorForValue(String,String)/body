@@ -8,7 +8,7 @@
       c=getContentProvider().query(ProviderTableMeta.CONTENT_URI,null,key + "=? AND " + ProviderTableMeta.FILE_ACCOUNT_OWNER+ "=?",new String[]{value,mAccount.name},null);
     }
  catch (    RemoteException e) {
-      Log.e(TAG,"Could not get file details: " + e.getMessage());
+      Log_OC.e(TAG,"Could not get file details: " + e.getMessage());
       c=null;
     }
   }

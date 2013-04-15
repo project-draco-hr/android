@@ -31,7 +31,7 @@
         file.setStoragePath(expectedPath);
       }
  catch (      Exception e) {
-        Log.e(TAG,"Exception while copying foreign file " + expectedPath,e);
+        Log_OC.e(TAG,"Exception while copying foreign file " + expectedPath,e);
         mForgottenLocalFiles.put(file.getRemotePath(),storagePath);
         file.setStoragePath(null);
       }
@@ -40,13 +40,13 @@
           if (in != null)           in.close();
         }
  catch (        Exception e) {
-          Log.d(TAG,"Weird exception while closing input stream for " + storagePath + " (ignoring)",e);
+          Log_OC.d(TAG,"Weird exception while closing input stream for " + storagePath + " (ignoring)",e);
         }
         try {
           if (out != null)           out.close();
         }
  catch (        Exception e) {
-          Log.d(TAG,"Weird exception while closing output stream for " + expectedPath + " (ignoring)",e);
+          Log_OC.d(TAG,"Weird exception while closing output stream for " + expectedPath + " (ignoring)",e);
         }
       }
     }

@@ -5,7 +5,7 @@
   imageButton.setOnClickListener(getImageButtonOnClickListener(img_path));
   int base_scale_size=32;
   if (img_path != null) {
-    Log.d(LOG_TAG,"add " + img_path + " to Image Button");
+    Log_OC.d(LOG_TAG,"add " + img_path + " to Image Button");
     BitmapFactory.Options options=new BitmapFactory.Options();
     options.inJustDecodeBounds=true;
     Bitmap bitmap=BitmapFactory.decodeFile(img_path,options);
@@ -19,16 +19,16 @@
       height_tmp/=2;
       scale++;
     }
-    Log.d(LOG_TAG,"scale Imgae with: " + scale);
+    Log_OC.d(LOG_TAG,"scale Imgae with: " + scale);
     BitmapFactory.Options options2=new BitmapFactory.Options();
     options2.inSampleSize=scale;
     bitmap=BitmapFactory.decodeFile(img_path,options2);
     if (bitmap != null) {
-      Log.d(LOG_TAG,"loaded Bitmap Bytes: " + bitmap.getRowBytes());
+      Log_OC.d(LOG_TAG,"loaded Bitmap Bytes: " + bitmap.getRowBytes());
       imageButton.setImageBitmap(bitmap);
     }
  else {
-      Log.d(LOG_TAG,"could not load imgage: " + img_path);
+      Log_OC.d(LOG_TAG,"could not load imgage: " + img_path);
     }
   }
   return imageButton;

@@ -20,7 +20,7 @@
     notifyFailedSynchronization();
     return;
   }
-  Log.d(TAG,"Synchronization of ownCloud account " + account.name + " starting");
+  Log_OC.d(TAG,"Synchronization of ownCloud account " + account.name + " starting");
   sendStickyBroadcast(true,null,null);
   try {
     updateOCVersion();
@@ -29,7 +29,7 @@
       fetchData(OCFile.PATH_SEPARATOR,DataStorageManager.ROOT_PARENT_ID);
     }
  else {
-      Log.d(TAG,"Leaving synchronization before any remote request due to cancellation was requested");
+      Log_OC.d(TAG,"Leaving synchronization before any remote request due to cancellation was requested");
     }
   }
   finally {

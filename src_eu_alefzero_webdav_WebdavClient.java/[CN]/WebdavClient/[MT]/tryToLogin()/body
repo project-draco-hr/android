@@ -4,7 +4,7 @@
   try {
     status=executeMethod(head);
     boolean result=status == HttpStatus.SC_OK;
-    Log.d(TAG,"HEAD for " + mUri + " finished with HTTP status "+ status+ (!result ? "(FAIL)" : ""));
+    Log_OC.d(TAG,"HEAD for " + mUri + " finished with HTTP status "+ status+ (!result ? "(FAIL)" : ""));
     exhaustResponse(head.getResponseBodyAsStream());
   }
  catch (  Exception e) {

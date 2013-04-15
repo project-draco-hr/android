@@ -26,73 +26,55 @@ case DIALOG_SETUP_ACCOUNT:
       dialog=builder.create();
       break;
     }
-case DIALOG_ABOUT_APP:
-{
-    builder=new AlertDialog.Builder(this);
-    builder.setTitle(getString(R.string.about_title));
-    PackageInfo pkg;
-    try {
-      pkg=getPackageManager().getPackageInfo(getPackageName(),0);
-      builder.setMessage(String.format(getString(R.string.about_message),getString(R.string.app_name),pkg.versionName));
-      builder.setIcon(android.R.drawable.ic_menu_info_details);
-      dialog=builder.create();
-    }
- catch (    NameNotFoundException e) {
-      builder=null;
-      dialog=null;
-      Log.e(TAG,"Error while showing about dialog",e);
-    }
-    break;
-  }
 case DIALOG_CREATE_DIR:
 {
-  builder=new Builder(this);
-  final EditText dirNameInput=new EditText(getBaseContext());
-  builder.setView(dirNameInput);
-  builder.setTitle(R.string.uploader_info_dirname);
-  int typed_color=getResources().getColor(R.color.setup_text_typed);
-  dirNameInput.setTextColor(typed_color);
-  builder.setPositiveButton(android.R.string.ok,new OnClickListener(){
-    public void onClick(    DialogInterface dialog,    int which){
-      String directoryName=dirNameInput.getText().toString();
-      if (directoryName.trim().length() == 0) {
-        dialog.cancel();
-        return;
-      }
-      String path;
-      if (mCurrentDir == null) {
-        if (!mStorageManager.fileExists(OCFile.PATH_SEPARATOR)) {
-          OCFile file=new OCFile(OCFile.PATH_SEPARATOR);
-          mStorageManager.saveFile(file);
+    builder=new Builder(this);
+    final EditText dirNameInput=new EditText(getBaseContext());
+    builder.setView(dirNameInput);
+    builder.setTitle(R.string.uploader_info_dirname);
+    int typed_color=getResources().getColor(R.color.setup_text_typed);
+    dirNameInput.setTextColor(typed_color);
+    builder.setPositiveButton(android.R.string.ok,new OnClickListener(){
+      public void onClick(      DialogInterface dialog,      int which){
+        String directoryName=dirNameInput.getText().toString();
+        if (directoryName.trim().length() == 0) {
+          dialog.cancel();
+          return;
         }
-        mCurrentDir=mStorageManager.getFileByPath(OCFile.PATH_SEPARATOR);
+        String path;
+        if (mCurrentDir == null) {
+          if (!mStorageManager.fileExists(OCFile.PATH_SEPARATOR)) {
+            OCFile file=new OCFile(OCFile.PATH_SEPARATOR);
+            mStorageManager.saveFile(file);
+          }
+          mCurrentDir=mStorageManager.getFileByPath(OCFile.PATH_SEPARATOR);
+        }
+        path=FileDisplayActivity.this.mCurrentDir.getRemotePath();
+        path+=directoryName + OCFile.PATH_SEPARATOR;
+        Thread thread=new Thread(new DirectoryCreator(path,AccountUtils.getCurrentOwnCloudAccount(FileDisplayActivity.this),new Handler()));
+        thread.start();
+        dialog.dismiss();
+        showDialog(DIALOG_SHORT_WAIT);
       }
-      path=FileDisplayActivity.this.mCurrentDir.getRemotePath();
-      path+=directoryName + OCFile.PATH_SEPARATOR;
-      Thread thread=new Thread(new DirectoryCreator(path,AccountUtils.getCurrentOwnCloudAccount(FileDisplayActivity.this),new Handler()));
-      thread.start();
-      dialog.dismiss();
-      showDialog(DIALOG_SHORT_WAIT);
     }
-  }
 );
-  builder.setNegativeButton(R.string.common_cancel,new OnClickListener(){
-    public void onClick(    DialogInterface dialog,    int which){
-      dialog.cancel();
+    builder.setNegativeButton(R.string.common_cancel,new OnClickListener(){
+      public void onClick(      DialogInterface dialog,      int which){
+        dialog.cancel();
+      }
     }
-  }
 );
-  dialog=builder.create();
-  break;
-}
+    dialog=builder.create();
+    break;
+  }
 case DIALOG_SHORT_WAIT:
 {
-ProgressDialog working_dialog=new ProgressDialog(this);
-working_dialog.setMessage(getResources().getString(R.string.wait_a_moment));
-working_dialog.setIndeterminate(true);
-working_dialog.setCancelable(false);
-dialog=working_dialog;
-break;
+  ProgressDialog working_dialog=new ProgressDialog(this);
+  working_dialog.setMessage(getResources().getString(R.string.wait_a_moment));
+  working_dialog.setIndeterminate(true);
+  working_dialog.setCancelable(false);
+  dialog=working_dialog;
+  break;
 }
 case DIALOG_CHOOSE_UPLOAD_SOURCE:
 {
@@ -104,24 +86,24 @@ if (InstantUploadActivity.IS_ENABLED) items=allTheItems;
 builder=new AlertDialog.Builder(this);
 builder.setTitle(R.string.actionbar_upload);
 builder.setItems(items,new DialogInterface.OnClickListener(){
-public void onClick(DialogInterface dialog,int item){
-  if (item == 0) {
-    Intent action=new Intent(FileDisplayActivity.this,UploadFilesActivity.class);
-    action.putExtra(UploadFilesActivity.EXTRA_ACCOUNT,AccountUtils.getCurrentOwnCloudAccount(FileDisplayActivity.this));
-    startActivityForResult(action,ACTION_SELECT_MULTIPLE_FILES);
+  public void onClick(  DialogInterface dialog,  int item){
+    if (item == 0) {
+      Intent action=new Intent(FileDisplayActivity.this,UploadFilesActivity.class);
+      action.putExtra(UploadFilesActivity.EXTRA_ACCOUNT,AccountUtils.getCurrentOwnCloudAccount(FileDisplayActivity.this));
+      startActivityForResult(action,ACTION_SELECT_MULTIPLE_FILES);
+    }
+ else     if (item == 1) {
+      Intent action=new Intent(Intent.ACTION_GET_CONTENT);
+      action=action.setType("*/*").addCategory(Intent.CATEGORY_OPENABLE);
+      startActivityForResult(Intent.createChooser(action,getString(R.string.upload_chooser_title)),ACTION_SELECT_CONTENT_FROM_APPS);
+    }
+ else     if (item == 2 && InstantUploadActivity.IS_ENABLED) {
+      Account account=AccountUtils.getCurrentOwnCloudAccount(FileDisplayActivity.this);
+      Intent action=new Intent(FileDisplayActivity.this,InstantUploadActivity.class);
+      action.putExtra(FileUploader.KEY_ACCOUNT,account);
+      startActivity(action);
+    }
   }
- else   if (item == 1) {
-    Intent action=new Intent(Intent.ACTION_GET_CONTENT);
-    action=action.setType("*/*").addCategory(Intent.CATEGORY_OPENABLE);
-    startActivityForResult(Intent.createChooser(action,getString(R.string.upload_chooser_title)),ACTION_SELECT_CONTENT_FROM_APPS);
-  }
- else   if (item == 2 && InstantUploadActivity.IS_ENABLED) {
-    Account account=AccountUtils.getCurrentOwnCloudAccount(FileDisplayActivity.this);
-    Intent action=new Intent(FileDisplayActivity.this,InstantUploadActivity.class);
-    action.putExtra(FileUploader.KEY_ACCOUNT,account);
-    startActivity(action);
-  }
-}
 }
 );
 dialog=builder.create();

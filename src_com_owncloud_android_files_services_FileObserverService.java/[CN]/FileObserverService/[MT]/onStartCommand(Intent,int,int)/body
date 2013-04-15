@@ -4,7 +4,7 @@
     return Service.START_STICKY;
   }
   if (!intent.hasExtra(KEY_FILE_CMD)) {
-    Log.e(TAG,"No KEY_FILE_CMD argument given");
+    Log_OC.e(TAG,"No KEY_FILE_CMD argument given");
     return Service.START_STICKY;
   }
 switch (intent.getIntExtra(KEY_FILE_CMD,-1)) {
@@ -18,7 +18,7 @@ case CMD_DEL_OBSERVED_FILE:
 removeObservedFile((OCFile)intent.getParcelableExtra(KEY_CMD_ARG_FILE),(Account)intent.getParcelableExtra(KEY_CMD_ARG_ACCOUNT));
 break;
 default :
-Log.wtf(TAG,"Incorrect key given");
+Log_OC.wtf(TAG,"Incorrect key given");
 }
 return Service.START_STICKY;
 }

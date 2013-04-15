@@ -1,6 +1,6 @@
 {
   if (intent == null || !intent.hasExtra(KEY_ACCOUNT) || !intent.hasExtra(KEY_DISPLAY_NAME) || !intent.hasExtra(KEY_FILE_PATH) || !intent.hasExtra(KEY_FILE_SIZE) || !intent.hasExtra(KEY_MIME_TYPE)) {
-    Log.w(TAG,"Not all required information was provided, abording");
+    Log_OC.w(TAG,"Not all required information was provided, abording");
     return Service.START_NOT_STICKY;
   }
   if (mUploaderRunnable == null) {
@@ -12,7 +12,7 @@
   Account account=intent.getParcelableExtra(KEY_ACCOUNT);
   long filesize=intent.getLongExtra(KEY_FILE_SIZE,-1);
   mUploaderRunnable.addElementToQueue(filename,filepath,mimetype,filesize,account);
-  Log.d(TAG,"Starting instant upload thread");
+  Log_OC.d(TAG,"Starting instant upload thread");
   new Thread(mUploaderRunnable).start();
   return Service.START_STICKY;
 }

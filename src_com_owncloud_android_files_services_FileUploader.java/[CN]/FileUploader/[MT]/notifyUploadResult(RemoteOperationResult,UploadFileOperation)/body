@@ -1,5 +1,5 @@
 {
-  Log.d(TAG,"NotifyUploadResult with resultCode: " + uploadResult.getCode());
+  Log_OC.d(TAG,"NotifyUploadResult with resultCode: " + uploadResult.getCode());
   if (uploadResult.isCancelled()) {
     mNotificationManager.cancel(R.string.uploader_upload_in_progress_ticker);
   }
@@ -54,7 +54,7 @@
       try {
         db=new DbHandler(this.getBaseContext());
         String message=uploadResult.getLogMessage() + " errorCode: " + uploadResult.getCode();
-        Log.e(TAG,message + " Http-Code: " + uploadResult.getHttpCode());
+        Log_OC.e(TAG,message + " Http-Code: " + uploadResult.getHttpCode());
         if (uploadResult.getCode() == ResultCode.QUOTA_EXCEEDED) {
           message=getString(R.string.failed_upload_quota_exceeded_text);
         }

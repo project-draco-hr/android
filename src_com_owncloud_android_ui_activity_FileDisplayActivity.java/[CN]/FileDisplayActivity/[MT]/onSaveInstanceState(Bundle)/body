@@ -1,5 +1,5 @@
 {
-  Log.d(getClass().toString(),"onSaveInstanceState() start");
+  Log_OC.d(getClass().toString(),"onSaveInstanceState() start");
   super.onSaveInstanceState(outState);
   outState.putParcelable(FileDetailFragment.EXTRA_FILE,mCurrentDir);
   if (mDualPane) {
@@ -12,5 +12,5 @@
     }
   }
   outState.putParcelable(FileDetailActivity.KEY_WAITING_TO_PREVIEW,mWaitingToPreview);
-  Log.d(getClass().toString(),"onSaveInstanceState() end");
+  Log_OC.d(getClass().toString(),"onSaveInstanceState() end");
 }

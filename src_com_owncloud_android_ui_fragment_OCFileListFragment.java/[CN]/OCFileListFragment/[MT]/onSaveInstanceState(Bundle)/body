@@ -1,5 +1,5 @@
 {
-  Log.i(TAG,"onSaveInstanceState() start");
+  Log_OC.i(TAG,"onSaveInstanceState() start");
   savedInstanceState.putInt(SAVED_LIST_POSITION,getReferencePosition());
-  Log.i(TAG,"onSaveInstanceState() stop");
+  Log_OC.i(TAG,"onSaveInstanceState() stop");
 }
