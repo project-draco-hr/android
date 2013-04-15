@@ -1,0 +1,7 @@
+{
+  super.onStart();
+  mDownloadConnection=new PreviewImageServiceConnection();
+  bindService(new Intent(this,FileDownloader.class),mDownloadConnection,Context.BIND_AUTO_CREATE);
+  mUploadConnection=new PreviewImageServiceConnection();
+  bindService(new Intent(this,FileUploader.class),mUploadConnection,Context.BIND_AUTO_CREATE);
+}

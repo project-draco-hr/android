@@ -17,6 +17,11 @@
       }
     }
     setSupportProgressBarIndeterminateVisibility(inProgress);
+    if (mBackFromCreatingFirstAccount) {
+      getSupportActionBar().hide();
+      getSupportActionBar().show();
+      mBackFromCreatingFirstAccount=false;
+    }
     removeStickyBroadcast(intent);
   }
   RemoteOperationResult synchResult=(RemoteOperationResult)intent.getSerializableExtra(FileSyncService.SYNC_RESULT);

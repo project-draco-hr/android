@@ -1,0 +1,5 @@
+{
+  if (mediaController != null && mediaController == mService.getMediaController()) {
+    mService.setMediaContoller(null);
+  }
+}

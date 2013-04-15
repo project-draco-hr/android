@@ -7,6 +7,7 @@
       if (mDualPane) {
         initFileDetailsInDualPane();
       }
+      mBackFromCreatingFirstAccount=true;
     }
     IntentFilter syncIntentFilter=new IntentFilter(FileSyncService.SYNC_MESSAGE);
     mSyncBroadcastReceiver=new SyncBroadcastReceiver();
@@ -14,7 +15,8 @@
     IntentFilter uploadIntentFilter=new IntentFilter(FileUploader.UPLOAD_FINISH_MESSAGE);
     mUploadFinishReceiver=new UploadFinishReceiver();
     registerReceiver(mUploadFinishReceiver,uploadIntentFilter);
-    IntentFilter downloadIntentFilter=new IntentFilter(FileDownloader.DOWNLOAD_FINISH_MESSAGE);
+    IntentFilter downloadIntentFilter=new IntentFilter(FileDownloader.DOWNLOAD_ADDED_MESSAGE);
+    downloadIntentFilter.addAction(FileDownloader.DOWNLOAD_FINISH_MESSAGE);
     mDownloadFinishReceiver=new DownloadFinishReceiver();
     registerReceiver(mDownloadFinishReceiver,downloadIntentFilter);
     mFileList.listDirectory(mCurrentDir);

@@ -1,0 +1,7 @@
+{
+  String key=buildRemoteName(mCurrentDownload.getAccount(),mCurrentDownload.getFile());
+  OnDatatransferProgressListener boundListener=mBoundListeners.get(key);
+  if (boundListener != null) {
+    boundListener.onTransferProgress(progressRate,totalTransferredSoFar,totalToTransfer,fileName);
+  }
+}

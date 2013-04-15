@@ -1,0 +1,22 @@
+{
+  String accountName=intent.getStringExtra(FileDownloader.ACCOUNT_NAME);
+  String downloadedRemotePath=intent.getStringExtra(FileDownloader.EXTRA_REMOTE_PATH);
+  if (mAccount.name.equals(accountName) && downloadedRemotePath != null) {
+    OCFile file=mStorageManager.getFileByPath(downloadedRemotePath);
+    int position=mPreviewImagePagerAdapter.getFilePosition(file);
+    boolean downloadWasFine=intent.getBooleanExtra(FileDownloader.EXTRA_DOWNLOAD_RESULT,false);
+    if (position >= 0 && intent.getAction().equals(FileDownloader.DOWNLOAD_FINISH_MESSAGE)) {
+      if (downloadWasFine) {
+        mPreviewImagePagerAdapter.updateFile(position,file);
+      }
+ else {
+        mPreviewImagePagerAdapter.updateWithDownloadError(position);
+      }
+      mPreviewImagePagerAdapter.notifyDataSetChanged();
+    }
+ else {
+      Log.d(TAG,"Download finished, but the fragment is offscreen");
+    }
+  }
+  removeStickyBroadcast(intent);
+}

@@ -1,5 +1,3 @@
 {
   Log_OC.d(TAG,"Negative button in dialog was clicked; dialog tag is " + callerTag);
-  mCurrentDialog.dismiss();
-  mCurrentDialog=null;
 }

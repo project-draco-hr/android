@@ -1,0 +1,8 @@
+{
+  Log.e(TAG,"ACTIVITY\t\tonPrepare");
+  mVideoPlayer.seekTo(mSavedPlaybackPosition);
+  if (mAutoplay) {
+    mVideoPlayer.start();
+  }
+  mMediaController.show(5000);
+}

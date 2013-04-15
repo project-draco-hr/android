@@ -1,0 +1,10 @@
+{
+  ActionBar actionBar=getSupportActionBar();
+  if (mFullScreen) {
+    actionBar.show();
+  }
+ else {
+    actionBar.hide();
+  }
+  mFullScreen=!mFullScreen;
+}

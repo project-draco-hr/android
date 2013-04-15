@@ -6,6 +6,4 @@
     setResult(RESULT_OK_AND_MOVE,data);
     finish();
   }
-  mCurrentDialog.dismiss();
-  mCurrentDialog=null;
 }

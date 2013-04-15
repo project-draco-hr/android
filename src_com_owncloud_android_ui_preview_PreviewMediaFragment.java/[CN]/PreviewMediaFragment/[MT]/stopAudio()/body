@@ -1,0 +1,5 @@
+{
+  Intent i=new Intent(getSherlockActivity(),MediaService.class);
+  i.setAction(MediaService.ACTION_STOP_ALL);
+  getSherlockActivity().startService(i);
+}

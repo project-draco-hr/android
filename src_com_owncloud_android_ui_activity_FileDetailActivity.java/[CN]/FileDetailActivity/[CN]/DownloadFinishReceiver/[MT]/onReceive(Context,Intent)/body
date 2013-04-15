@@ -1,0 +1,9 @@
+{
+  boolean sameAccount=isSameAccount(context,intent);
+  String downloadedRemotePath=intent.getStringExtra(FileDownloader.EXTRA_REMOTE_PATH);
+  boolean samePath=(mFile != null && mFile.getRemotePath().equals(downloadedRemotePath));
+  if (sameAccount && samePath) {
+    updateChildFragment(intent.getAction(),downloadedRemotePath,intent.getBooleanExtra(FileDownloader.EXTRA_DOWNLOAD_RESULT,false));
+  }
+  removeStickyBroadcast(intent);
+}

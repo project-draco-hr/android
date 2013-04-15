@@ -1,0 +1,12 @@
+{
+  Toast.makeText(this,String.format(getString(R.string.media_event_done,mFile.getFileName())),Toast.LENGTH_LONG).show();
+  if (mMediaController != null) {
+    player.seekTo(0);
+    processPauseRequest();
+    mMediaController.updatePausePlay();
+  }
+ else {
+    processStopRequest(true);
+  }
+  return;
+}

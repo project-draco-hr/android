@@ -1,11 +1,16 @@
 {
   Log_OC.d(getClass().toString(),"onCreate() start");
   super.onCreate(savedInstanceState);
-  mCurrentDir=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE);
   Account account=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_ACCOUNT);
-  if (account != null)   AccountUtils.setCurrentOwnCloudAccount(this,account.name);
+  if (account != null && AccountUtils.setCurrentOwnCloudAccount(this,account.name)) {
+    mCurrentDir=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE);
+  }
   if (savedInstanceState != null) {
     mCurrentDir=savedInstanceState.getParcelable(FileDetailFragment.EXTRA_FILE);
+    mWaitingToPreview=(OCFile)savedInstanceState.getParcelable(FileDetailActivity.KEY_WAITING_TO_PREVIEW);
+  }
+ else {
+    mWaitingToPreview=null;
   }
   if (!AccountUtils.accountsAreSetup(this)) {
     mStorageManager=null;
@@ -27,7 +32,7 @@
   requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
   mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
   OCFile currFile=mCurrentDir;
-  while (currFile != null && currFile.getFileName() != OCFile.PATH_SEPARATOR) {
+  while (mStorageManager != null && currFile != null && currFile.getFileName() != OCFile.PATH_SEPARATOR) {
     mDirectories.add(currFile.getFileName());
     currFile=mStorageManager.getFileById(currFile.getParentId());
   }
@@ -36,7 +41,19 @@
   mFileList=(OCFileListFragment)getSupportFragmentManager().findFragmentById(R.id.fileList);
   mDualPane=(findViewById(R.id.file_details_container) != null);
   if (mDualPane) {
-    initFileDetailsInDualPane();
+    if (savedInstanceState == null)     initFileDetailsInDualPane();
+  }
+ else {
+    if (mCurrentFile != null) {
+      onFileClick(mCurrentFile);
+      mCurrentFile=null;
+    }
+    Fragment rightPanel=getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
+    if (rightPanel != null) {
+      FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
+      transaction.remove(rightPanel);
+      transaction.commit();
+    }
   }
   ActionBar actionBar=getSupportActionBar();
   actionBar.setHomeButtonEnabled(true);
@@ -45,6 +62,6 @@
   actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
   actionBar.setListNavigationCallbacks(mDirectories,this);
   setSupportProgressBarIndeterminateVisibility(false);
-  showChangeLog();
+  mBackFromCreatingFirstAccount=false;
   Log_OC.d(getClass().toString(),"onCreate() end");
 }

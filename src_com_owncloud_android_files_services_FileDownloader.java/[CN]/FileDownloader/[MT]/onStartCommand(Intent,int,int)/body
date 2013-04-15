@@ -11,6 +11,7 @@
     DownloadFileOperation newDownload=new DownloadFileOperation(account,file);
     mPendingDownloads.putIfAbsent(downloadKey,newDownload);
     newDownload.addDatatransferProgressListener(this);
+    newDownload.addDatatransferProgressListener((FileDownloaderBinder)mBinder);
     requestedDownloads.add(downloadKey);
     sendBroadcastNewDownload(newDownload);
   }

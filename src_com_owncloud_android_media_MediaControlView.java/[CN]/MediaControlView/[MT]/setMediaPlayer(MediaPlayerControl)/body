@@ -1,0 +1,5 @@
+{
+  mPlayer=player;
+  mHandler.sendEmptyMessage(SHOW_PROGRESS);
+  updatePausePlay();
+}

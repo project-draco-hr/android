@@ -1,0 +1,3 @@
+{
+  return (mCurrentDir != null && downloadedRemotePath != null && downloadedRemotePath.startsWith(mCurrentDir.getRemotePath()));
+}

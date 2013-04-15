@@ -5,7 +5,7 @@
   delete_all_btn.setOnClickListener(getDeleteListner());
   Button retry_all_btn=(Button)findViewById(R.id.failed_upload_retry_all_btn);
   retry_all_btn.setOnClickListener(getRetryListner());
-  CheckBox failed_upload_all_cb=(CheckBox)findViewById(R.id.failed_upload_headline_cb);
+  this.failed_upload_all_cb=(CheckBox)findViewById(R.id.failed_upload_headline_cb);
   failed_upload_all_cb.setOnCheckedChangeListener(getCheckAllListener());
   listView=(LinearLayout)findViewById(R.id.failed_upload_scrollviewlayout);
   loadListView(true);

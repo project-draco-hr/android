@@ -1,0 +1,11 @@
+{
+  stopForeground(true);
+  if (releaseMediaPlayer && mPlayer != null) {
+    mPlayer.reset();
+    mPlayer.release();
+    mPlayer=null;
+  }
+  if (mWifiLock.isHeld()) {
+    mWifiLock.release();
+  }
+}

@@ -19,6 +19,9 @@
         dbh.close();
         listView.removeAllViews();
         loadListView(true);
+        if (failed_upload_all_cb != null) {
+          failed_upload_all_cb.setChecked(false);
+        }
       }
     }
   }

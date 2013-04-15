@@ -26,6 +26,9 @@
         mCode=ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED;
       }
     }
+ else     if (e instanceof RuntimeException) {
+      mCode=ResultCode.HOST_NOT_AVAILABLE;
+    }
  else {
       mCode=ResultCode.SSL_ERROR;
     }

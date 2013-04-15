@@ -1,7 +1,5 @@
 {
-  Log_OC.i(getClass().toString(),"onSaveInstanceState() start");
   super.onSaveInstanceState(outState);
   outState.putParcelable(FileDetailFragment.EXTRA_FILE,mFile);
   outState.putParcelable(FileDetailFragment.EXTRA_ACCOUNT,mAccount);
-  Log_OC.i(getClass().toString(),"onSaveInstanceState() end");
 }

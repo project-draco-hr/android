@@ -1,0 +1,23 @@
+{
+  int pos;
+  boolean playing=mPlayer.isPlaying();
+switch (v.getId()) {
+case R.id.playBtn:
+    doPauseResume();
+  break;
+case R.id.rewindBtn:
+pos=mPlayer.getCurrentPosition();
+pos-=5000;
+mPlayer.seekTo(pos);
+if (!playing) mPlayer.pause();
+setProgress();
+break;
+case R.id.forwardBtn:
+pos=mPlayer.getCurrentPosition();
+pos+=15000;
+mPlayer.seekTo(pos);
+if (!playing) mPlayer.pause();
+setProgress();
+break;
+}
+}

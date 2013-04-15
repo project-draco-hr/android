@@ -1,0 +1,8 @@
+{
+  if (mStorageManager.getFileById(mFile.getFileId()) != null) {
+    mLastRemoteOperation=new RemoveFileOperation(mFile,true,mStorageManager);
+    WebdavClient wc=OwnCloudClientUtils.createOwnCloudClient(mAccount,getSherlockActivity().getApplicationContext());
+    mLastRemoteOperation.execute(wc,this,mHandler);
+    getActivity().showDialog(PreviewImageActivity.DIALOG_SHORT_WAIT);
+  }
+}

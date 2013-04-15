@@ -1,0 +1,11 @@
+{
+  if (focusChange > 0) {
+    mAudioFocus=AudioFocus.FOCUS;
+    if (mState == State.PLAYING)     configAndStartMediaPlayer();
+  }
+ else   if (focusChange < 0) {
+    boolean canDuck=AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK == focusChange;
+    mAudioFocus=canDuck ? AudioFocus.NO_FOCUS_CAN_DUCK : AudioFocus.NO_FOCUS;
+    if (mPlayer != null && mPlayer.isPlaying())     configAndStartMediaPlayer();
+  }
+}

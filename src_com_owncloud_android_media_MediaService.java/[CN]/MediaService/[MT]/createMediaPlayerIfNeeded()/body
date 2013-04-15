@@ -1,0 +1,12 @@
+{
+  if (mPlayer == null) {
+    mPlayer=new MediaPlayer();
+    mPlayer.setWakeMode(getApplicationContext(),PowerManager.PARTIAL_WAKE_LOCK);
+    mPlayer.setOnPreparedListener(this);
+    mPlayer.setOnCompletionListener(this);
+    mPlayer.setOnErrorListener(this);
+  }
+ else {
+    mPlayer.reset();
+  }
+}
