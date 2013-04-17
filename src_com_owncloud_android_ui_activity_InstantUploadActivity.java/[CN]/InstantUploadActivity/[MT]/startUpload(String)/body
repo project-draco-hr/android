@@ -1,5 +1,5 @@
 {
-  String filename=FileStorageUtils.getInstantUploadFilePath(img_path);
+  String filename=FileStorageUtils.getInstantUploadFilePath(this,img_path);
   if (canInstantUpload()) {
     Account account=AccountUtils.getCurrentOwnCloudAccount(InstantUploadActivity.this);
     DbHandler db=new DbHandler(InstantUploadActivity.this);
