@@ -1,0 +1,40 @@
+{
+  FileDownloaderBinder downloaderBinder=mContainerActivity.getFileDownloaderBinder();
+  FileUploaderBinder uploaderBinder=mContainerActivity.getFileUploaderBinder();
+  if (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,mFile)) {
+    downloaderBinder.cancel(mAccount,mFile);
+    if (mFile.isDown()) {
+      setButtonsForDown();
+    }
+ else {
+      setButtonsForRemote();
+    }
+  }
+ else   if (uploaderBinder != null && uploaderBinder.isUploading(mAccount,mFile)) {
+    uploaderBinder.cancel(mAccount,mFile);
+    if (!mFile.fileExists()) {
+      if (getActivity() instanceof FileDisplayActivity) {
+        FragmentTransaction transaction=getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.file_details_container,new FileDetailFragment(null,null),FTAG);
+        transaction.commit();
+        mContainerActivity.onFileStateChanged();
+      }
+ else {
+        getActivity().finish();
+      }
+    }
+ else     if (mFile.isDown()) {
+      setButtonsForDown();
+    }
+ else {
+      setButtonsForRemote();
+    }
+  }
+ else {
+    mLastRemoteOperation=new SynchronizeFileOperation(mFile,null,mStorageManager,mAccount,true,false,getActivity());
+    WebdavClient wc=OwnCloudClientUtils.createOwnCloudClient(mAccount,getSherlockActivity().getApplicationContext());
+    mLastRemoteOperation.execute(wc,this,mHandler);
+    boolean inDisplayActivity=getActivity() instanceof FileDisplayActivity;
+    getActivity().showDialog((inDisplayActivity) ? FileDisplayActivity.DIALOG_SHORT_WAIT : FileDetailActivity.DIALOG_SHORT_WAIT);
+  }
+}

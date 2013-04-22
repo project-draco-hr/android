@@ -12,12 +12,9 @@
   mView=view;
   if (mLayout == R.layout.file_details_fragment) {
     mView.findViewById(R.id.fdKeepInSync).setOnClickListener(this);
-    mView.findViewById(R.id.fdRenameBtn).setOnClickListener(this);
-    mView.findViewById(R.id.fdDownloadBtn).setOnClickListener(this);
-    mView.findViewById(R.id.fdOpenBtn).setOnClickListener(this);
-    mView.findViewById(R.id.fdRemoveBtn).setOnClickListener(this);
     ProgressBar progressBar=(ProgressBar)mView.findViewById(R.id.fdProgressBar);
     mProgressListener=new ProgressListener(progressBar);
+    mView.findViewById(R.id.fdCancelBtn).setOnClickListener(this);
   }
   updateFileDetails(false,false);
   return view;
