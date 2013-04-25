@@ -1,0 +1,10 @@
+{
+  if (mFile.isDown()) {
+    stopPreview(true);
+    File f=new File(mFile.getStoragePath());
+    f.delete();
+    mFile.setStoragePath(null);
+    mStorageManager.saveFile(mFile);
+    finish();
+  }
+}

@@ -1,0 +1,5 @@
+{
+  if (operation.equals(mLastRemoteOperation) && operation instanceof RemoveFileOperation) {
+    onRemoveFileOperationFinish((RemoveFileOperation)operation,result);
+  }
+}

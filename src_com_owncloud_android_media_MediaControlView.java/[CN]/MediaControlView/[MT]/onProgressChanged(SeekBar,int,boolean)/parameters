@@ -1,0 +1,3 @@
+SeekBar seekBar
+int progress
+boolean fromUser

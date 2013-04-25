@@ -1,0 +1,5 @@
+{
+  super(context,R.layout.log_item,values);
+  this.context=context;
+  this.values=values;
+}

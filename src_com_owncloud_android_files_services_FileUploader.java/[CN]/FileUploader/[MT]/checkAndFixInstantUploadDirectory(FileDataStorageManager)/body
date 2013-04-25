@@ -1,11 +1,18 @@
 {
-  OCFile instantUploadDir=storageManager.getFileByPath(InstantUploadBroadcastReceiver.INSTANT_UPLOAD_DIR);
+  String instantUploadDirPath=FileStorageUtils.getInstantUploadFilePath(this,"");
+  OCFile instantUploadDir=storageManager.getFileByPath(instantUploadDirPath);
   if (instantUploadDir == null) {
-    OCFile newDir=new OCFile(InstantUploadBroadcastReceiver.INSTANT_UPLOAD_DIR);
+    OCFile newDir=new OCFile(instantUploadDirPath);
     newDir.setMimetype("DIR");
-    newDir.setParentId(storageManager.getFileByPath(OCFile.PATH_SEPARATOR).getFileId());
-    storageManager.saveFile(newDir);
-    return true;
+    OCFile path=storageManager.getFileByPath(OCFile.PATH_SEPARATOR);
+    if (path != null) {
+      newDir.setParentId(path.getFileId());
+      storageManager.saveFile(newDir);
+      return true;
+    }
+ else {
+      return false;
+    }
   }
   return false;
 }

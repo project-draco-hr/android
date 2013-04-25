@@ -1,0 +1,9 @@
+{
+  Log_OC.e(TAG,"onPrepared");
+  mVideoPreview.seekTo(mSavedPlaybackPosition);
+  if (mAutoplay) {
+    mVideoPreview.start();
+  }
+  mMediaController.setEnabled(true);
+  mMediaController.updatePausePlay();
+}

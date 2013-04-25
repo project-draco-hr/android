@@ -5,7 +5,7 @@
     int status=executeMethod(delete);
     ret=(status == HttpStatus.SC_OK || status == HttpStatus.SC_ACCEPTED || status == HttpStatus.SC_NO_CONTENT);
     exhaustResponse(delete.getResponseBodyAsStream());
-    Log.e(TAG,"DELETE of " + remoteFilePath + " finished with HTTP status "+ status+ (!ret ? "(FAIL)" : ""));
+    Log_OC.e(TAG,"DELETE of " + remoteFilePath + " finished with HTTP status "+ status+ (!ret ? "(FAIL)" : ""));
   }
  catch (  Exception e) {
     logException(e,"deleting " + remoteFilePath);

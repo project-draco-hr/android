@@ -1,0 +1,16 @@
+{
+  if (mPauseButton != null) {
+    mPauseButton.setEnabled(enabled);
+  }
+  if (mFfwdButton != null) {
+    mFfwdButton.setEnabled(enabled);
+  }
+  if (mRewButton != null) {
+    mRewButton.setEnabled(enabled);
+  }
+  if (mProgress != null) {
+    mProgress.setEnabled(enabled);
+  }
+  disableUnsupportedButtons();
+  super.setEnabled(enabled);
+}

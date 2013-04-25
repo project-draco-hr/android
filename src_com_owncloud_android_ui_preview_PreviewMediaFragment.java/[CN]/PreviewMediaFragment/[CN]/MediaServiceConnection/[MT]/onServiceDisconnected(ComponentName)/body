@@ -1,0 +1,13 @@
+{
+  if (component.equals(new ComponentName(getActivity(),MediaService.class))) {
+    Log_OC.e(TAG,"Media service suddenly disconnected");
+    if (mMediaController != null) {
+      mMediaController.setMediaPlayer(null);
+    }
+ else {
+      Toast.makeText(getActivity(),"No media controller to release when disconnected from media service",Toast.LENGTH_SHORT).show();
+    }
+    mMediaServiceBinder=null;
+    mMediaServiceConnection=null;
+  }
+}

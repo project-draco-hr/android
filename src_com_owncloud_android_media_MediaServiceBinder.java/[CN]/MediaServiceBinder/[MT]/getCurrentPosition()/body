@@ -1,0 +1,10 @@
+{
+  MediaPlayer currentPlayer=mService.getPlayer();
+  if (currentPlayer != null) {
+    int pos=currentPlayer.getCurrentPosition();
+    return pos;
+  }
+ else {
+    return 0;
+  }
+}

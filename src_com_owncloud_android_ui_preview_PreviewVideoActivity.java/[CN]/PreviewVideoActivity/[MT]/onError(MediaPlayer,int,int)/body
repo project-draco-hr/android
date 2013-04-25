@@ -1,0 +1,16 @@
+{
+  Log_OC.e(TAG,"Error in video playback, what = " + what + ", extra = "+ extra);
+  if (mMediaController != null) {
+    mMediaController.hide();
+  }
+  if (mVideoPlayer.getWindowToken() != null) {
+    String message=MediaService.getMessageForMediaError(this,what,extra);
+    new AlertDialog.Builder(this).setMessage(message).setPositiveButton(android.R.string.VideoView_error_button,new DialogInterface.OnClickListener(){
+      public void onClick(      DialogInterface dialog,      int whichButton){
+        PreviewVideoActivity.this.onCompletion(null);
+      }
+    }
+).setCancelable(false).show();
+  }
+  return true;
+}

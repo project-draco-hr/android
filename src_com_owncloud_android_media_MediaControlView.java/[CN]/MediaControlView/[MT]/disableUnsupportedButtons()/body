@@ -1,0 +1,15 @@
+{
+  try {
+    if (mPauseButton != null && !mPlayer.canPause()) {
+      mPauseButton.setEnabled(false);
+    }
+    if (mRewButton != null && !mPlayer.canSeekBackward()) {
+      mRewButton.setEnabled(false);
+    }
+    if (mFfwdButton != null && !mPlayer.canSeekForward()) {
+      mFfwdButton.setEnabled(false);
+    }
+  }
+ catch (  IncompatibleClassChangeError ex) {
+  }
+}

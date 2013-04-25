@@ -4,7 +4,7 @@
     mStatusText=R.string.auth_wtf_reenter_URL;
     updateConnStatus();
     mOkButton.setEnabled(false);
-    Log.wtf(TAG,"The user was allowed to click 'connect' to an unchecked server!!");
+    Log_OC.wtf(TAG,"The user was allowed to click 'connect' to an unchecked server!!");
     return;
   }
   if (mOAuth2Check.isChecked()) {

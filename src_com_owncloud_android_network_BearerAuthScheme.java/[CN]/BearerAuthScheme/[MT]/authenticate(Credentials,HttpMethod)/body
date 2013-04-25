@@ -1,5 +1,5 @@
 {
-  Log.d(TAG,"enter BearerScheme.authenticate(Credentials, HttpMethod)");
+  Log_OC.d(TAG,"enter BearerScheme.authenticate(Credentials, HttpMethod)");
   if (method == null) {
     throw new IllegalArgumentException("Method may not be null");
   }

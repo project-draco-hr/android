@@ -1,6 +1,6 @@
 {
   if (!instantUploadEnabled(context)) {
-    Log.d(TAG,"Instant upload disabled, abording uploading");
+    Log_OC.d(TAG,"Instant upload disabled, abording uploading");
     return;
   }
   if (!intent.hasExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY) && isOnline(context) && (!instantUploadViaWiFiOnly(context) || (instantUploadViaWiFiOnly(context) == isConnectedViaWiFi(context) == true))) {
@@ -20,19 +20,19 @@
             mimeType=MimeTypeMap.getSingleton().getMimeTypeFromExtension(f.getName().substring(f.getName().lastIndexOf('.') + 1));
           }
  catch (          Throwable e) {
-            Log.e(TAG,"Trying to find out MIME type of a file without extension: " + f.getName());
+            Log_OC.e(TAG,"Trying to find out MIME type of a file without extension: " + f.getName());
           }
           if (mimeType == null)           mimeType="application/octet-stream";
           Intent i=new Intent(context,FileUploader.class);
           i.putExtra(FileUploader.KEY_ACCOUNT,account);
           i.putExtra(FileUploader.KEY_LOCAL_FILE,file_path);
-          i.putExtra(FileUploader.KEY_REMOTE_FILE,INSTANT_UPLOAD_DIR + f.getName());
+          i.putExtra(FileUploader.KEY_REMOTE_FILE,FileStorageUtils.getInstantUploadFilePath(context,f.getName()));
           i.putExtra(FileUploader.KEY_UPLOAD_TYPE,FileUploader.UPLOAD_SINGLE_FILE);
           i.putExtra(FileUploader.KEY_INSTANT_UPLOAD,true);
           context.startService(i);
         }
  else {
-          Log.w(TAG,"Instant upload file " + f.getAbsolutePath() + " dont exist anymore");
+          Log_OC.w(TAG,"Instant upload file " + f.getAbsolutePath() + " dont exist anymore");
         }
       }
  while (c.moveToNext());

@@ -7,6 +7,4 @@
       getActivity().showDialog((inDisplayActivity) ? FileDisplayActivity.DIALOG_SHORT_WAIT : FileDetailActivity.DIALOG_SHORT_WAIT);
     }
   }
-  mCurrentDialog.dismiss();
-  mCurrentDialog=null;
 }

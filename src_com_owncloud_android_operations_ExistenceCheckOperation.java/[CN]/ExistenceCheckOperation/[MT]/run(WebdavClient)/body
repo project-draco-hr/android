@@ -10,11 +10,11 @@
     client.exhaustResponse(head.getResponseBodyAsStream());
     boolean success=(status == HttpStatus.SC_OK && !mSuccessIfAbsent) || (status == HttpStatus.SC_NOT_FOUND && mSuccessIfAbsent);
     result=new RemoteOperationResult(success,status);
-    Log.d(TAG,"Existence check for " + client.getBaseUri() + mPath+ " targeting for "+ (mSuccessIfAbsent ? " absence " : " existence ")+ "finished with HTTP status "+ status+ (!success ? "(FAIL)" : ""));
+    Log_OC.d(TAG,"Existence check for " + client.getBaseUri() + mPath+ " targeting for "+ (mSuccessIfAbsent ? " absence " : " existence ")+ "finished with HTTP status "+ status+ (!success ? "(FAIL)" : ""));
   }
  catch (  Exception e) {
     result=new RemoteOperationResult(e);
-    Log.e(TAG,"Existence check for " + client.getBaseUri() + mPath+ " targeting for "+ (mSuccessIfAbsent ? " absence " : " existence ")+ ": "+ result.getLogMessage(),result.getException());
+    Log_OC.e(TAG,"Existence check for " + client.getBaseUri() + mPath+ " targeting for "+ (mSuccessIfAbsent ? " absence " : " existence ")+ ": "+ result.getLogMessage(),result.getException());
   }
  finally {
     if (head != null)     head.releaseConnection();

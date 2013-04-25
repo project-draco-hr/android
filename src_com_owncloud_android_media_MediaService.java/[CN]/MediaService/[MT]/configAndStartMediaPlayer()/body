@@ -1,0 +1,21 @@
+{
+  if (mPlayer == null) {
+    throw new IllegalStateException("mPlayer is NULL");
+  }
+  if (mAudioFocus == AudioFocus.NO_FOCUS) {
+    if (mPlayer.isPlaying()) {
+      mPlayer.pause();
+    }
+  }
+ else {
+    if (mAudioFocus == AudioFocus.NO_FOCUS_CAN_DUCK) {
+      mPlayer.setVolume(DUCK_VOLUME,DUCK_VOLUME);
+    }
+ else {
+      mPlayer.setVolume(1.0f,1.0f);
+    }
+    if (!mPlayer.isPlaying()) {
+      mPlayer.start();
+    }
+  }
+}

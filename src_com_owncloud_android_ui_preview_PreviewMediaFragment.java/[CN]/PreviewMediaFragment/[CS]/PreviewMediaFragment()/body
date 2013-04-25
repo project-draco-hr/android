@@ -1,0 +1,7 @@
+{
+  mFile=null;
+  mAccount=null;
+  mSavedPlaybackPosition=0;
+  mStorageManager=null;
+  mAutoplay=true;
+}

@@ -1,0 +1,9 @@
+{
+  mFile=null;
+  mAccount=null;
+  mStorageManager=null;
+  mProgressListener=null;
+  mListening=false;
+  mIgnoreFirstSavedState=false;
+  mError=false;
+}

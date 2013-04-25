@@ -11,12 +11,12 @@
       mStorageManager.saveFile(newDir);
     }
     result=new RemoteOperationResult(mkcol.succeeded(),status);
-    Log.d(TAG,"Create directory " + mRemotePath + ": "+ result.getLogMessage());
+    Log_OC.d(TAG,"Create directory " + mRemotePath + ": "+ result.getLogMessage());
     client.exhaustResponse(mkcol.getResponseBodyAsStream());
   }
  catch (  Exception e) {
     result=new RemoteOperationResult(e);
-    Log.e(TAG,"Create directory " + mRemotePath + ": "+ result.getLogMessage(),e);
+    Log_OC.e(TAG,"Create directory " + mRemotePath + ": "+ result.getLogMessage(),e);
   }
  finally {
     if (mkcol != null)     mkcol.releaseConnection();

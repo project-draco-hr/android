@@ -19,7 +19,7 @@
     startService(i);
   }
  else {
-    Log.d("FileDisplay","User clicked on 'Update' with no selection");
+    Log_OC.d("FileDisplay","User clicked on 'Update' with no selection");
     Toast t=Toast.makeText(this,getString(R.string.filedisplay_no_file_selected),Toast.LENGTH_LONG);
     t.show();
     return;

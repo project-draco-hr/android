@@ -5,9 +5,5 @@
       operation.execute(AccountUtils.getCurrentOwnCloudAccount(getSherlockActivity()),getSherlockActivity(),mContainerActivity,mHandler,getSherlockActivity());
       getActivity().showDialog(FileDisplayActivity.DIALOG_SHORT_WAIT);
     }
-    if (mCurrentDialog != null) {
-      mCurrentDialog.dismiss();
-      mCurrentDialog=null;
-    }
   }
 }

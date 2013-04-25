@@ -1,0 +1,11 @@
+{
+  return new OnLongClickListener(){
+    @Override public boolean onLongClick(    View v){
+      Log_OC.d(LOG_TAG,message);
+      Toast toast=Toast.makeText(InstantUploadActivity.this,getString(R.string.failed_upload_retry_text) + message,Toast.LENGTH_LONG);
+      toast.show();
+      return true;
+    }
+  }
+;
+}

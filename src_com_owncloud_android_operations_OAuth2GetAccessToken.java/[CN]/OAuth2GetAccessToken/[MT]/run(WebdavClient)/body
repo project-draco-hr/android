@@ -43,16 +43,16 @@
  finally {
     if (postMethod != null)     postMethod.releaseConnection();
     if (result.isSuccess()) {
-      Log.i(TAG,"OAuth2 TOKEN REQUEST with auth code " + mOAuth2ParsedAuthorizationResponse.get("code") + " to "+ client.getBaseUri()+ ": "+ result.getLogMessage());
+      Log_OC.i(TAG,"OAuth2 TOKEN REQUEST with auth code " + mOAuth2ParsedAuthorizationResponse.get("code") + " to "+ client.getBaseUri()+ ": "+ result.getLogMessage());
     }
  else     if (result.getException() != null) {
-      Log.e(TAG,"OAuth2 TOKEN REQUEST with auth code " + mOAuth2ParsedAuthorizationResponse.get("code") + " to "+ client.getBaseUri()+ ": "+ result.getLogMessage(),result.getException());
+      Log_OC.e(TAG,"OAuth2 TOKEN REQUEST with auth code " + mOAuth2ParsedAuthorizationResponse.get("code") + " to "+ client.getBaseUri()+ ": "+ result.getLogMessage(),result.getException());
     }
  else     if (result.getCode() == ResultCode.OAUTH2_ERROR) {
-      Log.e(TAG,"OAuth2 TOKEN REQUEST with auth code " + mOAuth2ParsedAuthorizationResponse.get("code") + " to "+ client.getBaseUri()+ ": "+ ((mResultTokenMap != null) ? mResultTokenMap.get(OAuth2Constants.KEY_ERROR) : "NULL"));
+      Log_OC.e(TAG,"OAuth2 TOKEN REQUEST with auth code " + mOAuth2ParsedAuthorizationResponse.get("code") + " to "+ client.getBaseUri()+ ": "+ ((mResultTokenMap != null) ? mResultTokenMap.get(OAuth2Constants.KEY_ERROR) : "NULL"));
     }
  else {
-      Log.e(TAG,"OAuth2 TOKEN REQUEST with auth code " + mOAuth2ParsedAuthorizationResponse.get("code") + " to "+ client.getBaseUri()+ ": "+ result.getLogMessage());
+      Log_OC.e(TAG,"OAuth2 TOKEN REQUEST with auth code " + mOAuth2ParsedAuthorizationResponse.get("code") + " to "+ client.getBaseUri()+ ": "+ result.getLogMessage());
     }
   }
   return result;

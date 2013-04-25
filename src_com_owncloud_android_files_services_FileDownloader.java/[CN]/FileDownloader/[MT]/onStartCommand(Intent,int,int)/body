@@ -1,6 +1,6 @@
 {
   if (!intent.hasExtra(EXTRA_ACCOUNT) || !intent.hasExtra(EXTRA_FILE)) {
-    Log.e(TAG,"Not enough information provided in intent");
+    Log_OC.e(TAG,"Not enough information provided in intent");
     return START_NOT_STICKY;
   }
   Account account=intent.getParcelableExtra(EXTRA_ACCOUNT);
@@ -11,11 +11,12 @@
     DownloadFileOperation newDownload=new DownloadFileOperation(account,file);
     mPendingDownloads.putIfAbsent(downloadKey,newDownload);
     newDownload.addDatatransferProgressListener(this);
+    newDownload.addDatatransferProgressListener((FileDownloaderBinder)mBinder);
     requestedDownloads.add(downloadKey);
     sendBroadcastNewDownload(newDownload);
   }
  catch (  IllegalArgumentException e) {
-    Log.e(TAG,"Not enough information provided in intent: " + e.getMessage());
+    Log_OC.e(TAG,"Not enough information provided in intent: " + e.getMessage());
     return START_NOT_STICKY;
   }
   if (requestedDownloads.size() > 0) {

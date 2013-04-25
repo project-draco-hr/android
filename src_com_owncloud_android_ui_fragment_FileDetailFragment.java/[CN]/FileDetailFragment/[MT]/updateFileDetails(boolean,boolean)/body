@@ -1,0 +1,28 @@
+{
+  if (readyToShow()) {
+    if (refresh && mStorageManager != null) {
+      mFile=mStorageManager.getFileByPath(mFile.getRemotePath());
+    }
+    setFilename(mFile.getFileName());
+    setFiletype(mFile.getMimetype());
+    setFilesize(mFile.getFileLength());
+    if (ocVersionSupportsTimeCreated()) {
+      setTimeCreated(mFile.getCreationTimestamp());
+    }
+    setTimeModified(mFile.getModificationTimestamp());
+    CheckBox cb=(CheckBox)getView().findViewById(R.id.fdKeepInSync);
+    cb.setChecked(mFile.keepInSync());
+    FileDownloaderBinder downloaderBinder=mContainerActivity.getFileDownloaderBinder();
+    FileUploaderBinder uploaderBinder=mContainerActivity.getFileUploaderBinder();
+    if (transferring || (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,mFile)) || (uploaderBinder != null && uploaderBinder.isUploading(mAccount,mFile))) {
+      setButtonsForTransferring();
+    }
+ else     if (mFile.isDown()) {
+      setButtonsForDown();
+    }
+ else {
+      setButtonsForRemote();
+    }
+  }
+  getView().invalidate();
+}

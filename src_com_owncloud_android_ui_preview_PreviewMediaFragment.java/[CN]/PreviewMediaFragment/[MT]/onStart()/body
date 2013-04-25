@@ -1,0 +1,12 @@
+{
+  super.onStart();
+  if (mFile != null) {
+    if (mFile.isAudio()) {
+      bindMediaService();
+    }
+ else     if (mFile.isVideo()) {
+      stopAudio();
+      playVideo();
+    }
+  }
+}

@@ -1,11 +1,13 @@
 {
-  if (operation instanceof RemoveFileOperation) {
-    onRemoveFileOperationFinish((RemoveFileOperation)operation,result);
-  }
- else   if (operation instanceof RenameFileOperation) {
-    onRenameFileOperationFinish((RenameFileOperation)operation,result);
-  }
- else   if (operation instanceof SynchronizeFileOperation) {
-    onSynchronizeFileOperationFinish((SynchronizeFileOperation)operation,result);
+  if (operation.equals(mLastRemoteOperation)) {
+    if (operation instanceof RemoveFileOperation) {
+      onRemoveFileOperationFinish((RemoveFileOperation)operation,result);
+    }
+ else     if (operation instanceof RenameFileOperation) {
+      onRenameFileOperationFinish((RenameFileOperation)operation,result);
+    }
+ else     if (operation instanceof SynchronizeFileOperation) {
+      onSynchronizeFileOperationFinish((SynchronizeFileOperation)operation,result);
+    }
   }
 }

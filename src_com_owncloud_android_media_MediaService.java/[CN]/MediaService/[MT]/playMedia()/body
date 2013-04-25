@@ -1,0 +1,50 @@
+{
+  mState=State.STOPPED;
+  releaseResources(false);
+  try {
+    if (mFile == null) {
+      Toast.makeText(this,R.string.media_err_nothing_to_play,Toast.LENGTH_LONG).show();
+      processStopRequest(true);
+      return;
+    }
+ else     if (mAccount == null) {
+      Toast.makeText(this,R.string.media_err_not_in_owncloud,Toast.LENGTH_LONG).show();
+      processStopRequest(true);
+      return;
+    }
+    createMediaPlayerIfNeeded();
+    mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+    String url=mFile.getStoragePath();
+    mIsStreaming=false;
+    mPlayer.setDataSource(url);
+    mState=State.PREPARING;
+    setUpAsForeground(String.format(getString(R.string.media_state_loading),mFile.getFileName()));
+    mPlayer.prepareAsync();
+    if (mIsStreaming) {
+      mWifiLock.acquire();
+    }
+ else     if (mWifiLock.isHeld()) {
+      mWifiLock.release();
+    }
+  }
+ catch (  SecurityException e) {
+    Log_OC.e(TAG,"SecurityException playing " + mAccount.name + mFile.getRemotePath(),e);
+    Toast.makeText(this,String.format(getString(R.string.media_err_security_ex),mFile.getFileName()),Toast.LENGTH_LONG).show();
+    processStopRequest(true);
+  }
+catch (  IOException e) {
+    Log_OC.e(TAG,"IOException playing " + mAccount.name + mFile.getRemotePath(),e);
+    Toast.makeText(this,String.format(getString(R.string.media_err_io_ex),mFile.getFileName()),Toast.LENGTH_LONG).show();
+    processStopRequest(true);
+  }
+catch (  IllegalStateException e) {
+    Log_OC.e(TAG,"IllegalStateException " + mAccount.name + mFile.getRemotePath(),e);
+    Toast.makeText(this,String.format(getString(R.string.media_err_unexpected),mFile.getFileName()),Toast.LENGTH_LONG).show();
+    processStopRequest(true);
+  }
+catch (  IllegalArgumentException e) {
+    Log_OC.e(TAG,"IllegalArgumentException " + mAccount.name + mFile.getRemotePath(),e);
+    Toast.makeText(this,String.format(getString(R.string.media_err_unexpected),mFile.getFileName()),Toast.LENGTH_LONG).show();
+    processStopRequest(true);
+  }
+}

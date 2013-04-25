@@ -18,7 +18,7 @@
         mOAuth2ParsedAuthorizationResponse.put(key,value);
         sb.append(value + "\n");
       }
-      Log.v(TAG,"[" + i + ","+ j+ "] = "+ p);
+      Log_OC.v(TAG,"[" + i + ","+ j+ "] = "+ p);
       j++;
     }
     i++;

@@ -5,7 +5,7 @@
  catch (  IllegalArgumentException e) {
   }
   if (result.isSuccess()) {
-    Log.d(TAG,"Successful access - time to save the account");
+    Log_OC.d(TAG,"Successful access - time to save the account");
     if (mAction == ACTION_CREATE) {
       createAccount();
     }
@@ -17,6 +17,6 @@
  else {
     updateStatusIconAndText(result);
     updateAuthStatus();
-    Log.d(TAG,"Access failed: " + result.getLogMessage());
+    Log_OC.d(TAG,"Access failed: " + result.getLogMessage());
   }
 }

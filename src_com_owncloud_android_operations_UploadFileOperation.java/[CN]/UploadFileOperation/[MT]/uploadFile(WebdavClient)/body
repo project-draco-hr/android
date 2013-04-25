@@ -2,9 +2,11 @@
   int status=-1;
   try {
     File f=new File(mFile.getStoragePath());
-    FileRequestEntity entity=new FileRequestEntity(f,getMimeType());
-    entity.addOnDatatransferProgressListeners(mDataTransferListeners);
-    mPutMethod.setRequestEntity(entity);
+    mEntity=new FileRequestEntity(f,getMimeType());
+synchronized (mDataTransferListeners) {
+      ((ProgressiveDataTransferer)mEntity).addDatatransferProgressListeners(mDataTransferListeners);
+    }
+    mPutMethod.setRequestEntity(mEntity);
     status=client.executeMethod(mPutMethod);
     client.exhaustResponse(mPutMethod.getResponseBodyAsStream());
   }

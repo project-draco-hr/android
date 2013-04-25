@@ -11,19 +11,17 @@ synchronized (mPendingDownloads) {
         mStorageManager=new FileDataStorageManager(mLastAccount,getContentResolver());
         mDownloadClient=OwnCloudClientUtils.createOwnCloudClient(mLastAccount,getApplicationContext());
       }
-      if (downloadResult == null) {
-        downloadResult=mCurrentDownload.execute(mDownloadClient);
-      }
+      downloadResult=mCurrentDownload.execute(mDownloadClient);
       if (downloadResult.isSuccess()) {
         saveDownloadedFile();
       }
     }
  catch (    AccountsException e) {
-      Log.e(TAG,"Error while trying to get autorization for " + mLastAccount.name,e);
+      Log_OC.e(TAG,"Error while trying to get autorization for " + mLastAccount.name,e);
       downloadResult=new RemoteOperationResult(e);
     }
 catch (    IOException e) {
-      Log.e(TAG,"Error while trying to get autorization for " + mLastAccount.name,e);
+      Log_OC.e(TAG,"Error while trying to get autorization for " + mLastAccount.name,e);
       downloadResult=new RemoteOperationResult(e);
     }
  finally {

@@ -9,7 +9,7 @@
     }
   }
   if (!directory.isDirectory()) {
-    Log.w(TAG,"You see, that is not a directory -> " + directory.toString());
+    Log_OC.w(TAG,"You see, that is not a directory -> " + directory.toString());
     directory=directory.getParentFile();
   }
   mList.clearChoices();

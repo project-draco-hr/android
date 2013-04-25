@@ -1,0 +1,18 @@
+{
+  if (mPlayer == null || mDragging) {
+    return 0;
+  }
+  int position=mPlayer.getCurrentPosition();
+  int duration=mPlayer.getDuration();
+  if (mProgress != null) {
+    if (duration > 0) {
+      long pos=1000L * position / duration;
+      mProgress.setProgress((int)pos);
+    }
+    int percent=mPlayer.getBufferPercentage();
+    mProgress.setSecondaryProgress(percent * 10);
+  }
+  if (mEndTime != null)   mEndTime.setText(stringForTime(duration));
+  if (mCurrentTime != null)   mCurrentTime.setText(stringForTime(position));
+  return position;
+}

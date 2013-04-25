@@ -1,0 +1,4 @@
+{
+  mDragging=true;
+  mHandler.removeMessages(SHOW_PROGRESS);
+}

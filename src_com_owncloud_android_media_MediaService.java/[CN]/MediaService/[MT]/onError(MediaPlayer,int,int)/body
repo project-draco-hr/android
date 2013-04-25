@@ -1,0 +1,7 @@
+{
+  Log_OC.e(TAG,"Error in audio playback, what = " + what + ", extra = "+ extra);
+  String message=getMessageForMediaError(this,what,extra);
+  Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+  processStopRequest(true);
+  return true;
+}

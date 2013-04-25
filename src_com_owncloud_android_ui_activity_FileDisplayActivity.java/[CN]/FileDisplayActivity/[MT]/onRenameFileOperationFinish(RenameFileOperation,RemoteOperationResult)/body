@@ -3,9 +3,9 @@
   OCFile renamedFile=operation.getFile();
   if (result.isSuccess()) {
     if (mDualPane) {
-      FileDetailFragment details=(FileDetailFragment)getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
-      if (details != null && renamedFile.equals(details.getDisplayedFile())) {
-        details.updateFileDetails(renamedFile,AccountUtils.getCurrentOwnCloudAccount(this));
+      FileFragment details=(FileFragment)getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
+      if (details != null && details instanceof FileDetailFragment && renamedFile.equals(details.getFile())) {
+        ((FileDetailFragment)details).updateFileDetails(renamedFile,AccountUtils.getCurrentOwnCloudAccount(this));
       }
     }
     if (mStorageManager.getFileById(renamedFile.getParentId()).equals(mCurrentDir)) {

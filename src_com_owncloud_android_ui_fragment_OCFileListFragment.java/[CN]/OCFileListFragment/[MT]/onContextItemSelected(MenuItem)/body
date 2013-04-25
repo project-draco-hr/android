@@ -2,13 +2,16 @@
   AdapterContextMenuInfo info=(AdapterContextMenuInfo)item.getMenuInfo();
   mTargetFile=(OCFile)mAdapter.getItem(info.position);
 switch (item.getItemId()) {
-case R.id.rename_file_item:
+case R.id.action_rename_file:
 {
-      EditNameDialog dialog=EditNameDialog.newInstance(getString(R.string.rename_dialog_title),mTargetFile.getFileName(),this);
+      String fileName=mTargetFile.getFileName();
+      int extensionStart=mTargetFile.isDirectory() ? -1 : fileName.lastIndexOf(".");
+      int selectionEnd=(extensionStart >= 0) ? extensionStart : fileName.length();
+      EditNameDialog dialog=EditNameDialog.newInstance(getString(R.string.rename_dialog_title),fileName,0,selectionEnd,this);
       dialog.show(getFragmentManager(),EditNameDialog.TAG);
       return true;
     }
-case R.id.remove_file_item:
+case R.id.action_remove_file:
 {
     int messageStringId=R.string.confirmation_remove_alert;
     int posBtnStringId=R.string.confirmation_remove_remote;
@@ -24,11 +27,10 @@ case R.id.remove_file_item:
     }
     ConfirmationDialogFragment confDialog=ConfirmationDialogFragment.newInstance(messageStringId,new String[]{mTargetFile.getFileName()},posBtnStringId,neuBtnStringId,R.string.common_cancel);
     confDialog.setOnConfirmationListener(this);
-    mCurrentDialog=confDialog;
-    mCurrentDialog.show(getFragmentManager(),FileDetailFragment.FTAG_CONFIRMATION);
+    confDialog.show(getFragmentManager(),FileDetailFragment.FTAG_CONFIRMATION);
     return true;
   }
-case R.id.open_file_item:
+case R.id.action_open_file_with:
 {
   String storagePath=mTargetFile.getStoragePath();
   String encodedStoragePath=WebdavUtils.encodePath(storagePath);
@@ -39,7 +41,7 @@ case R.id.open_file_item:
     startActivity(i);
   }
  catch (  Throwable t) {
-    Log.e(TAG,"Fail when trying to open with the mimeType provided from the ownCloud server: " + mTargetFile.getMimetype());
+    Log_OC.e(TAG,"Fail when trying to open with the mimeType provided from the ownCloud server: " + mTargetFile.getMimetype());
     boolean toastIt=true;
     String mimeType="";
     try {
@@ -58,13 +60,13 @@ case R.id.open_file_item:
       }
     }
  catch (    IndexOutOfBoundsException e) {
-      Log.e(TAG,"Trying to find out MIME type of a file without extension: " + storagePath);
+      Log_OC.e(TAG,"Trying to find out MIME type of a file without extension: " + storagePath);
     }
 catch (    ActivityNotFoundException e) {
-      Log.e(TAG,"No activity found to handle: " + storagePath + " with MIME type "+ mimeType+ " obtained from extension");
+      Log_OC.e(TAG,"No activity found to handle: " + storagePath + " with MIME type "+ mimeType+ " obtained from extension");
     }
 catch (    Throwable th) {
-      Log.e(TAG,"Unexpected problem when opening: " + storagePath,th);
+      Log_OC.e(TAG,"Unexpected problem when opening: " + storagePath,th);
     }
  finally {
       if (toastIt) {
@@ -74,7 +76,7 @@ catch (    Throwable th) {
   }
   return true;
 }
-case R.id.download_file_item:
+case R.id.action_download_file:
 {
 Account account=AccountUtils.getCurrentOwnCloudAccount(getSherlockActivity());
 RemoteOperation operation=new SynchronizeFileOperation(mTargetFile,null,mContainerActivity.getStorageManager(),account,true,false,getSherlockActivity());
@@ -82,7 +84,7 @@ operation.execute(account,getSherlockActivity(),mContainerActivity,mHandler,getS
 getSherlockActivity().showDialog(FileDisplayActivity.DIALOG_SHORT_WAIT);
 return true;
 }
-case R.id.cancel_download_item:
+case R.id.action_cancel_download:
 {
 FileDownloaderBinder downloaderBinder=mContainerActivity.getFileDownloaderBinder();
 Account account=AccountUtils.getCurrentOwnCloudAccount(getActivity());
@@ -93,7 +95,7 @@ mContainerActivity.onTransferStateChanged(mTargetFile,false,false);
 }
 return true;
 }
-case R.id.cancel_upload_item:
+case R.id.action_cancel_upload:
 {
 FileUploaderBinder uploaderBinder=mContainerActivity.getFileUploaderBinder();
 Account account=AccountUtils.getCurrentOwnCloudAccount(getActivity());
@@ -102,6 +104,11 @@ uploaderBinder.cancel(account,mTargetFile);
 listDirectory();
 mContainerActivity.onTransferStateChanged(mTargetFile,false,false);
 }
+return true;
+}
+case R.id.action_see_details:
+{
+((FileFragment.ContainerActivity)getActivity()).showFragmentWithDetails(mTargetFile);
 return true;
 }
 default :

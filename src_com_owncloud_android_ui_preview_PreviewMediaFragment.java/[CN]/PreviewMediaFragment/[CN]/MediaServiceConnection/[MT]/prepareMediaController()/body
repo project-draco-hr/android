@@ -1,0 +1,8 @@
+{
+  mMediaServiceBinder.registerMediaController(mMediaController);
+  if (mMediaController != null) {
+    mMediaController.setMediaPlayer(mMediaServiceBinder);
+    mMediaController.setEnabled(true);
+    mMediaController.updatePausePlay();
+  }
+}

@@ -1,0 +1,3 @@
+{
+  return (mFile != null && mFile.equals(mService.getCurrentFile()));
+}

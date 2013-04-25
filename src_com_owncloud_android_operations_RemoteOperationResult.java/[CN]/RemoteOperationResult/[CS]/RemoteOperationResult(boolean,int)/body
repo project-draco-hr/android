@@ -18,8 +18,12 @@ break;
 case HttpStatus.SC_CONFLICT:
 mCode=ResultCode.CONFLICT;
 break;
+case HttpStatus.SC_INSUFFICIENT_STORAGE:
+mCode=ResultCode.QUOTA_EXCEEDED;
+break;
 default :
 mCode=ResultCode.UNHANDLED_HTTP_CODE;
+Log_OC.d(TAG,"RemoteOperationResult has prcessed UNHANDLED_HTTP_CODE: " + httpCode);
 }
 }
 }

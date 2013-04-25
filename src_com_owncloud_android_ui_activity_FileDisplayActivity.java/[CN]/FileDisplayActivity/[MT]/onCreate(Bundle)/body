@@ -1,5 +1,5 @@
 {
-  Log.d(getClass().toString(),"onCreate() start");
+  Log_OC.d(getClass().toString(),"onCreate() start");
   super.onCreate(savedInstanceState);
   mHandler=new Handler();
   Account account=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_ACCOUNT);
@@ -8,6 +8,10 @@
   }
   if (savedInstanceState != null) {
     mCurrentDir=savedInstanceState.getParcelable(FileDetailFragment.EXTRA_FILE);
+    mWaitingToPreview=(OCFile)savedInstanceState.getParcelable(FileDetailActivity.KEY_WAITING_TO_PREVIEW);
+  }
+ else {
+    mWaitingToPreview=null;
   }
   if (!AccountUtils.accountsAreSetup(this)) {
     mStorageManager=null;
@@ -38,7 +42,19 @@
   mFileList=(OCFileListFragment)getSupportFragmentManager().findFragmentById(R.id.fileList);
   mDualPane=(findViewById(R.id.file_details_container) != null);
   if (mDualPane) {
-    initFileDetailsInDualPane();
+    if (savedInstanceState == null)     initFileDetailsInDualPane();
+  }
+ else {
+    if (mCurrentFile != null) {
+      onFileClick(mCurrentFile);
+      mCurrentFile=null;
+    }
+    Fragment rightPanel=getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
+    if (rightPanel != null) {
+      FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
+      transaction.remove(rightPanel);
+      transaction.commit();
+    }
   }
   ActionBar actionBar=getSupportActionBar();
   actionBar.setHomeButtonEnabled(true);
@@ -47,5 +63,6 @@
   actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
   actionBar.setListNavigationCallbacks(mDirectories,this);
   setSupportProgressBarIndeterminateVisibility(false);
-  Log.d(getClass().toString(),"onCreate() end");
+  mBackFromCreatingFirstAccount=false;
+  Log_OC.d(getClass().toString(),"onCreate() end");
 }

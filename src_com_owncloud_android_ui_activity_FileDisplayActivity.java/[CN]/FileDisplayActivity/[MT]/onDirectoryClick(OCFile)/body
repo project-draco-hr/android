@@ -3,11 +3,10 @@
   ActionBar actionBar=getSupportActionBar();
   actionBar.setDisplayHomeAsUpEnabled(true);
   if (mDualPane) {
-    FileDetailFragment fileDetails=(FileDetailFragment)getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
-    if (fileDetails != null && !fileDetails.isEmpty()) {
+    Fragment fileFragment=getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
+    if (fileFragment != null && (fileFragment instanceof PreviewMediaFragment || !((FileDetailFragment)fileFragment).isEmpty())) {
       FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
-      transaction.remove(fileDetails);
-      transaction.add(R.id.file_details_container,new FileDetailFragment(null,null),FileDetailFragment.FTAG);
+      transaction.replace(R.id.file_details_container,new FileDetailFragment(null,null),FileDetailFragment.FTAG);
       transaction.commit();
     }
   }

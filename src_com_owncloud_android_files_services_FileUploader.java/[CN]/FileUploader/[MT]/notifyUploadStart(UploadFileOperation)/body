@@ -7,7 +7,14 @@
   mNotification.contentView.setProgressBar(R.id.status_progress,100,0,false);
   mNotification.contentView.setTextViewText(R.id.status_text,String.format(getString(R.string.uploader_upload_in_progress_content),0,upload.getFileName()));
   mNotification.contentView.setImageViewResource(R.id.status_icon,R.drawable.icon);
-  Intent showDetailsIntent=new Intent(this,FileDetailActivity.class);
+  Intent showDetailsIntent=null;
+  if (PreviewImageFragment.canBePreviewed(upload.getFile())) {
+    showDetailsIntent=new Intent(this,PreviewImageActivity.class);
+  }
+ else {
+    showDetailsIntent=new Intent(this,FileDetailActivity.class);
+    showDetailsIntent.putExtra(FileDetailActivity.EXTRA_MODE,FileDetailActivity.MODE_DETAILS);
+  }
   showDetailsIntent.putExtra(FileDetailFragment.EXTRA_FILE,upload.getFile());
   showDetailsIntent.putExtra(FileDetailFragment.EXTRA_ACCOUNT,upload.getAccount());
   showDetailsIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

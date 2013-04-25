@@ -1,0 +1,6 @@
+{
+  if (event.getAction() == MotionEvent.ACTION_UP) {
+    toggleFullScreen();
+  }
+  return true;
+}

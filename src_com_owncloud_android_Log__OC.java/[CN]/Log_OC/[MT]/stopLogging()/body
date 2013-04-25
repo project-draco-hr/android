@@ -1,0 +1,14 @@
+{
+  SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmss",Locale.getDefault());
+  String currentDateandTime=sdf.format(new Date());
+  if (logFile != null) {
+    logFile.renameTo(new File(folder + File.separator + "Owncloud_"+ currentDateandTime+ ".log"));
+    isEnabled=false;
+    try {
+      buf.close();
+    }
+ catch (    IOException e) {
+      e.printStackTrace();
+    }
+  }
+}

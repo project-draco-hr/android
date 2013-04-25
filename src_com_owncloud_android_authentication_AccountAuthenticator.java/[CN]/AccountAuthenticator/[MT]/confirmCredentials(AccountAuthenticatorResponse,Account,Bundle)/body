@@ -3,7 +3,7 @@
     validateAccountType(account.type);
   }
  catch (  AuthenticatorException e) {
-    Log.e(TAG,"Failed to validate account type " + account.type + ": "+ e.getMessage());
+    Log_OC.e(TAG,"Failed to validate account type " + account.type + ": "+ e.getMessage());
     e.printStackTrace();
     return e.getFailureBundle();
   }

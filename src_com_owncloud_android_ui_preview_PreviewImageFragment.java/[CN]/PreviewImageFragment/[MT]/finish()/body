@@ -1,0 +1,4 @@
+{
+  Activity container=getActivity();
+  container.finish();
+}

@@ -1,0 +1,10 @@
+{
+  if (mState != State.PREPARING || force) {
+    mState=State.STOPPED;
+    mFile=null;
+    mAccount=null;
+    releaseResources(true);
+    giveUpAudioFocus();
+    stopSelf();
+  }
+}

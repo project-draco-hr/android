@@ -1,0 +1,3 @@
+{
+  return mDownloadErrors.contains(Integer.valueOf(position));
+}

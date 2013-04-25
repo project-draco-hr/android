@@ -1,5 +1,5 @@
 {
-  Log.d(TAG,"enter BearerAuthScheme.authenticate(BearerCredentials, String)");
+  Log_OC.d(TAG,"enter BearerAuthScheme.authenticate(BearerCredentials, String)");
   if (credentials == null) {
     throw new IllegalArgumentException("Credentials may not be null");
   }

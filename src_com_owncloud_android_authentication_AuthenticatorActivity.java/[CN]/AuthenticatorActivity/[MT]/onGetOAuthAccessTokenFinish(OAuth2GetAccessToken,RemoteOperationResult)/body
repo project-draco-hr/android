@@ -8,7 +8,7 @@
   if (result.isSuccess() && webdav_path != null) {
     showDialog(DIALOG_LOGIN_PROGRESS);
     mOAuthAccessToken=((OAuth2GetAccessToken)operation).getResultTokenMap().get(OAuth2Constants.KEY_ACCESS_TOKEN);
-    Log.d(TAG,"Got ACCESS TOKEN: " + mOAuthAccessToken);
+    Log_OC.d(TAG,"Got ACCESS TOKEN: " + mOAuthAccessToken);
     mAuthCheckOperation=new ExistenceCheckOperation("",this,false);
     WebdavClient client=OwnCloudClientUtils.createOwnCloudClient(Uri.parse(mHostBaseUrl + webdav_path),this);
     client.setBearerCredentials(mOAuthAccessToken);
@@ -17,6 +17,6 @@
  else {
     updateStatusIconAndText(result);
     updateAuthStatus();
-    Log.d(TAG,"Access failed: " + result.getLogMessage());
+    Log_OC.d(TAG,"Access failed: " + result.getLogMessage());
   }
 }

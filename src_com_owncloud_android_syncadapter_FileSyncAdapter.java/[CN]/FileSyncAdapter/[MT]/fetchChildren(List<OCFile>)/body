@@ -6,5 +6,5 @@
       fetchData(newFile.getRemotePath(),newFile.getFileId());
     }
   }
-  if (mCancellation && i < files.size())   Log.d(TAG,"Leaving synchronization before synchronizing " + files.get(i).getRemotePath() + " because cancelation request");
+  if (mCancellation && i < files.size())   Log_OC.d(TAG,"Leaving synchronization before synchronizing " + files.get(i).getRemotePath() + " because cancelation request");
 }

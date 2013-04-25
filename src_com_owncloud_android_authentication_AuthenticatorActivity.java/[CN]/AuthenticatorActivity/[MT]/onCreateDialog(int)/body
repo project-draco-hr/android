@@ -9,7 +9,7 @@ case DIALOG_LOGIN_PROGRESS:
       working_dialog.setCancelable(true);
       working_dialog.setOnCancelListener(new DialogInterface.OnCancelListener(){
         @Override public void onCancel(        DialogInterface dialog){
-          Log.i(TAG,"Login canceled");
+          Log_OC.i(TAG,"Login canceled");
           if (mOperationThread != null) {
             mOperationThread.interrupt();
             finish();
@@ -28,7 +28,7 @@ case DIALOG_OAUTH2_LOGIN_PROGRESS:
     working_dialog.setCancelable(true);
     working_dialog.setOnCancelListener(new DialogInterface.OnCancelListener(){
       @Override public void onCancel(      DialogInterface dialog){
-        Log.i(TAG,"Login canceled");
+        Log_OC.i(TAG,"Login canceled");
         finish();
       }
     }
@@ -56,7 +56,7 @@ dialog=builder.create();
 break;
 }
 default :
-Log.e(TAG,"Incorrect dialog called with id = " + id);
+Log_OC.e(TAG,"Incorrect dialog called with id = " + id);
 }
 return dialog;
 }

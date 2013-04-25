@@ -4,11 +4,11 @@
   if (observer != null) {
     if (intent.getAction().equals(FileDownloader.DOWNLOAD_FINISH_MESSAGE) && new File(downloadPath).exists()) {
       observer.startWatching();
-      Log.d(TAG,"Watching again " + downloadPath);
+      Log_OC.d(TAG,"Watching again " + downloadPath);
     }
  else     if (intent.getAction().equals(FileDownloader.DOWNLOAD_ADDED_MESSAGE)) {
       observer.stopWatching();
-      Log.d(TAG,"Disabling observance of " + downloadPath);
+      Log_OC.d(TAG,"Disabling observance of " + downloadPath);
     }
   }
 }
