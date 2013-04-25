@@ -1,7 +1,0 @@
-{
-  if (mCredentials instanceof BearerCredentials) {
-    method.getHostAuthState().setAuthScheme(AuthPolicy.getAuthScheme(BearerAuthScheme.AUTH_POLICY));
-    method.getHostAuthState().setAuthAttempted(true);
-  }
-  return super.executeMethod(hostconfig,method,state);
-}
