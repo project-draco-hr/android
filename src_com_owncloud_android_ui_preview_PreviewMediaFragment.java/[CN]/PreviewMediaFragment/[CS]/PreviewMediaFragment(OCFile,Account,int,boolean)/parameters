@@ -1,0 +1,4 @@
+OCFile fileToDetail
+Account ocAccount
+int startPlaybackPosition
+boolean autoplay

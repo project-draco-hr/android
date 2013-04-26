@@ -1,10 +1,8 @@
 {
   super.onResume();
-  if (!mConfigurationChangedToLandscape) {
-    Fragment fragment=getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
-    if (fragment != null && fragment instanceof FileDetailFragment) {
-      ((FileDetailFragment)fragment).updateFileDetails(false,false);
-    }
+  Fragment fragment=getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
+  if (fragment != null && fragment instanceof FileDetailFragment) {
+    ((FileDetailFragment)fragment).updateFileDetails(false,false);
   }
   IntentFilter downloadIntentFilter=new IntentFilter(FileDownloader.DOWNLOAD_ADDED_MESSAGE);
   downloadIntentFilter.addAction(FileDownloader.DOWNLOAD_FINISH_MESSAGE);

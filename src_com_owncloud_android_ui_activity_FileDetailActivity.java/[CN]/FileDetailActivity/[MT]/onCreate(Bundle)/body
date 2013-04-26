@@ -3,25 +3,18 @@
   mFile=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE);
   mAccount=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_ACCOUNT);
   mStorageManager=new FileDataStorageManager(mAccount,getContentResolver());
-  Configuration conf=getResources().getConfiguration();
-  mConfigurationChangedToLandscape=(conf.orientation == Configuration.ORIENTATION_LANDSCAPE && (conf.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE);
-  if (!mConfigurationChangedToLandscape) {
-    setContentView(R.layout.file_activity_details);
-    ActionBar actionBar=getSupportActionBar();
-    actionBar.setDisplayHomeAsUpEnabled(true);
-    if (savedInstanceState == null) {
-      mWaitingToPreview=false;
-      createChildFragment();
-    }
- else {
-      mWaitingToPreview=savedInstanceState.getBoolean(KEY_WAITING_TO_PREVIEW);
-    }
-    mDownloadConnection=new DetailsServiceConnection();
-    bindService(new Intent(this,FileDownloader.class),mDownloadConnection,Context.BIND_AUTO_CREATE);
-    mUploadConnection=new DetailsServiceConnection();
-    bindService(new Intent(this,FileUploader.class),mUploadConnection,Context.BIND_AUTO_CREATE);
+  setContentView(R.layout.file_activity_details);
+  ActionBar actionBar=getSupportActionBar();
+  actionBar.setDisplayHomeAsUpEnabled(true);
+  if (savedInstanceState == null) {
+    mWaitingToPreview=false;
+    createChildFragment();
   }
  else {
-    backToDisplayActivity(false);
+    mWaitingToPreview=savedInstanceState.getBoolean(KEY_WAITING_TO_PREVIEW);
   }
+  mDownloadConnection=new DetailsServiceConnection();
+  bindService(new Intent(this,FileDownloader.class),mDownloadConnection,Context.BIND_AUTO_CREATE);
+  mUploadConnection=new DetailsServiceConnection();
+  bindService(new Intent(this,FileUploader.class),mUploadConnection,Context.BIND_AUTO_CREATE);
 }

@@ -14,7 +14,7 @@
       if (success && mWaitingToPreview) {
         mFile=mStorageManager.getFileById(mFile.getFileId());
         FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment,new PreviewMediaFragment(mFile,mAccount),FileDetailFragment.FTAG);
+        transaction.replace(R.id.fragment,new PreviewMediaFragment(mFile,mAccount,0,true),FileDetailFragment.FTAG);
         transaction.commit();
         mWaitingToPreview=false;
       }

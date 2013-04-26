@@ -1,0 +1,4 @@
+{
+  mSavedPlaybackPosition=mVideoPreview.getCurrentPosition();
+  return mSavedPlaybackPosition;
+}

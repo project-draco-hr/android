@@ -1,0 +1,4 @@
+{
+  mAutoplay=mVideoPreview.isPlaying();
+  return mAutoplay;
+}

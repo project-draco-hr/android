@@ -7,7 +7,7 @@
       mContainerActivity.onDirectoryClick(file);
     }
  else {
-      mContainerActivity.onFileClick(file);
+      mContainerActivity.onFileClick(file,false);
     }
   }
  else {

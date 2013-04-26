@@ -40,20 +40,8 @@
   setContentView(R.layout.files);
   mFileList=(OCFileListFragment)getSupportFragmentManager().findFragmentById(R.id.fileList);
   mDualPane=(findViewById(R.id.file_details_container) != null);
-  if (mDualPane) {
-    if (savedInstanceState == null)     initFileDetailsInDualPane();
-  }
- else {
-    if (mCurrentFile != null) {
-      onFileClick(mCurrentFile);
-      mCurrentFile=null;
-    }
-    Fragment rightPanel=getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
-    if (rightPanel != null) {
-      FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
-      transaction.remove(rightPanel);
-      transaction.commit();
-    }
+  if (mDualPane && savedInstanceState == null) {
+    initFileDetailsInDualPane();
   }
   ActionBar actionBar=getSupportActionBar();
   actionBar.setHomeButtonEnabled(true);

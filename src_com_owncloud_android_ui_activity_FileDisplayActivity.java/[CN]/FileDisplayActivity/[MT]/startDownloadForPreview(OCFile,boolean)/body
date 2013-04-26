@@ -1,8 +1,10 @@
 {
-  if (mDualPane && !file.isImage()) {
+  if (mDualPane && !onOrientationChange) {
     FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
     transaction.replace(R.id.file_details_container,new FileDetailFragment(file,AccountUtils.getCurrentOwnCloudAccount(this)),FileDetailFragment.FTAG);
     transaction.commit();
+    mWaitingToPreview=file;
+    requestForDownload();
   }
  else {
     Intent showDetailsIntent=new Intent(this,FileDetailActivity.class);
