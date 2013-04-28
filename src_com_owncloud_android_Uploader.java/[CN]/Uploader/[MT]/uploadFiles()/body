@@ -1,32 +1,79 @@
 {
   try {
-    WebdavClient wdc=OwnCloudClientUtils.createOwnCloudClient(mAccount,getApplicationContext());
+    WebdavClient webdav=OwnCloudClientUtils.createOwnCloudClient(mAccount,getApplicationContext());
+    ArrayList<String> local=new ArrayList<String>();
+    ArrayList<String> remote=new ArrayList<String>();
     if (mCreateDir) {
-      wdc.createDirectory(mUploadPath);
+      webdav.createDirectory(mUploadPath);
     }
-    String[] local=new String[mStreamsToUpload.size()], remote=new String[mStreamsToUpload.size()];
-    for (int i=0; i < mStreamsToUpload.size(); ++i) {
-      Uri uri=(Uri)mStreamsToUpload.get(i);
-      if (uri.getScheme().equals("content")) {
-        Cursor c=getContentResolver().query((Uri)mStreamsToUpload.get(i),CONTENT_PROJECTION,null,null,null);
-        if (!c.moveToFirst())         continue;
-        final String display_name=c.getString(c.getColumnIndex(Media.DISPLAY_NAME)), data=c.getString(c.getColumnIndex(Media.DATA));
-        local[i]=data;
-        remote[i]=mUploadPath + display_name;
+    for (    Parcelable mStream : mStreamsToUpload) {
+      Uri uri=(Uri)mStream;
+      if (uri != null) {
+        if (uri.getScheme().equals("content")) {
+          String mimeType=getContentResolver().getType(uri);
+          if (mimeType.contains("image")) {
+            String[] CONTENT_PROJECTION={Images.Media.DATA,Images.Media.DISPLAY_NAME,Images.Media.MIME_TYPE,Images.Media.SIZE};
+            Cursor c=getContentResolver().query(uri,CONTENT_PROJECTION,null,null,null);
+            c.moveToFirst();
+            int index=c.getColumnIndex(Images.Media.DATA);
+            String data=c.getString(index);
+            local.add(data);
+            remote.add(mUploadPath + c.getString(c.getColumnIndex(Images.Media.DISPLAY_NAME)));
+          }
+ else           if (mimeType.contains("video")) {
+            String[] CONTENT_PROJECTION={Video.Media.DATA,Video.Media.DISPLAY_NAME,Video.Media.MIME_TYPE,Video.Media.SIZE,Video.Media.DATE_MODIFIED};
+            Cursor c=getContentResolver().query(uri,CONTENT_PROJECTION,null,null,null);
+            c.moveToFirst();
+            int index=c.getColumnIndex(Video.Media.DATA);
+            String data=c.getString(index);
+            local.add(data);
+            remote.add(mUploadPath + c.getString(c.getColumnIndex(Video.Media.DISPLAY_NAME)));
+          }
+ else           if (mimeType.contains("audio")) {
+            String[] CONTENT_PROJECTION={Audio.Media.DATA,Audio.Media.DISPLAY_NAME,Audio.Media.MIME_TYPE,Audio.Media.SIZE};
+            Cursor c=getContentResolver().query(uri,CONTENT_PROJECTION,null,null,null);
+            c.moveToFirst();
+            int index=c.getColumnIndex(Audio.Media.DATA);
+            String data=c.getString(index);
+            local.add(data);
+            remote.add(mUploadPath + c.getString(c.getColumnIndex(Audio.Media.DISPLAY_NAME)));
+          }
+ else {
+            String filePath=Uri.decode(uri.toString()).replace(uri.getScheme() + "://","");
+            if (filePath.contains("mnt")) {
+              String splitedFilePath[]=filePath.split("/mnt");
+              filePath=splitedFilePath[1];
+            }
+            final File file=new File(filePath);
+            local.add(file.getAbsolutePath());
+            remote.add(mUploadPath + file.getName());
+          }
+        }
+ else         if (uri.getScheme().equals("file")) {
+          String filePath=Uri.decode(uri.toString()).replace(uri.getScheme() + "://","");
+          if (filePath.contains("mnt")) {
+            String splitedFilePath[]=filePath.split("/mnt");
+            filePath=splitedFilePath[1];
+          }
+          final File file=new File(filePath);
+          local.add(file.getAbsolutePath());
+          remote.add(mUploadPath + file.getName());
+        }
+ else {
+          throw new SecurityException();
+        }
       }
- else       if (uri.getScheme().equals("file")) {
-        final File file=new File(Uri.decode(uri.toString()).replace(uri.getScheme() + "://",""));
-        local[i]=file.getAbsolutePath();
-        remote[i]=mUploadPath + file.getName();
+ else {
+        throw new SecurityException();
       }
+      Intent intent=new Intent(getApplicationContext(),FileUploader.class);
+      intent.putExtra(FileUploader.KEY_UPLOAD_TYPE,FileUploader.UPLOAD_MULTIPLE_FILES);
+      intent.putExtra(FileUploader.KEY_LOCAL_FILE,local.toArray(new String[local.size()]));
+      intent.putExtra(FileUploader.KEY_REMOTE_FILE,remote.toArray(new String[remote.size()]));
+      intent.putExtra(FileUploader.KEY_ACCOUNT,mAccount);
+      startService(intent);
+      finish();
     }
-    Intent intent=new Intent(getApplicationContext(),FileUploader.class);
-    intent.putExtra(FileUploader.KEY_UPLOAD_TYPE,FileUploader.UPLOAD_MULTIPLE_FILES);
-    intent.putExtra(FileUploader.KEY_LOCAL_FILE,local);
-    intent.putExtra(FileUploader.KEY_REMOTE_FILE,remote);
-    intent.putExtra(FileUploader.KEY_ACCOUNT,mAccount);
-    startService(intent);
-    finish();
   }
  catch (  SecurityException e) {
     String message=String.format(getString(R.string.uploader_error_forbidden_content),getString(R.string.app_name));
