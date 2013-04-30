@@ -1,4 +1,5 @@
 {
   super.onAttach(activity);
+  Log_OC.e(TAG,"onAttach");
   if (!(activity instanceof FileFragment.ContainerActivity))   throw new ClassCastException(activity.toString() + " must implement " + FileFragment.ContainerActivity.class.getSimpleName());
 }

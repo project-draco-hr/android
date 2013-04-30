@@ -1,4 +1,5 @@
 {
+  super.onActivityResult(requestCode,resultCode,data);
   if (requestCode == ACTION_SELECT_CONTENT_FROM_APPS && (resultCode == RESULT_OK || resultCode == UploadFilesActivity.RESULT_OK_AND_MOVE)) {
     requestSimpleUpload(data,resultCode);
   }

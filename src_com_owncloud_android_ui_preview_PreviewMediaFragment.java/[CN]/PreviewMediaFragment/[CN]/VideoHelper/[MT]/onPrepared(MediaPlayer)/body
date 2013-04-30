@@ -6,4 +6,5 @@
   }
   mMediaController.setEnabled(true);
   mMediaController.updatePausePlay();
+  mPrepared=true;
 }

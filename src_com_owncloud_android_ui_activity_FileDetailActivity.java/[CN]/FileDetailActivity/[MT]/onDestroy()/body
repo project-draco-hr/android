@@ -1,5 +1,6 @@
 {
   super.onDestroy();
+  Log_OC.e(TAG,"onDestroy");
   if (mDownloadConnection != null) {
     unbindService(mDownloadConnection);
     mDownloadConnection=null;

@@ -1,5 +1,6 @@
 {
   super.onCreate(savedInstanceState);
+  mStarted=false;
   mFile=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE);
   mAccount=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_ACCOUNT);
   mStorageManager=new FileDataStorageManager(mAccount,getContentResolver());

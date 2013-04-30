@@ -1,6 +1,7 @@
 {
   Log_OC.d(getClass().toString(),"onCreate() start");
   super.onCreate(savedInstanceState);
+  mStarted=false;
   Account account=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_ACCOUNT);
   if (account != null && AccountUtils.setCurrentOwnCloudAccount(this,account.name)) {
     mCurrentDir=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE);

@@ -1,4 +1,7 @@
 {
-  mSavedPlaybackPosition=mVideoPreview.getCurrentPosition();
+  if (mPrepared) {
+    mSavedPlaybackPosition=mVideoPreview.getCurrentPosition();
+  }
+  Log_OC.e(TAG,"getting position: " + mSavedPlaybackPosition);
   return mSavedPlaybackPosition;
 }
