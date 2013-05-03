@@ -9,7 +9,7 @@
     startActivity(i);
   }
  catch (  Throwable t) {
-    Log.e(TAG,"Fail when trying to open with the mimeType provided from the ownCloud server: " + mFile.getMimetype());
+    Log_OC.e(TAG,"Fail when trying to open with the mimeType provided from the ownCloud server: " + mFile.getMimetype());
     boolean toastIt=true;
     String mimeType="";
     try {
@@ -28,13 +28,13 @@
       }
     }
  catch (    IndexOutOfBoundsException e) {
-      Log.e(TAG,"Trying to find out MIME type of a file without extension: " + storagePath);
+      Log_OC.e(TAG,"Trying to find out MIME type of a file without extension: " + storagePath);
     }
 catch (    ActivityNotFoundException e) {
-      Log.e(TAG,"No activity found to handle: " + storagePath + " with MIME type "+ mimeType+ " obtained from extension");
+      Log_OC.e(TAG,"No activity found to handle: " + storagePath + " with MIME type "+ mimeType+ " obtained from extension");
     }
 catch (    Throwable th) {
-      Log.e(TAG,"Unexpected problem when opening: " + storagePath,th);
+      Log_OC.e(TAG,"Unexpected problem when opening: " + storagePath,th);
     }
  finally {
       if (toastIt) {

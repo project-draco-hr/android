@@ -2,7 +2,7 @@
   setContentView(R.layout.uploader_layout);
   String full_path="";
   for (  String a : mParents)   full_path+=a + "/";
-  Log.d(TAG,"Populating view with content of : " + full_path);
+  Log_OC.d(TAG,"Populating view with content of : " + full_path);
   mFile=mStorageManager.getFileByPath(full_path);
   if (mFile != null) {
     Vector<OCFile> files=mStorageManager.getDirectoryContent(mFile);

@@ -1,6 +1,7 @@
 {
-  Log.d(getClass().toString(),"onCreate() start");
+  Log_OC.d(getClass().toString(),"onCreate() start");
   super.onCreate(savedInstanceState);
+  mHandler=new Handler();
   Account account=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_ACCOUNT);
   if (account != null && AccountUtils.setCurrentOwnCloudAccount(this,account.name)) {
     mCurrentDir=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE);
@@ -63,5 +64,5 @@
   actionBar.setListNavigationCallbacks(mDirectories,this);
   setSupportProgressBarIndeterminateVisibility(false);
   mBackFromCreatingFirstAccount=false;
-  Log.d(getClass().toString(),"onCreate() end");
+  Log_OC.d(getClass().toString(),"onCreate() end");
 }

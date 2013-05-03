@@ -1,0 +1,14 @@
+{
+  super.onMenuItemSelected(featureId,item);
+  Intent intent;
+switch (item.getItemId()) {
+case android.R.id.home:
+    intent=new Intent(getBaseContext(),Preferences.class);
+  intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+startActivity(intent);
+break;
+default :
+return false;
+}
+return true;
+}

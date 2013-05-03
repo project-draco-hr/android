@@ -1,11 +1,7 @@
 {
   try {
-    WebdavClient webdav=OwnCloudClientUtils.createOwnCloudClient(mAccount,getApplicationContext());
     ArrayList<String> local=new ArrayList<String>();
     ArrayList<String> remote=new ArrayList<String>();
-    if (mCreateDir) {
-      webdav.createDirectory(mUploadPath);
-    }
     for (    Parcelable mStream : mStreamsToUpload) {
       Uri uri=(Uri)mStream;
       if (uri != null) {

@@ -15,7 +15,7 @@
       mPreviewImagePagerAdapter.notifyDataSetChanged();
     }
  else {
-      Log.d(TAG,"Download finished, but the fragment is offscreen");
+      Log_OC.d(TAG,"Download finished, but the fragment is offscreen");
     }
   }
   removeStickyBroadcast(intent);

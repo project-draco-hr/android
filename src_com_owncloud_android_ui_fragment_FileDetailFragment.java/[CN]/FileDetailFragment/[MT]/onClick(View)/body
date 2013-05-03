@@ -35,10 +35,10 @@ case R.id.fdDownloadBtn:
       }
  else {
         mLastRemoteOperation=new SynchronizeFileOperation(mFile,null,mStorageManager,mAccount,true,false,getActivity());
-        WebdavClient wc=OwnCloudClientUtils.createOwnCloudClient(mAccount,getSherlockActivity().getApplicationContext());
-        mLastRemoteOperation.execute(wc,this,mHandler);
+        mLastRemoteOperation.execute(mAccount,getSherlockActivity(),this,mHandler,getSherlockActivity());
         boolean inDisplayActivity=getActivity() instanceof FileDisplayActivity;
         getActivity().showDialog((inDisplayActivity) ? FileDisplayActivity.DIALOG_SHORT_WAIT : FileDetailActivity.DIALOG_SHORT_WAIT);
+        setButtonsForTransferring();
       }
       break;
     }
@@ -59,7 +59,10 @@ case R.id.fdKeepInSync:
   }
 case R.id.fdRenameBtn:
 {
-  EditNameDialog dialog=EditNameDialog.newInstance(getString(R.string.rename_dialog_title),mFile.getFileName(),this);
+  String fileName=mFile.getFileName();
+  int extensionStart=mFile.isDirectory() ? -1 : fileName.lastIndexOf(".");
+  int selectionEnd=(extensionStart >= 0) ? extensionStart : fileName.length();
+  EditNameDialog dialog=EditNameDialog.newInstance(getString(R.string.rename_dialog_title),fileName,0,selectionEnd,this);
   dialog.show(getFragmentManager(),"nameeditdialog");
   break;
 }
@@ -76,6 +79,6 @@ openFile();
 break;
 }
 default :
-Log.e(TAG,"Incorrect view clicked!");
+Log_OC.e(TAG,"Incorrect view clicked!");
 }
 }

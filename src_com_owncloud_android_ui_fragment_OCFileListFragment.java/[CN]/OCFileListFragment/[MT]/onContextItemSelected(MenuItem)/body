@@ -4,7 +4,10 @@
 switch (item.getItemId()) {
 case R.id.action_rename_file:
 {
-      EditNameDialog dialog=EditNameDialog.newInstance(getString(R.string.rename_dialog_title),mTargetFile.getFileName(),this);
+      String fileName=mTargetFile.getFileName();
+      int extensionStart=mTargetFile.isDirectory() ? -1 : fileName.lastIndexOf(".");
+      int selectionEnd=(extensionStart >= 0) ? extensionStart : fileName.length();
+      EditNameDialog dialog=EditNameDialog.newInstance(getString(R.string.rename_dialog_title),fileName,0,selectionEnd,this);
       dialog.show(getFragmentManager(),EditNameDialog.TAG);
       return true;
     }
@@ -38,7 +41,7 @@ case R.id.action_open_file_with:
     startActivity(i);
   }
  catch (  Throwable t) {
-    Log.e(TAG,"Fail when trying to open with the mimeType provided from the ownCloud server: " + mTargetFile.getMimetype());
+    Log_OC.e(TAG,"Fail when trying to open with the mimeType provided from the ownCloud server: " + mTargetFile.getMimetype());
     boolean toastIt=true;
     String mimeType="";
     try {
@@ -57,13 +60,13 @@ case R.id.action_open_file_with:
       }
     }
  catch (    IndexOutOfBoundsException e) {
-      Log.e(TAG,"Trying to find out MIME type of a file without extension: " + storagePath);
+      Log_OC.e(TAG,"Trying to find out MIME type of a file without extension: " + storagePath);
     }
 catch (    ActivityNotFoundException e) {
-      Log.e(TAG,"No activity found to handle: " + storagePath + " with MIME type "+ mimeType+ " obtained from extension");
+      Log_OC.e(TAG,"No activity found to handle: " + storagePath + " with MIME type "+ mimeType+ " obtained from extension");
     }
 catch (    Throwable th) {
-      Log.e(TAG,"Unexpected problem when opening: " + storagePath,th);
+      Log_OC.e(TAG,"Unexpected problem when opening: " + storagePath,th);
     }
  finally {
       if (toastIt) {
@@ -77,8 +80,7 @@ case R.id.action_download_file:
 {
 Account account=AccountUtils.getCurrentOwnCloudAccount(getSherlockActivity());
 RemoteOperation operation=new SynchronizeFileOperation(mTargetFile,null,mContainerActivity.getStorageManager(),account,true,false,getSherlockActivity());
-WebdavClient wc=OwnCloudClientUtils.createOwnCloudClient(account,getSherlockActivity().getApplicationContext());
-operation.execute(wc,mContainerActivity,mHandler);
+operation.execute(account,getSherlockActivity(),mContainerActivity,mHandler,getSherlockActivity());
 getSherlockActivity().showDialog(FileDisplayActivity.DIALOG_SHORT_WAIT);
 return true;
 }

@@ -1,5 +1,5 @@
 {
-  Log.d(TAG,"Synchronization of " + getAccount().name + " has been requested to cancel");
+  Log_OC.d(TAG,"Synchronization of " + getAccount().name + " has been requested to cancel");
   mCancellation=true;
   super.onSyncCanceled();
 }

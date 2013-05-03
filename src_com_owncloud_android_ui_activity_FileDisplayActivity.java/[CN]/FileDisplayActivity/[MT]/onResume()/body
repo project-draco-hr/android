@@ -1,5 +1,5 @@
 {
-  Log.d(getClass().toString(),"onResume() start");
+  Log_OC.d(getClass().toString(),"onResume() start");
   super.onResume();
   if (AccountUtils.accountsAreSetup(this)) {
     if (mStorageManager == null) {
@@ -25,5 +25,5 @@
     mStorageManager=null;
     showDialog(DIALOG_SETUP_ACCOUNT);
   }
-  Log.d(getClass().toString(),"onResume() end");
+  Log_OC.d(getClass().toString(),"onResume() end");
 }

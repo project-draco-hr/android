@@ -11,7 +11,7 @@
       }
     }
     if (!directory.isDirectory()) {
-      Log.w(TAG,"You see, that is not a directory -> " + directory.toString());
+      Log_OC.w(TAG,"You see, that is not a directory -> " + directory.toString());
       directory=storageManager.getFileById(directory.getParentId());
     }
     mAdapter.swapDirectory(directory,storageManager);

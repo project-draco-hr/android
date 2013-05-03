@@ -11,6 +11,6 @@ case R.id.buttonNo:
 getActivity().finish();
 break;
 default :
-Log.e("EAD","Button with unknown id clicked " + v.getId());
+Log_OC.e("EAD","Button with unknown id clicked " + v.getId());
 }
 }

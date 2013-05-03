@@ -1,0 +1,41 @@
+{
+  boolean isOAuth=mOAuth2Check.isChecked();
+  Uri uri=Uri.parse(mHostBaseUrl);
+  String username=mUsernameInput.getText().toString().trim();
+  if (isOAuth) {
+    username="OAuth_user" + (new java.util.Random(System.currentTimeMillis())).nextLong();
+  }
+  String accountName=username + "@" + uri.getHost();
+  if (uri.getPort() >= 0) {
+    accountName+=":" + uri.getPort();
+  }
+  mAccount=new Account(accountName,AccountAuthenticator.ACCOUNT_TYPE);
+  if (isOAuth) {
+    mAccountMgr.addAccountExplicitly(mAccount,"",null);
+  }
+ else {
+    mAccountMgr.addAccountExplicitly(mAccount,mPasswordInput.getText().toString(),null);
+  }
+  Account defaultAccount=AccountUtils.getCurrentOwnCloudAccount(this);
+  if (defaultAccount == null) {
+    SharedPreferences.Editor editor=PreferenceManager.getDefaultSharedPreferences(this).edit();
+    editor.putString("select_oc_account",accountName);
+    editor.commit();
+  }
+  final Intent intent=new Intent();
+  intent.putExtra(AccountManager.KEY_ACCOUNT_TYPE,AccountAuthenticator.ACCOUNT_TYPE);
+  intent.putExtra(AccountManager.KEY_ACCOUNT_NAME,mAccount.name);
+  if (!isOAuth)   intent.putExtra(AccountManager.KEY_AUTHTOKEN,AccountAuthenticator.ACCOUNT_TYPE);
+  intent.putExtra(AccountManager.KEY_USERDATA,username);
+  if (isOAuth) {
+    mAccountMgr.setAuthToken(mAccount,AccountAuthenticator.AUTH_TOKEN_TYPE_ACCESS_TOKEN,mOAuthAccessToken);
+  }
+  mAccountMgr.setUserData(mAccount,AccountAuthenticator.KEY_OC_VERSION,mDiscoveredVersion.toString());
+  mAccountMgr.setUserData(mAccount,AccountAuthenticator.KEY_OC_BASE_URL,mHostBaseUrl);
+  if (isOAuth)   mAccountMgr.setUserData(mAccount,AccountAuthenticator.KEY_SUPPORTS_OAUTH2,"TRUE");
+  setAccountAuthenticatorResult(intent.getExtras());
+  setResult(RESULT_OK,intent);
+  Bundle bundle=new Bundle();
+  bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL,true);
+  ContentResolver.requestSync(mAccount,AccountAuthenticator.AUTHORITY,bundle);
+}

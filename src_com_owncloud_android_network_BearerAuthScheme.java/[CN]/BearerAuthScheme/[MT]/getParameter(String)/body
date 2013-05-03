@@ -1,0 +1,9 @@
+{
+  if (name == null) {
+    throw new IllegalArgumentException("Parameter name may not be null");
+  }
+  if (mParams == null) {
+    return null;
+  }
+  return (String)mParams.get(name.toLowerCase());
+}

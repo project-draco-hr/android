@@ -1,14 +1,13 @@
 {
-  Log.d(TAG,"Got file modified with event " + event + " and path "+ mPath+ ((path != null) ? File.separator + path : ""));
+  Log_OC.d(TAG,"Got file modified with event " + event + " and path "+ mPath+ ((path != null) ? File.separator + path : ""));
   if ((event & mMask) == 0) {
-    Log.wtf(TAG,"Incorrect event " + event + " sent for file "+ mPath+ ((path != null) ? File.separator + path : "")+ " with registered for "+ mMask+ " and original path "+ mPath);
+    Log_OC.wtf(TAG,"Incorrect event " + event + " sent for file "+ mPath+ ((path != null) ? File.separator + path : "")+ " with registered for "+ mMask+ " and original path "+ mPath);
     return;
   }
-  WebdavClient wc=OwnCloudClientUtils.createOwnCloudClient(mOCAccount,mContext);
   FileDataStorageManager storageManager=new FileDataStorageManager(mOCAccount,mContext.getContentResolver());
   OCFile file=storageManager.getFileByLocalPath(mPath);
   SynchronizeFileOperation sfo=new SynchronizeFileOperation(file,null,storageManager,mOCAccount,true,true,mContext);
-  RemoteOperationResult result=sfo.execute(wc);
+  RemoteOperationResult result=sfo.execute(mOCAccount,mContext);
   if (result.getCode() == ResultCode.SYNC_CONFLICT) {
     Intent i=new Intent(mContext,ConflictsResolveActivity.class);
     i.setFlags(i.getFlags() | Intent.FLAG_ACTIVITY_NEW_TASK);
