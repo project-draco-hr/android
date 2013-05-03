@@ -4,22 +4,31 @@ synchronized (mPendingUploads) {
   }
   if (mCurrentUpload != null) {
     notifyUploadStart(mCurrentUpload);
-    if (mUploadClient == null || !mLastAccount.equals(mCurrentUpload.getAccount())) {
-      mLastAccount=mCurrentUpload.getAccount();
-      mStorageManager=new FileDataStorageManager(mLastAccount,getContentResolver());
-      mUploadClient=OwnCloudClientUtils.createOwnCloudClient(mLastAccount,getApplicationContext());
-    }
-    if (mCurrentUpload.isRemoteFolderToBeCreated()) {
-      mUploadClient.createDirectory(FileStorageUtils.getInstantUploadFilePath(this,""));
-    }
     RemoteOperationResult uploadResult=null;
     try {
+      if (mUploadClient == null || !mLastAccount.equals(mCurrentUpload.getAccount())) {
+        mLastAccount=mCurrentUpload.getAccount();
+        mStorageManager=new FileDataStorageManager(mLastAccount,getContentResolver());
+        mUploadClient=OwnCloudClientUtils.createOwnCloudClient(mLastAccount,getApplicationContext());
+      }
+      if (mCurrentUpload.isRemoteFolderToBeCreated()) {
+        RemoteOperation operation=new CreateFolderOperation(FileStorageUtils.getInstantUploadFilePath(this,""),mStorageManager.getFileByPath(OCFile.PATH_SEPARATOR).getFileId(),mStorageManager);
+        operation.execute(mUploadClient);
+      }
       uploadResult=mCurrentUpload.execute(mUploadClient);
       if (uploadResult.isSuccess()) {
         saveUploadedFile();
       }
     }
-  finally {
+ catch (    AccountsException e) {
+      Log_OC.e(TAG,"Error while trying to get autorization for " + mLastAccount.name,e);
+      uploadResult=new RemoteOperationResult(e);
+    }
+catch (    IOException e) {
+      Log_OC.e(TAG,"Error while trying to get autorization for " + mLastAccount.name,e);
+      uploadResult=new RemoteOperationResult(e);
+    }
+ finally {
 synchronized (mPendingUploads) {
         mPendingUploads.remove(uploadKey);
         Log_OC.i(TAG,"Remove CurrentUploadItem from pending upload Item Map.");

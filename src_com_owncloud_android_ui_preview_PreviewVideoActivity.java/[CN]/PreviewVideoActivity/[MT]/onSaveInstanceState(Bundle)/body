@@ -1,6 +1,6 @@
 {
   super.onSaveInstanceState(outState);
-  Log.e(TAG,"ACTIVITY\t\tonSaveInstanceState");
+  Log_OC.e(TAG,"ACTIVITY\t\tonSaveInstanceState");
   outState.putParcelable(PreviewVideoActivity.EXTRA_FILE,mFile);
   outState.putParcelable(PreviewVideoActivity.EXTRA_ACCOUNT,mAccount);
   outState.putInt(PreviewVideoActivity.EXTRA_START_POSITION,mVideoPlayer.getCurrentPosition());

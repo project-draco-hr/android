@@ -80,8 +80,7 @@ case R.id.action_download_file:
 {
 Account account=AccountUtils.getCurrentOwnCloudAccount(getSherlockActivity());
 RemoteOperation operation=new SynchronizeFileOperation(mTargetFile,null,mContainerActivity.getStorageManager(),account,true,false,getSherlockActivity());
-WebdavClient wc=OwnCloudClientUtils.createOwnCloudClient(account,getSherlockActivity().getApplicationContext());
-operation.execute(wc,mContainerActivity,mHandler);
+operation.execute(account,getSherlockActivity(),mContainerActivity,mHandler,getSherlockActivity());
 getSherlockActivity().showDialog(FileDisplayActivity.DIALOG_SHORT_WAIT);
 return true;
 }

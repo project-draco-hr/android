@@ -1,0 +1,4 @@
+{
+  processChallenge(challenge);
+  mComplete=true;
+}

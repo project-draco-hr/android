@@ -1,0 +1,4 @@
+{
+  CheckBox oAuth2Check=(CheckBox)view;
+  changeViewByOAuth2Check(oAuth2Check.isChecked());
+}

@@ -1,4 +1,4 @@
 {
   super.onResume();
-  Log.e(TAG,"ACTIVTIY\t\tonResume");
+  Log_OC.e(TAG,"ACTIVTIY\t\tonResume");
 }
