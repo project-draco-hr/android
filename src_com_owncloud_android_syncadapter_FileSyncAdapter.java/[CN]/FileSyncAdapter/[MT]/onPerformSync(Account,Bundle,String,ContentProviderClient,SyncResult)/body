@@ -15,7 +15,12 @@
   try {
     this.initClientForCurrentAccount();
   }
- catch (  UnknownHostException e) {
+ catch (  IOException e) {
+    mSyncResult.tooManyRetries=true;
+    notifyFailedSynchronization();
+    return;
+  }
+catch (  AccountsException e) {
     mSyncResult.tooManyRetries=true;
     notifyFailedSynchronization();
     return;

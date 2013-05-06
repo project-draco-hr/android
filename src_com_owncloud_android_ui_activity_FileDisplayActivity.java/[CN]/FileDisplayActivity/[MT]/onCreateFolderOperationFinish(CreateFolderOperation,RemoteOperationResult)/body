@@ -1,0 +1,16 @@
+{
+  if (result.isSuccess()) {
+    dismissDialog(DIALOG_SHORT_WAIT);
+    mFileList.listDirectory();
+  }
+ else {
+    dismissDialog(DIALOG_SHORT_WAIT);
+    try {
+      Toast msg=Toast.makeText(FileDisplayActivity.this,R.string.create_dir_fail_msg,Toast.LENGTH_LONG);
+      msg.show();
+    }
+ catch (    NotFoundException e) {
+      Log_OC.e(TAG,"Error while trying to show fail message ",e);
+    }
+  }
+}

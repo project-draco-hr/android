@@ -1,0 +1,10 @@
+{
+  if (hasFocus) {
+    mViewPasswordButton.setVisibility(View.VISIBLE);
+  }
+ else {
+    int input_type=InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
+    passwordInput.setInputType(input_type);
+    mViewPasswordButton.setVisibility(View.INVISIBLE);
+  }
+}

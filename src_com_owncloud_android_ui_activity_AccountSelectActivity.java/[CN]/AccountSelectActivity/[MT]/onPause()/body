@@ -3,10 +3,10 @@
   if (this.isFinishing()) {
     Account current=AccountUtils.getCurrentOwnCloudAccount(this);
     if ((mPreviousAccount == null && current != null) || (mPreviousAccount != null && !mPreviousAccount.equals(current))) {
-      ContentResolver.cancelSync(null,AccountAuthenticator.AUTH_TOKEN_TYPE);
+      ContentResolver.cancelSync(null,AccountAuthenticator.AUTHORITY);
       Bundle bundle=new Bundle();
       bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL,true);
-      ContentResolver.requestSync(AccountUtils.getCurrentOwnCloudAccount(this),AccountAuthenticator.AUTH_TOKEN_TYPE,bundle);
+      ContentResolver.requestSync(AccountUtils.getCurrentOwnCloudAccount(this),AccountAuthenticator.AUTHORITY,bundle);
       Intent i=new Intent(this,FileDisplayActivity.class);
       i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
       startActivity(i);

@@ -1,6 +1,0 @@
-{
-  outState.putInt(STATUS_ICON,mStatusIcon);
-  outState.putInt(STATUS_TEXT,mStatusText);
-  outState.putBoolean(STATUS_CORRECT,mStatusCorrect);
-  super.onSaveInstanceState(outState);
-}

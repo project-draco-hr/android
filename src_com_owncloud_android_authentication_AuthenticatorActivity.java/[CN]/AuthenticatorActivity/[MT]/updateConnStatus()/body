@@ -1,0 +1,14 @@
+{
+  ImageView iv=(ImageView)findViewById(R.id.action_indicator);
+  TextView tv=(TextView)findViewById(R.id.status_text);
+  if (mStatusIcon == 0 && mStatusText == 0) {
+    iv.setVisibility(View.INVISIBLE);
+    tv.setVisibility(View.INVISIBLE);
+  }
+ else {
+    iv.setImageResource(mStatusIcon);
+    tv.setText(mStatusText);
+    iv.setVisibility(View.VISIBLE);
+    tv.setVisibility(View.VISIBLE);
+  }
+}

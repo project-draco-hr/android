@@ -3,7 +3,7 @@
   super.onStop();
   mPrepared=false;
   if (mMediaServiceConnection != null) {
-    Log.d(TAG,"Unbinding from MediaService ...");
+    Log_OC.d(TAG,"Unbinding from MediaService ...");
     if (mMediaServiceBinder != null && mMediaController != null) {
       mMediaServiceBinder.unregisterMediaController(mMediaController);
     }

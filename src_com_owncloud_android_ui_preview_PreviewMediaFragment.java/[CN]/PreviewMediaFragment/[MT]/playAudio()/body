@@ -1,6 +1,6 @@
 {
   if (!mMediaServiceBinder.isPlaying(mFile)) {
-    Log.d(TAG,"starting playback of " + mFile.getStoragePath());
+    Log_OC.d(TAG,"starting playback of " + mFile.getStoragePath());
     mMediaServiceBinder.start(mAccount,mFile,mAutoplay,mSavedPlaybackPosition);
   }
  else {

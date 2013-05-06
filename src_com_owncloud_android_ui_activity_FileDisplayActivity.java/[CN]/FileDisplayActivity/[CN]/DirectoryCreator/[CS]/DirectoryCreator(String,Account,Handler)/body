@@ -1,5 +1,0 @@
-{
-  mTargetPath=targetPath;
-  mAccount=account;
-  mHandler=handler;
-}

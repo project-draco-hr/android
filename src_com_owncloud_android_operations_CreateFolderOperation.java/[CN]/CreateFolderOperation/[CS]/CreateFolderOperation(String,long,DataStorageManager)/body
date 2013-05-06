@@ -1,0 +1,5 @@
+{
+  mRemotePath=remotePath;
+  mParentDirId=parentDirId;
+  mStorageManager=storageManager;
+}

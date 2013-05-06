@@ -1,5 +1,5 @@
 {
-  Log.e(TAG,"Error in video playback, what = " + what + ", extra = "+ extra);
+  Log_OC.e(TAG,"Error in video playback, what = " + what + ", extra = "+ extra);
   if (mMediaController != null) {
     mMediaController.hide();
   }

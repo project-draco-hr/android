@@ -15,8 +15,8 @@ builder.setCancelable(false);
 builder.setPositiveButton(R.string.uploader_wrn_no_account_setup_btn_text,new OnClickListener(){
 @Override public void onClick(DialogInterface dialog,int which){
 if (android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.ECLAIR_MR1) {
-Intent intent=new Intent("android.settings.ADD_ACCOUNT_SETTINGS");
-intent.putExtra("authorities",new String[]{AccountAuthenticator.AUTH_TOKEN_TYPE});
+Intent intent=new Intent(android.provider.Settings.ACTION_ADD_ACCOUNT);
+intent.putExtra("authorities",new String[]{AccountAuthenticator.AUTHORITY});
 startActivityForResult(intent,REQUEST_CODE_SETUP_ACCOUNT);
 }
  else {

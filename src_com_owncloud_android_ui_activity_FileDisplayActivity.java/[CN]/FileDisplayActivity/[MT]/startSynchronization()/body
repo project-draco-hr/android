@@ -1,6 +1,6 @@
 {
-  ContentResolver.cancelSync(null,AccountAuthenticator.AUTH_TOKEN_TYPE);
+  ContentResolver.cancelSync(null,AccountAuthenticator.AUTHORITY);
   Bundle bundle=new Bundle();
   bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL,true);
-  ContentResolver.requestSync(AccountUtils.getCurrentOwnCloudAccount(this),AccountAuthenticator.AUTH_TOKEN_TYPE,bundle);
+  ContentResolver.requestSync(AccountUtils.getCurrentOwnCloudAccount(this),AccountAuthenticator.AUTHORITY,bundle);
 }
