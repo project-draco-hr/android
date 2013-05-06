@@ -1,11 +1,15 @@
 {
   super.onCreate(savedInstanceState);
+  mStarted=false;
   mFile=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE);
   mAccount=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_ACCOUNT);
   mStorageManager=new FileDataStorageManager(mAccount,getContentResolver());
   Configuration conf=getResources().getConfiguration();
-  mConfigurationChangedToLandscape=(conf.orientation == Configuration.ORIENTATION_LANDSCAPE && (conf.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE);
-  if (!mConfigurationChangedToLandscape) {
+  mDualPane=(conf.orientation == Configuration.ORIENTATION_LANDSCAPE && (conf.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE);
+  if (mDualPane) {
+    changeToDualView(false);
+  }
+ else {
     setContentView(R.layout.file_activity_details);
     ActionBar actionBar=getSupportActionBar();
     actionBar.setDisplayHomeAsUpEnabled(true);
@@ -20,8 +24,5 @@
     bindService(new Intent(this,FileDownloader.class),mDownloadConnection,Context.BIND_AUTO_CREATE);
     mUploadConnection=new DetailsServiceConnection();
     bindService(new Intent(this,FileUploader.class),mUploadConnection,Context.BIND_AUTO_CREATE);
-  }
- else {
-    backToDisplayActivity(false);
   }
 }

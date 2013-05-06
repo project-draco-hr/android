@@ -2,7 +2,7 @@
   boolean returnValue=false;
 switch (item.getItemId()) {
 case android.R.id.home:
-    backToDisplayActivity(true);
+    changeToDualView(true);
   returnValue=true;
 break;
 default :

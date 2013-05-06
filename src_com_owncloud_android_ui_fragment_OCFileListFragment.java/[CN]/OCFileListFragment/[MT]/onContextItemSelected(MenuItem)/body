@@ -77,6 +77,7 @@ catch (    Throwable th) {
   return true;
 }
 case R.id.action_download_file:
+case R.id.action_sync_file:
 {
 Account account=AccountUtils.getCurrentOwnCloudAccount(getSherlockActivity());
 RemoteOperation operation=new SynchronizeFileOperation(mTargetFile,null,mContainerActivity.getStorageManager(),account,true,false,getSherlockActivity());
