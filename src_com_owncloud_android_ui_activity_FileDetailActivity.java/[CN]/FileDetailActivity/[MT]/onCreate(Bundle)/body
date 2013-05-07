@@ -1,13 +1,10 @@
 {
   super.onCreate(savedInstanceState);
   mStarted=false;
-  mFile=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE);
-  mAccount=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_ACCOUNT);
-  mStorageManager=new FileDataStorageManager(mAccount,getContentResolver());
   Configuration conf=getResources().getConfiguration();
   mDualPane=(conf.orientation == Configuration.ORIENTATION_LANDSCAPE && (conf.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE);
   if (mDualPane) {
-    changeToDualView(false);
+    backToDisplayActivity(false);
   }
  else {
     setContentView(R.layout.file_activity_details);

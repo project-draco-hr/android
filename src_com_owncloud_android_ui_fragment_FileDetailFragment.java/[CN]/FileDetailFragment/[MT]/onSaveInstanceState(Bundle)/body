@@ -1,5 +1,5 @@
 {
   super.onSaveInstanceState(outState);
-  outState.putParcelable(FileDetailFragment.EXTRA_FILE,mFile);
-  outState.putParcelable(FileDetailFragment.EXTRA_ACCOUNT,mAccount);
+  outState.putParcelable(FileActivity.EXTRA_FILE,mFile);
+  outState.putParcelable(FileActivity.EXTRA_ACCOUNT,mAccount);
 }

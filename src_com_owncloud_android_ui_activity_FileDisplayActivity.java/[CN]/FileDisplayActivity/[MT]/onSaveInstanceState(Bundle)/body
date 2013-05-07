@@ -6,7 +6,7 @@
     if (fragment != null) {
       OCFile file=fragment.getFile();
       if (file != null) {
-        outState.putParcelable(FileActivity.EXTRA_FILE,file);
+        outState.putParcelable(EXTRA_FILE,file);
       }
     }
   }
