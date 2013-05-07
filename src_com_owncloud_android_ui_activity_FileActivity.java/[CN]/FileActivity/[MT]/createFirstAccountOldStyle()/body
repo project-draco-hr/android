@@ -2,4 +2,5 @@
   Intent intent=new Intent(android.provider.Settings.ACTION_ADD_ACCOUNT);
   intent.putExtra(android.provider.Settings.EXTRA_AUTHORITIES,new String[]{AccountAuthenticator.AUTHORITY});
   startActivity(intent);
+  finish();
 }

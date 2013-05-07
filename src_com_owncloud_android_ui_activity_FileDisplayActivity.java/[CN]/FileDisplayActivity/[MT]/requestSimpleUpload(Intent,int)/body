@@ -20,7 +20,7 @@
     }
   }
   Intent i=new Intent(this,FileUploader.class);
-  i.putExtra(FileUploader.KEY_ACCOUNT,AccountUtils.getCurrentOwnCloudAccount(this));
+  i.putExtra(FileUploader.KEY_ACCOUNT,getAccount());
   String remotepath=new String();
   for (int j=mDirectories.getCount() - 2; j >= 0; --j) {
     remotepath+=OCFile.PATH_SEPARATOR + mDirectories.getItem(j);

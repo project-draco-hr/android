@@ -9,8 +9,8 @@
  else {
     finish();
     Intent intent=new Intent(this,FileDisplayActivity.class);
-    intent.putExtra(FileDetailFragment.EXTRA_FILE,mCurrentDir);
-    intent.putExtra(FileDetailFragment.EXTRA_ACCOUNT,AccountUtils.getCurrentOwnCloudAccount(this));
+    intent.putExtra(FileDetailFragment.EXTRA_FILE,getFile());
+    intent.putExtra(FileDetailFragment.EXTRA_ACCOUNT,getAccount());
     startActivity(intent);
   }
 }

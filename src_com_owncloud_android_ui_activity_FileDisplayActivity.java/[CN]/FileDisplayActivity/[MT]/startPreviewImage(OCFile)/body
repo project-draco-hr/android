@@ -1,6 +1,6 @@
 {
   Intent showDetailsIntent=new Intent(this,PreviewImageActivity.class);
   showDetailsIntent.putExtra(FileDetailFragment.EXTRA_FILE,file);
-  showDetailsIntent.putExtra(FileDetailFragment.EXTRA_ACCOUNT,AccountUtils.getCurrentOwnCloudAccount(this));
+  showDetailsIntent.putExtra(FileDetailFragment.EXTRA_ACCOUNT,getAccount());
   startActivity(showDetailsIntent);
 }

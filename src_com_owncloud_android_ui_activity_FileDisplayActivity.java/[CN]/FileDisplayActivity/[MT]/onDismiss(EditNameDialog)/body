@@ -4,17 +4,17 @@
     Log_OC.d(TAG,"'create directory' dialog dismissed with new name " + newDirectoryName);
     if (newDirectoryName.length() > 0) {
       String path;
-      if (mCurrentDir == null) {
+      if (getFile() == null) {
         if (!mStorageManager.fileExists(OCFile.PATH_SEPARATOR)) {
           OCFile file=new OCFile(OCFile.PATH_SEPARATOR);
           mStorageManager.saveFile(file);
         }
-        mCurrentDir=mStorageManager.getFileByPath(OCFile.PATH_SEPARATOR);
+        setFile(mStorageManager.getFileByPath(OCFile.PATH_SEPARATOR));
       }
-      path=FileDisplayActivity.this.mCurrentDir.getRemotePath();
+      path=FileDisplayActivity.this.getFile().getRemotePath();
       path+=newDirectoryName + OCFile.PATH_SEPARATOR;
-      RemoteOperation operation=new CreateFolderOperation(path,mCurrentDir.getFileId(),mStorageManager);
-      operation.execute(AccountUtils.getCurrentOwnCloudAccount(FileDisplayActivity.this),FileDisplayActivity.this,FileDisplayActivity.this,mHandler,FileDisplayActivity.this);
+      RemoteOperation operation=new CreateFolderOperation(path,getFile().getFileId(),mStorageManager);
+      operation.execute(getAccount(),FileDisplayActivity.this,FileDisplayActivity.this,mHandler,FileDisplayActivity.this);
       showDialog(DIALOG_SHORT_WAIT);
     }
   }

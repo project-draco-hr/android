@@ -25,7 +25,7 @@ break;
 }
 case android.R.id.home:
 {
-if (mCurrentDir != null && mCurrentDir.getParentId() != 0) {
+if (getFile() != null && getFile().getParentId() != 0) {
 onBackPressed();
 }
 break;

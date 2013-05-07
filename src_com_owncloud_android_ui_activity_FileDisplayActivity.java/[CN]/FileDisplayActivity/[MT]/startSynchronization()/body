@@ -2,5 +2,5 @@
   ContentResolver.cancelSync(null,AccountAuthenticator.AUTHORITY);
   Bundle bundle=new Bundle();
   bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL,true);
-  ContentResolver.requestSync(AccountUtils.getCurrentOwnCloudAccount(this),AccountAuthenticator.AUTHORITY,bundle);
+  ContentResolver.requestSync(getAccount(),AccountAuthenticator.AUTHORITY,bundle);
 }

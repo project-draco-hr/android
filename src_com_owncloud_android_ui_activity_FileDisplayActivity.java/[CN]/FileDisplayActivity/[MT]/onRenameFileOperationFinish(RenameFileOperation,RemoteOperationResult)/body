@@ -5,10 +5,10 @@
     if (mDualPane) {
       FileFragment details=(FileFragment)getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
       if (details != null && details instanceof FileDetailFragment && renamedFile.equals(details.getFile())) {
-        ((FileDetailFragment)details).updateFileDetails(renamedFile,AccountUtils.getCurrentOwnCloudAccount(this));
+        ((FileDetailFragment)details).updateFileDetails(renamedFile,getAccount());
       }
     }
-    if (mStorageManager.getFileById(renamedFile.getParentId()).equals(mCurrentDir)) {
+    if (mStorageManager.getFileById(renamedFile.getParentId()).equals(getFile())) {
       mFileList.listDirectory();
     }
   }
