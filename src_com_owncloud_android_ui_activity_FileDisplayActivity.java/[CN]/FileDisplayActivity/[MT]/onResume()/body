@@ -1,29 +1,16 @@
 {
-  Log_OC.d(getClass().toString(),"onResume() start");
+  Log_OC.d(TAG,"onResume() start");
   super.onResume();
-  if (AccountUtils.accountsAreSetup(this)) {
-    if (mStorageManager == null) {
-      initDataFromCurrentAccount();
-      if (mDualPane) {
-        initFileDetailsInDualPane();
-      }
-      mBackFromCreatingFirstAccount=true;
-    }
-    IntentFilter syncIntentFilter=new IntentFilter(FileSyncService.SYNC_MESSAGE);
-    mSyncBroadcastReceiver=new SyncBroadcastReceiver();
-    registerReceiver(mSyncBroadcastReceiver,syncIntentFilter);
-    IntentFilter uploadIntentFilter=new IntentFilter(FileUploader.UPLOAD_FINISH_MESSAGE);
-    mUploadFinishReceiver=new UploadFinishReceiver();
-    registerReceiver(mUploadFinishReceiver,uploadIntentFilter);
-    IntentFilter downloadIntentFilter=new IntentFilter(FileDownloader.DOWNLOAD_ADDED_MESSAGE);
-    downloadIntentFilter.addAction(FileDownloader.DOWNLOAD_FINISH_MESSAGE);
-    mDownloadFinishReceiver=new DownloadFinishReceiver();
-    registerReceiver(mDownloadFinishReceiver,downloadIntentFilter);
-    mFileList.listDirectory(mCurrentDir);
-  }
- else {
-    mStorageManager=null;
-    showDialog(DIALOG_SETUP_ACCOUNT);
-  }
-  Log_OC.d(getClass().toString(),"onResume() end");
+  IntentFilter syncIntentFilter=new IntentFilter(FileSyncService.SYNC_MESSAGE);
+  mSyncBroadcastReceiver=new SyncBroadcastReceiver();
+  registerReceiver(mSyncBroadcastReceiver,syncIntentFilter);
+  IntentFilter uploadIntentFilter=new IntentFilter(FileUploader.UPLOAD_FINISH_MESSAGE);
+  mUploadFinishReceiver=new UploadFinishReceiver();
+  registerReceiver(mUploadFinishReceiver,uploadIntentFilter);
+  IntentFilter downloadIntentFilter=new IntentFilter(FileDownloader.DOWNLOAD_ADDED_MESSAGE);
+  downloadIntentFilter.addAction(FileDownloader.DOWNLOAD_FINISH_MESSAGE);
+  mDownloadFinishReceiver=new DownloadFinishReceiver();
+  registerReceiver(mDownloadFinishReceiver,downloadIntentFilter);
+  mFileList.listDirectory(getFile());
+  Log_OC.d(TAG,"onResume() end");
 }

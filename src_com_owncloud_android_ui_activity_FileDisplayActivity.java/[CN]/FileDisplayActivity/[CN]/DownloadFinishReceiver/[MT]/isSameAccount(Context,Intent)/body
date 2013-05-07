@@ -1,4 +1,4 @@
 {
   String accountName=intent.getStringExtra(FileDownloader.ACCOUNT_NAME);
-  return (accountName != null && accountName.equals(AccountUtils.getCurrentOwnCloudAccount(context).name));
+  return (accountName != null && getAccount() != null && accountName.equals(getAccount().name));
 }

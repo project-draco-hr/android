@@ -1,13 +1,13 @@
 {
   if (mDualPane && !onOrientationChange) {
     FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
-    transaction.replace(R.id.file_details_container,new PreviewMediaFragment(file,AccountUtils.getCurrentOwnCloudAccount(this),startPlaybackPosition,autoplay),FileDetailFragment.FTAG);
+    transaction.replace(R.id.file_details_container,new PreviewMediaFragment(file,getAccount(),startPlaybackPosition,autoplay),FileDetailFragment.FTAG);
     transaction.commit();
   }
  else {
     Intent showDetailsIntent=new Intent(this,FileDetailActivity.class);
-    showDetailsIntent.putExtra(FileDetailFragment.EXTRA_FILE,file);
-    showDetailsIntent.putExtra(FileDetailFragment.EXTRA_ACCOUNT,AccountUtils.getCurrentOwnCloudAccount(this));
+    showDetailsIntent.putExtra(EXTRA_FILE,file);
+    showDetailsIntent.putExtra(EXTRA_ACCOUNT,getAccount());
     showDetailsIntent.putExtra(PreviewVideoActivity.EXTRA_START_POSITION,startPlaybackPosition);
     showDetailsIntent.putExtra(PreviewVideoActivity.EXTRA_AUTOPLAY,autoplay);
     startActivity(showDetailsIntent);

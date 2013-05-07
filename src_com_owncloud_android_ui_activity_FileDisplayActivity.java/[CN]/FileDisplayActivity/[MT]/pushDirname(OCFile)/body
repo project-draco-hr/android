@@ -3,5 +3,5 @@
     throw new IllegalArgumentException("Only directories may be pushed!");
   }
   mDirectories.insert(directory.getFileName(),0);
-  mCurrentDir=directory;
+  setFile(directory);
 }

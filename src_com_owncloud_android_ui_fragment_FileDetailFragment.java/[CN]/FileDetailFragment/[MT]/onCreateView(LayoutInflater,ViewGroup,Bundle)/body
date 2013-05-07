@@ -1,8 +1,8 @@
 {
   super.onCreateView(inflater,container,savedInstanceState);
   if (savedInstanceState != null) {
-    mFile=savedInstanceState.getParcelable(FileDetailFragment.EXTRA_FILE);
-    mAccount=savedInstanceState.getParcelable(FileDetailFragment.EXTRA_ACCOUNT);
+    mFile=savedInstanceState.getParcelable(FileActivity.EXTRA_FILE);
+    mAccount=savedInstanceState.getParcelable(FileActivity.EXTRA_ACCOUNT);
   }
   if (mFile != null && mAccount != null) {
     mLayout=R.layout.file_details_fragment;

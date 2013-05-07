@@ -1,0 +1,25 @@
+{
+  if (getAccount() != null) {
+    mStorageManager=new FileDataStorageManager(getAccount(),getContentResolver());
+    OCFile currentDir=getFile();
+    if (currentDir != null && !currentDir.isDirectory()) {
+      mChosenFile=getFile();
+      currentDir=mStorageManager.getFileById(currentDir.getParentId());
+    }
+    if (currentDir != null) {
+      currentDir=mStorageManager.getFileByPath(currentDir.getRemotePath());
+    }
+    if (mChosenFile != null) {
+      if (mChosenFile.fileExists()) {
+        mChosenFile=mStorageManager.getFileByPath(mChosenFile.getRemotePath());
+      }
+    }
+    if (currentDir == null) {
+      currentDir=mStorageManager.getFileByPath(OCFile.PATH_SEPARATOR);
+    }
+    setFile(currentDir);
+  }
+ else {
+    Log_OC.wtf(TAG,"onAccountChanged was called with NULL account associated!");
+  }
+}
