@@ -40,6 +40,5 @@
   actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
   actionBar.setListNavigationCallbacks(mDirectories,this);
   setSupportProgressBarIndeterminateVisibility(false);
-  mBackFromCreatingFirstAccount=false;
   Log_OC.d(TAG,"onCreate() end");
 }
