@@ -26,6 +26,8 @@
     mStatusText=mStatusIcon=0;
     mStatusCorrect=false;
     mIsSslConn=false;
+    updateConnStatus();
+    updateAuthStatus();
     String tokenType=getIntent().getExtras().getString(AccountAuthenticator.KEY_AUTH_TOKEN_TYPE);
     boolean oAuthRequired=AccountAuthenticator.AUTH_TOKEN_TYPE_ACCESS_TOKEN.equals(tokenType) || OAUTH_MODE_ON.equals(getString(R.string.oauth2_mode));
     mAccount=getIntent().getExtras().getParcelable(EXTRA_ACCOUNT);

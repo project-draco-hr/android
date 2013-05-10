@@ -1,14 +1,11 @@
 {
-  ImageView iv=(ImageView)findViewById(R.id.action_indicator);
-  TextView tv=(TextView)findViewById(R.id.status_text);
+  TextView tv=(TextView)findViewById(R.id.server_status_text);
   if (mStatusIcon == 0 && mStatusText == 0) {
-    iv.setVisibility(View.INVISIBLE);
     tv.setVisibility(View.INVISIBLE);
   }
  else {
-    iv.setImageResource(mStatusIcon);
     tv.setText(mStatusText);
-    iv.setVisibility(View.VISIBLE);
+    tv.setCompoundDrawablesWithIntrinsicBounds(mStatusIcon,0,0,0);
     tv.setVisibility(View.VISIBLE);
   }
 }
