@@ -2,7 +2,6 @@
   super.onCreate(savedInstanceState);
   getWindow().requestFeature(Window.FEATURE_NO_TITLE);
   setContentView(R.layout.account_setup);
-  mRefreshButton=(ImageView)findViewById(R.id.refreshButton);
   mViewPasswordButton=(ImageView)findViewById(R.id.viewPasswordButton);
   mHostUrlInput=(EditText)findViewById(R.id.hostUrlInput);
   mUsernameInput=(EditText)findViewById(R.id.account_username);
@@ -17,6 +16,13 @@
     b.setText(String.format(getString(R.string.auth_register),getString(R.string.app_name)));
   }
   mHostUrlInput.setOnFocusChangeListener(this);
+  mHostUrlInput.setOnTouchListener(new RightDrawableOnTouchListener(){
+    @Override public boolean onDrawableTouch(    final MotionEvent event){
+      AuthenticatorActivity.this.onRefreshClick(mHostUrlInput);
+      return true;
+    }
+  }
+);
   mPasswordInput.setOnFocusChangeListener(this);
   mPasswordInput.setImeOptions(EditorInfo.IME_ACTION_DONE);
   mPasswordInput.setOnEditorActionListener(this);

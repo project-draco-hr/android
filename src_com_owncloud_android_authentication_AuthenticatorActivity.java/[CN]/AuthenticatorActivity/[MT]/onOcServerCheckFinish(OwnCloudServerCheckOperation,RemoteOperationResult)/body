@@ -7,8 +7,12 @@
     mLastSslUntrustedServerResult=result;
     showDialog(DIALOG_SSL_VALIDATOR);
   }
-  if (!mStatusCorrect)   mRefreshButton.setVisibility(View.VISIBLE);
- else   mRefreshButton.setVisibility(View.INVISIBLE);
+  if (!mStatusCorrect) {
+    mHostUrlInput.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_action_refresh_black,0);
+  }
+ else {
+    mHostUrlInput.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0);
+  }
   mDiscoveredVersion=operation.getDiscoveredVersion();
   mHostBaseUrl=mHostUrlInput.getText().toString().trim();
   if (!mHostBaseUrl.toLowerCase().startsWith("http://") && !mHostBaseUrl.toLowerCase().startsWith("https://")) {

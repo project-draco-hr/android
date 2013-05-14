@@ -5,8 +5,12 @@
   mStatusIcon=savedInstanceState.getInt(KEY_STATUS_ICON);
   updateConnStatus();
   mOkButton.setEnabled(mStatusCorrect);
-  if (!mStatusCorrect)   mRefreshButton.setVisibility(View.VISIBLE);
- else   mRefreshButton.setVisibility(View.INVISIBLE);
+  if (!mStatusCorrect) {
+    mHostUrlInput.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_action_refresh_black,0);
+  }
+ else {
+    mHostUrlInput.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0);
+  }
   String ocVersion=savedInstanceState.getString(KEY_OC_VERSION);
   if (ocVersion != null)   mDiscoveredVersion=new OwnCloudVersion(ocVersion);
   mHostBaseUrl=savedInstanceState.getString(KEY_HOST_URL_TEXT);

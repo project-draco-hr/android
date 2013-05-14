@@ -1,0 +1,20 @@
+{
+  if (event.getAction() == MotionEvent.ACTION_DOWN) {
+    Drawable rightDrawable=null;
+    if (view instanceof TextView) {
+      Drawable[] drawables=((TextView)view).getCompoundDrawables();
+      if (drawables.length > 2) {
+        rightDrawable=drawables[2];
+      }
+    }
+    if (rightDrawable != null) {
+      final int x=(int)event.getX();
+      final int y=(int)event.getY();
+      final Rect bounds=rightDrawable.getBounds();
+      if (x >= (view.getRight() - bounds.width() - fuzz) && x <= (view.getRight() - view.getPaddingRight() + fuzz) && y >= (view.getPaddingTop() - fuzz) && y <= (view.getHeight() - view.getPaddingBottom()) + fuzz) {
+        return onDrawableTouch(event);
+      }
+    }
+  }
+  return false;
+}
