@@ -1,0 +1,8 @@
+{
+  if (inputField != null && inputField.equals(mPasswordInput) && actionId == EditorInfo.IME_ACTION_DONE) {
+    if (mOkButton.isEnabled()) {
+      mOkButton.performClick();
+    }
+  }
+  return false;
+}

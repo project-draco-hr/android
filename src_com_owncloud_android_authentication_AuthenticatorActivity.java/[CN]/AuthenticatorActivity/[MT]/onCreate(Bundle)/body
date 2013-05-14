@@ -18,6 +18,8 @@
   }
   mHostUrlInput.setOnFocusChangeListener(this);
   mPasswordInput.setOnFocusChangeListener(this);
+  mPasswordInput.setImeOptions(EditorInfo.IME_ACTION_DONE);
+  mPasswordInput.setOnEditorActionListener(this);
   mAccountMgr=AccountManager.get(this);
   mNewCapturedUriFromOAuth2Redirection=null;
   mAction=getIntent().getByteExtra(EXTRA_ACTION,ACTION_CREATE);
