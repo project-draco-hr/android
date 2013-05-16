@@ -1,9 +1,10 @@
 {
   if (operation.equals(mOcServerChkOperation)) {
-    mServerCheckedAndValid=result.isSuccess();
+    mServerIsChecked=true;
+    mServerIsValid=result.isSuccess();
     mIsSslConn=(result.getCode() == ResultCode.OK_SSL);
     mOcServerChkOperation=null;
-    if (mServerCheckedAndValid) {
+    if (mServerIsValid) {
       hideRefreshButton();
     }
  else {
@@ -17,6 +18,6 @@
     }
     mDiscoveredVersion=operation.getDiscoveredVersion();
     mHostBaseUrl=normalizeUrl(mHostUrlInput.getText().toString());
-    mOkButton.setEnabled(mServerCheckedAndValid);
+    mOkButton.setEnabled(mServerIsValid);
   }
 }

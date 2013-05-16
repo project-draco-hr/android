@@ -22,7 +22,8 @@
   mHostBaseUrl="";
   if (savedInstanceState == null) {
     mServerStatusText=mServerStatusIcon=0;
-    mServerCheckedAndValid=false;
+    mServerIsValid=false;
+    mServerIsChecked=false;
     mIsSslConn=false;
     mAuthStatusText=mAuthStatusIcon=0;
     String tokenType=getIntent().getExtras().getString(AccountAuthenticator.KEY_AUTH_TOKEN_TYPE);
@@ -43,7 +44,8 @@
     changeViewByOAuth2Check(oAuthRequired);
   }
  else {
-    mServerCheckedAndValid=savedInstanceState.getBoolean(KEY_SERVER_CHECKED_AND_VALID);
+    mServerIsValid=savedInstanceState.getBoolean(KEY_SERVER_VALID);
+    mServerIsChecked=savedInstanceState.getBoolean(KEY_SERVER_CHECKED);
     mServerStatusText=savedInstanceState.getInt(KEY_SERVER_STATUS_TEXT);
     mServerStatusIcon=savedInstanceState.getInt(KEY_SERVER_STATUS_ICON);
     mIsSslConn=savedInstanceState.getBoolean(KEY_IS_SSL_CONN);
@@ -61,6 +63,8 @@
   }
   showServerStatus();
   showAuthStatus();
+  if (mServerIsChecked && !mServerIsValid)   showRefreshButton();
+  mOkButton.setEnabled(mServerIsValid);
   if (!OAUTH_MODE_OPTIONAL.equals(getString(R.string.oauth2_mode))) {
     mOAuth2Check.setVisibility(View.GONE);
   }
@@ -68,7 +72,7 @@
     mHostUrlInput.setEnabled(false);
     mUsernameInput.setEnabled(false);
     mOAuth2Check.setVisibility(View.GONE);
-    if (!mServerCheckedAndValid && mOcServerChkOperation == null) {
+    if (!mServerIsValid && mOcServerChkOperation == null) {
       checkOcServer();
     }
   }

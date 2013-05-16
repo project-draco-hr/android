@@ -1,6 +1,7 @@
 {
   String uri=mHostUrlInput.getText().toString().trim();
-  mServerCheckedAndValid=false;
+  mServerIsValid=false;
+  mServerIsChecked=false;
   mOkButton.setEnabled(false);
   mDiscoveredVersion=null;
   hideRefreshButton();
