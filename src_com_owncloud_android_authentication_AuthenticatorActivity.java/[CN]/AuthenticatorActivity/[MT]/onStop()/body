@@ -1,4 +1,0 @@
-{
-  super.onStop();
-  mHostUrlInput.removeTextChangedListener(mHostUrlChangedListener);
-}
