@@ -1,19 +1,20 @@
 {
   String uri=mHostUrlInput.getText().toString().trim();
   if (uri.length() != 0) {
-    mStatusText=R.string.auth_testing_connection;
-    mStatusIcon=R.drawable.progress_small;
-    updateConnStatus();
+    mServerCheckedAndValid=false;
+    mOkButton.setEnabled(false);
+    mServerStatusText=R.string.auth_testing_connection;
+    mServerStatusIcon=R.drawable.progress_small;
+    showServerStatus();
     mOcServerChkOperation=new OwnCloudServerCheckOperation(uri,this);
     WebdavClient client=OwnCloudClientUtils.createOwnCloudClient(Uri.parse(uri),this);
-    mHostBaseUrl="";
     mDiscoveredVersion=null;
     mOperationThread=mOcServerChkOperation.execute(client,this,mHandler);
   }
  else {
     mHostUrlInput.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0);
-    mStatusText=0;
-    mStatusIcon=0;
-    updateConnStatus();
+    mServerStatusText=0;
+    mServerStatusIcon=0;
+    showServerStatus();
   }
 }

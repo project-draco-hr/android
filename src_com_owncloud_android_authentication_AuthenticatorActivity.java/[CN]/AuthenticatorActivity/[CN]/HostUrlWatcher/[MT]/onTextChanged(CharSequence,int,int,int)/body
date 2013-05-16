@@ -1,0 +1,6 @@
+{
+  if (mServerCheckedAndValid) {
+    mServerCheckedAndValid=false;
+    mOkButton.setEnabled(false);
+  }
+}

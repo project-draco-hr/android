@@ -1,0 +1,10 @@
+{
+  if (mServerStatusIcon == 0 && mServerStatusText == 0) {
+    mAuthStatusLayout.setVisibility(View.INVISIBLE);
+  }
+ else {
+    mAuthStatusLayout.setText(mServerStatusText);
+    mAuthStatusLayout.setCompoundDrawablesWithIntrinsicBounds(mServerStatusIcon,0,0,0);
+    mAuthStatusLayout.setVisibility(View.VISIBLE);
+  }
+}

@@ -1,6 +1,6 @@
 {
-  if (view.getId() == R.id.hostUrlInput) {
-    onUrlInputFocusChanged((TextView)view,hasFocus);
+  if (view.getId() == R.id.hostUrlInput && !hasFocus) {
+    onUrlInputFocusLost((TextView)view);
   }
  else   if (view.getId() == R.id.account_password) {
     onPasswordFocusChanged((TextView)view,hasFocus);

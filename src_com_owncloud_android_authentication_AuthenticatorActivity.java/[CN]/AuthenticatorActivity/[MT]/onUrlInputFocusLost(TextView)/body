@@ -1,0 +1,5 @@
+{
+  if (!mHostBaseUrl.equals(normalizeUrl(mHostUrlInput.getText().toString()))) {
+    checkOcServer();
+  }
+}
