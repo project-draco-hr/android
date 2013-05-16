@@ -3,17 +3,17 @@
     mServerCheckedAndValid=result.isSuccess();
     mIsSslConn=(result.getCode() == ResultCode.OK_SSL);
     mOcServerChkOperation=null;
-    updateStatusIconAndText(result);
+    if (mServerCheckedAndValid) {
+      hideRefreshButton();
+    }
+ else {
+      showRefreshButton();
+    }
+    updateServerStatusIconAndText(result);
     showServerStatus();
     if (result.getCode() == ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED) {
       mLastSslUntrustedServerResult=result;
       showDialog(DIALOG_SSL_VALIDATOR);
-    }
-    if (!mServerCheckedAndValid) {
-      mHostUrlInput.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_action_refresh_black,0);
-    }
- else {
-      mHostUrlInput.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0);
     }
     mDiscoveredVersion=operation.getDiscoveredVersion();
     mHostBaseUrl=normalizeUrl(mHostUrlInput.getText().toString());

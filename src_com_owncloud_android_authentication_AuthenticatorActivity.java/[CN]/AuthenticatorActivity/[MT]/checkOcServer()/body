@@ -3,6 +3,7 @@
   mServerCheckedAndValid=false;
   mOkButton.setEnabled(false);
   mDiscoveredVersion=null;
+  hideRefreshButton();
   if (uri.length() != 0) {
     mServerStatusText=R.string.auth_testing_connection;
     mServerStatusIcon=R.drawable.progress_small;
@@ -12,7 +13,6 @@
     mOperationThread=mOcServerChkOperation.execute(client,this,mHandler);
   }
  else {
-    mHostUrlInput.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0);
     mServerStatusText=0;
     mServerStatusIcon=0;
     showServerStatus();

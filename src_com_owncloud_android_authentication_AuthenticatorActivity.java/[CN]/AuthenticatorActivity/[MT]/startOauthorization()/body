@@ -1,6 +1,6 @@
 {
-  mServerStatusIcon=R.drawable.progress_small;
-  mServerStatusText=R.string.oauth_login_connection;
+  mAuthStatusIcon=R.drawable.progress_small;
+  mAuthStatusText=R.string.oauth_login_connection;
   showAuthStatus();
   Uri uri=Uri.parse(mOAuthAuthEndpointText.getText().toString().trim());
   Uri.Builder uriBuilder=uri.buildUpon();

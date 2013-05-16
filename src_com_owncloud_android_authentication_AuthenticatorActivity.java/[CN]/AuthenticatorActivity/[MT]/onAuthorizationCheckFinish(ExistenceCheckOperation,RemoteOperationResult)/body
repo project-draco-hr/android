@@ -15,7 +15,7 @@
     finish();
   }
  else {
-    updateStatusIconAndText(result);
+    updateAuthStatusIconAndText(result);
     showAuthStatus();
     Log_OC.d(TAG,"Access failed: " + result.getLogMessage());
   }
