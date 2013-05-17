@@ -1,0 +1,7 @@
+{
+  int drawable=android.R.drawable.ic_menu_view;
+  if (isPasswordVisible()) {
+    drawable=android.R.drawable.ic_secure;
+  }
+  mPasswordInput.setCompoundDrawablesWithIntrinsicBounds(0,0,drawable,0);
+}

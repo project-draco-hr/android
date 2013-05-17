@@ -1,0 +1,11 @@
+{
+  int selectionStart=mPasswordInput.getSelectionStart();
+  int selectionEnd=mPasswordInput.getSelectionEnd();
+  if (isPasswordVisible()) {
+    hidePassword();
+  }
+ else {
+    showPassword();
+  }
+  mPasswordInput.setSelection(selectionStart,selectionEnd);
+}
