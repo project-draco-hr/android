@@ -1,24 +1,23 @@
 {
-  updateStatusIconAndText(result);
-  updateConnStatus();
-  mStatusCorrect=result.isSuccess();
-  mIsSslConn=(result.getCode() == ResultCode.OK_SSL);
-  if (result.getCode() == ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED) {
-    mLastSslUntrustedServerResult=result;
-    showDialog(DIALOG_SSL_VALIDATOR);
-  }
-  if (!mStatusCorrect)   mRefreshButton.setVisibility(View.VISIBLE);
- else   mRefreshButton.setVisibility(View.INVISIBLE);
-  mDiscoveredVersion=operation.getDiscoveredVersion();
-  mHostBaseUrl=mHostUrlInput.getText().toString().trim();
-  if (!mHostBaseUrl.toLowerCase().startsWith("http://") && !mHostBaseUrl.toLowerCase().startsWith("https://")) {
-    if (mIsSslConn) {
-      mHostBaseUrl="https://" + mHostBaseUrl;
+  if (operation.equals(mOcServerChkOperation)) {
+    mServerIsChecked=true;
+    mServerIsValid=result.isSuccess();
+    mIsSslConn=(result.getCode() == ResultCode.OK_SSL);
+    mOcServerChkOperation=null;
+    if (mServerIsValid) {
+      hideRefreshButton();
     }
  else {
-      mHostBaseUrl="http://" + mHostBaseUrl;
+      showRefreshButton();
     }
+    updateServerStatusIconAndText(result);
+    showServerStatus();
+    if (result.getCode() == ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED) {
+      mLastSslUntrustedServerResult=result;
+      showDialog(DIALOG_SSL_VALIDATOR);
+    }
+    mDiscoveredVersion=operation.getDiscoveredVersion();
+    mHostBaseUrl=normalizeUrl(mHostUrlInput.getText().toString());
+    mOkButton.setEnabled(mServerIsValid);
   }
-  if (mHostBaseUrl.endsWith("/"))   mHostBaseUrl=mHostBaseUrl.substring(0,mHostBaseUrl.length() - 1);
-  mOkButton.setEnabled(mStatusCorrect);
 }

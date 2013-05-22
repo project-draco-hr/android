@@ -2,7 +2,6 @@
   super.onCreate(savedInstanceState);
   getWindow().requestFeature(Window.FEATURE_NO_TITLE);
   setContentView(R.layout.account_setup);
-  mRefreshButton=(ImageView)findViewById(R.id.refreshButton);
   mViewPasswordButton=(ImageView)findViewById(R.id.viewPasswordButton);
   mHostUrlInput=(EditText)findViewById(R.id.hostUrlInput);
   mUsernameInput=(EditText)findViewById(R.id.account_username);
@@ -16,16 +15,17 @@
   if (b != null) {
     b.setText(String.format(getString(R.string.auth_register),getString(R.string.app_name)));
   }
-  mHostUrlInput.setOnFocusChangeListener(this);
-  mPasswordInput.setOnFocusChangeListener(this);
   mAccountMgr=AccountManager.get(this);
   mNewCapturedUriFromOAuth2Redirection=null;
   mAction=getIntent().getByteExtra(EXTRA_ACTION,ACTION_CREATE);
   mAccount=null;
+  mHostBaseUrl="";
   if (savedInstanceState == null) {
-    mStatusText=mStatusIcon=0;
-    mStatusCorrect=false;
+    mServerStatusText=mServerStatusIcon=0;
+    mServerIsValid=false;
+    mServerIsChecked=false;
     mIsSslConn=false;
+    mAuthStatusText=mAuthStatusIcon=0;
     String tokenType=getIntent().getExtras().getString(AccountAuthenticator.KEY_AUTH_TOKEN_TYPE);
     boolean oAuthRequired=AccountAuthenticator.AUTH_TOKEN_TYPE_ACCESS_TOKEN.equals(tokenType) || OAUTH_MODE_ON.equals(getString(R.string.oauth2_mode));
     mAccount=getIntent().getExtras().getParcelable(EXTRA_ACCOUNT);
@@ -34,7 +34,7 @@
       if (ocVersion != null) {
         mDiscoveredVersion=new OwnCloudVersion(ocVersion);
       }
-      mHostBaseUrl=mAccountMgr.getUserData(mAccount,AccountAuthenticator.KEY_OC_BASE_URL);
+      mHostBaseUrl=normalizeUrl(mAccountMgr.getUserData(mAccount,AccountAuthenticator.KEY_OC_BASE_URL));
       mHostUrlInput.setText(mHostBaseUrl);
       String userName=mAccount.name.substring(0,mAccount.name.lastIndexOf('@'));
       mUsernameInput.setText(userName);
@@ -44,8 +44,27 @@
     changeViewByOAuth2Check(oAuthRequired);
   }
  else {
-    loadSavedInstanceState(savedInstanceState);
+    mServerIsValid=savedInstanceState.getBoolean(KEY_SERVER_VALID);
+    mServerIsChecked=savedInstanceState.getBoolean(KEY_SERVER_CHECKED);
+    mServerStatusText=savedInstanceState.getInt(KEY_SERVER_STATUS_TEXT);
+    mServerStatusIcon=savedInstanceState.getInt(KEY_SERVER_STATUS_ICON);
+    mIsSslConn=savedInstanceState.getBoolean(KEY_IS_SSL_CONN);
+    mAuthStatusText=savedInstanceState.getInt(KEY_AUTH_STATUS_TEXT);
+    mAuthStatusIcon=savedInstanceState.getInt(KEY_AUTH_STATUS_ICON);
+    String ocVersion=savedInstanceState.getString(KEY_OC_VERSION);
+    if (ocVersion != null) {
+      mDiscoveredVersion=new OwnCloudVersion(ocVersion);
+    }
+    mHostBaseUrl=savedInstanceState.getString(KEY_HOST_URL_TEXT);
+    mAccount=savedInstanceState.getParcelable(KEY_ACCOUNT);
+    if (savedInstanceState.getBoolean(KEY_SERVER_CHECK_IN_PROGRESS,false)) {
+      checkOcServer();
+    }
   }
+  showServerStatus();
+  showAuthStatus();
+  if (mServerIsChecked && !mServerIsValid)   showRefreshButton();
+  mOkButton.setEnabled(mServerIsValid);
   if (!OAUTH_MODE_OPTIONAL.equals(getString(R.string.oauth2_mode))) {
     mOAuth2Check.setVisibility(View.GONE);
   }
@@ -53,8 +72,33 @@
     mHostUrlInput.setEnabled(false);
     mUsernameInput.setEnabled(false);
     mOAuth2Check.setVisibility(View.GONE);
-    checkOcServer();
+    if (!mServerIsValid && mOcServerChkOperation == null) {
+      checkOcServer();
+    }
   }
   mPasswordInput.setText("");
   mJustCreated=true;
+  mHostUrlInput.setOnFocusChangeListener(this);
+  mHostUrlInput.setOnTouchListener(new RightDrawableOnTouchListener(){
+    @Override public boolean onDrawableTouch(    final MotionEvent event){
+      AuthenticatorActivity.this.onRefreshClick(mHostUrlInput);
+      return true;
+    }
+  }
+);
+  mHostUrlInput.addTextChangedListener(new TextWatcher(){
+    @Override public void afterTextChanged(    Editable s){
+      if (!mHostBaseUrl.equals(normalizeUrl(mHostUrlInput.getText().toString()))) {
+        mOkButton.setEnabled(false);
+      }
+    }
+    @Override public void beforeTextChanged(    CharSequence s,    int start,    int count,    int after){
+    }
+    @Override public void onTextChanged(    CharSequence s,    int start,    int before,    int count){
+    }
+  }
+);
+  mPasswordInput.setOnFocusChangeListener(this);
+  mPasswordInput.setImeOptions(EditorInfo.IME_ACTION_DONE);
+  mPasswordInput.setOnEditorActionListener(this);
 }

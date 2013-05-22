@@ -1,8 +1,0 @@
-{
-  if (!hasFocus) {
-    checkOcServer();
-  }
- else {
-    mOkButton.setEnabled(false);
-  }
-}

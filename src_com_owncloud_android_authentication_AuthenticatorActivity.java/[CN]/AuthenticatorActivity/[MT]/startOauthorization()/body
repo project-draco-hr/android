@@ -1,7 +1,7 @@
 {
-  mStatusIcon=R.drawable.progress_small;
-  mStatusText=R.string.oauth_login_connection;
-  updateAuthStatus();
+  mAuthStatusIcon=R.drawable.progress_small;
+  mAuthStatusText=R.string.oauth_login_connection;
+  showAuthStatus();
   Uri uri=Uri.parse(mOAuthAuthEndpointText.getText().toString().trim());
   Uri.Builder uriBuilder=uri.buildUpon();
   uriBuilder.appendQueryParameter(OAuth2Constants.KEY_RESPONSE_TYPE,getString(R.string.oauth2_response_type));
