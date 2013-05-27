@@ -2,7 +2,7 @@
 switch (item.getItemId()) {
 case R.id.action_open_file_with:
 {
-      openFile();
+      mContainerActivity.openFile(mFile);
       return true;
     }
 case R.id.action_remove_file:

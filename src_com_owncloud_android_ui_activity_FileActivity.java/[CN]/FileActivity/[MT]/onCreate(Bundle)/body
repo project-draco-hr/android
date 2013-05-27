@@ -11,4 +11,5 @@
   if (mAccount != null && AccountUtils.setCurrentOwnCloudAccount(getApplicationContext(),mAccount.name)) {
     onAccountChanged();
   }
+  mFileHandler=new FileHandlerImpl();
 }
