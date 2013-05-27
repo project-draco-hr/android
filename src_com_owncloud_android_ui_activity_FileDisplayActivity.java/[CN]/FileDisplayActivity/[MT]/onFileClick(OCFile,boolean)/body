@@ -1,29 +1,34 @@
 {
-  if (file != null && PreviewImageFragment.canBePreviewed(file)) {
-    startPreviewImage(file);
-  }
- else   if (file != null && PreviewMediaFragment.canBePreviewed(file)) {
-    if (file.isDown()) {
-      if (!onOrientationChange) {
-        startMediaPreview(file,0,true,onOrientationChange);
+  if (file != null) {
+    if (PreviewImageFragment.canBePreviewed(file)) {
+      startPreviewImage(file);
+    }
+ else     if (PreviewMediaFragment.canBePreviewed(file)) {
+      if (file.isDown()) {
+        if (!onOrientationChange) {
+          startMediaPreview(file,0,true,onOrientationChange);
+        }
+ else {
+          int startPlaybackPosition=0;
+          boolean autoplay=true;
+          Fragment fragment=getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
+          if (fragment != null && file.isVideo()) {
+            PreviewMediaFragment videoFragment=(PreviewMediaFragment)fragment;
+            startPlaybackPosition=videoFragment.getPosition();
+            autoplay=videoFragment.isPlaying();
+          }
+          startMediaPreview(file,startPlaybackPosition,autoplay,onOrientationChange);
+        }
       }
  else {
-        int startPlaybackPosition=0;
-        boolean autoplay=true;
-        Fragment fragment=getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
-        if (fragment != null && file.isVideo()) {
-          PreviewMediaFragment videoFragment=(PreviewMediaFragment)fragment;
-          startPlaybackPosition=videoFragment.getPosition();
-          autoplay=videoFragment.isPlaying();
-        }
-        startMediaPreview(file,startPlaybackPosition,autoplay,onOrientationChange);
+        startDownloadForPreview(file,onOrientationChange);
       }
+    }
+ else     if (file.isDown()) {
+      startDetails(file,onOrientationChange);
     }
  else {
       startDownloadForPreview(file,onOrientationChange);
     }
-  }
- else {
-    startDetails(file,onOrientationChange);
   }
 }
