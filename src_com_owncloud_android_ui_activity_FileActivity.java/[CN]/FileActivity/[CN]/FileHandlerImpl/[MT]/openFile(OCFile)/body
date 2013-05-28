@@ -16,10 +16,10 @@
     }
     Intent chooserIntent=null;
     if (intentForGuessedMimeType != null) {
-      chooserIntent=Intent.createChooser(intentForGuessedMimeType,null);
+      chooserIntent=Intent.createChooser(intentForGuessedMimeType,getString(R.string.actionbar_open_with));
     }
  else {
-      chooserIntent=Intent.createChooser(intentForSavedMimeType,null);
+      chooserIntent=Intent.createChooser(intentForSavedMimeType,getString(R.string.actionbar_open_with));
     }
     startActivity(chooserIntent);
   }

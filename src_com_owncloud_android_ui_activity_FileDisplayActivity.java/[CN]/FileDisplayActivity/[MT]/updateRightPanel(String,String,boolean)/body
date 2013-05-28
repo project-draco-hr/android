@@ -21,6 +21,7 @@
         }
  else {
           detailsFragment.updateFileDetails(false,(success));
+          openFile(mWaitingToPreview);
         }
         mWaitingToPreview=null;
       }
