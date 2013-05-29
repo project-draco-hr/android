@@ -24,8 +24,8 @@
         startDownloadForPreview(file,onOrientationChange);
       }
     }
- else     if (file.isDown()) {
-      startDetails(file,onOrientationChange);
+ else     if (file.isDown() && !onOrientationChange) {
+      openFile(file);
     }
  else {
       startDownloadForPreview(file,onOrientationChange);
