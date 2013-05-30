@@ -1,0 +1,7 @@
+{
+  Fragment detailFragment=new FileDetailFragment(file,getAccount());
+  setSecondFragment(detailFragment);
+  mWaitingToPreview=file;
+  requestForDownload();
+  updateNavigationElementsInActionBar(getFile(),file);
+}

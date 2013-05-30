@@ -54,7 +54,7 @@ catch (  NoSuchFieldError e) {
   }
 catch (  Throwable t) {
     mErrorMessageId=R.string.common_error_unknown;
-    Log_OC.e(TAG,"Unexpected error loading " + mFile.getStoragePath(),t);
+    Log_OC.e(TAG,"Unexpected error loading " + getFile().getStoragePath(),t);
   }
   return result;
 }

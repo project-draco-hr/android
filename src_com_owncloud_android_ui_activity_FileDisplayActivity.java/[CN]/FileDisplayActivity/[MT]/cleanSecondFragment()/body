@@ -1,0 +1,10 @@
+{
+  if (mDualPane) {
+    Fragment fileFragment=getSupportFragmentManager().findFragmentById(R.id.right_fragment_container);
+    if (fileFragment != null && (fileFragment instanceof PreviewMediaFragment || !((FileDetailFragment)fileFragment).isEmpty())) {
+      FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
+      transaction.replace(R.id.right_fragment_container,new FileDetailFragment(null,null));
+      transaction.commit();
+    }
+  }
+}

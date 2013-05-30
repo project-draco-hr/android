@@ -3,20 +3,20 @@
   mStorageManager=new FileDataStorageManager(mAccount,getActivity().getApplicationContext().getContentResolver());
   if (savedInstanceState != null) {
     if (!mIgnoreFirstSavedState) {
-      mFile=savedInstanceState.getParcelable(PreviewImageFragment.EXTRA_FILE);
+      setFile((OCFile)savedInstanceState.getParcelable(PreviewImageFragment.EXTRA_FILE));
       mAccount=savedInstanceState.getParcelable(PreviewImageFragment.EXTRA_ACCOUNT);
     }
  else {
       mIgnoreFirstSavedState=false;
     }
   }
-  if (mFile == null) {
+  if (getFile() == null) {
     throw new IllegalStateException("Instanced with a NULL OCFile");
   }
   if (mAccount == null) {
     throw new IllegalStateException("Instanced with a NULL ownCloud Account");
   }
-  if (!mFile.isDown()) {
+  if (!getFile().isDown()) {
     throw new IllegalStateException("There is no local file to preview");
   }
 }

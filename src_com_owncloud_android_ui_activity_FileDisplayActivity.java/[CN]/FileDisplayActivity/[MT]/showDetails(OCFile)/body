@@ -1,0 +1,5 @@
+{
+  Fragment detailFragment=new FileDetailFragment(file,getAccount());
+  setSecondFragment(detailFragment);
+  updateNavigationElementsInActionBar(getFile(),file);
+}

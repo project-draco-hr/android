@@ -1,7 +1,6 @@
 {
-  mFile=null;
+  super();
   mAccount=null;
-  mStorageManager=null;
   mProgressListener=null;
   mListening=false;
   mIgnoreFirstSavedState=false;

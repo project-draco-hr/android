@@ -13,13 +13,14 @@
  else {
     return;
   }
-  if (mFileList != null)   mFileList.listDirectory();
-  if (mDualPane) {
-    Fragment fragment=getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
-    if (fragment != null && fragment instanceof FileDetailFragment) {
-      FileDetailFragment detailFragment=(FileDetailFragment)fragment;
-      detailFragment.listenForTransferProgress();
-      detailFragment.updateFileDetails(false,false);
-    }
+  OCFileListFragment listOfFiles=getListOfFilesFragment();
+  if (listOfFiles != null) {
+    listOfFiles.listDirectory();
+  }
+  FileFragment secondFragment=getSecondFragment();
+  if (secondFragment != null && secondFragment instanceof FileDetailFragment) {
+    FileDetailFragment detailFragment=(FileDetailFragment)secondFragment;
+    detailFragment.listenForTransferProgress();
+    detailFragment.updateFileDetails(false,false);
   }
 }

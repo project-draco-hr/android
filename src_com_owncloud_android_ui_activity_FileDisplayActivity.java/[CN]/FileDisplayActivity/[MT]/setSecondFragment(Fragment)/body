@@ -1,0 +1,15 @@
+{
+  FragmentManager fm=getSupportFragmentManager();
+  FragmentTransaction transaction=fm.beginTransaction();
+  if (mDualPane) {
+    transaction.replace(R.id.right_fragment_container,fragment);
+  }
+ else {
+    transaction.replace(R.id.single_fragment_container,fragment);
+    while (fm.getBackStackEntryCount() > 0) {
+      fm.popBackStackImmediate();
+    }
+    transaction.addToBackStack(null);
+  }
+  transaction.commit();
+}

@@ -1,0 +1,31 @@
+{
+  FileFragment secondFragment=getSecondFragment();
+  boolean waitedPreview=(mWaitingToPreview != null && mWaitingToPreview.getRemotePath().equals(downloadedRemotePath));
+  if (secondFragment != null && secondFragment instanceof FileDetailFragment) {
+    FileDetailFragment detailsFragment=(FileDetailFragment)secondFragment;
+    OCFile fileInFragment=detailsFragment.getFile();
+    if (fileInFragment != null && !downloadedRemotePath.equals(fileInFragment.getRemotePath())) {
+      mWaitingToPreview=null;
+    }
+ else     if (downloadEvent.equals(FileDownloader.DOWNLOAD_ADDED_MESSAGE)) {
+      detailsFragment.listenForTransferProgress();
+      detailsFragment.updateFileDetails(true,false);
+    }
+ else     if (downloadEvent.equals(FileDownloader.DOWNLOAD_FINISH_MESSAGE)) {
+      if (success && waitedPreview) {
+        mWaitingToPreview=mStorageManager.getFileById(mWaitingToPreview.getFileId());
+        if (PreviewMediaFragment.canBePreviewed(mWaitingToPreview)) {
+          startMediaPreview(mWaitingToPreview,0,true);
+        }
+ else {
+          detailsFragment.updateFileDetails(false,(success));
+          openFile(mWaitingToPreview);
+        }
+        mWaitingToPreview=null;
+      }
+ else {
+        detailsFragment.updateFileDetails(false,(success));
+      }
+    }
+  }
+}

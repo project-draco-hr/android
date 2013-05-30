@@ -1,6 +1,6 @@
 {
   if (mDualPane) {
-    FileFragment details=(FileFragment)getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
+    FileFragment details=(FileFragment)getSupportFragmentManager().findFragmentById(R.id.right_fragment_container);
     if (details != null && details instanceof FileDetailFragment && file.equals(details.getFile())) {
       if (downloading || uploading) {
         ((FileDetailFragment)details).updateFileDetails(file,getAccount());

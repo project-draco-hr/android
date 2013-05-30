@@ -1,9 +1,0 @@
-{
-  super.onConfigurationChanged(newConfig);
-  if (mStarted) {
-    checkConfigurationChange(newConfig);
-  }
- else {
-    mNewConfigurationChangeToApplyOnStart=newConfig;
-  }
-}

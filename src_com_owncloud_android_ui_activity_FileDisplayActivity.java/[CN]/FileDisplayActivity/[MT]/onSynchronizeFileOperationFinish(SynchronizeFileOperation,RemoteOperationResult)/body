@@ -15,7 +15,7 @@
   }
  else {
     if (operation.transferWasRequested()) {
-      mFileList.listDirectory();
+      refeshListOfFilesFragment();
       onTransferStateChanged(syncedFile,true,true);
     }
  else {

@@ -4,9 +4,6 @@
   boolean sameAccount=getAccount() != null && accountName.equals(getAccount().name);
   boolean isDescendant=(getFile() != null) && (uploadedRemotePath != null) && (uploadedRemotePath.startsWith(getFile().getRemotePath()));
   if (sameAccount && isDescendant) {
-    OCFileListFragment fileListFragment=(OCFileListFragment)getSupportFragmentManager().findFragmentById(R.id.fileList);
-    if (fileListFragment != null) {
-      fileListFragment.listDirectory();
-    }
+    refeshListOfFilesFragment();
   }
 }

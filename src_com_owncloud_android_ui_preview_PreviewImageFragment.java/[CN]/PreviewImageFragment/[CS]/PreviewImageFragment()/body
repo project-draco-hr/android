@@ -1,5 +1,5 @@
 {
-  mFile=null;
+  super();
   mAccount=null;
   mStorageManager=null;
   mIgnoreFirstSavedState=false;

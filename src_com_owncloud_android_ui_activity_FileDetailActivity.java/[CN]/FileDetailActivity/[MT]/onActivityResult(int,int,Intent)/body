@@ -1,4 +1,0 @@
-{
-  Log_OC.e(TAG,"onActivityResult");
-  super.onActivityResult(requestCode,resultCode,data);
-}

@@ -1,6 +1,6 @@
 {
   boolean inDisplayActivity=getActivity() instanceof FileDisplayActivity;
-  getActivity().dismissDialog((inDisplayActivity) ? FileDisplayActivity.DIALOG_SHORT_WAIT : FileDetailActivity.DIALOG_SHORT_WAIT);
+  getActivity().dismissDialog(FileDisplayActivity.DIALOG_SHORT_WAIT);
   if (result.isSuccess()) {
     updateFileDetails(((RenameFileOperation)operation).getFile(),mAccount);
     mContainerActivity.onFileStateChanged();

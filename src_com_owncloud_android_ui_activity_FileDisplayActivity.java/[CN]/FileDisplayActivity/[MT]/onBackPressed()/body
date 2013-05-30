@@ -1,21 +1,17 @@
 {
-  if (mDirectories.getCount() <= 1) {
-    finish();
-    return;
-  }
-  popDirname();
-  mFileList.onNavigateUp();
-  setFile(mFileList.getCurrentFile());
-  if (mDualPane) {
-    Fragment fileFragment=getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
-    if (fileFragment != null && (fileFragment instanceof PreviewMediaFragment || !((FileDetailFragment)fileFragment).isEmpty())) {
-      FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
-      transaction.replace(R.id.file_details_container,new FileDetailFragment(null,null),FileDetailFragment.FTAG);
-      transaction.commit();
+  OCFileListFragment listOfFiles=getListOfFilesFragment();
+  if (listOfFiles != null) {
+    if (mDirectories.getCount() <= 1) {
+      finish();
+      return;
     }
+    popDirname();
+    listOfFiles.onBrowseUp();
+    setFile(listOfFiles.getCurrentFile());
+    cleanSecondFragment();
   }
-  if (getFile().getParentId() == 0) {
-    ActionBar actionBar=getSupportActionBar();
-    actionBar.setDisplayHomeAsUpEnabled(false);
+ else {
+    super.onBackPressed();
   }
+  updateNavigationElementsInActionBar(getFile(),null);
 }

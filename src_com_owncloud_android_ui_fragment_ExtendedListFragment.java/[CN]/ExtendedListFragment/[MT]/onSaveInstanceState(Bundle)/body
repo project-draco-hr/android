@@ -1,0 +1,5 @@
+{
+  super.onSaveInstanceState(savedInstanceState);
+  Log_OC.e(TAG,"onSaveInstanceState()");
+  savedInstanceState.putInt(KEY_SAVED_LIST_POSITION,getReferencePosition());
+}

@@ -1,4 +1,4 @@
 {
   stopPreview(false);
-  ((FileFragment.ContainerActivity)getActivity()).showFragmentWithDetails(mFile);
+  ((FileFragment.ContainerActivity)getActivity()).showDetails(getFile());
 }

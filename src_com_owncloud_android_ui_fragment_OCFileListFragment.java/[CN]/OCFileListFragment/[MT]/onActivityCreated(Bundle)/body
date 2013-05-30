@@ -1,15 +1,9 @@
 {
-  Log_OC.i(TAG,"onActivityCreated() start");
   super.onActivityCreated(savedInstanceState);
+  Log_OC.e(TAG,"onActivityCreated() start");
   mAdapter=new FileListListAdapter(mContainerActivity.getInitialDirectory(),mContainerActivity.getStorageManager(),getActivity(),mContainerActivity);
   setListAdapter(mAdapter);
-  if (savedInstanceState != null) {
-    Log_OC.i(TAG,"savedInstanceState is not null");
-    int position=savedInstanceState.getInt(SAVED_LIST_POSITION);
-    setReferencePosition(position);
-  }
   registerForContextMenu(getListView());
   getListView().setOnCreateContextMenuListener(this);
   mHandler=new Handler();
-  Log_OC.i(TAG,"onActivityCreated() stop");
 }

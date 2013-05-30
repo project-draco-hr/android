@@ -2,7 +2,7 @@
   super.onCreateView(inflater,container,savedInstanceState);
   if (savedInstanceState != null) {
     if (!mIgnoreFirstSavedState) {
-      mFile=savedInstanceState.getParcelable(FileDownloadFragment.EXTRA_FILE);
+      setFile((OCFile)savedInstanceState.getParcelable(FileDownloadFragment.EXTRA_FILE));
       mAccount=savedInstanceState.getParcelable(FileDownloadFragment.EXTRA_ACCOUNT);
       mError=savedInstanceState.getBoolean(FileDownloadFragment.EXTRA_ERROR);
     }

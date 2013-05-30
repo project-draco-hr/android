@@ -1,6 +1,6 @@
 {
-  Log_OC.d(TAG,"onResume() start");
   super.onResume();
+  Log_OC.e(TAG,"onResume() start");
   IntentFilter syncIntentFilter=new IntentFilter(FileSyncService.SYNC_MESSAGE);
   mSyncBroadcastReceiver=new SyncBroadcastReceiver();
   registerReceiver(mSyncBroadcastReceiver,syncIntentFilter);
@@ -11,6 +11,9 @@
   downloadIntentFilter.addAction(FileDownloader.DOWNLOAD_FINISH_MESSAGE);
   mDownloadFinishReceiver=new DownloadFinishReceiver();
   registerReceiver(mDownloadFinishReceiver,downloadIntentFilter);
-  mFileList.listDirectory(getFile());
+  OCFileListFragment listOfFiles=getListOfFilesFragment();
+  if (listOfFiles != null) {
+    listOfFiles.listDirectory(getFile());
+  }
   Log_OC.d(TAG,"onResume() end");
 }

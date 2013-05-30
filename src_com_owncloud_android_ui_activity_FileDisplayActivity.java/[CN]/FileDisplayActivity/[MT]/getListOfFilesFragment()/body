@@ -1,0 +1,14 @@
+{
+  if (mDualPane) {
+    return (OCFileListFragment)getSupportFragmentManager().findFragmentById(R.id.list_of_files_fragment);
+  }
+ else {
+    Fragment singleFragment=getSupportFragmentManager().findFragmentById(R.id.single_fragment_container);
+    if (singleFragment instanceof OCFileListFragment) {
+      return (OCFileListFragment)singleFragment;
+    }
+ else {
+      return null;
+    }
+  }
+}

@@ -68,7 +68,7 @@ return true;
 }
 case R.id.action_see_details:
 {
-((FileFragment.ContainerActivity)getActivity()).showFragmentWithDetails(mTargetFile);
+((FileFragment.ContainerActivity)getActivity()).showDetails(mTargetFile);
 return true;
 }
 default :

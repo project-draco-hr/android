@@ -3,10 +3,8 @@
   String downloadedRemotePath=intent.getStringExtra(FileDownloader.EXTRA_REMOTE_PATH);
   boolean isDescendant=isDescendant(downloadedRemotePath);
   if (sameAccount && isDescendant) {
-    updateLeftPanel();
-    if (mDualPane) {
-      updateRightPanel(intent.getAction(),downloadedRemotePath,intent.getBooleanExtra(FileDownloader.EXTRA_DOWNLOAD_RESULT,false));
-    }
+    refeshListOfFilesFragment();
+    updateSecondFragment(intent.getAction(),downloadedRemotePath,intent.getBooleanExtra(FileDownloader.EXTRA_DOWNLOAD_RESULT,false));
   }
   removeStickyBroadcast(intent);
 }

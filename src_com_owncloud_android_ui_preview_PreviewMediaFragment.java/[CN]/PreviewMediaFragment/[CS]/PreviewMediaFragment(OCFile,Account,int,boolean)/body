@@ -1,5 +1,5 @@
 {
-  mFile=fileToDetail;
+  super(fileToDetail);
   mAccount=ocAccount;
   mSavedPlaybackPosition=startPlaybackPosition;
   mStorageManager=null;

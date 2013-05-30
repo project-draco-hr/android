@@ -1,5 +1,5 @@
 {
-  Log_OC.e(TAG,"onStart en FileActivity");
+  Log_OC.d(TAG,"onStart en FileActivity");
   super.onStart();
   if (mAccount == null || !AccountUtils.setCurrentOwnCloudAccount(getApplicationContext(),mAccount.name)) {
     if (!AccountUtils.accountsAreSetup(getApplicationContext())) {
