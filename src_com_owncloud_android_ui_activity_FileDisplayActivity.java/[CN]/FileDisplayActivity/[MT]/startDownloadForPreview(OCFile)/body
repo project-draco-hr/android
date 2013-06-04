@@ -3,5 +3,6 @@
   setSecondFragment(detailFragment);
   mWaitingToPreview=file;
   requestForDownload();
+  updateFragmentsVisibility(true);
   updateNavigationElementsInActionBar(getFile(),file);
 }

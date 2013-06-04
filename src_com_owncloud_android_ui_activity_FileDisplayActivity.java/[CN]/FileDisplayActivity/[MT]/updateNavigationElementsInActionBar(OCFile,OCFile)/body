@@ -1,6 +1,6 @@
 {
   ActionBar actionBar=getSupportActionBar();
-  if (currentFile == null) {
+  if (currentFile == null || mDualPane) {
     actionBar.setDisplayHomeAsUpEnabled(currentDir != null && currentDir.getParentId() != 0);
     actionBar.setDisplayShowTitleEnabled(false);
     actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);

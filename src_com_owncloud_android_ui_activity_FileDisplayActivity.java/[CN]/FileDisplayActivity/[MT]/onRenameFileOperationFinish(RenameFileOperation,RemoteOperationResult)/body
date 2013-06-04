@@ -3,7 +3,7 @@
   OCFile renamedFile=operation.getFile();
   if (result.isSuccess()) {
     if (mDualPane) {
-      FileFragment details=(FileFragment)getSupportFragmentManager().findFragmentById(R.id.right_fragment_container);
+      FileFragment details=getSecondFragment();
       if (details != null && details instanceof FileDetailFragment && renamedFile.equals(details.getFile())) {
         ((FileDetailFragment)details).updateFileDetails(renamedFile,getAccount());
       }

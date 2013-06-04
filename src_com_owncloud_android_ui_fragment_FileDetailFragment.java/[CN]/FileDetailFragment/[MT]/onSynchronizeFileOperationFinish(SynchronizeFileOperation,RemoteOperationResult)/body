@@ -1,5 +1,4 @@
 {
-  boolean inDisplayActivity=getActivity() instanceof FileDisplayActivity;
   getActivity().dismissDialog(FileDisplayActivity.DIALOG_SHORT_WAIT);
   OCFile file=getFile();
   if (!result.isSuccess()) {

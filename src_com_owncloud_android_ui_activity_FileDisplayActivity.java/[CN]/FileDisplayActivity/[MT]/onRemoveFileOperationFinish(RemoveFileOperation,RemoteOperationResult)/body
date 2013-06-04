@@ -5,11 +5,9 @@
     msg.show();
     OCFile removedFile=operation.getFile();
     getSecondFragment();
-    if (mDualPane) {
-      FileFragment second=getSecondFragment();
-      if (second != null && removedFile.equals(second.getFile())) {
-        cleanSecondFragment();
-      }
+    FileFragment second=getSecondFragment();
+    if (second != null && removedFile.equals(second.getFile())) {
+      cleanSecondFragment();
     }
     if (mStorageManager.getFileById(removedFile.getParentId()).equals(getFile())) {
       refeshListOfFilesFragment();

@@ -1,5 +1,6 @@
 {
   Fragment detailFragment=new FileDetailFragment(file,getAccount());
   setSecondFragment(detailFragment);
+  updateFragmentsVisibility(true);
   updateNavigationElementsInActionBar(getFile(),file);
 }

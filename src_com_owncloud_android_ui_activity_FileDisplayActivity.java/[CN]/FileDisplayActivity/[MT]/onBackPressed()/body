@@ -1,17 +1,16 @@
 {
-  OCFileListFragment listOfFiles=getListOfFilesFragment();
-  if (listOfFiles != null) {
-    if (mDirectories.getCount() <= 1) {
-      finish();
-      return;
+  if (mDualPane || getSecondFragment() == null) {
+    OCFileListFragment listOfFiles=getListOfFilesFragment();
+    if (listOfFiles != null) {
+      if (mDirectories.getCount() <= 1) {
+        finish();
+        return;
+      }
+      popDirname();
+      listOfFiles.onBrowseUp();
+      setFile(listOfFiles.getCurrentFile());
     }
-    popDirname();
-    listOfFiles.onBrowseUp();
-    setFile(listOfFiles.getCurrentFile());
-    cleanSecondFragment();
   }
- else {
-    super.onBackPressed();
-  }
+  cleanSecondFragment();
   updateNavigationElementsInActionBar(getFile(),null);
 }

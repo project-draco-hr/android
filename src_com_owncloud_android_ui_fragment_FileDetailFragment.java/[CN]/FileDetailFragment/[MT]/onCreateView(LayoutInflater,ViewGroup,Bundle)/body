@@ -1,5 +1,4 @@
 {
-  super.onCreateView(inflater,container,savedInstanceState);
   if (savedInstanceState != null) {
     setFile((OCFile)savedInstanceState.getParcelable(FileActivity.EXTRA_FILE));
     mAccount=savedInstanceState.getParcelable(FileActivity.EXTRA_ACCOUNT);
@@ -8,7 +7,7 @@
     mLayout=R.layout.file_details_fragment;
   }
   View view=null;
-  view=inflater.inflate(mLayout,container,false);
+  view=inflater.inflate(mLayout,null);
   mView=view;
   if (mLayout == R.layout.file_details_fragment) {
     mView.findViewById(R.id.fdKeepInSync).setOnClickListener(this);

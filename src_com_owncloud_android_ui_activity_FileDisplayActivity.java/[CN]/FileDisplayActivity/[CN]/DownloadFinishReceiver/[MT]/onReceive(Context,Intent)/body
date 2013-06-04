@@ -4,7 +4,7 @@
   boolean isDescendant=isDescendant(downloadedRemotePath);
   if (sameAccount && isDescendant) {
     refeshListOfFilesFragment();
-    updateSecondFragment(intent.getAction(),downloadedRemotePath,intent.getBooleanExtra(FileDownloader.EXTRA_DOWNLOAD_RESULT,false));
+    refreshSecondFragment(intent.getAction(),downloadedRemotePath,intent.getBooleanExtra(FileDownloader.EXTRA_DOWNLOAD_RESULT,false));
   }
   removeStickyBroadcast(intent);
 }

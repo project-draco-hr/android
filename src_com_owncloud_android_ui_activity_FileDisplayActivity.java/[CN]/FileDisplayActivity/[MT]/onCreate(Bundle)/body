@@ -1,5 +1,6 @@
 {
   Log_OC.d(TAG,"onCreate() start");
+  requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
   super.onCreate(savedInstanceState);
   mHandler=new Handler();
   mUploadConnection=new ListServiceConnection();
@@ -18,13 +19,15 @@
  else {
     mWaitingToPreview=null;
   }
-  requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
   setContentView(R.layout.files);
-  mDualPane=(findViewById(R.id.right_fragment_container) != null);
+  mDualPane=getResources().getBoolean(R.bool.large_land_layout);
+  mLeftFragmentContainer=findViewById(R.id.left_fragment_container);
+  mRightFragmentContainer=findViewById(R.id.right_fragment_container);
   if (savedInstanceState == null) {
-    Fragment secondFragment=chooseSecondFragment(mChosenFile);
-    mChosenFile=null;
-    initFragments(secondFragment);
+    createMinFragments();
+    if (!isRedirectingToSetupAccount()) {
+      initFragmentsWithFile();
+    }
   }
   mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
   OCFile currFile=getFile();

@@ -1,14 +1,8 @@
 {
-  if (mDualPane) {
-    return (OCFileListFragment)getSupportFragmentManager().findFragmentById(R.id.list_of_files_fragment);
+  Fragment listOfFiles=getSupportFragmentManager().findFragmentByTag(FileDisplayActivity.TAG_LIST_OF_FILES);
+  if (listOfFiles != null) {
+    return (OCFileListFragment)listOfFiles;
   }
- else {
-    Fragment singleFragment=getSupportFragmentManager().findFragmentById(R.id.single_fragment_container);
-    if (singleFragment instanceof OCFileListFragment) {
-      return (OCFileListFragment)singleFragment;
-    }
- else {
-      return null;
-    }
-  }
+  Log_OC.wtf(TAG,"Access to unexisting list of files fragment!!");
+  return null;
 }

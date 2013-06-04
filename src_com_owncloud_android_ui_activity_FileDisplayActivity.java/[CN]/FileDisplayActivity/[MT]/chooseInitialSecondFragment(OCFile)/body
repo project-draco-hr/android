@@ -1,6 +1,6 @@
 {
   Fragment secondFragment=null;
-  if (file != null) {
+  if (file != null && !file.isDirectory()) {
     if (file.isDown() && PreviewMediaFragment.canBePreviewed(file)) {
       int startPlaybackPosition=getIntent().getIntExtra(PreviewVideoActivity.EXTRA_START_POSITION,0);
       boolean autoplay=getIntent().getBooleanExtra(PreviewVideoActivity.EXTRA_AUTOPLAY,true);
@@ -9,9 +9,6 @@
  else {
       secondFragment=new FileDetailFragment(file,getAccount());
     }
-  }
- else   if (mDualPane) {
-    secondFragment=new FileDetailFragment(null,null);
   }
   return secondFragment;
 }
