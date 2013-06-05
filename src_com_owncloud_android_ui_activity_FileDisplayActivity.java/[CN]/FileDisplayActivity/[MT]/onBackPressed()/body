@@ -1,6 +1,6 @@
 {
+  OCFileListFragment listOfFiles=getListOfFilesFragment();
   if (mDualPane || getSecondFragment() == null) {
-    OCFileListFragment listOfFiles=getListOfFilesFragment();
     if (listOfFiles != null) {
       if (mDirectories.getCount() <= 1) {
         finish();
@@ -8,9 +8,11 @@
       }
       popDirname();
       listOfFiles.onBrowseUp();
-      setFile(listOfFiles.getCurrentFile());
     }
   }
+  if (listOfFiles != null) {
+    setFile(listOfFiles.getCurrentFile());
+  }
   cleanSecondFragment();
-  updateNavigationElementsInActionBar(getFile(),null);
+  updateNavigationElementsInActionBar(null);
 }

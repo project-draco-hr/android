@@ -2,7 +2,8 @@
   String uploadedRemotePath=intent.getStringExtra(FileDownloader.EXTRA_REMOTE_PATH);
   String accountName=intent.getStringExtra(FileUploader.ACCOUNT_NAME);
   boolean sameAccount=getAccount() != null && accountName.equals(getAccount().name);
-  boolean isDescendant=(getFile() != null) && (uploadedRemotePath != null) && (uploadedRemotePath.startsWith(getFile().getRemotePath()));
+  OCFile currentDir=getCurrentDir();
+  boolean isDescendant=(currentDir != null) && (uploadedRemotePath != null) && (uploadedRemotePath.startsWith(currentDir.getRemotePath()));
   if (sameAccount && isDescendant) {
     refeshListOfFilesFragment();
   }

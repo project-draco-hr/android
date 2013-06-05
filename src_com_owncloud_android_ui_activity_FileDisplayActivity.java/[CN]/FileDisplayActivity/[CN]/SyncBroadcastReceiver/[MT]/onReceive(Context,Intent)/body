@@ -5,7 +5,7 @@
   if (getAccount() != null && accountName.equals(getAccount().name)) {
     String synchFolderRemotePath=intent.getStringExtra(FileSyncService.SYNC_FOLDER_REMOTE_PATH);
     boolean fillBlankRoot=false;
-    OCFile currentDir=getFile();
+    OCFile currentDir=getCurrentDir();
     if (currentDir == null) {
       currentDir=mStorageManager.getFileByPath(OCFile.PATH_SEPARATOR);
       fillBlankRoot=(currentDir != null);

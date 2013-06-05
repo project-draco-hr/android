@@ -13,7 +13,7 @@
   registerReceiver(mDownloadFinishReceiver,downloadIntentFilter);
   OCFileListFragment listOfFiles=getListOfFilesFragment();
   if (listOfFiles != null) {
-    listOfFiles.listDirectory(getFile());
+    listOfFiles.listDirectory(getCurrentDir());
   }
   Log_OC.d(TAG,"onResume() end");
 }

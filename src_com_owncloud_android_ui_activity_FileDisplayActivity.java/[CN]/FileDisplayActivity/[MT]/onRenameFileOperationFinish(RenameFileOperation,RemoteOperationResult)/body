@@ -8,7 +8,7 @@
         ((FileDetailFragment)details).updateFileDetails(renamedFile,getAccount());
       }
     }
-    if (mStorageManager.getFileById(renamedFile.getParentId()).equals(getFile())) {
+    if (mStorageManager.getFileById(renamedFile.getParentId()).equals(getCurrentDir())) {
       refeshListOfFilesFragment();
     }
   }

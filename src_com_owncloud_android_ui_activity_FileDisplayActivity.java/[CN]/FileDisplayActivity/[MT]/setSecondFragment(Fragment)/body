@@ -1,5 +1,5 @@
 {
   FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
-  transaction.add(R.id.right_fragment_container,fragment,TAG_SECOND_FRAGMENT);
+  transaction.replace(R.id.right_fragment_container,fragment,TAG_SECOND_FRAGMENT);
   transaction.commit();
 }

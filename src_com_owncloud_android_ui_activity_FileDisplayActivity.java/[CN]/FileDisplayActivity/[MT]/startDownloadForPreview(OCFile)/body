@@ -4,5 +4,6 @@
   mWaitingToPreview=file;
   requestForDownload();
   updateFragmentsVisibility(true);
-  updateNavigationElementsInActionBar(getFile(),file);
+  updateNavigationElementsInActionBar(file);
+  setFile(file);
 }

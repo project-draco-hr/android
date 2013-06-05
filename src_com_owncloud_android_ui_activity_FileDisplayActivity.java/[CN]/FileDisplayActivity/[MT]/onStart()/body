@@ -2,5 +2,5 @@
   super.onStart();
   FileFragment second=getSecondFragment();
   updateFragmentsVisibility(second != null);
-  updateNavigationElementsInActionBar(getFile(),(second == null) ? null : second.getFile());
+  updateNavigationElementsInActionBar((second == null) ? null : second.getFile());
 }

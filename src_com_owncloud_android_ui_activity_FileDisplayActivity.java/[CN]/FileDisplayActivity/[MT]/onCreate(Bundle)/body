@@ -33,7 +33,9 @@
   OCFile currFile=getFile();
   if (mStorageManager != null) {
     while (currFile != null && currFile.getFileName() != OCFile.PATH_SEPARATOR) {
-      mDirectories.add(currFile.getFileName());
+      if (currFile.isDirectory()) {
+        mDirectories.add(currFile.getFileName());
+      }
       currFile=mStorageManager.getFileById(currFile.getParentId());
     }
   }
