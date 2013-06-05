@@ -15,7 +15,7 @@
   mView=view;
   ProgressBar progressBar=(ProgressBar)mView.findViewById(R.id.progressBar);
   mProgressListener=new ProgressListener(progressBar);
-  ((Button)mView.findViewById(R.id.cancelBtn)).setOnClickListener(this);
+  ((ImageButton)mView.findViewById(R.id.cancelBtn)).setOnClickListener(this);
   if (mError) {
     setButtonsForRemote();
   }
