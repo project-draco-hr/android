@@ -1,0 +1,32 @@
+{
+  finish();
+  Intent intent=null;
+  OCFile file=getFile();
+  Account account=getAccount();
+  if ((newConfig.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE && newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+    intent=new Intent(this,FileDisplayActivity.class);
+    intent.putExtra(EXTRA_FILE,file);
+    intent.putExtra(EXTRA_ACCOUNT,account);
+    intent.putExtra(EXTRA_MODE,getIntent().getIntExtra(EXTRA_MODE,MODE_PREVIEW));
+    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    Fragment fragment=getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
+    if (fragment != null && file != null && fragment instanceof PreviewMediaFragment && file.isVideo()) {
+      PreviewMediaFragment videoFragment=(PreviewMediaFragment)fragment;
+      intent.putExtra(PreviewVideoActivity.EXTRA_START_POSITION,videoFragment.getPosition());
+      intent.putExtra(PreviewVideoActivity.EXTRA_AUTOPLAY,videoFragment.isPlaying());
+    }
+  }
+ else {
+    intent=new Intent(this,FileDetailActivity.class);
+    intent.putExtra(EXTRA_FILE,file);
+    intent.putExtra(EXTRA_ACCOUNT,account);
+    intent.putExtra(EXTRA_MODE,getIntent().getIntExtra(EXTRA_MODE,MODE_PREVIEW));
+    Fragment fragment=getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
+    if (fragment != null && file != null && fragment instanceof PreviewMediaFragment && file.isVideo()) {
+      PreviewMediaFragment videoFragment=(PreviewMediaFragment)fragment;
+      intent.putExtra(PreviewVideoActivity.EXTRA_START_POSITION,videoFragment.getPosition());
+      intent.putExtra(PreviewVideoActivity.EXTRA_AUTOPLAY,videoFragment.isPlaying());
+    }
+  }
+  startActivity(intent);
+}

@@ -1,0 +1,22 @@
+{
+  try {
+    dismissDialog(DIALOG_OAUTH2_LOGIN_PROGRESS);
+  }
+ catch (  IllegalArgumentException e) {
+  }
+  String webdav_path=AccountUtils.getWebdavPath(mDiscoveredVersion,true);
+  if (result.isSuccess() && webdav_path != null) {
+    showDialog(DIALOG_LOGIN_PROGRESS);
+    mOAuthAccessToken=((OAuth2GetAccessToken)operation).getResultTokenMap().get(OAuth2Constants.KEY_ACCESS_TOKEN);
+    Log_OC.d(TAG,"Got ACCESS TOKEN: " + mOAuthAccessToken);
+    mAuthCheckOperation=new ExistenceCheckOperation("",this,false);
+    WebdavClient client=OwnCloudClientUtils.createOwnCloudClient(Uri.parse(mHostBaseUrl + webdav_path),this);
+    client.setBearerCredentials(mOAuthAccessToken);
+    mAuthCheckOperation.execute(client,this,mHandler);
+  }
+ else {
+    updateAuthStatusIconAndText(result);
+    showAuthStatus();
+    Log_OC.d(TAG,"Access failed: " + result.getLogMessage());
+  }
+}

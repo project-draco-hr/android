@@ -3,7 +3,7 @@
 switch (item.getItemId()) {
 case R.id.action_create_dir:
 {
-      EditNameDialog dialog=EditNameDialog.newInstance(getString(R.string.uploader_info_dirname),"",this);
+      EditNameDialog dialog=EditNameDialog.newInstance(getString(R.string.uploader_info_dirname),"",-1,-1,this);
       dialog.show(getSupportFragmentManager(),"createdirdialog");
       break;
     }
@@ -23,14 +23,9 @@ Intent settingsIntent=new Intent(this,Preferences.class);
 startActivity(settingsIntent);
 break;
 }
-case R.id.action_about_app:
-{
-showDialog(DIALOG_ABOUT_APP);
-break;
-}
 case android.R.id.home:
 {
-if (mCurrentDir != null && mCurrentDir.getParentId() != 0) {
+if (getFile() != null && getFile().getParentId() != 0) {
 onBackPressed();
 }
 break;

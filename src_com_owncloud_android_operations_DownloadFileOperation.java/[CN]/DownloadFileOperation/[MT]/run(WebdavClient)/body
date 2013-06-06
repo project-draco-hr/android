@@ -13,11 +13,11 @@
     }
     if (!moved)     result=new RemoteOperationResult(RemoteOperationResult.ResultCode.LOCAL_STORAGE_NOT_MOVED);
  else     result=new RemoteOperationResult(isSuccess(status),status);
-    Log.i(TAG,"Download of " + mFile.getRemotePath() + " to "+ getSavePath()+ ": "+ result.getLogMessage());
+    Log_OC.i(TAG,"Download of " + mFile.getRemotePath() + " to "+ getSavePath()+ ": "+ result.getLogMessage());
   }
  catch (  Exception e) {
     result=new RemoteOperationResult(e);
-    Log.e(TAG,"Download of " + mFile.getRemotePath() + " to "+ getSavePath()+ ": "+ result.getLogMessage(),e);
+    Log_OC.e(TAG,"Download of " + mFile.getRemotePath() + " to "+ getSavePath()+ ": "+ result.getLogMessage(),e);
   }
   return result;
 }

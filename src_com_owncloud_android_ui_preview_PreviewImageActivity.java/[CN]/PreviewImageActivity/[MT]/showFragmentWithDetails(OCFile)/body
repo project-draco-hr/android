@@ -1,7 +1,7 @@
 {
   Intent showDetailsIntent=new Intent(this,FileDetailActivity.class);
-  showDetailsIntent.putExtra(FileDetailFragment.EXTRA_FILE,file);
-  showDetailsIntent.putExtra(FileDetailFragment.EXTRA_ACCOUNT,AccountUtils.getCurrentOwnCloudAccount(this));
+  showDetailsIntent.putExtra(FileActivity.EXTRA_FILE,file);
+  showDetailsIntent.putExtra(FileActivity.EXTRA_ACCOUNT,AccountUtils.getCurrentOwnCloudAccount(this));
   showDetailsIntent.putExtra(FileDetailActivity.EXTRA_MODE,FileDetailActivity.MODE_DETAILS);
   startActivity(showDetailsIntent);
   int pos=mPreviewImagePagerAdapter.getFilePosition(file);

@@ -5,7 +5,7 @@
   }
   popDirname();
   mFileList.onNavigateUp();
-  mCurrentDir=mFileList.getCurrentFile();
+  setFile(mFileList.getCurrentFile());
   if (mDualPane) {
     Fragment fileFragment=getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
     if (fileFragment != null && (fileFragment instanceof PreviewMediaFragment || !((FileDetailFragment)fileFragment).isEmpty())) {
@@ -14,7 +14,7 @@
       transaction.commit();
     }
   }
-  if (mCurrentDir.getParentId() == 0) {
+  if (getFile().getParentId() == 0) {
     ActionBar actionBar=getSupportActionBar();
     actionBar.setDisplayHomeAsUpEnabled(false);
   }

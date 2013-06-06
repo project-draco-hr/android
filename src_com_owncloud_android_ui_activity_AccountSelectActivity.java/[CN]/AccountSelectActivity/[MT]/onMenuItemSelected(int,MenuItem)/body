@@ -1,7 +1,7 @@
 {
   if (item.getItemId() == R.id.createAccount) {
     Intent intent=new Intent(android.provider.Settings.ACTION_ADD_ACCOUNT);
-    intent.putExtra("authorities",new String[]{AccountAuthenticator.AUTH_TOKEN_TYPE});
+    intent.putExtra("authorities",new String[]{AccountAuthenticator.AUTHORITY});
     startActivity(intent);
     return true;
   }

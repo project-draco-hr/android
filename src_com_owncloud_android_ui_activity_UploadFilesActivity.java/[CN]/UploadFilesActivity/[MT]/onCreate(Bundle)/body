@@ -1,5 +1,5 @@
 {
-  Log.d(TAG,"onCreate() start");
+  Log_OC.d(TAG,"onCreate() start");
   super.onCreate(savedInstanceState);
   if (savedInstanceState != null) {
     mCurrentDir=new File(savedInstanceState.getString(UploadFilesActivity.KEY_DIRECTORY_PATH));
@@ -31,5 +31,5 @@
     mCurrentDialog.dismiss();
     mCurrentDialog=null;
   }
-  Log.d(TAG,"onCreate() end");
+  Log_OC.d(TAG,"onCreate() end");
 }

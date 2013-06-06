@@ -1,0 +1,4 @@
+String clientId
+String redirectUri
+String grantType
+String oAuth2AuthorizationResponse

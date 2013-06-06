@@ -12,9 +12,9 @@
     }
  else     if (downloadEvent.equals(FileDownloader.DOWNLOAD_FINISH_MESSAGE)) {
       if (success && mWaitingToPreview) {
-        mFile=mStorageManager.getFileById(mFile.getFileId());
+        setFile(mStorageManager.getFileById(getFile().getFileId()));
         FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment,new PreviewMediaFragment(mFile,mAccount),FileDetailFragment.FTAG);
+        transaction.replace(R.id.fragment,new PreviewMediaFragment(getFile(),getAccount(),0,true),FileDetailFragment.FTAG);
         transaction.commit();
         mWaitingToPreview=false;
       }

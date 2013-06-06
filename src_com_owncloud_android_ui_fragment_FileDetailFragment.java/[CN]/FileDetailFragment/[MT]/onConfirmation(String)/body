@@ -2,8 +2,7 @@
   if (callerTag.equals(FTAG_CONFIRMATION)) {
     if (mStorageManager.getFileById(mFile.getFileId()) != null) {
       mLastRemoteOperation=new RemoveFileOperation(mFile,true,mStorageManager);
-      WebdavClient wc=OwnCloudClientUtils.createOwnCloudClient(mAccount,getSherlockActivity().getApplicationContext());
-      mLastRemoteOperation.execute(wc,this,mHandler);
+      mLastRemoteOperation.execute(mAccount,getSherlockActivity(),this,mHandler,getSherlockActivity());
       boolean inDisplayActivity=getActivity() instanceof FileDisplayActivity;
       getActivity().showDialog((inDisplayActivity) ? FileDisplayActivity.DIALOG_SHORT_WAIT : FileDetailActivity.DIALOG_SHORT_WAIT);
     }

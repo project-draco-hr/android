@@ -1,23 +1,13 @@
 {
-  Log.d(getClass().toString(),"onCreate() start");
+  Log_OC.d(TAG,"onCreate() start");
   super.onCreate(savedInstanceState);
-  Account account=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_ACCOUNT);
-  if (account != null && AccountUtils.setCurrentOwnCloudAccount(this,account.name)) {
-    mCurrentDir=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE);
-  }
+  mStarted=false;
+  mHandler=new Handler();
   if (savedInstanceState != null) {
-    mCurrentDir=savedInstanceState.getParcelable(FileDetailFragment.EXTRA_FILE);
     mWaitingToPreview=(OCFile)savedInstanceState.getParcelable(FileDetailActivity.KEY_WAITING_TO_PREVIEW);
   }
  else {
     mWaitingToPreview=null;
-  }
-  if (!AccountUtils.accountsAreSetup(this)) {
-    mStorageManager=null;
-    createFirstAccount();
-  }
- else {
-    initDataFromCurrentAccount();
   }
   mUploadConnection=new ListServiceConnection();
   mDownloadConnection=new ListServiceConnection();
@@ -31,7 +21,7 @@
   startService(observer_intent);
   requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
   mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
-  OCFile currFile=mCurrentDir;
+  OCFile currFile=getFile();
   while (mStorageManager != null && currFile != null && currFile.getFileName() != OCFile.PATH_SEPARATOR) {
     mDirectories.add(currFile.getFileName());
     currFile=mStorageManager.getFileById(currFile.getParentId());
@@ -40,28 +30,15 @@
   setContentView(R.layout.files);
   mFileList=(OCFileListFragment)getSupportFragmentManager().findFragmentById(R.id.fileList);
   mDualPane=(findViewById(R.id.file_details_container) != null);
-  if (mDualPane) {
-    if (savedInstanceState == null)     initFileDetailsInDualPane();
-  }
- else {
-    if (mCurrentFile != null) {
-      onFileClick(mCurrentFile);
-      mCurrentFile=null;
-    }
-    Fragment rightPanel=getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
-    if (rightPanel != null) {
-      FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
-      transaction.remove(rightPanel);
-      transaction.commit();
-    }
+  if (mDualPane && savedInstanceState == null) {
+    initFileDetailsInDualPane();
   }
   ActionBar actionBar=getSupportActionBar();
   actionBar.setHomeButtonEnabled(true);
-  actionBar.setDisplayHomeAsUpEnabled(mCurrentDir != null && mCurrentDir.getParentId() != 0);
+  actionBar.setDisplayHomeAsUpEnabled(getFile() != null && getFile().getParentId() != 0);
   actionBar.setDisplayShowTitleEnabled(false);
   actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
   actionBar.setListNavigationCallbacks(mDirectories,this);
   setSupportProgressBarIndeterminateVisibility(false);
-  mBackFromCreatingFirstAccount=false;
-  Log.d(getClass().toString(),"onCreate() end");
+  Log_OC.d(TAG,"onCreate() end");
 }

@@ -1,5 +1,5 @@
 {
-  Log.d(getClass().toString(),"onPause() start");
+  Log_OC.d(TAG,"onPause() start");
   super.onPause();
   if (mSyncBroadcastReceiver != null) {
     unregisterReceiver(mSyncBroadcastReceiver);
@@ -13,8 +13,5 @@
     unregisterReceiver(mDownloadFinishReceiver);
     mDownloadFinishReceiver=null;
   }
-  if (!AccountUtils.accountsAreSetup(this)) {
-    dismissDialog(DIALOG_SETUP_ACCOUNT);
-  }
-  Log.d(getClass().toString(),"onPause() end");
+  Log_OC.d(TAG,"onPause() end");
 }

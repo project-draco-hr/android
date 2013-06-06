@@ -1,6 +1,6 @@
 {
   if (file == null) {
-    Log.e(TAG,"Trying to remove a NULL file");
+    Log_OC.e(TAG,"Trying to remove a NULL file");
     return;
   }
   String localPath=file.getStoragePath();
@@ -11,6 +11,6 @@
   if (observer != null) {
     observer.stopWatching();
     mObserversMap.remove(observer);
-    Log.d(TAG,"Stopped watching " + localPath);
+    Log_OC.d(TAG,"Stopped watching " + localPath);
   }
 }

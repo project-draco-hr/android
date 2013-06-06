@@ -1,7 +1,7 @@
 {
-  Log.i(TAG,"onCreateView() start");
+  Log_OC.i(TAG,"onCreateView() start");
   View v=super.onCreateView(inflater,container,savedInstanceState);
   getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-  Log.i(TAG,"onCreateView() end");
+  Log_OC.i(TAG,"onCreateView() end");
   return v;
 }

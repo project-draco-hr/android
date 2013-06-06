@@ -10,6 +10,6 @@ case R.id.cancelBtn:
       break;
     }
 default :
-  Log.e(TAG,"Incorrect view clicked!");
+  Log_OC.e(TAG,"Incorrect view clicked!");
 }
 }

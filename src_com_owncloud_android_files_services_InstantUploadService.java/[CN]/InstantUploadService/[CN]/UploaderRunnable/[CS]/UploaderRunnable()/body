@@ -1,4 +1,0 @@
-{
-  mHashMapList=new LinkedList<HashMap<String,Object>>();
-  mLock=new Object();
-}

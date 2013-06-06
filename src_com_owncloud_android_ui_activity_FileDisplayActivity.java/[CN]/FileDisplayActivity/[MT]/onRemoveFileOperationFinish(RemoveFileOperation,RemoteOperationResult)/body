@@ -12,7 +12,7 @@
         transaction.commit();
       }
     }
-    if (mStorageManager.getFileById(removedFile.getParentId()).equals(mCurrentDir)) {
+    if (mStorageManager.getFileById(removedFile.getParentId()).equals(getFile())) {
       mFileList.listDirectory();
     }
   }

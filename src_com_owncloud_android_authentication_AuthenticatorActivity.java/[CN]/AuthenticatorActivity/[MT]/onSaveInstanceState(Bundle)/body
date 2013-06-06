@@ -1,0 +1,18 @@
+{
+  super.onSaveInstanceState(outState);
+  outState.putInt(KEY_SERVER_STATUS_TEXT,mServerStatusText);
+  outState.putInt(KEY_SERVER_STATUS_ICON,mServerStatusIcon);
+  outState.putBoolean(KEY_SERVER_VALID,mServerIsValid);
+  outState.putBoolean(KEY_SERVER_CHECKED,mServerIsChecked);
+  outState.putBoolean(KEY_SERVER_CHECK_IN_PROGRESS,(!mServerIsValid && mOcServerChkOperation != null));
+  outState.putBoolean(KEY_IS_SSL_CONN,mIsSslConn);
+  outState.putInt(KEY_AUTH_STATUS_ICON,mAuthStatusIcon);
+  outState.putInt(KEY_AUTH_STATUS_TEXT,mAuthStatusText);
+  if (mDiscoveredVersion != null) {
+    outState.putString(KEY_OC_VERSION,mDiscoveredVersion.toString());
+  }
+  outState.putString(KEY_HOST_URL_TEXT,mHostBaseUrl);
+  if (mAccount != null) {
+    outState.putParcelable(KEY_ACCOUNT,mAccount);
+  }
+}

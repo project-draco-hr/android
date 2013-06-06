@@ -1,5 +1,6 @@
 {
   super.onPause();
+  Log_OC.e(TAG,"onPause");
   if (mDownloadFinishReceiver != null) {
     unregisterReceiver(mDownloadFinishReceiver);
     mDownloadFinishReceiver=null;

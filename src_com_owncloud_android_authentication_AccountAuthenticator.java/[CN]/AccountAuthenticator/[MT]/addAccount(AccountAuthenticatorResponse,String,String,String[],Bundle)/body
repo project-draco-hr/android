@@ -1,0 +1,21 @@
+{
+  Log_OC.i(TAG,"Adding account with type " + accountType + " and auth token "+ authTokenType);
+  try {
+    validateAccountType(accountType);
+  }
+ catch (  AuthenticatorException e) {
+    Log_OC.e(TAG,"Failed to validate account type " + accountType + ": "+ e.getMessage());
+    e.printStackTrace();
+    return e.getFailureBundle();
+  }
+  final Intent intent=new Intent(mContext,AuthenticatorActivity.class);
+  intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE,response);
+  intent.putExtra(KEY_AUTH_TOKEN_TYPE,authTokenType);
+  intent.putExtra(KEY_REQUIRED_FEATURES,requiredFeatures);
+  intent.putExtra(KEY_LOGIN_OPTIONS,options);
+  intent.putExtra(AuthenticatorActivity.EXTRA_ACTION,AuthenticatorActivity.ACTION_CREATE);
+  setIntentFlags(intent);
+  final Bundle bundle=new Bundle();
+  bundle.putParcelable(AccountManager.KEY_INTENT,intent);
+  return bundle;
+}

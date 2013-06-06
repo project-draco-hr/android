@@ -1,0 +1,9 @@
+{
+  super.onStart();
+  Log_OC.e(TAG,"onStart");
+  if (mNewConfigurationChangeToApplyOnStart != null && !isRedirectingToSetupAccount()) {
+    checkConfigurationChange(mNewConfigurationChangeToApplyOnStart);
+    mNewConfigurationChangeToApplyOnStart=null;
+  }
+  mStarted=true;
+}
