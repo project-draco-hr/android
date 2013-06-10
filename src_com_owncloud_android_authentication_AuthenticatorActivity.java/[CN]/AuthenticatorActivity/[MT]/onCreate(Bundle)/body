@@ -2,7 +2,6 @@
   super.onCreate(savedInstanceState);
   getWindow().requestFeature(Window.FEATURE_NO_TITLE);
   setContentView(R.layout.account_setup);
-  mViewPasswordButton=(ImageView)findViewById(R.id.viewPasswordButton);
   mHostUrlInput=(EditText)findViewById(R.id.hostUrlInput);
   mUsernameInput=(EditText)findViewById(R.id.account_username);
   mPasswordInput=(EditText)findViewById(R.id.account_password);
@@ -51,6 +50,9 @@
     mIsSslConn=savedInstanceState.getBoolean(KEY_IS_SSL_CONN);
     mAuthStatusText=savedInstanceState.getInt(KEY_AUTH_STATUS_TEXT);
     mAuthStatusIcon=savedInstanceState.getInt(KEY_AUTH_STATUS_ICON);
+    if (savedInstanceState.getBoolean(KEY_PASSWORD_VISIBLE,false)) {
+      showPassword();
+    }
     String ocVersion=savedInstanceState.getString(KEY_OC_VERSION);
     if (ocVersion != null) {
       mDiscoveredVersion=new OwnCloudVersion(ocVersion);
@@ -82,7 +84,9 @@
   mHostUrlInput.setOnFocusChangeListener(this);
   mHostUrlInput.setOnTouchListener(new RightDrawableOnTouchListener(){
     @Override public boolean onDrawableTouch(    final MotionEvent event){
-      AuthenticatorActivity.this.onRefreshClick(mHostUrlInput);
+      if (event.getAction() == MotionEvent.ACTION_UP) {
+        AuthenticatorActivity.this.onRefreshClick();
+      }
       return true;
     }
   }
@@ -102,4 +106,13 @@
   mPasswordInput.setOnFocusChangeListener(this);
   mPasswordInput.setImeOptions(EditorInfo.IME_ACTION_DONE);
   mPasswordInput.setOnEditorActionListener(this);
+  mPasswordInput.setOnTouchListener(new RightDrawableOnTouchListener(){
+    @Override public boolean onDrawableTouch(    final MotionEvent event){
+      if (event.getAction() == MotionEvent.ACTION_UP) {
+        AuthenticatorActivity.this.onViewPasswordClick();
+      }
+      return true;
+    }
+  }
+);
 }
