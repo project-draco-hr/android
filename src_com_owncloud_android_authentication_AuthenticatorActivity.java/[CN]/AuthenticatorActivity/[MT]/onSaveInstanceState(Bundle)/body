@@ -15,4 +15,5 @@
   if (mAccount != null) {
     outState.putParcelable(KEY_ACCOUNT,mAccount);
   }
+  outState.putBoolean(KEY_REFRESH_BUTTON_ENABLED,mRefreshButtonEnabled);
 }

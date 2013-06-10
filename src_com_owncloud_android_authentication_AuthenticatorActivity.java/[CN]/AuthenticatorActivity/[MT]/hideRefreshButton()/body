@@ -1,3 +1,4 @@
 {
   mHostUrlInput.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0);
+  mRefreshButtonEnabled=false;
 }

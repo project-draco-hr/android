@@ -60,10 +60,11 @@
     if (savedInstanceState.getBoolean(KEY_SERVER_CHECK_IN_PROGRESS,false)) {
       checkOcServer();
     }
+    mRefreshButtonEnabled=savedInstanceState.getBoolean(KEY_REFRESH_BUTTON_ENABLED);
   }
   showServerStatus();
   showAuthStatus();
-  if (mServerIsChecked && !mServerIsValid)   showRefreshButton();
+  if (mServerIsChecked && !mServerIsValid && mRefreshButtonEnabled)   showRefreshButton();
   mOkButton.setEnabled(mServerIsValid);
   if (!OAUTH_MODE_OPTIONAL.equals(getString(R.string.oauth2_mode))) {
     mOAuth2Check.setVisibility(View.GONE);
