@@ -30,28 +30,22 @@ case R.id.action_remove_file:
     confDialog.show(getFragmentManager(),FileDetailFragment.FTAG_CONFIRMATION);
     return true;
   }
-case R.id.action_open_file_with:
-{
-  mContainerActivity.openFile(mTargetFile);
-  return true;
-}
-case R.id.action_download_file:
 case R.id.action_sync_file:
 {
-Account account=AccountUtils.getCurrentOwnCloudAccount(getSherlockActivity());
-RemoteOperation operation=new SynchronizeFileOperation(mTargetFile,null,mContainerActivity.getStorageManager(),account,true,false,getSherlockActivity());
-operation.execute(account,getSherlockActivity(),mContainerActivity,mHandler,getSherlockActivity());
-getSherlockActivity().showDialog(FileDisplayActivity.DIALOG_SHORT_WAIT);
-return true;
+  Account account=AccountUtils.getCurrentOwnCloudAccount(getSherlockActivity());
+  RemoteOperation operation=new SynchronizeFileOperation(mTargetFile,null,mContainerActivity.getStorageManager(),account,true,false,getSherlockActivity());
+  operation.execute(account,getSherlockActivity(),mContainerActivity,mHandler,getSherlockActivity());
+  getSherlockActivity().showDialog(FileDisplayActivity.DIALOG_SHORT_WAIT);
+  return true;
 }
 case R.id.action_cancel_download:
 {
 FileDownloaderBinder downloaderBinder=mContainerActivity.getFileDownloaderBinder();
 Account account=AccountUtils.getCurrentOwnCloudAccount(getActivity());
 if (downloaderBinder != null && downloaderBinder.isDownloading(account,mTargetFile)) {
-downloaderBinder.cancel(account,mTargetFile);
-listDirectory();
-mContainerActivity.onTransferStateChanged(mTargetFile,false,false);
+  downloaderBinder.cancel(account,mTargetFile);
+  listDirectory();
+  mContainerActivity.onTransferStateChanged(mTargetFile,false,false);
 }
 return true;
 }
