@@ -1,0 +1,6 @@
+{
+  if (url.toLowerCase().endsWith(WEBDAV_PATH)) {
+    url=url.substring(0,url.length() - WEBDAV_PATH.length());
+  }
+  return (url != null ? url : "");
+}
