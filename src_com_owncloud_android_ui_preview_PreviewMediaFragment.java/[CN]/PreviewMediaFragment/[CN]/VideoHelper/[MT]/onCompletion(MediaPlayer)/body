@@ -10,7 +10,7 @@
       mVideoPreview.stopPlayback();
       mAutoplay=false;
       mSavedPlaybackPosition=0;
-      mVideoPreview.setVideoPath(mFile.getStoragePath());
+      mVideoPreview.setVideoPath(getFile().getStoragePath());
     }
   }
   mMediaController.updatePausePlay();

@@ -1,14 +1,13 @@
 {
-  super.onCreateView(inflater,container,savedInstanceState);
   if (savedInstanceState != null) {
-    mFile=savedInstanceState.getParcelable(FileActivity.EXTRA_FILE);
+    setFile((OCFile)savedInstanceState.getParcelable(FileActivity.EXTRA_FILE));
     mAccount=savedInstanceState.getParcelable(FileActivity.EXTRA_ACCOUNT);
   }
-  if (mFile != null && mAccount != null) {
+  if (getFile() != null && mAccount != null) {
     mLayout=R.layout.file_details_fragment;
   }
   View view=null;
-  view=inflater.inflate(mLayout,container,false);
+  view=inflater.inflate(mLayout,null);
   mView=view;
   if (mLayout == R.layout.file_details_fragment) {
     mView.findViewById(R.id.fdKeepInSync).setOnClickListener(this);

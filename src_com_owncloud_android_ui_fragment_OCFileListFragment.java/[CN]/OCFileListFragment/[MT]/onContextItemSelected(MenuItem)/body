@@ -30,69 +30,22 @@ case R.id.action_remove_file:
     confDialog.show(getFragmentManager(),FileDetailFragment.FTAG_CONFIRMATION);
     return true;
   }
-case R.id.action_open_file_with:
-{
-  String storagePath=mTargetFile.getStoragePath();
-  String encodedStoragePath=WebdavUtils.encodePath(storagePath);
-  try {
-    Intent i=new Intent(Intent.ACTION_VIEW);
-    i.setDataAndType(Uri.parse("file://" + encodedStoragePath),mTargetFile.getMimetype());
-    i.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-    startActivity(i);
-  }
- catch (  Throwable t) {
-    Log_OC.e(TAG,"Fail when trying to open with the mimeType provided from the ownCloud server: " + mTargetFile.getMimetype());
-    boolean toastIt=true;
-    String mimeType="";
-    try {
-      Intent i=new Intent(Intent.ACTION_VIEW);
-      mimeType=MimeTypeMap.getSingleton().getMimeTypeFromExtension(storagePath.substring(storagePath.lastIndexOf('.') + 1));
-      if (mimeType == null || !mimeType.equals(mTargetFile.getMimetype())) {
-        if (mimeType != null) {
-          i.setDataAndType(Uri.parse("file://" + encodedStoragePath),mimeType);
-        }
- else {
-          i.setDataAndType(Uri.parse("file://" + encodedStoragePath),"*/*");
-        }
-        i.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-        startActivity(i);
-        toastIt=false;
-      }
-    }
- catch (    IndexOutOfBoundsException e) {
-      Log_OC.e(TAG,"Trying to find out MIME type of a file without extension: " + storagePath);
-    }
-catch (    ActivityNotFoundException e) {
-      Log_OC.e(TAG,"No activity found to handle: " + storagePath + " with MIME type "+ mimeType+ " obtained from extension");
-    }
-catch (    Throwable th) {
-      Log_OC.e(TAG,"Unexpected problem when opening: " + storagePath,th);
-    }
- finally {
-      if (toastIt) {
-        Toast.makeText(getActivity(),"There is no application to handle file " + mTargetFile.getFileName(),Toast.LENGTH_SHORT).show();
-      }
-    }
-  }
-  return true;
-}
-case R.id.action_download_file:
 case R.id.action_sync_file:
 {
-Account account=AccountUtils.getCurrentOwnCloudAccount(getSherlockActivity());
-RemoteOperation operation=new SynchronizeFileOperation(mTargetFile,null,mContainerActivity.getStorageManager(),account,true,false,getSherlockActivity());
-operation.execute(account,getSherlockActivity(),mContainerActivity,mHandler,getSherlockActivity());
-getSherlockActivity().showDialog(FileDisplayActivity.DIALOG_SHORT_WAIT);
-return true;
+  Account account=AccountUtils.getCurrentOwnCloudAccount(getSherlockActivity());
+  RemoteOperation operation=new SynchronizeFileOperation(mTargetFile,null,mContainerActivity.getStorageManager(),account,true,false,getSherlockActivity());
+  operation.execute(account,getSherlockActivity(),mContainerActivity,mHandler,getSherlockActivity());
+  getSherlockActivity().showDialog(FileDisplayActivity.DIALOG_SHORT_WAIT);
+  return true;
 }
 case R.id.action_cancel_download:
 {
 FileDownloaderBinder downloaderBinder=mContainerActivity.getFileDownloaderBinder();
 Account account=AccountUtils.getCurrentOwnCloudAccount(getActivity());
 if (downloaderBinder != null && downloaderBinder.isDownloading(account,mTargetFile)) {
-downloaderBinder.cancel(account,mTargetFile);
-listDirectory();
-mContainerActivity.onTransferStateChanged(mTargetFile,false,false);
+  downloaderBinder.cancel(account,mTargetFile);
+  listDirectory();
+  mContainerActivity.onTransferStateChanged(mTargetFile,false,false);
 }
 return true;
 }
@@ -109,7 +62,7 @@ return true;
 }
 case R.id.action_see_details:
 {
-((FileFragment.ContainerActivity)getActivity()).showFragmentWithDetails(mTargetFile);
+((FileFragment.ContainerActivity)getActivity()).showDetails(mTargetFile);
 return true;
 }
 default :

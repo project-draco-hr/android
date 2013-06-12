@@ -1,8 +1,9 @@
 {
-  if (mFile.isAudio() && stopAudio) {
+  OCFile file=getFile();
+  if (file.isAudio() && stopAudio) {
     mMediaServiceBinder.pause();
   }
- else   if (mFile.isVideo()) {
+ else   if (file.isVideo()) {
     mVideoPreview.stopPlayback();
   }
 }

@@ -25,7 +25,9 @@ break;
 }
 case android.R.id.home:
 {
-if (getFile() != null && getFile().getParentId() != 0) {
+FileFragment second=getSecondFragment();
+OCFile currentDir=getCurrentDir();
+if ((currentDir != null && currentDir.getParentId() != 0) || (second != null && second.getFile() != null)) {
 onBackPressed();
 }
 break;

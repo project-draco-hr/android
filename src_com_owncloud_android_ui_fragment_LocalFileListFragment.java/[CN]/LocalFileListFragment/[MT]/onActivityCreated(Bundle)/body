@@ -3,10 +3,5 @@
   super.onCreate(savedInstanceState);
   mAdapter=new LocalFileListAdapter(mContainerActivity.getInitialDirectory(),getActivity());
   setListAdapter(mAdapter);
-  if (savedInstanceState != null) {
-    Log_OC.i(TAG,"savedInstanceState is not null");
-    int position=savedInstanceState.getInt(SAVED_LIST_POSITION);
-    setReferencePosition(position);
-  }
   Log_OC.i(TAG,"onActivityCreated() stop");
 }

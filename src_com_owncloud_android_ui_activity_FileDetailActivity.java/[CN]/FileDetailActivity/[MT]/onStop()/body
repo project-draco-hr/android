@@ -1,5 +1,0 @@
-{
-  super.onStop();
-  Log_OC.e(TAG,"onStop");
-  mStarted=false;
-}

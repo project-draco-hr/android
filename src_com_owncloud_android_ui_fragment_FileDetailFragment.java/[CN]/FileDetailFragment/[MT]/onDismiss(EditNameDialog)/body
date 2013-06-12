@@ -2,9 +2,9 @@
   if (dialog.getResult()) {
     String newFilename=dialog.getNewFilename();
     Log_OC.d(TAG,"name edit dialog dismissed with new name " + newFilename);
-    mLastRemoteOperation=new RenameFileOperation(mFile,mAccount,newFilename,new FileDataStorageManager(mAccount,getActivity().getContentResolver()));
+    mLastRemoteOperation=new RenameFileOperation(getFile(),mAccount,newFilename,new FileDataStorageManager(mAccount,getActivity().getContentResolver()));
     mLastRemoteOperation.execute(mAccount,getSherlockActivity(),this,mHandler,getSherlockActivity());
     boolean inDisplayActivity=getActivity() instanceof FileDisplayActivity;
-    getActivity().showDialog((inDisplayActivity) ? FileDisplayActivity.DIALOG_SHORT_WAIT : FileDetailActivity.DIALOG_SHORT_WAIT);
+    getActivity().showDialog(FileDisplayActivity.DIALOG_SHORT_WAIT);
   }
 }

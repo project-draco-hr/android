@@ -1,9 +1,10 @@
 {
-  if (mStorageManager.getFileById(mFile.getFileId()) != null) {
+  OCFile file=getFile();
+  if (mStorageManager.getFileById(file.getFileId()) != null) {
     stopPreview(true);
-    mLastRemoteOperation=new RemoveFileOperation(mFile,true,mStorageManager);
+    mLastRemoteOperation=new RemoveFileOperation(file,true,mStorageManager);
     mLastRemoteOperation.execute(mAccount,getSherlockActivity(),this,mHandler,getSherlockActivity());
     boolean inDisplayActivity=getActivity() instanceof FileDisplayActivity;
-    getActivity().showDialog((inDisplayActivity) ? FileDisplayActivity.DIALOG_SHORT_WAIT : FileDetailActivity.DIALOG_SHORT_WAIT);
+    getActivity().showDialog(FileDisplayActivity.DIALOG_SHORT_WAIT);
   }
 }

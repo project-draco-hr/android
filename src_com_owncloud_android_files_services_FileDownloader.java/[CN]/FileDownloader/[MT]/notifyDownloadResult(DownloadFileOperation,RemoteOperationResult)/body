@@ -24,7 +24,7 @@
           showDetailsIntent=new Intent(this,PreviewImageActivity.class);
         }
  else {
-          showDetailsIntent=new Intent(this,FileDetailActivity.class);
+          showDetailsIntent=new Intent(this,FileDisplayActivity.class);
         }
         showDetailsIntent.putExtra(FileActivity.EXTRA_FILE,download.getFile());
         showDetailsIntent.putExtra(FileActivity.EXTRA_ACCOUNT,download.getAccount());

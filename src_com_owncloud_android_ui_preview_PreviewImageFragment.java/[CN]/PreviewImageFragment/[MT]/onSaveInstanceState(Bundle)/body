@@ -1,5 +1,5 @@
 {
   super.onSaveInstanceState(outState);
-  outState.putParcelable(PreviewImageFragment.EXTRA_FILE,mFile);
+  outState.putParcelable(PreviewImageFragment.EXTRA_FILE,getFile());
   outState.putParcelable(PreviewImageFragment.EXTRA_ACCOUNT,mAccount);
 }

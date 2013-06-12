@@ -3,7 +3,7 @@
   mNotification.icon=android.R.drawable.ic_media_play;
   mNotification.when=System.currentTimeMillis();
   mNotification.flags|=Notification.FLAG_ONGOING_EVENT;
-  Intent showDetailsIntent=new Intent(this,FileDetailActivity.class);
+  Intent showDetailsIntent=new Intent(this,FileDisplayActivity.class);
   showDetailsIntent.putExtra(FileActivity.EXTRA_FILE,mFile);
   showDetailsIntent.putExtra(FileActivity.EXTRA_ACCOUNT,mAccount);
   showDetailsIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

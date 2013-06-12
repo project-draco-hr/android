@@ -1,5 +1,6 @@
 {
   super.onAttach(activity);
+  Log_OC.e(TAG,"onAttach");
   try {
     mContainerActivity=(ContainerActivity)activity;
   }

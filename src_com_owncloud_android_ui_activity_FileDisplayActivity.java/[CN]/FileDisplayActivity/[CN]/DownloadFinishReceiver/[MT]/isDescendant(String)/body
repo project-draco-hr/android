@@ -1,3 +1,4 @@
 {
-  return (getFile() != null && downloadedRemotePath != null && downloadedRemotePath.startsWith(getFile().getRemotePath()));
+  OCFile currentDir=getCurrentDir();
+  return (currentDir != null && downloadedRemotePath != null && downloadedRemotePath.startsWith(currentDir.getRemotePath()));
 }

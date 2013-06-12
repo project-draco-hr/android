@@ -1,3 +1,0 @@
-{
-  return (mList.getFirstVisiblePosition() + mList.getLastVisiblePosition()) / 2;
-}

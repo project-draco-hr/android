@@ -1,7 +1,0 @@
-{
-  mStorageManager=new FileDataStorageManager(getAccount(),getContentResolver());
-  FileFragment fragment=(FileFragment)getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
-  if (fragment != null && mStorageManager.getFileById(fragment.getFile().getFileId()) == null) {
-    backToDisplayActivity(false);
-  }
-}

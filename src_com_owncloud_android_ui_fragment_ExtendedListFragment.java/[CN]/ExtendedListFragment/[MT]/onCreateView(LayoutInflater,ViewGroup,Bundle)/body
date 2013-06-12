@@ -1,0 +1,13 @@
+{
+  Log_OC.e(TAG,"onCreateView");
+  View v=inflater.inflate(R.layout.list_fragment,null);
+  mList=(ExtendedListView)(v.findViewById(R.id.list_root));
+  mList.setOnItemClickListener(this);
+  mList.setDivider(getResources().getDrawable(R.drawable.uploader_list_separator));
+  mList.setDividerHeight(1);
+  if (savedInstanceState != null) {
+    int referencePosition=savedInstanceState.getInt(KEY_SAVED_LIST_POSITION);
+    setReferencePosition(referencePosition);
+  }
+  return v;
+}

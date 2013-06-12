@@ -1,9 +1,9 @@
 {
   super.onSaveInstanceState(outState);
   Log_OC.e(TAG,"onSaveInstanceState");
-  outState.putParcelable(PreviewMediaFragment.EXTRA_FILE,mFile);
+  outState.putParcelable(PreviewMediaFragment.EXTRA_FILE,getFile());
   outState.putParcelable(PreviewMediaFragment.EXTRA_ACCOUNT,mAccount);
-  if (mFile.isVideo()) {
+  if (getFile().isVideo()) {
     mSavedPlaybackPosition=mVideoPreview.getCurrentPosition();
     mAutoplay=mVideoPreview.isPlaying();
     outState.putInt(PreviewMediaFragment.EXTRA_PLAY_POSITION,mSavedPlaybackPosition);
