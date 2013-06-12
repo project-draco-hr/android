@@ -1,0 +1,4 @@
+{
+  mPasswordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+  showViewPasswordButton();
+}

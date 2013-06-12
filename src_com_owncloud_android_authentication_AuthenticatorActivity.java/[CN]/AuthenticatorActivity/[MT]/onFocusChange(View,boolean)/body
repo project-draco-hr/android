@@ -2,6 +2,9 @@
   if (view.getId() == R.id.hostUrlInput) {
     if (!hasFocus) {
       onUrlInputFocusLost((TextView)view);
+      if (!mServerIsValid) {
+        showRefreshButton();
+      }
     }
  else {
       hideRefreshButton();

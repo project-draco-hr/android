@@ -6,6 +6,7 @@
   outState.putBoolean(KEY_SERVER_CHECKED,mServerIsChecked);
   outState.putBoolean(KEY_SERVER_CHECK_IN_PROGRESS,(!mServerIsValid && mOcServerChkOperation != null));
   outState.putBoolean(KEY_IS_SSL_CONN,mIsSslConn);
+  outState.putBoolean(KEY_PASSWORD_VISIBLE,isPasswordVisible());
   outState.putInt(KEY_AUTH_STATUS_ICON,mAuthStatusIcon);
   outState.putInt(KEY_AUTH_STATUS_TEXT,mAuthStatusText);
   if (mDiscoveredVersion != null) {
@@ -15,4 +16,5 @@
   if (mAccount != null) {
     outState.putParcelable(KEY_ACCOUNT,mAccount);
   }
+  outState.putBoolean(KEY_REFRESH_BUTTON_ENABLED,mRefreshButtonEnabled);
 }
