@@ -1,0 +1,16 @@
+{
+  OCFile parentFolder=mStorageManager.getFileById(getFile().getParentId());
+  if (parentFolder == null) {
+    parentFolder=mStorageManager.getFileByPath(OCFile.PATH_SEPARATOR);
+  }
+  mPreviewImagePagerAdapter=new PreviewImagePagerAdapter(getSupportFragmentManager(),parentFolder,getAccount(),mStorageManager);
+  mViewPager=(ViewPager)findViewById(R.id.fragmentPager);
+  int position=mPreviewImagePagerAdapter.getFilePosition(getFile());
+  position=(position >= 0) ? position : 0;
+  mViewPager.setAdapter(mPreviewImagePagerAdapter);
+  mViewPager.setOnPageChangeListener(this);
+  mViewPager.setCurrentItem(position);
+  if (position == 0 && !getFile().isDown()) {
+    mRequestWaitingForBinder=true;
+  }
+}

@@ -1,7 +1,7 @@
 {
   Log_OC.d(TAG,"onCreate() start");
-  requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
   super.onCreate(savedInstanceState);
+  requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
   mHandler=new Handler();
   mUploadConnection=new ListServiceConnection();
   mDownloadConnection=new ListServiceConnection();
@@ -25,23 +25,9 @@
   mRightFragmentContainer=findViewById(R.id.right_fragment_container);
   if (savedInstanceState == null) {
     createMinFragments();
-    if (!isRedirectingToSetupAccount()) {
-      initFragmentsWithFile();
-    }
   }
   mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
-  OCFile currFile=getFile();
-  if (mStorageManager != null) {
-    while (currFile != null && currFile.getFileName() != OCFile.PATH_SEPARATOR) {
-      if (currFile.isDirectory()) {
-        mDirectories.add(currFile.getFileName());
-      }
-      currFile=mStorageManager.getFileById(currFile.getParentId());
-    }
-  }
-  mDirectories.add(OCFile.PATH_SEPARATOR);
-  ActionBar actionBar=getSupportActionBar();
-  actionBar.setHomeButtonEnabled(true);
+  getSupportActionBar().setHomeButtonEnabled(true);
   setSupportProgressBarIndeterminateVisibility(false);
   Log_OC.d(TAG,"onCreate() end");
 }

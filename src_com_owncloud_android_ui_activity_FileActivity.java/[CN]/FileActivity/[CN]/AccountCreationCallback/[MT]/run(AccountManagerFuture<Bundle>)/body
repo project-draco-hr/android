@@ -12,7 +12,7 @@
       }
     }
  catch (    OperationCanceledException e) {
-      Log_OC.e(TAG,"Account creation canceled");
+      Log_OC.d(TAG,"Account creation canceled");
     }
 catch (    Exception e) {
       Log_OC.e(TAG,"Account creation finished in exception: ",e);
@@ -22,13 +22,6 @@ catch (    Exception e) {
     Log_OC.e(TAG,"Account creation callback with null bundle");
   }
   if (mAccount == null) {
-    if (isTaskRoot()) {
-      Log_OC.e(TAG,"FINISHING");
-      finish();
-    }
- else {
-      Log_OC.e(TAG,"MOVING BACK");
-      moveTaskToBack(true);
-    }
+    moveTaskToBack(true);
   }
 }

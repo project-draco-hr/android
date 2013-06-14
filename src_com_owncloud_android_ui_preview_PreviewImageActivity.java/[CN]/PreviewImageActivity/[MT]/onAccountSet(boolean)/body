@@ -1,2 +1,24 @@
 {
+  if (getAccount() != null) {
+    OCFile file=getFile();
+    if (file == null) {
+      throw new IllegalStateException("Instanced with a NULL OCFile");
+    }
+    if (!file.isImage()) {
+      throw new IllegalArgumentException("Non-image file passed as argument");
+    }
+    mStorageManager=new FileDataStorageManager(getAccount(),getContentResolver());
+    file=mStorageManager.getFileById(file.getFileId());
+    if (file != null) {
+      setFile(file);
+      getSupportActionBar().setTitle(getFile().getFileName());
+      initViewPager();
+    }
+ else {
+      finish();
+    }
+  }
+ else {
+    Log_OC.wtf(TAG,"onAccountChanged was called with NULL account associated!");
+  }
 }

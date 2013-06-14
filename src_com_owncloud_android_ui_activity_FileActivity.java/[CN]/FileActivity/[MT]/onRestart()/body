@@ -3,6 +3,11 @@
   Account oldAccount=mAccount;
   grantValidAccount();
   if (mAccount != null && !mAccount.equals(oldAccount)) {
-    onAccountSet(false);
+    mAccountWasSet=true;
+    mAccountWasRestored=false;
+  }
+ else {
+    mAccountWasSet=false;
+    mAccountWasRestored=false;
   }
 }

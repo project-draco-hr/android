@@ -8,8 +8,14 @@
     mAccount=getIntent().getParcelableExtra(FileActivity.EXTRA_ACCOUNT);
     mFile=getIntent().getParcelableExtra(FileActivity.EXTRA_FILE);
   }
+  Account oldAccount=mAccount;
   grantValidAccount();
   if (mAccount != null) {
-    onAccountSet(savedInstanceState != null);
+    mAccountWasSet=true;
+    mAccountWasRestored=(savedInstanceState != null && mAccount.equals(oldAccount));
+  }
+ else {
+    mAccountWasSet=false;
+    mAccountWasRestored=false;
   }
 }
