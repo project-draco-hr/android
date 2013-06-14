@@ -9,6 +9,7 @@
       file=mStorageManager.getFileByPath(OCFile.PATH_SEPARATOR);
     }
     setFile(file);
+    mDirectories.clear();
     while (file != null && file.getFileName() != OCFile.PATH_SEPARATOR) {
       if (file.isDirectory()) {
         mDirectories.add(file.getFileName());

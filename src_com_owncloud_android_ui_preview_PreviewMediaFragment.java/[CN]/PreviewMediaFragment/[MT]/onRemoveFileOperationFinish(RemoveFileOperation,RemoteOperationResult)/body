@@ -1,5 +1,4 @@
 {
-  boolean inDisplayActivity=getActivity() instanceof FileDisplayActivity;
   getActivity().dismissDialog(FileDisplayActivity.DIALOG_SHORT_WAIT);
   if (result.isSuccess()) {
     Toast msg=Toast.makeText(getActivity().getApplicationContext(),R.string.remove_success_msg,Toast.LENGTH_LONG);

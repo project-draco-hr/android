@@ -4,6 +4,11 @@
     Fragment secondFragment=chooseInitialSecondFragment(file);
     if (secondFragment != null) {
       setSecondFragment(secondFragment);
+      updateFragmentsVisibility(true);
+      updateNavigationElementsInActionBar(file);
+    }
+ else {
+      cleanSecondFragment();
     }
   }
  else {

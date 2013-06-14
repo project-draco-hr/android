@@ -1,5 +1,4 @@
 {
   pushDirname(directory);
   cleanSecondFragment();
-  updateNavigationElementsInActionBar(null);
 }
