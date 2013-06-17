@@ -1,0 +1,13 @@
+{
+  if (getAccount() != null) {
+    if (!mAccountOnCreation.equals(getAccount())) {
+      setResult(RESULT_CANCELED);
+      finish();
+    }
+  }
+ else {
+    Log_OC.wtf(TAG,"onAccountChanged was called with NULL account associated!");
+    setResult(RESULT_CANCELED);
+    finish();
+  }
+}
