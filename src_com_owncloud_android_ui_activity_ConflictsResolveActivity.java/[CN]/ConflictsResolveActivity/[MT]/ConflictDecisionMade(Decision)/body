@@ -14,8 +14,8 @@ default :
 Log_OC.wtf(TAG,"Unhandled conflict decision " + decision);
 return;
 }
-i.putExtra(FileUploader.KEY_ACCOUNT,mOCAccount);
-i.putExtra(FileUploader.KEY_FILE,mFile);
+i.putExtra(FileUploader.KEY_ACCOUNT,getAccount());
+i.putExtra(FileUploader.KEY_FILE,getFile());
 i.putExtra(FileUploader.KEY_UPLOAD_TYPE,FileUploader.UPLOAD_SINGLE_FILE);
 startService(i);
 finish();
