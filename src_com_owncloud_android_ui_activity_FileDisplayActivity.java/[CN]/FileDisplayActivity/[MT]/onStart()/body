@@ -1,8 +1,6 @@
 {
   super.onStart();
-  if (mNewConfigurationChangeToApplyOnStart != null) {
-    checkConfigurationChange(mNewConfigurationChangeToApplyOnStart);
-    mNewConfigurationChangeToApplyOnStart=null;
-  }
-  mStarted=true;
+  FileFragment second=getSecondFragment();
+  updateFragmentsVisibility(second != null);
+  updateNavigationElementsInActionBar((second == null) ? null : second.getFile());
 }

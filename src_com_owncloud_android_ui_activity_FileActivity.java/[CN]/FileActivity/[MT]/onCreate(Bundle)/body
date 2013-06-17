@@ -8,7 +8,8 @@
     mAccount=getIntent().getParcelableExtra(FileActivity.EXTRA_ACCOUNT);
     mFile=getIntent().getParcelableExtra(FileActivity.EXTRA_FILE);
   }
-  if (mAccount != null && AccountUtils.setCurrentOwnCloudAccount(getApplicationContext(),mAccount.name)) {
-    onAccountChanged();
+  grantValidAccount();
+  if (mAccount != null) {
+    onAccountSet(savedInstanceState != null);
   }
 }

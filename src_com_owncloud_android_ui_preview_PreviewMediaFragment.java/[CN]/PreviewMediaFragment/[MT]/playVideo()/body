@@ -1,4 +1,4 @@
 {
   mMediaController.setMediaPlayer(mVideoPreview);
-  mVideoPreview.setVideoPath(mFile.getStoragePath());
+  mVideoPreview.setVideoPath(getFile().getStoragePath());
 }

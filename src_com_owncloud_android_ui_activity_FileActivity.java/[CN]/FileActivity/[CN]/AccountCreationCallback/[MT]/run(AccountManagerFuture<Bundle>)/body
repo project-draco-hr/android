@@ -8,7 +8,7 @@
       String type=result.getString(AccountManager.KEY_ACCOUNT_TYPE);
       if (AccountUtils.setCurrentOwnCloudAccount(getApplicationContext(),name)) {
         FileActivity.this.mAccount=new Account(name,type);
-        FileActivity.this.onAccountChanged();
+        FileActivity.this.onAccountSet(false);
       }
     }
  catch (    OperationCanceledException e) {

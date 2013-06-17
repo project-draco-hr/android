@@ -1,7 +1,7 @@
 {
   if (result.isSuccess()) {
     dismissDialog(DIALOG_SHORT_WAIT);
-    mFileList.listDirectory();
+    refeshListOfFilesFragment();
   }
  else {
     dismissDialog(DIALOG_SHORT_WAIT);

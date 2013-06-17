@@ -1,0 +1,10 @@
+{
+  boolean validAccount=(mAccount != null && AccountUtils.setCurrentOwnCloudAccount(getApplicationContext(),mAccount.name));
+  if (!validAccount) {
+    mAccount=AccountUtils.getCurrentOwnCloudAccount(getApplicationContext());
+    if (mAccount == null) {
+      createFirstAccount();
+      mRedirectingToSetupAccount=true;
+    }
+  }
+}

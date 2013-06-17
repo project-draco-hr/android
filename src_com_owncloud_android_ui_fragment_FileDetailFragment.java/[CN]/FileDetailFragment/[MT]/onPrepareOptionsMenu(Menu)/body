@@ -2,10 +2,11 @@
   super.onPrepareOptionsMenu(menu);
   List<Integer> toHide=new ArrayList<Integer>();
   List<Integer> toShow=new ArrayList<Integer>();
+  OCFile file=getFile();
   FileDownloaderBinder downloaderBinder=mContainerActivity.getFileDownloaderBinder();
-  boolean downloading=downloaderBinder != null && downloaderBinder.isDownloading(mAccount,mFile);
+  boolean downloading=downloaderBinder != null && downloaderBinder.isDownloading(mAccount,file);
   FileUploaderBinder uploaderBinder=mContainerActivity.getFileUploaderBinder();
-  boolean uploading=uploaderBinder != null && uploaderBinder.isUploading(mAccount,mFile);
+  boolean uploading=uploaderBinder != null && uploaderBinder.isUploading(mAccount,getFile());
   if (downloading || uploading) {
     toHide.add(R.id.action_download_file);
     toHide.add(R.id.action_rename_file);
@@ -20,7 +21,7 @@
       toShow.add(R.id.action_cancel_download);
     }
   }
- else   if (mFile != null && mFile.isDown()) {
+ else   if (file != null && file.isDown()) {
     toHide.add(R.id.action_download_file);
     toHide.add(R.id.action_cancel_download);
     toHide.add(R.id.action_cancel_upload);
@@ -29,7 +30,7 @@
     toShow.add(R.id.action_open_file_with);
     toShow.add(R.id.action_sync_file);
   }
- else   if (mFile != null) {
+ else   if (file != null) {
     toHide.add(R.id.action_open_file_with);
     toHide.add(R.id.action_cancel_download);
     toHide.add(R.id.action_cancel_upload);

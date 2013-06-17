@@ -1,8 +1,0 @@
-{
-  if (!mDownloaderBinder.isDownloading(getAccount(),getFile())) {
-    Intent i=new Intent(this,FileDownloader.class);
-    i.putExtra(FileDownloader.EXTRA_ACCOUNT,getAccount());
-    i.putExtra(FileDownloader.EXTRA_FILE,getFile());
-    startService(i);
-  }
-}

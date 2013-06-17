@@ -1,0 +1,9 @@
+{
+  Fragment second=getSecondFragment();
+  if (second != null) {
+    FragmentTransaction tr=getSupportFragmentManager().beginTransaction();
+    tr.remove(second);
+    tr.commit();
+    updateFragmentsVisibility(false);
+  }
+}
