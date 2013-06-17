@@ -10,16 +10,21 @@
     }
     setFile(file);
     mDirectories.clear();
-    while (file != null && file.getFileName() != OCFile.PATH_SEPARATOR) {
-      if (file.isDirectory()) {
-        mDirectories.add(file.getFileName());
+    OCFile fileIt=file;
+    while (fileIt != null && fileIt.getFileName() != OCFile.PATH_SEPARATOR) {
+      if (fileIt.isDirectory()) {
+        mDirectories.add(fileIt.getFileName());
       }
-      file=mStorageManager.getFileById(file.getParentId());
+      fileIt=mStorageManager.getFileById(fileIt.getParentId());
     }
     mDirectories.add(OCFile.PATH_SEPARATOR);
     if (!stateWasRecovered) {
       Log_OC.e(TAG,"Initializing Fragments in onAccountChanged..");
       initFragmentsWithFile();
+    }
+ else {
+      updateFragmentsVisibility(!file.isDirectory());
+      updateNavigationElementsInActionBar(file.isDirectory() ? null : file);
     }
   }
  else {

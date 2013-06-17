@@ -1,7 +1,7 @@
 {
   super.onActivityCreated(savedInstanceState);
   Log_OC.e(TAG,"onActivityCreated() start");
-  mAdapter=new FileListListAdapter(mContainerActivity.getInitialDirectory(),mContainerActivity.getStorageManager(),getActivity(),mContainerActivity);
+  mAdapter=new FileListListAdapter(getActivity(),mContainerActivity);
   setListAdapter(mAdapter);
   registerForContextMenu(getListView());
   getListView().setOnCreateContextMenuListener(this);

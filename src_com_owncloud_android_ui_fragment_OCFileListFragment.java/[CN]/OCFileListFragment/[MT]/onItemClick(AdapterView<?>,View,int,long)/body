@@ -2,7 +2,6 @@
   OCFile file=(OCFile)mAdapter.getItem(position);
   if (file != null) {
     if (file.isDirectory()) {
-      mFile=file;
       listDirectory(file);
       mContainerActivity.onBrowsedDownTo(file);
     }
