@@ -1,5 +1,5 @@
 {
-  String uri=mHostUrlInput.getText().toString().trim();
+  String uri=trimUrlWebdav(mHostUrlInput.getText().toString().trim());
   mServerIsValid=false;
   mServerIsChecked=false;
   mOkButton.setEnabled(false);
