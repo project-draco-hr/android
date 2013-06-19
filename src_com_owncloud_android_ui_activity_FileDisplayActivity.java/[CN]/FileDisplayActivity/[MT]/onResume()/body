@@ -1,29 +1,19 @@
 {
-  Log.d(getClass().toString(),"onResume() start");
   super.onResume();
-  if (AccountUtils.accountsAreSetup(this)) {
-    if (mStorageManager == null) {
-      initDataFromCurrentAccount();
-      if (mDualPane) {
-        initFileDetailsInDualPane();
-      }
-      mBackFromCreatingFirstAccount=true;
-    }
-    IntentFilter syncIntentFilter=new IntentFilter(FileSyncService.SYNC_MESSAGE);
-    mSyncBroadcastReceiver=new SyncBroadcastReceiver();
-    registerReceiver(mSyncBroadcastReceiver,syncIntentFilter);
-    IntentFilter uploadIntentFilter=new IntentFilter(FileUploader.UPLOAD_FINISH_MESSAGE);
-    mUploadFinishReceiver=new UploadFinishReceiver();
-    registerReceiver(mUploadFinishReceiver,uploadIntentFilter);
-    IntentFilter downloadIntentFilter=new IntentFilter(FileDownloader.DOWNLOAD_ADDED_MESSAGE);
-    downloadIntentFilter.addAction(FileDownloader.DOWNLOAD_FINISH_MESSAGE);
-    mDownloadFinishReceiver=new DownloadFinishReceiver();
-    registerReceiver(mDownloadFinishReceiver,downloadIntentFilter);
-    mFileList.listDirectory(mCurrentDir);
+  Log_OC.e(TAG,"onResume() start");
+  IntentFilter syncIntentFilter=new IntentFilter(FileSyncService.SYNC_MESSAGE);
+  mSyncBroadcastReceiver=new SyncBroadcastReceiver();
+  registerReceiver(mSyncBroadcastReceiver,syncIntentFilter);
+  IntentFilter uploadIntentFilter=new IntentFilter(FileUploader.UPLOAD_FINISH_MESSAGE);
+  mUploadFinishReceiver=new UploadFinishReceiver();
+  registerReceiver(mUploadFinishReceiver,uploadIntentFilter);
+  IntentFilter downloadIntentFilter=new IntentFilter(FileDownloader.DOWNLOAD_ADDED_MESSAGE);
+  downloadIntentFilter.addAction(FileDownloader.DOWNLOAD_FINISH_MESSAGE);
+  mDownloadFinishReceiver=new DownloadFinishReceiver();
+  registerReceiver(mDownloadFinishReceiver,downloadIntentFilter);
+  OCFileListFragment listOfFiles=getListOfFilesFragment();
+  if (listOfFiles != null) {
+    listOfFiles.listDirectory(getCurrentDir());
   }
- else {
-    mStorageManager=null;
-    showDialog(DIALOG_SETUP_ACCOUNT);
-  }
-  Log.d(getClass().toString(),"onResume() end");
+  Log_OC.d(TAG,"onResume() end");
 }

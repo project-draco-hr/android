@@ -1,0 +1,4 @@
+{
+  AccountManager am=AccountManager.get(getApplicationContext());
+  am.addAccount(AccountAuthenticator.ACCOUNT_TYPE,AccountAuthenticator.AUTH_TOKEN_TYPE_PASSWORD,null,null,this,new AccountCreationCallback(),null);
+}

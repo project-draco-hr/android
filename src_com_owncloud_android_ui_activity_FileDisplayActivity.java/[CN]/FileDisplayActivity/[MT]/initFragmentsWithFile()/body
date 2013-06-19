@@ -1,0 +1,18 @@
+{
+  if (getAccount() != null && getFile() != null) {
+    OCFile file=getFile();
+    Fragment secondFragment=chooseInitialSecondFragment(file);
+    if (secondFragment != null) {
+      setSecondFragment(secondFragment);
+    }
+  }
+ else {
+    Log.wtf(TAG,"initFragments() called with invalid NULLs!");
+    if (getAccount() == null) {
+      Log.wtf(TAG,"\t account is NULL");
+    }
+    if (getFile() == null) {
+      Log.wtf(TAG,"\t file is NULL");
+    }
+  }
+}

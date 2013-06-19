@@ -1,11 +1,11 @@
 {
   if (!intent.hasExtra(KEY_ACCOUNT) || !intent.hasExtra(KEY_UPLOAD_TYPE) || !(intent.hasExtra(KEY_LOCAL_FILE) || intent.hasExtra(KEY_FILE))) {
-    Log.e(TAG,"Not enough information provided in intent");
+    Log_OC.e(TAG,"Not enough information provided in intent");
     return Service.START_NOT_STICKY;
   }
   int uploadType=intent.getIntExtra(KEY_UPLOAD_TYPE,-1);
   if (uploadType == -1) {
-    Log.e(TAG,"Incorrect upload type provided");
+    Log_OC.e(TAG,"Incorrect upload type provided");
     return Service.START_NOT_STICKY;
   }
   Account account=intent.getParcelableExtra(KEY_ACCOUNT);
@@ -40,20 +40,20 @@
     fixed=checkAndFixInstantUploadDirectory(storageManager);
   }
   if (intent.hasExtra(KEY_FILE) && files == null) {
-    Log.e(TAG,"Incorrect array for OCFiles provided in upload intent");
+    Log_OC.e(TAG,"Incorrect array for OCFiles provided in upload intent");
     return Service.START_NOT_STICKY;
   }
  else   if (!intent.hasExtra(KEY_FILE)) {
     if (localPaths == null) {
-      Log.e(TAG,"Incorrect array for local paths provided in upload intent");
+      Log_OC.e(TAG,"Incorrect array for local paths provided in upload intent");
       return Service.START_NOT_STICKY;
     }
     if (remotePaths == null) {
-      Log.e(TAG,"Incorrect array for remote paths provided in upload intent");
+      Log_OC.e(TAG,"Incorrect array for remote paths provided in upload intent");
       return Service.START_NOT_STICKY;
     }
     if (localPaths.length != remotePaths.length) {
-      Log.e(TAG,"Different number of remote paths and local paths!");
+      Log_OC.e(TAG,"Different number of remote paths and local paths!");
       return Service.START_NOT_STICKY;
     }
     files=new OCFile[localPaths.length];
@@ -88,15 +88,15 @@
     }
   }
  catch (  IllegalArgumentException e) {
-    Log.e(TAG,"Not enough information provided in intent: " + e.getMessage());
+    Log_OC.e(TAG,"Not enough information provided in intent: " + e.getMessage());
     return START_NOT_STICKY;
   }
 catch (  IllegalStateException e) {
-    Log.e(TAG,"Bad information provided in intent: " + e.getMessage());
+    Log_OC.e(TAG,"Bad information provided in intent: " + e.getMessage());
     return START_NOT_STICKY;
   }
 catch (  Exception e) {
-    Log.e(TAG,"Unexpected exception while processing upload intent",e);
+    Log_OC.e(TAG,"Unexpected exception while processing upload intent",e);
     return START_NOT_STICKY;
   }
   if (requestedUploads.size() > 0) {
@@ -105,6 +105,6 @@ catch (  Exception e) {
     msg.obj=requestedUploads;
     mServiceHandler.sendMessage(msg);
   }
-  Log.i(TAG,"mPendingUploads size:" + mPendingUploads.size());
+  Log_OC.i(TAG,"mPendingUploads size:" + mPendingUploads.size());
   return Service.START_NOT_STICKY;
 }

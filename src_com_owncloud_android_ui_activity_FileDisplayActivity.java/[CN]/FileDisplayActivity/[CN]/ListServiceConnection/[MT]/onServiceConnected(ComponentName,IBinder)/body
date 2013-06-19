@@ -1,25 +1,26 @@
 {
   if (component.equals(new ComponentName(FileDisplayActivity.this,FileDownloader.class))) {
-    Log.d(TAG,"Download service connected");
+    Log_OC.d(TAG,"Download service connected");
     mDownloaderBinder=(FileDownloaderBinder)service;
     if (mWaitingToPreview != null) {
       requestForDownload();
     }
   }
  else   if (component.equals(new ComponentName(FileDisplayActivity.this,FileUploader.class))) {
-    Log.d(TAG,"Upload service connected");
+    Log_OC.d(TAG,"Upload service connected");
     mUploaderBinder=(FileUploaderBinder)service;
   }
  else {
     return;
   }
-  if (mFileList != null)   mFileList.listDirectory();
-  if (mDualPane) {
-    Fragment fragment=getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
-    if (fragment != null && fragment instanceof FileDetailFragment) {
-      FileDetailFragment detailFragment=(FileDetailFragment)fragment;
-      detailFragment.listenForTransferProgress();
-      detailFragment.updateFileDetails(false,false);
-    }
+  OCFileListFragment listOfFiles=getListOfFilesFragment();
+  if (listOfFiles != null) {
+    listOfFiles.listDirectory();
+  }
+  FileFragment secondFragment=getSecondFragment();
+  if (secondFragment != null && secondFragment instanceof FileDetailFragment) {
+    FileDetailFragment detailFragment=(FileDetailFragment)secondFragment;
+    detailFragment.listenForTransferProgress();
+    detailFragment.updateFileDetails(false,false);
   }
 }

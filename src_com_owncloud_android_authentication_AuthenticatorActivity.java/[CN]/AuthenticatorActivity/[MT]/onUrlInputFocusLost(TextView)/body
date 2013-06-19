@@ -1,0 +1,8 @@
+{
+  if (!mHostBaseUrl.equals(normalizeUrl(mHostUrlInput.getText().toString()))) {
+    checkOcServer();
+  }
+ else {
+    mOkButton.setEnabled(mServerIsValid);
+  }
+}

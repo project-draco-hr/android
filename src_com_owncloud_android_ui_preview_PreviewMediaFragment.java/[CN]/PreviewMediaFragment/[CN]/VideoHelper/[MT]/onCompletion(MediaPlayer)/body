@@ -1,5 +1,5 @@
 {
-  Log.e(TAG,"completed");
+  Log_OC.e(TAG,"completed");
   if (mp != null) {
     mVideoPreview.seekTo(0);
     if (Build.VERSION.SDK_INT == Build.VERSION_CODES.GINGERBREAD) {
@@ -10,7 +10,7 @@
       mVideoPreview.stopPlayback();
       mAutoplay=false;
       mSavedPlaybackPosition=0;
-      mVideoPreview.setVideoPath(mFile.getStoragePath());
+      mVideoPreview.setVideoPath(getFile().getStoragePath());
     }
   }
   mMediaController.updatePausePlay();

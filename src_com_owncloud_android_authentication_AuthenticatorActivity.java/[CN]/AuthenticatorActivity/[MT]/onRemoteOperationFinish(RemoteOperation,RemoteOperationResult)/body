@@ -1,0 +1,11 @@
+{
+  if (operation instanceof OwnCloudServerCheckOperation) {
+    onOcServerCheckFinish((OwnCloudServerCheckOperation)operation,result);
+  }
+ else   if (operation instanceof OAuth2GetAccessToken) {
+    onGetOAuthAccessTokenFinish((OAuth2GetAccessToken)operation,result);
+  }
+ else   if (operation instanceof ExistenceCheckOperation) {
+    onAuthorizationCheckFinish((ExistenceCheckOperation)operation,result);
+  }
+}

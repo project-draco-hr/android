@@ -1,27 +1,24 @@
 {
   boolean inProgress=intent.getBooleanExtra(FileSyncService.IN_PROGRESS,false);
   String accountName=intent.getStringExtra(FileSyncService.ACCOUNT_NAME);
-  Log.d("FileDisplay","sync of account " + accountName + " is in_progress: "+ inProgress);
-  if (accountName.equals(AccountUtils.getCurrentOwnCloudAccount(context).name)) {
+  Log_OC.d(TAG,"sync of account " + accountName + " is in_progress: "+ inProgress);
+  if (getAccount() != null && accountName.equals(getAccount().name)) {
     String synchFolderRemotePath=intent.getStringExtra(FileSyncService.SYNC_FOLDER_REMOTE_PATH);
     boolean fillBlankRoot=false;
-    if (mCurrentDir == null) {
-      mCurrentDir=mStorageManager.getFileByPath("/");
-      fillBlankRoot=(mCurrentDir != null);
+    OCFile currentDir=getCurrentDir();
+    if (currentDir == null) {
+      currentDir=mStorageManager.getFileByPath(OCFile.PATH_SEPARATOR);
+      fillBlankRoot=(currentDir != null);
     }
-    if ((synchFolderRemotePath != null && mCurrentDir != null && (mCurrentDir.getRemotePath().equals(synchFolderRemotePath))) || fillBlankRoot) {
-      if (!fillBlankRoot)       mCurrentDir=getStorageManager().getFileByPath(synchFolderRemotePath);
-      OCFileListFragment fileListFragment=(OCFileListFragment)getSupportFragmentManager().findFragmentById(R.id.fileList);
+    if ((synchFolderRemotePath != null && currentDir != null && (currentDir.getRemotePath().equals(synchFolderRemotePath))) || fillBlankRoot) {
+      if (!fillBlankRoot)       currentDir=getStorageManager().getFileByPath(synchFolderRemotePath);
+      OCFileListFragment fileListFragment=getListOfFilesFragment();
       if (fileListFragment != null) {
-        fileListFragment.listDirectory(mCurrentDir);
+        fileListFragment.listDirectory(currentDir);
       }
     }
+    setFile(currentDir);
     setSupportProgressBarIndeterminateVisibility(inProgress);
-    if (mBackFromCreatingFirstAccount) {
-      getSupportActionBar().hide();
-      getSupportActionBar().show();
-      mBackFromCreatingFirstAccount=false;
-    }
     removeStickyBroadcast(intent);
   }
   RemoteOperationResult synchResult=(RemoteOperationResult)intent.getSerializableExtra(FileSyncService.SYNC_RESULT);

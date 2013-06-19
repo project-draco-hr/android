@@ -1,0 +1,30 @@
+{
+  if (getAccount() != null) {
+    mStorageManager=new FileDataStorageManager(getAccount(),getContentResolver());
+    OCFile file=getFile();
+    if (file != null) {
+      if (file.isDown() && file.getLastSyncDateForProperties() == 0) {
+        if (mStorageManager.getFileById(file.getParentId()) == null) {
+          file=null;
+        }
+      }
+ else {
+        file=mStorageManager.getFileByPath(file.getRemotePath());
+      }
+    }
+    if (file == null) {
+      file=mStorageManager.getFileByPath(OCFile.PATH_SEPARATOR);
+    }
+    setFile(file);
+    if (findViewById(android.R.id.content) != null && !stateWasRecovered) {
+      Log_OC.e(TAG,"Initializing Fragments in onAccountChanged..");
+      initFragmentsWithFile();
+    }
+ else {
+      Log_OC.e(TAG,"Fragment initializacion ignored in onAccountChanged due to lack of CONTENT VIEW");
+    }
+  }
+ else {
+    Log_OC.wtf(TAG,"onAccountChanged was called with NULL account associated!");
+  }
+}

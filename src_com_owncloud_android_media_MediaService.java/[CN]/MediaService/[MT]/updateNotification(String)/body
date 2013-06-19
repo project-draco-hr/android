@@ -1,7 +1,7 @@
 {
-  Intent showDetailsIntent=new Intent(this,FileDetailActivity.class);
-  showDetailsIntent.putExtra(FileDetailFragment.EXTRA_FILE,mFile);
-  showDetailsIntent.putExtra(FileDetailFragment.EXTRA_ACCOUNT,mAccount);
+  Intent showDetailsIntent=new Intent(this,FileDisplayActivity.class);
+  showDetailsIntent.putExtra(FileActivity.EXTRA_FILE,mFile);
+  showDetailsIntent.putExtra(FileActivity.EXTRA_ACCOUNT,mAccount);
   showDetailsIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
   mNotification.contentIntent=PendingIntent.getActivity(getApplicationContext(),(int)System.currentTimeMillis(),showDetailsIntent,PendingIntent.FLAG_UPDATE_CURRENT);
   mNotification.when=System.currentTimeMillis();

@@ -13,7 +13,7 @@
       mimeType=MimeTypeMap.getSingleton().getMimeTypeFromExtension(remotePath.substring(remotePath.lastIndexOf('.') + 1));
     }
  catch (    IndexOutOfBoundsException e) {
-      Log.e(TAG,"Trying to find out MIME type of a file without extension: " + remotePath);
+      Log_OC.e(TAG,"Trying to find out MIME type of a file without extension: " + remotePath);
     }
   }
   if (mimeType == null) {
@@ -23,11 +23,6 @@
   String parentPath=new File(remotePath).getParent();
   parentPath=parentPath.endsWith(OCFile.PATH_SEPARATOR) ? parentPath : parentPath + OCFile.PATH_SEPARATOR;
   OCFile parentDir=storageManager.getFileByPath(parentPath);
-  if (parentDir == null) {
-    Toast t=Toast.makeText(getApplicationContext(),"The first time the InstantUpload is running you must be online, so the target folder can successfully created by the upload process",30);
-    t.show();
-    return null;
-  }
   long parentDirId=parentDir.getFileId();
   newFile.setParentId(parentDirId);
   return newFile;

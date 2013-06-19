@@ -1,0 +1,8 @@
+{
+  super.onRestart();
+  Account oldAccount=mAccount;
+  grantValidAccount();
+  if (mAccount != null && !mAccount.equals(oldAccount)) {
+    onAccountSet(false);
+  }
+}

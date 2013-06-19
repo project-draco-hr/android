@@ -3,10 +3,10 @@
   if (!isEmpty() && accountName.equals(mAccount.name)) {
     boolean uploadWasFine=intent.getBooleanExtra(FileUploader.EXTRA_UPLOAD_RESULT,false);
     String uploadRemotePath=intent.getStringExtra(FileUploader.EXTRA_REMOTE_PATH);
-    boolean renamedInUpload=mFile.getRemotePath().equals(intent.getStringExtra(FileUploader.EXTRA_OLD_REMOTE_PATH));
-    if (mFile.getRemotePath().equals(uploadRemotePath) || renamedInUpload) {
+    boolean renamedInUpload=getFile().getRemotePath().equals(intent.getStringExtra(FileUploader.EXTRA_OLD_REMOTE_PATH));
+    if (getFile().getRemotePath().equals(uploadRemotePath) || renamedInUpload) {
       if (uploadWasFine) {
-        mFile=mStorageManager.getFileByPath(uploadRemotePath);
+        setFile(mStorageManager.getFileByPath(uploadRemotePath));
       }
       if (renamedInUpload) {
         String newName=(new File(uploadRemotePath)).getName();

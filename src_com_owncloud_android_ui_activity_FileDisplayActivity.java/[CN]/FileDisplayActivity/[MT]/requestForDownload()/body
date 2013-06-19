@@ -1,5 +1,5 @@
 {
-  Account account=AccountUtils.getCurrentOwnCloudAccount(this);
+  Account account=getAccount();
   if (!mDownloaderBinder.isDownloading(account,mWaitingToPreview)) {
     Intent i=new Intent(this,FileDownloader.class);
     i.putExtra(FileDownloader.EXTRA_ACCOUNT,account);

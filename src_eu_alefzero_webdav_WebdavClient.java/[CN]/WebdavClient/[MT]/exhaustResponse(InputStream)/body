@@ -5,7 +5,7 @@
       responseBodyAsStream.close();
     }
  catch (    IOException io) {
-      Log.e(TAG,"Unexpected exception while exhausting not interesting HTTP response; will be IGNORED",io);
+      Log_OC.e(TAG,"Unexpected exception while exhausting not interesting HTTP response; will be IGNORED",io);
     }
   }
 }

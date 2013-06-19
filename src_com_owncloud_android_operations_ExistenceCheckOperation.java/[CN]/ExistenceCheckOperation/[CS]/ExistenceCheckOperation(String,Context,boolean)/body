@@ -1,0 +1,5 @@
+{
+  mPath=(path != null) ? path : "";
+  mContext=context;
+  mSuccessIfAbsent=successIfAbsent;
+}

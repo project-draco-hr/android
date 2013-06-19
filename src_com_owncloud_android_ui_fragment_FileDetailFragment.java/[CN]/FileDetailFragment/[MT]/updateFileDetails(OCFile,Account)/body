@@ -1,5 +1,5 @@
 {
-  mFile=file;
+  setFile(file);
   if (ocAccount != null && (mStorageManager == null || (mAccount != null && !mAccount.equals(ocAccount)))) {
     mStorageManager=new FileDataStorageManager(ocAccount,getActivity().getApplicationContext().getContentResolver());
   }

@@ -1,4 +1,0 @@
-{
-  mListener=listener;
-  mHandler=handler;
-}

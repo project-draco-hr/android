@@ -1,0 +1,16 @@
+{
+  ActionBar actionBar=getSupportActionBar();
+  if (currentFile == null || mDualPane) {
+    OCFile currentDir=getCurrentDir();
+    actionBar.setDisplayHomeAsUpEnabled(currentDir != null && currentDir.getParentId() != 0);
+    actionBar.setDisplayShowTitleEnabled(false);
+    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+    actionBar.setListNavigationCallbacks(mDirectories,this);
+  }
+ else {
+    actionBar.setDisplayHomeAsUpEnabled(true);
+    actionBar.setDisplayShowTitleEnabled(true);
+    actionBar.setTitle(currentFile.getFileName());
+    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+  }
+}

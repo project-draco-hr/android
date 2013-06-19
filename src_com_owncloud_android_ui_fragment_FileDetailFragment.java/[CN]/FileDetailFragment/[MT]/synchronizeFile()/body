@@ -1,0 +1,32 @@
+{
+  OCFile file=getFile();
+  FileDownloaderBinder downloaderBinder=mContainerActivity.getFileDownloaderBinder();
+  FileUploaderBinder uploaderBinder=mContainerActivity.getFileUploaderBinder();
+  if (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,file)) {
+    downloaderBinder.cancel(mAccount,file);
+    if (file.isDown()) {
+      setButtonsForDown();
+    }
+ else {
+      setButtonsForRemote();
+    }
+  }
+ else   if (uploaderBinder != null && uploaderBinder.isUploading(mAccount,file)) {
+    uploaderBinder.cancel(mAccount,file);
+    if (!file.fileExists()) {
+      ((FileDisplayActivity)getActivity()).cleanSecondFragment();
+    }
+ else     if (file.isDown()) {
+      setButtonsForDown();
+    }
+ else {
+      setButtonsForRemote();
+    }
+  }
+ else {
+    mLastRemoteOperation=new SynchronizeFileOperation(file,null,mStorageManager,mAccount,true,false,getActivity());
+    mLastRemoteOperation.execute(mAccount,getSherlockActivity(),this,mHandler,getSherlockActivity());
+    boolean inDisplayActivity=getActivity() instanceof FileDisplayActivity;
+    getActivity().showDialog(FileDisplayActivity.DIALOG_SHORT_WAIT);
+  }
+}

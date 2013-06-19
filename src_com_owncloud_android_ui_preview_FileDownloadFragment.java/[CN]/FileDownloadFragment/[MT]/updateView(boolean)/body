@@ -1,9 +1,9 @@
 {
   FileDownloaderBinder downloaderBinder=(mContainerActivity == null) ? null : mContainerActivity.getFileDownloaderBinder();
-  if (transferring || (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,mFile))) {
+  if (transferring || (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,getFile()))) {
     setButtonsForTransferring();
   }
- else   if (mFile.isDown()) {
+ else   if (getFile().isDown()) {
     setButtonsForDown();
   }
  else {

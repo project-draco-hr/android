@@ -1,3 +1,0 @@
-{
-  return InstantUploadService.INSTANT_UPLOAD_DIR + "/" + getFileName(fileName);
-}

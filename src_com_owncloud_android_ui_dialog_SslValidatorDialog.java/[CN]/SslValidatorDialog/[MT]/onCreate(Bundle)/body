@@ -9,12 +9,12 @@
         saveServerCert();
         dismiss();
         if (mListener != null)         mListener.onSavedCertificate();
- else         Log.d(TAG,"Nobody there to notify the certificate was saved");
+ else         Log_OC.d(TAG,"Nobody there to notify the certificate was saved");
       }
  catch (      Exception e) {
         dismiss();
         if (mListener != null)         mListener.onFailedSavingCertificate();
-        Log.e(TAG,"Server certificate could not be saved in the known servers trust store ",e);
+        Log_OC.e(TAG,"Server certificate could not be saved in the known servers trust store ",e);
       }
     }
   }

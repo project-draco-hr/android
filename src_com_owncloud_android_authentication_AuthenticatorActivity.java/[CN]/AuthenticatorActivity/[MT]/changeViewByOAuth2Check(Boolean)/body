@@ -1,0 +1,14 @@
+{
+  if (checked) {
+    mOAuthAuthEndpointText.setVisibility(View.VISIBLE);
+    mOAuthTokenEndpointText.setVisibility(View.VISIBLE);
+    mUsernameInput.setVisibility(View.GONE);
+    mPasswordInput.setVisibility(View.GONE);
+  }
+ else {
+    mOAuthAuthEndpointText.setVisibility(View.GONE);
+    mOAuthTokenEndpointText.setVisibility(View.GONE);
+    mUsernameInput.setVisibility(View.VISIBLE);
+    mPasswordInput.setVisibility(View.VISIBLE);
+  }
+}

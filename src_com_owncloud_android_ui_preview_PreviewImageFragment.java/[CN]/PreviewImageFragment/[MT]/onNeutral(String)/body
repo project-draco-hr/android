@@ -1,9 +1,10 @@
 {
-  if (mFile.isDown()) {
-    File f=new File(mFile.getStoragePath());
+  OCFile file=getFile();
+  if (file.isDown()) {
+    File f=new File(file.getStoragePath());
     f.delete();
-    mFile.setStoragePath(null);
-    mStorageManager.saveFile(mFile);
+    file.setStoragePath(null);
+    mStorageManager.saveFile(file);
     finish();
   }
 }

@@ -19,7 +19,7 @@
     mObserversMap.put(path,observer);
     if (new File(path).exists()) {
       observer.startWatching();
-      Log.d(TAG,"Started watching file " + path);
+      Log_OC.d(TAG,"Started watching file " + path);
     }
   }
  while (c.moveToNext());

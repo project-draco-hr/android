@@ -1,0 +1,5 @@
+{
+  if (!authTokenType.equals(AUTH_TOKEN_TYPE) && !authTokenType.equals(AUTH_TOKEN_TYPE_PASSWORD) && !authTokenType.equals(AUTH_TOKEN_TYPE_ACCESS_TOKEN)&& !authTokenType.equals(AUTH_TOKEN_TYPE_REFRESH_TOKEN)) {
+    throw new UnsupportedAuthTokenTypeException();
+  }
+}

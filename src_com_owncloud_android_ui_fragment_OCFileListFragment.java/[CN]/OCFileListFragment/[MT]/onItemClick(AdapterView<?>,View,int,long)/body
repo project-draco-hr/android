@@ -1,16 +1,29 @@
 {
   OCFile file=(OCFile)mAdapter.getItem(position);
   if (file != null) {
-    if (file.getMimetype().equals("DIR")) {
+    if (file.isDirectory()) {
       mFile=file;
       listDirectory(file);
-      mContainerActivity.onDirectoryClick(file);
+      mContainerActivity.onBrowsedDownTo(file);
     }
  else {
-      mContainerActivity.onFileClick(file);
+      if (PreviewImageFragment.canBePreviewed(file)) {
+        mContainerActivity.startImagePreview(file);
+      }
+ else       if (file.isDown()) {
+        if (PreviewMediaFragment.canBePreviewed(file)) {
+          mContainerActivity.startMediaPreview(file,0,true);
+        }
+ else {
+          mContainerActivity.openFile(file);
+        }
+      }
+ else {
+        mContainerActivity.startDownloadForPreview(file);
+      }
     }
   }
  else {
-    Log.d(TAG,"Null object in ListAdapter!!");
+    Log_OC.d(TAG,"Null object in ListAdapter!!");
   }
 }

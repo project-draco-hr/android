@@ -1,0 +1,26 @@
+{
+  if (mDualPane) {
+    if (mLeftFragmentContainer.getVisibility() != View.VISIBLE) {
+      mLeftFragmentContainer.setVisibility(View.VISIBLE);
+    }
+    if (mRightFragmentContainer.getVisibility() != View.VISIBLE) {
+      mRightFragmentContainer.setVisibility(View.VISIBLE);
+    }
+  }
+ else   if (existsSecondFragment) {
+    if (mLeftFragmentContainer.getVisibility() != View.GONE) {
+      mLeftFragmentContainer.setVisibility(View.GONE);
+    }
+    if (mRightFragmentContainer.getVisibility() != View.VISIBLE) {
+      mRightFragmentContainer.setVisibility(View.VISIBLE);
+    }
+  }
+ else {
+    if (mLeftFragmentContainer.getVisibility() != View.VISIBLE) {
+      mLeftFragmentContainer.setVisibility(View.VISIBLE);
+    }
+    if (mRightFragmentContainer.getVisibility() != View.GONE) {
+      mRightFragmentContainer.setVisibility(View.GONE);
+    }
+  }
+}

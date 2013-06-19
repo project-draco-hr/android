@@ -1,23 +1,24 @@
 {
   if (readyToShow()) {
     if (refresh && mStorageManager != null) {
-      mFile=mStorageManager.getFileByPath(mFile.getRemotePath());
+      setFile(mStorageManager.getFileByPath(getFile().getRemotePath()));
     }
-    setFilename(mFile.getFileName());
-    setFiletype(mFile.getMimetype());
-    setFilesize(mFile.getFileLength());
+    OCFile file=getFile();
+    setFilename(file.getFileName());
+    setFiletype(file.getMimetype());
+    setFilesize(file.getFileLength());
     if (ocVersionSupportsTimeCreated()) {
-      setTimeCreated(mFile.getCreationTimestamp());
+      setTimeCreated(file.getCreationTimestamp());
     }
-    setTimeModified(mFile.getModificationTimestamp());
+    setTimeModified(file.getModificationTimestamp());
     CheckBox cb=(CheckBox)getView().findViewById(R.id.fdKeepInSync);
-    cb.setChecked(mFile.keepInSync());
+    cb.setChecked(file.keepInSync());
     FileDownloaderBinder downloaderBinder=mContainerActivity.getFileDownloaderBinder();
     FileUploaderBinder uploaderBinder=mContainerActivity.getFileUploaderBinder();
-    if (transferring || (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,mFile)) || (uploaderBinder != null && uploaderBinder.isUploading(mAccount,mFile))) {
+    if (transferring || (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,file)) || (uploaderBinder != null && uploaderBinder.isUploading(mAccount,file))) {
       setButtonsForTransferring();
     }
- else     if (mFile.isDown()) {
+ else     if (file.isDown()) {
       setButtonsForDown();
     }
  else {

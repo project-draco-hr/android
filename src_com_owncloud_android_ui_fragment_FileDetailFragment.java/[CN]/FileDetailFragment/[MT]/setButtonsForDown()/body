@@ -1,13 +1,7 @@
 {
   if (!isEmpty()) {
-    Button downloadButton=(Button)getView().findViewById(R.id.fdDownloadBtn);
-    downloadButton.setText(R.string.filedetails_sync_file);
-    ((Button)getView().findViewById(R.id.fdOpenBtn)).setEnabled(true);
-    ((Button)getView().findViewById(R.id.fdRenameBtn)).setEnabled(true);
-    ((Button)getView().findViewById(R.id.fdRemoveBtn)).setEnabled(true);
     getView().findViewById(R.id.fdKeepInSync).setEnabled(true);
-    ProgressBar progressBar=(ProgressBar)getView().findViewById(R.id.fdProgressBar);
-    progressBar.setVisibility(View.GONE);
+    getView().findViewById(R.id.fdProgressBlock).setVisibility(View.GONE);
     TextView progressText=(TextView)getView().findViewById(R.id.fdProgressText);
     progressText.setVisibility(View.GONE);
   }

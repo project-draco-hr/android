@@ -1,7 +1,7 @@
 {
   if (mProgressListener != null && !mListening) {
     if (mContainerActivity.getFileDownloaderBinder() != null) {
-      mContainerActivity.getFileDownloaderBinder().addDatatransferProgressListener(mProgressListener,mAccount,mFile);
+      mContainerActivity.getFileDownloaderBinder().addDatatransferProgressListener(mProgressListener,mAccount,getFile());
       mListening=true;
       setButtonsForTransferring();
     }

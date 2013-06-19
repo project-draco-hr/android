@@ -1,0 +1,7 @@
+{
+  Fragment second=getSupportFragmentManager().findFragmentByTag(FileDisplayActivity.TAG_SECOND_FRAGMENT);
+  if (second != null) {
+    return (FileFragment)second;
+  }
+  return null;
+}

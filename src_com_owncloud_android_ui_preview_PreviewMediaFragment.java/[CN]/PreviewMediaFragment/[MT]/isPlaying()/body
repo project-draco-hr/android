@@ -1,0 +1,6 @@
+{
+  if (mPrepared) {
+    mAutoplay=mVideoPreview.isPlaying();
+  }
+  return mAutoplay;
+}

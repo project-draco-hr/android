@@ -8,4 +8,7 @@
  else   if (operation instanceof SynchronizeFileOperation) {
     onSynchronizeFileOperationFinish((SynchronizeFileOperation)operation,result);
   }
+ else   if (operation instanceof CreateFolderOperation) {
+    onCreateFolderOperationFinish((CreateFolderOperation)operation,result);
+  }
 }

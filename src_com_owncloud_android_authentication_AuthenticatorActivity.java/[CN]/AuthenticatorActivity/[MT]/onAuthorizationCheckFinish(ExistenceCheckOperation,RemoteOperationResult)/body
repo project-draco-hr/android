@@ -1,0 +1,41 @@
+{
+  try {
+    dismissDialog(DIALOG_LOGIN_PROGRESS);
+  }
+ catch (  IllegalArgumentException e) {
+  }
+  if (result.isSuccess()) {
+    Log_OC.d(TAG,"Successful access - time to save the account");
+    if (mAction == ACTION_CREATE) {
+      createAccount();
+    }
+ else {
+      updateToken();
+    }
+    finish();
+  }
+ else   if (result.isServerFail() || result.isException()) {
+    mServerIsChecked=true;
+    mServerIsValid=false;
+    mIsSslConn=false;
+    mOcServerChkOperation=null;
+    mDiscoveredVersion=null;
+    mHostBaseUrl=normalizeUrl(mHostUrlInput.getText().toString());
+    updateServerStatusIconAndText(result);
+    showServerStatus();
+    mAuthStatusIcon=0;
+    mAuthStatusText=0;
+    showAuthStatus();
+    showRefreshButton();
+    mOkButton.setEnabled(false);
+    if (result.getCode() == ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED) {
+      mLastSslUntrustedServerResult=result;
+      showDialog(DIALOG_SSL_VALIDATOR);
+    }
+  }
+ else {
+    updateAuthStatusIconAndText(result);
+    showAuthStatus();
+    Log_OC.d(TAG,"Access failed: " + result.getLogMessage());
+  }
+}

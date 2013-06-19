@@ -1,0 +1,7 @@
+{
+  int drawable=R.drawable.ic_view;
+  if (isPasswordVisible()) {
+    drawable=R.drawable.ic_hide;
+  }
+  mPasswordInput.setCompoundDrawablesWithIntrinsicBounds(0,0,drawable,0);
+}

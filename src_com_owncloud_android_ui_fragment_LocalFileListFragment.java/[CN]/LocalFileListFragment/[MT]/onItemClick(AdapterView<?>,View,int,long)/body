@@ -19,6 +19,6 @@
     }
   }
  else {
-    Log.w(TAG,"Null object in ListAdapter!!");
+    Log_OC.w(TAG,"Null object in ListAdapter!!");
   }
 }

@@ -1,9 +1,9 @@
 {
   if (mDualPane) {
-    FileFragment details=(FileFragment)getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
+    FileFragment details=getSecondFragment();
     if (details != null && details instanceof FileDetailFragment && file.equals(details.getFile())) {
       if (downloading || uploading) {
-        ((FileDetailFragment)details).updateFileDetails(file,AccountUtils.getCurrentOwnCloudAccount(this));
+        ((FileDetailFragment)details).updateFileDetails(file,getAccount());
       }
  else {
         ((FileDetailFragment)details).updateFileDetails(false,true);

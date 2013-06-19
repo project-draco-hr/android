@@ -1,7 +1,7 @@
 {
   super.onCreate(savedInstanceState);
-  mFile=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE);
-  mAccount=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_ACCOUNT);
+  mFile=getIntent().getParcelableExtra(FileActivity.EXTRA_FILE);
+  mAccount=getIntent().getParcelableExtra(FileActivity.EXTRA_ACCOUNT);
   if (mFile == null) {
     throw new IllegalStateException("Instanced with a NULL OCFile");
   }

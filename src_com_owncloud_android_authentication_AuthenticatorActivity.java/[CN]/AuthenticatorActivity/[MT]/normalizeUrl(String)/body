@@ -1,0 +1,19 @@
+{
+  if (url != null && url.length() > 0) {
+    url=url.trim();
+    if (!url.toLowerCase().startsWith("http://") && !url.toLowerCase().startsWith("https://")) {
+      if (mIsSslConn) {
+        url="https://" + url;
+      }
+ else {
+        url="http://" + url;
+      }
+    }
+    url=trimUrlWebdav(url);
+    if (url.endsWith("/")) {
+      url=url.substring(0,url.length() - 1);
+    }
+  }
+  Log_OC.d(TAG,"URL Normalize " + url);
+  return (url != null ? url : "");
+}
