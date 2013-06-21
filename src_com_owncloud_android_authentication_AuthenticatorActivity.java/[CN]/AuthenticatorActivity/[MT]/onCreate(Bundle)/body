@@ -74,7 +74,9 @@
   }
   if (mAction == ACTION_UPDATE_TOKEN) {
     mHostUrlInput.setEnabled(false);
+    mHostUrlInput.setFocusable(false);
     mUsernameInput.setEnabled(false);
+    mUsernameInput.setFocusable(false);
     mOAuth2Check.setVisibility(View.GONE);
     if (!mServerIsValid && mOcServerChkOperation == null) {
       checkOcServer();
