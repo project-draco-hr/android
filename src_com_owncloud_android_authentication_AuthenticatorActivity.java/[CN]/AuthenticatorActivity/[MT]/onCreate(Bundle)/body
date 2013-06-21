@@ -41,6 +41,7 @@
     }
     mOAuth2Check.setChecked(oAuthRequired);
     changeViewByOAuth2Check(oAuthRequired);
+    mJustCreated=true;
   }
  else {
     mServerIsValid=savedInstanceState.getBoolean(KEY_SERVER_VALID);
@@ -80,7 +81,6 @@
     }
   }
   mPasswordInput.setText("");
-  mJustCreated=true;
   mHostUrlInput.setOnFocusChangeListener(this);
   mHostUrlInput.setOnTouchListener(new RightDrawableOnTouchListener(){
     @Override public boolean onDrawableTouch(    final MotionEvent event){
