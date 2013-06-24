@@ -1,4 +1,3 @@
 {
-  mHostUrlInput.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0);
-  mRefreshButtonEnabled=false;
+  mRefreshButton.setVisibility(View.GONE);
 }

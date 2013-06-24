@@ -3,6 +3,7 @@
   getWindow().requestFeature(Window.FEATURE_NO_TITLE);
   setContentView(R.layout.account_setup);
   mHostUrlInput=(EditText)findViewById(R.id.hostUrlInput);
+  mRefreshButton=(ImageButton)findViewById(R.id.refeshButton);
   mUsernameInput=(EditText)findViewById(R.id.account_username);
   mPasswordInput=(EditText)findViewById(R.id.account_password);
   mOAuthAuthEndpointText=(TextView)findViewById(R.id.oAuthEntryPoint_1);
@@ -19,6 +20,7 @@
   mAction=getIntent().getByteExtra(EXTRA_ACTION,ACTION_CREATE);
   mAccount=null;
   mHostBaseUrl="";
+  boolean refreshButtonEnabled=false;
   if (savedInstanceState == null) {
     mServerStatusText=mServerStatusIcon=0;
     mServerIsValid=false;
@@ -42,6 +44,9 @@
     mOAuth2Check.setChecked(oAuthRequired);
     changeViewByOAuth2Check(oAuthRequired);
     mJustCreated=true;
+    if (mAction == ACTION_UPDATE_TOKEN) {
+      checkOcServer();
+    }
   }
  else {
     mServerIsValid=savedInstanceState.getBoolean(KEY_SERVER_VALID);
@@ -63,36 +68,24 @@
     if (savedInstanceState.getBoolean(KEY_SERVER_CHECK_IN_PROGRESS,false)) {
       checkOcServer();
     }
-    mRefreshButtonEnabled=savedInstanceState.getBoolean(KEY_REFRESH_BUTTON_ENABLED);
+    refreshButtonEnabled=savedInstanceState.getBoolean(KEY_REFRESH_BUTTON_ENABLED);
   }
   showServerStatus();
   showAuthStatus();
-  if (mServerIsChecked && !mServerIsValid && mRefreshButtonEnabled)   showRefreshButton();
-  mOkButton.setEnabled(mServerIsValid);
-  if (!OAUTH_MODE_OPTIONAL.equals(getString(R.string.oauth2_mode))) {
-    mOAuth2Check.setVisibility(View.GONE);
-  }
   if (mAction == ACTION_UPDATE_TOKEN) {
     mHostUrlInput.setEnabled(false);
     mHostUrlInput.setFocusable(false);
     mUsernameInput.setEnabled(false);
     mUsernameInput.setFocusable(false);
     mOAuth2Check.setVisibility(View.GONE);
-    if (!mServerIsValid && mOcServerChkOperation == null) {
-      checkOcServer();
-    }
+  }
+  if (mServerIsChecked && !mServerIsValid && refreshButtonEnabled)   showRefreshButton();
+  mOkButton.setEnabled(mServerIsValid);
+  if (!OAUTH_MODE_OPTIONAL.equals(getString(R.string.oauth2_mode))) {
+    mOAuth2Check.setVisibility(View.GONE);
   }
   mPasswordInput.setText("");
   mHostUrlInput.setOnFocusChangeListener(this);
-  mHostUrlInput.setOnTouchListener(new RightDrawableOnTouchListener(){
-    @Override public boolean onDrawableTouch(    final MotionEvent event){
-      if (event.getAction() == MotionEvent.ACTION_UP) {
-        AuthenticatorActivity.this.onRefreshClick();
-      }
-      return true;
-    }
-  }
-);
   mHostUrlInput.addTextChangedListener(new TextWatcher(){
     @Override public void afterTextChanged(    Editable s){
       if (!mHostBaseUrl.equals(normalizeUrl(mHostUrlInput.getText().toString()))) {
