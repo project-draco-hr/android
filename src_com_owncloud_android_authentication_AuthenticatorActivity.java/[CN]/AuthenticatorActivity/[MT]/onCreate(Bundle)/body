@@ -10,6 +10,7 @@
   mOAuth2Check=(CheckBox)findViewById(R.id.oauth_onOff_check);
   mOkButton=findViewById(R.id.buttonOK);
   mAuthStatusLayout=(TextView)findViewById(R.id.auth_status_text);
+  mHostUrlInputEnabled=getResources().getBoolean(R.bool.show_server_url_input);
   Button b=(Button)findViewById(R.id.account_register);
   if (b != null) {
     b.setText(String.format(getString(R.string.auth_register),getString(R.string.app_name)));
@@ -19,6 +20,11 @@
   mAction=getIntent().getByteExtra(EXTRA_ACTION,ACTION_CREATE);
   mAccount=null;
   mHostBaseUrl="";
+  if (!mHostUrlInputEnabled) {
+    mHostUrlInput.setText(getString(R.string.server_url));
+    mHostUrlInput.setVisibility(View.GONE);
+    checkOcServer();
+  }
   if (savedInstanceState == null) {
     mServerStatusText=mServerStatusIcon=0;
     mServerIsValid=false;
