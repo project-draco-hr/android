@@ -2,6 +2,7 @@
   super.onCreate(savedInstanceState);
   getWindow().requestFeature(Window.FEATURE_NO_TITLE);
   setContentView(R.layout.account_setup);
+  mCheckServerButton=(Button)findViewById(R.id.checkServerButton);
   mHostUrlInput=(EditText)findViewById(R.id.hostUrlInput);
   mUsernameInput=(EditText)findViewById(R.id.account_username);
   mPasswordInput=(EditText)findViewById(R.id.account_password);
@@ -23,6 +24,13 @@
   if (!mHostUrlInputEnabled) {
     mHostUrlInput.setText(getString(R.string.server_url));
     mHostUrlInput.setVisibility(View.GONE);
+    mCheckServerButton.setVisibility(View.VISIBLE);
+    mCheckServerButton.setOnClickListener(new OnClickListener(){
+      @Override public void onClick(      View v){
+        checkOcServer();
+      }
+    }
+);
     checkOcServer();
   }
   if (savedInstanceState == null) {
