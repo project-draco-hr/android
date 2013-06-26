@@ -18,6 +18,12 @@
  else   if (e instanceof UnknownHostException) {
     mCode=ResultCode.HOST_NOT_AVAILABLE;
   }
+ else   if (e instanceof AccountNotFoundException) {
+    mCode=ResultCode.ACCOUNT_NOT_FOUND;
+  }
+ else   if (e instanceof AccountsException) {
+    mCode=ResultCode.ACCOUNT_EXCEPTION;
+  }
  else   if (e instanceof SSLException || e instanceof RuntimeException) {
     CertificateCombinedException se=getCertificateCombinedException(e);
     if (se != null) {
