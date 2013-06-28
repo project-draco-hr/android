@@ -14,8 +14,14 @@
         mVideoPlayer.setVideoPath(file.getStoragePath());
       }
  else {
-        String url=AccountUtils.constructFullURLForAccount(this,getAccount()) + file.getRemotePath();
-        mVideoPlayer.setVideoURI(Uri.parse(url));
+        String url;
+        try {
+          url=AccountUtils.constructFullURLForAccount(this,getAccount()) + file.getRemotePath();
+          mVideoPlayer.setVideoURI(Uri.parse(url));
+        }
+ catch (        AccountNotFoundException e) {
+          onError(null,MediaService.OC_MEDIA_ERROR,R.string.media_err_no_account);
+        }
       }
       mMediaController=new MediaController(this);
       mMediaController.setMediaPlayer(mVideoPlayer);

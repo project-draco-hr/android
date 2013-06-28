@@ -14,6 +14,25 @@
     }
     finish();
   }
+ else   if (result.isServerFail() || result.isException()) {
+    mServerIsChecked=true;
+    mServerIsValid=false;
+    mIsSslConn=false;
+    mOcServerChkOperation=null;
+    mDiscoveredVersion=null;
+    mHostBaseUrl=normalizeUrl(mHostUrlInput.getText().toString());
+    updateServerStatusIconAndText(result);
+    showServerStatus();
+    mAuthStatusIcon=0;
+    mAuthStatusText=0;
+    showAuthStatus();
+    showRefreshButton();
+    mOkButton.setEnabled(false);
+    if (result.getCode() == ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED) {
+      mLastSslUntrustedServerResult=result;
+      showDialog(DIALOG_SSL_VALIDATOR);
+    }
+  }
  else {
     updateAuthStatusIconAndText(result);
     showAuthStatus();

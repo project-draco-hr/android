@@ -3,7 +3,14 @@
     mStorageManager=new FileDataStorageManager(getAccount(),getContentResolver());
     OCFile file=getFile();
     if (file != null) {
-      file=mStorageManager.getFileByPath(file.getRemotePath());
+      if (file.isDown() && file.getLastSyncDateForProperties() == 0) {
+        if (mStorageManager.getFileById(file.getParentId()) == null) {
+          file=null;
+        }
+      }
+ else {
+        file=mStorageManager.getFileByPath(file.getRemotePath());
+      }
     }
     if (file == null) {
       file=mStorageManager.getFileByPath(OCFile.PATH_SEPARATOR);
