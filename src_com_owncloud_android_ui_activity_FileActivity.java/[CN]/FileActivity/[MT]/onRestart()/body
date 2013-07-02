@@ -1,13 +1,7 @@
 {
   super.onRestart();
-  Account oldAccount=mAccount;
-  grantValidAccount();
-  if (mAccount != null && !mAccount.equals(oldAccount)) {
-    mAccountWasSet=true;
-    mAccountWasRestored=false;
-  }
- else {
-    mAccountWasSet=false;
-    mAccountWasRestored=false;
+  boolean validAccount=(mAccount != null && AccountUtils.setCurrentOwnCloudAccount(getApplicationContext(),mAccount.name));
+  if (!validAccount) {
+    swapToDefaultAccount();
   }
 }
