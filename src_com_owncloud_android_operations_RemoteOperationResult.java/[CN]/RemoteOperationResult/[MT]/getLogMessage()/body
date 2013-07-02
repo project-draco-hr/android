@@ -34,6 +34,13 @@
  else     if (mException instanceof IOException) {
       return "Unrecovered transport exception";
     }
+ else     if (mException instanceof AccountNotFoundException) {
+      Account failedAccount=((AccountNotFoundException)mException).getFailedAccount();
+      return mException.getMessage() + " (" + (failedAccount != null ? failedAccount.name : "NULL")+ ")";
+    }
+ else     if (mException instanceof AccountsException) {
+      return "Exception while using account";
+    }
  else {
       return "Unexpected exception";
     }
