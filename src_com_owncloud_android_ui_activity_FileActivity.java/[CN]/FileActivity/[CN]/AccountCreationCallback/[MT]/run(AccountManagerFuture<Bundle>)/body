@@ -1,5 +1,6 @@
 {
   FileActivity.this.mRedirectingToSetupAccount=false;
+  boolean accountWasSet=false;
   if (future != null) {
     try {
       Bundle result;
@@ -7,12 +8,12 @@
       String name=result.getString(AccountManager.KEY_ACCOUNT_NAME);
       String type=result.getString(AccountManager.KEY_ACCOUNT_TYPE);
       if (AccountUtils.setCurrentOwnCloudAccount(getApplicationContext(),name)) {
-        FileActivity.this.mAccount=new Account(name,type);
-        FileActivity.this.onAccountSet(false);
+        setAccount(new Account(name,type),false);
+        accountWasSet=true;
       }
     }
  catch (    OperationCanceledException e) {
-      Log_OC.e(TAG,"Account creation canceled");
+      Log_OC.d(TAG,"Account creation canceled");
     }
 catch (    Exception e) {
       Log_OC.e(TAG,"Account creation finished in exception: ",e);
@@ -21,7 +22,7 @@ catch (    Exception e) {
  else {
     Log_OC.e(TAG,"Account creation callback with null bundle");
   }
-  if (mAccount == null) {
-    finish();
+  if (!accountWasSet) {
+    moveTaskToBack(true);
   }
 }

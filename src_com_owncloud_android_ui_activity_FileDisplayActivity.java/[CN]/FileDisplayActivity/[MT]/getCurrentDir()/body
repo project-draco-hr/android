@@ -4,11 +4,9 @@
     if (file.isDirectory()) {
       return file;
     }
- else {
+ else     if (mStorageManager != null) {
       return mStorageManager.getFileById(file.getParentId());
     }
   }
- else {
-    return null;
-  }
+  return null;
 }

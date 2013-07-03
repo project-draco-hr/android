@@ -1,0 +1,12 @@
+{
+  Account oldAccount=mAccount;
+  boolean validAccount=(account != null && AccountUtils.setCurrentOwnCloudAccount(getApplicationContext(),account.name));
+  if (validAccount) {
+    mAccount=account;
+    mAccountWasSet=true;
+    mAccountWasRestored=(savedAccount || mAccount.equals(oldAccount));
+  }
+ else {
+    swapToDefaultAccount();
+  }
+}

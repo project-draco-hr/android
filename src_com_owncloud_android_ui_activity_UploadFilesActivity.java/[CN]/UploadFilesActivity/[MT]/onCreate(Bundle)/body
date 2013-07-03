@@ -7,7 +7,7 @@
  else {
     mCurrentDir=Environment.getExternalStorageDirectory();
   }
-  mAccount=getIntent().getParcelableExtra(EXTRA_ACCOUNT);
+  mAccountOnCreation=getAccount();
   mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
   File currDir=mCurrentDir;
   while (currDir != null && currDir.getParentFile() != null) {

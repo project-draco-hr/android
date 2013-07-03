@@ -1,0 +1,6 @@
+{
+  super.onStart();
+  if (mAccountWasSet) {
+    onAccountSet(mAccountWasRestored);
+  }
+}

@@ -1,0 +1,25 @@
+{
+  if (getAccount() != null) {
+    OCFile file=getFile();
+    if (getFile() == null) {
+      Log_OC.e(TAG,"No conflictive file received");
+      finish();
+    }
+ else {
+      DataStorageManager storageManager=new FileDataStorageManager(getAccount(),getContentResolver());
+      file=storageManager.getFileByPath(file.getRemotePath());
+      if (file != null) {
+        setFile(file);
+        ConflictsResolveDialog d=ConflictsResolveDialog.newInstance(file.getRemotePath(),this);
+        d.showDialog(this);
+      }
+ else {
+        finish();
+      }
+    }
+  }
+ else {
+    Log_OC.wtf(TAG,"onAccountChanged was called with NULL account associated!");
+    finish();
+  }
+}

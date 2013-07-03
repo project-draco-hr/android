@@ -16,12 +16,22 @@
       file=mStorageManager.getFileByPath(OCFile.PATH_SEPARATOR);
     }
     setFile(file);
-    if (findViewById(android.R.id.content) != null && !stateWasRecovered) {
+    mDirectories.clear();
+    OCFile fileIt=file;
+    while (fileIt != null && fileIt.getFileName() != OCFile.PATH_SEPARATOR) {
+      if (fileIt.isDirectory()) {
+        mDirectories.add(fileIt.getFileName());
+      }
+      fileIt=mStorageManager.getFileById(fileIt.getParentId());
+    }
+    mDirectories.add(OCFile.PATH_SEPARATOR);
+    if (!stateWasRecovered) {
       Log_OC.e(TAG,"Initializing Fragments in onAccountChanged..");
       initFragmentsWithFile();
     }
  else {
-      Log_OC.e(TAG,"Fragment initializacion ignored in onAccountChanged due to lack of CONTENT VIEW");
+      updateFragmentsVisibility(!file.isDirectory());
+      updateNavigationElementsInActionBar(file.isDirectory() ? null : file);
     }
   }
  else {

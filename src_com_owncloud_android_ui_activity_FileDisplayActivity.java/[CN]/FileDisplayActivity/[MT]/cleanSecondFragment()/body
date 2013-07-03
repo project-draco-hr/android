@@ -4,6 +4,7 @@
     FragmentTransaction tr=getSupportFragmentManager().beginTransaction();
     tr.remove(second);
     tr.commit();
-    updateFragmentsVisibility(false);
   }
+  updateFragmentsVisibility(false);
+  updateNavigationElementsInActionBar(null);
 }
