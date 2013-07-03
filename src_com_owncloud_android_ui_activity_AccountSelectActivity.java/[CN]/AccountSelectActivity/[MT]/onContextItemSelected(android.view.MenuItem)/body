@@ -14,7 +14,15 @@
   Account accounts[]=am.getAccountsByType(AccountAuthenticator.ACCOUNT_TYPE);
   for (  Account a : accounts) {
     if (a.name.equals(accountName)) {
-      am.removeAccount(a,this,mHandler);
+      if (item.getItemId() == R.id.change_password) {
+        Intent updateAccountCredentials=new Intent(this,AuthenticatorActivity.class);
+        updateAccountCredentials.putExtra(AuthenticatorActivity.EXTRA_ACCOUNT,a);
+        updateAccountCredentials.putExtra(AuthenticatorActivity.EXTRA_ACTION,AuthenticatorActivity.ACTION_UPDATE_TOKEN);
+        startActivity(updateAccountCredentials);
+      }
+ else       if (item.getItemId() == R.id.delete_account) {
+        am.removeAccount(a,this,mHandler);
+      }
     }
   }
   return true;
