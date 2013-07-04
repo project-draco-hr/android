@@ -12,10 +12,10 @@
     }
     if ((synchFolderRemotePath != null && currentDir != null && (currentDir.getRemotePath().equals(synchFolderRemotePath))) || fillBlankRoot) {
       if (!fillBlankRoot)       currentDir=getStorageManager().getFileByPath(synchFolderRemotePath);
-      OCFileListFragment fileListFragment=getListOfFilesFragment();
-      if (fileListFragment != null) {
-        fileListFragment.listDirectory(currentDir);
-      }
+    }
+    OCFileListFragment fileListFragment=getListOfFilesFragment();
+    if (fileListFragment != null) {
+      fileListFragment.listDirectory(currentDir);
     }
     setFile(currentDir);
     setSupportProgressBarIndeterminateVisibility(inProgress);
