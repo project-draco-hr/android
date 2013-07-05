@@ -52,5 +52,7 @@
     }
   }
   if (file.isDirectory() && file.needsUpdatingWhileSaving())   for (  OCFile f : getDirectoryContent(file))   saveFile(f);
+  Log_OC.d(TAG,".........file Time= " + DisplayUtils.unixTimeToHumanReadable(file.getModificationTimestamp()));
+  updateSubtreeSize(file.getParentId());
   return overriden;
 }
