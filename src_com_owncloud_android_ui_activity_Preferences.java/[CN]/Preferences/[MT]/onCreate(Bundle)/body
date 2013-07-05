@@ -26,17 +26,66 @@
       }
     }
 );
-    pAboutApp=(Preference)findPreference("about_app");
-    if (pAboutApp != null) {
-      pAboutApp.setTitle(String.format(getString(R.string.about_android),getString(R.string.app_name)));
-      PackageInfo pkg;
-      try {
-        pkg=getPackageManager().getPackageInfo(getPackageName(),0);
-        pAboutApp.setSummary(String.format(getString(R.string.about_version),pkg.versionName));
+  }
+  Preference pHelp=findPreference("help");
+  if (pHelp != null) {
+    pHelp.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+      @Override public boolean onPreferenceClick(      Preference preference){
+        String helpWeb=(String)getText(R.string.url_help);
+        Uri uriUrl=Uri.parse(helpWeb);
+        Intent intent=new Intent(Intent.ACTION_VIEW,uriUrl);
+        startActivity(intent);
+        return true;
       }
- catch (      NameNotFoundException e) {
-        Log_OC.e(TAG,"Error while showing about dialog",e);
+    }
+);
+  }
+  Preference pRecommend=findPreference("recommend");
+  if (pRecommend != null) {
+    pRecommend.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+      @Override public boolean onPreferenceClick(      Preference preference){
+        Intent intent=new Intent(Intent.ACTION_SENDTO);
+        intent.setType("text/plain");
+        String appName=getString(R.string.app_name);
+        String recommendSubject=String.format(getString(R.string.recommend_subject),appName);
+        intent.putExtra(Intent.EXTRA_SUBJECT,recommendSubject);
+        String recommendText=String.format(getString(R.string.recommend_text),getString(R.string.app_name),getString(R.string.url_app_download));
+        intent.putExtra(Intent.EXTRA_TEXT,recommendText);
+        intent.setData(Uri.parse(getString(R.string.mail_recommend)));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        return (true);
       }
+    }
+);
+  }
+  Preference pFeedback=findPreference("feedback");
+  if (pFeedback != null) {
+    pFeedback.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+      @Override public boolean onPreferenceClick(      Preference preference){
+        String feedbackMail=(String)getText(R.string.mail_feedback);
+        String feedback=(String)getText(R.string.prefs_feedback);
+        Intent intent=new Intent(Intent.ACTION_SENDTO);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT,feedback);
+        intent.setData(Uri.parse(feedbackMail));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        return true;
+      }
+    }
+);
+  }
+  pAboutApp=(Preference)findPreference("about_app");
+  if (pAboutApp != null) {
+    pAboutApp.setTitle(String.format(getString(R.string.about_android),getString(R.string.app_name)));
+    PackageInfo pkg;
+    try {
+      pkg=getPackageManager().getPackageInfo(getPackageName(),0);
+      pAboutApp.setSummary(String.format(getString(R.string.about_version),pkg.versionName));
+    }
+ catch (    NameNotFoundException e) {
+      Log_OC.e(TAG,"Error while showing about dialog",e);
     }
   }
 }
