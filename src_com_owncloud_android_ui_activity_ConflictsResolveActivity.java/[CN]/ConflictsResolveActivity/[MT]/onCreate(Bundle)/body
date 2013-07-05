@@ -1,7 +1,3 @@
 {
   super.onCreate(savedInstanceState);
-  mFile=getIntent().getParcelableExtra(EXTRA_FILE);
-  mOCAccount=getIntent().getParcelableExtra(EXTRA_ACCOUNT);
-  ConflictsResolveDialog d=ConflictsResolveDialog.newInstance(mFile.getRemotePath(),this);
-  d.showDialog(this);
 }

@@ -1,0 +1,14 @@
+{
+  Account newAccount=AccountUtils.getCurrentOwnCloudAccount(getApplicationContext());
+  if (newAccount == null) {
+    createFirstAccount();
+    mRedirectingToSetupAccount=true;
+    mAccountWasSet=false;
+    mAccountWasRestored=false;
+  }
+ else {
+    mAccountWasSet=true;
+    mAccountWasRestored=(newAccount.equals(mAccount));
+    mAccount=newAccount;
+  }
+}

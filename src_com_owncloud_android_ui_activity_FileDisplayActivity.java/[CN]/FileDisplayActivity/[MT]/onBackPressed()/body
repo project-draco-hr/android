@@ -14,5 +14,4 @@
     setFile(listOfFiles.getCurrentFile());
   }
   cleanSecondFragment();
-  updateNavigationElementsInActionBar(null);
 }

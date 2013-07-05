@@ -1,15 +1,13 @@
 {
   super.onCreate(savedInstanceState);
+  Account account;
   if (savedInstanceState != null) {
+    account=savedInstanceState.getParcelable(FileActivity.EXTRA_ACCOUNT);
     mFile=savedInstanceState.getParcelable(FileActivity.EXTRA_FILE);
-    mAccount=savedInstanceState.getParcelable(FileActivity.EXTRA_ACCOUNT);
   }
  else {
-    mAccount=getIntent().getParcelableExtra(FileActivity.EXTRA_ACCOUNT);
+    account=getIntent().getParcelableExtra(FileActivity.EXTRA_ACCOUNT);
     mFile=getIntent().getParcelableExtra(FileActivity.EXTRA_FILE);
   }
-  grantValidAccount();
-  if (mAccount != null) {
-    onAccountSet(savedInstanceState != null);
-  }
+  setAccount(account,savedInstanceState != null);
 }

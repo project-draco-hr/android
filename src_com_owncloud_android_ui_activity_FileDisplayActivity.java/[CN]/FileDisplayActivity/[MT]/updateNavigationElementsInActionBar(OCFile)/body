@@ -1,6 +1,6 @@
 {
   ActionBar actionBar=getSupportActionBar();
-  if (currentFile == null || mDualPane) {
+  if (chosenFile == null || mDualPane) {
     OCFile currentDir=getCurrentDir();
     actionBar.setDisplayHomeAsUpEnabled(currentDir != null && currentDir.getParentId() != 0);
     actionBar.setDisplayShowTitleEnabled(false);
@@ -10,7 +10,7 @@
  else {
     actionBar.setDisplayHomeAsUpEnabled(true);
     actionBar.setDisplayShowTitleEnabled(true);
-    actionBar.setTitle(currentFile.getFileName());
+    actionBar.setTitle(chosenFile.getFileName());
     actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
   }
 }

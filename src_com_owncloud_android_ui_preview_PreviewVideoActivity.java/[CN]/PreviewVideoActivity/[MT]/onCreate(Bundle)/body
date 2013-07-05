@@ -4,14 +4,10 @@
   setContentView(R.layout.video_layout);
   if (savedInstanceState == null) {
     Bundle extras=getIntent().getExtras();
-    mFile=extras.getParcelable(EXTRA_FILE);
-    mAccount=extras.getParcelable(EXTRA_ACCOUNT);
     mSavedPlaybackPosition=extras.getInt(EXTRA_START_POSITION);
     mAutoplay=extras.getBoolean(EXTRA_AUTOPLAY);
   }
  else {
-    mFile=savedInstanceState.getParcelable(EXTRA_FILE);
-    mAccount=savedInstanceState.getParcelable(EXTRA_ACCOUNT);
     mSavedPlaybackPosition=savedInstanceState.getInt(EXTRA_START_POSITION);
     mAutoplay=savedInstanceState.getBoolean(EXTRA_AUTOPLAY);
   }
@@ -20,23 +16,4 @@
   mVideoPlayer.setOnCompletionListener(this);
   mVideoPlayer.setOnErrorListener(this);
   mVideoPlayer.setKeepScreenOn(true);
-  if (mFile != null) {
-    if (mFile.isDown()) {
-      mVideoPlayer.setVideoPath(mFile.getStoragePath());
-    }
- else     if (mAccount != null) {
-      String url=AccountUtils.constructFullURLForAccount(this,mAccount) + mFile.getRemotePath();
-      mVideoPlayer.setVideoURI(Uri.parse(url));
-    }
- else {
-      onError(null,MediaService.OC_MEDIA_ERROR,R.string.media_err_no_account);
-    }
-    mMediaController=new MediaController(this);
-    mMediaController.setMediaPlayer(mVideoPlayer);
-    mMediaController.setAnchorView(mVideoPlayer);
-    mVideoPlayer.setMediaController(mMediaController);
-  }
- else {
-    onError(null,MediaService.OC_MEDIA_ERROR,R.string.media_err_nothing_to_play);
-  }
 }
