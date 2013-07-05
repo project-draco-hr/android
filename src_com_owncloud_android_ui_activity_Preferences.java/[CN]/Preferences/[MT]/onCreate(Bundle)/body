@@ -32,9 +32,11 @@
     pHelp.setOnPreferenceClickListener(new OnPreferenceClickListener(){
       @Override public boolean onPreferenceClick(      Preference preference){
         String helpWeb=(String)getText(R.string.url_help);
-        Uri uriUrl=Uri.parse(helpWeb);
-        Intent intent=new Intent(Intent.ACTION_VIEW,uriUrl);
-        startActivity(intent);
+        if (helpWeb != null && helpWeb.length() > 0) {
+          Uri uriUrl=Uri.parse(helpWeb);
+          Intent intent=new Intent(Intent.ACTION_VIEW,uriUrl);
+          startActivity(intent);
+        }
         return true;
       }
     }
@@ -71,6 +73,21 @@
         intent.setData(Uri.parse(feedbackMail));
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        return true;
+      }
+    }
+);
+  }
+  Preference pImprint=findPreference("imprint");
+  if (pImprint != null) {
+    pImprint.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+      @Override public boolean onPreferenceClick(      Preference preference){
+        String imprintWeb=(String)getText(R.string.url_imprint);
+        if (imprintWeb != null && imprintWeb.length() > 0) {
+          Uri uriUrl=Uri.parse(imprintWeb);
+          Intent intent=new Intent(Intent.ACTION_VIEW,uriUrl);
+          startActivity(intent);
+        }
         return true;
       }
     }
