@@ -20,4 +20,5 @@
       f.delete();
     }
   }
+  updateSubtreeSize(file.getParentId());
 }
