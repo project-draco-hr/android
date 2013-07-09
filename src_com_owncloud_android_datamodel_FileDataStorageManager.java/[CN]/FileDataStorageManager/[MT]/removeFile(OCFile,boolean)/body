@@ -20,5 +20,7 @@
       f.delete();
     }
   }
-  updateSubtreeSize(file.getParentId());
+  if (file.getFileLength() > 0) {
+    updateSizesToTheRoot(file.getParentId());
+  }
 }

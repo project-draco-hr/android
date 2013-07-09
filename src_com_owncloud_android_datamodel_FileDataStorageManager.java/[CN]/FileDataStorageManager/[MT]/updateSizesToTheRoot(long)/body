@@ -2,7 +2,7 @@
   OCFile file;
   while (parentId != 0) {
     Log_OC.d(TAG,"parent = " + parentId);
-    saveFolderSize(parentId);
+    calculateFolderSize(parentId);
     file=getFileById(parentId);
     parentId=file.getParentId();
   }

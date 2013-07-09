@@ -23,6 +23,8 @@
     if (removeDBData) {
       removeFile(dir,true);
     }
-    updateSubtreeSize(dir.getParentId());
+    if (dir.getFileLength() > 0) {
+      updateSizesToTheRoot(dir.getParentId());
+    }
   }
 }
