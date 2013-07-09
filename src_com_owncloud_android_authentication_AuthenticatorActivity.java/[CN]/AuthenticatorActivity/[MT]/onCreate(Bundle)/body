@@ -3,6 +3,7 @@
   getWindow().requestFeature(Window.FEATURE_NO_TITLE);
   setContentView(R.layout.account_setup);
   mHostUrlInput=(EditText)findViewById(R.id.hostUrlInput);
+  mHostUrlInput.setText(getString(R.string.server_url));
   mUsernameInput=(EditText)findViewById(R.id.account_username);
   mPasswordInput=(EditText)findViewById(R.id.account_password);
   mOAuthAuthEndpointText=(TextView)findViewById(R.id.oAuthEntryPoint_1);
@@ -22,7 +23,6 @@
   mHostBaseUrl="";
   boolean refreshButtonEnabled=false;
   if (!mHostUrlInputEnabled) {
-    mHostUrlInput.setText(getString(R.string.server_url));
     findViewById(R.id.hostUrlFrame).setVisibility(View.GONE);
     mRefreshButton=findViewById(R.id.centeredRefreshButton);
   }
