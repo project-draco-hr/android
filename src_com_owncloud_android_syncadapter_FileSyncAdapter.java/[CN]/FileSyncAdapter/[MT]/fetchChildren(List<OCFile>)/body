@@ -4,6 +4,7 @@
     OCFile newFile=files.get(i);
     if (newFile.isDirectory()) {
       fetchData(newFile.getRemotePath(),newFile.getFileId());
+      getStorageManager().calculateFolderSize(newFile.getFileId());
     }
   }
   if (mCancellation && i < files.size())   Log_OC.d(TAG,"Leaving synchronization before synchronizing " + files.get(i).getRemotePath() + " because cancelation request");

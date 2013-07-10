@@ -23,5 +23,8 @@
     if (removeDBData) {
       removeFile(dir,true);
     }
+    if (dir.getFileLength() > 0) {
+      updateSizesToTheRoot(dir.getParentId());
+    }
   }
 }

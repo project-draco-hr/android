@@ -1,0 +1,8 @@
+{
+  long folderSize=0;
+  Vector<OCFile> files=getDirectoryContent(id);
+  for (  OCFile f : files) {
+    folderSize=folderSize + f.getFileLength();
+  }
+  updateSize(id,folderSize);
+}
