@@ -13,6 +13,7 @@
     }
     List<OCFile> children=synchFolderOp.getChildren();
     fetchChildren(children);
+    sendStickyBroadcast(true,remotePath,null);
   }
  else {
     if (result.getCode() == RemoteOperationResult.ResultCode.UNAUTHORIZED) {
