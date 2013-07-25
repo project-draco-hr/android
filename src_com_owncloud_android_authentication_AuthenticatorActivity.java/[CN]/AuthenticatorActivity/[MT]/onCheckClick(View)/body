@@ -1,4 +1,10 @@
 {
   CheckBox oAuth2Check=(CheckBox)view;
-  changeViewByOAuth2Check(oAuth2Check.isChecked());
+  if (oAuth2Check.isChecked()) {
+    mCurrentAuthorizationMethod=AUTH_METHOD_OAUTH2;
+  }
+ else {
+    mCurrentAuthorizationMethod=AUTH_METHOD_BASIC_HTTP;
+  }
+  adaptViewAccordingToAuthenticationMethod();
 }

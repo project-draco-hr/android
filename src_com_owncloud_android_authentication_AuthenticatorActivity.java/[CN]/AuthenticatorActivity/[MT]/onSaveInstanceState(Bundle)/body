@@ -16,5 +16,6 @@
   if (mAccount != null) {
     outState.putParcelable(KEY_ACCOUNT,mAccount);
   }
+  outState.putInt(KEY_AUTH_METHOD,mCurrentAuthorizationMethod);
   outState.putBoolean(KEY_REFRESH_BUTTON_ENABLED,(mRefreshButton.getVisibility() == View.VISIBLE));
 }
