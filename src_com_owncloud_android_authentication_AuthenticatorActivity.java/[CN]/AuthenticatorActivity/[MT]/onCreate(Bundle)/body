@@ -47,7 +47,7 @@
       mHostUrlInput.setText(mHostBaseUrl);
     }
     initAuthorizationMethod();
-    mOAuth2Check.setChecked(mCurrentAuthorizationMethod == AUTH_METHOD_OAUTH2);
+    mOAuth2Check.setChecked(mCurrentAuthTokenType == AccountAuthenticator.AUTH_TOKEN_TYPE_ACCESS_TOKEN);
     mJustCreated=true;
     if (mAction == ACTION_UPDATE_TOKEN || !mHostUrlInputEnabled) {
       checkOcServer();
@@ -70,7 +70,7 @@
     }
     mHostBaseUrl=savedInstanceState.getString(KEY_HOST_URL_TEXT);
     mAccount=savedInstanceState.getParcelable(KEY_ACCOUNT);
-    mCurrentAuthorizationMethod=savedInstanceState.getInt(KEY_AUTH_METHOD,AUTH_METHOD_BASIC_HTTP);
+    mCurrentAuthTokenType=savedInstanceState.getString(AccountAuthenticator.KEY_AUTH_TOKEN_TYPE,AccountAuthenticator.AUTH_TOKEN_TYPE_PASSWORD);
     if (savedInstanceState.getBoolean(KEY_SERVER_CHECK_IN_PROGRESS,false)) {
       checkOcServer();
     }
@@ -88,7 +88,7 @@
   }
   if (mServerIsChecked && !mServerIsValid && refreshButtonEnabled)   showRefreshButton();
   mOkButton.setEnabled(mServerIsValid);
-  if (mCurrentAuthorizationMethod == AUTH_METHOD_SAML_WEB_SSO || !AUTH_OPTIONAL.equals(getString(R.string.auth_method_oauth2))) {
+  if (mCurrentAuthTokenType == AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE || !AUTH_OPTIONAL.equals(getString(R.string.auth_method_oauth2))) {
     mOAuth2Check.setVisibility(View.GONE);
   }
   mPasswordInput.setText("");

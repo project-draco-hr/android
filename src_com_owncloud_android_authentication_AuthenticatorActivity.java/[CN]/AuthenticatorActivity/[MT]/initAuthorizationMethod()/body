@@ -1,28 +1,26 @@
 {
   boolean oAuthRequired=false;
   boolean samlWebSsoRequired=false;
-  String tokenType=getIntent().getExtras().getString(AccountAuthenticator.KEY_AUTH_TOKEN_TYPE);
+  mCurrentAuthTokenType=getIntent().getExtras().getString(AccountAuthenticator.KEY_AUTH_TOKEN_TYPE);
   mAccount=getIntent().getExtras().getParcelable(EXTRA_ACCOUNT);
-  if (tokenType != null) {
-    oAuthRequired=AccountAuthenticator.AUTH_TOKEN_TYPE_ACCESS_TOKEN.equals(tokenType);
-    samlWebSsoRequired=AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE.equals(tokenType);
-  }
- else   if (mAccount != null) {
-    oAuthRequired=(mAccountMgr.getUserData(mAccount,AccountAuthenticator.KEY_SUPPORTS_OAUTH2) != null);
-    samlWebSsoRequired=(mAccountMgr.getUserData(mAccount,AccountAuthenticator.KEY_SUPPORTS_SAML_WEB_SSO) != null);
-  }
+  if (mCurrentAuthTokenType == null) {
+    if (mAccount != null) {
+      oAuthRequired=(mAccountMgr.getUserData(mAccount,AccountAuthenticator.KEY_SUPPORTS_OAUTH2) != null);
+      samlWebSsoRequired=(mAccountMgr.getUserData(mAccount,AccountAuthenticator.KEY_SUPPORTS_SAML_WEB_SSO) != null);
+    }
  else {
-    oAuthRequired=AUTH_ON.equals(getString(R.string.auth_method_oauth2));
-    samlWebSsoRequired=AUTH_ON.equals(getString(R.string.auth_method_saml_web_sso));
-  }
-  if (oAuthRequired) {
-    mCurrentAuthorizationMethod=AUTH_METHOD_OAUTH2;
-  }
- else   if (samlWebSsoRequired) {
-    mCurrentAuthorizationMethod=AUTH_METHOD_SAML_WEB_SSO;
-  }
+      oAuthRequired=AUTH_ON.equals(getString(R.string.auth_method_oauth2));
+      samlWebSsoRequired=AUTH_ON.equals(getString(R.string.auth_method_saml_web_sso));
+    }
+    if (oAuthRequired) {
+      mCurrentAuthTokenType=AccountAuthenticator.AUTH_TOKEN_TYPE_ACCESS_TOKEN;
+    }
+ else     if (samlWebSsoRequired) {
+      mCurrentAuthTokenType=AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE;
+    }
  else {
-    mCurrentAuthorizationMethod=AUTH_METHOD_BASIC_HTTP;
+      mCurrentAuthTokenType=AccountAuthenticator.AUTH_TOKEN_TYPE_PASSWORD;
+    }
   }
   if (mAccount != null) {
     String userName=mAccount.name.substring(0,mAccount.name.lastIndexOf('@'));

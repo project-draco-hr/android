@@ -4,7 +4,7 @@
   }
  catch (  IllegalArgumentException e) {
   }
-  String webdav_path=AccountUtils.getWebdavPath(mDiscoveredVersion,true);
+  String webdav_path=AccountUtils.getWebdavPath(mDiscoveredVersion,mCurrentAuthTokenType);
   if (result.isSuccess() && webdav_path != null) {
     showDialog(DIALOG_LOGIN_PROGRESS);
     mOAuthAccessToken=((OAuth2GetAccessToken)operation).getResultTokenMap().get(OAuth2Constants.KEY_ACCESS_TOKEN);

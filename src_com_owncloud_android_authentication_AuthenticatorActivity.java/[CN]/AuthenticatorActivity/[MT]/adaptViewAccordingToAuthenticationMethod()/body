@@ -1,28 +1,26 @@
 {
-switch (mCurrentAuthorizationMethod) {
-case AUTH_METHOD_OAUTH2:
+  if (AccountAuthenticator.AUTH_TOKEN_TYPE_ACCESS_TOKEN.equals(mCurrentAuthTokenType)) {
     mOAuthAuthEndpointText.setVisibility(View.VISIBLE);
-  mOAuthTokenEndpointText.setVisibility(View.VISIBLE);
-mUsernameInput.setVisibility(View.GONE);
-mPasswordInput.setVisibility(View.GONE);
-mAccountNameInput.setVisibility(View.GONE);
-mWebSsoView.setVisibility(View.GONE);
-break;
-case AUTH_METHOD_SAML_WEB_SSO:
-mOAuthAuthEndpointText.setVisibility(View.GONE);
-mOAuthTokenEndpointText.setVisibility(View.GONE);
-mUsernameInput.setVisibility(View.GONE);
-mPasswordInput.setVisibility(View.GONE);
-mAccountNameInput.setVisibility(View.VISIBLE);
-mWebSsoView.setVisibility(View.VISIBLE);
-break;
-case AUTH_METHOD_BASIC_HTTP:
-default :
-mOAuthAuthEndpointText.setVisibility(View.GONE);
-mOAuthTokenEndpointText.setVisibility(View.GONE);
-mUsernameInput.setVisibility(View.VISIBLE);
-mPasswordInput.setVisibility(View.VISIBLE);
-mAccountNameInput.setVisibility(View.GONE);
-mWebSsoView.setVisibility(View.GONE);
-}
+    mOAuthTokenEndpointText.setVisibility(View.VISIBLE);
+    mUsernameInput.setVisibility(View.GONE);
+    mPasswordInput.setVisibility(View.GONE);
+    mAccountNameInput.setVisibility(View.GONE);
+    mWebSsoView.setVisibility(View.GONE);
+  }
+ else   if (AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE.equals(mCurrentAuthTokenType)) {
+    mOAuthAuthEndpointText.setVisibility(View.GONE);
+    mOAuthTokenEndpointText.setVisibility(View.GONE);
+    mUsernameInput.setVisibility(View.GONE);
+    mPasswordInput.setVisibility(View.GONE);
+    mAccountNameInput.setVisibility(View.VISIBLE);
+    mWebSsoView.setVisibility(View.VISIBLE);
+  }
+ else {
+    mOAuthAuthEndpointText.setVisibility(View.GONE);
+    mOAuthTokenEndpointText.setVisibility(View.GONE);
+    mUsernameInput.setVisibility(View.VISIBLE);
+    mPasswordInput.setVisibility(View.VISIBLE);
+    mAccountNameInput.setVisibility(View.GONE);
+    mWebSsoView.setVisibility(View.GONE);
+  }
 }

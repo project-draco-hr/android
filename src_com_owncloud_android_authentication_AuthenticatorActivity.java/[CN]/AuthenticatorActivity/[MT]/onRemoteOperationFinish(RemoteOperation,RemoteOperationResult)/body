@@ -6,6 +6,11 @@
     onGetOAuthAccessTokenFinish((OAuth2GetAccessToken)operation,result);
   }
  else   if (operation instanceof ExistenceCheckOperation) {
-    onAuthorizationCheckFinish((ExistenceCheckOperation)operation,result);
+    if (AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE.equals(mCurrentAuthTokenType)) {
+      Toast.makeText(this,result.getLogMessage(),Toast.LENGTH_LONG).show();
+    }
+ else {
+      onAuthorizationCheckFinish((ExistenceCheckOperation)operation,result);
+    }
   }
 }
