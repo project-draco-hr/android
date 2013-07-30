@@ -10,7 +10,7 @@
     mOAuthAccessToken=((OAuth2GetAccessToken)operation).getResultTokenMap().get(OAuth2Constants.KEY_ACCESS_TOKEN);
     Log_OC.d(TAG,"Got ACCESS TOKEN: " + mOAuthAccessToken);
     mAuthCheckOperation=new ExistenceCheckOperation("",this,false);
-    WebdavClient client=OwnCloudClientUtils.createOwnCloudClient(Uri.parse(mHostBaseUrl + webdav_path),this);
+    WebdavClient client=OwnCloudClientUtils.createOwnCloudClient(Uri.parse(mHostBaseUrl + webdav_path),this,true);
     client.setBearerCredentials(mOAuthAccessToken);
     mAuthCheckOperation.execute(client,this,mHandler);
   }

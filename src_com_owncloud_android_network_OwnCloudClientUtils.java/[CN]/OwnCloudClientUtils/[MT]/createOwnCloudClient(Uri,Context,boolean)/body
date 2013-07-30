@@ -11,5 +11,6 @@ catch (  IOException e) {
   WebdavClient client=new WebdavClient(getMultiThreadedConnManager());
   client.setDefaultTimeouts(DEFAULT_DATA_TIMEOUT,DEFAULT_CONNECTION_TIMEOUT);
   client.setBaseUri(uri);
+  client.setFollowRedirects(followRedirects);
   return client;
 }

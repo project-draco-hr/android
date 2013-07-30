@@ -1,6 +1,7 @@
 {
   HeadMethod head=new HeadMethod(mUri.toString() + WebdavUtils.encodePath(path));
   try {
+    head.setFollowRedirects(mFollowRedirects);
     int status=executeMethod(head);
     Log_OC.d(TAG,"HEAD to " + path + " finished with HTTP status "+ status+ ((status != HttpStatus.SC_OK) ? "(FAIL)" : ""));
     exhaustResponse(head.getResponseBodyAsStream());

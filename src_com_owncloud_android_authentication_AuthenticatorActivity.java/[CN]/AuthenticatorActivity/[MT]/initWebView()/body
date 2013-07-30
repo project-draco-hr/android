@@ -1,0 +1,12 @@
+{
+  CookieManager cookieManager=CookieManager.getInstance();
+  cookieManager.setAcceptCookie(true);
+  mWebViewClient=new SsoWebViewClient(this);
+  mSsoWebView.setWebViewClient(mWebViewClient);
+  WebSettings webSettings=mSsoWebView.getSettings();
+  webSettings.setJavaScriptEnabled(true);
+  webSettings.setBuiltInZoomControls(true);
+  webSettings.setLoadWithOverviewMode(false);
+  webSettings.setSavePassword(false);
+  webSettings.setUserAgentString(WebdavClient.USER_AGENT);
+}

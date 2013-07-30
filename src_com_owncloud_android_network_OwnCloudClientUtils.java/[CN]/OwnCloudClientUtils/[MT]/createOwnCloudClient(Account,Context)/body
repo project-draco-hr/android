@@ -1,6 +1,6 @@
 {
   Uri uri=Uri.parse(AccountUtils.constructFullURLForAccount(appContext,account));
-  WebdavClient client=createOwnCloudClient(uri,appContext);
+  WebdavClient client=createOwnCloudClient(uri,appContext,true);
   AccountManager am=AccountManager.get(appContext);
   if (am.getUserData(account,AccountAuthenticator.KEY_SUPPORTS_OAUTH2) != null) {
     String accessToken=am.blockingGetAuthToken(account,AccountAuthenticator.AUTH_TOKEN_TYPE_ACCESS_TOKEN,false);

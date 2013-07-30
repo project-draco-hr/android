@@ -1,6 +1,9 @@
 {
+  mAuthStatusIcon=R.drawable.progress_small;
+  mAuthStatusText=R.string.oauth_login_connection;
+  showAuthStatus();
   String webdav_path=AccountUtils.getWebdavPath(mDiscoveredVersion,mCurrentAuthTokenType);
   mAuthCheckOperation=new ExistenceCheckOperation("",this,false);
-  WebdavClient client=OwnCloudClientUtils.createOwnCloudClient(Uri.parse(mHostBaseUrl + webdav_path),this);
+  WebdavClient client=OwnCloudClientUtils.createOwnCloudClient(Uri.parse(mHostBaseUrl + webdav_path),this,false);
   mOperationThread=mAuthCheckOperation.execute(client,this,mHandler);
 }

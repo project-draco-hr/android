@@ -1,0 +1,8 @@
+{
+  if (url.startsWith(mTargetUrl)) {
+    view.setVisibility(View.GONE);
+    CookieManager cookieManager=CookieManager.getInstance();
+    String cookies=cookieManager.getCookie(url);
+    Toast.makeText(mContext,"got cookies: " + cookies,Toast.LENGTH_LONG).show();
+  }
+}

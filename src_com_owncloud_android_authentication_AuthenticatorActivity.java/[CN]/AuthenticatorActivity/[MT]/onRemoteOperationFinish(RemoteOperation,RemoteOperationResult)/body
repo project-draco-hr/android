@@ -7,7 +7,11 @@
   }
  else   if (operation instanceof ExistenceCheckOperation) {
     if (AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE.equals(mCurrentAuthTokenType)) {
-      Toast.makeText(this,result.getLogMessage(),Toast.LENGTH_LONG).show();
+      if (result.isTemporalRedirection()) {
+        String url=result.getRedirectedLocation();
+        mWebViewClient.setTargetUrl(mHostBaseUrl + AccountUtils.getWebdavPath(mDiscoveredVersion,mCurrentAuthTokenType));
+        mSsoWebView.loadUrl(url);
+      }
     }
  else {
       onAuthorizationCheckFinish((ExistenceCheckOperation)operation,result);
