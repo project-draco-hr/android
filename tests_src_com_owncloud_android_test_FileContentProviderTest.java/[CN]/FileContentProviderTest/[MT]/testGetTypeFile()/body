@@ -1,0 +1,6 @@
+{
+  Uri testuri=Uri.parse("content://org.owncloud/file/");
+  assertEquals(ProviderTableMeta.CONTENT_TYPE_ITEM,resolve.getType(testuri));
+  testuri=Uri.parse("content://org.owncloud/file/123");
+  assertEquals(ProviderTableMeta.CONTENT_TYPE_ITEM,resolve.getType(testuri));
+}
