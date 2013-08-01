@@ -1,0 +1,19 @@
+{
+  try {
+    dismissDialog(DIALOG_LOGIN_PROGRESS);
+  }
+ catch (  IllegalArgumentException e) {
+  }
+  if (result.isTemporalRedirection()) {
+    String url=result.getRedirectedLocation();
+    mWebViewClient.setTargetUrl(mHostBaseUrl + AccountUtils.getWebdavPath(mDiscoveredVersion,mCurrentAuthTokenType));
+    mSsoWebView.loadUrl(url);
+    mAuthStatusIcon=android.R.drawable.ic_secure;
+    mAuthStatusText=R.string.auth_follow_auth_server;
+  }
+ else {
+    mAuthStatusIcon=R.drawable.common_error;
+    mAuthStatusText=R.string.auth_unsupported_auth_method;
+  }
+  showAuthStatus();
+}
