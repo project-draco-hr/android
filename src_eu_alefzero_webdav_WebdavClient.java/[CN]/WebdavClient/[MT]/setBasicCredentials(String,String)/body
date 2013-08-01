@@ -5,4 +5,5 @@
   getParams().setAuthenticationPreemptive(true);
   mCredentials=new UsernamePasswordCredentials(username,password);
   getState().setCredentials(AuthScope.ANY,mCredentials);
+  mSsoSessionCookie=null;
 }

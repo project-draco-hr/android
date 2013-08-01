@@ -9,7 +9,6 @@
     if (connectionTimeout >= 0) {
       getHttpConnectionManager().getParams().setConnectionTimeout(connectionTimeout);
     }
-    method.setFollowRedirects(mFollowRedirects);
     return executeMethod(method);
   }
   finally {

@@ -6,6 +6,10 @@
     String accessToken=am.blockingGetAuthToken(account,AccountAuthenticator.AUTH_TOKEN_TYPE_ACCESS_TOKEN,false);
     client.setBearerCredentials(accessToken);
   }
+ else   if (am.getUserData(account,AccountAuthenticator.KEY_SUPPORTS_SAML_WEB_SSO) != null) {
+    String accessToken=am.blockingGetAuthToken(account,AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE,false);
+    client.setSsoSessionCookie(accessToken);
+  }
  else {
     String username=account.name.substring(0,account.name.lastIndexOf('@'));
     String password=am.blockingGetAuthToken(account,AccountAuthenticator.AUTH_TOKEN_TYPE_PASSWORD,false);

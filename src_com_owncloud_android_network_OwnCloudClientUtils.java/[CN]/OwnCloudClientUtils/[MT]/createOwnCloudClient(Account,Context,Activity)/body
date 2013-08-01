@@ -9,6 +9,13 @@
     if (accessToken == null)     throw new AuthenticatorException("WTF!");
     client.setBearerCredentials(accessToken);
   }
+ else   if (am.getUserData(account,AccountAuthenticator.KEY_SUPPORTS_SAML_WEB_SSO) != null) {
+    AccountManagerFuture<Bundle> future=am.getAuthToken(account,AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE,null,currentActivity,null,null);
+    Bundle result=future.getResult();
+    String accessToken=result.getString(AccountManager.KEY_AUTHTOKEN);
+    if (accessToken == null)     throw new AuthenticatorException("WTF!");
+    client.setSsoSessionCookie(accessToken);
+  }
  else {
     String username=account.name.substring(0,account.name.lastIndexOf('@'));
     AccountManagerFuture<Bundle> future=am.getAuthToken(account,AccountAuthenticator.AUTH_TOKEN_TYPE_PASSWORD,null,currentActivity,null,null);

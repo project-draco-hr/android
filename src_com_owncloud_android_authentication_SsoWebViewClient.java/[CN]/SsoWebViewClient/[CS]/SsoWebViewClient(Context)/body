@@ -1,4 +1,0 @@
-{
-  mContext=context;
-  mTargetUrl="fake://url.to.be.set";
-}

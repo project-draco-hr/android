@@ -7,11 +7,11 @@
   String webdav_path=AccountUtils.getWebdavPath(mDiscoveredVersion,mCurrentAuthTokenType);
   if (result.isSuccess() && webdav_path != null) {
     showDialog(DIALOG_LOGIN_PROGRESS);
-    mOAuthAccessToken=((OAuth2GetAccessToken)operation).getResultTokenMap().get(OAuth2Constants.KEY_ACCESS_TOKEN);
-    Log_OC.d(TAG,"Got ACCESS TOKEN: " + mOAuthAccessToken);
+    mAuthToken=((OAuth2GetAccessToken)operation).getResultTokenMap().get(OAuth2Constants.KEY_ACCESS_TOKEN);
+    Log_OC.d(TAG,"Got ACCESS TOKEN: " + mAuthToken);
     mAuthCheckOperation=new ExistenceCheckOperation("",this,false);
     WebdavClient client=OwnCloudClientUtils.createOwnCloudClient(Uri.parse(mHostBaseUrl + webdav_path),this,true);
-    client.setBearerCredentials(mOAuthAccessToken);
+    client.setBearerCredentials(mAuthToken);
     mAuthCheckOperation.execute(client,this,mHandler);
   }
  else {

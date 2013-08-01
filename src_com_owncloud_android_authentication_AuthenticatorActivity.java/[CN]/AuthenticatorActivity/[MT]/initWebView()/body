@@ -1,7 +1,7 @@
 {
   CookieManager cookieManager=CookieManager.getInstance();
   cookieManager.setAcceptCookie(true);
-  mWebViewClient=new SsoWebViewClient(this);
+  mWebViewClient=new SsoWebViewClient(mHandler,this);
   mSsoWebView.setWebViewClient(mWebViewClient);
   WebSettings webSettings=mSsoWebView.getSettings();
   webSettings.setJavaScriptEnabled(true);
