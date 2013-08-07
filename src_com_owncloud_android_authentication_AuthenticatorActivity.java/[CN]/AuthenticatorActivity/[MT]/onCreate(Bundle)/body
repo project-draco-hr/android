@@ -45,6 +45,9 @@
       }
       mHostBaseUrl=normalizeUrl(mAccountMgr.getUserData(mAccount,AccountAuthenticator.KEY_OC_BASE_URL));
       mHostUrlInput.setText(mHostBaseUrl);
+      String userName=mAccount.name.substring(0,mAccount.name.lastIndexOf('@'));
+      mUsernameInput.setText(userName);
+      mAccountNameInput.setText(userName);
     }
     initAuthorizationMethod();
     mJustCreated=true;
@@ -90,6 +93,8 @@
     mUsernameInput.setEnabled(false);
     mUsernameInput.setFocusable(false);
     mOAuth2Check.setVisibility(View.GONE);
+    mAccountNameInput.setEnabled(false);
+    mAccountNameInput.setFocusable(false);
   }
   if (mServerIsChecked && !mServerIsValid && refreshButtonEnabled)   showRefreshButton();
   mOkButton.setEnabled(mServerIsValid);
