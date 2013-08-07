@@ -22,8 +22,4 @@
       mCurrentAuthTokenType=AccountAuthenticator.AUTH_TOKEN_TYPE_PASSWORD;
     }
   }
-  if (mAccount != null) {
-    String userName=mAccount.name.substring(0,mAccount.name.lastIndexOf('@'));
-    mUsernameInput.setText(userName);
-  }
 }
