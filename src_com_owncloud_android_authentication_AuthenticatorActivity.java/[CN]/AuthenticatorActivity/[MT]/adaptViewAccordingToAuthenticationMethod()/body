@@ -14,7 +14,6 @@
     mPasswordInput.setVisibility(View.GONE);
     mAccountNameInput.setVisibility(View.VISIBLE);
     mSsoWebView.setVisibility(View.VISIBLE);
-    initWebView();
   }
  else {
     mOAuthAuthEndpointText.setVisibility(View.GONE);

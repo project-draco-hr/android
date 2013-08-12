@@ -1,9 +1,10 @@
 {
+  mSsoWebView.restoreState(savedInstanceState);
   CookieManager cookieManager=CookieManager.getInstance();
-  cookieManager.setAcceptCookie(true);
-  cookieManager.removeAllCookie();
+  Log_OC.e(TAG,"Accept Cookie: " + cookieManager.acceptCookie());
   mWebViewClient=new SsoWebViewClient(mHandler,this);
   mSsoWebView.setWebViewClient(mWebViewClient);
+  mWebViewClient.setTargetUrl(mHostBaseUrl + AccountUtils.getWebdavPath(mDiscoveredVersion,mCurrentAuthTokenType));
   WebSettings webSettings=mSsoWebView.getSettings();
   webSettings.setJavaScriptEnabled(true);
   webSettings.setBuiltInZoomControls(true);
