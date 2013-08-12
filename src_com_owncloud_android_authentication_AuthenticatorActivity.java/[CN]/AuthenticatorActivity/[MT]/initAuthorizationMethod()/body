@@ -22,4 +22,12 @@
       mCurrentAuthTokenType=AccountAuthenticator.AUTH_TOKEN_TYPE_PASSWORD;
     }
   }
+  if (mAccount != null) {
+    String userName=mAccount.name.substring(0,mAccount.name.lastIndexOf('@'));
+    mUsernameInput.setText(userName);
+  }
+  if (AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE.equals(mCurrentAuthTokenType)) {
+    initWebView();
+  }
+  mOAuth2Check.setChecked(AccountAuthenticator.AUTH_TOKEN_TYPE_ACCESS_TOKEN.equals(mCurrentAuthTokenType));
 }
