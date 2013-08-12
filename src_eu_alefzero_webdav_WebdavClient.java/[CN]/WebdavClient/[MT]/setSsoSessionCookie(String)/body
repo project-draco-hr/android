@@ -3,4 +3,5 @@
   getParams().setCookiePolicy(CookiePolicy.IGNORE_COOKIES);
   mSsoSessionCookie=accessToken;
   mCredentials=null;
+  mAuthTokenType=AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE;
 }
