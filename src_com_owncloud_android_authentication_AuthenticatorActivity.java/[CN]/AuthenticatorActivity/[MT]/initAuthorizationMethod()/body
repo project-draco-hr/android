@@ -26,4 +26,5 @@
     String userName=mAccount.name.substring(0,mAccount.name.lastIndexOf('@'));
     mUsernameInput.setText(userName);
   }
+  mOAuth2Check.setChecked(AccountAuthenticator.AUTH_TOKEN_TYPE_ACCESS_TOKEN.equals(mCurrentAuthTokenType));
 }
