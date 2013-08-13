@@ -1,0 +1,6 @@
+{
+  Dialog dialog=getDialog();
+  Log_OC.d(TAG,"On Destroy");
+  if ((dialog != null) && getRetainInstance())   getDialog().setOnDismissListener(null);
+  super.onDestroyView();
+}

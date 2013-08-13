@@ -1,0 +1,8 @@
+{
+  Log_OC.d(TAG,"On Create Dialog");
+  initWebView(savedInstanceState);
+  setRetainInstance(true);
+  AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+  Dialog dialog=builder.setView(mSsoWebView).create();
+  return dialog;
+}

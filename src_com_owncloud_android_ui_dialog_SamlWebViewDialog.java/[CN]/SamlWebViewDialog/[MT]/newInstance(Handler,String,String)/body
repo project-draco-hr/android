@@ -1,0 +1,7 @@
+{
+  SamlWebViewDialog fragment=new SamlWebViewDialog();
+  mHandler=handler;
+  mUrl=url;
+  mTargetUrl=targetUrl;
+  return fragment;
+}

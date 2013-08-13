@@ -10,7 +10,6 @@
   mOAuthTokenEndpointText=(TextView)findViewById(R.id.oAuthEntryPoint_2);
   mOAuth2Check=(CheckBox)findViewById(R.id.oauth_onOff_check);
   mAccountNameInput=(EditText)findViewById(R.id.account_name);
-  mSsoWebView=(WebView)findViewById(R.id.web_sso_view);
   mOkButton=findViewById(R.id.buttonOK);
   mAuthStatusLayout=(TextView)findViewById(R.id.auth_status_text);
   mHostUrlInputEnabled=getResources().getBoolean(R.bool.show_server_url_input);

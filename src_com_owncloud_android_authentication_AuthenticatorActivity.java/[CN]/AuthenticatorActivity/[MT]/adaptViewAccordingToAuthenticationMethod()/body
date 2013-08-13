@@ -5,7 +5,6 @@
     mUsernameInput.setVisibility(View.GONE);
     mPasswordInput.setVisibility(View.GONE);
     mAccountNameInput.setVisibility(View.GONE);
-    mSsoWebView.setVisibility(View.GONE);
   }
  else   if (AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE.equals(mCurrentAuthTokenType)) {
     mOAuthAuthEndpointText.setVisibility(View.GONE);
@@ -13,8 +12,6 @@
     mUsernameInput.setVisibility(View.GONE);
     mPasswordInput.setVisibility(View.GONE);
     mAccountNameInput.setVisibility(View.VISIBLE);
-    mSsoWebView.setVisibility(View.VISIBLE);
-    initWebView();
   }
  else {
     mOAuthAuthEndpointText.setVisibility(View.GONE);
@@ -22,6 +19,5 @@
     mUsernameInput.setVisibility(View.VISIBLE);
     mPasswordInput.setVisibility(View.VISIBLE);
     mAccountNameInput.setVisibility(View.GONE);
-    mSsoWebView.setVisibility(View.GONE);
   }
 }
