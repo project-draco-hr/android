@@ -1,0 +1,6 @@
+{
+  CookieManager cookieManager=CookieManager.getInstance();
+  cookieManager.setAcceptCookie(true);
+  cookieManager.removeAllCookie();
+  mSsoWebView.loadUrl(mUrl);
+}
