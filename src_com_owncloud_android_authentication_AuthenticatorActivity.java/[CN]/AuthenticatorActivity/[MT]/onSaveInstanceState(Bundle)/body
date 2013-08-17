@@ -1,5 +1,7 @@
 {
   super.onSaveInstanceState(outState);
+  outState.putInt(KEY_AUTH_MESSAGE_VISIBILITY,mAuthMessage.getVisibility());
+  outState.putString(KEY_AUTH_MESSAGE_TEXT,mAuthMessage.getText().toString());
   outState.putInt(KEY_SERVER_STATUS_TEXT,mServerStatusText);
   outState.putInt(KEY_SERVER_STATUS_ICON,mServerStatusIcon);
   outState.putBoolean(KEY_SERVER_VALID,mServerIsValid);
