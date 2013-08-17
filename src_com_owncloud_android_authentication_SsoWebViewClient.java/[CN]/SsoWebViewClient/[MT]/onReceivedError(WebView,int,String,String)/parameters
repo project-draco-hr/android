@@ -1,4 +1,0 @@
-WebView view
-int errorCode
-String description
-String failingUrl
