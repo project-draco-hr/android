@@ -15,4 +15,5 @@
     mAccountMgr.setPassword(mAccount,mPasswordInput.getText().toString());
   }
   setAccountAuthenticatorResult(response);
+  syncAccount();
 }
