@@ -1,3 +1,3 @@
 {
-  return (mHttpCode == 302 || mHttpCode == 307);
+  return (mHttpCode == 302 || mHttpCode == 307 || mRedirectedLocation.toUpperCase().contains("SAML") || mRedirectedLocation.toLowerCase().contains("wayf"));
 }
