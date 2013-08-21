@@ -1,4 +1,5 @@
 {
+  Log_OC.d(TAG,"onPageStarted : " + url);
   if (url.startsWith(mTargetUrl)) {
     view.setVisibility(View.GONE);
     CookieManager cookieManager=CookieManager.getInstance();

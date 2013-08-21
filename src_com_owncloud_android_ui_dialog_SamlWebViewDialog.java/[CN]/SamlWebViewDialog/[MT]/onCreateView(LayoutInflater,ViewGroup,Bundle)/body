@@ -1,0 +1,30 @@
+{
+  Log_OC.d(TAG,"onCreateView");
+  View rootView=inflater.inflate(R.layout.sso_dialog,container,false);
+  WebView ssoWebView=(WebView)rootView.findViewById(R.id.sso_webview);
+  mWebViewClient.setTargetUrl(mTargetUrl);
+  ssoWebView.setWebViewClient(mWebViewClient);
+  if (savedInstanceState == null) {
+    Log_OC.d(TAG,"   initWebView start");
+    CookieManager cookieManager=CookieManager.getInstance();
+    cookieManager.setAcceptCookie(true);
+    cookieManager.removeAllCookie();
+    ssoWebView.loadUrl(mInitialUrl);
+  }
+ else {
+    Log_OC.d(TAG,"   restoreWebView start");
+    WebBackForwardList history=ssoWebView.restoreState(savedInstanceState.getBundle(KEY_WEBVIEW_STATE));
+    if (history == null) {
+      Log_OC.e(TAG,"Error restoring WebView state ; back to starting URL");
+      ssoWebView.loadUrl(mInitialUrl);
+    }
+  }
+  WebSettings webSettings=ssoWebView.getSettings();
+  webSettings.setJavaScriptEnabled(true);
+  webSettings.setBuiltInZoomControls(true);
+  webSettings.setLoadWithOverviewMode(false);
+  webSettings.setSavePassword(false);
+  webSettings.setUserAgentString(WebdavClient.USER_AGENT);
+  webSettings.setSaveFormData(false);
+  return rootView;
+}
