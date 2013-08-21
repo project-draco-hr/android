@@ -1,0 +1,9 @@
+{
+  Log.i(TAG,"Entered setup");
+  try {
+    super.setUp();
+    resolve=this.getMockContentResolver();
+  }
+ catch (  Exception e) {
+  }
+}
