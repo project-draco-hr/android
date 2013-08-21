@@ -16,7 +16,7 @@
     sendStickyBroadcast(true,remotePath,null);
   }
  else {
-    if (result.getCode() == RemoteOperationResult.ResultCode.UNAUTHORIZED || (result.isTemporalRedirection() && getClient().getSsoSessionCookie() != null)) {
+    if (result.getCode() == RemoteOperationResult.ResultCode.UNAUTHORIZED || ((result.isTemporalRedirection() || result.isIdPRedirection()) && getClient().getSsoSessionCookie() != null)) {
       mSyncResult.stats.numAuthExceptions++;
     }
  else     if (result.getException() instanceof DavException) {
