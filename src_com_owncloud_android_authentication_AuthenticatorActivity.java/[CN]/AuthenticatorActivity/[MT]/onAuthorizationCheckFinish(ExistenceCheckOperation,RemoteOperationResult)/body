@@ -6,13 +6,16 @@
   }
   if (result.isSuccess()) {
     Log_OC.d(TAG,"Successful access - time to save the account");
+    boolean success=true;
     if (mAction == ACTION_CREATE) {
-      createAccount();
+      success=createAccount();
     }
  else {
       updateToken();
     }
-    finish();
+    if (success) {
+      finish();
+    }
   }
  else   if (result.isServerFail() || result.isException()) {
     mServerIsChecked=true;
