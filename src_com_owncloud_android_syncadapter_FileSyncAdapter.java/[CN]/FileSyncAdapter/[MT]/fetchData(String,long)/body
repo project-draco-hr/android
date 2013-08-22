@@ -16,7 +16,7 @@
     sendStickyBroadcast(true,remotePath,null);
   }
  else {
-    if (result.getCode() == RemoteOperationResult.ResultCode.UNAUTHORIZED || ((result.isTemporalRedirection() || result.isIdPRedirection()) && getClient().getSsoSessionCookie() != null)) {
+    if (result.getCode() == RemoteOperationResult.ResultCode.UNAUTHORIZED || (result.isTemporalRedirection() && result.isIdPRedirection() && AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE.equals(getClient().getAuthTokenType()))) {
       mSyncResult.stats.numAuthExceptions++;
     }
  else     if (result.getException() instanceof DavException) {

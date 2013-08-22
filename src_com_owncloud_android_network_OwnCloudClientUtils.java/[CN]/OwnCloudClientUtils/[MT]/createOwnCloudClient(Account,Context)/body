@@ -11,7 +11,6 @@
  else   if (isSamlSso) {
     String accessToken=am.blockingGetAuthToken(account,AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE,false);
     client.setSsoSessionCookie(accessToken);
-    Log_OC.e(TAG,"client with auth token: " + accessToken);
   }
  else {
     String username=account.name.substring(0,account.name.lastIndexOf('@'));

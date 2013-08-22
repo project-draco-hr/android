@@ -17,7 +17,6 @@
     String accessToken=result.getString(AccountManager.KEY_AUTHTOKEN);
     if (accessToken == null)     throw new AuthenticatorException("WTF!");
     client.setSsoSessionCookie(accessToken);
-    Log_OC.e(TAG,"client with auth token: " + accessToken);
   }
  else {
     String username=account.name.substring(0,account.name.lastIndexOf('@'));

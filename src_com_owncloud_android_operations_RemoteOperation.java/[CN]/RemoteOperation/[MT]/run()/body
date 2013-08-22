@@ -27,7 +27,7 @@ catch (    AccountsException e) {
     }
     if (result == null)     result=run(mClient);
     repeat=false;
-    if (mCallerActivity != null && mAccount != null && mContext != null && !result.isSuccess() && (result.getCode() == ResultCode.UNAUTHORIZED || result.isTemporalRedirection() || result.isIdPRedirection())) {
+    if (mCallerActivity != null && mAccount != null && mContext != null && !result.isSuccess() && (result.getCode() == ResultCode.UNAUTHORIZED || (result.isTemporalRedirection() && result.isIdPRedirection()))) {
       Credentials cred=mClient.getCredentials();
       String ssoSessionCookie=mClient.getSsoSessionCookie();
       if (cred != null || ssoSessionCookie != null) {

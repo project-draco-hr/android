@@ -17,7 +17,6 @@
     }
     response.putString(AccountManager.KEY_AUTHTOKEN,mAuthToken);
     mAccountMgr.setAuthToken(mAccount,mCurrentAuthTokenType,mAuthToken);
-    Log_OC.e(TAG,"saving auth token: " + mAuthToken);
   }
  else {
     response.putString(AccountManager.KEY_AUTHTOKEN,mPasswordInput.getText().toString());
