@@ -4,20 +4,17 @@
     mOAuthTokenEndpointText.setVisibility(View.VISIBLE);
     mUsernameInput.setVisibility(View.GONE);
     mPasswordInput.setVisibility(View.GONE);
-    mAccountNameInput.setVisibility(View.GONE);
   }
  else   if (AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE.equals(mCurrentAuthTokenType)) {
     mOAuthAuthEndpointText.setVisibility(View.GONE);
     mOAuthTokenEndpointText.setVisibility(View.GONE);
     mUsernameInput.setVisibility(View.GONE);
     mPasswordInput.setVisibility(View.GONE);
-    mAccountNameInput.setVisibility(View.VISIBLE);
   }
  else {
     mOAuthAuthEndpointText.setVisibility(View.GONE);
     mOAuthTokenEndpointText.setVisibility(View.GONE);
     mUsernameInput.setVisibility(View.VISIBLE);
     mPasswordInput.setVisibility(View.VISIBLE);
-    mAccountNameInput.setVisibility(View.GONE);
   }
 }

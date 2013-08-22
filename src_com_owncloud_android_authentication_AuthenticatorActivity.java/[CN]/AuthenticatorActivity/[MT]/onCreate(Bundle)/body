@@ -10,7 +10,6 @@
   mOAuthAuthEndpointText=(TextView)findViewById(R.id.oAuthEntryPoint_1);
   mOAuthTokenEndpointText=(TextView)findViewById(R.id.oAuthEntryPoint_2);
   mOAuth2Check=(CheckBox)findViewById(R.id.oauth_onOff_check);
-  mAccountNameInput=(EditText)findViewById(R.id.account_name);
   mOkButton=findViewById(R.id.buttonOK);
   mAuthStatusLayout=(TextView)findViewById(R.id.auth_status_text);
   mHostUrlInputEnabled=getResources().getBoolean(R.bool.show_server_url_input);
@@ -48,7 +47,6 @@
       mHostUrlInput.setText(mHostBaseUrl);
       String userName=mAccount.name.substring(0,mAccount.name.lastIndexOf('@'));
       mUsernameInput.setText(userName);
-      mAccountNameInput.setText(userName);
     }
     initAuthorizationMethod();
     mJustCreated=true;
@@ -99,8 +97,6 @@
     mUsernameInput.setEnabled(false);
     mUsernameInput.setFocusable(false);
     mOAuth2Check.setVisibility(View.GONE);
-    mAccountNameInput.setEnabled(false);
-    mAccountNameInput.setFocusable(false);
   }
   if (mServerIsChecked && !mServerIsValid && refreshButtonEnabled)   showRefreshButton();
   mOkButton.setEnabled(mServerIsValid);
@@ -109,6 +105,8 @@
   }
   mPasswordInput.setText("");
   mHostUrlInput.setOnFocusChangeListener(this);
+  mHostUrlInput.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+  mHostUrlInput.setOnEditorActionListener(this);
   mHostUrlInput.addTextChangedListener(new TextWatcher(){
     @Override public void afterTextChanged(    Editable s){
       if (!mHostBaseUrl.equals(normalizeUrl(mHostUrlInput.getText().toString()))) {

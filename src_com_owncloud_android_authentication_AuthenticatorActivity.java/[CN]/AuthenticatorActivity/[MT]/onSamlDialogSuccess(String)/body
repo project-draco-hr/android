@@ -3,12 +3,15 @@
   if (sessionCookie != null && sessionCookie.length() > 0) {
     Log_OC.d(TAG,"Successful SSO - time to save the account");
     mAuthToken=sessionCookie;
+    boolean success=true;
     if (mAction == ACTION_CREATE) {
-      createAccount();
+      success=createAccount();
     }
  else {
       updateToken();
     }
-    finish();
+    if (success) {
+      finish();
+    }
   }
 }
