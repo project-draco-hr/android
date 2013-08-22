@@ -4,6 +4,7 @@
     view.setVisibility(View.GONE);
     CookieManager cookieManager=CookieManager.getInstance();
     final String cookies=cookieManager.getCookie(url);
+    Log_OC.d(TAG,"Cookies: " + cookies);
     if (mListenerHandler != null && mListenerRef != null) {
       mListenerHandler.post(new Runnable(){
         @Override public void run(){

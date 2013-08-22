@@ -4,6 +4,6 @@
   outState.putString(ARG_INITIAL_URL,mInitialUrl);
   outState.putString(ARG_TARGET_URL,mTargetUrl);
   Bundle webviewState=new Bundle();
-  ((WebView)getDialog().findViewById(R.id.sso_webview)).saveState(webviewState);
+  mSsoWebView.saveState(webviewState);
   outState.putBundle(KEY_WEBVIEW_STATE,webviewState);
 }

@@ -6,5 +6,6 @@
   }
  else {
     mLastReloadedUrlAtError=null;
+    super.onReceivedError(view,errorCode,description,failingUrl);
   }
 }
