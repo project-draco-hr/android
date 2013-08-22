@@ -1,5 +1,0 @@
-{
-  mSsoWebView.restoreState(savedInstanceState);
-  CookieManager cookieManager=CookieManager.getInstance();
-  Log_OC.e(TAG,"Accept Cookie: " + cookieManager.acceptCookie());
-}

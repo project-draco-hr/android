@@ -2,4 +2,5 @@
   mListenerHandler=listenerHandler;
   mListenerRef=new WeakReference<SsoWebViewClient.SsoWebViewClientListener>(listener);
   mTargetUrl="fake://url.to.be.set";
+  mLastReloadedUrlAtError=null;
 }

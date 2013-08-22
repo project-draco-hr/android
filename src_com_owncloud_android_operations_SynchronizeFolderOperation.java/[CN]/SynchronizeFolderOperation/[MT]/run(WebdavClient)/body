@@ -88,6 +88,10 @@
       }
  else {
         result=new RemoteOperationResult(true,status);
+        Header hCookie=query.getResponseHeader("Cookie");
+        if (hCookie != null) {
+          Log_OC.d(TAG,"PROPFIND cookie: " + hCookie.getValue());
+        }
       }
     }
  else {

@@ -1,31 +1,4 @@
 {
-  Log_OC.d(TAG,"On Create Dialog");
-  mHandler=new Handler();
-  mSsoWebView=new WebView(getActivity()){
-    @Override public boolean onCheckIsTextEditor(){
-      return true;
-    }
-  }
-;
-  mWebViewClient=new SsoWebViewClient(mHandler,mSsoWebViewClientListener);
-  mSsoWebView.setWebViewClient(mWebViewClient);
-  mWebViewClient.setTargetUrl(mTargetUrl);
-  mSsoWebView.setFocusable(true);
-  mSsoWebView.setFocusableInTouchMode(true);
-  mSsoWebView.setClickable(true);
-  WebSettings webSettings=mSsoWebView.getSettings();
-  webSettings.setJavaScriptEnabled(true);
-  webSettings.setBuiltInZoomControls(true);
-  webSettings.setLoadWithOverviewMode(false);
-  webSettings.setSavePassword(false);
-  webSettings.setUserAgentString(WebdavClient.USER_AGENT);
-  if (savedInstanceState == null) {
-    initWebView();
-  }
- else {
-    restoreWebView(savedInstanceState);
-  }
-  AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
-  Dialog dialog=builder.setView(mSsoWebView).create();
-  return dialog;
+  Log_OC.d(TAG,"onCreateDialog");
+  return super.onCreateDialog(savedInstanceState);
 }
