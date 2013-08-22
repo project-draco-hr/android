@@ -40,6 +40,7 @@
     intent.putExtra(AccountManager.KEY_USERDATA,username);
     if (isOAuth || isSaml) {
       mAccountMgr.setAuthToken(mAccount,mCurrentAuthTokenType,mAuthToken);
+      Log_OC.e(TAG,"saving auth token: " + mAuthToken);
     }
     mAccountMgr.setUserData(mAccount,AccountAuthenticator.KEY_OC_VERSION,mDiscoveredVersion.toString());
     mAccountMgr.setUserData(mAccount,AccountAuthenticator.KEY_OC_BASE_URL,mHostBaseUrl);

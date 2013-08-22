@@ -6,12 +6,12 @@
   }
   if (result.isSuccess()) {
     Log_OC.d(TAG,"Successful access - time to save the account");
-    boolean success=true;
+    boolean success=false;
     if (mAction == ACTION_CREATE) {
       success=createAccount();
     }
  else {
-      updateToken();
+      success=updateToken();
     }
     if (success) {
       finish();

@@ -7,13 +7,22 @@
     mAccountMgr.setAuthToken(mAccount,mCurrentAuthTokenType,mAuthToken);
   }
  else   if (AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE.equals(mCurrentAuthTokenType)) {
+    String username=getUserNameForSamlSso();
+    if (!mUsernameInput.getText().toString().equals(username)) {
+      RemoteOperationResult result=new RemoteOperationResult(ResultCode.ACCOUNT_NOT_THE_SAME);
+      updateAuthStatusIconAndText(result);
+      showAuthStatus();
+      Log_OC.d(TAG,result.getLogMessage());
+      return false;
+    }
     response.putString(AccountManager.KEY_AUTHTOKEN,mAuthToken);
     mAccountMgr.setAuthToken(mAccount,mCurrentAuthTokenType,mAuthToken);
+    Log_OC.e(TAG,"saving auth token: " + mAuthToken);
   }
  else {
     response.putString(AccountManager.KEY_AUTHTOKEN,mPasswordInput.getText().toString());
     mAccountMgr.setPassword(mAccount,mPasswordInput.getText().toString());
   }
   setAccountAuthenticatorResult(response);
-  syncAccount();
+  return true;
 }
