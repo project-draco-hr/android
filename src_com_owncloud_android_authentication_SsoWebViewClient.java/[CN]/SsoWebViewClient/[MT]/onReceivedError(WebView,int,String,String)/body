@@ -1,3 +1,11 @@
 {
-  Log_OC.e(TAG,"onReceivedError : " + failingUrl);
+  Log_OC.e(TAG,"onReceivedError : " + failingUrl + ", code "+ errorCode+ ", description: "+ description);
+  if (!failingUrl.equals(mLastReloadedUrlAtError)) {
+    view.reload();
+    mLastReloadedUrlAtError=failingUrl;
+  }
+ else {
+    mLastReloadedUrlAtError=null;
+    super.onReceivedError(view,errorCode,description,failingUrl);
+  }
 }

@@ -1,0 +1,13 @@
+{
+  Log_OC.d(TAG,"onCreate");
+  super.onCreate(savedInstanceState);
+  if (savedInstanceState == null) {
+    mInitialUrl=getArguments().getString(ARG_INITIAL_URL);
+    mTargetUrl=getArguments().getString(ARG_TARGET_URL);
+  }
+ else {
+    mInitialUrl=savedInstanceState.getString(ARG_INITIAL_URL);
+    mTargetUrl=savedInstanceState.getString(ARG_TARGET_URL);
+  }
+  setStyle(SherlockDialogFragment.STYLE_NO_TITLE,R.style.Theme_ownCloud_Dialog);
+}
