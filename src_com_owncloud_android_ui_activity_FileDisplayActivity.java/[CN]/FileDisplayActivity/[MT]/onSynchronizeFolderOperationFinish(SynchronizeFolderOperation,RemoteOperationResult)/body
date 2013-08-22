@@ -1,0 +1,14 @@
+{
+  if (result.isSuccess()) {
+    refeshListOfFilesFragment();
+  }
+ else {
+    try {
+      Toast msg=Toast.makeText(FileDisplayActivity.this,R.string.sync_file_fail_msg,Toast.LENGTH_LONG);
+      msg.show();
+    }
+ catch (    NotFoundException e) {
+      Log_OC.e(TAG,"Error while trying to show fail message ",e);
+    }
+  }
+}

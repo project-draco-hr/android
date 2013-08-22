@@ -6,4 +6,5 @@
     mFile=parentDir;
   }
   listDirectory(parentDir);
+  mContainerActivity.syncFolderOperation(mFile.getRemotePath(),mFile.getParentId());
 }
