@@ -3,7 +3,7 @@
   mAuthStatusText=R.string.auth_connecting_auth_server;
   showAuthStatus();
   showDialog(DIALOG_LOGIN_PROGRESS);
-  String webdav_path=AccountUtils.getWebdavPath(mDiscoveredVersion,mCurrentAuthTokenType);
+  String webdav_path=AccountUtils.getWebdavPath(mDiscoveredVersion,mAuthTokenType);
   mAuthCheckOperation=new ExistenceCheckOperation("",this,false);
   WebdavClient client=OwnCloudClientUtils.createOwnCloudClient(Uri.parse(mHostBaseUrl + webdav_path),this,false);
   mOperationThread=mAuthCheckOperation.execute(client,this,mHandler);

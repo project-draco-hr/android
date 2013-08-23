@@ -2,11 +2,11 @@
   Bundle response=new Bundle();
   response.putString(AccountManager.KEY_ACCOUNT_NAME,mAccount.name);
   response.putString(AccountManager.KEY_ACCOUNT_TYPE,mAccount.type);
-  if (AccountAuthenticator.AUTH_TOKEN_TYPE_ACCESS_TOKEN.equals(mCurrentAuthTokenType)) {
+  if (AccountAuthenticator.AUTH_TOKEN_TYPE_ACCESS_TOKEN.equals(mAuthTokenType)) {
     response.putString(AccountManager.KEY_AUTHTOKEN,mAuthToken);
-    mAccountMgr.setAuthToken(mAccount,mCurrentAuthTokenType,mAuthToken);
+    mAccountMgr.setAuthToken(mAccount,mAuthTokenType,mAuthToken);
   }
- else   if (AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE.equals(mCurrentAuthTokenType)) {
+ else   if (AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE.equals(mAuthTokenType)) {
     String username=getUserNameForSamlSso();
     if (!mUsernameInput.getText().toString().equals(username)) {
       RemoteOperationResult result=new RemoteOperationResult(ResultCode.ACCOUNT_NOT_THE_SAME);
@@ -16,7 +16,7 @@
       return false;
     }
     response.putString(AccountManager.KEY_AUTHTOKEN,mAuthToken);
-    mAccountMgr.setAuthToken(mAccount,mCurrentAuthTokenType,mAuthToken);
+    mAccountMgr.setAuthToken(mAccount,mAuthTokenType,mAuthToken);
   }
  else {
     response.putString(AccountManager.KEY_AUTHTOKEN,mPasswordInput.getText().toString());

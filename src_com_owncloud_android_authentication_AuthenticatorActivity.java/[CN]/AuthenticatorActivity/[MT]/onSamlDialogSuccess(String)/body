@@ -1,7 +1,6 @@
 {
   mAuthToken=sessionCookie;
   if (sessionCookie != null && sessionCookie.length() > 0) {
-    Log_OC.d(TAG,"Successful SSO - time to save the account");
     mAuthToken=sessionCookie;
     boolean success=false;
     if (mAction == ACTION_CREATE) {

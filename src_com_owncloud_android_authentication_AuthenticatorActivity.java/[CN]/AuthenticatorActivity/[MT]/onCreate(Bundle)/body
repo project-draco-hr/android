@@ -73,9 +73,9 @@
     }
     mHostBaseUrl=savedInstanceState.getString(KEY_HOST_URL_TEXT);
     mAccount=savedInstanceState.getParcelable(KEY_ACCOUNT);
-    mCurrentAuthTokenType=savedInstanceState.getString(AccountAuthenticator.KEY_AUTH_TOKEN_TYPE);
-    if (mCurrentAuthTokenType == null) {
-      mCurrentAuthTokenType=AccountAuthenticator.AUTH_TOKEN_TYPE_PASSWORD;
+    mAuthTokenType=savedInstanceState.getString(AccountAuthenticator.KEY_AUTH_TOKEN_TYPE);
+    if (mAuthTokenType == null) {
+      mAuthTokenType=AccountAuthenticator.AUTH_TOKEN_TYPE_PASSWORD;
     }
     if (savedInstanceState.getBoolean(KEY_SERVER_CHECK_IN_PROGRESS,false)) {
       checkOcServer();
@@ -100,7 +100,7 @@
   }
   if (mServerIsChecked && !mServerIsValid && refreshButtonEnabled)   showRefreshButton();
   mOkButton.setEnabled(mServerIsValid);
-  if (AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE.equals(mCurrentAuthTokenType) || !AUTH_OPTIONAL.equals(getString(R.string.auth_method_oauth2))) {
+  if (AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE.equals(mAuthTokenType) || !AUTH_OPTIONAL.equals(getString(R.string.auth_method_oauth2))) {
     mOAuth2Check.setVisibility(View.GONE);
   }
   mPasswordInput.setText("");
@@ -128,6 +128,17 @@
         AuthenticatorActivity.this.onViewPasswordClick();
       }
       return true;
+    }
+  }
+);
+  findViewById(R.id.scroll).setOnTouchListener(new OnTouchListener(){
+    @Override public boolean onTouch(    View view,    MotionEvent event){
+      if (event.getAction() == MotionEvent.ACTION_DOWN) {
+        if (AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE.equals(mAuthTokenType) && mHostUrlInput.hasFocus()) {
+          checkOcServer();
+        }
+      }
+      return false;
     }
   }
 );

@@ -6,7 +6,7 @@
   }
   if (result.isTemporalRedirection() && result.isIdPRedirection()) {
     String url=result.getRedirectedLocation();
-    String targetUrl=mHostBaseUrl + AccountUtils.getWebdavPath(mDiscoveredVersion,mCurrentAuthTokenType);
+    String targetUrl=mHostBaseUrl + AccountUtils.getWebdavPath(mDiscoveredVersion,mAuthTokenType);
     mSamlDialog=SamlWebViewDialog.newInstance(url,targetUrl);
     mSamlDialog.show(getSupportFragmentManager(),TAG_SAML_DIALOG);
     mAuthStatusIcon=0;
