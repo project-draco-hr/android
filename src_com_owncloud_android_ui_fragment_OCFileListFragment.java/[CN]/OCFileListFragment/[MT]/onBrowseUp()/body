@@ -3,6 +3,7 @@
   if (mFile != null) {
     DataStorageManager storageManager=mContainerActivity.getStorageManager();
     parentDir=storageManager.getFileById(mFile.getParentId());
+    storageManager.calculateFolderSize(mFile.getFileId());
     mFile=parentDir;
   }
   listDirectory(parentDir);
