@@ -16,6 +16,6 @@
   if (mAccount != null) {
     outState.putParcelable(KEY_ACCOUNT,mAccount);
   }
-  outState.putString(AccountAuthenticator.KEY_AUTH_TOKEN_TYPE,mCurrentAuthTokenType);
+  outState.putString(AccountAuthenticator.KEY_AUTH_TOKEN_TYPE,mAuthTokenType);
   outState.putBoolean(KEY_REFRESH_BUTTON_ENABLED,(mRefreshButton.getVisibility() == View.VISIBLE));
 }

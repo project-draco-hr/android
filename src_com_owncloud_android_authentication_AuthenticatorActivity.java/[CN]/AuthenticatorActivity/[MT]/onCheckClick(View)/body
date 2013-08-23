@@ -1,10 +1,10 @@
 {
   CheckBox oAuth2Check=(CheckBox)view;
   if (oAuth2Check.isChecked()) {
-    mCurrentAuthTokenType=AccountAuthenticator.AUTH_TOKEN_TYPE_ACCESS_TOKEN;
+    mAuthTokenType=AccountAuthenticator.AUTH_TOKEN_TYPE_ACCESS_TOKEN;
   }
  else {
-    mCurrentAuthTokenType=AccountAuthenticator.AUTH_TOKEN_TYPE_PASSWORD;
+    mAuthTokenType=AccountAuthenticator.AUTH_TOKEN_TYPE_PASSWORD;
   }
   adaptViewAccordingToAuthenticationMethod();
 }
