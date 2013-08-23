@@ -1,7 +1,12 @@
 {
-  if (inputField != null && inputField.equals(mPasswordInput) && actionId == EditorInfo.IME_ACTION_DONE) {
+  if (actionId == EditorInfo.IME_ACTION_DONE && inputField != null && inputField.equals(mPasswordInput)) {
     if (mOkButton.isEnabled()) {
       mOkButton.performClick();
+    }
+  }
+ else   if (actionId == EditorInfo.IME_ACTION_NEXT && inputField != null && inputField.equals(mHostUrlInput)) {
+    if (AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE.equals(mCurrentAuthTokenType)) {
+      checkOcServer();
     }
   }
   return false;

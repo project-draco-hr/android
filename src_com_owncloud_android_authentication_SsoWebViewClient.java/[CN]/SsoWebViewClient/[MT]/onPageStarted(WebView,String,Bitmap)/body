@@ -1,20 +1,4 @@
 {
   Log_OC.d(TAG,"onPageStarted : " + url);
-  if (url.startsWith(mTargetUrl)) {
-    view.setVisibility(View.GONE);
-    CookieManager cookieManager=CookieManager.getInstance();
-    final String cookies=cookieManager.getCookie(url);
-    Log_OC.d(TAG,"Cookies: " + cookies);
-    if (mListenerHandler != null && mListenerRef != null) {
-      mListenerHandler.post(new Runnable(){
-        @Override public void run(){
-          SsoWebViewClientListener listener=mListenerRef.get();
-          if (listener != null) {
-            listener.onSsoFinished(cookies);
-          }
-        }
-      }
-);
-    }
-  }
+  super.onPageStarted(view,url,favicon);
 }

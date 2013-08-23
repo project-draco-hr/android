@@ -1,0 +1,12 @@
+{
+  if (mAuthToken != null) {
+    String[] cookies=mAuthToken.split(";");
+    for (int i=0; i < cookies.length; i++) {
+      if (cookies[i].startsWith(KEY_OC_USERNAME_EQUALS)) {
+        String value=Uri.decode(cookies[i].substring(KEY_OC_USERNAME_EQUALS.length()));
+        return value;
+      }
+    }
+  }
+  return "";
+}
