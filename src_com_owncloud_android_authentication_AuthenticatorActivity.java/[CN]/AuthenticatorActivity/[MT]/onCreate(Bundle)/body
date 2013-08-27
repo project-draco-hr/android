@@ -31,6 +31,7 @@
     mRefreshButton=findViewById(R.id.embeddedRefreshButton);
   }
   if (savedInstanceState == null) {
+    mResumed=false;
     mAuthMessageVisibility=View.GONE;
     mServerStatusText=mServerStatusIcon=0;
     mServerIsValid=false;
@@ -55,6 +56,7 @@
     }
   }
  else {
+    mResumed=true;
     mAuthMessageVisibility=savedInstanceState.getInt(KEY_AUTH_MESSAGE_VISIBILITY);
     mAuthMessageText=savedInstanceState.getString(KEY_AUTH_MESSAGE_TEXT);
     mServerIsValid=savedInstanceState.getBoolean(KEY_SERVER_VALID);
@@ -116,9 +118,12 @@
     @Override public void beforeTextChanged(    CharSequence s,    int start,    int count,    int after){
     }
     @Override public void onTextChanged(    CharSequence s,    int start,    int before,    int count){
-      mAuthStatusIcon=0;
-      mAuthStatusText=0;
-      showAuthStatus();
+      if (!mResumed) {
+        mAuthStatusIcon=0;
+        mAuthStatusText=0;
+        showAuthStatus();
+      }
+      mResumed=false;
     }
   }
 );
