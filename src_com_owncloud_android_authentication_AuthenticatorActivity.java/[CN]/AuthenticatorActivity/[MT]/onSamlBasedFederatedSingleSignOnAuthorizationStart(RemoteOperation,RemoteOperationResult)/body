@@ -4,7 +4,7 @@
   }
  catch (  IllegalArgumentException e) {
   }
-  if (result.isTemporalRedirection() || result.isIdPRedirection()) {
+  if (result.isIdPRedirection()) {
     String url=result.getRedirectedLocation();
     String targetUrl=mHostBaseUrl + AccountUtils.getWebdavPath(mDiscoveredVersion,mAuthTokenType);
     mSamlDialog=SamlWebViewDialog.newInstance(url,targetUrl);
