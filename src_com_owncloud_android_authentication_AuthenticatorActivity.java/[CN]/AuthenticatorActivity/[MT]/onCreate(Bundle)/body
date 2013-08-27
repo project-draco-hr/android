@@ -2,6 +2,7 @@
   super.onCreate(savedInstanceState);
   getWindow().requestFeature(Window.FEATURE_NO_TITLE);
   setContentView(R.layout.account_setup);
+  mAuthMessage=(TextView)findViewById(R.id.auth_message);
   mHostUrlInput=(EditText)findViewById(R.id.hostUrlInput);
   mHostUrlInput.setText(getString(R.string.server_url));
   mUsernameInput=(EditText)findViewById(R.id.account_username);
@@ -31,6 +32,7 @@
   }
   if (savedInstanceState == null) {
     mResumed=false;
+    mAuthMessageVisibility=View.GONE;
     mServerStatusText=mServerStatusIcon=0;
     mServerIsValid=false;
     mServerIsChecked=false;
@@ -44,6 +46,8 @@
       }
       mHostBaseUrl=normalizeUrl(mAccountMgr.getUserData(mAccount,AccountAuthenticator.KEY_OC_BASE_URL));
       mHostUrlInput.setText(mHostBaseUrl);
+      String userName=mAccount.name.substring(0,mAccount.name.lastIndexOf('@'));
+      mUsernameInput.setText(userName);
     }
     initAuthorizationMethod();
     mJustCreated=true;
@@ -53,6 +57,8 @@
   }
  else {
     mResumed=true;
+    mAuthMessageVisibility=savedInstanceState.getInt(KEY_AUTH_MESSAGE_VISIBILITY);
+    mAuthMessageText=savedInstanceState.getString(KEY_AUTH_MESSAGE_TEXT);
     mServerIsValid=savedInstanceState.getBoolean(KEY_SERVER_VALID);
     mServerIsChecked=savedInstanceState.getBoolean(KEY_SERVER_CHECKED);
     mServerStatusText=savedInstanceState.getInt(KEY_SERVER_STATUS_TEXT);
@@ -77,6 +83,12 @@
       checkOcServer();
     }
     refreshButtonEnabled=savedInstanceState.getBoolean(KEY_REFRESH_BUTTON_ENABLED);
+  }
+  if (mAuthMessageVisibility == View.VISIBLE) {
+    showAuthMessage(mAuthMessageText);
+  }
+ else {
+    hideAuthMessage();
   }
   adaptViewAccordingToAuthenticationMethod();
   showServerStatus();

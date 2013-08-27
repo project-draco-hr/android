@@ -54,6 +54,7 @@
     Bundle bundle=new Bundle();
     bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL,true);
     ContentResolver.requestSync(mAccount,AccountAuthenticator.AUTHORITY,bundle);
+    syncAccount();
     return true;
   }
 }

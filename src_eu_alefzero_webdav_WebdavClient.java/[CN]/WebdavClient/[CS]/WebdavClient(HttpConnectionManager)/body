@@ -5,4 +5,5 @@
   getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION,HttpVersion.HTTP_1_1);
   mFollowRedirects=true;
   mSsoSessionCookie=null;
+  mAuthTokenType=AccountAuthenticator.AUTH_TOKEN_TYPE_PASSWORD;
 }
