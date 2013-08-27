@@ -5,4 +5,5 @@
   getParams().setParameter(AuthPolicy.AUTH_SCHEME_PRIORITY,authPrefs);
   mCredentials=new BearerCredentials(accessToken);
   getState().setCredentials(AuthScope.ANY,mCredentials);
+  mSsoSessionCookie=null;
 }

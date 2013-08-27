@@ -1,0 +1,3 @@
+{
+  return (mRedirectedLocation != null && (mRedirectedLocation.toUpperCase().contains("SAML") || mRedirectedLocation.toLowerCase().contains("wayf")));
+}

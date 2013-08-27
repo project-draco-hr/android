@@ -1,0 +1,11 @@
+{
+  try {
+    method.setFollowRedirects(mFollowRedirects);
+  }
+ catch (  Exception e) {
+  }
+  if (mSsoSessionCookie != null && mSsoSessionCookie.length() > 0) {
+    method.setRequestHeader("Cookie",mSsoSessionCookie);
+  }
+  return super.executeMethod(method);
+}
