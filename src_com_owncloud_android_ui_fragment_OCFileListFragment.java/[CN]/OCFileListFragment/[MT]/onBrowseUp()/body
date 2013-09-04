@@ -2,10 +2,17 @@
   OCFile parentDir=null;
   if (mFile != null) {
     DataStorageManager storageManager=mContainerActivity.getStorageManager();
-    parentDir=storageManager.getFileById(mFile.getParentId());
+    if (mFile.getParentId() == 0) {
+      parentDir=storageManager.getFileById(1);
+    }
+ else {
+      parentDir=storageManager.getFileById(mFile.getParentId());
+    }
     storageManager.calculateFolderSize(mFile.getFileId());
     mFile=parentDir;
   }
-  listDirectory(parentDir);
-  mContainerActivity.syncFolderOperation(mFile.getRemotePath(),mFile.getParentId());
+  if (mFile != null) {
+    listDirectory(mFile);
+    mContainerActivity.startSyncFolderOperation(mFile.getRemotePath(),mFile.getParentId());
+  }
 }

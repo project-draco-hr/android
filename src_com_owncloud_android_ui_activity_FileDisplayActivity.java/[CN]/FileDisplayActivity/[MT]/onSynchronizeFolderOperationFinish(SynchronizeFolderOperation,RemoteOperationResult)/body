@@ -1,6 +1,9 @@
 {
+  setSupportProgressBarIndeterminateVisibility(false);
   if (result.isSuccess()) {
-    refeshListOfFilesFragment();
+    DataStorageManager storageManager=getStorageManager();
+    OCFile parentDir=storageManager.getFileById(operation.getParentId());
+    refreshListOfFilesFragment(parentDir);
   }
  else {
     try {
