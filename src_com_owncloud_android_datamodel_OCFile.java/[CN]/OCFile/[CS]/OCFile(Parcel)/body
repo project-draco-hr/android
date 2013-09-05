@@ -12,4 +12,5 @@
   mKeepInSync=source.readInt() == 1;
   mLastSyncDateForProperties=source.readLong();
   mLastSyncDateForData=source.readLong();
+  mEtag=source.readString();
 }
