@@ -38,6 +38,8 @@
       Date d=WebdavUtils.parseResponseDate((String)prop.getValue());
       mCreateTimestamp=(d != null) ? d.getTime() : 0;
     }
+    prop=propSet.get(DavPropertyName.GETETAG);
+    if (prop != null)     mEtag=(String)prop.getValue();
   }
  else {
     Log_OC.e("WebdavEntry","General fuckup, no status for webdav response");
