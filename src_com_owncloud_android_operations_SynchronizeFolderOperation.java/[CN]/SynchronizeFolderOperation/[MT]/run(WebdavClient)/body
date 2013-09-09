@@ -13,35 +13,49 @@
       if (mParentId == DataStorageManager.ROOT_PARENT_ID) {
         WebdavEntry we=new WebdavEntry(resp.getResponses()[0],client.getBaseUri().getPath());
         OCFile parent=fillOCFile(we);
-        mStorageManager.saveFile(parent);
-        mParentId=parent.getFileId();
+        OCFile localParent=mStorageManager.getFileById(1);
+        if (parent.getEtag() != localParent.getEtag()) {
+          mStorageManager.saveFile(parent);
+          mParentId=parent.getFileId();
+        }
       }
+      List<String> filesOnServer=new ArrayList<String>();
       List<OCFile> updatedFiles=new Vector<OCFile>(resp.getResponses().length - 1);
       List<SynchronizeFileOperation> filesToSyncContents=new Vector<SynchronizeFileOperation>();
       for (int i=1; i < resp.getResponses().length; ++i) {
         WebdavEntry we=new WebdavEntry(resp.getResponses()[i],client.getBaseUri().getPath());
         OCFile file=fillOCFile(we);
+        filesOnServer.add(file.getRemotePath());
         file.setLastSyncDateForProperties(mCurrentSyncTime);
         OCFile oldFile=mStorageManager.getFileByPath(file.getRemotePath());
+        boolean fileChanged=false;
         if (oldFile != null) {
-          file.setKeepInSync(oldFile.keepInSync());
-          file.setLastSyncDateForData(oldFile.getLastSyncDateForData());
-          file.setModificationTimestampAtLastSyncForData(oldFile.getModificationTimestampAtLastSyncForData());
-          checkAndFixForeignStoragePath(oldFile);
-          file.setStoragePath(oldFile.getStoragePath());
-        }
-        if (file.getStoragePath() == null && !file.isDirectory()) {
-          File f=new File(FileStorageUtils.getDefaultSavePathFor(mAccount.name,file));
-          if (f.exists()) {
-            file.setStoragePath(f.getAbsolutePath());
-            file.setLastSyncDateForData(f.lastModified());
+          if (!file.getEtag().equalsIgnoreCase(oldFile.getEtag())) {
+            fileChanged=true;
           }
         }
-        if (file.keepInSync()) {
-          SynchronizeFileOperation operation=new SynchronizeFileOperation(oldFile,file,mStorageManager,mAccount,true,false,mContext);
-          filesToSyncContents.add(operation);
+ else         fileChanged=true;
+        if (fileChanged) {
+          if (oldFile != null) {
+            file.setKeepInSync(oldFile.keepInSync());
+            file.setLastSyncDateForData(oldFile.getLastSyncDateForData());
+            file.setModificationTimestampAtLastSyncForData(oldFile.getModificationTimestampAtLastSyncForData());
+            checkAndFixForeignStoragePath(oldFile);
+            file.setStoragePath(oldFile.getStoragePath());
+          }
+          if (file.getStoragePath() == null && !file.isDirectory()) {
+            File f=new File(FileStorageUtils.getDefaultSavePathFor(mAccount.name,file));
+            if (f.exists()) {
+              file.setStoragePath(f.getAbsolutePath());
+              file.setLastSyncDateForData(f.lastModified());
+            }
+          }
+          if (file.keepInSync()) {
+            SynchronizeFileOperation operation=new SynchronizeFileOperation(oldFile,file,mStorageManager,mAccount,true,false,mContext);
+            filesToSyncContents.add(operation);
+          }
+          updatedFiles.add(file);
         }
-        updatedFiles.add(file);
       }
       mStorageManager.saveFiles(updatedFiles);
       SynchronizeFileOperation op=null;
@@ -69,8 +83,8 @@
       String currentSavePath=FileStorageUtils.getSavePath(mAccount.name);
       for (int i=0; i < mChildren.size(); ) {
         file=mChildren.get(i);
-        if (file.getLastSyncDateForProperties() != mCurrentSyncTime) {
-          Log_OC.d(TAG,"removing file: " + file);
+        if (!filesOnServer.contains(file.getRemotePath())) {
+          Log_OC.d(TAG,"removing file: " + file.getFileName());
           mStorageManager.removeFile(file,(file.isDown() && file.getStoragePath().startsWith(currentSavePath)));
           mChildren.remove(i);
         }
