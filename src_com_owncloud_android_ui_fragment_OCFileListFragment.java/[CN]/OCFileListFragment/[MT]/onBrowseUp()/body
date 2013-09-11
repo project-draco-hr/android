@@ -8,7 +8,6 @@
  else {
       parentDir=storageManager.getFileById(mFile.getParentId());
     }
-    storageManager.calculateFolderSize(mFile.getFileId());
     mFile=parentDir;
   }
   if (mFile != null) {

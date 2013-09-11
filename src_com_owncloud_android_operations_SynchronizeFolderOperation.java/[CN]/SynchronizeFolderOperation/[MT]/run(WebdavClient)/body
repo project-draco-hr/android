@@ -3,6 +3,7 @@
   mFailsInFavouritesFound=0;
   mConflictsFound=0;
   mForgottenLocalFiles.clear();
+  boolean fileChanged=false;
   PropFindMethod query=null;
   try {
     Log_OC.d(TAG,"Synchronizing " + mAccount.name + ", fetching files in "+ mRemotePath);
@@ -28,7 +29,7 @@
         filesOnServer.add(file.getRemotePath());
         file.setLastSyncDateForProperties(mCurrentSyncTime);
         OCFile oldFile=mStorageManager.getFileByPath(file.getRemotePath());
-        boolean fileChanged=false;
+        fileChanged=false;
         if (oldFile != null) {
           if (!file.getEtag().equalsIgnoreCase(oldFile.getEtag())) {
             fileChanged=true;
@@ -55,48 +56,44 @@
             filesToSyncContents.add(operation);
           }
           updatedFiles.add(file);
-        }
-      }
-      mStorageManager.saveFiles(updatedFiles);
-      SynchronizeFileOperation op=null;
-      RemoteOperationResult contentsResult=null;
-      for (int i=0; i < filesToSyncContents.size(); i++) {
-        op=filesToSyncContents.get(i);
-        contentsResult=op.execute(client);
-        if (!contentsResult.isSuccess()) {
-          if (contentsResult.getCode() == ResultCode.SYNC_CONFLICT) {
-            mConflictsFound++;
-          }
+          mStorageManager.saveFiles(updatedFiles);
+          RemoteOperationResult contentsResult=null;
+          for (          SynchronizeFileOperation op : filesToSyncContents) {
+            contentsResult=op.execute(client);
+            if (!contentsResult.isSuccess()) {
+              if (contentsResult.getCode() == ResultCode.SYNC_CONFLICT) {
+                mConflictsFound++;
+              }
  else {
-            mFailsInFavouritesFound++;
-            if (contentsResult.getException() != null) {
-              Log_OC.d(TAG,"Error while synchronizing favourites : " + contentsResult.getLogMessage(),contentsResult.getException());
-            }
+                mFailsInFavouritesFound++;
+                if (contentsResult.getException() != null) {
+                  Log_OC.d(TAG,"Error while synchronizing favourites : " + contentsResult.getLogMessage(),contentsResult.getException());
+                }
  else {
-              Log_OC.d(TAG,"Error while synchronizing favourites : " + contentsResult.getLogMessage());
+                  Log_OC.d(TAG,"Error while synchronizing favourites : " + contentsResult.getLogMessage());
+                }
+              }
             }
           }
-        }
-      }
-      mChildren=mStorageManager.getDirectoryContent(mStorageManager.getFileById(mParentId));
-      OCFile file;
-      String currentSavePath=FileStorageUtils.getSavePath(mAccount.name);
-      for (int i=0; i < mChildren.size(); ) {
-        file=mChildren.get(i);
-        if (!filesOnServer.contains(file.getRemotePath())) {
-          Log_OC.d(TAG,"removing file: " + file.getFileName());
-          mStorageManager.removeFile(file,(file.isDown() && file.getStoragePath().startsWith(currentSavePath)));
-          mChildren.remove(i);
-        }
- else {
-          i++;
+          mChildren=mStorageManager.getDirectoryContent(mStorageManager.getFileById(mParentId));
+          String currentSavePath=FileStorageUtils.getSavePath(mAccount.name);
+          for (          OCFile fileChild : mChildren) {
+            if (!filesOnServer.contains(fileChild.getRemotePath())) {
+              Log_OC.d(TAG,"removing file: " + fileChild.getFileName());
+              mStorageManager.removeFile(fileChild,(fileChild.isDown() && fileChild.getStoragePath().startsWith(currentSavePath)));
+              mChildren.remove(fileChild);
+            }
+          }
         }
       }
     }
  else {
       client.exhaustResponse(query.getResponseBodyAsStream());
     }
-    if (isMultiStatus(status)) {
+    if (!fileChanged) {
+      result=new RemoteOperationResult(ResultCode.OK_NO_CHANGES_ON_DIR);
+    }
+ else     if (isMultiStatus(status)) {
       if (mConflictsFound > 0 || mFailsInFavouritesFound > 0) {
         result=new RemoteOperationResult(ResultCode.SYNC_CONFLICT);
       }

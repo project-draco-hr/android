@@ -1,4 +1,4 @@
 {
   mCode=code;
-  mSuccess=(code == ResultCode.OK || code == ResultCode.OK_SSL || code == ResultCode.OK_NO_SSL);
+  mSuccess=(code == ResultCode.OK || code == ResultCode.OK_SSL || code == ResultCode.OK_NO_SSL || code == ResultCode.OK_NO_CHANGES_ON_DIR);
 }

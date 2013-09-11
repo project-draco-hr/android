@@ -1,9 +1,14 @@
 {
+  OCFileListFragment list=getListOfFilesFragment();
+  enableDisableViewGroup(list.getListView(),true);
   setSupportProgressBarIndeterminateVisibility(false);
   if (result.isSuccess()) {
-    DataStorageManager storageManager=getStorageManager();
-    OCFile parentDir=storageManager.getFileByPath(operation.getRemotePath());
-    refreshListOfFilesFragment(parentDir);
+    if (result.getCode() != ResultCode.OK_NO_CHANGES_ON_DIR) {
+      DataStorageManager storageManager=getStorageManager();
+      OCFile parentDir=storageManager.getFileByPath(operation.getRemotePath());
+      getStorageManager().calculateFolderSize(parentDir.getFileId());
+      refreshListOfFilesFragment(parentDir);
+    }
   }
  else {
     try {

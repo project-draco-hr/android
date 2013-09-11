@@ -2,5 +2,4 @@
   pushDirname(directory);
   cleanSecondFragment();
   startSyncFolderOperation(directory.getRemotePath(),directory.getFileId());
-  getStorageManager().calculateFolderSize(directory.getParentId());
 }
