@@ -3,14 +3,14 @@
     Cursor c=null;
     if (getContentProvider() != null) {
       try {
-        c=getContentProvider().query(ProviderTableMeta.CONTENT_URI,null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=? AND " + ProviderTableMeta._ID+ "=?",new String[]{mAccount.name,String.valueOf(dir.getFileId())},null);
+        c=getContentProvider().query(ProviderTableMeta.CONTENT_URI,null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=? AND " + ProviderTableMeta.FILE_PATH+ " LIKE ? ",new String[]{mAccount.name,dir.getRemotePath() + "%"},ProviderTableMeta.FILE_PATH + " ASC ");
       }
  catch (      RemoteException e) {
         Log_OC.e(TAG,e.getMessage());
       }
     }
  else {
-      c=getContentResolver().query(ProviderTableMeta.CONTENT_URI,null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=? AND " + ProviderTableMeta._ID+ "=?",new String[]{mAccount.name,String.valueOf(dir.getFileId())},null);
+      c=getContentResolver().query(ProviderTableMeta.CONTENT_URI,null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=? AND " + ProviderTableMeta.FILE_PATH+ " LIKE ? ",new String[]{mAccount.name,dir.getRemotePath() + "%"},ProviderTableMeta.FILE_PATH + " ASC ");
     }
     ArrayList<ContentProviderOperation> operations=new ArrayList<ContentProviderOperation>(c.getCount());
     int lengthOfOldPath=dir.getRemotePath().length();
