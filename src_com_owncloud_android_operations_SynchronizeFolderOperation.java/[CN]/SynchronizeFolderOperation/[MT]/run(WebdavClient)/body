@@ -56,34 +56,34 @@
             filesToSyncContents.add(operation);
           }
           updatedFiles.add(file);
-          mStorageManager.saveFiles(updatedFiles);
-          RemoteOperationResult contentsResult=null;
-          for (          SynchronizeFileOperation op : filesToSyncContents) {
-            contentsResult=op.execute(client);
-            if (!contentsResult.isSuccess()) {
-              if (contentsResult.getCode() == ResultCode.SYNC_CONFLICT) {
-                mConflictsFound++;
-              }
+        }
+      }
+      mStorageManager.saveFiles(updatedFiles);
+      RemoteOperationResult contentsResult=null;
+      for (      SynchronizeFileOperation op : filesToSyncContents) {
+        contentsResult=op.execute(client);
+        if (!contentsResult.isSuccess()) {
+          if (contentsResult.getCode() == ResultCode.SYNC_CONFLICT) {
+            mConflictsFound++;
+          }
  else {
-                mFailsInFavouritesFound++;
-                if (contentsResult.getException() != null) {
-                  Log_OC.d(TAG,"Error while synchronizing favourites : " + contentsResult.getLogMessage(),contentsResult.getException());
-                }
+            mFailsInFavouritesFound++;
+            if (contentsResult.getException() != null) {
+              Log_OC.d(TAG,"Error while synchronizing favourites : " + contentsResult.getLogMessage(),contentsResult.getException());
+            }
  else {
-                  Log_OC.d(TAG,"Error while synchronizing favourites : " + contentsResult.getLogMessage());
-                }
-              }
+              Log_OC.d(TAG,"Error while synchronizing favourites : " + contentsResult.getLogMessage());
             }
           }
-          mChildren=mStorageManager.getDirectoryContent(mStorageManager.getFileById(mParentId));
-          String currentSavePath=FileStorageUtils.getSavePath(mAccount.name);
-          for (          OCFile fileChild : mChildren) {
-            if (!filesOnServer.contains(fileChild.getRemotePath())) {
-              Log_OC.d(TAG,"removing file: " + fileChild.getFileName());
-              mStorageManager.removeFile(fileChild,(fileChild.isDown() && fileChild.getStoragePath().startsWith(currentSavePath)));
-              mChildren.remove(fileChild);
-            }
-          }
+        }
+      }
+      mChildren=mStorageManager.getDirectoryContent(mStorageManager.getFileById(mParentId));
+      String currentSavePath=FileStorageUtils.getSavePath(mAccount.name);
+      for (      OCFile fileChild : mChildren) {
+        if (!filesOnServer.contains(fileChild.getRemotePath())) {
+          Log_OC.d(TAG,"removing file: " + fileChild.getFileName());
+          mStorageManager.removeFile(fileChild,(fileChild.isDown() && fileChild.getStoragePath().startsWith(currentSavePath)));
+          mChildren.remove(fileChild);
         }
       }
     }
