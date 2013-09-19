@@ -1,5 +1,5 @@
 {
-  dismissDialog(DIALOG_SHORT_WAIT);
+  dismissLoadingDialog();
   OCFile renamedFile=operation.getFile();
   if (result.isSuccess()) {
     if (mDualPane) {

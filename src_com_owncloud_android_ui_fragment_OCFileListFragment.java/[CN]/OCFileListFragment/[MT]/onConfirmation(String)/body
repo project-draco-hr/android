@@ -3,7 +3,7 @@
     if (mContainerActivity.getStorageManager().getFileById(mTargetFile.getFileId()) != null) {
       RemoteOperation operation=new RemoveFileOperation(mTargetFile,true,mContainerActivity.getStorageManager());
       operation.execute(AccountUtils.getCurrentOwnCloudAccount(getSherlockActivity()),getSherlockActivity(),mContainerActivity,mHandler,getSherlockActivity());
-      getActivity().showDialog(FileDisplayActivity.DIALOG_SHORT_WAIT);
+      ((FileDisplayActivity)getActivity()).showLoadingDialog();
     }
   }
 }

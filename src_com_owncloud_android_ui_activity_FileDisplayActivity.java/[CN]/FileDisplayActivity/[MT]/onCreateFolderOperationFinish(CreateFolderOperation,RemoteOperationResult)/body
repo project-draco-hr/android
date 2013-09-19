@@ -1,10 +1,10 @@
 {
   if (result.isSuccess()) {
-    dismissDialog(DIALOG_SHORT_WAIT);
+    dismissLoadingDialog();
     refeshListOfFilesFragment();
   }
  else {
-    dismissDialog(DIALOG_SHORT_WAIT);
+    dismissLoadingDialog();
     try {
       Toast msg=Toast.makeText(FileDisplayActivity.this,R.string.create_dir_fail_msg,Toast.LENGTH_LONG);
       msg.show();
