@@ -15,7 +15,7 @@
         WebdavEntry we=new WebdavEntry(resp.getResponses()[0],client.getBaseUri().getPath());
         OCFile parent=fillOCFile(we);
         OCFile localParent=mStorageManager.getFileById(1);
-        if (parent.getEtag() != localParent.getEtag()) {
+        if (localParent == null || parent.getEtag() != localParent.getEtag()) {
           mStorageManager.saveFile(parent);
           mParentId=parent.getFileId();
         }
