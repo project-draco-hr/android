@@ -27,18 +27,26 @@ catch (    AccountsException e) {
     }
     if (result == null)     result=run(mClient);
     repeat=false;
-    if (mCallerActivity != null && mAccount != null && mContext != null && !result.isSuccess() && result.getCode() == ResultCode.UNAUTHORIZED) {
-      AccountManager am=AccountManager.get(mContext);
+    if (mCallerActivity != null && mAccount != null && mContext != null && !result.isSuccess() && (result.getCode() == ResultCode.UNAUTHORIZED || result.isIdPRedirection())) {
       Credentials cred=mClient.getCredentials();
-      if (cred instanceof BearerCredentials) {
-        am.invalidateAuthToken(AccountAuthenticator.ACCOUNT_TYPE,((BearerCredentials)cred).getAccessToken());
-      }
+      String ssoSessionCookie=mClient.getSsoSessionCookie();
+      if (cred != null || ssoSessionCookie != null) {
+        AccountManager am=AccountManager.get(mContext);
+        boolean bearerAuthorization=(cred != null && cred instanceof BearerCredentials);
+        boolean samlBasedSsoAuthorization=(cred == null && ssoSessionCookie != null);
+        if (bearerAuthorization) {
+          am.invalidateAuthToken(AccountAuthenticator.ACCOUNT_TYPE,((BearerCredentials)cred).getAccessToken());
+        }
+ else         if (samlBasedSsoAuthorization) {
+          am.invalidateAuthToken(AccountAuthenticator.ACCOUNT_TYPE,ssoSessionCookie);
+        }
  else {
-        am.clearPassword(mAccount);
+          am.clearPassword(mAccount);
+        }
+        mClient=null;
+        repeat=true;
+        result=null;
       }
-      mClient=null;
-      repeat=true;
-      result=null;
     }
   }
  while (repeat);

@@ -1,10 +1,16 @@
 {
   Uri uri=Uri.parse(AccountUtils.constructFullURLForAccount(appContext,account));
-  WebdavClient client=createOwnCloudClient(uri,appContext);
   AccountManager am=AccountManager.get(appContext);
-  if (am.getUserData(account,AccountAuthenticator.KEY_SUPPORTS_OAUTH2) != null) {
+  boolean isOauth2=am.getUserData(account,AccountAuthenticator.KEY_SUPPORTS_OAUTH2) != null;
+  boolean isSamlSso=am.getUserData(account,AccountAuthenticator.KEY_SUPPORTS_SAML_WEB_SSO) != null;
+  WebdavClient client=createOwnCloudClient(uri,appContext,!isSamlSso);
+  if (isOauth2) {
     String accessToken=am.blockingGetAuthToken(account,AccountAuthenticator.AUTH_TOKEN_TYPE_ACCESS_TOKEN,false);
     client.setBearerCredentials(accessToken);
+  }
+ else   if (isSamlSso) {
+    String accessToken=am.blockingGetAuthToken(account,AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE,false);
+    client.setSsoSessionCookie(accessToken);
   }
  else {
     String username=account.name.substring(0,account.name.lastIndexOf('@'));

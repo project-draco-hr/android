@@ -1,0 +1,4 @@
+{
+  Log_OC.d(TAG,"onPageStarted : " + url);
+  super.onPageStarted(view,url,favicon);
+}

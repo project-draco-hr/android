@@ -1,0 +1,13 @@
+{
+  this(success,httpCode);
+  if (headers != null) {
+    Header current;
+    for (int i=0; i < headers.length; i++) {
+      current=headers[i];
+      if ("Location".equals(current.getName())) {
+        mRedirectedLocation=current.getValue();
+        break;
+      }
+    }
+  }
+}

@@ -1,13 +1,22 @@
 {
   Uri uri=Uri.parse(AccountUtils.constructFullURLForAccount(appContext,account));
-  WebdavClient client=createOwnCloudClient(uri,appContext);
   AccountManager am=AccountManager.get(appContext);
-  if (am.getUserData(account,AccountAuthenticator.KEY_SUPPORTS_OAUTH2) != null) {
+  boolean isOauth2=am.getUserData(account,AccountAuthenticator.KEY_SUPPORTS_OAUTH2) != null;
+  boolean isSamlSso=am.getUserData(account,AccountAuthenticator.KEY_SUPPORTS_SAML_WEB_SSO) != null;
+  WebdavClient client=createOwnCloudClient(uri,appContext,!isSamlSso);
+  if (isOauth2) {
     AccountManagerFuture<Bundle> future=am.getAuthToken(account,AccountAuthenticator.AUTH_TOKEN_TYPE_ACCESS_TOKEN,null,currentActivity,null,null);
     Bundle result=future.getResult();
     String accessToken=result.getString(AccountManager.KEY_AUTHTOKEN);
     if (accessToken == null)     throw new AuthenticatorException("WTF!");
     client.setBearerCredentials(accessToken);
+  }
+ else   if (isSamlSso) {
+    AccountManagerFuture<Bundle> future=am.getAuthToken(account,AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE,null,currentActivity,null,null);
+    Bundle result=future.getResult();
+    String accessToken=result.getString(AccountManager.KEY_AUTHTOKEN);
+    if (accessToken == null)     throw new AuthenticatorException("WTF!");
+    client.setSsoSessionCookie(accessToken);
   }
  else {
     String username=account.name.substring(0,account.name.lastIndexOf('@'));

@@ -1,0 +1,3 @@
+Uri uri
+Context context
+boolean followRedirects

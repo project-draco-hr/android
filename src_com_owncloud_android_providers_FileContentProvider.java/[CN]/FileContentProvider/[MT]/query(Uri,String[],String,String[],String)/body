@@ -24,6 +24,7 @@ order=ProviderTableMeta.DEFAULT_SORT_ORDER;
 order=sortOrder;
 }
 SQLiteDatabase db=mDbHelper.getReadableDatabase();
+db.execSQL("PRAGMA case_sensitive_like = true");
 Cursor c=sqlQuery.query(db,projection,selection,selectionArgs,null,null,order);
 c.setNotificationUri(getContext().getContentResolver(),uri);
 return c;

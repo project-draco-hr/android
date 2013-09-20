@@ -1,0 +1,20 @@
+{
+  if (AccountAuthenticator.AUTH_TOKEN_TYPE_ACCESS_TOKEN.equals(mAuthTokenType)) {
+    mOAuthAuthEndpointText.setVisibility(View.VISIBLE);
+    mOAuthTokenEndpointText.setVisibility(View.VISIBLE);
+    mUsernameInput.setVisibility(View.GONE);
+    mPasswordInput.setVisibility(View.GONE);
+  }
+ else   if (AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE.equals(mAuthTokenType)) {
+    mOAuthAuthEndpointText.setVisibility(View.GONE);
+    mOAuthTokenEndpointText.setVisibility(View.GONE);
+    mUsernameInput.setVisibility(View.GONE);
+    mPasswordInput.setVisibility(View.GONE);
+  }
+ else {
+    mOAuthAuthEndpointText.setVisibility(View.GONE);
+    mOAuthTokenEndpointText.setVisibility(View.GONE);
+    mUsernameInput.setVisibility(View.VISIBLE);
+    mPasswordInput.setVisibility(View.VISIBLE);
+  }
+}

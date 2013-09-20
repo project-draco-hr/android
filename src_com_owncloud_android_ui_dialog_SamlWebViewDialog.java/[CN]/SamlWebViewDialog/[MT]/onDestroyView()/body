@@ -1,0 +1,9 @@
+{
+  Log_OC.d(TAG,"onDestroyView");
+  mSsoWebView.setWebViewClient(null);
+  Dialog dialog=getDialog();
+  if ((dialog != null)) {
+    dialog.setOnDismissListener(null);
+  }
+  super.onDestroyView();
+}

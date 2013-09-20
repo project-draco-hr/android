@@ -69,10 +69,10 @@
  else {
             mFailsInFavouritesFound++;
             if (contentsResult.getException() != null) {
-              Log_OC.d(TAG,"Error while synchronizing favourites : " + contentsResult.getLogMessage(),contentsResult.getException());
+              Log_OC.e(TAG,"Error while synchronizing favourites : " + contentsResult.getLogMessage(),contentsResult.getException());
             }
  else {
-              Log_OC.d(TAG,"Error while synchronizing favourites : " + contentsResult.getLogMessage());
+              Log_OC.e(TAG,"Error while synchronizing favourites : " + contentsResult.getLogMessage());
             }
           }
         }
@@ -98,20 +98,30 @@
         result=new RemoteOperationResult(ResultCode.SYNC_CONFLICT);
       }
  else {
-        result=new RemoteOperationResult(true,status);
+        result=new RemoteOperationResult(true,status,query.getResponseHeaders());
       }
     }
  else {
-      result=new RemoteOperationResult(false,status);
+      result=new RemoteOperationResult(false,status,query.getResponseHeaders());
     }
     Log_OC.i(TAG,"Synchronizing " + mAccount.name + ", folder "+ mRemotePath+ ": "+ result.getLogMessage());
   }
  catch (  Exception e) {
     result=new RemoteOperationResult(e);
-    Log_OC.e(TAG,"Synchronizing " + mAccount.name + ", folder "+ mRemotePath+ ": "+ result.getLogMessage(),result.getException());
   }
  finally {
     if (query != null)     query.releaseConnection();
+    if (result.isSuccess()) {
+      Log_OC.i(TAG,"Synchronizing " + mAccount.name + ", folder "+ mRemotePath+ ": "+ result.getLogMessage());
+    }
+ else {
+      if (result.isException()) {
+        Log_OC.e(TAG,"Synchronizing " + mAccount.name + ", folder "+ mRemotePath+ ": "+ result.getLogMessage(),result.getException());
+      }
+ else {
+        Log_OC.e(TAG,"Synchronizing " + mAccount.name + ", folder "+ mRemotePath+ ": "+ result.getLogMessage());
+      }
+    }
   }
   return result;
 }

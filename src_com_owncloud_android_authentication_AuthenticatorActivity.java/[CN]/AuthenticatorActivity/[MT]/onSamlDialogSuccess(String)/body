@@ -1,0 +1,16 @@
+{
+  mAuthToken=sessionCookie;
+  if (sessionCookie != null && sessionCookie.length() > 0) {
+    mAuthToken=sessionCookie;
+    boolean success=false;
+    if (mAction == ACTION_CREATE) {
+      success=createAccount();
+    }
+ else {
+      success=updateToken();
+    }
+    if (success) {
+      finish();
+    }
+  }
+}

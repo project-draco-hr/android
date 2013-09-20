@@ -1,0 +1,4 @@
+{
+  mAuthMessage.setVisibility(View.VISIBLE);
+  mAuthMessage.setText(message);
+}
