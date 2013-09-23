@@ -4,6 +4,7 @@
   mConflictsFound=0;
   mForgottenLocalFiles.clear();
   boolean fileChanged=false;
+  boolean dirChanged=true;
   PropFindMethod query=null;
   try {
     Log_OC.d(TAG,"Synchronizing " + mAccount.name + ", fetching files in "+ mRemotePath);
@@ -12,86 +13,100 @@
     if (isMultiStatus(status)) {
       MultiStatus resp=query.getResponseBodyAsMultiStatus();
       if (mParentId == DataStorageManager.ROOT_PARENT_ID) {
+        dirChanged=false;
         WebdavEntry we=new WebdavEntry(resp.getResponses()[0],client.getBaseUri().getPath());
         OCFile parent=fillOCFile(we);
         OCFile localParent=mStorageManager.getFileById(1);
-        if (localParent == null || parent.getEtag() != localParent.getEtag()) {
+        if (localParent == null || !(parent.getEtag().equalsIgnoreCase(localParent.getEtag()))) {
           mStorageManager.saveFile(parent);
           mParentId=parent.getFileId();
+          dirChanged=true;
         }
       }
-      List<String> filesOnServer=new ArrayList<String>();
-      List<OCFile> updatedFiles=new Vector<OCFile>(resp.getResponses().length - 1);
-      List<SynchronizeFileOperation> filesToSyncContents=new Vector<SynchronizeFileOperation>();
-      for (int i=1; i < resp.getResponses().length; ++i) {
-        WebdavEntry we=new WebdavEntry(resp.getResponses()[i],client.getBaseUri().getPath());
-        OCFile file=fillOCFile(we);
-        filesOnServer.add(file.getRemotePath());
-        file.setLastSyncDateForProperties(mCurrentSyncTime);
-        OCFile oldFile=mStorageManager.getFileByPath(file.getRemotePath());
-        fileChanged=false;
-        if (oldFile != null) {
-          if (!file.getEtag().equalsIgnoreCase(oldFile.getEtag())) {
-            fileChanged=true;
-          }
+ else       if (!mRemotePath.equalsIgnoreCase(OCFile.PATH_SEPARATOR)) {
+        dirChanged=false;
+        WebdavEntry we=new WebdavEntry(resp.getResponses()[0],client.getBaseUri().getPath());
+        OCFile parent=fillOCFile(we);
+        OCFile localParent=mStorageManager.getFileByPath(mRemotePath);
+        if (localParent == null || !(parent.getEtag().equalsIgnoreCase(localParent.getEtag()))) {
+          dirChanged=true;
         }
- else         fileChanged=true;
-        if (fileChanged) {
+      }
+      if (dirChanged) {
+        List<String> filesOnServer=new ArrayList<String>();
+        List<OCFile> updatedFiles=new Vector<OCFile>(resp.getResponses().length - 1);
+        List<SynchronizeFileOperation> filesToSyncContents=new Vector<SynchronizeFileOperation>();
+        for (int i=1; i < resp.getResponses().length; ++i) {
+          WebdavEntry we=new WebdavEntry(resp.getResponses()[i],client.getBaseUri().getPath());
+          OCFile file=fillOCFile(we);
+          filesOnServer.add(file.getRemotePath());
+          file.setLastSyncDateForProperties(mCurrentSyncTime);
+          OCFile oldFile=mStorageManager.getFileByPath(file.getRemotePath());
+          fileChanged=false;
           if (oldFile != null) {
-            file.setKeepInSync(oldFile.keepInSync());
-            file.setLastSyncDateForData(oldFile.getLastSyncDateForData());
-            file.setModificationTimestampAtLastSyncForData(oldFile.getModificationTimestampAtLastSyncForData());
-            checkAndFixForeignStoragePath(oldFile);
-            file.setStoragePath(oldFile.getStoragePath());
-          }
-          if (file.getStoragePath() == null && !file.isDirectory()) {
-            File f=new File(FileStorageUtils.getDefaultSavePathFor(mAccount.name,file));
-            if (f.exists()) {
-              file.setStoragePath(f.getAbsolutePath());
-              file.setLastSyncDateForData(f.lastModified());
+            if (!file.getEtag().equalsIgnoreCase(oldFile.getEtag())) {
+              fileChanged=true;
             }
           }
-          if (file.keepInSync()) {
-            SynchronizeFileOperation operation=new SynchronizeFileOperation(oldFile,file,mStorageManager,mAccount,true,false,mContext);
-            filesToSyncContents.add(operation);
+ else           fileChanged=true;
+          if (fileChanged) {
+            if (file.isDirectory())             file.setEtag("");
+            if (oldFile != null) {
+              file.setKeepInSync(oldFile.keepInSync());
+              file.setLastSyncDateForData(oldFile.getLastSyncDateForData());
+              file.setModificationTimestampAtLastSyncForData(oldFile.getModificationTimestampAtLastSyncForData());
+              checkAndFixForeignStoragePath(oldFile);
+              file.setStoragePath(oldFile.getStoragePath());
+            }
+            if (file.getStoragePath() == null && !file.isDirectory()) {
+              File f=new File(FileStorageUtils.getDefaultSavePathFor(mAccount.name,file));
+              if (f.exists()) {
+                file.setStoragePath(f.getAbsolutePath());
+                file.setLastSyncDateForData(f.lastModified());
+              }
+            }
+            if (file.keepInSync()) {
+              SynchronizeFileOperation operation=new SynchronizeFileOperation(oldFile,file,mStorageManager,mAccount,true,false,mContext);
+              filesToSyncContents.add(operation);
+            }
+            updatedFiles.add(file);
           }
-          updatedFiles.add(file);
+        }
+        mStorageManager.saveFiles(updatedFiles);
+        RemoteOperationResult contentsResult=null;
+        for (        SynchronizeFileOperation op : filesToSyncContents) {
+          contentsResult=op.execute(client);
+          if (!contentsResult.isSuccess()) {
+            if (contentsResult.getCode() == ResultCode.SYNC_CONFLICT) {
+              mConflictsFound++;
+            }
+ else {
+              mFailsInFavouritesFound++;
+              if (contentsResult.getException() != null) {
+                Log_OC.e(TAG,"Error while synchronizing favourites : " + contentsResult.getLogMessage(),contentsResult.getException());
+              }
+ else {
+                Log_OC.e(TAG,"Error while synchronizing favourites : " + contentsResult.getLogMessage());
+              }
+            }
+          }
+        }
+        mChildren=mStorageManager.getDirectoryContent(mStorageManager.getFileById(mParentId));
+        String currentSavePath=FileStorageUtils.getSavePath(mAccount.name);
+        for (        OCFile fileChild : mChildren) {
+          if (!filesOnServer.contains(fileChild.getRemotePath())) {
+            Log_OC.d(TAG,"removing file: " + fileChild.getFileName());
+            mStorageManager.removeFile(fileChild,(fileChild.isDown() && fileChild.getStoragePath().startsWith(currentSavePath)));
+          }
         }
       }
-      mStorageManager.saveFiles(updatedFiles);
-      RemoteOperationResult contentsResult=null;
-      for (      SynchronizeFileOperation op : filesToSyncContents) {
-        contentsResult=op.execute(client);
-        if (!contentsResult.isSuccess()) {
-          if (contentsResult.getCode() == ResultCode.SYNC_CONFLICT) {
-            mConflictsFound++;
-          }
  else {
-            mFailsInFavouritesFound++;
-            if (contentsResult.getException() != null) {
-              Log_OC.e(TAG,"Error while synchronizing favourites : " + contentsResult.getLogMessage(),contentsResult.getException());
-            }
- else {
-              Log_OC.e(TAG,"Error while synchronizing favourites : " + contentsResult.getLogMessage());
-            }
-          }
-        }
-      }
-      mChildren=mStorageManager.getDirectoryContent(mStorageManager.getFileById(mParentId));
-      String currentSavePath=FileStorageUtils.getSavePath(mAccount.name);
-      for (      OCFile fileChild : mChildren) {
-        if (!filesOnServer.contains(fileChild.getRemotePath())) {
-          Log_OC.d(TAG,"removing file: " + fileChild.getFileName());
-          mStorageManager.removeFile(fileChild,(fileChild.isDown() && fileChild.getStoragePath().startsWith(currentSavePath)));
-          mChildren.remove(fileChild);
-        }
+        client.exhaustResponse(query.getResponseBodyAsStream());
       }
     }
- else {
-      client.exhaustResponse(query.getResponseBodyAsStream());
-    }
-    if (!fileChanged) {
+    if (!dirChanged) {
       result=new RemoteOperationResult(ResultCode.OK_NO_CHANGES_ON_DIR);
+      mChildren=mStorageManager.getDirectoryContent(mStorageManager.getFileById(mParentId));
     }
  else     if (isMultiStatus(status)) {
       if (mConflictsFound > 0 || mFailsInFavouritesFound > 0) {
