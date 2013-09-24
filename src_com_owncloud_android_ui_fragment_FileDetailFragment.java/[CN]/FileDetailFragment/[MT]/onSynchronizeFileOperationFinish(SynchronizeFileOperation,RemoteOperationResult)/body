@@ -1,5 +1,5 @@
 {
-  getActivity().dismissDialog(FileDisplayActivity.DIALOG_SHORT_WAIT);
+  ((FileDisplayActivity)getActivity()).dismissLoadingDialog();
   OCFile file=getFile();
   if (!result.isSuccess()) {
     if (result.getCode() == ResultCode.SYNC_CONFLICT) {

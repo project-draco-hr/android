@@ -1,5 +1,5 @@
 {
-  getActivity().dismissDialog(FileDisplayActivity.DIALOG_SHORT_WAIT);
+  ((FileDisplayActivity)getActivity()).dismissLoadingDialog();
   if (result.isSuccess()) {
     updateFileDetails(((RenameFileOperation)operation).getFile(),mAccount);
     mContainerActivity.onFileStateChanged();
