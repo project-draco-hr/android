@@ -4,8 +4,7 @@
     if (mStorageManager.getFileById(file.getFileId()) != null) {
       mLastRemoteOperation=new RemoveFileOperation(file,true,mStorageManager);
       mLastRemoteOperation.execute(mAccount,getSherlockActivity(),this,mHandler,getSherlockActivity());
-      boolean inDisplayActivity=getActivity() instanceof FileDisplayActivity;
-      getActivity().showDialog(FileDisplayActivity.DIALOG_SHORT_WAIT);
+      ((FileDisplayActivity)getActivity()).showLoadingDialog();
     }
   }
 }

@@ -4,6 +4,6 @@
     Log_OC.d(TAG,"name edit dialog dismissed with new name " + newFilename);
     RemoteOperation operation=new RenameFileOperation(mTargetFile,AccountUtils.getCurrentOwnCloudAccount(getActivity()),newFilename,mContainerActivity.getStorageManager());
     operation.execute(AccountUtils.getCurrentOwnCloudAccount(getSherlockActivity()),getSherlockActivity(),mContainerActivity,mHandler,getSherlockActivity());
-    getActivity().showDialog(FileDisplayActivity.DIALOG_SHORT_WAIT);
+    ((FileDisplayActivity)getActivity()).showLoadingDialog();
   }
 }

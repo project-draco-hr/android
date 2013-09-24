@@ -1,0 +1,7 @@
+{
+  Fragment frag=getSupportFragmentManager().findFragmentByTag(DIALOG_WAIT_TAG);
+  if (frag != null) {
+    LoadingDialog loading=(LoadingDialog)frag;
+    loading.dismiss();
+  }
+}
