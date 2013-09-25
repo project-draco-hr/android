@@ -1,0 +1,4 @@
+{
+  ActionBar actionBar=getSupportActionBar();
+  actionBar.setDisplayHomeAsUpEnabled(!mSyncInProgress && getCurrentDir().getParentId() != DataStorageManager.ROOT_PARENT_ID);
+}

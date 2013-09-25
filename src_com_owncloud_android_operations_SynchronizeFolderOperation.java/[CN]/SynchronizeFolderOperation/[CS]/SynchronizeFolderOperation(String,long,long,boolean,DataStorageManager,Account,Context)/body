@@ -2,6 +2,7 @@
   mRemotePath=remotePath;
   mCurrentSyncTime=currentSyncTime;
   mParentId=parentId;
+  mEnforceMetadataUpdate=enforceMetadataUpdate;
   mStorageManager=dataStorageManager;
   mAccount=account;
   mContext=context;

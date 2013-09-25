@@ -1,17 +1,19 @@
 {
-  OCFileListFragment listOfFiles=getListOfFilesFragment();
-  if (mDualPane || getSecondFragment() == null) {
-    if (listOfFiles != null) {
-      if (mDirectories.getCount() <= 1) {
-        finish();
-        return;
+  if (!mSyncInProgress) {
+    OCFileListFragment listOfFiles=getListOfFilesFragment();
+    if (mDualPane || getSecondFragment() == null) {
+      if (listOfFiles != null) {
+        if (mDirectories.getCount() <= 1) {
+          finish();
+          return;
+        }
+        popDirname();
+        listOfFiles.onBrowseUp();
       }
-      popDirname();
-      listOfFiles.onBrowseUp();
     }
+    if (listOfFiles != null) {
+      setFile(listOfFiles.getCurrentFile());
+    }
+    cleanSecondFragment();
   }
-  if (listOfFiles != null) {
-    setFile(listOfFiles.getCurrentFile());
-  }
-  cleanSecondFragment();
 }

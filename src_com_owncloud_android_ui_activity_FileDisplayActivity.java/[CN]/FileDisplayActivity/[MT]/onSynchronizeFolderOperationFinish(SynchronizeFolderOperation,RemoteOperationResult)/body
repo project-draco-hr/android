@@ -1,6 +1,8 @@
 {
   OCFileListFragment list=getListOfFilesFragment();
   enableDisableViewGroup(list.getListView(),true);
+  mSyncInProgress=false;
+  updateDisplayHomeAtSync();
   setSupportProgressBarIndeterminateVisibility(false);
   if (result.isSuccess()) {
     if (result.getCode() != ResultCode.OK_NO_CHANGES_ON_DIR) {
