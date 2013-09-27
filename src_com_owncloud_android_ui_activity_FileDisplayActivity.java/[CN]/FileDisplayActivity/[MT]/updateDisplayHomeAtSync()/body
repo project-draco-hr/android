@@ -1,4 +1,12 @@
 {
   ActionBar actionBar=getSupportActionBar();
-  actionBar.setDisplayHomeAsUpEnabled(!mSyncInProgress && getCurrentDir().getParentId() != DataStorageManager.ROOT_PARENT_ID);
+  OCFile currentDir=getCurrentDir();
+  if (currentDir.getParentId() != DataStorageManager.ROOT_PARENT_ID) {
+    actionBar.setHomeButtonEnabled(!mSyncInProgress);
+    actionBar.setDisplayHomeAsUpEnabled(!mSyncInProgress);
+  }
+ else {
+    actionBar.setHomeButtonEnabled(true);
+    actionBar.setDisplayHomeAsUpEnabled(false);
+  }
 }

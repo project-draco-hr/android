@@ -2,7 +2,7 @@
   ActionBar actionBar=getSupportActionBar();
   if (chosenFile == null || mDualPane) {
     OCFile currentDir=getCurrentDir();
-    actionBar.setDisplayHomeAsUpEnabled(currentDir != null && currentDir.getParentId() != 0);
+    actionBar.setDisplayHomeAsUpEnabled(currentDir != null && currentDir.getParentId() != 0 && !mSyncInProgress);
     actionBar.setDisplayShowTitleEnabled(false);
     actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
     actionBar.setListNavigationCallbacks(mDirectories,this);
