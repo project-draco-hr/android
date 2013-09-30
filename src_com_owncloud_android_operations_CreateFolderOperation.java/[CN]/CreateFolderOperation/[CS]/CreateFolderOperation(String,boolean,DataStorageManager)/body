@@ -1,5 +1,5 @@
 {
   mRemotePath=remotePath;
-  mParentDirId=parentDirId;
+  mCreateFullPath=createFullPath;
   mStorageManager=storageManager;
 }

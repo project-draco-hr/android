@@ -4,10 +4,15 @@
   try {
     mkcol=new MkColMethod(client.getBaseUri() + WebdavUtils.encodePath(mRemotePath));
     int status=client.executeMethod(mkcol,READ_TIMEOUT,CONNECTION_TIMEOUT);
+    if (!mkcol.succeeded() && mkcol.getStatusCode() == HttpStatus.SC_CONFLICT && mCreateFullPath) {
+      result=createParentFolder(getParentPath(),client);
+      status=client.executeMethod(mkcol,READ_TIMEOUT,CONNECTION_TIMEOUT);
+    }
     if (mkcol.succeeded()) {
       OCFile newDir=new OCFile(mRemotePath);
       newDir.setMimetype("DIR");
-      newDir.setParentId(mParentDirId);
+      long parentId=mStorageManager.getFileByPath(getParentPath()).getFileId();
+      newDir.setParentId(parentId);
       newDir.setModificationTimestamp(System.currentTimeMillis());
       mStorageManager.saveFile(newDir);
     }

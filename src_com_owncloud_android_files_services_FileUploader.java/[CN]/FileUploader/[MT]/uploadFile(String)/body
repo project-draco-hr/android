@@ -4,20 +4,26 @@ synchronized (mPendingUploads) {
   }
   if (mCurrentUpload != null) {
     notifyUploadStart(mCurrentUpload);
-    RemoteOperationResult uploadResult=null;
+    RemoteOperationResult uploadResult=null, grantResult=null;
     try {
       if (mUploadClient == null || !mLastAccount.equals(mCurrentUpload.getAccount())) {
         mLastAccount=mCurrentUpload.getAccount();
         mStorageManager=new FileDataStorageManager(mLastAccount,getContentResolver());
         mUploadClient=OwnCloudClientUtils.createOwnCloudClient(mLastAccount,getApplicationContext());
       }
-      if (mCurrentUpload.isRemoteFolderToBeCreated()) {
-        RemoteOperation operation=new CreateFolderOperation(FileStorageUtils.getInstantUploadFilePath(this,""),mStorageManager.getFileByPath(OCFile.PATH_SEPARATOR).getFileId(),mStorageManager);
-        operation.execute(mUploadClient);
+      String remoteParentPath=new File(mCurrentUpload.getRemotePath()).getParent();
+      remoteParentPath=remoteParentPath.endsWith(OCFile.PATH_SEPARATOR) ? remoteParentPath : remoteParentPath + OCFile.PATH_SEPARATOR;
+      grantResult=grantFolderExistence(remoteParentPath);
+      if (grantResult.isSuccess()) {
+        OCFile parent=mStorageManager.getFileByPath(remoteParentPath);
+        mCurrentUpload.getFile().setParentId(parent.getFileId());
+        uploadResult=mCurrentUpload.execute(mUploadClient);
+        if (uploadResult.isSuccess()) {
+          saveUploadedFile();
+        }
       }
-      uploadResult=mCurrentUpload.execute(mUploadClient);
-      if (uploadResult.isSuccess()) {
-        saveUploadedFile();
+ else {
+        uploadResult=grantResult;
       }
     }
  catch (    AccountsException e) {

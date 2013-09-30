@@ -1,0 +1,16 @@
+{
+  String parentPath=new File(remotePath).getParent();
+  parentPath=parentPath.endsWith(OCFile.PATH_SEPARATOR) ? parentPath : parentPath + OCFile.PATH_SEPARATOR;
+  OCFile parent=mStorageManager.getFileByPath(parentPath);
+  if (parent == null) {
+    parent=createLocalFolder(parentPath);
+  }
+  if (parent != null) {
+    OCFile createdFolder=new OCFile(remotePath);
+    createdFolder.setMimetype("DIR");
+    createdFolder.setParentId(parent.getFileId());
+    mStorageManager.saveFile(createdFolder);
+    return createdFolder;
+  }
+  return null;
+}
