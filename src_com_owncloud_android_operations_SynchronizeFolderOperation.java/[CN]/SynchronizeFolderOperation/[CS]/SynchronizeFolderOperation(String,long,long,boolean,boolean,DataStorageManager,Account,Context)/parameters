@@ -2,6 +2,7 @@ String remotePath
 long currentSyncTime
 long parentId
 boolean enforceMetadataUpdate
+boolean syncFullAccount
 DataStorageManager dataStorageManager
 Account account
 Context context

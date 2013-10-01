@@ -3,6 +3,7 @@
   mCurrentSyncTime=currentSyncTime;
   mParentId=parentId;
   mEnforceMetadataUpdate=enforceMetadataUpdate;
+  mSyncFullAccount=syncFullAccount;
   mStorageManager=dataStorageManager;
   mAccount=account;
   mContext=context;

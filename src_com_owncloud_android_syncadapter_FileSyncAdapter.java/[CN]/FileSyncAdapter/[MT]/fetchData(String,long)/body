@@ -1,7 +1,7 @@
 {
   if (mFailedResultsCounter > MAX_FAILED_RESULTS || isFinisher(mLastFailedResult))   return;
   boolean enforceMetadataUpdate=(parentId == DataStorageManager.ROOT_PARENT_ID);
-  SynchronizeFolderOperation synchFolderOp=new SynchronizeFolderOperation(remotePath,mCurrentSyncTime,parentId,enforceMetadataUpdate,getStorageManager(),getAccount(),getContext());
+  SynchronizeFolderOperation synchFolderOp=new SynchronizeFolderOperation(remotePath,mCurrentSyncTime,parentId,enforceMetadataUpdate,true,getStorageManager(),getAccount(),getContext());
   RemoteOperationResult result=synchFolderOp.execute(getClient());
   sendStickyBroadcast(true,remotePath,null);
   if (result.isSuccess() || result.getCode() == ResultCode.SYNC_CONFLICT) {

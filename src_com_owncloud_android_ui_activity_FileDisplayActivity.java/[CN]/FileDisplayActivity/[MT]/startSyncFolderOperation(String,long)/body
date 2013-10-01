@@ -1,10 +1,7 @@
 {
   long currentSyncTime=System.currentTimeMillis();
-  OCFileListFragment list=getListOfFilesFragment();
-  enableDisableViewGroup(list.getListView(),false);
   mSyncInProgress=true;
-  updateDisplayHomeAtSync();
-  RemoteOperation synchFolderOp=new SynchronizeFolderOperation(remotePath,currentSyncTime,parentId,false,getStorageManager(),getAccount(),getApplicationContext());
-  synchFolderOp.execute(getAccount(),this,this,mHandler,this);
+  RemoteOperation synchFolderOp=new SynchronizeFolderOperation(remotePath,currentSyncTime,parentId,false,false,getStorageManager(),getAccount(),getApplicationContext());
+  synchFolderOp.execute(getAccount(),this,null,null,this);
   setSupportProgressBarIndeterminateVisibility(true);
 }

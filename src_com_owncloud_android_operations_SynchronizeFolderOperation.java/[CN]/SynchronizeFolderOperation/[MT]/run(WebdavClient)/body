@@ -3,7 +3,6 @@
   mFailsInFavouritesFound=0;
   mConflictsFound=0;
   mForgottenLocalFiles.clear();
-  boolean fileChanged=false;
   boolean dirChanged=false;
   PropFindMethod query=null;
   try {
@@ -33,36 +32,31 @@
           filesOnServer.add(file.getRemotePath());
           file.setLastSyncDateForProperties(mCurrentSyncTime);
           OCFile oldFile=mStorageManager.getFileByPath(file.getRemotePath());
-          fileChanged=false;
           if (oldFile != null) {
             if (!file.getEtag().equalsIgnoreCase(oldFile.getEtag())) {
-              fileChanged=true;
             }
           }
- else           fileChanged=true;
-          if (fileChanged) {
-            if (oldFile != null) {
-              file.setKeepInSync(oldFile.keepInSync());
-              file.setLastSyncDateForData(oldFile.getLastSyncDateForData());
-              file.setModificationTimestampAtLastSyncForData(oldFile.getModificationTimestampAtLastSyncForData());
-              checkAndFixForeignStoragePath(oldFile);
-              file.setStoragePath(oldFile.getStoragePath());
-              if (file.isDirectory())               file.setEtag(oldFile.getEtag());
-            }
- else             if (file.isDirectory())             file.setEtag("");
-            if (file.getStoragePath() == null && !file.isDirectory()) {
-              File f=new File(FileStorageUtils.getDefaultSavePathFor(mAccount.name,file));
-              if (f.exists()) {
-                file.setStoragePath(f.getAbsolutePath());
-                file.setLastSyncDateForData(f.lastModified());
-              }
-            }
-            if (file.keepInSync()) {
-              SynchronizeFileOperation operation=new SynchronizeFileOperation(oldFile,file,mStorageManager,mAccount,true,false,mContext);
-              filesToSyncContents.add(operation);
-            }
-            updatedFiles.add(file);
+          if (oldFile != null) {
+            file.setKeepInSync(oldFile.keepInSync());
+            file.setLastSyncDateForData(oldFile.getLastSyncDateForData());
+            file.setModificationTimestampAtLastSyncForData(oldFile.getModificationTimestampAtLastSyncForData());
+            checkAndFixForeignStoragePath(oldFile);
+            file.setStoragePath(oldFile.getStoragePath());
+            if (file.isDirectory())             file.setEtag(oldFile.getEtag());
           }
+ else           if (file.isDirectory())           file.setEtag("");
+          if (file.getStoragePath() == null && !file.isDirectory()) {
+            File f=new File(FileStorageUtils.getDefaultSavePathFor(mAccount.name,file));
+            if (f.exists()) {
+              file.setStoragePath(f.getAbsolutePath());
+              file.setLastSyncDateForData(f.lastModified());
+            }
+          }
+          if (file.keepInSync()) {
+            SynchronizeFileOperation operation=new SynchronizeFileOperation(oldFile,file,mStorageManager,mAccount,true,false,mContext);
+            filesToSyncContents.add(operation);
+          }
+          updatedFiles.add(file);
         }
         mStorageManager.saveFiles(updatedFiles);
         RemoteOperationResult contentsResult=null;
@@ -134,6 +128,9 @@
  else {
         Log_OC.e(TAG,"Synchronizing " + mAccount.name + ", folder "+ mRemotePath+ ": "+ result.getLogMessage());
       }
+    }
+    if (!mSyncFullAccount) {
+      sendStickyBroadcast(false,mRemotePath,result);
     }
   }
   return result;

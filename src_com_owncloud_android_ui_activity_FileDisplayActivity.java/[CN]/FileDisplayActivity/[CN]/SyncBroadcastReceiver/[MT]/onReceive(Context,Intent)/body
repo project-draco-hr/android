@@ -2,6 +2,7 @@
   boolean inProgress=intent.getBooleanExtra(FileSyncService.IN_PROGRESS,false);
   String accountName=intent.getStringExtra(FileSyncService.ACCOUNT_NAME);
   Log_OC.d(TAG,"sync of account " + accountName + " is in_progress: "+ inProgress);
+  RemoteOperationResult synchResult=(RemoteOperationResult)intent.getSerializableExtra(FileSyncService.SYNC_RESULT);
   if (getAccount() != null && accountName.equals(getAccount().name)) {
     String synchFolderRemotePath=intent.getStringExtra(FileSyncService.SYNC_FOLDER_REMOTE_PATH);
     boolean fillBlankRoot=false;
@@ -20,8 +21,8 @@
     }
     setSupportProgressBarIndeterminateVisibility(inProgress);
     removeStickyBroadcast(intent);
+    mSyncInProgress=inProgress;
   }
-  RemoteOperationResult synchResult=(RemoteOperationResult)intent.getSerializableExtra(FileSyncService.SYNC_RESULT);
   if (synchResult != null) {
     if (synchResult.getCode().equals(RemoteOperationResult.ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED)) {
       mLastSslUntrustedServerResult=synchResult;
