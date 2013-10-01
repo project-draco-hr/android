@@ -21,7 +21,7 @@
     mNotification.setLatestEventInfo(getApplicationContext(),getString(R.string.uploader_upload_succeeded_ticker),String.format(getString(R.string.uploader_upload_succeeded_content_single),upload.getFileName()),mNotification.contentIntent);
     mNotificationManager.notify(R.string.uploader_upload_in_progress_ticker,mNotification);
     DbHandler db=new DbHandler(this.getBaseContext());
-    db.removeIUPendingFile(mCurrentUpload.getFile().getStoragePath());
+    db.removeIUPendingFile(mCurrentUpload.getOriginalStoragePath());
     db.close();
   }
  else {
@@ -71,9 +71,9 @@
           Log_OC.e(TAG,message + " Http-Code: " + uploadResult.getHttpCode());
           if (uploadResult.getCode() == ResultCode.QUOTA_EXCEEDED) {
             message=getString(R.string.failed_upload_quota_exceeded_text);
-          }
-          if (db.updateFileState(upload.getOriginalStoragePath(),DbHandler.UPLOAD_STATUS_UPLOAD_FAILED,message) == 0) {
-            db.putFileForLater(upload.getOriginalStoragePath(),upload.getAccount().name,message);
+            if (db.updateFileState(upload.getOriginalStoragePath(),DbHandler.UPLOAD_STATUS_UPLOAD_FAILED,message) == 0) {
+              db.putFileForLater(upload.getOriginalStoragePath(),upload.getAccount().name,message);
+            }
           }
         }
   finally {

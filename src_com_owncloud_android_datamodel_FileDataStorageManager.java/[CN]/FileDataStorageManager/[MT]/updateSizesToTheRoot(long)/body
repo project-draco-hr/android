@@ -1,7 +1,6 @@
 {
   OCFile file;
   while (parentId != DataStorageManager.ROOT_PARENT_ID) {
-    Log_OC.d(TAG,"parent = " + parentId);
     calculateFolderSize(parentId);
     file=getFileById(parentId);
     parentId=file.getParentId();
