@@ -78,7 +78,6 @@
         newUpload.setRemoteFolderToBeCreated();
       }
       mPendingUploads.putIfAbsent(uploadKey,newUpload);
-      Log_OC.d(TAG,"Trying to update " + uploadKey);
       newUpload.addDatatransferProgressListener(this);
       newUpload.addDatatransferProgressListener((FileUploaderBinder)mBinder);
       requestedUploads.add(uploadKey);
