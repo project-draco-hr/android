@@ -20,10 +20,5 @@
     mimeType="application/octet-stream";
   }
   newFile.setMimetype(mimeType);
-  String parentPath=new File(remotePath).getParent();
-  parentPath=parentPath.endsWith(OCFile.PATH_SEPARATOR) ? parentPath : parentPath + OCFile.PATH_SEPARATOR;
-  OCFile parentDir=storageManager.getFileByPath(parentPath);
-  long parentDirId=parentDir.getFileId();
-  newFile.setParentId(parentDirId);
   return newFile;
 }
