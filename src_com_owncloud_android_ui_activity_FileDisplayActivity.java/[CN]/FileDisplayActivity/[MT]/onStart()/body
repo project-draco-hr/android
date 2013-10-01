@@ -1,7 +1,0 @@
-{
-  super.onStart();
-  Log_OC.e(TAG,"onStart() start");
-  if (mSyncInProgress) {
-  }
-  Log_OC.e(TAG,"onStart() end");
-}
