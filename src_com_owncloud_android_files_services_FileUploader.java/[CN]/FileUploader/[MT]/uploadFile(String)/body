@@ -39,6 +39,9 @@ synchronized (mPendingUploads) {
         mPendingUploads.remove(uploadKey);
         Log_OC.i(TAG,"Remove CurrentUploadItem from pending upload Item Map.");
       }
+      if (uploadResult.isException()) {
+        mUploadClient=null;
+      }
     }
     notifyUploadResult(uploadResult,mCurrentUpload);
     sendFinalBroadcast(mCurrentUpload,uploadResult);
