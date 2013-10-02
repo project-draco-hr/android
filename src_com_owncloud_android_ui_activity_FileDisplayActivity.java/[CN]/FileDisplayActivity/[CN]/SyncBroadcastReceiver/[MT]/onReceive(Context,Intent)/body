@@ -5,38 +5,18 @@
   RemoteOperationResult synchResult=(RemoteOperationResult)intent.getSerializableExtra(FileSyncService.SYNC_RESULT);
   if (getAccount() != null && accountName.equals(getAccount().name)) {
     String synchFolderRemotePath=intent.getStringExtra(FileSyncService.SYNC_FOLDER_REMOTE_PATH);
-    OCFile currentDir=getCurrentDir();
-    if (synchFolderRemotePath != null) {
-      OCFile synchDir=getStorageManager().getFileByPath(synchFolderRemotePath);
-      boolean needToRefresh=false;
-      if (synchDir == null) {
-        Log_OC.e(TAG,"SEARCHING NEW CURRENT");
-        String synchPath=synchFolderRemotePath;
-        do {
-          String synchParentPath=new File(synchPath).getParent();
-          synchParentPath=synchParentPath.endsWith(OCFile.PATH_SEPARATOR) ? synchParentPath : synchParentPath + OCFile.PATH_SEPARATOR;
-          synchDir=getStorageManager().getFileByPath(synchParentPath);
-          popDirname();
-          synchPath=synchParentPath;
-        }
- while (synchDir == null);
-        currentDir=synchDir;
-        Toast.makeText(FileDisplayActivity.this,String.format(getString(R.string.sync_current_folder_was_removed),synchPath),Toast.LENGTH_LONG).show();
-        needToRefresh=true;
+    OCFile currentDir=mStorageManager.getFileById(getCurrentDir().getFileId());
+    if (currentDir == null) {
+      Toast.makeText(FileDisplayActivity.this,getString(R.string.sync_current_folder_was_removed),Toast.LENGTH_LONG).show();
+      onBackPressed();
+    }
+ else     if (synchFolderRemotePath != null && currentDir.getRemotePath().equals(synchFolderRemotePath)) {
+      OCFileListFragment fileListFragment=getListOfFilesFragment();
+      if (fileListFragment != null) {
+        fileListFragment.listDirectory(currentDir);
       }
-      if (currentDir.getRemotePath().equals(synchFolderRemotePath)) {
-        needToRefresh=true;
-      }
-      if (needToRefresh) {
-        OCFileListFragment fileListFragment=getListOfFilesFragment();
-        if (fileListFragment != null) {
-          fileListFragment.listDirectory(currentDir);
-        }
-        boolean existsSecondFragment=(getSecondFragment() != null);
-        if (!existsSecondFragment) {
-          setFile(currentDir);
-        }
-        updateNavigationElementsInActionBar(existsSecondFragment ? getFile() : null);
+      if (getSecondFragment() == null) {
+        setFile(currentDir);
       }
     }
     setSupportProgressBarIndeterminateVisibility(inProgress);
