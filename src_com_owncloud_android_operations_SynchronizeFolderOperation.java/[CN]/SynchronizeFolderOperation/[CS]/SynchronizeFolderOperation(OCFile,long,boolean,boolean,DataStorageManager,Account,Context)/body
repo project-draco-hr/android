@@ -1,8 +1,7 @@
 {
-  mRemotePath=remotePath;
+  mLocalFolder=folder;
   mCurrentSyncTime=currentSyncTime;
-  mParentId=parentId;
-  mEnforceMetadataUpdate=enforceMetadataUpdate;
+  mUpdateFolderProperties=updateFolderProperties;
   mSyncFullAccount=syncFullAccount;
   mStorageManager=dataStorageManager;
   mAccount=account;

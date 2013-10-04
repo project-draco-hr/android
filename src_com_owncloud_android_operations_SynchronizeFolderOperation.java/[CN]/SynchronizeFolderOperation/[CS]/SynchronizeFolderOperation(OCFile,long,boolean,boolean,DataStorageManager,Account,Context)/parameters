@@ -1,7 +1,6 @@
-String remotePath
+OCFile folder
 long currentSyncTime
-long parentId
-boolean enforceMetadataUpdate
+boolean updateFolderProperties
 boolean syncFullAccount
 DataStorageManager dataStorageManager
 Account account

@@ -1,0 +1,48 @@
+{
+  mLocalFolder=mStorageManager.getFileById(mLocalFolder.getFileId());
+  WebdavEntry we=new WebdavEntry(dataInServer.getResponses()[0],client.getBaseUri().getPath());
+  OCFile remoteFolder=fillOCFile(we);
+  remoteFolder.setParentId(mLocalFolder.getParentId());
+  remoteFolder.setFileId(mLocalFolder.getFileId());
+  boolean folderChanged=!(remoteFolder.getEtag().equalsIgnoreCase(mLocalFolder.getEtag()));
+  if (!folderChanged) {
+    if (mUpdateFolderProperties) {
+      mStorageManager.saveFile(remoteFolder);
+    }
+    mChildren=mStorageManager.getDirectoryContent(mLocalFolder);
+  }
+ else {
+    List<OCFile> updatedFiles=new Vector<OCFile>(dataInServer.getResponses().length - 1);
+    List<SynchronizeFileOperation> filesToSyncContents=new Vector<SynchronizeFileOperation>();
+    OCFile remoteFile=null, localFile=null;
+    for (int i=1; i < dataInServer.getResponses().length; ++i) {
+      we=new WebdavEntry(dataInServer.getResponses()[i],client.getBaseUri().getPath());
+      remoteFile=fillOCFile(we);
+      remoteFile.setParentId(mLocalFolder.getFileId());
+      localFile=mStorageManager.getFileByPath(remoteFile.getRemotePath());
+      remoteFile.setLastSyncDateForProperties(mCurrentSyncTime);
+      if (localFile != null) {
+        remoteFile.setKeepInSync(localFile.keepInSync());
+        remoteFile.setLastSyncDateForData(localFile.getLastSyncDateForData());
+        remoteFile.setModificationTimestampAtLastSyncForData(localFile.getModificationTimestampAtLastSyncForData());
+        remoteFile.setStoragePath(localFile.getStoragePath());
+        remoteFile.setEtag(localFile.getEtag());
+      }
+ else {
+        remoteFile.setEtag("");
+      }
+      checkAndFixForeignStoragePath(remoteFile);
+      searchForLocalFileInDefaultPath(remoteFile);
+      if (remoteFile.keepInSync()) {
+        SynchronizeFileOperation operation=new SynchronizeFileOperation(localFile,remoteFile,mStorageManager,mAccount,true,false,mContext);
+        filesToSyncContents.add(operation);
+      }
+      updatedFiles.add(remoteFile);
+    }
+    mStorageManager.saveFiles(updatedFiles);
+    startContentSynchronizations(filesToSyncContents,client);
+    removeObsoleteFiles();
+    mStorageManager.saveFile(remoteFolder);
+  }
+  return folderChanged;
+}

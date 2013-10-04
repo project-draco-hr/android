@@ -1,5 +1,5 @@
 {
   pushDirname(directory);
   cleanSecondFragment();
-  startSyncFolderOperation(directory.getRemotePath(),directory.getFileId());
+  startSyncFolderOperation(directory);
 }

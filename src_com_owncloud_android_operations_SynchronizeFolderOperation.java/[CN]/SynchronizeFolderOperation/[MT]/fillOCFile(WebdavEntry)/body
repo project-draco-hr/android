@@ -4,7 +4,6 @@
   file.setFileLength(we.contentLength());
   file.setMimetype(we.contentType());
   file.setModificationTimestamp(we.modifiedTimestamp());
-  file.setParentId(mParentId);
   file.setEtag(we.etag());
   return file;
 }

@@ -1,9 +1,8 @@
 {
   if (mFailedResultsCounter > MAX_FAILED_RESULTS || isFinisher(mLastFailedResult))   return;
-  boolean enforceMetadataUpdate=(parentId == DataStorageManager.ROOT_PARENT_ID);
-  SynchronizeFolderOperation synchFolderOp=new SynchronizeFolderOperation(remotePath,mCurrentSyncTime,parentId,enforceMetadataUpdate,true,getStorageManager(),getAccount(),getContext());
+  SynchronizeFolderOperation synchFolderOp=new SynchronizeFolderOperation(folder,mCurrentSyncTime,updateFolderProperties,true,getStorageManager(),getAccount(),getContext());
   RemoteOperationResult result=synchFolderOp.execute(getClient());
-  sendStickyBroadcast(true,remotePath,null);
+  sendStickyBroadcast(true,folder.getRemotePath(),null);
   if (result.isSuccess() || result.getCode() == ResultCode.SYNC_CONFLICT) {
     if (result.getCode() == ResultCode.SYNC_CONFLICT) {
       mConflictsFound+=synchFolderOp.getConflictsFound();
@@ -14,7 +13,8 @@
     }
     List<OCFile> children=synchFolderOp.getChildren();
     fetchChildren(children);
-    sendStickyBroadcast(true,remotePath,null);
+    getStorageManager().calculateFolderSize(folder.getFileId());
+    sendStickyBroadcast(true,folder.getRemotePath(),null);
   }
  else {
     if (result.getCode() == RemoteOperationResult.ResultCode.UNAUTHORIZED || (result.isIdPRedirection() && AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE.equals(getClient().getAuthTokenType()))) {

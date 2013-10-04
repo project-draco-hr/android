@@ -12,6 +12,6 @@
   }
   if (mFile != null) {
     listDirectory(mFile);
-    mContainerActivity.startSyncFolderOperation(mFile.getRemotePath(),mFile.getFileId());
+    mContainerActivity.startSyncFolderOperation(mFile);
   }
 }

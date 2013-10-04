@@ -1,23 +1,28 @@
 {
   boolean inProgress=intent.getBooleanExtra(FileSyncService.IN_PROGRESS,false);
   String accountName=intent.getStringExtra(FileSyncService.ACCOUNT_NAME);
-  Log_OC.d(TAG,"sync of account " + accountName + " is in_progress: "+ inProgress);
   RemoteOperationResult synchResult=(RemoteOperationResult)intent.getSerializableExtra(FileSyncService.SYNC_RESULT);
+  Log_OC.d(TAG,"sync of account " + accountName + " is in_progress: "+ inProgress);
   if (getAccount() != null && accountName.equals(getAccount().name)) {
     String synchFolderRemotePath=intent.getStringExtra(FileSyncService.SYNC_FOLDER_REMOTE_PATH);
+    OCFile currentFile=mStorageManager.getFileById(getFile().getFileId());
     OCFile currentDir=mStorageManager.getFileById(getCurrentDir().getFileId());
     if (currentDir == null) {
       Toast.makeText(FileDisplayActivity.this,getString(R.string.sync_current_folder_was_removed),Toast.LENGTH_LONG).show();
       onBackPressed();
     }
- else     if (synchFolderRemotePath != null && currentDir.getRemotePath().equals(synchFolderRemotePath)) {
-      OCFileListFragment fileListFragment=getListOfFilesFragment();
-      if (fileListFragment != null) {
-        fileListFragment.listDirectory(currentDir);
+ else {
+      if (currentFile == null && !getFile().isDirectory()) {
+        cleanSecondFragment();
+        currentFile=currentDir;
       }
-      if (getSecondFragment() == null) {
-        setFile(currentDir);
+      if (synchFolderRemotePath != null && currentDir.getRemotePath().equals(synchFolderRemotePath)) {
+        OCFileListFragment fileListFragment=getListOfFilesFragment();
+        if (fileListFragment != null) {
+          fileListFragment.listDirectory(currentDir);
+        }
       }
+      setFile(currentFile);
     }
     setSupportProgressBarIndeterminateVisibility(inProgress);
     removeStickyBroadcast(intent);
