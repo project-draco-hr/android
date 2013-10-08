@@ -5,8 +5,8 @@
   Log_OC.d(TAG,"sync of account " + accountName + " is in_progress: "+ inProgress);
   if (getAccount() != null && accountName.equals(getAccount().name)) {
     String synchFolderRemotePath=intent.getStringExtra(FileSyncService.SYNC_FOLDER_REMOTE_PATH);
-    OCFile currentFile=(getFile() == null) ? null : mStorageManager.getFileById(getFile().getFileId());
-    OCFile currentDir=(getCurrentDir() == null) ? null : mStorageManager.getFileById(getCurrentDir().getFileId());
+    OCFile currentFile=(getFile() == null) ? null : mStorageManager.getFileByPath(getFile().getRemotePath());
+    OCFile currentDir=(getCurrentDir() == null) ? null : mStorageManager.getFileByPath(getCurrentDir().getRemotePath());
     if (currentDir == null) {
       Toast.makeText(FileDisplayActivity.this,getString(R.string.sync_current_folder_was_removed),Toast.LENGTH_LONG).show();
       onBackPressed();

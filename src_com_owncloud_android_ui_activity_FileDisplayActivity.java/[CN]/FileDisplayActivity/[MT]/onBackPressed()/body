@@ -6,8 +6,10 @@
         finish();
         return;
       }
-      popDirname();
-      listOfFiles.onBrowseUp();
+      int levelsUp=listOfFiles.onBrowseUp();
+      for (int i=0; i < levelsUp && mDirectories.getCount() > 1; i++) {
+        popDirname();
+      }
     }
   }
   if (listOfFiles != null) {
