@@ -9,7 +9,7 @@
     OCFile currentDir=(getCurrentDir() == null) ? null : mStorageManager.getFileByPath(getCurrentDir().getRemotePath());
     if (currentDir == null) {
       Toast.makeText(FileDisplayActivity.this,String.format(getString(R.string.sync_current_folder_was_removed),mDirectories.getItem(0)),Toast.LENGTH_LONG).show();
-      jumpToRoot();
+      browseToRoot();
     }
  else {
       if (currentFile == null && !getFile().isDirectory()) {

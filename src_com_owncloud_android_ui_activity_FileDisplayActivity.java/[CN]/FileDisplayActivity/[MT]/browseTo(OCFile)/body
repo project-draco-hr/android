@@ -1,0 +1,16 @@
+{
+  if (folder == null || !folder.isDirectory()) {
+    throw new IllegalArgumentException("Trying to browse to invalid folder " + folder);
+  }
+  OCFileListFragment listOfFiles=getListOfFilesFragment();
+  if (listOfFiles != null) {
+    setNavigationListWithFolder(folder);
+    listOfFiles.listDirectory(folder);
+    setFile(listOfFiles.getCurrentFile());
+    startSyncFolderOperation(folder);
+  }
+ else {
+    Log_OC.e(TAG,"Unexpected null when accessing list fragment");
+  }
+  cleanSecondFragment();
+}

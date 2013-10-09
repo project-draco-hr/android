@@ -16,15 +16,7 @@
       file=mStorageManager.getFileByPath(OCFile.PATH_SEPARATOR);
     }
     setFile(file);
-    mDirectories.clear();
-    OCFile fileIt=file;
-    while (fileIt != null && fileIt.getFileName() != OCFile.PATH_SEPARATOR) {
-      if (fileIt.isDirectory()) {
-        mDirectories.add(fileIt.getFileName());
-      }
-      fileIt=mStorageManager.getFileById(fileIt.getParentId());
-    }
-    mDirectories.add(OCFile.PATH_SEPARATOR);
+    setNavigationListWithFolder(file);
     if (!stateWasRecovered) {
       Log_OC.e(TAG,"Initializing Fragments in onAccountChanged..");
       initFragmentsWithFile();
