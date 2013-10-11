@@ -8,7 +8,7 @@
       throw new IllegalArgumentException("Non-image file passed as argument");
     }
     mStorageManager=new FileDataStorageManager(getAccount(),getContentResolver());
-    file=mStorageManager.getFileById(file.getFileId());
+    if (file.getFileId() > DataStorageManager.ROOT_PARENT_ID)     file=mStorageManager.getFileById(file.getFileId());
     if (file != null) {
       setFile(file);
       getSupportActionBar().setTitle(getFile().getFileName());

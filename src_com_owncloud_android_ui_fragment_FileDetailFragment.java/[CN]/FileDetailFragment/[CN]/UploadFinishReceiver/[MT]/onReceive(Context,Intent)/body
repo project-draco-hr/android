@@ -15,6 +15,9 @@
       }
       getSherlockActivity().removeStickyBroadcast(intent);
       updateFileDetails(false,false);
+      if (uploadWasFine && PreviewImageFragment.canBePreviewed(getFile())) {
+        ((FileDisplayActivity)mContainerActivity).startImagePreview(getFile());
+      }
     }
   }
 }
