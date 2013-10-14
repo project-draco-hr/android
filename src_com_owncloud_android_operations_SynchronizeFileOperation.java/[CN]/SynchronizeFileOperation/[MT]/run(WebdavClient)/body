@@ -32,7 +32,7 @@
           serverChanged=(mServerFile.getModificationTimestamp() > mLocalFile.getModificationTimestampAtLastSyncForData());
         }
         boolean localChanged=(mLocalChangeAlreadyKnown || mLocalFile.getLocalModificationTimestamp() > mLocalFile.getLastSyncDateForData());
-        if (localChanged && serverChanged) {
+        if (!mLocalFile.getEtag().isEmpty() && localChanged && serverChanged) {
           result=new RemoteOperationResult(ResultCode.SYNC_CONFLICT);
         }
  else         if (localChanged) {
