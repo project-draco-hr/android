@@ -1,6 +1,6 @@
 OCFile localFile
 OCFile serverFile
-DataStorageManager storageManager
+FileDataStorageManager storageManager
 Account account
 boolean syncFileContents
 boolean localChangeAlreadyKnown

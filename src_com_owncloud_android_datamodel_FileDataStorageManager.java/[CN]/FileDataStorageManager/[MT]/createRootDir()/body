@@ -1,7 +1,7 @@
 {
   OCFile file=new OCFile(OCFile.PATH_SEPARATOR);
   file.setMimetype("DIR");
-  file.setParentId(DataStorageManager.ROOT_PARENT_ID);
+  file.setParentId(FileDataStorageManager.ROOT_PARENT_ID);
   saveFile(file);
   return file;
 }

@@ -1,4 +1,4 @@
 FragmentManager fragmentManager
 OCFile parentFolder
 Account account
-DataStorageManager storageManager
+FileDataStorageManager storageManager

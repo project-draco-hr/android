@@ -1,3 +1,3 @@
 OCFile fileToRemove
 boolean deleteLocalCopy
-DataStorageManager storageManager
+FileDataStorageManager storageManager

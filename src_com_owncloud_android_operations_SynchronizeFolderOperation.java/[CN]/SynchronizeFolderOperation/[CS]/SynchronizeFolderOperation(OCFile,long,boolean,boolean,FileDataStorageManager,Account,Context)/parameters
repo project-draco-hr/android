@@ -2,6 +2,6 @@ OCFile folder
 long currentSyncTime
 boolean updateFolderProperties
 boolean syncFullAccount
-DataStorageManager dataStorageManager
+FileDataStorageManager dataStorageManager
 Account account
 Context context
