@@ -7,7 +7,7 @@
   List<Integer> toHide=new ArrayList<Integer>();
   List<Integer> toDisable=new ArrayList<Integer>();
   MenuItem item=null;
-  if (targetFile.isDirectory()) {
+  if (targetFile.isFolder()) {
     toHide.add(R.id.action_open_file_with);
     toHide.add(R.id.action_download_file);
     toHide.add(R.id.action_cancel_download);

@@ -1,19 +1,19 @@
 {
-  if (dir != null && dir.isDirectory() && dir.fileExists() && !dir.getFileName().equals(OCFile.PATH_SEPARATOR)) {
+  if (folder != null && folder.isFolder() && folder.fileExists() && !OCFile.ROOT_PATH.equals(folder.getFileName())) {
     Cursor c=null;
-    if (getContentProvider() != null) {
+    if (getContentProviderClient() != null) {
       try {
-        c=getContentProvider().query(ProviderTableMeta.CONTENT_URI,null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=? AND " + ProviderTableMeta.FILE_PATH+ " LIKE ? ",new String[]{mAccount.name,dir.getRemotePath() + "%"},ProviderTableMeta.FILE_PATH + " ASC ");
+        c=getContentProviderClient().query(ProviderTableMeta.CONTENT_URI,null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=? AND " + ProviderTableMeta.FILE_PATH+ " LIKE ? ",new String[]{mAccount.name,folder.getRemotePath() + "%"},ProviderTableMeta.FILE_PATH + " ASC ");
       }
  catch (      RemoteException e) {
         Log_OC.e(TAG,e.getMessage());
       }
     }
  else {
-      c=getContentResolver().query(ProviderTableMeta.CONTENT_URI,null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=? AND " + ProviderTableMeta.FILE_PATH+ " LIKE ? ",new String[]{mAccount.name,dir.getRemotePath() + "%"},ProviderTableMeta.FILE_PATH + " ASC ");
+      c=getContentResolver().query(ProviderTableMeta.CONTENT_URI,null,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=? AND " + ProviderTableMeta.FILE_PATH+ " LIKE ? ",new String[]{mAccount.name,folder.getRemotePath() + "%"},ProviderTableMeta.FILE_PATH + " ASC ");
     }
     ArrayList<ContentProviderOperation> operations=new ArrayList<ContentProviderOperation>(c.getCount());
-    int lengthOfOldPath=dir.getRemotePath().length();
+    int lengthOfOldPath=folder.getRemotePath().length();
     String defaultSavePath=FileStorageUtils.getSavePath(mAccount.name);
     int lengthOfOldStoragePath=defaultSavePath.length() + lengthOfOldPath;
     if (c.moveToFirst()) {
@@ -34,14 +34,14 @@
         getContentResolver().applyBatch(ProviderMeta.AUTHORITY_FILES,operations);
       }
  else {
-        getContentProvider().applyBatch(operations);
+        getContentProviderClient().applyBatch(operations);
       }
     }
  catch (    OperationApplicationException e) {
-      Log_OC.e(TAG,"Fail to update descendants of " + dir.getFileId() + " in database",e);
+      Log_OC.e(TAG,"Fail to update descendants of " + folder.getFileId() + " in database",e);
     }
 catch (    RemoteException e) {
-      Log_OC.e(TAG,"Fail to update desendants of " + dir.getFileId() + " in database",e);
+      Log_OC.e(TAG,"Fail to update desendants of " + folder.getFileId() + " in database",e);
     }
   }
 }

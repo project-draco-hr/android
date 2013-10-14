@@ -2,7 +2,7 @@
   int i;
   for (i=0; i < files.size() && !mCancellation; i++) {
     OCFile newFile=files.get(i);
-    if (newFile.isDirectory()) {
+    if (newFile.isFolder()) {
       synchronizeFolder(newFile,false);
     }
   }

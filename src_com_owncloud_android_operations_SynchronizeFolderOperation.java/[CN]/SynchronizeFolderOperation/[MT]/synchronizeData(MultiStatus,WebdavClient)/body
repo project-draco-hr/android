@@ -9,7 +9,7 @@
     if (mUpdateFolderProperties) {
       mStorageManager.saveFile(remoteFolder);
     }
-    mChildren=mStorageManager.getDirectoryContent(mLocalFolder);
+    mChildren=mStorageManager.getFolderContent(mLocalFolder);
   }
  else {
     List<OCFile> updatedFiles=new Vector<OCFile>(dataInServer.getResponses().length - 1);

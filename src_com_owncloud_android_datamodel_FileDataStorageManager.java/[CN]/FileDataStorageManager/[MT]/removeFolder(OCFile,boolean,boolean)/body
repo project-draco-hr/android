@@ -1,12 +1,12 @@
 {
-  if (dir != null && dir.isDirectory() && dir.getFileId() != -1) {
-    Vector<OCFile> children=getDirectoryContent(dir);
+  if (folder != null && folder.isFolder() && folder.getFileId() != -1) {
+    Vector<OCFile> children=getFolderContent(folder);
     if (children.size() > 0) {
       OCFile child=null;
       for (int i=0; i < children.size(); i++) {
         child=children.get(i);
-        if (child.isDirectory()) {
-          removeDirectory(child,removeDBData,removeLocalContent);
+        if (child.isFolder()) {
+          removeFolder(child,removeDBData,removeLocalContent);
         }
  else {
           if (removeDBData) {
@@ -21,10 +21,10 @@
       }
     }
     if (removeDBData) {
-      removeFile(dir,true);
+      removeFile(folder,true);
     }
-    if (dir.getFileLength() > 0) {
-      updateSizesToTheRoot(dir.getParentId());
+    if (folder.getFileLength() > 0) {
+      updateSizesToTheRoot(folder.getParentId());
     }
   }
 }

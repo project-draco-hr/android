@@ -31,7 +31,7 @@ catch (  AccountsException e) {
     updateOCVersion();
     mCurrentSyncTime=System.currentTimeMillis();
     if (!mCancellation) {
-      synchronizeFolder(getStorageManager().getFileByPath(OCFile.PATH_SEPARATOR),true);
+      synchronizeFolder(getStorageManager().getFileByPath(OCFile.ROOT_PATH),true);
     }
  else {
       Log_OC.d(TAG,"Leaving synchronization before synchronizing the root folder because cancelation request");

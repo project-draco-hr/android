@@ -1,5 +1,5 @@
 {
-  if (isDirectory()) {
+  if (isFolder()) {
     file.mParentId=mId;
     mNeedsUpdating=true;
     return;

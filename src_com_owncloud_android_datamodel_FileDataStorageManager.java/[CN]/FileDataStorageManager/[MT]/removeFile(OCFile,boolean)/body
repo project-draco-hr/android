@@ -1,8 +1,8 @@
 {
   Uri file_uri=Uri.withAppendedPath(ProviderTableMeta.CONTENT_URI_FILE,"" + file.getFileId());
-  if (getContentProvider() != null) {
+  if (getContentProviderClient() != null) {
     try {
-      getContentProvider().delete(file_uri,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?",new String[]{mAccount.name});
+      getContentProviderClient().delete(file_uri,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?",new String[]{mAccount.name});
     }
  catch (    RemoteException e) {
       e.printStackTrace();
@@ -14,7 +14,7 @@
   if (file.isDown() && removeLocalCopy) {
     new File(file.getStoragePath()).delete();
   }
-  if (file.isDirectory() && removeLocalCopy) {
+  if (file.isFolder() && removeLocalCopy) {
     File f=new File(FileStorageUtils.getDefaultSavePathFor(mAccount.name,file));
     if (f.exists() && f.isDirectory() && (f.list() == null || f.list().length == 0)) {
       f.delete();

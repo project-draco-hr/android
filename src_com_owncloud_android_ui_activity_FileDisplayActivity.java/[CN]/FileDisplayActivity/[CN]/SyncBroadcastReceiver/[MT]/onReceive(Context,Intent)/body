@@ -12,7 +12,7 @@
       browseToRoot();
     }
  else {
-      if (currentFile == null && !getFile().isDirectory()) {
+      if (currentFile == null && !getFile().isFolder()) {
         cleanSecondFragment();
         currentFile=currentDir;
       }

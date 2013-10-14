@@ -1,5 +1,5 @@
 {
-  if (folder == null || !folder.isDirectory()) {
+  if (folder == null || !folder.isFolder()) {
     throw new IllegalArgumentException("Trying to browse to invalid folder " + folder);
   }
   OCFileListFragment listOfFiles=getListOfFilesFragment();

@@ -29,7 +29,7 @@
       if (status == HttpStatus.SC_NOT_FOUND) {
         if (mStorageManager.fileExists(mLocalFolder.getFileId())) {
           String currentSavePath=FileStorageUtils.getSavePath(mAccount.name);
-          mStorageManager.removeDirectory(mLocalFolder,true,(mLocalFolder.isDown() && mLocalFolder.getStoragePath().startsWith(currentSavePath)));
+          mStorageManager.removeFolder(mLocalFolder,true,(mLocalFolder.isDown() && mLocalFolder.getStoragePath().startsWith(currentSavePath)));
         }
       }
       result=new RemoteOperationResult(false,status,query.getResponseHeaders());

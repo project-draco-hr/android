@@ -1,12 +1,12 @@
 {
-  mChildren=mStorageManager.getDirectoryContent(mLocalFolder);
+  mChildren=mStorageManager.getFolderContent(mLocalFolder);
   OCFile file;
   for (int i=0; i < mChildren.size(); ) {
     file=mChildren.get(i);
     if (file.getLastSyncDateForProperties() != mCurrentSyncTime) {
-      if (file.isDirectory()) {
+      if (file.isFolder()) {
         Log_OC.d(TAG,"removing folder: " + file);
-        mStorageManager.removeDirectory(file,true,true);
+        mStorageManager.removeFolder(file,true,true);
       }
  else {
         Log_OC.d(TAG,"removing file: " + file);

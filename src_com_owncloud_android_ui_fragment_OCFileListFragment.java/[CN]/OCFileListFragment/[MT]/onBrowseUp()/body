@@ -11,7 +11,7 @@
       moveCount++;
     }
  else {
-      parentDir=storageManager.getFileByPath(OCFile.PATH_SEPARATOR);
+      parentDir=storageManager.getFileByPath(OCFile.ROOT_PATH);
     }
     while (parentDir == null) {
       parentPath=new File(parentPath).getParent();

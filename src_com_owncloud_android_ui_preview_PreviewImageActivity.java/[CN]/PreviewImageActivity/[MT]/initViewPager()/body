@@ -1,7 +1,7 @@
 {
   OCFile parentFolder=mStorageManager.getFileById(getFile().getParentId());
   if (parentFolder == null) {
-    parentFolder=mStorageManager.getFileByPath(OCFile.PATH_SEPARATOR);
+    parentFolder=mStorageManager.getFileByPath(OCFile.ROOT_PATH);
   }
   mPreviewImagePagerAdapter=new PreviewImagePagerAdapter(getSupportFragmentManager(),parentFolder,getAccount(),mStorageManager);
   mViewPager=(ViewPager)findViewById(R.id.fragmentPager);

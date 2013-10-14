@@ -1,5 +1,5 @@
 {
-  mContentProvider=null;
+  mContentProviderClient=null;
   mContentResolver=cr;
   mAccount=account;
 }

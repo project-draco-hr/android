@@ -9,7 +9,7 @@
     String parent=(new File(mFile.getRemotePath())).getParent();
     parent=(parent.endsWith(OCFile.PATH_SEPARATOR)) ? parent : parent + OCFile.PATH_SEPARATOR;
     mNewRemotePath=parent + mNewName;
-    if (mFile.isDirectory()) {
+    if (mFile.isFolder()) {
       mNewRemotePath+=OCFile.PATH_SEPARATOR;
     }
     if (!isValidNewName()) {
@@ -21,7 +21,7 @@
     move=new LocalMoveMethod(client.getBaseUri() + WebdavUtils.encodePath(mFile.getRemotePath()),client.getBaseUri() + WebdavUtils.encodePath(mNewRemotePath));
     int status=client.executeMethod(move,RENAME_READ_TIMEOUT,RENAME_CONNECTION_TIMEOUT);
     if (move.succeeded()) {
-      if (mFile.isDirectory()) {
+      if (mFile.isFolder()) {
         saveLocalDirectory();
       }
  else {

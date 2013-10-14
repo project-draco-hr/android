@@ -5,7 +5,7 @@
   }
  else {
     try {
-      c=getContentProvider().query(ProviderTableMeta.CONTENT_URI,null,cmp_key + "=? AND " + ProviderTableMeta.FILE_ACCOUNT_OWNER+ "=?",new String[]{value,mAccount.name},null);
+      c=getContentProviderClient().query(ProviderTableMeta.CONTENT_URI,null,cmp_key + "=? AND " + ProviderTableMeta.FILE_ACCOUNT_OWNER+ "=?",new String[]{value,mAccount.name},null);
     }
  catch (    RemoteException e) {
       Log_OC.e(TAG,"Couldn't determine file existance, assuming non existance: " + e.getMessage());

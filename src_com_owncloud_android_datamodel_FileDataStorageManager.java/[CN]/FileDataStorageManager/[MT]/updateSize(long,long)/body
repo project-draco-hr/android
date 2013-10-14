@@ -7,7 +7,7 @@
   }
  else {
     try {
-      result=getContentProvider().update(ProviderTableMeta.CONTENT_URI,cv,ProviderTableMeta._ID + "=?",new String[]{String.valueOf(id)});
+      result=getContentProviderClient().update(ProviderTableMeta.CONTENT_URI,cv,ProviderTableMeta._ID + "=?",new String[]{String.valueOf(id)});
     }
  catch (    RemoteException e) {
       Log_OC.e(TAG,"Fail to update size column into database " + e.getMessage());

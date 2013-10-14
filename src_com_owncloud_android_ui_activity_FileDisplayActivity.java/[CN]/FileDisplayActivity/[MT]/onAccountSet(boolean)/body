@@ -13,7 +13,7 @@
       }
     }
     if (file == null) {
-      file=mStorageManager.getFileByPath(OCFile.PATH_SEPARATOR);
+      file=mStorageManager.getFileByPath(OCFile.ROOT_PATH);
     }
     setFile(file);
     setNavigationListWithFolder(file);
@@ -22,8 +22,8 @@
       initFragmentsWithFile();
     }
  else {
-      updateFragmentsVisibility(!file.isDirectory());
-      updateNavigationElementsInActionBar(file.isDirectory() ? null : file);
+      updateFragmentsVisibility(!file.isFolder());
+      updateNavigationElementsInActionBar(file.isFolder() ? null : file);
     }
   }
  else {

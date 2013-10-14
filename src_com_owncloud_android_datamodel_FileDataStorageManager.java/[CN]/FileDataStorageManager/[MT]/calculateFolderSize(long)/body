@@ -1,6 +1,6 @@
 {
   long folderSize=0;
-  Vector<OCFile> files=getDirectoryContent(id);
+  Vector<OCFile> files=getFolderContent(id);
   for (  OCFile f : files) {
     folderSize=folderSize + f.getFileLength();
   }

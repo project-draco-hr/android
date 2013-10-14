@@ -1,7 +1,7 @@
 {
   File f=null;
-  if (mTargetFile.isDirectory()) {
-    mContainerActivity.getStorageManager().removeDirectory(mTargetFile,false,true);
+  if (mTargetFile.isFolder()) {
+    mContainerActivity.getStorageManager().removeFolder(mTargetFile,false,true);
   }
  else   if (mTargetFile.isDown() && (f=new File(mTargetFile.getStoragePath())).exists()) {
     f.delete();

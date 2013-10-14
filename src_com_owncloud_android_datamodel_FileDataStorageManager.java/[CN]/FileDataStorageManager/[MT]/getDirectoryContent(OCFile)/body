@@ -1,8 +1,0 @@
-{
-  if (f != null && f.isDirectory() && f.getFileId() != -1) {
-    return getDirectoryContent(f.getFileId());
-  }
- else {
-    return new Vector<OCFile>();
-  }
-}

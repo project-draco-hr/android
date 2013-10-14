@@ -5,7 +5,7 @@
     mAccount=AccountUtils.getCurrentOwnCloudAccount(mContext);
   }
   if (mStorageManager != null) {
-    mFiles=mStorageManager.getDirectoryContent(mFile);
+    mFiles=mStorageManager.getFolderContent(mFile);
   }
  else {
     mFiles=null;
