@@ -1,0 +1,4 @@
+{
+  Log_OC.d(SAML_DIALOG_TAG,"onStart");
+  super.onStart();
+}

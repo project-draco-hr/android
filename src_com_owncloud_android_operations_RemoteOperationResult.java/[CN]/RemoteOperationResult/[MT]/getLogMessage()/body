@@ -60,5 +60,11 @@
  else   if (mCode == ResultCode.LOCAL_STORAGE_NOT_MOVED) {
     return "Error while moving file to final directory";
   }
+ else   if (mCode == ResultCode.ACCOUNT_NOT_NEW) {
+    return "Account already existing when creating a new one";
+  }
+ else   if (mCode == ResultCode.ACCOUNT_NOT_THE_SAME) {
+    return "Authenticated with a different account than the one updating";
+  }
   return "Operation finished with HTTP status code " + mHttpCode + " ("+ (isSuccess() ? "success" : "fail")+ ")";
 }

@@ -1,0 +1,20 @@
+{
+  try {
+    dismissDialog(DIALOG_LOGIN_PROGRESS);
+  }
+ catch (  IllegalArgumentException e) {
+  }
+  if (result.isIdPRedirection()) {
+    String url=result.getRedirectedLocation();
+    String targetUrl=mHostBaseUrl + AccountUtils.getWebdavPath(mDiscoveredVersion,mAuthTokenType);
+    mSamlDialog=SamlWebViewDialog.newInstance(url,targetUrl);
+    mSamlDialog.show(getSupportFragmentManager(),TAG_SAML_DIALOG);
+    mAuthStatusIcon=0;
+    mAuthStatusText=0;
+  }
+ else {
+    mAuthStatusIcon=R.drawable.common_error;
+    mAuthStatusText=R.string.auth_unsupported_auth_method;
+  }
+  showAuthStatus();
+}

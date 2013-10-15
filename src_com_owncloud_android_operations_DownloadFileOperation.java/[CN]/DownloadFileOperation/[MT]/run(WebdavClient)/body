@@ -12,7 +12,7 @@
       moved=tmpFile.renameTo(newFile);
     }
     if (!moved)     result=new RemoteOperationResult(RemoteOperationResult.ResultCode.LOCAL_STORAGE_NOT_MOVED);
- else     result=new RemoteOperationResult(isSuccess(status),status);
+ else     result=new RemoteOperationResult(isSuccess(status),status,(mGet != null ? mGet.getResponseHeaders() : null));
     Log_OC.i(TAG,"Download of " + mFile.getRemotePath() + " to "+ getSavePath()+ ": "+ result.getLogMessage());
   }
  catch (  Exception e) {

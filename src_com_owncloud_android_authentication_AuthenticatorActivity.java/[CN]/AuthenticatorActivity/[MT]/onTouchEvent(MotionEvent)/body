@@ -1,0 +1,6 @@
+{
+  if (AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE.equals(mAuthTokenType) && mHostUrlInput.hasFocus() && event.getAction() == MotionEvent.ACTION_DOWN) {
+    checkOcServer();
+  }
+  return super.onTouchEvent(event);
+}

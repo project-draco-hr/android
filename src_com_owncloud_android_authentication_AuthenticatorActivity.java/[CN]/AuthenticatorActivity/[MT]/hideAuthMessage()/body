@@ -1,0 +1,3 @@
+{
+  mAuthMessage.setVisibility(View.GONE);
+}

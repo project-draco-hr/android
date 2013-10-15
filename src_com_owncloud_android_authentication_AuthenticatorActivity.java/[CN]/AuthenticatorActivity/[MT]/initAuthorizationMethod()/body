@@ -1,0 +1,30 @@
+{
+  boolean oAuthRequired=false;
+  boolean samlWebSsoRequired=false;
+  mAuthTokenType=getIntent().getExtras().getString(AccountAuthenticator.KEY_AUTH_TOKEN_TYPE);
+  mAccount=getIntent().getExtras().getParcelable(EXTRA_ACCOUNT);
+  if (mAuthTokenType == null) {
+    if (mAccount != null) {
+      oAuthRequired=(mAccountMgr.getUserData(mAccount,AccountAuthenticator.KEY_SUPPORTS_OAUTH2) != null);
+      samlWebSsoRequired=(mAccountMgr.getUserData(mAccount,AccountAuthenticator.KEY_SUPPORTS_SAML_WEB_SSO) != null);
+    }
+ else {
+      oAuthRequired=AUTH_ON.equals(getString(R.string.auth_method_oauth2));
+      samlWebSsoRequired=AUTH_ON.equals(getString(R.string.auth_method_saml_web_sso));
+    }
+    if (oAuthRequired) {
+      mAuthTokenType=AccountAuthenticator.AUTH_TOKEN_TYPE_ACCESS_TOKEN;
+    }
+ else     if (samlWebSsoRequired) {
+      mAuthTokenType=AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE;
+    }
+ else {
+      mAuthTokenType=AccountAuthenticator.AUTH_TOKEN_TYPE_PASSWORD;
+    }
+  }
+  if (mAccount != null) {
+    String userName=mAccount.name.substring(0,mAccount.name.lastIndexOf('@'));
+    mUsernameInput.setText(userName);
+  }
+  mOAuth2Check.setChecked(AccountAuthenticator.AUTH_TOKEN_TYPE_ACCESS_TOKEN.equals(mAuthTokenType));
+}

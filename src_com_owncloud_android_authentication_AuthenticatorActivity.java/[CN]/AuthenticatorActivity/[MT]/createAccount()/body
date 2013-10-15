@@ -1,8 +1,12 @@
 {
-  boolean isOAuth=mOAuth2Check.isChecked();
+  boolean isOAuth=AccountAuthenticator.AUTH_TOKEN_TYPE_ACCESS_TOKEN.equals(mAuthTokenType);
+  boolean isSaml=AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE.equals(mAuthTokenType);
   Uri uri=Uri.parse(mHostBaseUrl);
   String username=mUsernameInput.getText().toString().trim();
-  if (isOAuth) {
+  if (isSaml) {
+    username=getUserNameForSamlSso();
+  }
+ else   if (isOAuth) {
     username="OAuth_user" + (new java.util.Random(System.currentTimeMillis())).nextLong();
   }
   String accountName=username + "@" + uri.getHost();
@@ -10,32 +14,47 @@
     accountName+=":" + uri.getPort();
   }
   mAccount=new Account(accountName,AccountAuthenticator.ACCOUNT_TYPE);
-  if (isOAuth) {
-    mAccountMgr.addAccountExplicitly(mAccount,"",null);
+  if (AccountUtils.exists(mAccount,getApplicationContext())) {
+    RemoteOperationResult result=new RemoteOperationResult(ResultCode.ACCOUNT_NOT_NEW);
+    updateAuthStatusIconAndText(result);
+    showAuthStatus();
+    Log_OC.d(TAG,result.getLogMessage());
+    return false;
   }
  else {
-    mAccountMgr.addAccountExplicitly(mAccount,mPasswordInput.getText().toString(),null);
+    if (isOAuth || isSaml) {
+      mAccountMgr.addAccountExplicitly(mAccount,"",null);
+    }
+ else {
+      mAccountMgr.addAccountExplicitly(mAccount,mPasswordInput.getText().toString(),null);
+    }
+    Account defaultAccount=AccountUtils.getCurrentOwnCloudAccount(this);
+    if (defaultAccount == null) {
+      SharedPreferences.Editor editor=PreferenceManager.getDefaultSharedPreferences(this).edit();
+      editor.putString("select_oc_account",accountName);
+      editor.commit();
+    }
+    final Intent intent=new Intent();
+    intent.putExtra(AccountManager.KEY_ACCOUNT_TYPE,AccountAuthenticator.ACCOUNT_TYPE);
+    intent.putExtra(AccountManager.KEY_ACCOUNT_NAME,mAccount.name);
+    intent.putExtra(AccountManager.KEY_USERDATA,username);
+    if (isOAuth || isSaml) {
+      mAccountMgr.setAuthToken(mAccount,mAuthTokenType,mAuthToken);
+    }
+    mAccountMgr.setUserData(mAccount,AccountAuthenticator.KEY_OC_VERSION,mDiscoveredVersion.toString());
+    mAccountMgr.setUserData(mAccount,AccountAuthenticator.KEY_OC_BASE_URL,mHostBaseUrl);
+    if (isSaml) {
+      mAccountMgr.setUserData(mAccount,AccountAuthenticator.KEY_SUPPORTS_SAML_WEB_SSO,"TRUE");
+    }
+ else     if (isOAuth) {
+      mAccountMgr.setUserData(mAccount,AccountAuthenticator.KEY_SUPPORTS_OAUTH2,"TRUE");
+    }
+    setAccountAuthenticatorResult(intent.getExtras());
+    setResult(RESULT_OK,intent);
+    Bundle bundle=new Bundle();
+    bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL,true);
+    ContentResolver.requestSync(mAccount,AccountAuthenticator.AUTHORITY,bundle);
+    syncAccount();
+    return true;
   }
-  Account defaultAccount=AccountUtils.getCurrentOwnCloudAccount(this);
-  if (defaultAccount == null) {
-    SharedPreferences.Editor editor=PreferenceManager.getDefaultSharedPreferences(this).edit();
-    editor.putString("select_oc_account",accountName);
-    editor.commit();
-  }
-  final Intent intent=new Intent();
-  intent.putExtra(AccountManager.KEY_ACCOUNT_TYPE,AccountAuthenticator.ACCOUNT_TYPE);
-  intent.putExtra(AccountManager.KEY_ACCOUNT_NAME,mAccount.name);
-  if (!isOAuth)   intent.putExtra(AccountManager.KEY_AUTHTOKEN,AccountAuthenticator.ACCOUNT_TYPE);
-  intent.putExtra(AccountManager.KEY_USERDATA,username);
-  if (isOAuth) {
-    mAccountMgr.setAuthToken(mAccount,AccountAuthenticator.AUTH_TOKEN_TYPE_ACCESS_TOKEN,mOAuthAccessToken);
-  }
-  mAccountMgr.setUserData(mAccount,AccountAuthenticator.KEY_OC_VERSION,mDiscoveredVersion.toString());
-  mAccountMgr.setUserData(mAccount,AccountAuthenticator.KEY_OC_BASE_URL,mHostBaseUrl);
-  if (isOAuth)   mAccountMgr.setUserData(mAccount,AccountAuthenticator.KEY_SUPPORTS_OAUTH2,"TRUE");
-  setAccountAuthenticatorResult(intent.getExtras());
-  setResult(RESULT_OK,intent);
-  Bundle bundle=new Bundle();
-  bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL,true);
-  ContentResolver.requestSync(mAccount,AccountAuthenticator.AUTHORITY,bundle);
 }

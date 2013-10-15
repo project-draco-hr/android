@@ -14,6 +14,5 @@
       url=url.substring(0,url.length() - 1);
     }
   }
-  Log_OC.d(TAG,"URL Normalize " + url);
   return (url != null ? url : "");
 }

@@ -1,5 +1,8 @@
 {
   String uri=trimUrlWebdav(mHostUrlInput.getText().toString().trim());
+  if (!mHostUrlInputEnabled) {
+    uri=getString(R.string.server_url);
+  }
   mServerIsValid=false;
   mServerIsChecked=false;
   mOkButton.setEnabled(false);
@@ -10,7 +13,7 @@
     mServerStatusIcon=R.drawable.progress_small;
     showServerStatus();
     mOcServerChkOperation=new OwnCloudServerCheckOperation(uri,this);
-    WebdavClient client=OwnCloudClientUtils.createOwnCloudClient(Uri.parse(uri),this);
+    WebdavClient client=OwnCloudClientUtils.createOwnCloudClient(Uri.parse(uri),this,true);
     mOperationThread=mOcServerChkOperation.execute(client,this,mHandler);
   }
  else {

@@ -4,6 +4,6 @@
     stopPreview(true);
     mLastRemoteOperation=new RemoveFileOperation(file,true,mStorageManager);
     mLastRemoteOperation.execute(mAccount,getSherlockActivity(),this,mHandler,getSherlockActivity());
-    getActivity().showDialog(FileDisplayActivity.DIALOG_SHORT_WAIT);
+    ((FileDisplayActivity)getActivity()).showLoadingDialog();
   }
 }

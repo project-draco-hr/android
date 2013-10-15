@@ -1,5 +1,5 @@
 {
-  dismissDialog(DIALOG_SHORT_WAIT);
+  dismissLoadingDialog();
   if (result.isSuccess()) {
     Toast msg=Toast.makeText(this,R.string.remove_success_msg,Toast.LENGTH_LONG);
     msg.show();
