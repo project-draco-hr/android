@@ -1,0 +1,30 @@
+{
+  SQLiteQueryBuilder sqlQuery=new SQLiteQueryBuilder();
+  sqlQuery.setTables(ProviderTableMeta.DB_NAME);
+  sqlQuery.setProjectionMap(mProjectionMap);
+switch (mUriMatcher.match(uri)) {
+case ROOT_DIRECTORY:
+    break;
+case DIRECTORY:
+  sqlQuery.appendWhere(ProviderTableMeta.FILE_PARENT + "=" + uri.getPathSegments().get(1));
+break;
+case SINGLE_FILE:
+if (uri.getPathSegments().size() > 1) {
+sqlQuery.appendWhere(ProviderTableMeta._ID + "=" + uri.getPathSegments().get(1));
+}
+break;
+default :
+throw new IllegalArgumentException("Unknown uri id: " + uri);
+}
+String order;
+if (TextUtils.isEmpty(sortOrder)) {
+order=ProviderTableMeta.DEFAULT_SORT_ORDER;
+}
+ else {
+order=sortOrder;
+}
+db.execSQL("PRAGMA case_sensitive_like = true");
+Cursor c=sqlQuery.query(db,projection,selection,selectionArgs,null,null,order);
+c.setNotificationUri(getContext().getContentResolver(),uri);
+return c;
+}

@@ -9,19 +9,27 @@
     if (mUpdateFolderProperties) {
       mStorageManager.saveFile(remoteFolder);
     }
+    Log_OC.d(TAG,"Remote folder " + mLocalFolder.getRemotePath() + " didn't change");
     mChildren=mStorageManager.getFolderContent(mLocalFolder);
   }
  else {
+    Log_OC.d(TAG,"Remote folder " + mLocalFolder.getRemotePath() + " changed - starting update of local data ");
     List<OCFile> updatedFiles=new Vector<OCFile>(dataInServer.getResponses().length - 1);
     List<SynchronizeFileOperation> filesToSyncContents=new Vector<SynchronizeFileOperation>();
+    List<OCFile> localFiles=mStorageManager.getFolderContent(mLocalFolder);
+    Map<String,OCFile> localFilesMap=new HashMap<String,OCFile>(localFiles.size());
+    for (    OCFile file : localFiles) {
+      localFilesMap.put(file.getRemotePath(),file);
+    }
     OCFile remoteFile=null, localFile=null;
     for (int i=1; i < dataInServer.getResponses().length; ++i) {
       we=new WebdavEntry(dataInServer.getResponses()[i],client.getBaseUri().getPath());
       remoteFile=fillOCFile(we);
       remoteFile.setParentId(mLocalFolder.getFileId());
-      localFile=mStorageManager.getFileByPath(remoteFile.getRemotePath());
+      localFile=localFilesMap.remove(remoteFile.getRemotePath());
       remoteFile.setLastSyncDateForProperties(mCurrentSyncTime);
       if (localFile != null) {
+        remoteFile.setFileId(localFile.getFileId());
         remoteFile.setKeepInSync(localFile.keepInSync());
         remoteFile.setLastSyncDateForData(localFile.getLastSyncDateForData());
         remoteFile.setModificationTimestampAtLastSyncForData(localFile.getModificationTimestampAtLastSyncForData());
@@ -39,10 +47,9 @@
       }
       updatedFiles.add(remoteFile);
     }
-    mStorageManager.saveFiles(updatedFiles);
+    mStorageManager.saveFolder(remoteFolder,updatedFiles,localFilesMap.values());
     startContentSynchronizations(filesToSyncContents,client);
-    removeObsoleteFiles();
-    mStorageManager.saveFile(remoteFolder);
+    mChildren=updatedFiles;
   }
   return folderChanged;
 }

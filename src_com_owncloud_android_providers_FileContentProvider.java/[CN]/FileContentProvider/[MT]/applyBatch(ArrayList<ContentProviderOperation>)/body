@@ -1,0 +1,17 @@
+{
+  ContentProviderResult[] results=new ContentProviderResult[operations.size()];
+  int i=0;
+  SQLiteDatabase db=mDbHelper.getWritableDatabase();
+  db.beginTransaction();
+  try {
+    for (    ContentProviderOperation operation : operations) {
+      results[i]=operation.apply(this,results,i);
+      i++;
+    }
+    db.setTransactionSuccessful();
+  }
+  finally {
+    db.endTransaction();
+  }
+  return results;
+}

@@ -1,3 +1,14 @@
 {
-  return mDbHelper.getWritableDatabase().update(ProviderTableMeta.DB_NAME,values,selection,selectionArgs);
+  int count=0;
+  SQLiteDatabase db=mDbHelper.getWritableDatabase();
+  db.beginTransaction();
+  try {
+    count=update(db,uri,values,selection,selectionArgs);
+    db.setTransactionSuccessful();
+  }
+  finally {
+    db.endTransaction();
+  }
+  getContext().getContentResolver().notifyChange(uri,null);
+  return count;
 }

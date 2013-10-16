@@ -1,0 +1,35 @@
+{
+  if (file != null) {
+    if (file.isFolder()) {
+      removeFolder(file,removeDBData,removeLocalCopy);
+    }
+ else {
+      if (removeDBData) {
+        Uri file_uri=ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_FILE,file.getFileId());
+        String where=ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?" + " AND "+ ProviderTableMeta.FILE_PATH+ "=?";
+        String[] whereArgs=new String[]{mAccount.name,file.getRemotePath()};
+        if (getContentProviderClient() != null) {
+          try {
+            getContentProviderClient().delete(file_uri,where,whereArgs);
+          }
+ catch (          RemoteException e) {
+            e.printStackTrace();
+          }
+        }
+ else {
+          getContentResolver().delete(file_uri,where,whereArgs);
+        }
+        if (file.getFileLength() > 0) {
+          updateSizesToTheRoot(file.getParentId());
+        }
+      }
+      if (removeLocalCopy && file.isDown()) {
+        boolean success=new File(file.getStoragePath()).delete();
+        if (!removeDBData && success) {
+          file.setStoragePath(null);
+          saveFile(file);
+        }
+      }
+    }
+  }
+}

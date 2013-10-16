@@ -1,2 +1,3 @@
 OCFile file
+boolean removeDBData
 boolean removeLocalCopy

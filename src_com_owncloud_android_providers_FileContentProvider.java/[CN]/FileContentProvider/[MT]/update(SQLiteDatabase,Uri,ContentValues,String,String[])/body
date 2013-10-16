@@ -1,0 +1,3 @@
+{
+  return db.update(ProviderTableMeta.DB_NAME,values,selection,selectionArgs);
+}

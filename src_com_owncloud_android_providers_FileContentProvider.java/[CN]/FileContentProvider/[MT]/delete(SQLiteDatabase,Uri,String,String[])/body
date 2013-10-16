@@ -1,0 +1,36 @@
+{
+  int count=0;
+switch (mUriMatcher.match(uri)) {
+case SINGLE_FILE:
+    count=db.delete(ProviderTableMeta.DB_NAME,ProviderTableMeta._ID + "=" + uri.getPathSegments().get(1)+ (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),whereArgs);
+  break;
+case DIRECTORY:
+Cursor children=query(uri,null,null,null,null);
+if (children != null && children.moveToFirst()) {
+long childId;
+boolean isDir;
+String remotePath;
+while (!children.isAfterLast()) {
+  childId=children.getLong(children.getColumnIndex(ProviderTableMeta._ID));
+  isDir="DIR".equals(children.getString(children.getColumnIndex(ProviderTableMeta.FILE_CONTENT_TYPE)));
+  remotePath=children.getString(children.getColumnIndex(ProviderTableMeta.FILE_PATH));
+  if (isDir) {
+    count+=delete(db,ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_DIR,childId),null,null);
+  }
+ else {
+    count+=delete(db,ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_FILE,childId),null,null);
+  }
+  children.moveToNext();
+}
+children.close();
+}
+count+=db.delete(ProviderTableMeta.DB_NAME,ProviderTableMeta._ID + "=" + uri.getPathSegments().get(1)+ (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),whereArgs);
+break;
+case ROOT_DIRECTORY:
+count=db.delete(ProviderTableMeta.DB_NAME,where,whereArgs);
+break;
+default :
+throw new IllegalArgumentException("Unknown uri: " + uri.toString());
+}
+return count;
+}
