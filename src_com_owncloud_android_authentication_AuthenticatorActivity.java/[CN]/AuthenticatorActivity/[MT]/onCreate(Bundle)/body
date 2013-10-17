@@ -77,7 +77,7 @@
     mAccount=savedInstanceState.getParcelable(KEY_ACCOUNT);
     mAuthTokenType=savedInstanceState.getString(AccountAuthenticator.KEY_AUTH_TOKEN_TYPE);
     if (mAuthTokenType == null) {
-      mAuthTokenType=AccountAuthenticator.AUTH_TOKEN_TYPE_PASSWORD;
+      mAuthTokenType=MainApp.getAuthTokenTypePass();
     }
     if (savedInstanceState.getBoolean(KEY_SERVER_CHECK_IN_PROGRESS,false)) {
       checkOcServer();
@@ -102,7 +102,7 @@
   }
   if (mServerIsChecked && !mServerIsValid && refreshButtonEnabled)   showRefreshButton();
   mOkButton.setEnabled(mServerIsValid);
-  if (AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE.equals(mAuthTokenType) || !AUTH_OPTIONAL.equals(getString(R.string.auth_method_oauth2))) {
+  if (MainApp.getAuthTokenTypeSamlSessionCookie().equals(mAuthTokenType) || !AUTH_OPTIONAL.equals(getString(R.string.auth_method_oauth2))) {
     mOAuth2Check.setVisibility(View.GONE);
   }
   mPasswordInput.setText("");
@@ -142,7 +142,7 @@
   findViewById(R.id.scroll).setOnTouchListener(new OnTouchListener(){
     @Override public boolean onTouch(    View view,    MotionEvent event){
       if (event.getAction() == MotionEvent.ACTION_DOWN) {
-        if (AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE.equals(mAuthTokenType) && mHostUrlInput.hasFocus()) {
+        if (MainApp.getAuthTokenTypeSamlSessionCookie().equals(mAuthTokenType) && mHostUrlInput.hasFocus()) {
           checkOcServer();
         }
       }

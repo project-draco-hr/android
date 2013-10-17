@@ -16,7 +16,7 @@ builder.setPositiveButton(R.string.uploader_wrn_no_account_setup_btn_text,new On
 @Override public void onClick(DialogInterface dialog,int which){
 if (android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.ECLAIR_MR1) {
 Intent intent=new Intent(android.provider.Settings.ACTION_ADD_ACCOUNT);
-intent.putExtra("authorities",new String[]{AccountAuthenticator.AUTHORITY});
+intent.putExtra("authorities",new String[]{MainApp.getAuthTokenType()});
 startActivityForResult(intent,REQUEST_CODE_SETUP_ACCOUNT);
 }
  else {
@@ -34,14 +34,14 @@ finish();
 );
 return builder.create();
 case DIALOG_MULTIPLE_ACCOUNT:
-CharSequence ac[]=new CharSequence[mAccountManager.getAccountsByType(AccountAuthenticator.ACCOUNT_TYPE).length];
+CharSequence ac[]=new CharSequence[mAccountManager.getAccountsByType(MainApp.getAccountType()).length];
 for (int i=0; i < ac.length; ++i) {
-ac[i]=mAccountManager.getAccountsByType(AccountAuthenticator.ACCOUNT_TYPE)[i].name;
+ac[i]=mAccountManager.getAccountsByType(MainApp.getAccountType())[i].name;
 }
 builder.setTitle(R.string.common_choose_account);
 builder.setItems(ac,new OnClickListener(){
 @Override public void onClick(DialogInterface dialog,int which){
-mAccount=mAccountManager.getAccountsByType(AccountAuthenticator.ACCOUNT_TYPE)[which];
+mAccount=mAccountManager.getAccountsByType(MainApp.getAccountType())[which];
 mStorageManager=new FileDataStorageManager(mAccount,getContentResolver());
 populateDirectoryList();
 }

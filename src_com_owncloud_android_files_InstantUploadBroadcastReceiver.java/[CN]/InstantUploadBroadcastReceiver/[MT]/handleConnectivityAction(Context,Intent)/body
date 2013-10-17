@@ -12,7 +12,7 @@
         String file_path=c.getString(c.getColumnIndex("path"));
         File f=new File(file_path);
         if (f.exists()) {
-          Account account=new Account(account_name,AccountAuthenticator.ACCOUNT_TYPE);
+          Account account=new Account(account_name,MainApp.getAccountType());
           String mimeType=null;
           try {
             mimeType=MimeTypeMap.getSingleton().getMimeTypeFromExtension(f.getName().substring(f.getName().lastIndexOf('.') + 1));

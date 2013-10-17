@@ -1,4 +1,4 @@
 {
   File sdCard=Environment.getExternalStorageDirectory();
-  return sdCard.getAbsolutePath() + "/owncloud/tmp/" + Uri.encode(accountName,"@");
+  return sdCard.getAbsolutePath() + "/" + MainApp.getDataFolder()+ "/tmp/"+ Uri.encode(accountName,"@");
 }

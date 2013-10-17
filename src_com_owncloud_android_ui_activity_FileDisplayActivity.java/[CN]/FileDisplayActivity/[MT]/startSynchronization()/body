@@ -1,6 +1,6 @@
 {
-  ContentResolver.cancelSync(null,AccountAuthenticator.AUTHORITY);
+  ContentResolver.cancelSync(null,MainApp.getAuthTokenType());
   Bundle bundle=new Bundle();
   bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL,true);
-  ContentResolver.requestSync(getAccount(),AccountAuthenticator.AUTHORITY,bundle);
+  ContentResolver.requestSync(getAccount(),MainApp.getAuthTokenType(),bundle);
 }
