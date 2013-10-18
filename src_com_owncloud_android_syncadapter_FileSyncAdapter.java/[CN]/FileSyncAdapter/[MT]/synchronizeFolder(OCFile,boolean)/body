@@ -12,9 +12,7 @@
       mForgottenLocalFiles.putAll(synchFolderOp.getForgottenLocalFiles());
     }
     List<OCFile> children=synchFolderOp.getChildren();
-    fetchChildren(children);
-    getStorageManager().calculateFolderSize(folder.getFileId());
-    sendStickyBroadcast(true,folder.getRemotePath(),null);
+    fetchChildren(folder,children);
   }
  else {
     if (result.getCode() == RemoteOperationResult.ResultCode.UNAUTHORIZED || (result.isIdPRedirection() && AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE.equals(getClient().getAuthTokenType()))) {

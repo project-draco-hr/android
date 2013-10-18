@@ -1,12 +1,14 @@
 {
   Log_OC.d(TAG,"Saving folder " + folder.getRemotePath() + " with "+ updatedFiles.size()+ " children and "+ filesToRemove.size()+ " files to remove");
   ArrayList<ContentProviderOperation> operations=new ArrayList<ContentProviderOperation>(updatedFiles.size());
+  long folderSize=0;
   for (  OCFile file : updatedFiles) {
     ContentValues cv=new ContentValues();
     cv.put(ProviderTableMeta.FILE_MODIFIED,file.getModificationTimestamp());
     cv.put(ProviderTableMeta.FILE_MODIFIED_AT_LAST_SYNC_FOR_DATA,file.getModificationTimestampAtLastSyncForData());
     cv.put(ProviderTableMeta.FILE_CREATION,file.getCreationTimestamp());
     cv.put(ProviderTableMeta.FILE_CONTENT_LENGTH,file.getFileLength());
+    folderSize+=file.getFileLength();
     cv.put(ProviderTableMeta.FILE_CONTENT_TYPE,file.getMimetype());
     cv.put(ProviderTableMeta.FILE_NAME,file.getFileName());
     cv.put(ProviderTableMeta.FILE_PARENT,folder.getFileId());
@@ -47,14 +49,11 @@
   cv.put(ProviderTableMeta.FILE_MODIFIED,folder.getModificationTimestamp());
   cv.put(ProviderTableMeta.FILE_MODIFIED_AT_LAST_SYNC_FOR_DATA,folder.getModificationTimestampAtLastSyncForData());
   cv.put(ProviderTableMeta.FILE_CREATION,folder.getCreationTimestamp());
-  cv.put(ProviderTableMeta.FILE_CONTENT_LENGTH,folder.getFileLength());
+  cv.put(ProviderTableMeta.FILE_CONTENT_LENGTH,folderSize);
   cv.put(ProviderTableMeta.FILE_CONTENT_TYPE,folder.getMimetype());
   cv.put(ProviderTableMeta.FILE_NAME,folder.getFileName());
   cv.put(ProviderTableMeta.FILE_PARENT,folder.getParentId());
   cv.put(ProviderTableMeta.FILE_PATH,folder.getRemotePath());
-  if (!folder.isFolder()) {
-    cv.put(ProviderTableMeta.FILE_STORAGE_PATH,folder.getStoragePath());
-  }
   cv.put(ProviderTableMeta.FILE_ACCOUNT_OWNER,mAccount.name);
   cv.put(ProviderTableMeta.FILE_LAST_SYNC_DATE,folder.getLastSyncDateForProperties());
   cv.put(ProviderTableMeta.FILE_LAST_SYNC_DATE_FOR_DATA,folder.getLastSyncDateForData());

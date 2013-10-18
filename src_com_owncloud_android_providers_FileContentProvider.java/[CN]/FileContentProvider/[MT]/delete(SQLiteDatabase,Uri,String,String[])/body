@@ -9,11 +9,9 @@ Cursor children=query(uri,null,null,null,null);
 if (children != null && children.moveToFirst()) {
 long childId;
 boolean isDir;
-String remotePath;
 while (!children.isAfterLast()) {
   childId=children.getLong(children.getColumnIndex(ProviderTableMeta._ID));
   isDir="DIR".equals(children.getString(children.getColumnIndex(ProviderTableMeta.FILE_CONTENT_TYPE)));
-  remotePath=children.getString(children.getColumnIndex(ProviderTableMeta.FILE_PATH));
   if (isDir) {
     count+=delete(db,ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_DIR,childId),null,null);
   }

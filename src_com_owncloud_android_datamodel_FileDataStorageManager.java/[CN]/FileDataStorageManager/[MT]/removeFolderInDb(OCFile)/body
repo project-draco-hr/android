@@ -13,7 +13,4 @@
  else {
     getContentResolver().delete(folder_uri,where,whereArgs);
   }
-  if (folder.getFileLength() > 0) {
-    updateSizesToTheRoot(folder.getParentId());
-  }
 }

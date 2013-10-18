@@ -1,0 +1,13 @@
+{
+  if (getContentResolver() != null) {
+    getContentResolver().update(ProviderTableMeta.CONTENT_URI_DIR,null,ProviderTableMeta._ID + "=?",new String[]{String.valueOf(id)});
+  }
+ else {
+    try {
+      getContentProviderClient().update(ProviderTableMeta.CONTENT_URI_DIR,null,ProviderTableMeta._ID + "=?",new String[]{String.valueOf(id)});
+    }
+ catch (    RemoteException e) {
+      Log_OC.e(TAG,"Exception in update of folder size through compatibility patch " + e.getMessage());
+    }
+  }
+}

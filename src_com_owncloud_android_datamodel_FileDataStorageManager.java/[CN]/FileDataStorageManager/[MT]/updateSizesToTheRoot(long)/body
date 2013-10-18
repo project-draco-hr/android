@@ -1,8 +1,0 @@
-{
-  OCFile file;
-  while (parentId != FileDataStorageManager.ROOT_PARENT_ID) {
-    calculateFolderSize(parentId);
-    file=getFileById(parentId);
-    parentId=file.getParentId();
-  }
-}

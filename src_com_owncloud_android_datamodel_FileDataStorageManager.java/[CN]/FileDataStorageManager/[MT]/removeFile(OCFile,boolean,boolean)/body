@@ -19,9 +19,6 @@
  else {
           getContentResolver().delete(file_uri,where,whereArgs);
         }
-        if (file.getFileLength() > 0) {
-          updateSizesToTheRoot(file.getParentId());
-        }
       }
       if (removeLocalCopy && file.isDown()) {
         boolean success=new File(file.getStoragePath()).delete();
