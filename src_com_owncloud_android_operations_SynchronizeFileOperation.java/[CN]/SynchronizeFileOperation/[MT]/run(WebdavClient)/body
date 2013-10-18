@@ -9,7 +9,7 @@
     }
  else {
       if (mServerFile == null) {
-        propfind=new PropFindMethod(client.getBaseUri() + WebdavUtils.encodePath(mLocalFile.getRemotePath()));
+        propfind=new PropFindMethod(client.getBaseUri() + WebdavUtils.encodePath(mLocalFile.getRemotePath()),DavConstants.PROPFIND_ALL_PROP,DavConstants.DEPTH_0);
         int status=client.executeMethod(propfind,SYNC_READ_TIMEOUT,SYNC_CONNECTION_TIMEOUT);
         boolean isMultiStatus=status == HttpStatus.SC_MULTI_STATUS;
         if (isMultiStatus) {

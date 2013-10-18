@@ -8,7 +8,7 @@
   try {
     remotePath=mLocalFolder.getRemotePath();
     Log_OC.d(TAG,"Synchronizing " + mAccount.name + remotePath);
-    query=new PropFindMethod(client.getBaseUri() + WebdavUtils.encodePath(remotePath));
+    query=new PropFindMethod(client.getBaseUri() + WebdavUtils.encodePath(remotePath),DavConstants.PROPFIND_ALL_PROP,DavConstants.DEPTH_1);
     int status=client.executeMethod(query);
     if (isMultiStatus(status)) {
       boolean folderChanged=synchronizeData(query.getResponseBodyAsMultiStatus(),client);
