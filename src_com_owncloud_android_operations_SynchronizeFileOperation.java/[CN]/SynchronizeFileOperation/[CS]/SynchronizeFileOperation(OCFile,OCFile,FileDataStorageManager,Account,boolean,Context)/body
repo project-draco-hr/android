@@ -4,6 +4,5 @@
   mStorageManager=storageManager;
   mAccount=account;
   mSyncFileContents=syncFileContents;
-  mLocalChangeAlreadyKnown=localChangeAlreadyKnown;
   mContext=context;
 }

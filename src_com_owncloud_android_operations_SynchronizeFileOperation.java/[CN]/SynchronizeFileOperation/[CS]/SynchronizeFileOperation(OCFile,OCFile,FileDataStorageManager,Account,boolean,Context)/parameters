@@ -3,5 +3,4 @@ OCFile serverFile
 FileDataStorageManager storageManager
 Account account
 boolean syncFileContents
-boolean localChangeAlreadyKnown
 Context context

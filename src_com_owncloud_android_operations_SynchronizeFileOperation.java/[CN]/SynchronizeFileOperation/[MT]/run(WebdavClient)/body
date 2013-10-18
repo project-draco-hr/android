@@ -26,7 +26,7 @@
       if (result == null) {
         boolean serverChanged=false;
         serverChanged=(mServerFile.getModificationTimestamp() > mLocalFile.getModificationTimestampAtLastSyncForData());
-        boolean localChanged=(mLocalChangeAlreadyKnown || mLocalFile.getLocalModificationTimestamp() > mLocalFile.getLastSyncDateForData());
+        boolean localChanged=(mLocalFile.getLocalModificationTimestamp() > mLocalFile.getLastSyncDateForData());
         if (localChanged && serverChanged) {
           result=new RemoteOperationResult(ResultCode.SYNC_CONFLICT);
         }
