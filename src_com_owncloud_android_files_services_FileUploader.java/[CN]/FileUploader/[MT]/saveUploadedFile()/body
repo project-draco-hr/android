@@ -5,7 +5,7 @@
   PropFindMethod propfind=null;
   RemoteOperationResult result=null;
   try {
-    propfind=new PropFindMethod(mUploadClient.getBaseUri() + WebdavUtils.encodePath(mCurrentUpload.getRemotePath()));
+    propfind=new PropFindMethod(mUploadClient.getBaseUri() + WebdavUtils.encodePath(mCurrentUpload.getRemotePath()),DavConstants.PROPFIND_ALL_PROP,DavConstants.DEPTH_0);
     int status=mUploadClient.executeMethod(propfind);
     boolean isMultiStatus=(status == HttpStatus.SC_MULTI_STATUS);
     if (isMultiStatus) {
