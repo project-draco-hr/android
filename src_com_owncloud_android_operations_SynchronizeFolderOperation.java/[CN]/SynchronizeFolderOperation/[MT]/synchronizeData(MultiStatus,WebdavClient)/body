@@ -26,6 +26,9 @@
       remoteFile.setModificationTimestampAtLastSyncForData(localFile.getModificationTimestampAtLastSyncForData());
       remoteFile.setStoragePath(localFile.getStoragePath());
       remoteFile.setEtag(localFile.getEtag());
+      if (remoteFile.isFolder()) {
+        remoteFile.setFileLength(localFile.getFileLength());
+      }
     }
  else {
       remoteFile.setEtag("");
