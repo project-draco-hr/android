@@ -1,0 +1,19 @@
+{
+  int i;
+  OCFile newFile=null;
+  String etag=null;
+  boolean syncDown=false;
+  for (i=0; i < files.size() && !mCancellation; i++) {
+    newFile=files.get(i);
+    if (newFile.isFolder()) {
+      etag=newFile.getEtag();
+      syncDown=(parentEtagChanged || etag == null || etag.length() == 0);
+      if (syncDown) {
+        synchronizeFolder(newFile);
+        getStorageManager().updateFolderSize(parent.getFileId());
+        sendStickyBroadcast(true,parent.getRemotePath(),null);
+      }
+    }
+  }
+  if (mCancellation && i < files.size())   Log_OC.d(TAG,"Leaving synchronization before synchronizing " + files.get(i).getRemotePath() + " due to cancelation request");
+}

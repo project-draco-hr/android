@@ -11,9 +11,9 @@
     if (synchFolderOp.getForgottenLocalFiles().size() > 0) {
       mForgottenLocalFiles.putAll(synchFolderOp.getForgottenLocalFiles());
     }
-    if (result.isSuccess() && synchFolderOp.getRemoteFolderChanged()) {
+    if (result.isSuccess()) {
       List<OCFile> children=synchFolderOp.getChildren();
-      fetchChildren(folder,children);
+      fetchChildren(folder,children,synchFolderOp.getRemoteFolderChanged());
     }
   }
  else {
