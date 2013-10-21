@@ -3,7 +3,7 @@
   for (i=0; i < files.size() && !mCancellation; i++) {
     OCFile newFile=files.get(i);
     if (newFile.isFolder()) {
-      synchronizeFolder(newFile,false);
+      synchronizeFolder(newFile);
       getStorageManager().updateFolderSize(parent.getFileId());
       sendStickyBroadcast(true,parent.getRemotePath(),null);
     }

@@ -1,6 +1,5 @@
 OCFile folder
 long currentSyncTime
-boolean updateFolderProperties
 boolean syncFullAccount
 FileDataStorageManager dataStorageManager
 Account account

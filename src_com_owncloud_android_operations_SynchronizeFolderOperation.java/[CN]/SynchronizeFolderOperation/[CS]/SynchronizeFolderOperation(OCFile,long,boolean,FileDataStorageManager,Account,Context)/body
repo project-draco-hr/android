@@ -1,10 +1,10 @@
 {
   mLocalFolder=folder;
   mCurrentSyncTime=currentSyncTime;
-  mUpdateFolderProperties=updateFolderProperties;
   mSyncFullAccount=syncFullAccount;
   mStorageManager=dataStorageManager;
   mAccount=account;
   mContext=context;
   mForgottenLocalFiles=new HashMap<String,String>();
+  mRemoteFolderChanged=false;
 }

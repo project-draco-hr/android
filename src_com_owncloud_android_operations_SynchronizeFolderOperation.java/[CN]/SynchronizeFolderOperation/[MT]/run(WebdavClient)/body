@@ -3,57 +3,17 @@
   mFailsInFavouritesFound=0;
   mConflictsFound=0;
   mForgottenLocalFiles.clear();
-  String remotePath=null;
-  PropFindMethod query=null;
-  try {
-    remotePath=mLocalFolder.getRemotePath();
-    Log_OC.d(TAG,"Synchronizing " + mAccount.name + remotePath);
-    query=new PropFindMethod(client.getBaseUri() + WebdavUtils.encodePath(remotePath),DavConstants.PROPFIND_ALL_PROP,DavConstants.DEPTH_1);
-    int status=client.executeMethod(query);
-    if (isMultiStatus(status)) {
-      boolean folderChanged=synchronizeData(query.getResponseBodyAsMultiStatus(),client);
-      if (folderChanged) {
-        if (mConflictsFound > 0 || mFailsInFavouritesFound > 0) {
-          result=new RemoteOperationResult(ResultCode.SYNC_CONFLICT);
-        }
- else {
-          result=new RemoteOperationResult(true,status,query.getResponseHeaders());
-        }
-      }
- else {
-        result=new RemoteOperationResult(ResultCode.OK_NO_CHANGES_ON_DIR);
-      }
+  result=checkForChanges(client);
+  if (result.isSuccess()) {
+    if (mRemoteFolderChanged) {
+      result=fetchAndSyncRemoteFolder(client);
     }
  else {
-      client.exhaustResponse(query.getResponseBodyAsStream());
-      if (status == HttpStatus.SC_NOT_FOUND) {
-        if (mStorageManager.fileExists(mLocalFolder.getFileId())) {
-          String currentSavePath=FileStorageUtils.getSavePath(mAccount.name);
-          mStorageManager.removeFolder(mLocalFolder,true,(mLocalFolder.isDown() && mLocalFolder.getStoragePath().startsWith(currentSavePath)));
-        }
-      }
-      result=new RemoteOperationResult(false,status,query.getResponseHeaders());
+      mChildren=mStorageManager.getFolderContent(mLocalFolder);
     }
   }
- catch (  Exception e) {
-    result=new RemoteOperationResult(e);
-  }
- finally {
-    if (query != null)     query.releaseConnection();
-    if (result.isSuccess()) {
-      Log_OC.i(TAG,"Synchronized " + mAccount.name + remotePath+ ": "+ result.getLogMessage());
-    }
- else {
-      if (result.isException()) {
-        Log_OC.e(TAG,"Synchronized " + mAccount.name + remotePath+ ": "+ result.getLogMessage(),result.getException());
-      }
- else {
-        Log_OC.e(TAG,"Synchronized " + mAccount.name + remotePath+ ": "+ result.getLogMessage());
-      }
-    }
-    if (!mSyncFullAccount) {
-      sendStickyBroadcast(false,remotePath,result);
-    }
+  if (!mSyncFullAccount) {
+    sendStickyBroadcast(false,mLocalFolder.getRemotePath(),result);
   }
   return result;
 }
