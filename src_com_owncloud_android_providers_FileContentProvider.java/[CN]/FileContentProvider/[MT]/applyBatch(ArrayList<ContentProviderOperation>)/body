@@ -1,4 +1,5 @@
 {
+  Log_OC.d("FileContentProvider","applying batch in provider " + this + " (temporary: "+ isTemporary()+ ")");
   ContentProviderResult[] results=new ContentProviderResult[operations.size()];
   int i=0;
   SQLiteDatabase db=mDbHelper.getWritableDatabase();
@@ -13,5 +14,6 @@
   finally {
     db.endTransaction();
   }
+  Log_OC.d("FileContentProvider","applied batch in provider " + this);
   return results;
 }

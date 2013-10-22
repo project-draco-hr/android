@@ -13,4 +13,5 @@
  else {
     getContentResolver().delete(folder_uri,where,whereArgs);
   }
+  updateFolderSize(folder.getParentId());
 }

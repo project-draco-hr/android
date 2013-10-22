@@ -58,9 +58,9 @@
   }
   if (file.isFolder()) {
     updateFolderSize(file.getFileId());
-    if (file.needsUpdatingWhileSaving()) {
-      for (      OCFile f : getFolderContent(file))       saveFile(f);
-    }
+  }
+ else {
+    updateFolderSize(file.getParentId());
   }
   return overriden;
 }

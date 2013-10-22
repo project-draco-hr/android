@@ -10,7 +10,6 @@
       syncDown=(parentEtagChanged || etag == null || etag.length() == 0);
       if (syncDown) {
         synchronizeFolder(newFile);
-        getStorageManager().updateFolderSize(parent.getFileId());
         sendStickyBroadcast(true,parent.getRemotePath(),null);
       }
     }

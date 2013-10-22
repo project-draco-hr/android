@@ -19,6 +19,7 @@
  else {
           getContentResolver().delete(file_uri,where,whereArgs);
         }
+        updateFolderSize(file.getParentId());
       }
       if (removeLocalCopy && file.isDown()) {
         boolean success=new File(file.getStoragePath()).delete();
