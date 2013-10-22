@@ -1,7 +1,0 @@
-{
-  super.onContentChanged();
-  AccountManager am=(AccountManager)getSystemService(ACCOUNT_SERVICE);
-  if (am.getAccountsByType(AccountAuthenticator.ACCOUNT_TYPE).length == 0) {
-    am.addAccount(AccountAuthenticator.ACCOUNT_TYPE,null,null,null,this,null,null);
-  }
-}
