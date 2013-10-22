@@ -10,7 +10,7 @@
       loadmoreBtn=new Button(this);
       loadmoreBtn.setId(42);
       loadmoreBtn.setText(getString(R.string.failed_upload_load_more_images));
-      loadmoreBtn.setBackgroundResource(R.color.owncloud_white);
+      loadmoreBtn.setBackgroundResource(R.color.background_color);
       loadmoreBtn.setTextSize(12);
       loadmoreBtn.setOnClickListener(new OnClickListener(){
         @Override public void onClick(        View v){

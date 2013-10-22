@@ -44,7 +44,7 @@
   ContentProviderResult[] results=null;
   try {
     if (getContentResolver() != null) {
-      results=getContentResolver().applyBatch(ProviderMeta.AUTHORITY_FILES,operations);
+      results=getContentResolver().applyBatch(MainApp.getAuthority(),operations);
     }
  else {
       results=getContentProvider().applyBatch(operations);

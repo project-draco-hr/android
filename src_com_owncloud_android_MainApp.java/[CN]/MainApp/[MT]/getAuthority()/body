@@ -1,0 +1,3 @@
+{
+  return getAppContext().getResources().getString(R.string.authority);
+}

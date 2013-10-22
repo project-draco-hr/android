@@ -3,7 +3,7 @@
 switch (which) {
 case DialogInterface.BUTTON_POSITIVE:
     Intent intent=new Intent(android.provider.Settings.ACTION_ADD_ACCOUNT);
-  intent.putExtra("authorities",new String[]{AccountAuthenticator.AUTHORITY});
+  intent.putExtra("authorities",new String[]{MainApp.getAuthTokenType()});
 startActivity(intent);
 break;
 case DialogInterface.BUTTON_NEGATIVE:

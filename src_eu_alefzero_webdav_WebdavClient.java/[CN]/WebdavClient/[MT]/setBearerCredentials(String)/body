@@ -6,5 +6,5 @@
   mCredentials=new BearerCredentials(accessToken);
   getState().setCredentials(AuthScope.ANY,mCredentials);
   mSsoSessionCookie=null;
-  mAuthTokenType=AccountAuthenticator.AUTH_TOKEN_TYPE_ACCESS_TOKEN;
+  mAuthTokenType=MainApp.getAuthTokenTypeAccessToken();
 }
