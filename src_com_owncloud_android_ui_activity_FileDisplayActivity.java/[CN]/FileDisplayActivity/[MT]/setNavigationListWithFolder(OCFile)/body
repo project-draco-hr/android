@@ -1,11 +1,13 @@
 {
   mDirectories.clear();
   OCFile fileIt=file;
+  String parentPath;
   while (fileIt != null && fileIt.getFileName() != OCFile.ROOT_PATH) {
     if (fileIt.isFolder()) {
       mDirectories.add(fileIt.getFileName());
     }
-    fileIt=mStorageManager.getFileById(fileIt.getParentId());
+    parentPath=fileIt.getRemotePath().substring(0,fileIt.getRemotePath().lastIndexOf(fileIt.getFileName()));
+    fileIt=mStorageManager.getFileByPath(parentPath);
   }
   mDirectories.add(OCFile.PATH_SEPARATOR);
 }

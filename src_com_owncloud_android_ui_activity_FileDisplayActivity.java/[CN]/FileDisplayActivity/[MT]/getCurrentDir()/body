@@ -5,7 +5,8 @@
       return file;
     }
  else     if (mStorageManager != null) {
-      return mStorageManager.getFileById(file.getParentId());
+      String parentPath=file.getRemotePath().substring(0,file.getRemotePath().lastIndexOf(file.getFileName()));
+      return mStorageManager.getFileByPath(parentPath);
     }
   }
   return null;

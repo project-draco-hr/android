@@ -2,11 +2,11 @@
   if (getAccount() != null) {
     mStorageManager=new FileDataStorageManager(getAccount(),getContentResolver());
     OCFile file=getFile();
+    String parentPath="";
     if (file != null) {
       if (file.isDown() && file.getLastSyncDateForProperties() == 0) {
-        if (mStorageManager.getFileById(file.getParentId()) == null) {
-          file=null;
-        }
+        parentPath=file.getRemotePath().substring(0,file.getRemotePath().lastIndexOf(file.getFileName()));
+        if (mStorageManager.getFileByPath(parentPath) == null)         file=null;
       }
  else {
         file=mStorageManager.getFileByPath(file.getRemotePath());

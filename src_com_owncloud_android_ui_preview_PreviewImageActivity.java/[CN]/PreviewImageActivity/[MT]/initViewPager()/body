@@ -1,5 +1,6 @@
 {
-  OCFile parentFolder=mStorageManager.getFileById(getFile().getParentId());
+  String parentPath=getFile().getRemotePath().substring(0,getFile().getRemotePath().lastIndexOf(getFile().getFileName()));
+  OCFile parentFolder=mStorageManager.getFileByPath(parentPath);
   if (parentFolder == null) {
     parentFolder=mStorageManager.getFileByPath(OCFile.ROOT_PATH);
   }
