@@ -1,5 +1,5 @@
 {
   AccountManager accMan=AccountManager.get(context);
-  Account[] accounts=accMan.getAccountsByType(AccountAuthenticator.ACCOUNT_TYPE);
+  Account[] accounts=accMan.getAccountsByType(MainApp.getAccountType());
   return accounts.length > 0;
 }

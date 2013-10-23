@@ -1,3 +1,3 @@
 {
-  return Environment.getExternalStorageDirectory() + File.separator + "owncloud"+ File.separator+ "log";
+  return Environment.getExternalStorageDirectory() + File.separator + MainApp.getDataFolder()+ File.separator+ "log";
 }

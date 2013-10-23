@@ -62,7 +62,7 @@
   Log_OC.d(TAG,"Sending " + operations.size() + " operations to FileContentProvider");
   try {
     if (getContentResolver() != null) {
-      results=getContentResolver().applyBatch(ProviderMeta.AUTHORITY_FILES,operations);
+      results=getContentResolver().applyBatch(MainApp.getAuthority(),operations);
     }
  else {
       results=getContentProviderClient().applyBatch(operations);

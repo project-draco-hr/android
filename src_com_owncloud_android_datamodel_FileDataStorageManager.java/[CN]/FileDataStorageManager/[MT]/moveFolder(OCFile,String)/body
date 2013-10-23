@@ -31,7 +31,7 @@
     c.close();
     try {
       if (getContentResolver() != null) {
-        getContentResolver().applyBatch(ProviderMeta.AUTHORITY_FILES,operations);
+        getContentResolver().applyBatch(MainApp.getAuthority(),operations);
       }
  else {
         getContentProviderClient().applyBatch(operations);

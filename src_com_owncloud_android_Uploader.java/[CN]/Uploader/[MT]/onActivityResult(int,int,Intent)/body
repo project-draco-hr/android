@@ -6,7 +6,7 @@
     if (resultCode == RESULT_CANCELED) {
       finish();
     }
-    Account[] accounts=mAccountManager.getAccountsByType(AccountAuthenticator.AUTH_TOKEN_TYPE);
+    Account[] accounts=mAccountManager.getAccountsByType(MainApp.getAuthTokenType());
     if (accounts.length == 0) {
       showDialog(DIALOG_NO_ACCOUNT);
     }

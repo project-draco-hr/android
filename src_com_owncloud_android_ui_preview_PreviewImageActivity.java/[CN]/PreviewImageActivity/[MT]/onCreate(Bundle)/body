@@ -12,4 +12,7 @@
  else {
     mRequestWaitingForBinder=false;
   }
+  FileDownloader downloader=new FileDownloader();
+  mDownloadAddedMessage=downloader.getDownloadAddedMessage();
+  mDownloadFinishMessage=downloader.getDownloadFinishMessage();
 }

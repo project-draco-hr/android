@@ -11,7 +11,7 @@
   }
   String accountName=map.get("NAME");
   AccountManager am=(AccountManager)getSystemService(ACCOUNT_SERVICE);
-  Account accounts[]=am.getAccountsByType(AccountAuthenticator.ACCOUNT_TYPE);
+  Account accounts[]=am.getAccountsByType(MainApp.getAccountType());
   for (  Account a : accounts) {
     if (a.name.equals(accountName)) {
       if (item.getItemId() == R.id.change_password) {

@@ -1,5 +1,5 @@
 {
-  Intent end=new Intent(UPLOAD_FINISH_MESSAGE);
+  Intent end=new Intent(getUploadFinishMessage());
   end.putExtra(EXTRA_REMOTE_PATH,upload.getRemotePath());
   if (upload.wasRenamed()) {
     end.putExtra(EXTRA_OLD_REMOTE_PATH,upload.getOldFile().getRemotePath());

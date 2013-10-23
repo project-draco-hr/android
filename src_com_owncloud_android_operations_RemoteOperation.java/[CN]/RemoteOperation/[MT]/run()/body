@@ -35,10 +35,10 @@ catch (    AccountsException e) {
         boolean bearerAuthorization=(cred != null && cred instanceof BearerCredentials);
         boolean samlBasedSsoAuthorization=(cred == null && ssoSessionCookie != null);
         if (bearerAuthorization) {
-          am.invalidateAuthToken(AccountAuthenticator.ACCOUNT_TYPE,((BearerCredentials)cred).getAccessToken());
+          am.invalidateAuthToken(MainApp.getAccountType(),((BearerCredentials)cred).getAccessToken());
         }
  else         if (samlBasedSsoAuthorization) {
-          am.invalidateAuthToken(AccountAuthenticator.ACCOUNT_TYPE,ssoSessionCookie);
+          am.invalidateAuthToken(MainApp.getAccountType(),ssoSessionCookie);
         }
  else {
           am.clearPassword(mAccount);

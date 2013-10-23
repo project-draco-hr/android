@@ -5,16 +5,16 @@
   boolean isSamlSso=am.getUserData(account,AccountAuthenticator.KEY_SUPPORTS_SAML_WEB_SSO) != null;
   WebdavClient client=createOwnCloudClient(uri,appContext,!isSamlSso);
   if (isOauth2) {
-    String accessToken=am.blockingGetAuthToken(account,AccountAuthenticator.AUTH_TOKEN_TYPE_ACCESS_TOKEN,false);
+    String accessToken=am.blockingGetAuthToken(account,MainApp.getAuthTokenTypeAccessToken(),false);
     client.setBearerCredentials(accessToken);
   }
  else   if (isSamlSso) {
-    String accessToken=am.blockingGetAuthToken(account,AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE,false);
+    String accessToken=am.blockingGetAuthToken(account,MainApp.getAuthTokenTypeSamlSessionCookie(),false);
     client.setSsoSessionCookie(accessToken);
   }
  else {
     String username=account.name.substring(0,account.name.lastIndexOf('@'));
-    String password=am.blockingGetAuthToken(account,AccountAuthenticator.AUTH_TOKEN_TYPE_PASSWORD,false);
+    String password=am.blockingGetAuthToken(account,MainApp.getAuthTokenTypePass(),false);
     client.setBasicCredentials(username,password);
   }
   return client;
