@@ -1,12 +1,9 @@
 {
   super.onCreate();
   mDownloadReceiver=new DownloadCompletedReceiverBis();
-  FileDownloader downloader=new FileDownloader();
-  mDownloadAddedMessage=downloader.getDownloadAddedMessage();
-  mDownloadFinishMessage=downloader.getDownloadFinishMessage();
   IntentFilter filter=new IntentFilter();
-  filter.addAction(mDownloadAddedMessage);
-  filter.addAction(mDownloadFinishMessage);
+  filter.addAction(FileDownloader.getDownloadAddedMessage());
+  filter.addAction(FileDownloader.getDownloadFinishMessage());
   registerReceiver(mDownloadReceiver,filter);
   mObserversMap=new HashMap<String,OwnCloudFileObserver>();
 }
