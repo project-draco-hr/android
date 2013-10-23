@@ -3,9 +3,6 @@
   requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
   super.onCreate(savedInstanceState);
   mHandler=new Handler();
-  FileDownloader downloader=new FileDownloader();
-  mDownloadAddedMessage=downloader.getDownloadAddedMessage();
-  mDownloadFinishMessage=downloader.getDownloadFinishMessage();
   mUploadConnection=new ListServiceConnection();
   mDownloadConnection=new ListServiceConnection();
   bindService(new Intent(this,FileUploader.class),mUploadConnection,Context.BIND_AUTO_CREATE);
