@@ -1,5 +1,0 @@
-{
-  AccountManager accMan=AccountManager.get(this);
-  Account[] accounts=accMan.getAccountsByType(MainApp.getAccountType());
-  return accounts.length > 0;
-}
