@@ -1,5 +1,5 @@
 {
-  mLocalFolder=mStorageManager.getFileById(mLocalFolder.getFileId());
+  mLocalFolder=mStorageManager.getFileByPath(mLocalFolder.getRemotePath());
   WebdavEntry we=new WebdavEntry(dataInServer.getResponses()[0],client.getBaseUri().getPath());
   OCFile remoteFolder=fillOCFile(we);
   remoteFolder.setParentId(mLocalFolder.getParentId());
