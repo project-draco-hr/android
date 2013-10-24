@@ -1,0 +1,3 @@
+{
+  super(FileContentProvider.class,"de.mobilcom.debitel.cloud.android.providers.FileContentProvider");
+}

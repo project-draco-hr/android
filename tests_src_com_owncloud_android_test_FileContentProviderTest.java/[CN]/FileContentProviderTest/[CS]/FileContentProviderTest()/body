@@ -1,3 +1,0 @@
-{
-  super(FileContentProvider.class,"com.owncloud.android.providers.FileContentProvider");
-}

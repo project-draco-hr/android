@@ -1,0 +1,28 @@
+{
+  String filename=FileStorageUtils.getInstantUploadFilePath(this,img_path);
+  if (canInstantUpload()) {
+    Account account=AccountUtils.getCurrentOwnCloudAccount(InstantUploadActivity.this);
+    DbHandler db=new DbHandler(InstantUploadActivity.this);
+    try {
+      db.updateFileState(img_path,DbHandler.UPLOAD_STATUS_UPLOAD_LATER,null);
+    }
+  finally {
+      db.close();
+    }
+    Intent i=new Intent(InstantUploadActivity.this,FileUploader.class);
+    i.putExtra(FileUploader.KEY_ACCOUNT,account);
+    i.putExtra(FileUploader.KEY_LOCAL_FILE,img_path);
+    i.putExtra(FileUploader.KEY_REMOTE_FILE,filename);
+    i.putExtra(FileUploader.KEY_UPLOAD_TYPE,FileUploader.UPLOAD_SINGLE_FILE);
+    i.putExtra(de.mobilcom.debitel.cloud.android.files.services.FileUploader.KEY_INSTANT_UPLOAD,true);
+    final String msg="try to upload file with name :" + filename;
+    Log_OC.d(LOG_TAG,msg);
+    Toast toast=Toast.makeText(InstantUploadActivity.this,getString(R.string.failed_upload_retry_text) + filename,Toast.LENGTH_LONG);
+    toast.show();
+    startService(i);
+  }
+ else {
+    Toast toast=Toast.makeText(InstantUploadActivity.this,getString(R.string.failed_upload_retry_do_nothing_text) + filename,Toast.LENGTH_LONG);
+    toast.show();
+  }
+}
