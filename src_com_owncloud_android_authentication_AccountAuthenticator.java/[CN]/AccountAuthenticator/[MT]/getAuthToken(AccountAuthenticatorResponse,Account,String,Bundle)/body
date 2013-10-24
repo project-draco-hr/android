@@ -10,7 +10,7 @@
   }
   final AccountManager am=AccountManager.get(mContext);
   String accessToken;
-  if (authTokenType.equals(AUTH_TOKEN_TYPE_PASSWORD)) {
+  if (authTokenType.equals(MainApp.getAuthTokenTypePass())) {
     accessToken=am.getPassword(account);
   }
  else {
@@ -19,7 +19,7 @@
   if (accessToken != null) {
     final Bundle result=new Bundle();
     result.putString(AccountManager.KEY_ACCOUNT_NAME,account.name);
-    result.putString(AccountManager.KEY_ACCOUNT_TYPE,ACCOUNT_TYPE);
+    result.putString(AccountManager.KEY_ACCOUNT_TYPE,MainApp.getAccountType());
     result.putString(AccountManager.KEY_AUTHTOKEN,accessToken);
     return result;
   }

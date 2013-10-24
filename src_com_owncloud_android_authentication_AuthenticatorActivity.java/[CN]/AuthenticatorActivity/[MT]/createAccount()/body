@@ -1,6 +1,6 @@
 {
-  boolean isOAuth=AccountAuthenticator.AUTH_TOKEN_TYPE_ACCESS_TOKEN.equals(mAuthTokenType);
-  boolean isSaml=AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE.equals(mAuthTokenType);
+  boolean isOAuth=MainApp.getAuthTokenTypeAccessToken().equals(mAuthTokenType);
+  boolean isSaml=MainApp.getAuthTokenTypeSamlSessionCookie().equals(mAuthTokenType);
   Uri uri=Uri.parse(mHostBaseUrl);
   String username=mUsernameInput.getText().toString().trim();
   if (isSaml) {
@@ -13,7 +13,7 @@
   if (uri.getPort() >= 0) {
     accountName+=":" + uri.getPort();
   }
-  mAccount=new Account(accountName,AccountAuthenticator.ACCOUNT_TYPE);
+  mAccount=new Account(accountName,MainApp.getAccountType());
   if (AccountUtils.exists(mAccount,getApplicationContext())) {
     RemoteOperationResult result=new RemoteOperationResult(ResultCode.ACCOUNT_NOT_NEW);
     updateAuthStatusIconAndText(result);
@@ -35,7 +35,7 @@
       editor.commit();
     }
     final Intent intent=new Intent();
-    intent.putExtra(AccountManager.KEY_ACCOUNT_TYPE,AccountAuthenticator.ACCOUNT_TYPE);
+    intent.putExtra(AccountManager.KEY_ACCOUNT_TYPE,MainApp.getAccountType());
     intent.putExtra(AccountManager.KEY_ACCOUNT_NAME,mAccount.name);
     intent.putExtra(AccountManager.KEY_USERDATA,username);
     if (isOAuth || isSaml) {
@@ -53,7 +53,7 @@
     setResult(RESULT_OK,intent);
     Bundle bundle=new Bundle();
     bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL,true);
-    ContentResolver.requestSync(mAccount,AccountAuthenticator.AUTHORITY,bundle);
+    ContentResolver.requestSync(mAccount,MainApp.getAuthTokenType(),bundle);
     syncAccount();
     return true;
   }

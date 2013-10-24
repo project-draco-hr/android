@@ -5,7 +5,7 @@
   mParents.add("");
   if (prepareStreamsToUpload()) {
     mAccountManager=(AccountManager)getSystemService(Context.ACCOUNT_SERVICE);
-    Account[] accounts=mAccountManager.getAccountsByType(AccountAuthenticator.ACCOUNT_TYPE);
+    Account[] accounts=mAccountManager.getAccountsByType(MainApp.getAccountType());
     if (accounts.length == 0) {
       Log_OC.i(TAG,"No ownCloud account is available");
       showDialog(DIALOG_NO_ACCOUNT);

@@ -11,7 +11,7 @@
     handleNewPhotoAction(context,intent);
     Log_OC.d(TAG,"OFFICIAL processed: android.hardware.action.NEW_PICTURE");
   }
- else   if (intent.getAction().equals(FileUploader.UPLOAD_FINISH_MESSAGE)) {
+ else   if (intent.getAction().equals(FileUploader.getUploadFinishMessage())) {
     handleUploadFinished(context,intent);
   }
  else {

@@ -1,9 +1,9 @@
 {
   if (version != null) {
-    if (AccountAuthenticator.AUTH_TOKEN_TYPE_ACCESS_TOKEN.equals(authTokenType)) {
+    if (MainApp.getAuthTokenTypeAccessToken().equals(authTokenType)) {
       return ODAV_PATH;
     }
-    if (AccountAuthenticator.AUTH_TOKEN_TYPE_SAML_WEB_SSO_SESSION_COOKIE.equals(authTokenType)) {
+    if (MainApp.getAuthTokenTypeSamlSessionCookie().equals(authTokenType)) {
       return SAML_SSO_PATH;
     }
     if (version.compareTo(OwnCloudVersion.owncloud_v4) >= 0)     return WEBDAV_PATH_4_0;

@@ -1,0 +1,3 @@
+{
+  return FileSyncService.class.getName().toString() + SYNC_MESSAGE;
+}
