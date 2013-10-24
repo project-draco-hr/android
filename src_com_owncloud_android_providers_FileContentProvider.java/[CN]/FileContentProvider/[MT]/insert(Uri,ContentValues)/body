@@ -1,13 +1,14 @@
 {
-  if (mUriMatcher.match(uri) != SINGLE_FILE && mUriMatcher.match(uri) != ROOT_DIRECTORY) {
-    throw new IllegalArgumentException("Unknown uri id: " + uri);
-  }
+  Uri newUri=null;
   SQLiteDatabase db=mDbHelper.getWritableDatabase();
-  long rowId=db.insert(ProviderTableMeta.DB_NAME,null,values);
-  if (rowId > 0) {
-    Uri insertedFileUri=ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_FILE,rowId);
-    getContext().getContentResolver().notifyChange(insertedFileUri,null);
-    return insertedFileUri;
+  db.beginTransaction();
+  try {
+    newUri=insert(db,uri,values);
+    db.setTransactionSuccessful();
   }
-  throw new SQLException("ERROR " + uri);
+  finally {
+    db.endTransaction();
+  }
+  getContext().getContentResolver().notifyChange(newUri,null);
+  return newUri;
 }

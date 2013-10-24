@@ -6,7 +6,10 @@
     int status=ms.getStatus()[0].getStatusCode();
     DavPropertySet propSet=ms.getProperties(status);
     @SuppressWarnings("rawtypes") DavProperty prop=propSet.get(DavPropertyName.DISPLAYNAME);
-    if (prop != null)     mName=(String)prop.getName().toString();
+    if (prop != null) {
+      mName=(String)prop.getName().toString();
+      mName=mName.substring(1,mName.length() - 1);
+    }
  else {
       String[] tmp=mPath.split("/");
       if (tmp.length > 0)       mName=tmp[tmp.length - 1];
@@ -37,6 +40,11 @@
     if (prop != null) {
       Date d=WebdavUtils.parseResponseDate((String)prop.getValue());
       mCreateTimestamp=(d != null) ? d.getTime() : 0;
+    }
+    prop=propSet.get(DavPropertyName.GETETAG);
+    if (prop != null) {
+      mEtag=(String)prop.getValue();
+      mEtag=mEtag.substring(1,mEtag.length() - 1);
     }
   }
  else {

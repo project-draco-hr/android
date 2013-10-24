@@ -2,7 +2,7 @@
   String parentPath=getFile().getRemotePath().substring(0,getFile().getRemotePath().lastIndexOf(getFile().getFileName()));
   OCFile parentFolder=mStorageManager.getFileByPath(parentPath);
   if (parentFolder == null) {
-    parentFolder=mStorageManager.getFileByPath(OCFile.PATH_SEPARATOR);
+    parentFolder=mStorageManager.getFileByPath(OCFile.ROOT_PATH);
   }
   mPreviewImagePagerAdapter=new PreviewImagePagerAdapter(getSupportFragmentManager(),parentFolder,getAccount(),mStorageManager);
   mViewPager=(ViewPager)findViewById(R.id.fragmentPager);

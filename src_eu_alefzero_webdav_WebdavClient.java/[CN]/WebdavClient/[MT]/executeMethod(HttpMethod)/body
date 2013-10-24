@@ -4,7 +4,6 @@
     method.setFollowRedirects(mFollowRedirects);
   }
  catch (  Exception e) {
-    if (mFollowRedirects)     Log_OC.d(TAG,"setFollowRedirects failed for " + method.getName() + " method, custom redirection will be used");
     customRedirectionNeeded=mFollowRedirects;
   }
   if (mSsoSessionCookie != null && mSsoSessionCookie.length() > 0) {

@@ -1,6 +1,0 @@
-String remotePath
-long currentSyncTime
-long parentId
-DataStorageManager dataStorageManager
-Account account
-Context context

@@ -1,0 +1,3 @@
+OCFile folder
+Collection<OCFile> updatedFiles
+Collection<OCFile> filesToRemove

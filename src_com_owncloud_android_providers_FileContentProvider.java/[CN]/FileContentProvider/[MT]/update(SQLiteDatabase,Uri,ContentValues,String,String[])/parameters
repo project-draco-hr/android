@@ -1,0 +1,5 @@
+SQLiteDatabase db
+Uri uri
+ContentValues values
+String selection
+String[] selectionArgs

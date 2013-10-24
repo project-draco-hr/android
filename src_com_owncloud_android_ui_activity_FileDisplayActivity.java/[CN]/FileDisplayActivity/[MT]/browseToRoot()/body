@@ -1,0 +1,13 @@
+{
+  OCFileListFragment listOfFiles=getListOfFilesFragment();
+  if (listOfFiles != null) {
+    while (mDirectories.getCount() > 1) {
+      popDirname();
+    }
+    OCFile root=mStorageManager.getFileByPath(OCFile.ROOT_PATH);
+    listOfFiles.listDirectory(root);
+    setFile(listOfFiles.getCurrentFile());
+    startSyncFolderOperation(root);
+  }
+  cleanSecondFragment();
+}

@@ -1,0 +1,11 @@
+{
+  if (folder != null && folder.isFolder()) {
+    if (removeDBData && folder.getFileId() != -1) {
+      removeFolderInDb(folder);
+    }
+    if (removeLocalContent) {
+      File localFolder=new File(FileStorageUtils.getDefaultSavePathFor(mAccount.name,folder));
+      removeLocalFolder(localFolder);
+    }
+  }
+}

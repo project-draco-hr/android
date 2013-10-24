@@ -1,0 +1,12 @@
+{
+  Intent i=new Intent(FileSyncService.getSyncMessage());
+  i.putExtra(FileSyncService.IN_PROGRESS,inProgress);
+  i.putExtra(FileSyncService.ACCOUNT_NAME,mAccount.name);
+  if (dirRemotePath != null) {
+    i.putExtra(FileSyncService.SYNC_FOLDER_REMOTE_PATH,dirRemotePath);
+  }
+  if (result != null) {
+    i.putExtra(FileSyncService.SYNC_RESULT,result);
+  }
+  mContext.sendStickyBroadcast(i);
+}

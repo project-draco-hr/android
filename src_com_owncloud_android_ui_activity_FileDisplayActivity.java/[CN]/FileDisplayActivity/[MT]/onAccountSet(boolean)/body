@@ -13,26 +13,20 @@
       }
     }
     if (file == null) {
-      file=mStorageManager.getFileByPath(OCFile.PATH_SEPARATOR);
+      file=mStorageManager.getFileByPath(OCFile.ROOT_PATH);
     }
     setFile(file);
-    mDirectories.clear();
-    OCFile fileIt=file;
-    while (fileIt != null && fileIt.getFileName() != OCFile.PATH_SEPARATOR) {
-      if (fileIt.isDirectory()) {
-        mDirectories.add(fileIt.getFileName());
-      }
-      parentPath=fileIt.getRemotePath().substring(0,fileIt.getRemotePath().lastIndexOf(fileIt.getFileName()));
-      fileIt=mStorageManager.getFileByPath(parentPath);
-    }
-    mDirectories.add(OCFile.PATH_SEPARATOR);
+    setNavigationListWithFolder(file);
     if (!stateWasRecovered) {
       Log_OC.e(TAG,"Initializing Fragments in onAccountChanged..");
       initFragmentsWithFile();
+      if (file.isFolder()) {
+        startSyncFolderOperation(file);
+      }
     }
  else {
-      updateFragmentsVisibility(!file.isDirectory());
-      updateNavigationElementsInActionBar(file.isDirectory() ? null : file);
+      updateFragmentsVisibility(!file.isFolder());
+      updateNavigationElementsInActionBar(file.isFolder() ? null : file);
     }
   }
  else {

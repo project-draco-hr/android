@@ -7,15 +7,15 @@
   cv.put(ProviderTableMeta.FILE_CONTENT_LENGTH,file.getFileLength());
   cv.put(ProviderTableMeta.FILE_CONTENT_TYPE,file.getMimetype());
   cv.put(ProviderTableMeta.FILE_NAME,file.getFileName());
-  if (file.getParentId() != 0)   cv.put(ProviderTableMeta.FILE_PARENT,file.getParentId());
+  cv.put(ProviderTableMeta.FILE_PARENT,file.getParentId());
   cv.put(ProviderTableMeta.FILE_PATH,file.getRemotePath());
-  if (!file.isDirectory())   cv.put(ProviderTableMeta.FILE_STORAGE_PATH,file.getStoragePath());
+  if (!file.isFolder())   cv.put(ProviderTableMeta.FILE_STORAGE_PATH,file.getStoragePath());
   cv.put(ProviderTableMeta.FILE_ACCOUNT_OWNER,mAccount.name);
   cv.put(ProviderTableMeta.FILE_LAST_SYNC_DATE,file.getLastSyncDateForProperties());
   cv.put(ProviderTableMeta.FILE_LAST_SYNC_DATE_FOR_DATA,file.getLastSyncDateForData());
   cv.put(ProviderTableMeta.FILE_KEEP_IN_SYNC,file.keepInSync() ? 1 : 0);
+  cv.put(ProviderTableMeta.FILE_ETAG,file.getEtag());
   boolean sameRemotePath=fileExists(file.getRemotePath());
-  boolean changesSizeOfAncestors=false;
   if (sameRemotePath || fileExists(file.getFileId())) {
     OCFile oldFile=null;
     if (sameRemotePath) {
@@ -25,14 +25,13 @@
  else {
       oldFile=getFileById(file.getFileId());
     }
-    changesSizeOfAncestors=(oldFile.getFileLength() != file.getFileLength());
     overriden=true;
     if (getContentResolver() != null) {
       getContentResolver().update(ProviderTableMeta.CONTENT_URI,cv,ProviderTableMeta._ID + "=?",new String[]{String.valueOf(file.getFileId())});
     }
  else {
       try {
-        getContentProvider().update(ProviderTableMeta.CONTENT_URI,cv,ProviderTableMeta._ID + "=?",new String[]{String.valueOf(file.getFileId())});
+        getContentProviderClient().update(ProviderTableMeta.CONTENT_URI,cv,ProviderTableMeta._ID + "=?",new String[]{String.valueOf(file.getFileId())});
       }
  catch (      RemoteException e) {
         Log_OC.e(TAG,"Fail to insert insert file to database " + e.getMessage());
@@ -40,14 +39,13 @@
     }
   }
  else {
-    changesSizeOfAncestors=true;
     Uri result_uri=null;
     if (getContentResolver() != null) {
       result_uri=getContentResolver().insert(ProviderTableMeta.CONTENT_URI_FILE,cv);
     }
  else {
       try {
-        result_uri=getContentProvider().insert(ProviderTableMeta.CONTENT_URI_FILE,cv);
+        result_uri=getContentProviderClient().insert(ProviderTableMeta.CONTENT_URI_FILE,cv);
       }
  catch (      RemoteException e) {
         Log_OC.e(TAG,"Fail to insert insert file to database " + e.getMessage());
@@ -58,14 +56,11 @@
       file.setFileId(new_id);
     }
   }
-  if (file.isDirectory()) {
-    calculateFolderSize(file.getFileId());
-    if (file.needsUpdatingWhileSaving()) {
-      for (      OCFile f : getDirectoryContent(file))       saveFile(f);
-    }
+  if (file.isFolder()) {
+    updateFolderSize(file.getFileId());
   }
-  if (changesSizeOfAncestors || file.isDirectory()) {
-    updateSizesToTheRoot(file.getParentId());
+ else {
+    updateFolderSize(file.getParentId());
   }
   return overriden;
 }
