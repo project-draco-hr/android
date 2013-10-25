@@ -12,6 +12,8 @@
   mText2=(EditText)findViewById(R.id.txt2);
   mText3=(EditText)findViewById(R.id.txt3);
   mText4=(EditText)findViewById(R.id.txt4);
+  boolean customButtons=getResources().getBoolean(R.bool.custom_buttons);
+  if (customButtons)   bCancel.setBackgroundResource(R.drawable.btn_default);
   SharedPreferences appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
   if ((appPrefs.getString("PrefPinCode1",null) == null)) {
     setChangePincodeView(true);

@@ -6,6 +6,8 @@
   actionBar.setDisplayHomeAsUpEnabled(true);
   ListView listView=(ListView)findViewById(android.R.id.list);
   Button deleteHistoryButton=(Button)findViewById(R.id.deleteLogHistoryButton);
+  boolean customButtons=getResources().getBoolean(R.bool.custom_buttons);
+  if (customButtons)   deleteHistoryButton.setBackgroundResource(R.drawable.btn_default);
   deleteHistoryButton.setOnClickListener(new OnClickListener(){
     @Override public void onClick(    View v){
       File dir=new File(logpath);
