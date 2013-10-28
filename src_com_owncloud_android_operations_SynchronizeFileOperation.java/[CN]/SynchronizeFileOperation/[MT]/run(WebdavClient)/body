@@ -25,13 +25,8 @@
       }
       if (result == null) {
         boolean serverChanged=false;
-        if (mServerFile.getEtag() != null) {
-          serverChanged=(!mServerFile.getEtag().equals(mLocalFile.getEtag()));
-        }
- else {
-          serverChanged=(mServerFile.getModificationTimestamp() > mLocalFile.getModificationTimestampAtLastSyncForData());
-        }
-        boolean localChanged=(mLocalChangeAlreadyKnown || mLocalFile.getLocalModificationTimestamp() > mLocalFile.getLastSyncDateForData());
+        serverChanged=(mServerFile.getModificationTimestamp() > mLocalFile.getModificationTimestampAtLastSyncForData());
+        boolean localChanged=(mLocalFile.getLocalModificationTimestamp() > mLocalFile.getLastSyncDateForData());
         if (localChanged && serverChanged) {
           result=new RemoteOperationResult(ResultCode.SYNC_CONFLICT);
         }

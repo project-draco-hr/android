@@ -24,7 +24,7 @@
     }
   }
  else {
-    mLastRemoteOperation=new SynchronizeFileOperation(file,null,mStorageManager,mAccount,true,false,getActivity());
+    mLastRemoteOperation=new SynchronizeFileOperation(file,null,mStorageManager,mAccount,true,getActivity());
     mLastRemoteOperation.execute(mAccount,getSherlockActivity(),this,mHandler,getSherlockActivity());
     ((FileDisplayActivity)getActivity()).showLoadingDialog();
   }

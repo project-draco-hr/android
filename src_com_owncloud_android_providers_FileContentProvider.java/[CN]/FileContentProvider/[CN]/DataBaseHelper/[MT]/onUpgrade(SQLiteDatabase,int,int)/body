@@ -33,4 +33,17 @@
     }
   }
   if (!upgraded)   Log_OC.i("SQL","OUT of the ADD in onUpgrade; oldVersion == " + oldVersion + ", newVersion == "+ newVersion);
+  if (oldVersion < 5 && newVersion >= 5) {
+    Log_OC.i("SQL","Entering in the #4 ADD in onUpgrade");
+    db.beginTransaction();
+    try {
+      db.execSQL("ALTER TABLE " + ProviderTableMeta.DB_NAME + " ADD COLUMN "+ ProviderTableMeta.FILE_ETAG+ " TEXT "+ " DEFAULT NULL");
+      upgraded=true;
+      db.setTransactionSuccessful();
+    }
+  finally {
+      db.endTransaction();
+    }
+  }
+  if (!upgraded)   Log_OC.i("SQL","OUT of the ADD in onUpgrade; oldVersion == " + oldVersion + ", newVersion == "+ newVersion);
 }

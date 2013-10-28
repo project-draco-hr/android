@@ -1,0 +1,4 @@
+SQLiteDatabase db
+Uri uri
+String where
+String[] whereArgs

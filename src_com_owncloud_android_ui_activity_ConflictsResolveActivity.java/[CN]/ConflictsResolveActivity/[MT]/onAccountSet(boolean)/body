@@ -6,7 +6,7 @@
       finish();
     }
  else {
-      DataStorageManager storageManager=new FileDataStorageManager(getAccount(),getContentResolver());
+      FileDataStorageManager storageManager=new FileDataStorageManager(getAccount(),getContentResolver());
       file=storageManager.getFileByPath(file.getRemotePath());
       if (file != null) {
         setFile(file);

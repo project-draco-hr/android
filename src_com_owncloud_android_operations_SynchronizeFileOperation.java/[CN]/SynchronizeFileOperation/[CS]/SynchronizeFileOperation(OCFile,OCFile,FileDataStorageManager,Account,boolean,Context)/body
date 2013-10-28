@@ -1,0 +1,8 @@
+{
+  mLocalFile=localFile;
+  mServerFile=serverFile;
+  mStorageManager=storageManager;
+  mAccount=account;
+  mSyncFileContents=syncFileContents;
+  mContext=context;
+}

@@ -1,27 +1,32 @@
 {
   boolean inProgress=intent.getBooleanExtra(FileSyncService.IN_PROGRESS,false);
   String accountName=intent.getStringExtra(FileSyncService.ACCOUNT_NAME);
-  Log_OC.d(TAG,"sync of account " + accountName + " is in_progress: "+ inProgress);
+  RemoteOperationResult synchResult=(RemoteOperationResult)intent.getSerializableExtra(FileSyncService.SYNC_RESULT);
   if (getAccount() != null && accountName.equals(getAccount().name) && mStorageManager != null) {
     String synchFolderRemotePath=intent.getStringExtra(FileSyncService.SYNC_FOLDER_REMOTE_PATH);
-    boolean fillBlankRoot=false;
-    OCFile currentDir=getCurrentDir();
+    OCFile currentFile=(getFile() == null) ? null : mStorageManager.getFileByPath(getFile().getRemotePath());
+    OCFile currentDir=(getCurrentDir() == null) ? null : mStorageManager.getFileByPath(getCurrentDir().getRemotePath());
     if (currentDir == null) {
-      currentDir=mStorageManager.getFileByPath(OCFile.PATH_SEPARATOR);
-      fillBlankRoot=(currentDir != null);
+      Toast.makeText(FileDisplayActivity.this,String.format(getString(R.string.sync_current_folder_was_removed),mDirectories.getItem(0)),Toast.LENGTH_LONG).show();
+      browseToRoot();
     }
-    if ((synchFolderRemotePath != null && currentDir != null && (currentDir.getRemotePath().equals(synchFolderRemotePath))) || fillBlankRoot) {
-      if (!fillBlankRoot)       currentDir=mStorageManager.getFileByPath(synchFolderRemotePath);
-      OCFileListFragment fileListFragment=getListOfFilesFragment();
-      if (fileListFragment != null) {
-        fileListFragment.listDirectory(currentDir);
+ else {
+      if (currentFile == null && !getFile().isFolder()) {
+        cleanSecondFragment();
+        currentFile=currentDir;
       }
-      if (getSecondFragment() == null)       setFile(currentDir);
+      if (synchFolderRemotePath != null && currentDir.getRemotePath().equals(synchFolderRemotePath)) {
+        OCFileListFragment fileListFragment=getListOfFilesFragment();
+        if (fileListFragment != null) {
+          fileListFragment.listDirectory(currentDir);
+        }
+      }
+      setFile(currentFile);
     }
     setSupportProgressBarIndeterminateVisibility(inProgress);
     removeStickyBroadcast(intent);
+    mSyncInProgress=inProgress;
   }
-  RemoteOperationResult synchResult=(RemoteOperationResult)intent.getSerializableExtra(FileSyncService.SYNC_RESULT);
   if (synchResult != null) {
     if (synchResult.getCode().equals(RemoteOperationResult.ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED)) {
       mLastSslUntrustedServerResult=synchResult;

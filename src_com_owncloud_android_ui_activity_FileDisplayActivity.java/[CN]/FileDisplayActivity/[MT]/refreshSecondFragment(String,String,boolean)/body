@@ -7,11 +7,11 @@
     if (fileInFragment != null && !downloadedRemotePath.equals(fileInFragment.getRemotePath())) {
       mWaitingToPreview=null;
     }
- else     if (downloadEvent.equals(mDownloadAddedMessage)) {
+ else     if (downloadEvent.equals(FileDownloader.getDownloadAddedMessage())) {
       detailsFragment.listenForTransferProgress();
       detailsFragment.updateFileDetails(true,false);
     }
- else     if (downloadEvent.equals(mDownloadFinishMessage)) {
+ else     if (downloadEvent.equals(FileDownloader.getDownloadFinishMessage())) {
       boolean detailsFragmentChanged=false;
       if (waitedPreview) {
         if (success) {

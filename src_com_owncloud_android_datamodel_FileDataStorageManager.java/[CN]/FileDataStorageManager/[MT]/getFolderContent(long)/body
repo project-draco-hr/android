@@ -1,0 +1,27 @@
+{
+  Vector<OCFile> ret=new Vector<OCFile>();
+  Uri req_uri=Uri.withAppendedPath(ProviderTableMeta.CONTENT_URI_DIR,String.valueOf(parentId));
+  Cursor c=null;
+  if (getContentProviderClient() != null) {
+    try {
+      c=getContentProviderClient().query(req_uri,null,ProviderTableMeta.FILE_PARENT + "=?",new String[]{String.valueOf(parentId)},null);
+    }
+ catch (    RemoteException e) {
+      Log_OC.e(TAG,e.getMessage());
+      return ret;
+    }
+  }
+ else {
+    c=getContentResolver().query(req_uri,null,ProviderTableMeta.FILE_PARENT + "=?",new String[]{String.valueOf(parentId)},null);
+  }
+  if (c.moveToFirst()) {
+    do {
+      OCFile child=createFileInstance(c);
+      ret.add(child);
+    }
+ while (c.moveToNext());
+  }
+  c.close();
+  Collections.sort(ret);
+  return ret;
+}

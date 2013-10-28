@@ -1,7 +1,7 @@
 {
   OCFile file=getFile();
   if (file != null) {
-    if (file.isDirectory()) {
+    if (file.isFolder()) {
       return file;
     }
  else     if (mStorageManager != null) {

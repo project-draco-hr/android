@@ -3,9 +3,6 @@
   requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
   super.onCreate(savedInstanceState);
   mHandler=new Handler();
-  FileDownloader downloader=new FileDownloader();
-  mDownloadAddedMessage=downloader.getDownloadAddedMessage();
-  mDownloadFinishMessage=downloader.getDownloadFinishMessage();
   mUploadConnection=new ListServiceConnection();
   mDownloadConnection=new ListServiceConnection();
   bindService(new Intent(this,FileUploader.class),mUploadConnection,Context.BIND_AUTO_CREATE);
@@ -18,9 +15,11 @@
   startService(observer_intent);
   if (savedInstanceState != null) {
     mWaitingToPreview=(OCFile)savedInstanceState.getParcelable(FileDisplayActivity.KEY_WAITING_TO_PREVIEW);
+    mSyncInProgress=savedInstanceState.getBoolean(KEY_SYNC_IN_PROGRESS);
   }
  else {
     mWaitingToPreview=null;
+    mSyncInProgress=false;
   }
   setContentView(R.layout.files);
   mDualPane=getResources().getBoolean(R.bool.large_land_layout);
@@ -31,6 +30,6 @@
   }
   mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
   getSupportActionBar().setHomeButtonEnabled(true);
-  setSupportProgressBarIndeterminateVisibility(false);
+  setSupportProgressBarIndeterminateVisibility(mSyncInProgress);
   Log_OC.d(TAG,"onCreate() end");
 }

@@ -6,7 +6,7 @@
   }
   FileDataStorageManager storageManager=new FileDataStorageManager(mOCAccount,mContext.getContentResolver());
   OCFile file=storageManager.getFileByLocalPath(mPath);
-  SynchronizeFileOperation sfo=new SynchronizeFileOperation(file,null,storageManager,mOCAccount,true,true,mContext);
+  SynchronizeFileOperation sfo=new SynchronizeFileOperation(file,null,storageManager,mOCAccount,true,mContext);
   RemoteOperationResult result=sfo.execute(mOCAccount,mContext);
   if (result.getCode() == ResultCode.SYNC_CONFLICT) {
     Intent i=new Intent(mContext,ConflictsResolveActivity.class);

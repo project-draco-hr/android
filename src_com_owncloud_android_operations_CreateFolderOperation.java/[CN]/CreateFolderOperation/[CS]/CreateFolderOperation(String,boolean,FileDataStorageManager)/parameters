@@ -1,0 +1,3 @@
+String remotePath
+boolean createFullPath
+FileDataStorageManager storageManager
