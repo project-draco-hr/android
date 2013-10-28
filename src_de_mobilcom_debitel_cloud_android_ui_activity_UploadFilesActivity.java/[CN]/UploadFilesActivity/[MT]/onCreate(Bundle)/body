@@ -17,15 +17,10 @@
   mDirectories.add(File.separator);
   setContentView(R.layout.upload_files_layout);
   mFileListFragment=(LocalFileListFragment)getSupportFragmentManager().findFragmentById(R.id.local_files_list);
-  mCancelBtn=(Button)findViewById(R.id.upload_files_btn_cancel);
+  mCancelBtn=(CustomButton)findViewById(R.id.upload_files_btn_cancel);
   mCancelBtn.setOnClickListener(this);
-  mUploadBtn=(Button)findViewById(R.id.upload_files_btn_upload);
+  mUploadBtn=(CustomButton)findViewById(R.id.upload_files_btn_upload);
   mUploadBtn.setOnClickListener(this);
-  boolean customButtons=getResources().getBoolean(R.bool.custom_buttons);
-  if (customButtons) {
-    mCancelBtn.setBackgroundResource(R.drawable.btn_default);
-    mUploadBtn.setBackgroundResource(R.drawable.btn_default);
-  }
   ActionBar actionBar=getSupportActionBar();
   actionBar.setHomeButtonEnabled(true);
   actionBar.setDisplayHomeAsUpEnabled(mCurrentDir != null && mCurrentDir.getName() != null);

@@ -3,7 +3,7 @@
   setContentView(R.layout.pincodelock);
   Intent intent=getIntent();
   activity=intent.getStringExtra(EXTRA_ACTIVITY);
-  bCancel=(Button)findViewById(R.id.cancel);
+  bCancel=(CustomButton)findViewById(R.id.cancel);
   mPinHdr=(TextView)findViewById(R.id.pinHdr);
   mPinHdrExplanation=(TextView)findViewById(R.id.pinHdrExpl);
   mText1=(EditText)findViewById(R.id.txt1);
@@ -12,8 +12,6 @@
   mText2=(EditText)findViewById(R.id.txt2);
   mText3=(EditText)findViewById(R.id.txt3);
   mText4=(EditText)findViewById(R.id.txt4);
-  boolean customButtons=getResources().getBoolean(R.bool.custom_buttons);
-  if (customButtons)   bCancel.setBackgroundResource(R.drawable.btn_default);
   SharedPreferences appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
   if ((appPrefs.getString("PrefPinCode1",null) == null)) {
     setChangePincodeView(true);

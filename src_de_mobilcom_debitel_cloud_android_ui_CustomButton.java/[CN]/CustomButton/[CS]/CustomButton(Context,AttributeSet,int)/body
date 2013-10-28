@@ -1,0 +1,7 @@
+{
+  super(context,attrs,defStyle);
+  boolean customButtons=getResources().getBoolean(R.bool.custom_buttons);
+  if (customButtons) {
+    this.setBackgroundResource(R.drawable.btn_default);
+  }
+}
