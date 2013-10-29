@@ -1,0 +1,14 @@
+{
+  if (preference.equals(mTrackingUpdateInterval)) {
+    String trackingSummary=getResources().getString(R.string.prefs_trackmydevice_interval_summary);
+    trackingSummary=String.format(trackingSummary,newValue.toString());
+    mTrackingUpdateInterval.setSummary(trackingSummary);
+  }
+ else   if (preference.equals(mDeviceTracking)) {
+    Intent locationServiceIntent=new Intent();
+    locationServiceIntent.setAction("com.owncloud.android.location.LocationLauncher");
+    locationServiceIntent.putExtra("TRACKING_SETTING",(Boolean)newValue);
+    sendBroadcast(locationServiceIntent);
+  }
+  return true;
+}

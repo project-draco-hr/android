@@ -1,0 +1,10 @@
+{
+  Intent deviceTrackingIntent=new Intent();
+  deviceTrackingIntent.setAction("com.owncloud.android.location.LocationUpdateService");
+  SharedPreferences preferences=PreferenceManager.getDefaultSharedPreferences(context);
+  boolean trackDevice=preferences.getBoolean("enable_devicetracking",true);
+  if (intent.hasExtra("TRACKING_SETTING")) {
+    trackDevice=intent.getBooleanExtra("TRACKING_SETTING",true);
+  }
+  startOrStopDeviceTracking(context,trackDevice);
+}
