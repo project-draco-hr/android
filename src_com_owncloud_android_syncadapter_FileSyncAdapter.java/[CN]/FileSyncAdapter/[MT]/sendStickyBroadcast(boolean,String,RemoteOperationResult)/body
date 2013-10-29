@@ -1,6 +1,5 @@
 {
-  FileSyncService fileSyncService=new FileSyncService();
-  Intent i=new Intent(fileSyncService.getSyncMessage());
+  Intent i=new Intent(FileSyncService.getSyncMessage());
   i.putExtra(FileSyncService.IN_PROGRESS,inProgress);
   i.putExtra(FileSyncService.ACCOUNT_NAME,getAccount().name);
   if (dirRemotePath != null) {

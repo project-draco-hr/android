@@ -1,6 +1,5 @@
 {
   Log_OC.d(TAG,"Received: " + intent.getAction());
-  FileUploader fileUploader=new FileUploader();
   if (intent.getAction().equals(android.net.ConnectivityManager.CONNECTIVITY_ACTION)) {
     handleConnectivityAction(context,intent);
   }
@@ -12,7 +11,7 @@
     handleNewPhotoAction(context,intent);
     Log_OC.d(TAG,"OFFICIAL processed: android.hardware.action.NEW_PICTURE");
   }
- else   if (intent.getAction().equals(fileUploader.getUploadFinishMessage())) {
+ else   if (intent.getAction().equals(FileUploader.getUploadFinishMessage())) {
     handleUploadFinished(context,intent);
   }
  else {
