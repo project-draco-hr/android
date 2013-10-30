@@ -3,7 +3,7 @@
   setContentView(R.layout.pincodelock);
   Intent intent=getIntent();
   activity=intent.getStringExtra(EXTRA_ACTIVITY);
-  bCancel=(CustomButton)findViewById(R.id.cancel);
+  bCancel=(Button)findViewById(R.id.cancel);
   mPinHdr=(TextView)findViewById(R.id.pinHdr);
   mPinHdrExplanation=(TextView)findViewById(R.id.pinHdrExpl);
   mText1=(EditText)findViewById(R.id.txt1);

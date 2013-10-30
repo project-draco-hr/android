@@ -5,7 +5,7 @@
   ActionBar actionBar=getSherlock().getActionBar();
   actionBar.setDisplayHomeAsUpEnabled(true);
   ListView listView=(ListView)findViewById(android.R.id.list);
-  CustomButton deleteHistoryButton=(CustomButton)findViewById(R.id.deleteLogHistoryButton);
+  Button deleteHistoryButton=(Button)findViewById(R.id.deleteLogHistoryButton);
   deleteHistoryButton.setOnClickListener(new OnClickListener(){
     @Override public void onClick(    View v){
       File dir=new File(logpath);

@@ -17,9 +17,9 @@
   mDirectories.add(File.separator);
   setContentView(R.layout.upload_files_layout);
   mFileListFragment=(LocalFileListFragment)getSupportFragmentManager().findFragmentById(R.id.local_files_list);
-  mCancelBtn=(CustomButton)findViewById(R.id.upload_files_btn_cancel);
+  mCancelBtn=(Button)findViewById(R.id.upload_files_btn_cancel);
   mCancelBtn.setOnClickListener(this);
-  mUploadBtn=(CustomButton)findViewById(R.id.upload_files_btn_upload);
+  mUploadBtn=(Button)findViewById(R.id.upload_files_btn_upload);
   mUploadBtn.setOnClickListener(this);
   ActionBar actionBar=getSupportActionBar();
   actionBar.setHomeButtonEnabled(true);

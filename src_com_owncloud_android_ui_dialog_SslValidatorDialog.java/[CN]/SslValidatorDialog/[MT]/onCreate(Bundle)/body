@@ -35,11 +35,11 @@ catch (      IOException e) {
       View detailsScroll=findViewById(R.id.details_scroll);
       if (detailsScroll.getVisibility() == View.VISIBLE) {
         detailsScroll.setVisibility(View.GONE);
-        ((CustomButton)v).setText(R.string.ssl_validator_btn_details_see);
+        ((Button)v).setText(R.string.ssl_validator_btn_details_see);
       }
  else {
         detailsScroll.setVisibility(View.VISIBLE);
-        ((CustomButton)v).setText(R.string.ssl_validator_btn_details_hide);
+        ((Button)v).setText(R.string.ssl_validator_btn_details_hide);
       }
     }
   }

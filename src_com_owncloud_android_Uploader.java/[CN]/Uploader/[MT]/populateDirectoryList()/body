@@ -16,7 +16,7 @@
     }
     SimpleAdapter sa=new SimpleAdapter(this,data,R.layout.uploader_list_item_layout,new String[]{"dirname"},new int[]{R.id.textView1});
     setListAdapter(sa);
-    CustomButton btn=(CustomButton)findViewById(R.id.uploader_choose_folder);
+    Button btn=(Button)findViewById(R.id.uploader_choose_folder);
     btn.setOnClickListener(this);
     getListView().setOnItemClickListener(this);
   }

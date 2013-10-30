@@ -25,8 +25,8 @@
     listView.setVisibility(View.GONE);
     mAdapter=null;
   }
-  CustomButton cancelBtn=(CustomButton)findViewById(R.id.cancel);
-  CustomButton okBtn=(CustomButton)findViewById(R.id.ok);
+  Button cancelBtn=(Button)findViewById(R.id.cancel);
+  Button okBtn=(Button)findViewById(R.id.ok);
   okBtn.setText(R.string.foreign_files_move);
   cancelBtn.setOnClickListener(this);
   okBtn.setOnClickListener(this);
