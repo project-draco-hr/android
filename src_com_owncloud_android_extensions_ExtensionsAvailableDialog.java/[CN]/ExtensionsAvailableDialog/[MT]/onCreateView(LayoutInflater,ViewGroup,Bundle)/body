@@ -1,9 +1,0 @@
-{
-  View view=inflater.inflate(R.layout.extensions_available_dialog,container);
-  Button btnYes=(Button)view.findViewById(R.id.buttonYes);
-  Button btnNo=(Button)view.findViewById(R.id.buttonNo);
-  btnYes.setOnClickListener(this);
-  btnNo.setOnClickListener(this);
-  getDialog().setTitle(R.string.extensions_avail_title);
-  return view;
-}
