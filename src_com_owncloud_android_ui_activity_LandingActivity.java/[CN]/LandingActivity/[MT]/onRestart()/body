@@ -1,6 +1,0 @@
-{
-  super.onRestart();
-  if (!accountsAreSetup()) {
-    showDialog(DIALOG_SETUP_ACCOUNT);
-  }
-}
