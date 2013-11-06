@@ -1,0 +1,43 @@
+{
+  mRemoteFolderChanged=false;
+  RemoteOperationResult result=null;
+  String remotePath=null;
+  PropFindMethod query=null;
+  try {
+    remotePath=mLocalFolder.getRemotePath();
+    Log_OC.d(TAG,"Checking changes in " + mAccount.name + remotePath);
+    query=new PropFindMethod(client.getBaseUri() + WebdavUtils.encodePath(remotePath),DavConstants.PROPFIND_ALL_PROP,DavConstants.DEPTH_0);
+    int status=client.executeMethod(query);
+    if (isMultiStatus(status)) {
+      WebdavEntry we=new WebdavEntry(query.getResponseBodyAsMultiStatus().getResponses()[0],client.getBaseUri().getPath());
+      OCFile remoteFolder=fillOCFile(we);
+      mRemoteFolderChanged=!(remoteFolder.getEtag().equalsIgnoreCase(mLocalFolder.getEtag()));
+      result=new RemoteOperationResult(ResultCode.OK);
+    }
+ else {
+      client.exhaustResponse(query.getResponseBodyAsStream());
+      if (status == HttpStatus.SC_NOT_FOUND) {
+        removeLocalFolder();
+      }
+      result=new RemoteOperationResult(false,status,query.getResponseHeaders());
+    }
+  }
+ catch (  Exception e) {
+    result=new RemoteOperationResult(e);
+  }
+ finally {
+    if (query != null)     query.releaseConnection();
+    if (result.isSuccess()) {
+      Log_OC.i(TAG,"Checked " + mAccount.name + remotePath+ " : "+ (mRemoteFolderChanged ? "changed" : "not changed"));
+    }
+ else {
+      if (result.isException()) {
+        Log_OC.e(TAG,"Checked " + mAccount.name + remotePath+ " : "+ result.getLogMessage(),result.getException());
+      }
+ else {
+        Log_OC.e(TAG,"Checked " + mAccount.name + remotePath+ " : "+ result.getLogMessage());
+      }
+    }
+  }
+  return result;
+}

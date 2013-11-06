@@ -1,0 +1,26 @@
+{
+  if (mUriMatcher.match(uri) != SINGLE_FILE && mUriMatcher.match(uri) != ROOT_DIRECTORY) {
+    throw new IllegalArgumentException("Unknown uri id: " + uri);
+  }
+  String remotePath=values.getAsString(ProviderTableMeta.FILE_PATH);
+  String accountName=values.getAsString(ProviderTableMeta.FILE_ACCOUNT_OWNER);
+  String[] projection=new String[]{ProviderTableMeta._ID,ProviderTableMeta.FILE_PATH,ProviderTableMeta.FILE_ACCOUNT_OWNER};
+  String where=ProviderTableMeta.FILE_PATH + "=? AND " + ProviderTableMeta.FILE_ACCOUNT_OWNER+ "=?";
+  String[] whereArgs=new String[]{remotePath,accountName};
+  Cursor doubleCheck=query(db,uri,projection,where,whereArgs,null);
+  if (doubleCheck == null || !doubleCheck.moveToFirst()) {
+    long rowId=db.insert(ProviderTableMeta.DB_NAME,null,values);
+    if (rowId > 0) {
+      Uri insertedFileUri=ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_FILE,rowId);
+      return insertedFileUri;
+    }
+ else {
+      throw new SQLException("ERROR " + uri);
+    }
+  }
+ else {
+    Uri insertedFileUri=ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_FILE,doubleCheck.getLong(doubleCheck.getColumnIndex(ProviderTableMeta._ID)));
+    doubleCheck.close();
+    return insertedFileUri;
+  }
+}

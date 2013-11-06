@@ -1,8 +1,15 @@
 {
-  int i=itemPosition;
-  while (i-- != 0) {
-    onBackPressed();
+  if (itemPosition != 0) {
+    String targetPath="";
+    for (int i=itemPosition; i < mDirectories.getCount() - 1; i++) {
+      targetPath=mDirectories.getItem(i) + OCFile.PATH_SEPARATOR + targetPath;
+    }
+    targetPath=OCFile.PATH_SEPARATOR + targetPath;
+    OCFile targetFolder=mStorageManager.getFileByPath(targetPath);
+    if (targetFolder != null) {
+      browseTo(targetFolder);
+    }
+    getSupportActionBar().setSelectedNavigationItem(0);
   }
-  if (itemPosition != 0)   getSupportActionBar().setSelectedNavigationItem(0);
   return true;
 }

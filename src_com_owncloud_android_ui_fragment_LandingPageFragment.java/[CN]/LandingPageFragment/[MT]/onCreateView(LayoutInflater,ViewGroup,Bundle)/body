@@ -1,4 +1,0 @@
-{
-  View root=inflater.inflate(R.layout.landing_page_fragment,container);
-  return root;
-}

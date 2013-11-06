@@ -32,7 +32,7 @@
     TextView fileSizeV=(TextView)view.findViewById(R.id.file_size);
     TextView lastModV=(TextView)view.findViewById(R.id.last_mod);
     ImageView checkBoxV=(ImageView)view.findViewById(R.id.custom_checkbox);
-    if (!file.isDirectory()) {
+    if (!file.isFolder()) {
       fileSizeV.setVisibility(View.VISIBLE);
       fileSizeV.setText(DisplayUtils.bytesToHumanReadable(file.getFileLength()));
       lastModV.setVisibility(View.VISIBLE);

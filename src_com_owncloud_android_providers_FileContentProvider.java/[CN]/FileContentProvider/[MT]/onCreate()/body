@@ -5,6 +5,7 @@
   mUriMatcher.addURI(authority,null,ROOT_DIRECTORY);
   mUriMatcher.addURI(authority,"file/",SINGLE_FILE);
   mUriMatcher.addURI(authority,"file/#",SINGLE_FILE);
+  mUriMatcher.addURI(authority,"dir/",DIRECTORY);
   mUriMatcher.addURI(authority,"dir/#",DIRECTORY);
   return true;
 }

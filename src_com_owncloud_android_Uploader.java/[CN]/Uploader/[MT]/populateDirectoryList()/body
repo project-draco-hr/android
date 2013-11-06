@@ -5,11 +5,11 @@
   Log_OC.d(TAG,"Populating view with content of : " + full_path);
   mFile=mStorageManager.getFileByPath(full_path);
   if (mFile != null) {
-    Vector<OCFile> files=mStorageManager.getDirectoryContent(mFile);
+    Vector<OCFile> files=mStorageManager.getFolderContent(mFile);
     List<HashMap<String,Object>> data=new LinkedList<HashMap<String,Object>>();
     for (    OCFile f : files) {
       HashMap<String,Object> h=new HashMap<String,Object>();
-      if (f.isDirectory()) {
+      if (f.isFolder()) {
         h.put("dirname",f.getFileName());
         data.add(h);
       }

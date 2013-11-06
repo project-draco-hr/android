@@ -1,9 +1,9 @@
 {
   Log_OC.d(TAG,"on item click");
-  Vector<OCFile> tmpfiles=mStorageManager.getDirectoryContent(mFile);
+  Vector<OCFile> tmpfiles=mStorageManager.getFolderContent(mFile);
   if (tmpfiles.size() <= 0)   return;
   Vector<OCFile> files=new Vector<OCFile>();
-  for (  OCFile f : tmpfiles)   if (f.isDirectory())   files.add(f);
+  for (  OCFile f : tmpfiles)   if (f.isFolder())   files.add(f);
   if (files.size() < position) {
     throw new IndexOutOfBoundsException("Incorrect item selected");
   }

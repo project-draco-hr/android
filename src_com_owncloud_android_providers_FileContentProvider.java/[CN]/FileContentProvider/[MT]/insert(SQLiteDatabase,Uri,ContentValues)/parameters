@@ -1,0 +1,3 @@
+SQLiteDatabase db
+Uri uri
+ContentValues values
