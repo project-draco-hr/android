@@ -1,3 +1,23 @@
 {
-  return null;
+  RemoteOperationResult result=null;
+  MkColMethod mkcol=null;
+  try {
+    mkcol=new MkColMethod(client.getBaseUri() + WebdavUtils.encodePath(mRemotePath));
+    int status=client.executeMethod(mkcol,READ_TIMEOUT,CONNECTION_TIMEOUT);
+    if (!mkcol.succeeded() && mkcol.getStatusCode() == HttpStatus.SC_CONFLICT && mCreateFullPath) {
+      result=createParentFolder(FileStorageUtils.getParentPath(mRemotePath),client);
+      status=client.executeMethod(mkcol,READ_TIMEOUT,CONNECTION_TIMEOUT);
+    }
+    result=new RemoteOperationResult(mkcol.succeeded(),status,mkcol.getResponseHeaders());
+    Log_OC.d(TAG,"Create directory " + mRemotePath + ": "+ result.getLogMessage());
+    client.exhaustResponse(mkcol.getResponseBodyAsStream());
+  }
+ catch (  Exception e) {
+    result=new RemoteOperationResult(e);
+    Log_OC.e(TAG,"Create directory " + mRemotePath + ": "+ result.getLogMessage(),e);
+  }
+ finally {
+    if (mkcol != null)     mkcol.releaseConnection();
+  }
+  return result;
 }
