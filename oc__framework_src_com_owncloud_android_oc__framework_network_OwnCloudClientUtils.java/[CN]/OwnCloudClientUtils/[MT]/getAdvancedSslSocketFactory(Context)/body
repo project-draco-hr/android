@@ -1,0 +1,12 @@
+{
+  if (mAdvancedSslSocketFactory == null) {
+    KeyStore trustStore=getKnownServersStore(context);
+    AdvancedX509TrustManager trustMgr=new AdvancedX509TrustManager(trustStore);
+    TrustManager[] tms=new TrustManager[]{trustMgr};
+    SSLContext sslContext=SSLContext.getInstance("TLS");
+    sslContext.init(null,tms,null);
+    mHostnameVerifier=new BrowserCompatHostnameVerifier();
+    mAdvancedSslSocketFactory=new AdvancedSslSocketFactory(sslContext,trustMgr,mHostnameVerifier);
+  }
+  return mAdvancedSslSocketFactory;
+}

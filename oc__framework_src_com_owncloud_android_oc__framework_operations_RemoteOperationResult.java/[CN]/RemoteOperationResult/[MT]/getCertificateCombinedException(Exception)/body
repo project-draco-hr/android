@@ -1,0 +1,16 @@
+{
+  CertificateCombinedException result=null;
+  if (e instanceof CertificateCombinedException) {
+    return (CertificateCombinedException)e;
+  }
+  Throwable cause=mException.getCause();
+  Throwable previousCause=null;
+  while (cause != null && cause != previousCause && !(cause instanceof CertificateCombinedException)) {
+    previousCause=cause;
+    cause=cause.getCause();
+  }
+  if (cause != null && cause instanceof CertificateCombinedException) {
+    result=(CertificateCombinedException)cause;
+  }
+  return result;
+}

@@ -1,0 +1,10 @@
+{
+  List<String> authPrefs=new ArrayList<String>(1);
+  authPrefs.add(AuthPolicy.BASIC);
+  getParams().setParameter(AuthPolicy.AUTH_SCHEME_PRIORITY,authPrefs);
+  getParams().setAuthenticationPreemptive(true);
+  mCredentials=new UsernamePasswordCredentials(username,password);
+  getState().setCredentials(AuthScope.ANY,mCredentials);
+  mSsoSessionCookie=null;
+  mAuthTokenType=MainApp.getAuthTokenTypePass();
+}

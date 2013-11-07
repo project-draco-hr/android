@@ -1,0 +1,3 @@
+{
+  return mCode == ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED;
+}

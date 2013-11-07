@@ -1,0 +1,8 @@
+{
+  try {
+    return Math.min(mChunkSize,mChannel.size() - mChannel.position());
+  }
+ catch (  IOException e) {
+    return mChunkSize;
+  }
+}

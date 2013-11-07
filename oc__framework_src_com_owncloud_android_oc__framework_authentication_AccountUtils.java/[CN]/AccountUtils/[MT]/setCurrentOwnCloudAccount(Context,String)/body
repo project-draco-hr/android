@@ -1,0 +1,18 @@
+{
+  boolean result=false;
+  if (accountName != null) {
+    Account[] ocAccounts=AccountManager.get(context).getAccountsByType(MainApp.getAccountType());
+    boolean found=false;
+    for (    Account account : ocAccounts) {
+      found=(account.name.equals(accountName));
+      if (found) {
+        SharedPreferences.Editor appPrefs=PreferenceManager.getDefaultSharedPreferences(context).edit();
+        appPrefs.putString("select_oc_account",accountName);
+        appPrefs.commit();
+        result=true;
+        break;
+      }
+    }
+  }
+  return result;
+}

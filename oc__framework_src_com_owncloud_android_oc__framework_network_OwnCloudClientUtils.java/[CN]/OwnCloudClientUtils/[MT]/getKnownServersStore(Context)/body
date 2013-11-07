@@ -1,0 +1,20 @@
+{
+  if (mKnownServersStore == null) {
+    mKnownServersStore=KeyStore.getInstance(KeyStore.getDefaultType());
+    File localTrustStoreFile=new File(context.getFilesDir(),LOCAL_TRUSTSTORE_FILENAME);
+    Log.d(TAG,"Searching known-servers store at " + localTrustStoreFile.getAbsolutePath());
+    if (localTrustStoreFile.exists()) {
+      InputStream in=new FileInputStream(localTrustStoreFile);
+      try {
+        mKnownServersStore.load(in,LOCAL_TRUSTSTORE_PASSWORD.toCharArray());
+      }
+  finally {
+        in.close();
+      }
+    }
+ else {
+      mKnownServersStore.load(null,LOCAL_TRUSTSTORE_PASSWORD.toCharArray());
+    }
+  }
+  return mKnownServersStore;
+}

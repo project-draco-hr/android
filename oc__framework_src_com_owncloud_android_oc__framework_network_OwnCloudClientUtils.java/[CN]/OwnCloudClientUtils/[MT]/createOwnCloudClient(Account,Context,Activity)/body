@@ -1,0 +1,29 @@
+{
+  Uri uri=Uri.parse(AccountUtils.constructFullURLForAccount(appContext,account));
+  AccountManager am=AccountManager.get(appContext);
+  boolean isOauth2=am.getUserData(account,AccountAuthenticatorConstants.KEY_SUPPORTS_OAUTH2) != null;
+  boolean isSamlSso=am.getUserData(account,AccountAuthenticatorConstants.KEY_SUPPORTS_SAML_WEB_SSO) != null;
+  WebdavClient client=createOwnCloudClient(uri,appContext,!isSamlSso);
+  if (isOauth2) {
+    AccountManagerFuture<Bundle> future=am.getAuthToken(account,MainApp.getAuthTokenTypeAccessToken(),null,currentActivity,null,null);
+    Bundle result=future.getResult();
+    String accessToken=result.getString(AccountManager.KEY_AUTHTOKEN);
+    if (accessToken == null)     throw new AuthenticatorException("WTF!");
+    client.setBearerCredentials(accessToken);
+  }
+ else   if (isSamlSso) {
+    AccountManagerFuture<Bundle> future=am.getAuthToken(account,MainApp.getAuthTokenTypeSamlSessionCookie(),null,currentActivity,null,null);
+    Bundle result=future.getResult();
+    String accessToken=result.getString(AccountManager.KEY_AUTHTOKEN);
+    if (accessToken == null)     throw new AuthenticatorException("WTF!");
+    client.setSsoSessionCookie(accessToken);
+  }
+ else {
+    String username=account.name.substring(0,account.name.lastIndexOf('@'));
+    AccountManagerFuture<Bundle> future=am.getAuthToken(account,MainApp.getAuthTokenTypePass(),null,currentActivity,null,null);
+    Bundle result=future.getResult();
+    String password=result.getString(AccountManager.KEY_AUTHTOKEN);
+    client.setBasicCredentials(username,password);
+  }
+  return client;
+}

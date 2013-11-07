@@ -1,0 +1,15 @@
+{
+  super();
+  if (channel == null) {
+    throw new IllegalArgumentException("File may not be null");
+  }
+  if (chunkSize <= 0) {
+    throw new IllegalArgumentException("Chunk size must be greater than zero");
+  }
+  mChannel=channel;
+  mContentType=contentType;
+  mChunkSize=chunkSize;
+  mFile=file;
+  mOffset=0;
+  mTransferred=0;
+}

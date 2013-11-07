@@ -1,0 +1,70 @@
+{
+  if (mException != null) {
+    if (mException instanceof OperationCancelledException) {
+      return "Operation cancelled by the caller";
+    }
+ else     if (mException instanceof SocketException) {
+      return "Socket exception";
+    }
+ else     if (mException instanceof SocketTimeoutException) {
+      return "Socket timeout exception";
+    }
+ else     if (mException instanceof ConnectTimeoutException) {
+      return "Connect timeout exception";
+    }
+ else     if (mException instanceof MalformedURLException) {
+      return "Malformed URL exception";
+    }
+ else     if (mException instanceof UnknownHostException) {
+      return "Unknown host exception";
+    }
+ else     if (mException instanceof CertificateCombinedException) {
+      if (((CertificateCombinedException)mException).isRecoverable())       return "SSL recoverable exception";
+ else       return "SSL exception";
+    }
+ else     if (mException instanceof SSLException) {
+      return "SSL exception";
+    }
+ else     if (mException instanceof DavException) {
+      return "Unexpected WebDAV exception";
+    }
+ else     if (mException instanceof HttpException) {
+      return "HTTP violation";
+    }
+ else     if (mException instanceof IOException) {
+      return "Unrecovered transport exception";
+    }
+ else     if (mException instanceof AccountNotFoundException) {
+      Account failedAccount=((AccountNotFoundException)mException).getFailedAccount();
+      return mException.getMessage() + " (" + (failedAccount != null ? failedAccount.name : "NULL")+ ")";
+    }
+ else     if (mException instanceof AccountsException) {
+      return "Exception while using account";
+    }
+ else {
+      return "Unexpected exception";
+    }
+  }
+  if (mCode == ResultCode.INSTANCE_NOT_CONFIGURED) {
+    return "The ownCloud server is not configured!";
+  }
+ else   if (mCode == ResultCode.NO_NETWORK_CONNECTION) {
+    return "No network connection";
+  }
+ else   if (mCode == ResultCode.BAD_OC_VERSION) {
+    return "No valid ownCloud version was found at the server";
+  }
+ else   if (mCode == ResultCode.LOCAL_STORAGE_FULL) {
+    return "Local storage full";
+  }
+ else   if (mCode == ResultCode.LOCAL_STORAGE_NOT_MOVED) {
+    return "Error while moving file to final directory";
+  }
+ else   if (mCode == ResultCode.ACCOUNT_NOT_NEW) {
+    return "Account already existing when creating a new one";
+  }
+ else   if (mCode == ResultCode.ACCOUNT_NOT_THE_SAME) {
+    return "Authenticated with a different account than the one updating";
+  }
+  return "Operation finished with HTTP status code " + mHttpCode + " ("+ (isSuccess() ? "success" : "fail")+ ")";
+}
