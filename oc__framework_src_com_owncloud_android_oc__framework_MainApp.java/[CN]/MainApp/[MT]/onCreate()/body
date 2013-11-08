@@ -1,4 +1,0 @@
-{
-  super.onCreate();
-  MainApp.mContext=getApplicationContext();
-}

@@ -1,0 +1,4 @@
+Uri uri
+Context context
+boolean followRedirects
+String authoritities

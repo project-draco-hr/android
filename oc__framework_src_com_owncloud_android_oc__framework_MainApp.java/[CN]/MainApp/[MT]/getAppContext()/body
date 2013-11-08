@@ -1,3 +1,0 @@
-{
-  return MainApp.mContext;
-}

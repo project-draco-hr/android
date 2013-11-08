@@ -6,10 +6,10 @@
       if (mClient == null) {
         if (mAccount != null && mContext != null) {
           if (mCallerActivity != null) {
-            mClient=OwnCloudClientUtils.createOwnCloudClient(mAccount,mContext,mCallerActivity);
+            mClient=OwnCloudClientUtils.createOwnCloudClient(mAccount,mContext,mCallerActivity,mAuthorities);
           }
  else {
-            mClient=OwnCloudClientUtils.createOwnCloudClient(mAccount,mContext);
+            mClient=OwnCloudClientUtils.createOwnCloudClient(mAccount,mContext,mAuthorities);
           }
         }
  else {
@@ -35,10 +35,10 @@ catch (    AccountsException e) {
         boolean bearerAuthorization=(cred != null && cred instanceof BearerCredentials);
         boolean samlBasedSsoAuthorization=(cred == null && ssoSessionCookie != null);
         if (bearerAuthorization) {
-          am.invalidateAuthToken(MainApp.getAccountType(),((BearerCredentials)cred).getAccessToken());
+          am.invalidateAuthToken(mAccount.type,((BearerCredentials)cred).getAccessToken());
         }
  else         if (samlBasedSsoAuthorization) {
-          am.invalidateAuthToken(MainApp.getAccountType(),ssoSessionCookie);
+          am.invalidateAuthToken(mAccount.type,ssoSessionCookie);
         }
  else {
           am.clearPassword(mAccount);
