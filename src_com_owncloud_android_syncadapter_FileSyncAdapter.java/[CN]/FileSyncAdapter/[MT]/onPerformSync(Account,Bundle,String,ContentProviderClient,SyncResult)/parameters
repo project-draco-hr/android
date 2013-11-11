@@ -1,5 +1,5 @@
 Account account
 Bundle extras
 String authority
-ContentProviderClient provider
+ContentProviderClient providerClient
 SyncResult syncResult

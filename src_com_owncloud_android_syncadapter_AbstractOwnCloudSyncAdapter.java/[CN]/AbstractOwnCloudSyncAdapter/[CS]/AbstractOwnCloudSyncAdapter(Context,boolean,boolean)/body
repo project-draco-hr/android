@@ -1,0 +1,4 @@
+{
+  super(context,autoInitialize,allowParallelSyncs);
+  this.setAccountManager(AccountManager.get(context));
+}

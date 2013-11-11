@@ -10,8 +10,8 @@
   mSyncResult.fullSyncRequested=false;
   mSyncResult.delayUntil=60 * 60 * 24;
   this.setAccount(account);
-  this.setContentProvider(provider);
-  this.setStorageManager(new FileDataStorageManager(account,provider));
+  this.setContentProviderClient(providerClient);
+  this.setStorageManager(new FileDataStorageManager(account,providerClient));
   try {
     this.initClientForCurrentAccount();
   }
