@@ -4,8 +4,8 @@
   String message=getIntent().getStringExtra(MESSAGE);
   TextView textView=(TextView)findViewById(R.id.faild_upload_message);
   textView.setText(message);
-  Button close_button=(Button)findViewById(R.id.failed_uploadactivity_close_button);
-  close_button.setOnClickListener(new OnClickListener(){
+  Button closeBtn=(Button)findViewById(R.id.failed_uploadactivity_close_button);
+  closeBtn.setOnClickListener(new OnClickListener(){
     @Override public void onClick(    View v){
       finish();
     }

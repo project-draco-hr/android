@@ -1,5 +1,0 @@
-{
-  Bundle bundle=new Bundle();
-  bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL,true);
-  ContentResolver.requestSync(mAccount,MainApp.getAuthTokenType(),bundle);
-}

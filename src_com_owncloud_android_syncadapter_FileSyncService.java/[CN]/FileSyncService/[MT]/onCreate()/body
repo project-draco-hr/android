@@ -1,2 +1,7 @@
 {
+synchronized (sSyncAdapterLock) {
+    if (sSyncAdapter == null) {
+      sSyncAdapter=new FileSyncAdapter(getApplicationContext(),true);
+    }
+  }
 }
