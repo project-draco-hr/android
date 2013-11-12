@@ -1,0 +1,6 @@
+{
+  String remotePath="/test^^SpecialCharacters" + mCurrentDate;
+  boolean createFullPath=true;
+  RemoteOperationResult result=mActivity.createFolder(remotePath,createFullPath);
+  assertFalse(result.isSuccess());
+}

@@ -1,0 +1,8 @@
+{
+  String remotePath="/testCreateFolder" + mCurrentDate;
+  boolean createFullPath=true;
+  RemoteOperationResult result=mActivity.createFolder(remotePath,createFullPath);
+  Log.d("test CreateFolder","-----------------------" + result.getCode().name());
+  Log.d("test CreateFolder","-----------------------" + result.getLogMessage());
+  assertTrue(result.isSuccess());
+}
