@@ -6,10 +6,10 @@
       if (mClient == null) {
         if (mAccount != null && mContext != null) {
           if (mCallerActivity != null) {
-            mClient=OwnCloudClientUtils.createOwnCloudClient(mAccount,mContext,mCallerActivity,mAuthorities);
+            mClient=OwnCloudClientFactory.createOwnCloudClient(mAccount,mContext,mCallerActivity);
           }
  else {
-            mClient=OwnCloudClientUtils.createOwnCloudClient(mAccount,mContext,mAuthorities);
+            mClient=OwnCloudClientFactory.createOwnCloudClient(mAccount,mContext);
           }
         }
  else {

@@ -5,26 +5,26 @@
   mAccount=getIntent().getExtras().getParcelable(EXTRA_ACCOUNT);
   if (mAuthTokenType == null) {
     if (mAccount != null) {
-      oAuthRequired=(mAccountMgr.getUserData(mAccount,AccountAuthenticator.KEY_SUPPORTS_OAUTH2) != null);
-      samlWebSsoRequired=(mAccountMgr.getUserData(mAccount,AccountAuthenticator.KEY_SUPPORTS_SAML_WEB_SSO) != null);
+      oAuthRequired=(mAccountMgr.getUserData(mAccount,OwnCloudAccount.Constants.KEY_SUPPORTS_OAUTH2) != null);
+      samlWebSsoRequired=(mAccountMgr.getUserData(mAccount,OwnCloudAccount.Constants.KEY_SUPPORTS_SAML_WEB_SSO) != null);
     }
  else {
       oAuthRequired=AUTH_ON.equals(getString(R.string.auth_method_oauth2));
       samlWebSsoRequired=AUTH_ON.equals(getString(R.string.auth_method_saml_web_sso));
     }
     if (oAuthRequired) {
-      mAuthTokenType=MainApp.getAuthTokenTypeAccessToken();
+      mAuthTokenType=AccountTypeUtils.getAuthTokenTypeAccessToken(MainApp.getAccountType());
     }
  else     if (samlWebSsoRequired) {
-      mAuthTokenType=MainApp.getAuthTokenTypeSamlSessionCookie();
+      mAuthTokenType=AccountTypeUtils.getAuthTokenTypeSamlSessionCookie(MainApp.getAccountType());
     }
  else {
-      mAuthTokenType=MainApp.getAuthTokenTypePass();
+      mAuthTokenType=AccountTypeUtils.getAuthTokenTypePass(MainApp.getAccountType());
     }
   }
   if (mAccount != null) {
     String userName=mAccount.name.substring(0,mAccount.name.lastIndexOf('@'));
     mUsernameInput.setText(userName);
   }
-  mOAuth2Check.setChecked(MainApp.getAuthTokenTypeAccessToken().equals(mAuthTokenType));
+  mOAuth2Check.setChecked(AccountTypeUtils.getAuthTokenTypeAccessToken(MainApp.getAccountType()).equals(mAuthTokenType));
 }

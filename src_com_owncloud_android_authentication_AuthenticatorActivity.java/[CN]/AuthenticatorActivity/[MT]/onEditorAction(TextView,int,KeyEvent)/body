@@ -5,7 +5,7 @@
     }
   }
  else   if (actionId == EditorInfo.IME_ACTION_NEXT && inputField != null && inputField.equals(mHostUrlInput)) {
-    if (MainApp.getAuthTokenTypeSamlSessionCookie().equals(mAuthTokenType)) {
+    if (AccountTypeUtils.getAuthTokenTypeSamlSessionCookie(MainApp.getAccountType()).equals(mAuthTokenType)) {
       checkOcServer();
     }
   }

@@ -1,0 +1,14 @@
+{
+  if (account == null)   throw new IllegalArgumentException("Trying to execute a remote operation with a NULL Account");
+  if (context == null)   throw new IllegalArgumentException("Trying to execute a remote operation with a NULL Context");
+  mAccount=account;
+  mContext=context.getApplicationContext();
+  try {
+    mClient=OwnCloudClientFactory.createOwnCloudClient(mAccount,mContext);
+  }
+ catch (  Exception e) {
+    Log.e(TAG,"Error while trying to access to " + mAccount.name,e);
+    return new RemoteOperationResult(e);
+  }
+  return run(mClient);
+}

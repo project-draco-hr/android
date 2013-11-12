@@ -6,7 +6,7 @@
     onGetOAuthAccessTokenFinish((OAuth2GetAccessToken)operation,result);
   }
  else   if (operation instanceof ExistenceCheckOperation) {
-    if (MainApp.getAuthTokenTypeSamlSessionCookie().equals(mAuthTokenType)) {
+    if (AccountTypeUtils.getAuthTokenTypeSamlSessionCookie(MainApp.getAccountType()).equals(mAuthTokenType)) {
       onSamlBasedFederatedSingleSignOnAuthorizationStart(operation,result);
     }
  else {

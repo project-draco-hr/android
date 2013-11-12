@@ -40,11 +40,11 @@
     mAuthStatusText=mAuthStatusIcon=0;
     mAccount=getIntent().getExtras().getParcelable(EXTRA_ACCOUNT);
     if (mAccount != null) {
-      String ocVersion=mAccountMgr.getUserData(mAccount,AccountAuthenticator.KEY_OC_VERSION);
+      String ocVersion=mAccountMgr.getUserData(mAccount,OwnCloudAccount.Constants.KEY_OC_VERSION);
       if (ocVersion != null) {
         mDiscoveredVersion=new OwnCloudVersion(ocVersion);
       }
-      mHostBaseUrl=normalizeUrl(mAccountMgr.getUserData(mAccount,AccountAuthenticator.KEY_OC_BASE_URL));
+      mHostBaseUrl=normalizeUrl(mAccountMgr.getUserData(mAccount,OwnCloudAccount.Constants.KEY_OC_BASE_URL));
       mHostUrlInput.setText(mHostBaseUrl);
       String userName=mAccount.name.substring(0,mAccount.name.lastIndexOf('@'));
       mUsernameInput.setText(userName);
@@ -77,7 +77,7 @@
     mAccount=savedInstanceState.getParcelable(KEY_ACCOUNT);
     mAuthTokenType=savedInstanceState.getString(AccountAuthenticator.KEY_AUTH_TOKEN_TYPE);
     if (mAuthTokenType == null) {
-      mAuthTokenType=MainApp.getAuthTokenTypePass();
+      mAuthTokenType=AccountTypeUtils.getAuthTokenTypePass(MainApp.getAccountType());
     }
     if (savedInstanceState.getBoolean(KEY_SERVER_CHECK_IN_PROGRESS,false)) {
       checkOcServer();
@@ -102,7 +102,7 @@
   }
   if (mServerIsChecked && !mServerIsValid && refreshButtonEnabled)   showRefreshButton();
   mOkButton.setEnabled(mServerIsValid);
-  if (MainApp.getAuthTokenTypeSamlSessionCookie().equals(mAuthTokenType) || !AUTH_OPTIONAL.equals(getString(R.string.auth_method_oauth2))) {
+  if (AccountTypeUtils.getAuthTokenTypeSamlSessionCookie(MainApp.getAccountType()).equals(mAuthTokenType) || !AUTH_OPTIONAL.equals(getString(R.string.auth_method_oauth2))) {
     mOAuth2Check.setVisibility(View.GONE);
   }
   mPasswordInput.setText("");
@@ -142,7 +142,7 @@
   findViewById(R.id.scroll).setOnTouchListener(new OnTouchListener(){
     @Override public boolean onTouch(    View view,    MotionEvent event){
       if (event.getAction() == MotionEvent.ACTION_DOWN) {
-        if (MainApp.getAuthTokenTypeSamlSessionCookie().equals(mAuthTokenType) && mHostUrlInput.hasFocus()) {
+        if (AccountTypeUtils.getAuthTokenTypeSamlSessionCookie(MainApp.getAccountType()).equals(mAuthTokenType) && mHostUrlInput.hasFocus()) {
           checkOcServer();
         }
       }

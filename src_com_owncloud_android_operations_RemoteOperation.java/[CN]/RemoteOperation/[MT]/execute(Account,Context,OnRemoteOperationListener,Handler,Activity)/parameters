@@ -1,5 +1,0 @@
-Account account
-Context context
-OnRemoteOperationListener listener
-Handler listenerHandler
-Activity callerActivity

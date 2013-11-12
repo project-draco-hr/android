@@ -1,7 +1,0 @@
-{
-  getParams().setAuthenticationPreemptive(false);
-  getParams().setCookiePolicy(CookiePolicy.IGNORE_COOKIES);
-  mSsoSessionCookie=accessToken;
-  mCredentials=null;
-  mAuthTokenType=authorities;
-}

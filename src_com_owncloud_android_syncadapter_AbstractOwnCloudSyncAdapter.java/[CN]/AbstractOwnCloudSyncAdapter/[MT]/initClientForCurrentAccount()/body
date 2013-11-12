@@ -1,4 +1,4 @@
 {
   AccountUtils.constructFullURLForAccount(getContext(),account);
-  mClient=OwnCloudClientUtils.createOwnCloudClient(account,getContext());
+  mClient=OwnCloudClientFactory.createOwnCloudClient(account,getContext());
 }

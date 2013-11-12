@@ -9,7 +9,7 @@ synchronized (mPendingDownloads) {
       if (mDownloadClient == null || !mLastAccount.equals(mCurrentDownload.getAccount())) {
         mLastAccount=mCurrentDownload.getAccount();
         mStorageManager=new FileDataStorageManager(mLastAccount,getContentResolver());
-        mDownloadClient=OwnCloudClientUtils.createOwnCloudClient(mLastAccount,getApplicationContext());
+        mDownloadClient=OwnCloudClientFactory.createOwnCloudClient(mLastAccount,getApplicationContext());
       }
       downloadResult=mCurrentDownload.execute(mDownloadClient);
       if (downloadResult.isSuccess()) {
