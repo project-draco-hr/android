@@ -1,0 +1,6 @@
+{
+  String remotePath="beta.owncloud.com/owncloud/test^^SpecialCharacters";
+  boolean createFullPath=true;
+  RemoteOperationResult result=mActivity.createFolder(remotePath,createFullPath);
+  assertTrue(result.isSuccess());
+}

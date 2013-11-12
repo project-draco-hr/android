@@ -1,0 +1,5 @@
+{
+  CreateRemoteFolderOperation createOperation=new CreateRemoteFolderOperation(remotePath,createFullPath);
+  RemoteOperationResult result=createOperation.execute(mClient);
+  return result;
+}
