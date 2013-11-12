@@ -1,3 +1,5 @@
 {
   super(TestActivity.class);
+  SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmss");
+  mCurrentDate=sdf.format(new Date());
 }

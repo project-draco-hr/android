@@ -1,16 +1,30 @@
 {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.activity_test);
-  String accountName="admin@beta.owncloud.com";
   String accountHost="beta.owncloud.com";
-  String accountUser="admin";
-  String accountPass="owncloud42";
+  String accountUser="masensio";
+  String accountName=accountUser + "@" + accountHost;
+  String accountPass="masensio";
   String accountType="owncloud";
-  String accountTypePass="owncloud.password";
   String authorities="org.owncloud";
-  mAccount=new Account(accountName,accountType);
   AccountManager am=AccountManager.get(this);
-  am.addAccountExplicitly(mAccount,accountPass,null);
+  Account[] ocAccounts=am.getAccountsByType(accountType);
+  for (  Account ac : ocAccounts) {
+    if (ac.name.equals(accountName)) {
+      mAccount=ac;
+      break;
+    }
+  }
+  if (mAccount == null) {
+    mAccount=new Account(accountName,accountType);
+    am.addAccountExplicitly(mAccount,accountPass,null);
+    am.setUserData(mAccount,"oc_version","5.0.14");
+    am.setUserData(mAccount,"oc_base_url","http://beta.owncloud.com/owncloud");
+  }
+ else {
+    Log.d(TAG,"oc_version --->" + am.getUserData(mAccount,"oc_version"));
+    Log.d(TAG,"oc_base_url --->" + am.getUserData(mAccount,"oc_base_url"));
+  }
   try {
     mClient=OwnCloudClientUtils.createOwnCloudClient(mAccount,this.getApplicationContext(),authorities);
   }

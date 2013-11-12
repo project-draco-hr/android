@@ -1,5 +1,5 @@
 {
-  String remotePath="beta.owncloud.com/owncloud/testCreateFolder";
+  String remotePath="/testCreateFolder" + mCurrentDate;
   boolean createFullPath=true;
   RemoteOperationResult result=mActivity.createFolder(remotePath,createFullPath);
   Log.d("test CreateFolder","-----------------------" + result.getCode().name());
