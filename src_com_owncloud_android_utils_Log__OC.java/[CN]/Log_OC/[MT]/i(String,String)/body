@@ -1,4 +1,4 @@
 {
-  Log.i(TAG,message);
+  int a=Log.i(TAG,message);
   appendLog(TAG + " : " + message);
 }
