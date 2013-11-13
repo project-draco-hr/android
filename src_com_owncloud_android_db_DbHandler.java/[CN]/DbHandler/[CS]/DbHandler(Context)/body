@@ -1,5 +1,5 @@
 {
+  mDatabaseName=MainApp.getDBName();
   mHelper=new OpenerHelper(context);
   mDB=mHelper.getWritableDatabase();
-  mDatabaseName=MainApp.getDBName();
 }
