@@ -1,5 +1,0 @@
-{
-  String parentPath=new File(mRemotePath).getParent();
-  parentPath=parentPath.endsWith(PATH_SEPARATOR) ? parentPath : parentPath + PATH_SEPARATOR;
-  return parentPath;
-}
