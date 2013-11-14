@@ -17,6 +17,10 @@
       Toast msg=Toast.makeText(this,R.string.rename_local_fail_msg,Toast.LENGTH_LONG);
       msg.show();
     }
+    if (result.getCode().equals(ResultCode.INVALID_CHARACTER_IN_NAME)) {
+      Toast msg=Toast.makeText(this,R.string.create_dir_fail_msg_invalid_characters,Toast.LENGTH_LONG);
+      msg.show();
+    }
  else {
       Toast msg=Toast.makeText(this,R.string.rename_server_fail_msg,Toast.LENGTH_LONG);
       msg.show();

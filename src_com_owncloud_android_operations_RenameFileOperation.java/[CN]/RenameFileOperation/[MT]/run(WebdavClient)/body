@@ -13,7 +13,7 @@
     if (client.existsFile(mNewRemotePath) || mStorageManager.getFileByPath(mNewRemotePath) != null) {
       return new RemoteOperationResult(ResultCode.INVALID_OVERWRITE);
     }
-    RenameRemoteFileOperation operation=new RenameRemoteFileOperation(mFile.getFileName(),mFile.getRemotePath(),mNewName,mNewRemotePath,mFile.isFolder());
+    RenameRemoteFileOperation operation=new RenameRemoteFileOperation(mFile.getFileName(),mFile.getRemotePath(),mNewName,mNewRemotePath);
     result=operation.execute(client);
     if (result.isSuccess()) {
       if (mFile.isFolder()) {
