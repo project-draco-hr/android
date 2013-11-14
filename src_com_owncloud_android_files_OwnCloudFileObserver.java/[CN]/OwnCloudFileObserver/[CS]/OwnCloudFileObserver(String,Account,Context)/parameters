@@ -1,4 +1,3 @@
 String path
 Account account
 Context context
-int mask
