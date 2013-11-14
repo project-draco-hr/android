@@ -1,0 +1,7 @@
+{
+  mOldName=oldName;
+  mOldRemotePath=oldRemotePath;
+  mNewName=newName;
+  mNewRemotePath=newRemotePath;
+  mIsFolder=isFolder;
+}

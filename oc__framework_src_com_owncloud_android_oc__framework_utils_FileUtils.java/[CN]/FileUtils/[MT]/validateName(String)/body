@@ -1,9 +1,0 @@
-{
-  boolean result=true;
-  Log.d("FileUtils","fileName =======" + fileName);
-  String name=fileName.substring(1);
-  if ((fileName.indexOf("/") > 0 && name.indexOf("/") < (name.length() - 1)) || fileName.contains("\\") || fileName.contains("<")|| fileName.contains(">")|| fileName.contains(":")|| fileName.contains("\"")|| fileName.contains("|")|| fileName.contains("?")|| fileName.contains("*")) {
-    result=false;
-  }
-  return result;
-}

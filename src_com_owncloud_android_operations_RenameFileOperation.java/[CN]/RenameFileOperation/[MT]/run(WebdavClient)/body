@@ -1,10 +1,8 @@
 {
   RemoteOperationResult result=null;
-  LocalMoveMethod move=null;
-  mNewRemotePath=null;
   try {
-    if (mNewName.equals(mFile.getFileName())) {
-      return new RemoteOperationResult(ResultCode.OK);
+    if (!isValidNewName()) {
+      return new RemoteOperationResult(ResultCode.INVALID_LOCAL_FILE_NAME);
     }
     String parent=(new File(mFile.getRemotePath())).getParent();
     parent=(parent.endsWith(OCFile.PATH_SEPARATOR)) ? parent : parent + OCFile.PATH_SEPARATOR;
@@ -12,15 +10,12 @@
     if (mFile.isFolder()) {
       mNewRemotePath+=OCFile.PATH_SEPARATOR;
     }
-    if (!isValidNewName()) {
-      return new RemoteOperationResult(ResultCode.INVALID_LOCAL_FILE_NAME);
-    }
     if (client.existsFile(mNewRemotePath) || mStorageManager.getFileByPath(mNewRemotePath) != null) {
       return new RemoteOperationResult(ResultCode.INVALID_OVERWRITE);
     }
-    move=new LocalMoveMethod(client.getBaseUri() + WebdavUtils.encodePath(mFile.getRemotePath()),client.getBaseUri() + WebdavUtils.encodePath(mNewRemotePath));
-    int status=client.executeMethod(move,RENAME_READ_TIMEOUT,RENAME_CONNECTION_TIMEOUT);
-    if (move.succeeded()) {
+    RenameRemoteFileOperation operation=new RenameRemoteFileOperation(mFile.getFileName(),mFile.getRemotePath(),mNewName,mNewRemotePath,mFile.isFolder());
+    result=operation.execute(client);
+    if (result.isSuccess()) {
       if (mFile.isFolder()) {
         saveLocalDirectory();
       }
@@ -28,16 +23,14 @@
         saveLocalFile();
       }
     }
-    move.getResponseBodyAsString();
-    result=new RemoteOperationResult(move.succeeded(),status,move.getResponseHeaders());
-    Log_OC.i(TAG,"Rename " + mFile.getRemotePath() + " to "+ mNewRemotePath+ ": "+ result.getLogMessage());
   }
- catch (  Exception e) {
-    result=new RemoteOperationResult(e);
-    Log_OC.e(TAG,"Rename " + mFile.getRemotePath() + " to "+ ((mNewRemotePath == null) ? mNewName : mNewRemotePath)+ ": "+ result.getLogMessage(),e);
+ catch (  HttpException e) {
+    Log_OC.e(TAG,"Rename " + mFile.getRemotePath() + " to "+ ((mNewRemotePath == null) ? mNewName : mNewRemotePath)+ ": "+ ((result != null) ? result.getLogMessage() : ""),e);
+    e.printStackTrace();
   }
- finally {
-    if (move != null)     move.releaseConnection();
+catch (  IOException e) {
+    Log_OC.e(TAG,"Rename " + mFile.getRemotePath() + " to "+ ((mNewRemotePath == null) ? mNewName : mNewRemotePath)+ ": "+ ((result != null) ? result.getLogMessage() : ""),e);
+    e.printStackTrace();
   }
   return result;
 }
