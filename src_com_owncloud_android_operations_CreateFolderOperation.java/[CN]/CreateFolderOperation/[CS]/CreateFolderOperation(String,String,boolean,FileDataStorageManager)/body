@@ -1,4 +1,6 @@
 {
+  mFolderName=folderName;
   mRemotePath=remotePath;
   mCreateFullPath=createFullPath;
+  mStorageManager=storageManager;
 }
