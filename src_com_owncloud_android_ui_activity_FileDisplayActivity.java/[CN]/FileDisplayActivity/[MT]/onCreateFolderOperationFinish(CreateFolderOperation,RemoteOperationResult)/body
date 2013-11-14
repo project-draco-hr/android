@@ -5,12 +5,17 @@
   }
  else {
     dismissLoadingDialog();
-    try {
-      Toast msg=Toast.makeText(FileDisplayActivity.this,R.string.create_dir_fail_msg,Toast.LENGTH_LONG);
-      msg.show();
+    if (result.getCode() == ResultCode.INVALID_CHARACTER_IN_NAME) {
+      Toast.makeText(FileDisplayActivity.this,R.string.create_dir_fail_msg_invalid_characters,Toast.LENGTH_LONG).show();
     }
- catch (    NotFoundException e) {
-      Log_OC.e(TAG,"Error while trying to show fail message ",e);
+ else {
+      try {
+        Toast msg=Toast.makeText(FileDisplayActivity.this,R.string.create_dir_fail_msg,Toast.LENGTH_LONG);
+        msg.show();
+      }
+ catch (      NotFoundException e) {
+        Log_OC.e(TAG,"Error while trying to show fail message ",e);
+      }
     }
   }
 }
