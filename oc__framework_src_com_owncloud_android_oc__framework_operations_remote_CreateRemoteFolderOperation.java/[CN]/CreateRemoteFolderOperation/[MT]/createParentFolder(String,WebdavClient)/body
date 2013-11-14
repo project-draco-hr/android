@@ -1,4 +1,4 @@
 {
-  RemoteOperation operation=new CreateRemoteFolderOperation(parentPath,mCreateFullPath);
+  RemoteOperation operation=new CreateRemoteFolderOperation("",parentPath,mCreateFullPath);
   return operation.execute(client);
 }
