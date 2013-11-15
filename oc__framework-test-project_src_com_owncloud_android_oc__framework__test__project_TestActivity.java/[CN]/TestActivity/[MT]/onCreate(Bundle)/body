@@ -9,8 +9,6 @@
       break;
     }
   }
-  Log.d(TAG,"oc_version --->" + am.getUserData(mAccount,"oc_version"));
-  Log.d(TAG,"oc_base_url --->" + am.getUserData(mAccount,"oc_base_url"));
   try {
     mClient=OwnCloudClientFactory.createOwnCloudClient(mAccount,this.getApplicationContext());
   }

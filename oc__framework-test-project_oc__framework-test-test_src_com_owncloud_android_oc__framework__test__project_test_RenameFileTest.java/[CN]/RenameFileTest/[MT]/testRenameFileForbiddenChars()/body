@@ -1,4 +1,20 @@
 {
-  RemoteOperationResult result=mActivity.renameFile(mOldFileName,mOldFilePath,mNewFileNameInvalidChars,mNewFilePathInvalidChars);
+  RemoteOperationResult result=mActivity.renameFile(mOldFileName,mOldFilePath,mNewFileName + "//" + mFileExtension,mNewFilePath + "//" + mFileExtension);
+  assertTrue(result.getCode() == ResultCode.INVALID_CHARACTER_IN_NAME);
+  result=mActivity.renameFile(mOldFileName,mOldFilePath,mNewFileName + "\\" + mFileExtension,mNewFilePath + "\\" + mFileExtension);
+  assertTrue(result.getCode() == ResultCode.INVALID_CHARACTER_IN_NAME);
+  result=mActivity.renameFile(mOldFileName,mOldFilePath,mNewFileName + "<" + mFileExtension,mNewFilePath + "<" + mFileExtension);
+  assertTrue(result.getCode() == ResultCode.INVALID_CHARACTER_IN_NAME);
+  result=mActivity.renameFile(mOldFileName,mOldFilePath,mNewFileName + ">" + mFileExtension,mNewFilePath + ">" + mFileExtension);
+  assertTrue(result.getCode() == ResultCode.INVALID_CHARACTER_IN_NAME);
+  result=mActivity.renameFile(mOldFileName,mOldFilePath,mNewFileName + ":" + mFileExtension,mNewFilePath + ":" + mFileExtension);
+  assertTrue(result.getCode() == ResultCode.INVALID_CHARACTER_IN_NAME);
+  result=mActivity.renameFile(mOldFileName,mOldFilePath,mNewFileName + "\"" + mFileExtension,mNewFilePath + "\"" + mFileExtension);
+  assertTrue(result.getCode() == ResultCode.INVALID_CHARACTER_IN_NAME);
+  result=mActivity.renameFile(mOldFileName,mOldFilePath,mNewFileName + "|" + mFileExtension,mNewFilePath + "|" + mFileExtension);
+  assertTrue(result.getCode() == ResultCode.INVALID_CHARACTER_IN_NAME);
+  result=mActivity.renameFile(mOldFileName,mOldFilePath,mNewFileName + "?" + mFileExtension,mNewFilePath + "?" + mFileExtension);
+  assertTrue(result.getCode() == ResultCode.INVALID_CHARACTER_IN_NAME);
+  result=mActivity.renameFile(mOldFileName,mOldFilePath,mNewFileName + "*" + mFileExtension,mNewFilePath + "*" + mFileExtension);
   assertTrue(result.getCode() == ResultCode.INVALID_CHARACTER_IN_NAME);
 }
