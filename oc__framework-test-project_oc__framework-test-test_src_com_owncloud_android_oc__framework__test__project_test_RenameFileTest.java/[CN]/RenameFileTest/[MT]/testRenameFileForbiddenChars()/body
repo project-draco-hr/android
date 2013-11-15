@@ -1,0 +1,4 @@
+{
+  RemoteOperationResult result=mActivity.renameFile(mOldFileName,mOldFilePath,mNewFileNameInvalidChars,mNewFilePathInvalidChars);
+  assertTrue(result.getCode() == ResultCode.INVALID_CHARACTER_IN_NAME);
+}

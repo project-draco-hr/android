@@ -1,15 +1,10 @@
 {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.activity_test);
-  String accountHost="beta.owncloud.com";
-  String accountUser="masensio";
-  String accountName=accountUser + "@" + accountHost;
-  String accountPass="masensio";
-  String accountType="owncloud";
   AccountManager am=AccountManager.get(this);
-  Account[] ocAccounts=am.getAccountsByType(accountType);
+  Account[] ocAccounts=am.getAccountsByType(mAccountType);
   for (  Account ac : ocAccounts) {
-    if (ac.name.equals(accountName)) {
+    if (ac.name.equals(mAccountName)) {
       mAccount=ac;
       break;
     }
