@@ -2,9 +2,9 @@
   super.onCreate(savedInstanceState);
   setContentView(R.layout.activity_test);
   String accountHost="beta.owncloud.com";
-  String accountUser="masensio";
+  String accountUser="testandroid";
   String accountName=accountUser + "@" + accountHost;
-  String accountPass="masensio";
+  String accountPass="testandroid";
   String accountType="owncloud";
   AccountManager am=AccountManager.get(this);
   Account[] ocAccounts=am.getAccountsByType(accountType);
