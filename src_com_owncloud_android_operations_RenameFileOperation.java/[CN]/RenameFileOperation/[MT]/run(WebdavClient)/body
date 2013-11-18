@@ -10,7 +10,7 @@
     if (mFile.isFolder()) {
       mNewRemotePath+=OCFile.PATH_SEPARATOR;
     }
-    if (client.existsFile(mNewRemotePath) || mStorageManager.getFileByPath(mNewRemotePath) != null) {
+    if (mStorageManager.getFileByPath(mNewRemotePath) != null) {
       return new RemoteOperationResult(ResultCode.INVALID_OVERWRITE);
     }
     RenameRemoteFileOperation operation=new RenameRemoteFileOperation(mFile.getFileName(),mFile.getRemotePath(),mNewName,mNewRemotePath);
