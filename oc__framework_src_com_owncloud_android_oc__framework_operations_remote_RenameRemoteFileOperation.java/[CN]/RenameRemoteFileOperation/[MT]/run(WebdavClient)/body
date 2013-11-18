@@ -1,7 +1,7 @@
 {
   RemoteOperationResult result=null;
   LocalMoveMethod move=null;
-  boolean noInvalidChars=FileUtils.validateName(mNewName);
+  boolean noInvalidChars=FileUtils.isValidPath(mNewRemotePath);
   if (noInvalidChars) {
     try {
       if (mNewName.equals(mOldName)) {
