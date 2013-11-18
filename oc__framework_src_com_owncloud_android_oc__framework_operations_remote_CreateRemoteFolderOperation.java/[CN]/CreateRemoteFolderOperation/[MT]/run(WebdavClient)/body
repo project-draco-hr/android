@@ -1,7 +1,7 @@
 {
   RemoteOperationResult result=null;
   MkColMethod mkcol=null;
-  boolean noInvalidChars=FileUtils.validateName(mFolderName);
+  boolean noInvalidChars=FileUtils.validatePath(mRemotePath);
   if (noInvalidChars) {
     try {
       mkcol=new MkColMethod(client.getBaseUri() + WebdavUtils.encodePath(mRemotePath));

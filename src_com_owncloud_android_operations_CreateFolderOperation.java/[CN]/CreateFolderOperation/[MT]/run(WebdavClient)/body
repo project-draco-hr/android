@@ -1,5 +1,5 @@
 {
-  CreateRemoteFolderOperation operation=new CreateRemoteFolderOperation(mFolderName,mRemotePath,mCreateFullPath);
+  CreateRemoteFolderOperation operation=new CreateRemoteFolderOperation(mRemotePath,mCreateFullPath);
   RemoteOperationResult result=operation.execute(client);
   if (result.isSuccess()) {
     saveFolderInDB();
