@@ -1,5 +1,0 @@
-{
-  RenameRemoteFileOperation renameOperation=new RenameRemoteFileOperation(oldName,oldRemotePath,newName,newRemotePath);
-  RemoteOperationResult result=renameOperation.execute(mClient);
-  return result;
-}
