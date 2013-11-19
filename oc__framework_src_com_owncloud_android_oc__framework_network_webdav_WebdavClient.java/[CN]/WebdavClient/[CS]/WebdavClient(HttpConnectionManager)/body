@@ -1,0 +1,8 @@
+{
+  super(connectionMgr);
+  Log.d(TAG,"Creating WebdavClient");
+  getParams().setParameter(HttpMethodParams.USER_AGENT,USER_AGENT);
+  getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION,HttpVersion.HTTP_1_1);
+  mFollowRedirects=true;
+  mSsoSessionCookie=null;
+}

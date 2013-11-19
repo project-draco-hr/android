@@ -2,11 +2,11 @@
   Bundle response=new Bundle();
   response.putString(AccountManager.KEY_ACCOUNT_NAME,mAccount.name);
   response.putString(AccountManager.KEY_ACCOUNT_TYPE,mAccount.type);
-  if (MainApp.getAuthTokenTypeAccessToken().equals(mAuthTokenType)) {
+  if (AccountTypeUtils.getAuthTokenTypeAccessToken(MainApp.getAccountType()).equals(mAuthTokenType)) {
     response.putString(AccountManager.KEY_AUTHTOKEN,mAuthToken);
     mAccountMgr.setAuthToken(mAccount,mAuthTokenType,mAuthToken);
   }
- else   if (MainApp.getAuthTokenTypeSamlSessionCookie().equals(mAuthTokenType)) {
+ else   if (AccountTypeUtils.getAuthTokenTypeSamlSessionCookie(MainApp.getAccountType()).equals(mAuthTokenType)) {
     String username=getUserNameForSamlSso();
     if (!mUsernameInput.getText().toString().equals(username)) {
       RemoteOperationResult result=new RemoteOperationResult(ResultCode.ACCOUNT_NOT_THE_SAME);

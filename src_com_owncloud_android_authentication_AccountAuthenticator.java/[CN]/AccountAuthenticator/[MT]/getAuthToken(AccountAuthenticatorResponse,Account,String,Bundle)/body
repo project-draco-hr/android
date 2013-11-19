@@ -10,7 +10,7 @@
   }
   final AccountManager am=AccountManager.get(mContext);
   String accessToken;
-  if (authTokenType.equals(MainApp.getAuthTokenTypePass())) {
+  if (authTokenType.equals(AccountTypeUtils.getAuthTokenTypePass(MainApp.getAccountType()))) {
     accessToken=am.getPassword(account);
   }
  else {

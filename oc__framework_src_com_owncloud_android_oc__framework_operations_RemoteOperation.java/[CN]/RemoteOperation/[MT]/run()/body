@@ -1,0 +1,62 @@
+{
+  RemoteOperationResult result=null;
+  boolean repeat=false;
+  do {
+    try {
+      if (mClient == null) {
+        if (mAccount != null && mContext != null) {
+          if (mCallerActivity != null) {
+            mClient=OwnCloudClientFactory.createOwnCloudClient(mAccount,mContext,mCallerActivity);
+          }
+ else {
+            mClient=OwnCloudClientFactory.createOwnCloudClient(mAccount,mContext);
+          }
+        }
+ else {
+          throw new IllegalStateException("Trying to run a remote operation asynchronously with no client instance or account");
+        }
+      }
+    }
+ catch (    IOException e) {
+      Log.e(TAG,"Error while trying to access to " + mAccount.name,new AccountsException("I/O exception while trying to authorize the account",e));
+      result=new RemoteOperationResult(e);
+    }
+catch (    AccountsException e) {
+      Log.e(TAG,"Error while trying to access to " + mAccount.name,e);
+      result=new RemoteOperationResult(e);
+    }
+    if (result == null)     result=run(mClient);
+    repeat=false;
+    if (mCallerActivity != null && mAccount != null && mContext != null && !result.isSuccess() && (result.getCode() == ResultCode.UNAUTHORIZED || result.isIdPRedirection())) {
+      Credentials cred=mClient.getCredentials();
+      String ssoSessionCookie=mClient.getSsoSessionCookie();
+      if (cred != null || ssoSessionCookie != null) {
+        AccountManager am=AccountManager.get(mContext);
+        boolean bearerAuthorization=(cred != null && cred instanceof BearerCredentials);
+        boolean samlBasedSsoAuthorization=(cred == null && ssoSessionCookie != null);
+        if (bearerAuthorization) {
+          am.invalidateAuthToken(mAccount.type,((BearerCredentials)cred).getAccessToken());
+        }
+ else         if (samlBasedSsoAuthorization) {
+          am.invalidateAuthToken(mAccount.type,ssoSessionCookie);
+        }
+ else {
+          am.clearPassword(mAccount);
+        }
+        mClient=null;
+        repeat=true;
+        result=null;
+      }
+    }
+  }
+ while (repeat);
+  final RemoteOperationResult resultToSend=result;
+  if (mListenerHandler != null && mListener != null) {
+    mListenerHandler.post(new Runnable(){
+      @Override public void run(){
+        mListener.onRemoteOperationFinish(RemoteOperation.this,resultToSend);
+      }
+    }
+);
+  }
+}

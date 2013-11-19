@@ -1,0 +1,19 @@
+{
+  super.onCreate(savedInstanceState);
+  setContentView(R.layout.activity_test);
+  String accountHost="beta.owncloud.com";
+  String accountUser="testandroid";
+  String accountName=accountUser + "@" + accountHost;
+  String accountPass="testandroid";
+  String accountType="owncloud";
+  AccountManager am=AccountManager.get(this);
+  Account[] ocAccounts=am.getAccountsByType(accountType);
+  for (  Account ac : ocAccounts) {
+    if (ac.name.equals(accountName)) {
+      mAccount=ac;
+      break;
+    }
+  }
+  AuthTask task=new AuthTask();
+  task.execute(this.getApplicationContext());
+}

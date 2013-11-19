@@ -17,7 +17,7 @@
     }
   }
  else {
-    if (result.getCode() == RemoteOperationResult.ResultCode.UNAUTHORIZED || (result.isIdPRedirection() && MainApp.getAuthTokenTypeSamlSessionCookie().equals(getClient().getAuthTokenType()))) {
+    if (result.getCode() == RemoteOperationResult.ResultCode.UNAUTHORIZED || (result.isIdPRedirection() && getClient().getCredentials() == null)) {
       mSyncResult.stats.numAuthExceptions++;
     }
  else     if (result.getException() instanceof DavException) {

@@ -7,10 +7,10 @@
     Log_OC.wtf(TAG,"The user was allowed to click 'connect' to an unchecked server!!");
     return;
   }
-  if (MainApp.getAuthTokenTypeAccessToken().equals(mAuthTokenType)) {
+  if (AccountTypeUtils.getAuthTokenTypeAccessToken(MainApp.getAccountType()).equals(mAuthTokenType)) {
     startOauthorization();
   }
- else   if (MainApp.getAuthTokenTypeSamlSessionCookie().equals(mAuthTokenType)) {
+ else   if (AccountTypeUtils.getAuthTokenTypeSamlSessionCookie(MainApp.getAccountType()).equals(mAuthTokenType)) {
     startSamlBasedFederatedSingleSignOnAuthorization();
   }
  else {

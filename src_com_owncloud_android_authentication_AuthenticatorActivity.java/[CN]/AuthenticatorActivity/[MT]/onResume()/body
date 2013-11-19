@@ -1,10 +1,10 @@
 {
   super.onResume();
   if (mAction == ACTION_UPDATE_TOKEN && mJustCreated && getIntent().getBooleanExtra(EXTRA_ENFORCED_UPDATE,false)) {
-    if (MainApp.getAuthTokenTypeAccessToken().equals(mAuthTokenType)) {
+    if (AccountTypeUtils.getAuthTokenTypeAccessToken(MainApp.getAccountType()).equals(mAuthTokenType)) {
       showAuthMessage(getString(R.string.auth_expired_oauth_token_toast));
     }
- else     if (MainApp.getAuthTokenTypeSamlSessionCookie().equals(mAuthTokenType)) {
+ else     if (AccountTypeUtils.getAuthTokenTypeSamlSessionCookie(MainApp.getAccountType()).equals(mAuthTokenType)) {
       showAuthMessage(getString(R.string.auth_expired_saml_sso_token_toast));
     }
  else {

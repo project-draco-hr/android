@@ -1,31 +1,11 @@
 {
-  RemoteOperationResult result=null;
-  MkColMethod mkcol=null;
-  try {
-    mkcol=new MkColMethod(client.getBaseUri() + WebdavUtils.encodePath(mRemotePath));
-    int status=client.executeMethod(mkcol,READ_TIMEOUT,CONNECTION_TIMEOUT);
-    if (!mkcol.succeeded() && mkcol.getStatusCode() == HttpStatus.SC_CONFLICT && mCreateFullPath) {
-      result=createParentFolder(getParentPath(),client);
-      status=client.executeMethod(mkcol,READ_TIMEOUT,CONNECTION_TIMEOUT);
-    }
-    if (mkcol.succeeded()) {
-      OCFile newDir=new OCFile(mRemotePath);
-      newDir.setMimetype("DIR");
-      long parentId=mStorageManager.getFileByPath(getParentPath()).getFileId();
-      newDir.setParentId(parentId);
-      newDir.setModificationTimestamp(System.currentTimeMillis());
-      mStorageManager.saveFile(newDir);
-    }
-    result=new RemoteOperationResult(mkcol.succeeded(),status,mkcol.getResponseHeaders());
-    Log_OC.d(TAG,"Create directory " + mRemotePath + ": "+ result.getLogMessage());
-    client.exhaustResponse(mkcol.getResponseBodyAsStream());
+  CreateRemoteFolderOperation operation=new CreateRemoteFolderOperation(mRemotePath,mCreateFullPath);
+  RemoteOperationResult result=operation.execute(client);
+  if (result.isSuccess()) {
+    saveFolderInDB();
   }
- catch (  Exception e) {
-    result=new RemoteOperationResult(e);
-    Log_OC.e(TAG,"Create directory " + mRemotePath + ": "+ result.getLogMessage(),e);
-  }
- finally {
-    if (mkcol != null)     mkcol.releaseConnection();
+ else {
+    Log_OC.e(TAG,mRemotePath + "hasn't been created");
   }
   return result;
 }

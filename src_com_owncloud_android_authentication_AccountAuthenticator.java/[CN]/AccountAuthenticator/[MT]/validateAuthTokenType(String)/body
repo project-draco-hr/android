@@ -1,5 +1,5 @@
 {
-  if (!authTokenType.equals(MainApp.getAuthTokenType()) && !authTokenType.equals(MainApp.getAuthTokenTypePass()) && !authTokenType.equals(MainApp.getAuthTokenTypeAccessToken())&& !authTokenType.equals(MainApp.getAuthTokenTypeRefreshToken())&& !authTokenType.equals(MainApp.getAuthTokenTypeSamlSessionCookie())) {
+  if (!authTokenType.equals(MainApp.getAuthTokenType()) && !authTokenType.equals(AccountTypeUtils.getAuthTokenTypePass(MainApp.getAccountType())) && !authTokenType.equals(AccountTypeUtils.getAuthTokenTypeAccessToken(MainApp.getAccountType()))&& !authTokenType.equals(AccountTypeUtils.getAuthTokenTypeRefreshToken(MainApp.getAccountType()))&& !authTokenType.equals(AccountTypeUtils.getAuthTokenTypeSamlSessionCookie(MainApp.getAccountType()))) {
     throw new UnsupportedAuthTokenTypeException();
   }
 }
