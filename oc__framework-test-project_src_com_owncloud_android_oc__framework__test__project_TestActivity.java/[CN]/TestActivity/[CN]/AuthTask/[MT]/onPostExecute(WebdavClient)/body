@@ -1,4 +1,0 @@
-{
-  super.onPostExecute(result);
-  mClient=result;
-}

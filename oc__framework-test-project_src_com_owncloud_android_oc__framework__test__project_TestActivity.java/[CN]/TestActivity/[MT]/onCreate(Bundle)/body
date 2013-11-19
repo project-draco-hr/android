@@ -1,14 +1,7 @@
 {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.activity_test);
-  AccountManager am=AccountManager.get(this);
-  Account[] ocAccounts=am.getAccountsByType(mAccountType);
-  for (  Account ac : ocAccounts) {
-    if (ac.name.equals(mAccountName)) {
-      mAccount=ac;
-      break;
-    }
-  }
-  AuthTask task=new AuthTask();
-  task.execute(this.getApplicationContext());
+  Uri uri=Uri.parse(mServerUri);
+  mClient=OwnCloudClientFactory.createOwnCloudClient(uri,getApplicationContext(),true);
+  mClient.setBasicCredentials(mUser,mPass);
 }
