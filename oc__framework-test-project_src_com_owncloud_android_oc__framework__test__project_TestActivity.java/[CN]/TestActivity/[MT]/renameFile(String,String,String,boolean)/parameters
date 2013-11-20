@@ -1,0 +1,4 @@
+String oldName
+String oldRemotePath
+String newName
+boolean isFolder

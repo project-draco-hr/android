@@ -1,0 +1,18 @@
+{
+  RemoteOperationResult result=mActivity.renameFile(mOldFolderName,mOldFolderPath,mNewFolderName + "\\",true);
+  assertTrue(result.getCode() == ResultCode.INVALID_CHARACTER_IN_NAME);
+  result=mActivity.renameFile(mOldFolderName,mOldFolderPath,mNewFolderName + "<",true);
+  assertTrue(result.getCode() == ResultCode.INVALID_CHARACTER_IN_NAME);
+  result=mActivity.renameFile(mOldFolderName,mOldFolderPath,mNewFolderName + ">",true);
+  assertTrue(result.getCode() == ResultCode.INVALID_CHARACTER_IN_NAME);
+  result=mActivity.renameFile(mOldFolderName,mOldFolderPath,mNewFolderName + ":",true);
+  assertTrue(result.getCode() == ResultCode.INVALID_CHARACTER_IN_NAME);
+  result=mActivity.renameFile(mOldFolderName,mOldFolderPath,mNewFolderName + "\"",true);
+  assertTrue(result.getCode() == ResultCode.INVALID_CHARACTER_IN_NAME);
+  result=mActivity.renameFile(mOldFolderName,mOldFolderPath,mNewFolderName + "|",true);
+  assertTrue(result.getCode() == ResultCode.INVALID_CHARACTER_IN_NAME);
+  result=mActivity.renameFile(mOldFolderName,mOldFolderPath,mNewFolderName + "?",true);
+  assertTrue(result.getCode() == ResultCode.INVALID_CHARACTER_IN_NAME);
+  result=mActivity.renameFile(mOldFolderName,mOldFolderPath,mNewFolderName + "*",true);
+  assertTrue(result.getCode() == ResultCode.INVALID_CHARACTER_IN_NAME);
+}

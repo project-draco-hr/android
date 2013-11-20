@@ -1,0 +1,4 @@
+{
+  RemoteOperationResult result=mActivity.renameFile(mOldFileName,mOldFilePath,mNewFileName + mFileExtension,false);
+  assertTrue(result.isSuccess());
+}

@@ -1,0 +1,31 @@
+{
+  RemoteOperationResult result=null;
+  LocalMoveMethod move=null;
+  boolean noInvalidChars=FileUtils.isValidPath(mNewRemotePath);
+  if (noInvalidChars) {
+    try {
+      if (mNewName.equals(mOldName)) {
+        return new RemoteOperationResult(ResultCode.OK);
+      }
+      if (client.existsFile(mNewRemotePath)) {
+        return new RemoteOperationResult(ResultCode.INVALID_OVERWRITE);
+      }
+      move=new LocalMoveMethod(client.getBaseUri() + WebdavUtils.encodePath(mOldRemotePath),client.getBaseUri() + WebdavUtils.encodePath(mNewRemotePath));
+      int status=client.executeMethod(move,RENAME_READ_TIMEOUT,RENAME_CONNECTION_TIMEOUT);
+      move.getResponseBodyAsString();
+      result=new RemoteOperationResult(move.succeeded(),status,move.getResponseHeaders());
+      Log.i(TAG,"Rename " + mOldRemotePath + " to "+ mNewRemotePath+ ": "+ result.getLogMessage());
+    }
+ catch (    Exception e) {
+      result=new RemoteOperationResult(e);
+      Log.e(TAG,"Rename " + mOldRemotePath + " to "+ ((mNewRemotePath == null) ? mNewName : mNewRemotePath)+ ": "+ result.getLogMessage(),e);
+    }
+ finally {
+      if (move != null)       move.releaseConnection();
+    }
+  }
+ else {
+    result=new RemoteOperationResult(ResultCode.INVALID_CHARACTER_IN_NAME);
+  }
+  return result;
+}
