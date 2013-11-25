@@ -1,0 +1,4 @@
+{
+  mSSLSocketClassRef=new WeakReference<Class<?>>(sslSocketClass);
+  mSetHostnameMethodRef=(setHostnameMethod == null) ? null : new WeakReference<Method>(setHostnameMethod);
+}
