@@ -5,8 +5,7 @@
     query=new PropFindMethod(client.getBaseUri() + WebdavUtils.encodePath(mRemotePath),DavConstants.PROPFIND_ALL_PROP,DavConstants.DEPTH_1);
     int status=client.executeMethod(query);
     if (isMultiStatus(status)) {
-      MultiStatus dataInServer=query.getResponseBodyAsMultiStatus();
-      mWe=new WebdavEntry(dataInServer.getResponses()[0],client.getBaseUri().getPath());
+      mDataInServer=query.getResponseBodyAsMultiStatus();
       result=new RemoteOperationResult(true,status,query.getResponseHeaders());
     }
  else {
