@@ -1,0 +1,4 @@
+{
+  RemoteOperationResult result=mActivity.removeFile(mFilePath);
+  assertTrue(result.isSuccess() || result.getCode() == ResultCode.FILE_NOT_FOUND);
+}
