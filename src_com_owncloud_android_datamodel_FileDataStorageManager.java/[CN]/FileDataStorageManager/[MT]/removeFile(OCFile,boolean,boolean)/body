@@ -21,7 +21,7 @@
         }
         updateFolderSize(file.getParentId());
       }
-      if (removeLocalCopy && file.isDown()) {
+      if (removeLocalCopy && file.isDown() && file.getStoragePath() != null) {
         boolean success=new File(file.getStoragePath()).delete();
         if (!removeDBData && success) {
           file.setStoragePath(null);
