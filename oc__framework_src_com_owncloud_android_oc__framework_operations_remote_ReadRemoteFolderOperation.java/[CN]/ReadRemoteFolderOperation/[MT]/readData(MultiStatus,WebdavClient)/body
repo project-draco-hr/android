@@ -1,7 +1,6 @@
 {
   WebdavEntry we=new WebdavEntry(dataInServer.getResponses()[0],client.getBaseUri().getPath());
   mFolder=fillOCFile(we);
-  Log.d(TAG,"Remote folder " + mRemotePath + " changed - starting update of local data ");
   RemoteFile remoteFile=null;
   mFiles=new ArrayList<RemoteFile>();
   for (int i=1; i < dataInServer.getResponses().length; ++i) {
