@@ -4,8 +4,9 @@
   RemoteOperationResult result=operation.execute(client);
   Log_OC.d(TAG,"Synchronizing " + mAccount.name + remotePath);
   if (result.isSuccess()) {
-    MultiStatus dataInServer=((ReadRemoteFileOperation)operation).getDataInServer();
-    synchronizeData(dataInServer,client);
+    RemoteFile folder=result.getFile();
+    ArrayList<RemoteFile> files=result.getData();
+    synchronizeData(folder,files,client);
     if (mConflictsFound > 0 || mFailsInFavouritesFound > 0) {
       result=new RemoteOperationResult(ResultCode.SYNC_CONFLICT);
     }

@@ -5,8 +5,13 @@
     query=new PropFindMethod(client.getBaseUri() + WebdavUtils.encodePath(mRemotePath),DavConstants.PROPFIND_ALL_PROP,DavConstants.DEPTH_1);
     int status=client.executeMethod(query);
     if (isMultiStatus(status)) {
-      mDataInServer=query.getResponseBodyAsMultiStatus();
+      MultiStatus dataInServer=query.getResponseBodyAsMultiStatus();
+      readData(dataInServer,client);
       result=new RemoteOperationResult(true,status,query.getResponseHeaders());
+      if (result.isSuccess()) {
+        result.setFile(mFolder);
+        result.setData(mFiles);
+      }
     }
  else {
       client.exhaustResponse(query.getResponseBodyAsStream());

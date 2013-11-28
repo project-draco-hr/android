@@ -1,0 +1,8 @@
+{
+  mRemotePath=source.readString();
+  mMimeType=source.readString();
+  mLength=source.readLong();
+  mCreationTimestamp=source.readLong();
+  mModifiedTimestamp=source.readLong();
+  mEtag=source.readString();
+}

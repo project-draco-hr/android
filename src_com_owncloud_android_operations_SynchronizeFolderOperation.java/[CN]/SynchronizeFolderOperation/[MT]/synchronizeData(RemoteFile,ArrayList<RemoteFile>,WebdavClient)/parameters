@@ -1,0 +1,3 @@
+RemoteFile folder
+ArrayList<RemoteFile> files
+WebdavClient client
