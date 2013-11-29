@@ -1,11 +1,11 @@
 {
+  mFolderAndFiles=new ArrayList<RemoteFile>();
   WebdavEntry we=new WebdavEntry(dataInServer.getResponses()[0],client.getBaseUri().getPath());
-  mFolder=fillOCFile(we);
+  mFolderAndFiles.add(fillOCFile(we));
   RemoteFile remoteFile=null;
-  mFiles=new ArrayList<RemoteFile>();
   for (int i=1; i < dataInServer.getResponses().length; ++i) {
     we=new WebdavEntry(dataInServer.getResponses()[i],client.getBaseUri().getPath());
     remoteFile=fillOCFile(we);
-    mFiles.add(remoteFile);
+    mFolderAndFiles.add(remoteFile);
   }
 }

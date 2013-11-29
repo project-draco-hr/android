@@ -9,8 +9,7 @@
       readData(dataInServer,client);
       result=new RemoteOperationResult(true,status,query.getResponseHeaders());
       if (result.isSuccess()) {
-        result.setFile(mFolder);
-        result.setData(mFiles);
+        result.setData(mFolderAndFiles);
       }
     }
  else {
