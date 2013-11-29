@@ -1,0 +1,8 @@
+{
+  dest.writeString(mRemotePath);
+  dest.writeString(mMimeType);
+  dest.writeLong(mLength);
+  dest.writeLong(mCreationTimestamp);
+  dest.writeLong(mModifiedTimestamp);
+  dest.writeString(mEtag);
+}

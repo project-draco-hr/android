@@ -1,11 +1,10 @@
 {
   mLocalFolder=mStorageManager.getFileByPath(mLocalFolder.getRemotePath());
-  WebdavEntry we=new WebdavEntry(dataInServer.getResponses()[0],client.getBaseUri().getPath());
-  OCFile remoteFolder=fillOCFile(we);
+  OCFile remoteFolder=fillOCFile(folderAndFiles.get(0));
   remoteFolder.setParentId(mLocalFolder.getParentId());
   remoteFolder.setFileId(mLocalFolder.getFileId());
   Log_OC.d(TAG,"Remote folder " + mLocalFolder.getRemotePath() + " changed - starting update of local data ");
-  List<OCFile> updatedFiles=new Vector<OCFile>(dataInServer.getResponses().length - 1);
+  List<OCFile> updatedFiles=new Vector<OCFile>(folderAndFiles.size() - 1);
   List<SynchronizeFileOperation> filesToSyncContents=new Vector<SynchronizeFileOperation>();
   List<OCFile> localFiles=mStorageManager.getFolderContent(mLocalFolder);
   Map<String,OCFile> localFilesMap=new HashMap<String,OCFile>(localFiles.size());
@@ -13,9 +12,8 @@
     localFilesMap.put(file.getRemotePath(),file);
   }
   OCFile remoteFile=null, localFile=null;
-  for (int i=1; i < dataInServer.getResponses().length; ++i) {
-    we=new WebdavEntry(dataInServer.getResponses()[i],client.getBaseUri().getPath());
-    remoteFile=fillOCFile(we);
+  for (int i=1; i < folderAndFiles.size(); i++) {
+    remoteFile=fillOCFile(folderAndFiles.get(i));
     remoteFile.setParentId(mLocalFolder.getFileId());
     localFile=localFilesMap.remove(remoteFile.getRemotePath());
     remoteFile.setLastSyncDateForProperties(mCurrentSyncTime);
