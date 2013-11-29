@@ -1,4 +1,5 @@
 {
   mCode=code;
   mSuccess=(code == ResultCode.OK || code == ResultCode.OK_SSL || code == ResultCode.OK_NO_SSL);
+  mFiles=null;
 }
