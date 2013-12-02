@@ -1,45 +1,16 @@
 {
-  RemoteOperationResult result=null;
-  String remotePath=null;
-  PropFindMethod query=null;
-  try {
-    remotePath=mLocalFolder.getRemotePath();
-    Log_OC.d(TAG,"Synchronizing " + mAccount.name + remotePath);
-    query=new PropFindMethod(client.getBaseUri() + WebdavUtils.encodePath(remotePath),DavConstants.PROPFIND_ALL_PROP,DavConstants.DEPTH_1);
-    int status=client.executeMethod(query);
-    if (isMultiStatus(status)) {
-      synchronizeData(query.getResponseBodyAsMultiStatus(),client);
-      if (mConflictsFound > 0 || mFailsInFavouritesFound > 0) {
-        result=new RemoteOperationResult(ResultCode.SYNC_CONFLICT);
-      }
- else {
-        result=new RemoteOperationResult(true,status,query.getResponseHeaders());
-      }
-    }
- else {
-      client.exhaustResponse(query.getResponseBodyAsStream());
-      if (status == HttpStatus.SC_NOT_FOUND) {
-        removeLocalFolder();
-      }
-      result=new RemoteOperationResult(false,status,query.getResponseHeaders());
+  String remotePath=mLocalFolder.getRemotePath();
+  ReadRemoteFolderOperation operation=new ReadRemoteFolderOperation(remotePath);
+  RemoteOperationResult result=operation.execute(client);
+  Log_OC.d(TAG,"Synchronizing " + mAccount.name + remotePath);
+  if (result.isSuccess()) {
+    synchronizeData(result.getData(),client);
+    if (mConflictsFound > 0 || mFailsInFavouritesFound > 0) {
+      result=new RemoteOperationResult(ResultCode.SYNC_CONFLICT);
     }
   }
- catch (  Exception e) {
-    result=new RemoteOperationResult(e);
-  }
- finally {
-    if (query != null)     query.releaseConnection();
-    if (result.isSuccess()) {
-      Log_OC.i(TAG,"Synchronized " + mAccount.name + remotePath+ ": "+ result.getLogMessage());
-    }
  else {
-      if (result.isException()) {
-        Log_OC.e(TAG,"Synchronized " + mAccount.name + remotePath+ ": "+ result.getLogMessage(),result.getException());
-      }
- else {
-        Log_OC.e(TAG,"Synchronized " + mAccount.name + remotePath+ ": "+ result.getLogMessage());
-      }
-    }
+    if (result.getCode() == ResultCode.FILE_NOT_FOUND)     removeLocalFolder();
   }
   return result;
 }
