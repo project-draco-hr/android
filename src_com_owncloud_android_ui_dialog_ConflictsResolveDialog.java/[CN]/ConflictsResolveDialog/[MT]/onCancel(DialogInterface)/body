@@ -1,3 +1,3 @@
 {
-  mListener.ConflictDecisionMade(Decision.CANCEL);
+  mListener.conflictDecisionMade(Decision.CANCEL);
 }
