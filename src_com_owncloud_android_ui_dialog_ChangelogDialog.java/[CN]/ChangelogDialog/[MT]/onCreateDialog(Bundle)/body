@@ -2,7 +2,7 @@
   WebView webview=new WebView(getActivity());
   webview.loadUrl("file:///android_res/raw/" + getResources().getResourceEntryName(R.raw.changelog) + ".html");
   AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
-  Dialog dialog=builder.setView(webview).setIcon(R.drawable.icon).setPositiveButton(R.string.common_ok,new DialogInterface.OnClickListener(){
+  Dialog dialog=builder.setView(webview).setIcon(DisplayUtils.getSeasonalIconId()).setPositiveButton(R.string.common_ok,new DialogInterface.OnClickListener(){
     @Override public void onClick(    DialogInterface dialog,    int which){
       dialog.dismiss();
     }

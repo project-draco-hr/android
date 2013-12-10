@@ -1,9 +1,9 @@
 {
   super.onCreate(savedInstanceState);
   mDbHandler=new DbHandler(getBaseContext());
-  mSessions=new Vector<OwnCloudSession>();
   addPreferencesFromResource(R.xml.preferences);
   ActionBar actionBar=getSherlock().getActionBar();
+  actionBar.setIcon(DisplayUtils.getSeasonalIconId());
   actionBar.setDisplayHomeAsUpEnabled(true);
   Preference p=findPreference("manage_account");
   if (p != null)   p.setOnPreferenceClickListener(new OnPreferenceClickListener(){

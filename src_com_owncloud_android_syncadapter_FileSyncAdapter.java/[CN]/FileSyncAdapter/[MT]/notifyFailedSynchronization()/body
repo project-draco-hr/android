@@ -1,5 +1,5 @@
 {
-  Notification notification=new Notification(R.drawable.icon,getContext().getString(R.string.sync_fail_ticker),System.currentTimeMillis());
+  Notification notification=new Notification(DisplayUtils.getSeasonalIconId(),getContext().getString(R.string.sync_fail_ticker),System.currentTimeMillis());
   notification.flags|=Notification.FLAG_AUTO_CANCEL;
   boolean needsToUpdateCredentials=(mLastFailedResult != null && (mLastFailedResult.getCode() == ResultCode.UNAUTHORIZED || (mLastFailedResult.isIdPRedirection() && getClient().getCredentials() == null)));
   notification.contentIntent=PendingIntent.getActivity(getContext().getApplicationContext(),(int)System.currentTimeMillis(),new Intent(),0);
