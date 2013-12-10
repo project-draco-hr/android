@@ -1,3 +1,15 @@
 {
-  return null;
+  RemoteOperationResult result=null;
+  File tmpFile=new File(getTmpPath());
+  try {
+    tmpFile.getParentFile().mkdirs();
+    int status=downloadFile(client,tmpFile);
+    result=new RemoteOperationResult(isSuccess(status),status,(mGet != null ? mGet.getResponseHeaders() : null));
+    Log.i(TAG,"Download of " + mRemoteFile.getRemotePath() + " to "+ getTmpPath()+ ": "+ result.getLogMessage());
+  }
+ catch (  Exception e) {
+    result=new RemoteOperationResult(e);
+    Log.e(TAG,"Download of " + mRemoteFile.getRemotePath() + " to "+ getTmpPath()+ ": "+ result.getLogMessage(),e);
+  }
+  return result;
 }

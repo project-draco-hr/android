@@ -3,4 +3,5 @@
   if (file == null)   throw new IllegalArgumentException("Illegal null file in DownloadFileOperation creation");
   mAccount=account;
   mFile=file;
+  mDatatransferProgressListener=listener;
 }
