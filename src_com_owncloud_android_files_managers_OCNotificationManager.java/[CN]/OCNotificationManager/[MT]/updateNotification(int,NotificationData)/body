@@ -8,7 +8,7 @@ case NOTIFICATION_PROGRESS:
     pair.mNotificaiton.contentView.setProgressBar(R.id.status_text,100,data.getPercent(),false);
   return true;
 case NOTIFICATION_SIMPLE:
-pair.mNotificaiton=new Notification(R.drawable.icon,data.getText(),System.currentTimeMillis());
+pair.mNotificaiton=new Notification(DisplayUtils.getSeasonalIconId(),data.getText(),System.currentTimeMillis());
 mNM.notify(notification_id,pair.mNotificaiton);
 return true;
 default :
