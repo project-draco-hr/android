@@ -1,4 +1,0 @@
-def _set_mode(resource, value, path_to_tx):
-    'Set the mode in the .tx/config file.'
-    args = (resource, 'mode', value, path_to_tx, 'set_default_mode')
-    _set_project_option(*args)

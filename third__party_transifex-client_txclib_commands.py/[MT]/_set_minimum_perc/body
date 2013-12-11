@@ -1,4 +1,0 @@
-def _set_minimum_perc(resource, value, path_to_tx):
-    'Set the minimum percentage in the .tx/config file.'
-    args = (resource, 'minimum_perc', value, path_to_tx, 'set_min_perc')
-    _set_project_option(*args)

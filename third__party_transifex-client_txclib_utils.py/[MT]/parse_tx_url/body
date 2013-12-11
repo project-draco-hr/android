@@ -1,8 +1,0 @@
-def parse_tx_url(url):
-    '\n    Try to match given url to any of the valid url patterns specified in\n    TX_URLS. If not match is found, we raise exception\n    '
-    for type in TX_URLS.keys():
-        pattern = TX_URLS[type]
-        m = re.match(pattern, url)
-        if m:
-            return (type, m.groupdict())
-    raise Exception('tx: Malformed url given. Please refer to our docs: http://bit.ly/txautor')

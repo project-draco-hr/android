@@ -1,6 +1,0 @@
-def get_resource_option(self, resource, option):
-    '\n        Return the requested option for a specific resource\n\n        If there is no such option, we return None\n        '
-    if self.config.has_section(resource):
-        if self.config.has_option(resource, option):
-            return self.config.get(resource, option)
-    return None
