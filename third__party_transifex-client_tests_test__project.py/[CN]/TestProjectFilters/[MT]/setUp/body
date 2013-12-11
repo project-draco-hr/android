@@ -1,7 +1,0 @@
-def setUp(self):
-    super(TestProjectFilters, self).setUp()
-    self.p = Project(init=False)
-    self.p.minimum_perc = None
-    self.p.resource = 'resource'
-    self.stats = {'en': {'completed': '100%', 'last_update': '2011-11-01 15:00:00', }, 'el': {'completed': '60%', 'last_update': '2011-11-01 15:00:00', }, 'pt': {'completed': '70%', 'last_update': '2011-11-01 15:00:00', }, }
-    self.langs = self.stats.keys()

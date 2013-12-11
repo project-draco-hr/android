@@ -1,7 +1,0 @@
-def _save_tx_config(self, config=None):
-    'Save the local config file.'
-    if (config is None):
-        config = self.config
-    fh = open(self.config_file, 'w')
-    config.write(fh)
-    fh.close()

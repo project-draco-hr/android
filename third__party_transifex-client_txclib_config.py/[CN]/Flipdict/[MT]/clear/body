@@ -1,3 +1,0 @@
-def clear(self):
-    dict.clear(self)
-    dict.clear(self._flip)

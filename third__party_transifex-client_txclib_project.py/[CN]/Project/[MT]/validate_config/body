@@ -1,3 +1,0 @@
-def validate_config(self):
-    '\n        To ensure the json structure is correctly formed.\n        '
-    pass

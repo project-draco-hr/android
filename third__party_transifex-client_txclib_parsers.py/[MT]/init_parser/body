@@ -1,9 +1,0 @@
-def init_parser():
-    'Return the command-line parser for the init command.'
-    usage = 'usage: %prog [tx_options] init <path>'
-    description = 'This command initializes a new project for use with transifex. It is recommended to execute this command in the top level directory of your project so that you can include all files under it in transifex. If no path is provided, the current working dir will be used.'
-    parser = OptionParser(usage=usage, description=description)
-    parser.add_option('--host', action='store', dest='host', default=None, help='Specify a default Transifex host.')
-    parser.add_option('--user', action='store', dest='user', default=None, help='Specify username for Transifex server.')
-    parser.add_option('--pass', action='store', dest='password', default=None, help='Specify password for Transifex server.')
-    return parser

@@ -1,4 +1,0 @@
-def _generate_timestamp(self, update_datetime):
-    'Generate a UNIX timestamp from the argument.\n\n        Args:\n            update_datetime: The datetime in the format used by Transifex.\n        Returns:\n            A float, representing the timestamp that corresponds to the\n            argument.\n        '
-    time_format = '%Y-%m-%d %H:%M:%S'
-    return time.mktime(datetime.datetime(*time.strptime(update_datetime, time_format)[0:5]).utctimetuple())

@@ -1,5 +1,0 @@
-def regex_from_filefilter(file_filter, root_path=os.path.curdir):
-    '\n    Create proper regex from <lang> expression\n    '
-    expr_re = re.escape(os.path.join(root_path, file_filter))
-    expr_re = expr_re.replace('\\<lang\\>', '<lang>').replace('<lang>', ('([^%(sep)s]+)' % {'sep': re.escape(os.path.sep), }))
-    return ('^%s$' % expr_re)

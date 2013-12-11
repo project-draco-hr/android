@@ -1,9 +1,0 @@
-def test_tld_migration_needed(self):
-    '\n        Test the tld migration of Transifex, when needed.\n        '
-    hostnames = ['http://transifex.net', 'http://www.transifex.net', 'https://fedora.transifex.net']
-    for h in hostnames:
-        hostname = hostname_tld_migration(h)
-        self.assertTrue(hostname.endswith('com'))
-    orig_hostname = 'http://www.transifex.net/path/'
-    hostname = hostname_tld_migration(orig_hostname)
-    self.assertEqual(hostname, orig_hostname.replace('net', 'com', 1))

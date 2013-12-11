@@ -1,9 +1,0 @@
-def test_add_translation(self):
-    'Test filters for adding translations.\n\n        We do not test here for minimum percentages.\n        '
-    with patch.object(self.p, 'get_resource_option') as mock:
-        mock.return_value = None
-        should_add = self.p._should_add_translation
-        for force in [True, False]:
-            for lang in self.langs:
-                self.assertTrue(should_add(lang, self.stats, force))
-        self.assertFalse(should_add('es', self.stats))
