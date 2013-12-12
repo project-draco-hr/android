@@ -1,5 +1,5 @@
 {
-  boolean check=wc.existsFile(remotePath);
+  boolean check=existsFile(wc,remotePath);
   if (!check) {
     return remotePath;
   }
@@ -13,8 +13,12 @@
   int count=2;
   do {
     suffix=" (" + count + ")";
-    if (pos >= 0)     check=wc.existsFile(remotePath + suffix + "."+ extension);
- else     check=wc.existsFile(remotePath + suffix);
+    if (pos >= 0) {
+      check=existsFile(wc,remotePath + suffix + "."+ extension);
+    }
+ else {
+      check=existsFile(wc,remotePath + suffix);
+    }
     count++;
   }
  while (check);

@@ -12,4 +12,5 @@
   mLocalBehaviour=localBehaviour;
   mOriginalStoragePath=mFile.getStoragePath();
   mOriginalFileName=mFile.getFileName();
+  mContext=context;
 }
