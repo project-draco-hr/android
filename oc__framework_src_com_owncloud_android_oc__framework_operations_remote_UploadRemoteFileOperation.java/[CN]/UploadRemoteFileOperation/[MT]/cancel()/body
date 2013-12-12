@@ -1,0 +1,6 @@
+{
+synchronized (mCancellationRequested) {
+    mCancellationRequested.set(true);
+    if (mPutMethod != null)     mPutMethod.abort();
+  }
+}

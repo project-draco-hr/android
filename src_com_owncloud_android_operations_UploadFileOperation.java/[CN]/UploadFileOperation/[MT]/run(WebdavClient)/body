@@ -65,16 +65,9 @@
       }
     }
     localCopyPassed=true;
-synchronized (mCancellationRequested) {
-      if (mCancellationRequested.get()) {
-        throw new OperationCancelledException();
-      }
- else {
-        mPutMethod=new PutMethod(client.getBaseUri() + WebdavUtils.encodePath(mFile.getRemotePath()));
-      }
-    }
-    int status=uploadFile(client);
-    if (isSuccess(status)) {
+    mUploadOperation=new UploadRemoteFileOperation(mFile.getStoragePath(),mFile.getRemotePath(),mFile.getMimetype());
+    result=mUploadOperation.execute(client);
+    if (result.isSuccess()) {
       if (mLocalBehaviour == FileUploader.LOCAL_BEHAVIOUR_FORGET) {
         mFile.setStoragePath(null);
       }
@@ -96,7 +89,6 @@ synchronized (mCancellationRequested) {
         }
       }
     }
-    result=new RemoteOperationResult(isSuccess(status),status,(mPutMethod != null ? mPutMethod.getResponseHeaders() : null));
   }
  catch (  Exception e) {
     if (mCancellationRequested.get()) {

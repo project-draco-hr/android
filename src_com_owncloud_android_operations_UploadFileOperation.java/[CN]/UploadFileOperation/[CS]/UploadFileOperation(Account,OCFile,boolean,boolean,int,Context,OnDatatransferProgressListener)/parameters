@@ -4,3 +4,4 @@ boolean isInstant
 boolean forceOverwrite
 int localBehaviour
 Context context
+OnDatatransferProgressListener listener
