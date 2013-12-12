@@ -5,12 +5,12 @@
  else   if (operation instanceof OAuth2GetAccessToken) {
     onGetOAuthAccessTokenFinish((OAuth2GetAccessToken)operation,result);
   }
- else   if (operation instanceof ExistenceCheckOperation) {
+ else   if (operation instanceof ExistenceCheckRemoteOperation) {
     if (AccountTypeUtils.getAuthTokenTypeSamlSessionCookie(MainApp.getAccountType()).equals(mAuthTokenType)) {
       onSamlBasedFederatedSingleSignOnAuthorizationStart(operation,result);
     }
  else {
-      onAuthorizationCheckFinish((ExistenceCheckOperation)operation,result);
+      onAuthorizationCheckFinish((ExistenceCheckRemoteOperation)operation,result);
     }
   }
 }
