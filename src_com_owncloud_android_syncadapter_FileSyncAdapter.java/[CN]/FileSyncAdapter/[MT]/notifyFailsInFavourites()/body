@@ -1,13 +1,13 @@
 {
   if (mFailedResultsCounter > 0) {
-    Notification notification=new Notification(R.drawable.icon,getContext().getString(R.string.sync_fail_in_favourites_ticker),System.currentTimeMillis());
+    Notification notification=new Notification(DisplayUtils.getSeasonalIconId(),getContext().getString(R.string.sync_fail_in_favourites_ticker),System.currentTimeMillis());
     notification.flags|=Notification.FLAG_AUTO_CANCEL;
     notification.contentIntent=PendingIntent.getActivity(getContext().getApplicationContext(),(int)System.currentTimeMillis(),new Intent(),0);
     notification.setLatestEventInfo(getContext().getApplicationContext(),getContext().getString(R.string.sync_fail_in_favourites_ticker),String.format(getContext().getString(R.string.sync_fail_in_favourites_content),mFailedResultsCounter + mConflictsFound,mConflictsFound),notification.contentIntent);
     ((NotificationManager)getContext().getSystemService(Context.NOTIFICATION_SERVICE)).notify(R.string.sync_fail_in_favourites_ticker,notification);
   }
  else {
-    Notification notification=new Notification(R.drawable.icon,getContext().getString(R.string.sync_conflicts_in_favourites_ticker),System.currentTimeMillis());
+    Notification notification=new Notification(DisplayUtils.getSeasonalIconId(),getContext().getString(R.string.sync_conflicts_in_favourites_ticker),System.currentTimeMillis());
     notification.flags|=Notification.FLAG_AUTO_CANCEL;
     notification.contentIntent=PendingIntent.getActivity(getContext().getApplicationContext(),(int)System.currentTimeMillis(),new Intent(),0);
     notification.setLatestEventInfo(getContext().getApplicationContext(),getContext().getString(R.string.sync_conflicts_in_favourites_ticker),String.format(getContext().getString(R.string.sync_conflicts_in_favourites_content),mConflictsFound),notification.contentIntent);

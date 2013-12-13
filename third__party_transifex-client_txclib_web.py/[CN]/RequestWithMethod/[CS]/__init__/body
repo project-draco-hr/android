@@ -1,3 +1,0 @@
-def __init__(self, url, method, data=None, headers={}, origin_req_host=None, unverifiable=False):
-    self._method = method
-    urllib2.Request.__init__(self, url, data=data, headers=headers, origin_req_host=None, unverifiable=False)

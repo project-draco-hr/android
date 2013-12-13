@@ -1,0 +1,15 @@
+{
+  Log.i(TAG,"SSLSocket implementation: " + sslSocketClass.getCanonicalName());
+  Method setHostnameMethod=null;
+  try {
+    setHostnameMethod=sslSocketClass.getMethod(METHOD_NAME,String.class);
+  }
+ catch (  SecurityException e) {
+    Log.e(TAG,"Could not access to SSLSocket#setHostname(String) method ",e);
+  }
+catch (  NoSuchMethodException e) {
+    Log.i(TAG,"Could not find SSLSocket#setHostname(String) method - SNI not supported");
+  }
+  mSingleInstance.set(new ServerNameIndicator(sslSocketClass,setHostnameMethod));
+  return setHostnameMethod;
+}

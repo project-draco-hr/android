@@ -1,7 +1,0 @@
-'\nHTTP-related utility functions.\n'
-from __future__ import with_statement
-import gzip
-try:
-    import cStringIO as StringIO
-except ImportError:
-    import StringIO

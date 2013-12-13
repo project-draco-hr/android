@@ -1,5 +1,0 @@
-def test_no_scheme_specified(self):
-    '\n        Test that, if no scheme has been specified, the https one will be used.\n        '
-    hostname = '//transifex.net'
-    hostname = hostname_ssl_migration(hostname)
-    self.assertTrue(hostname.startswith('https://'))

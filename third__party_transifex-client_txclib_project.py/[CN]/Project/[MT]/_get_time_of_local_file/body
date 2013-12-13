@@ -1,5 +1,0 @@
-def _get_time_of_local_file(self, path):
-    'Get the modified time of the path_.\n\n        Args:\n            path: The path we want the mtime for.\n        Returns:\n            The time as a timestamp or None, if the file does not exist\n        '
-    if (not os.path.exists(path)):
-        return None
-    return time.mktime(time.gmtime(os.path.getmtime(path)))
