@@ -6,7 +6,10 @@
   String tmpFolder=getTmpFolder();
   RemoteFile remoteFile=FileStorageUtils.fillRemoteFile(mFile);
   mDownloadOperation=new DownloadRemoteFileOperation(remoteFile,tmpFolder);
-  mDownloadOperation.addDatatransferProgressListener(mDatatransferProgressListener);
+  Iterator<OnDatatransferProgressListener> listener=mDataTransferListeners.iterator();
+  while (listener.hasNext()) {
+    mDownloadOperation.addDatatransferProgressListener(listener.next());
+  }
   result=mDownloadOperation.execute(client);
   if (result.isSuccess()) {
     newFile=new File(getSavePath());
