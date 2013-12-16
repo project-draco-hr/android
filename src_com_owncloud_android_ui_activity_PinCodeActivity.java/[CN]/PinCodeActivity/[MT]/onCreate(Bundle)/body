@@ -42,4 +42,6 @@
     }
   }
   setTextListeners();
+  ActionBar actionBar=getSupportActionBar();
+  actionBar.setIcon(DisplayUtils.getSeasonalIconId());
 }

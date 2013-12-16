@@ -1,0 +1,21 @@
+{
+  final Method setHostnameMethod=getMethod(sslSocket);
+  if (setHostnameMethod != null) {
+    try {
+      setHostnameMethod.invoke(sslSocket,hostname);
+      Log.i(TAG,"SNI done, hostname: " + hostname);
+    }
+ catch (    IllegalArgumentException e) {
+      Log.e(TAG,"Call to SSLSocket#setHost(String) failed ",e);
+    }
+catch (    IllegalAccessException e) {
+      Log.e(TAG,"Call to SSLSocket#setHost(String) failed ",e);
+    }
+catch (    InvocationTargetException e) {
+      Log.e(TAG,"Call to SSLSocket#setHost(String) failed ",e);
+    }
+  }
+ else {
+    Log.i(TAG,"SNI not supported");
+  }
+}

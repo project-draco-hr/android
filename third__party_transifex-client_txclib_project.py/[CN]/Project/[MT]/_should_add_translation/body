@@ -1,3 +1,0 @@
-def _should_add_translation(self, lang, stats, force=False, mode=None):
-    'Whether a translation should be added from Transifex.\n\n        We use the following criteria for that:\n        - If user requested to force the download.\n        - If language exists in Transifex.\n        - If the user requested a x% completion.\n\n        Args:\n            lang: The language code to check.\n            stats: The (global) statistics object.\n            force: A boolean flag.\n            mode: The mode for the translation.\n        Returns:\n            True or False.\n        '
-    return self._should_download(lang, stats, None, force)

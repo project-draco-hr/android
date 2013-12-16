@@ -3,7 +3,7 @@
   Notification notification=null;
 switch (type) {
 case NOTIFICATION_SIMPLE:
-    notification=new Notification(R.drawable.icon,data.getText(),System.currentTimeMillis());
+    notification=new Notification(DisplayUtils.getSeasonalIconId(),data.getText(),System.currentTimeMillis());
   break;
 case NOTIFICATION_PROGRESS:
 notification=new Notification();

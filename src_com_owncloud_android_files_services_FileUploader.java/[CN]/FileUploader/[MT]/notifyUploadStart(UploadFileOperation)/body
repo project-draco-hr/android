@@ -1,12 +1,12 @@
 {
   mLastPercent=0;
-  mNotification=new Notification(R.drawable.icon,getString(R.string.uploader_upload_in_progress_ticker),System.currentTimeMillis());
+  mNotification=new Notification(DisplayUtils.getSeasonalIconId(),getString(R.string.uploader_upload_in_progress_ticker),System.currentTimeMillis());
   mNotification.flags|=Notification.FLAG_ONGOING_EVENT;
   mDefaultNotificationContentView=mNotification.contentView;
   mNotification.contentView=new RemoteViews(getApplicationContext().getPackageName(),R.layout.progressbar_layout);
   mNotification.contentView.setProgressBar(R.id.status_progress,100,0,false);
   mNotification.contentView.setTextViewText(R.id.status_text,String.format(getString(R.string.uploader_upload_in_progress_content),0,upload.getFileName()));
-  mNotification.contentView.setImageViewResource(R.id.status_icon,R.drawable.icon);
+  mNotification.contentView.setImageViewResource(R.id.status_icon,DisplayUtils.getSeasonalIconId());
   Intent showDetailsIntent=new Intent(this,FileDisplayActivity.class);
   showDetailsIntent.putExtra(FileActivity.EXTRA_FILE,upload.getFile());
   showDetailsIntent.putExtra(FileActivity.EXTRA_ACCOUNT,upload.getAccount());

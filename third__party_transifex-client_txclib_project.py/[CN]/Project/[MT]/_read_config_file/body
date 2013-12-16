@@ -1,9 +1,0 @@
-def _read_config_file(self, config_file):
-    'Parse the config file and return its contents.'
-    config = OrderedRawConfigParser()
-    try:
-        config.read(config_file)
-    except Exception as err:
-        msg = ('Cannot open/parse .tx/config file: %s' % err)
-        raise ProjectNotInit(msg)
-    return config
