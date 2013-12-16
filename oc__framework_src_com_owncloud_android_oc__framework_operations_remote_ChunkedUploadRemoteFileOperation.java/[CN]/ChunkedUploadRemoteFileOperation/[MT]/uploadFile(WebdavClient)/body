@@ -3,13 +3,15 @@
   FileChannel channel=null;
   RandomAccessFile raf=null;
   try {
-    File file=new File(getStoragePath());
+    File file=new File(mStoragePath);
     raf=new RandomAccessFile(file,"r");
     channel=raf.getChannel();
-    mEntity=new ChunkFromFileChannelRequestEntity(channel,getMimeType(),CHUNK_SIZE,file);
-    ((ProgressiveDataTransferer)mEntity).addDatatransferProgressListeners(getDataTransferListeners());
+    mEntity=new ChunkFromFileChannelRequestEntity(channel,mMimeType,CHUNK_SIZE,file);
+synchronized (mDataTransferListeners) {
+      ((ProgressiveDataTransferer)mEntity).addDatatransferProgressListeners(mDataTransferListeners);
+    }
     long offset=0;
-    String uriPrefix=client.getBaseUri() + WebdavUtils.encodePath(getRemotePath()) + "-chunking-"+ Math.abs((new Random()).nextInt(9000) + 1000)+ "-";
+    String uriPrefix=client.getBaseUri() + WebdavUtils.encodePath(mRemotePath) + "-chunking-"+ Math.abs((new Random()).nextInt(9000) + 1000)+ "-";
     long chunkCount=(long)Math.ceil((double)file.length() / CHUNK_SIZE);
     for (int chunkIndex=0; chunkIndex < chunkCount; chunkIndex++, offset+=CHUNK_SIZE) {
       if (mPutMethod != null) {
@@ -21,7 +23,7 @@
       mPutMethod.setRequestEntity(mEntity);
       status=client.executeMethod(mPutMethod);
       client.exhaustResponse(mPutMethod.getResponseBodyAsStream());
-      Log_OC.d(TAG,"Upload of " + getStoragePath() + " to "+ getRemotePath()+ ", chunk index "+ chunkIndex+ ", count "+ chunkCount+ ", HTTP result status "+ status);
+      Log.d(TAG,"Upload of " + mStoragePath + " to "+ mRemotePath+ ", chunk index "+ chunkIndex+ ", count "+ chunkCount+ ", HTTP result status "+ status);
       if (!isSuccess(status))       break;
     }
   }

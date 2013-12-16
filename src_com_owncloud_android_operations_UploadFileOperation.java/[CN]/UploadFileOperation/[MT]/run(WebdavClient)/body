@@ -65,7 +65,16 @@
       }
     }
     localCopyPassed=true;
-    mUploadOperation=new UploadRemoteFileOperation(mFile.getStoragePath(),mFile.getRemotePath(),mFile.getMimetype());
+    if (mChunked) {
+      mUploadOperation=new ChunkedUploadRemoteFileOperation(mFile.getStoragePath(),mFile.getRemotePath(),mFile.getMimetype());
+    }
+ else {
+      mUploadOperation=new UploadRemoteFileOperation(mFile.getStoragePath(),mFile.getRemotePath(),mFile.getMimetype());
+    }
+    Iterator<OnDatatransferProgressListener> listener=mDataTransferListeners.iterator();
+    while (listener.hasNext()) {
+      mUploadOperation.addDatatransferProgressListener(listener.next());
+    }
     result=mUploadOperation.execute(client);
     if (result.isSuccess()) {
       if (mLocalBehaviour == FileUploader.LOCAL_BEHAVIOUR_FORGET) {
