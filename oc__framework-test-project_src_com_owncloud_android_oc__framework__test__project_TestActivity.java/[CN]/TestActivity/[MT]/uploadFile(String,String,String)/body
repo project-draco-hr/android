@@ -1,0 +1,5 @@
+{
+  UploadRemoteFileOperation uploadOperation=new UploadRemoteFileOperation(storagePath,remotePath,mimeType);
+  RemoteOperationResult result=uploadOperation.execute(mClient);
+  return result;
+}
