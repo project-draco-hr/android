@@ -1,0 +1,6 @@
+{
+  String storagePath=mPath + "/" + mFileToUpload;
+  String remotePath="/" + mFileToUpload;
+  RemoteOperationResult result=mActivity.uploadFile(storagePath,remotePath,mMimeType);
+  assertTrue(result.isSuccess());
+}

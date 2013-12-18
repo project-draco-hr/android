@@ -1,0 +1,11 @@
+{
+  UploadRemoteFileOperation uploadOperation;
+  if (mChunked) {
+    uploadOperation=new ChunkedUploadRemoteFileOperation(storagePath,remotePath,mimeType);
+  }
+ else {
+    uploadOperation=new UploadRemoteFileOperation(storagePath,remotePath,mimeType);
+  }
+  RemoteOperationResult result=uploadOperation.execute(mClient);
+  return result;
+}

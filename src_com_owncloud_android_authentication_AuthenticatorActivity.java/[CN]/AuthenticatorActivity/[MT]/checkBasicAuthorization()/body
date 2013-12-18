@@ -3,7 +3,7 @@
   String username=mUsernameInput.getText().toString();
   String password=mPasswordInput.getText().toString();
   showDialog(DIALOG_LOGIN_PROGRESS);
-  mAuthCheckOperation=new ExistenceCheckOperation("",this,false);
+  mAuthCheckOperation=new ExistenceCheckRemoteOperation("",this,false);
   WebdavClient client=OwnCloudClientFactory.createOwnCloudClient(Uri.parse(mHostBaseUrl + webdav_path),this,true);
   client.setBasicCredentials(username,password);
   mOperationThread=mAuthCheckOperation.execute(client,this,mHandler);

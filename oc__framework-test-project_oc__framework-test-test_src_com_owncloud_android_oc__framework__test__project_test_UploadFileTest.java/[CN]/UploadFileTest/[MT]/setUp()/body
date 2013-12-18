@@ -1,0 +1,10 @@
+{
+  super.setUp();
+  setActivityInitialTouchMode(false);
+  mActivity=getActivity();
+  SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmss");
+  mCurrentDate=sdf.format(new Date());
+  File sdCard=Environment.getExternalStorageDirectory();
+  mPath=sdCard.getAbsolutePath() + "/" + mStoragePath+ mCurrentDate;
+  copyAssets();
+}
