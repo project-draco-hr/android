@@ -1,6 +1,6 @@
 {
   UploadRemoteFileOperation uploadOperation;
-  if (mChunked) {
+  if (mChunked && (new File(storagePath)).length() > ChunkedUploadRemoteFileOperation.CHUNK_SIZE) {
     uploadOperation=new ChunkedUploadRemoteFileOperation(storagePath,remotePath,mimeType);
   }
  else {

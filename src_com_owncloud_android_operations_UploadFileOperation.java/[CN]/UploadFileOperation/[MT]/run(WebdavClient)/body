@@ -65,7 +65,7 @@
       }
     }
     localCopyPassed=true;
-    if (mChunked) {
+    if (mChunked && (new File(mFile.getStoragePath())).length() > ChunkedUploadRemoteFileOperation.CHUNK_SIZE) {
       mUploadOperation=new ChunkedUploadRemoteFileOperation(mFile.getStoragePath(),mFile.getRemotePath(),mFile.getMimetype());
     }
  else {
