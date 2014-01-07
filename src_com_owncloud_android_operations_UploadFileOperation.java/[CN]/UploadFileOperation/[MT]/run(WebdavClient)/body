@@ -65,16 +65,18 @@
       }
     }
     localCopyPassed=true;
-synchronized (mCancellationRequested) {
-      if (mCancellationRequested.get()) {
-        throw new OperationCancelledException();
-      }
- else {
-        mPutMethod=new PutMethod(client.getBaseUri() + WebdavUtils.encodePath(mFile.getRemotePath()));
-      }
+    if (mChunked && (new File(mFile.getStoragePath())).length() > ChunkedUploadRemoteFileOperation.CHUNK_SIZE) {
+      mUploadOperation=new ChunkedUploadRemoteFileOperation(mFile.getStoragePath(),mFile.getRemotePath(),mFile.getMimetype());
     }
-    int status=uploadFile(client);
-    if (isSuccess(status)) {
+ else {
+      mUploadOperation=new UploadRemoteFileOperation(mFile.getStoragePath(),mFile.getRemotePath(),mFile.getMimetype());
+    }
+    Iterator<OnDatatransferProgressListener> listener=mDataTransferListeners.iterator();
+    while (listener.hasNext()) {
+      mUploadOperation.addDatatransferProgressListener(listener.next());
+    }
+    result=mUploadOperation.execute(client);
+    if (result.isSuccess()) {
       if (mLocalBehaviour == FileUploader.LOCAL_BEHAVIOUR_FORGET) {
         mFile.setStoragePath(null);
       }
@@ -96,7 +98,6 @@ synchronized (mCancellationRequested) {
         }
       }
     }
-    result=new RemoteOperationResult(isSuccess(status),status,(mPutMethod != null ? mPutMethod.getResponseHeaders() : null));
   }
  catch (  Exception e) {
     if (mCancellationRequested.get()) {
