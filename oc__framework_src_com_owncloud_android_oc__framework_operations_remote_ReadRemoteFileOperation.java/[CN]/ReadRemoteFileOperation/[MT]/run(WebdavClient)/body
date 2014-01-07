@@ -8,14 +8,12 @@
     boolean isMultiStatus=status == HttpStatus.SC_MULTI_STATUS;
     if (isMultiStatus) {
       MultiStatus resp=propfind.getResponseBodyAsMultiStatus();
+      WebdavEntry we=new WebdavEntry(resp.getResponses()[0],client.getBaseUri().getPath());
+      RemoteFile remoteFile=new RemoteFile(we);
+      ArrayList<RemoteFile> files=new ArrayList<RemoteFile>();
+      files.add(remoteFile);
       result=new RemoteOperationResult(true,status,propfind.getResponseHeaders());
-      if (result.isSuccess()) {
-        WebdavEntry we=new WebdavEntry(resp.getResponses()[0],client.getBaseUri().getPath());
-        RemoteFile remoteFile=FileUtils.fillOCFile(we);
-        ArrayList<RemoteFile> files=new ArrayList<RemoteFile>();
-        files.add(remoteFile);
-        result.setData(files);
-      }
+      result.setData(files);
     }
  else {
       client.exhaustResponse(propfind.getResponseBodyAsStream());
