@@ -10,7 +10,7 @@
   if (getIntent().getAction() != null && getIntent().getAction().equals(Intent.ACTION_MAIN) && savedInstanceState == null) {
     requestPinCode();
   }
- else   if (getIntent().getAction() == null) {
+ else   if (getIntent().getAction() == null && savedInstanceState == null) {
     requestPinCode();
   }
   Intent observer_intent=new Intent(this,FileObserverService.class);
