@@ -6,8 +6,8 @@
     }
     @Override public void afterTextChanged(    Editable s){
       if (s.length() > 0) {
-        if (!confirmingPinCode) {
-          tempText[0]=mText1.getText().toString();
+        if (!mConfirmingPinCode) {
+          mTempText[0]=mText1.getText().toString();
         }
         mText2.requestFocus();
       }
@@ -21,8 +21,8 @@
     }
     @Override public void afterTextChanged(    Editable s){
       if (s.length() > 0) {
-        if (!confirmingPinCode) {
-          tempText[1]=mText2.getText().toString();
+        if (!mConfirmingPinCode) {
+          mTempText[1]=mText2.getText().toString();
         }
         mText3.requestFocus();
       }
@@ -31,14 +31,14 @@
 );
   mText2.setOnKeyListener(new OnKeyListener(){
     @Override public boolean onKey(    View v,    int keyCode,    KeyEvent event){
-      if (keyCode == KeyEvent.KEYCODE_DEL && bChange) {
+      if (keyCode == KeyEvent.KEYCODE_DEL && mBChange) {
         mText1.setText("");
         mText1.requestFocus();
-        if (!confirmingPinCode)         tempText[0]="";
-        bChange=false;
+        if (!mConfirmingPinCode)         mTempText[0]="";
+        mBChange=false;
       }
- else       if (!bChange) {
-        bChange=true;
+ else       if (!mBChange) {
+        mBChange=true;
       }
       return false;
     }
@@ -64,8 +64,8 @@
     }
     @Override public void afterTextChanged(    Editable s){
       if (s.length() > 0) {
-        if (!confirmingPinCode) {
-          tempText[2]=mText3.getText().toString();
+        if (!mConfirmingPinCode) {
+          mTempText[2]=mText3.getText().toString();
         }
         mText4.requestFocus();
       }
@@ -74,14 +74,14 @@
 );
   mText3.setOnKeyListener(new OnKeyListener(){
     @Override public boolean onKey(    View v,    int keyCode,    KeyEvent event){
-      if (keyCode == KeyEvent.KEYCODE_DEL && bChange) {
+      if (keyCode == KeyEvent.KEYCODE_DEL && mBChange) {
         mText2.requestFocus();
-        if (!confirmingPinCode)         tempText[1]="";
+        if (!mConfirmingPinCode)         mTempText[1]="";
         mText2.setText("");
-        bChange=false;
+        mBChange=false;
       }
- else       if (!bChange) {
-        bChange=true;
+ else       if (!mBChange) {
+        mBChange=true;
       }
       return false;
     }
@@ -114,17 +114,17 @@
     }
     @Override public void afterTextChanged(    Editable s){
       if (s.length() > 0) {
-        if (!confirmingPinCode) {
-          tempText[3]=mText4.getText().toString();
+        if (!mConfirmingPinCode) {
+          mTempText[3]=mText4.getText().toString();
         }
         mText1.requestFocus();
-        if (!pinCodeChecked) {
-          pinCodeChecked=checkPincode();
+        if (!mPinCodeChecked) {
+          mPinCodeChecked=checkPincode();
         }
-        if (pinCodeChecked && activity.equals("FileDisplayActivity")) {
+        if (mPinCodeChecked && (mActivity.equals("FileDisplayActivity") || mActivity.equals("PreviewImageActivity"))) {
           finish();
         }
- else         if (pinCodeChecked) {
+ else         if (mPinCodeChecked) {
           Intent intent=getIntent();
           String newState=intent.getStringExtra(EXTRA_NEW_STATE);
           if (newState.equals("false")) {
@@ -135,7 +135,7 @@
             pinCodeEnd(false);
           }
  else {
-            if (!confirmingPinCode) {
+            if (!mConfirmingPinCode) {
               pinCodeChangeRequest();
             }
  else {
@@ -149,14 +149,14 @@
 );
   mText4.setOnKeyListener(new OnKeyListener(){
     @Override public boolean onKey(    View v,    int keyCode,    KeyEvent event){
-      if (keyCode == KeyEvent.KEYCODE_DEL && bChange) {
+      if (keyCode == KeyEvent.KEYCODE_DEL && mBChange) {
         mText3.requestFocus();
-        if (!confirmingPinCode)         tempText[2]="";
+        if (!mConfirmingPinCode)         mTempText[2]="";
         mText3.setText("");
-        bChange=false;
+        mBChange=false;
       }
- else       if (!bChange) {
-        bChange=true;
+ else       if (!mBChange) {
+        mBChange=true;
       }
       return false;
     }

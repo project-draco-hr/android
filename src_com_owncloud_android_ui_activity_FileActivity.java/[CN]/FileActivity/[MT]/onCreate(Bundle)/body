@@ -4,10 +4,12 @@
   if (savedInstanceState != null) {
     account=savedInstanceState.getParcelable(FileActivity.EXTRA_ACCOUNT);
     mFile=savedInstanceState.getParcelable(FileActivity.EXTRA_FILE);
+    mFromNotification=savedInstanceState.getBoolean(FileActivity.EXTRA_FROM_NOTIFICATION);
   }
  else {
     account=getIntent().getParcelableExtra(FileActivity.EXTRA_ACCOUNT);
     mFile=getIntent().getParcelableExtra(FileActivity.EXTRA_FILE);
+    mFromNotification=getIntent().getBooleanExtra(FileActivity.EXTRA_FROM_NOTIFICATION,false);
   }
   setAccount(account,savedInstanceState != null);
 }
