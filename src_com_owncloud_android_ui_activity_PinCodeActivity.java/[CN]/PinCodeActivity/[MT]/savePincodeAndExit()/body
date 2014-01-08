@@ -1,9 +1,9 @@
 {
   SharedPreferences.Editor appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
-  appPrefs.putString("PrefPinCode1",tempText[0]);
-  appPrefs.putString("PrefPinCode2",tempText[1]);
-  appPrefs.putString("PrefPinCode3",tempText[2]);
-  appPrefs.putString("PrefPinCode4",tempText[3]);
+  appPrefs.putString("PrefPinCode1",mTempText[0]);
+  appPrefs.putString("PrefPinCode2",mTempText[1]);
+  appPrefs.putString("PrefPinCode3",mTempText[2]);
+  appPrefs.putString("PrefPinCode4",mTempText[3]);
   appPrefs.putBoolean("set_pincode",true);
   appPrefs.commit();
   pinCodeEnd(true);

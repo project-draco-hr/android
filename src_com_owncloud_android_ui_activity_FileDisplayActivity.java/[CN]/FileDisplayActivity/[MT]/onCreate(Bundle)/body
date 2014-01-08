@@ -10,6 +10,9 @@
   if (getIntent().getAction() != null && getIntent().getAction().equals(Intent.ACTION_MAIN) && savedInstanceState == null) {
     requestPinCode();
   }
+ else   if (getIntent().getAction() == null) {
+    requestPinCode();
+  }
   Intent observer_intent=new Intent(this,FileObserverService.class);
   observer_intent.putExtra(FileObserverService.KEY_FILE_CMD,FileObserverService.CMD_INIT_OBSERVED_LIST);
   startService(observer_intent);
