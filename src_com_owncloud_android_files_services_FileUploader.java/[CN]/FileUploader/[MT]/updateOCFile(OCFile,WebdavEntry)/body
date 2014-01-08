@@ -1,7 +1,0 @@
-{
-  file.setCreationTimestamp(we.createTimestamp());
-  file.setFileLength(we.contentLength());
-  file.setMimetype(we.contentType());
-  file.setModificationTimestamp(we.modifiedTimestamp());
-  file.setModificationTimestampAtLastSyncForData(we.modifiedTimestamp());
-}
