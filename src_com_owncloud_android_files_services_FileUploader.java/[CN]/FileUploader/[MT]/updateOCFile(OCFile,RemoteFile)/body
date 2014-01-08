@@ -1,0 +1,7 @@
+{
+  file.setCreationTimestamp(remoteFile.getCreationTimestamp());
+  file.setFileLength(remoteFile.getLength());
+  file.setMimetype(remoteFile.getMimeType());
+  file.setModificationTimestamp(remoteFile.getModifiedTimestamp());
+  file.setModificationTimestampAtLastSyncForData(remoteFile.getModifiedTimestamp());
+}
