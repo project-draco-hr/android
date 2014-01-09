@@ -4,7 +4,7 @@
   Uri uri=Uri.parse(mHostBaseUrl);
   String username=mUsernameInput.getText().toString().trim();
   if (isSaml) {
-    username=getUserNameForSamlSso();
+    username=com.owncloud.android.oc_framework.accounts.AccountUtils.getUserNameForSamlSso(mAuthToken);
   }
  else   if (isOAuth) {
     username="OAuth_user" + (new java.util.Random(System.currentTimeMillis())).nextLong();

@@ -7,7 +7,7 @@
     mAccountMgr.setAuthToken(mAccount,mAuthTokenType,mAuthToken);
   }
  else   if (AccountTypeUtils.getAuthTokenTypeSamlSessionCookie(MainApp.getAccountType()).equals(mAuthTokenType)) {
-    String username=getUserNameForSamlSso();
+    String username=com.owncloud.android.oc_framework.accounts.AccountUtils.getUserNameForSamlSso(mAuthToken);
     if (!mUsernameInput.getText().toString().equals(username)) {
       RemoteOperationResult result=new RemoteOperationResult(ResultCode.ACCOUNT_NOT_THE_SAME);
       updateAuthStatusIconAndText(result);
