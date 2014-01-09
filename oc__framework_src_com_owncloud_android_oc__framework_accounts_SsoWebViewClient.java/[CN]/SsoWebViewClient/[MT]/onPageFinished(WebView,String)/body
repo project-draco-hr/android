@@ -1,5 +1,5 @@
 {
-  Log_OC.d(TAG,"onPageFinished : " + url);
+  Log.d(TAG,"onPageFinished : " + url);
   mLastReloadedUrlAtError=null;
   if (url.startsWith(mTargetUrl)) {
     view.setVisibility(View.GONE);
