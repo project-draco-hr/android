@@ -1,7 +1,7 @@
 {
   if (state) {
-    bCancel.setVisibility(View.VISIBLE);
-    bCancel.setOnClickListener(new OnClickListener(){
+    mBCancel.setVisibility(View.VISIBLE);
+    mBCancel.setOnClickListener(new OnClickListener(){
       @Override public void onClick(      View v){
         SharedPreferences.Editor appPrefsE=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
         SharedPreferences appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());

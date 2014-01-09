@@ -2,8 +2,8 @@
   super.onCreate(savedInstanceState);
   setContentView(R.layout.pincodelock);
   Intent intent=getIntent();
-  activity=intent.getStringExtra(EXTRA_ACTIVITY);
-  bCancel=(Button)findViewById(R.id.cancel);
+  mActivity=intent.getStringExtra(EXTRA_ACTIVITY);
+  mBCancel=(Button)findViewById(R.id.cancel);
   mPinHdr=(TextView)findViewById(R.id.pinHdr);
   mPinHdrExplanation=(TextView)findViewById(R.id.pinHdrExpl);
   mText1=(EditText)findViewById(R.id.txt1);
@@ -15,20 +15,20 @@
   SharedPreferences appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
   if ((appPrefs.getString("PrefPinCode1",null) == null)) {
     setChangePincodeView(true);
-    pinCodeChecked=true;
-    newPasswordEntered=true;
+    mPinCodeChecked=true;
+    mNewPasswordEntered=true;
   }
  else {
     if (appPrefs.getBoolean("set_pincode",false)) {
-      if (activity.equals("preferences")) {
+      if (mActivity.equals("preferences")) {
         mPinHdr.setText(R.string.pincode_configure_your_pin);
         mPinHdrExplanation.setVisibility(View.VISIBLE);
-        pinCodeChecked=true;
+        mPinCodeChecked=true;
         setChangePincodeView(true);
       }
  else {
-        bCancel.setVisibility(View.INVISIBLE);
-        bCancel.setVisibility(View.GONE);
+        mBCancel.setVisibility(View.INVISIBLE);
+        mBCancel.setVisibility(View.GONE);
         mPinHdr.setText(R.string.pincode_enter_pin_code);
         mPinHdrExplanation.setVisibility(View.INVISIBLE);
         setChangePincodeView(false);
@@ -37,7 +37,7 @@
  else {
       mPinHdr.setText(R.string.pincode_remove_your_pincode);
       mPinHdrExplanation.setVisibility(View.INVISIBLE);
-      pinCodeChecked=false;
+      mPinCodeChecked=false;
       setChangePincodeView(true);
     }
   }
