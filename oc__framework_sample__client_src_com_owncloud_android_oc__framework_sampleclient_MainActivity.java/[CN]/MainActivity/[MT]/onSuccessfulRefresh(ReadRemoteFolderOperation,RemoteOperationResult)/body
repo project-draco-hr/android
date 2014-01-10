@@ -1,0 +1,9 @@
+{
+  mFilesAdapter.clear();
+  List<RemoteFile> files=result.getData();
+  if (files != null && files.size() > 0) {
+    mFilesAdapter.addAll(files);
+    mFilesAdapter.remove(mFilesAdapter.getItem(0));
+  }
+  mFilesAdapter.notifyDataSetChanged();
+}

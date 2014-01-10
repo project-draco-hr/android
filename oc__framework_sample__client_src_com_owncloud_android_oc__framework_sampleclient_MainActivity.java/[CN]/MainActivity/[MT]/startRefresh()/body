@@ -1,7 +1,4 @@
 {
   RemoteOperation refreshOperation=new ReadRemoteFolderOperation(FileUtils.PATH_SEPARATOR);
-  Uri serverUri=Uri.parse(getString(R.string.server_base_url) + AccountUtils.WEBDAV_PATH_4_0);
-  WebdavClient client=OwnCloudClientFactory.createOwnCloudClient(serverUri,this,true);
-  client.setBasicCredentials(getString(R.string.username),getString(R.string.password));
-  refreshOperation.execute(client,this,mHandler);
+  refreshOperation.execute(mClient,this,mHandler);
 }

@@ -1,8 +1,11 @@
 {
-  if (result.isSuccess()) {
-    Toast.makeText(this,R.string.todo_operation_finished_in_success,Toast.LENGTH_SHORT).show();
+  if (!result.isSuccess()) {
+    Toast.makeText(this,R.string.todo_operation_finished_in_fail,Toast.LENGTH_SHORT).show();
+  }
+ else   if (operation instanceof ReadRemoteFolderOperation) {
+    onSuccessfulRefresh((ReadRemoteFolderOperation)operation,result);
   }
  else {
-    Toast.makeText(this,R.string.todo_operation_finished_in_fail,Toast.LENGTH_SHORT).show();
+    Toast.makeText(this,R.string.todo_operation_finished_in_success,Toast.LENGTH_SHORT).show();
   }
 }

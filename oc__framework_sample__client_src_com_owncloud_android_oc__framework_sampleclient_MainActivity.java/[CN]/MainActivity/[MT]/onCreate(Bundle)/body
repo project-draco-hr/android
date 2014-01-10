@@ -2,4 +2,9 @@
   super.onCreate(savedInstanceState);
   setContentView(R.layout.main);
   mHandler=new Handler();
+  Uri serverUri=Uri.parse(getString(R.string.server_base_url) + AccountUtils.WEBDAV_PATH_4_0);
+  mClient=OwnCloudClientFactory.createOwnCloudClient(serverUri,this,true);
+  mClient.setBasicCredentials(getString(R.string.username),getString(R.string.password));
+  mFilesAdapter=new FilesArrayAdapter(this,R.layout.file_in_list);
+  ((ListView)findViewById(R.id.list_view)).setAdapter(mFilesAdapter);
 }
