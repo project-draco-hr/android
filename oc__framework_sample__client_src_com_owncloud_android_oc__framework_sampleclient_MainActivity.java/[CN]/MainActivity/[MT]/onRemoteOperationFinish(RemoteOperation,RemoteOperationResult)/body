@@ -1,0 +1,8 @@
+{
+  if (result.isSuccess()) {
+    Toast.makeText(this,R.string.todo_operation_finished_in_success,Toast.LENGTH_SHORT).show();
+  }
+ else {
+    Toast.makeText(this,R.string.todo_operation_finished_in_fail,Toast.LENGTH_SHORT).show();
+  }
+}
