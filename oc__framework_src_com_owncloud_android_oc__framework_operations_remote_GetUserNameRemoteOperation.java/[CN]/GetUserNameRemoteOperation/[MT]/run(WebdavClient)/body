@@ -1,0 +1,36 @@
+{
+  RemoteOperationResult result=null;
+  int status=-1;
+  GetMethod get=new GetMethod(mUrl);
+  get.addRequestHeader("application/xml","Content-Type");
+  get.addRequestHeader(TAG_HEADER,TAG_HEADER_VALUE);
+  try {
+    status=client.executeMethod(get);
+    if (isSuccess(status)) {
+      Log.d(TAG,"Obtain RESPONSE");
+      String response=get.getResponseBodyAsString();
+      Log.d(TAG,response);
+      JSONObject respJSON=new JSONObject(response);
+      String id=respJSON.getString(TAG_ID);
+      String display_name=respJSON.getString(TAG_DISPLAY_NAME);
+      String email=respJSON.getString(TAG_EMAIL);
+      Log.d(TAG,"Response: " + id + "-"+ display_name+ "-"+ email);
+    }
+  }
+ catch (  HttpException e) {
+    result=new RemoteOperationResult(e);
+    e.printStackTrace();
+  }
+catch (  IOException e) {
+    result=new RemoteOperationResult(e);
+    e.printStackTrace();
+  }
+catch (  JSONException e) {
+    result=new RemoteOperationResult(e);
+    e.printStackTrace();
+  }
+ finally {
+    get.releaseConnection();
+  }
+  return result;
+}
