@@ -18,7 +18,4 @@
 );
     }
   }
- else {
-    Log.d(TAG,"URL==> " + url + " mTarget==> "+ mTargetUrl);
-  }
 }
