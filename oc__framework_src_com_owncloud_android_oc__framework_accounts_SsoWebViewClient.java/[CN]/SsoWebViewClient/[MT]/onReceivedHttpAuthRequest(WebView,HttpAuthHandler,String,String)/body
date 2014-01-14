@@ -1,0 +1,3 @@
+{
+  Log.d(TAG,"onReceivedHttpAuthRequest : " + host);
+}

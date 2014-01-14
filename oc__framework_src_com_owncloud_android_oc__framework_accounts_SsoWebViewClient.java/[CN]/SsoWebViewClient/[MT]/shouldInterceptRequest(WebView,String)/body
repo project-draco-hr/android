@@ -1,0 +1,4 @@
+{
+  Log.d(TAG,"shouldInterceptRequest : " + url);
+  return null;
+}
