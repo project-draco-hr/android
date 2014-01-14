@@ -1,4 +1,4 @@
 {
-  RemoteOperation refreshOperation=new ReadRemoteFolderOperation(FileUtils.PATH_SEPARATOR);
+  ReadRemoteFolderOperation refreshOperation=new ReadRemoteFolderOperation(FileUtils.PATH_SEPARATOR);
   refreshOperation.execute(mClient,this,mHandler);
 }

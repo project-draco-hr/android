@@ -1,9 +1,13 @@
 {
   if (!result.isSuccess()) {
     Toast.makeText(this,R.string.todo_operation_finished_in_fail,Toast.LENGTH_SHORT).show();
+    Log.e(LOG_TAG,result.getLogMessage(),result.getException());
   }
  else   if (operation instanceof ReadRemoteFolderOperation) {
     onSuccessfulRefresh((ReadRemoteFolderOperation)operation,result);
+  }
+ else   if (operation instanceof UploadRemoteFileOperation) {
+    onSuccessfulUpload((UploadRemoteFileOperation)operation,result);
   }
  else {
     Toast.makeText(this,R.string.todo_operation_finished_in_success,Toast.LENGTH_SHORT).show();

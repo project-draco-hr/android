@@ -7,4 +7,24 @@
   mClient.setBasicCredentials(getString(R.string.username),getString(R.string.password));
   mFilesAdapter=new FilesArrayAdapter(this,R.layout.file_in_list);
   ((ListView)findViewById(R.id.list_view)).setAdapter(mFilesAdapter);
+  AssetManager assets=getAssets();
+  try {
+    String sampleFileName=getString(R.string.sample_file_name);
+    File upFolder=new File(getCacheDir(),getString(R.string.upload_folder_path));
+    upFolder.mkdir();
+    File upFile=new File(upFolder,sampleFileName);
+    FileOutputStream fos=new FileOutputStream(upFile);
+    InputStream is=assets.open(sampleFileName);
+    int count=0;
+    byte[] buffer=new byte[1024];
+    while ((count=is.read(buffer,0,buffer.length)) >= 0) {
+      fos.write(buffer,0,count);
+    }
+    is.close();
+    fos.close();
+  }
+ catch (  IOException e) {
+    Toast.makeText(this,R.string.error_copying_sample_file,Toast.LENGTH_SHORT).show();
+    Log.e(LOG_TAG,getString(R.string.error_copying_sample_file),e);
+  }
 }
