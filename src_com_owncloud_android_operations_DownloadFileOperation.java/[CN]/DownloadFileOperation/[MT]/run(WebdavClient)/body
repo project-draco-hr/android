@@ -4,8 +4,7 @@
   boolean moved=true;
   File tmpFile=new File(getTmpPath());
   String tmpFolder=getTmpFolder();
-  RemoteFile remoteFile=FileStorageUtils.fillRemoteFile(mFile);
-  mDownloadOperation=new DownloadRemoteFileOperation(remoteFile,tmpFolder);
+  mDownloadOperation=new DownloadRemoteFileOperation(mFile.getRemotePath(),tmpFolder);
   Iterator<OnDatatransferProgressListener> listener=mDataTransferListeners.iterator();
   while (listener.hasNext()) {
     mDownloadOperation.addDatatransferProgressListener(listener.next());

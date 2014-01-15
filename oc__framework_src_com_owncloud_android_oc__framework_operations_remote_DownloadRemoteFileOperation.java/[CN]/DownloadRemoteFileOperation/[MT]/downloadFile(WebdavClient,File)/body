@@ -1,7 +1,7 @@
 {
   int status=-1;
   boolean savedFile=false;
-  mGet=new GetMethod(client.getBaseUri() + WebdavUtils.encodePath(mRemoteFile.getRemotePath()));
+  mGet=new GetMethod(client.getBaseUri() + WebdavUtils.encodePath(mRemotePath));
   Iterator<OnDatatransferProgressListener> it=null;
   FileOutputStream fos=null;
   try {
@@ -11,6 +11,8 @@
       BufferedInputStream bis=new BufferedInputStream(mGet.getResponseBodyAsStream());
       fos=new FileOutputStream(targetFile);
       long transferred=0;
+      Header contentLength=mGet.getResponseHeader("Content-Length");
+      long totalToTransfer=(contentLength != null && contentLength.getValue().length() > 0) ? Long.parseLong(contentLength.getValue()) : 0;
       byte[] bytes=new byte[4096];
       int readResult=0;
       while ((readResult=bis.read(bytes)) != -1) {
@@ -25,16 +27,11 @@ synchronized (mCancellationRequested) {
 synchronized (mDataTransferListeners) {
           it=mDataTransferListeners.iterator();
           while (it.hasNext()) {
-            it.next().onTransferProgress(readResult,transferred,mRemoteFile.getLength(),targetFile.getName());
+            it.next().onTransferProgress(readResult,transferred,totalToTransfer,targetFile.getName());
           }
         }
       }
       savedFile=true;
-      Header modificationTime=mGet.getResponseHeader("Last-Modified");
-      if (modificationTime != null) {
-        Date d=WebdavUtils.parseResponseDate((String)modificationTime.getValue());
-        mModificationTimestamp=(d != null) ? d.getTime() : 0;
-      }
     }
  else {
       client.exhaustResponse(mGet.getResponseBodyAsStream());
