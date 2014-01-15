@@ -1,6 +1,7 @@
 {
-  final long percentage=totalTransferredSoFar * 100 / totalToTransfer;
+  final long percentage=(totalToTransfer > 0 ? totalTransferredSoFar * 100 / totalToTransfer : 0);
   final boolean upload=fileName.contains(getString(R.string.upload_folder_path));
+  Log.d(LOG_TAG,"progressRate " + percentage);
   mHandler.post(new Runnable(){
     @Override public void run(){
       TextView progressView=null;

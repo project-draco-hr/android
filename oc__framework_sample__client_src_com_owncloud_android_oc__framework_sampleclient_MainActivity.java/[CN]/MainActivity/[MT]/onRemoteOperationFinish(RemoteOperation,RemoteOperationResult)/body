@@ -9,6 +9,12 @@
  else   if (operation instanceof UploadRemoteFileOperation) {
     onSuccessfulUpload((UploadRemoteFileOperation)operation,result);
   }
+ else   if (operation instanceof RemoveRemoteFileOperation) {
+    onSuccessfulRemoteDeletion((RemoveRemoteFileOperation)operation,result);
+  }
+ else   if (operation instanceof DownloadRemoteFileOperation) {
+    onSuccessfulDownload((DownloadRemoteFileOperation)operation,result);
+  }
  else {
     Toast.makeText(this,R.string.todo_operation_finished_in_success,Toast.LENGTH_SHORT).show();
   }

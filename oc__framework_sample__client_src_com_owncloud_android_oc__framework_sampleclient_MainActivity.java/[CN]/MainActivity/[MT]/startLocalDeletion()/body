@@ -1,3 +1,11 @@
 {
-  Toast.makeText(this,R.string.todo_start_local_deletion,Toast.LENGTH_SHORT).show();
+  File downFolder=new File(getCacheDir(),getString(R.string.download_folder_path));
+  File downloadedFile=downFolder.listFiles()[0];
+  if (!downloadedFile.delete() && downloadedFile.exists()) {
+    Toast.makeText(this,R.string.error_deleting_local_file,Toast.LENGTH_SHORT).show();
+  }
+ else {
+    ((TextView)findViewById(R.id.download_progress)).setText("0%");
+    findViewById(R.id.frame).setBackgroundDrawable(null);
+  }
 }

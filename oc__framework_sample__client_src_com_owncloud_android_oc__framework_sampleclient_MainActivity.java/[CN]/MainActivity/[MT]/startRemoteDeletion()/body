@@ -1,3 +1,7 @@
 {
-  Toast.makeText(this,R.string.todo_start_remote_deletion,Toast.LENGTH_SHORT).show();
+  File upFolder=new File(getCacheDir(),getString(R.string.upload_folder_path));
+  File fileToUpload=upFolder.listFiles()[0];
+  String remotePath=FileUtils.PATH_SEPARATOR + fileToUpload.getName();
+  RemoveRemoteFileOperation removeOperation=new RemoveRemoteFileOperation(remotePath);
+  removeOperation.execute(mClient,this,mHandler);
 }

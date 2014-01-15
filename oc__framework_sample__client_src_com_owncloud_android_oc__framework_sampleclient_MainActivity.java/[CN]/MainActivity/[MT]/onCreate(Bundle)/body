@@ -27,4 +27,5 @@
     Toast.makeText(this,R.string.error_copying_sample_file,Toast.LENGTH_SHORT).show();
     Log.e(LOG_TAG,getString(R.string.error_copying_sample_file),e);
   }
+  mFrame=findViewById(R.id.frame);
 }
