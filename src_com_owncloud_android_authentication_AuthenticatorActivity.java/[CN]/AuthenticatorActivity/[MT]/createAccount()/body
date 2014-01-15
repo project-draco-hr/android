@@ -4,7 +4,7 @@
   Uri uri=Uri.parse(mHostBaseUrl);
   String username=mUsernameInput.getText().toString().trim();
   if (isSaml) {
-    username=getUserNameForSaml(mHostBaseUrl);
+    username=getUserNameForSaml();
     if (username == null)     return false;
   }
  else   if (isOAuth) {

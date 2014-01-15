@@ -2,7 +2,7 @@
   GetUserNameTask getUserTask=new GetUserNameTask();
   String username=null;
   try {
-    username=getUserTask.execute(mHostBaseUrl).get();
+    username=getUserTask.execute().get();
   }
  catch (  InterruptedException e) {
     e.printStackTrace();

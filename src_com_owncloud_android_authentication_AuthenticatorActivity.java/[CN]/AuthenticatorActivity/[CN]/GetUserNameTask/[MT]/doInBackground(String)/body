@@ -1,7 +1,0 @@
-{
-  String hostUrl=(String)params[0];
-  GetUserNameRemoteOperation getUserOperation=new GetUserNameRemoteOperation(hostUrl,mAuthToken);
-  WebdavClient client=OwnCloudClientFactory.createOwnCloudClient(Uri.parse(hostUrl),getApplicationContext(),true);
-  RemoteOperationResult result=getUserOperation.execute(client);
-  return result.getUserName();
-}
