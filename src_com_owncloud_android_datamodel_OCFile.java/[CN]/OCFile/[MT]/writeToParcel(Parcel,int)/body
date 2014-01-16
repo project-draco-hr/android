@@ -13,4 +13,6 @@
   dest.writeLong(mLastSyncDateForProperties);
   dest.writeLong(mLastSyncDateForData);
   dest.writeString(mEtag);
+  dest.writeInt(mShareByLink ? 1 : 0);
+  dest.writeString(mPublicLink);
 }

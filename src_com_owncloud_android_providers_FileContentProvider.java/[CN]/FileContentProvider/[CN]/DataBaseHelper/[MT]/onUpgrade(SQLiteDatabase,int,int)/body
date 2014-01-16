@@ -46,4 +46,18 @@
     }
   }
   if (!upgraded)   Log_OC.i("SQL","OUT of the ADD in onUpgrade; oldVersion == " + oldVersion + ", newVersion == "+ newVersion);
+  if (oldVersion < 6 && newVersion >= 6) {
+    Log_OC.i("SQL","Entering in the #5 ADD in onUpgrade");
+    db.beginTransaction();
+    try {
+      db.execSQL("ALTER TABLE " + ProviderTableMeta.DB_NAME + " ADD COLUMN "+ ProviderTableMeta.FILE_SHARE_BY_LINK+ " INTEGER "+ " DEFAULT 0");
+      db.execSQL("ALTER TABLE " + ProviderTableMeta.DB_NAME + " ADD COLUMN "+ ProviderTableMeta.FILE_PUBLIC_LINK+ " TEXT "+ " DEFAULT NULL");
+      upgraded=true;
+      db.setTransactionSuccessful();
+    }
+  finally {
+      db.endTransaction();
+    }
+  }
+  if (!upgraded)   Log_OC.i("SQL","OUT of the ADD in onUpgrade; oldVersion == " + oldVersion + ", newVersion == "+ newVersion);
 }
