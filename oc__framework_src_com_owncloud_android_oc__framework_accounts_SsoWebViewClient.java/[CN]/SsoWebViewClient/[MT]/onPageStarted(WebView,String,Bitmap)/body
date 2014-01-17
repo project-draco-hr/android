@@ -1,4 +1,0 @@
-{
-  Log.d(TAG,"onPageStarted : " + url);
-  super.onPageStarted(view,url,favicon);
-}

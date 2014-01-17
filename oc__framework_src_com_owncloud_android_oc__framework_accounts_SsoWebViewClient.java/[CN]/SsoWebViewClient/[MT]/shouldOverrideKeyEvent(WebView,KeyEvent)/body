@@ -1,4 +1,0 @@
-{
-  Log.d(TAG,"shouldOverrideKeyEvent : " + event);
-  return false;
-}

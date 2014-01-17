@@ -1,4 +1,0 @@
-{
-  Log.d(TAG,"onScaleChanged : " + oldScale + " -> "+ newScale);
-  super.onScaleChanged(view,oldScale,newScale);
-}

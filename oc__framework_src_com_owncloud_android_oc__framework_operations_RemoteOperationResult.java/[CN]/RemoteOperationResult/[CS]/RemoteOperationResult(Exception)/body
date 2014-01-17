@@ -39,9 +39,6 @@
       mCode=ResultCode.SSL_ERROR;
     }
   }
- else   if (e instanceof JSONException) {
-    mCode=ResultCode.JSON_EXCEPTION;
-  }
  else {
     mCode=ResultCode.UNKNOWN_ERROR;
   }

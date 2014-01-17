@@ -1,4 +1,0 @@
-{
-  Log.d(TAG,"onFormResubMission ");
-  resend.sendToTarget();
-}

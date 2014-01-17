@@ -1,4 +1,0 @@
-{
-  Log.d(TAG,"onReceivedSslError : " + error);
-  handler.proceed();
-}
