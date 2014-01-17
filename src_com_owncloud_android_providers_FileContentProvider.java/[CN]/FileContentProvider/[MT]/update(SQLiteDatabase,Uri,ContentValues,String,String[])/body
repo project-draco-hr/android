@@ -3,6 +3,6 @@ switch (mUriMatcher.match(uri)) {
 case DIRECTORY:
     return updateFolderSize(db,selectionArgs[0]);
 default :
-  return db.update(ProviderTableMeta.DB_NAME,values,selection,selectionArgs);
+  return db.update(ProviderTableMeta.FILE_TABLE_NAME,values,selection,selectionArgs);
 }
 }

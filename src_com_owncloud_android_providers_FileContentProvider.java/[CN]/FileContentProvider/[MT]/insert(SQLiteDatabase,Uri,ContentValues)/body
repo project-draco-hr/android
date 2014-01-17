@@ -9,7 +9,7 @@
   String[] whereArgs=new String[]{remotePath,accountName};
   Cursor doubleCheck=query(db,uri,projection,where,whereArgs,null);
   if (doubleCheck == null || !doubleCheck.moveToFirst()) {
-    long rowId=db.insert(ProviderTableMeta.DB_NAME,null,values);
+    long rowId=db.insert(ProviderTableMeta.FILE_TABLE_NAME,null,values);
     if (rowId > 0) {
       Uri insertedFileUri=ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_FILE,rowId);
       return insertedFileUri;
