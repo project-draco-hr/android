@@ -1,0 +1,3 @@
+OwnCloudClient client
+OnRemoteOperationListener listener
+Handler listenerHandler

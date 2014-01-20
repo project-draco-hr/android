@@ -1,0 +1,21 @@
+{
+  Uri uri=Uri.parse(AccountUtils.constructFullURLForAccount(appContext,account));
+  AccountManager am=AccountManager.get(appContext);
+  boolean isOauth2=am.getUserData(account,OwnCloudAccount.Constants.KEY_SUPPORTS_OAUTH2) != null;
+  boolean isSamlSso=am.getUserData(account,OwnCloudAccount.Constants.KEY_SUPPORTS_SAML_WEB_SSO) != null;
+  OwnCloudClient client=createOwnCloudClient(uri,appContext,!isSamlSso);
+  if (isOauth2) {
+    String accessToken=am.blockingGetAuthToken(account,AccountTypeUtils.getAuthTokenTypeAccessToken(account.type),false);
+    client.setBearerCredentials(accessToken);
+  }
+ else   if (isSamlSso) {
+    String accessToken=am.blockingGetAuthToken(account,AccountTypeUtils.getAuthTokenTypeSamlSessionCookie(account.type),false);
+    client.setSsoSessionCookie(accessToken);
+  }
+ else {
+    String username=account.name.substring(0,account.name.lastIndexOf('@'));
+    String password=am.blockingGetAuthToken(account,AccountTypeUtils.getAuthTokenTypePass(account.type),false);
+    client.setBasicCredentials(username,password);
+  }
+  return client;
+}

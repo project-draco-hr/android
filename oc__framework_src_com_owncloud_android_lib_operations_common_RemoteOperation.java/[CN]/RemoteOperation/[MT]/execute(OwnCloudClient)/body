@@ -1,0 +1,5 @@
+{
+  if (client == null)   throw new IllegalArgumentException("Trying to execute a remote operation with a NULL OwnCloudClient");
+  mClient=client;
+  return run(client);
+}
