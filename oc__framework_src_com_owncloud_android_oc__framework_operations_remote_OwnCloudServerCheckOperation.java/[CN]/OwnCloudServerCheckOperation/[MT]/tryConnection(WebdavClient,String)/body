@@ -7,11 +7,12 @@
     String response=get.getResponseBodyAsString();
     if (status == HttpStatus.SC_OK) {
       JSONObject json=new JSONObject(response);
-      if (!json.getBoolean("installed")) {
+      if (!json.getBoolean(NODE_INSTALLED)) {
         mLatestResult=new RemoteOperationResult(RemoteOperationResult.ResultCode.INSTANCE_NOT_CONFIGURED);
       }
  else {
-        mOCVersion=new OwnCloudVersion(json.getString("version"));
+        mOCVersion=new OwnCloudVersion(json.getString(NODE_VERSION));
+        mOCVersionString=new OwnCloudVersion(json.getString(NODE_VERSIONSTRING),true);
         if (!mOCVersion.isVersionValid()) {
           mLatestResult=new RemoteOperationResult(RemoteOperationResult.ResultCode.BAD_OC_VERSION);
         }
@@ -35,13 +36,13 @@ catch (  Exception e) {
     if (get != null)     get.releaseConnection();
   }
   if (mLatestResult.isSuccess()) {
-    Log_OC.i(TAG,"Connection check at " + urlSt + ": "+ mLatestResult.getLogMessage());
+    Log.i(TAG,"Connection check at " + urlSt + ": "+ mLatestResult.getLogMessage());
   }
  else   if (mLatestResult.getException() != null) {
-    Log_OC.e(TAG,"Connection check at " + urlSt + ": "+ mLatestResult.getLogMessage(),mLatestResult.getException());
+    Log.e(TAG,"Connection check at " + urlSt + ": "+ mLatestResult.getLogMessage(),mLatestResult.getException());
   }
  else {
-    Log_OC.e(TAG,"Connection check at " + urlSt + ": "+ mLatestResult.getLogMessage());
+    Log.e(TAG,"Connection check at " + urlSt + ": "+ mLatestResult.getLogMessage());
   }
   return retval;
 }

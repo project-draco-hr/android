@@ -1,0 +1,10 @@
+{
+  mVersion=0;
+  mIsValid=false;
+  if (isVersionString) {
+    parseVersionString(versionstring);
+  }
+ else {
+    parseVersion(versionstring);
+  }
+}

@@ -1,7 +1,6 @@
 {
   try {
-    versionstring=versionstring.replaceAll("[^\\d.]","");
-    String[] nums=versionstring.split("\\.");
+    String[] nums=version.split("\\.");
     if (nums.length > 0) {
       mVersion+=Integer.parseInt(nums[0]);
     }
