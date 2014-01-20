@@ -3,10 +3,7 @@
   boolean isSaml=AccountTypeUtils.getAuthTokenTypeSamlSessionCookie(MainApp.getAccountType()).equals(mAuthTokenType);
   Uri uri=Uri.parse(mHostBaseUrl);
   String username=mUsernameInput.getText().toString().trim();
-  if (isSaml) {
-    username=getUserNameForSamlSso();
-  }
- else   if (isOAuth) {
+  if (isOAuth) {
     username="OAuth_user" + (new java.util.Random(System.currentTimeMillis())).nextLong();
   }
   String accountName=username + "@" + uri.getHost();

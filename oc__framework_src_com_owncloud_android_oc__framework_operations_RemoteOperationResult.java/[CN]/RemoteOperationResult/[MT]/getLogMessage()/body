@@ -41,6 +41,9 @@
  else     if (mException instanceof AccountsException) {
       return "Exception while using account";
     }
+ else     if (mException instanceof JSONException) {
+      return "JSON exception";
+    }
  else {
       return "Unexpected exception";
     }
