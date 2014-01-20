@@ -1,0 +1,23 @@
+{
+  if (result.isSuccess()) {
+    boolean success=false;
+    String username=operation.getUserName();
+    if (mAction == ACTION_CREATE) {
+      mUsernameInput.setText(username);
+      success=createAccount();
+    }
+ else {
+      if (!mUsernameInput.getText().toString().equals(username)) {
+        result=new RemoteOperationResult(ResultCode.ACCOUNT_NOT_THE_SAME);
+        updateAuthStatusIconAndText(result);
+        showAuthStatus();
+        Log_OC.d(TAG,result.getLogMessage());
+      }
+ else {
+        updateToken();
+        success=true;
+      }
+    }
+    if (success)     finish();
+  }
+}

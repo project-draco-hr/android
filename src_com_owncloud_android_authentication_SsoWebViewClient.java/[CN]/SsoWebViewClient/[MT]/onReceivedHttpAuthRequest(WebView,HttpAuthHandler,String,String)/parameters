@@ -1,0 +1,4 @@
+WebView view
+HttpAuthHandler handler
+String host
+String realm
