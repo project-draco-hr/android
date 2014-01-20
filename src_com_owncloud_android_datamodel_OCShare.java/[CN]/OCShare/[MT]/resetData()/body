@@ -1,0 +1,16 @@
+{
+  mId=-1;
+  mFileSource=0;
+  mItemSource=0;
+  mShareType=ShareType.NO_SHARED;
+  mShareWith=null;
+  mPath=null;
+  mPermissions=-1;
+  mSharedDate=0;
+  mExpirationDate=0;
+  mToken=null;
+  mSharedWithDisplayName=null;
+  mIsDirectory=false;
+  mUserId=-1;
+  mIdRemoteShared=-1;
+}

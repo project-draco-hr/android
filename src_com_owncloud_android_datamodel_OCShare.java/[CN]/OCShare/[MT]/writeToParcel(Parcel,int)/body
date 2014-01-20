@@ -1,0 +1,16 @@
+{
+  dest.writeLong(mId);
+  dest.writeLong(mFileSource);
+  dest.writeLong(mItemSource);
+  dest.writeString((mShareType == null) ? "" : mShareType.name());
+  dest.writeString(mShareWith);
+  dest.writeString(mPath);
+  dest.writeInt(mPermissions);
+  dest.writeLong(mSharedDate);
+  dest.writeLong(mExpirationDate);
+  dest.writeString(mToken);
+  dest.writeString(mSharedWithDisplayName);
+  dest.writeInt(mIsDirectory ? 1 : 0);
+  dest.writeLong(mUserId);
+  dest.writeLong(mIdRemoteShared);
+}
