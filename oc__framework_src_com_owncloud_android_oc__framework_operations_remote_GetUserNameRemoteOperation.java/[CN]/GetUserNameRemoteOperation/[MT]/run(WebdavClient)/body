@@ -1,0 +1,40 @@
+{
+  RemoteOperationResult result=null;
+  int status=-1;
+  GetMethod get=new GetMethod(client.getBaseUri() + OCS_ROUTE);
+  Log.d(TAG,"URL ------> " + client.getBaseUri() + OCS_ROUTE);
+  get.addRequestHeader(HEADER_OCS_API,HEADER_OCS_API_VALUE);
+  try {
+    status=client.executeMethod(get);
+    if (isSuccess(status)) {
+      Log.d(TAG,"Obtain RESPONSE");
+      String response=get.getResponseBodyAsString();
+      Log.d(TAG,"GET RESPONSE.................... " + response);
+      JSONObject respJSON=new JSONObject(response);
+      JSONObject respOCS=respJSON.getJSONObject(NODE_OCS);
+      JSONObject respData=respOCS.getJSONObject(NODE_DATA);
+      String id=respData.getString(NODE_ID);
+      String displayName=respData.getString(NODE_DISPLAY_NAME);
+      String email=respData.getString(NODE_EMAIL);
+      result=new RemoteOperationResult(isSuccess(status),status,(get != null ? get.getResponseHeaders() : null));
+      mUserName=displayName;
+      Log.d(TAG,"Response: " + id + " - "+ displayName+ " - "+ email);
+    }
+  }
+ catch (  HttpException e) {
+    result=new RemoteOperationResult(e);
+    e.printStackTrace();
+  }
+catch (  IOException e) {
+    result=new RemoteOperationResult(e);
+    e.printStackTrace();
+  }
+catch (  JSONException e) {
+    result=new RemoteOperationResult(e);
+    e.printStackTrace();
+  }
+ finally {
+    get.releaseConnection();
+  }
+  return result;
+}

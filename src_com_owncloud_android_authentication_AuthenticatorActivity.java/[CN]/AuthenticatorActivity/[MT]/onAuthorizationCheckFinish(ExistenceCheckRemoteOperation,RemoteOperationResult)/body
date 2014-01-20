@@ -11,7 +11,8 @@
       success=createAccount();
     }
  else {
-      success=updateToken();
+      updateToken();
+      success=true;
     }
     if (success) {
       finish();
