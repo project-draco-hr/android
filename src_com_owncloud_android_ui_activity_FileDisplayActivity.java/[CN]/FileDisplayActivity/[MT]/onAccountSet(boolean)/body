@@ -17,6 +17,9 @@
     }
     setFile(file);
     setNavigationListWithFolder(file);
+    if (isSharedSupported()) {
+      startGetSharedFiles();
+    }
     if (!stateWasRecovered) {
       Log_OC.e(TAG,"Initializing Fragments in onAccountChanged..");
       initFragmentsWithFile();

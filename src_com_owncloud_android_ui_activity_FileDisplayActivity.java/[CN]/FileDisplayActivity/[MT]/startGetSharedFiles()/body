@@ -1,0 +1,4 @@
+{
+  RemoteOperation getSharedFiles=new GetSharedFilesOperation();
+  getSharedFiles.execute(getAccount(),this,null,null,this);
+}
