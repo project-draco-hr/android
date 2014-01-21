@@ -1,7 +1,0 @@
-{
-  File upFolder=new File(getCacheDir(),getString(R.string.upload_folder_path));
-  File upFile=upFolder.listFiles()[0];
-  upFile.delete();
-  upFolder.delete();
-  super.onDestroy();
-}

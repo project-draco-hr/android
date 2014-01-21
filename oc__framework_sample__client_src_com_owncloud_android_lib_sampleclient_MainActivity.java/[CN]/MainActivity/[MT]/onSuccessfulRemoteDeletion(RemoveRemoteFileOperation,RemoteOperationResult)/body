@@ -1,7 +1,0 @@
-{
-  startRefresh();
-  TextView progressView=(TextView)findViewById(R.id.upload_progress);
-  if (progressView != null) {
-    progressView.setText("0%");
-  }
-}

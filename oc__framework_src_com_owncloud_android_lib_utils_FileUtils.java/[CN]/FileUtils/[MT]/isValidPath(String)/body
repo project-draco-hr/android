@@ -1,8 +1,0 @@
-{
-  boolean result=true;
-  Log.d("FileUtils","path ....... " + path);
-  if (path.contains("\\") || path.contains("<") || path.contains(">")|| path.contains(":")|| path.contains("\"")|| path.contains("|")|| path.contains("?")|| path.contains("*")) {
-    result=false;
-  }
-  return result;
-}

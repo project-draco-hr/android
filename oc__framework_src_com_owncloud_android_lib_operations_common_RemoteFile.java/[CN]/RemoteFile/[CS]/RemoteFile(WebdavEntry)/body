@@ -1,8 +1,0 @@
-{
-  this(we.decodedPath());
-  this.setCreationTimestamp(we.createTimestamp());
-  this.setLength(we.contentLength());
-  this.setMimeType(we.contentType());
-  this.setModifiedTimestamp(we.modifiedTimestamp());
-  this.setEtag(we.etag());
-}

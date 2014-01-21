@@ -1,4 +1,0 @@
-{
-  super(uri);
-  addRequestHeader(new org.apache.commons.httpclient.Header("Destination",dest));
-}

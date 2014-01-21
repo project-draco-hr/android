@@ -1,9 +1,0 @@
-{
-  File upFolder=new File(getCacheDir(),getString(R.string.upload_folder_path));
-  File fileToUpload=upFolder.listFiles()[0];
-  String remotePath=FileUtils.PATH_SEPARATOR + fileToUpload.getName();
-  String mimeType=getString(R.string.sample_file_mimetype);
-  UploadRemoteFileOperation uploadOperation=new UploadRemoteFileOperation(fileToUpload.getAbsolutePath(),remotePath,mimeType);
-  uploadOperation.addDatatransferProgressListener(this);
-  uploadOperation.execute(mClient,this,mHandler);
-}

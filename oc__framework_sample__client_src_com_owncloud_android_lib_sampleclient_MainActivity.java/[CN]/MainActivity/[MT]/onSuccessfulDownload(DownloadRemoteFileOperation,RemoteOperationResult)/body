@@ -1,6 +1,0 @@
-{
-  File downFolder=new File(getCacheDir(),getString(R.string.download_folder_path));
-  File downloadedFile=downFolder.listFiles()[0];
-  BitmapDrawable bDraw=new BitmapDrawable(getResources(),downloadedFile.getAbsolutePath());
-  mFrame.setBackgroundDrawable(bDraw);
-}

@@ -1,5 +1,0 @@
-{
-  mStoragePath=storagePath;
-  mRemotePath=remotePath;
-  mMimeType=mimeType;
-}

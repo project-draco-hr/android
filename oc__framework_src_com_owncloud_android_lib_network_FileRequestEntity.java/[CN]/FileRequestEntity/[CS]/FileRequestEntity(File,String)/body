@@ -1,8 +1,0 @@
-{
-  super();
-  this.mFile=file;
-  this.mContentType=contentType;
-  if (file == null) {
-    throw new IllegalArgumentException("File may not be null");
-  }
-}
