@@ -15,7 +15,7 @@
         mServerFile.setLastSyncDateForProperties(System.currentTimeMillis());
       }
     }
-    if (result.isSuccess()) {
+    if (mServerFile != null) {
       boolean serverChanged=false;
       serverChanged=(mServerFile.getModificationTimestamp() != mLocalFile.getModificationTimestampAtLastSyncForData());
       boolean localChanged=(mLocalFile.getLocalModificationTimestamp() > mLocalFile.getLastSyncDateForData());
