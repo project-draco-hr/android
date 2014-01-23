@@ -1,26 +1,51 @@
 {
-  if (mUriMatcher.match(uri) != SINGLE_FILE && mUriMatcher.match(uri) != ROOT_DIRECTORY) {
-    throw new IllegalArgumentException("Unknown uri id: " + uri);
-  }
-  String remotePath=values.getAsString(ProviderTableMeta.FILE_PATH);
+switch (mUriMatcher.match(uri)) {
+case ROOT_DIRECTORY:
+case SINGLE_FILE:
+    String remotePath=values.getAsString(ProviderTableMeta.FILE_PATH);
   String accountName=values.getAsString(ProviderTableMeta.FILE_ACCOUNT_OWNER);
-  String[] projection=new String[]{ProviderTableMeta._ID,ProviderTableMeta.FILE_PATH,ProviderTableMeta.FILE_ACCOUNT_OWNER};
-  String where=ProviderTableMeta.FILE_PATH + "=? AND " + ProviderTableMeta.FILE_ACCOUNT_OWNER+ "=?";
-  String[] whereArgs=new String[]{remotePath,accountName};
-  Cursor doubleCheck=query(db,uri,projection,where,whereArgs,null);
-  if (doubleCheck == null || !doubleCheck.moveToFirst()) {
-    long rowId=db.insert(ProviderTableMeta.FILE_TABLE_NAME,null,values);
-    if (rowId > 0) {
-      Uri insertedFileUri=ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_FILE,rowId);
-      return insertedFileUri;
-    }
+String[] projection=new String[]{ProviderTableMeta._ID,ProviderTableMeta.FILE_PATH,ProviderTableMeta.FILE_ACCOUNT_OWNER};
+String where=ProviderTableMeta.FILE_PATH + "=? AND " + ProviderTableMeta.FILE_ACCOUNT_OWNER+ "=?";
+String[] whereArgs=new String[]{remotePath,accountName};
+Cursor doubleCheck=query(db,uri,projection,where,whereArgs,null);
+if (doubleCheck == null || !doubleCheck.moveToFirst()) {
+long rowId=db.insert(ProviderTableMeta.FILE_TABLE_NAME,null,values);
+if (rowId > 0) {
+Uri insertedFileUri=ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_FILE,rowId);
+return insertedFileUri;
+}
  else {
-      throw new SQLException("ERROR " + uri);
-    }
-  }
+throw new SQLException("ERROR " + uri);
+}
+}
  else {
-    Uri insertedFileUri=ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_FILE,doubleCheck.getLong(doubleCheck.getColumnIndex(ProviderTableMeta._ID)));
-    doubleCheck.close();
-    return insertedFileUri;
-  }
+Uri insertedFileUri=ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_FILE,doubleCheck.getLong(doubleCheck.getColumnIndex(ProviderTableMeta._ID)));
+doubleCheck.close();
+return insertedFileUri;
+}
+case SHARES:
+String path=values.getAsString(ProviderTableMeta.OCSHARES_PATH);
+String accountNameShare=values.getAsString(ProviderTableMeta.OCSHARES_ACCOUNT_OWNER);
+String[] projectionShare=new String[]{ProviderTableMeta._ID,ProviderTableMeta.OCSHARES_PATH,ProviderTableMeta.OCSHARES_ACCOUNT_OWNER};
+String whereShare=ProviderTableMeta.OCSHARES_PATH + "=? AND " + ProviderTableMeta.OCSHARES_ACCOUNT_OWNER+ "=?";
+String[] whereArgsShare=new String[]{path,accountNameShare};
+Cursor doubleCheckShare=query(db,uri,projectionShare,whereShare,whereArgsShare,null);
+if (doubleCheckShare == null || !doubleCheckShare.moveToFirst()) {
+long rowId=db.insert(ProviderTableMeta.OCSHARES_TABLE_NAME,null,values);
+if (rowId > 0) {
+Uri insertedShareUri=ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_SHARE,rowId);
+return insertedShareUri;
+}
+ else {
+throw new SQLException("ERROR " + uri);
+}
+}
+ else {
+Uri insertedFileUri=ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_SHARE,doubleCheckShare.getLong(doubleCheckShare.getColumnIndex(ProviderTableMeta._ID)));
+doubleCheckShare.close();
+return insertedFileUri;
+}
+default :
+throw new IllegalArgumentException("Unknown uri id: " + uri);
+}
 }

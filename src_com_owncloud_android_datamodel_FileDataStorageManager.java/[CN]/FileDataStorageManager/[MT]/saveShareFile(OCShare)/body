@@ -1,0 +1,60 @@
+{
+  boolean overriden=false;
+  ContentValues cv=new ContentValues();
+  cv.put(ProviderTableMeta.OCSHARES_FILE_SOURCE,shareFile.getFileSource());
+  cv.put(ProviderTableMeta.OCSHARES_ITEM_SOURCE,shareFile.getItemSource());
+  cv.put(ProviderTableMeta.OCSHARES_SHARE_TYPE,shareFile.getShareType().getValue());
+  cv.put(ProviderTableMeta.OCSHARES_SHARE_WITH,shareFile.getShareWith());
+  cv.put(ProviderTableMeta.OCSHARES_PATH,shareFile.getPath());
+  cv.put(ProviderTableMeta.OCSHARES_PERMISSIONS,shareFile.getPermissions());
+  cv.put(ProviderTableMeta.OCSHARES_SHARED_DATE,shareFile.getSharedDate());
+  cv.put(ProviderTableMeta.OCSHARES_EXPIRATION_DATE,shareFile.getExpirationDate());
+  cv.put(ProviderTableMeta.OCSHARES_TOKEN,shareFile.getToken());
+  cv.put(ProviderTableMeta.OCSHARES_SHARE_WITH_DISPLAY_NAME,shareFile.getSharedWithDisplayName());
+  cv.put(ProviderTableMeta.OCSHARES_IS_DIRECTORY,shareFile.isDirectory() ? 1 : 0);
+  cv.put(ProviderTableMeta.OCSHARES_USER_ID,shareFile.getUserId());
+  cv.put(ProviderTableMeta.OCSHARES_ID_REMOTE_SHARED,shareFile.getIdRemoteShared());
+  cv.put(ProviderTableMeta.OCSHARES_ACCOUNT_OWNER,mAccount.name);
+  boolean samePath=fileShareExists(shareFile.getPath());
+  if (samePath || fileShareExists(shareFile.getId())) {
+    OCShare oldFile=null;
+    if (samePath) {
+      oldFile=getShareFileByPath(shareFile.getPath());
+      shareFile.setId(oldFile.getId());
+    }
+ else {
+      oldFile=getShareFileById(shareFile.getId());
+    }
+    overriden=true;
+    if (getContentResolver() != null) {
+      getContentResolver().update(ProviderTableMeta.CONTENT_URI_SHARE,cv,ProviderTableMeta._ID + "=?",new String[]{String.valueOf(shareFile.getId())});
+    }
+ else {
+      try {
+        getContentProviderClient().update(ProviderTableMeta.CONTENT_URI_SHARE,cv,ProviderTableMeta._ID + "=?",new String[]{String.valueOf(shareFile.getId())});
+      }
+ catch (      RemoteException e) {
+        Log_OC.e(TAG,"Fail to insert insert file to database " + e.getMessage());
+      }
+    }
+  }
+ else {
+    Uri result_uri=null;
+    if (getContentResolver() != null) {
+      result_uri=getContentResolver().insert(ProviderTableMeta.CONTENT_URI_SHARE,cv);
+    }
+ else {
+      try {
+        result_uri=getContentProviderClient().insert(ProviderTableMeta.CONTENT_URI_SHARE,cv);
+      }
+ catch (      RemoteException e) {
+        Log_OC.e(TAG,"Fail to insert insert file to database " + e.getMessage());
+      }
+    }
+    if (result_uri != null) {
+      long new_id=Long.parseLong(result_uri.getPathSegments().get(1));
+      shareFile.setId(new_id);
+    }
+  }
+  return overriden;
+}

@@ -2,8 +2,12 @@
   GetRemoteSharedFilesOperation operation=new GetRemoteSharedFilesOperation(mUrlServer);
   RemoteOperationResult result=operation.execute(client);
   if (result.isSuccess()) {
-  }
- else {
+    ArrayList<ShareRemoteFile> shareRemoteFiles=operation.getSharedFiles();
+    Log_OC.d(TAG,"Share list size = " + shareRemoteFiles.size());
+    for (    ShareRemoteFile remoteFile : shareRemoteFiles) {
+      OCShare shareFile=new OCShare(remoteFile);
+      saveShareFileInDB(shareFile);
+    }
   }
   return result;
 }

@@ -1,0 +1,14 @@
+{
+  mStorageManager.saveShareFile(shareFile);
+  String path=shareFile.getPath();
+  if (shareFile.isDirectory()) {
+    path=path + FileUtils.PATH_SEPARATOR;
+  }
+  OCFile file=mStorageManager.getFileByPath(path);
+  if (file != null) {
+    if (shareFile.getShareType().equals(ShareType.PUBLIC_LINK)) {
+      file.setShareByLink(true);
+      mStorageManager.saveFile(file);
+    }
+  }
+}

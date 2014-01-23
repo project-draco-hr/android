@@ -7,7 +7,10 @@
       continue;
     }
     String name=parser.getName();
-    if (name.equalsIgnoreCase(NODE_ITEM_TYPE)) {
+    if (name.equalsIgnoreCase(NODE_ID)) {
+      sharedFile.setIdRemoteShared(Integer.parseInt(readNode(parser,NODE_ID)));
+    }
+ else     if (name.equalsIgnoreCase(NODE_ITEM_TYPE)) {
       sharedFile.setIsDirectory(readNode(parser,NODE_ITEM_TYPE).equalsIgnoreCase(TYPE_FOLDER));
     }
  else     if (name.equalsIgnoreCase(NODE_ITEM_SOURCE)) {
