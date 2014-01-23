@@ -1,9 +1,9 @@
 {
-  GetRemoteSharedFilesOperation operation=new GetRemoteSharedFilesOperation();
+  GetRemoteSharedFilesOperation operation=new GetRemoteSharedFilesOperation(mUrlServer);
   RemoteOperationResult result=operation.execute(client);
   if (result.isSuccess()) {
   }
  else {
   }
-  return null;
+  return result;
 }

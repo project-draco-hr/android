@@ -1,0 +1,8 @@
+{
+  String result="";
+  if (parser.next() == XmlPullParser.TEXT) {
+    result=parser.getText();
+    parser.nextTag();
+  }
+  return result;
+}

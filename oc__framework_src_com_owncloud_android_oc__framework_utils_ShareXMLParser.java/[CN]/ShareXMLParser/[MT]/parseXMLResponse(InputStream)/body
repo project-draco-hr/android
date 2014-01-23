@@ -1,0 +1,14 @@
+{
+  try {
+    XmlPullParserFactory factory=XmlPullParserFactory.newInstance();
+    factory.setNamespaceAware(true);
+    XmlPullParser parser=Xml.newPullParser();
+    parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES,false);
+    parser.setInput(is,null);
+    parser.nextTag();
+    return readOCS(parser);
+  }
+  finally {
+    is.close();
+  }
+}

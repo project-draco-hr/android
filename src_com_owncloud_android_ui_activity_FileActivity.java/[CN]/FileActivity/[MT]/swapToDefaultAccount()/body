@@ -1,5 +1,4 @@
 {
-  AccountManager accountManager=AccountManager.get(this);
   Account newAccount=AccountUtils.getCurrentOwnCloudAccount(getApplicationContext());
   if (newAccount == null) {
     createFirstAccount();
@@ -12,5 +11,4 @@
     mAccountWasRestored=(newAccount.equals(mAccount));
     mAccount=newAccount;
   }
-  setIsSharedSupported(Boolean.getBoolean(accountManager.getUserData(mAccount,OwnCloudAccount.Constants.KEY_SUPPORTS_SHARE_API)));
 }

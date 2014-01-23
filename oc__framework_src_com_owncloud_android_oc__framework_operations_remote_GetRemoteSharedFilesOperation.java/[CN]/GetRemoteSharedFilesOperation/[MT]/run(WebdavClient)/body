@@ -1,14 +1,21 @@
 {
   RemoteOperationResult result=null;
   int status=-1;
-  GetMethod get=new GetMethod(client.getBaseUri() + SHAREAPI_ROUTE);
-  Log.d(TAG,"URL ------> " + client.getBaseUri() + SHAREAPI_ROUTE);
+  GetMethod get=new GetMethod(mUrlServer + SHAREAPI_ROUTE);
+  Log.d(TAG,"URL ------> " + mUrlServer + SHAREAPI_ROUTE);
   try {
     status=client.executeMethod(get);
     if (isSuccess(status)) {
       Log.d(TAG,"Obtain RESPONSE");
       String response=get.getResponseBodyAsString();
       Log.d(TAG,response);
+      InputStream is=new ByteArrayInputStream(response.getBytes());
+      ShareXMLParser xmlParser=new ShareXMLParser();
+      mSharedFiles=xmlParser.parseXMLResponse(is);
+      if (mSharedFiles != null) {
+        Log.d(TAG,"Shared Files: " + mSharedFiles.size());
+        result=new RemoteOperationResult(ResultCode.OK);
+      }
     }
   }
  catch (  HttpException e) {
@@ -16,6 +23,10 @@
     e.printStackTrace();
   }
 catch (  IOException e) {
+    result=new RemoteOperationResult(e);
+    e.printStackTrace();
+  }
+catch (  XmlPullParserException e) {
     result=new RemoteOperationResult(e);
     e.printStackTrace();
   }

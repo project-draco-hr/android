@@ -9,4 +9,8 @@
  else {
     swapToDefaultAccount();
   }
+  AccountManager accountMngr=AccountManager.get(getBaseContext());
+  if (mAccount != null) {
+    mIsSharedSupported=Boolean.parseBoolean(accountMngr.getUserData(mAccount,OwnCloudAccount.Constants.KEY_SUPPORTS_SHARE_API));
+  }
 }

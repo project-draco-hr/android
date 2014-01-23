@@ -1,3 +1,3 @@
 {
-  this.mIsSharedSupported=mIsSharedSupported;
+  this.mIsSharedSupported=isSharedSupported;
 }
