@@ -1,3 +1,0 @@
-{
-  return another.mVersion == mVersion ? 0 : another.mVersion < mVersion ? 1 : -1;
-}

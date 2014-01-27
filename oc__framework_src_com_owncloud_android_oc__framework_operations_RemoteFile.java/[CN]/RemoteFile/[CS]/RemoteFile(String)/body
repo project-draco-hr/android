@@ -1,7 +1,0 @@
-{
-  resetData();
-  if (path == null || path.length() <= 0 || !path.startsWith(FileUtils.PATH_SEPARATOR)) {
-    throw new IllegalArgumentException("Trying to create a OCFile with a non valid remote path: " + path);
-  }
-  mRemotePath=path;
-}

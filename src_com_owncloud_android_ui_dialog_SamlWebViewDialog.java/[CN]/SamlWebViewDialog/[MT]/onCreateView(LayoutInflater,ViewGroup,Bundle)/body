@@ -24,7 +24,7 @@
   webSettings.setBuiltInZoomControls(true);
   webSettings.setLoadWithOverviewMode(false);
   webSettings.setSavePassword(false);
-  webSettings.setUserAgentString(WebdavClient.USER_AGENT);
+  webSettings.setUserAgentString(OwnCloudClient.USER_AGENT);
   webSettings.setSaveFormData(false);
   return rootView;
 }

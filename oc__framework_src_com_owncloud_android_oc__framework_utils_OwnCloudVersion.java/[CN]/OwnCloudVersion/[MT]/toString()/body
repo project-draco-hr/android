@@ -1,3 +1,0 @@
-{
-  return ((mVersion >> 16) % 256) + "." + ((mVersion >> 8) % 256)+ "."+ ((mVersion) % 256);
-}

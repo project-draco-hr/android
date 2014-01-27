@@ -1,7 +1,0 @@
-{
-  parser.require(XmlPullParser.START_TAG,ns,node);
-  String value=readText(parser);
-  Log.d(TAG,"node= " + node + ", value= "+ value);
-  parser.require(XmlPullParser.END_TAG,ns,node);
-  return value;
-}

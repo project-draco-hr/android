@@ -1,8 +1,0 @@
-{
-  boolean result=true;
-  Log.d("FileUtils","fileName =======" + fileName);
-  if (fileName.contains(PATH_SEPARATOR) || fileName.contains("\\") || fileName.contains("<")|| fileName.contains(">")|| fileName.contains(":")|| fileName.contains("\"")|| fileName.contains("|")|| fileName.contains("?")|| fileName.contains("*")) {
-    result=false;
-  }
-  return result;
-}

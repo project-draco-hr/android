@@ -1,6 +1,0 @@
-{
-  mUrl=url;
-  mContext=context;
-  mOCVersion=null;
-  mOCVersionString=null;
-}

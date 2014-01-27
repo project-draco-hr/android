@@ -1,4 +1,0 @@
-{
-  RemoteOperationResult result=mActivity.createFolder(mFolderPath,true);
-  assertTrue(result.isSuccess());
-}

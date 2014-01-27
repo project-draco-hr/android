@@ -1,4 +1,0 @@
-FileChannel channel
-String contentType
-long chunkSize
-File file
