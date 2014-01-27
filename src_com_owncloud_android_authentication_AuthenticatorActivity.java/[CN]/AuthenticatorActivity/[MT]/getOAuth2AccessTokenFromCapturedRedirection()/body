@@ -3,6 +3,6 @@
   mNewCapturedUriFromOAuth2Redirection=null;
   showDialog(DIALOG_OAUTH2_LOGIN_PROGRESS);
   RemoteOperation operation=new OAuth2GetAccessToken(getString(R.string.oauth2_client_id),getString(R.string.oauth2_redirect_uri),getString(R.string.oauth2_grant_type),queryParameters);
-  WebdavClient client=OwnCloudClientFactory.createOwnCloudClient(Uri.parse(mOAuthTokenEndpointText.getText().toString().trim()),getApplicationContext(),true);
+  OwnCloudClient client=OwnCloudClientFactory.createOwnCloudClient(Uri.parse(mOAuthTokenEndpointText.getText().toString().trim()),getApplicationContext(),true);
   operation.execute(client,this,mHandler);
 }

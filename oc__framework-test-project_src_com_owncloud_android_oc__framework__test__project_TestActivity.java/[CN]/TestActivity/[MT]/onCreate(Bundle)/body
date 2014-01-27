@@ -1,7 +1,0 @@
-{
-  super.onCreate(savedInstanceState);
-  setContentView(R.layout.activity_test);
-  Uri uri=Uri.parse(mServerUri);
-  mClient=OwnCloudClientFactory.createOwnCloudClient(uri,getApplicationContext(),true);
-  mClient.setBasicCredentials(mUser,mPass);
-}

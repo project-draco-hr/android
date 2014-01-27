@@ -1,9 +1,0 @@
-{
-  TrustManager tms[]=factory.getTrustManagers();
-  for (int i=0; i < tms.length; i++) {
-    if (tms[i] instanceof X509TrustManager) {
-      return (X509TrustManager)tms[i];
-    }
-  }
-  return null;
-}

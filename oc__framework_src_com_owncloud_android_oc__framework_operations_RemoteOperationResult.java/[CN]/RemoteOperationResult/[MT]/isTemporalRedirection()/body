@@ -1,3 +1,0 @@
-{
-  return (mHttpCode == 302 || mHttpCode == 307);
-}
