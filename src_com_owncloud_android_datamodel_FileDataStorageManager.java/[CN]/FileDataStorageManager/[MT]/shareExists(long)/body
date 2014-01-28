@@ -1,0 +1,3 @@
+{
+  return shareExists(ProviderTableMeta._ID,String.valueOf(id));
+}

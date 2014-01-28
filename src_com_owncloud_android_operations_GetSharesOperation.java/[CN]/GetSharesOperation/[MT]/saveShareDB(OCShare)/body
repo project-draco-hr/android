@@ -1,5 +1,5 @@
 {
-  mStorageManager.saveShareFile(shareFile);
+  mStorageManager.saveShare(shareFile);
   String path=shareFile.getPath();
   if (shareFile.isDirectory()) {
     path=path + FileUtils.PATH_SEPARATOR;
