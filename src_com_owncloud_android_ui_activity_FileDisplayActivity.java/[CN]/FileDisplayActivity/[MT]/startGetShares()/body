@@ -1,6 +1,4 @@
 {
-  AccountManager accountMngr=AccountManager.get(this);
-  String urlServer=accountMngr.getUserData(getAccount(),OwnCloudAccount.Constants.KEY_OC_BASE_URL);
-  RemoteOperation getShares=new GetSharesOperation(urlServer,mStorageManager);
+  RemoteOperation getShares=new GetSharesOperation(mStorageManager);
   getShares.execute(getAccount(),this,this,mHandler,this);
 }
