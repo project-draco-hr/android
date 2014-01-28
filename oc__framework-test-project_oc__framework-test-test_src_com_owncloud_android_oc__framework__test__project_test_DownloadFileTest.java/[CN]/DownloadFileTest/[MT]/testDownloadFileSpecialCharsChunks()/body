@@ -1,6 +1,0 @@
-{
-  String temporalFolder="/download" + mCurrentDate;
-  RemoteFile remoteFile=new RemoteFile(mRemoteFileSpecialCharsChunks);
-  RemoteOperationResult result=mActivity.downloadFile(remoteFile,temporalFolder);
-  assertTrue(result.isSuccess());
-}

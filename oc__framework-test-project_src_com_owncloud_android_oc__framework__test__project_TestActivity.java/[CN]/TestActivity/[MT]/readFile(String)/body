@@ -1,5 +1,0 @@
-{
-  ReadRemoteFolderOperation readOperation=new ReadRemoteFolderOperation(remotePath);
-  RemoteOperationResult result=readOperation.execute(mClient);
-  return result;
-}

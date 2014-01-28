@@ -1,4 +1,0 @@
-{
-  String ret="<?xml version=\"1.0\" ?><D:propfind xmlns:D=\"DAV:\"><D:allprop/></D:propfind>";
-  return ret;
-}

@@ -1,0 +1,18 @@
+{
+  OCShare share=null;
+  if (c != null) {
+    share=new OCShare(c.getString(c.getColumnIndex(ProviderTableMeta.OCSHARES_PATH)));
+    share.setId(c.getLong(c.getColumnIndex(ProviderTableMeta._ID)));
+    share.setFileSource(c.getLong(c.getColumnIndex(ProviderTableMeta.OCSHARES_ITEM_SOURCE)));
+    share.setShareType(ShareType.fromValue(c.getInt(c.getColumnIndex(ProviderTableMeta.OCSHARES_SHARE_TYPE))));
+    share.setPermissions(c.getInt(c.getColumnIndex(ProviderTableMeta.OCSHARES_PERMISSIONS)));
+    share.setSharedDate(c.getLong(c.getColumnIndex(ProviderTableMeta.OCSHARES_SHARED_DATE)));
+    share.setExpirationDate(c.getLong(c.getColumnIndex(ProviderTableMeta.OCSHARES_EXPIRATION_DATE)));
+    share.setToken(c.getString(c.getColumnIndex(ProviderTableMeta.OCSHARES_TOKEN)));
+    share.setSharedWithDisplayName(c.getString(c.getColumnIndex(ProviderTableMeta.OCSHARES_SHARE_WITH_DISPLAY_NAME)));
+    share.setIsDirectory(c.getInt(c.getColumnIndex(ProviderTableMeta.OCSHARES_IS_DIRECTORY)) == 1 ? true : false);
+    share.setUserId(c.getLong(c.getColumnIndex(ProviderTableMeta.OCSHARES_USER_ID)));
+    share.setIdRemoteShared(c.getLong(c.getColumnIndex(ProviderTableMeta.OCSHARES_ID_REMOTE_SHARED)));
+  }
+  return share;
+}

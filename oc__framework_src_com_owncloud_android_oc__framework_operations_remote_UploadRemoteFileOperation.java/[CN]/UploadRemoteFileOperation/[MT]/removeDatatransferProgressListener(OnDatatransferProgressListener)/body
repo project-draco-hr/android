@@ -1,8 +1,0 @@
-{
-synchronized (mDataTransferListeners) {
-    mDataTransferListeners.remove(listener);
-  }
-  if (mEntity != null) {
-    ((ProgressiveDataTransferer)mEntity).removeDatatransferProgressListener(listener);
-  }
-}

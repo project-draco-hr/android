@@ -1,0 +1,4 @@
+{
+  mUrlServer=urlServer;
+  mStorageManager=storageManager;
+}

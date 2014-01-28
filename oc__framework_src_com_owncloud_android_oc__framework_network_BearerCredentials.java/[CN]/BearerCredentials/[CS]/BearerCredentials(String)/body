@@ -1,3 +1,0 @@
-{
-  mAccessToken=(token == null) ? "" : token;
-}

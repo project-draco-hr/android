@@ -1,8 +1,0 @@
-{
-  mRemotePath=null;
-  mMimeType=null;
-  mLength=0;
-  mCreationTimestamp=0;
-  mModifiedTimestamp=0;
-  mEtag=null;
-}

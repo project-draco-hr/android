@@ -1,0 +1,3 @@
+{
+  return fileShareExists(ProviderTableMeta._ID,String.valueOf(id));
+}

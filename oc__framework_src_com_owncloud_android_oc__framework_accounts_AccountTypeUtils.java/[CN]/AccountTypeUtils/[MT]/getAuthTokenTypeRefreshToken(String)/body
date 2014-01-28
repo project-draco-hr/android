@@ -1,3 +1,0 @@
-{
-  return accountType + ".oauth2.refresh_token";
-}

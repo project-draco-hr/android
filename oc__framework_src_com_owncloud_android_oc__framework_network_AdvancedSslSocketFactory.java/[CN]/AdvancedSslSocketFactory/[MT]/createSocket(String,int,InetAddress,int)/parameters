@@ -1,4 +1,0 @@
-String host
-int port
-InetAddress clientHost
-int clientPort
