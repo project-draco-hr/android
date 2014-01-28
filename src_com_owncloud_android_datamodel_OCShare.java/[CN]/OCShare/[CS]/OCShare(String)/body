@@ -1,8 +1,0 @@
-{
-  resetData();
-  if (path == null || path.length() <= 0 || !path.startsWith(OCFile.PATH_SEPARATOR)) {
-    Log_OC.e(TAG,"Trying to create a OCShare with a non valid path");
-    throw new IllegalArgumentException("Trying to create a OCShare with a non valid path: " + path);
-  }
-  mPath=path;
-}

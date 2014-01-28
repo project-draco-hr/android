@@ -5,7 +5,7 @@
   ReadRemoteFileOperation operation=new ReadRemoteFileOperation(mCurrentUpload.getRemotePath());
   RemoteOperationResult result=operation.execute(mUploadClient);
   if (result.isSuccess()) {
-    updateOCFile(file,result.getData().get(0));
+    updateOCFile(file,(RemoteFile)result.getData().get(0));
     file.setLastSyncDateForProperties(syncDate);
   }
   if (mCurrentUpload.wasRenamed()) {

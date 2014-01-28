@@ -1,0 +1,12 @@
+{
+  GetRemoteSharesOperation operation=new GetRemoteSharesOperation(mUrlServer);
+  RemoteOperationResult result=operation.execute(client);
+  if (result.isSuccess()) {
+    mStorageManager.cleanShare();
+    Log_OC.d(TAG,"Share list size = " + result.getData().size());
+    for (    Object obj : result.getData()) {
+      saveShareDB((OCShare)obj);
+    }
+  }
+  return result;
+}
