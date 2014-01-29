@@ -26,7 +26,12 @@
       }
       setFile(currentFile);
     }
-    setSupportProgressBarIndeterminateVisibility(inProgress);
+    if (!mRefreshSharesInProgress) {
+      setSupportProgressBarIndeterminateVisibility(inProgress);
+    }
+ else {
+      setSupportProgressBarIndeterminateVisibility(true);
+    }
     removeStickyBroadcast(intent);
     mSyncInProgress=inProgress;
   }
