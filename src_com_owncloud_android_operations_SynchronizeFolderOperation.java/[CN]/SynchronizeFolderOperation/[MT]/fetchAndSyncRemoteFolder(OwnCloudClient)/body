@@ -4,11 +4,7 @@
   RemoteOperationResult result=operation.execute(client);
   Log_OC.d(TAG,"Synchronizing " + mAccount.name + remotePath);
   if (result.isSuccess()) {
-    ArrayList<RemoteFile> remotes=new ArrayList<RemoteFile>();
-    for (    Object obj : result.getData()) {
-      remotes.add((RemoteFile)obj);
-    }
-    synchronizeData(remotes,client);
+    synchronizeData(result.getData(),client);
     if (mConflictsFound > 0 || mFailsInFavouritesFound > 0) {
       result=new RemoteOperationResult(ResultCode.SYNC_CONFLICT);
     }
