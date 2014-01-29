@@ -3,9 +3,6 @@
   String accountName=intent.getStringExtra(FileSyncService.ACCOUNT_NAME);
   RemoteOperationResult synchResult=(RemoteOperationResult)intent.getSerializableExtra(FileSyncService.SYNC_RESULT);
   if (getAccount() != null && accountName.equals(getAccount().name) && mStorageManager != null) {
-    if (isSharedSupported()) {
-      startGetShares();
-    }
     String synchFolderRemotePath=intent.getStringExtra(FileSyncService.SYNC_FOLDER_REMOTE_PATH);
     OCFile currentFile=(getFile() == null) ? null : mStorageManager.getFileByPath(getFile().getRemotePath());
     OCFile currentDir=(getCurrentDir() == null) ? null : mStorageManager.getFileByPath(getCurrentDir().getRemotePath());
@@ -27,6 +24,9 @@
       setFile(currentFile);
     }
     if (!mRefreshSharesInProgress) {
+      if (isSharedSupported()) {
+        startGetShares();
+      }
       setSupportProgressBarIndeterminateVisibility(inProgress);
     }
  else {
