@@ -20,4 +20,9 @@
     }
     if (success)     finish();
   }
+ else {
+    updateAuthStatusIconAndText(result);
+    showAuthStatus();
+    Log_OC.e(TAG,"Access to user name failed: " + result.getLogMessage());
+  }
 }
