@@ -1,0 +1,46 @@
+{
+  if (shares != null) {
+    cleanShares();
+    ArrayList<ContentProviderOperation> operations=new ArrayList<ContentProviderOperation>(shares.size());
+    for (    OCShare share : shares) {
+      ContentValues cv=new ContentValues();
+      cv.put(ProviderTableMeta.OCSHARES_FILE_SOURCE,share.getFileSource());
+      cv.put(ProviderTableMeta.OCSHARES_ITEM_SOURCE,share.getItemSource());
+      cv.put(ProviderTableMeta.OCSHARES_SHARE_TYPE,share.getShareType().getValue());
+      cv.put(ProviderTableMeta.OCSHARES_SHARE_WITH,share.getShareWith());
+      cv.put(ProviderTableMeta.OCSHARES_PATH,share.getPath());
+      cv.put(ProviderTableMeta.OCSHARES_PERMISSIONS,share.getPermissions());
+      cv.put(ProviderTableMeta.OCSHARES_SHARED_DATE,share.getSharedDate());
+      cv.put(ProviderTableMeta.OCSHARES_EXPIRATION_DATE,share.getExpirationDate());
+      cv.put(ProviderTableMeta.OCSHARES_TOKEN,share.getToken());
+      cv.put(ProviderTableMeta.OCSHARES_SHARE_WITH_DISPLAY_NAME,share.getSharedWithDisplayName());
+      cv.put(ProviderTableMeta.OCSHARES_IS_DIRECTORY,share.isDirectory() ? 1 : 0);
+      cv.put(ProviderTableMeta.OCSHARES_USER_ID,share.getUserId());
+      cv.put(ProviderTableMeta.OCSHARES_ID_REMOTE_SHARED,share.getIdRemoteShared());
+      cv.put(ProviderTableMeta.OCSHARES_ACCOUNT_OWNER,mAccount.name);
+      boolean existsByPath=shareExists(share.getPath());
+      if (existsByPath || shareExists(share.getId())) {
+        operations.add(ContentProviderOperation.newUpdate(ProviderTableMeta.CONTENT_URI_SHARE).withValues(cv).withSelection(ProviderTableMeta._ID + "=?",new String[]{String.valueOf(share.getId())}).build());
+      }
+ else {
+        operations.add(ContentProviderOperation.newInsert(ProviderTableMeta.CONTENT_URI_SHARE).withValues(cv).build());
+      }
+    }
+    @SuppressWarnings("unused") ContentProviderResult[] results=null;
+    Log_OC.d(TAG,"Sending " + operations.size() + " operations to FileContentProvider");
+    try {
+      if (getContentResolver() != null) {
+        results=getContentResolver().applyBatch(MainApp.getAuthority(),operations);
+      }
+ else {
+        results=getContentProviderClient().applyBatch(operations);
+      }
+    }
+ catch (    OperationApplicationException e) {
+      Log_OC.e(TAG,"Exception in batch of operations " + e.getMessage());
+    }
+catch (    RemoteException e) {
+      Log_OC.e(TAG,"Exception in batch of operations  " + e.getMessage());
+    }
+  }
+}
