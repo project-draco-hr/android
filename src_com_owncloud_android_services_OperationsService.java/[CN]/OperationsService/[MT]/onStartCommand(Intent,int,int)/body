@@ -1,0 +1,22 @@
+{
+  if (!intent.hasExtra(EXTRA_ACCOUNT) && !intent.hasExtra(EXTRA_SERVER_URL)) {
+    Log_OC.e(TAG,"Not enough information provided in intent");
+    return START_NOT_STICKY;
+  }
+  try {
+    Account account=intent.getParcelableExtra(EXTRA_ACCOUNT);
+    String serverUrl=intent.getStringExtra(EXTRA_SERVER_URL);
+    Target target=new Target(account,(serverUrl == null) ? null : Uri.parse(serverUrl));
+    GetSharesOperation operation=new GetSharesOperation();
+    mPendingOperations.add(new Pair<Target,RemoteOperation>(target,operation));
+    sendBroadcastNewOperation(target,operation);
+    Message msg=mServiceHandler.obtainMessage();
+    msg.arg1=startId;
+    mServiceHandler.sendMessage(msg);
+  }
+ catch (  IllegalArgumentException e) {
+    Log_OC.e(TAG,"Bad information provided in intent: " + e.getMessage());
+    return START_NOT_STICKY;
+  }
+  return START_NOT_STICKY;
+}

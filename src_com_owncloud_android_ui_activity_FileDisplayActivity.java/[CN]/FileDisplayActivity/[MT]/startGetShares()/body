@@ -1,6 +1,6 @@
 {
-  RemoteOperation getShares=new GetSharesOperation(mStorageManager);
-  getShares.execute(getAccount(),this,this,mHandler,this);
+  SyncOperation getShares=new GetSharesOperation();
+  getShares.execute(mStorageManager,this,this,mHandler,this);
   mRefreshSharesInProgress=true;
   setSupportProgressBarIndeterminateVisibility(true);
 }
