@@ -1,0 +1,7 @@
+{
+  CreateShareRemoteOperation operation=new CreateShareRemoteOperation(mPath,mShareType,mShareWith,mPublicUpload,mPassword,mPermissions);
+  RemoteOperationResult result=operation.execute(client);
+  if (result.isSuccess()) {
+  }
+  return result;
+}

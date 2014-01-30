@@ -1,0 +1,6 @@
+String path
+ShareType shareType
+String shareWith
+boolean publicUpload
+String password
+int permissions
