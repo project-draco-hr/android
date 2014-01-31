@@ -1,0 +1,9 @@
+{
+  Intent intent=getArguments().getParcelable(ARG_INTENT);
+  String[] packagesToExclude=getArguments().getStringArray(ARG_PACKAGES_TO_EXCLUDE);
+  return new AlertDialog.Builder(getSherlockActivity()).setIcon(DisplayUtils.getSeasonalIconId()).setTitle(R.string.activity_chooser_title).setAdapter(mAdapter,new DialogInterface.OnClickListener(){
+    @Override public void onClick(    DialogInterface dialog,    int which){
+    }
+  }
+).create();
+}
