@@ -1,33 +1,35 @@
 {
-  boolean inProgress=intent.getBooleanExtra(FileSyncService.IN_PROGRESS,false);
-  String accountName=intent.getStringExtra(FileSyncService.ACCOUNT_NAME);
-  RemoteOperationResult synchResult=(RemoteOperationResult)intent.getSerializableExtra(FileSyncService.SYNC_RESULT);
-  if (getAccount() != null && accountName.equals(getAccount().name) && mStorageManager != null) {
-    String synchFolderRemotePath=intent.getStringExtra(FileSyncService.SYNC_FOLDER_REMOTE_PATH);
-    OCFile currentFile=(getFile() == null) ? null : mStorageManager.getFileByPath(getFile().getRemotePath());
-    OCFile currentDir=(getCurrentDir() == null) ? null : mStorageManager.getFileByPath(getCurrentDir().getRemotePath());
-    if (currentDir == null) {
-      Toast.makeText(FileDisplayActivity.this,String.format(getString(R.string.sync_current_folder_was_removed),mDirectories.getItem(0)),Toast.LENGTH_LONG).show();
-      browseToRoot();
-    }
+  String event=intent.getAction();
+  String accountName=intent.getStringExtra(FileSyncAdapter.EXTRA_ACCOUNT_NAME);
+  String synchFolderRemotePath=intent.getStringExtra(FileSyncAdapter.EXTRA_FOLDER_PATH);
+  RemoteOperationResult synchResult=(RemoteOperationResult)intent.getSerializableExtra(FileSyncAdapter.EXTRA_RESULT);
+  boolean sameAccount=(getAccount() != null && accountName.equals(getAccount().name) && mStorageManager != null);
+  if (sameAccount) {
+    if (!FileSyncAdapter.EVENT_FULL_SYNC_START.equals(event)) {
+      OCFile currentFile=(getFile() == null) ? null : mStorageManager.getFileByPath(getFile().getRemotePath());
+      OCFile currentDir=(getCurrentDir() == null) ? null : mStorageManager.getFileByPath(getCurrentDir().getRemotePath());
+      if (currentDir == null) {
+        Toast.makeText(FileDisplayActivity.this,String.format(getString(R.string.sync_current_folder_was_removed),mDirectories.getItem(0)),Toast.LENGTH_LONG).show();
+        browseToRoot();
+      }
  else {
-      if (currentFile == null && !getFile().isFolder()) {
-        cleanSecondFragment();
-        currentFile=currentDir;
-      }
-      if (synchFolderRemotePath != null && currentDir.getRemotePath().equals(synchFolderRemotePath)) {
-        OCFileListFragment fileListFragment=getListOfFilesFragment();
-        if (fileListFragment != null) {
-          fileListFragment.listDirectory(currentDir);
+        if (currentFile == null && !getFile().isFolder()) {
+          cleanSecondFragment();
+          currentFile=currentDir;
         }
+        if (synchFolderRemotePath != null && currentDir.getRemotePath().equals(synchFolderRemotePath)) {
+          OCFileListFragment fileListFragment=getListOfFilesFragment();
+          if (fileListFragment != null) {
+            fileListFragment.listDirectory(currentDir);
+          }
+        }
+        setFile(currentFile);
       }
-      setFile(currentFile);
+      mSyncInProgress=(!FileSyncAdapter.EVENT_FULL_SYNC_END.equals(event) && !SynchronizeFolderOperation.EVENT_SINGLE_FOLDER_SYNCED.equals(event));
+      if (synchResult != null && synchResult.isSuccess() && (SynchronizeFolderOperation.EVENT_SINGLE_FOLDER_SYNCED.equals(event) || FileSyncAdapter.EVENT_FOLDER_CONTENTS_SYNCED.equals(event))) {
+        startGetShares();
+      }
     }
-    if (synchResult != null && synchResult.isSuccess() && isSharedSupported()) {
-      startGetShares();
-    }
-    removeStickyBroadcast(intent);
-    mSyncInProgress=inProgress;
     setSupportProgressBarIndeterminateVisibility(mSyncInProgress || mRefreshSharesInProgress);
   }
   if (synchResult != null) {
