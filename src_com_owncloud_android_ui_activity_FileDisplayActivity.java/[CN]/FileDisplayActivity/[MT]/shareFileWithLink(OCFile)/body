@@ -1,4 +1,0 @@
-{
-  CreateShareOperation createShare=new CreateShareOperation(file.getRemotePath(),ShareType.PUBLIC_LINK,"",false,"",1);
-  createShare.execute(getAccount(),this,this,mHandler,this);
-}

@@ -1,0 +1,8 @@
+{
+  Intent targetedShare=new Intent(Intent.ACTION_MAIN);
+  targetedShare.addCategory(Intent.CATEGORY_LAUNCHER);
+  targetedShare.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+  Log_OC.e("LOLO","className: " + className + "\npackageName: "+ packageName+ "\n");
+  targetedShare.setClassName(packageName,className);
+  return targetedShare;
+}
