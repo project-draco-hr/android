@@ -3,5 +3,4 @@
   intent.putExtra(OperationsService.EXTRA_ACCOUNT,getAccount());
   startService(intent);
   mRefreshSharesInProgress=true;
-  setSupportProgressBarIndeterminateVisibility(true);
 }

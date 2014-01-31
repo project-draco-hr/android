@@ -23,17 +23,12 @@
       }
       setFile(currentFile);
     }
-    if (!mRefreshSharesInProgress) {
-      if (isSharedSupported()) {
-        startGetShares();
-      }
-      setSupportProgressBarIndeterminateVisibility(inProgress);
-    }
- else {
-      setSupportProgressBarIndeterminateVisibility(true);
+    if (synchResult != null && synchResult.isSuccess() && isSharedSupported()) {
+      startGetShares();
     }
     removeStickyBroadcast(intent);
     mSyncInProgress=inProgress;
+    setSupportProgressBarIndeterminateVisibility(mSyncInProgress || mRefreshSharesInProgress);
   }
   if (synchResult != null) {
     if (synchResult.getCode().equals(RemoteOperationResult.ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED)) {
