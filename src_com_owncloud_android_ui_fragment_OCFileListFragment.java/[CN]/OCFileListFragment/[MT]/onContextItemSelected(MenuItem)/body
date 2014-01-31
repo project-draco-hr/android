@@ -4,7 +4,7 @@
 switch (item.getItemId()) {
 case R.id.action_share_file:
 {
-      mContainerActivity.shareFileWithLink(getCurrentFile());
+      mContainerActivity.shareFileWithLink(mTargetFile);
       return true;
     }
 case R.id.action_rename_file:
