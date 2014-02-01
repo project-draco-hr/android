@@ -1,8 +1,8 @@
 {
-  GetRemoteSharesOperation operation=new GetRemoteSharesOperation();
+  GetSharesForFileRemoteOperation operation=new GetSharesForFileRemoteOperation(mPath,mReshares,mSubfiles);
   RemoteOperationResult result=operation.execute(client);
   if (result.isSuccess()) {
-    Log_OC.d(TAG,"Share list size = " + result.getData().size());
+    Log_OC.d(TAG,"File = " + mPath + " Share list size  "+ result.getData().size());
     ArrayList<OCShare> shares=new ArrayList<OCShare>();
     for (    Object obj : result.getData()) {
       shares.add((OCShare)obj);

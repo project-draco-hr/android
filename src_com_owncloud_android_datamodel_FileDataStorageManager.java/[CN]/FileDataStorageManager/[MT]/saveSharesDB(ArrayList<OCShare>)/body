@@ -1,13 +1,13 @@
 {
   if (shares.size() > 0) {
-    getStorageManager().saveShares(shares);
+    saveShares(shares);
     ArrayList<OCFile> sharedFiles=new ArrayList<OCFile>();
     for (    OCShare share : shares) {
       String path=share.getPath();
       if (share.isDirectory()) {
         path=path + FileUtils.PATH_SEPARATOR;
       }
-      OCFile file=getStorageManager().getFileByPath(path);
+      OCFile file=getFileByPath(path);
       if (file != null) {
         if (share.getShareType().equals(ShareType.PUBLIC_LINK)) {
           file.setShareByLink(true);
@@ -16,7 +16,7 @@
       }
     }
     if (sharedFiles.size() > 0) {
-      getStorageManager().updateSharedFiles(sharedFiles);
+      updateSharedFiles(sharedFiles);
     }
   }
 }
