@@ -7,7 +7,7 @@
     for (    Object obj : result.getData()) {
       shares.add((OCShare)obj);
     }
-    saveSharesDB(shares);
+    getStorageManager().saveSharesDB(shares);
   }
   return result;
 }

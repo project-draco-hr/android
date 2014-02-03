@@ -1,0 +1,7 @@
+{
+  if (result.getCode() == ResultCode.FILE_NOT_FOUND) {
+    Toast t=Toast.makeText(this,getString(R.string.share_link_file_no_exist),Toast.LENGTH_LONG);
+    t.show();
+  }
+  refeshListOfFilesFragment();
+}

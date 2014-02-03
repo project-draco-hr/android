@@ -1,0 +1,8 @@
+{
+  super.onCreate();
+  HandlerThread thread=new HandlerThread("Operations service thread",Process.THREAD_PRIORITY_BACKGROUND);
+  thread.start();
+  mServiceLooper=thread.getLooper();
+  mServiceHandler=new ServiceHandler(mServiceLooper,this);
+  mBinder=new OperationsServiceBinder();
+}

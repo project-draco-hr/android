@@ -11,7 +11,7 @@
  else   if (operation instanceof CreateFolderOperation) {
     onCreateFolderOperationFinish((CreateFolderOperation)operation,result);
   }
- else   if (operation instanceof GetSharesOperation) {
-    onGetSharesOperationFinish((GetSharesOperation)operation,result);
+ else   if (operation instanceof CreateShareOperation) {
+    onCreateShareOperation((CreateShareOperation)operation,result);
   }
 }

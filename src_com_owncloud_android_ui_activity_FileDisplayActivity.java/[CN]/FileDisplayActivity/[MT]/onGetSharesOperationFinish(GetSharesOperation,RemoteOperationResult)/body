@@ -1,7 +1,0 @@
-{
-  refeshListOfFilesFragment();
-  mRefreshSharesInProgress=false;
-  if (!mSyncInProgress) {
-    setSupportProgressBarIndeterminateVisibility(false);
-  }
-}
