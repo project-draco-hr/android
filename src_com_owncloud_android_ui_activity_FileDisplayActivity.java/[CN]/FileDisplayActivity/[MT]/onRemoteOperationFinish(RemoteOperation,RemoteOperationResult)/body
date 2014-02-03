@@ -11,4 +11,7 @@
  else   if (operation instanceof CreateFolderOperation) {
     onCreateFolderOperationFinish((CreateFolderOperation)operation,result);
   }
+ else   if (operation instanceof UnshareLinkOperation) {
+    onUnshareLinkOperationFinish((UnshareLinkOperation)operation,result);
+  }
 }
