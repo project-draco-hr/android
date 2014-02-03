@@ -1,6 +1,10 @@
 {
   RemoteOperationResult result=null;
-  OCShare share=getStorageManager().getShareByPath(mFile.getRemotePath());
+  String path=mFile.getRemotePath();
+  if (mFile.isFolder()) {
+    path=path.substring(0,path.length() - 1);
+  }
+  OCShare share=getStorageManager().getShareByPath(path);
   if (share != null) {
     UnshareLinkRemoteOperation operation=new UnshareLinkRemoteOperation((int)share.getIdRemoteShared());
     result=operation.execute(client);
