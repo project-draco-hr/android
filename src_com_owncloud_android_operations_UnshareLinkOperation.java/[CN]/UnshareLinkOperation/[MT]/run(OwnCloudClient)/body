@@ -1,0 +1,15 @@
+{
+  RemoteOperationResult result=null;
+  OCShare share=getStorageManager().getShareByPath(mFile.getRemotePath());
+  if (share != null) {
+    GetRemoteSharesOperation operation=new GetRemoteSharesOperation();
+    result=operation.execute(client);
+    if (result.isSuccess()) {
+      Log_OC.d(TAG,"Share id = " + share.getIdRemoteShared() + " deleted");
+    }
+  }
+ else {
+    result=new RemoteOperationResult(ResultCode.FILE_NOT_FOUND);
+  }
+  return result;
+}
