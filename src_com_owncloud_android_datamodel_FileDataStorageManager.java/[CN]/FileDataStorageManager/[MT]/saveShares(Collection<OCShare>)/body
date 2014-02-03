@@ -1,6 +1,6 @@
 {
+  cleanShares();
   if (shares != null) {
-    cleanShares();
     ArrayList<ContentProviderOperation> operations=new ArrayList<ContentProviderOperation>(shares.size());
     for (    OCShare share : shares) {
       ContentValues cv=new ContentValues();
@@ -26,21 +26,23 @@
         operations.add(ContentProviderOperation.newInsert(ProviderTableMeta.CONTENT_URI_SHARE).withValues(cv).build());
       }
     }
-    @SuppressWarnings("unused") ContentProviderResult[] results=null;
-    Log_OC.d(TAG,"Sending " + operations.size() + " operations to FileContentProvider");
-    try {
-      if (getContentResolver() != null) {
-        results=getContentResolver().applyBatch(MainApp.getAuthority(),operations);
-      }
+    if (operations.size() > 0) {
+      @SuppressWarnings("unused") ContentProviderResult[] results=null;
+      Log_OC.d(TAG,"Sending " + operations.size() + " operations to FileContentProvider");
+      try {
+        if (getContentResolver() != null) {
+          results=getContentResolver().applyBatch(MainApp.getAuthority(),operations);
+        }
  else {
-        results=getContentProviderClient().applyBatch(operations);
+          results=getContentProviderClient().applyBatch(operations);
+        }
       }
-    }
- catch (    OperationApplicationException e) {
-      Log_OC.e(TAG,"Exception in batch of operations " + e.getMessage());
-    }
-catch (    RemoteException e) {
-      Log_OC.e(TAG,"Exception in batch of operations  " + e.getMessage());
+ catch (      OperationApplicationException e) {
+        Log_OC.e(TAG,"Exception in batch of operations " + e.getMessage());
+      }
+catch (      RemoteException e) {
+        Log_OC.e(TAG,"Exception in batch of operations  " + e.getMessage());
+      }
     }
   }
 }
