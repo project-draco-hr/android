@@ -13,7 +13,7 @@
     }
   }
   if (!mSyncFullAccount) {
-    sendStickyBroadcast(false,mLocalFolder.getRemotePath(),result);
+    sendLocalBroadcast(mLocalFolder.getRemotePath(),result);
   }
   return result;
 }

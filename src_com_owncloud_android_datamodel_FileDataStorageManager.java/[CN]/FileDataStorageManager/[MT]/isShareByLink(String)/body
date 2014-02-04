@@ -1,0 +1,9 @@
+{
+  Cursor c=getCursorForValue(ProviderTableMeta.FILE_STORAGE_PATH,path);
+  OCFile file=null;
+  if (c.moveToFirst()) {
+    file=createFileInstance(c);
+  }
+  c.close();
+  return file.isShareByLink();
+}
