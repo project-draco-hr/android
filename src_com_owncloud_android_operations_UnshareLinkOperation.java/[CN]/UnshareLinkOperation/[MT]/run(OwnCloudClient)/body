@@ -6,18 +6,21 @@
   }
   OCShare share=getStorageManager().getShareByPath(path);
   if (share != null) {
-    UnshareLinkRemoteOperation operation=new UnshareLinkRemoteOperation((int)share.getIdRemoteShared());
+    RemoveRemoteShareOperation operation=new RemoveRemoteShareOperation((int)share.getIdRemoteShared());
     result=operation.execute(client);
-    if (result.isSuccess()) {
+    if (result.isSuccess() || result.getCode() == ResultCode.SHARE_NOT_FOUND) {
       Log_OC.d(TAG,"Share id = " + share.getIdRemoteShared() + " deleted");
       mFile.setShareByLink(false);
       mFile.setPublicLink("");
       getStorageManager().saveFile(mFile);
       getStorageManager().removeShare(share);
+      if (result.getCode() == ResultCode.SHARE_NOT_FOUND) {
+        result=new RemoteOperationResult(ResultCode.OK);
+      }
     }
   }
  else {
-    result=new RemoteOperationResult(ResultCode.FILE_NOT_FOUND);
+    result=new RemoteOperationResult(ResultCode.SHARE_NOT_FOUND);
   }
   return result;
 }
