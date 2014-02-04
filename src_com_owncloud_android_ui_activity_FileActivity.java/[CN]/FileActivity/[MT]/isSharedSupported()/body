@@ -1,7 +1,0 @@
-{
-  if (getAccount() != null) {
-    AccountManager accountManager=AccountManager.get(this);
-    return Boolean.parseBoolean(accountManager.getUserData(getAccount(),OwnCloudAccount.Constants.KEY_SUPPORTS_SHARE_API));
-  }
-  return false;
-}

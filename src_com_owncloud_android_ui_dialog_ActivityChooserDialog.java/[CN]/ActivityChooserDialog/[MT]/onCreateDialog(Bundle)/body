@@ -1,9 +1,10 @@
 {
-  Intent intent=getArguments().getParcelable(ARG_INTENT);
+  mIntent=getArguments().getParcelable(ARG_INTENT);
   String[] packagesToExclude=getArguments().getStringArray(ARG_PACKAGES_TO_EXCLUDE);
   List<String> packagesToExcludeList=Arrays.asList(packagesToExclude != null ? packagesToExclude : new String[0]);
+  mFile=getArguments().getParcelable(ARG_FILE_TO_SHARE);
   PackageManager pm=getSherlockActivity().getPackageManager();
-  List<ResolveInfo> activities=pm.queryIntentActivities(intent,PackageManager.MATCH_DEFAULT_ONLY);
+  List<ResolveInfo> activities=pm.queryIntentActivities(mIntent,PackageManager.MATCH_DEFAULT_ONLY);
   Iterator<ResolveInfo> it=activities.iterator();
   ResolveInfo resolveInfo;
   while (it.hasNext()) {
@@ -16,6 +17,12 @@
   mAdapter=new ActivityAdapter(getSherlockActivity(),pm,activities);
   return new AlertDialog.Builder(getSherlockActivity()).setTitle(R.string.activity_chooser_title).setAdapter(mAdapter,new DialogInterface.OnClickListener(){
     @Override public void onClick(    DialogInterface dialog,    int which){
+      ResolveInfo chosen=mAdapter.getItem(which);
+      ActivityInfo actInfo=chosen.activityInfo;
+      ComponentName name=new ComponentName(actInfo.applicationInfo.packageName,actInfo.name);
+      mIntent.setComponent(name);
+      FileOperationsHelper foh=new FileOperationsHelper();
+      foh.shareFileWithLinkToApp(mFile,mIntent,(FileActivity)getSherlockActivity());
     }
   }
 ).create();

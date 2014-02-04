@@ -4,3 +4,4 @@ String shareWith
 boolean publicUpload
 String password
 int permissions
+Intent sendIntent

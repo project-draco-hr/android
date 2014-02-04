@@ -4,7 +4,8 @@
 switch (item.getItemId()) {
 case R.id.action_share_file:
 {
-      mContainerActivity.shareFileWithLink(mTargetFile);
+      FileDisplayActivity activity=(FileDisplayActivity)getSherlockActivity();
+      activity.getFileOperationsHelper().shareFileWithLink(mTargetFile,activity);
       return true;
     }
 case R.id.action_rename_file:

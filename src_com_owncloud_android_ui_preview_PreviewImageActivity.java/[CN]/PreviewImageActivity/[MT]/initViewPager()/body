@@ -1,10 +1,10 @@
 {
   String parentPath=getFile().getRemotePath().substring(0,getFile().getRemotePath().lastIndexOf(getFile().getFileName()));
-  OCFile parentFolder=mStorageManager.getFileByPath(parentPath);
+  OCFile parentFolder=getStorageManager().getFileByPath(parentPath);
   if (parentFolder == null) {
-    parentFolder=mStorageManager.getFileByPath(OCFile.ROOT_PATH);
+    parentFolder=getStorageManager().getFileByPath(OCFile.ROOT_PATH);
   }
-  mPreviewImagePagerAdapter=new PreviewImagePagerAdapter(getSupportFragmentManager(),parentFolder,getAccount(),mStorageManager);
+  mPreviewImagePagerAdapter=new PreviewImagePagerAdapter(getSupportFragmentManager(),parentFolder,getAccount(),getStorageManager());
   mViewPager=(ViewPager)findViewById(R.id.fragmentPager);
   int position=mPreviewImagePagerAdapter.getFilePosition(getFile());
   position=(position >= 0) ? position : 0;

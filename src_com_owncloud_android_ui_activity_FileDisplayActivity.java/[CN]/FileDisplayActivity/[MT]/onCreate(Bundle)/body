@@ -2,7 +2,6 @@
   Log_OC.d(TAG,"onCreate() start");
   requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
   super.onCreate(savedInstanceState);
-  mHandler=new Handler();
   mUploadConnection=new ListServiceConnection();
   mDownloadConnection=new ListServiceConnection();
   bindService(new Intent(this,FileUploader.class),mUploadConnection,Context.BIND_AUTO_CREATE);

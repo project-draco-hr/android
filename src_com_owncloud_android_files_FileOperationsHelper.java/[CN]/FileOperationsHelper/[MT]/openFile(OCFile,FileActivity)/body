@@ -16,12 +16,12 @@
     }
     Intent chooserIntent=null;
     if (intentForGuessedMimeType != null) {
-      chooserIntent=Intent.createChooser(intentForGuessedMimeType,getString(R.string.actionbar_open_with));
+      chooserIntent=Intent.createChooser(intentForGuessedMimeType,callerActivity.getString(R.string.actionbar_open_with));
     }
  else {
-      chooserIntent=Intent.createChooser(intentForSavedMimeType,getString(R.string.actionbar_open_with));
+      chooserIntent=Intent.createChooser(intentForSavedMimeType,callerActivity.getString(R.string.actionbar_open_with));
     }
-    startActivity(chooserIntent);
+    callerActivity.startActivity(chooserIntent);
   }
  else {
     Log_OC.wtf(TAG,"Trying to open a NULL OCFile");

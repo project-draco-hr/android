@@ -5,7 +5,7 @@
       targetPath=mDirectories.getItem(i) + OCFile.PATH_SEPARATOR + targetPath;
     }
     targetPath=OCFile.PATH_SEPARATOR + targetPath;
-    OCFile targetFolder=mStorageManager.getFileByPath(targetPath);
+    OCFile targetFolder=getStorageManager().getFileByPath(targetPath);
     if (targetFolder != null) {
       browseTo(targetFolder);
     }

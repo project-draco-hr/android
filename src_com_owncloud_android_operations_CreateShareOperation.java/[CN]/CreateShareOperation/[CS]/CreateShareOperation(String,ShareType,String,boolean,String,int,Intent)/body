@@ -5,4 +5,5 @@
   mPublicUpload=publicUpload;
   mPassword=password;
   mPermissions=permissions;
+  mSendIntent=sendIntent;
 }

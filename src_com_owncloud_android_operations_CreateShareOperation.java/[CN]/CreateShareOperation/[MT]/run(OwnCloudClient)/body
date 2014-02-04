@@ -16,6 +16,7 @@
       getStorageManager().saveShare(share);
       OCFile file=getStorageManager().getFileByPath(mPath);
       if (file != null) {
+        mSendIntent.putExtra(Intent.EXTRA_TEXT,share.getShareLink());
         file.setPublicLink(share.getShareLink());
         getStorageManager().saveFile(file);
         Log_OC.d(TAG,"Public Link = " + file.getPublicLink());

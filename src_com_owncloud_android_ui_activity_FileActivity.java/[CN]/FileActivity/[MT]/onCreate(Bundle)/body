@@ -1,5 +1,7 @@
 {
   super.onCreate(savedInstanceState);
+  mHandler=new Handler();
+  mFileOperationsHelper=new FileOperationsHelper();
   Account account;
   if (savedInstanceState != null) {
     account=savedInstanceState.getParcelable(FileActivity.EXTRA_ACCOUNT);
