@@ -2,7 +2,7 @@
   if (isSharedSupported()) {
     UnshareLinkOperation unshare=new UnshareLinkOperation(file);
     unshare.execute(getStorageManager(),this,this,mHandler,this);
-    setSupportProgressBarIndeterminateVisibility(true);
+    showLoadingDialog();
   }
  else {
     Toast t=Toast.makeText(this,getString(R.string.share_link_no_support_share_api),Toast.LENGTH_LONG);

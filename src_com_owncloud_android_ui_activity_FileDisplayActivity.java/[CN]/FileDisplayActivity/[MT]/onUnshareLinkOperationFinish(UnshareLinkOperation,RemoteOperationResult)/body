@@ -4,5 +4,5 @@
     t.show();
   }
   refeshListOfFilesFragment();
-  setSupportProgressBarIndeterminateVisibility(false);
+  dismissLoadingDialog();
 }
