@@ -26,7 +26,7 @@ catch (  AccountsException e) {
     return;
   }
   Log_OC.d(TAG,"Synchronization of ownCloud account " + account.name + " starting");
-  sendStickyBroadcast(true,null,null);
+  sendLocalBroadcast(EVENT_FULL_SYNC_START,null,null);
   try {
     updateOCVersion();
     mCurrentSyncTime=System.currentTimeMillis();
@@ -48,6 +48,6 @@ catch (  AccountsException e) {
     if (mForgottenLocalFiles.size() > 0) {
       notifyForgottenLocalFiles();
     }
-    sendStickyBroadcast(false,null,mLastFailedResult);
+    sendLocalBroadcast(EVENT_FULL_SYNC_END,null,mLastFailedResult);
   }
 }

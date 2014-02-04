@@ -34,6 +34,6 @@
   }
   mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
   getSupportActionBar().setHomeButtonEnabled(true);
-  setSupportProgressBarIndeterminateVisibility(mSyncInProgress);
+  setSupportProgressBarIndeterminateVisibility(mSyncInProgress || mRefreshSharesInProgress);
   Log_OC.d(TAG,"onCreate() end");
 }
