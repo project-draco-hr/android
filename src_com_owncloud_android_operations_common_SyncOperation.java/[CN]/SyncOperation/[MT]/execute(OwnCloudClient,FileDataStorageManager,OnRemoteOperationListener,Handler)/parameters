@@ -1,0 +1,4 @@
+OwnCloudClient client
+FileDataStorageManager storageManager
+OnRemoteOperationListener listener
+Handler listenerHandler

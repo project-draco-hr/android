@@ -1,0 +1,6 @@
+{
+  Intent intent=new Intent(this,OperationsService.class);
+  intent.putExtra(OperationsService.EXTRA_ACCOUNT,getAccount());
+  startService(intent);
+  mRefreshSharesInProgress=true;
+}

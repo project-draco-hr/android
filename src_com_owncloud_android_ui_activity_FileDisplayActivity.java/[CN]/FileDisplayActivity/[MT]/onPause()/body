@@ -2,7 +2,7 @@
   super.onPause();
   Log_OC.e(TAG,"onPause() start");
   if (mSyncBroadcastReceiver != null) {
-    unregisterReceiver(mSyncBroadcastReceiver);
+    LocalBroadcastManager.getInstance(this).unregisterReceiver(mSyncBroadcastReceiver);
     mSyncBroadcastReceiver=null;
   }
   if (mUploadFinishReceiver != null) {
@@ -12,6 +12,10 @@
   if (mDownloadFinishReceiver != null) {
     unregisterReceiver(mDownloadFinishReceiver);
     mDownloadFinishReceiver=null;
+  }
+  if (mOperationsServiceReceiver != null) {
+    LocalBroadcastManager.getInstance(this).unregisterReceiver(mOperationsServiceReceiver);
+    mOperationsServiceReceiver=null;
   }
   Log_OC.d(TAG,"onPause() end");
 }

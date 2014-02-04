@@ -15,6 +15,7 @@
     outState.putString(KEY_OC_VERSION,mDiscoveredVersion.toString());
   }
   outState.putString(KEY_HOST_URL_TEXT,mHostBaseUrl);
+  outState.putBoolean(KEY_IS_SHARED_SUPPORTED,mIsSharedSupported);
   if (mAccount != null) {
     outState.putParcelable(KEY_ACCOUNT,mAccount);
   }

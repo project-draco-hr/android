@@ -30,7 +30,7 @@
     Log_OC.d("FileContentProvider","Updating " + folderSize + " to "+ childrenSize);
     ContentValues cv=new ContentValues();
     cv.put(ProviderTableMeta.FILE_CONTENT_LENGTH,childrenSize);
-    count=db.update(ProviderTableMeta.DB_NAME,cv,folderWhere,whereArgs);
+    count=db.update(ProviderTableMeta.FILE_TABLE_NAME,cv,folderWhere,whereArgs);
     if (folderParentId > FileDataStorageManager.ROOT_PARENT_ID) {
       Log_OC.d("FileContentProvider","Propagating update to " + folderParentId);
       updateFolderSize(db,String.valueOf(folderParentId));
