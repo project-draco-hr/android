@@ -1,11 +1,15 @@
 {
-  if (result.getCode() == ResultCode.FILE_NOT_FOUND) {
-    Toast t=Toast.makeText(this,getString(R.string.share_link_file_no_exist),Toast.LENGTH_LONG);
-    t.show();
-  }
- else   if (result.isSuccess()) {
+  if (result.isSuccess()) {
     refeshListOfFilesFragment();
     Intent sendIntent=operation.getSendIntent();
     startActivity(sendIntent);
+  }
+ else   if (result.getCode() == ResultCode.FILE_NOT_FOUND) {
+    Toast t=Toast.makeText(this,getString(R.string.share_link_file_no_exist),Toast.LENGTH_LONG);
+    t.show();
+  }
+ else {
+    Toast t=Toast.makeText(this,getString(R.string.share_link_file_error),Toast.LENGTH_LONG);
+    t.show();
   }
 }
