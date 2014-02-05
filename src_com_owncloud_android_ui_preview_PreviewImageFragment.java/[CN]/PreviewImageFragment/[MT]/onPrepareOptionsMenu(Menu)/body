@@ -1,3 +1,8 @@
 {
   super.onPrepareOptionsMenu(menu);
+  if (!getFile().isShareByLink()) {
+    MenuItem item=menu.findItem(R.id.action_unshare_file);
+    item.setVisible(false);
+    item.setEnabled(false);
+  }
 }

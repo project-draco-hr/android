@@ -6,15 +6,21 @@ case R.id.action_share_file:
       act.getFileOperationsHelper().shareFileWithLink(getFile(),act);
       return true;
     }
-case R.id.action_open_file_with:
+case R.id.action_unshare_file:
 {
-    openFile();
+    FileActivity act=(FileActivity)getSherlockActivity();
+    act.getFileOperationsHelper().unshareFileWithLink(getFile(),act);
     return true;
   }
+case R.id.action_open_file_with:
+{
+  openFile();
+  return true;
+}
 case R.id.action_remove_file:
 {
-  removeFile();
-  return true;
+removeFile();
+return true;
 }
 case R.id.action_see_details:
 {
