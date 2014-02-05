@@ -1,19 +1,19 @@
 {
+  super.onAccountSet(stateWasRecovered);
   if (getAccount() != null) {
-    mStorageManager=new FileDataStorageManager(getAccount(),getContentResolver());
     OCFile file=getFile();
     String parentPath="";
     if (file != null) {
       if (file.isDown() && file.getLastSyncDateForProperties() == 0) {
         parentPath=file.getRemotePath().substring(0,file.getRemotePath().lastIndexOf(file.getFileName()));
-        if (mStorageManager.getFileByPath(parentPath) == null)         file=null;
+        if (getStorageManager().getFileByPath(parentPath) == null)         file=null;
       }
  else {
-        file=mStorageManager.getFileByPath(file.getRemotePath());
+        file=getStorageManager().getFileByPath(file.getRemotePath());
       }
     }
     if (file == null) {
-      file=mStorageManager.getFileByPath(OCFile.ROOT_PATH);
+      file=getStorageManager().getFileByPath(OCFile.ROOT_PATH);
     }
     setFile(file);
     setNavigationListWithFolder(file);
@@ -28,8 +28,5 @@
       updateFragmentsVisibility(!file.isFolder());
       updateNavigationElementsInActionBar(file.isFolder() ? null : file);
     }
-  }
- else {
-    Log_OC.wtf(TAG,"onAccountChanged was called with NULL account associated!");
   }
 }

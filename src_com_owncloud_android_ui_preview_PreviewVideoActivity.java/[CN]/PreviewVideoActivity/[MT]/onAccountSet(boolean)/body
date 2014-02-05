@@ -1,4 +1,5 @@
 {
+  super.onAccountSet(stateWasRecovered);
   if (getAccount() != null) {
     OCFile file=getFile();
     if (file == null) {
@@ -7,8 +8,7 @@
     if (!file.isVideo()) {
       throw new IllegalArgumentException("Non-video file passed as argument");
     }
-    mStorageManager=new FileDataStorageManager(getAccount(),getContentResolver());
-    file=mStorageManager.getFileById(file.getFileId());
+    file=getStorageManager().getFileById(file.getFileId());
     if (file != null) {
       if (file.isDown()) {
         mVideoPlayer.setVideoPath(file.getStoragePath());
@@ -33,7 +33,6 @@
     }
   }
  else {
-    Log_OC.wtf(TAG,"onAccountChanged was called with NULL account associated!");
     finish();
   }
 }

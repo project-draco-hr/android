@@ -3,11 +3,11 @@
   String accountName=intent.getStringExtra(FileSyncAdapter.EXTRA_ACCOUNT_NAME);
   String synchFolderRemotePath=intent.getStringExtra(FileSyncAdapter.EXTRA_FOLDER_PATH);
   RemoteOperationResult synchResult=(RemoteOperationResult)intent.getSerializableExtra(FileSyncAdapter.EXTRA_RESULT);
-  boolean sameAccount=(getAccount() != null && accountName.equals(getAccount().name) && mStorageManager != null);
+  boolean sameAccount=(getAccount() != null && accountName.equals(getAccount().name) && getStorageManager() != null);
   if (sameAccount) {
     if (!FileSyncAdapter.EVENT_FULL_SYNC_START.equals(event)) {
-      OCFile currentFile=(getFile() == null) ? null : mStorageManager.getFileByPath(getFile().getRemotePath());
-      OCFile currentDir=(getCurrentDir() == null) ? null : mStorageManager.getFileByPath(getCurrentDir().getRemotePath());
+      OCFile currentFile=(getFile() == null) ? null : getStorageManager().getFileByPath(getFile().getRemotePath());
+      OCFile currentDir=(getCurrentDir() == null) ? null : getStorageManager().getFileByPath(getCurrentDir().getRemotePath());
       if (currentDir == null) {
         Toast.makeText(FileDisplayActivity.this,String.format(getString(R.string.sync_current_folder_was_removed),mDirectories.getItem(0)),Toast.LENGTH_LONG).show();
         browseToRoot();
@@ -25,8 +25,8 @@
         }
         setFile(currentFile);
       }
-      mSyncInProgress=(!FileSyncAdapter.EVENT_FULL_SYNC_END.equals(event) && !SynchronizeFolderOperation.EVENT_SINGLE_FOLDER_SYNCED.equals(event));
-      if (synchResult != null && synchResult.isSuccess() && (SynchronizeFolderOperation.EVENT_SINGLE_FOLDER_SYNCED.equals(event) || FileSyncAdapter.EVENT_FOLDER_CONTENTS_SYNCED.equals(event))) {
+      mSyncInProgress=(!FileSyncAdapter.EVENT_FULL_SYNC_END.equals(event) && !SynchronizeFolderOperation.EVENT_SINGLE_FOLDER_SYNCED.equals(event) && (synchResult == null || synchResult.isSuccess()));
+      if (synchResult != null && synchResult.isSuccess() && (SynchronizeFolderOperation.EVENT_SINGLE_FOLDER_SYNCED.equals(event) || FileSyncAdapter.EVENT_FOLDER_CONTENTS_SYNCED.equals(event)) && !mRefreshSharesInProgress && getFileOperationsHelper().isSharedSupported(FileDisplayActivity.this)) {
         startGetShares();
       }
     }

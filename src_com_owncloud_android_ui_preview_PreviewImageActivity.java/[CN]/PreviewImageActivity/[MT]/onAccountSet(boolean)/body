@@ -1,4 +1,5 @@
 {
+  super.onAccountSet(stateWasRecovered);
   if (getAccount() != null) {
     OCFile file=getFile();
     if (file == null) {
@@ -7,8 +8,7 @@
     if (!file.isImage()) {
       throw new IllegalArgumentException("Non-image file passed as argument");
     }
-    mStorageManager=new FileDataStorageManager(getAccount(),getContentResolver());
-    if (file.getFileId() > FileDataStorageManager.ROOT_PARENT_ID)     file=mStorageManager.getFileById(file.getFileId());
+    if (file.getFileId() > FileDataStorageManager.ROOT_PARENT_ID)     file=getStorageManager().getFileById(file.getFileId());
     if (file != null) {
       setFile(file);
       getSupportActionBar().setTitle(getFile().getFileName());
@@ -17,8 +17,5 @@
  else {
       finish();
     }
-  }
- else {
-    Log_OC.wtf(TAG,"onAccountChanged was called with NULL account associated!");
   }
 }

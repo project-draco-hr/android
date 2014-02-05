@@ -5,7 +5,7 @@
     mRefreshSharesInProgress=false;
     Account account=intent.getParcelableExtra(OperationsService.EXTRA_ACCOUNT);
     RemoteOperationResult getSharesResult=(RemoteOperationResult)intent.getSerializableExtra(OperationsService.EXTRA_RESULT);
-    if (getAccount() != null && account.name.equals(getAccount().name) && mStorageManager != null) {
+    if (getAccount() != null && account.name.equals(getAccount().name) && getStorageManager() != null) {
       refeshListOfFilesFragment();
     }
     if ((getSharesResult != null) && RemoteOperationResult.ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED.equals(getSharesResult.getCode())) {

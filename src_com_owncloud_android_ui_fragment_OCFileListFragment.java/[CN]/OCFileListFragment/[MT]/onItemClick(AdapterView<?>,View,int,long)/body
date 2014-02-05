@@ -14,7 +14,8 @@
           mContainerActivity.startMediaPreview(file,0,true);
         }
  else {
-          mContainerActivity.openFile(file);
+          FileDisplayActivity activity=(FileDisplayActivity)getSherlockActivity();
+          activity.getFileOperationsHelper().openFile(file,activity);
         }
       }
  else {
