@@ -2,6 +2,8 @@
 switch (item.getItemId()) {
 case R.id.action_share_file:
 {
+      FileActivity act=(FileActivity)getSherlockActivity();
+      act.getFileOperationsHelper().shareFileWithLink(getFile(),act);
       return true;
     }
 case R.id.action_open_file_with:

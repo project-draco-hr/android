@@ -1,4 +1,5 @@
 {
+  super.onRemoteOperationFinish(operation,result);
   if (operation instanceof RemoveFileOperation) {
     onRemoveFileOperationFinish((RemoveFileOperation)operation,result);
   }
