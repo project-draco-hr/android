@@ -1,5 +1,6 @@
 {
   if (file != null) {
+    ((FileDisplayActivity)callerActivity).showLoadingDialog();
     CreateShareOperation createShare=new CreateShareOperation(file.getRemotePath(),ShareType.PUBLIC_LINK,"",false,"",1,sendIntent);
     createShare.execute(callerActivity.getStorageManager(),callerActivity,callerActivity.getRemoteOperationListener(),callerActivity.getHandler(),callerActivity);
   }
