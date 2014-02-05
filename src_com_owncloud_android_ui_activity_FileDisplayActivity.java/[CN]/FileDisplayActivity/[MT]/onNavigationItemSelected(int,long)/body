@@ -9,7 +9,7 @@
     if (targetFolder != null) {
       browseTo(targetFolder);
     }
-    getSupportActionBar().setSelectedNavigationItem(0);
+    if (getSupportActionBar().getNavigationMode() == ActionBar.NAVIGATION_MODE_LIST && itemPosition != 0)     getSupportActionBar().setSelectedNavigationItem(0);
   }
   return true;
 }
