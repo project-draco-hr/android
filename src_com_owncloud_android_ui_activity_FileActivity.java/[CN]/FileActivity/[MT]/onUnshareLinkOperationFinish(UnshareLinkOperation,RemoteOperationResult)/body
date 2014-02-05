@@ -1,0 +1,7 @@
+{
+  dismissLoadingDialog();
+  if (!result.isSuccess()) {
+    Toast t=Toast.makeText(this,getString(R.string.unshare_link_file_error),Toast.LENGTH_LONG);
+    t.show();
+  }
+}
