@@ -1,4 +1,5 @@
 {
+  dismissLoadingDialog();
   if (result.isSuccess()) {
     refeshListOfFilesFragment();
     Intent sendIntent=operation.getSendIntent();
