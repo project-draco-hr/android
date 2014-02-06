@@ -1,5 +1,9 @@
 {
   super.onPrepareOptionsMenu(menu);
+  OCFile file=((PreviewImageActivity)getActivity()).getStorageManager().getFileByPath(getFile().getRemotePath());
+  if (file != null) {
+    setFile(file);
+  }
   if (!getFile().isShareByLink()) {
     MenuItem item=menu.findItem(R.id.action_unshare_file);
     item.setVisible(false);

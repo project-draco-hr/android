@@ -1,0 +1,18 @@
+{
+  FileFragment details=getSecondFragment();
+  if (details != null) {
+    OCFile file=details.getFile();
+    if (file != null) {
+      file=getStorageManager().getFileByPath(file.getRemotePath());
+{
+        if (!(details instanceof PreviewMediaFragment || details instanceof PreviewImageFragment)) {
+          showDetails(file);
+        }
+ else         if (details instanceof PreviewMediaFragment) {
+          startMediaPreview(file,0,false);
+        }
+      }
+      invalidateOptionsMenu();
+    }
+  }
+}

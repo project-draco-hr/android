@@ -1,0 +1,6 @@
+{
+  super.onRemoteOperationFinish(operation,result);
+  if (operation instanceof CreateShareOperation) {
+    onCreateShareOperationFinish((CreateShareOperation)operation,result);
+  }
+}

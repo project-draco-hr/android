@@ -1,0 +1,9 @@
+{
+  if (result.isSuccess()) {
+    OCFile file=getStorageManager().getFileByPath(getFile().getRemotePath());
+    if (file != null) {
+      setFile(file);
+      invalidateOptionsMenu();
+    }
+  }
+}
