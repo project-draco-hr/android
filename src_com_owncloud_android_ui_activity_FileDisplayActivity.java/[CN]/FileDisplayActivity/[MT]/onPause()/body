@@ -13,9 +13,5 @@
     unregisterReceiver(mDownloadFinishReceiver);
     mDownloadFinishReceiver=null;
   }
-  if (mOperationsServiceReceiver != null) {
-    LocalBroadcastManager.getInstance(this).unregisterReceiver(mOperationsServiceReceiver);
-    mOperationsServiceReceiver=null;
-  }
   Log_OC.d(TAG,"onPause() end");
 }

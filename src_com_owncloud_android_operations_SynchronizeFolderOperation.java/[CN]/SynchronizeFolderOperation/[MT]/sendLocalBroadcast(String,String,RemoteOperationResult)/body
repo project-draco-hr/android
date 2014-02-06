@@ -1,5 +1,5 @@
 {
-  Intent intent=new Intent(EVENT_SINGLE_FOLDER_SYNCED);
+  Intent intent=new Intent(event);
   intent.putExtra(FileSyncAdapter.EXTRA_ACCOUNT_NAME,mAccount.name);
   if (dirRemotePath != null) {
     intent.putExtra(FileSyncAdapter.EXTRA_FOLDER_PATH,dirRemotePath);
