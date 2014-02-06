@@ -7,5 +7,5 @@
   if (result != null) {
     intent.putExtra(FileSyncAdapter.EXTRA_RESULT,result);
   }
-  LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
+  getContext().sendStickyBroadcast(intent);
 }

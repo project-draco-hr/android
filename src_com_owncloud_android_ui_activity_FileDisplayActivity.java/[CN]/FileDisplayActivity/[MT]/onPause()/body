@@ -2,7 +2,7 @@
   super.onPause();
   Log_OC.e(TAG,"onPause() start");
   if (mSyncBroadcastReceiver != null) {
-    LocalBroadcastManager.getInstance(this).unregisterReceiver(mSyncBroadcastReceiver);
+    unregisterReceiver(mSyncBroadcastReceiver);
     mSyncBroadcastReceiver=null;
   }
   if (mUploadFinishReceiver != null) {
