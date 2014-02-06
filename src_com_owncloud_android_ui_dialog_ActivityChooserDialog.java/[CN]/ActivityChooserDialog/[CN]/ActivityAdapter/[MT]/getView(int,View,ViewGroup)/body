@@ -1,0 +1,7 @@
+{
+  if (convertView == null) {
+    convertView=newView(parent);
+  }
+  bindView(position,convertView);
+  return convertView;
+}

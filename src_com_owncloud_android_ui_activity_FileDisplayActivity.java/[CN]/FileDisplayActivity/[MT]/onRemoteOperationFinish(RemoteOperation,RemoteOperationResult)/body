@@ -1,4 +1,5 @@
 {
+  super.onRemoteOperationFinish(operation,result);
   if (operation instanceof RemoveFileOperation) {
     onRemoveFileOperationFinish((RemoveFileOperation)operation,result);
   }
@@ -10,5 +11,8 @@
   }
  else   if (operation instanceof CreateFolderOperation) {
     onCreateFolderOperationFinish((CreateFolderOperation)operation,result);
+  }
+ else   if (operation instanceof CreateShareOperation) {
+    onCreateShareOperationFinish((CreateShareOperation)operation,result);
   }
 }

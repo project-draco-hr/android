@@ -1,0 +1,9 @@
+{
+  ActivityChooserDialog f=new ActivityChooserDialog();
+  Bundle args=new Bundle();
+  args.putParcelable(ARG_INTENT,intent);
+  args.putStringArray(ARG_PACKAGES_TO_EXCLUDE,packagesToExclude);
+  args.putParcelable(ARG_FILE_TO_SHARE,fileToShare);
+  f.setArguments(args);
+  return f;
+}

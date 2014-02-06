@@ -5,8 +5,8 @@
     if (newDirectoryName.length() > 0) {
       String path=getCurrentDir().getRemotePath();
       path+=newDirectoryName + OCFile.PATH_SEPARATOR;
-      RemoteOperation operation=new CreateFolderOperation(path,false,mStorageManager);
-      operation.execute(getAccount(),FileDisplayActivity.this,FileDisplayActivity.this,mHandler,FileDisplayActivity.this);
+      RemoteOperation operation=new CreateFolderOperation(path,false,getStorageManager());
+      operation.execute(getAccount(),FileDisplayActivity.this,FileDisplayActivity.this,getHandler(),FileDisplayActivity.this);
       showLoadingDialog();
     }
   }

@@ -1,0 +1,3 @@
+{
+  return (((LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.activity_row,parent,false));
+}

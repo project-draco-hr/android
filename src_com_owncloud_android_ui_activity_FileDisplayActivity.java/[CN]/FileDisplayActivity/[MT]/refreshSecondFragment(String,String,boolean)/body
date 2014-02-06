@@ -15,13 +15,13 @@
       boolean detailsFragmentChanged=false;
       if (waitedPreview) {
         if (success) {
-          mWaitingToPreview=mStorageManager.getFileById(mWaitingToPreview.getFileId());
+          mWaitingToPreview=getStorageManager().getFileById(mWaitingToPreview.getFileId());
           if (PreviewMediaFragment.canBePreviewed(mWaitingToPreview)) {
             startMediaPreview(mWaitingToPreview,0,true);
             detailsFragmentChanged=true;
           }
  else {
-            openFile(mWaitingToPreview);
+            getFileOperationsHelper().openFile(mWaitingToPreview,this);
           }
         }
         mWaitingToPreview=null;
