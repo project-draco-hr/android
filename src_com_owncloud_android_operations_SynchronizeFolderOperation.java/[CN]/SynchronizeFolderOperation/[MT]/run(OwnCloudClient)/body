@@ -15,8 +15,11 @@
   if (!mSyncFullAccount) {
     sendLocalBroadcast(EVENT_SINGLE_FOLDER_CONTENTS_SYNCED,mLocalFolder.getRemotePath(),result);
   }
-  if (result.isSuccess()) {
-    result=refreshSharesForFolder(client);
+  if (result.isSuccess() && mRefreshShares) {
+    RemoteOperationResult shareResult=refreshSharesForFolder(client);
+    if (shareResult.getCode() != ResultCode.FILE_NOT_FOUND) {
+      result=shareResult;
+    }
   }
   if (!mSyncFullAccount) {
     sendLocalBroadcast(EVENT_SINGLE_FOLDER_SHARES_SYNCED,mLocalFolder.getRemotePath(),result);
