@@ -15,7 +15,12 @@
       getStorageManager().saveFile(mFile);
       getStorageManager().removeShare(share);
       if (result.getCode() == ResultCode.SHARE_NOT_FOUND) {
-        result=new RemoteOperationResult(ResultCode.OK);
+        if (existsFile(client,mFile.getRemotePath())) {
+          result=new RemoteOperationResult(ResultCode.OK);
+        }
+ else {
+          getStorageManager().removeFile(mFile,true,true);
+        }
       }
     }
   }

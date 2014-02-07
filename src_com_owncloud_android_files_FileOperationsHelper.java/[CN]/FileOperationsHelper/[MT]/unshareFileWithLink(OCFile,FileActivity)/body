@@ -1,6 +1,6 @@
 {
   if (isSharedSupported(callerActivity)) {
-    UnshareLinkOperation unshare=new UnshareLinkOperation(file);
+    UnshareLinkOperation unshare=new UnshareLinkOperation(file,callerActivity);
     unshare.execute(callerActivity.getStorageManager(),callerActivity,callerActivity.getRemoteOperationListener(),callerActivity.getHandler(),callerActivity);
     callerActivity.showLoadingDialog();
   }
