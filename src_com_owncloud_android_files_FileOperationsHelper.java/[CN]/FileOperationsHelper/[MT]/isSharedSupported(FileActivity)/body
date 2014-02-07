@@ -1,0 +1,7 @@
+{
+  if (callerActivity.getAccount() != null) {
+    AccountManager accountManager=AccountManager.get(callerActivity);
+    return Boolean.parseBoolean(accountManager.getUserData(callerActivity.getAccount(),OwnCloudAccount.Constants.KEY_SUPPORTS_SHARE_API));
+  }
+  return false;
+}

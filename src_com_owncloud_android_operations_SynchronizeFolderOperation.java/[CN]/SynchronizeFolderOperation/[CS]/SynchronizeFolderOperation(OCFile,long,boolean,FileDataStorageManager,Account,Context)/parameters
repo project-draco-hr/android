@@ -1,6 +1,0 @@
-OCFile folder
-long currentSyncTime
-boolean syncFullAccount
-FileDataStorageManager dataStorageManager
-Account account
-Context context

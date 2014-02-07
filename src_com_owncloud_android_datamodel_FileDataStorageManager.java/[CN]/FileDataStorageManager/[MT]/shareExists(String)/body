@@ -1,3 +1,0 @@
-{
-  return shareExists(ProviderTableMeta.OCSHARES_PATH,path);
-}

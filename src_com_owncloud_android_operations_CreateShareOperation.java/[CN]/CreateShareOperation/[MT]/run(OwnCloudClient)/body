@@ -1,0 +1,28 @@
+{
+  CreateShareRemoteOperation operation=new CreateShareRemoteOperation(mPath,mShareType,mShareWith,mPublicUpload,mPassword,mPermissions);
+  RemoteOperationResult result=operation.execute(client);
+  if (result.isSuccess()) {
+    if (result.getData().size() > 0) {
+      OCShare share=(OCShare)result.getData().get(0);
+      if (mPath.endsWith(FileUtils.PATH_SEPARATOR)) {
+        share.setPath(mPath.substring(0,mPath.length() - 1));
+        share.setIsFolder(true);
+      }
+ else {
+        share.setPath(mPath);
+        share.setIsFolder(false);
+      }
+      share.setPermissions(mPermissions);
+      getStorageManager().saveShare(share);
+      OCFile file=getStorageManager().getFileByPath(mPath);
+      if (file != null) {
+        mSendIntent.putExtra(Intent.EXTRA_TEXT,share.getShareLink());
+        file.setPublicLink(share.getShareLink());
+        file.setShareByLink(true);
+        getStorageManager().saveFile(file);
+        Log_OC.d(TAG,"Public Link = " + file.getPublicLink());
+      }
+    }
+  }
+  return result;
+}

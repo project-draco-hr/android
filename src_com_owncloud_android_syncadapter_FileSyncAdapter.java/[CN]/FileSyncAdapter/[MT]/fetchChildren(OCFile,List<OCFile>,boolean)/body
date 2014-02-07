@@ -5,7 +5,7 @@
     newFile=files.get(i);
     if (newFile.isFolder()) {
       synchronizeFolder(newFile);
-      sendLocalBroadcast(EVENT_FOLDER_SIZE_SYNCED,parent.getRemotePath(),null);
+      sendLocalBroadcast(EVENT_FULL_SYNC_FOLDER_SIZE_SYNCED,parent.getRemotePath(),null);
     }
   }
   if (mCancellation && i < files.size())   Log_OC.d(TAG,"Leaving synchronization before synchronizing " + files.get(i).getRemotePath() + " due to cancelation request");

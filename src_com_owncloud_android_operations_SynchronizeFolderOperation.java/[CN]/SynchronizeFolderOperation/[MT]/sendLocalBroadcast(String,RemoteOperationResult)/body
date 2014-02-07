@@ -1,9 +1,0 @@
-{
-  Intent intent=new Intent(EVENT_SINGLE_FOLDER_SYNCED);
-  intent.putExtra(FileSyncAdapter.EXTRA_ACCOUNT_NAME,mAccount.name);
-  if (dirRemotePath != null) {
-    intent.putExtra(FileSyncAdapter.EXTRA_FOLDER_PATH,dirRemotePath);
-  }
-  intent.putExtra(FileSyncAdapter.EXTRA_RESULT,result);
-  LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
-}

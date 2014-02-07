@@ -1,19 +1,26 @@
 {
 switch (item.getItemId()) {
-case R.id.action_open_file_with:
+case R.id.action_share_file:
 {
-      mContainerActivity.openFile(getFile());
+      FileDisplayActivity activity=(FileDisplayActivity)getSherlockActivity();
+      activity.getFileOperationsHelper().shareFileWithLink(getFile(),activity);
       return true;
     }
-case R.id.action_remove_file:
+case R.id.action_open_file_with:
 {
-    removeFile();
+    FileDisplayActivity activity=(FileDisplayActivity)getSherlockActivity();
+    activity.getFileOperationsHelper().openFile(getFile(),activity);
     return true;
   }
+case R.id.action_remove_file:
+{
+  removeFile();
+  return true;
+}
 case R.id.action_rename_file:
 {
-  renameFile();
-  return true;
+renameFile();
+return true;
 }
 case R.id.action_download_file:
 case R.id.action_cancel_download:
