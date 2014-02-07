@@ -18,12 +18,10 @@
   if (savedInstanceState != null) {
     mWaitingToPreview=(OCFile)savedInstanceState.getParcelable(FileDisplayActivity.KEY_WAITING_TO_PREVIEW);
     mSyncInProgress=savedInstanceState.getBoolean(KEY_SYNC_IN_PROGRESS);
-    mRefreshSharesInProgress=savedInstanceState.getBoolean(KEY_REFRESH_SHARES_IN_PROGRESS);
   }
  else {
     mWaitingToPreview=null;
     mSyncInProgress=false;
-    mRefreshSharesInProgress=false;
   }
   setContentView(R.layout.files);
   mDualPane=getResources().getBoolean(R.bool.large_land_layout);
@@ -34,6 +32,6 @@
   }
   mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
   getSupportActionBar().setHomeButtonEnabled(true);
-  setSupportProgressBarIndeterminateVisibility(mSyncInProgress || mRefreshSharesInProgress);
+  setSupportProgressBarIndeterminateVisibility(mSyncInProgress);
   Log_OC.d(TAG,"onCreate() end");
 }

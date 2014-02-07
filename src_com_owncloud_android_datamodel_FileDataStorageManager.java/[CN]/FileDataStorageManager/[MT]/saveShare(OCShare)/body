@@ -11,27 +11,18 @@
   cv.put(ProviderTableMeta.OCSHARES_EXPIRATION_DATE,share.getExpirationDate());
   cv.put(ProviderTableMeta.OCSHARES_TOKEN,share.getToken());
   cv.put(ProviderTableMeta.OCSHARES_SHARE_WITH_DISPLAY_NAME,share.getSharedWithDisplayName());
-  cv.put(ProviderTableMeta.OCSHARES_IS_DIRECTORY,share.isDirectory() ? 1 : 0);
+  cv.put(ProviderTableMeta.OCSHARES_IS_DIRECTORY,share.isFolder() ? 1 : 0);
   cv.put(ProviderTableMeta.OCSHARES_USER_ID,share.getUserId());
   cv.put(ProviderTableMeta.OCSHARES_ID_REMOTE_SHARED,share.getIdRemoteShared());
   cv.put(ProviderTableMeta.OCSHARES_ACCOUNT_OWNER,mAccount.name);
-  boolean samePath=shareExists(share.getPath());
-  if (samePath || shareExists(share.getId())) {
-    OCShare oldFile=null;
-    if (samePath) {
-      oldFile=getShareByPath(share.getPath());
-      share.setId(oldFile.getId());
-    }
- else {
-      oldFile=getShareById(share.getId());
-    }
+  if (shareExists(share.getIdRemoteShared())) {
     overriden=true;
     if (getContentResolver() != null) {
-      getContentResolver().update(ProviderTableMeta.CONTENT_URI_SHARE,cv,ProviderTableMeta._ID + "=?",new String[]{String.valueOf(share.getId())});
+      getContentResolver().update(ProviderTableMeta.CONTENT_URI_SHARE,cv,ProviderTableMeta.OCSHARES_ID_REMOTE_SHARED + "=?",new String[]{String.valueOf(share.getIdRemoteShared())});
     }
  else {
       try {
-        getContentProviderClient().update(ProviderTableMeta.CONTENT_URI_SHARE,cv,ProviderTableMeta._ID + "=?",new String[]{String.valueOf(share.getId())});
+        getContentProviderClient().update(ProviderTableMeta.CONTENT_URI_SHARE,cv,ProviderTableMeta.OCSHARES_ID_REMOTE_SHARED + "=?",new String[]{String.valueOf(share.getIdRemoteShared())});
       }
  catch (      RemoteException e) {
         Log_OC.e(TAG,"Fail to insert insert file to database " + e.getMessage());

@@ -2,7 +2,6 @@
   if (OperationsService.ACTION_OPERATION_ADDED.equals(intent.getAction())) {
   }
  else   if (OperationsService.ACTION_OPERATION_FINISHED.equals(intent.getAction())) {
-    mRefreshSharesInProgress=false;
     Account account=intent.getParcelableExtra(OperationsService.EXTRA_ACCOUNT);
     RemoteOperationResult getSharesResult=(RemoteOperationResult)intent.getSerializableExtra(OperationsService.EXTRA_RESULT);
     if (getAccount() != null && account.name.equals(getAccount().name) && getStorageManager() != null) {
@@ -12,6 +11,5 @@
       mLastSslUntrustedServerResult=getSharesResult;
       showDialog(DIALOG_SSL_VALIDATOR);
     }
-    setSupportProgressBarIndeterminateVisibility(mRefreshSharesInProgress || mSyncInProgress);
   }
 }
