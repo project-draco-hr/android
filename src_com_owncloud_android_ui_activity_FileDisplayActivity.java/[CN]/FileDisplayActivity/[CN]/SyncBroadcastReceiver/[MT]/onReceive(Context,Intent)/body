@@ -1,11 +1,15 @@
 {
   String event=intent.getAction();
+  Log_OC.d(TAG,"Received broadcast " + event);
   String accountName=intent.getStringExtra(FileSyncAdapter.EXTRA_ACCOUNT_NAME);
   String synchFolderRemotePath=intent.getStringExtra(FileSyncAdapter.EXTRA_FOLDER_PATH);
   RemoteOperationResult synchResult=(RemoteOperationResult)intent.getSerializableExtra(FileSyncAdapter.EXTRA_RESULT);
   boolean sameAccount=(getAccount() != null && accountName.equals(getAccount().name) && getStorageManager() != null);
   if (sameAccount) {
-    if (!FileSyncAdapter.EVENT_FULL_SYNC_START.equals(event)) {
+    if (FileSyncAdapter.EVENT_FULL_SYNC_START.equals(event)) {
+      mSyncInProgress=true;
+    }
+ else {
       OCFile currentFile=(getFile() == null) ? null : getStorageManager().getFileByPath(getFile().getRemotePath());
       OCFile currentDir=(getCurrentDir() == null) ? null : getStorageManager().getFileByPath(getCurrentDir().getRemotePath());
       if (currentDir == null) {
@@ -25,12 +29,11 @@
         }
         setFile(currentFile);
       }
-      mSyncInProgress=(!FileSyncAdapter.EVENT_FULL_SYNC_END.equals(event) && !SynchronizeFolderOperation.EVENT_SINGLE_FOLDER_SYNCED.equals(event) && (synchResult == null || synchResult.isSuccess()));
-      if (synchResult != null && synchResult.isSuccess() && (SynchronizeFolderOperation.EVENT_SINGLE_FOLDER_SYNCED.equals(event) || FileSyncAdapter.EVENT_FOLDER_CONTENTS_SYNCED.equals(event)) && !mRefreshSharesInProgress && getFileOperationsHelper().isSharedSupported(FileDisplayActivity.this)) {
-        startGetShares();
-      }
+      mSyncInProgress=(!FileSyncAdapter.EVENT_FULL_SYNC_END.equals(event) && !SynchronizeFolderOperation.EVENT_SINGLE_FOLDER_SHARES_SYNCED.equals(event));
     }
-    setSupportProgressBarIndeterminateVisibility(mSyncInProgress || mRefreshSharesInProgress);
+    removeStickyBroadcast(intent);
+    Log_OC.d(TAG,"Setting progress visibility to " + mSyncInProgress);
+    setSupportProgressBarIndeterminateVisibility(mSyncInProgress);
   }
   if (synchResult != null) {
     if (synchResult.getCode().equals(RemoteOperationResult.ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED)) {

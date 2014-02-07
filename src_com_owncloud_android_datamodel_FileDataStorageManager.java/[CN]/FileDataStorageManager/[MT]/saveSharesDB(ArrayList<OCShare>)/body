@@ -3,7 +3,7 @@
   ArrayList<OCFile> sharedFiles=new ArrayList<OCFile>();
   for (  OCShare share : shares) {
     String path=share.getPath();
-    if (share.isDirectory()) {
+    if (share.isFolder()) {
       path=path + FileUtils.PATH_SEPARATOR;
     }
     OCFile file=getFileByPath(path);

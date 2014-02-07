@@ -3,11 +3,12 @@
   Log_OC.e(TAG,"onResume() start");
   IntentFilter syncIntentFilter=new IntentFilter(FileSyncAdapter.EVENT_FULL_SYNC_START);
   syncIntentFilter.addAction(FileSyncAdapter.EVENT_FULL_SYNC_END);
-  syncIntentFilter.addAction(FileSyncAdapter.EVENT_FOLDER_SIZE_SYNCED);
-  syncIntentFilter.addAction(FileSyncAdapter.EVENT_FOLDER_CONTENTS_SYNCED);
-  syncIntentFilter.addAction(SynchronizeFolderOperation.EVENT_SINGLE_FOLDER_SYNCED);
+  syncIntentFilter.addAction(FileSyncAdapter.EVENT_FULL_SYNC_FOLDER_SIZE_SYNCED);
+  syncIntentFilter.addAction(FileSyncAdapter.EVENT_FULL_SYNC_FOLDER_CONTENTS_SYNCED);
+  syncIntentFilter.addAction(SynchronizeFolderOperation.EVENT_SINGLE_FOLDER_CONTENTS_SYNCED);
+  syncIntentFilter.addAction(SynchronizeFolderOperation.EVENT_SINGLE_FOLDER_SHARES_SYNCED);
   mSyncBroadcastReceiver=new SyncBroadcastReceiver();
-  LocalBroadcastManager.getInstance(this).registerReceiver(mSyncBroadcastReceiver,syncIntentFilter);
+  registerReceiver(mSyncBroadcastReceiver,syncIntentFilter);
   IntentFilter uploadIntentFilter=new IntentFilter(FileUploader.getUploadFinishMessage());
   mUploadFinishReceiver=new UploadFinishReceiver();
   registerReceiver(mUploadFinishReceiver,uploadIntentFilter);
@@ -15,9 +16,5 @@
   downloadIntentFilter.addAction(FileDownloader.getDownloadFinishMessage());
   mDownloadFinishReceiver=new DownloadFinishReceiver();
   registerReceiver(mDownloadFinishReceiver,downloadIntentFilter);
-  IntentFilter operationsIntentFilter=new IntentFilter(OperationsService.ACTION_OPERATION_ADDED);
-  operationsIntentFilter.addAction(OperationsService.ACTION_OPERATION_FINISHED);
-  mOperationsServiceReceiver=new OperationsServiceReceiver();
-  LocalBroadcastManager.getInstance(this).registerReceiver(mOperationsServiceReceiver,operationsIntentFilter);
   Log_OC.d(TAG,"onResume() end");
 }
