@@ -4,9 +4,13 @@
   if (file != null) {
     setFile(file);
   }
+  MenuItem item=menu.findItem(R.id.action_unshare_file);
   if (!getFile().isShareByLink()) {
-    MenuItem item=menu.findItem(R.id.action_unshare_file);
     item.setVisible(false);
     item.setEnabled(false);
+  }
+ else {
+    item.setVisible(true);
+    item.setEnabled(true);
   }
 }
