@@ -14,13 +14,12 @@
       cv.put(ProviderTableMeta.OCSHARES_EXPIRATION_DATE,share.getExpirationDate());
       cv.put(ProviderTableMeta.OCSHARES_TOKEN,share.getToken());
       cv.put(ProviderTableMeta.OCSHARES_SHARE_WITH_DISPLAY_NAME,share.getSharedWithDisplayName());
-      cv.put(ProviderTableMeta.OCSHARES_IS_DIRECTORY,share.isDirectory() ? 1 : 0);
+      cv.put(ProviderTableMeta.OCSHARES_IS_DIRECTORY,share.isFolder() ? 1 : 0);
       cv.put(ProviderTableMeta.OCSHARES_USER_ID,share.getUserId());
       cv.put(ProviderTableMeta.OCSHARES_ID_REMOTE_SHARED,share.getIdRemoteShared());
       cv.put(ProviderTableMeta.OCSHARES_ACCOUNT_OWNER,mAccount.name);
-      boolean existsByPath=shareExists(share.getPath());
-      if (existsByPath || shareExists(share.getId())) {
-        operations.add(ContentProviderOperation.newUpdate(ProviderTableMeta.CONTENT_URI_SHARE).withValues(cv).withSelection(ProviderTableMeta._ID + "=?",new String[]{String.valueOf(share.getId())}).build());
+      if (shareExists(share.getIdRemoteShared())) {
+        operations.add(ContentProviderOperation.newUpdate(ProviderTableMeta.CONTENT_URI_SHARE).withValues(cv).withSelection(ProviderTableMeta.OCSHARES_ID_REMOTE_SHARED + "=?",new String[]{String.valueOf(share.getIdRemoteShared())}).build());
       }
  else {
         operations.add(ContentProviderOperation.newInsert(ProviderTableMeta.CONTENT_URI_SHARE).withValues(cv).build());

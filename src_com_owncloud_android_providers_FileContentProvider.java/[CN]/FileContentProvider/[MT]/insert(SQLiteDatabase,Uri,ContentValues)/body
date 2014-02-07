@@ -29,22 +29,23 @@ String accountNameShare=values.getAsString(ProviderTableMeta.OCSHARES_ACCOUNT_OW
 String[] projectionShare=new String[]{ProviderTableMeta._ID,ProviderTableMeta.OCSHARES_PATH,ProviderTableMeta.OCSHARES_ACCOUNT_OWNER};
 String whereShare=ProviderTableMeta.OCSHARES_PATH + "=? AND " + ProviderTableMeta.OCSHARES_ACCOUNT_OWNER+ "=?";
 String[] whereArgsShare=new String[]{path,accountNameShare};
+Uri insertedShareUri=null;
 Cursor doubleCheckShare=query(db,uri,projectionShare,whereShare,whereArgsShare,null);
 if (doubleCheckShare == null || !doubleCheckShare.moveToFirst()) {
 long rowId=db.insert(ProviderTableMeta.OCSHARES_TABLE_NAME,null,values);
 if (rowId > 0) {
-Uri insertedShareUri=ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_SHARE,rowId);
-return insertedShareUri;
+insertedShareUri=ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_SHARE,rowId);
 }
  else {
 throw new SQLException("ERROR " + uri);
 }
 }
  else {
-Uri insertedFileUri=ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_SHARE,doubleCheckShare.getLong(doubleCheckShare.getColumnIndex(ProviderTableMeta._ID)));
+insertedShareUri=ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_SHARE,doubleCheckShare.getLong(doubleCheckShare.getColumnIndex(ProviderTableMeta._ID)));
 doubleCheckShare.close();
-return insertedFileUri;
 }
+updateFilesTableAccordingToShareInsertion(db,uri,values);
+return insertedShareUri;
 default :
 throw new IllegalArgumentException("Unknown uri id: " + uri);
 }

@@ -1,0 +1,9 @@
+{
+  Cursor c=getShareCursorForValue(ProviderTableMeta.OCSHARES_ID_REMOTE_SHARED,String.valueOf(remoteId));
+  OCShare share=null;
+  if (c.moveToFirst()) {
+    share=createShareInstance(c);
+  }
+  c.close();
+  return share;
+}
