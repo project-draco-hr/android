@@ -3,8 +3,8 @@
     OCFile file=getStorageManager().getFileByPath(getFile().getRemotePath());
     if (file != null) {
       setFile(file);
-      invalidateOptionsMenu();
     }
+    invalidateOptionsMenu();
   }
  else   if (result.getCode() == ResultCode.SHARE_NOT_FOUND) {
     backToDisplayActivity();
