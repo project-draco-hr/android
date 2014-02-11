@@ -1,6 +1,15 @@
 {
-  Iterator<OnRemoteOperationListener> it=mBinder.mBoundListeners.iterator();
-  while (it.hasNext()) {
-    it.next().onRemoteOperationFinish(operation,result);
+  Iterator<OnRemoteOperationListener> listeners=mBinder.mBoundListeners.keySet().iterator();
+  while (listeners.hasNext()) {
+    final OnRemoteOperationListener listener=listeners.next();
+    final Handler handler=mBinder.mBoundListeners.get(listener);
+    if (handler != null) {
+      handler.post(new Runnable(){
+        @Override public void run(){
+          listener.onRemoteOperationFinish(operation,result);
+        }
+      }
+);
+    }
   }
 }
