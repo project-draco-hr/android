@@ -58,5 +58,6 @@ synchronized (mPendingOperations) {
       }
     }
     sendBroadcastOperationFinished(mLastTarget,mCurrentOperation,result);
+    callbackOperationListeners(mLastTarget,mCurrentOperation,result);
   }
 }

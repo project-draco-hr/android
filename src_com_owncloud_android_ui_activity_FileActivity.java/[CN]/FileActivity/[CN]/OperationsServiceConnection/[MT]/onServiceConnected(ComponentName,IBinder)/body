@@ -1,0 +1,13 @@
+{
+  if (component.equals(new ComponentName(FileActivity.this,OperationsService.class))) {
+    Log_OC.d(TAG,"Operations service connected");
+    mOperationsServiceBinder=(OperationsServiceBinder)service;
+    mOperationsServiceBinder.addOperationListener(FileActivity.this);
+    if (!mOperationsServiceBinder.isPerformingBlockingOperation()) {
+      dismissLoadingDialog();
+    }
+  }
+ else {
+    return;
+  }
+}
