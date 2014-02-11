@@ -17,6 +17,10 @@
       }
     }
  else     if (action == ACTION_UNSHARE) {
+      String remotePath=intent.getStringExtra(EXTRA_REMOTE_PATH);
+      if (remotePath.length() > 0) {
+        operation=new UnshareLinkOperation(remotePath,this.getApplicationContext());
+      }
     }
  else {
       operation=new GetSharesOperation();
