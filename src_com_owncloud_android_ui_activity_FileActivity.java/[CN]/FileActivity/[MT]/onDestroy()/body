@@ -1,4 +1,10 @@
 {
   super.onDestroy();
-  if (mOperationsServiceConnection != null)   unbindService(mOperationsServiceConnection);
+  if (mOperationsServiceConnection != null) {
+    if (mOperationsServiceBinder != null) {
+      mOperationsServiceBinder.removeOperationListener(this);
+      mOperationsServiceBinder=null;
+    }
+    unbindService(mOperationsServiceConnection);
+  }
 }

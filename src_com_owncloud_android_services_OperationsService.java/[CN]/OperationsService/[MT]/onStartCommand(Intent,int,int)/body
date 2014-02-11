@@ -26,7 +26,6 @@
       operation=new GetSharesOperation();
     }
     mPendingOperations.add(new Pair<Target,RemoteOperation>(target,operation));
-    sendBroadcastNewOperation(target,operation);
     Message msg=mServiceHandler.obtainMessage();
     msg.arg1=startId;
     mServiceHandler.sendMessage(msg);

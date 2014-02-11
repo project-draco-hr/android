@@ -1,7 +1,3 @@
 {
   super.onStop();
-  if (mOperationsServiceBinder != null) {
-    mOperationsServiceBinder.removeOperationListener(this);
-    mOperationsServiceBinder=null;
-  }
 }
