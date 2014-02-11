@@ -1,7 +1,7 @@
 {
   RemoteOperationResult result=null;
-  String path=mFile.getRemotePath();
-  if (mFile.isFolder()) {
+  String path=mRemotePath;
+  if (path.endsWith(FileUtils.PATH_SEPARATOR)) {
     path=path.substring(0,path.length() - 1);
   }
   OCShare share=getStorageManager().getShareByPath(path);
@@ -10,16 +10,17 @@
     result=operation.execute(client);
     if (result.isSuccess() || result.getCode() == ResultCode.SHARE_NOT_FOUND) {
       Log_OC.d(TAG,"Share id = " + share.getIdRemoteShared() + " deleted");
-      mFile.setShareByLink(false);
-      mFile.setPublicLink("");
-      getStorageManager().saveFile(mFile);
+      OCFile file=getStorageManager().getFileByPath(mRemotePath);
+      file.setShareByLink(false);
+      file.setPublicLink("");
+      getStorageManager().saveFile(file);
       getStorageManager().removeShare(share);
       if (result.getCode() == ResultCode.SHARE_NOT_FOUND) {
-        if (existsFile(client,mFile.getRemotePath())) {
+        if (existsFile(client,file.getRemotePath())) {
           result=new RemoteOperationResult(ResultCode.OK);
         }
  else {
-          getStorageManager().removeFile(mFile,true,true);
+          getStorageManager().removeFile(file,true,true);
         }
       }
     }
