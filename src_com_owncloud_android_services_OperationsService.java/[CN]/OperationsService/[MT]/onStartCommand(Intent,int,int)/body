@@ -23,7 +23,7 @@
       }
     }
  else {
-      operation=new GetSharesOperation();
+      return START_NOT_STICKY;
     }
     mPendingOperations.add(new Pair<Target,RemoteOperation>(target,operation));
     Message msg=mServiceHandler.obtainMessage();
