@@ -2,5 +2,6 @@
   super.onDestroy();
   if (mOperationsServiceConnection != null) {
     unbindService(mOperationsServiceConnection);
+    mOperationsServiceBinder=null;
   }
 }
