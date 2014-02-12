@@ -9,14 +9,14 @@
     Target target=new Target(account,(serverUrl == null) ? null : Uri.parse(serverUrl));
     RemoteOperation operation=null;
     String action=intent.getAction();
-    if (action == ACTION_CREATE_SHARE) {
+    if (action.equals(ACTION_CREATE_SHARE)) {
       String remotePath=intent.getStringExtra(EXTRA_REMOTE_PATH);
       Intent sendIntent=intent.getParcelableExtra(EXTRA_SEND_INTENT);
       if (remotePath.length() > 0) {
         operation=new CreateShareOperation(remotePath,ShareType.PUBLIC_LINK,"",false,"",1,sendIntent);
       }
     }
- else     if (action == ACTION_UNSHARE) {
+ else     if (action.equals(ACTION_UNSHARE)) {
       String remotePath=intent.getStringExtra(EXTRA_REMOTE_PATH);
       if (remotePath.length() > 0) {
         operation=new UnshareLinkOperation(remotePath,this.getApplicationContext());
