@@ -21,6 +21,11 @@ case R.id.action_see_details:
 seeDetails();
 return true;
 }
+case R.id.action_share_file:
+{
+shareFile();
+return true;
+}
 default :
 return false;
 }
