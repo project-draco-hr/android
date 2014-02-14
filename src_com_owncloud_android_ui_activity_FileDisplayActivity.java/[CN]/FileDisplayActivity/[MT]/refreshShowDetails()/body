@@ -4,15 +4,13 @@
     OCFile file=details.getFile();
     if (file != null) {
       file=getStorageManager().getFileByPath(file.getRemotePath());
-{
-        if (!(details instanceof PreviewMediaFragment || details instanceof PreviewImageFragment)) {
-          showDetails(file);
-        }
- else         if (details instanceof PreviewMediaFragment) {
-          startMediaPreview(file,0,false);
-        }
+      if (details instanceof PreviewMediaFragment) {
+        ((PreviewMediaFragment)details).updateFile(file);
       }
-      invalidateOptionsMenu();
+ else {
+        showDetails(file);
+      }
     }
+    invalidateOptionsMenu();
   }
 }
