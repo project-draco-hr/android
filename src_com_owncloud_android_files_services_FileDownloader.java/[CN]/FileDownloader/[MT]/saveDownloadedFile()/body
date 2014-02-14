@@ -1,5 +1,5 @@
 {
-  OCFile file=mCurrentDownload.getFile();
+  OCFile file=mStorageManager.getFileById(mCurrentDownload.getFile().getFileId());
   long syncDate=System.currentTimeMillis();
   file.setLastSyncDateForProperties(syncDate);
   file.setLastSyncDateForData(syncDate);

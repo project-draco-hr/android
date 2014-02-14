@@ -6,16 +6,22 @@ case R.id.action_share_file:
       activity.getFileOperationsHelper().shareFileWithLink(getFile(),activity);
       return true;
     }
-case R.id.action_open_file_with:
+case R.id.action_unshare_file:
 {
     FileDisplayActivity activity=(FileDisplayActivity)getSherlockActivity();
-    activity.getFileOperationsHelper().openFile(getFile(),activity);
+    activity.getFileOperationsHelper().unshareFileWithLink(getFile(),activity);
     return true;
   }
+case R.id.action_open_file_with:
+{
+  FileDisplayActivity activity=(FileDisplayActivity)getSherlockActivity();
+  activity.getFileOperationsHelper().openFile(getFile(),activity);
+  return true;
+}
 case R.id.action_remove_file:
 {
-  removeFile();
-  return true;
+removeFile();
+return true;
 }
 case R.id.action_rename_file:
 {

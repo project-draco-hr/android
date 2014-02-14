@@ -1,0 +1,5 @@
+{
+  ExistenceCheckRemoteOperation existsOperation=new ExistenceCheckRemoteOperation(remotePath,mContext,false);
+  RemoteOperationResult result=existsOperation.execute(client);
+  return result.isSuccess();
+}
