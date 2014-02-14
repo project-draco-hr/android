@@ -1,5 +1,5 @@
 {
-  CreateShareRemoteOperation operation=new CreateShareRemoteOperation(mPath,mShareType,mShareWith,mPublicUpload,mPassword,mPermissions);
+  CreateRemoteShareOperation operation=new CreateRemoteShareOperation(mPath,mShareType,mShareWith,mPublicUpload,mPassword,mPermissions);
   RemoteOperationResult result=operation.execute(client);
   if (result.isSuccess()) {
     if (result.getData().size() > 0) {
