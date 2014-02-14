@@ -77,6 +77,14 @@ case R.id.action_see_details:
 ((FileFragment.ContainerActivity)getActivity()).showDetails(mTargetFile);
 return true;
 }
+case R.id.action_share_file:
+{
+Intent sharingIntent=new Intent(android.content.Intent.ACTION_SEND);
+sharingIntent.setType(mTargetFile.getMimetype());
+sharingIntent.putExtra(Intent.EXTRA_STREAM,Uri.parse("file://" + mTargetFile.getStoragePath()));
+startActivity(Intent.createChooser(sharingIntent,"Share via"));
+return true;
+}
 default :
 return super.onContextItemSelected(item);
 }
