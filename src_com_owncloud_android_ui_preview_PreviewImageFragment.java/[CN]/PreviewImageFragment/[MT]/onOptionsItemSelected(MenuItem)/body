@@ -23,7 +23,7 @@ return true;
 }
 case R.id.action_send_file:
 {
-shareFile();
+sendFile();
 return true;
 }
 default :
