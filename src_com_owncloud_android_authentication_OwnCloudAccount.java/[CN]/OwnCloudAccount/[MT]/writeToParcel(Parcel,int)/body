@@ -1,0 +1,4 @@
+{
+  super.writeToParcel(dest,flags);
+  dest.writeString(mAuthTokenType);
+}
