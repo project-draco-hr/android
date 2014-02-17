@@ -1,4 +1,5 @@
 {
+  dismissLoadingDialog();
   getFileOperationsHelper().sendDownloadedFile(mWaitingToSend,this);
   mWaitingToSend=null;
 }
