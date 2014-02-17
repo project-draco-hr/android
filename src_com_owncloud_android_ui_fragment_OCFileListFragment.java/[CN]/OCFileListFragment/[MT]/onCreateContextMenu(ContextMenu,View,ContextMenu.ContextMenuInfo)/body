@@ -45,6 +45,9 @@
       toHide.add(R.id.action_cancel_upload);
     }
   }
+  if (!targetFile.isShareByLink()) {
+    toHide.add(R.id.action_unshare_file);
+  }
   for (  int i : toHide) {
     item=menu.findItem(i);
     if (item != null) {

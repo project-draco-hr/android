@@ -3,4 +3,7 @@
   if (mAccountWasSet) {
     onAccountSet(mAccountWasRestored);
   }
+  if (mOperationsServiceBinder != null) {
+    mOperationsServiceBinder.addOperationListener(FileActivity.this,mHandler);
+  }
 }
