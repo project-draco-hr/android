@@ -1,0 +1,8 @@
+{
+  if (!file.isDown()) {
+    Log_OC.d(TAG,file.getRemotePath() + " : File must be downloaded");
+  }
+ else {
+    sendDownloadedFile(file,callerActivity);
+  }
+}

@@ -6,5 +6,8 @@
     refeshListOfFilesFragment();
     refreshSecondFragment(intent.getAction(),downloadedRemotePath,intent.getBooleanExtra(FileDownloader.EXTRA_DOWNLOAD_RESULT,false));
   }
+  if (mWaitingToSend != null && mWaitingToSend.isDown()) {
+    sendDownloadedFile();
+  }
   removeStickyBroadcast(intent);
 }

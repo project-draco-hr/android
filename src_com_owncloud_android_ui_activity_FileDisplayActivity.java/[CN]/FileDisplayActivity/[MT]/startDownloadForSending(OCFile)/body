@@ -1,0 +1,5 @@
+{
+  mWaitingToSend=file;
+  requestForDownload(mWaitingToSend);
+  updateFragmentsVisibility(true);
+}
