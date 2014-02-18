@@ -5,8 +5,8 @@
   mAccount=getIntent().getExtras().getParcelable(EXTRA_ACCOUNT);
   if (mAuthTokenType == null) {
     if (mAccount != null) {
-      oAuthRequired=(mAccountMgr.getUserData(mAccount,OwnCloudAccount.Constants.KEY_SUPPORTS_OAUTH2) != null);
-      samlWebSsoRequired=(mAccountMgr.getUserData(mAccount,OwnCloudAccount.Constants.KEY_SUPPORTS_SAML_WEB_SSO) != null);
+      oAuthRequired=(mAccountMgr.getUserData(mAccount,Constants.KEY_SUPPORTS_OAUTH2) != null);
+      samlWebSsoRequired=(mAccountMgr.getUserData(mAccount,Constants.KEY_SUPPORTS_SAML_WEB_SSO) != null);
     }
  else {
       oAuthRequired=AUTH_ON.equals(getString(R.string.auth_method_oauth2));

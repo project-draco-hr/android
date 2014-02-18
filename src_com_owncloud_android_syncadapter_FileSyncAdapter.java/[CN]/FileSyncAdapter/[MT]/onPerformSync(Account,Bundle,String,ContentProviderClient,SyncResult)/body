@@ -13,7 +13,7 @@
   this.setContentProviderClient(providerClient);
   this.setStorageManager(new FileDataStorageManager(account,providerClient));
   AccountManager accountManager=getAccountManager();
-  mIsSharedSupported=Boolean.parseBoolean(accountManager.getUserData(account,OwnCloudAccount.Constants.KEY_SUPPORTS_SHARE_API));
+  mIsSharedSupported=Boolean.parseBoolean(accountManager.getUserData(account,Constants.KEY_SUPPORTS_SHARE_API));
   try {
     this.initClientForCurrentAccount();
   }

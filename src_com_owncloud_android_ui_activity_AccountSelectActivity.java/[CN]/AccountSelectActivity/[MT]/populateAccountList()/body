@@ -9,7 +9,7 @@
     for (    Account a : accounts) {
       HashMap<String,String> h=new HashMap<String,String>();
       h.put("NAME",a.name);
-      h.put("VER","ownCloud version: " + am.getUserData(a,OwnCloudAccount.Constants.KEY_OC_VERSION));
+      h.put("VER","ownCloud version: " + am.getUserData(a,Constants.KEY_OC_VERSION));
       ll.add(h);
     }
     setListAdapter(new AccountCheckedSimpleAdepter(this,ll,android.R.layout.simple_list_item_single_choice,new String[]{"NAME"},new int[]{android.R.id.text1}));

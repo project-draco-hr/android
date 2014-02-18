@@ -2,7 +2,7 @@
   mAuthToken=sessionCookie;
   if (sessionCookie != null && sessionCookie.length() > 0) {
     mAuthToken=sessionCookie;
-    GetUserNameRemoteOperation getUserOperation=new GetUserNameRemoteOperation();
+    GetRemoteUserNameOperation getUserOperation=new GetRemoteUserNameOperation();
     OwnCloudClient client=OwnCloudClientFactory.createOwnCloudClient(Uri.parse(mHostBaseUrl),getApplicationContext(),true);
     client.setSsoSessionCookie(mAuthToken);
     getUserOperation.execute(client,this,mHandler);
