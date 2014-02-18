@@ -36,6 +36,18 @@ case R.id.action_sync_file:
 synchronizeFile();
 return true;
 }
+case R.id.action_send_file:
+{
+FileDisplayActivity activity=(FileDisplayActivity)getSherlockActivity();
+if (!getFile().isDown()) {
+Log_OC.d(TAG,getFile().getRemotePath() + " : File must be downloaded");
+activity.startDownloadForSending(getFile());
+}
+ else {
+activity.getFileOperationsHelper().sendDownloadedFile(getFile(),activity);
+}
+return true;
+}
 default :
 return false;
 }
