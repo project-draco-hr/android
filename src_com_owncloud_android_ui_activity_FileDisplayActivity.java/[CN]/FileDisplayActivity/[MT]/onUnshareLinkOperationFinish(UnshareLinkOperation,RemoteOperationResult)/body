@@ -3,4 +3,8 @@
     refreshShowDetails();
     refeshListOfFilesFragment();
   }
+ else   if (result.getCode() == ResultCode.SHARE_NOT_FOUND) {
+    cleanSecondFragment();
+    refeshListOfFilesFragment();
+  }
 }

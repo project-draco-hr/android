@@ -1,6 +1,7 @@
 {
   dismissLoadingDialog();
   if (result.isSuccess()) {
+    updateFileFromDB();
     Intent sendIntent=operation.getSendIntent();
     startActivity(sendIntent);
   }

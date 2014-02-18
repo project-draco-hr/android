@@ -14,4 +14,6 @@
     mFromNotification=getIntent().getBooleanExtra(FileActivity.EXTRA_FROM_NOTIFICATION,false);
   }
   setAccount(account,savedInstanceState != null);
+  mOperationsServiceConnection=new OperationsServiceConnection();
+  bindService(new Intent(this,OperationsService.class),mOperationsServiceConnection,Context.BIND_AUTO_CREATE);
 }
