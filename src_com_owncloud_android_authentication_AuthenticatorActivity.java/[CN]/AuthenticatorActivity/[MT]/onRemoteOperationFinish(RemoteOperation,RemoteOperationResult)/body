@@ -1,6 +1,6 @@
 {
-  if (operation instanceof OwnCloudServerCheckOperation) {
-    onOcServerCheckFinish((OwnCloudServerCheckOperation)operation,result);
+  if (operation instanceof GetRemoteStatusOperation) {
+    onOcServerCheckFinish((GetRemoteStatusOperation)operation,result);
   }
  else   if (operation instanceof OAuth2GetAccessToken) {
     onGetOAuthAccessTokenFinish((OAuth2GetAccessToken)operation,result);
@@ -13,7 +13,7 @@
       onAuthorizationCheckFinish((ExistenceCheckRemoteOperation)operation,result);
     }
   }
- else   if (operation instanceof GetUserNameRemoteOperation) {
-    onGetUserNameFinish((GetUserNameRemoteOperation)operation,result);
+ else   if (operation instanceof GetRemoteUserNameOperation) {
+    onGetUserNameFinish((GetRemoteUserNameOperation)operation,result);
   }
 }
