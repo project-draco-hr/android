@@ -1,7 +1,9 @@
 {
   if (callerActivity.getAccount() != null) {
     AccountManager accountManager=AccountManager.get(callerActivity);
-    return Boolean.parseBoolean(accountManager.getUserData(callerActivity.getAccount(),OwnCloudAccount.Constants.KEY_SUPPORTS_SHARE_API));
+    String version=accountManager.getUserData(callerActivity.getAccount(),OwnCloudAccount.Constants.KEY_OC_VERSION);
+    String versionString=accountManager.getUserData(callerActivity.getAccount(),OwnCloudAccount.Constants.KEY_OC_VERSION_STRING);
+    return (new OwnCloudVersion(version,versionString)).isSharedSupported();
   }
   return false;
 }
