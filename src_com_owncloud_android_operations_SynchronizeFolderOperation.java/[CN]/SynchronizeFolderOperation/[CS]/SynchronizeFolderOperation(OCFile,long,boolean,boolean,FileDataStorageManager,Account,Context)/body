@@ -2,7 +2,7 @@
   mLocalFolder=folder;
   mCurrentSyncTime=currentSyncTime;
   mSyncFullAccount=syncFullAccount;
-  mRefreshShares=refreshShares;
+  mIsShareSupported=isShareSupported;
   mStorageManager=dataStorageManager;
   mAccount=account;
   mContext=context;

@@ -1,5 +1,5 @@
 {
-  ActivityChooserDialog f=new ActivityChooserDialog();
+  ShareLinkToDialog f=new ShareLinkToDialog();
   Bundle args=new Bundle();
   args.putParcelable(ARG_INTENT,intent);
   args.putStringArray(ARG_PACKAGES_TO_EXCLUDE,packagesToExclude);

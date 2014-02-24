@@ -1,7 +1,7 @@
 OCFile folder
 long currentSyncTime
 boolean syncFullAccount
-boolean refreshShares
+boolean isShareSupported
 FileDataStorageManager dataStorageManager
 Account account
 Context context

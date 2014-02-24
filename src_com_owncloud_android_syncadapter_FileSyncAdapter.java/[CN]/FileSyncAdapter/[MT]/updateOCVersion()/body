@@ -4,4 +4,7 @@
   if (!result.isSuccess()) {
     mLastFailedResult=result;
   }
+ else {
+    mIsShareSupported=update.getOCVersion().isSharedSupported();
+  }
 }

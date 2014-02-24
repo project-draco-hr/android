@@ -19,6 +19,5 @@
     mDiscoveredVersion=operation.getDiscoveredVersion();
     mHostBaseUrl=normalizeUrl(mHostUrlInput.getText().toString());
     mOkButton.setEnabled(mServerIsValid);
-    mIsSharedSupported=operation.isSharedSupported();
   }
 }
