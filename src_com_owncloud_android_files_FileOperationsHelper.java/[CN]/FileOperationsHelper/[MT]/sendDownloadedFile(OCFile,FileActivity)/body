@@ -5,7 +5,7 @@
     sendIntent.putExtra(Intent.EXTRA_STREAM,Uri.parse("file://" + file.getStoragePath()));
     sendIntent.putExtra(Intent.ACTION_SEND,true);
     String[] packagesToExclude=new String[]{callerActivity.getPackageName()};
-    DialogFragment chooserDialog=ActivityChooserDialog.newInstance(sendIntent,packagesToExclude,file);
+    DialogFragment chooserDialog=ShareLinkToDialog.newInstance(sendIntent,packagesToExclude,file);
     chooserDialog.show(callerActivity.getSupportFragmentManager(),FTAG_CHOOSER_DIALOG);
   }
  else {

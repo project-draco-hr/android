@@ -5,7 +5,6 @@
   }
   mServerIsValid=false;
   mServerIsChecked=false;
-  mIsSharedSupported=false;
   mOkButton.setEnabled(false);
   mDiscoveredVersion=null;
   hideRefreshButton();

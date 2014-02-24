@@ -1,6 +1,6 @@
 {
   RemoteOperationResult result=null;
-  OCShare share=getStorageManager().getShareByPath(mRemotePath);
+  OCShare share=getStorageManager().getFirstShareByPathAndType(mRemotePath,ShareType.PUBLIC_LINK);
   if (share != null) {
     RemoveRemoteShareOperation operation=new RemoveRemoteShareOperation((int)share.getIdRemoteShared());
     result=operation.execute(client);

@@ -3,7 +3,7 @@
   Cursor c=getContentResolver().query(ProviderTableMeta.CONTENT_URI,null,ProviderTableMeta.FILE_KEEP_IN_SYNC + " = ?",new String[]{String.valueOf(1)},null);
   if (c == null || !c.moveToFirst())   return;
   AccountManager acm=AccountManager.get(this);
-  Account[] accounts=acm.getAccounts();
+  Account[] accounts=acm.getAccountsByType(MainApp.getAccountType());
   do {
     Account account=null;
     for (    Account a : accounts)     if (a.name.equals(c.getString(c.getColumnIndex(ProviderTableMeta.FILE_ACCOUNT_OWNER)))) {

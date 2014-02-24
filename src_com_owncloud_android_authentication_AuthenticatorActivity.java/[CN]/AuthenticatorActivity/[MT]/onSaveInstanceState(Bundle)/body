@@ -12,10 +12,10 @@
   outState.putInt(KEY_AUTH_STATUS_ICON,mAuthStatusIcon);
   outState.putInt(KEY_AUTH_STATUS_TEXT,mAuthStatusText);
   if (mDiscoveredVersion != null) {
-    outState.putString(KEY_OC_VERSION,mDiscoveredVersion.toString());
+    outState.putString(KEY_OC_VERSION,mDiscoveredVersion.getVersion());
+    outState.putString(KEY_OC_VERSION_STRING,mDiscoveredVersion.getVersionString());
   }
   outState.putString(KEY_HOST_URL_TEXT,mHostBaseUrl);
-  outState.putBoolean(KEY_IS_SHARED_SUPPORTED,mIsSharedSupported);
   if (mAccount != null) {
     outState.putParcelable(KEY_ACCOUNT,mAccount);
   }

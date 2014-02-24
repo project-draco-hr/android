@@ -4,7 +4,7 @@
       String link="https://fake.url";
       Intent intent=createShareWithLinkIntent(link);
       String[] packagesToExclude=new String[]{callerActivity.getPackageName()};
-      DialogFragment chooserDialog=ActivityChooserDialog.newInstance(intent,packagesToExclude,file);
+      DialogFragment chooserDialog=ShareLinkToDialog.newInstance(intent,packagesToExclude,file);
       chooserDialog.show(callerActivity.getSupportFragmentManager(),FTAG_CHOOSER_DIALOG);
     }
  else {
