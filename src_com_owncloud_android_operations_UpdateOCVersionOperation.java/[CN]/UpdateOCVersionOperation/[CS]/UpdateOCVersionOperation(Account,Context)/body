@@ -1,4 +1,5 @@
 {
   mAccount=account;
   mContext=context;
+  mOwnCloudVersion=null;
 }

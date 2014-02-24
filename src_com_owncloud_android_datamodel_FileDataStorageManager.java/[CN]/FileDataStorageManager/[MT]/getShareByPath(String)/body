@@ -1,9 +1,0 @@
-{
-  Cursor c=getShareCursorForValue(ProviderTableMeta.OCSHARES_PATH,path);
-  OCShare share=null;
-  if (c.moveToFirst()) {
-    share=createShareInstance(c);
-  }
-  c.close();
-  return share;
-}
