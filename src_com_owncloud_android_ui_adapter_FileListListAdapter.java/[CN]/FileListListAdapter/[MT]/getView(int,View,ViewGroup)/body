@@ -58,8 +58,7 @@
       }
     }
  else {
-      fileSizeV.setVisibility(View.VISIBLE);
-      fileSizeV.setText(DisplayUtils.bytesToHumanReadable(file.getFileLength()));
+      fileSizeV.setVisibility(View.INVISIBLE);
       lastModV.setVisibility(View.VISIBLE);
       lastModV.setText(DisplayUtils.unixTimeToHumanReadable(file.getModificationTimestamp()));
       checkBoxV.setVisibility(View.GONE);
