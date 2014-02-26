@@ -80,7 +80,6 @@ return true;
 case R.id.action_send_file:
 {
 if (!mTargetFile.isDown()) {
-((FileDisplayActivity)getSherlockActivity()).showLoadingDialog();
 Log_OC.d(TAG,mTargetFile.getRemotePath() + " : File must be downloaded");
 mContainerActivity.startDownloadForSending(mTargetFile);
 }
