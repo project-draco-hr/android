@@ -97,5 +97,4 @@ catch (  RemoteException e) {
       }
     }
   }
-  updateFolderSize(folder.getFileId());
 }
