@@ -8,7 +8,7 @@
   }
   if (mWaitingToSend != null) {
     mWaitingToSend=getStorageManager().getFileByPath(mWaitingToSend.getRemotePath());
-    if (mWaitingToSend.isDown() && mWaitingToSend.getStoragePath() != null) {
+    if (mWaitingToSend.isDown()) {
       sendDownloadedFile();
     }
   }
