@@ -30,8 +30,7 @@
         ActivityInfo actInfo=chosen.activityInfo;
         ComponentName name=new ComponentName(actInfo.applicationInfo.packageName,actInfo.name);
         mIntent.setComponent(name);
-        FileOperationsHelper foh=new FileOperationsHelper();
-        foh.sendFileToApp(mIntent,(FileActivity)getSherlockActivity());
+        ((FileActivity)getSherlockActivity()).startActivity(mIntent);
       }
     }
 ).create();
