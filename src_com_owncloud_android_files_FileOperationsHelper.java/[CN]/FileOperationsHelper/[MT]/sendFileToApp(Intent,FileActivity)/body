@@ -1,0 +1,31 @@
+{
+  Uri filePath=sendIntent.getParcelableExtra(Intent.EXTRA_STREAM);
+  File file=new File(filePath.getPath());
+  Log_OC.d(TAG,"FILE " + filePath.getPath());
+  if (file.exists()) {
+    File folder=new File(FileStorageUtils.getTemporalPath(callerActivity.getAccount().name) + "/send");
+    boolean success=true;
+    if (!folder.exists()) {
+      success=folder.mkdir();
+    }
+    if (success) {
+      File tmpFile=new File(folder.getAbsolutePath() + "/" + file.getName());
+      try {
+        tmpFile.createNewFile();
+        FileStorageUtils.copyFile(file,tmpFile);
+      }
+ catch (      IOException e) {
+        Log_OC.e(TAG,"An error occurred while it was trying to copy in a temporal folder " + e.getMessage());
+      }
+      Uri uri=Uri.fromFile(tmpFile);
+      sendIntent.removeExtra(Intent.EXTRA_STREAM);
+      sendIntent.putExtra(Intent.EXTRA_STREAM,uri);
+      callerActivity.startActivityForResult(sendIntent,REQUEST_CODE_FILE_OPEN_HELPER);
+    }
+  }
+ else {
+    Toast t=Toast.makeText(callerActivity,callerActivity.getString(R.string.send_file_missing_file),Toast.LENGTH_LONG);
+    t.show();
+    Log_OC.d(TAG,"Missing file");
+  }
+}
