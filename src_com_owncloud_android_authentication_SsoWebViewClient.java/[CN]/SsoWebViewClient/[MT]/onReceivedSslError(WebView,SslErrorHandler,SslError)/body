@@ -1,8 +1,28 @@
 {
   Log_OC.d(TAG,"onReceivedSslError : " + error);
   X509Certificate x509Certificate=getX509CertificateFromError(error);
+  boolean isKnowServer=false;
   if (x509Certificate != null) {
     Log_OC.d(TAG,"------>>>>> x509Certificate " + x509Certificate.toString());
+    try {
+      isKnowServer=NetworkUtils.isCertInKnownServersStore((Certificate)x509Certificate,mContext);
+    }
+ catch (    KeyStoreException e) {
+      e.printStackTrace();
+    }
+catch (    NoSuchAlgorithmException e) {
+      e.printStackTrace();
+    }
+catch (    CertificateException e) {
+      e.printStackTrace();
+    }
+catch (    IOException e) {
+      e.printStackTrace();
+    }
   }
-  handler.proceed();
+  if (isKnowServer) {
+    handler.proceed();
+  }
+ else {
+  }
 }
