@@ -30,6 +30,7 @@
         ActivityInfo actInfo=chosen.activityInfo;
         ComponentName name=new ComponentName(actInfo.applicationInfo.packageName,actInfo.name);
         mIntent.setComponent(name);
+        dialog.dismiss();
         ((FileActivity)getSherlockActivity()).startActivity(mIntent);
       }
     }
