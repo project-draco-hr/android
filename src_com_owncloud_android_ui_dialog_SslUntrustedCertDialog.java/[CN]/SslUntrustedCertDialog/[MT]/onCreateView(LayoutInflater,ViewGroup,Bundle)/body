@@ -1,0 +1,58 @@
+{
+  mView=inflater.inflate(R.layout.ssl_untrusted_cert_layout,container,false);
+  Button ok=(Button)mView.findViewById(R.id.untrusted_ok);
+  ok.setOnClickListener(new OnClickListener(){
+    @Override public void onClick(    View v){
+      try {
+        saveServerCert();
+        dismiss();
+        if (mListener != null) {
+          ((AuthenticatorActivity)getSherlockActivity()).reloadWebView();
+        }
+ else         Log_OC.d(TAG,"Nobody there to notify the certificate was saved");
+      }
+ catch (      GeneralSecurityException e) {
+        dismiss();
+        if (mListener != null) {
+          ((AuthenticatorActivity)getSherlockActivity()).cancelWebView();
+          mListener.onFailedSavingCertificate();
+        }
+        Log_OC.e(TAG,"Server certificate could not be saved in the known servers trust store ",e);
+      }
+catch (      IOException e) {
+        dismiss();
+        if (mListener != null) {
+          ((AuthenticatorActivity)getSherlockActivity()).cancelWebView();
+          mListener.onFailedSavingCertificate();
+        }
+        Log_OC.e(TAG,"Server certificate could not be saved in the known servers trust store ",e);
+      }
+    }
+  }
+);
+  Button cancel=(Button)mView.findViewById(R.id.untrusted_cancel);
+  cancel.setOnClickListener(new OnClickListener(){
+    @Override public void onClick(    View v){
+      getDialog().cancel();
+      ((AuthenticatorActivity)getSherlockActivity()).cancelWebView();
+    }
+  }
+);
+  Button details=(Button)mView.findViewById(R.id.untrusted_details_btn);
+  details.setOnClickListener(new OnClickListener(){
+    @Override public void onClick(    View v){
+      View detailsScroll=mView.findViewById(R.id.untrusted_details_scroll);
+      if (detailsScroll.getVisibility() == View.VISIBLE) {
+        detailsScroll.setVisibility(View.GONE);
+        ((Button)v).setText(R.string.ssl_validator_btn_details_see);
+      }
+ else {
+        detailsScroll.setVisibility(View.VISIBLE);
+        ((Button)v).setText(R.string.ssl_validator_btn_details_hide);
+        showCertificateData(mCertificate);
+      }
+    }
+  }
+);
+  return mView;
+}

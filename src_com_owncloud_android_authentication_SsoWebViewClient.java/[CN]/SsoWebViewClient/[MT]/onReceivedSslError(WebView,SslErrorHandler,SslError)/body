@@ -7,22 +7,18 @@
     try {
       isKnowServer=NetworkUtils.isCertInKnownServersStore((Certificate)x509Certificate,mContext);
     }
- catch (    KeyStoreException e) {
-      e.printStackTrace();
-    }
-catch (    NoSuchAlgorithmException e) {
-      e.printStackTrace();
-    }
-catch (    CertificateException e) {
-      e.printStackTrace();
-    }
-catch (    IOException e) {
-      e.printStackTrace();
+ catch (    Exception e) {
+      Log_OC.e(TAG,"Exception: " + e.getMessage());
     }
   }
   if (isKnowServer) {
     handler.proceed();
   }
  else {
+    SslUntrustedCertDialog dialog=SslUntrustedCertDialog.newInstance(mContext,x509Certificate,this,handler);
+    FragmentManager fm=((FragmentActivity)mContext).getSupportFragmentManager();
+    FragmentTransaction ft=fm.beginTransaction();
+    dialog.show(ft,DIALOG_UNTRUSTED_CERT);
+    handler.cancel();
   }
 }

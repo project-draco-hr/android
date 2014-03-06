@@ -1,0 +1,51 @@
+{
+  Map<String,String> s=parsePrincipal(issuer);
+  TextView cnView=((TextView)mView.findViewById(R.id.untrusted_value_issuer_CN));
+  TextView oView=((TextView)mView.findViewById(R.id.untrusted_value_issuer_O));
+  TextView ouView=((TextView)mView.findViewById(R.id.untrusted_value_issuer_OU));
+  TextView cView=((TextView)mView.findViewById(R.id.untrusted_value_issuer_C));
+  TextView stView=((TextView)mView.findViewById(R.id.untrusted_value_issuer_ST));
+  TextView lView=((TextView)mView.findViewById(R.id.untrusted_value_issuer_L));
+  if (s.get("CN") != null) {
+    cnView.setText(s.get("CN"));
+    cnView.setVisibility(View.VISIBLE);
+  }
+ else {
+    cnView.setVisibility(View.GONE);
+  }
+  if (s.get("O") != null) {
+    oView.setText(s.get("O"));
+    oView.setVisibility(View.VISIBLE);
+  }
+ else {
+    oView.setVisibility(View.GONE);
+  }
+  if (s.get("OU") != null) {
+    ouView.setText(s.get("OU"));
+    ouView.setVisibility(View.VISIBLE);
+  }
+ else {
+    ouView.setVisibility(View.GONE);
+  }
+  if (s.get("C") != null) {
+    cView.setText(s.get("C"));
+    cView.setVisibility(View.VISIBLE);
+  }
+ else {
+    cView.setVisibility(View.GONE);
+  }
+  if (s.get("ST") != null) {
+    stView.setText(s.get("ST"));
+    stView.setVisibility(View.VISIBLE);
+  }
+ else {
+    stView.setVisibility(View.GONE);
+  }
+  if (s.get("L") != null) {
+    lView.setText(s.get("L"));
+    lView.setVisibility(View.VISIBLE);
+  }
+ else {
+    lView.setVisibility(View.GONE);
+  }
+}

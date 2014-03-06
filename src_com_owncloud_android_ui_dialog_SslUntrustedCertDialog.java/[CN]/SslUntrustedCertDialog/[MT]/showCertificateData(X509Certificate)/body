@@ -1,0 +1,13 @@
+{
+  TextView nullCerView=(TextView)mView.findViewById(R.id.untrusted_null_cert);
+  if (cert != null) {
+    nullCerView.setVisibility(View.GONE);
+    showSubject(cert.getSubjectX500Principal());
+    showIssuer(cert.getIssuerX500Principal());
+    showValidity(cert.getNotBefore(),cert.getNotAfter());
+    showSignature(cert);
+  }
+ else {
+    nullCerView.setVisibility(View.VISIBLE);
+  }
+}
