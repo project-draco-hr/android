@@ -1,0 +1,7 @@
+{
+  TextView fromView=((TextView)mView.findViewById(R.id.value_validity_from));
+  TextView toView=((TextView)mView.findViewById(R.id.value_validity_to));
+  DateFormat dateFormat=DateFormat.getDateInstance();
+  fromView.setText(dateFormat.format(notBefore));
+  toView.setText(dateFormat.format(notAfter));
+}

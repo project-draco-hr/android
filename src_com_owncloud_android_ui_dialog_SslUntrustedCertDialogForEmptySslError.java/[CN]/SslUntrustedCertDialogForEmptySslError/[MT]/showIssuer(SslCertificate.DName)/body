@@ -1,0 +1,17 @@
+{
+  TextView cnView=((TextView)mView.findViewById(R.id.value_issuer_CN));
+  cnView.setText(issuer.getCName());
+  cnView.setVisibility(View.VISIBLE);
+  TextView oView=((TextView)mView.findViewById(R.id.value_issuer_O));
+  oView.setText(issuer.getOName());
+  oView.setVisibility(View.VISIBLE);
+  TextView ouView=((TextView)mView.findViewById(R.id.value_issuer_OU));
+  ouView.setText(issuer.getUName());
+  ouView.setVisibility(View.VISIBLE);
+  ((TextView)mView.findViewById(R.id.value_issuer_C)).setVisibility(View.GONE);
+  ((TextView)mView.findViewById(R.id.value_issuer_ST)).setVisibility(View.GONE);
+  ((TextView)mView.findViewById(R.id.value_issuer_L)).setVisibility(View.GONE);
+  ((TextView)mView.findViewById(R.id.label_issuer_C)).setVisibility(View.GONE);
+  ((TextView)mView.findViewById(R.id.label_issuer_ST)).setVisibility(View.GONE);
+  ((TextView)mView.findViewById(R.id.label_issuer_L)).setVisibility(View.GONE);
+}

@@ -1,0 +1,6 @@
+{
+  if (error == null) {
+    throw new IllegalArgumentException("Trying to create instance with a parameter error == null");
+  }
+  return SslUntrustedCertDialogForEmptySslError.newInstance(error,handler);
+}
