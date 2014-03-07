@@ -43,24 +43,19 @@ case DIALOG_CHOOSE_UPLOAD_SOURCE:
     dialog=builder.create();
     break;
   }
-case DIALOG_SSL_VALIDATOR:
-{
-  dialog=SslValidatorDialog.newInstance(this,mLastSslUntrustedServerResult,this);
-  break;
-}
 case DIALOG_CERT_NOT_SAVED:
 {
-builder=new AlertDialog.Builder(this);
-builder.setMessage(getResources().getString(R.string.ssl_validator_not_saved));
-builder.setCancelable(false);
-builder.setPositiveButton(R.string.common_ok,new DialogInterface.OnClickListener(){
-  @Override public void onClick(  DialogInterface dialog,  int which){
-    dialog.dismiss();
+  builder=new AlertDialog.Builder(this);
+  builder.setMessage(getResources().getString(R.string.ssl_validator_not_saved));
+  builder.setCancelable(false);
+  builder.setPositiveButton(R.string.common_ok,new DialogInterface.OnClickListener(){
+    @Override public void onClick(    DialogInterface dialog,    int which){
+      dialog.dismiss();
+    }
   }
-}
 );
-dialog=builder.create();
-break;
+  dialog=builder.create();
+  break;
 }
 default :
 dialog=null;

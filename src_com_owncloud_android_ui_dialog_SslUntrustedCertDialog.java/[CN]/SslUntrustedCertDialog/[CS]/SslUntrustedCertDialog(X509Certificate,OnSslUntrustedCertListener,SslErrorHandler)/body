@@ -1,5 +1,0 @@
-{
-  mCertificate=cert;
-  mListener=listener;
-  mHandler=handler;
-}

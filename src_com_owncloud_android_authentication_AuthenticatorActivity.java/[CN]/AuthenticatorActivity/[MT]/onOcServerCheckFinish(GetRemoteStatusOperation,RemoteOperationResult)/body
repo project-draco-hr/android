@@ -13,8 +13,7 @@
     updateServerStatusIconAndText(result);
     showServerStatus();
     if (result.getCode() == ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED) {
-      mLastSslUntrustedServerResult=result;
-      showDialog(DIALOG_SSL_VALIDATOR);
+      showUntrustedCertDialog(result);
     }
     mDiscoveredVersion=operation.getDiscoveredVersion();
     mHostBaseUrl=normalizeUrl(mHostUrlInput.getText().toString());

@@ -33,8 +33,7 @@
     showRefreshButton();
     mOkButton.setEnabled(false);
     if (result.getCode() == ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED) {
-      mLastSslUntrustedServerResult=result;
-      showDialog(DIALOG_SSL_VALIDATOR);
+      showUntrustedCertDialog(result);
     }
   }
  else {

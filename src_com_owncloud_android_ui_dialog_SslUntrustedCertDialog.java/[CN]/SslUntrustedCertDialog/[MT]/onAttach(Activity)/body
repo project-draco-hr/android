@@ -1,0 +1,6 @@
+{
+  super.onAttach(activity);
+  if (activity instanceof SherlockActivity) {
+    mListener=(OnSslUntrustedCertListener)activity;
+  }
+}

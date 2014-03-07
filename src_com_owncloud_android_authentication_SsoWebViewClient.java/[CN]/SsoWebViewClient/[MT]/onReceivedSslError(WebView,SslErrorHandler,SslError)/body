@@ -15,10 +15,7 @@
     handler.proceed();
   }
  else {
-    SslUntrustedCertDialog dialog=SslUntrustedCertDialog.newInstance(mContext,x509Certificate,this,handler);
-    FragmentManager fm=((FragmentActivity)mContext).getSupportFragmentManager();
-    FragmentTransaction ft=fm.beginTransaction();
-    dialog.show(ft,DIALOG_UNTRUSTED_CERT);
+    ((AuthenticatorActivity)mContext).showUntrustedCertDialog(x509Certificate,error);
     handler.cancel();
   }
 }

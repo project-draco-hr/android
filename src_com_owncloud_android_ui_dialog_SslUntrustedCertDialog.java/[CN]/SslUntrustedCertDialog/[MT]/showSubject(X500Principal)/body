@@ -1,11 +1,11 @@
 {
   Map<String,String> s=parsePrincipal(subject);
-  TextView cnView=((TextView)mView.findViewById(R.id.untrusted_value_subject_CN));
-  TextView oView=((TextView)mView.findViewById(R.id.untrusted_value_subject_O));
-  TextView ouView=((TextView)mView.findViewById(R.id.untrusted_value_subject_OU));
-  TextView cView=((TextView)mView.findViewById(R.id.untrusted_value_subject_C));
-  TextView stView=((TextView)mView.findViewById(R.id.untrusted_value_subject_ST));
-  TextView lView=((TextView)mView.findViewById(R.id.untrusted_value_subject_L));
+  TextView cnView=((TextView)mView.findViewById(R.id.value_subject_CN));
+  TextView oView=((TextView)mView.findViewById(R.id.value_subject_O));
+  TextView ouView=((TextView)mView.findViewById(R.id.value_subject_OU));
+  TextView cView=((TextView)mView.findViewById(R.id.value_subject_C));
+  TextView stView=((TextView)mView.findViewById(R.id.value_subject_ST));
+  TextView lView=((TextView)mView.findViewById(R.id.value_subject_L));
   if (s.get("CN") != null) {
     cnView.setText(s.get("CN"));
     cnView.setVisibility(View.VISIBLE);

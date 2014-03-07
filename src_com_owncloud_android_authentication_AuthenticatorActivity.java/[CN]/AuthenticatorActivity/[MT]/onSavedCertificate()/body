@@ -1,3 +1,4 @@
 {
   checkOcServer();
+  reloadWebView();
 }

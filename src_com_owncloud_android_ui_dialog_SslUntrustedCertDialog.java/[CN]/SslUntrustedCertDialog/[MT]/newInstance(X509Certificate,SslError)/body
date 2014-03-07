@@ -1,0 +1,10 @@
+{
+  if (cert != null) {
+    SslUntrustedCertDialog dialog=new SslUntrustedCertDialog(cert,error);
+    return dialog;
+  }
+ else {
+    SslUntrustedCertDialog dialog=new SslUntrustedCertDialog();
+    return dialog;
+  }
+}
