@@ -1,6 +1,0 @@
-{
-  Intent sharingIntent=new Intent(android.content.Intent.ACTION_SEND);
-  sharingIntent.setType(getFile().getMimetype());
-  sharingIntent.putExtra(Intent.EXTRA_STREAM,Uri.parse("file://" + getFile().getStoragePath()));
-  startActivity(Intent.createChooser(sharingIntent,"Share via"));
-}

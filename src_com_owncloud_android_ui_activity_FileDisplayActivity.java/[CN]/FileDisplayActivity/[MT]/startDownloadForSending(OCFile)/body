@@ -1,0 +1,6 @@
+{
+  mWaitingToSend=file;
+  requestForDownload(mWaitingToSend);
+  boolean hasSecondFragment=(getSecondFragment() != null);
+  updateFragmentsVisibility(hasSecondFragment);
+}

@@ -18,10 +18,12 @@
   if (savedInstanceState != null) {
     mWaitingToPreview=(OCFile)savedInstanceState.getParcelable(FileDisplayActivity.KEY_WAITING_TO_PREVIEW);
     mSyncInProgress=savedInstanceState.getBoolean(KEY_SYNC_IN_PROGRESS);
+    mWaitingToSend=(OCFile)savedInstanceState.getParcelable(FileDisplayActivity.KEY_WAITING_TO_SEND);
   }
  else {
     mWaitingToPreview=null;
     mSyncInProgress=false;
+    mWaitingToSend=null;
   }
   setContentView(R.layout.files);
   mDualPane=getResources().getBoolean(R.bool.large_land_layout);
