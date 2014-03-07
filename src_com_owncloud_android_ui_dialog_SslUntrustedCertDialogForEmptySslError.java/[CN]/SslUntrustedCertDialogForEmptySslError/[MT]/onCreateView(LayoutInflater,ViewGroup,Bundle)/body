@@ -1,0 +1,43 @@
+{
+  if (mView == null) {
+    mView=inflater.inflate(R.layout.ssl_untrusted_cert_layout,container,false);
+  }
+ else {
+    ((ViewGroup)mView.getParent()).removeView(mView);
+  }
+  Button ok=(Button)mView.findViewById(R.id.untrusted_ok);
+  ok.setOnClickListener(new OnClickListener(){
+    @Override public void onClick(    View v){
+      mHandler.proceed();
+      dismiss();
+    }
+  }
+);
+  Button cancel=(Button)mView.findViewById(R.id.untrusted_cancel);
+  cancel.setOnClickListener(new OnClickListener(){
+    @Override public void onClick(    View v){
+      AuthenticatorActivity act=((AuthenticatorActivity)getSherlockActivity());
+      getDialog().cancel();
+      mHandler.cancel();
+      act.cancelWebView();
+    }
+  }
+);
+  Button details=(Button)mView.findViewById(R.id.untrusted_details_btn);
+  details.setOnClickListener(new OnClickListener(){
+    @Override public void onClick(    View v){
+      View detailsScroll=mView.findViewById(R.id.untrusted_details_scroll);
+      if (detailsScroll.getVisibility() == View.VISIBLE) {
+        detailsScroll.setVisibility(View.GONE);
+        ((Button)v).setText(R.string.ssl_validator_btn_details_see);
+      }
+ else {
+        detailsScroll.setVisibility(View.VISIBLE);
+        ((Button)v).setText(R.string.ssl_validator_btn_details_hide);
+        showCertificateData();
+      }
+    }
+  }
+);
+  return mView;
+}

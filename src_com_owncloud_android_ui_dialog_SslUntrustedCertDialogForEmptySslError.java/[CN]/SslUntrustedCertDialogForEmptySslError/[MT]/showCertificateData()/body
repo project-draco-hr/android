@@ -1,0 +1,13 @@
+{
+  TextView nullCerView=(TextView)mView.findViewById(R.id.untrusted_null_cert);
+  SslCertificate cert=mError.getCertificate();
+  if (cert != null) {
+    nullCerView.setVisibility(View.GONE);
+    showSubject(cert.getIssuedTo());
+    showIssuer(cert.getIssuedBy());
+    showValidity(cert.getValidNotBeforeDate(),cert.getValidNotAfterDate());
+  }
+ else {
+    nullCerView.setVisibility(View.VISIBLE);
+  }
+}
