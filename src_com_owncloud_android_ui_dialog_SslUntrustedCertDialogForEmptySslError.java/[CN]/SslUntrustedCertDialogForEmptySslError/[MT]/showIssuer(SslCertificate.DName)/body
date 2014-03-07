@@ -11,4 +11,7 @@
   ((TextView)mView.findViewById(R.id.untrusted_value_issuer_C)).setVisibility(View.GONE);
   ((TextView)mView.findViewById(R.id.untrusted_value_issuer_ST)).setVisibility(View.GONE);
   ((TextView)mView.findViewById(R.id.untrusted_value_issuer_L)).setVisibility(View.GONE);
+  ((TextView)mView.findViewById(R.id.untrusted_label_issuer_C)).setVisibility(View.GONE);
+  ((TextView)mView.findViewById(R.id.untrusted_label_issuer_ST)).setVisibility(View.GONE);
+  ((TextView)mView.findViewById(R.id.untrusted_label_issuer_L)).setVisibility(View.GONE);
 }

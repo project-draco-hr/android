@@ -1,0 +1,6 @@
+{
+  ((TextView)mView.findViewById(R.id.untrusted_label_signature)).setVisibility(View.GONE);
+  ((TextView)mView.findViewById(R.id.untrusted_label_signature_algorithm)).setVisibility(View.GONE);
+  ((TextView)mView.findViewById(R.id.untrusted_value_signature_algorithm)).setVisibility(View.GONE);
+  ((TextView)mView.findViewById(R.id.untrusted_value_signature)).setVisibility(View.GONE);
+}

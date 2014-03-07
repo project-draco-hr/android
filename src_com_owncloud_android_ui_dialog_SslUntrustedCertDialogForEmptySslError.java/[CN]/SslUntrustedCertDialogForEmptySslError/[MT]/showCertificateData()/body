@@ -6,6 +6,7 @@
     showSubject(cert.getIssuedTo());
     showIssuer(cert.getIssuedBy());
     showValidity(cert.getValidNotBeforeDate(),cert.getValidNotAfterDate());
+    hideSignature();
   }
  else {
     nullCerView.setVisibility(View.VISIBLE);
