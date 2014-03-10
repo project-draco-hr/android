@@ -5,6 +5,7 @@
  else {
     ((ViewGroup)mView.getParent()).removeView(mView);
   }
+  showNoMessageError();
   Button ok=(Button)mView.findViewById(R.id.ok);
   ok.setOnClickListener(new OnClickListener(){
     @Override public void onClick(    View v){
