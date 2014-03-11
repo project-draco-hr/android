@@ -1,7 +1,0 @@
-{
-  mListener=listener;
-  if (result.isSslRecoverableException()) {
-    mException=(CertificateCombinedException)result.getException();
-    mCertificate=mException.getServerCertificate();
-  }
-}

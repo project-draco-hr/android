@@ -1,0 +1,6 @@
+{
+  TextView sigView=((TextView)dialogView.findViewById(R.id.value_signature));
+  TextView algorithmView=((TextView)dialogView.findViewById(R.id.value_signature_algorithm));
+  sigView.setText(getHex(mCertificate.getSignature()));
+  algorithmView.setText(mCertificate.getSigAlgName());
+}

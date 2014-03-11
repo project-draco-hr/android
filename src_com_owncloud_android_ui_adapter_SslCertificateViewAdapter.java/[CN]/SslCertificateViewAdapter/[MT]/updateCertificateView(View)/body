@@ -1,0 +1,13 @@
+{
+  TextView nullCerView=(TextView)dialogView.findViewById(R.id.null_cert);
+  if (mCertificate != null) {
+    nullCerView.setVisibility(View.GONE);
+    showSubject(mCertificate.getIssuedTo(),dialogView);
+    showIssuer(mCertificate.getIssuedBy(),dialogView);
+    showValidity(mCertificate.getValidNotBeforeDate(),mCertificate.getValidNotAfterDate(),dialogView);
+    hideSignature(dialogView);
+  }
+ else {
+    nullCerView.setVisibility(View.VISIBLE);
+  }
+}

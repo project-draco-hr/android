@@ -1,7 +1,0 @@
-{
-  Fragment frag=getSupportFragmentManager().findFragmentByTag(DIALOG_UNTRUSTED_CERT);
-  if (frag != null) {
-    SslUntrustedCertDialog dialog=(SslUntrustedCertDialog)frag;
-    dialog.dismiss();
-  }
-}

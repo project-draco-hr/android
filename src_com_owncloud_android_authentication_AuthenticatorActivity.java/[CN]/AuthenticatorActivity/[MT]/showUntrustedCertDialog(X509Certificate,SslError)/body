@@ -1,6 +1,0 @@
-{
-  SslUntrustedCertDialog dialog=SslUntrustedCertDialog.newInstance(x509Certificate,error);
-  FragmentManager fm=getSupportFragmentManager();
-  FragmentTransaction ft=fm.beginTransaction();
-  dialog.show(ft,DIALOG_UNTRUSTED_CERT);
-}

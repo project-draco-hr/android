@@ -1,0 +1,10 @@
+{
+  if (sslException == null) {
+    throw new IllegalArgumentException("Trying to create instance with parameter sslException == null");
+  }
+  SslUntrustedCertDialog dialog=new SslUntrustedCertDialog();
+  dialog.m509Certificate=sslException.getServerCertificate();
+  dialog.mErrorViewAdapter=new CertificateCombinedExceptionViewAdapter(sslException);
+  dialog.mCertificateViewAdapter=new X509CertificateViewAdapter(sslException.getServerCertificate());
+  return dialog;
+}

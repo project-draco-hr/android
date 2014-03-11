@@ -1,5 +1,0 @@
-{
-  final Dialog dialog=super.onCreateDialog(savedInstanceState);
-  dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-  return dialog;
-}

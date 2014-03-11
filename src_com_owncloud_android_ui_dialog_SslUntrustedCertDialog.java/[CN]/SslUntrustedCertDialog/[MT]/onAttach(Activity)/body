@@ -1,6 +1,6 @@
 {
   super.onAttach(activity);
-  if (activity instanceof SherlockActivity) {
-    mListener=(OnSslUntrustedCertListener)activity;
+  if (!(activity instanceof OnSslUntrustedCertListener)) {
+    throw new IllegalArgumentException("The host activity must implement " + OnSslUntrustedCertListener.class.getCanonicalName());
   }
 }

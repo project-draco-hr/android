@@ -1,6 +1,0 @@
-{
-  super.onCreate(savedInstanceState);
-  setRetainInstance(true);
-  setCancelable(false);
-  mView=null;
-}

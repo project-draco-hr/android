@@ -1,9 +1,0 @@
-{
-  if (result != null && result.isSslRecoverableException()) {
-    SslUntrustedCertDialog dialog=new SslUntrustedCertDialog(result,listener);
-    return dialog;
-  }
- else {
-    return null;
-  }
-}

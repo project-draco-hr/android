@@ -1,0 +1,17 @@
+{
+  if (cert == null) {
+    throw new IllegalArgumentException("Trying to create instance with parameter cert == null");
+  }
+  if (error == null) {
+    throw new IllegalArgumentException("Trying to create instance with parameter error == null");
+  }
+  if (handler == null) {
+    throw new IllegalArgumentException("Trying to create instance with parameter handler == null");
+  }
+  SslUntrustedCertDialog dialog=new SslUntrustedCertDialog();
+  dialog.m509Certificate=cert;
+  dialog.mHandler=handler;
+  dialog.mErrorViewAdapter=new SslErrorViewAdapter(error);
+  dialog.mCertificateViewAdapter=new X509CertificateViewAdapter(cert);
+  return dialog;
+}

@@ -14,14 +14,7 @@
   if (isKnownServer) {
     handler.proceed();
   }
- else   if (x509Certificate != null) {
-    ((AuthenticatorActivity)mContext).showUntrustedCertDialog(x509Certificate,error);
-    handler.cancel();
-  }
  else {
-    SslUntrustedCertDialogABSTRACT dialog=SslUntrustedCertDialogABSTRACT.newInstanceForEmptySslError(error,handler);
-    FragmentManager fm=((SherlockFragmentActivity)mContext).getSupportFragmentManager();
-    FragmentTransaction ft=fm.beginTransaction();
-    dialog.show(ft,AuthenticatorActivity.DIALOG_UNTRUSTED_CERT);
+    ((AuthenticatorActivity)mContext).showUntrustedCertDialog(x509Certificate,error,handler);
   }
 }
