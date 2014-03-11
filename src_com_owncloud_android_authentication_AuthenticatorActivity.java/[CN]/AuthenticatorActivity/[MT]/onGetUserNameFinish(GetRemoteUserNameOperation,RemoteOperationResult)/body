@@ -21,7 +21,7 @@
     if (success)     finish();
   }
  else {
-    updateStatusIconFailUserName();
+    updateAuthStatusIconAndText(result);
     showAuthStatus();
     Log_OC.e(TAG,"Access to user name failed: " + result.getLogMessage());
   }
