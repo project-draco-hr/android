@@ -1,0 +1,6 @@
+{
+  ((TextView)dialogView.findViewById(R.id.label_signature)).setVisibility(View.GONE);
+  ((TextView)dialogView.findViewById(R.id.label_signature_algorithm)).setVisibility(View.GONE);
+  ((TextView)dialogView.findViewById(R.id.value_signature_algorithm)).setVisibility(View.GONE);
+  ((TextView)dialogView.findViewById(R.id.value_signature)).setVisibility(View.GONE);
+}

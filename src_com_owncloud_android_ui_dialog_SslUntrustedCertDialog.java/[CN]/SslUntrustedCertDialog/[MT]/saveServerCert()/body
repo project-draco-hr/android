@@ -1,5 +1,0 @@
-{
-  if (mCertificate != null) {
-    NetworkUtils.addCertToKnownServersStore(mCertificate,getSherlockActivity());
-  }
-}
