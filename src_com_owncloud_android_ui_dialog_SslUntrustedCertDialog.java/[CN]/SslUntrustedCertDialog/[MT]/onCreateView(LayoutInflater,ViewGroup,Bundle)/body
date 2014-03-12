@@ -1,4 +1,5 @@
 {
+  Log_OC.d(TAG,"onCreateView, savedInsanceState is " + savedInstanceState);
   if (mView == null) {
     mView=inflater.inflate(R.layout.ssl_untrusted_cert_layout,container,false);
     mView.findViewById(R.id.details_scroll).setVisibility(View.GONE);

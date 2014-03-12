@@ -1,6 +1,0 @@
-{
-  Fragment fd=getSupportFragmentManager().findFragmentByTag(TAG_SAML_DIALOG);
-  if (fd != null && fd instanceof SamlWebViewDialog) {
-    ((SamlWebViewDialog)fd).reloadWebView();
-  }
-}

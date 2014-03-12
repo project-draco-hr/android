@@ -1,30 +1,27 @@
 {
-  Log_OC.d(TAG,"onCreateView");
-  View rootView=inflater.inflate(R.layout.sso_dialog,container,false);
-  mSsoWebView=(WebView)rootView.findViewById(R.id.sso_webview);
-  mWebViewClient.setTargetUrl(mTargetUrl);
-  mSsoWebView.setWebViewClient(mWebViewClient);
-  if (savedInstanceState == null) {
-    Log_OC.d(TAG,"   initWebView start");
+  Log_OC.d(TAG,"onCreateView, savedInsanceState is " + savedInstanceState);
+  RelativeLayout ssoRootView=(RelativeLayout)inflater.inflate(R.layout.sso_dialog,container,false);
+  if (mSsoWebView == null) {
+    mSsoWebView=new SsoWebView(getSherlockActivity().getApplicationContext());
+    mSsoWebView.setFocusable(true);
+    mSsoWebView.setFocusableInTouchMode(true);
+    mSsoWebView.setClickable(true);
     CookieManager cookieManager=CookieManager.getInstance();
     cookieManager.setAcceptCookie(true);
     cookieManager.removeAllCookie();
     mSsoWebView.loadUrl(mInitialUrl);
+    WebSettings webSettings=mSsoWebView.getSettings();
+    webSettings.setJavaScriptEnabled(true);
+    webSettings.setBuiltInZoomControls(false);
+    webSettings.setLoadWithOverviewMode(false);
+    webSettings.setSavePassword(false);
+    webSettings.setUserAgentString(OwnCloudClient.USER_AGENT);
+    webSettings.setSaveFormData(false);
   }
- else {
-    Log_OC.d(TAG,"   restoreWebView start");
-    WebBackForwardList history=mSsoWebView.restoreState(savedInstanceState.getBundle(KEY_WEBVIEW_STATE));
-    if (history == null) {
-      Log_OC.e(TAG,"Error restoring WebView state ; back to starting URL");
-      mSsoWebView.loadUrl(mInitialUrl);
-    }
-  }
-  WebSettings webSettings=mSsoWebView.getSettings();
-  webSettings.setJavaScriptEnabled(true);
-  webSettings.setBuiltInZoomControls(true);
-  webSettings.setLoadWithOverviewMode(false);
-  webSettings.setSavePassword(false);
-  webSettings.setUserAgentString(OwnCloudClient.USER_AGENT);
-  webSettings.setSaveFormData(false);
-  return rootView;
+  mWebViewClient.setTargetUrl(mTargetUrl);
+  mSsoWebView.setWebViewClient(mWebViewClient);
+  RelativeLayout.LayoutParams layoutParams=new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+  ssoRootView.addView(mSsoWebView,layoutParams);
+  ssoRootView.requestLayout();
+  return ssoRootView;
 }
