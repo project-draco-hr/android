@@ -1,9 +1,6 @@
 {
-  Log_OC.d(SAML_DIALOG_TAG,"onSaveInstanceState being CALLED");
+  Log_OC.d(TAG,"onSaveInstanceState being CALLED");
   super.onSaveInstanceState(outState);
   outState.putString(ARG_INITIAL_URL,mInitialUrl);
   outState.putString(ARG_TARGET_URL,mTargetUrl);
-  Bundle webviewState=new Bundle();
-  mSsoWebView.saveState(webviewState);
-  outState.putBundle(KEY_WEBVIEW_STATE,webviewState);
 }

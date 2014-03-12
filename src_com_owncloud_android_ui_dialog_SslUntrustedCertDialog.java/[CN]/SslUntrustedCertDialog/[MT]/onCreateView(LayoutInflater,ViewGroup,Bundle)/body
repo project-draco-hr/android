@@ -1,0 +1,32 @@
+{
+  Log_OC.d(TAG,"onCreateView, savedInsanceState is " + savedInstanceState);
+  if (mView == null) {
+    mView=inflater.inflate(R.layout.ssl_untrusted_cert_layout,container,false);
+    mView.findViewById(R.id.details_scroll).setVisibility(View.GONE);
+    mErrorViewAdapter.updateErrorView(mView);
+  }
+ else {
+    ((ViewGroup)mView.getParent()).removeView(mView);
+  }
+  Button ok=(Button)mView.findViewById(R.id.ok);
+  ok.setOnClickListener(new OnCertificateTrusted());
+  Button cancel=(Button)mView.findViewById(R.id.cancel);
+  cancel.setOnClickListener(new OnCertificateNotTrusted());
+  Button details=(Button)mView.findViewById(R.id.details_btn);
+  details.setOnClickListener(new OnClickListener(){
+    @Override public void onClick(    View v){
+      View detailsScroll=mView.findViewById(R.id.details_scroll);
+      if (detailsScroll.getVisibility() == View.VISIBLE) {
+        detailsScroll.setVisibility(View.GONE);
+        ((Button)v).setText(R.string.ssl_validator_btn_details_see);
+      }
+ else {
+        detailsScroll.setVisibility(View.VISIBLE);
+        ((Button)v).setText(R.string.ssl_validator_btn_details_hide);
+        mCertificateViewAdapter.updateCertificateView(mView);
+      }
+    }
+  }
+);
+  return mView;
+}

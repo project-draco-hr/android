@@ -1,0 +1,21 @@
+{
+  dismiss();
+  if (mHandler != null) {
+    mHandler.proceed();
+  }
+  if (m509Certificate != null) {
+    Activity activity=getSherlockActivity();
+    try {
+      NetworkUtils.addCertToKnownServersStore(m509Certificate,activity);
+      ((OnSslUntrustedCertListener)activity).onSavedCertificate();
+    }
+ catch (    GeneralSecurityException e) {
+      ((OnSslUntrustedCertListener)activity).onFailedSavingCertificate();
+      Log_OC.e(TAG,"Server certificate could not be saved in the known-servers trust store ",e);
+    }
+catch (    IOException e) {
+      ((OnSslUntrustedCertListener)activity).onFailedSavingCertificate();
+      Log_OC.e(TAG,"Server certificate could not be saved in the known-servers trust store ",e);
+    }
+  }
+}

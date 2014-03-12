@@ -1,4 +1,20 @@
 {
   Log_OC.d(TAG,"onReceivedSslError : " + error);
-  handler.proceed();
+  X509Certificate x509Certificate=getX509CertificateFromError(error);
+  boolean isKnownServer=false;
+  if (x509Certificate != null) {
+    Log_OC.d(TAG,"------>>>>> x509Certificate " + x509Certificate.toString());
+    try {
+      isKnownServer=NetworkUtils.isCertInKnownServersStore((Certificate)x509Certificate,mContext);
+    }
+ catch (    Exception e) {
+      Log_OC.e(TAG,"Exception: " + e.getMessage());
+    }
+  }
+  if (isKnownServer) {
+    handler.proceed();
+  }
+ else {
+    ((AuthenticatorActivity)mContext).showUntrustedCertDialog(x509Certificate,error,handler);
+  }
 }

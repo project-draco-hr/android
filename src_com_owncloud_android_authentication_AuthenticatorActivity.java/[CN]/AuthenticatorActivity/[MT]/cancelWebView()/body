@@ -1,0 +1,9 @@
+{
+  Fragment fd=getSupportFragmentManager().findFragmentByTag(TAG_SAML_DIALOG);
+  if (fd != null && fd instanceof SherlockDialogFragment) {
+    Dialog d=((SherlockDialogFragment)fd).getDialog();
+    if (d != null && d.isShowing()) {
+      d.dismiss();
+    }
+  }
+}

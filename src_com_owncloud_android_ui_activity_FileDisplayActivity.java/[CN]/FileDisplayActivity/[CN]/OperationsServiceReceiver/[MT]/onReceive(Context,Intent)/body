@@ -9,7 +9,7 @@
     }
     if ((getSharesResult != null) && RemoteOperationResult.ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED.equals(getSharesResult.getCode())) {
       mLastSslUntrustedServerResult=getSharesResult;
-      showDialog(DIALOG_SSL_VALIDATOR);
+      showUntrustedCertDialog(mLastSslUntrustedServerResult);
     }
   }
 }
