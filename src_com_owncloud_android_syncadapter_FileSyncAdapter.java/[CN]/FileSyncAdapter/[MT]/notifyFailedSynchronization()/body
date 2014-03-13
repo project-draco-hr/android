@@ -1,8 +1,8 @@
 {
-  Notification notification=new Notification(DisplayUtils.getSeasonalIconId(),getContext().getString(R.string.sync_fail_ticker),System.currentTimeMillis());
-  notification.flags|=Notification.FLAG_AUTO_CANCEL;
+  NotificationCompat.Builder notificationBuilder=createNotificationBuilder();
+  notificationBuilder.setTicker(i18n(R.string.sync_fail_ticker));
   boolean needsToUpdateCredentials=(mLastFailedResult != null && (mLastFailedResult.getCode() == ResultCode.UNAUTHORIZED || (mLastFailedResult.isIdPRedirection() && getClient().getCredentials() == null)));
-  notification.contentIntent=PendingIntent.getActivity(getContext().getApplicationContext(),(int)System.currentTimeMillis(),new Intent(),0);
+  notificationBuilder.setContentTitle(i18n(R.string.sync_fail_ticker));
   if (needsToUpdateCredentials) {
     Intent updateAccountCredentials=new Intent(getContext(),AuthenticatorActivity.class);
     updateAccountCredentials.putExtra(AuthenticatorActivity.EXTRA_ACCOUNT,getAccount());
@@ -11,11 +11,10 @@
     updateAccountCredentials.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     updateAccountCredentials.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
     updateAccountCredentials.addFlags(Intent.FLAG_FROM_BACKGROUND);
-    notification.contentIntent=PendingIntent.getActivity(getContext(),(int)System.currentTimeMillis(),updateAccountCredentials,PendingIntent.FLAG_ONE_SHOT);
-    notification.setLatestEventInfo(getContext().getApplicationContext(),getContext().getString(R.string.sync_fail_ticker),String.format(getContext().getString(R.string.sync_fail_content_unauthorized),getAccount().name),notification.contentIntent);
+    notificationBuilder.setContentIntent(PendingIntent.getActivity(getContext(),(int)System.currentTimeMillis(),updateAccountCredentials,PendingIntent.FLAG_ONE_SHOT)).setContentText(i18n(R.string.sync_fail_content_unauthorized,getAccount().name));
   }
  else {
-    notification.setLatestEventInfo(getContext().getApplicationContext(),getContext().getString(R.string.sync_fail_ticker),String.format(getContext().getString(R.string.sync_fail_content),getAccount().name),notification.contentIntent);
+    notificationBuilder.setContentText(i18n(R.string.sync_fail_content,getAccount().name));
   }
-  ((NotificationManager)getContext().getSystemService(Context.NOTIFICATION_SERVICE)).notify(R.string.sync_fail_ticker,notification);
+  showNotification(R.string.sync_fail_ticker,notificationBuilder);
 }
