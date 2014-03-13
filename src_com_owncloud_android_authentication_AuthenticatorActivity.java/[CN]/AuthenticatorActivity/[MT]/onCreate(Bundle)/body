@@ -47,11 +47,12 @@
     mAuthStatusText=mAuthStatusIcon=0;
     mAccount=getIntent().getExtras().getParcelable(EXTRA_ACCOUNT);
     if (mAccount != null) {
-      String ocVersion=mAccountMgr.getUserData(mAccount,OwnCloudAccount.Constants.KEY_OC_VERSION);
+      String ocVersion=mAccountMgr.getUserData(mAccount,Constants.KEY_OC_VERSION);
+      String ocVersionString=mAccountMgr.getUserData(mAccount,Constants.KEY_OC_VERSION_STRING);
       if (ocVersion != null) {
-        mDiscoveredVersion=new OwnCloudVersion(ocVersion);
+        mDiscoveredVersion=new OwnCloudVersion(ocVersion,ocVersionString);
       }
-      mHostBaseUrl=normalizeUrl(mAccountMgr.getUserData(mAccount,OwnCloudAccount.Constants.KEY_OC_BASE_URL));
+      mHostBaseUrl=normalizeUrl(mAccountMgr.getUserData(mAccount,Constants.KEY_OC_BASE_URL));
       mHostUrlInput.setText(mHostBaseUrl);
       String userName=mAccount.name.substring(0,mAccount.name.lastIndexOf('@'));
       mUsernameInput.setText(userName);
@@ -77,8 +78,9 @@
       showPassword();
     }
     String ocVersion=savedInstanceState.getString(KEY_OC_VERSION);
+    String ocVersionString=savedInstanceState.getString(KEY_OC_VERSION_STRING);
     if (ocVersion != null) {
-      mDiscoveredVersion=new OwnCloudVersion(ocVersion);
+      mDiscoveredVersion=new OwnCloudVersion(ocVersion,ocVersionString);
     }
     mHostBaseUrl=savedInstanceState.getString(KEY_HOST_URL_TEXT);
     mAccount=savedInstanceState.getParcelable(KEY_ACCOUNT);

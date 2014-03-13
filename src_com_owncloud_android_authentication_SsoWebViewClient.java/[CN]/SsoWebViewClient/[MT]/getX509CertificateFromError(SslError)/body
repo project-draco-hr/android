@@ -1,0 +1,19 @@
+{
+  Bundle bundle=SslCertificate.saveState(error.getCertificate());
+  X509Certificate x509Certificate;
+  byte[] bytes=bundle.getByteArray("x509-certificate");
+  if (bytes == null) {
+    x509Certificate=null;
+  }
+ else {
+    try {
+      CertificateFactory certFactory=CertificateFactory.getInstance("X.509");
+      Certificate cert=certFactory.generateCertificate(new ByteArrayInputStream(bytes));
+      x509Certificate=(X509Certificate)cert;
+    }
+ catch (    CertificateException e) {
+      x509Certificate=null;
+    }
+  }
+  return x509Certificate;
+}

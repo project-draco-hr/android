@@ -58,12 +58,18 @@
       }
     }
  else {
-      fileSizeV.setVisibility(View.VISIBLE);
-      fileSizeV.setText(DisplayUtils.bytesToHumanReadable(file.getFileLength()));
+      fileSizeV.setVisibility(View.INVISIBLE);
       lastModV.setVisibility(View.VISIBLE);
       lastModV.setText(DisplayUtils.unixTimeToHumanReadable(file.getModificationTimestamp()));
       checkBoxV.setVisibility(View.GONE);
       view.findViewById(R.id.imageView3).setVisibility(View.GONE);
+    }
+    ImageView shareIconV=(ImageView)view.findViewById(R.id.shareIcon);
+    if (file.isShareByLink()) {
+      shareIconV.setVisibility(View.VISIBLE);
+    }
+ else {
+      shareIconV.setVisibility(View.INVISIBLE);
     }
   }
   return view;

@@ -1,7 +1,7 @@
 {
   SQLiteQueryBuilder sqlQuery=new SQLiteQueryBuilder();
-  sqlQuery.setTables(ProviderTableMeta.DB_NAME);
-  sqlQuery.setProjectionMap(mProjectionMap);
+  sqlQuery.setTables(ProviderTableMeta.FILE_TABLE_NAME);
+  sqlQuery.setProjectionMap(mFileProjectionMap);
 switch (mUriMatcher.match(uri)) {
 case ROOT_DIRECTORY:
     break;
@@ -14,12 +14,24 @@ if (uri.getPathSegments().size() > 1) {
 sqlQuery.appendWhere(ProviderTableMeta._ID + "=" + uri.getPathSegments().get(1));
 }
 break;
+case SHARES:
+sqlQuery.setTables(ProviderTableMeta.OCSHARES_TABLE_NAME);
+sqlQuery.setProjectionMap(mOCSharesProjectionMap);
+if (uri.getPathSegments().size() > 1) {
+sqlQuery.appendWhere(ProviderTableMeta._ID + "=" + uri.getPathSegments().get(1));
+}
+break;
 default :
 throw new IllegalArgumentException("Unknown uri id: " + uri);
 }
 String order;
 if (TextUtils.isEmpty(sortOrder)) {
-order=ProviderTableMeta.DEFAULT_SORT_ORDER;
+if (mUriMatcher.match(uri) == SHARES) {
+order=ProviderTableMeta.OCSHARES_DEFAULT_SORT_ORDER;
+}
+ else {
+order=ProviderTableMeta.FILE_DEFAULT_SORT_ORDER;
+}
 }
  else {
 order=sortOrder;

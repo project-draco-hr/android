@@ -1,6 +1,0 @@
-{
-  RemoteOperationResult result=mActivity.readFile(mRemoteFolderPath);
-  assertTrue(result.getData().size() > 1);
-  assertTrue(result.getData().size() == 4);
-  assertTrue(result.isSuccess());
-}

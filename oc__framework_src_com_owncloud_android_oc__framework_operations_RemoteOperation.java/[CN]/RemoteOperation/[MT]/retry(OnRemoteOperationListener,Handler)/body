@@ -1,3 +1,0 @@
-{
-  return execute(mClient,listener,listenerHandler);
-}

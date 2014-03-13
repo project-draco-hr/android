@@ -1,5 +1,0 @@
-{
-  RemoveRemoteFileOperation removeOperation=new RemoveRemoteFileOperation(remotePath);
-  RemoteOperationResult result=removeOperation.execute(mClient);
-  return result;
-}

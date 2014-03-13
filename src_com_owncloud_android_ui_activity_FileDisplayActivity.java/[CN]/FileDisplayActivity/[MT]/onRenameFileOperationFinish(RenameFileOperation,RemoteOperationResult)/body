@@ -8,7 +8,7 @@
         ((FileDetailFragment)details).updateFileDetails(renamedFile,getAccount());
       }
     }
-    if (mStorageManager.getFileById(renamedFile.getParentId()).equals(getCurrentDir())) {
+    if (getStorageManager().getFileById(renamedFile.getParentId()).equals(getCurrentDir())) {
       refeshListOfFilesFragment();
     }
   }
@@ -26,7 +26,7 @@
       msg.show();
       if (result.isSslRecoverableException()) {
         mLastSslUntrustedServerResult=result;
-        showDialog(DIALOG_SSL_VALIDATOR);
+        showUntrustedCertDialog(mLastSslUntrustedServerResult);
       }
     }
   }

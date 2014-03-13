@@ -1,0 +1,14 @@
+{
+  if (file != null) {
+    callerActivity.showLoadingDialog();
+    Intent service=new Intent(callerActivity,OperationsService.class);
+    service.setAction(OperationsService.ACTION_CREATE_SHARE);
+    service.putExtra(OperationsService.EXTRA_ACCOUNT,callerActivity.getAccount());
+    service.putExtra(OperationsService.EXTRA_REMOTE_PATH,file.getRemotePath());
+    service.putExtra(OperationsService.EXTRA_SEND_INTENT,sendIntent);
+    callerActivity.startService(service);
+  }
+ else {
+    Log_OC.wtf(TAG,"Trying to open a NULL OCFile");
+  }
+}

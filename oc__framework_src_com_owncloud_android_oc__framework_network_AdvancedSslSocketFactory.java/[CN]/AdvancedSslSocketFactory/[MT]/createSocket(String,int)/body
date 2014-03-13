@@ -1,6 +1,0 @@
-{
-  Log.d(TAG,"Creating SSL Socket with remote " + host + ":"+ port);
-  Socket socket=mSslContext.getSocketFactory().createSocket(host,port);
-  verifyPeerIdentity(host,port,socket);
-  return socket;
-}

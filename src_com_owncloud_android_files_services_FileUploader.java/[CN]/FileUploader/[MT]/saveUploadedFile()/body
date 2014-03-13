@@ -1,11 +1,14 @@
 {
   OCFile file=mCurrentUpload.getFile();
+  if (file.fileExists()) {
+    file=mStorageManager.getFileById(file.getFileId());
+  }
   long syncDate=System.currentTimeMillis();
   file.setLastSyncDateForData(syncDate);
   ReadRemoteFileOperation operation=new ReadRemoteFileOperation(mCurrentUpload.getRemotePath());
   RemoteOperationResult result=operation.execute(mUploadClient);
   if (result.isSuccess()) {
-    updateOCFile(file,result.getData().get(0));
+    updateOCFile(file,(RemoteFile)result.getData().get(0));
     file.setLastSyncDateForProperties(syncDate);
   }
   if (mCurrentUpload.wasRenamed()) {

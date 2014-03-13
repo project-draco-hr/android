@@ -15,6 +15,8 @@
   cv.put(ProviderTableMeta.FILE_LAST_SYNC_DATE_FOR_DATA,file.getLastSyncDateForData());
   cv.put(ProviderTableMeta.FILE_KEEP_IN_SYNC,file.keepInSync() ? 1 : 0);
   cv.put(ProviderTableMeta.FILE_ETAG,file.getEtag());
+  cv.put(ProviderTableMeta.FILE_SHARE_BY_LINK,file.isShareByLink() ? 1 : 0);
+  cv.put(ProviderTableMeta.FILE_PUBLIC_LINK,file.getPublicLink());
   boolean sameRemotePath=fileExists(file.getRemotePath());
   if (sameRemotePath || fileExists(file.getFileId())) {
     OCFile oldFile=null;
@@ -55,12 +57,6 @@
       long new_id=Long.parseLong(result_uri.getPathSegments().get(1));
       file.setFileId(new_id);
     }
-  }
-  if (file.isFolder()) {
-    updateFolderSize(file.getFileId());
-  }
- else {
-    updateFolderSize(file.getParentId());
   }
   return overriden;
 }

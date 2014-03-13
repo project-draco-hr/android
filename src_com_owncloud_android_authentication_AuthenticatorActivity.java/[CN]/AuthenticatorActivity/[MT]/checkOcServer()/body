@@ -12,8 +12,8 @@
     mServerStatusText=R.string.auth_testing_connection;
     mServerStatusIcon=R.drawable.progress_small;
     showServerStatus();
-    mOcServerChkOperation=new OwnCloudServerCheckOperation(uri,this);
-    WebdavClient client=OwnCloudClientFactory.createOwnCloudClient(Uri.parse(uri),this,true);
+    mOcServerChkOperation=new GetRemoteStatusOperation(uri,this);
+    OwnCloudClient client=OwnCloudClientFactory.createOwnCloudClient(Uri.parse(uri),this,true);
     mOperationThread=mOcServerChkOperation.execute(client,this,mHandler);
   }
  else {

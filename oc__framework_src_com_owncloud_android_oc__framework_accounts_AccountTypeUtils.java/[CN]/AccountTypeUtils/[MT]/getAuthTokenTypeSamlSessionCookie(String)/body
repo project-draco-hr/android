@@ -1,3 +1,0 @@
-{
-  return accountType + ".saml.web_sso.session_cookie";
-}

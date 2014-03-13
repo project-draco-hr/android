@@ -1,6 +1,0 @@
-{
-  String storagePath=mPath + "/" + mFileToUploadWithChunks;
-  String remotePath="/" + mFileToUploadWithChunks;
-  RemoteOperationResult result=mActivity.uploadFile(storagePath,remotePath,mMimeTypeWithChunks);
-  assertTrue(result.isSuccess());
-}

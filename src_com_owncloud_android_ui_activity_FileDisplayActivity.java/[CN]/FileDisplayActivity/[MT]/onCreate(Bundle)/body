@@ -2,7 +2,6 @@
   Log_OC.d(TAG,"onCreate() start");
   requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
   super.onCreate(savedInstanceState);
-  mHandler=new Handler();
   mUploadConnection=new ListServiceConnection();
   mDownloadConnection=new ListServiceConnection();
   bindService(new Intent(this,FileUploader.class),mUploadConnection,Context.BIND_AUTO_CREATE);
@@ -19,10 +18,12 @@
   if (savedInstanceState != null) {
     mWaitingToPreview=(OCFile)savedInstanceState.getParcelable(FileDisplayActivity.KEY_WAITING_TO_PREVIEW);
     mSyncInProgress=savedInstanceState.getBoolean(KEY_SYNC_IN_PROGRESS);
+    mWaitingToSend=(OCFile)savedInstanceState.getParcelable(FileDisplayActivity.KEY_WAITING_TO_SEND);
   }
  else {
     mWaitingToPreview=null;
     mSyncInProgress=false;
+    mWaitingToSend=null;
   }
   setContentView(R.layout.files);
   mDualPane=getResources().getBoolean(R.bool.large_land_layout);
@@ -30,6 +31,12 @@
   mRightFragmentContainer=findViewById(R.id.right_fragment_container);
   if (savedInstanceState == null) {
     createMinFragments();
+  }
+ else {
+    Log_OC.d(TAG,"Init the secondFragment again");
+    if (mDualPane) {
+      initFragmentsWithFile();
+    }
   }
   mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
   getSupportActionBar().setHomeButtonEnabled(true);

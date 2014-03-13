@@ -9,7 +9,7 @@
     if (second != null && removedFile.equals(second.getFile())) {
       cleanSecondFragment();
     }
-    if (mStorageManager.getFileById(removedFile.getParentId()).equals(getCurrentDir())) {
+    if (getStorageManager().getFileById(removedFile.getParentId()).equals(getCurrentDir())) {
       refeshListOfFilesFragment();
     }
   }
@@ -18,7 +18,7 @@
     msg.show();
     if (result.isSslRecoverableException()) {
       mLastSslUntrustedServerResult=result;
-      showDialog(DIALOG_SSL_VALIDATOR);
+      showUntrustedCertDialog(mLastSslUntrustedServerResult);
     }
   }
 }

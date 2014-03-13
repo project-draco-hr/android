@@ -1,8 +1,0 @@
-{
-  String s=AuthChallengeParser.extractScheme(challenge);
-  if (!s.equalsIgnoreCase(getSchemeName())) {
-    throw new MalformedChallengeException("Invalid " + getSchemeName() + " challenge: "+ challenge);
-  }
-  mParams=AuthChallengeParser.extractParams(challenge);
-  mComplete=true;
-}

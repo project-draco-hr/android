@@ -48,6 +48,12 @@
     toHide.add(R.id.action_rename_file);
     toHide.add(R.id.action_remove_file);
   }
+  if (!file.isShareByLink()) {
+    toHide.add(R.id.action_unshare_file);
+  }
+ else {
+    toShow.add(R.id.action_unshare_file);
+  }
   MenuItem item=null;
   for (  int i : toHide) {
     item=menu.findItem(i);
