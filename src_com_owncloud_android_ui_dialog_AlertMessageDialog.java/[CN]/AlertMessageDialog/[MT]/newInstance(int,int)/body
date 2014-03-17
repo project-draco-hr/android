@@ -1,0 +1,8 @@
+{
+  AlertMessageDialog frag=new AlertMessageDialog();
+  Bundle args=new Bundle();
+  args.putInt(ARG_TITLE_ID,title);
+  args.putInt(ARG_MESSAGE_ID,message);
+  frag.setArguments(args);
+  return frag;
+}

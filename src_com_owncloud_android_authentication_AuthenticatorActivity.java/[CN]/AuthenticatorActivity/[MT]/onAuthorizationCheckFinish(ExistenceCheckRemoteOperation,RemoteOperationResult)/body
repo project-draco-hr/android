@@ -6,8 +6,10 @@
   }
   if (result.isSuccess()) {
     if (mTryEmptyAuthorization) {
-      mOkButton.setEnabled(mServerIsValid);
+      mOkButton.setEnabled(false);
       mTryEmptyAuthorization=false;
+      mServerIsValid=false;
+      showAlertMessageDialog(R.string.common_alert_title,R.string.auth_unsupported_auth_method);
     }
  else {
       Log_OC.d(TAG,"Successful access - time to save the account");
@@ -24,27 +26,33 @@
       }
     }
   }
- else   if (result.isServerFail() || result.isException()) {
-    mServerIsChecked=true;
-    mServerIsValid=false;
-    mIsSslConn=false;
-    mOcServerChkOperation=null;
-    mDiscoveredVersion=null;
-    mHostBaseUrl=normalizeUrl(mHostUrlInput.getText().toString());
-    updateServerStatusIconAndText(result);
-    showServerStatus();
-    mAuthStatusIcon=0;
-    mAuthStatusText=0;
-    showAuthStatus();
-    showRefreshButton();
-    mOkButton.setEnabled(false);
-    if (result.getCode() == ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED) {
-      showUntrustedCertDialog(result);
-    }
-  }
  else {
-    updateAuthStatusIconAndText(result);
-    showAuthStatus();
-    Log_OC.d(TAG,"Access failed: " + result.getLogMessage());
+    if (mTryEmptyAuthorization) {
+      mTryEmptyAuthorization=false;
+      mOkButton.setEnabled(true);
+    }
+ else     if (result.isServerFail() || result.isException()) {
+      mServerIsChecked=true;
+      mServerIsValid=false;
+      mIsSslConn=false;
+      mOcServerChkOperation=null;
+      mDiscoveredVersion=null;
+      mHostBaseUrl=normalizeUrl(mHostUrlInput.getText().toString());
+      updateServerStatusIconAndText(result);
+      showServerStatus();
+      mAuthStatusIcon=0;
+      mAuthStatusText=0;
+      showAuthStatus();
+      showRefreshButton();
+      mOkButton.setEnabled(false);
+      if (result.getCode() == ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED) {
+        showUntrustedCertDialog(result);
+      }
+    }
+ else {
+      updateAuthStatusIconAndText(result);
+      showAuthStatus();
+      Log_OC.d(TAG,"Access failed: " + result.getLogMessage());
+    }
   }
 }

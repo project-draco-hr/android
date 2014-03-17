@@ -4,6 +4,8 @@
     mServerIsValid=result.isSuccess();
     mIsSslConn=(result.getCode() == ResultCode.OK_SSL);
     mOcServerChkOperation=null;
+    mDiscoveredVersion=operation.getDiscoveredVersion();
+    mHostBaseUrl=normalizeUrl(mHostUrlInput.getText().toString());
     if (mServerIsValid) {
       hideRefreshButton();
       tryEmptyAuthorization();
@@ -16,7 +18,5 @@
     if (result.getCode() == ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED) {
       showUntrustedCertDialog(result);
     }
-    mDiscoveredVersion=operation.getDiscoveredVersion();
-    mHostBaseUrl=normalizeUrl(mHostUrlInput.getText().toString());
   }
 }
