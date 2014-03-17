@@ -4,7 +4,9 @@
   for (i=0; i < files.size() && !mCancellation; i++) {
     newFile=files.get(i);
     if (newFile.isFolder()) {
-      synchronizeFolder(newFile);
+      if (parentEtagChanged) {
+        synchronizeFolder(newFile);
+      }
     }
   }
   if (mCancellation && i < files.size())   Log_OC.d(TAG,"Leaving synchronization before synchronizing " + files.get(i).getRemotePath() + " due to cancelation request");
