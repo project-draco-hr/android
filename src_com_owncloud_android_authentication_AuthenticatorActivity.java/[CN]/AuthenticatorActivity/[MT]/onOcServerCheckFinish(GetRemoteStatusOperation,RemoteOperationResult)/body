@@ -6,6 +6,7 @@
     mOcServerChkOperation=null;
     if (mServerIsValid) {
       hideRefreshButton();
+      tryEmptyAuthorization();
     }
  else {
       showRefreshButton();
@@ -17,6 +18,5 @@
     }
     mDiscoveredVersion=operation.getDiscoveredVersion();
     mHostBaseUrl=normalizeUrl(mHostUrlInput.getText().toString());
-    mOkButton.setEnabled(mServerIsValid);
   }
 }

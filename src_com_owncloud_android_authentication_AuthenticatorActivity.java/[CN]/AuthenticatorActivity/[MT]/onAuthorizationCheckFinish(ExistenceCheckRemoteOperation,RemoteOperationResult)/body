@@ -5,17 +5,23 @@
  catch (  IllegalArgumentException e) {
   }
   if (result.isSuccess()) {
-    Log_OC.d(TAG,"Successful access - time to save the account");
-    boolean success=false;
-    if (mAction == ACTION_CREATE) {
-      success=createAccount();
+    if (mTryEmptyAuthorization) {
+      mOkButton.setEnabled(mServerIsValid);
+      mTryEmptyAuthorization=false;
     }
  else {
-      updateToken();
-      success=true;
-    }
-    if (success) {
-      finish();
+      Log_OC.d(TAG,"Successful access - time to save the account");
+      boolean success=false;
+      if (mAction == ACTION_CREATE) {
+        success=createAccount();
+      }
+ else {
+        updateToken();
+        success=true;
+      }
+      if (success) {
+        finish();
+      }
     }
   }
  else   if (result.isServerFail() || result.isException()) {
