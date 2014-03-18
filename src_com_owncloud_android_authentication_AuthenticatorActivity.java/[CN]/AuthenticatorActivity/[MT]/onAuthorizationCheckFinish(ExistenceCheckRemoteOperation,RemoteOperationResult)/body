@@ -9,7 +9,8 @@
       mOkButton.setEnabled(false);
       mTryEmptyAuthorization=false;
       mServerIsValid=false;
-      showAlertMessageDialog(R.string.common_alert_title,R.string.auth_unsupported_auth_method);
+      updateServerStatusIconNoRegularAuth();
+      showServerStatus();
     }
  else {
       Log_OC.d(TAG,"Successful access - time to save the account");

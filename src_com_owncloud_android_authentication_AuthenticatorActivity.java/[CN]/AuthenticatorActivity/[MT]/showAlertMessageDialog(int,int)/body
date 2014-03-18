@@ -1,4 +1,0 @@
-{
-  DialogFragment newAlertMessage=AlertMessageDialog.newInstance(tittle,message);
-  newAlertMessage.show(getSupportFragmentManager(),TAG_ALERT_MESSAGE_DIALOG);
-}
