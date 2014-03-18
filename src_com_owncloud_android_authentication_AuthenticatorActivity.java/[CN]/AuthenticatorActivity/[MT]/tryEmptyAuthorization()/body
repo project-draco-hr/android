@@ -1,7 +1,6 @@
 {
   mTryEmptyAuthorization=true;
   Log_OC.d(TAG,"Trying empty authorization to detect authentication method");
-  showDialog(DIALOG_LOGIN_PROGRESS);
   String webdav_path=AccountUtils.getWebdavPath(mDiscoveredVersion,mAuthTokenType);
   String username="";
   String password="";
