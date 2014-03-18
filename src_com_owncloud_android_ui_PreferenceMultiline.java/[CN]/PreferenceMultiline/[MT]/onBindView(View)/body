@@ -1,0 +1,6 @@
+{
+  super.onBindView(view);
+  TextView titleView=(TextView)view.findViewById(android.R.id.title);
+  titleView.setSingleLine(false);
+  titleView.setMaxLines(3);
+}
