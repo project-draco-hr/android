@@ -6,15 +6,15 @@
     mOcServerChkOperation=null;
     mDiscoveredVersion=operation.getDiscoveredVersion();
     mHostBaseUrl=normalizeUrl(mHostUrlInput.getText().toString());
+    updateServerStatusIconAndText(result);
     if (mServerIsValid) {
       hideRefreshButton();
       tryEmptyAuthorization();
     }
  else {
       showRefreshButton();
+      showServerStatus();
     }
-    updateServerStatusIconAndText(result);
-    showServerStatus();
     if (result.getCode() == ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED) {
       showUntrustedCertDialog(result);
     }

@@ -1,4 +1,4 @@
 {
-  mServerStatusIcon=android.R.drawable.ic_secure;
+  mServerStatusIcon=R.drawable.common_error;
   mServerStatusText=R.string.auth_unsupported_auth_method;
 }
