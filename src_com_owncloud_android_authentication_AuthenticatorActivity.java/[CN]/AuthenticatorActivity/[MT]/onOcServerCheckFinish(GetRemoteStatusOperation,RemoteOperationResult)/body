@@ -9,7 +9,7 @@
     updateServerStatusIconAndText(result);
     if (mServerIsValid) {
       hideRefreshButton();
-      tryEmptyAuthorization();
+      detectAuthorizationMethod();
     }
  else {
       showRefreshButton();

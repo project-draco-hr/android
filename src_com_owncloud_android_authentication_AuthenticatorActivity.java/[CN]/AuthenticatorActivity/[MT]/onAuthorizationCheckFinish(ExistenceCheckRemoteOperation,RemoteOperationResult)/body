@@ -5,9 +5,9 @@
  catch (  IllegalArgumentException e) {
   }
   if (result.isSuccess()) {
-    if (mTryEmptyAuthorization) {
+    if (mDetectAuthorizationMethod) {
       mOkButton.setEnabled(false);
-      mTryEmptyAuthorization=false;
+      mDetectAuthorizationMethod=false;
       mServerIsValid=false;
       updateServerStatusIconNoRegularAuth();
       showServerStatus();
@@ -28,8 +28,8 @@
     }
   }
  else {
-    if (mTryEmptyAuthorization) {
-      mTryEmptyAuthorization=false;
+    if (mDetectAuthorizationMethod) {
+      mDetectAuthorizationMethod=false;
       mOkButton.setEnabled(true);
       showServerStatus();
     }
