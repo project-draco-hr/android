@@ -1,16 +1,11 @@
 {
   mLastPercent=0;
-  mNotification=new Notification(DisplayUtils.getSeasonalIconId(),getString(R.string.uploader_upload_in_progress_ticker),System.currentTimeMillis());
-  mNotification.flags|=Notification.FLAG_ONGOING_EVENT;
-  mDefaultNotificationContentView=mNotification.contentView;
-  mNotification.contentView=new RemoteViews(getApplicationContext().getPackageName(),R.layout.progressbar_layout);
-  mNotification.contentView.setProgressBar(R.id.status_progress,100,0,false);
-  mNotification.contentView.setTextViewText(R.id.status_text,String.format(getString(R.string.uploader_upload_in_progress_content),0,upload.getFileName()));
-  mNotification.contentView.setImageViewResource(R.id.status_icon,DisplayUtils.getSeasonalIconId());
+  mNotificationBuilder=new NotificationCompat.Builder(this);
+  mNotificationBuilder.setOngoing(true).setSmallIcon(R.drawable.notification_icon).setTicker(getString(R.string.uploader_upload_in_progress_ticker)).setContentTitle(getString(R.string.uploader_upload_in_progress_ticker)).setProgress(100,0,false).setContentText(String.format(getString(R.string.uploader_upload_in_progress_content),0,upload.getFileName()));
   Intent showDetailsIntent=new Intent(this,FileDisplayActivity.class);
   showDetailsIntent.putExtra(FileActivity.EXTRA_FILE,upload.getFile());
   showDetailsIntent.putExtra(FileActivity.EXTRA_ACCOUNT,upload.getAccount());
   showDetailsIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-  mNotification.contentIntent=PendingIntent.getActivity(getApplicationContext(),(int)System.currentTimeMillis(),showDetailsIntent,0);
-  mNotificationManager.notify(R.string.uploader_upload_in_progress_ticker,mNotification);
+  mNotificationBuilder.setContentIntent(PendingIntent.getActivity(this,(int)System.currentTimeMillis(),showDetailsIntent,0));
+  mNotificationManager.notify(R.string.uploader_upload_in_progress_ticker,mNotificationBuilder.build());
 }
