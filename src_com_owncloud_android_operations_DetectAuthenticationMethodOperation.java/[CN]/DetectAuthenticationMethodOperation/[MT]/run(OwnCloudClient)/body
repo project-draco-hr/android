@@ -4,11 +4,11 @@
   RemoteOperation operation=new ExistenceCheckRemoteOperation("",mContext,false);
   client.setBasicCredentials("","");
   client.setFollowRedirects(false);
-  do {
+  result=operation.execute(client);
+  while (result.isTemporalRedirection() && !result.isIdPRedirection()) {
+    client.setWebdavUri(Uri.parse(result.getRedirectedLocation()));
     result=operation.execute(client);
-    client.setBaseUri(Uri.parse(result.getRedirectedLocation()));
   }
- while (result.isTemporalRedirection() && !result.isIdPRedirection());
   if (result.getCode() == ResultCode.UNAUTHORIZED) {
     String authRequest=((result.getAuthenticateHeader()).trim()).toLowerCase();
     if (authRequest.startsWith("basic")) {

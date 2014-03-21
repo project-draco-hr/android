@@ -5,56 +5,40 @@
  catch (  IllegalArgumentException e) {
   }
   if (result.isSuccess()) {
-    if (mDetectAuthorizationMethod) {
-      mOkButton.setEnabled(false);
-      mDetectAuthorizationMethod=false;
-      mServerIsValid=false;
-      updateServerStatusIconNoRegularAuth();
-      showServerStatus();
+    Log_OC.d(TAG,"Successful access - time to save the account");
+    boolean success=false;
+    if (mAction == ACTION_CREATE) {
+      success=createAccount();
     }
  else {
-      Log_OC.d(TAG,"Successful access - time to save the account");
-      boolean success=false;
-      if (mAction == ACTION_CREATE) {
-        success=createAccount();
-      }
- else {
-        updateToken();
-        success=true;
-      }
-      if (success) {
-        finish();
-      }
+      updateToken();
+      success=true;
+    }
+    if (success) {
+      finish();
+    }
+  }
+ else   if (result.isServerFail() || result.isException()) {
+    mServerIsChecked=true;
+    mServerIsValid=false;
+    mIsSslConn=false;
+    mOcServerChkOperation=null;
+    mDiscoveredVersion=null;
+    mHostBaseUrl=normalizeUrl(mHostUrlInput.getText().toString());
+    updateServerStatusIconAndText(result);
+    showServerStatus();
+    mAuthStatusIcon=0;
+    mAuthStatusText=0;
+    showAuthStatus();
+    showRefreshButton();
+    mOkButton.setEnabled(false);
+    if (result.getCode() == ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED) {
+      showUntrustedCertDialog(result);
     }
   }
  else {
-    if (mDetectAuthorizationMethod && (result.getCode() == ResultCode.UNAUTHORIZED)) {
-      mDetectAuthorizationMethod=false;
-      mOkButton.setEnabled(true);
-      showServerStatus();
-    }
- else     if (result.isServerFail() || result.isException()) {
-      mServerIsChecked=true;
-      mServerIsValid=false;
-      mIsSslConn=false;
-      mOcServerChkOperation=null;
-      mDiscoveredVersion=null;
-      mHostBaseUrl=normalizeUrl(mHostUrlInput.getText().toString());
-      updateServerStatusIconAndText(result);
-      showServerStatus();
-      mAuthStatusIcon=0;
-      mAuthStatusText=0;
-      showAuthStatus();
-      showRefreshButton();
-      mOkButton.setEnabled(false);
-      if (result.getCode() == ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED) {
-        showUntrustedCertDialog(result);
-      }
-    }
- else {
-      updateAuthStatusIconAndText(result);
-      showAuthStatus();
-      Log_OC.d(TAG,"Access failed: " + result.getLogMessage());
-    }
+    updateAuthStatusIconAndText(result);
+    showAuthStatus();
+    Log_OC.d(TAG,"Access failed: " + result.getLogMessage());
   }
 }
