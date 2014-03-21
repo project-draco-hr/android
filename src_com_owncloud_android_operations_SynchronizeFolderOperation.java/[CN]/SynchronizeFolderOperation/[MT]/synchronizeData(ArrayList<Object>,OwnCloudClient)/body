@@ -27,6 +27,8 @@
       if (remoteFile.isFolder()) {
         remoteFile.setFileLength(localFile.getFileLength());
       }
+      remoteFile.setPublicLink(localFile.getPublicLink());
+      remoteFile.setShareByLink(localFile.isShareByLink());
     }
  else {
       remoteFile.setEtag("");
