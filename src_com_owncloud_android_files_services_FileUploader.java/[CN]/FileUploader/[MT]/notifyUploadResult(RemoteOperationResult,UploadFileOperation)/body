@@ -4,9 +4,7 @@
     mNotificationManager.cancel(R.string.uploader_upload_in_progress_ticker);
   }
  else   if (uploadResult.isSuccess()) {
-    mNotification.flags^=Notification.FLAG_ONGOING_EVENT;
-    mNotification.flags|=Notification.FLAG_AUTO_CANCEL;
-    mNotification.contentView=mDefaultNotificationContentView;
+    mNotificationBuilder.setOngoing(false).setAutoCancel(true).setProgress(0,0,false);
     Intent showDetailsIntent=null;
     if (PreviewImageFragment.canBePreviewed(upload.getFile())) {
       showDetailsIntent=new Intent(this,PreviewImageActivity.class);
@@ -17,18 +15,17 @@
     showDetailsIntent.putExtra(FileActivity.EXTRA_FILE,upload.getFile());
     showDetailsIntent.putExtra(FileActivity.EXTRA_ACCOUNT,upload.getAccount());
     showDetailsIntent.putExtra(FileActivity.EXTRA_FROM_NOTIFICATION,true);
-    showDetailsIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    mNotification.contentIntent=PendingIntent.getActivity(getApplicationContext(),(int)System.currentTimeMillis(),showDetailsIntent,0);
-    mNotification.setLatestEventInfo(getApplicationContext(),getString(R.string.uploader_upload_succeeded_ticker),String.format(getString(R.string.uploader_upload_succeeded_content_single),upload.getFileName()),mNotification.contentIntent);
-    mNotificationManager.notify(R.string.uploader_upload_in_progress_ticker,mNotification);
+    ;
+    mNotificationBuilder.setContentIntent(PendingIntent.getActivity(this,(int)System.currentTimeMillis(),showDetailsIntent,0)).setTicker(getString(R.string.uploader_upload_succeeded_ticker)).setContentTitle(getString(R.string.uploader_upload_succeeded_ticker)).setContentText(String.format(getString(R.string.uploader_upload_succeeded_content_single),upload.getFileName()));
+    mNotificationManager.notify(R.string.uploader_upload_in_progress_ticker,mNotificationBuilder.build());
     DbHandler db=new DbHandler(this.getBaseContext());
     db.removeIUPendingFile(mCurrentUpload.getOriginalStoragePath());
     db.close();
   }
  else {
     mNotificationManager.cancel(R.string.uploader_upload_in_progress_ticker);
-    Notification finalNotification=new Notification(DisplayUtils.getSeasonalIconId(),getString(R.string.uploader_upload_failed_ticker),System.currentTimeMillis());
-    finalNotification.flags|=Notification.FLAG_AUTO_CANCEL;
+    NotificationCompat.Builder errorBuilder=new NotificationCompat.Builder(this);
+    errorBuilder.setSmallIcon(R.drawable.notification_icon).setTicker(getString(R.string.uploader_upload_failed_ticker)).setContentTitle(getString(R.string.uploader_upload_failed_ticker)).setAutoCancel(true);
     String content=null;
     boolean needsToUpdateCredentials=(uploadResult.getCode() == ResultCode.UNAUTHORIZED || (uploadResult.isIdPRedirection() && mUploadClient.getCredentials() == null));
     if (needsToUpdateCredentials) {
@@ -39,9 +36,8 @@
       updateAccountCredentials.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
       updateAccountCredentials.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
       updateAccountCredentials.addFlags(Intent.FLAG_FROM_BACKGROUND);
-      finalNotification.contentIntent=PendingIntent.getActivity(this,(int)System.currentTimeMillis(),updateAccountCredentials,PendingIntent.FLAG_ONE_SHOT);
+      errorBuilder.setContentIntent(PendingIntent.getActivity(this,(int)System.currentTimeMillis(),updateAccountCredentials,PendingIntent.FLAG_ONE_SHOT));
       content=String.format(getString(R.string.uploader_upload_failed_content_single),upload.getFileName());
-      finalNotification.setLatestEventInfo(getApplicationContext(),getString(R.string.uploader_upload_failed_ticker),content,finalNotification.contentIntent);
       mUploadClient=null;
     }
  else {
@@ -63,7 +59,7 @@
         detailUploadIntent=new Intent(this,FailedUploadActivity.class);
         detailUploadIntent.putExtra(FailedUploadActivity.MESSAGE,content);
       }
-      finalNotification.contentIntent=PendingIntent.getActivity(getApplicationContext(),(int)System.currentTimeMillis(),detailUploadIntent,PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_ONE_SHOT);
+      errorBuilder.setContentIntent(PendingIntent.getActivity(this,(int)System.currentTimeMillis(),detailUploadIntent,PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_ONE_SHOT)).setContentText(content);
       if (upload.isInstant()) {
         DbHandler db=null;
         try {
@@ -84,7 +80,6 @@
         }
       }
     }
-    finalNotification.setLatestEventInfo(getApplicationContext(),getString(R.string.uploader_upload_failed_ticker),content,finalNotification.contentIntent);
-    mNotificationManager.notify(R.string.uploader_upload_failed_ticker,finalNotification);
+    mNotificationManager.notify(R.string.uploader_upload_failed_ticker,errorBuilder.build());
   }
 }
