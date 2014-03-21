@@ -1,0 +1,7 @@
+{
+  RemoteOperationResult result=new RemoteOperationResult(ResultCode.OK);
+  ArrayList<Object> data=new ArrayList<Object>();
+  data.add(AuthenticationMethod.UNKNOWN);
+  result.setData(data);
+  return result;
+}
