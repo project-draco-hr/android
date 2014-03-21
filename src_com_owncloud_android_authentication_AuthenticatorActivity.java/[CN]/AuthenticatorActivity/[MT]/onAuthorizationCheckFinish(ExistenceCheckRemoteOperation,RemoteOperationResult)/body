@@ -28,7 +28,7 @@
     }
   }
  else {
-    if (mDetectAuthorizationMethod && (result.getCode() == ResultCode.UNAUTHORIZED && result.isBasicAuthentication())) {
+    if (mDetectAuthorizationMethod && (result.getCode() == ResultCode.UNAUTHORIZED)) {
       mDetectAuthorizationMethod=false;
       mOkButton.setEnabled(true);
       showServerStatus();

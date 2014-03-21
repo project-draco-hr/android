@@ -1,7 +1,32 @@
 {
-  RemoteOperationResult result=new RemoteOperationResult(ResultCode.OK);
+  RemoteOperationResult result=null;
+  AuthenticationMethod authMethod=AuthenticationMethod.UNKNOWN;
+  RemoteOperation operation=new ExistenceCheckRemoteOperation("",mContext,false);
+  client.setBasicCredentials("","");
+  client.setFollowRedirects(false);
+  do {
+    result=operation.execute(client);
+    client.setBaseUri(Uri.parse(result.getRedirectedLocation()));
+  }
+ while (result.isTemporalRedirection() && !result.isIdPRedirection());
+  if (result.getCode() == ResultCode.UNAUTHORIZED) {
+    String authRequest=((result.getAuthenticateHeader()).trim()).toLowerCase();
+    if (authRequest.startsWith("basic")) {
+      authMethod=AuthenticationMethod.BASIC_HTTP_AUTH;
+    }
+ else     if (authRequest.startsWith("bearer")) {
+      authMethod=AuthenticationMethod.BEARER_TOKEN;
+    }
+  }
+ else   if (result.isSuccess()) {
+    authMethod=AuthenticationMethod.NONE;
+  }
+ else   if (result.isIdPRedirection()) {
+    authMethod=AuthenticationMethod.SAML_WEB_SSO;
+  }
+  Log.d(TAG,"Authentication method found: " + authenticationMethodToString(authMethod));
   ArrayList<Object> data=new ArrayList<Object>();
-  data.add(AuthenticationMethod.UNKNOWN);
+  data.add(authMethod);
   result.setData(data);
   return result;
 }
