@@ -4,7 +4,7 @@
     mNotificationManager.cancel(R.string.uploader_upload_in_progress_ticker);
   }
  else   if (uploadResult.isSuccess()) {
-    mNotificationBuilder.setOngoing(false).setAutoCancel(true);
+    mNotificationBuilder.setOngoing(false).setAutoCancel(true).setProgress(0,0,false);
     Intent showDetailsIntent=null;
     if (PreviewImageFragment.canBePreviewed(upload.getFile())) {
       showDetailsIntent=new Intent(this,PreviewImageActivity.class);
