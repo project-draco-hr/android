@@ -16,4 +16,7 @@
  else   if (operation instanceof GetRemoteUserNameOperation) {
     onGetUserNameFinish((GetRemoteUserNameOperation)operation,result);
   }
+ else   if (operation instanceof DetectAuthenticationMethodOperation) {
+    onDetectAutheticationFinish((DetectAuthenticationMethodOperation)operation,result);
+  }
 }
