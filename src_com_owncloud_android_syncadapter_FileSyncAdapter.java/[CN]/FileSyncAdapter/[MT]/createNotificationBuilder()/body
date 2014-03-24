@@ -1,0 +1,5 @@
+{
+  NotificationCompat.Builder notificationBuilder=new NotificationCompat.Builder(getContext());
+  notificationBuilder.setSmallIcon(R.drawable.notification_icon).setAutoCancel(true);
+  return notificationBuilder;
+}

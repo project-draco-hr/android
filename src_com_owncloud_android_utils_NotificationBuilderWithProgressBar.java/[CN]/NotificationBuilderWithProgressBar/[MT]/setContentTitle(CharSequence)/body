@@ -1,0 +1,5 @@
+{
+  super.setContentTitle(title);
+  mContentView.setTextViewText(R.id.title,title);
+  return this;
+}

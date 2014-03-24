@@ -3,8 +3,7 @@
   if (!downloadResult.isCancelled()) {
     int tickerId=(downloadResult.isSuccess()) ? R.string.downloader_download_succeeded_ticker : R.string.downloader_download_failed_ticker;
     int contentId=(downloadResult.isSuccess()) ? R.string.downloader_download_succeeded_content : R.string.downloader_download_failed_content;
-    Notification finalNotification=new Notification(DisplayUtils.getSeasonalIconId(),getString(tickerId),System.currentTimeMillis());
-    finalNotification.flags|=Notification.FLAG_AUTO_CANCEL;
+    mNotificationBuilder.setTicker(getString(tickerId)).setContentTitle(getString(tickerId)).setAutoCancel(true).setOngoing(false).setProgress(0,0,false);
     boolean needsToUpdateCredentials=(downloadResult.getCode() == ResultCode.UNAUTHORIZED || (downloadResult.isIdPRedirection() && mDownloadClient.getCredentials() == null));
     if (needsToUpdateCredentials) {
       Intent updateAccountCredentials=new Intent(this,AuthenticatorActivity.class);
@@ -14,8 +13,7 @@
       updateAccountCredentials.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
       updateAccountCredentials.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
       updateAccountCredentials.addFlags(Intent.FLAG_FROM_BACKGROUND);
-      finalNotification.contentIntent=PendingIntent.getActivity(this,(int)System.currentTimeMillis(),updateAccountCredentials,PendingIntent.FLAG_ONE_SHOT);
-      finalNotification.setLatestEventInfo(getApplicationContext(),getString(tickerId),String.format(getString(contentId),new File(download.getSavePath()).getName()),finalNotification.contentIntent);
+      mNotificationBuilder.setContentIntent(PendingIntent.getActivity(this,(int)System.currentTimeMillis(),updateAccountCredentials,PendingIntent.FLAG_ONE_SHOT)).setContentText(String.format(getString(contentId),new File(download.getSavePath()).getName()));
       mDownloadClient=null;
     }
  else {
@@ -34,9 +32,8 @@
  else {
         showDetailsIntent=new Intent();
       }
-      finalNotification.contentIntent=PendingIntent.getActivity(getApplicationContext(),(int)System.currentTimeMillis(),showDetailsIntent,0);
-      finalNotification.setLatestEventInfo(getApplicationContext(),getString(tickerId),String.format(getString(contentId),new File(download.getSavePath()).getName()),finalNotification.contentIntent);
+      mNotificationBuilder.setContentIntent(PendingIntent.getActivity(this,(int)System.currentTimeMillis(),showDetailsIntent,0)).setContentText(String.format(getString(contentId),new File(download.getSavePath()).getName()));
     }
-    mNotificationManager.notify(tickerId,finalNotification);
+    mNotificationManager.notify(tickerId,mNotificationBuilder.build());
   }
 }
