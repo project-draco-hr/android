@@ -5,9 +5,11 @@
   client.setBasicCredentials("","");
   client.setFollowRedirects(false);
   result=operation.execute(client);
-  while (result.isTemporalRedirection() && !result.isIdPRedirection()) {
+  String redirectedLocation=result.getRedirectedLocation();
+  while (redirectedLocation != null && redirectedLocation.length() > 0 && !result.isIdPRedirection()) {
     client.setWebdavUri(Uri.parse(result.getRedirectedLocation()));
     result=operation.execute(client);
+    redirectedLocation=result.getRedirectedLocation();
   }
   if (result.getCode() == ResultCode.UNAUTHORIZED) {
     String authRequest=((result.getAuthenticateHeader()).trim()).toLowerCase();
