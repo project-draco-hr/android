@@ -48,7 +48,6 @@
     mAccount=getIntent().getExtras().getParcelable(EXTRA_ACCOUNT);
     if (mAccount != null) {
       String ocVersion=mAccountMgr.getUserData(mAccount,Constants.KEY_OC_VERSION);
-      String ocVersionString=mAccountMgr.getUserData(mAccount,Constants.KEY_OC_VERSION_STRING);
       if (ocVersion != null) {
         mDiscoveredVersion=new OwnCloudVersion(ocVersion);
       }
@@ -78,7 +77,6 @@
       showPassword();
     }
     String ocVersion=savedInstanceState.getString(KEY_OC_VERSION);
-    String ocVersionString=savedInstanceState.getString(KEY_OC_VERSION_STRING);
     if (ocVersion != null) {
       mDiscoveredVersion=new OwnCloudVersion(ocVersion);
     }
