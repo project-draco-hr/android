@@ -1,7 +1,7 @@
 {
   Log_OC.d(TAG,"Trying empty authorization to detect authentication method");
-  String webdav_path=AccountUtils.getWebdavPath(mDiscoveredVersion,mAuthTokenType);
-  mDetectAuthenticationOperation=new DetectAuthenticationMethodOperation(this);
-  OwnCloudClient client=OwnCloudClientFactory.createOwnCloudClient(Uri.parse(mHostBaseUrl + webdav_path),this,true);
-  mOperationThread=mDetectAuthenticationOperation.execute(client,this,mHandler);
+  Intent service=new Intent(this,OperationsService.class);
+  service.setAction(OperationsService.ACTION_DETECT_AUTHENTICATION_METHOD);
+  service.putExtra(OperationsService.EXTRA_SERVER_URL,mHostBaseUrl);
+  startService(service);
 }

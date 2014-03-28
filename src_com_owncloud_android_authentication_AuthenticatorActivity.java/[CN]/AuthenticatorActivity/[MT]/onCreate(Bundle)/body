@@ -159,4 +159,6 @@
     }
   }
 );
+  mOperationsServiceConnection=new OperationsServiceConnection();
+  bindService(new Intent(this,OperationsService.class),mOperationsServiceConnection,Context.BIND_AUTO_CREATE);
 }

@@ -22,6 +22,9 @@
         operation=new UnshareLinkOperation(remotePath,this.getApplicationContext());
       }
     }
+ else     if (action.equals(ACTION_DETECT_AUTHENTICATION_METHOD)) {
+      operation=new DetectAuthenticationMethodOperation(this.getApplicationContext());
+    }
  else {
       return START_NOT_STICKY;
     }
