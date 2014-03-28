@@ -1,0 +1,10 @@
+{
+  if (component.equals(new ComponentName(AuthenticatorActivity.this,OperationsService.class))) {
+    Log_OC.d(TAG,"Operations service connected");
+    mOperationsServiceBinder=(OperationsServiceBinder)service;
+    mOperationsServiceBinder.addOperationListener(AuthenticatorActivity.this,mHandler);
+  }
+ else {
+    return;
+  }
+}
