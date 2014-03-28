@@ -1,6 +1,21 @@
 {
   super.onCreate(savedInstanceState);
   getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+  mOperationsConnection=new ServiceConnection(){
+    @Override public void onServiceConnected(    ComponentName name,    IBinder service){
+      Log_OC.d(TAG,"Operations service connected");
+      mOperationsBinder=(OperationsServiceBinder)service;
+    }
+    @Override public void onServiceDisconnected(    ComponentName name){
+      Log_OC.d(TAG,"Operations service crashed");
+      mOperationsBinder=null;
+    }
+  }
+;
+  if (!bindService(new Intent(this,OperationsService.class),mOperationsConnection,Context.BIND_AUTO_CREATE)) {
+    Toast.makeText(this,R.string.error_cant_bind_to_operations_service,Toast.LENGTH_LONG).show();
+    finish();
+  }
   setContentView(R.layout.account_setup);
   mAuthMessage=(TextView)findViewById(R.id.auth_message);
   mHostUrlInput=(EditText)findViewById(R.id.hostUrlInput);
