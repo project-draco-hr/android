@@ -1,3 +1,4 @@
 {
   mContext=context;
+  mWebDavUrl=webdavUrl;
 }

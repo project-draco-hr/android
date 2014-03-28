@@ -23,7 +23,8 @@
       }
     }
  else     if (action.equals(ACTION_DETECT_AUTHENTICATION_METHOD)) {
-      operation=new DetectAuthenticationMethodOperation(this.getApplicationContext());
+      String webdav_url=serverUrl + intent.getStringExtra(EXTRA_WEBDAV_PATH);
+      operation=new DetectAuthenticationMethodOperation(this.getApplicationContext(),webdav_url);
     }
  else {
       return START_NOT_STICKY;
