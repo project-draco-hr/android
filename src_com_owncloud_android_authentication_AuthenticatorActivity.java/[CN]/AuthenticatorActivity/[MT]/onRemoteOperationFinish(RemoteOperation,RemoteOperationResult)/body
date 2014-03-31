@@ -17,6 +17,7 @@
     onGetUserNameFinish((GetRemoteUserNameOperation)operation,result);
   }
  else   if (operation instanceof DetectAuthenticationMethodOperation) {
-    onDetectAutheticationFinish((DetectAuthenticationMethodOperation)operation,result);
+    Log.wtf(TAG,"received detection response through callback");
+    onDetectAuthenticationFinish(result);
   }
 }

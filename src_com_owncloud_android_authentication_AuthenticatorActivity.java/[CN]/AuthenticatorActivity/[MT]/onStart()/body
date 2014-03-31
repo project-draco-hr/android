@@ -1,6 +1,0 @@
-{
-  if (mOperationsServiceBinder != null) {
-    mOperationsServiceBinder.addOperationListener(AuthenticatorActivity.this,mHandler);
-  }
-  super.onStart();
-}

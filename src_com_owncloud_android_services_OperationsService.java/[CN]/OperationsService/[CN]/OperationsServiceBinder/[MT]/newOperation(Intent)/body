@@ -1,0 +1,44 @@
+{
+  RemoteOperation operation=null;
+  Target target=null;
+  try {
+    if (!operationIntent.hasExtra(EXTRA_ACCOUNT) && !operationIntent.hasExtra(EXTRA_SERVER_URL)) {
+      Log_OC.e(TAG,"Not enough information provided in intent");
+    }
+ else {
+      Account account=operationIntent.getParcelableExtra(EXTRA_ACCOUNT);
+      String serverUrl=operationIntent.getStringExtra(EXTRA_SERVER_URL);
+      target=new Target(account,(serverUrl == null) ? null : Uri.parse(serverUrl));
+      String action=operationIntent.getAction();
+      if (action.equals(ACTION_CREATE_SHARE)) {
+        String remotePath=operationIntent.getStringExtra(EXTRA_REMOTE_PATH);
+        Intent sendIntent=operationIntent.getParcelableExtra(EXTRA_SEND_INTENT);
+        if (remotePath.length() > 0) {
+          operation=new CreateShareOperation(remotePath,ShareType.PUBLIC_LINK,"",false,"",1,sendIntent);
+        }
+      }
+ else       if (action.equals(ACTION_UNSHARE)) {
+        String remotePath=operationIntent.getStringExtra(EXTRA_REMOTE_PATH);
+        if (remotePath.length() > 0) {
+          operation=new UnshareLinkOperation(remotePath,OperationsService.this);
+        }
+      }
+ else       if (action.equals(ACTION_DETECT_AUTHENTICATION_METHOD)) {
+        String webdav_url=serverUrl + operationIntent.getStringExtra(EXTRA_WEBDAV_PATH);
+        operation=new DetectAuthenticationMethodOperation(OperationsService.this,webdav_url);
+      }
+    }
+  }
+ catch (  IllegalArgumentException e) {
+    Log_OC.e(TAG,"Bad information provided in intent: " + e.getMessage());
+    operation=null;
+  }
+  if (operation != null) {
+    mPendingOperations.add(new Pair<Target,RemoteOperation>(target,operation));
+    startService(new Intent(OperationsService.this,OperationsService.class));
+    return operation.hashCode();
+  }
+ else {
+    return -1;
+  }
+}

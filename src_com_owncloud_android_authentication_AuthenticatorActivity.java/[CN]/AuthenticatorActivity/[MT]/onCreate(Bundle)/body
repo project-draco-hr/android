@@ -1,18 +1,8 @@
 {
   super.onCreate(savedInstanceState);
   getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-  mOperationsConnection=new ServiceConnection(){
-    @Override public void onServiceConnected(    ComponentName name,    IBinder service){
-      Log_OC.d(TAG,"Operations service connected");
-      mOperationsBinder=(OperationsServiceBinder)service;
-    }
-    @Override public void onServiceDisconnected(    ComponentName name){
-      Log_OC.d(TAG,"Operations service crashed");
-      mOperationsBinder=null;
-    }
-  }
-;
-  if (!bindService(new Intent(this,OperationsService.class),mOperationsConnection,Context.BIND_AUTO_CREATE)) {
+  mOperationsServiceConnection=new OperationsServiceConnection();
+  if (!bindService(new Intent(this,OperationsService.class),mOperationsServiceConnection,Context.BIND_AUTO_CREATE)) {
     Toast.makeText(this,R.string.error_cant_bind_to_operations_service,Toast.LENGTH_LONG).show();
     finish();
   }
@@ -107,6 +97,8 @@
       checkOcServer();
     }
     refreshButtonEnabled=savedInstanceState.getBoolean(KEY_REFRESH_BUTTON_ENABLED);
+    mServerAuthMethod=AuthenticationMethod.valueOf(savedInstanceState.getString(KEY_SERVER_AUTH_METHOD));
+    mDetectAuthOpId=savedInstanceState.getInt(KEY_DETECT_AUTH_OP_ID);
   }
   if (mAuthMessageVisibility == View.VISIBLE) {
     showAuthMessage(mAuthMessageText);
@@ -174,6 +166,4 @@
     }
   }
 );
-  mOperationsServiceConnection=new OperationsServiceConnection();
-  bindService(new Intent(this,OperationsService.class),mOperationsServiceConnection,Context.BIND_AUTO_CREATE);
 }

@@ -1,0 +1,3 @@
+{
+  return mOperationResults.remove(mDetectAuthOpId);
+}

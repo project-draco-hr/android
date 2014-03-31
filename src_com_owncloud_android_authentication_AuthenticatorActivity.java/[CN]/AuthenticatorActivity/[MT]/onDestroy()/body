@@ -1,7 +1,7 @@
 {
-  if (mOperationsConnection != null) {
-    unbindService(mOperationsConnection);
-    mOperationsBinder=null;
+  if (mOperationsServiceConnection != null) {
+    unbindService(mOperationsServiceConnection);
+    mOperationsServiceBinder=null;
   }
   super.onDestroy();
 }

@@ -1,6 +1,6 @@
 {
   if (component.equals(new ComponentName(AuthenticatorActivity.this,OperationsService.class))) {
-    Log_OC.d(TAG,"Operations service disconnected");
+    Log_OC.e(TAG,"Operations service crashed");
     mOperationsServiceBinder=null;
   }
 }

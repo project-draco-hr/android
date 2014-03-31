@@ -55,6 +55,7 @@ catch (    Exception e) {
  finally {
 synchronized (mPendingOperations) {
         mPendingOperations.poll();
+        mOperationResults.put(mCurrentOperation.hashCode(),result);
       }
     }
     callbackOperationListeners(mLastTarget,mCurrentOperation,result);

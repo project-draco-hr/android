@@ -1,4 +1,5 @@
 {
+  int count=0;
   Iterator<OnRemoteOperationListener> listeners=mBinder.mBoundListeners.keySet().iterator();
   while (listeners.hasNext()) {
     final OnRemoteOperationListener listener=listeners.next();
@@ -10,6 +11,8 @@
         }
       }
 );
+      count+=1;
     }
   }
+  Log_OC.d(TAG,"Called " + count + " listeners");
 }

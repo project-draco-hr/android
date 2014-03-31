@@ -1,4 +1,5 @@
 {
+  mDetectAuthOpId=-1;
   if (result.getData().size() > 0) {
     AuthenticationMethod authMethod=(AuthenticationMethod)result.getData().get(0);
     String basic=AccountTypeUtils.getAuthTokenTypePass(MainApp.getAccountType());

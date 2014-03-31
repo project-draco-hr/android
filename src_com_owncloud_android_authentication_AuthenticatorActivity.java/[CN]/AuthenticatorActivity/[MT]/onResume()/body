@@ -15,4 +15,7 @@
     getOAuth2AccessTokenFromCapturedRedirection();
   }
   mJustCreated=false;
+  if (mOperationsServiceBinder != null) {
+    doOnResumeAndBound();
+  }
 }
