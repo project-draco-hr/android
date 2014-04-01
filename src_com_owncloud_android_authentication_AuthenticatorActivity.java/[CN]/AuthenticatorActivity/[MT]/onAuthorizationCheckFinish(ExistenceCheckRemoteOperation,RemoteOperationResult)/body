@@ -22,7 +22,7 @@
     mServerIsChecked=true;
     mServerIsValid=false;
     mIsSslConn=false;
-    mOcServerChkOperation=null;
+    mServerInfoOperation=null;
     mDiscoveredVersion=null;
     mHostBaseUrl=normalizeUrl(mHostUrlInput.getText().toString());
     updateServerStatusIconAndText(result);
@@ -30,7 +30,7 @@
     mAuthStatusIcon=0;
     mAuthStatusText=0;
     showAuthStatus();
-    showRefreshButton();
+    showRefreshButton(true);
     mOkButton.setEnabled(false);
     if (result.getCode() == ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED) {
       showUntrustedCertDialog(result);

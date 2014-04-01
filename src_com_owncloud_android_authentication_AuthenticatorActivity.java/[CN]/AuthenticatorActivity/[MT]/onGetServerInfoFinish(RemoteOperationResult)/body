@@ -1,0 +1,28 @@
+{
+  mServerIsChecked=true;
+  mIsSslConn=(result.getCode() == ResultCode.OK_SSL);
+  mServerInfoOperation=null;
+  mDetectAuthOpId=-1;
+  updateServerStatusIconAndText(result);
+  if (result.isSuccess()) {
+    mServerInfo=(GetServerInfoOperation.ServerInfo)(result.getData().get(0));
+    mDiscoveredVersion=mServerInfo.mVersion;
+    mHostBaseUrl=mServerInfo.mBaseUrl;
+    if (!authSupported(mServerInfo.mAuthMethod)) {
+      updateServerStatusIconNoRegularAuth();
+      mServerIsValid=false;
+    }
+ else {
+      mServerIsValid=true;
+    }
+  }
+ else {
+    mServerIsValid=false;
+  }
+  showRefreshButton(!mServerIsValid);
+  showServerStatus();
+  mOkButton.setEnabled(mServerIsValid);
+  if (result.getCode() == ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED) {
+    showUntrustedCertDialog(result);
+  }
+}

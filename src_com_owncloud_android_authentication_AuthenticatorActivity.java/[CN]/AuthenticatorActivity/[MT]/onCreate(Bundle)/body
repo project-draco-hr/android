@@ -116,7 +116,7 @@
     mUsernameInput.setFocusable(false);
     mOAuth2Check.setVisibility(View.GONE);
   }
-  if (mServerIsChecked && !mServerIsValid && refreshButtonEnabled)   showRefreshButton();
+  showRefreshButton(mServerIsChecked && !mServerIsValid && refreshButtonEnabled);
   mOkButton.setEnabled(mServerIsValid);
   if (AccountTypeUtils.getAuthTokenTypeSamlSessionCookie(MainApp.getAccountType()).equals(mAuthTokenType) || !AUTH_OPTIONAL.equals(getString(R.string.auth_method_oauth2))) {
     mOAuth2Check.setVisibility(View.GONE);

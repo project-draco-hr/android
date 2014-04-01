@@ -1,6 +1,8 @@
 {
-  if (operation instanceof GetRemoteStatusOperation) {
-    onOcServerCheckFinish((GetRemoteStatusOperation)operation,result);
+  if (operation instanceof GetServerInfoOperation) {
+    if (operation.equals(mServerInfoOperation)) {
+      onGetServerInfoFinish(result);
+    }
   }
  else   if (operation instanceof OAuth2GetAccessToken) {
     onGetOAuthAccessTokenFinish((OAuth2GetAccessToken)operation,result);

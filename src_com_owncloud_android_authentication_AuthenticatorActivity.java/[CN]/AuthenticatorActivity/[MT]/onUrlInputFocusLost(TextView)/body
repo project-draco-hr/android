@@ -4,8 +4,6 @@
   }
  else {
     mOkButton.setEnabled(mServerIsValid);
-    if (!mServerIsValid) {
-      showRefreshButton();
-    }
+    showRefreshButton(!mServerIsValid);
   }
 }

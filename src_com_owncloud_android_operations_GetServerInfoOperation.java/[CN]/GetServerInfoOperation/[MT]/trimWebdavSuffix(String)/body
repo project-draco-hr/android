@@ -1,0 +1,20 @@
+{
+  if (url == null) {
+    url="";
+  }
+ else {
+    if (url.endsWith("/")) {
+      url=url.substring(0,url.length() - 1);
+    }
+    if (url.toLowerCase().endsWith(AccountUtils.WEBDAV_PATH_4_0)) {
+      url=url.substring(0,url.length() - AccountUtils.WEBDAV_PATH_4_0.length());
+    }
+ else     if (url.toLowerCase().endsWith(AccountUtils.WEBDAV_PATH_2_0)) {
+      url=url.substring(0,url.length() - AccountUtils.WEBDAV_PATH_2_0.length());
+    }
+ else     if (url.toLowerCase().endsWith(AccountUtils.WEBDAV_PATH_1_2)) {
+      url=url.substring(0,url.length() - AccountUtils.WEBDAV_PATH_1_2.length());
+    }
+  }
+  return url;
+}

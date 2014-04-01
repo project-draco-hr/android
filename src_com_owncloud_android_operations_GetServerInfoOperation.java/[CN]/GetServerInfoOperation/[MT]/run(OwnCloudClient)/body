@@ -1,0 +1,20 @@
+{
+  GetRemoteStatusOperation getStatus=new GetRemoteStatusOperation(mUrl,mContext);
+  RemoteOperationResult result=getStatus.execute(client);
+  if (result.isSuccess()) {
+    mResultData.mVersion=(OwnCloudVersion)(result.getData().get(0));
+    boolean isSslConn=(result.getCode() == ResultCode.OK_SSL);
+    mResultData.mBaseUrl=normalizeProtocolPrefix(mUrl,isSslConn);
+    RemoteOperationResult detectAuthResult=detectAuthorizationMethod(client);
+    if (detectAuthResult.isSuccess()) {
+      mResultData.mAuthMethod=(AuthenticationMethod)detectAuthResult.getData().get(0);
+      ArrayList<Object> data=new ArrayList<Object>();
+      data.add(mResultData);
+      result.setData(data);
+    }
+ else {
+      result=detectAuthResult;
+    }
+  }
+  return result;
+}
