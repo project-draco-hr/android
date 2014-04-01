@@ -5,7 +5,7 @@
     }
   }
  else   if (operation instanceof OAuth2GetAccessToken) {
-    onGetOAuthAccessTokenFinish((OAuth2GetAccessToken)operation,result);
+    onGetOAuthAccessTokenFinish(result);
   }
  else   if (operation instanceof ExistenceCheckRemoteOperation) {
     if (AccountTypeUtils.getAuthTokenTypeSamlSessionCookie(MainApp.getAccountType()).equals(mAuthTokenType)) {

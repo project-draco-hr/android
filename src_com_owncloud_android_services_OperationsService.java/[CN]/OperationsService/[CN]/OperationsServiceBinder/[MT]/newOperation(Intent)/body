@@ -27,6 +27,10 @@
         String authTokenType=operationIntent.getStringExtra(EXTRA_AUTH_TOKEN_TYPE);
         operation=new GetServerInfoOperation(serverUrl,authTokenType,OperationsService.this);
       }
+ else       if (action.equals(ACTION_OAUTH2_GET_ACCESS_TOKEN)) {
+        String oauth2QueryParameters=operationIntent.getStringExtra(EXTRA_OAUTH2_QUERY_PARAMETERS);
+        operation=new OAuth2GetAccessToken(getString(R.string.oauth2_client_id),getString(R.string.oauth2_redirect_uri),getString(R.string.oauth2_grant_type),oauth2QueryParameters);
+      }
     }
   }
  catch (  IllegalArgumentException e) {
