@@ -23,9 +23,9 @@
           operation=new UnshareLinkOperation(remotePath,OperationsService.this);
         }
       }
- else       if (action.equals(ACTION_DETECT_AUTHENTICATION_METHOD)) {
-        String webdav_url=serverUrl + operationIntent.getStringExtra(EXTRA_WEBDAV_PATH);
-        operation=new DetectAuthenticationMethodOperation(OperationsService.this,webdav_url);
+ else       if (action.equals(ACTION_GET_SERVER_INFO)) {
+        String authTokenType=operationIntent.getStringExtra(EXTRA_AUTH_TOKEN_TYPE);
+        operation=new GetServerInfoOperation(serverUrl,authTokenType,OperationsService.this);
       }
     }
   }

@@ -22,5 +22,5 @@
   outState.putString(AccountAuthenticator.KEY_AUTH_TOKEN_TYPE,mAuthTokenType);
   outState.putBoolean(KEY_REFRESH_BUTTON_ENABLED,(mRefreshButton.getVisibility() == View.VISIBLE));
   outState.putString(KEY_SERVER_AUTH_METHOD,mServerAuthMethod.name());
-  outState.putInt(KEY_DETECT_AUTH_OP_ID,mDetectAuthOpId);
+  outState.putInt(KEY_DETECT_AUTH_OP_ID,mGetServerInfoOpId);
 }

@@ -98,7 +98,7 @@
     }
     refreshButtonEnabled=savedInstanceState.getBoolean(KEY_REFRESH_BUTTON_ENABLED);
     mServerAuthMethod=AuthenticationMethod.valueOf(savedInstanceState.getString(KEY_SERVER_AUTH_METHOD));
-    mDetectAuthOpId=savedInstanceState.getInt(KEY_DETECT_AUTH_OP_ID);
+    mGetServerInfoOpId=savedInstanceState.getInt(KEY_DETECT_AUTH_OP_ID);
   }
   if (mAuthMessageVisibility == View.VISIBLE) {
     showAuthMessage(mAuthMessageText);

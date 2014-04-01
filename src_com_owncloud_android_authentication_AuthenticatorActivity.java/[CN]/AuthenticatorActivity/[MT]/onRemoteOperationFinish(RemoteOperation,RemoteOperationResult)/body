@@ -1,6 +1,6 @@
 {
   if (operation instanceof GetServerInfoOperation) {
-    if (operation.equals(mServerInfoOperation)) {
+    if (operation.hashCode() == mGetServerInfoOpId) {
       onGetServerInfoFinish(result);
     }
   }
@@ -17,9 +17,5 @@
   }
  else   if (operation instanceof GetRemoteUserNameOperation) {
     onGetUserNameFinish((GetRemoteUserNameOperation)operation,result);
-  }
- else   if (operation instanceof DetectAuthenticationMethodOperation) {
-    Log.wtf(TAG,"received detection response through callback");
-    onDetectAuthenticationFinish(result);
   }
 }

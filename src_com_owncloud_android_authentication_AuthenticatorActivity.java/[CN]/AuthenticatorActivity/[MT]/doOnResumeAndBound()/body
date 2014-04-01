@@ -1,9 +1,9 @@
 {
   mOperationsServiceBinder.addOperationListener(AuthenticatorActivity.this,mHandler);
-  if (mDetectAuthOpId != -1) {
-    RemoteOperationResult result=mOperationsServiceBinder.getOperationResultIfFinished(mDetectAuthOpId);
+  if (mGetServerInfoOpId != -1) {
+    RemoteOperationResult result=mOperationsServiceBinder.getOperationResultIfFinished(mGetServerInfoOpId);
     if (result != null) {
-      onDetectAuthenticationFinish(result);
+      onGetServerInfoFinish(result);
     }
   }
 }
