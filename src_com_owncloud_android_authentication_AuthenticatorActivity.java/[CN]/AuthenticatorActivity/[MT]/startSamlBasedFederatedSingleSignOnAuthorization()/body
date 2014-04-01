@@ -4,7 +4,8 @@
   showAuthStatus();
   showDialog(DIALOG_LOGIN_PROGRESS);
   String webdav_path=AccountUtils.getWebdavPath(mDiscoveredVersion,mAuthTokenType);
-  mAuthCheckOperation=new ExistenceCheckRemoteOperation("",this,false);
-  OwnCloudClient client=OwnCloudClientFactory.createOwnCloudClient(Uri.parse(mHostBaseUrl + webdav_path),this,false);
-  mOperationThread=mAuthCheckOperation.execute(client,this,mHandler);
+  String remotePath="";
+  boolean successIfAbsent=false;
+  boolean followRedirections=false;
+  startExistenceCheckRemoteOperation(remotePath,this,successIfAbsent,webdav_path,"","",followRedirections);
 }

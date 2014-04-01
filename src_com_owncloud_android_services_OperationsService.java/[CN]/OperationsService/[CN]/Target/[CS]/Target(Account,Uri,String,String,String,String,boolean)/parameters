@@ -1,0 +1,7 @@
+Account account
+Uri serverUrl
+String webdavUrl
+String username
+String password
+String authToken
+boolean followRedirects

@@ -1,0 +1,16 @@
+{
+  Intent existenceCheckIntent=new Intent();
+  existenceCheckIntent.setAction(OperationsService.ACTION_EXISTENCE_CHECK);
+  existenceCheckIntent.putExtra(OperationsService.EXTRA_SERVER_URL,mHostBaseUrl);
+  existenceCheckIntent.putExtra(OperationsService.EXTRA_REMOTE_PATH,remotePath);
+  existenceCheckIntent.putExtra(OperationsService.EXTRA_SUCCESS_IF_ABSENT,successIfAbsent);
+  existenceCheckIntent.putExtra(OperationsService.EXTRA_WEBDAV_PATH,webdav_path);
+  existenceCheckIntent.putExtra(OperationsService.EXTRA_USERNAME,username);
+  existenceCheckIntent.putExtra(OperationsService.EXTRA_PASSWORD,password);
+  existenceCheckIntent.putExtra(OperationsService.EXTRA_AUTH_TOKEN,mAuthToken);
+  existenceCheckIntent.putExtra(OperationsService.EXTRA_FOLLOW_REDIRECTS,followRedirects);
+  if (mOperationsServiceBinder != null) {
+    Log.wtf(TAG,"starting existenceCheckRemoteOperation...");
+    mExistenceCheckOpId=mOperationsServiceBinder.newOperation(existenceCheckIntent);
+  }
+}

@@ -3,8 +3,8 @@
   String username=mUsernameInput.getText().toString();
   String password=mPasswordInput.getText().toString();
   showDialog(DIALOG_LOGIN_PROGRESS);
-  mAuthCheckOperation=new ExistenceCheckRemoteOperation("",this,false);
-  OwnCloudClient client=OwnCloudClientFactory.createOwnCloudClient(Uri.parse(mHostBaseUrl + webdav_path),this,true);
-  client.setBasicCredentials(username,password);
-  mOperationThread=mAuthCheckOperation.execute(client,this,mHandler);
+  String remotePath="";
+  boolean successIfAbsent=false;
+  boolean followRedirects=true;
+  startExistenceCheckRemoteOperation(remotePath,this,successIfAbsent,webdav_path,username,password,followRedirects);
 }

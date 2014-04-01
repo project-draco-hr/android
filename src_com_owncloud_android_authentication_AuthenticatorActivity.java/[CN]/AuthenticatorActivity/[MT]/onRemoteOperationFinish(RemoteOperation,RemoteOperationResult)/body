@@ -6,11 +6,12 @@
     onGetOAuthAccessTokenFinish((OAuth2GetAccessToken)operation,result);
   }
  else   if (operation instanceof ExistenceCheckRemoteOperation) {
+    Log.wtf(TAG,"received detection response through callback");
     if (AccountTypeUtils.getAuthTokenTypeSamlSessionCookie(MainApp.getAccountType()).equals(mAuthTokenType)) {
-      onSamlBasedFederatedSingleSignOnAuthorizationStart(operation,result);
+      onSamlBasedFederatedSingleSignOnAuthorizationStart(result);
     }
  else {
-      onAuthorizationCheckFinish((ExistenceCheckRemoteOperation)operation,result);
+      onAuthorizationCheckFinish(result);
     }
   }
  else   if (operation instanceof GetRemoteUserNameOperation) {

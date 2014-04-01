@@ -6,4 +6,16 @@
       onDetectAuthenticationFinish(result);
     }
   }
+  if (mExistenceCheckOpId != -1) {
+    RemoteOperationResult result=mOperationsServiceBinder.getOperationResultIfFinished(mExistenceCheckOpId);
+    if (result != null) {
+      Log.wtf(TAG,"found result of operation finished while rotating");
+      if (AccountTypeUtils.getAuthTokenTypeSamlSessionCookie(MainApp.getAccountType()).equals(mAuthTokenType)) {
+        onSamlBasedFederatedSingleSignOnAuthorizationStart(result);
+      }
+ else {
+        onAuthorizationCheckFinish(result);
+      }
+    }
+  }
 }
