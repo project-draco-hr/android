@@ -12,4 +12,15 @@
       onGetOAuthAccessTokenFinish(result);
     }
   }
+ else   if (mExistenceCheckOpId != -1) {
+    RemoteOperationResult result=mOperationsServiceBinder.getOperationResultIfFinished(mExistenceCheckOpId);
+    if (result != null) {
+      if (AccountTypeUtils.getAuthTokenTypeSamlSessionCookie(MainApp.getAccountType()).equals(mAuthTokenType)) {
+        onSamlBasedFederatedSingleSignOnAuthorizationStart(result);
+      }
+ else {
+        onAuthorizationCheckFinish(result);
+      }
+    }
+  }
 }

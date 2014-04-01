@@ -39,7 +39,6 @@
       mAccountMgr.setAuthToken(mAccount,mAuthTokenType,mAuthToken);
     }
     mAccountMgr.setUserData(mAccount,Constants.KEY_OC_VERSION,mDiscoveredVersion.getVersion());
-    mAccountMgr.setUserData(mAccount,Constants.KEY_OC_VERSION_STRING,mDiscoveredVersion.getVersionString());
     mAccountMgr.setUserData(mAccount,Constants.KEY_OC_BASE_URL,mHostBaseUrl);
     if (isSaml) {
       mAccountMgr.setUserData(mAccount,Constants.KEY_SUPPORTS_SAML_WEB_SSO,"TRUE");

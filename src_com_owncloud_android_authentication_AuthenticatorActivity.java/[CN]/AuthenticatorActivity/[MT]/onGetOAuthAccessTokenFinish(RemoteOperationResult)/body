@@ -11,10 +11,10 @@
     @SuppressWarnings("unchecked") Map<String,String> tokens=(Map<String,String>)(result.getData().get(0));
     mAuthToken=tokens.get(OAuth2Constants.KEY_ACCESS_TOKEN);
     Log_OC.d(TAG,"Got ACCESS TOKEN: " + mAuthToken);
-    mAuthCheckOperation=new ExistenceCheckRemoteOperation("",this,false);
-    OwnCloudClient client=OwnCloudClientFactory.createOwnCloudClient(Uri.parse(mHostBaseUrl + webdav_path),this,true);
-    client.setBearerCredentials(mAuthToken);
-    mAuthCheckOperation.execute(client,this,mHandler);
+    String remotePath="";
+    boolean successIfAbsent=false;
+    boolean followRedirects=true;
+    startExistenceCheckRemoteOperation(remotePath,this,successIfAbsent,webdav_path,"","",followRedirects);
   }
  else {
     updateAuthStatusIconAndText(result);

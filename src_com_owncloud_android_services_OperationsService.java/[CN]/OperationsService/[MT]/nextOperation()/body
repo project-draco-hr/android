@@ -14,7 +14,16 @@ synchronized (mPendingOperations) {
           mStorageManager=new FileDataStorageManager(mLastTarget.mAccount,getContentResolver());
         }
  else {
-          mOwnCloudClient=OwnCloudClientFactory.createOwnCloudClient(mLastTarget.mServerUrl,getApplicationContext(),true);
+          mOwnCloudClient=OwnCloudClientFactory.createOwnCloudClient(mLastTarget.mServerUrl,getApplicationContext(),mLastTarget.mFollowRedirects);
+          if (mLastTarget.mWebDavUrl != "") {
+            mOwnCloudClient.setWebdavUri(Uri.parse(mLastTarget.mWebDavUrl));
+          }
+          if (mLastTarget.mUsername != "" && mLastTarget.mPassword != "") {
+            mOwnCloudClient.setBasicCredentials(mLastTarget.mUsername,mLastTarget.mPassword);
+          }
+ else           if (mLastTarget.mAuthToken != "") {
+            mOwnCloudClient.setBearerCredentials(mLastTarget.mAuthToken);
+          }
           mStorageManager=null;
         }
       }

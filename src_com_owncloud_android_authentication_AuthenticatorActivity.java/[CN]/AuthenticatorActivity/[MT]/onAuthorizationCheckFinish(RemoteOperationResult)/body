@@ -1,4 +1,5 @@
 {
+  mExistenceCheckOpId=-1;
   try {
     dismissDialog(DIALOG_LOGIN_PROGRESS);
   }
