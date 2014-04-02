@@ -24,6 +24,9 @@ synchronized (mPendingOperations) {
  else           if (mLastTarget.mAuthToken != "") {
             mOwnCloudClient.setBearerCredentials(mLastTarget.mAuthToken);
           }
+ else           if (mLastTarget.mCookie != "") {
+            mOwnCloudClient.setSsoSessionCookie(mLastTarget.mCookie);
+          }
           mStorageManager=null;
         }
       }

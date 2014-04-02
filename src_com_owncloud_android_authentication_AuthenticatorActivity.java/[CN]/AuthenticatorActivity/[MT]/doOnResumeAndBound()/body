@@ -23,4 +23,10 @@
       }
     }
   }
+  if (mGetUserNameOpId != -1) {
+    RemoteOperationResult result=mOperationsServiceBinder.getOperationResultIfFinished(mGetUserNameOpId);
+    if (result != null) {
+      onGetUserNameFinish(result);
+    }
+  }
 }

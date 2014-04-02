@@ -17,6 +17,6 @@
     }
   }
  else   if (operation instanceof GetRemoteUserNameOperation) {
-    onGetUserNameFinish((GetRemoteUserNameOperation)operation,result);
+    onGetUserNameFinish(result);
   }
 }

@@ -6,4 +6,5 @@
   mPassword=password;
   mAuthToken=authToken;
   mFollowRedirects=followRedirects;
+  mCookie=cookie;
 }
