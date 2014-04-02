@@ -1,7 +1,8 @@
 {
   String queryParameters=mNewCapturedUriFromOAuth2Redirection.getQuery();
   mNewCapturedUriFromOAuth2Redirection=null;
-  showDialog(DIALOG_OAUTH2_LOGIN_PROGRESS);
+  IndeterminateProgressDialog dialog=IndeterminateProgressDialog.newInstance(R.string.auth_getting_authorization,true);
+  dialog.show(getSupportFragmentManager(),WAIT_DIALOG_TAG);
   Intent getServerInfoIntent=new Intent();
   getServerInfoIntent.setAction(OperationsService.ACTION_OAUTH2_GET_ACCESS_TOKEN);
   getServerInfoIntent.putExtra(OperationsService.EXTRA_SERVER_URL,mOAuthTokenEndpointText.getText().toString().trim());

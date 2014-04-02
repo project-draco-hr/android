@@ -2,7 +2,8 @@
   mAuthStatusIcon=R.drawable.progress_small;
   mAuthStatusText=R.string.auth_connecting_auth_server;
   showAuthStatus();
-  showDialog(DIALOG_LOGIN_PROGRESS);
+  IndeterminateProgressDialog dialog=IndeterminateProgressDialog.newInstance(R.string.auth_trying_to_login,true);
+  dialog.show(getSupportFragmentManager(),WAIT_DIALOG_TAG);
   String webdav_path=AccountUtils.getWebdavPath(mDiscoveredVersion,mAuthTokenType);
   String remotePath="";
   boolean successIfAbsent=false;

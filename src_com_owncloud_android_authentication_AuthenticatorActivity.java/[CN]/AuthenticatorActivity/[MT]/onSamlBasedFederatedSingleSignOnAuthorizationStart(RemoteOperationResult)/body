@@ -1,15 +1,11 @@
 {
   mExistenceCheckOpId=-1;
-  try {
-    dismissDialog(DIALOG_LOGIN_PROGRESS);
-  }
- catch (  IllegalArgumentException e) {
-  }
+  dismissDialog(WAIT_DIALOG_TAG);
   if (result.isIdPRedirection()) {
     String url=result.getRedirectedLocation();
     String targetUrl=mHostBaseUrl + AccountUtils.getWebdavPath(mDiscoveredVersion,mAuthTokenType);
     mSamlDialog=SamlWebViewDialog.newInstance(url,targetUrl);
-    mSamlDialog.show(getSupportFragmentManager(),TAG_SAML_DIALOG);
+    mSamlDialog.show(getSupportFragmentManager(),SAML_DIALOG_TAG);
     mAuthStatusIcon=0;
     mAuthStatusText=0;
   }
