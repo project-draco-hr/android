@@ -14,5 +14,8 @@
       count+=1;
     }
   }
+  if (count == 0) {
+    mOperationResults.put(operation.hashCode(),result);
+  }
   Log_OC.d(TAG,"Called " + count + " listeners");
 }
