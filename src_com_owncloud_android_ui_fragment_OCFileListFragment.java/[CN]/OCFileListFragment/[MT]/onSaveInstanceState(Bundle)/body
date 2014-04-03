@@ -1,4 +1,6 @@
 {
   super.onSaveInstanceState(outState);
   outState.putParcelable(EXTRA_FILE,mFile);
+  outState.putIntegerArrayList(KEY_INDEXES,mIndexes);
+  outState.putIntegerArrayList(KEY_TOPS,mTops);
 }
