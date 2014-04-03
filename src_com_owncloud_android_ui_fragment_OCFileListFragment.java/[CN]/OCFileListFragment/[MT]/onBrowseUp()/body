@@ -24,6 +24,7 @@
   if (mFile != null) {
     listDirectory(mFile);
     mContainerActivity.startSyncFolderOperation(mFile);
+    restoreIndexAndPosition();
   }
   return moveCount;
 }

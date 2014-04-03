@@ -9,4 +9,6 @@
   registerForContextMenu(getListView());
   getListView().setOnCreateContextMenuListener(this);
   mHandler=new Handler();
+  mIndexes=new ArrayList<Integer>();
+  mTops=new ArrayList<Integer>();
 }

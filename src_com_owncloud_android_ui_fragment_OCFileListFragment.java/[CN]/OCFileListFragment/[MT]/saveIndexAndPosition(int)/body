@@ -1,0 +1,5 @@
+{
+  mIndexes.add(index);
+  View view=mList.getChildAt(0);
+  mTops.add((view == null) ? 0 : view.getTop());
+}

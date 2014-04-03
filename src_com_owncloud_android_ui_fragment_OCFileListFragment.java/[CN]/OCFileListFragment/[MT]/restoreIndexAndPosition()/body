@@ -1,0 +1,7 @@
+{
+  int index=mIndexes.get(mIndexes.size() - 1);
+  mIndexes.remove(mIndexes.size() - 1);
+  int top=mTops.get(mTops.size() - 1);
+  mTops.remove(mTops.size() - 1);
+  mList.setSelectionFromTop(index,top);
+}
