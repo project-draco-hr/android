@@ -1,7 +1,7 @@
 {
   boolean isOAuth=AccountTypeUtils.getAuthTokenTypeAccessToken(MainApp.getAccountType()).equals(mAuthTokenType);
   boolean isSaml=AccountTypeUtils.getAuthTokenTypeSamlSessionCookie(MainApp.getAccountType()).equals(mAuthTokenType);
-  Uri uri=Uri.parse(mHostBaseUrl);
+  Uri uri=Uri.parse(mServerInfo.mBaseUrl);
   String username=mUsernameInput.getText().toString().trim();
   if (isOAuth) {
     username="OAuth_user" + (new java.util.Random(System.currentTimeMillis())).nextLong();
@@ -10,8 +10,8 @@
   if (uri.getPort() >= 0) {
     accountName+=":" + uri.getPort();
   }
-  mAccount=new Account(accountName,MainApp.getAccountType());
-  if (AccountUtils.exists(mAccount,getApplicationContext())) {
+  Account newAccount=new Account(accountName,MainApp.getAccountType());
+  if (AccountUtils.exists(newAccount,getApplicationContext())) {
     RemoteOperationResult result=new RemoteOperationResult(ResultCode.ACCOUNT_NOT_NEW);
     updateAuthStatusIconAndText(result);
     showAuthStatus();
@@ -19,6 +19,7 @@
     return false;
   }
  else {
+    mAccount=newAccount;
     if (isOAuth || isSaml) {
       mAccountMgr.addAccountExplicitly(mAccount,"",null);
     }
@@ -38,8 +39,8 @@
     if (isOAuth || isSaml) {
       mAccountMgr.setAuthToken(mAccount,mAuthTokenType,mAuthToken);
     }
-    mAccountMgr.setUserData(mAccount,Constants.KEY_OC_VERSION,mDiscoveredVersion.getVersion());
-    mAccountMgr.setUserData(mAccount,Constants.KEY_OC_BASE_URL,mHostBaseUrl);
+    mAccountMgr.setUserData(mAccount,Constants.KEY_OC_VERSION,mServerInfo.mVersion.getVersion());
+    mAccountMgr.setUserData(mAccount,Constants.KEY_OC_BASE_URL,mServerInfo.mBaseUrl);
     if (isSaml) {
       mAccountMgr.setUserData(mAccount,Constants.KEY_SUPPORTS_SAML_WEB_SSO,"TRUE");
     }

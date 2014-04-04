@@ -1,7 +1,7 @@
 {
   mOauth2GetAccessTokenOpId=-1;
   dismissDialog(WAIT_DIALOG_TAG);
-  String webdav_path=AccountUtils.getWebdavPath(mDiscoveredVersion,mAuthTokenType);
+  String webdav_path=AccountUtils.getWebdavPath(mServerInfo.mVersion,mAuthTokenType);
   if (result.isSuccess() && webdav_path != null) {
     IndeterminateProgressDialog dialog=IndeterminateProgressDialog.newInstance(R.string.auth_trying_to_login,true);
     dialog.show(getSupportFragmentManager(),WAIT_DIALOG_TAG);

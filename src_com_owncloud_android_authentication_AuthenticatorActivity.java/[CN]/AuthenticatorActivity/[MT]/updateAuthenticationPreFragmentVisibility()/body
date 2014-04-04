@@ -1,0 +1,29 @@
+{
+  if (AccountTypeUtils.getAuthTokenTypeSamlSessionCookie(MainApp.getAccountType()).equals(mAuthTokenType)) {
+    mOAuth2Check.setVisibility(View.GONE);
+    mOAuthAuthEndpointText.setVisibility(View.GONE);
+    mOAuthTokenEndpointText.setVisibility(View.GONE);
+    mUsernameInput.setVisibility(View.GONE);
+    mPasswordInput.setVisibility(View.GONE);
+  }
+ else {
+    if (mAction == ACTION_CREATE && AUTH_OPTIONAL.equals(getString(R.string.auth_method_oauth2))) {
+      mOAuth2Check.setVisibility(View.VISIBLE);
+    }
+ else {
+      mOAuth2Check.setVisibility(View.GONE);
+    }
+    if (AccountTypeUtils.getAuthTokenTypeAccessToken(MainApp.getAccountType()).equals(mAuthTokenType)) {
+      mOAuthAuthEndpointText.setVisibility(View.VISIBLE);
+      mOAuthTokenEndpointText.setVisibility(View.VISIBLE);
+      mUsernameInput.setVisibility(View.GONE);
+      mPasswordInput.setVisibility(View.GONE);
+    }
+ else {
+      mOAuthAuthEndpointText.setVisibility(View.GONE);
+      mOAuthTokenEndpointText.setVisibility(View.GONE);
+      mUsernameInput.setVisibility(View.VISIBLE);
+      mPasswordInput.setVisibility(View.VISIBLE);
+    }
+  }
+}

@@ -1,7 +1,7 @@
 {
   Intent existenceCheckIntent=new Intent();
   existenceCheckIntent.setAction(OperationsService.ACTION_EXISTENCE_CHECK);
-  existenceCheckIntent.putExtra(OperationsService.EXTRA_SERVER_URL,mHostBaseUrl);
+  existenceCheckIntent.putExtra(OperationsService.EXTRA_SERVER_URL,mServerInfo.mBaseUrl);
   existenceCheckIntent.putExtra(OperationsService.EXTRA_REMOTE_PATH,remotePath);
   existenceCheckIntent.putExtra(OperationsService.EXTRA_SUCCESS_IF_ABSENT,successIfAbsent);
   existenceCheckIntent.putExtra(OperationsService.EXTRA_WEBDAV_PATH,webdav_path);

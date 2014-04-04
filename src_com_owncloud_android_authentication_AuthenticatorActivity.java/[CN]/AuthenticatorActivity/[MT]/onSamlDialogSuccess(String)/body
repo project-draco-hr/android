@@ -1,8 +1,0 @@
-{
-  mAuthToken=sessionCookie;
-  if (sessionCookie != null && sessionCookie.length() > 0) {
-    mAuthToken=sessionCookie;
-    boolean followRedirects=true;
-    getRemoteUserNameOperation(sessionCookie,followRedirects);
-  }
-}

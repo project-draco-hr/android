@@ -1,15 +1,10 @@
 {
   mServerIsChecked=true;
-  mIsSslConn=(result.getCode() == ResultCode.OK_SSL);
-  mServerInfoOperation=null;
   mGetServerInfoOpId=-1;
   updateServerStatusIconAndText(result);
   if (result.isSuccess()) {
     mServerInfo=(GetServerInfoOperation.ServerInfo)(result.getData().get(0));
-    mDiscoveredVersion=mServerInfo.mVersion;
-    mHostBaseUrl=mServerInfo.mBaseUrl;
-    mServerAuthMethod=mServerInfo.mAuthMethod;
-    if (!authSupported(mServerAuthMethod)) {
+    if (!authSupported(mServerInfo.mAuthMethod)) {
       updateServerStatusIconNoRegularAuth();
       mServerIsValid=false;
     }

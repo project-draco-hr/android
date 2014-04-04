@@ -18,10 +18,7 @@
  else   if (result.isServerFail() || result.isException()) {
     mServerIsChecked=true;
     mServerIsValid=false;
-    mIsSslConn=false;
-    mServerInfoOperation=null;
-    mDiscoveredVersion=null;
-    mHostBaseUrl=normalizeUrl(mHostUrlInput.getText().toString());
+    mServerInfo=new GetServerInfoOperation.ServerInfo();
     updateServerStatusIconAndText(result);
     showServerStatus();
     mAuthStatusIcon=0;
