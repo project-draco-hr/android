@@ -5,6 +5,7 @@
   getUserNameIntent.putExtra(OperationsService.EXTRA_COOKIE,sessionCookie);
   getUserNameIntent.putExtra(OperationsService.EXTRA_FOLLOW_REDIRECTS,followRedirects);
   if (mOperationsServiceBinder != null) {
+    Log_OC.wtf(TAG,"starting getRemoteUserNameOperation...");
     mGetUserNameOpId=mOperationsServiceBinder.newOperation(getUserNameIntent);
   }
 }

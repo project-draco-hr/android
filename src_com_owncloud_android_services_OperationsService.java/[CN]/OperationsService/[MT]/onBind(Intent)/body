@@ -1,3 +1,4 @@
 {
+  Log.wtf(TAG,"onBind");
   return mBinder;
 }

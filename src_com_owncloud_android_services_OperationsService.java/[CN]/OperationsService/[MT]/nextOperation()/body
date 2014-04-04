@@ -1,4 +1,5 @@
 {
+  Log.wtf(TAG,"nextOperation init");
   Pair<Target,RemoteOperation> next=null;
 synchronized (mPendingOperations) {
     next=mPendingOperations.peek();

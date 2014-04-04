@@ -1,20 +1,24 @@
 {
+  Log.wtf(TAG,"registering to listen for operation callbacks");
   mOperationsServiceBinder.addOperationListener(AuthenticatorActivity.this,mHandler);
   if (mGetServerInfoOpId != -1) {
     RemoteOperationResult result=mOperationsServiceBinder.getOperationResultIfFinished(mGetServerInfoOpId);
     if (result != null) {
+      Log_OC.wtf(TAG,"found result of operation finished while rotating");
       onGetServerInfoFinish(result);
     }
   }
  else   if (mOauth2GetAccessTokenOpId != -1) {
     RemoteOperationResult result=mOperationsServiceBinder.getOperationResultIfFinished(mOauth2GetAccessTokenOpId);
     if (result != null) {
+      Log_OC.wtf(TAG,"found result of operation finished while rotating");
       onGetOAuthAccessTokenFinish(result);
     }
   }
  else   if (mExistenceCheckOpId != -1) {
     RemoteOperationResult result=mOperationsServiceBinder.getOperationResultIfFinished(mExistenceCheckOpId);
     if (result != null) {
+      Log_OC.wtf(TAG,"found result of operation finished while rotating");
       if (AccountTypeUtils.getAuthTokenTypeSamlSessionCookie(MainApp.getAccountType()).equals(mAuthTokenType)) {
         onSamlBasedFederatedSingleSignOnAuthorizationStart(result);
       }
@@ -26,6 +30,7 @@
   if (mGetUserNameOpId != -1) {
     RemoteOperationResult result=mOperationsServiceBinder.getOperationResultIfFinished(mGetUserNameOpId);
     if (result != null) {
+      Log_OC.wtf(TAG,"found result of operation finished while rotating");
       onGetUserNameFinish(result);
     }
   }

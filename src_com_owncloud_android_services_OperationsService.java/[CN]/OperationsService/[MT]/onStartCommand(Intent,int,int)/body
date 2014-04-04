@@ -1,6 +1,8 @@
 {
+  Log.wtf(TAG,"onStartCommand init");
   Message msg=mServiceHandler.obtainMessage();
   msg.arg1=startId;
   mServiceHandler.sendMessage(msg);
+  Log.wtf(TAG,"onStartCommand end");
   return START_NOT_STICKY;
 }

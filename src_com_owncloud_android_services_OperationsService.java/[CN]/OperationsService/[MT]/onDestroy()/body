@@ -1,4 +1,7 @@
 {
+  Log.wtf(TAG,"onDestroy init");
   super.onDestroy();
+  Log.wtf(TAG,"Clear mOperationResults");
   mOperationResults.clear();
+  Log.wtf(TAG,"onDestroy end");
 }

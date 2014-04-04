@@ -1,5 +1,6 @@
 {
   if (component.equals(new ComponentName(AuthenticatorActivity.this,OperationsService.class))) {
+    Log_OC.wtf(TAG,"Operations service connected");
     mOperationsServiceBinder=(OperationsServiceBinder)service;
     doOnResumeAndBound();
   }

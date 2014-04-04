@@ -14,6 +14,7 @@
     getServerInfoIntent.putExtra(OperationsService.EXTRA_SERVER_URL,uri);
     getServerInfoIntent.putExtra(OperationsService.EXTRA_AUTH_TOKEN_TYPE,mAuthTokenType);
     if (mOperationsServiceBinder != null) {
+      Log.wtf(TAG,"checking server...");
       mGetServerInfoOpId=mOperationsServiceBinder.newOperation(getServerInfoIntent);
     }
   }

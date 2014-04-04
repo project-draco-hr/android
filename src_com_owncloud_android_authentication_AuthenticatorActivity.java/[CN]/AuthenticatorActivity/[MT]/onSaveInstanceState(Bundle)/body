@@ -1,4 +1,5 @@
 {
+  Log.wtf(TAG,"onSaveInstanceState init");
   super.onSaveInstanceState(outState);
   outState.putString(KEY_AUTH_TOKEN_TYPE,mAuthTokenType);
   outState.putInt(KEY_SERVER_STATUS_TEXT,mServerStatusText);
@@ -19,4 +20,5 @@
   outState.putInt(KEY_EXISTENCE_CHECK_OP_ID,mExistenceCheckOpId);
   outState.putInt(KEY_OAUTH2_GET_ACCESS_TOKEN_OP_ID,mOauth2GetAccessTokenOpId);
   outState.putInt(KEY_GET_USER_NAME_OP_ID,mGetUserNameOpId);
+  Log.wtf(TAG,"onSaveInstanceState end");
 }

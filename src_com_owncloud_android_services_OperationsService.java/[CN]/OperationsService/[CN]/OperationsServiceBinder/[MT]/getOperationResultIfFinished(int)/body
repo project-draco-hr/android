@@ -1,3 +1,4 @@
 {
+  Log_OC.wtf(TAG,"Searching result for operation with id " + operationId);
   return mOperationResults.remove(operationId);
 }
