@@ -1,4 +1,5 @@
 {
+  mHostUrlInputWatcher=null;
   if (mOperationsServiceConnection != null) {
     unbindService(mOperationsServiceConnection);
     mOperationsServiceBinder=null;

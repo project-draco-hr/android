@@ -1,25 +1,22 @@
 {
   super.onSaveInstanceState(outState);
-  outState.putInt(KEY_AUTH_MESSAGE_VISIBILITY,mAuthMessage.getVisibility());
-  outState.putString(KEY_AUTH_MESSAGE_TEXT,mAuthMessage.getText().toString());
+  outState.putString(KEY_AUTH_TOKEN_TYPE,mAuthTokenType);
   outState.putInt(KEY_SERVER_STATUS_TEXT,mServerStatusText);
   outState.putInt(KEY_SERVER_STATUS_ICON,mServerStatusIcon);
-  outState.putBoolean(KEY_SERVER_VALID,mServerIsValid);
   outState.putBoolean(KEY_SERVER_CHECKED,mServerIsChecked);
-  outState.putBoolean(KEY_SERVER_CHECK_IN_PROGRESS,(!mServerIsValid && mServerInfoOperation != null));
-  outState.putBoolean(KEY_IS_SSL_CONN,mIsSslConn);
-  outState.putBoolean(KEY_PASSWORD_VISIBLE,isPasswordVisible());
+  outState.putInt(KEY_GET_SERVER_INFO_OP_ID,mGetServerInfoOpId);
+  outState.putBoolean(KEY_SERVER_VALID,mServerIsValid);
+  outState.putBoolean(KEY_IS_SSL_CONN,mServerInfo.mIsSslConn);
+  outState.putString(KEY_HOST_URL_TEXT,mServerInfo.mBaseUrl);
+  if (mServerInfo.mVersion != null) {
+    outState.putString(KEY_OC_VERSION,mServerInfo.mVersion.getVersion());
+  }
+  outState.putString(KEY_SERVER_AUTH_METHOD,mServerInfo.mAuthMethod.name());
+  outState.putBoolean(KEY_PASSWORD_EXPOSED,isPasswordVisible());
   outState.putInt(KEY_AUTH_STATUS_ICON,mAuthStatusIcon);
   outState.putInt(KEY_AUTH_STATUS_TEXT,mAuthStatusText);
-  if (mDiscoveredVersion != null) {
-    outState.putString(KEY_OC_VERSION,mDiscoveredVersion.getVersion());
-  }
-  outState.putString(KEY_HOST_URL_TEXT,mHostBaseUrl);
-  if (mAccount != null) {
-    outState.putParcelable(KEY_ACCOUNT,mAccount);
-  }
-  outState.putString(AccountAuthenticator.KEY_AUTH_TOKEN_TYPE,mAuthTokenType);
-  outState.putBoolean(KEY_REFRESH_BUTTON_ENABLED,(mRefreshButton.getVisibility() == View.VISIBLE));
-  outState.putString(KEY_SERVER_AUTH_METHOD,mServerAuthMethod.name());
-  outState.putInt(KEY_DETECT_AUTH_OP_ID,mGetServerInfoOpId);
+  outState.putString(KEY_AUTH_TOKEN,mAuthToken);
+  outState.putInt(KEY_EXISTENCE_CHECK_OP_ID,mExistenceCheckOpId);
+  outState.putInt(KEY_OAUTH2_GET_ACCESS_TOKEN_OP_ID,mOauth2GetAccessTokenOpId);
+  outState.putInt(KEY_GET_USER_NAME_OP_ID,mGetUserNameOpId);
 }

@@ -1,8 +1,9 @@
 {
-  if (sessionCookies != null && sessionCookies.length() > 0) {
+  if (sessionCookie != null && sessionCookie.length() > 0) {
     Log_OC.d(TAG,"Successful SSO - time to save the account");
-    onSamlDialogSuccess(sessionCookies);
-    Fragment fd=getSupportFragmentManager().findFragmentByTag(TAG_SAML_DIALOG);
+    mAuthToken=sessionCookie;
+    getRemoteUserNameOperation(sessionCookie,true);
+    Fragment fd=getSupportFragmentManager().findFragmentByTag(SAML_DIALOG_TAG);
     if (fd != null && fd instanceof SherlockDialogFragment) {
       Dialog d=((SherlockDialogFragment)fd).getDialog();
       if (d != null && d.isShowing()) {

@@ -3,8 +3,8 @@
   RemoteOperationResult result=getStatus.execute(client);
   if (result.isSuccess()) {
     mResultData.mVersion=(OwnCloudVersion)(result.getData().get(0));
-    boolean isSslConn=(result.getCode() == ResultCode.OK_SSL);
-    mResultData.mBaseUrl=normalizeProtocolPrefix(mUrl,isSslConn);
+    mResultData.mIsSslConn=(result.getCode() == ResultCode.OK_SSL);
+    mResultData.mBaseUrl=normalizeProtocolPrefix(mUrl,mResultData.mIsSslConn);
     RemoteOperationResult detectAuthResult=detectAuthorizationMethod(client);
     if (detectAuthResult.isSuccess()) {
       mResultData.mAuthMethod=(AuthenticationMethod)detectAuthResult.getData().get(0);

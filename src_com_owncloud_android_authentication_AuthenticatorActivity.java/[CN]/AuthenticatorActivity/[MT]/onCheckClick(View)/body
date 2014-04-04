@@ -6,5 +6,5 @@
  else {
     mAuthTokenType=AccountTypeUtils.getAuthTokenTypePass(MainApp.getAccountType());
   }
-  adaptViewAccordingToAuthenticationMethod();
+  updateAuthenticationPreFragmentVisibility();
 }

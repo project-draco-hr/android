@@ -1,4 +1,4 @@
 {
-  showDialog(DIALOG_CERT_NOT_SAVED);
-  cancelWebView();
+  dismissDialog(SAML_DIALOG_TAG);
+  Toast.makeText(this,R.string.ssl_validator_not_saved,Toast.LENGTH_LONG).show();
 }

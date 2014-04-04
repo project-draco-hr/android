@@ -1,10 +1,6 @@
 {
   mExistenceCheckOpId=-1;
-  try {
-    dismissDialog(DIALOG_LOGIN_PROGRESS);
-  }
- catch (  IllegalArgumentException e) {
-  }
+  dismissDialog(WAIT_DIALOG_TAG);
   if (result.isSuccess()) {
     Log_OC.d(TAG,"Successful access - time to save the account");
     boolean success=false;
@@ -22,10 +18,7 @@
  else   if (result.isServerFail() || result.isException()) {
     mServerIsChecked=true;
     mServerIsValid=false;
-    mIsSslConn=false;
-    mServerInfoOperation=null;
-    mDiscoveredVersion=null;
-    mHostBaseUrl=normalizeUrl(mHostUrlInput.getText().toString());
+    mServerInfo=new GetServerInfoOperation.ServerInfo();
     updateServerStatusIconAndText(result);
     showServerStatus();
     mAuthStatusIcon=0;
