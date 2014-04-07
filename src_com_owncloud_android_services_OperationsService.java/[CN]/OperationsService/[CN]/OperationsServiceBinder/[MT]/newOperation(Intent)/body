@@ -15,7 +15,7 @@
       String authToken=operationIntent.getStringExtra(EXTRA_AUTH_TOKEN);
       boolean followRedirects=operationIntent.getBooleanExtra(EXTRA_FOLLOW_REDIRECTS,true);
       String cookie=operationIntent.getStringExtra(EXTRA_COOKIE);
-      target=new Target(account,(serverUrl == null) ? null : Uri.parse(serverUrl),((webDavPath == null) || (serverUrl == null)) ? "" : webDavUrl,(username == null) ? "" : username,(password == null) ? "" : password,(authToken == null) ? "" : authToken,followRedirects,(cookie == null) ? "" : cookie);
+      target=new Target(account,(serverUrl == null) ? null : Uri.parse(serverUrl),((webDavPath == null) || (serverUrl == null)) ? null : webDavUrl,username,password,authToken,followRedirects,cookie);
       String action=operationIntent.getAction();
       if (action.equals(ACTION_CREATE_SHARE)) {
         String remotePath=operationIntent.getStringExtra(EXTRA_REMOTE_PATH);

@@ -16,16 +16,16 @@ synchronized (mPendingOperations) {
         }
  else {
           mOwnCloudClient=OwnCloudClientFactory.createOwnCloudClient(mLastTarget.mServerUrl,getApplicationContext(),mLastTarget.mFollowRedirects);
-          if (mLastTarget.mWebDavUrl != "") {
+          if (mLastTarget.mWebDavUrl != null) {
             mOwnCloudClient.setWebdavUri(Uri.parse(mLastTarget.mWebDavUrl));
           }
-          if (mLastTarget.mUsername != "" && mLastTarget.mPassword != "") {
+          if (mLastTarget.mUsername != null && mLastTarget.mPassword != null) {
             mOwnCloudClient.setBasicCredentials(mLastTarget.mUsername,mLastTarget.mPassword);
           }
- else           if (mLastTarget.mAuthToken != "") {
+ else           if (mLastTarget.mAuthToken != null) {
             mOwnCloudClient.setBearerCredentials(mLastTarget.mAuthToken);
           }
- else           if (mLastTarget.mCookie != "") {
+ else           if (mLastTarget.mCookie != null) {
             mOwnCloudClient.setSsoSessionCookie(mLastTarget.mCookie);
           }
           mStorageManager=null;
