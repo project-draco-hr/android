@@ -40,7 +40,7 @@
     findViewById(R.id.hostUrlFrame).setVisibility(View.GONE);
     mRefreshButton=findViewById(R.id.centeredRefreshButton);
   }
-  showRefreshButton(mServerIsChecked && !mServerIsValid && mWaitingForOpId == -1);
+  showRefreshButton(mServerIsChecked && !mServerIsValid && mWaitingForOpId > Integer.MAX_VALUE);
   mServerStatusView=(TextView)findViewById(R.id.server_status_text);
   showServerStatus();
   mHostUrlInput.setImeOptions(EditorInfo.IME_ACTION_NEXT);

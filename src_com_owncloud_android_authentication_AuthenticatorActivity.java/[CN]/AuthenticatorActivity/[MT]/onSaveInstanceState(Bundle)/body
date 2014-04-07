@@ -2,7 +2,7 @@
   Log.wtf(TAG,"onSaveInstanceState init");
   super.onSaveInstanceState(outState);
   outState.putString(KEY_AUTH_TOKEN_TYPE,mAuthTokenType);
-  outState.putInt(KEY_WAITING_FOR_OP_ID,mWaitingForOpId);
+  outState.putLong(KEY_WAITING_FOR_OP_ID,mWaitingForOpId);
   outState.putInt(KEY_SERVER_STATUS_TEXT,mServerStatusText);
   outState.putInt(KEY_SERVER_STATUS_ICON,mServerStatusIcon);
   outState.putBoolean(KEY_SERVER_CHECKED,mServerIsChecked);

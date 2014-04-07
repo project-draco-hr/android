@@ -1,6 +1,6 @@
 {
   mServerIsChecked=true;
-  mWaitingForOpId=-1;
+  mWaitingForOpId=Long.MAX_VALUE;
   updateServerStatusIconAndText(result);
   if (result.isSuccess()) {
     mServerInfo=(GetServerInfoOperation.ServerInfo)(result.getData().get(0));

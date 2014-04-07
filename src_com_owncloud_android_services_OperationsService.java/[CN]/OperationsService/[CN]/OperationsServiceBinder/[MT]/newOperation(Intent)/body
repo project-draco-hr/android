@@ -59,7 +59,7 @@
     return operation.hashCode();
   }
  else {
-    Log_OC.wtf(TAG,"New operation failed, returned -1");
-    return -1;
+    Log_OC.wtf(TAG,"New operation failed, returned Long.MAX_VALUE");
+    return Long.MAX_VALUE;
   }
 }
