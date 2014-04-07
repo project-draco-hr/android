@@ -1,5 +1,5 @@
 {
-  Log.wtf(TAG,"onSaveInstanceState init");
+  Log_OC.wtf(TAG,"onSaveInstanceState init");
   super.onSaveInstanceState(outState);
   outState.putString(KEY_AUTH_TOKEN_TYPE,mAuthTokenType);
   outState.putLong(KEY_WAITING_FOR_OP_ID,mWaitingForOpId);
@@ -17,5 +17,5 @@
   outState.putInt(KEY_AUTH_STATUS_ICON,mAuthStatusIcon);
   outState.putInt(KEY_AUTH_STATUS_TEXT,mAuthStatusText);
   outState.putString(KEY_AUTH_TOKEN,mAuthToken);
-  Log.wtf(TAG,"onSaveInstanceState end");
+  Log_OC.wtf(TAG,"onSaveInstanceState end");
 }

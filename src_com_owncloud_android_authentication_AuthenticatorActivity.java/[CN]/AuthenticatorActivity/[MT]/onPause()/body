@@ -1,11 +1,11 @@
 {
-  Log.wtf(TAG,"onPause init");
+  Log_OC.wtf(TAG,"onPause init");
   if (mOperationsServiceBinder != null) {
-    Log.wtf(TAG,"unregistering to listen for operation callbacks");
+    Log_OC.wtf(TAG,"unregistering to listen for operation callbacks");
     mOperationsServiceBinder.removeOperationListener(this);
   }
   mHostUrlInput.removeTextChangedListener(mHostUrlInputWatcher);
   mHostUrlInput.setOnFocusChangeListener(null);
   super.onPause();
-  Log.wtf(TAG,"onPause end");
+  Log_OC.wtf(TAG,"onPause end");
 }
