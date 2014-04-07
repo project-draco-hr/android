@@ -1,5 +1,4 @@
 {
-  Log_OC.wtf(TAG,"onResume init");
   super.onResume();
   mHostUrlInput.setOnFocusChangeListener(this);
   mHostUrlInput.addTextChangedListener(mHostUrlInputWatcher);
@@ -9,5 +8,4 @@
   if (mOperationsServiceBinder != null) {
     doOnResumeAndBound();
   }
-  Log_OC.wtf(TAG,"onResume end");
 }

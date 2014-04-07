@@ -1,4 +1,3 @@
 {
-  Log_OC.wtf(TAG,"onBind");
   return mBinder;
 }

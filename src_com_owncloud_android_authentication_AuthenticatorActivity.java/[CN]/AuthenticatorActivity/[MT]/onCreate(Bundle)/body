@@ -1,5 +1,4 @@
 {
-  Log_OC.wtf(TAG,"onCreate init");
   super.onCreate(savedInstanceState);
   getWindow().requestFeature(Window.FEATURE_NO_TITLE);
   mOperationsServiceConnection=new OperationsServiceConnection();
@@ -22,5 +21,4 @@
   initOverallUi(savedInstanceState);
   initServerPreFragment(savedInstanceState);
   initAuthorizationPreFragment(savedInstanceState);
-  Log_OC.wtf(TAG,"onCreate end");
 }

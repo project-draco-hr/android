@@ -2,9 +2,7 @@
   Pair<RemoteOperation,RemoteOperationResult> undispatched=mUndispatchedFinishedOperations.remove(operationId);
   if (undispatched != null) {
     listener.onRemoteOperationFinish(undispatched.first,undispatched.second);
-    Log_OC.wtf(TAG,"Sending callback later");
   }
  else {
-    Log_OC.wtf(TAG,"Not finished yet");
   }
 }

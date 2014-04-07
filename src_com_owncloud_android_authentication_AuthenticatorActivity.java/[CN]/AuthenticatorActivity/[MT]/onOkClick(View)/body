@@ -4,7 +4,6 @@
     mServerStatusText=R.string.auth_wtf_reenter_URL;
     showServerStatus();
     mOkButton.setEnabled(false);
-    Log_OC.wtf(TAG,"The user was allowed to click 'connect' to an unchecked server!!");
     return;
   }
   if (AccountTypeUtils.getAuthTokenTypeAccessToken(MainApp.getAccountType()).equals(mAuthTokenType)) {

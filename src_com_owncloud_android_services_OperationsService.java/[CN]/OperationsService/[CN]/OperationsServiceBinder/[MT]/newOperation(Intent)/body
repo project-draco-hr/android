@@ -55,11 +55,9 @@
   if (operation != null) {
     mPendingOperations.add(new Pair<Target,RemoteOperation>(target,operation));
     startService(new Intent(OperationsService.this,OperationsService.class));
-    Log_OC.wtf(TAG,"New operation added, opId: " + operation.hashCode());
     return operation.hashCode();
   }
  else {
-    Log_OC.wtf(TAG,"New operation failed, returned Long.MAX_VALUE");
     return Long.MAX_VALUE;
   }
 }
