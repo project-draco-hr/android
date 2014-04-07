@@ -15,7 +15,8 @@
     }
   }
   if (count == 0) {
-    mOperationResults.put(operation.hashCode(),result);
+    Pair<RemoteOperation,RemoteOperationResult> undispatched=new Pair<RemoteOperation,RemoteOperationResult>(operation,result);
+    mUndispatchedFinishedOperations.put(operation.hashCode(),undispatched);
   }
   Log_OC.d(TAG,"Called " + count + " listeners");
 }

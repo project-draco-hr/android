@@ -1,6 +1,7 @@
 {
-  mExistenceCheckOpId=-1;
+  mWaitingForOpId=-1;
   dismissDialog(WAIT_DIALOG_TAG);
+  result=new RemoteOperationResult(new RuntimeException("FAKE"));
   if (result.isSuccess()) {
     Log_OC.d(TAG,"Successful access - time to save the account");
     boolean success=false;

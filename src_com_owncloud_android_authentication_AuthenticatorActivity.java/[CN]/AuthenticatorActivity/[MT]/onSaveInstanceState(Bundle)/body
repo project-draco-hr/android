@@ -2,10 +2,10 @@
   Log.wtf(TAG,"onSaveInstanceState init");
   super.onSaveInstanceState(outState);
   outState.putString(KEY_AUTH_TOKEN_TYPE,mAuthTokenType);
+  outState.putInt(KEY_WAITING_FOR_OP_ID,mWaitingForOpId);
   outState.putInt(KEY_SERVER_STATUS_TEXT,mServerStatusText);
   outState.putInt(KEY_SERVER_STATUS_ICON,mServerStatusIcon);
   outState.putBoolean(KEY_SERVER_CHECKED,mServerIsChecked);
-  outState.putInt(KEY_GET_SERVER_INFO_OP_ID,mGetServerInfoOpId);
   outState.putBoolean(KEY_SERVER_VALID,mServerIsValid);
   outState.putBoolean(KEY_IS_SSL_CONN,mServerInfo.mIsSslConn);
   outState.putString(KEY_HOST_URL_TEXT,mServerInfo.mBaseUrl);
@@ -17,8 +17,5 @@
   outState.putInt(KEY_AUTH_STATUS_ICON,mAuthStatusIcon);
   outState.putInt(KEY_AUTH_STATUS_TEXT,mAuthStatusText);
   outState.putString(KEY_AUTH_TOKEN,mAuthToken);
-  outState.putInt(KEY_EXISTENCE_CHECK_OP_ID,mExistenceCheckOpId);
-  outState.putInt(KEY_OAUTH2_GET_ACCESS_TOKEN_OP_ID,mOauth2GetAccessTokenOpId);
-  outState.putInt(KEY_GET_USER_NAME_OP_ID,mGetUserNameOpId);
   Log.wtf(TAG,"onSaveInstanceState end");
 }

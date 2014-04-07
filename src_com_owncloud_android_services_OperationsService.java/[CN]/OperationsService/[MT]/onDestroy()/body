@@ -1,7 +1,7 @@
 {
-  Log.wtf(TAG,"onDestroy init");
+  Log_OC.wtf(TAG,"onDestroy init");
   super.onDestroy();
-  Log.wtf(TAG,"Clear mOperationResults");
-  mOperationResults.clear();
-  Log.wtf(TAG,"onDestroy end");
+  Log_OC.wtf(TAG,"Clear mUndispatchedFinisiedOperations");
+  mUndispatchedFinishedOperations.clear();
+  Log_OC.wtf(TAG,"onDestroy end");
 }

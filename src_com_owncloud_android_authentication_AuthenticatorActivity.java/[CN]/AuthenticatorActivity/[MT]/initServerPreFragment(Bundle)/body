@@ -26,7 +26,6 @@
       mServerInfo.mVersion=new OwnCloudVersion(ocVersion);
     }
     mServerInfo.mAuthMethod=AuthenticationMethod.valueOf(savedInstanceState.getString(KEY_SERVER_AUTH_METHOD));
-    mGetServerInfoOpId=savedInstanceState.getInt(KEY_GET_SERVER_INFO_OP_ID);
   }
   mHostUrlInput=(EditText)findViewById(R.id.hostUrlInput);
   mHostUrlInput.setText(mServerInfo.mBaseUrl);
@@ -41,7 +40,7 @@
     findViewById(R.id.hostUrlFrame).setVisibility(View.GONE);
     mRefreshButton=findViewById(R.id.centeredRefreshButton);
   }
-  showRefreshButton(mServerIsChecked && !mServerIsValid && mGetServerInfoOpId == -1);
+  showRefreshButton(mServerIsChecked && !mServerIsValid && mWaitingForOpId == -1);
   mServerStatusView=(TextView)findViewById(R.id.server_status_text);
   showServerStatus();
   mHostUrlInput.setImeOptions(EditorInfo.IME_ACTION_NEXT);

@@ -1,5 +1,5 @@
 {
-  mExistenceCheckOpId=-1;
+  mWaitingForOpId=-1;
   dismissDialog(WAIT_DIALOG_TAG);
   if (result.isIdPRedirection()) {
     String url=result.getRedirectedLocation();

@@ -16,6 +16,7 @@
   }
  else {
     mAuthTokenType=savedInstanceState.getString(KEY_AUTH_TOKEN_TYPE);
+    mWaitingForOpId=savedInstanceState.getInt(KEY_WAITING_FOR_OP_ID);
   }
   setContentView(R.layout.account_setup);
   initOverallUi(savedInstanceState);

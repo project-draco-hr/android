@@ -1,6 +1,6 @@
 {
   if (operation instanceof GetServerInfoOperation) {
-    if (operation.hashCode() == mGetServerInfoOpId) {
+    if (operation.hashCode() == mWaitingForOpId) {
       onGetServerInfoFinish(result);
     }
   }

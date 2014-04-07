@@ -1,4 +1,7 @@
 {
-  Log_OC.wtf(TAG,"Searching result for operation with id " + operationId);
-  return mOperationResults.remove(operationId);
+  Pair<RemoteOperation,RemoteOperationResult> undispatched=mUndispatchedFinishedOperations.remove(operationId);
+  if (undispatched != null) {
+    return undispatched.second;
+  }
+  return null;
 }

@@ -18,9 +18,6 @@
     mAuthStatusText=savedInstanceState.getInt(KEY_AUTH_STATUS_TEXT);
     mAuthStatusIcon=savedInstanceState.getInt(KEY_AUTH_STATUS_ICON);
     mAuthToken=savedInstanceState.getString(KEY_AUTH_TOKEN);
-    mExistenceCheckOpId=savedInstanceState.getInt(KEY_EXISTENCE_CHECK_OP_ID);
-    mOauth2GetAccessTokenOpId=savedInstanceState.getInt(KEY_OAUTH2_GET_ACCESS_TOKEN_OP_ID);
-    mGetUserNameOpId=savedInstanceState.getInt(KEY_GET_USER_NAME_OP_ID);
   }
   mOAuth2Check.setChecked(AccountTypeUtils.getAuthTokenTypeAccessToken(MainApp.getAccountType()).equals(mAuthTokenType));
   if (presetUserName != null) {

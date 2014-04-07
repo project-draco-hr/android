@@ -11,6 +11,6 @@
   existenceCheckIntent.putExtra(OperationsService.EXTRA_FOLLOW_REDIRECTS,followRedirects);
   if (mOperationsServiceBinder != null) {
     Log_OC.wtf(TAG,"starting existenceCheckRemoteOperation...");
-    mExistenceCheckOpId=mOperationsServiceBinder.newOperation(existenceCheckIntent);
+    mWaitingForOpId=mOperationsServiceBinder.newOperation(existenceCheckIntent);
   }
 }

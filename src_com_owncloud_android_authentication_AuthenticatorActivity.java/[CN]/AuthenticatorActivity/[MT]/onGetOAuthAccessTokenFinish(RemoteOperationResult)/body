@@ -1,5 +1,5 @@
 {
-  mOauth2GetAccessTokenOpId=-1;
+  mWaitingForOpId=-1;
   dismissDialog(WAIT_DIALOG_TAG);
   String webdav_path=AccountUtils.getWebdavPath(mServerInfo.mVersion,mAuthTokenType);
   if (result.isSuccess() && webdav_path != null) {

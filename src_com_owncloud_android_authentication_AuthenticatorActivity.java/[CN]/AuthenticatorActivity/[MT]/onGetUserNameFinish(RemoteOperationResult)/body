@@ -1,5 +1,5 @@
 {
-  mGetUserNameOpId=-1;
+  mWaitingForOpId=-1;
   if (result.isSuccess()) {
     boolean success=false;
     String username=(String)result.getData().get(0);
