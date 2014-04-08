@@ -4,7 +4,7 @@
     service.setAction(OperationsService.ACTION_UNSHARE);
     service.putExtra(OperationsService.EXTRA_ACCOUNT,callerActivity.getAccount());
     service.putExtra(OperationsService.EXTRA_REMOTE_PATH,file.getRemotePath());
-    callerActivity.startService(service);
+    callerActivity.getOperationsServiceBinder().newOperation(service);
     callerActivity.showLoadingDialog();
   }
  else {

@@ -1,3 +1,5 @@
 {
-  mBoundListeners.put(listener,callbackHandler);
+synchronized (mBoundListeners) {
+    mBoundListeners.put(listener,callbackHandler);
+  }
 }

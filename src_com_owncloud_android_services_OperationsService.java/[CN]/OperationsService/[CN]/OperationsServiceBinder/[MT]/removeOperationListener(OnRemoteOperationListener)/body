@@ -1,3 +1,5 @@
 {
-  mBoundListeners.remove(listener);
+synchronized (mBoundListeners) {
+    mBoundListeners.remove(listener);
+  }
 }

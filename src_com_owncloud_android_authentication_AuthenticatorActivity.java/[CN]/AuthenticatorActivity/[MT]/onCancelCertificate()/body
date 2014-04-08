@@ -1,3 +1,3 @@
 {
-  cancelWebView();
+  dismissDialog(SAML_DIALOG_TAG);
 }
