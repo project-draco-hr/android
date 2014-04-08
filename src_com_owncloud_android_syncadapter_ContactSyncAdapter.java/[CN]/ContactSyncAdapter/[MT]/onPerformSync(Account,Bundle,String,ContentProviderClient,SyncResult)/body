@@ -1,6 +1,6 @@
 {
   setAccount(account);
-  setContentProvider(provider);
+  setContentProviderClient(provider);
   Cursor c=getLocalContacts(false);
   if (c.moveToFirst()) {
     do {

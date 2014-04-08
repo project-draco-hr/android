@@ -1,0 +1,6 @@
+{
+  Log_OC.d(TAG,"onDetach");
+  mSsoWebViewClientListener=null;
+  mWebViewClient=null;
+  super.onDetach();
+}

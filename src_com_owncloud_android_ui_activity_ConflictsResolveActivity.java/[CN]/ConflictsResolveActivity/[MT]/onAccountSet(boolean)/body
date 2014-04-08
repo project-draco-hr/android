@@ -1,0 +1,24 @@
+{
+  super.onAccountSet(stateWasRecovered);
+  if (getAccount() != null) {
+    OCFile file=getFile();
+    if (getFile() == null) {
+      Log_OC.e(TAG,"No conflictive file received");
+      finish();
+    }
+ else {
+      file=getStorageManager().getFileByPath(file.getRemotePath());
+      if (file != null) {
+        setFile(file);
+        ConflictsResolveDialog d=ConflictsResolveDialog.newInstance(file.getRemotePath(),this);
+        d.showDialog(this);
+      }
+ else {
+        finish();
+      }
+    }
+  }
+ else {
+    finish();
+  }
+}

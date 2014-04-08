@@ -1,0 +1,9 @@
+{
+  OCFile newDir=new OCFile(mRemotePath);
+  newDir.setMimetype("DIR");
+  long parentId=mStorageManager.getFileByPath(FileStorageUtils.getParentPath(mRemotePath)).getFileId();
+  newDir.setParentId(parentId);
+  newDir.setModificationTimestamp(System.currentTimeMillis());
+  mStorageManager.saveFile(newDir);
+  Log_OC.d(TAG,"Create directory " + mRemotePath + " in Database");
+}

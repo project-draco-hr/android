@@ -12,4 +12,7 @@
   mKeepInSync=source.readInt() == 1;
   mLastSyncDateForProperties=source.readLong();
   mLastSyncDateForData=source.readLong();
+  mEtag=source.readString();
+  mShareByLink=source.readInt() == 1;
+  mPublicLink=source.readString();
 }

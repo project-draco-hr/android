@@ -1,5 +1,0 @@
-{
-  if (!type.equals(ACCOUNT_TYPE)) {
-    throw new UnsupportedAccountTypeException();
-  }
-}

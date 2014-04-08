@@ -1,0 +1,7 @@
+{
+  Fragment frag=getSupportFragmentManager().findFragmentByTag(dialogTag);
+  if (frag != null && frag instanceof SherlockDialogFragment) {
+    SherlockDialogFragment dialog=(SherlockDialogFragment)frag;
+    dialog.dismiss();
+  }
+}

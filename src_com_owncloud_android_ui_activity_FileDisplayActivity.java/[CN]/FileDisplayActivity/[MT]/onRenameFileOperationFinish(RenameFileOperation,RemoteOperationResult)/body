@@ -1,15 +1,15 @@
 {
-  dismissDialog(DIALOG_SHORT_WAIT);
+  dismissLoadingDialog();
   OCFile renamedFile=operation.getFile();
   if (result.isSuccess()) {
     if (mDualPane) {
-      FileFragment details=(FileFragment)getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
+      FileFragment details=getSecondFragment();
       if (details != null && details instanceof FileDetailFragment && renamedFile.equals(details.getFile())) {
-        ((FileDetailFragment)details).updateFileDetails(renamedFile,AccountUtils.getCurrentOwnCloudAccount(this));
+        ((FileDetailFragment)details).updateFileDetails(renamedFile,getAccount());
       }
     }
-    if (mStorageManager.getFileById(renamedFile.getParentId()).equals(mCurrentDir)) {
-      mFileList.listDirectory();
+    if (getStorageManager().getFileById(renamedFile.getParentId()).equals(getCurrentDir())) {
+      refeshListOfFilesFragment();
     }
   }
  else {
@@ -17,12 +17,16 @@
       Toast msg=Toast.makeText(this,R.string.rename_local_fail_msg,Toast.LENGTH_LONG);
       msg.show();
     }
+    if (result.getCode().equals(ResultCode.INVALID_CHARACTER_IN_NAME)) {
+      Toast msg=Toast.makeText(this,R.string.filename_forbidden_characters,Toast.LENGTH_LONG);
+      msg.show();
+    }
  else {
       Toast msg=Toast.makeText(this,R.string.rename_server_fail_msg,Toast.LENGTH_LONG);
       msg.show();
       if (result.isSslRecoverableException()) {
         mLastSslUntrustedServerResult=result;
-        showDialog(DIALOG_SSL_VALIDATOR);
+        showUntrustedCertDialog(mLastSslUntrustedServerResult);
       }
     }
   }

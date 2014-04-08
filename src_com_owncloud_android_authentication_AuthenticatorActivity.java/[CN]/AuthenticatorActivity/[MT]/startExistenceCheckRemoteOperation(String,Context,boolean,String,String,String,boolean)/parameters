@@ -1,0 +1,7 @@
+String remotePath
+Context context
+boolean successIfAbsent
+String webdav_path
+String username
+String password
+boolean followRedirects

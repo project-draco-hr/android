@@ -1,0 +1,14 @@
+{
+  if (isSharedSupported(callerActivity)) {
+    Intent service=new Intent(callerActivity,OperationsService.class);
+    service.setAction(OperationsService.ACTION_UNSHARE);
+    service.putExtra(OperationsService.EXTRA_ACCOUNT,callerActivity.getAccount());
+    service.putExtra(OperationsService.EXTRA_REMOTE_PATH,file.getRemotePath());
+    callerActivity.getOperationsServiceBinder().newOperation(service);
+    callerActivity.showLoadingDialog();
+  }
+ else {
+    Toast t=Toast.makeText(callerActivity,callerActivity.getString(R.string.share_link_no_support_share_api),Toast.LENGTH_LONG);
+    t.show();
+  }
+}

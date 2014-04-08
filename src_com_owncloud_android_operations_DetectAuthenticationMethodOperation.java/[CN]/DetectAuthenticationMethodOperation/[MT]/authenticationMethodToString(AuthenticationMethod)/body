@@ -1,0 +1,14 @@
+{
+switch (value) {
+case NONE:
+    return "NONE";
+case BASIC_HTTP_AUTH:
+  return "BASIC_HTTP_AUTH";
+case BEARER_TOKEN:
+return "BEARER_TOKEN";
+case SAML_WEB_SSO:
+return "SAML_WEB_SSO";
+default :
+return "UNKNOWN";
+}
+}

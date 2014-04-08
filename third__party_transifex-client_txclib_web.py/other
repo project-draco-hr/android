@@ -1,8 +1,0 @@
-import urllib2
-import itertools, mimetools, mimetypes
-import platform
-from txclib import get_version
-import urllib
-import os, stat
-from cStringIO import StringIO
-doseq = 1

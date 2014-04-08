@@ -1,0 +1,16 @@
+{
+  Uri folder_uri=Uri.withAppendedPath(ProviderTableMeta.CONTENT_URI_DIR,"" + folder.getFileId());
+  String where=ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?" + " AND "+ ProviderTableMeta.FILE_PATH+ "=?";
+  String[] whereArgs=new String[]{mAccount.name,folder.getRemotePath()};
+  if (getContentProviderClient() != null) {
+    try {
+      getContentProviderClient().delete(folder_uri,where,whereArgs);
+    }
+ catch (    RemoteException e) {
+      e.printStackTrace();
+    }
+  }
+ else {
+    getContentResolver().delete(folder_uri,where,whereArgs);
+  }
+}

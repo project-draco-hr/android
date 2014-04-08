@@ -1,0 +1,11 @@
+{
+  super.onResume();
+  mHostUrlInput.setOnFocusChangeListener(this);
+  mHostUrlInput.addTextChangedListener(mHostUrlInputWatcher);
+  if (mNewCapturedUriFromOAuth2Redirection != null) {
+    getOAuth2AccessTokenFromCapturedRedirection();
+  }
+  if (mOperationsServiceBinder != null) {
+    doOnResumeAndBound();
+  }
+}

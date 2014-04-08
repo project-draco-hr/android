@@ -1,4 +1,0 @@
-{
-  super.onDestroy();
-  Log.e(TAG,"ACTIVITY\t\tonDestroy");
-}

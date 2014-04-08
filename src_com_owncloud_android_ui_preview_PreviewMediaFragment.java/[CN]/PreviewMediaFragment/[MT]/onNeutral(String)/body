@@ -1,10 +1,6 @@
 {
-  if (mFile.isDown()) {
-    stopPreview(true);
-    File f=new File(mFile.getStoragePath());
-    f.delete();
-    mFile.setStoragePath(null);
-    mStorageManager.saveFile(mFile);
-    finish();
-  }
+  OCFile file=getFile();
+  stopPreview(true);
+  mStorageManager.removeFile(file,false,true);
+  finish();
 }

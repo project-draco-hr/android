@@ -1,4 +1,0 @@
-{
-  super.onStop();
-  Log.e(TAG,"ACTIVTIY\t\tonStop");
-}

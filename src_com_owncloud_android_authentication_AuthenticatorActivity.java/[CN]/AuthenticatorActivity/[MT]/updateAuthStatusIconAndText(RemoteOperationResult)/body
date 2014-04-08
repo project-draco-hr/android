@@ -1,0 +1,73 @@
+{
+  mAuthStatusIcon=R.drawable.common_error;
+switch (result.getCode()) {
+case OK_SSL:
+    mAuthStatusIcon=android.R.drawable.ic_secure;
+  mAuthStatusText=R.string.auth_secure_connection;
+break;
+case OK_NO_SSL:
+case OK:
+if (mHostUrlInput.getText().toString().trim().toLowerCase().startsWith("http://")) {
+mAuthStatusText=R.string.auth_connection_established;
+mAuthStatusIcon=R.drawable.ic_ok;
+}
+ else {
+mAuthStatusText=R.string.auth_nossl_plain_ok_title;
+mAuthStatusIcon=android.R.drawable.ic_partial_secure;
+}
+break;
+case NO_NETWORK_CONNECTION:
+mAuthStatusIcon=R.drawable.no_network;
+mAuthStatusText=R.string.auth_no_net_conn_title;
+break;
+case SSL_RECOVERABLE_PEER_UNVERIFIED:
+mAuthStatusText=R.string.auth_ssl_unverified_server_title;
+break;
+case BAD_OC_VERSION:
+mAuthStatusText=R.string.auth_bad_oc_version_title;
+break;
+case WRONG_CONNECTION:
+mAuthStatusText=R.string.auth_wrong_connection_title;
+break;
+case TIMEOUT:
+mAuthStatusText=R.string.auth_timeout_title;
+break;
+case INCORRECT_ADDRESS:
+mAuthStatusText=R.string.auth_incorrect_address_title;
+break;
+case SSL_ERROR:
+mAuthStatusText=R.string.auth_ssl_general_error_title;
+break;
+case UNAUTHORIZED:
+mAuthStatusText=R.string.auth_unauthorized;
+break;
+case HOST_NOT_AVAILABLE:
+mAuthStatusText=R.string.auth_unknown_host_title;
+break;
+case INSTANCE_NOT_CONFIGURED:
+mAuthStatusText=R.string.auth_not_configured_title;
+break;
+case FILE_NOT_FOUND:
+mAuthStatusText=R.string.auth_incorrect_path_title;
+break;
+case OAUTH2_ERROR:
+mAuthStatusText=R.string.auth_oauth_error;
+break;
+case OAUTH2_ERROR_ACCESS_DENIED:
+mAuthStatusText=R.string.auth_oauth_error_access_denied;
+break;
+case ACCOUNT_NOT_NEW:
+mAuthStatusText=R.string.auth_account_not_new;
+break;
+case ACCOUNT_NOT_THE_SAME:
+mAuthStatusText=R.string.auth_account_not_the_same;
+break;
+case UNHANDLED_HTTP_CODE:
+case UNKNOWN_ERROR:
+mAuthStatusText=R.string.auth_unknown_error_title;
+break;
+default :
+mAuthStatusText=0;
+mAuthStatusIcon=0;
+}
+}

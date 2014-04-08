@@ -1,9 +1,0 @@
-{
-  Log_OC.d(TAG,"Creating WebdavClient associated to " + account.name);
-  Uri uri=Uri.parse(AccountUtils.constructFullURLForAccount(context,account));
-  WebdavClient client=createOwnCloudClient(uri,context);
-  String username=account.name.substring(0,account.name.lastIndexOf('@'));
-  String password=AccountManager.get(context).getPassword(account);
-  client.setCredentials(username,password);
-  return client;
-}

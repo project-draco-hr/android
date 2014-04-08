@@ -1,0 +1,4 @@
+{
+  Log_OC.d(TAG,"show (manager)");
+  super.show(manager,tag);
+}

@@ -1,10 +1,12 @@
 {
   super.onStart();
-  if (mFile != null) {
-    if (mFile.isAudio()) {
+  Log_OC.e(TAG,"onStart");
+  OCFile file=getFile();
+  if (file != null) {
+    if (file.isAudio()) {
       bindMediaService();
     }
- else     if (mFile.isVideo()) {
+ else     if (file.isVideo()) {
       stopAudio();
       playVideo();
     }

@@ -1,5 +1,4 @@
 {
-  Log_OC.i(TAG,"onSaveInstanceState() start");
-  savedInstanceState.putInt(SAVED_LIST_POSITION,getReferencePosition());
-  Log_OC.i(TAG,"onSaveInstanceState() stop");
+  super.onSaveInstanceState(outState);
+  outState.putParcelable(EXTRA_FILE,mFile);
 }

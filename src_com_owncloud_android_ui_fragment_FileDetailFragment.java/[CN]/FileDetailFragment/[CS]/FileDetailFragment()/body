@@ -1,5 +1,5 @@
 {
-  mFile=null;
+  super();
   mAccount=null;
   mStorageManager=null;
   mLayout=R.layout.file_details_empty;

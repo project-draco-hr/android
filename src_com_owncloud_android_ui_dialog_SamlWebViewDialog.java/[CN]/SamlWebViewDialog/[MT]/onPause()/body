@@ -1,0 +1,5 @@
+{
+  Log_OC.d(TAG,"onPause");
+  mSsoWebView.onPause();
+  super.onPause();
+}

@@ -1,0 +1,35 @@
+{
+  try {
+    validateAccountType(account.type);
+    validateAuthTokenType(authTokenType);
+  }
+ catch (  AuthenticatorException e) {
+    Log_OC.e(TAG,"Failed to validate account type " + account.type + ": "+ e.getMessage());
+    e.printStackTrace();
+    return e.getFailureBundle();
+  }
+  final AccountManager am=AccountManager.get(mContext);
+  String accessToken;
+  if (authTokenType.equals(AccountTypeUtils.getAuthTokenTypePass(MainApp.getAccountType()))) {
+    accessToken=am.getPassword(account);
+  }
+ else {
+    accessToken=am.peekAuthToken(account,authTokenType);
+  }
+  if (accessToken != null) {
+    final Bundle result=new Bundle();
+    result.putString(AccountManager.KEY_ACCOUNT_NAME,account.name);
+    result.putString(AccountManager.KEY_ACCOUNT_TYPE,MainApp.getAccountType());
+    result.putString(AccountManager.KEY_AUTHTOKEN,accessToken);
+    return result;
+  }
+  final Intent intent=new Intent(mContext,AuthenticatorActivity.class);
+  intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE,response);
+  intent.putExtra(KEY_AUTH_TOKEN_TYPE,authTokenType);
+  intent.putExtra(KEY_LOGIN_OPTIONS,options);
+  intent.putExtra(AuthenticatorActivity.EXTRA_ACCOUNT,account);
+  intent.putExtra(AuthenticatorActivity.EXTRA_ACTION,AuthenticatorActivity.ACTION_UPDATE_EXPIRED_TOKEN);
+  final Bundle bundle=new Bundle();
+  bundle.putParcelable(AccountManager.KEY_INTENT,intent);
+  return bundle;
+}

@@ -1,0 +1,5 @@
+{
+  super(context);
+  mContext=context;
+  mHandler=new Handler();
+}

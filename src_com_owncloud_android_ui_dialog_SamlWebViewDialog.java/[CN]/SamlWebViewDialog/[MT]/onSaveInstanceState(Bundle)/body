@@ -1,0 +1,6 @@
+{
+  Log_OC.d(TAG,"onSaveInstanceState being CALLED");
+  super.onSaveInstanceState(outState);
+  outState.putString(ARG_INITIAL_URL,mInitialUrl);
+  outState.putString(ARG_TARGET_URL,mTargetUrl);
+}

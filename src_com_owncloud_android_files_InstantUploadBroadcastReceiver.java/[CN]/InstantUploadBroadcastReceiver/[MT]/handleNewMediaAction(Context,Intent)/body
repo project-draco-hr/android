@@ -4,7 +4,7 @@
   String file_name=null;
   String mime_type=null;
   if (!instantUploadEnabled(context)) {
-    Log_OC.d(TAG,"Instant upload disabled, abording uploading");
+    Log_OC.d(TAG,"Instant upload disabled, aborting uploading");
     return;
   }
   Account account=AccountUtils.getCurrentOwnCloudAccount(context);
@@ -48,8 +48,6 @@
   if (!isOnline(context) || (instantUploadViaWiFiOnly(context) && !isConnectedViaWiFi(context))) {
     return;
   }
-  IntentFilter filter=new IntentFilter(FileUploader.UPLOAD_FINISH_MESSAGE);
-  context.getApplicationContext().registerReceiver(this,filter);
   Intent i=new Intent(context,FileUploader.class);
   i.putExtra(FileUploader.KEY_ACCOUNT,account);
   i.putExtra(FileUploader.KEY_LOCAL_FILE,file_path);

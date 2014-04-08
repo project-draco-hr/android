@@ -1,33 +1,19 @@
 {
   super.onCreate(savedInstanceState);
-  mFile=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_FILE);
-  mAccount=getIntent().getParcelableExtra(FileDetailFragment.EXTRA_ACCOUNT);
-  if (mFile == null) {
-    throw new IllegalStateException("Instanced with a NULL OCFile");
-  }
-  if (mAccount == null) {
-    throw new IllegalStateException("Instanced with a NULL ownCloud Account");
-  }
-  if (!mFile.isImage()) {
-    throw new IllegalArgumentException("Non-image file passed as argument");
-  }
   requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
   setContentView(R.layout.preview_image_activity);
   ActionBar actionBar=getSupportActionBar();
+  actionBar.setIcon(DisplayUtils.getSeasonalIconId());
   actionBar.setDisplayHomeAsUpEnabled(true);
-  actionBar.setTitle(mFile.getFileName());
   actionBar.hide();
-  mFullScreen=true;
-  mStorageManager=new FileDataStorageManager(mAccount,getContentResolver());
-  mParentFolder=mStorageManager.getFileById(mFile.getParentId());
-  if (mParentFolder == null) {
-    mParentFolder=mStorageManager.getFileByPath(OCFile.PATH_SEPARATOR);
+  if (getIntent().getExtras() != null && savedInstanceState == null && fromNotification()) {
+    requestPinCode();
   }
+  mFullScreen=true;
   if (savedInstanceState != null) {
     mRequestWaitingForBinder=savedInstanceState.getBoolean(KEY_WAITING_FOR_BINDER);
   }
  else {
     mRequestWaitingForBinder=false;
   }
-  createViewPager();
 }

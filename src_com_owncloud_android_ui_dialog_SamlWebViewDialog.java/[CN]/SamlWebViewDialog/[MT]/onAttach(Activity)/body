@@ -1,0 +1,12 @@
+{
+  Log_OC.d(TAG,"onAttach");
+  super.onAttach(activity);
+  try {
+    mSsoWebViewClientListener=(SsoWebViewClientListener)activity;
+    mHandler=new Handler();
+    mWebViewClient=new SsoWebViewClient(activity,mHandler,mSsoWebViewClientListener);
+  }
+ catch (  ClassCastException e) {
+    throw new ClassCastException(activity.toString() + " must implement " + SsoWebViewClientListener.class.getSimpleName());
+  }
+}

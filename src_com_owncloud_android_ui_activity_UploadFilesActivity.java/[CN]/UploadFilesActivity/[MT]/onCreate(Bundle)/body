@@ -7,7 +7,7 @@
  else {
     mCurrentDir=Environment.getExternalStorageDirectory();
   }
-  mAccount=getIntent().getParcelableExtra(EXTRA_ACCOUNT);
+  mAccountOnCreation=getAccount();
   mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
   File currDir=mCurrentDir;
   while (currDir != null && currDir.getParentFile() != null) {
@@ -22,6 +22,7 @@
   mUploadBtn=(Button)findViewById(R.id.upload_files_btn_upload);
   mUploadBtn.setOnClickListener(this);
   ActionBar actionBar=getSupportActionBar();
+  actionBar.setIcon(DisplayUtils.getSeasonalIconId());
   actionBar.setHomeButtonEnabled(true);
   actionBar.setDisplayHomeAsUpEnabled(mCurrentDir != null && mCurrentDir.getName() != null);
   actionBar.setDisplayShowTitleEnabled(false);

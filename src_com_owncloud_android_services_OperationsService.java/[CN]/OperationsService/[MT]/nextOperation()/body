@@ -1,0 +1,74 @@
+{
+  Pair<Target,RemoteOperation> next=null;
+synchronized (mPendingOperations) {
+    next=mPendingOperations.peek();
+  }
+  if (next != null) {
+    mCurrentOperation=next.second;
+    RemoteOperationResult result=null;
+    try {
+      if (mLastTarget == null || !mLastTarget.equals(next.first)) {
+        mLastTarget=next.first;
+        if (mLastTarget.mAccount != null) {
+          mOwnCloudClient=OwnCloudClientFactory.createOwnCloudClient(mLastTarget.mAccount,getApplicationContext());
+          mStorageManager=new FileDataStorageManager(mLastTarget.mAccount,getContentResolver());
+        }
+ else {
+          mOwnCloudClient=OwnCloudClientFactory.createOwnCloudClient(mLastTarget.mServerUrl,getApplicationContext(),mLastTarget.mFollowRedirects);
+          if (mLastTarget.mWebDavUrl != null) {
+            mOwnCloudClient.setWebdavUri(Uri.parse(mLastTarget.mWebDavUrl));
+          }
+          if (mLastTarget.mUsername != null && mLastTarget.mPassword != null) {
+            mOwnCloudClient.setBasicCredentials(mLastTarget.mUsername,mLastTarget.mPassword);
+          }
+ else           if (mLastTarget.mAuthToken != null) {
+            mOwnCloudClient.setBearerCredentials(mLastTarget.mAuthToken);
+          }
+ else           if (mLastTarget.mCookie != null) {
+            mOwnCloudClient.setSsoSessionCookie(mLastTarget.mCookie);
+          }
+          mStorageManager=null;
+        }
+      }
+      if (mCurrentOperation instanceof SyncOperation) {
+        result=((SyncOperation)mCurrentOperation).execute(mOwnCloudClient,mStorageManager);
+      }
+ else {
+        result=mCurrentOperation.execute(mOwnCloudClient);
+      }
+    }
+ catch (    AccountsException e) {
+      if (mLastTarget.mAccount == null) {
+        Log_OC.e(TAG,"Error while trying to get autorization for a NULL account",e);
+      }
+ else {
+        Log_OC.e(TAG,"Error while trying to get autorization for " + mLastTarget.mAccount.name,e);
+      }
+      result=new RemoteOperationResult(e);
+    }
+catch (    IOException e) {
+      if (mLastTarget.mAccount == null) {
+        Log_OC.e(TAG,"Error while trying to get autorization for a NULL account",e);
+      }
+ else {
+        Log_OC.e(TAG,"Error while trying to get autorization for " + mLastTarget.mAccount.name,e);
+      }
+      result=new RemoteOperationResult(e);
+    }
+catch (    Exception e) {
+      if (mLastTarget.mAccount == null) {
+        Log_OC.e(TAG,"Unexpected error for a NULL account",e);
+      }
+ else {
+        Log_OC.e(TAG,"Unexpected error for " + mLastTarget.mAccount.name,e);
+      }
+      result=new RemoteOperationResult(e);
+    }
+ finally {
+synchronized (mPendingOperations) {
+        mPendingOperations.poll();
+      }
+    }
+    dispatchResultToOperationListeners(mLastTarget,mCurrentOperation,result);
+  }
+}

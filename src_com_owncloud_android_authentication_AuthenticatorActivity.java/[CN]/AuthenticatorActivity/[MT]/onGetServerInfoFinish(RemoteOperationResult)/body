@@ -1,0 +1,24 @@
+{
+  mServerIsChecked=true;
+  mWaitingForOpId=Long.MAX_VALUE;
+  updateServerStatusIconAndText(result);
+  if (result.isSuccess()) {
+    mServerInfo=(GetServerInfoOperation.ServerInfo)(result.getData().get(0));
+    if (!authSupported(mServerInfo.mAuthMethod)) {
+      updateServerStatusIconNoRegularAuth();
+      mServerIsValid=false;
+    }
+ else {
+      mServerIsValid=true;
+    }
+  }
+ else {
+    mServerIsValid=false;
+  }
+  showRefreshButton(!mServerIsValid);
+  showServerStatus();
+  mOkButton.setEnabled(mServerIsValid);
+  if (result.getCode() == ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED) {
+    showUntrustedCertDialog(result);
+  }
+}

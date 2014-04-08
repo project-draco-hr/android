@@ -1,0 +1,8 @@
+{
+  Pair<RemoteOperation,RemoteOperationResult> undispatched=mUndispatchedFinishedOperations.remove(operationId);
+  if (undispatched != null) {
+    listener.onRemoteOperationFinish(undispatched.first,undispatched.second);
+  }
+ else {
+  }
+}

@@ -1,0 +1,6 @@
+{
+  OCFile file=getFile();
+  ConfirmationDialogFragment confDialog=ConfirmationDialogFragment.newInstance(R.string.confirmation_remove_alert,new String[]{file.getFileName()},file.isDown() ? R.string.confirmation_remove_remote_and_local : R.string.confirmation_remove_remote,file.isDown() ? R.string.confirmation_remove_local : -1,R.string.common_cancel);
+  confDialog.setOnConfirmationListener(this);
+  confDialog.show(getFragmentManager(),FTAG_CONFIRMATION);
+}

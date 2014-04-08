@@ -1,18 +1,14 @@
 {
-  boolean inDisplayActivity=getActivity() instanceof FileDisplayActivity;
-  getActivity().dismissDialog((inDisplayActivity) ? FileDisplayActivity.DIALOG_SHORT_WAIT : FileDetailActivity.DIALOG_SHORT_WAIT);
+  ((FileDisplayActivity)getActivity()).dismissLoadingDialog();
+  OCFile file=getFile();
   if (!result.isSuccess()) {
     if (result.getCode() == ResultCode.SYNC_CONFLICT) {
       Intent i=new Intent(getActivity(),ConflictsResolveActivity.class);
-      i.putExtra(ConflictsResolveActivity.EXTRA_FILE,mFile);
+      i.putExtra(ConflictsResolveActivity.EXTRA_FILE,file);
       i.putExtra(ConflictsResolveActivity.EXTRA_ACCOUNT,mAccount);
       startActivity(i);
     }
- else {
-      Toast msg=Toast.makeText(getActivity(),R.string.sync_file_fail_msg,Toast.LENGTH_LONG);
-      msg.show();
-    }
-    if (mFile.isDown()) {
+    if (file.isDown()) {
       setButtonsForDown();
     }
  else {
@@ -27,7 +23,7 @@
  else {
       Toast msg=Toast.makeText(getActivity(),R.string.sync_file_nothing_to_do_msg,Toast.LENGTH_LONG);
       msg.show();
-      if (mFile.isDown()) {
+      if (file.isDown()) {
         setButtonsForDown();
       }
  else {

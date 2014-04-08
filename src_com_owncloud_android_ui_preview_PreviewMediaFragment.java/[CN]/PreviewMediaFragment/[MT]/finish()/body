@@ -1,12 +1,3 @@
 {
-  Activity container=getActivity();
-  if (container instanceof FileDisplayActivity) {
-    FragmentTransaction transaction=getActivity().getSupportFragmentManager().beginTransaction();
-    transaction.replace(R.id.file_details_container,new FileDetailFragment(null,null),FileDetailFragment.FTAG);
-    transaction.commit();
-    ((FileFragment.ContainerActivity)container).onFileStateChanged();
-  }
- else {
-    container.finish();
-  }
+  getActivity().onBackPressed();
 }

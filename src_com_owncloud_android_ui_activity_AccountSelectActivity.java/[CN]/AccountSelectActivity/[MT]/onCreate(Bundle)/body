@@ -6,7 +6,8 @@
  else {
     mPreviousAccount=AccountUtils.getCurrentOwnCloudAccount(this);
   }
-  ActionBar action_bar=getSupportActionBar();
-  action_bar.setDisplayShowTitleEnabled(true);
-  action_bar.setDisplayHomeAsUpEnabled(false);
+  ActionBar actionBar=getSupportActionBar();
+  actionBar.setIcon(DisplayUtils.getSeasonalIconId());
+  actionBar.setDisplayShowTitleEnabled(true);
+  actionBar.setDisplayHomeAsUpEnabled(false);
 }

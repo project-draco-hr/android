@@ -1,0 +1,9 @@
+{
+  RemoteFile file=new RemoteFile(ocFile.getRemotePath());
+  file.setCreationTimestamp(ocFile.getCreationTimestamp());
+  file.setLength(ocFile.getFileLength());
+  file.setMimeType(ocFile.getMimetype());
+  file.setModifiedTimestamp(ocFile.getModificationTimestamp());
+  file.setEtag(ocFile.getEtag());
+  return file;
+}

@@ -1,10 +1,10 @@
 {
   if (component.equals(new ComponentName(PreviewImageActivity.this,FileDownloader.class))) {
-    Log.d(TAG,"Download service suddenly disconnected");
+    Log_OC.d(TAG,"Download service suddenly disconnected");
     mDownloaderBinder=null;
   }
  else   if (component.equals(new ComponentName(PreviewImageActivity.this,FileUploader.class))) {
-    Log.d(TAG,"Upload service suddenly disconnected");
+    Log_OC.d(TAG,"Upload service suddenly disconnected");
     mUploaderBinder=null;
   }
 }

@@ -5,7 +5,7 @@
     file=createFileInstance(c);
   }
   c.close();
-  if (file == null && OCFile.PATH_SEPARATOR.equals(path)) {
+  if (file == null && OCFile.ROOT_PATH.equals(path)) {
     return createRootDir();
   }
   return file;

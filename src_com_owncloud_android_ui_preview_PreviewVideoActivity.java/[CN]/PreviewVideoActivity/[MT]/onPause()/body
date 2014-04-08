@@ -1,4 +1,0 @@
-{
-  super.onPause();
-  Log.e(TAG,"ACTIVTIY\t\tonPause");
-}

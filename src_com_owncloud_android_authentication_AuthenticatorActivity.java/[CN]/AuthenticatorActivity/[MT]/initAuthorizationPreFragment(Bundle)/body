@@ -1,0 +1,49 @@
+{
+  mOAuth2Check=(CheckBox)findViewById(R.id.oauth_onOff_check);
+  mOAuthAuthEndpointText=(TextView)findViewById(R.id.oAuthEntryPoint_1);
+  mOAuthTokenEndpointText=(TextView)findViewById(R.id.oAuthEntryPoint_2);
+  mUsernameInput=(EditText)findViewById(R.id.account_username);
+  mPasswordInput=(EditText)findViewById(R.id.account_password);
+  mAuthStatusView=(TextView)findViewById(R.id.auth_status_text);
+  mOkButton=findViewById(R.id.buttonOK);
+  String presetUserName=null;
+  boolean isPasswordExposed=false;
+  if (savedInstanceState == null) {
+    if (mAccount != null) {
+      presetUserName=mAccount.name.substring(0,mAccount.name.lastIndexOf('@'));
+    }
+  }
+ else {
+    isPasswordExposed=savedInstanceState.getBoolean(KEY_PASSWORD_EXPOSED,false);
+    mAuthStatusText=savedInstanceState.getInt(KEY_AUTH_STATUS_TEXT);
+    mAuthStatusIcon=savedInstanceState.getInt(KEY_AUTH_STATUS_ICON);
+    mAuthToken=savedInstanceState.getString(KEY_AUTH_TOKEN);
+  }
+  mOAuth2Check.setChecked(AccountTypeUtils.getAuthTokenTypeAccessToken(MainApp.getAccountType()).equals(mAuthTokenType));
+  if (presetUserName != null) {
+    mUsernameInput.setText(presetUserName);
+  }
+  if (mAction != ACTION_CREATE) {
+    mUsernameInput.setEnabled(false);
+    mUsernameInput.setFocusable(false);
+  }
+  mPasswordInput.setText("");
+  if (isPasswordExposed) {
+    showPassword();
+  }
+  updateAuthenticationPreFragmentVisibility();
+  showAuthStatus();
+  mOkButton.setEnabled(mServerIsValid);
+  mPasswordInput.setOnFocusChangeListener(this);
+  mPasswordInput.setImeOptions(EditorInfo.IME_ACTION_DONE);
+  mPasswordInput.setOnEditorActionListener(this);
+  mPasswordInput.setOnTouchListener(new RightDrawableOnTouchListener(){
+    @Override public boolean onDrawableTouch(    final MotionEvent event){
+      if (event.getAction() == MotionEvent.ACTION_UP) {
+        AuthenticatorActivity.this.onViewPasswordClick();
+      }
+      return true;
+    }
+  }
+);
+}

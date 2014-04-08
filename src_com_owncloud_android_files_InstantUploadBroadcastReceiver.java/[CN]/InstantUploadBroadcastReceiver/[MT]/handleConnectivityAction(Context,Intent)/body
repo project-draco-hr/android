@@ -7,14 +7,12 @@
     DbHandler db=new DbHandler(context);
     Cursor c=db.getAwaitingFiles();
     if (c.moveToFirst()) {
-      IntentFilter filter=new IntentFilter(FileUploader.UPLOAD_FINISH_MESSAGE);
-      context.getApplicationContext().registerReceiver(this,filter);
       do {
         String account_name=c.getString(c.getColumnIndex("account"));
         String file_path=c.getString(c.getColumnIndex("path"));
         File f=new File(file_path);
         if (f.exists()) {
-          Account account=new Account(account_name,AccountAuthenticator.ACCOUNT_TYPE);
+          Account account=new Account(account_name,MainApp.getAccountType());
           String mimeType=null;
           try {
             mimeType=MimeTypeMap.getSingleton().getMimeTypeFromExtension(f.getName().substring(f.getName().lastIndexOf('.') + 1));

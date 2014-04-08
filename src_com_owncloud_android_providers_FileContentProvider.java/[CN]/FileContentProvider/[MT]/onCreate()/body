@@ -1,4 +1,13 @@
 {
   mDbHelper=new DataBaseHelper(getContext());
+  String authority=getContext().getResources().getString(R.string.authority);
+  mUriMatcher=new UriMatcher(UriMatcher.NO_MATCH);
+  mUriMatcher.addURI(authority,null,ROOT_DIRECTORY);
+  mUriMatcher.addURI(authority,"file/",SINGLE_FILE);
+  mUriMatcher.addURI(authority,"file/#",SINGLE_FILE);
+  mUriMatcher.addURI(authority,"dir/",DIRECTORY);
+  mUriMatcher.addURI(authority,"dir/#",DIRECTORY);
+  mUriMatcher.addURI(authority,"shares/",SHARES);
+  mUriMatcher.addURI(authority,"shares/#",SHARES);
   return true;
 }

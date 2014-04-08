@@ -1,9 +1,0 @@
-def _save_txrc_file(self, txrc=None):
-    'Save the .transifexrc file.'
-    if (txrc is None):
-        txrc = self.txrc
-    mask = os.umask(63)
-    fh = open(self.txrc_file, 'w')
-    txrc.write(fh)
-    fh.close()
-    os.umask(mask)

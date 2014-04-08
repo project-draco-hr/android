@@ -1,0 +1,6 @@
+{
+  if (mOperationsServiceBinder != null) {
+    mOperationsServiceBinder.removeOperationListener(this);
+  }
+  super.onStop();
+}

@@ -1,4 +1,0 @@
-{
-  super.onStart();
-  Log.e(TAG,"ACTIVTIY\t\tonStart");
-}

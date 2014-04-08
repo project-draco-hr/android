@@ -1,0 +1,5 @@
+{
+  if (!type.equals(MainApp.getAccountType())) {
+    throw new UnsupportedAccountTypeException();
+  }
+}

@@ -1,0 +1,12 @@
+{
+  Log_OC.d(TAG,"onDestroyView");
+  if ((ViewGroup)mSsoWebView.getParent() != null) {
+    ((ViewGroup)mSsoWebView.getParent()).removeView(mSsoWebView);
+  }
+  mSsoWebView.setWebViewClient(null);
+  Dialog dialog=getDialog();
+  if ((dialog != null)) {
+    dialog.setOnDismissListener(null);
+  }
+  super.onDestroyView();
+}

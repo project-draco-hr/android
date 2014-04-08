@@ -1,0 +1,9 @@
+{
+  if (component.equals(new ComponentName(AuthenticatorActivity.this,OperationsService.class))) {
+    mOperationsServiceBinder=(OperationsServiceBinder)service;
+    doOnResumeAndBound();
+  }
+ else {
+    return;
+  }
+}

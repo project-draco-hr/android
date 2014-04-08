@@ -1,0 +1,21 @@
+{
+  if (operation instanceof GetServerInfoOperation) {
+    if (operation.hashCode() == mWaitingForOpId) {
+      onGetServerInfoFinish(result);
+    }
+  }
+ else   if (operation instanceof OAuth2GetAccessToken) {
+    onGetOAuthAccessTokenFinish(result);
+  }
+ else   if (operation instanceof ExistenceCheckRemoteOperation) {
+    if (AccountTypeUtils.getAuthTokenTypeSamlSessionCookie(MainApp.getAccountType()).equals(mAuthTokenType)) {
+      onSamlBasedFederatedSingleSignOnAuthorizationStart(result);
+    }
+ else {
+      onAuthorizationCheckFinish(result);
+    }
+  }
+ else   if (operation instanceof GetRemoteUserNameOperation) {
+    onGetUserNameFinish(result);
+  }
+}

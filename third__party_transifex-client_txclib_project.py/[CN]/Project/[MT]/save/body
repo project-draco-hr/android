@@ -1,4 +1,0 @@
-def save(self):
-    '\n        Store the config dictionary in the .tx/config file of the project.\n        '
-    self._save_tx_config()
-    self._save_txrc_file()

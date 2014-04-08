@@ -1,0 +1,3 @@
+{
+  return FileDownloader.class.getName().toString() + DOWNLOAD_FINISH_MESSAGE;
+}

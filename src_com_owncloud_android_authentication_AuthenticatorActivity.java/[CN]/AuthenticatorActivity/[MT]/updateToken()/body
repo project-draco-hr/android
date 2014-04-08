@@ -1,0 +1,18 @@
+{
+  Bundle response=new Bundle();
+  response.putString(AccountManager.KEY_ACCOUNT_NAME,mAccount.name);
+  response.putString(AccountManager.KEY_ACCOUNT_TYPE,mAccount.type);
+  if (AccountTypeUtils.getAuthTokenTypeAccessToken(MainApp.getAccountType()).equals(mAuthTokenType)) {
+    response.putString(AccountManager.KEY_AUTHTOKEN,mAuthToken);
+    mAccountMgr.setAuthToken(mAccount,mAuthTokenType,mAuthToken);
+  }
+ else   if (AccountTypeUtils.getAuthTokenTypeSamlSessionCookie(MainApp.getAccountType()).equals(mAuthTokenType)) {
+    response.putString(AccountManager.KEY_AUTHTOKEN,mAuthToken);
+    mAccountMgr.setAuthToken(mAccount,mAuthTokenType,mAuthToken);
+  }
+ else {
+    response.putString(AccountManager.KEY_AUTHTOKEN,mPasswordInput.getText().toString());
+    mAccountMgr.setPassword(mAccount,mPasswordInput.getText().toString());
+  }
+  setAccountAuthenticatorResult(response);
+}

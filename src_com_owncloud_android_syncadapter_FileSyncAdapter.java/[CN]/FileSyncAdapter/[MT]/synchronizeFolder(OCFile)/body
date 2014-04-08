@@ -1,0 +1,32 @@
+{
+  if (mFailedResultsCounter > MAX_FAILED_RESULTS || isFinisher(mLastFailedResult))   return;
+  SynchronizeFolderOperation synchFolderOp=new SynchronizeFolderOperation(folder,mCurrentSyncTime,true,mIsShareSupported,getStorageManager(),getAccount(),getContext());
+  RemoteOperationResult result=synchFolderOp.execute(getClient());
+  sendLocalBroadcast(EVENT_FULL_SYNC_FOLDER_CONTENTS_SYNCED,folder.getRemotePath(),result);
+  if (result.isSuccess() || result.getCode() == ResultCode.SYNC_CONFLICT) {
+    if (result.getCode() == ResultCode.SYNC_CONFLICT) {
+      mConflictsFound+=synchFolderOp.getConflictsFound();
+      mFailsInFavouritesFound+=synchFolderOp.getFailsInFavouritesFound();
+    }
+    if (synchFolderOp.getForgottenLocalFiles().size() > 0) {
+      mForgottenLocalFiles.putAll(synchFolderOp.getForgottenLocalFiles());
+    }
+    if (result.isSuccess()) {
+      List<OCFile> children=synchFolderOp.getChildren();
+      fetchChildren(folder,children,synchFolderOp.getRemoteFolderChanged());
+    }
+  }
+ else {
+    if (result.getCode() == RemoteOperationResult.ResultCode.UNAUTHORIZED || (result.isIdPRedirection() && getClient().getCredentials() == null)) {
+      mSyncResult.stats.numAuthExceptions++;
+    }
+ else     if (result.getException() instanceof DavException) {
+      mSyncResult.stats.numParseExceptions++;
+    }
+ else     if (result.getException() instanceof IOException) {
+      mSyncResult.stats.numIoExceptions++;
+    }
+    mFailedResultsCounter++;
+    mLastFailedResult=result;
+  }
+}

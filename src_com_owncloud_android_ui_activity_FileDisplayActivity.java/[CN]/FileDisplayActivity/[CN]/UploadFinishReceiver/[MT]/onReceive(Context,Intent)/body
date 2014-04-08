@@ -1,12 +1,10 @@
 {
   String uploadedRemotePath=intent.getStringExtra(FileDownloader.EXTRA_REMOTE_PATH);
   String accountName=intent.getStringExtra(FileUploader.ACCOUNT_NAME);
-  boolean sameAccount=accountName.equals(AccountUtils.getCurrentOwnCloudAccount(context).name);
-  boolean isDescendant=(mCurrentDir != null) && (uploadedRemotePath != null) && (uploadedRemotePath.startsWith(mCurrentDir.getRemotePath()));
+  boolean sameAccount=getAccount() != null && accountName.equals(getAccount().name);
+  OCFile currentDir=getCurrentDir();
+  boolean isDescendant=(currentDir != null) && (uploadedRemotePath != null) && (uploadedRemotePath.startsWith(currentDir.getRemotePath()));
   if (sameAccount && isDescendant) {
-    OCFileListFragment fileListFragment=(OCFileListFragment)getSupportFragmentManager().findFragmentById(R.id.fileList);
-    if (fileListFragment != null) {
-      fileListFragment.listDirectory();
-    }
+    refeshListOfFilesFragment();
   }
 }

@@ -1,0 +1,27 @@
+{
+  Log_OC.d(TAG,"onCreateView, savedInsanceState is " + savedInstanceState);
+  RelativeLayout ssoRootView=(RelativeLayout)inflater.inflate(R.layout.sso_dialog,container,false);
+  if (mSsoWebView == null) {
+    mSsoWebView=new SsoWebView(getSherlockActivity().getApplicationContext());
+    mSsoWebView.setFocusable(true);
+    mSsoWebView.setFocusableInTouchMode(true);
+    mSsoWebView.setClickable(true);
+    CookieManager cookieManager=CookieManager.getInstance();
+    cookieManager.setAcceptCookie(true);
+    cookieManager.removeAllCookie();
+    mSsoWebView.loadUrl(mInitialUrl);
+    WebSettings webSettings=mSsoWebView.getSettings();
+    webSettings.setJavaScriptEnabled(true);
+    webSettings.setBuiltInZoomControls(false);
+    webSettings.setLoadWithOverviewMode(false);
+    webSettings.setSavePassword(false);
+    webSettings.setUserAgentString(OwnCloudClient.USER_AGENT);
+    webSettings.setSaveFormData(false);
+  }
+  mWebViewClient.setTargetUrl(mTargetUrl);
+  mSsoWebView.setWebViewClient(mWebViewClient);
+  RelativeLayout.LayoutParams layoutParams=new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+  ssoRootView.addView(mSsoWebView,layoutParams);
+  ssoRootView.requestLayout();
+  return ssoRootView;
+}

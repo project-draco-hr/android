@@ -1,0 +1,13 @@
+{
+  if (actionId == EditorInfo.IME_ACTION_DONE && inputField != null && inputField.equals(mPasswordInput)) {
+    if (mOkButton.isEnabled()) {
+      mOkButton.performClick();
+    }
+  }
+ else   if (actionId == EditorInfo.IME_ACTION_NEXT && inputField != null && inputField.equals(mHostUrlInput)) {
+    if (AccountTypeUtils.getAuthTokenTypeSamlSessionCookie(MainApp.getAccountType()).equals(mAuthTokenType)) {
+      checkOcServer();
+    }
+  }
+  return false;
+}

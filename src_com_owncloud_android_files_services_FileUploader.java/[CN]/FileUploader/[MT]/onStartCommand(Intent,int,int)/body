@@ -35,10 +35,6 @@
   boolean forceOverwrite=intent.getBooleanExtra(KEY_FORCE_OVERWRITE,false);
   boolean isInstant=intent.getBooleanExtra(KEY_INSTANT_UPLOAD,false);
   int localAction=intent.getIntExtra(KEY_LOCAL_BEHAVIOUR,LOCAL_BEHAVIOUR_COPY);
-  boolean fixed=false;
-  if (isInstant) {
-    fixed=checkAndFixInstantUploadDirectory(storageManager);
-  }
   if (intent.hasExtra(KEY_FILE) && files == null) {
     Log_OC.e(TAG,"Incorrect array for OCFiles provided in upload intent");
     return Service.START_NOT_STICKY;
@@ -64,7 +60,9 @@
       }
     }
   }
-  OwnCloudVersion ocv=new OwnCloudVersion(AccountManager.get(this).getUserData(account,AccountAuthenticator.KEY_OC_VERSION));
+  AccountManager aMgr=AccountManager.get(this);
+  String version=aMgr.getUserData(account,Constants.KEY_OC_VERSION);
+  OwnCloudVersion ocv=new OwnCloudVersion(version);
   boolean chunked=FileUploader.chunkedUploadIsSupported(ocv);
   AbstractList<String> requestedUploads=new Vector<String>();
   String uploadKey=null;
@@ -72,13 +70,8 @@
   try {
     for (int i=0; i < files.length; i++) {
       uploadKey=buildRemoteName(account,files[i].getRemotePath());
-      if (chunked) {
-        newUpload=new ChunkedUploadFileOperation(account,files[i],isInstant,forceOverwrite,localAction);
-      }
- else {
-        newUpload=new UploadFileOperation(account,files[i],isInstant,forceOverwrite,localAction);
-      }
-      if (fixed && i == 0) {
+      newUpload=new UploadFileOperation(account,files[i],chunked,isInstant,forceOverwrite,localAction,getApplicationContext());
+      if (isInstant) {
         newUpload.setRemoteFolderToBeCreated();
       }
       mPendingUploads.putIfAbsent(uploadKey,newUpload);

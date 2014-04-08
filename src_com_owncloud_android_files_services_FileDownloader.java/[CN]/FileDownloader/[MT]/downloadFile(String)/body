@@ -4,19 +4,27 @@ synchronized (mPendingDownloads) {
   }
   if (mCurrentDownload != null) {
     notifyDownloadStart(mCurrentDownload);
-    if (mDownloadClient == null || !mLastAccount.equals(mCurrentDownload.getAccount())) {
-      mLastAccount=mCurrentDownload.getAccount();
-      mStorageManager=new FileDataStorageManager(mLastAccount,getContentResolver());
-      mDownloadClient=OwnCloudClientUtils.createOwnCloudClient(mLastAccount,getApplicationContext());
-    }
     RemoteOperationResult downloadResult=null;
     try {
+      if (mDownloadClient == null || !mLastAccount.equals(mCurrentDownload.getAccount())) {
+        mLastAccount=mCurrentDownload.getAccount();
+        mStorageManager=new FileDataStorageManager(mLastAccount,getContentResolver());
+        mDownloadClient=OwnCloudClientFactory.createOwnCloudClient(mLastAccount,getApplicationContext());
+      }
       downloadResult=mCurrentDownload.execute(mDownloadClient);
       if (downloadResult.isSuccess()) {
         saveDownloadedFile();
       }
     }
-  finally {
+ catch (    AccountsException e) {
+      Log_OC.e(TAG,"Error while trying to get autorization for " + mLastAccount.name,e);
+      downloadResult=new RemoteOperationResult(e);
+    }
+catch (    IOException e) {
+      Log_OC.e(TAG,"Error while trying to get autorization for " + mLastAccount.name,e);
+      downloadResult=new RemoteOperationResult(e);
+    }
+ finally {
 synchronized (mPendingDownloads) {
         mPendingDownloads.remove(downloadKey);
       }

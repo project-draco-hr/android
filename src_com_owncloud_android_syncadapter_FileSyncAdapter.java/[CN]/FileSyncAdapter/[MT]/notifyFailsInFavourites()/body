@@ -1,16 +1,14 @@
 {
   if (mFailedResultsCounter > 0) {
-    Notification notification=new Notification(R.drawable.icon,getContext().getString(R.string.sync_fail_in_favourites_ticker),System.currentTimeMillis());
-    notification.flags|=Notification.FLAG_AUTO_CANCEL;
-    notification.contentIntent=PendingIntent.getActivity(getContext().getApplicationContext(),(int)System.currentTimeMillis(),new Intent(),0);
-    notification.setLatestEventInfo(getContext().getApplicationContext(),getContext().getString(R.string.sync_fail_in_favourites_ticker),String.format(getContext().getString(R.string.sync_fail_in_favourites_content),mFailedResultsCounter + mConflictsFound,mConflictsFound),notification.contentIntent);
-    ((NotificationManager)getContext().getSystemService(Context.NOTIFICATION_SERVICE)).notify(R.string.sync_fail_in_favourites_ticker,notification);
+    NotificationCompat.Builder notificationBuilder=createNotificationBuilder();
+    notificationBuilder.setTicker(i18n(R.string.sync_fail_in_favourites_ticker));
+    notificationBuilder.setContentIntent(PendingIntent.getActivity(getContext(),(int)System.currentTimeMillis(),new Intent(),0)).setContentTitle(i18n(R.string.sync_fail_in_favourites_ticker)).setContentText(i18n(R.string.sync_fail_in_favourites_content,mFailedResultsCounter + mConflictsFound,mConflictsFound));
+    showNotification(R.string.sync_fail_in_favourites_ticker,notificationBuilder);
   }
  else {
-    Notification notification=new Notification(R.drawable.icon,getContext().getString(R.string.sync_conflicts_in_favourites_ticker),System.currentTimeMillis());
-    notification.flags|=Notification.FLAG_AUTO_CANCEL;
-    notification.contentIntent=PendingIntent.getActivity(getContext().getApplicationContext(),(int)System.currentTimeMillis(),new Intent(),0);
-    notification.setLatestEventInfo(getContext().getApplicationContext(),getContext().getString(R.string.sync_conflicts_in_favourites_ticker),String.format(getContext().getString(R.string.sync_conflicts_in_favourites_content),mConflictsFound),notification.contentIntent);
-    ((NotificationManager)getContext().getSystemService(Context.NOTIFICATION_SERVICE)).notify(R.string.sync_conflicts_in_favourites_ticker,notification);
+    NotificationCompat.Builder notificationBuilder=createNotificationBuilder();
+    notificationBuilder.setTicker(i18n(R.string.sync_conflicts_in_favourites_ticker));
+    notificationBuilder.setContentIntent(PendingIntent.getActivity(getContext(),(int)System.currentTimeMillis(),new Intent(),0)).setContentTitle(i18n(R.string.sync_conflicts_in_favourites_ticker)).setContentText(i18n(R.string.sync_conflicts_in_favourites_ticker,mConflictsFound));
+    showNotification(R.string.sync_conflicts_in_favourites_ticker,notificationBuilder);
   }
 }

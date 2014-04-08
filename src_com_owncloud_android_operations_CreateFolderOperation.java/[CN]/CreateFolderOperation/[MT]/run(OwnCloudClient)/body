@@ -1,0 +1,11 @@
+{
+  CreateRemoteFolderOperation operation=new CreateRemoteFolderOperation(mRemotePath,mCreateFullPath);
+  RemoteOperationResult result=operation.execute(client);
+  if (result.isSuccess()) {
+    saveFolderInDB();
+  }
+ else {
+    Log_OC.e(TAG,mRemotePath + "hasn't been created");
+  }
+  return result;
+}

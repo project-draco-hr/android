@@ -1,0 +1,38 @@
+{
+  super.onAccountSet(stateWasRecovered);
+  if (getAccount() != null) {
+    OCFile file=getFile();
+    if (file == null) {
+      throw new IllegalStateException("Instanced with a NULL OCFile");
+    }
+    if (!file.isVideo()) {
+      throw new IllegalArgumentException("Non-video file passed as argument");
+    }
+    file=getStorageManager().getFileById(file.getFileId());
+    if (file != null) {
+      if (file.isDown()) {
+        mVideoPlayer.setVideoPath(file.getStoragePath());
+      }
+ else {
+        String url;
+        try {
+          url=AccountUtils.constructFullURLForAccount(this,getAccount()) + file.getRemotePath();
+          mVideoPlayer.setVideoURI(Uri.parse(url));
+        }
+ catch (        AccountNotFoundException e) {
+          onError(null,MediaService.OC_MEDIA_ERROR,R.string.media_err_no_account);
+        }
+      }
+      mMediaController=new MediaController(this);
+      mMediaController.setMediaPlayer(mVideoPlayer);
+      mMediaController.setAnchorView(mVideoPlayer);
+      mVideoPlayer.setMediaController(mMediaController);
+    }
+ else {
+      finish();
+    }
+  }
+ else {
+    finish();
+  }
+}

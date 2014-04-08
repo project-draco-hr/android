@@ -1,23 +1,19 @@
 {
-  super.onCreateView(inflater,container,savedInstanceState);
   if (savedInstanceState != null) {
-    mFile=savedInstanceState.getParcelable(FileDetailFragment.EXTRA_FILE);
-    mAccount=savedInstanceState.getParcelable(FileDetailFragment.EXTRA_ACCOUNT);
+    setFile((OCFile)savedInstanceState.getParcelable(FileActivity.EXTRA_FILE));
+    mAccount=savedInstanceState.getParcelable(FileActivity.EXTRA_ACCOUNT);
   }
-  if (mFile != null && mAccount != null) {
+  if (getFile() != null && mAccount != null) {
     mLayout=R.layout.file_details_fragment;
   }
   View view=null;
-  view=inflater.inflate(mLayout,container,false);
+  view=inflater.inflate(mLayout,null);
   mView=view;
   if (mLayout == R.layout.file_details_fragment) {
     mView.findViewById(R.id.fdKeepInSync).setOnClickListener(this);
-    mView.findViewById(R.id.fdRenameBtn).setOnClickListener(this);
-    mView.findViewById(R.id.fdDownloadBtn).setOnClickListener(this);
-    mView.findViewById(R.id.fdOpenBtn).setOnClickListener(this);
-    mView.findViewById(R.id.fdRemoveBtn).setOnClickListener(this);
     ProgressBar progressBar=(ProgressBar)mView.findViewById(R.id.fdProgressBar);
     mProgressListener=new ProgressListener(progressBar);
+    mView.findViewById(R.id.fdCancelBtn).setOnClickListener(this);
   }
   updateFileDetails(false,false);
   return view;

@@ -1,16 +1,14 @@
 {
-  SQLiteDatabase db=mDbHelper.getWritableDatabase();
   int count=0;
-switch (mUriMatcher.match(uri)) {
-case SINGLE_FILE:
-    count=db.delete(ProviderTableMeta.DB_NAME,ProviderTableMeta._ID + "=" + uri.getPathSegments().get(1)+ (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),whereArgs);
-  break;
-case ROOT_DIRECTORY:
-count=db.delete(ProviderTableMeta.DB_NAME,where,whereArgs);
-break;
-default :
-throw new IllegalArgumentException("Unknown uri: " + uri.toString());
-}
-getContext().getContentResolver().notifyChange(uri,null);
-return count;
+  SQLiteDatabase db=mDbHelper.getWritableDatabase();
+  db.beginTransaction();
+  try {
+    count=delete(db,uri,where,whereArgs);
+    db.setTransactionSuccessful();
+  }
+  finally {
+    db.endTransaction();
+  }
+  getContext().getContentResolver().notifyChange(uri,null);
+  return count;
 }

@@ -1,0 +1,21 @@
+{
+  RemoteOperation operation=new ExistenceCheckRemoteOperation(pathToGrant,this,false);
+  RemoteOperationResult result=operation.execute(mUploadClient);
+  if (!result.isSuccess() && result.getCode() == ResultCode.FILE_NOT_FOUND && mCurrentUpload.isRemoteFolderToBeCreated()) {
+    operation=new CreateFolderOperation(pathToGrant,true,mStorageManager);
+    result=operation.execute(mUploadClient);
+  }
+  if (result.isSuccess()) {
+    OCFile parentDir=mStorageManager.getFileByPath(pathToGrant);
+    if (parentDir == null) {
+      parentDir=createLocalFolder(pathToGrant);
+    }
+    if (parentDir != null) {
+      result=new RemoteOperationResult(ResultCode.OK);
+    }
+ else {
+      result=new RemoteOperationResult(ResultCode.UNKNOWN_ERROR);
+    }
+  }
+  return result;
+}

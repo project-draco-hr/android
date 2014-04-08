@@ -1,0 +1,29 @@
+{
+  OCFile parentDir=null;
+  int moveCount=0;
+  if (mFile != null) {
+    FileDataStorageManager storageManager=mContainerActivity.getStorageManager();
+    String parentPath=null;
+    if (mFile.getParentId() != FileDataStorageManager.ROOT_PARENT_ID) {
+      parentPath=new File(mFile.getRemotePath()).getParent();
+      parentPath=parentPath.endsWith(OCFile.PATH_SEPARATOR) ? parentPath : parentPath + OCFile.PATH_SEPARATOR;
+      parentDir=storageManager.getFileByPath(parentPath);
+      moveCount++;
+    }
+ else {
+      parentDir=storageManager.getFileByPath(OCFile.ROOT_PATH);
+    }
+    while (parentDir == null) {
+      parentPath=new File(parentPath).getParent();
+      parentPath=parentPath.endsWith(OCFile.PATH_SEPARATOR) ? parentPath : parentPath + OCFile.PATH_SEPARATOR;
+      parentDir=storageManager.getFileByPath(parentPath);
+      moveCount++;
+    }
+    mFile=parentDir;
+  }
+  if (mFile != null) {
+    listDirectory(mFile);
+    mContainerActivity.startSyncFolderOperation(mFile);
+  }
+  return moveCount;
+}

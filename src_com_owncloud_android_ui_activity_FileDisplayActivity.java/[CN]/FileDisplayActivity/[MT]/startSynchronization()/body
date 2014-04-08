@@ -1,6 +1,22 @@
 {
-  ContentResolver.cancelSync(null,AccountAuthenticator.AUTH_TOKEN_TYPE);
-  Bundle bundle=new Bundle();
-  bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL,true);
-  ContentResolver.requestSync(AccountUtils.getCurrentOwnCloudAccount(this),AccountAuthenticator.AUTH_TOKEN_TYPE,bundle);
+  Log_OC.e(TAG,"Got to start sync");
+  if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.KITKAT) {
+    Log_OC.e(TAG,"Canceling all syncs for " + MainApp.getAuthority());
+    ContentResolver.cancelSync(null,MainApp.getAuthority());
+    Bundle bundle=new Bundle();
+    bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL,true);
+    bundle.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED,true);
+    Log_OC.e(TAG,"Requesting sync for " + getAccount().name + " at "+ MainApp.getAuthority());
+    ContentResolver.requestSync(getAccount(),MainApp.getAuthority(),bundle);
+  }
+ else {
+    Log_OC.e(TAG,"Requesting sync for " + getAccount().name + " at "+ MainApp.getAuthority()+ " with new API");
+    SyncRequest.Builder builder=new SyncRequest.Builder();
+    builder.setSyncAdapter(getAccount(),MainApp.getAuthority());
+    builder.setExpedited(true);
+    builder.setManual(true);
+    builder.syncOnce();
+    SyncRequest request=builder.build();
+    ContentResolver.requestSync(request);
+  }
 }

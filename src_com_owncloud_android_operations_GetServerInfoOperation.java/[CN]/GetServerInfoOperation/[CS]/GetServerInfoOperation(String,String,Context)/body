@@ -1,0 +1,6 @@
+{
+  mUrl=trimWebdavSuffix(url);
+  mAuthTokenType=authTokenType;
+  mContext=context;
+  mResultData=new ServerInfo();
+}

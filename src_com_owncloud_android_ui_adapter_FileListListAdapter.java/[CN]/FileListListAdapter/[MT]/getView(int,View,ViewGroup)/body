@@ -32,7 +32,7 @@
     TextView fileSizeV=(TextView)view.findViewById(R.id.file_size);
     TextView lastModV=(TextView)view.findViewById(R.id.last_mod);
     ImageView checkBoxV=(ImageView)view.findViewById(R.id.custom_checkbox);
-    if (!file.isDirectory()) {
+    if (!file.isFolder()) {
       fileSizeV.setVisibility(View.VISIBLE);
       fileSizeV.setText(DisplayUtils.bytesToHumanReadable(file.getFileLength()));
       lastModV.setVisibility(View.VISIBLE);
@@ -58,10 +58,18 @@
       }
     }
  else {
-      fileSizeV.setVisibility(View.GONE);
-      lastModV.setVisibility(View.GONE);
+      fileSizeV.setVisibility(View.INVISIBLE);
+      lastModV.setVisibility(View.VISIBLE);
+      lastModV.setText(DisplayUtils.unixTimeToHumanReadable(file.getModificationTimestamp()));
       checkBoxV.setVisibility(View.GONE);
       view.findViewById(R.id.imageView3).setVisibility(View.GONE);
+    }
+    ImageView shareIconV=(ImageView)view.findViewById(R.id.shareIcon);
+    if (file.isShareByLink()) {
+      shareIconV.setVisibility(View.VISIBLE);
+    }
+ else {
+      shareIconV.setVisibility(View.INVISIBLE);
     }
   }
   return view;

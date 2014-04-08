@@ -1,5 +1,5 @@
 {
-  DataStorageManager storageManager=mContainerActivity.getStorageManager();
+  FileDataStorageManager storageManager=mContainerActivity.getStorageManager();
   if (storageManager != null) {
     if (directory == null) {
       if (mFile != null) {
@@ -10,7 +10,7 @@
         if (directory == null)         return;
       }
     }
-    if (!directory.isDirectory()) {
+    if (!directory.isFolder()) {
       Log_OC.w(TAG,"You see, that is not a directory -> " + directory.toString());
       directory=storageManager.getFileById(directory.getParentId());
     }

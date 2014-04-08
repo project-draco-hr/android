@@ -1,0 +1,20 @@
+{
+  RemoteOperationResult contentsResult=null;
+  for (  SynchronizeFileOperation op : filesToSyncContents) {
+    contentsResult=op.execute(client);
+    if (!contentsResult.isSuccess()) {
+      if (contentsResult.getCode() == ResultCode.SYNC_CONFLICT) {
+        mConflictsFound++;
+      }
+ else {
+        mFailsInFavouritesFound++;
+        if (contentsResult.getException() != null) {
+          Log_OC.e(TAG,"Error while synchronizing favourites : " + contentsResult.getLogMessage(),contentsResult.getException());
+        }
+ else {
+          Log_OC.e(TAG,"Error while synchronizing favourites : " + contentsResult.getLogMessage());
+        }
+      }
+    }
+  }
+}

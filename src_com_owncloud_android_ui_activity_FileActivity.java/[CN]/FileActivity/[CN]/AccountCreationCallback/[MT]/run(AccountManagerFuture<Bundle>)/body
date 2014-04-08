@@ -1,0 +1,28 @@
+{
+  FileActivity.this.mRedirectingToSetupAccount=false;
+  boolean accountWasSet=false;
+  if (future != null) {
+    try {
+      Bundle result;
+      result=future.getResult();
+      String name=result.getString(AccountManager.KEY_ACCOUNT_NAME);
+      String type=result.getString(AccountManager.KEY_ACCOUNT_TYPE);
+      if (AccountUtils.setCurrentOwnCloudAccount(getApplicationContext(),name)) {
+        setAccount(new Account(name,type),false);
+        accountWasSet=true;
+      }
+    }
+ catch (    OperationCanceledException e) {
+      Log_OC.d(TAG,"Account creation canceled");
+    }
+catch (    Exception e) {
+      Log_OC.e(TAG,"Account creation finished in exception: ",e);
+    }
+  }
+ else {
+    Log_OC.e(TAG,"Account creation callback with null bundle");
+  }
+  if (!accountWasSet) {
+    moveTaskToBack(true);
+  }
+}

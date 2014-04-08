@@ -1,0 +1,18 @@
+{
+  super.onActivityResult(requestCode,resultCode,data);
+  Log_OC.i(TAG,"result received. req: " + requestCode + " res: "+ resultCode);
+  if (requestCode == REQUEST_CODE_SETUP_ACCOUNT) {
+    dismissDialog(DIALOG_NO_ACCOUNT);
+    if (resultCode == RESULT_CANCELED) {
+      finish();
+    }
+    Account[] accounts=mAccountManager.getAccountsByType(MainApp.getAuthTokenType());
+    if (accounts.length == 0) {
+      showDialog(DIALOG_NO_ACCOUNT);
+    }
+ else {
+      mAccount=accounts[0];
+      populateDirectoryList();
+    }
+  }
+}

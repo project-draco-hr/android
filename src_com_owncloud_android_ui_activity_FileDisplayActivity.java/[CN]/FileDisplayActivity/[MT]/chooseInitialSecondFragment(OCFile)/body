@@ -1,0 +1,14 @@
+{
+  Fragment secondFragment=null;
+  if (file != null && !file.isFolder()) {
+    if (file.isDown() && PreviewMediaFragment.canBePreviewed(file) && file.getLastSyncDateForProperties() > 0) {
+      int startPlaybackPosition=getIntent().getIntExtra(PreviewVideoActivity.EXTRA_START_POSITION,0);
+      boolean autoplay=getIntent().getBooleanExtra(PreviewVideoActivity.EXTRA_AUTOPLAY,true);
+      secondFragment=new PreviewMediaFragment(file,getAccount(),startPlaybackPosition,autoplay);
+    }
+ else {
+      secondFragment=new FileDetailFragment(file,getAccount());
+    }
+  }
+  return secondFragment;
+}

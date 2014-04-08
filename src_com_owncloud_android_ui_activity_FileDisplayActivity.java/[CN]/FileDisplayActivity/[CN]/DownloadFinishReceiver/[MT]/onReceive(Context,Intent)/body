@@ -3,9 +3,13 @@
   String downloadedRemotePath=intent.getStringExtra(FileDownloader.EXTRA_REMOTE_PATH);
   boolean isDescendant=isDescendant(downloadedRemotePath);
   if (sameAccount && isDescendant) {
-    updateLeftPanel();
-    if (mDualPane) {
-      updateRightPanel(intent.getAction(),downloadedRemotePath,intent.getBooleanExtra(FileDownloader.EXTRA_DOWNLOAD_RESULT,false));
+    refeshListOfFilesFragment();
+    refreshSecondFragment(intent.getAction(),downloadedRemotePath,intent.getBooleanExtra(FileDownloader.EXTRA_DOWNLOAD_RESULT,false));
+  }
+  if (mWaitingToSend != null) {
+    mWaitingToSend=getStorageManager().getFileByPath(mWaitingToSend.getRemotePath());
+    if (mWaitingToSend.isDown()) {
+      sendDownloadedFile();
     }
   }
   removeStickyBroadcast(intent);

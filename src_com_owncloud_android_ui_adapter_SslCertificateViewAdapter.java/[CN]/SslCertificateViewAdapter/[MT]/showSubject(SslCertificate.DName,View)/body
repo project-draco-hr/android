@@ -1,0 +1,17 @@
+{
+  TextView cnView=((TextView)dialogView.findViewById(R.id.value_subject_CN));
+  cnView.setText(subject.getCName());
+  cnView.setVisibility(View.VISIBLE);
+  TextView oView=((TextView)dialogView.findViewById(R.id.value_subject_O));
+  oView.setText(subject.getOName());
+  oView.setVisibility(View.VISIBLE);
+  TextView ouView=((TextView)dialogView.findViewById(R.id.value_subject_OU));
+  ouView.setText(subject.getUName());
+  ouView.setVisibility(View.VISIBLE);
+  ((TextView)dialogView.findViewById(R.id.value_subject_C)).setVisibility(View.GONE);
+  ((TextView)dialogView.findViewById(R.id.value_subject_ST)).setVisibility(View.GONE);
+  ((TextView)dialogView.findViewById(R.id.value_subject_L)).setVisibility(View.GONE);
+  ((TextView)dialogView.findViewById(R.id.label_subject_C)).setVisibility(View.GONE);
+  ((TextView)dialogView.findViewById(R.id.label_subject_ST)).setVisibility(View.GONE);
+  ((TextView)dialogView.findViewById(R.id.label_subject_L)).setVisibility(View.GONE);
+}

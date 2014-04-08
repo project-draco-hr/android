@@ -6,5 +6,5 @@
     File localFile=new File(localPath);
     total+=localFile.length();
   }
-  return (FileStorageUtils.getUsableSpace(mAccount.name) >= total);
+  return (FileStorageUtils.getUsableSpace(mAccountOnCreation.name) >= total);
 }

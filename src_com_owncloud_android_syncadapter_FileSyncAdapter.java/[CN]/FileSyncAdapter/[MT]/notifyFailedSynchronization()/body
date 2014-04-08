@@ -1,7 +1,19 @@
 {
-  Notification notification=new Notification(R.drawable.icon,getContext().getString(R.string.sync_fail_ticker),System.currentTimeMillis());
-  notification.flags|=Notification.FLAG_AUTO_CANCEL;
-  notification.contentIntent=PendingIntent.getActivity(getContext().getApplicationContext(),(int)System.currentTimeMillis(),new Intent(),0);
-  notification.setLatestEventInfo(getContext().getApplicationContext(),getContext().getString(R.string.sync_fail_ticker),String.format(getContext().getString(R.string.sync_fail_content),getAccount().name),notification.contentIntent);
-  ((NotificationManager)getContext().getSystemService(Context.NOTIFICATION_SERVICE)).notify(R.string.sync_fail_ticker,notification);
+  NotificationCompat.Builder notificationBuilder=createNotificationBuilder();
+  notificationBuilder.setTicker(i18n(R.string.sync_fail_ticker));
+  boolean needsToUpdateCredentials=(mLastFailedResult != null && (mLastFailedResult.getCode() == ResultCode.UNAUTHORIZED || (mLastFailedResult.isIdPRedirection() && getClient().getCredentials() == null)));
+  notificationBuilder.setContentTitle(i18n(R.string.sync_fail_ticker));
+  if (needsToUpdateCredentials) {
+    Intent updateAccountCredentials=new Intent(getContext(),AuthenticatorActivity.class);
+    updateAccountCredentials.putExtra(AuthenticatorActivity.EXTRA_ACCOUNT,getAccount());
+    updateAccountCredentials.putExtra(AuthenticatorActivity.EXTRA_ACTION,AuthenticatorActivity.ACTION_UPDATE_EXPIRED_TOKEN);
+    updateAccountCredentials.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    updateAccountCredentials.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+    updateAccountCredentials.addFlags(Intent.FLAG_FROM_BACKGROUND);
+    notificationBuilder.setContentIntent(PendingIntent.getActivity(getContext(),(int)System.currentTimeMillis(),updateAccountCredentials,PendingIntent.FLAG_ONE_SHOT)).setContentText(i18n(R.string.sync_fail_content_unauthorized,getAccount().name));
+  }
+ else {
+    notificationBuilder.setContentText(i18n(R.string.sync_fail_content,getAccount().name));
+  }
+  showNotification(R.string.sync_fail_ticker,notificationBuilder);
 }

@@ -1,0 +1,5 @@
+{
+  Intent register=new Intent(Intent.ACTION_VIEW,Uri.parse(getString(R.string.welcome_link_url)));
+  setResult(RESULT_CANCELED);
+  startActivity(register);
+}

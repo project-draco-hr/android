@@ -1,19 +1,16 @@
 {
-  dismissDialog(DIALOG_SHORT_WAIT);
+  dismissLoadingDialog();
   if (result.isSuccess()) {
     Toast msg=Toast.makeText(this,R.string.remove_success_msg,Toast.LENGTH_LONG);
     msg.show();
     OCFile removedFile=operation.getFile();
-    if (mDualPane) {
-      FileFragment details=(FileFragment)getSupportFragmentManager().findFragmentByTag(FileDetailFragment.FTAG);
-      if (details != null && removedFile.equals(details.getFile())) {
-        FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.file_details_container,new FileDetailFragment(null,null));
-        transaction.commit();
-      }
+    getSecondFragment();
+    FileFragment second=getSecondFragment();
+    if (second != null && removedFile.equals(second.getFile())) {
+      cleanSecondFragment();
     }
-    if (mStorageManager.getFileById(removedFile.getParentId()).equals(mCurrentDir)) {
-      mFileList.listDirectory();
+    if (getStorageManager().getFileById(removedFile.getParentId()).equals(getCurrentDir())) {
+      refeshListOfFilesFragment();
     }
   }
  else {
@@ -21,7 +18,7 @@
     msg.show();
     if (result.isSslRecoverableException()) {
       mLastSslUntrustedServerResult=result;
-      showDialog(DIALOG_SSL_VALIDATOR);
+      showUntrustedCertDialog(mLastSslUntrustedServerResult);
     }
   }
 }

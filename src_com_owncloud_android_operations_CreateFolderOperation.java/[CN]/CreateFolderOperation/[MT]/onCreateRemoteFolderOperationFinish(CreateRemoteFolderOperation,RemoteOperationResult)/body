@@ -1,0 +1,8 @@
+{
+  if (result.isSuccess()) {
+    saveFolderInDB();
+  }
+ else {
+    Log_OC.e(TAG,mRemotePath + "hasn't been created");
+  }
+}

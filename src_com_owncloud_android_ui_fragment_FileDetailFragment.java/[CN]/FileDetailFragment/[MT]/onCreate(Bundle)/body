@@ -1,4 +1,5 @@
 {
   super.onCreate(savedInstanceState);
   mHandler=new Handler();
+  setHasOptionsMenu(true);
 }

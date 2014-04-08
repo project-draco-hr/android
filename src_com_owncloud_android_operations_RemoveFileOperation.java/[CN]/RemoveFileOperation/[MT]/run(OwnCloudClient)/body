@@ -1,0 +1,9 @@
+{
+  RemoteOperationResult result=null;
+  RemoveRemoteFileOperation operation=new RemoveRemoteFileOperation(mFileToRemove.getRemotePath());
+  result=operation.execute(client);
+  if (result.isSuccess() || result.getCode() == ResultCode.FILE_NOT_FOUND) {
+    mDataStorageManager.removeFile(mFileToRemove,true,mDeleteLocalCopy);
+  }
+  return result;
+}

@@ -1,0 +1,10 @@
+{
+  if (mServerStatusIcon == 0 && mServerStatusText == 0) {
+    mServerStatusView.setVisibility(View.INVISIBLE);
+  }
+ else {
+    mServerStatusView.setText(mServerStatusText);
+    mServerStatusView.setCompoundDrawablesWithIntrinsicBounds(mServerStatusIcon,0,0,0);
+    mServerStatusView.setVisibility(View.VISIBLE);
+  }
+}

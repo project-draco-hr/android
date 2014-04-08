@@ -1,0 +1,11 @@
+{
+  Account[] ocAccounts=AccountManager.get(context).getAccountsByType(MainApp.getAccountType());
+  if (account != null && account.name != null) {
+    for (    Account ac : ocAccounts) {
+      if (ac.name.equals(account.name)) {
+        return true;
+      }
+    }
+  }
+  return false;
+}

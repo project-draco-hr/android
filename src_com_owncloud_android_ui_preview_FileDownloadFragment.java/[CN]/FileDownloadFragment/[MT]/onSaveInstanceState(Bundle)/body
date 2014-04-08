@@ -1,6 +1,6 @@
 {
   super.onSaveInstanceState(outState);
-  outState.putParcelable(FileDownloadFragment.EXTRA_FILE,mFile);
+  outState.putParcelable(FileDownloadFragment.EXTRA_FILE,getFile());
   outState.putParcelable(FileDownloadFragment.EXTRA_ACCOUNT,mAccount);
   outState.putBoolean(FileDownloadFragment.EXTRA_ERROR,mError);
 }

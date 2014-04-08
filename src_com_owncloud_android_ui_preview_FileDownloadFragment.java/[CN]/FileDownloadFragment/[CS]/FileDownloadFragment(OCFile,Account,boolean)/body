@@ -1,7 +1,6 @@
 {
-  mFile=fileToDetail;
+  super(fileToDetail);
   mAccount=ocAccount;
-  mStorageManager=null;
   mProgressListener=null;
   mListening=false;
   mIgnoreFirstSavedState=ignoreFirstSavedState;

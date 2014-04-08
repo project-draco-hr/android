@@ -1,5 +1,0 @@
-{
-  Intent register=new Intent(Intent.ACTION_VIEW,Uri.parse(getString(R.string.url_account_register)));
-  setResult(RESULT_CANCELED);
-  startActivity(register);
-}

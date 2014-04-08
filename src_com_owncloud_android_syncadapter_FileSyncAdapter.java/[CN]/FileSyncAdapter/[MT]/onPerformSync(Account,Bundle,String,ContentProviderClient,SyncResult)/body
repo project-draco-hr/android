@@ -10,26 +10,31 @@
   mSyncResult.fullSyncRequested=false;
   mSyncResult.delayUntil=60 * 60 * 24;
   this.setAccount(account);
-  this.setContentProvider(provider);
-  this.setStorageManager(new FileDataStorageManager(account,getContentProvider()));
+  this.setContentProviderClient(providerClient);
+  this.setStorageManager(new FileDataStorageManager(account,providerClient));
   try {
     this.initClientForCurrentAccount();
   }
- catch (  UnknownHostException e) {
+ catch (  IOException e) {
+    mSyncResult.tooManyRetries=true;
+    notifyFailedSynchronization();
+    return;
+  }
+catch (  AccountsException e) {
     mSyncResult.tooManyRetries=true;
     notifyFailedSynchronization();
     return;
   }
   Log_OC.d(TAG,"Synchronization of ownCloud account " + account.name + " starting");
-  sendStickyBroadcast(true,null,null);
+  sendLocalBroadcast(EVENT_FULL_SYNC_START,null,null);
   try {
     updateOCVersion();
     mCurrentSyncTime=System.currentTimeMillis();
     if (!mCancellation) {
-      fetchData(OCFile.PATH_SEPARATOR,DataStorageManager.ROOT_PARENT_ID);
+      synchronizeFolder(getStorageManager().getFileByPath(OCFile.ROOT_PATH));
     }
  else {
-      Log_OC.d(TAG,"Leaving synchronization before any remote request due to cancellation was requested");
+      Log_OC.d(TAG,"Leaving synchronization before synchronizing the root folder because cancelation request");
     }
   }
   finally {
@@ -43,6 +48,6 @@
     if (mForgottenLocalFiles.size() > 0) {
       notifyForgottenLocalFiles();
     }
-    sendStickyBroadcast(false,null,mLastFailedResult);
+    sendLocalBroadcast(EVENT_FULL_SYNC_END,null,mLastFailedResult);
   }
 }

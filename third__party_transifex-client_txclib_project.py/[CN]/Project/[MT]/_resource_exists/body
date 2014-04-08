@@ -1,3 +1,0 @@
-def _resource_exists(self, stats):
-    'Check if resource exists.\n\n        Args:\n            stats: The statistics dict as returned by Tx.\n        Returns:\n            True, if the resource exists in the server.\n        '
-    return bool(stats)

@@ -1,0 +1,13 @@
+{
+  super.onAccountSet(stateWasRecovered);
+  if (getAccount() != null) {
+    if (!mAccountOnCreation.equals(getAccount())) {
+      setResult(RESULT_CANCELED);
+      finish();
+    }
+  }
+ else {
+    setResult(RESULT_CANCELED);
+    finish();
+  }
+}

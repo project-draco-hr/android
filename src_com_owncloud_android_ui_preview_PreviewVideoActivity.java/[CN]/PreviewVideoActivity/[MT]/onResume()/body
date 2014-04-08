@@ -1,4 +1,0 @@
-{
-  super.onResume();
-  Log.e(TAG,"ACTIVTIY\t\tonResume");
-}

@@ -1,7 +1,0 @@
-def _set_resource_option(self, resources, key, value):
-    'Set options in the config file.\n\n        If resources is empty. set the option globally.\n        '
-    if (not resources):
-        self.config.set('main', key, value)
-        return
-    for r in resources:
-        self.config.set(r, key, value)

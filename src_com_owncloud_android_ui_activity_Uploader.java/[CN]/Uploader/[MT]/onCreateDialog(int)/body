@@ -1,0 +1,74 @@
+{
+  final AlertDialog.Builder builder=new Builder(this);
+switch (id) {
+case DIALOG_WAITING:
+    ProgressDialog pDialog=new ProgressDialog(this);
+  pDialog.setIndeterminate(false);
+pDialog.setCancelable(false);
+pDialog.setMessage(getResources().getString(R.string.uploader_info_uploading));
+return pDialog;
+case DIALOG_NO_ACCOUNT:
+builder.setIcon(android.R.drawable.ic_dialog_alert);
+builder.setTitle(R.string.uploader_wrn_no_account_title);
+builder.setMessage(String.format(getString(R.string.uploader_wrn_no_account_text),getString(R.string.app_name)));
+builder.setCancelable(false);
+builder.setPositiveButton(R.string.uploader_wrn_no_account_setup_btn_text,new OnClickListener(){
+@Override public void onClick(DialogInterface dialog,int which){
+if (android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.ECLAIR_MR1) {
+Intent intent=new Intent(android.provider.Settings.ACTION_ADD_ACCOUNT);
+intent.putExtra("authorities",new String[]{MainApp.getAuthTokenType()});
+startActivityForResult(intent,REQUEST_CODE_SETUP_ACCOUNT);
+}
+ else {
+Intent intent=new Intent(getBaseContext(),AccountAuthenticator.class);
+startActivityForResult(intent,REQUEST_CODE_SETUP_ACCOUNT);
+}
+}
+}
+);
+builder.setNegativeButton(R.string.uploader_wrn_no_account_quit_btn_text,new OnClickListener(){
+@Override public void onClick(DialogInterface dialog,int which){
+finish();
+}
+}
+);
+return builder.create();
+case DIALOG_MULTIPLE_ACCOUNT:
+CharSequence ac[]=new CharSequence[mAccountManager.getAccountsByType(MainApp.getAccountType()).length];
+for (int i=0; i < ac.length; ++i) {
+ac[i]=mAccountManager.getAccountsByType(MainApp.getAccountType())[i].name;
+}
+builder.setTitle(R.string.common_choose_account);
+builder.setItems(ac,new OnClickListener(){
+@Override public void onClick(DialogInterface dialog,int which){
+mAccount=mAccountManager.getAccountsByType(MainApp.getAccountType())[which];
+mStorageManager=new FileDataStorageManager(mAccount,getContentResolver());
+populateDirectoryList();
+}
+}
+);
+builder.setCancelable(true);
+builder.setOnCancelListener(new OnCancelListener(){
+@Override public void onCancel(DialogInterface dialog){
+dialog.cancel();
+finish();
+}
+}
+);
+return builder.create();
+case DIALOG_NO_STREAM:
+builder.setIcon(android.R.drawable.ic_dialog_alert);
+builder.setTitle(R.string.uploader_wrn_no_content_title);
+builder.setMessage(R.string.uploader_wrn_no_content_text);
+builder.setCancelable(false);
+builder.setNegativeButton(R.string.common_cancel,new OnClickListener(){
+@Override public void onClick(DialogInterface dialog,int which){
+finish();
+}
+}
+);
+return builder.create();
+default :
+throw new IllegalArgumentException("Unknown dialog id: " + id);
+}
+}

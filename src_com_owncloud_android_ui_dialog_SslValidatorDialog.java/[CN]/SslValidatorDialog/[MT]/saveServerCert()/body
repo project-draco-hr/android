@@ -1,5 +1,5 @@
 {
   if (mException.getServerCertificate() != null) {
-    OwnCloudClientUtils.addCertToKnownServersStore(mException.getServerCertificate(),getContext());
+    NetworkUtils.addCertToKnownServersStore(mException.getServerCertificate(),getContext());
   }
 }
