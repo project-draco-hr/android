@@ -4,7 +4,7 @@
     if (file.isFolder()) {
       listDirectory(file);
       mContainerActivity.onBrowsedDownTo(file);
-      saveIndexAndPosition(position);
+      saveIndexAndTopPosition(position);
     }
  else {
       if (PreviewImageFragment.canBePreviewed(file)) {

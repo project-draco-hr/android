@@ -5,10 +5,12 @@
   if (savedInstanceState != null) {
     mFile=savedInstanceState.getParcelable(EXTRA_FILE);
     mIndexes=savedInstanceState.getIntegerArrayList(KEY_INDEXES);
+    mFirstPositions=savedInstanceState.getIntegerArrayList(KEY_FIRST_POSITIONS);
     mTops=savedInstanceState.getIntegerArrayList(KEY_TOPS);
   }
  else {
     mIndexes=new ArrayList<Integer>();
+    mFirstPositions=new ArrayList<Integer>();
     mTops=new ArrayList<Integer>();
   }
   setListAdapter(mAdapter);

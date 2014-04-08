@@ -1,0 +1,8 @@
+{
+  mIndexes.add(index);
+  int firstPosition=mList.getFirstVisiblePosition();
+  mFirstPositions.add(firstPosition);
+  View view=mList.getChildAt(0);
+  int top=(view == null) ? 0 : view.getTop();
+  mTops.add(top);
+}

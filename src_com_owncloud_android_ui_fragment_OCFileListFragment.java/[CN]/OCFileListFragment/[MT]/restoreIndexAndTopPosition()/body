@@ -1,0 +1,15 @@
+{
+  int index=mIndexes.get(mIndexes.size() - 1);
+  mIndexes.remove(mIndexes.size() - 1);
+  int firstPosition=mFirstPositions.get(mFirstPositions.size() - 1);
+  mFirstPositions.remove(mFirstPositions.size() - 1);
+  int top=mTops.get(mTops.size() - 1);
+  mTops.remove(mTops.size() - 1);
+  mList.setSelectionFromTop(firstPosition,top);
+  View view=mList.getChildAt(0);
+  int indexPosition=view.getHeight() * index;
+  int height=mList.getHeight();
+  if (indexPosition > height) {
+    mList.smoothScrollToPosition(index);
+  }
+}
