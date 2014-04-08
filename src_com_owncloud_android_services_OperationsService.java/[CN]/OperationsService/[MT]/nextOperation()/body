@@ -14,7 +14,19 @@ synchronized (mPendingOperations) {
           mStorageManager=new FileDataStorageManager(mLastTarget.mAccount,getContentResolver());
         }
  else {
-          mOwnCloudClient=OwnCloudClientFactory.createOwnCloudClient(mLastTarget.mServerUrl,getApplicationContext(),true);
+          mOwnCloudClient=OwnCloudClientFactory.createOwnCloudClient(mLastTarget.mServerUrl,getApplicationContext(),mLastTarget.mFollowRedirects);
+          if (mLastTarget.mWebDavUrl != null) {
+            mOwnCloudClient.setWebdavUri(Uri.parse(mLastTarget.mWebDavUrl));
+          }
+          if (mLastTarget.mUsername != null && mLastTarget.mPassword != null) {
+            mOwnCloudClient.setBasicCredentials(mLastTarget.mUsername,mLastTarget.mPassword);
+          }
+ else           if (mLastTarget.mAuthToken != null) {
+            mOwnCloudClient.setBearerCredentials(mLastTarget.mAuthToken);
+          }
+ else           if (mLastTarget.mCookie != null) {
+            mOwnCloudClient.setSsoSessionCookie(mLastTarget.mCookie);
+          }
           mStorageManager=null;
         }
       }
@@ -57,6 +69,6 @@ synchronized (mPendingOperations) {
         mPendingOperations.poll();
       }
     }
-    callbackOperationListeners(mLastTarget,mCurrentOperation,result);
+    dispatchResultToOperationListeners(mLastTarget,mCurrentOperation,result);
   }
 }

@@ -1,20 +1,21 @@
 {
-  String uri=trimUrlWebdav(mHostUrlInput.getText().toString().trim());
-  if (!mHostUrlInputEnabled) {
-    uri=getString(R.string.server_url);
-  }
+  String uri=mHostUrlInput.getText().toString().trim();
   mServerIsValid=false;
   mServerIsChecked=false;
   mOkButton.setEnabled(false);
-  mDiscoveredVersion=null;
-  hideRefreshButton();
+  mServerInfo=new GetServerInfoOperation.ServerInfo();
+  showRefreshButton(false);
   if (uri.length() != 0) {
     mServerStatusText=R.string.auth_testing_connection;
     mServerStatusIcon=R.drawable.progress_small;
     showServerStatus();
-    mOcServerChkOperation=new GetRemoteStatusOperation(uri,this);
-    OwnCloudClient client=OwnCloudClientFactory.createOwnCloudClient(Uri.parse(uri),this,true);
-    mOperationThread=mOcServerChkOperation.execute(client,this,mHandler);
+    Intent getServerInfoIntent=new Intent();
+    getServerInfoIntent.setAction(OperationsService.ACTION_GET_SERVER_INFO);
+    getServerInfoIntent.putExtra(OperationsService.EXTRA_SERVER_URL,uri);
+    getServerInfoIntent.putExtra(OperationsService.EXTRA_AUTH_TOKEN_TYPE,mAuthTokenType);
+    if (mOperationsServiceBinder != null) {
+      mWaitingForOpId=mOperationsServiceBinder.newOperation(getServerInfoIntent);
+    }
   }
  else {
     mServerStatusText=0;

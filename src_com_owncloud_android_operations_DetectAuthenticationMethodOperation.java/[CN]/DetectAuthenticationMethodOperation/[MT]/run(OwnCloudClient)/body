@@ -2,6 +2,7 @@
   RemoteOperationResult result=null;
   AuthenticationMethod authMethod=AuthenticationMethod.UNKNOWN;
   RemoteOperation operation=new ExistenceCheckRemoteOperation("",mContext,false);
+  client.setWebdavUri(Uri.parse(mWebDavUrl));
   client.setBasicCredentials("","");
   client.setFollowRedirects(false);
   result=operation.execute(client);
@@ -27,6 +28,9 @@
     authMethod=AuthenticationMethod.SAML_WEB_SSO;
   }
   Log.d(TAG,"Authentication method found: " + authenticationMethodToString(authMethod));
+  if (!authMethod.equals(AuthenticationMethod.UNKNOWN)) {
+    result=new RemoteOperationResult(true,result.getHttpCode(),null);
+  }
   ArrayList<Object> data=new ArrayList<Object>();
   data.add(authMethod);
   result.setData(data);

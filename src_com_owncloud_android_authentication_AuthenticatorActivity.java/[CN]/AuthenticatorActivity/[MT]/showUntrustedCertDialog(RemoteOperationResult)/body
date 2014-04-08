@@ -3,5 +3,5 @@
   FragmentManager fm=getSupportFragmentManager();
   FragmentTransaction ft=fm.beginTransaction();
   ft.addToBackStack(null);
-  dialog.show(ft,DIALOG_UNTRUSTED_CERT);
+  dialog.show(ft,UNTRUSTED_CERT_DIALOG_TAG);
 }

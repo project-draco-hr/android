@@ -29,6 +29,9 @@
         }
  else {
           result=new RemoteOperationResult(true,status,postMethod.getResponseHeaders());
+          ArrayList<Object> data=new ArrayList<Object>();
+          data.add(mResultTokenMap);
+          result.setData(data);
         }
       }
  else {

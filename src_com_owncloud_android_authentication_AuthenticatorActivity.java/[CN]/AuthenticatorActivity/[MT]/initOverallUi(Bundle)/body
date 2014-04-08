@@ -1,0 +1,26 @@
+{
+  boolean isWelcomeLinkVisible=getResources().getBoolean(R.bool.show_welcome_link);
+  String instructionsMessageText=null;
+  if (mAction == ACTION_UPDATE_EXPIRED_TOKEN) {
+    if (AccountTypeUtils.getAuthTokenTypeAccessToken(MainApp.getAccountType()).equals(mAuthTokenType)) {
+      instructionsMessageText=getString(R.string.auth_expired_oauth_token_toast);
+    }
+ else     if (AccountTypeUtils.getAuthTokenTypeSamlSessionCookie(MainApp.getAccountType()).equals(mAuthTokenType)) {
+      instructionsMessageText=getString(R.string.auth_expired_saml_sso_token_toast);
+    }
+ else {
+      instructionsMessageText=getString(R.string.auth_expired_basic_auth_toast);
+    }
+  }
+  Button welcomeLink=(Button)findViewById(R.id.welcome_link);
+  welcomeLink.setVisibility(isWelcomeLinkVisible ? View.VISIBLE : View.GONE);
+  welcomeLink.setText(String.format(getString(R.string.auth_register),getString(R.string.app_name)));
+  TextView instructionsView=(TextView)findViewById(R.id.instructions_message);
+  if (instructionsMessageText != null) {
+    instructionsView.setVisibility(View.VISIBLE);
+    instructionsView.setText(instructionsMessageText);
+  }
+ else {
+    instructionsView.setVisibility(View.GONE);
+  }
+}

@@ -1,0 +1,82 @@
+{
+  boolean isUrlInputAllowed=getResources().getBoolean(R.bool.show_server_url_input);
+  if (savedInstanceState == null) {
+    if (mAccount != null) {
+      mServerInfo.mBaseUrl=mAccountMgr.getUserData(mAccount,Constants.KEY_OC_BASE_URL);
+      mServerInfo.mIsSslConn=mServerInfo.mBaseUrl.startsWith("https://");
+      String ocVersion=mAccountMgr.getUserData(mAccount,Constants.KEY_OC_VERSION);
+      if (ocVersion != null) {
+        mServerInfo.mVersion=new OwnCloudVersion(ocVersion);
+      }
+    }
+ else {
+      mServerInfo.mBaseUrl=getString(R.string.server_url).trim();
+      mServerInfo.mIsSslConn=mServerInfo.mBaseUrl.startsWith("https://");
+    }
+  }
+ else {
+    mServerStatusText=savedInstanceState.getInt(KEY_SERVER_STATUS_TEXT);
+    mServerStatusIcon=savedInstanceState.getInt(KEY_SERVER_STATUS_ICON);
+    mServerIsValid=savedInstanceState.getBoolean(KEY_SERVER_VALID);
+    mServerIsChecked=savedInstanceState.getBoolean(KEY_SERVER_CHECKED);
+    mServerInfo.mIsSslConn=savedInstanceState.getBoolean(KEY_IS_SSL_CONN);
+    mServerInfo.mBaseUrl=savedInstanceState.getString(KEY_HOST_URL_TEXT);
+    String ocVersion=savedInstanceState.getString(KEY_OC_VERSION);
+    if (ocVersion != null) {
+      mServerInfo.mVersion=new OwnCloudVersion(ocVersion);
+    }
+    mServerInfo.mAuthMethod=AuthenticationMethod.valueOf(savedInstanceState.getString(KEY_SERVER_AUTH_METHOD));
+  }
+  mHostUrlInput=(EditText)findViewById(R.id.hostUrlInput);
+  mHostUrlInput.setText(mServerInfo.mBaseUrl);
+  if (mAction != ACTION_CREATE) {
+    mHostUrlInput.setEnabled(false);
+    mHostUrlInput.setFocusable(false);
+  }
+  if (isUrlInputAllowed) {
+    mRefreshButton=findViewById(R.id.embeddedRefreshButton);
+  }
+ else {
+    findViewById(R.id.hostUrlFrame).setVisibility(View.GONE);
+    mRefreshButton=findViewById(R.id.centeredRefreshButton);
+  }
+  showRefreshButton(mServerIsChecked && !mServerIsValid && mWaitingForOpId > Integer.MAX_VALUE);
+  mServerStatusView=(TextView)findViewById(R.id.server_status_text);
+  showServerStatus();
+  mHostUrlInput.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+  mHostUrlInput.setOnEditorActionListener(this);
+  mHostUrlInputWatcher=new TextWatcher(){
+    @Override public void afterTextChanged(    Editable s){
+      if (mOkButton.isEnabled() && !mServerInfo.mBaseUrl.equals(normalizeUrl(s.toString(),mServerInfo.mIsSslConn))) {
+        mOkButton.setEnabled(false);
+      }
+    }
+    @Override public void beforeTextChanged(    CharSequence s,    int start,    int count,    int after){
+    }
+    @Override public void onTextChanged(    CharSequence s,    int start,    int before,    int count){
+      if (mAuthStatusIcon != 0) {
+        Log_OC.d(TAG,"onTextChanged: hiding authentication status");
+        mAuthStatusIcon=0;
+        mAuthStatusText=0;
+        showAuthStatus();
+      }
+    }
+  }
+;
+  findViewById(R.id.scroll).setOnTouchListener(new OnTouchListener(){
+    @Override public boolean onTouch(    View view,    MotionEvent event){
+      if (event.getAction() == MotionEvent.ACTION_DOWN) {
+        if (AccountTypeUtils.getAuthTokenTypeSamlSessionCookie(MainApp.getAccountType()).equals(mAuthTokenType) && mHostUrlInput.hasFocus()) {
+          checkOcServer();
+        }
+      }
+      return false;
+    }
+  }
+);
+  if (savedInstanceState == null) {
+    if (mAction != ACTION_CREATE || !isUrlInputAllowed) {
+      checkOcServer();
+    }
+  }
+}

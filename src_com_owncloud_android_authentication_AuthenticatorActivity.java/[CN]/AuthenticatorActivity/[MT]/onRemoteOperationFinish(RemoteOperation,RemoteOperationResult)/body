@@ -1,22 +1,21 @@
 {
-  if (operation instanceof GetRemoteStatusOperation) {
-    onOcServerCheckFinish((GetRemoteStatusOperation)operation,result);
+  if (operation instanceof GetServerInfoOperation) {
+    if (operation.hashCode() == mWaitingForOpId) {
+      onGetServerInfoFinish(result);
+    }
   }
  else   if (operation instanceof OAuth2GetAccessToken) {
-    onGetOAuthAccessTokenFinish((OAuth2GetAccessToken)operation,result);
+    onGetOAuthAccessTokenFinish(result);
   }
  else   if (operation instanceof ExistenceCheckRemoteOperation) {
     if (AccountTypeUtils.getAuthTokenTypeSamlSessionCookie(MainApp.getAccountType()).equals(mAuthTokenType)) {
-      onSamlBasedFederatedSingleSignOnAuthorizationStart(operation,result);
+      onSamlBasedFederatedSingleSignOnAuthorizationStart(result);
     }
  else {
-      onAuthorizationCheckFinish((ExistenceCheckRemoteOperation)operation,result);
+      onAuthorizationCheckFinish(result);
     }
   }
  else   if (operation instanceof GetRemoteUserNameOperation) {
-    onGetUserNameFinish((GetRemoteUserNameOperation)operation,result);
-  }
- else   if (operation instanceof DetectAuthenticationMethodOperation) {
-    onDetectAutheticationFinish((DetectAuthenticationMethodOperation)operation,result);
+    onGetUserNameFinish(result);
   }
 }

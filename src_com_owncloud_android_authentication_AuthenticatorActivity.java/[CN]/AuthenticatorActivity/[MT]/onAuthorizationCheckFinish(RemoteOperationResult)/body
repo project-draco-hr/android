@@ -1,0 +1,38 @@
+{
+  mWaitingForOpId=Long.MAX_VALUE;
+  dismissDialog(WAIT_DIALOG_TAG);
+  if (result.isSuccess()) {
+    Log_OC.d(TAG,"Successful access - time to save the account");
+    boolean success=false;
+    if (mAction == ACTION_CREATE) {
+      success=createAccount();
+    }
+ else {
+      updateToken();
+      success=true;
+    }
+    if (success) {
+      finish();
+    }
+  }
+ else   if (result.isServerFail() || result.isException()) {
+    mServerIsChecked=true;
+    mServerIsValid=false;
+    mServerInfo=new GetServerInfoOperation.ServerInfo();
+    updateServerStatusIconAndText(result);
+    showServerStatus();
+    mAuthStatusIcon=0;
+    mAuthStatusText=0;
+    showAuthStatus();
+    showRefreshButton(true);
+    mOkButton.setEnabled(false);
+    if (result.getCode() == ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED) {
+      showUntrustedCertDialog(result);
+    }
+  }
+ else {
+    updateAuthStatusIconAndText(result);
+    showAuthStatus();
+    Log_OC.d(TAG,"Access failed: " + result.getLogMessage());
+  }
+}
