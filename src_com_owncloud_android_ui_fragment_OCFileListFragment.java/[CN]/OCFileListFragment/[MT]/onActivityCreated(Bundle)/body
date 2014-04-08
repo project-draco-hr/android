@@ -7,11 +7,13 @@
     mIndexes=savedInstanceState.getIntegerArrayList(KEY_INDEXES);
     mFirstPositions=savedInstanceState.getIntegerArrayList(KEY_FIRST_POSITIONS);
     mTops=savedInstanceState.getIntegerArrayList(KEY_TOPS);
+    mHeightCell=savedInstanceState.getInt(KEY_HEIGHT_CELL);
   }
  else {
     mIndexes=new ArrayList<Integer>();
     mFirstPositions=new ArrayList<Integer>();
     mTops=new ArrayList<Integer>();
+    mHeightCell=0;
   }
   setListAdapter(mAdapter);
   registerForContextMenu(getListView());

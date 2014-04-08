@@ -6,8 +6,7 @@
   int top=mTops.get(mTops.size() - 1);
   mTops.remove(mTops.size() - 1);
   mList.setSelectionFromTop(firstPosition,top);
-  View view=mList.getChildAt(0);
-  int indexPosition=view.getHeight() * index;
+  int indexPosition=mHeightCell * index;
   int height=mList.getHeight();
   if (indexPosition > height) {
     mList.smoothScrollToPosition(index);
