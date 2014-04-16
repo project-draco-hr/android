@@ -19,6 +19,7 @@
   }
   setContentView(R.layout.account_setup);
   initOverallUi(savedInstanceState);
+  mOkButton=findViewById(R.id.buttonOK);
   initServerPreFragment(savedInstanceState);
   initAuthorizationPreFragment(savedInstanceState);
 }
