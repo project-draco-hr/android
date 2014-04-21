@@ -74,9 +74,5 @@
     }
   }
 );
-  if (savedInstanceState == null) {
-    if (mAction != ACTION_CREATE || !isUrlInputAllowed) {
-      checkOcServer();
-    }
-  }
+  mPendingAutoCheck=(savedInstanceState == null && (mAction != ACTION_CREATE || !isUrlInputAllowed));
 }
