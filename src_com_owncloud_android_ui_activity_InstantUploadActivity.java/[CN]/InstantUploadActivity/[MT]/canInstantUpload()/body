@@ -1,5 +1,5 @@
 {
-  if (!InstantUploadBroadcastReceiver.isOnline(this) || (InstantUploadBroadcastReceiver.instantUploadViaWiFiOnly(this) && !InstantUploadBroadcastReceiver.isConnectedViaWiFi(this))) {
+  if (!InstantUploadBroadcastReceiver.isOnline(this) || (InstantUploadBroadcastReceiver.instantPictureUploadViaWiFiOnly(this) && !InstantUploadBroadcastReceiver.isConnectedViaWiFi(this))) {
     return false;
   }
  else {
