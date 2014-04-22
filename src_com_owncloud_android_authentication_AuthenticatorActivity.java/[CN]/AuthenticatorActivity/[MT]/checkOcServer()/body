@@ -16,6 +16,9 @@
     if (mOperationsServiceBinder != null) {
       mWaitingForOpId=mOperationsServiceBinder.newOperation(getServerInfoIntent);
     }
+ else {
+      Log_OC.wtf(TAG,"Server check tried with OperationService unbound!");
+    }
   }
  else {
     mServerStatusText=0;
