@@ -6,9 +6,11 @@
   }
   if (mStorageManager != null) {
     mFiles=mStorageManager.getFolderContent(mFile);
+    mCursor=mStorageManager.getContent(mFile.getParentId());
   }
  else {
     mFiles=null;
+    mCursor=null;
   }
   notifyDataSetChanged();
 }
