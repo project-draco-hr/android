@@ -3,7 +3,6 @@
   String downloadedRemotePath=intent.getStringExtra(FileDownloader.EXTRA_REMOTE_PATH);
   boolean isDescendant=isDescendant(downloadedRemotePath);
   if (sameAccount && isDescendant) {
-    refeshListOfFilesFragment();
     refreshSecondFragment(intent.getAction(),downloadedRemotePath,intent.getBooleanExtra(FileDownloader.EXTRA_DOWNLOAD_RESULT,false));
   }
   if (mWaitingToSend != null) {

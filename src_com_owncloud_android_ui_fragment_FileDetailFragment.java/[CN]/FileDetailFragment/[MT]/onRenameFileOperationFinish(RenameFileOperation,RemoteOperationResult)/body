@@ -2,7 +2,6 @@
   ((FileDisplayActivity)getActivity()).dismissLoadingDialog();
   if (result.isSuccess()) {
     updateFileDetails(((RenameFileOperation)operation).getFile(),mAccount);
-    mContainerActivity.onFileStateChanged();
   }
  else {
     if (result.getCode().equals(ResultCode.INVALID_LOCAL_FILE_NAME)) {

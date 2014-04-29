@@ -1,4 +1,5 @@
 {
+  Log_OC.d(TAG,"getContent start");
   Uri req_uri=Uri.withAppendedPath(ProviderTableMeta.CONTENT_URI_DIR,String.valueOf(parentId));
   Cursor c=null;
   if (getContentProviderClient() != null) {
@@ -13,5 +14,6 @@
  else {
     c=getContentResolver().query(req_uri,null,ProviderTableMeta.FILE_PARENT + "=?",new String[]{String.valueOf(parentId)},null);
   }
+  Log_OC.d(TAG,"getContent end");
   return c;
 }

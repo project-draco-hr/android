@@ -18,7 +18,6 @@
  else {
     if (operation.transferWasRequested()) {
       setButtonsForTransferring();
-      mContainerActivity.onFileStateChanged();
     }
  else {
       Toast msg=Toast.makeText(getActivity(),R.string.sync_file_nothing_to_do_msg,Toast.LENGTH_LONG);

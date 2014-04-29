@@ -9,7 +9,6 @@
       }
     }
     if (getStorageManager().getFileById(renamedFile.getParentId()).equals(getCurrentDir())) {
-      refeshListOfFilesFragment();
     }
   }
  else {

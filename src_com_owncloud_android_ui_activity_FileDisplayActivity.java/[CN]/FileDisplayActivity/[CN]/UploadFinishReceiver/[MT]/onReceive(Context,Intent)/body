@@ -5,6 +5,5 @@
   OCFile currentDir=getCurrentDir();
   boolean isDescendant=(currentDir != null) && (uploadedRemotePath != null) && (uploadedRemotePath.startsWith(currentDir.getRemotePath()));
   if (sameAccount && isDescendant) {
-    refeshListOfFilesFragment();
   }
 }

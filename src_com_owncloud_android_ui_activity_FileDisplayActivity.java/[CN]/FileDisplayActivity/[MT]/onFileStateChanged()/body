@@ -1,4 +1,2 @@
 {
-  refeshListOfFilesFragment();
-  updateNavigationElementsInActionBar(getSecondFragment().getFile());
 }
