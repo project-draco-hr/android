@@ -1,0 +1,15 @@
+{
+  Log_OC.d(TAG,"newView start");
+  LayoutInflater inflator=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+  View view=inflator.inflate(R.layout.list_item,null);
+  ListView parentList=(ListView)parent;
+  ImageView checkBoxV=(ImageView)view.findViewById(R.id.custom_checkbox);
+  if (parentList.getChoiceMode() == ListView.CHOICE_MODE_NONE) {
+    checkBoxV.setVisibility(View.GONE);
+  }
+ else {
+    checkBoxV.setVisibility(View.VISIBLE);
+  }
+  Log_OC.d(TAG,"newView end");
+  return view;
+}

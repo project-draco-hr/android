@@ -1,8 +1,0 @@
-{
-  super(context,R.layout.list_item,mCursor,cursorFrom,cursorTo,0);
-  mContext=context;
-  mAccount=AccountUtils.getCurrentOwnCloudAccount(mContext);
-  mTransferServiceGetter=transferServiceGetter;
-  mFile=file;
-  mCursor=file == null ? null : mStorageManager.getContent(file.getParentId());
-}

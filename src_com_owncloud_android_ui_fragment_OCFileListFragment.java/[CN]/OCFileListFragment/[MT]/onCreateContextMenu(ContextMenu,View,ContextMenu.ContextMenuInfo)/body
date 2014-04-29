@@ -3,7 +3,7 @@
   MenuInflater inflater=getActivity().getMenuInflater();
   inflater.inflate(R.menu.file_actions_menu,menu);
   AdapterContextMenuInfo info=(AdapterContextMenuInfo)menuInfo;
-  OCFile targetFile=(OCFile)mAdapter.getItem(info.position);
+  OCFile targetFile=mContainerActivity.getStorageManager().createFileInstance((Cursor)mAdapter.getItem(info.position));
   List<Integer> toHide=new ArrayList<Integer>();
   List<Integer> toDisable=new ArrayList<Integer>();
   MenuItem item=null;

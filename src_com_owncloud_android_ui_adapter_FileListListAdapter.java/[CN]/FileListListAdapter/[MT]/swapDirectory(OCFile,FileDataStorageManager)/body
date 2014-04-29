@@ -1,16 +1,15 @@
 {
-  mFile=directory;
   if (updatedStorageManager != null && updatedStorageManager != mStorageManager) {
     mStorageManager=updatedStorageManager;
     mAccount=AccountUtils.getCurrentOwnCloudAccount(mContext);
   }
+  Cursor newCursor=null;
   if (mStorageManager != null) {
-    mFiles=mStorageManager.getFolderContent(mFile);
-    mCursor=mStorageManager.getContent(mFile.getParentId());
+    newCursor=mStorageManager.getContent(folder.getFileId());
   }
- else {
-    mFiles=null;
-    mCursor=null;
+  Cursor oldCursor=swapCursor(newCursor);
+  if (oldCursor != null) {
+    oldCursor.close();
   }
   notifyDataSetChanged();
 }

@@ -1,3 +1,0 @@
-{
-  return mFiles != null ? mFiles.size() : 0;
-}
