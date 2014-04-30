@@ -7,7 +7,7 @@
     if (mMediaServiceBinder != null && mMediaController != null) {
       mMediaServiceBinder.unregisterMediaController(mMediaController);
     }
-    getActivity().unbindService(mMediaServiceConnection);
+    getSherlockActivity().unbindService(mMediaServiceConnection);
     mMediaServiceConnection=null;
     mMediaServiceBinder=null;
   }

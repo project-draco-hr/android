@@ -1,9 +1,9 @@
 {
   super.onCreateContextMenu(menu,v,menuInfo);
-  MenuInflater inflater=getActivity().getMenuInflater();
+  MenuInflater inflater=getSherlockActivity().getMenuInflater();
   inflater.inflate(R.menu.file_actions_menu,menu);
   AdapterContextMenuInfo info=(AdapterContextMenuInfo)menuInfo;
-  OCFile targetFile=mContainerActivity.getStorageManager().createFileInstance((Cursor)mAdapter.getItem(info.position));
+  OCFile targetFile=((FileActivity)getSherlockActivity()).getStorageManager().createFileInstance((Cursor)mAdapter.getItem(info.position));
   List<Integer> toHide=new ArrayList<Integer>();
   List<Integer> toDisable=new ArrayList<Integer>();
   MenuItem item=null;
@@ -15,7 +15,7 @@
     toHide.add(R.id.action_sync_file);
     toHide.add(R.id.action_see_details);
     toHide.add(R.id.action_send_file);
-    if (mContainerActivity.getFileDownloaderBinder().isDownloading(AccountUtils.getCurrentOwnCloudAccount(getActivity()),targetFile) || mContainerActivity.getFileUploaderBinder().isUploading(AccountUtils.getCurrentOwnCloudAccount(getActivity()),targetFile)) {
+    if (mContainerActivity.getFileDownloaderBinder().isDownloading(AccountUtils.getCurrentOwnCloudAccount(getSherlockActivity()),targetFile) || mContainerActivity.getFileUploaderBinder().isUploading(AccountUtils.getCurrentOwnCloudAccount(getSherlockActivity()),targetFile)) {
       toDisable.add(R.id.action_rename_file);
       toDisable.add(R.id.action_remove_file);
     }
@@ -30,12 +30,12 @@
  else {
       toHide.add(R.id.action_sync_file);
     }
-    if (mContainerActivity.getFileDownloaderBinder().isDownloading(AccountUtils.getCurrentOwnCloudAccount(getActivity()),targetFile)) {
+    if (mContainerActivity.getFileDownloaderBinder().isDownloading(AccountUtils.getCurrentOwnCloudAccount(getSherlockActivity()),targetFile)) {
       toHide.add(R.id.action_cancel_upload);
       toDisable.add(R.id.action_rename_file);
       toDisable.add(R.id.action_remove_file);
     }
- else     if (mContainerActivity.getFileUploaderBinder().isUploading(AccountUtils.getCurrentOwnCloudAccount(getActivity()),targetFile)) {
+ else     if (mContainerActivity.getFileUploaderBinder().isUploading(AccountUtils.getCurrentOwnCloudAccount(getSherlockActivity()),targetFile)) {
       toHide.add(R.id.action_cancel_download);
       toDisable.add(R.id.action_rename_file);
       toDisable.add(R.id.action_remove_file);

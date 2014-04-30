@@ -1,16 +1,16 @@
 {
   AdapterContextMenuInfo info=(AdapterContextMenuInfo)item.getMenuInfo();
-  mTargetFile=mContainerActivity.getStorageManager().createFileInstance((Cursor)mAdapter.getItem(info.position));
+  mTargetFile=((FileActivity)getSherlockActivity()).getStorageManager().createFileInstance((Cursor)mAdapter.getItem(info.position));
 switch (item.getItemId()) {
 case R.id.action_share_file:
 {
-      FileDisplayActivity activity=(FileDisplayActivity)getSherlockActivity();
+      FileActivity activity=(FileActivity)getSherlockActivity();
       activity.getFileOperationsHelper().shareFileWithLink(mTargetFile,activity);
       return true;
     }
 case R.id.action_unshare_file:
 {
-    FileDisplayActivity activity=(FileDisplayActivity)getSherlockActivity();
+    FileActivity activity=(FileActivity)getSherlockActivity();
     activity.getFileOperationsHelper().unshareFileWithLink(mTargetFile,activity);
     return true;
   }
@@ -45,15 +45,15 @@ return true;
 case R.id.action_sync_file:
 {
 Account account=AccountUtils.getCurrentOwnCloudAccount(getSherlockActivity());
-RemoteOperation operation=new SynchronizeFileOperation(mTargetFile,null,mContainerActivity.getStorageManager(),account,true,getSherlockActivity());
+RemoteOperation operation=new SynchronizeFileOperation(mTargetFile,null,((FileActivity)getSherlockActivity()).getStorageManager(),account,true,getSherlockActivity());
 operation.execute(account,getSherlockActivity(),mContainerActivity,mHandler,getSherlockActivity());
-((FileDisplayActivity)getSherlockActivity()).showLoadingDialog();
+((FileActivity)getSherlockActivity()).showLoadingDialog();
 return true;
 }
 case R.id.action_cancel_download:
 {
 FileDownloaderBinder downloaderBinder=mContainerActivity.getFileDownloaderBinder();
-Account account=AccountUtils.getCurrentOwnCloudAccount(getActivity());
+Account account=AccountUtils.getCurrentOwnCloudAccount(getSherlockActivity());
 if (downloaderBinder != null && downloaderBinder.isDownloading(account,mTargetFile)) {
 downloaderBinder.cancel(account,mTargetFile);
 listDirectory();
@@ -64,7 +64,7 @@ return true;
 case R.id.action_cancel_upload:
 {
 FileUploaderBinder uploaderBinder=mContainerActivity.getFileUploaderBinder();
-Account account=AccountUtils.getCurrentOwnCloudAccount(getActivity());
+Account account=AccountUtils.getCurrentOwnCloudAccount(getSherlockActivity());
 if (uploaderBinder != null && uploaderBinder.isUploading(account,mTargetFile)) {
 uploaderBinder.cancel(account,mTargetFile);
 listDirectory();
@@ -74,7 +74,7 @@ return true;
 }
 case R.id.action_see_details:
 {
-((FileFragment.ContainerActivity)getActivity()).showDetails(mTargetFile);
+((FileFragment.ContainerActivity)getSherlockActivity()).showDetails(mTargetFile);
 return true;
 }
 case R.id.action_send_file:
@@ -84,7 +84,7 @@ Log_OC.d(TAG,mTargetFile.getRemotePath() + " : File must be downloaded");
 mContainerActivity.startDownloadForSending(mTargetFile);
 }
  else {
-FileDisplayActivity activity=(FileDisplayActivity)getSherlockActivity();
+FileActivity activity=(FileActivity)getSherlockActivity();
 activity.getFileOperationsHelper().sendDownloadedFile(mTargetFile,activity);
 }
 return true;

@@ -39,7 +39,7 @@ catch (    Throwable th) {
     }
  finally {
       if (toastIt) {
-        Toast.makeText(getActivity(),"There is no application to handle file " + file.getFileName(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(getSherlockActivity(),"There is no application to handle file " + file.getFileName(),Toast.LENGTH_SHORT).show();
       }
     }
   }

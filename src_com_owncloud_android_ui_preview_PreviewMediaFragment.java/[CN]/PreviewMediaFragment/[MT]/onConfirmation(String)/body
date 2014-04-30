@@ -1,9 +1,10 @@
 {
   OCFile file=getFile();
-  if (mStorageManager.getFileById(file.getFileId()) != null) {
+  FileDataStorageManager storageManager=((FileActivity)getSherlockActivity()).getStorageManager();
+  if (storageManager.getFileById(file.getFileId()) != null) {
     stopPreview(true);
-    mLastRemoteOperation=new RemoveFileOperation(file,true,mStorageManager);
+    mLastRemoteOperation=new RemoveFileOperation(file,true,storageManager);
     mLastRemoteOperation.execute(mAccount,getSherlockActivity(),this,mHandler,getSherlockActivity());
-    ((FileDisplayActivity)getActivity()).showLoadingDialog();
+    ((FileActivity)getSherlockActivity()).showLoadingDialog();
   }
 }

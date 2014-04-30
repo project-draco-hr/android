@@ -1,13 +1,11 @@
 {
   super.onActivityCreated(savedInstanceState);
-  mStorageManager=new FileDataStorageManager(mAccount,getActivity().getApplicationContext().getContentResolver());
   if (savedInstanceState != null) {
     if (!mIgnoreFirstSavedState) {
       OCFile file=(OCFile)savedInstanceState.getParcelable(PreviewImageFragment.EXTRA_FILE);
       mAccount=savedInstanceState.getParcelable(PreviewImageFragment.EXTRA_ACCOUNT);
       if (mAccount != null) {
-        mStorageManager=new FileDataStorageManager(mAccount,getActivity().getApplicationContext().getContentResolver());
-        OCFile updatedFile=mStorageManager.getFileByPath(file.getRemotePath());
+        OCFile updatedFile=((FileActivity)getSherlockActivity()).getStorageManager().getFileByPath(file.getRemotePath());
         if (updatedFile != null) {
           setFile(updatedFile);
         }

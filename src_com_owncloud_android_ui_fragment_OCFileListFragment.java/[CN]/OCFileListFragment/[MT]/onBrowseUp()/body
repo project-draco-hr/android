@@ -2,7 +2,7 @@
   OCFile parentDir=null;
   int moveCount=0;
   if (mFile != null) {
-    FileDataStorageManager storageManager=mContainerActivity.getStorageManager();
+    FileDataStorageManager storageManager=((FileActivity)getSherlockActivity()).getStorageManager();
     String parentPath=null;
     if (mFile.getParentId() != FileDataStorageManager.ROOT_PARENT_ID) {
       parentPath=new File(mFile.getRemotePath()).getParent();

@@ -1,5 +1,5 @@
 {
-  ((FileDisplayActivity)getActivity()).dismissLoadingDialog();
+  ((FileActivity)getActivity()).dismissLoadingDialog();
   if (result.isSuccess()) {
     updateFileDetails(((RenameFileOperation)operation).getFile(),mAccount);
   }

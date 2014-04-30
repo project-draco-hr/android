@@ -1,8 +1,7 @@
 {
   super.onActivityCreated(savedInstanceState);
   if (mAccount != null) {
-    mStorageManager=new FileDataStorageManager(mAccount,getActivity().getApplicationContext().getContentResolver());
-    OCFile file=mStorageManager.getFileByPath(getFile().getRemotePath());
+    OCFile file=((FileActivity)getActivity()).getStorageManager().getFileByPath(getFile().getRemotePath());
     if (file != null) {
       setFile(file);
     }

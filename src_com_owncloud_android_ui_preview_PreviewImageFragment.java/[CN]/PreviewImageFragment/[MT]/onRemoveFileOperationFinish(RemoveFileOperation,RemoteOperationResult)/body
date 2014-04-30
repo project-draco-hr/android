@@ -1,5 +1,5 @@
 {
-  ((PreviewImageActivity)getActivity()).dismissLoadingDialog();
+  ((FileActivity)getActivity()).dismissLoadingDialog();
   if (result.isSuccess()) {
     Toast msg=Toast.makeText(getActivity().getApplicationContext(),R.string.remove_success_msg,Toast.LENGTH_LONG);
     msg.show();

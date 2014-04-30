@@ -1,5 +1,5 @@
 {
-  OCFile file=mContainerActivity.getStorageManager().createFileInstance((Cursor)mAdapter.getItem(position));
+  OCFile file=((FileActivity)getSherlockActivity()).getStorageManager().createFileInstance((Cursor)mAdapter.getItem(position));
   if (file != null) {
     if (file.isFolder()) {
       listDirectory(file);
@@ -15,7 +15,7 @@
           mContainerActivity.startMediaPreview(file,0,true);
         }
  else {
-          FileDisplayActivity activity=(FileDisplayActivity)getSherlockActivity();
+          FileActivity activity=(FileActivity)getSherlockActivity();
           activity.getFileOperationsHelper().openFile(file,activity);
         }
       }

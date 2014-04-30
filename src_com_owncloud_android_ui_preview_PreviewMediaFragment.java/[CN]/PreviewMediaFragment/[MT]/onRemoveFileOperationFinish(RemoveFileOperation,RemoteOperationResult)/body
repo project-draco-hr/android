@@ -1,12 +1,12 @@
 {
-  ((FileDisplayActivity)getActivity()).dismissLoadingDialog();
+  ((FileActivity)getSherlockActivity()).dismissLoadingDialog();
   if (result.isSuccess()) {
-    Toast msg=Toast.makeText(getActivity().getApplicationContext(),R.string.remove_success_msg,Toast.LENGTH_LONG);
+    Toast msg=Toast.makeText(getSherlockActivity().getApplicationContext(),R.string.remove_success_msg,Toast.LENGTH_LONG);
     msg.show();
     finish();
   }
  else {
-    Toast msg=Toast.makeText(getActivity(),R.string.remove_fail_msg,Toast.LENGTH_LONG);
+    Toast msg=Toast.makeText(getSherlockActivity(),R.string.remove_fail_msg,Toast.LENGTH_LONG);
     msg.show();
     if (result.isSslRecoverableException()) {
     }
