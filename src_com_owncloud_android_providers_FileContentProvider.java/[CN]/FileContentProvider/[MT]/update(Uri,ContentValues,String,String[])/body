@@ -12,5 +12,7 @@
     db.endTransaction();
   }
   getContext().getContentResolver().notifyChange(uri,null);
+  long parentId=getParentId(uri);
+  notifyChangeToParentUri(parentId);
   return count;
 }
