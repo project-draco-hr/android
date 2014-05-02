@@ -1,0 +1,19 @@
+{
+  FileDataStorageManager storageManager=null;
+  if (updatedStorageManager != null && updatedStorageManager != storageManager) {
+    storageManager=updatedStorageManager;
+  }
+  Cursor newCursor=null;
+  if (storageManager != null) {
+    mAdapter.setStorageManager(storageManager);
+    mCursorLoader.setParentId(parentId);
+    newCursor=mCursorLoader.loadInBackground();
+    Uri uri=Uri.withAppendedPath(ProviderTableMeta.CONTENT_URI_DIR,String.valueOf(parentId));
+    Log_OC.d(TAG,"swapDirectory Uri " + uri);
+  }
+  Cursor oldCursor=mAdapter.swapCursor(newCursor);
+  if (oldCursor != null) {
+    oldCursor.close();
+  }
+  mAdapter.notifyDataSetChanged();
+}

@@ -1,8 +1,9 @@
 {
   mIndexes.add(index);
-  int firstPosition=mList.getFirstVisiblePosition();
+  ExtendedListView list=(ExtendedListView)getListView();
+  int firstPosition=list.getFirstVisiblePosition();
   mFirstPositions.add(firstPosition);
-  View view=mList.getChildAt(0);
+  View view=list.getChildAt(0);
   int top=(view == null) ? 0 : view.getTop();
   mTops.add(top);
   mHeightCell=(view == null || mHeightCell != 0) ? mHeightCell : view.getHeight();

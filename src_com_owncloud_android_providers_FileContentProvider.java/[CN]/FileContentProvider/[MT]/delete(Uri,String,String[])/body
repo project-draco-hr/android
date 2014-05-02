@@ -1,7 +1,9 @@
 {
+  Log_OC.d(TAG,"Deleting " + uri + " at provider "+ this);
   int count=0;
   SQLiteDatabase db=mDbHelper.getWritableDatabase();
   db.beginTransaction();
+  long parentId=getParentId(uri);
   try {
     count=delete(db,uri,where,whereArgs);
     db.setTransactionSuccessful();
@@ -9,6 +11,8 @@
   finally {
     db.endTransaction();
   }
+  Log_OC.d(TAG,"Uri " + uri);
   getContext().getContentResolver().notifyChange(uri,null);
+  notifyChangeToParentUri(parentId);
   return count;
 }

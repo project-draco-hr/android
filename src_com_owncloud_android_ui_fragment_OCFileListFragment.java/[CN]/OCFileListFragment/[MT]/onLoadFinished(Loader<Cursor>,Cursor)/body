@@ -1,0 +1,15 @@
+{
+  Log_OC.d(TAG,"onLoadFinished start");
+  FileDataStorageManager storageManager=((FileActivity)getSherlockActivity()).getStorageManager();
+  if (storageManager != null) {
+    mCursorLoader.setStorageManager(storageManager);
+    if (mFile != null) {
+      mCursorLoader.setParentId(mFile.getFileId());
+    }
+ else {
+      mCursorLoader.setParentId(1);
+    }
+    mAdapter.swapCursor(mCursorLoader.loadInBackground());
+  }
+  Log_OC.d(TAG,"onLoadFinished end");
+}

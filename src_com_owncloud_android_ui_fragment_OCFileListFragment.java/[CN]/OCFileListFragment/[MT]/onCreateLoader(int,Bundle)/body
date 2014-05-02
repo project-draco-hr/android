@@ -1,0 +1,12 @@
+{
+  Log_OC.d(TAG,"onCreateLoader start");
+  mCursorLoader=new FileListCursorLoader((FileActivity)getSherlockActivity(),((FileActivity)getSherlockActivity()).getStorageManager());
+  if (mFile != null) {
+    mCursorLoader.setParentId(mFile.getFileId());
+  }
+ else {
+    mCursorLoader.setParentId(1);
+  }
+  Log_OC.d(TAG,"onCreateLoader end");
+  return mCursorLoader;
+}

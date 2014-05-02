@@ -1,0 +1,7 @@
+{
+  if (parentId != -1) {
+    Uri parentUri=Uri.withAppendedPath(ProviderTableMeta.CONTENT_URI_DIR,String.valueOf(parentId));
+    Log_OC.d(TAG,"ParentUri " + parentUri);
+    getContext().getContentResolver().notifyChange(parentUri,null);
+  }
+}
