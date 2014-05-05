@@ -7,6 +7,7 @@
   if (storageManager != null) {
     mAdapter.setStorageManager(storageManager);
     mCursorLoader.setParentId(parentId);
+    mCursorLoader.setStorageManager(storageManager);
     newCursor=mCursorLoader.loadInBackground();
     Uri uri=Uri.withAppendedPath(ProviderTableMeta.CONTENT_URI_DIR,String.valueOf(parentId));
     Log_OC.d(TAG,"swapDirectory Uri " + uri);
