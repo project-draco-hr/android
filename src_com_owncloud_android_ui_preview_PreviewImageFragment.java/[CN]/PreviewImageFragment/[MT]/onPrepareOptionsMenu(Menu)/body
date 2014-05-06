@@ -1,8 +1,7 @@
 {
   super.onPrepareOptionsMenu(menu);
   MenuItem item=menu.findItem(R.id.action_unshare_file);
-  OCFile file=((FileActivity)getSherlockActivity()).getFile();
-  if (!file.isShareByLink()) {
+  if (!getFile().isShareByLink()) {
     item.setVisible(false);
     item.setEnabled(false);
   }

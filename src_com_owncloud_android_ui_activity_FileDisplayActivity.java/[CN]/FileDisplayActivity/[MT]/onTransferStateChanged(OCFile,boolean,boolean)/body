@@ -1,13 +1,11 @@
 {
-  if (mDualPane) {
-    FileFragment details=getSecondFragment();
-    if (details != null && details instanceof FileDetailFragment && file.equals(details.getFile())) {
-      if (downloading || uploading) {
-        ((FileDetailFragment)details).updateFileDetails(file,getAccount());
-      }
+  FileFragment details=getSecondFragment();
+  if (details != null && details instanceof FileDetailFragment && file.equals(details.getFile())) {
+    if (downloading || uploading) {
+      ((FileDetailFragment)details).updateFileDetails(file,getAccount());
+    }
  else {
-        ((FileDetailFragment)details).updateFileDetails(false,true);
-      }
+      ((FileDetailFragment)details).updateFileDetails(false,true);
     }
   }
 }

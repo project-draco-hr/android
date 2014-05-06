@@ -1,0 +1,6 @@
+{
+  Account account=mFileActivity.getAccount();
+  RemoteOperation operation=new SynchronizeFileOperation(file,null,mFileActivity.getStorageManager(),account,true,mFileActivity);
+  operation.execute(account,mFileActivity,mFileActivity,mFileActivity.getHandler(),mFileActivity);
+  mFileActivity.showLoadingDialog();
+}

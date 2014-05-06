@@ -2,11 +2,9 @@
   dismissLoadingDialog();
   OCFile renamedFile=operation.getFile();
   if (result.isSuccess()) {
-    if (mDualPane) {
-      FileFragment details=getSecondFragment();
-      if (details != null && details instanceof FileDetailFragment && renamedFile.equals(details.getFile())) {
-        ((FileDetailFragment)details).updateFileDetails(renamedFile,getAccount());
-      }
+    FileFragment details=getSecondFragment();
+    if (details != null && details instanceof FileDetailFragment && renamedFile.equals(details.getFile())) {
+      ((FileDetailFragment)details).updateFileDetails(renamedFile,getAccount());
     }
     if (getStorageManager().getFileById(renamedFile.getParentId()).equals(getCurrentDir())) {
     }

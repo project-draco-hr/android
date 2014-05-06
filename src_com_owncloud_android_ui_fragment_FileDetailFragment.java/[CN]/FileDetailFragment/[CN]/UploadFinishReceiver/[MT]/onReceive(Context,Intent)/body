@@ -6,7 +6,7 @@
     boolean renamedInUpload=getFile().getRemotePath().equals(intent.getStringExtra(FileUploader.EXTRA_OLD_REMOTE_PATH));
     if (getFile().getRemotePath().equals(uploadRemotePath) || renamedInUpload) {
       if (uploadWasFine) {
-        setFile(((FileActivity)getActivity()).getStorageManager().getFileByPath(uploadRemotePath));
+        setFile(mContainerActivity.getStorageManager().getFileByPath(uploadRemotePath));
       }
       if (renamedInUpload) {
         String newName=(new File(uploadRemotePath)).getName();

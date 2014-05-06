@@ -1,0 +1,16 @@
+{
+  Account account=getAccount();
+  if (mDownloaderBinder != null && mDownloaderBinder.isDownloading(account,file)) {
+    mDownloaderBinder.cancel(account,file);
+    onTransferStateChanged(file,false,false);
+  }
+ else   if (mUploaderBinder != null && mUploaderBinder.isUploading(account,file)) {
+    mUploaderBinder.cancel(account,file);
+    if (!file.fileExists()) {
+      cleanSecondFragment();
+    }
+ else {
+      onTransferStateChanged(file,false,false);
+    }
+  }
+}

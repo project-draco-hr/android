@@ -1,4 +1,4 @@
 {
-  getFileOperationsHelper().sendDownloadedFile(mWaitingToSend,this);
+  getFileOperationsHelper().sendDownloadedFile(mWaitingToSend);
   mWaitingToSend=null;
 }

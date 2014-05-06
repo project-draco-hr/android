@@ -1,6 +1,6 @@
 {
   OCFile file=getFile();
   stopPreview(true);
-  ((FileActivity)getSherlockActivity()).getStorageManager().removeFile(file,false,true);
+  mContainerActivity.getStorageManager().removeFile(file,false,true);
   finish();
 }

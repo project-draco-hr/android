@@ -1,5 +1,5 @@
 {
-  OCFile file=((FileActivity)getSherlockActivity()).getStorageManager().createFileInstance((Cursor)mAdapter.getItem(position));
+  OCFile file=mContainerActivity.getStorageManager().createFileInstance((Cursor)mAdapter.getItem(position));
   if (file != null) {
     if (file.isFolder()) {
       listDirectory(file);
@@ -8,19 +8,18 @@
     }
  else {
       if (PreviewImageFragment.canBePreviewed(file)) {
-        mContainerActivity.startImagePreview(file);
+        ((FileDisplayActivity)mContainerActivity).startImagePreview(file);
       }
  else       if (file.isDown()) {
         if (PreviewMediaFragment.canBePreviewed(file)) {
-          mContainerActivity.startMediaPreview(file,0,true);
+          ((FileDisplayActivity)mContainerActivity).startMediaPreview(file,0,true);
         }
  else {
-          FileActivity activity=(FileActivity)getSherlockActivity();
-          activity.getFileOperationsHelper().openFile(file,activity);
+          ((FileDisplayActivity)mContainerActivity).getFileOperationsHelper().openFile(file);
         }
       }
  else {
-        mContainerActivity.startDownloadForPreview(file);
+        ((FileDisplayActivity)mContainerActivity).startDownloadForPreview(file);
       }
     }
   }

@@ -20,5 +20,4 @@
   setListAdapter(mAdapter);
   registerForContextMenu(getListView());
   getListView().setOnCreateContextMenuListener(this);
-  mHandler=new Handler();
 }

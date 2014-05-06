@@ -5,7 +5,7 @@
       OCFile file=(OCFile)savedInstanceState.getParcelable(PreviewImageFragment.EXTRA_FILE);
       mAccount=savedInstanceState.getParcelable(PreviewImageFragment.EXTRA_ACCOUNT);
       if (mAccount != null) {
-        OCFile updatedFile=((FileActivity)getSherlockActivity()).getStorageManager().getFileByPath(file.getRemotePath());
+        OCFile updatedFile=mContainerActivity.getStorageManager().getFileByPath(file.getRemotePath());
         if (updatedFile != null) {
           setFile(updatedFile);
         }

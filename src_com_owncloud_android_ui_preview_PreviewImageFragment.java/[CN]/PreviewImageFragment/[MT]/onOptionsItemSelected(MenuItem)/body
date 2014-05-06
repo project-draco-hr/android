@@ -2,14 +2,12 @@
 switch (item.getItemId()) {
 case R.id.action_share_file:
 {
-      FileActivity act=(FileActivity)getSherlockActivity();
-      act.getFileOperationsHelper().shareFileWithLink(getFile(),act);
+      mContainerActivity.getFileOperationsHelper().shareFileWithLink(getFile());
       return true;
     }
 case R.id.action_unshare_file:
 {
-    FileActivity act=(FileActivity)getSherlockActivity();
-    act.getFileOperationsHelper().unshareFileWithLink(getFile(),act);
+    mContainerActivity.getFileOperationsHelper().unshareFileWithLink(getFile());
     return true;
   }
 case R.id.action_open_file_with:
@@ -29,8 +27,7 @@ return true;
 }
 case R.id.action_send_file:
 {
-FileActivity act=(FileActivity)getSherlockActivity();
-act.getFileOperationsHelper().sendDownloadedFile(getFile(),act);
+mContainerActivity.getFileOperationsHelper().sendDownloadedFile(getFile());
 return true;
 }
 default :

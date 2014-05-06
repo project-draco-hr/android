@@ -4,7 +4,6 @@
     Toast msg=Toast.makeText(this,R.string.remove_success_msg,Toast.LENGTH_LONG);
     msg.show();
     OCFile removedFile=operation.getFile();
-    getSecondFragment();
     FileFragment second=getSecondFragment();
     if (second != null && removedFile.equals(second.getFile())) {
       cleanSecondFragment();

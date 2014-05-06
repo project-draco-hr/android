@@ -1,5 +1,4 @@
 {
   stopPreview(false);
-  FileActivity activity=(FileActivity)getSherlockActivity();
-  activity.getFileOperationsHelper().unshareFileWithLink(getFile(),activity);
+  mContainerActivity.getFileOperationsHelper().unshareFileWithLink(getFile());
 }

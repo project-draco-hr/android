@@ -1,0 +1,6 @@
+{
+  Account account=mFileActivity.getAccount();
+  RemoteOperation operation=new RenameFileOperation(file,account,newFilename,mFileActivity.getStorageManager());
+  operation.execute(account,mFileActivity,mFileActivity,mFileActivity.getHandler(),mFileActivity);
+  mFileActivity.showLoadingDialog();
+}

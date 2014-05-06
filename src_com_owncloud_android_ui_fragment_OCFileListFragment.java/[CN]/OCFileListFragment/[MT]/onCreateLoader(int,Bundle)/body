@@ -1,6 +1,6 @@
 {
   Log_OC.d(TAG,"onCreateLoader start");
-  mCursorLoader=new FileListCursorLoader((FileActivity)getSherlockActivity(),((FileActivity)getSherlockActivity()).getStorageManager());
+  mCursorLoader=new FileListCursorLoader(getSherlockActivity(),mContainerActivity.getStorageManager());
   if (mFile != null) {
     mCursorLoader.setParentId(mFile.getFileId());
   }

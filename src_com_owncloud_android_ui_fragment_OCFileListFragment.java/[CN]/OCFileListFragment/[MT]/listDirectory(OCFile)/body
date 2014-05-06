@@ -1,5 +1,5 @@
 {
-  FileDataStorageManager storageManager=((FileActivity)getSherlockActivity()).getStorageManager();
+  FileDataStorageManager storageManager=mContainerActivity.getStorageManager();
   if (storageManager != null) {
     if (directory == null) {
       if (mFile != null) {

@@ -1,6 +1,6 @@
 {
   if (readyToShow()) {
-    FileDataStorageManager storageManager=((FileActivity)getActivity()).getStorageManager();
+    FileDataStorageManager storageManager=mContainerActivity.getStorageManager();
     if (refresh && storageManager != null) {
       setFile(storageManager.getFileByPath(getFile().getRemotePath()));
     }

@@ -1,6 +1,6 @@
 {
   Log_OC.d(TAG,"onLoadFinished start");
-  FileDataStorageManager storageManager=((FileActivity)getSherlockActivity()).getStorageManager();
+  FileDataStorageManager storageManager=mContainerActivity.getStorageManager();
   if (storageManager != null) {
     mCursorLoader.setStorageManager(storageManager);
     if (mFile != null) {

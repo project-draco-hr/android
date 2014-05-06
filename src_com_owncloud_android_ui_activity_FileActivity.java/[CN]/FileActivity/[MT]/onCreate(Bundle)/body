@@ -1,7 +1,7 @@
 {
   super.onCreate(savedInstanceState);
   mHandler=new Handler();
-  mFileOperationsHelper=new FileOperationsHelper();
+  mFileOperationsHelper=new FileOperationsHelper(this);
   Account account;
   if (savedInstanceState != null) {
     account=savedInstanceState.getParcelable(FileActivity.EXTRA_ACCOUNT);
@@ -16,4 +16,12 @@
   setAccount(account,savedInstanceState != null);
   mOperationsServiceConnection=new OperationsServiceConnection();
   bindService(new Intent(this,OperationsService.class),mOperationsServiceConnection,Context.BIND_AUTO_CREATE);
+  mDownloadServiceConnection=newTransferenceServiceConnection();
+  if (mDownloadServiceConnection != null) {
+    bindService(new Intent(this,FileDownloader.class),mDownloadServiceConnection,Context.BIND_AUTO_CREATE);
+  }
+  mUploadServiceConnection=newTransferenceServiceConnection();
+  if (mUploadServiceConnection != null) {
+    bindService(new Intent(this,FileUploader.class),mUploadServiceConnection,Context.BIND_AUTO_CREATE);
+  }
 }

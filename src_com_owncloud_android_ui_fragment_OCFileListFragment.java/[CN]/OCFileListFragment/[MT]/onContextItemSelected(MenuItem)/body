@@ -1,17 +1,15 @@
 {
   AdapterContextMenuInfo info=(AdapterContextMenuInfo)item.getMenuInfo();
-  mTargetFile=((FileActivity)getSherlockActivity()).getStorageManager().createFileInstance((Cursor)mAdapter.getItem(info.position));
+  mTargetFile=mContainerActivity.getStorageManager().createFileInstance((Cursor)mAdapter.getItem(info.position));
 switch (item.getItemId()) {
 case R.id.action_share_file:
 {
-      FileActivity activity=(FileActivity)getSherlockActivity();
-      activity.getFileOperationsHelper().shareFileWithLink(mTargetFile,activity);
+      mContainerActivity.getFileOperationsHelper().shareFileWithLink(mTargetFile);
       return true;
     }
 case R.id.action_unshare_file:
 {
-    FileActivity activity=(FileActivity)getSherlockActivity();
-    activity.getFileOperationsHelper().unshareFileWithLink(mTargetFile,activity);
+    mContainerActivity.getFileOperationsHelper().unshareFileWithLink(mTargetFile);
     return true;
   }
 case R.id.action_rename_file:
@@ -44,10 +42,7 @@ return true;
 }
 case R.id.action_sync_file:
 {
-Account account=AccountUtils.getCurrentOwnCloudAccount(getSherlockActivity());
-RemoteOperation operation=new SynchronizeFileOperation(mTargetFile,null,((FileActivity)getSherlockActivity()).getStorageManager(),account,true,getSherlockActivity());
-operation.execute(account,getSherlockActivity(),mContainerActivity,mHandler,getSherlockActivity());
-((FileActivity)getSherlockActivity()).showLoadingDialog();
+mContainerActivity.getFileOperationsHelper().syncFile(mTargetFile);
 return true;
 }
 case R.id.action_cancel_download:
@@ -74,18 +69,17 @@ return true;
 }
 case R.id.action_see_details:
 {
-((FileFragment.ContainerActivity)getSherlockActivity()).showDetails(mTargetFile);
+mContainerActivity.showDetails(mTargetFile);
 return true;
 }
 case R.id.action_send_file:
 {
 if (!mTargetFile.isDown()) {
 Log_OC.d(TAG,mTargetFile.getRemotePath() + " : File must be downloaded");
-mContainerActivity.startDownloadForSending(mTargetFile);
+((FileDisplayActivity)mContainerActivity).startDownloadForSending(mTargetFile);
 }
  else {
-FileActivity activity=(FileActivity)getSherlockActivity();
-activity.getFileOperationsHelper().sendDownloadedFile(mTargetFile,activity);
+((FileDisplayActivity)mContainerActivity).getFileOperationsHelper().sendDownloadedFile(mTargetFile);
 }
 return true;
 }

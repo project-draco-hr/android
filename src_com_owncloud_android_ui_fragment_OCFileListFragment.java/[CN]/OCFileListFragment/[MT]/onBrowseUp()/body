@@ -2,7 +2,7 @@
   OCFile parentDir=null;
   int moveCount=0;
   if (mFile != null) {
-    FileDataStorageManager storageManager=((FileActivity)getSherlockActivity()).getStorageManager();
+    FileDataStorageManager storageManager=mContainerActivity.getStorageManager();
     String parentPath=null;
     if (mFile.getParentId() != FileDataStorageManager.ROOT_PARENT_ID) {
       parentPath=new File(mFile.getRemotePath()).getParent();
@@ -23,7 +23,7 @@
   }
   if (mFile != null) {
     listDirectory(mFile);
-    mContainerActivity.startSyncFolderOperation(mFile);
+    ((FileDisplayActivity)mContainerActivity).startSyncFolderOperation(mFile);
     restoreIndexAndTopPosition();
   }
   return moveCount;

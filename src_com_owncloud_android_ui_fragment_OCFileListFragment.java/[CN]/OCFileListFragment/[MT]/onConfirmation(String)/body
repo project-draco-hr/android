@@ -1,10 +1,8 @@
 {
   if (callerTag.equals(FileDetailFragment.FTAG_CONFIRMATION)) {
-    FileDataStorageManager storageManager=((FileActivity)getSherlockActivity()).getStorageManager();
+    FileDataStorageManager storageManager=mContainerActivity.getStorageManager();
     if (storageManager.getFileById(mTargetFile.getFileId()) != null) {
-      RemoteOperation operation=new RemoveFileOperation(mTargetFile,true,storageManager);
-      operation.execute(AccountUtils.getCurrentOwnCloudAccount(getSherlockActivity()),getSherlockActivity(),mContainerActivity,mHandler,getSherlockActivity());
-      ((FileActivity)getSherlockActivity()).showLoadingDialog();
+      mContainerActivity.getFileOperationsHelper().removeFile(mTargetFile,true);
     }
   }
 }

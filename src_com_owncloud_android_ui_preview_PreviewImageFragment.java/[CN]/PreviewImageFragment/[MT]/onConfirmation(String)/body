@@ -1,8 +1,6 @@
 {
-  FileDataStorageManager storageManager=((FileActivity)getSherlockActivity()).getStorageManager();
+  FileDataStorageManager storageManager=mContainerActivity.getStorageManager();
   if (storageManager.getFileById(getFile().getFileId()) != null) {
-    mLastRemoteOperation=new RemoveFileOperation(getFile(),true,storageManager);
-    mLastRemoteOperation.execute(mAccount,getSherlockActivity(),this,mHandler,getSherlockActivity());
-    ((FileActivity)getActivity()).showLoadingDialog();
+    mContainerActivity.getFileOperationsHelper().removeFile(getFile(),true);
   }
 }

@@ -1,5 +1,5 @@
 {
-  ((FileActivity)getSherlockActivity()).getStorageManager().removeFile(mTargetFile,false,true);
+  mContainerActivity.getStorageManager().removeFile(mTargetFile,false,true);
   listDirectory();
   mContainerActivity.onTransferStateChanged(mTargetFile,false,false);
 }
