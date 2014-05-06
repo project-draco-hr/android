@@ -11,7 +11,5 @@
     db.endTransaction();
   }
   getContext().getContentResolver().notifyChange(newUri,null);
-  long parentId=getParentId(newUri);
-  notifyChangeToParentUri(parentId);
   return newUri;
 }
