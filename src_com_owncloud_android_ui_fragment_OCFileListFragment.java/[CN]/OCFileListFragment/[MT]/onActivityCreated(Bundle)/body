@@ -15,7 +15,7 @@
     mTops=new ArrayList<Integer>();
     mHeightCell=0;
   }
-  mAdapter=new FileListListAdapter(getActivity(),mContainerActivity);
+  mAdapter=new FileListListAdapter(getSherlockActivity(),mContainerActivity);
   setListAdapter(mAdapter);
   registerForContextMenu(getListView());
   getListView().setOnCreateContextMenuListener(this);
