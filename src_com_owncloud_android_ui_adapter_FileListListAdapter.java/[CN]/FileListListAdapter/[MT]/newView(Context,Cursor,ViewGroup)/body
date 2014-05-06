@@ -1,4 +1,5 @@
 {
+  Log_OC.d(TAG,"newView start");
   LayoutInflater inflator=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
   View view=inflator.inflate(R.layout.list_item,null);
   ListView parentList=(ListView)parent;
@@ -9,5 +10,6 @@
  else {
     checkBoxV.setVisibility(View.VISIBLE);
   }
+  Log_OC.d(TAG,"newView end");
   return view;
 }

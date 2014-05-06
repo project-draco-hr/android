@@ -1,6 +1,4 @@
 {
-  Log_OC.d(TAG,"Updating " + values.getAsString(ProviderTableMeta.FILE_PATH) + " at provider "+ this);
-  Log_OC.d(TAG,"Uri " + uri);
   int count=0;
   SQLiteDatabase db=mDbHelper.getWritableDatabase();
   db.beginTransaction();

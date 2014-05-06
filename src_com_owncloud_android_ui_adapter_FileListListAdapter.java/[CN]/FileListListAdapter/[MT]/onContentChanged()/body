@@ -1,6 +1,0 @@
-{
-  Log_OC.d(TAG,"onContentChanged() start");
-  super.onContentChanged();
-  notifyDataSetChanged();
-  Log_OC.d(TAG,"onContentChanged() end");
-}

@@ -1,6 +1,0 @@
-{
-  Log_OC.d(TAG,"onLoadReset start");
-  if (mAdapter != null)   mAdapter.swapCursor(null);
- else   Log_OC.d(TAG,"OnLoadFinished: mAdapter is null");
-  Log_OC.d(TAG,"onLoadReset end");
-}

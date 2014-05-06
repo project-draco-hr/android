@@ -1,8 +1,0 @@
-{
-  Log_OC.d(TAG,"loadInBackgroud");
-  Cursor cursor=null;
-  if (mStorageManager != null) {
-    cursor=mStorageManager.getContent(mParentId);
-  }
-  return cursor;
-}

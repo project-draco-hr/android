@@ -3,16 +3,15 @@
     int index=mIndexes.remove(mIndexes.size() - 1);
     int firstPosition=mFirstPositions.remove(mFirstPositions.size() - 1);
     int top=mTops.remove(mTops.size() - 1);
-    ExtendedListView list=(ExtendedListView)getListView();
-    list.setSelectionFromTop(firstPosition,top);
+    mList.setSelectionFromTop(firstPosition,top);
     int indexPosition=mHeightCell * index;
-    int height=list.getHeight();
+    int height=mList.getHeight();
     if (indexPosition > height) {
       if (android.os.Build.VERSION.SDK_INT >= 11) {
-        list.smoothScrollToPosition(index);
+        mList.smoothScrollToPosition(index);
       }
  else       if (android.os.Build.VERSION.SDK_INT >= 8) {
-        list.setSelectionFromTop(index,0);
+        mList.setSelectionFromTop(index,0);
       }
     }
   }

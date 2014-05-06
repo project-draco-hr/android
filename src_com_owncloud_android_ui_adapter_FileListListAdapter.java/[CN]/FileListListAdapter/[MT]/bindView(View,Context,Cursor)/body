@@ -1,4 +1,5 @@
 {
+  Log_OC.d(TAG,"bindView start");
   OCFile file=mStorageManager.createFileInstance(cursor);
   TextView fileName=(TextView)view.findViewById(R.id.Filename);
   String name=file.getFileName();
@@ -52,4 +53,5 @@
  else {
     shareIconV.setVisibility(View.INVISIBLE);
   }
+  Log_OC.d(TAG,"bindView end");
 }

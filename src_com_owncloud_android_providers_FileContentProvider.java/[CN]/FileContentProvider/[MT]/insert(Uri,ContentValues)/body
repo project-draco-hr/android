@@ -1,5 +1,4 @@
 {
-  Log_OC.d(TAG,"Uri " + uri);
   Uri newUri=null;
   SQLiteDatabase db=mDbHelper.getWritableDatabase();
   db.beginTransaction();

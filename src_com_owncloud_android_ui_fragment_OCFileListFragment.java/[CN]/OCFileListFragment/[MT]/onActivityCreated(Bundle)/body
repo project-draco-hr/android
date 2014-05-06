@@ -2,7 +2,6 @@
   super.onActivityCreated(savedInstanceState);
   Log_OC.e(TAG,"onActivityCreated() start");
   mAdapter=new FileListListAdapter(getSherlockActivity(),mContainerActivity);
-  mLoaderManager=getLoaderManager();
   if (savedInstanceState != null) {
     mFile=savedInstanceState.getParcelable(EXTRA_FILE);
     mIndexes=savedInstanceState.getIntegerArrayList(KEY_INDEXES);
@@ -16,7 +15,6 @@
     mTops=new ArrayList<Integer>();
     mHeightCell=0;
   }
-  mLoaderManager.initLoader(LOADER_ID,null,this);
   setListAdapter(mAdapter);
   registerForContextMenu(getListView());
   getListView().setOnCreateContextMenuListener(this);
