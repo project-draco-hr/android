@@ -1,5 +1,5 @@
 {
-  OCFile file=mContainerActivity.getStorageManager().createFileInstance((Cursor)mAdapter.getItem(position));
+  OCFile file=(OCFile)mAdapter.getItem(position);
   if (file != null) {
     if (file.isFolder()) {
       listDirectory(file);

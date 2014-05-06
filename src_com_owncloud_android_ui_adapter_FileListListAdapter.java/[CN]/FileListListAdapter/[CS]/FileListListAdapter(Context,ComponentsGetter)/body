@@ -1,5 +1,5 @@
 {
-  super(context,null,0);
+  super(context,0,null,null,null,0);
   mContext=context;
   mAccount=AccountUtils.getCurrentOwnCloudAccount(mContext);
   mTransferServiceGetter=componentsGetter;

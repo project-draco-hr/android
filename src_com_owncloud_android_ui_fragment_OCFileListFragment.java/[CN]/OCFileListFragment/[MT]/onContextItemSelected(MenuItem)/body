@@ -1,6 +1,6 @@
 {
   AdapterContextMenuInfo info=(AdapterContextMenuInfo)item.getMenuInfo();
-  mTargetFile=mContainerActivity.getStorageManager().createFileInstance((Cursor)mAdapter.getItem(info.position));
+  mTargetFile=(OCFile)mAdapter.getItem(info.position);
 switch (item.getItemId()) {
 case R.id.action_share_file:
 {
