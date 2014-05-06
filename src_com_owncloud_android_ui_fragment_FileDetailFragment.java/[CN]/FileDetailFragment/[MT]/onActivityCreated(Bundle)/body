@@ -1,9 +1,3 @@
 {
   super.onActivityCreated(savedInstanceState);
-  if (mAccount != null) {
-    OCFile file=mContainerActivity.getStorageManager().getFileByPath(getFile().getRemotePath());
-    if (file != null) {
-      setFile(file);
-    }
-  }
 }

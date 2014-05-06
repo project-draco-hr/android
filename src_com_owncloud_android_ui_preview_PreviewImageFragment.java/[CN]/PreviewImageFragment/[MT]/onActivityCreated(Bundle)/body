@@ -3,19 +3,8 @@
   if (savedInstanceState != null) {
     if (!mIgnoreFirstSavedState) {
       OCFile file=(OCFile)savedInstanceState.getParcelable(PreviewImageFragment.EXTRA_FILE);
+      setFile(file);
       mAccount=savedInstanceState.getParcelable(PreviewImageFragment.EXTRA_ACCOUNT);
-      if (mAccount != null) {
-        OCFile updatedFile=mContainerActivity.getStorageManager().getFileByPath(file.getRemotePath());
-        if (updatedFile != null) {
-          setFile(updatedFile);
-        }
- else {
-          setFile(file);
-        }
-      }
- else {
-        setFile(file);
-      }
     }
  else {
       mIgnoreFirstSavedState=false;

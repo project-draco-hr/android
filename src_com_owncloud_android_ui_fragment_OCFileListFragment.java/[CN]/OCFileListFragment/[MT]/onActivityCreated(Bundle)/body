@@ -8,7 +8,7 @@
     mIndexes=savedInstanceState.getIntegerArrayList(KEY_INDEXES);
     mFirstPositions=savedInstanceState.getIntegerArrayList(KEY_FIRST_POSITIONS);
     mTops=savedInstanceState.getIntegerArrayList(KEY_TOPS);
-    mHeightCell=savedInstanceState.getInt(KEY_HEIGHT_CELL);
+    onCreateLoader(LOADER_ID,null);
   }
  else {
     mIndexes=new ArrayList<Integer>();
