@@ -5,6 +5,7 @@
   OCFile currentDir=getCurrentDir();
   boolean isDescendant=(currentDir != null) && (uploadedRemotePath != null) && (uploadedRemotePath.startsWith(currentDir.getRemotePath()));
   if (sameAccount && isDescendant) {
+    refeshListOfFilesFragment();
   }
   boolean uploadWasFine=intent.getBooleanExtra(FileUploader.EXTRA_UPLOAD_RESULT,false);
   boolean renamedInUpload=getFile().getRemotePath().equals(intent.getStringExtra(FileUploader.EXTRA_OLD_REMOTE_PATH));
