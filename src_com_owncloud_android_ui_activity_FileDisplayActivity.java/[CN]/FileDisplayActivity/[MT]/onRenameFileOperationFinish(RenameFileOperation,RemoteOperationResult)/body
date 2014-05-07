@@ -7,6 +7,7 @@
       ((FileDetailFragment)details).updateFileDetails(renamedFile,getAccount());
     }
     if (getStorageManager().getFileById(renamedFile.getParentId()).equals(getCurrentDir())) {
+      refreshListOfFilesFragment();
     }
   }
  else {
