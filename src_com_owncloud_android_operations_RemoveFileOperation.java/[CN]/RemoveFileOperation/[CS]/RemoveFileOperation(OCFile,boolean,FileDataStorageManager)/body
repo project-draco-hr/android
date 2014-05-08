@@ -1,5 +1,0 @@
-{
-  mFileToRemove=fileToRemove;
-  mDeleteLocalCopy=deleteLocalCopy;
-  mDataStorageManager=storageManager;
-}

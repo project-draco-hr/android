@@ -1,6 +1,9 @@
 {
-  Account account=mFileActivity.getAccount();
-  RemoteOperation operation=new RemoveFileOperation(file,removeLocalCopy,mFileActivity.getStorageManager());
-  operation.execute(account,mFileActivity,mFileActivity,mFileActivity.getHandler(),mFileActivity);
+  Intent service=new Intent(mFileActivity,OperationsService.class);
+  service.setAction(OperationsService.ACTION_REMOVE);
+  service.putExtra(OperationsService.EXTRA_ACCOUNT,mFileActivity.getAccount());
+  service.putExtra(OperationsService.EXTRA_REMOTE_PATH,file.getRemotePath());
+  service.putExtra(OperationsService.EXTRA_REMOVE_LOCAL_COPY,removeLocalCopy);
+  mFileActivity.getOperationsServiceBinder().newOperation(service);
   mFileActivity.showLoadingDialog();
 }

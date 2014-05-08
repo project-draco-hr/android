@@ -51,6 +51,11 @@
         String newName=operationIntent.getStringExtra(EXTRA_NEWNAME);
         operation=new RenameFileOperation(remotePath,account,newName);
       }
+ else       if (action.equals(ACTION_REMOVE)) {
+        String remotePath=operationIntent.getStringExtra(EXTRA_REMOTE_PATH);
+        boolean removeLocalCopy=operationIntent.getBooleanExtra(EXTRA_REMOVE_LOCAL_COPY,true);
+        operation=new RemoveFileOperation(remotePath,removeLocalCopy);
+      }
     }
   }
  catch (  IllegalArgumentException e) {

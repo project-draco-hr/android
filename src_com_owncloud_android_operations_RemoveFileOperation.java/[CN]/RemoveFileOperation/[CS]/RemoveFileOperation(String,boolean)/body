@@ -1,0 +1,4 @@
+{
+  mRemotePath=remotePath;
+  mDeleteLocalCopy=deleteLocalCopy;
+}
