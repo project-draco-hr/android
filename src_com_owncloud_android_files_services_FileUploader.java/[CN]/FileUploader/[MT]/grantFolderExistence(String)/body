@@ -2,8 +2,8 @@
   RemoteOperation operation=new ExistenceCheckRemoteOperation(pathToGrant,this,false);
   RemoteOperationResult result=operation.execute(mUploadClient);
   if (!result.isSuccess() && result.getCode() == ResultCode.FILE_NOT_FOUND && mCurrentUpload.isRemoteFolderToBeCreated()) {
-    operation=new CreateFolderOperation(pathToGrant,true,mStorageManager);
-    result=operation.execute(mUploadClient);
+    SyncOperation syncOp=new CreateFolderOperation(pathToGrant,true);
+    result=syncOp.execute(mUploadClient,mStorageManager);
   }
   if (result.isSuccess()) {
     OCFile parentDir=mStorageManager.getFileByPath(pathToGrant);

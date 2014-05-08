@@ -56,6 +56,11 @@
         boolean removeLocalCopy=operationIntent.getBooleanExtra(EXTRA_REMOVE_LOCAL_COPY,true);
         operation=new RemoveFileOperation(remotePath,removeLocalCopy);
       }
+ else       if (action.equals(ACTION_CREATE_FOLDER)) {
+        String remotePath=operationIntent.getStringExtra(EXTRA_REMOTE_PATH);
+        boolean createFullPath=operationIntent.getBooleanExtra(EXTRA_CREATE_FULL_PATH,true);
+        operation=new CreateFolderOperation(remotePath,createFullPath);
+      }
     }
   }
  catch (  IllegalArgumentException e) {
