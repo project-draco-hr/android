@@ -4,65 +4,11 @@
   inflater.inflate(R.menu.file_actions_menu,menu);
   AdapterContextMenuInfo info=(AdapterContextMenuInfo)menuInfo;
   OCFile targetFile=(OCFile)mAdapter.getItem(info.position);
-  List<Integer> toHide=new ArrayList<Integer>();
-  List<Integer> toDisable=new ArrayList<Integer>();
-  MenuItem item=null;
-  if (targetFile.isFolder()) {
-    toHide.add(R.id.action_open_file_with);
-    toHide.add(R.id.action_download_file);
-    toHide.add(R.id.action_cancel_download);
-    toHide.add(R.id.action_cancel_upload);
-    toHide.add(R.id.action_sync_file);
-    toHide.add(R.id.action_see_details);
-    toHide.add(R.id.action_send_file);
-    if (mContainerActivity.getFileDownloaderBinder().isDownloading(AccountUtils.getCurrentOwnCloudAccount(getSherlockActivity()),targetFile) || mContainerActivity.getFileUploaderBinder().isUploading(AccountUtils.getCurrentOwnCloudAccount(getSherlockActivity()),targetFile)) {
-      toDisable.add(R.id.action_rename_file);
-      toDisable.add(R.id.action_remove_file);
-    }
-  }
- else {
-    toHide.add(R.id.action_download_file);
-    toHide.add(R.id.action_open_file_with);
-    if (targetFile.isDown()) {
-      toHide.add(R.id.action_cancel_download);
-      toHide.add(R.id.action_cancel_upload);
-    }
- else {
-      toHide.add(R.id.action_sync_file);
-    }
-    if (mContainerActivity.getFileDownloaderBinder().isDownloading(AccountUtils.getCurrentOwnCloudAccount(getSherlockActivity()),targetFile)) {
-      toHide.add(R.id.action_cancel_upload);
-      toDisable.add(R.id.action_rename_file);
-      toDisable.add(R.id.action_remove_file);
-    }
- else     if (mContainerActivity.getFileUploaderBinder().isUploading(AccountUtils.getCurrentOwnCloudAccount(getSherlockActivity()),targetFile)) {
-      toHide.add(R.id.action_cancel_download);
-      toDisable.add(R.id.action_rename_file);
-      toDisable.add(R.id.action_remove_file);
-    }
- else {
-      toHide.add(R.id.action_cancel_download);
-      toHide.add(R.id.action_cancel_upload);
-    }
-  }
-  if (!targetFile.isShareByLink()) {
-    toHide.add(R.id.action_unshare_file);
-  }
-  boolean sendEnabled=getString(R.string.send_files_to_other_apps).equalsIgnoreCase("on");
-  if (!sendEnabled) {
-    toHide.add(R.id.action_send_file);
-  }
-  for (  int i : toHide) {
-    item=menu.findItem(i);
-    if (item != null) {
-      item.setVisible(false);
-      item.setEnabled(false);
-    }
-  }
-  for (  int i : toDisable) {
-    item=menu.findItem(i);
-    if (item != null) {
-      item.setEnabled(false);
-    }
-  }
+  FileMenuFilter mf=new FileMenuFilter();
+  mf.setFile(targetFile);
+  mf.setComponentGetter(mContainerActivity);
+  mf.setAccount(mContainerActivity.getStorageManager().getAccount());
+  mf.setContext(getSherlockActivity());
+  mf.setFragment(this);
+  mf.filter(menu);
 }

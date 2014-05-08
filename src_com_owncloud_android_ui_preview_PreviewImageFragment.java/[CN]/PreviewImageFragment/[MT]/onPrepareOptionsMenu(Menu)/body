@@ -1,12 +1,10 @@
 {
   super.onPrepareOptionsMenu(menu);
-  MenuItem item=menu.findItem(R.id.action_unshare_file);
-  if (!getFile().isShareByLink()) {
-    item.setVisible(false);
-    item.setEnabled(false);
-  }
- else {
-    item.setVisible(true);
-    item.setEnabled(true);
-  }
+  FileMenuFilter mf=new FileMenuFilter();
+  mf.setFile(getFile());
+  mf.setComponentGetter(mContainerActivity);
+  mf.setAccount(mContainerActivity.getStorageManager().getAccount());
+  mf.setContext(getSherlockActivity());
+  mf.setFragment(this);
+  mf.filter(menu);
 }
