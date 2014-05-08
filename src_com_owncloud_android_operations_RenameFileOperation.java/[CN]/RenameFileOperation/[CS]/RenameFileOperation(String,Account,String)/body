@@ -1,7 +1,6 @@
 {
-  mFile=file;
+  mRemotePath=remotePath;
   mAccount=account;
   mNewName=newName;
   mNewRemotePath=null;
-  mStorageManager=storageManager;
 }

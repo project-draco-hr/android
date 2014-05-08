@@ -1,5 +1,6 @@
 {
   RemoteOperationResult result=null;
+  mFile=getStorageManager().getFileByPath(mRemotePath);
   try {
     if (!isValidNewName()) {
       return new RemoteOperationResult(ResultCode.INVALID_LOCAL_FILE_NAME);
@@ -10,7 +11,7 @@
     if (mFile.isFolder()) {
       mNewRemotePath+=OCFile.PATH_SEPARATOR;
     }
-    if (mStorageManager.getFileByPath(mNewRemotePath) != null) {
+    if (getStorageManager().getFileByPath(mNewRemotePath) != null) {
       return new RemoteOperationResult(ResultCode.INVALID_OVERWRITE);
     }
     RenameRemoteFileOperation operation=new RenameRemoteFileOperation(mFile.getFileName(),mFile.getRemotePath(),mNewName,mFile.isFolder());

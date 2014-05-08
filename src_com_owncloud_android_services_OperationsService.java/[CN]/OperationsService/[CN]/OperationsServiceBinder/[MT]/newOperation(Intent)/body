@@ -46,6 +46,11 @@
  else       if (action.equals(ACTION_GET_USER_NAME)) {
         operation=new GetRemoteUserNameOperation();
       }
+ else       if (action.equals(ACTION_RENAME)) {
+        String remotePath=operationIntent.getStringExtra(EXTRA_REMOTE_PATH);
+        String newName=operationIntent.getStringExtra(EXTRA_NEWNAME);
+        operation=new RenameFileOperation(remotePath,account,newName);
+      }
     }
   }
  catch (  IllegalArgumentException e) {

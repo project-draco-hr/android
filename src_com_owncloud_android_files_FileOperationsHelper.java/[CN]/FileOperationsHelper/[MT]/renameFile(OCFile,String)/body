@@ -1,6 +1,9 @@
 {
-  Account account=mFileActivity.getAccount();
-  RemoteOperation operation=new RenameFileOperation(file,account,newFilename,mFileActivity.getStorageManager());
-  operation.execute(account,mFileActivity,mFileActivity,mFileActivity.getHandler(),mFileActivity);
+  Intent service=new Intent(mFileActivity,OperationsService.class);
+  service.setAction(OperationsService.ACTION_RENAME);
+  service.putExtra(OperationsService.EXTRA_ACCOUNT,mFileActivity.getAccount());
+  service.putExtra(OperationsService.EXTRA_REMOTE_PATH,file.getRemotePath());
+  service.putExtra(OperationsService.EXTRA_NEWNAME,newFilename);
+  mFileActivity.getOperationsServiceBinder().newOperation(service);
   mFileActivity.showLoadingDialog();
 }
