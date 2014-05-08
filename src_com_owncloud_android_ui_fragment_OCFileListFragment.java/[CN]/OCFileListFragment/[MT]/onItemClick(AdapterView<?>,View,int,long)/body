@@ -15,7 +15,7 @@
           ((FileDisplayActivity)mContainerActivity).startMediaPreview(file,0,true);
         }
  else {
-          ((FileDisplayActivity)mContainerActivity).getFileOperationsHelper().openFile(file);
+          mContainerActivity.getFileOperationsHelper().openFile(file);
         }
       }
  else {

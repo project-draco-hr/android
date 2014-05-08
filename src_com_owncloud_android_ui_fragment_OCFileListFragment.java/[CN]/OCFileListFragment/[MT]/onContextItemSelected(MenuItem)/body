@@ -79,7 +79,7 @@ Log_OC.d(TAG,mTargetFile.getRemotePath() + " : File must be downloaded");
 ((FileDisplayActivity)mContainerActivity).startDownloadForSending(mTargetFile);
 }
  else {
-((FileDisplayActivity)mContainerActivity).getFileOperationsHelper().sendDownloadedFile(mTargetFile);
+mContainerActivity.getFileOperationsHelper().sendDownloadedFile(mTargetFile);
 }
 return true;
 }
