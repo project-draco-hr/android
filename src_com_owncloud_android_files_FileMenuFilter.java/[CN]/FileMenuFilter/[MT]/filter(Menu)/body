@@ -1,21 +1,13 @@
 {
   List<Integer> toShow=new ArrayList<Integer>();
-  List<Integer> toDisable=new ArrayList<Integer>();
   List<Integer> toHide=new ArrayList<Integer>();
-  filter(toShow,toDisable,toHide);
+  filter(toShow,toHide);
   MenuItem item=null;
   for (  int i : toShow) {
     item=menu.findItem(i);
     if (item != null) {
       item.setVisible(true);
       item.setEnabled(true);
-    }
-  }
-  for (  int i : toDisable) {
-    item=menu.findItem(i);
-    if (item != null) {
-      item.setVisible(true);
-      item.setEnabled(false);
     }
   }
   for (  int i : toHide) {

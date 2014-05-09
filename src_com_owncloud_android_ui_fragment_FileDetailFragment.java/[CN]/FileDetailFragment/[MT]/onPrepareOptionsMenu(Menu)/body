@@ -1,10 +1,10 @@
 {
   super.onPrepareOptionsMenu(menu);
-  FileMenuFilter mf=new FileMenuFilter();
-  mf.setFile(getFile());
-  mf.setComponentGetter(mContainerActivity);
-  mf.setAccount(mContainerActivity.getStorageManager().getAccount());
-  mf.setContext(getSherlockActivity());
-  mf.setFragment(this);
+  FileMenuFilter mf=new FileMenuFilter(getFile(),mContainerActivity.getStorageManager().getAccount(),mContainerActivity,getSherlockActivity());
   mf.filter(menu);
+  MenuItem item=menu.findItem(R.id.action_see_details);
+  if (item != null) {
+    item.setVisible(false);
+    item.setEnabled(false);
+  }
 }

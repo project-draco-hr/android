@@ -4,11 +4,19 @@
   inflater.inflate(R.menu.file_actions_menu,menu);
   AdapterContextMenuInfo info=(AdapterContextMenuInfo)menuInfo;
   OCFile targetFile=(OCFile)mAdapter.getItem(info.position);
-  FileMenuFilter mf=new FileMenuFilter();
-  mf.setFile(targetFile);
-  mf.setComponentGetter(mContainerActivity);
-  mf.setAccount(mContainerActivity.getStorageManager().getAccount());
-  mf.setContext(getSherlockActivity());
-  mf.setFragment(this);
+  FileMenuFilter mf=new FileMenuFilter(targetFile,mContainerActivity.getStorageManager().getAccount(),mContainerActivity,getSherlockActivity());
   mf.filter(menu);
+  MenuItem item=menu.findItem(R.id.action_open_file_with);
+  if (item != null) {
+    item.setVisible(false);
+    item.setEnabled(false);
+  }
+  FileFragment frag=((FileDisplayActivity)getSherlockActivity()).getSecondFragment();
+  if (frag != null && frag instanceof FileDetailFragment && frag.getFile().getFileId() == targetFile.getFileId()) {
+    item=menu.findItem(R.id.action_see_details);
+    if (item != null) {
+      item.setVisible(false);
+      item.setEnabled(false);
+    }
+  }
 }

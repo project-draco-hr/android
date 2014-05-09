@@ -18,7 +18,7 @@ case R.id.action_rename_file:
   int extensionStart=mTargetFile.isFolder() ? -1 : fileName.lastIndexOf(".");
   int selectionEnd=(extensionStart >= 0) ? extensionStart : fileName.length();
   EditNameDialog dialog=EditNameDialog.newInstance(getString(R.string.rename_dialog_title),fileName,0,selectionEnd,this);
-  dialog.show(getFragmentManager(),EditNameDialog.TAG);
+  dialog.show(getFragmentManager(),FileDetailFragment.FTAG_RENAME_FILE);
   return true;
 }
 case R.id.action_remove_file:
@@ -40,31 +40,16 @@ confDialog.setOnConfirmationListener(this);
 confDialog.show(getFragmentManager(),FileDetailFragment.FTAG_CONFIRMATION);
 return true;
 }
+case R.id.action_download_file:
 case R.id.action_sync_file:
 {
 mContainerActivity.getFileOperationsHelper().syncFile(mTargetFile);
 return true;
 }
 case R.id.action_cancel_download:
-{
-FileDownloaderBinder downloaderBinder=mContainerActivity.getFileDownloaderBinder();
-Account account=AccountUtils.getCurrentOwnCloudAccount(getSherlockActivity());
-if (downloaderBinder != null && downloaderBinder.isDownloading(account,mTargetFile)) {
-downloaderBinder.cancel(account,mTargetFile);
-listDirectory();
-mContainerActivity.onTransferStateChanged(mTargetFile,false,false);
-}
-return true;
-}
 case R.id.action_cancel_upload:
 {
-FileUploaderBinder uploaderBinder=mContainerActivity.getFileUploaderBinder();
-Account account=AccountUtils.getCurrentOwnCloudAccount(getSherlockActivity());
-if (uploaderBinder != null && uploaderBinder.isUploading(account,mTargetFile)) {
-uploaderBinder.cancel(account,mTargetFile);
-listDirectory();
-mContainerActivity.onTransferStateChanged(mTargetFile,false,false);
-}
+((FileDisplayActivity)mContainerActivity).cancelTransference(mTargetFile);
 return true;
 }
 case R.id.action_see_details:
