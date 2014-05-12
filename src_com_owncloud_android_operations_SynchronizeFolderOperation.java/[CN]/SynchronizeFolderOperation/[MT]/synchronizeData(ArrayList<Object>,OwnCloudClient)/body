@@ -36,7 +36,7 @@
     checkAndFixForeignStoragePath(remoteFile);
     searchForLocalFileInDefaultPath(remoteFile);
     if (remoteFile.keepInSync()) {
-      SynchronizeFileOperation operation=new SynchronizeFileOperation(localFile,remoteFile,mStorageManager,mAccount,true,mContext);
+      SynchronizeFileOperation operation=new SynchronizeFileOperation(localFile,remoteFile,mAccount,true,mContext);
       filesToSyncContents.add(operation);
     }
     updatedFiles.add(remoteFile);

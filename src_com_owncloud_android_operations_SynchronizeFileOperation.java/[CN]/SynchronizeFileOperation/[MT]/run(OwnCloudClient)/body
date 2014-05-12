@@ -1,6 +1,7 @@
 {
   RemoteOperationResult result=null;
   mTransferWasRequested=false;
+  mLocalFile=getStorageManager().getFileByPath(mRemotePath);
   if (!mLocalFile.isDown()) {
     requestForDownload(mLocalFile);
     result=new RemoteOperationResult(ResultCode.OK);
@@ -39,7 +40,7 @@
           mServerFile.setLastSyncDateForData(mLocalFile.getLastSyncDateForData());
           mServerFile.setStoragePath(mLocalFile.getStoragePath());
           mServerFile.setParentId(mLocalFile.getParentId());
-          mStorageManager.saveFile(mServerFile);
+          getStorageManager().saveFile(mServerFile);
         }
         result=new RemoteOperationResult(ResultCode.OK);
       }
