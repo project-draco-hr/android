@@ -20,6 +20,5 @@
   args.putInt(ARG_NEGATIVE_BTN_RES,R.string.common_cancel);
   args.putParcelable(ARG_TARGET_FILE,file);
   frag.setArguments(args);
-  frag.setOnConfirmationListener(frag);
   return frag;
 }
