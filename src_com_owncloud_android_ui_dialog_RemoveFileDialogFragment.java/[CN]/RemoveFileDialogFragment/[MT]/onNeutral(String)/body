@@ -1,0 +1,3 @@
+{
+  ((ComponentsGetter)getSherlockActivity()).getFileOperationsHelper().removeFile(mTargetFile,true);
+}

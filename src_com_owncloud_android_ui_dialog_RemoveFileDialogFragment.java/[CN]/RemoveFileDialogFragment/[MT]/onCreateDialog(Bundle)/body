@@ -1,0 +1,5 @@
+{
+  Dialog dialog=super.onCreateDialog(savedInstanceState);
+  mTargetFile=getArguments().getParcelable(ARG_TARGET_FILE);
+  return dialog;
+}

@@ -1,4 +1,0 @@
-{
-  OCFile file=getFile();
-  mContainerActivity.getFileOperationsHelper().removeFile(file,true);
-}

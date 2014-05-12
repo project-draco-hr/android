@@ -1,8 +1,0 @@
-{
-  OCFile file=getFile();
-  if (callerTag.equals(FTAG_CONFIRMATION)) {
-    if (mContainerActivity.getStorageManager().getFileById(file.getFileId()) != null) {
-      mContainerActivity.getFileOperationsHelper().removeFile(file,false);
-    }
-  }
-}

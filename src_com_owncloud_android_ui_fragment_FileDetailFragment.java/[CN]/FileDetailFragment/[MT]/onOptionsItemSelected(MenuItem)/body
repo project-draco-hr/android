@@ -17,7 +17,8 @@ case R.id.action_open_file_with:
 }
 case R.id.action_remove_file:
 {
-showDialogToRemoveFile();
+RemoveFileDialogFragment dialog=RemoveFileDialogFragment.newInstance(getFile());
+dialog.show(getFragmentManager(),FTAG_CONFIRMATION);
 return true;
 }
 case R.id.action_rename_file:

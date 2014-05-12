@@ -4,8 +4,10 @@
   inflater.inflate(R.menu.file_actions_menu,menu);
   AdapterContextMenuInfo info=(AdapterContextMenuInfo)menuInfo;
   OCFile targetFile=(OCFile)mAdapter.getItem(info.position);
-  FileMenuFilter mf=new FileMenuFilter(targetFile,mContainerActivity.getStorageManager().getAccount(),mContainerActivity,getSherlockActivity());
-  mf.filter(menu);
+  if (mContainerActivity.getStorageManager() != null) {
+    FileMenuFilter mf=new FileMenuFilter(targetFile,mContainerActivity.getStorageManager().getAccount(),mContainerActivity,getSherlockActivity());
+    mf.filter(menu);
+  }
   MenuItem item=menu.findItem(R.id.action_open_file_with);
   if (item != null) {
     item.setVisible(false);
