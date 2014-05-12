@@ -21,7 +21,12 @@
       Toast msg=Toast.makeText(context,String.format(getString(R.string.filedetails_renamed_in_upload_msg),newName),Toast.LENGTH_LONG);
       msg.show();
     }
-    ((FileDetailFragment)details).updateFileDetails(false,false);
+    if (uploadWasFine || getFile().fileExists()) {
+      ((FileDetailFragment)details).updateFileDetails(false,true);
+    }
+ else {
+      cleanSecondFragment();
+    }
     if (uploadWasFine && PreviewImageFragment.canBePreviewed(getFile())) {
       startImagePreview(getFile());
     }
