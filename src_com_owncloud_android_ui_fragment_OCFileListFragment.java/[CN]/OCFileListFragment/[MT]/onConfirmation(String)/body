@@ -2,7 +2,7 @@
   if (callerTag.equals(FileDetailFragment.FTAG_CONFIRMATION)) {
     FileDataStorageManager storageManager=mContainerActivity.getStorageManager();
     if (storageManager.getFileById(mTargetFile.getFileId()) != null) {
-      mContainerActivity.getFileOperationsHelper().removeFile(mTargetFile,true);
+      mContainerActivity.getFileOperationsHelper().removeFile(mTargetFile,false);
     }
   }
 }

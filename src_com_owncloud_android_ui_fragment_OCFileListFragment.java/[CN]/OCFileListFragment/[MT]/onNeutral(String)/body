@@ -1,5 +1,3 @@
 {
-  mContainerActivity.getStorageManager().removeFile(mTargetFile,false,true);
-  listDirectory();
-  mContainerActivity.onTransferStateChanged(mTargetFile,false,false);
+  mContainerActivity.getFileOperationsHelper().removeFile(mTargetFile,true);
 }

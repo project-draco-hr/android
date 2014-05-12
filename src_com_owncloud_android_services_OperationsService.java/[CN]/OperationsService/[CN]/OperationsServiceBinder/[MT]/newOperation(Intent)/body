@@ -53,8 +53,8 @@
       }
  else       if (action.equals(ACTION_REMOVE)) {
         String remotePath=operationIntent.getStringExtra(EXTRA_REMOTE_PATH);
-        boolean removeLocalCopy=operationIntent.getBooleanExtra(EXTRA_REMOVE_LOCAL_COPY,true);
-        operation=new RemoveFileOperation(remotePath,removeLocalCopy);
+        boolean onlyLocalCopy=operationIntent.getBooleanExtra(EXTRA_REMOVE_ONLY_LOCAL,false);
+        operation=new RemoveFileOperation(remotePath,onlyLocalCopy);
       }
  else       if (action.equals(ACTION_CREATE_FOLDER)) {
         String remotePath=operationIntent.getStringExtra(EXTRA_REMOTE_PATH);

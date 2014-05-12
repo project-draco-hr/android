@@ -3,6 +3,6 @@
   FileDataStorageManager storageManager=mContainerActivity.getStorageManager();
   if (storageManager.getFileById(file.getFileId()) != null) {
     stopPreview(true);
-    mContainerActivity.getFileOperationsHelper().removeFile(file,true);
+    mContainerActivity.getFileOperationsHelper().removeFile(file,false);
   }
 }

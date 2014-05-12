@@ -1,8 +1,4 @@
 {
   OCFile file=getFile();
-  mContainerActivity.getStorageManager().removeFile(file,false,true);
-  if (file.getStoragePath() != null) {
-    file.setStoragePath(null);
-    updateFileDetails(file,mAccount);
-  }
+  mContainerActivity.getFileOperationsHelper().removeFile(file,true);
 }

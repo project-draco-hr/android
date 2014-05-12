@@ -1,2 +1,2 @@
 OCFile file
-boolean removeLocalCopy
+boolean onlyLocalCopy

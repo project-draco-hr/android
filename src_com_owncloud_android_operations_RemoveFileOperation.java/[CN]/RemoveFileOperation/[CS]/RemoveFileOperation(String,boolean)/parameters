@@ -1,2 +1,2 @@
 String remotePath
-boolean deleteLocalCopy
+boolean onlyLocalCopy
