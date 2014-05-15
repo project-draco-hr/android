@@ -2,7 +2,7 @@
   super.onStart();
   Log_OC.e(TAG,"onStart");
   OCFile file=getFile();
-  if (file != null) {
+  if (file != null && file.isDown()) {
     if (file.isAudio()) {
       bindMediaService();
     }
