@@ -1,0 +1,26 @@
+{
+  boolean success=true;
+  File localFolder=new File(FileStorageUtils.getDefaultSavePathFor(mAccount.name,folder));
+  if (localFolder.exists()) {
+    Vector<OCFile> files=getFolderContent(folder.getFileId());
+    if (files != null) {
+      for (      OCFile file : files) {
+        if (file.isFolder()) {
+          success&=removeLocalFolder(file);
+        }
+ else {
+          if (file.isDown()) {
+            File localFile=new File(file.getStoragePath());
+            success&=localFile.delete();
+            if (success) {
+              file.setStoragePath(null);
+              saveFile(file);
+            }
+          }
+        }
+      }
+    }
+    success&=localFolder.delete();
+  }
+  return success;
+}

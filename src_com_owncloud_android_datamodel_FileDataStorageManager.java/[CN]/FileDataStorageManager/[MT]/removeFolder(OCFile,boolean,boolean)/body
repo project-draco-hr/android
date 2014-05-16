@@ -5,8 +5,7 @@
       success=removeFolderInDb(folder);
     }
     if (removeLocalContent && success) {
-      File localFolder=new File(FileStorageUtils.getDefaultSavePathFor(mAccount.name,folder));
-      success=removeLocalFolder(localFolder);
+      success=removeLocalFolder(folder);
     }
   }
   return success;
