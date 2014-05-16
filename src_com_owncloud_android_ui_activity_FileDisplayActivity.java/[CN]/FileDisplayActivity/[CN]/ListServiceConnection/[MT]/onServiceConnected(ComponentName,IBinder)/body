@@ -2,7 +2,7 @@
   if (component.equals(new ComponentName(FileDisplayActivity.this,FileDownloader.class))) {
     Log_OC.d(TAG,"Download service connected");
     mDownloaderBinder=(FileDownloaderBinder)service;
-    if (mWaitingToPreview != null) {
+    if (mWaitingToPreview != null && !mWaitingToPreview.isDown()) {
       requestForDownload();
     }
   }
