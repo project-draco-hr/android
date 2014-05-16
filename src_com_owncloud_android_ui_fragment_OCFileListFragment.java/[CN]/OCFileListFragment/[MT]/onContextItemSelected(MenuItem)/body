@@ -14,10 +14,7 @@ case R.id.action_unshare_file:
   }
 case R.id.action_rename_file:
 {
-  String fileName=mTargetFile.getFileName();
-  int extensionStart=mTargetFile.isFolder() ? -1 : fileName.lastIndexOf(".");
-  int selectionEnd=(extensionStart >= 0) ? extensionStart : fileName.length();
-  EditNameDialog dialog=EditNameDialog.newInstance(getString(R.string.rename_dialog_title),fileName,0,selectionEnd,this);
+  RenameFileDialogFragment dialog=RenameFileDialogFragment.newInstance(mTargetFile);
   dialog.show(getFragmentManager(),FileDetailFragment.FTAG_RENAME_FILE);
   return true;
 }

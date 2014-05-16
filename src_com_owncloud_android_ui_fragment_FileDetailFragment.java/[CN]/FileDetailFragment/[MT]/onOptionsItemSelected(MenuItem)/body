@@ -23,7 +23,8 @@ return true;
 }
 case R.id.action_rename_file:
 {
-showDialogToRenameFile();
+RenameFileDialogFragment dialog=RenameFileDialogFragment.newInstance(getFile());
+dialog.show(getFragmentManager(),FTAG_RENAME_FILE);
 return true;
 }
 case R.id.action_cancel_download:

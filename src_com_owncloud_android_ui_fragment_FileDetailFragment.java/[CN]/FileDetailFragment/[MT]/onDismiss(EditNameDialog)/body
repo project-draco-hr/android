@@ -1,7 +1,0 @@
-{
-  if (dialog.getResult()) {
-    String newFilename=dialog.getNewFilename();
-    Log_OC.d(TAG,"name edit dialog dismissed with new name " + newFilename);
-    mContainerActivity.getFileOperationsHelper().renameFile(getFile(),newFilename);
-  }
-}
