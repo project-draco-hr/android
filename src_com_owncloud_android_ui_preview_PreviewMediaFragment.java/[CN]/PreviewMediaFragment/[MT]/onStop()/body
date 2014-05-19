@@ -1,6 +1,5 @@
 {
   Log_OC.e(TAG,"onStop");
-  super.onStop();
   mPrepared=false;
   if (mMediaServiceConnection != null) {
     Log_OC.d(TAG,"Unbinding from MediaService ...");
@@ -11,4 +10,5 @@
     mMediaServiceConnection=null;
     mMediaServiceBinder=null;
   }
+  super.onStop();
 }
