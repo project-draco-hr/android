@@ -1,18 +1,10 @@
 {
-  Account account=getAccount();
-  if (mDownloaderBinder != null && mDownloaderBinder.isDownloading(account,file)) {
-    mDownloaderBinder.cancel(account,file);
-    refreshListOfFilesFragment();
-    onTransferStateChanged(file,false,false);
+  getFileOperationsHelper().cancelTransference(file);
+  if (mWaitingToPreview != null && mWaitingToPreview.getRemotePath().equals(file.getRemotePath())) {
+    mWaitingToPreview=null;
   }
- else   if (mUploaderBinder != null && mUploaderBinder.isUploading(account,file)) {
-    mUploaderBinder.cancel(account,file);
-    refreshListOfFilesFragment();
-    if (!file.fileExists()) {
-      cleanSecondFragment();
-    }
- else {
-      onTransferStateChanged(file,false,false);
-    }
+  if (mWaitingToSend != null && mWaitingToSend.getRemotePath().equals(file.getRemotePath())) {
+    mWaitingToSend=null;
   }
+  onTransferStateChanged(file,false,false);
 }
