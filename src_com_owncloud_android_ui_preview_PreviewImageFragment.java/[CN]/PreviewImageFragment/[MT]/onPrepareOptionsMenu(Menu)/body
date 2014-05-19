@@ -1,6 +1,7 @@
 {
   super.onPrepareOptionsMenu(menu);
   if (mContainerActivity.getStorageManager() != null) {
+    setFile(mContainerActivity.getStorageManager().getFileById(getFile().getFileId()));
     FileMenuFilter mf=new FileMenuFilter(getFile(),mContainerActivity.getStorageManager().getAccount(),mContainerActivity,getSherlockActivity());
     mf.filter(menu);
   }
