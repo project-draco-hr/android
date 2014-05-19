@@ -1,5 +1,4 @@
 {
-  super.onPause();
   if (this.isFinishing()) {
     Account current=AccountUtils.getCurrentOwnCloudAccount(this);
     if ((mPreviousAccount == null && current != null) || (mPreviousAccount != null && !mPreviousAccount.equals(current))) {
@@ -8,4 +7,5 @@
       startActivity(i);
     }
   }
+  super.onPause();
 }

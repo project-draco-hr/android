@@ -17,8 +17,7 @@
         ((FileActivity)getSherlockActivity()).startActivity(mIntent);
       }
  else {
-        FileOperationsHelper foh=new FileOperationsHelper((FileActivity)getSherlockActivity());
-        foh.shareFileWithLinkToApp(mFile,mIntent);
+        ((ComponentsGetter)getSherlockActivity()).getFileOperationsHelper().shareFileWithLinkToApp(mFile,mIntent);
       }
     }
   }

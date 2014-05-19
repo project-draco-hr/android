@@ -1,5 +1,4 @@
 {
-  super.onPause();
   Log_OC.e(TAG,"onPause() start");
   if (mSyncBroadcastReceiver != null) {
     unregisterReceiver(mSyncBroadcastReceiver);
@@ -13,6 +12,6 @@
     unregisterReceiver(mDownloadFinishReceiver);
     mDownloadFinishReceiver=null;
   }
-  dismissLoadingDialog();
   Log_OC.d(TAG,"onPause() end");
+  super.onPause();
 }
