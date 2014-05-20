@@ -1,6 +1,0 @@
-{
-  OCFile file=getFile();
-  stopPreview(true);
-  mStorageManager.removeFile(file,false,true);
-  finish();
-}

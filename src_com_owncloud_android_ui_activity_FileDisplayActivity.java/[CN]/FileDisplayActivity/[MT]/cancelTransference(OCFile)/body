@@ -1,0 +1,10 @@
+{
+  getFileOperationsHelper().cancelTransference(file);
+  if (mWaitingToPreview != null && mWaitingToPreview.getRemotePath().equals(file.getRemotePath())) {
+    mWaitingToPreview=null;
+  }
+  if (mWaitingToSend != null && mWaitingToSend.getRemotePath().equals(file.getRemotePath())) {
+    mWaitingToSend=null;
+  }
+  onTransferStateChanged(file,false,false);
+}

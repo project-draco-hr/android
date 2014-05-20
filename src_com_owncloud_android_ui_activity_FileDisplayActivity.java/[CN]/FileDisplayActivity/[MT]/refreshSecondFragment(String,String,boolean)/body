@@ -21,7 +21,7 @@
             detailsFragmentChanged=true;
           }
  else {
-            getFileOperationsHelper().openFile(mWaitingToPreview,this);
+            getFileOperationsHelper().openFile(mWaitingToPreview);
           }
         }
         mWaitingToPreview=null;

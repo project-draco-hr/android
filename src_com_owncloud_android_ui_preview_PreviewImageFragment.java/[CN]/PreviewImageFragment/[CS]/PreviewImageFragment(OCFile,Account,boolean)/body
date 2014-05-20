@@ -1,6 +1,5 @@
 {
   super(fileToDetail);
   mAccount=ocAccount;
-  mStorageManager=null;
   mIgnoreFirstSavedState=ignoreFirstSavedState;
 }

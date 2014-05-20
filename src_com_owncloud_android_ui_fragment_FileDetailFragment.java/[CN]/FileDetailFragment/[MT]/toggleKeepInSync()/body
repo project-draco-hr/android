@@ -2,13 +2,13 @@
   CheckBox cb=(CheckBox)getView().findViewById(R.id.fdKeepInSync);
   OCFile file=getFile();
   file.setKeepInSync(cb.isChecked());
-  mStorageManager.saveFile(file);
+  mContainerActivity.getStorageManager().saveFile(file);
   Intent intent=new Intent(getActivity().getApplicationContext(),FileObserverService.class);
   intent.putExtra(FileObserverService.KEY_FILE_CMD,(cb.isChecked() ? FileObserverService.CMD_ADD_OBSERVED_FILE : FileObserverService.CMD_DEL_OBSERVED_FILE));
   intent.putExtra(FileObserverService.KEY_CMD_ARG_FILE,file);
   intent.putExtra(FileObserverService.KEY_CMD_ARG_ACCOUNT,mAccount);
   getActivity().startService(intent);
   if (file.keepInSync()) {
-    synchronizeFile();
+    mContainerActivity.getFileOperationsHelper().syncFile(getFile());
   }
 }

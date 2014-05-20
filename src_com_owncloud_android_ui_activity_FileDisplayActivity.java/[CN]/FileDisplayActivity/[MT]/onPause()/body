@@ -1,5 +1,4 @@
 {
-  super.onPause();
   Log_OC.e(TAG,"onPause() start");
   if (mSyncBroadcastReceiver != null) {
     unregisterReceiver(mSyncBroadcastReceiver);
@@ -14,4 +13,5 @@
     mDownloadFinishReceiver=null;
   }
   Log_OC.d(TAG,"onPause() end");
+  super.onPause();
 }

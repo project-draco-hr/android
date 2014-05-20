@@ -1,6 +1,6 @@
 {
-  super.onDestroy();
   if (mBitmap != null) {
     mBitmap.recycle();
   }
+  super.onDestroy();
 }

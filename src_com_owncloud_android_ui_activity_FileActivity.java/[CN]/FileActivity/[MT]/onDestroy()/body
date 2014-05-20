@@ -1,7 +1,15 @@
 {
-  super.onDestroy();
   if (mOperationsServiceConnection != null) {
     unbindService(mOperationsServiceConnection);
     mOperationsServiceBinder=null;
   }
+  if (mDownloadServiceConnection != null) {
+    unbindService(mDownloadServiceConnection);
+    mDownloadServiceConnection=null;
+  }
+  if (mUploadServiceConnection != null) {
+    unbindService(mUploadServiceConnection);
+    mUploadServiceConnection=null;
+  }
+  super.onDestroy();
 }

@@ -1,30 +1,33 @@
 {
   super.onActivityCreated(savedInstanceState);
   Log_OC.e(TAG,"onActivityCreated");
-  mStorageManager=new FileDataStorageManager(mAccount,getActivity().getApplicationContext().getContentResolver());
-  if (savedInstanceState != null) {
+  OCFile file=getFile();
+  if (savedInstanceState == null) {
+    if (file == null) {
+      throw new IllegalStateException("Instanced with a NULL OCFile");
+    }
+    if (mAccount == null) {
+      throw new IllegalStateException("Instanced with a NULL ownCloud Account");
+    }
+    if (!file.isDown()) {
+      throw new IllegalStateException("There is no local file to preview");
+    }
+  }
+ else {
     setFile((OCFile)savedInstanceState.getParcelable(PreviewMediaFragment.EXTRA_FILE));
     mAccount=savedInstanceState.getParcelable(PreviewMediaFragment.EXTRA_ACCOUNT);
     mSavedPlaybackPosition=savedInstanceState.getInt(PreviewMediaFragment.EXTRA_PLAY_POSITION);
     mAutoplay=savedInstanceState.getBoolean(PreviewMediaFragment.EXTRA_PLAYING);
   }
-  OCFile file=getFile();
-  if (file == null) {
-    throw new IllegalStateException("Instanced with a NULL OCFile");
-  }
-  if (mAccount == null) {
-    throw new IllegalStateException("Instanced with a NULL ownCloud Account");
-  }
-  if (!file.isDown()) {
-    throw new IllegalStateException("There is no local file to preview");
-  }
-  if (file.isVideo()) {
-    mVideoPreview.setVisibility(View.VISIBLE);
-    mImagePreview.setVisibility(View.GONE);
-    prepareVideo();
-  }
+  if (file != null && file.isDown()) {
+    if (file.isVideo()) {
+      mVideoPreview.setVisibility(View.VISIBLE);
+      mImagePreview.setVisibility(View.GONE);
+      prepareVideo();
+    }
  else {
-    mVideoPreview.setVisibility(View.GONE);
-    mImagePreview.setVisibility(View.VISIBLE);
+      mVideoPreview.setVisibility(View.GONE);
+      mImagePreview.setVisibility(View.VISIBLE);
+    }
   }
 }

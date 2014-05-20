@@ -1,8 +1,0 @@
-{
-  OCFile file=getFile();
-  mStorageManager.removeFile(file,false,true);
-  if (file.getStoragePath() != null) {
-    file.setStoragePath(null);
-    updateFileDetails(file,mAccount);
-  }
-}

@@ -23,7 +23,7 @@
   }
   if (mFile != null) {
     listDirectory(mFile);
-    mContainerActivity.startSyncFolderOperation(mFile);
+    ((FileDisplayActivity)mContainerActivity).startSyncFolderOperation(mFile);
     restoreIndexAndTopPosition();
   }
   return moveCount;

@@ -2,49 +2,51 @@
 switch (item.getItemId()) {
 case R.id.action_share_file:
 {
-      FileDisplayActivity activity=(FileDisplayActivity)getSherlockActivity();
-      activity.getFileOperationsHelper().shareFileWithLink(getFile(),activity);
+      mContainerActivity.getFileOperationsHelper().shareFileWithLink(getFile());
       return true;
     }
 case R.id.action_unshare_file:
 {
-    FileDisplayActivity activity=(FileDisplayActivity)getSherlockActivity();
-    activity.getFileOperationsHelper().unshareFileWithLink(getFile(),activity);
+    mContainerActivity.getFileOperationsHelper().unshareFileWithLink(getFile());
     return true;
   }
 case R.id.action_open_file_with:
 {
-  FileDisplayActivity activity=(FileDisplayActivity)getSherlockActivity();
-  activity.getFileOperationsHelper().openFile(getFile(),activity);
+  mContainerActivity.getFileOperationsHelper().openFile(getFile());
   return true;
 }
 case R.id.action_remove_file:
 {
-removeFile();
+RemoveFileDialogFragment dialog=RemoveFileDialogFragment.newInstance(getFile());
+dialog.show(getFragmentManager(),FTAG_CONFIRMATION);
 return true;
 }
 case R.id.action_rename_file:
 {
-renameFile();
+RenameFileDialogFragment dialog=RenameFileDialogFragment.newInstance(getFile());
+dialog.show(getFragmentManager(),FTAG_RENAME_FILE);
+return true;
+}
+case R.id.action_cancel_download:
+case R.id.action_cancel_upload:
+{
+((FileDisplayActivity)mContainerActivity).cancelTransference(getFile());
 return true;
 }
 case R.id.action_download_file:
-case R.id.action_cancel_download:
-case R.id.action_cancel_upload:
 case R.id.action_sync_file:
 {
-synchronizeFile();
+mContainerActivity.getFileOperationsHelper().syncFile(getFile());
 return true;
 }
 case R.id.action_send_file:
 {
-FileDisplayActivity activity=(FileDisplayActivity)getSherlockActivity();
 if (!getFile().isDown()) {
 Log_OC.d(TAG,getFile().getRemotePath() + " : File must be downloaded");
-activity.startDownloadForSending(getFile());
+((FileDisplayActivity)mContainerActivity).startDownloadForSending(getFile());
 }
  else {
-activity.getFileOperationsHelper().sendDownloadedFile(getFile(),activity);
+mContainerActivity.getFileOperationsHelper().sendDownloadedFile(getFile());
 }
 return true;
 }

@@ -4,6 +4,11 @@
   boolean moved=true;
   File tmpFile=new File(getTmpPath());
   String tmpFolder=getTmpFolder();
+synchronized (mCancellationRequested) {
+    if (mCancellationRequested.get()) {
+      return new RemoteOperationResult(new OperationCancelledException());
+    }
+  }
   mDownloadOperation=new DownloadRemoteFileOperation(mFile.getRemotePath(),tmpFolder);
   Iterator<OnDatatransferProgressListener> listener=mDataTransferListeners.iterator();
   while (listener.hasNext()) {

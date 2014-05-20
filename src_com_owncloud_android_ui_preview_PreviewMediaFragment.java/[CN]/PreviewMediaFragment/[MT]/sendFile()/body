@@ -1,5 +1,4 @@
 {
   stopPreview(false);
-  FileActivity activity=(FileActivity)((FileFragment.ContainerActivity)getActivity());
-  activity.getFileOperationsHelper().sendDownloadedFile(getFile(),activity);
+  mContainerActivity.getFileOperationsHelper().sendDownloadedFile(getFile());
 }

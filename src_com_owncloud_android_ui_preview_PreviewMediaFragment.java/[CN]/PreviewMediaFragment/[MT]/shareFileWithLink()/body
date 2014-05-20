@@ -1,5 +1,0 @@
-{
-  stopPreview(false);
-  FileActivity activity=(FileActivity)((FileFragment.ContainerActivity)getActivity());
-  activity.getFileOperationsHelper().shareFileWithLink(getFile(),activity);
-}

@@ -1,0 +1,7 @@
+{
+  mRemotePath=remotePath;
+  mServerFile=null;
+  mAccount=account;
+  mSyncFileContents=syncFileContents;
+  mContext=context;
+}

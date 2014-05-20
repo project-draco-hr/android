@@ -1,6 +1,0 @@
-{
-  super.onResume();
-  mUploadFinishReceiver=new UploadFinishReceiver();
-  IntentFilter filter=new IntentFilter(FileUploader.getUploadFinishMessage());
-  getActivity().registerReceiver(mUploadFinishReceiver,filter);
-}

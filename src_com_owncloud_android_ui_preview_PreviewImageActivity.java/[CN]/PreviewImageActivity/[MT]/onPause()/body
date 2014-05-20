@@ -1,5 +1,5 @@
 {
-  super.onPause();
   unregisterReceiver(mDownloadFinishReceiver);
   mDownloadFinishReceiver=null;
+  super.onPause();
 }

@@ -7,7 +7,7 @@ case R.id.fdKeepInSync:
     }
 case R.id.fdCancelBtn:
 {
-    synchronizeFile();
+    ((FileDisplayActivity)mContainerActivity).cancelTransference(getFile());
     break;
   }
 default :

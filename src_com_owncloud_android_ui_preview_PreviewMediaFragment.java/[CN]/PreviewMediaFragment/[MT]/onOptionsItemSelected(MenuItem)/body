@@ -2,12 +2,14 @@
 switch (item.getItemId()) {
 case R.id.action_share_file:
 {
-      shareFileWithLink();
+      stopPreview(false);
+      mContainerActivity.getFileOperationsHelper().shareFileWithLink(getFile());
       return true;
     }
 case R.id.action_unshare_file:
 {
-    unshareFileWithLink();
+    stopPreview(false);
+    mContainerActivity.getFileOperationsHelper().unshareFileWithLink(getFile());
     return true;
   }
 case R.id.action_open_file_with:
@@ -17,7 +19,8 @@ case R.id.action_open_file_with:
 }
 case R.id.action_remove_file:
 {
-removeFile();
+RemoveFileDialogFragment dialog=RemoveFileDialogFragment.newInstance(getFile());
+dialog.show(getFragmentManager(),ConfirmationDialogFragment.FTAG_CONFIRMATION);
 return true;
 }
 case R.id.action_see_details:
@@ -28,6 +31,12 @@ return true;
 case R.id.action_send_file:
 {
 sendFile();
+return true;
+}
+case R.id.action_sync_file:
+{
+mContainerActivity.getFileOperationsHelper().syncFile(getFile());
+return true;
 }
 default :
 return false;

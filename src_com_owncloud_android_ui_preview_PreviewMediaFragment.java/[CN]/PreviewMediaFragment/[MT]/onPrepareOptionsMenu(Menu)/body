@@ -1,12 +1,12 @@
 {
   super.onPrepareOptionsMenu(menu);
-  MenuItem item=menu.findItem(R.id.action_unshare_file);
-  if (!getFile().isShareByLink()) {
+  if (mContainerActivity.getStorageManager() != null) {
+    FileMenuFilter mf=new FileMenuFilter(getFile(),mContainerActivity.getStorageManager().getAccount(),mContainerActivity,getSherlockActivity());
+    mf.filter(menu);
+  }
+  MenuItem item=menu.findItem(R.id.action_rename_file);
+  if (item != null) {
     item.setVisible(false);
     item.setEnabled(false);
-  }
- else {
-    item.setVisible(true);
-    item.setEnabled(true);
   }
 }

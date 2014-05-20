@@ -46,6 +46,26 @@
  else       if (action.equals(ACTION_GET_USER_NAME)) {
         operation=new GetRemoteUserNameOperation();
       }
+ else       if (action.equals(ACTION_RENAME)) {
+        String remotePath=operationIntent.getStringExtra(EXTRA_REMOTE_PATH);
+        String newName=operationIntent.getStringExtra(EXTRA_NEWNAME);
+        operation=new RenameFileOperation(remotePath,account,newName);
+      }
+ else       if (action.equals(ACTION_REMOVE)) {
+        String remotePath=operationIntent.getStringExtra(EXTRA_REMOTE_PATH);
+        boolean onlyLocalCopy=operationIntent.getBooleanExtra(EXTRA_REMOVE_ONLY_LOCAL,false);
+        operation=new RemoveFileOperation(remotePath,onlyLocalCopy);
+      }
+ else       if (action.equals(ACTION_CREATE_FOLDER)) {
+        String remotePath=operationIntent.getStringExtra(EXTRA_REMOTE_PATH);
+        boolean createFullPath=operationIntent.getBooleanExtra(EXTRA_CREATE_FULL_PATH,true);
+        operation=new CreateFolderOperation(remotePath,createFullPath);
+      }
+ else       if (action.equals(ACTION_SYNC_FILE)) {
+        String remotePath=operationIntent.getStringExtra(EXTRA_REMOTE_PATH);
+        boolean syncFileContents=operationIntent.getBooleanExtra(EXTRA_SYNC_FILE_CONTENTS,true);
+        operation=new SynchronizeFileOperation(remotePath,account,syncFileContents,getApplicationContext());
+      }
     }
   }
  catch (  IllegalArgumentException e) {

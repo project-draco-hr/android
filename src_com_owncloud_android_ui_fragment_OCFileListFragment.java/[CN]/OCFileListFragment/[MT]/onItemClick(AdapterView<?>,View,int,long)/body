@@ -8,19 +8,18 @@
     }
  else {
       if (PreviewImageFragment.canBePreviewed(file)) {
-        mContainerActivity.startImagePreview(file);
+        ((FileDisplayActivity)mContainerActivity).startImagePreview(file);
       }
  else       if (file.isDown()) {
         if (PreviewMediaFragment.canBePreviewed(file)) {
-          mContainerActivity.startMediaPreview(file,0,true);
+          ((FileDisplayActivity)mContainerActivity).startMediaPreview(file,0,true);
         }
  else {
-          FileDisplayActivity activity=(FileDisplayActivity)getSherlockActivity();
-          activity.getFileOperationsHelper().openFile(file,activity);
+          mContainerActivity.getFileOperationsHelper().openFile(file);
         }
       }
  else {
-        mContainerActivity.startDownloadForPreview(file);
+        ((FileDisplayActivity)mContainerActivity).startDownloadForPreview(file);
       }
     }
   }

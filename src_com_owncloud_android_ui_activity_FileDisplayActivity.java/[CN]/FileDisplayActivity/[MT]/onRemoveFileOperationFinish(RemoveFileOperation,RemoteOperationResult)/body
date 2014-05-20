@@ -4,14 +4,18 @@
     Toast msg=Toast.makeText(this,R.string.remove_success_msg,Toast.LENGTH_LONG);
     msg.show();
     OCFile removedFile=operation.getFile();
-    getSecondFragment();
     FileFragment second=getSecondFragment();
     if (second != null && removedFile.equals(second.getFile())) {
+      if (second instanceof PreviewMediaFragment) {
+        ((PreviewMediaFragment)second).stopPreview(true);
+      }
+      setFile(getStorageManager().getFileById(removedFile.getParentId()));
       cleanSecondFragment();
     }
     if (getStorageManager().getFileById(removedFile.getParentId()).equals(getCurrentDir())) {
-      refeshListOfFilesFragment();
+      refreshListOfFilesFragment();
     }
+    invalidateOptionsMenu();
   }
  else {
     Toast msg=Toast.makeText(this,R.string.remove_fail_msg,Toast.LENGTH_LONG);

@@ -1,9 +1,13 @@
 {
-  if (mDualPane) {
-    FileFragment details=getSecondFragment();
-    if (details != null && details instanceof FileDetailFragment && file.equals(details.getFile())) {
-      if (downloading || uploading) {
-        ((FileDetailFragment)details).updateFileDetails(file,getAccount());
+  refreshListOfFilesFragment();
+  FileFragment details=getSecondFragment();
+  if (details != null && details instanceof FileDetailFragment && file.equals(details.getFile())) {
+    if (downloading || uploading) {
+      ((FileDetailFragment)details).updateFileDetails(file,getAccount());
+    }
+ else {
+      if (!file.fileExists()) {
+        cleanSecondFragment();
       }
  else {
         ((FileDetailFragment)details).updateFileDetails(false,true);

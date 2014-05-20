@@ -2,6 +2,5 @@
   super(fileToDetail);
   mAccount=ocAccount;
   mSavedPlaybackPosition=startPlaybackPosition;
-  mStorageManager=null;
   mAutoplay=autoplay;
 }

@@ -1,7 +1,7 @@
 {
   if (result.isSuccess()) {
     dismissLoadingDialog();
-    refeshListOfFilesFragment();
+    refreshListOfFilesFragment();
   }
  else {
     dismissLoadingDialog();
