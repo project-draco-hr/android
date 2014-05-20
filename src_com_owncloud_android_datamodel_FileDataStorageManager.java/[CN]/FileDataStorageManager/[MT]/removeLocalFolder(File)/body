@@ -1,0 +1,16 @@
+{
+  boolean success=true;
+  File[] localFiles=localFolder.listFiles();
+  if (localFiles != null) {
+    for (    File localFile : localFiles) {
+      if (localFile.isDirectory()) {
+        success&=removeLocalFolder(localFile);
+      }
+ else {
+        success&=localFile.delete();
+      }
+    }
+  }
+  success&=localFolder.delete();
+  return success;
+}
