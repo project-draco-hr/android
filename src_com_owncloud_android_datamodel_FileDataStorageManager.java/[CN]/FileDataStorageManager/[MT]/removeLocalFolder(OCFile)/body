@@ -20,7 +20,7 @@
         }
       }
     }
-    success&=localFolder.delete();
+    success&=removeLocalFolder(localFolder);
   }
   return success;
 }
