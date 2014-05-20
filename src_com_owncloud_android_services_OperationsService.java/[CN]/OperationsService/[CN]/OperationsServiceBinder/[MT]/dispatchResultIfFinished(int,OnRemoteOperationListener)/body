@@ -2,7 +2,15 @@
   Pair<RemoteOperation,RemoteOperationResult> undispatched=mUndispatchedFinishedOperations.remove(operationId);
   if (undispatched != null) {
     listener.onRemoteOperationFinish(undispatched.first,undispatched.second);
+    return true;
   }
  else {
+    if (!mPendingOperations.isEmpty()) {
+      nextOperation();
+      return true;
+    }
+ else {
+      return false;
+    }
   }
 }
