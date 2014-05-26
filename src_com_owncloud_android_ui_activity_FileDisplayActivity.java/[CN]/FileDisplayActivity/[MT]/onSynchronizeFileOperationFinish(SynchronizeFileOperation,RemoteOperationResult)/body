@@ -14,7 +14,7 @@
       onTransferStateChanged(syncedFile,true,true);
     }
  else {
-      Toast msg=Toast.makeText(this,R.string.sync_file_nothing_to_do_msg,Toast.LENGTH_LONG);
+      Toast msg=Toast.makeText(this,ErrorMessageAdapter.getErrorCauseMessage(result,operation,getResources()),Toast.LENGTH_LONG);
       msg.show();
     }
   }
