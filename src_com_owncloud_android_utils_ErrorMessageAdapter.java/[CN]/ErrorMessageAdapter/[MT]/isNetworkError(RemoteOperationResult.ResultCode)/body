@@ -1,0 +1,6 @@
+{
+  if (code == ResultCode.WRONG_CONNECTION || code == ResultCode.TIMEOUT || code == ResultCode.HOST_NOT_AVAILABLE) {
+    return true;
+  }
+ else   return false;
+}

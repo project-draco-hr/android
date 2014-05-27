@@ -1,8 +1,8 @@
 {
   dismissLoadingDialog();
+  Toast msg=Toast.makeText(this,ErrorMessageAdapter.getErrorCauseMessage(result,operation,getResources()),Toast.LENGTH_LONG);
+  msg.show();
   if (result.isSuccess()) {
-    Toast msg=Toast.makeText(this,R.string.remove_success_msg,Toast.LENGTH_LONG);
-    msg.show();
     OCFile removedFile=operation.getFile();
     FileFragment second=getSecondFragment();
     if (second != null && removedFile.equals(second.getFile())) {
@@ -18,8 +18,6 @@
     invalidateOptionsMenu();
   }
  else {
-    Toast msg=Toast.makeText(this,R.string.remove_fail_msg,Toast.LENGTH_LONG);
-    msg.show();
     if (result.isSslRecoverableException()) {
       mLastSslUntrustedServerResult=result;
       showUntrustedCertDialog(mLastSslUntrustedServerResult);

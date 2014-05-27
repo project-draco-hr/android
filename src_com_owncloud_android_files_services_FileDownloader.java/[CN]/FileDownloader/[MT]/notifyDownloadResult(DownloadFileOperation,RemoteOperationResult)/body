@@ -2,9 +2,9 @@
   mNotificationManager.cancel(R.string.downloader_download_in_progress_ticker);
   if (!downloadResult.isCancelled()) {
     int tickerId=(downloadResult.isSuccess()) ? R.string.downloader_download_succeeded_ticker : R.string.downloader_download_failed_ticker;
-    int contentId=(downloadResult.isSuccess()) ? R.string.downloader_download_succeeded_content : R.string.downloader_download_failed_content;
-    mNotificationBuilder.setTicker(getString(tickerId)).setContentTitle(getString(tickerId)).setAutoCancel(true).setOngoing(false).setProgress(0,0,false);
     boolean needsToUpdateCredentials=(downloadResult.getCode() == ResultCode.UNAUTHORIZED || (downloadResult.isIdPRedirection() && mDownloadClient.getCredentials() == null));
+    tickerId=(needsToUpdateCredentials) ? R.string.downloader_download_failed_credentials_error : tickerId;
+    mNotificationBuilder.setTicker(getString(tickerId)).setContentTitle(getString(tickerId)).setAutoCancel(true).setOngoing(false).setProgress(0,0,false);
     if (needsToUpdateCredentials) {
       Intent updateAccountCredentials=new Intent(this,AuthenticatorActivity.class);
       updateAccountCredentials.putExtra(AuthenticatorActivity.EXTRA_ACCOUNT,download.getAccount());
@@ -12,7 +12,7 @@
       updateAccountCredentials.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
       updateAccountCredentials.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
       updateAccountCredentials.addFlags(Intent.FLAG_FROM_BACKGROUND);
-      mNotificationBuilder.setContentIntent(PendingIntent.getActivity(this,(int)System.currentTimeMillis(),updateAccountCredentials,PendingIntent.FLAG_ONE_SHOT)).setContentText(String.format(getString(contentId),new File(download.getSavePath()).getName()));
+      mNotificationBuilder.setContentIntent(PendingIntent.getActivity(this,(int)System.currentTimeMillis(),updateAccountCredentials,PendingIntent.FLAG_ONE_SHOT));
       mDownloadClient=null;
     }
  else {
@@ -31,8 +31,9 @@
  else {
         showDetailsIntent=new Intent();
       }
-      mNotificationBuilder.setContentIntent(PendingIntent.getActivity(this,(int)System.currentTimeMillis(),showDetailsIntent,0)).setContentText(String.format(getString(contentId),new File(download.getSavePath()).getName()));
+      mNotificationBuilder.setContentIntent(PendingIntent.getActivity(this,(int)System.currentTimeMillis(),showDetailsIntent,0));
     }
+    mNotificationBuilder.setContentText(ErrorMessageAdapter.getErrorCauseMessage(downloadResult,download,getResources()));
     mNotificationManager.notify(tickerId,mNotificationBuilder.build());
   }
 }
