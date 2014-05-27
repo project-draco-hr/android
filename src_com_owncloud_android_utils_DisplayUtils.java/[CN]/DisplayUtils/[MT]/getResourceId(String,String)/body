@@ -25,8 +25,25 @@
  else       if (SUBTYPES_DOCUMENT_SET.contains(subtype)) {
         return R.drawable.file_doc;
       }
+ else       if (SUBTYPES_SPREADSHEET_SET.contains(subtype)) {
+        return R.drawable.file_xls;
+      }
+ else       if (SUBTYPES_PRESENTATION_SET.contains(subtype)) {
+        return R.drawable.file_ppt;
+      }
  else       if (SUBTYPES_COMPRESSED_SET.contains(subtype)) {
         return R.drawable.file_zip;
+      }
+ else       if (SUBTYPE_OCTET_STREAM.equals(subtype)) {
+        if (getExtension(filename).equalsIgnoreCase(EXTENSION_RAR)) {
+          return R.drawable.file_zip;
+        }
+ else         if (getExtension(filename).equalsIgnoreCase(EXTENSION_RTF)) {
+          return R.drawable.file_doc;
+        }
+ else         if (getExtension(filename).equalsIgnoreCase(EXTENSION_3GP)) {
+          return R.drawable.file_movie;
+        }
       }
     }
   }

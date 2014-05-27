@@ -1,0 +1,4 @@
+{
+  String extension=filename.substring(filename.lastIndexOf(".") + 1);
+  return extension;
+}
