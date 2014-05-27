@@ -16,7 +16,7 @@
     showDetailsIntent.putExtra(FileActivity.EXTRA_ACCOUNT,upload.getAccount());
     showDetailsIntent.putExtra(FileActivity.EXTRA_FROM_NOTIFICATION,true);
     ;
-    mNotificationBuilder.setContentIntent(PendingIntent.getActivity(this,(int)System.currentTimeMillis(),showDetailsIntent,0)).setTicker(getString(R.string.uploader_upload_succeeded_ticker)).setContentTitle(getString(R.string.uploader_upload_succeeded_ticker)).setContentText(String.format(getString(R.string.uploader_upload_succeeded_content_single),upload.getFileName()));
+    mNotificationBuilder.setContentIntent(PendingIntent.getActivity(this,(int)System.currentTimeMillis(),showDetailsIntent,0)).setTicker(getString(R.string.uploader_upload_succeeded_ticker)).setContentTitle(getString(R.string.uploader_upload_succeeded_ticker)).setContentText(ErrorMessageAdapter.getErrorCauseMessage(uploadResult,upload,getResources()));
     mNotificationManager.notify(R.string.uploader_upload_in_progress_ticker,mNotificationBuilder.build());
     DbHandler db=new DbHandler(this.getBaseContext());
     db.removeIUPendingFile(mCurrentUpload.getOriginalStoragePath());
@@ -25,9 +25,11 @@
  else {
     mNotificationManager.cancel(R.string.uploader_upload_in_progress_ticker);
     NotificationCompat.Builder errorBuilder=new NotificationCompat.Builder(this);
-    errorBuilder.setSmallIcon(R.drawable.notification_icon).setTicker(getString(R.string.uploader_upload_failed_ticker)).setContentTitle(getString(R.string.uploader_upload_failed_ticker)).setAutoCancel(true);
     String content=null;
     boolean needsToUpdateCredentials=(uploadResult.getCode() == ResultCode.UNAUTHORIZED || (uploadResult.isIdPRedirection() && mUploadClient.getCredentials() == null));
+    int tickerId=(needsToUpdateCredentials) ? R.string.uploader_upload_failed_credentials_error : R.string.uploader_upload_failed_ticker;
+    errorBuilder.setSmallIcon(R.drawable.notification_icon).setTicker(getString(tickerId)).setContentTitle(getString(tickerId)).setAutoCancel(true);
+    content=ErrorMessageAdapter.getErrorCauseMessage(uploadResult,upload,getResources());
     if (needsToUpdateCredentials) {
       Intent updateAccountCredentials=new Intent(this,AuthenticatorActivity.class);
       updateAccountCredentials.putExtra(AuthenticatorActivity.EXTRA_ACCOUNT,upload.getAccount());
@@ -36,19 +38,9 @@
       updateAccountCredentials.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
       updateAccountCredentials.addFlags(Intent.FLAG_FROM_BACKGROUND);
       errorBuilder.setContentIntent(PendingIntent.getActivity(this,(int)System.currentTimeMillis(),updateAccountCredentials,PendingIntent.FLAG_ONE_SHOT));
-      content=String.format(getString(R.string.uploader_upload_failed_content_single),upload.getFileName());
       mUploadClient=null;
     }
  else {
-      if (uploadResult.getCode() == ResultCode.LOCAL_STORAGE_FULL || uploadResult.getCode() == ResultCode.LOCAL_STORAGE_NOT_COPIED) {
-        content=String.format(getString(R.string.error__upload__local_file_not_copied),upload.getFileName(),getString(R.string.app_name));
-      }
- else       if (uploadResult.getCode() == ResultCode.QUOTA_EXCEEDED) {
-        content=getString(R.string.failed_upload_quota_exceeded_text);
-      }
- else {
-        content=String.format(getString(R.string.uploader_upload_failed_content_single),upload.getFileName());
-      }
       Intent detailUploadIntent=null;
       if (upload.isInstant() && InstantUploadActivity.IS_ENABLED) {
         detailUploadIntent=new Intent(this,InstantUploadActivity.class);
@@ -80,6 +72,6 @@
       }
     }
     errorBuilder.setContentText(content);
-    mNotificationManager.notify(R.string.uploader_upload_failed_ticker,errorBuilder.build());
+    mNotificationManager.notify(tickerId,errorBuilder.build());
   }
 }
