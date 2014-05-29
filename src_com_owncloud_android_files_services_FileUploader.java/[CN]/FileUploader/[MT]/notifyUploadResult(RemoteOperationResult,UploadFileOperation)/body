@@ -1,26 +1,7 @@
 {
   Log_OC.d(TAG,"NotifyUploadResult with resultCode: " + uploadResult.getCode());
-  if (uploadResult.isCancelled()) {
+  if (uploadResult.isCancelled() || uploadResult.isSuccess()) {
     mNotificationManager.cancel(R.string.uploader_upload_in_progress_ticker);
-  }
- else   if (uploadResult.isSuccess()) {
-    mNotificationBuilder.setOngoing(false).setAutoCancel(true).setProgress(0,0,false);
-    Intent showDetailsIntent=null;
-    if (PreviewImageFragment.canBePreviewed(upload.getFile())) {
-      showDetailsIntent=new Intent(this,PreviewImageActivity.class);
-    }
- else {
-      showDetailsIntent=new Intent(this,FileDisplayActivity.class);
-    }
-    showDetailsIntent.putExtra(FileActivity.EXTRA_FILE,upload.getFile());
-    showDetailsIntent.putExtra(FileActivity.EXTRA_ACCOUNT,upload.getAccount());
-    showDetailsIntent.putExtra(FileActivity.EXTRA_FROM_NOTIFICATION,true);
-    ;
-    mNotificationBuilder.setContentIntent(PendingIntent.getActivity(this,(int)System.currentTimeMillis(),showDetailsIntent,0)).setTicker(getString(R.string.uploader_upload_succeeded_ticker)).setContentTitle(getString(R.string.uploader_upload_succeeded_ticker)).setContentText(ErrorMessageAdapter.getErrorCauseMessage(uploadResult,upload,getResources()));
-    mNotificationManager.notify(R.string.uploader_upload_in_progress_ticker,mNotificationBuilder.build());
-    DbHandler db=new DbHandler(this.getBaseContext());
-    db.removeIUPendingFile(mCurrentUpload.getOriginalStoragePath());
-    db.close();
   }
  else {
     mNotificationManager.cancel(R.string.uploader_upload_in_progress_ticker);
