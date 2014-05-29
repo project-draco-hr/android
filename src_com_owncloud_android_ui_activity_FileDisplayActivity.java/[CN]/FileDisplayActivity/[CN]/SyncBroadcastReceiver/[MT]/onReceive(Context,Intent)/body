@@ -35,6 +35,12 @@
       removeStickyBroadcast(intent);
       Log_OC.d(TAG,"Setting progress visibility to " + mSyncInProgress);
       setSupportProgressBarIndeterminateVisibility(mSyncInProgress);
+      if (mSyncInProgress) {
+        getListOfFilesFragment().showSwipeProgress();
+      }
+ else {
+        getListOfFilesFragment().hideSwipeProgress();
+      }
     }
     if (synchResult != null) {
       if (synchResult.getCode().equals(RemoteOperationResult.ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED)) {
