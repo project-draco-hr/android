@@ -36,9 +36,10 @@
       Log_OC.d(TAG,"Setting progress visibility to " + mSyncInProgress);
       setSupportProgressBarIndeterminateVisibility(mSyncInProgress);
       if (mSyncInProgress) {
-        getListOfFilesFragment().showSwipeProgress();
+        getListOfFilesFragment().disableSwipe();
       }
  else {
+        getListOfFilesFragment().enableSwipe();
         getListOfFilesFragment().hideSwipeProgress();
       }
     }
