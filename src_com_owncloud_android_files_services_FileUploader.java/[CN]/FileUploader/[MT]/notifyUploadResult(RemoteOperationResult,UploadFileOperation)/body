@@ -1,15 +1,13 @@
 {
   Log_OC.d(TAG,"NotifyUploadResult with resultCode: " + uploadResult.getCode());
-  if (uploadResult.isCancelled() || uploadResult.isSuccess()) {
-    mNotificationManager.cancel(R.string.uploader_upload_in_progress_ticker);
-  }
- else {
-    mNotificationManager.cancel(R.string.uploader_upload_in_progress_ticker);
-    NotificationCompat.Builder errorBuilder=new NotificationCompat.Builder(this);
+  mNotificationManager.cancel(R.string.uploader_upload_in_progress_ticker);
+  if (!uploadResult.isCancelled()) {
+    int tickerId=(uploadResult.isSuccess()) ? R.string.uploader_upload_succeeded_ticker : R.string.uploader_upload_failed_ticker;
+    NotificationCompat.Builder resultBuilder=new NotificationCompat.Builder(this);
     String content=null;
     boolean needsToUpdateCredentials=(uploadResult.getCode() == ResultCode.UNAUTHORIZED || (uploadResult.isIdPRedirection() && mUploadClient.getCredentials() == null));
-    int tickerId=(needsToUpdateCredentials) ? R.string.uploader_upload_failed_credentials_error : R.string.uploader_upload_failed_ticker;
-    errorBuilder.setSmallIcon(R.drawable.notification_icon).setTicker(getString(tickerId)).setContentTitle(getString(tickerId)).setAutoCancel(true);
+    tickerId=(needsToUpdateCredentials) ? R.string.uploader_upload_failed_credentials_error : tickerId;
+    resultBuilder.setSmallIcon(R.drawable.notification_icon).setTicker(getString(tickerId)).setContentTitle(getString(tickerId)).setAutoCancel(true);
     content=ErrorMessageAdapter.getErrorCauseMessage(uploadResult,upload,getResources());
     if (needsToUpdateCredentials) {
       Intent updateAccountCredentials=new Intent(this,AuthenticatorActivity.class);
@@ -18,7 +16,7 @@
       updateAccountCredentials.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
       updateAccountCredentials.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
       updateAccountCredentials.addFlags(Intent.FLAG_FROM_BACKGROUND);
-      errorBuilder.setContentIntent(PendingIntent.getActivity(this,(int)System.currentTimeMillis(),updateAccountCredentials,PendingIntent.FLAG_ONE_SHOT));
+      resultBuilder.setContentIntent(PendingIntent.getActivity(this,(int)System.currentTimeMillis(),updateAccountCredentials,PendingIntent.FLAG_ONE_SHOT));
       mUploadClient=null;
     }
  else {
@@ -31,7 +29,7 @@
         detailUploadIntent=new Intent(this,FailedUploadActivity.class);
         detailUploadIntent.putExtra(FailedUploadActivity.MESSAGE,content);
       }
-      errorBuilder.setContentIntent(PendingIntent.getActivity(this,(int)System.currentTimeMillis(),detailUploadIntent,PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_ONE_SHOT)).setContentText(content);
+      resultBuilder.setContentIntent(PendingIntent.getActivity(this,(int)System.currentTimeMillis(),detailUploadIntent,PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_ONE_SHOT)).setContentText(content);
       if (upload.isInstant()) {
         DbHandler db=null;
         try {
@@ -52,7 +50,16 @@
         }
       }
     }
-    errorBuilder.setContentText(content);
-    mNotificationManager.notify(tickerId,errorBuilder.build());
+    resultBuilder.setContentText(content);
+    mNotificationManager.notify(tickerId,resultBuilder.build());
+    if (uploadResult.isSuccess()) {
+      Handler handler=new Handler();
+      handler.postDelayed(new Runnable(){
+        public void run(){
+          mNotificationManager.cancel(R.string.uploader_upload_succeeded_ticker);
+        }
+      }
+,2000);
+    }
   }
 }
