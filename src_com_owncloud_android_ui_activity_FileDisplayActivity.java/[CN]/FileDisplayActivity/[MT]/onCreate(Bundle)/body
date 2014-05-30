@@ -28,12 +28,6 @@
   if (savedInstanceState == null) {
     createMinFragments();
   }
- else {
-    Log_OC.d(TAG,"Init the secondFragment again");
-    if (mDualPane) {
-      initFragmentsWithFile();
-    }
-  }
   mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
   getSupportActionBar().setHomeButtonEnabled(true);
   setSupportProgressBarIndeterminateVisibility(mSyncInProgress);

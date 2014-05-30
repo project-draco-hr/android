@@ -6,7 +6,7 @@
     }
     OCFile file=getFile();
     setFilename(file.getFileName());
-    setFiletype(file.getMimetype());
+    setFiletype(file.getMimetype(),file.getFileName());
     setFilesize(file.getFileLength());
     if (ocVersionSupportsTimeCreated()) {
       setTimeCreated(file.getCreationTimestamp());
