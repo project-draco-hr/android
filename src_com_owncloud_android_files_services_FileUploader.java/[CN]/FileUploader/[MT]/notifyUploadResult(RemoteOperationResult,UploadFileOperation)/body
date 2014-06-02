@@ -53,6 +53,9 @@
     resultBuilder.setContentText(content);
     mNotificationManager.notify(tickerId,resultBuilder.build());
     if (uploadResult.isSuccess()) {
+      DbHandler db=new DbHandler(this.getBaseContext());
+      db.removeIUPendingFile(mCurrentUpload.getOriginalStoragePath());
+      db.close();
       NotificationDelayer.cancelWithDelay(mNotificationManager,R.string.uploader_upload_succeeded_ticker,2000);
     }
   }
