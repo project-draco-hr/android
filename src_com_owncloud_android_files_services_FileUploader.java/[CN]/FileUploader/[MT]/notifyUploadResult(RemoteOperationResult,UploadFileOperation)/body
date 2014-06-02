@@ -53,13 +53,7 @@
     resultBuilder.setContentText(content);
     mNotificationManager.notify(tickerId,resultBuilder.build());
     if (uploadResult.isSuccess()) {
-      Handler handler=new Handler();
-      handler.postDelayed(new Runnable(){
-        public void run(){
-          mNotificationManager.cancel(R.string.uploader_upload_succeeded_ticker);
-        }
-      }
-,2000);
+      NotificationDelayer.cancelWithDelay(mNotificationManager,R.string.uploader_upload_succeeded_ticker,2000);
     }
   }
 }

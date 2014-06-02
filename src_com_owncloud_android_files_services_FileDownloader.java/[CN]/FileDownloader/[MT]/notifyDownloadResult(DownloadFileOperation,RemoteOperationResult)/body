@@ -22,13 +22,7 @@
     mNotificationBuilder.setContentText(ErrorMessageAdapter.getErrorCauseMessage(downloadResult,download,getResources()));
     mNotificationManager.notify(tickerId,mNotificationBuilder.build());
     if (downloadResult.isSuccess()) {
-      Handler handler=new Handler();
-      handler.postDelayed(new Runnable(){
-        public void run(){
-          mNotificationManager.cancel(R.string.downloader_download_succeeded_ticker);
-        }
-      }
-,2000);
+      NotificationDelayer.cancelWithDelay(mNotificationManager,R.string.downloader_download_succeeded_ticker,2000);
     }
   }
 }
