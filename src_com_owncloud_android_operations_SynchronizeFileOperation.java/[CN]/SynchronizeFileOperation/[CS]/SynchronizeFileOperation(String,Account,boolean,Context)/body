@@ -1,5 +1,6 @@
 {
   mRemotePath=remotePath;
+  mLocalFile=null;
   mServerFile=null;
   mAccount=account;
   mSyncFileContents=syncFileContents;
