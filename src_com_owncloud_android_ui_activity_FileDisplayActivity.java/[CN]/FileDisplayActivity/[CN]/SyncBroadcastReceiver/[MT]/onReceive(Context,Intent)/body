@@ -40,7 +40,6 @@
       }
  else {
         getListOfFilesFragment().enableSwipe();
-        getListOfFilesFragment().hideSwipeProgress();
       }
     }
     if (synchResult != null) {
