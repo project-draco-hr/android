@@ -1,0 +1,7 @@
+{
+  super.onRefresh();
+  if (mFile != null) {
+    listDirectory(mFile);
+    ((FileDisplayActivity)mContainerActivity).startSyncFolderOperation(mFile);
+  }
+}
