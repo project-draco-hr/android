@@ -10,7 +10,7 @@ synchronized (mPendingOperations) {
       if (mLastTarget == null || !mLastTarget.equals(next.first)) {
         mLastTarget=next.first;
         if (mLastTarget.mAccount != null) {
-          mOwnCloudClient=OwnCloudClientFactory.createOwnCloudClient(mLastTarget.mAccount,getApplicationContext());
+          mOwnCloudClient=OwnCloudClientMap.getClientFor(mLastTarget.mAccount,this);
           mStorageManager=new FileDataStorageManager(mLastTarget.mAccount,getContentResolver());
         }
  else {
