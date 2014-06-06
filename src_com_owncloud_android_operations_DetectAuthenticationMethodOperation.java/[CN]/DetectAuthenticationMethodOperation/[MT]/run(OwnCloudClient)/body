@@ -3,7 +3,7 @@
   AuthenticationMethod authMethod=AuthenticationMethod.UNKNOWN;
   RemoteOperation operation=new ExistenceCheckRemoteOperation("",mContext,false);
   client.setWebdavUri(Uri.parse(mWebDavUrl));
-  client.setBasicCredentials("","");
+  client.clearCredentials();
   client.setFollowRedirects(false);
   result=operation.execute(client);
   String redirectedLocation=result.getRedirectedLocation();
