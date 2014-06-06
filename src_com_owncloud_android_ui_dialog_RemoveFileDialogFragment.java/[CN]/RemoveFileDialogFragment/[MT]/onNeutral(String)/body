@@ -20,6 +20,5 @@
     }
     folder.setEtag("");
     storageManager.saveFile(folder);
-    Log_OC.d("RemoveFileDialogFragment","Parent etag= |" + folder.getEtag() + "|");
   }
 }
