@@ -1,4 +1,8 @@
 {
+  Log_OC.wtf(TAG,"Saving Cookies");
+  if (mAccount != null) {
+    OwnCloudClientMap.saveClient(mAccount,this);
+  }
   if (mOperationsServiceBinder != null) {
     mOperationsServiceBinder.removeOperationListener(this);
   }
