@@ -1,3 +1,24 @@
 {
-  ((ComponentsGetter)getSherlockActivity()).getFileOperationsHelper().removeFile(mTargetFile,true);
+  ComponentsGetter cg=(ComponentsGetter)getSherlockActivity();
+  cg.getFileOperationsHelper().removeFile(mTargetFile,true);
+  FileDataStorageManager storageManager=cg.getStorageManager();
+  boolean containsKeepInSync=false;
+  if (mTargetFile.isFolder()) {
+    Vector<OCFile> files=storageManager.getFolderContent(mTargetFile);
+    for (    OCFile file : files) {
+      containsKeepInSync=file.keepInSync() || containsKeepInSync;
+      if (containsKeepInSync)       break;
+    }
+  }
+  if (mTargetFile.keepInSync() || containsKeepInSync) {
+    OCFile folder=null;
+    if (mTargetFile.isFolder()) {
+      folder=mTargetFile;
+    }
+ else {
+      folder=storageManager.getFileById(mTargetFile.getParentId());
+    }
+    folder.setEtag("");
+    storageManager.saveFile(folder);
+  }
 }
