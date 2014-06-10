@@ -1,4 +1,5 @@
 {
+  OwnCloudClientMap.saveAllClients(this,MainApp.getAccountType());
   mUndispatchedFinishedOperations.clear();
   super.onDestroy();
 }
