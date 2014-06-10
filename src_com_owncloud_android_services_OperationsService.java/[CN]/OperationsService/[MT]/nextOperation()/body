@@ -14,7 +14,7 @@ synchronized (mPendingOperations) {
           mStorageManager=new FileDataStorageManager(mLastTarget.mAccount,getContentResolver());
         }
  else {
-          mOwnCloudClient=OwnCloudClientFactory.createOwnCloudClient(mLastTarget.mServerUrl,getApplicationContext(),mLastTarget.mFollowRedirects);
+          mOwnCloudClient=OwnCloudClientMap.getAnonymousClientFor(mLastTarget.mServerUrl,this,mLastTarget.mFollowRedirects);
           if (mLastTarget.mWebDavUrl != null) {
             mOwnCloudClient.setWebdavUri(Uri.parse(mLastTarget.mWebDavUrl));
           }
