@@ -1,7 +1,0 @@
-{
-  if (baseUri == null) {
-    throw new IllegalArgumentException("Parameter 'baseUri' cannot be null");
-  }
-  mBaseUri=baseUri;
-  mCredentials=credentials;
-}
