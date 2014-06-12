@@ -1,5 +1,19 @@
 {
-  OwnCloudClientMap.saveAllClients(this,MainApp.getAccountType());
+  try {
+    ((MainApp)getApplicationContext()).getOwnCloudClientManager().saveAllClients(this,MainApp.getAccountType());
+  }
+ catch (  AccountNotFoundException e) {
+    e.printStackTrace();
+  }
+catch (  AuthenticatorException e) {
+    e.printStackTrace();
+  }
+catch (  OperationCanceledException e) {
+    e.printStackTrace();
+  }
+catch (  IOException e) {
+    e.printStackTrace();
+  }
   mUndispatchedFinishedOperations.clear();
   super.onDestroy();
 }

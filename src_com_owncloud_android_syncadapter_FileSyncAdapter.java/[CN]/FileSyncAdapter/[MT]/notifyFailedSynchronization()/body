@@ -1,7 +1,7 @@
 {
   NotificationCompat.Builder notificationBuilder=createNotificationBuilder();
   notificationBuilder.setTicker(i18n(R.string.sync_fail_ticker));
-  boolean needsToUpdateCredentials=(mLastFailedResult != null && (mLastFailedResult.getCode() == ResultCode.UNAUTHORIZED || (mLastFailedResult.isIdPRedirection() && getClient().getCredentials() == null)));
+  boolean needsToUpdateCredentials=(mLastFailedResult != null && (mLastFailedResult.getCode() == ResultCode.UNAUTHORIZED || mLastFailedResult.isIdPRedirection()));
   notificationBuilder.setContentTitle(i18n(R.string.sync_fail_ticker));
   if (needsToUpdateCredentials) {
     Intent updateAccountCredentials=new Intent(getContext(),AuthenticatorActivity.class);

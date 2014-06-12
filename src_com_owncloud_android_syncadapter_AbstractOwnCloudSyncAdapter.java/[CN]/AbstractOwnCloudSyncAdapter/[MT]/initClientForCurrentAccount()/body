@@ -1,4 +1,4 @@
 {
   AccountUtils.constructFullURLForAccount(getContext(),account);
-  mClient=OwnCloudClientMap.getClientFor(account,getContext());
+  mClient=((MainApp)(getContext().getApplicationContext())).getOwnCloudClientManager().getClientFor(account,getContext());
 }

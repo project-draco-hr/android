@@ -10,23 +10,25 @@ synchronized (mPendingOperations) {
       if (mLastTarget == null || !mLastTarget.equals(next.first)) {
         mLastTarget=next.first;
         if (mLastTarget.mAccount != null) {
-          mOwnCloudClient=OwnCloudClientMap.getClientFor(mLastTarget.mAccount,this);
+          mOwnCloudClient=((MainApp)getApplicationContext()).getOwnCloudClientManager().getClientFor(mLastTarget.mAccount,this);
           mStorageManager=new FileDataStorageManager(mLastTarget.mAccount,getContentResolver());
         }
  else {
-          mOwnCloudClient=OwnCloudClientMap.getAnonymousClientFor(mLastTarget.mServerUrl,this,mLastTarget.mFollowRedirects);
+          OwnCloudCredentials credentials=null;
+          if (mLastTarget.mUsername != null) {
+            credentials=OwnCloudCredentialsFactory.newBasicCredentials(mLastTarget.mUsername,mLastTarget.mPassword);
+          }
+ else           if (mLastTarget.mAuthToken != null) {
+            credentials=OwnCloudCredentialsFactory.newBearerCredentials(mLastTarget.mAuthToken);
+          }
+ else           if (mLastTarget.mCookie != null) {
+            credentials=OwnCloudCredentialsFactory.newSamlSsoCredentials(mLastTarget.mCookie);
+          }
+          mOwnCloudClient=((MainApp)getApplicationContext()).getOwnCloudClientManager().getClientFor(mLastTarget.mServerUrl,credentials,this);
           if (mLastTarget.mWebDavUrl != null) {
             mOwnCloudClient.setWebdavUri(Uri.parse(mLastTarget.mWebDavUrl));
           }
-          if (mLastTarget.mUsername != null && mLastTarget.mPassword != null) {
-            mOwnCloudClient.setBasicCredentials(mLastTarget.mUsername,mLastTarget.mPassword);
-          }
- else           if (mLastTarget.mAuthToken != null) {
-            mOwnCloudClient.setBearerCredentials(mLastTarget.mAuthToken);
-          }
- else           if (mLastTarget.mCookie != null) {
-            mOwnCloudClient.setSsoSessionCookie(mLastTarget.mCookie);
-          }
+          mOwnCloudClient.setFollowRedirects(mLastTarget.mFollowRedirects);
           mStorageManager=null;
         }
       }

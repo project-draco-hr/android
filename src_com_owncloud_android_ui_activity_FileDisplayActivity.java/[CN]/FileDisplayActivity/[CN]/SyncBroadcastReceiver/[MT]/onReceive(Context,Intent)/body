@@ -32,19 +32,28 @@
         }
         mSyncInProgress=(!FileSyncAdapter.EVENT_FULL_SYNC_END.equals(event) && !SynchronizeFolderOperation.EVENT_SINGLE_FOLDER_SHARES_SYNCED.equals(event));
         if (SynchronizeFolderOperation.EVENT_SINGLE_FOLDER_CONTENTS_SYNCED.equals(event) && synchResult != null && !synchResult.isSuccess() && (synchResult.getCode() == ResultCode.UNAUTHORIZED || synchResult.isIdPRedirection() || (synchResult.isException() && synchResult.getException() instanceof AuthenticatorException))) {
-          OwnCloudClient client=OwnCloudClientMap.removeClientFor(getAccount());
+          OwnCloudClient client=null;
+          try {
+            client=((MainApp)getApplicationContext()).getOwnCloudClientManager().removeClientFor(getAccount(),context);
+          }
+ catch (          AccountNotFoundException e) {
+            e.printStackTrace();
+          }
+catch (          AuthenticatorException e) {
+            e.printStackTrace();
+          }
+catch (          OperationCanceledException e) {
+            e.printStackTrace();
+          }
+catch (          IOException e) {
+            e.printStackTrace();
+          }
           if (client != null) {
-            Credentials cred=client.getCredentials();
-            String ssoSessionCookie=client.getSsoSessionCookie();
-            if (cred != null || ssoSessionCookie != null) {
-              boolean bearerAuthorization=(cred != null && cred instanceof BearerCredentials);
-              boolean samlBasedSsoAuthorization=(cred == null && ssoSessionCookie != null);
+            OwnCloudCredentials cred=client.getCredentials();
+            if (cred != null) {
               AccountManager am=AccountManager.get(context);
-              if (bearerAuthorization) {
-                am.invalidateAuthToken(getAccount().type,((BearerCredentials)cred).getAccessToken());
-              }
- else               if (samlBasedSsoAuthorization) {
-                am.invalidateAuthToken(getAccount().type,ssoSessionCookie);
+              if (cred.authTokenExpires()) {
+                am.invalidateAuthToken(getAccount().type,cred.getAuthToken());
               }
  else {
                 am.clearPassword(getAccount());
