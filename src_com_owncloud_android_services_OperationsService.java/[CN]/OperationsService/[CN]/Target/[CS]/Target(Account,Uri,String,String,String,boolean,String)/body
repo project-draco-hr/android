@@ -1,7 +1,6 @@
 {
   mAccount=account;
   mServerUrl=serverUrl;
-  mWebDavUrl=webdavUrl;
   mUsername=username;
   mPassword=password;
   mAuthToken=authToken;

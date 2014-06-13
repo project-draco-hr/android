@@ -25,9 +25,6 @@ synchronized (mPendingOperations) {
             credentials=OwnCloudCredentialsFactory.newSamlSsoCredentials(mLastTarget.mCookie);
           }
           mOwnCloudClient=((MainApp)getApplicationContext()).getOwnCloudClientManager().getClientFor(mLastTarget.mServerUrl,credentials,this);
-          if (mLastTarget.mWebDavUrl != null) {
-            mOwnCloudClient.setWebdavUri(Uri.parse(mLastTarget.mWebDavUrl));
-          }
           mOwnCloudClient.setFollowRedirects(mLastTarget.mFollowRedirects);
           mStorageManager=null;
         }

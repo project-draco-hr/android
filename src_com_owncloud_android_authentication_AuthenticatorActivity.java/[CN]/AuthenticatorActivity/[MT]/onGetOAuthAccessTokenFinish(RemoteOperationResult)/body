@@ -1,8 +1,7 @@
 {
   mWaitingForOpId=Long.MAX_VALUE;
   dismissDialog(WAIT_DIALOG_TAG);
-  String webdav_path=AccountUtils.getWebdavPath(mServerInfo.mVersion,mAuthTokenType);
-  if (result.isSuccess() && webdav_path != null) {
+  if (result.isSuccess()) {
     IndeterminateProgressDialog dialog=IndeterminateProgressDialog.newInstance(R.string.auth_trying_to_login,true);
     dialog.show(getSupportFragmentManager(),WAIT_DIALOG_TAG);
     @SuppressWarnings("unchecked") Map<String,String> tokens=(Map<String,String>)(result.getData().get(0));
@@ -11,7 +10,7 @@
     String remotePath="";
     boolean successIfAbsent=false;
     boolean followRedirects=true;
-    startExistenceCheckRemoteOperation(remotePath,this,successIfAbsent,webdav_path,"","",followRedirects);
+    startExistenceCheckRemoteOperation(remotePath,this,successIfAbsent,"","",followRedirects);
   }
  else {
     updateAuthStatusIconAndText(result);
