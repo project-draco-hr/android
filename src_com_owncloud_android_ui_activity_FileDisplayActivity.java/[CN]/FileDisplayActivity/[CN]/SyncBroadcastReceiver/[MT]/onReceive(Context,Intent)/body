@@ -34,7 +34,8 @@
         if (SynchronizeFolderOperation.EVENT_SINGLE_FOLDER_CONTENTS_SYNCED.equals(event) && synchResult != null && !synchResult.isSuccess() && (synchResult.getCode() == ResultCode.UNAUTHORIZED || synchResult.isIdPRedirection() || (synchResult.isException() && synchResult.getException() instanceof AuthenticatorException))) {
           OwnCloudClient client=null;
           try {
-            client=(OwnCloudClientManagerFactory.getDefaultSingleton().removeClientFor(getAccount(),context));
+            OwnCloudAccount ocAccount=new OwnCloudAccount(getAccount(),context);
+            client=(OwnCloudClientManagerFactory.getDefaultSingleton().removeClientFor(ocAccount));
           }
  catch (          AccountNotFoundException e) {
             e.printStackTrace();
