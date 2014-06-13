@@ -1,22 +1,4 @@
 {
-  Log_OC.wtf(TAG,"Saving Cookies");
-  if (mAccount != null) {
-    try {
-      ((MainApp)getApplicationContext()).getOwnCloudClientManager().saveClient(mAccount,this);
-    }
- catch (    AccountNotFoundException e) {
-      e.printStackTrace();
-    }
-catch (    AuthenticatorException e) {
-      e.printStackTrace();
-    }
-catch (    OperationCanceledException e) {
-      e.printStackTrace();
-    }
-catch (    IOException e) {
-      e.printStackTrace();
-    }
-  }
   if (mOperationsServiceBinder != null) {
     mOperationsServiceBinder.removeOperationListener(this);
   }
