@@ -1,6 +1,6 @@
 {
   try {
-    ((MainApp)getApplicationContext()).getOwnCloudClientManager().saveAllClients(this,MainApp.getAccountType());
+    OwnCloudClientManagerFactory.getDefaultSingleton().saveAllClients(this,MainApp.getAccountType());
   }
  catch (  AccountNotFoundException e) {
     e.printStackTrace();

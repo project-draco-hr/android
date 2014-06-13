@@ -11,7 +11,7 @@ synchronized (mPendingOperations) {
         mLastTarget=next.first;
         if (mLastTarget.mAccount != null) {
           OwnCloudAccount ocAccount=new OwnCloudAccount(mLastTarget.mAccount,this);
-          mOwnCloudClient=((MainApp)getApplicationContext()).getOwnCloudClientManager().getClientFor(ocAccount,this);
+          mOwnCloudClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,this);
           mStorageManager=new FileDataStorageManager(mLastTarget.mAccount,getContentResolver());
         }
  else {
@@ -26,7 +26,7 @@ synchronized (mPendingOperations) {
             credentials=OwnCloudCredentialsFactory.newSamlSsoCredentials(mLastTarget.mCookie);
           }
           OwnCloudAccount ocAccount=new OwnCloudAccount(mLastTarget.mServerUrl,credentials);
-          mOwnCloudClient=((MainApp)getApplicationContext()).getOwnCloudClientManager().getClientFor(ocAccount,this);
+          mOwnCloudClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,this);
           mOwnCloudClient.setFollowRedirects(mLastTarget.mFollowRedirects);
           mStorageManager=null;
         }
