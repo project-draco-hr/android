@@ -3,4 +3,3 @@ Context context
 boolean successIfAbsent
 String username
 String password
-boolean followRedirects

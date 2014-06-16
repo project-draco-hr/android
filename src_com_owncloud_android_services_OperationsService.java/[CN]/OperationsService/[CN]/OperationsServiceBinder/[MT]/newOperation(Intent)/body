@@ -11,9 +11,8 @@
       String username=operationIntent.getStringExtra(EXTRA_USERNAME);
       String password=operationIntent.getStringExtra(EXTRA_PASSWORD);
       String authToken=operationIntent.getStringExtra(EXTRA_AUTH_TOKEN);
-      boolean followRedirects=operationIntent.getBooleanExtra(EXTRA_FOLLOW_REDIRECTS,true);
       String cookie=operationIntent.getStringExtra(EXTRA_COOKIE);
-      target=new Target(account,(serverUrl == null) ? null : Uri.parse(serverUrl),username,password,authToken,followRedirects,cookie);
+      target=new Target(account,(serverUrl == null) ? null : Uri.parse(serverUrl),username,password,authToken,cookie);
       String action=operationIntent.getAction();
       if (action.equals(ACTION_CREATE_SHARE)) {
         String remotePath=operationIntent.getStringExtra(EXTRA_REMOTE_PATH);

@@ -9,8 +9,7 @@
     Log_OC.d(TAG,"Got ACCESS TOKEN: " + mAuthToken);
     String remotePath="";
     boolean successIfAbsent=false;
-    boolean followRedirects=true;
-    startExistenceCheckRemoteOperation(remotePath,this,successIfAbsent,"","",followRedirects);
+    startExistenceCheckRemoteOperation(remotePath,this,successIfAbsent,"","");
   }
  else {
     updateAuthStatusIconAndText(result);

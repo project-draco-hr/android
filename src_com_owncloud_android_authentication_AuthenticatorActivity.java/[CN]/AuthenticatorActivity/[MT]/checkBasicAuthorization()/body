@@ -5,6 +5,5 @@
   dialog.show(getSupportFragmentManager(),WAIT_DIALOG_TAG);
   String remotePath="";
   boolean successIfAbsent=false;
-  boolean followRedirects=true;
-  startExistenceCheckRemoteOperation(remotePath,this,successIfAbsent,username,password,followRedirects);
+  startExistenceCheckRemoteOperation(remotePath,this,successIfAbsent,username,password);
 }

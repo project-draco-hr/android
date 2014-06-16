@@ -3,7 +3,6 @@
   getUserNameIntent.setAction(OperationsService.ACTION_GET_USER_NAME);
   getUserNameIntent.putExtra(OperationsService.EXTRA_SERVER_URL,mServerInfo.mBaseUrl);
   getUserNameIntent.putExtra(OperationsService.EXTRA_COOKIE,sessionCookie);
-  getUserNameIntent.putExtra(OperationsService.EXTRA_FOLLOW_REDIRECTS,followRedirects);
   if (mOperationsServiceBinder != null) {
     mWaitingForOpId=mOperationsServiceBinder.newOperation(getUserNameIntent);
   }

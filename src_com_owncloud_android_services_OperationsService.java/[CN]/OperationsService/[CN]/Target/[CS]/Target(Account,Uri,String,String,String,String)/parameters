@@ -3,5 +3,4 @@ Uri serverUrl
 String username
 String password
 String authToken
-boolean followRedirects
 String cookie

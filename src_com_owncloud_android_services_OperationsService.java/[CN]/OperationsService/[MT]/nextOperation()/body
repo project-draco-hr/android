@@ -27,7 +27,6 @@ synchronized (mPendingOperations) {
           }
           OwnCloudAccount ocAccount=new OwnCloudAccount(mLastTarget.mServerUrl,credentials);
           mOwnCloudClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,this);
-          mOwnCloudClient.setFollowRedirects(mLastTarget.mFollowRedirects);
           mStorageManager=null;
         }
       }
