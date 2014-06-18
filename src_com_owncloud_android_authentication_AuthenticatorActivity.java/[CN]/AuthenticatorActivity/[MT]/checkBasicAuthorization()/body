@@ -3,7 +3,5 @@
   String password=mPasswordInput.getText().toString();
   IndeterminateProgressDialog dialog=IndeterminateProgressDialog.newInstance(R.string.auth_trying_to_login,true);
   dialog.show(getSupportFragmentManager(),WAIT_DIALOG_TAG);
-  String remotePath="";
-  boolean successIfAbsent=false;
-  startExistenceCheckRemoteOperation(remotePath,this,successIfAbsent,username,password);
+  accessRootFolderRemoteOperation(username,password);
 }

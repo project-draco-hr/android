@@ -16,13 +16,13 @@ synchronized (mPendingOperations) {
         }
  else {
           OwnCloudCredentials credentials=null;
-          if (mLastTarget.mUsername != null) {
+          if (mLastTarget.mUsername != null && mLastTarget.mUsername.length() > 0) {
             credentials=OwnCloudCredentialsFactory.newBasicCredentials(mLastTarget.mUsername,mLastTarget.mPassword);
           }
- else           if (mLastTarget.mAuthToken != null) {
+ else           if (mLastTarget.mAuthToken != null && mLastTarget.mAuthToken.length() > 0) {
             credentials=OwnCloudCredentialsFactory.newBearerCredentials(mLastTarget.mAuthToken);
           }
- else           if (mLastTarget.mCookie != null) {
+ else           if (mLastTarget.mCookie != null && mLastTarget.mCookie.length() > 0) {
             credentials=OwnCloudCredentialsFactory.newSamlSsoCredentials(mLastTarget.mCookie);
           }
           OwnCloudAccount ocAccount=new OwnCloudAccount(mLastTarget.mServerUrl,credentials);

@@ -28,8 +28,7 @@
         }
       }
  else       if (action.equals(ACTION_GET_SERVER_INFO)) {
-        String authTokenType=operationIntent.getStringExtra(EXTRA_AUTH_TOKEN_TYPE);
-        operation=new GetServerInfoOperation(serverUrl,authTokenType,OperationsService.this);
+        operation=new GetServerInfoOperation(serverUrl,OperationsService.this);
       }
  else       if (action.equals(ACTION_OAUTH2_GET_ACCESS_TOKEN)) {
         String oauth2QueryParameters=operationIntent.getStringExtra(EXTRA_OAUTH2_QUERY_PARAMETERS);
@@ -37,7 +36,7 @@
       }
  else       if (action.equals(ACTION_EXISTENCE_CHECK)) {
         String remotePath=operationIntent.getStringExtra(EXTRA_REMOTE_PATH);
-        boolean successIfAbsent=operationIntent.getBooleanExtra(EXTRA_SUCCESS_IF_ABSENT,true);
+        boolean successIfAbsent=operationIntent.getBooleanExtra(EXTRA_SUCCESS_IF_ABSENT,false);
         operation=new ExistenceCheckRemoteOperation(remotePath,OperationsService.this,successIfAbsent);
       }
  else       if (action.equals(ACTION_GET_USER_NAME)) {
