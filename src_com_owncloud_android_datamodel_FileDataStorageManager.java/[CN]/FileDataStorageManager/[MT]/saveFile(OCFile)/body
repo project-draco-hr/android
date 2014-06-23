@@ -17,6 +17,7 @@
   cv.put(ProviderTableMeta.FILE_ETAG,file.getEtag());
   cv.put(ProviderTableMeta.FILE_SHARE_BY_LINK,file.isShareByLink() ? 1 : 0);
   cv.put(ProviderTableMeta.FILE_PUBLIC_LINK,file.getPublicLink());
+  cv.put(ProviderTableMeta.FILE_PERMISSIONS,file.getPermissions());
   boolean sameRemotePath=fileExists(file.getRemotePath());
   if (sameRemotePath || fileExists(file.getFileId())) {
     OCFile oldFile=null;

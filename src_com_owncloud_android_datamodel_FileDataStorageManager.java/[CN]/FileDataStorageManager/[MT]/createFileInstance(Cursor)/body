@@ -25,6 +25,7 @@
     file.setEtag(c.getString(c.getColumnIndex(ProviderTableMeta.FILE_ETAG)));
     file.setShareByLink(c.getInt(c.getColumnIndex(ProviderTableMeta.FILE_SHARE_BY_LINK)) == 1 ? true : false);
     file.setPublicLink(c.getString(c.getColumnIndex(ProviderTableMeta.FILE_PUBLIC_LINK)));
+    file.setPermissions(c.getString(c.getColumnIndex(ProviderTableMeta.FILE_PERMISSIONS)));
   }
   return file;
 }
