@@ -6,5 +6,6 @@
   file.setModifiedTimestamp(ocFile.getModificationTimestamp());
   file.setEtag(ocFile.getEtag());
   file.setPermissions(ocFile.getPermissions());
+  file.setRemoteId(ocFile.getRemoteId());
   return file;
 }

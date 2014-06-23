@@ -16,4 +16,5 @@
   mShareByLink=source.readInt() == 1;
   mPublicLink=source.readString();
   mPermissions=source.readString();
+  mRemoteId=source.readString();
 }

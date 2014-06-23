@@ -16,4 +16,5 @@
   dest.writeInt(mShareByLink ? 1 : 0);
   dest.writeString(mPublicLink);
   dest.writeString(mPermissions);
+  dest.writeString(mRemoteId);
 }
