@@ -15,4 +15,5 @@
   mEtag=source.readString();
   mShareByLink=source.readInt() == 1;
   mPublicLink=source.readString();
+  mPermissions=source.readString();
 }

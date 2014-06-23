@@ -15,4 +15,5 @@
   mEtag=null;
   mShareByLink=false;
   mPublicLink=null;
+  mPermissions=null;
 }
