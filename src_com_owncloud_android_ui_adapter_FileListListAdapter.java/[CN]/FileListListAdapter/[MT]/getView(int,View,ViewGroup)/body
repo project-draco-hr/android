@@ -10,7 +10,28 @@
     String name=file.getFileName();
     fileName.setText(name);
     ImageView fileIcon=(ImageView)view.findViewById(R.id.imageView1);
-    fileIcon.setImageResource(DisplayUtils.getResourceId(file.getMimetype(),file.getFileName()));
+    ImageView shareIconV=(ImageView)view.findViewById(R.id.shareIcon);
+    ImageView shareWithMeIconV=(ImageView)view.findViewById(R.id.shareWithMeIcon);
+    if (file.isShareByLink()) {
+      shareIconV.setVisibility(View.VISIBLE);
+    }
+ else {
+      shareIconV.setVisibility(View.GONE);
+    }
+    if (mFile.getPermissions() != null && !mFile.getPermissions().contains(PERMISSION_SHARED_WITH_ME)) {
+      if (file.getPermissions() != null && file.getPermissions().contains(PERMISSION_SHARED_WITH_ME)) {
+        if (file.getMimetype().equals(FILE_CONTENTTYPE_FOLDER)) {
+          fileIcon.setImageResource(R.drawable.shared_with_me_folder);
+        }
+ else {
+          fileIcon.setImageResource(DisplayUtils.getResourceId(file.getMimetype(),file.getFileName()));
+        }
+        shareWithMeIconV.setVisibility(View.VISIBLE);
+      }
+ else {
+        fileIcon.setImageResource(DisplayUtils.getResourceId(file.getMimetype(),file.getFileName()));
+      }
+    }
     ImageView localStateView=(ImageView)view.findViewById(R.id.imageView2);
     FileDownloaderBinder downloaderBinder=mTransferServiceGetter.getFileDownloaderBinder();
     FileUploaderBinder uploaderBinder=mTransferServiceGetter.getFileUploaderBinder();
@@ -63,13 +84,6 @@
       lastModV.setText(DisplayUtils.unixTimeToHumanReadable(file.getModificationTimestamp()));
       checkBoxV.setVisibility(View.GONE);
       view.findViewById(R.id.imageView3).setVisibility(View.GONE);
-    }
-    ImageView shareIconV=(ImageView)view.findViewById(R.id.shareIcon);
-    if (file.isShareByLink()) {
-      shareIconV.setVisibility(View.VISIBLE);
-    }
- else {
-      shareIconV.setVisibility(View.INVISIBLE);
     }
   }
   return view;
