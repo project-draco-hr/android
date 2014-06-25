@@ -2,7 +2,7 @@
   mNotificationManager.cancel(R.string.downloader_download_in_progress_ticker);
   if (!downloadResult.isCancelled()) {
     int tickerId=(downloadResult.isSuccess()) ? R.string.downloader_download_succeeded_ticker : R.string.downloader_download_failed_ticker;
-    boolean needsToUpdateCredentials=(downloadResult.getCode() == ResultCode.UNAUTHORIZED || (downloadResult.isIdPRedirection() && mDownloadClient.getCredentials() == null));
+    boolean needsToUpdateCredentials=(downloadResult.getCode() == ResultCode.UNAUTHORIZED || downloadResult.isIdPRedirection());
     tickerId=(needsToUpdateCredentials) ? R.string.downloader_download_failed_credentials_error : tickerId;
     mNotificationBuilder.setTicker(getString(tickerId)).setContentTitle(getString(tickerId)).setAutoCancel(true).setOngoing(false).setProgress(0,0,false);
     if (needsToUpdateCredentials) {
