@@ -1,8 +1,6 @@
 {
   NotificationCompat.Builder notificationBuilder=createNotificationBuilder();
-  notificationBuilder.setTicker(i18n(R.string.sync_fail_ticker));
   boolean needsToUpdateCredentials=(mLastFailedResult != null && (mLastFailedResult.getCode() == ResultCode.UNAUTHORIZED || mLastFailedResult.isIdPRedirection()));
-  notificationBuilder.setContentTitle(i18n(R.string.sync_fail_ticker));
   if (needsToUpdateCredentials) {
     Intent updateAccountCredentials=new Intent(getContext(),AuthenticatorActivity.class);
     updateAccountCredentials.putExtra(AuthenticatorActivity.EXTRA_ACCOUNT,getAccount());
@@ -10,10 +8,10 @@
     updateAccountCredentials.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     updateAccountCredentials.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
     updateAccountCredentials.addFlags(Intent.FLAG_FROM_BACKGROUND);
-    notificationBuilder.setContentIntent(PendingIntent.getActivity(getContext(),(int)System.currentTimeMillis(),updateAccountCredentials,PendingIntent.FLAG_ONE_SHOT)).setContentText(i18n(R.string.sync_fail_content_unauthorized,getAccount().name));
+    notificationBuilder.setTicker(i18n(R.string.sync_fail_ticker_unauthorized)).setContentTitle(i18n(R.string.sync_fail_ticker_unauthorized)).setContentIntent(PendingIntent.getActivity(getContext(),(int)System.currentTimeMillis(),updateAccountCredentials,PendingIntent.FLAG_ONE_SHOT)).setContentText(i18n(R.string.sync_fail_content_unauthorized,getAccount().name));
   }
  else {
-    notificationBuilder.setContentText(i18n(R.string.sync_fail_content,getAccount().name));
+    notificationBuilder.setTicker(i18n(R.string.sync_fail_ticker)).setContentTitle(i18n(R.string.sync_fail_ticker)).setContentText(i18n(R.string.sync_fail_content,getAccount().name));
   }
   showNotification(R.string.sync_fail_ticker,notificationBuilder);
 }
