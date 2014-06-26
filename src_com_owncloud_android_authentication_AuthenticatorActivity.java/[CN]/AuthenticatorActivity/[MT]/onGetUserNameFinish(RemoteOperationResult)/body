@@ -10,6 +10,7 @@
  else {
       if (!mUsernameInput.getText().toString().equals(username)) {
         result=new RemoteOperationResult(ResultCode.ACCOUNT_NOT_THE_SAME);
+        mAuthToken="";
         updateAuthStatusIconAndText(result);
         showAuthStatus();
         Log_OC.d(TAG,result.getLogMessage());
