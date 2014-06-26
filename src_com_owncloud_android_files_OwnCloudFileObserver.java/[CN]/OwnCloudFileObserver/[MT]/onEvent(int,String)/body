@@ -2,6 +2,15 @@
   Log_OC.d(TAG,"Got file modified with event " + event + " and path "+ mPath+ ((path != null) ? File.separator + path : ""));
   if ((event & MASK) == 0) {
     Log_OC.wtf(TAG,"Incorrect event " + event + " sent for file "+ mPath+ ((path != null) ? File.separator + path : "")+ " with registered for "+ mMask+ " and original path "+ mPath);
+    if ((event & IN_IGNORE) != 0 && mRestartWatching) {
+      mRestartWatching=false;
+      mHandler.postDelayed(new Runnable(){
+        public void run(){
+          startWatching();
+        }
+      }
+,5000);
+    }
   }
  else {
     if ((event & FileObserver.MODIFY) != 0) {
@@ -10,6 +19,13 @@
     if ((event & FileObserver.CLOSE_WRITE) != 0) {
       if (mModified) {
         mModified=false;
+        mRestartWatching=false;
+        startSyncOperation();
+      }
+ else       if (isFileUpdated()) {
+        mRestartWatching=true;
+        mFileLastModified=new File(mPath).lastModified();
+        Log_OC.d(TAG,"CLOSE_WRITE - New FileLastModified: " + mFileLastModified);
         startSyncOperation();
       }
     }
