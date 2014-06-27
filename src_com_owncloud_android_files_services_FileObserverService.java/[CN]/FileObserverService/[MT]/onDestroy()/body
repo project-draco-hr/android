@@ -1,6 +1,10 @@
 {
   Log_OC.d(TAG,"onDestroy - FINISHING OBSERVATION");
   unregisterReceiver(mDownloadReceiver);
+  Iterator<OwnCloudFileObserver> it=mObserversMap.values().iterator();
+  while (it.hasNext()) {
+    it.next().stopWatching();
+  }
   mObserversMap.clear();
   mObserversMap=null;
   super.onDestroy();
