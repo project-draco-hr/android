@@ -1,6 +1,7 @@
 {
+  Log_OC.d(TAG,"onDestroy - FINISHING OBSERVATION");
   unregisterReceiver(mDownloadReceiver);
+  mObserversMap.clear();
   mObserversMap=null;
-  Log_OC.d(TAG,"Bye, bye");
   super.onDestroy();
 }

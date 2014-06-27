@@ -8,9 +8,10 @@
  else   if (getIntent().getAction() == null && savedInstanceState == null) {
     requestPinCode();
   }
-  Intent observer_intent=new Intent(this,FileObserverService.class);
-  observer_intent.putExtra(FileObserverService.KEY_FILE_CMD,FileObserverService.CMD_INIT_OBSERVED_LIST);
-  startService(observer_intent);
+  if (savedInstanceState != null) {
+    Intent initObserversIntent=FileObserverService.makeInitIntent(this);
+    startService(initObserversIntent);
+  }
   if (savedInstanceState != null) {
     mWaitingToPreview=(OCFile)savedInstanceState.getParcelable(FileDisplayActivity.KEY_WAITING_TO_PREVIEW);
     mSyncInProgress=savedInstanceState.getBoolean(KEY_SYNC_IN_PROGRESS);

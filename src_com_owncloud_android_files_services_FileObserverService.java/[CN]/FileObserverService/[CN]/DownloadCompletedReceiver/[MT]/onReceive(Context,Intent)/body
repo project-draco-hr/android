@@ -1,14 +1,18 @@
 {
+  Log_OC.d(TAG,"Received broadcast intent " + intent);
   String downloadPath=intent.getStringExtra(FileDownloader.EXTRA_FILE_PATH);
   OwnCloudFileObserver observer=mObserversMap.get(downloadPath);
   if (observer != null) {
     if (intent.getAction().equals(FileDownloader.getDownloadFinishMessage()) && new File(downloadPath).exists()) {
       observer.startWatching();
-      Log_OC.d(TAG,"Watching again " + downloadPath);
+      Log_OC.d(TAG,"Resuming observance of " + downloadPath);
     }
  else     if (intent.getAction().equals(FileDownloader.getDownloadAddedMessage())) {
       observer.stopWatching();
-      Log_OC.d(TAG,"Disabling observance of " + downloadPath);
+      Log_OC.d(TAG,"Pausing observance of " + downloadPath);
     }
+  }
+ else {
+    Log_OC.d(TAG,"No observer for path " + downloadPath);
   }
 }

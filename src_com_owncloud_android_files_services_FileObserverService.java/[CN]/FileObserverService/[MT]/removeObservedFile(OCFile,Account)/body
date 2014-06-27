@@ -1,6 +1,11 @@
 {
+  Log_OC.v(TAG,"Removing a file from being watched");
   if (file == null) {
     Log_OC.e(TAG,"Trying to remove a NULL file");
+    return;
+  }
+  if (account == null) {
+    Log_OC.e(TAG,"Trying to add a file with a NULL account to observer");
     return;
   }
   String localPath=file.getStoragePath();
@@ -12,5 +17,8 @@
     observer.stopWatching();
     mObserversMap.remove(observer);
     Log_OC.d(TAG,"Stopped watching " + localPath);
+  }
+ else {
+    Log_OC.d(TAG,"No observer to remove for path " + localPath);
   }
 }

@@ -1,27 +1,30 @@
 {
-  mObserversMap.clear();
-  Cursor c=getContentResolver().query(ProviderTableMeta.CONTENT_URI,null,ProviderTableMeta.FILE_KEEP_IN_SYNC + " = ?",new String[]{String.valueOf(1)},null);
-  if (c == null || !c.moveToFirst())   return;
-  AccountManager acm=AccountManager.get(this);
-  Account[] accounts=acm.getAccountsByType(MainApp.getAccountType());
-  do {
-    Account account=null;
-    for (    Account a : accounts)     if (a.name.equals(c.getString(c.getColumnIndex(ProviderTableMeta.FILE_ACCOUNT_OWNER)))) {
-      account=a;
-      break;
+  Log_OC.d(TAG,"Loading all kept-in-sync files from database to start watching them");
+  Cursor cursorOnKeptInSync=getContentResolver().query(ProviderTableMeta.CONTENT_URI,null,ProviderTableMeta.FILE_KEEP_IN_SYNC + " = ?",new String[]{String.valueOf(1)},null);
+  if (cursorOnKeptInSync != null) {
+    if (cursorOnKeptInSync.moveToFirst()) {
+      String localPath="";
+      String accountName="";
+      Account account=null;
+      do {
+        localPath=cursorOnKeptInSync.getString(cursorOnKeptInSync.getColumnIndex(ProviderTableMeta.FILE_STORAGE_PATH));
+        accountName=cursorOnKeptInSync.getString(cursorOnKeptInSync.getColumnIndex(ProviderTableMeta.FILE_ACCOUNT_OWNER));
+        account=new Account(accountName,MainApp.getAccountType());
+        if (!AccountUtils.exists(account,this) || localPath == null || localPath.length() <= 0) {
+          continue;
+        }
+        OwnCloudFileObserver observer=mObserversMap.get(localPath);
+        if (observer == null) {
+          observer=new OwnCloudFileObserver(localPath,account,getApplicationContext());
+          mObserversMap.put(localPath,observer);
+          if (new File(localPath).exists()) {
+            observer.startWatching();
+            Log_OC.d(TAG,"Started watching file " + localPath);
+          }
+        }
+      }
+ while (cursorOnKeptInSync.moveToNext());
     }
-    if (account == null)     continue;
-    FileDataStorageManager storage=new FileDataStorageManager(account,getContentResolver());
-    if (!storage.fileExists(c.getString(c.getColumnIndex(ProviderTableMeta.FILE_PATH))))     continue;
-    String path=c.getString(c.getColumnIndex(ProviderTableMeta.FILE_STORAGE_PATH));
-    if (path == null || path.length() <= 0)     continue;
-    OwnCloudFileObserver observer=new OwnCloudFileObserver(path,account,getApplicationContext(),mHandler);
-    mObserversMap.put(path,observer);
-    if (new File(path).exists()) {
-      observer.startWatching();
-      Log_OC.d(TAG,"Started watching file " + path);
-    }
+    cursorOnKeptInSync.close();
   }
- while (c.moveToNext());
-  c.close();
 }

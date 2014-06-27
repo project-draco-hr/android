@@ -1,24 +1,17 @@
 {
-  if (intent == null) {
+  Log_OC.d(TAG,"Starting command " + intent);
+  if (intent == null || ACTION_INIT_OBSERVED_LIST.equals(intent.getAction())) {
     initializeObservedList();
     return Service.START_STICKY;
   }
-  if (!intent.hasExtra(KEY_FILE_CMD)) {
-    Log_OC.e(TAG,"No KEY_FILE_CMD argument given");
-    return Service.START_STICKY;
+ else   if (CMD_ADD_OBSERVED_FILE.equals(intent.getAction())) {
+    addObservedFile((OCFile)intent.getParcelableExtra(KEY_CMD_ARG_FILE),(Account)intent.getParcelableExtra(KEY_CMD_ARG_ACCOUNT));
   }
-switch (intent.getIntExtra(KEY_FILE_CMD,-1)) {
-case CMD_INIT_OBSERVED_LIST:
-    initializeObservedList();
-  break;
-case CMD_ADD_OBSERVED_FILE:
-addObservedFile((OCFile)intent.getParcelableExtra(KEY_CMD_ARG_FILE),(Account)intent.getParcelableExtra(KEY_CMD_ARG_ACCOUNT));
-break;
-case CMD_DEL_OBSERVED_FILE:
-removeObservedFile((OCFile)intent.getParcelableExtra(KEY_CMD_ARG_FILE),(Account)intent.getParcelableExtra(KEY_CMD_ARG_ACCOUNT));
-break;
-default :
-Log_OC.wtf(TAG,"Incorrect key given");
-}
-return Service.START_STICKY;
+ else   if (CMD_DEL_OBSERVED_FILE.equals(intent.getAction())) {
+    removeObservedFile((OCFile)intent.getParcelableExtra(KEY_CMD_ARG_FILE),(Account)intent.getParcelableExtra(KEY_CMD_ARG_ACCOUNT));
+  }
+ else {
+    Log_OC.e(TAG,"Unknown action recieved; ignoring it: " + intent.getAction());
+  }
+  return Service.START_STICKY;
 }
