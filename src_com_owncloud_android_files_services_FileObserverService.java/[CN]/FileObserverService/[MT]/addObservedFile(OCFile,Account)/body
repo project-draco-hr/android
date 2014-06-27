@@ -14,12 +14,23 @@
   }
   OwnCloudFileObserver observer=mObserversMap.get(localPath);
   if (observer == null) {
-    observer=new OwnCloudFileObserver(localPath,account,getApplicationContext(),mHandler);
+    observer=new OwnCloudFileObserver(localPath,account,getApplicationContext());
     mObserversMap.put(localPath,observer);
     Log_OC.d(TAG,"Observer added for path " + localPath);
     if (file.isDown()) {
       observer.startWatching();
       Log_OC.d(TAG,"Started watching " + localPath);
+    }
+  }
+  String parentPath=(new File(localPath)).getParent();
+  OwnCloudFileObserver observerParent=mObserverParentsMap.get(parentPath);
+  if (observerParent == null) {
+    observerParent=new OwnCloudFileObserver(parentPath,account,getApplicationContext());
+    mObserverParentsMap.put(parentPath,observerParent);
+    Log_OC.d(TAG,"Observer added for parent folder " + localPath);
+    if (file.isDown()) {
+      observerParent.startWatching();
+      Log_OC.d(TAG,"Started watching parent folder " + parentPath);
     }
   }
 }

@@ -22,6 +22,16 @@
             Log_OC.d(TAG,"Started watching file " + localPath);
           }
         }
+        String parentPath=(new File(localPath)).getParent();
+        OwnCloudFileObserver observerParent=mObserverParentsMap.get(parentPath);
+        if (observerParent == null) {
+          observerParent=new OwnCloudFileObserver(parentPath,account,getApplicationContext());
+          mObserverParentsMap.put(parentPath,observer);
+          if (new File(parentPath).exists()) {
+            observerParent.startWatching();
+            Log_OC.d(TAG,"Started watching parent folder " + parentPath);
+          }
+        }
       }
  while (cursorOnKeptInSync.moveToNext());
     }
