@@ -1,0 +1,14 @@
+{
+  Log_OC.v(TAG,"Adding a child file to be watched");
+  String parentPath=(new File(localPath)).getParent();
+  OwnCloudFolderObserver observerParent=mObserversFolderMap.get(parentPath);
+  if (observerParent == null) {
+    observerParent=new OwnCloudFolderObserver(parentPath,account,getApplicationContext());
+    mObserversFolderMap.put(parentPath,observerParent);
+    Log_OC.d(TAG,"Observer added for parent folder " + parentPath + "/");
+    if (new File(parentPath).exists()) {
+      observerParent.startWatching();
+      Log_OC.d(TAG,"Started watching parent folder " + parentPath + "/");
+    }
+  }
+}

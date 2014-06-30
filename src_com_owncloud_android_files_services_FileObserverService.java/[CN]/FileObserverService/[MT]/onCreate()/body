@@ -7,5 +7,5 @@
   filter.addAction(FileDownloader.getDownloadFinishMessage());
   registerReceiver(mDownloadReceiver,filter);
   mObserversMap=new HashMap<String,OwnCloudFileObserver>();
-  mObserverParentsMap=new HashMap<String,OwnCloudFileObserver>();
+  mObserversFolderMap=new HashMap<String,OwnCloudFolderObserver>();
 }

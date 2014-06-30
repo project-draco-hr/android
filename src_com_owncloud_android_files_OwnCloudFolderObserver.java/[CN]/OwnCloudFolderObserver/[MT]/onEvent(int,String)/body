@@ -1,0 +1,12 @@
+{
+  Log_OC.d(TAG,"Got file modified with event " + event + " and path "+ mPath+ ((path != null) ? File.separator + path : ""));
+  if ((event & MASK) == 0) {
+    Log_OC.wtf(TAG,"Incorrect event " + event + " sent for file "+ mPath+ ((path != null) ? File.separator + path : "")+ " with registered for "+ mMask+ " and original path "+ mPath);
+  }
+ else {
+    if ((event & FileObserver.CREATE) != 0) {
+    }
+    if ((event & FileObserver.MOVED_TO) != 0) {
+    }
+  }
+}

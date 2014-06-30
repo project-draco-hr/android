@@ -1,0 +1,3 @@
+{
+  Log_OC.d(TAG,"ON LOW MEMORY");
+}

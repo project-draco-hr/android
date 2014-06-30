@@ -15,7 +15,7 @@
         }
         OwnCloudFileObserver observer=mObserversMap.get(localPath);
         if (observer == null) {
-          observer=new OwnCloudFileObserver(localPath,account,getApplicationContext());
+          observer=new OwnCloudFileObserver(localPath,account,getApplicationContext(),mHandler);
           mObserversMap.put(localPath,observer);
           if (new File(localPath).exists()) {
             observer.startWatching();
@@ -23,13 +23,13 @@
           }
         }
         String parentPath=(new File(localPath)).getParent();
-        OwnCloudFileObserver observerParent=mObserverParentsMap.get(parentPath);
-        if (observerParent == null) {
-          observerParent=new OwnCloudFileObserver(parentPath,account,getApplicationContext());
-          mObserverParentsMap.put(parentPath,observer);
+        OwnCloudFolderObserver observerFolder=mObserversFolderMap.get(parentPath);
+        if (observerFolder == null) {
+          observerFolder=new OwnCloudFolderObserver(parentPath,account,getApplicationContext());
+          mObserversFolderMap.put(parentPath,observerFolder);
           if (new File(parentPath).exists()) {
-            observerParent.startWatching();
-            Log_OC.d(TAG,"Started watching parent folder " + parentPath);
+            observerFolder.startWatching();
+            Log_OC.d(TAG,"Started watching parent folder " + parentPath + "/");
           }
         }
       }

@@ -7,11 +7,11 @@
   }
   mObserversMap.clear();
   mObserversMap=null;
-  it=mObserverParentsMap.values().iterator();
-  while (it.hasNext()) {
-    it.next().stopWatching();
+  Iterator<OwnCloudFolderObserver> itOCFolder=mObserversFolderMap.values().iterator();
+  while (itOCFolder.hasNext()) {
+    itOCFolder.next().stopWatching();
   }
-  mObserverParentsMap.clear();
-  mObserverParentsMap=null;
+  mObserversFolderMap.clear();
+  mObserversFolderMap=null;
   super.onDestroy();
 }
