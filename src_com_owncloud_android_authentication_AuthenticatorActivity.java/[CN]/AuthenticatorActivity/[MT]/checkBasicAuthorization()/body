@@ -1,11 +1,7 @@
 {
-  String webdav_path=AccountUtils.getWebdavPath(mServerInfo.mVersion,mAuthTokenType);
   String username=mUsernameInput.getText().toString();
   String password=mPasswordInput.getText().toString();
   IndeterminateProgressDialog dialog=IndeterminateProgressDialog.newInstance(R.string.auth_trying_to_login,true);
   dialog.show(getSupportFragmentManager(),WAIT_DIALOG_TAG);
-  String remotePath="";
-  boolean successIfAbsent=false;
-  boolean followRedirects=true;
-  startExistenceCheckRemoteOperation(remotePath,this,successIfAbsent,webdav_path,username,password,followRedirects);
+  accessRootFolderRemoteOperation(username,password);
 }

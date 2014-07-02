@@ -10,23 +10,23 @@ synchronized (mPendingOperations) {
       if (mLastTarget == null || !mLastTarget.equals(next.first)) {
         mLastTarget=next.first;
         if (mLastTarget.mAccount != null) {
-          mOwnCloudClient=OwnCloudClientFactory.createOwnCloudClient(mLastTarget.mAccount,getApplicationContext());
+          OwnCloudAccount ocAccount=new OwnCloudAccount(mLastTarget.mAccount,this);
+          mOwnCloudClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,this);
           mStorageManager=new FileDataStorageManager(mLastTarget.mAccount,getContentResolver());
         }
  else {
-          mOwnCloudClient=OwnCloudClientFactory.createOwnCloudClient(mLastTarget.mServerUrl,getApplicationContext(),mLastTarget.mFollowRedirects);
-          if (mLastTarget.mWebDavUrl != null) {
-            mOwnCloudClient.setWebdavUri(Uri.parse(mLastTarget.mWebDavUrl));
+          OwnCloudCredentials credentials=null;
+          if (mLastTarget.mUsername != null && mLastTarget.mUsername.length() > 0) {
+            credentials=OwnCloudCredentialsFactory.newBasicCredentials(mLastTarget.mUsername,mLastTarget.mPassword);
           }
-          if (mLastTarget.mUsername != null && mLastTarget.mPassword != null) {
-            mOwnCloudClient.setBasicCredentials(mLastTarget.mUsername,mLastTarget.mPassword);
+ else           if (mLastTarget.mAuthToken != null && mLastTarget.mAuthToken.length() > 0) {
+            credentials=OwnCloudCredentialsFactory.newBearerCredentials(mLastTarget.mAuthToken);
           }
- else           if (mLastTarget.mAuthToken != null) {
-            mOwnCloudClient.setBearerCredentials(mLastTarget.mAuthToken);
+ else           if (mLastTarget.mCookie != null && mLastTarget.mCookie.length() > 0) {
+            credentials=OwnCloudCredentialsFactory.newSamlSsoCredentials(mLastTarget.mCookie);
           }
- else           if (mLastTarget.mCookie != null) {
-            mOwnCloudClient.setSsoSessionCookie(mLastTarget.mCookie);
-          }
+          OwnCloudAccount ocAccount=new OwnCloudAccount(mLastTarget.mServerUrl,credentials);
+          mOwnCloudClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,this);
           mStorageManager=null;
         }
       }

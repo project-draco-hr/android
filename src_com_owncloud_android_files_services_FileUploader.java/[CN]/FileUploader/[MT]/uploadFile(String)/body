@@ -9,7 +9,8 @@ synchronized (mPendingUploads) {
       if (mUploadClient == null || !mLastAccount.equals(mCurrentUpload.getAccount())) {
         mLastAccount=mCurrentUpload.getAccount();
         mStorageManager=new FileDataStorageManager(mLastAccount,getContentResolver());
-        mUploadClient=OwnCloudClientFactory.createOwnCloudClient(mLastAccount,getApplicationContext());
+        OwnCloudAccount ocAccount=new OwnCloudAccount(mLastAccount,this);
+        mUploadClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,this);
       }
       String remoteParentPath=new File(mCurrentUpload.getRemotePath()).getParent();
       remoteParentPath=remoteParentPath.endsWith(OCFile.PATH_SEPARATOR) ? remoteParentPath : remoteParentPath + OCFile.PATH_SEPARATOR;

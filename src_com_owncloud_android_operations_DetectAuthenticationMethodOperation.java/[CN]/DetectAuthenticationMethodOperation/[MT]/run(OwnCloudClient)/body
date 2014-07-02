@@ -2,13 +2,12 @@
   RemoteOperationResult result=null;
   AuthenticationMethod authMethod=AuthenticationMethod.UNKNOWN;
   RemoteOperation operation=new ExistenceCheckRemoteOperation("",mContext,false);
-  client.setWebdavUri(Uri.parse(mWebDavUrl));
-  client.setBasicCredentials("","");
+  client.clearCredentials();
   client.setFollowRedirects(false);
   result=operation.execute(client);
   String redirectedLocation=result.getRedirectedLocation();
   while (redirectedLocation != null && redirectedLocation.length() > 0 && !result.isIdPRedirection()) {
-    client.setWebdavUri(Uri.parse(result.getRedirectedLocation()));
+    client.setBaseUri(Uri.parse(result.getRedirectedLocation()));
     result=operation.execute(client);
     redirectedLocation=result.getRedirectedLocation();
   }

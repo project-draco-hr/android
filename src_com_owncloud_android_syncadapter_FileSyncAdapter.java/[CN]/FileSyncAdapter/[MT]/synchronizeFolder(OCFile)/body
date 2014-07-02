@@ -17,7 +17,7 @@
     }
   }
  else {
-    if (result.getCode() == RemoteOperationResult.ResultCode.UNAUTHORIZED || (result.isIdPRedirection() && getClient().getCredentials() == null)) {
+    if (result.getCode() == RemoteOperationResult.ResultCode.UNAUTHORIZED || result.isIdPRedirection()) {
       mSyncResult.stats.numAuthExceptions++;
     }
  else     if (result.getException() instanceof DavException) {

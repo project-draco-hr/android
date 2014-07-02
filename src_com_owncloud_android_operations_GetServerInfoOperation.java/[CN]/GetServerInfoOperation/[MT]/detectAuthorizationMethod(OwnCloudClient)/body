@@ -1,7 +1,5 @@
 {
   Log_OC.d(TAG,"Trying empty authorization to detect authentication method");
-  String webdav_path=AccountUtils.getWebdavPath(mResultData.mVersion,mAuthTokenType);
-  String webdav_url=mResultData.mBaseUrl + webdav_path;
-  DetectAuthenticationMethodOperation operation=new DetectAuthenticationMethodOperation(mContext,webdav_url);
+  DetectAuthenticationMethodOperation operation=new DetectAuthenticationMethodOperation(mContext);
   return operation.execute(client);
 }

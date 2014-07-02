@@ -5,7 +5,7 @@
     int tickerId=(uploadResult.isSuccess()) ? R.string.uploader_upload_succeeded_ticker : R.string.uploader_upload_failed_ticker;
     NotificationCompat.Builder resultBuilder=new NotificationCompat.Builder(this);
     String content=null;
-    boolean needsToUpdateCredentials=(uploadResult.getCode() == ResultCode.UNAUTHORIZED || (uploadResult.isIdPRedirection() && mUploadClient.getCredentials() == null));
+    boolean needsToUpdateCredentials=(uploadResult.getCode() == ResultCode.UNAUTHORIZED || uploadResult.isIdPRedirection());
     tickerId=(needsToUpdateCredentials) ? R.string.uploader_upload_failed_credentials_error : tickerId;
     resultBuilder.setSmallIcon(R.drawable.notification_icon).setTicker(getString(tickerId)).setContentTitle(getString(tickerId)).setAutoCancel(true);
     content=ErrorMessageAdapter.getErrorCauseMessage(uploadResult,upload,getResources());

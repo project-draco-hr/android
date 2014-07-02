@@ -12,7 +12,6 @@
     Intent getServerInfoIntent=new Intent();
     getServerInfoIntent.setAction(OperationsService.ACTION_GET_SERVER_INFO);
     getServerInfoIntent.putExtra(OperationsService.EXTRA_SERVER_URL,uri);
-    getServerInfoIntent.putExtra(OperationsService.EXTRA_AUTH_TOKEN_TYPE,mAuthTokenType);
     if (mOperationsServiceBinder != null) {
       mWaitingForOpId=mOperationsServiceBinder.newOperation(getServerInfoIntent);
     }

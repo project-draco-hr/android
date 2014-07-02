@@ -1,5 +1,5 @@
 {
-  GetRemoteStatusOperation getStatus=new GetRemoteStatusOperation(mUrl,mContext);
+  GetRemoteStatusOperation getStatus=new GetRemoteStatusOperation(mContext);
   RemoteOperationResult result=getStatus.execute(client);
   if (result.isSuccess()) {
     mResultData.mVersion=(OwnCloudVersion)(result.getData().get(0));
