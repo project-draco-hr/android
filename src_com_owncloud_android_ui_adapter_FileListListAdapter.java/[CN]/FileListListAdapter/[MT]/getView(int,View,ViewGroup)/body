@@ -76,6 +76,9 @@
  else {
         fileIcon.setImageResource(DisplayUtils.getResourceId(file.getMimetype(),file.getFileName()));
       }
+      if (file.isShareByLink()) {
+        fileIcon.setImageResource(R.drawable.folder_public);
+      }
     }
     if (file.isShareByLink()) {
       sharedIconV.setVisibility(View.VISIBLE);
