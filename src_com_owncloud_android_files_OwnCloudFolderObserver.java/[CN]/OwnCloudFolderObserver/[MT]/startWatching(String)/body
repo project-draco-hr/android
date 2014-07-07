@@ -1,0 +1,11 @@
+{
+synchronized (mObservedChildren) {
+    if (!mObservedChildren.containsKey(localPath)) {
+      mObservedChildren.put(localPath,Boolean.valueOf(false));
+    }
+  }
+  if (new File(mPath).exists()) {
+    startWatching();
+    Log_OC.d(TAG,"Started watching parent folder " + mPath + "/");
+  }
+}

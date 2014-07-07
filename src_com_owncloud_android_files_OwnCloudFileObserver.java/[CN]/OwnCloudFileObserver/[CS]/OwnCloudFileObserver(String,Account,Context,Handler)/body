@@ -1,5 +1,5 @@
 {
-  super(path,FileObserver.ALL_EVENTS);
+  super(path,ALL_EVENTS);
   if (path == null)   throw new IllegalArgumentException("NULL path argument received");
   if (account == null)   throw new IllegalArgumentException("NULL account argument received");
   if (context == null)   throw new IllegalArgumentException("NULL context argument received");
@@ -8,6 +8,5 @@
   mContext=context;
   mModified=false;
   mFileLastModified=new File(path).lastModified();
-  mHandler=handler;
   Log_OC.d(TAG,"Create Observer - FileLastModified: " + mFileLastModified);
 }

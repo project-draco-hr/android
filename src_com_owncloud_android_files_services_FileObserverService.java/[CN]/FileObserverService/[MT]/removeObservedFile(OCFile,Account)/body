@@ -12,13 +12,5 @@
   if (localPath == null || localPath.length() <= 0) {
     localPath=FileStorageUtils.getDefaultSavePathFor(account.name,file);
   }
-  OwnCloudFileObserver observer=mObserversMap.get(localPath);
-  if (observer != null) {
-    observer.stopWatching();
-    mObserversMap.remove(observer);
-    Log_OC.d(TAG,"Stopped watching " + localPath);
-  }
- else {
-    Log_OC.d(TAG,"No observer to remove for path " + localPath);
-  }
+  removeObservedFile(localPath);
 }

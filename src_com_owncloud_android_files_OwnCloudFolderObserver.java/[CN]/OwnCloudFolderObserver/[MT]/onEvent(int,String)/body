@@ -1,12 +1,23 @@
 {
-  Log_OC.d(TAG,"Got file modified with event " + event + " and path "+ mPath+ ((path != null) ? File.separator + path : ""));
-  if ((event & MASK) == 0) {
-    Log_OC.wtf(TAG,"Incorrect event " + event + " sent for file "+ mPath+ ((path != null) ? File.separator + path : "")+ " with registered for "+ mMask+ " and original path "+ mPath);
+  Log_OC.d(TAG,"Got event " + event + " on FOLDER "+ mPath+ " about "+ ((path != null) ? path : ""));
+  boolean shouldSynchronize=false;
+synchronized (mObservedChildren) {
+    if (path != null && path.length() > 0 && mObservedChildren.containsKey(path)) {
+      if ((event & FileObserver.MODIFY) != 0) {
+        if (!mObservedChildren.get(path)) {
+          mObservedChildren.put(path,Boolean.valueOf(true));
+        }
+      }
+      if ((event & FileObserver.CLOSE_WRITE) != 0) {
+        mObservedChildren.put(path,Boolean.valueOf(false));
+        shouldSynchronize=true;
+      }
+    }
   }
- else {
-    if ((event & FileObserver.CREATE) != 0) {
-    }
-    if ((event & FileObserver.MOVED_TO) != 0) {
-    }
+  if (shouldSynchronize) {
+    startSyncOperation(path);
+  }
+  if ((event & OwnCloudFileObserver.IN_IGNORE) != 0 && (path == null || path.length() == 0)) {
+    Log_OC.d(TAG,"Stopping the observance on " + mPath);
   }
 }

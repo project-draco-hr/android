@@ -12,14 +12,5 @@
   if (localPath == null || localPath.length() <= 0) {
     localPath=FileStorageUtils.getDefaultSavePathFor(account.name,file);
   }
-  OwnCloudFileObserver observer=mObserversMap.get(localPath);
-  if (observer == null) {
-    observer=new OwnCloudFileObserver(localPath,account,getApplicationContext(),mHandler);
-    mObserversMap.put(localPath,observer);
-    Log_OC.d(TAG,"Observer added for path " + localPath);
-    if (file.isDown()) {
-      observer.startWatching();
-      Log_OC.d(TAG,"Started watching " + localPath);
-    }
-  }
+  addObservedFile(localPath,account);
 }

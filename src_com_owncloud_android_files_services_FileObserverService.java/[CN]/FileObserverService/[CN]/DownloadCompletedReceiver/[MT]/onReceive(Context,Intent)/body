@@ -1,18 +1,19 @@
 {
   Log_OC.d(TAG,"Received broadcast intent " + intent);
-  String downloadPath=intent.getStringExtra(FileDownloader.EXTRA_FILE_PATH);
-  OwnCloudFileObserver observer=mObserversMap.get(downloadPath);
+  File downloadedFile=new File(intent.getStringExtra(FileDownloader.EXTRA_FILE_PATH));
+  String parentPath=downloadedFile.getParent();
+  OwnCloudFolderObserver observer=mFolderObserversMap.get(parentPath);
   if (observer != null) {
-    if (intent.getAction().equals(FileDownloader.getDownloadFinishMessage()) && new File(downloadPath).exists()) {
-      observer.startWatching();
-      Log_OC.d(TAG,"Resuming observance of " + downloadPath);
+    if (intent.getAction().equals(FileDownloader.getDownloadFinishMessage()) && downloadedFile.exists()) {
+      observer.startWatching(downloadedFile.getName());
+      Log_OC.d(TAG,"Resuming observance of " + downloadedFile.getAbsolutePath());
     }
  else     if (intent.getAction().equals(FileDownloader.getDownloadAddedMessage())) {
-      observer.stopWatching();
-      Log_OC.d(TAG,"Pausing observance of " + downloadPath);
+      observer.stopWatching(downloadedFile.getName());
+      Log_OC.d(TAG,"Pausing observance of " + downloadedFile.getAbsolutePath());
     }
   }
  else {
-    Log_OC.d(TAG,"No observer for path " + downloadPath);
+    Log_OC.d(TAG,"No observer for path " + downloadedFile.getAbsolutePath());
   }
 }

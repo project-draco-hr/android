@@ -1,0 +1,13 @@
+{
+  FileDataStorageManager storageManager=new FileDataStorageManager(mAccount,mContext.getContentResolver());
+  OCFile file=storageManager.getFileByLocalPath(mPath + File.separator + childName);
+  SynchronizeFileOperation sfo=new SynchronizeFileOperation(file,null,mAccount,true,mContext);
+  RemoteOperationResult result=sfo.execute(storageManager,mContext);
+  if (result.getCode() == ResultCode.SYNC_CONFLICT) {
+    Intent i=new Intent(mContext,ConflictsResolveActivity.class);
+    i.setFlags(i.getFlags() | Intent.FLAG_ACTIVITY_NEW_TASK);
+    i.putExtra(ConflictsResolveActivity.EXTRA_FILE,file);
+    i.putExtra(ConflictsResolveActivity.EXTRA_ACCOUNT,mAccount);
+    mContext.startActivity(i);
+  }
+}

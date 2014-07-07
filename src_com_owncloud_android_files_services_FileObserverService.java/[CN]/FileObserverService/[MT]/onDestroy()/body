@@ -1,17 +1,11 @@
 {
-  Log_OC.d(TAG,"onDestroy - FINISHING OBSERVATION");
+  Log_OC.d(TAG,"onDestroy - finishing observation of favourite files");
   unregisterReceiver(mDownloadReceiver);
-  Iterator<OwnCloudFileObserver> it=mObserversMap.values().iterator();
-  while (it.hasNext()) {
-    it.next().stopWatching();
-  }
-  mObserversMap.clear();
-  mObserversMap=null;
-  Iterator<OwnCloudFolderObserver> itOCFolder=mObserversFolderMap.values().iterator();
+  Iterator<OwnCloudFolderObserver> itOCFolder=mFolderObserversMap.values().iterator();
   while (itOCFolder.hasNext()) {
     itOCFolder.next().stopWatching();
   }
-  mObserversFolderMap.clear();
-  mObserversFolderMap=null;
+  mFolderObserversMap.clear();
+  mFolderObserversMap=null;
   super.onDestroy();
 }

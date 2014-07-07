@@ -1,22 +1,16 @@
 {
   Log_OC.d(TAG,"Starting command " + intent);
-  if (intent == null || ACTION_INIT_OBSERVED_LIST.equals(intent.getAction())) {
-    initializeObservedList();
+  if (intent == null || ACTION_START_OBSERVE.equals(intent.getAction())) {
+    startObservation();
     return Service.START_STICKY;
   }
- else   if (CMD_ADD_OBSERVED_FILE.equals(intent.getAction())) {
-    OCFile file=(OCFile)intent.getParcelableExtra(KEY_CMD_ARG_FILE);
-    Account account=(Account)intent.getParcelableExtra(KEY_CMD_ARG_ACCOUNT);
+ else   if (ACTION_ADD_OBSERVED_FILE.equals(intent.getAction())) {
+    OCFile file=(OCFile)intent.getParcelableExtra(ARG_FILE);
+    Account account=(Account)intent.getParcelableExtra(ARG_ACCOUNT);
     addObservedFile(file,account);
-    String localPath=file.getStoragePath();
-    if (localPath == null || localPath.length() <= 0) {
-      localPath=FileStorageUtils.getDefaultSavePathFor(account.name,file);
-    }
-    String parentPath=(new File(localPath)).getParent();
-    addObservedFolder(parentPath,account);
   }
- else   if (CMD_DEL_OBSERVED_FILE.equals(intent.getAction())) {
-    removeObservedFile((OCFile)intent.getParcelableExtra(KEY_CMD_ARG_FILE),(Account)intent.getParcelableExtra(KEY_CMD_ARG_ACCOUNT));
+ else   if (ACTION_DEL_OBSERVED_FILE.equals(intent.getAction())) {
+    removeObservedFile((OCFile)intent.getParcelableExtra(ARG_FILE),(Account)intent.getParcelableExtra(ARG_ACCOUNT));
   }
  else {
     Log_OC.e(TAG,"Unknown action recieved; ignoring it: " + intent.getAction());
