@@ -1,4 +1,0 @@
-{
-  Log_OC.d(TAG,"FileLastModified: " + mFileLastModified);
-  return (new File(mPath).lastModified() > mFileLastModified);
-}

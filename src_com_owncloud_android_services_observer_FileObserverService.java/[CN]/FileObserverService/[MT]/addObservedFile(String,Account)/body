@@ -1,0 +1,12 @@
+{
+  File file=new File(localPath);
+  String parentPath=file.getParent();
+  FolderObserver observer=mFolderObserversMap.get(parentPath);
+  if (observer == null) {
+    observer=new FolderObserver(parentPath,account,getApplicationContext());
+    mFolderObserversMap.put(parentPath,observer);
+    Log_OC.d(TAG,"Observer added for parent folder " + parentPath + "/");
+  }
+  observer.startWatching(file.getName());
+  Log_OC.d(TAG,"Added " + localPath + " to list of observed children");
+}

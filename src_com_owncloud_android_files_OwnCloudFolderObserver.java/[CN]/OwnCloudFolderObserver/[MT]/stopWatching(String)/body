@@ -1,9 +1,0 @@
-{
-synchronized (mObservedChildren) {
-    mObservedChildren.remove(localPath);
-    if (mObservedChildren.isEmpty()) {
-      stopWatching();
-      Log_OC.d(TAG,"Stopped watching parent folder " + mPath + "/");
-    }
-  }
-}

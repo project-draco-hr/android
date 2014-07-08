@@ -1,0 +1,15 @@
+{
+  File file=new File(localPath);
+  String parentPath=file.getParent();
+  FolderObserver observer=mFolderObserversMap.get(parentPath);
+  if (observer != null) {
+    observer.stopWatching(file.getName());
+    if (observer.isEmpty()) {
+      mFolderObserversMap.remove(parentPath);
+      Log_OC.d(TAG,"Observer removed for parent folder " + parentPath + "/");
+    }
+  }
+ else {
+    Log_OC.d(TAG,"No observer to remove for path " + localPath);
+  }
+}

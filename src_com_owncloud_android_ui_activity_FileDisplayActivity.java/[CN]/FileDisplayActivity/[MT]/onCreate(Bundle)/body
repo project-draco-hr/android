@@ -8,7 +8,7 @@
  else   if (getIntent().getAction() == null && savedInstanceState == null) {
     requestPinCode();
   }
-  if (savedInstanceState != null) {
+  if (savedInstanceState == null) {
     Intent initObserversIntent=FileObserverService.makeInitIntent(this);
     startService(initObserversIntent);
   }
