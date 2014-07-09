@@ -1,0 +1,16 @@
+{
+  Log_OC.v(TAG,"Adding a file to be watched");
+  if (file == null) {
+    Log_OC.e(TAG,"Trying to add a NULL file to observer");
+    return;
+  }
+  if (account == null) {
+    Log_OC.e(TAG,"Trying to add a file with a NULL account to observer");
+    return;
+  }
+  String localPath=file.getStoragePath();
+  if (localPath == null || localPath.length() <= 0) {
+    localPath=FileStorageUtils.getDefaultSavePathFor(account.name,file);
+  }
+  addObservedFile(localPath,account);
+}

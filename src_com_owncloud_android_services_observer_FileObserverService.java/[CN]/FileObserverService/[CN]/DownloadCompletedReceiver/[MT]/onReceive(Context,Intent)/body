@@ -1,0 +1,19 @@
+{
+  Log_OC.d(TAG,"Received broadcast intent " + intent);
+  File downloadedFile=new File(intent.getStringExtra(FileDownloader.EXTRA_FILE_PATH));
+  String parentPath=downloadedFile.getParent();
+  FolderObserver observer=mFolderObserversMap.get(parentPath);
+  if (observer != null) {
+    if (intent.getAction().equals(FileDownloader.getDownloadFinishMessage()) && downloadedFile.exists()) {
+      observer.startWatching(downloadedFile.getName());
+      Log_OC.d(TAG,"Resuming observance of " + downloadedFile.getAbsolutePath());
+    }
+ else     if (intent.getAction().equals(FileDownloader.getDownloadAddedMessage())) {
+      observer.stopWatching(downloadedFile.getName());
+      Log_OC.d(TAG,"Pausing observance of " + downloadedFile.getAbsolutePath());
+    }
+  }
+ else {
+    Log_OC.d(TAG,"No observer for path " + downloadedFile.getAbsolutePath());
+  }
+}
