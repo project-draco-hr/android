@@ -1,0 +1,19 @@
+{
+  Log_OC.d(TAG,"Starting command " + intent);
+  if (intent == null || ACTION_START_OBSERVE.equals(intent.getAction())) {
+    startObservation();
+    return Service.START_STICKY;
+  }
+ else   if (ACTION_ADD_OBSERVED_FILE.equals(intent.getAction())) {
+    OCFile file=(OCFile)intent.getParcelableExtra(ARG_FILE);
+    Account account=(Account)intent.getParcelableExtra(ARG_ACCOUNT);
+    addObservedFile(file,account);
+  }
+ else   if (ACTION_DEL_OBSERVED_FILE.equals(intent.getAction())) {
+    removeObservedFile((OCFile)intent.getParcelableExtra(ARG_FILE),(Account)intent.getParcelableExtra(ARG_ACCOUNT));
+  }
+ else {
+    Log_OC.e(TAG,"Unknown action recieved; ignoring it: " + intent.getAction());
+  }
+  return Service.START_STICKY;
+}
