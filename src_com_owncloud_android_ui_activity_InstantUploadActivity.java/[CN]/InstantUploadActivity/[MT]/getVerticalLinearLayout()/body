@@ -1,7 +1,0 @@
-{
-  LinearLayout linearLayout=new LinearLayout(getApplicationContext());
-  linearLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.MATCH_PARENT));
-  linearLayout.setGravity(Gravity.TOP);
-  linearLayout.setOrientation(LinearLayout.VERTICAL);
-  return linearLayout;
-}
