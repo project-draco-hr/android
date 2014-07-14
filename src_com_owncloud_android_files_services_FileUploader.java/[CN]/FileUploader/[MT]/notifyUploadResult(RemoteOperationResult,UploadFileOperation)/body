@@ -3,11 +3,10 @@
   mNotificationManager.cancel(R.string.uploader_upload_in_progress_ticker);
   if (!uploadResult.isCancelled()) {
     int tickerId=(uploadResult.isSuccess()) ? R.string.uploader_upload_succeeded_ticker : R.string.uploader_upload_failed_ticker;
-    NotificationCompat.Builder resultBuilder=new NotificationCompat.Builder(this);
     String content=null;
     boolean needsToUpdateCredentials=(uploadResult.getCode() == ResultCode.UNAUTHORIZED || uploadResult.isIdPRedirection());
     tickerId=(needsToUpdateCredentials) ? R.string.uploader_upload_failed_credentials_error : tickerId;
-    resultBuilder.setSmallIcon(R.drawable.notification_icon).setTicker(getString(tickerId)).setContentTitle(getString(tickerId)).setAutoCancel(true);
+    mNotificationBuilder.setTicker(getString(tickerId)).setContentTitle(getString(tickerId)).setAutoCancel(true).setOngoing(false).setProgress(0,0,false);
     content=ErrorMessageAdapter.getErrorCauseMessage(uploadResult,upload,getResources());
     if (needsToUpdateCredentials) {
       Intent updateAccountCredentials=new Intent(this,AuthenticatorActivity.class);
@@ -16,11 +15,11 @@
       updateAccountCredentials.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
       updateAccountCredentials.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
       updateAccountCredentials.addFlags(Intent.FLAG_FROM_BACKGROUND);
-      resultBuilder.setContentIntent(PendingIntent.getActivity(this,(int)System.currentTimeMillis(),updateAccountCredentials,PendingIntent.FLAG_ONE_SHOT));
+      mNotificationBuilder.setContentIntent(PendingIntent.getActivity(this,(int)System.currentTimeMillis(),updateAccountCredentials,PendingIntent.FLAG_ONE_SHOT));
       mUploadClient=null;
     }
  else {
-      resultBuilder.setContentText(content);
+      mNotificationBuilder.setContentText(content);
       if (upload.isInstant()) {
         DbHandler db=null;
         try {
@@ -41,8 +40,8 @@
         }
       }
     }
-    resultBuilder.setContentText(content);
-    mNotificationManager.notify(tickerId,resultBuilder.build());
+    mNotificationBuilder.setContentText(content);
+    mNotificationManager.notify(tickerId,mNotificationBuilder.build());
     if (uploadResult.isSuccess()) {
       DbHandler db=new DbHandler(this.getBaseContext());
       db.removeIUPendingFile(mCurrentUpload.getOriginalStoragePath());
