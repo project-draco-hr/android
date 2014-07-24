@@ -1,0 +1,3 @@
+{
+  mEmptyListMessage.setText(message);
+}
