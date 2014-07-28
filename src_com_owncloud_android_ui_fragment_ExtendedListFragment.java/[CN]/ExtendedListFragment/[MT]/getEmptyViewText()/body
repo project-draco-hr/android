@@ -1,0 +1,3 @@
+{
+  return (mEmptyListMessage != null) ? mEmptyListMessage.getText().toString() : "";
+}
