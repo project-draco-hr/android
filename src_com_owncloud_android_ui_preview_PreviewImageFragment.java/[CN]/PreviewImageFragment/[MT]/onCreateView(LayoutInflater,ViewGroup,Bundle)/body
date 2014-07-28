@@ -1,7 +1,7 @@
 {
   super.onCreateView(inflater,container,savedInstanceState);
   mView=inflater.inflate(R.layout.preview_image_fragment,container,false);
-  mImageView=(ImageView)mView.findViewById(R.id.image);
+  mImageView=(TouchImageView)mView.findViewById(R.id.image);
   mImageView.setVisibility(View.GONE);
   mView.setOnTouchListener((OnTouchListener)getActivity());
   mMessageView=(TextView)mView.findViewById(R.id.message);
