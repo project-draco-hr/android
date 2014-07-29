@@ -1,6 +1,3 @@
 {
   super.onAttach(activity);
-  if (!(activity instanceof OnTouchListener)) {
-    throw new ClassCastException(activity.toString() + " must implement " + OnTouchListener.class.getSimpleName());
-  }
 }
