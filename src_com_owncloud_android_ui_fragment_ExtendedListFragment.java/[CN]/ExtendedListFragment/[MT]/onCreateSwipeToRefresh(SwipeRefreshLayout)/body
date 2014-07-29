@@ -1,0 +1,4 @@
+{
+  refreshLayout.setColorScheme(R.color.background_color,R.color.background_color,R.color.background_color,R.color.background_color);
+  refreshLayout.setOnRefreshListener(this);
+}
