@@ -67,6 +67,7 @@ catch (          IOException e) {
       removeStickyBroadcast(intent);
       Log_OC.d(TAG,"Setting progress visibility to " + mSyncInProgress);
       setSupportProgressBarIndeterminateVisibility(mSyncInProgress);
+      setBackgroundText();
     }
     if (synchResult != null) {
       if (synchResult.getCode().equals(RemoteOperationResult.ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED)) {
