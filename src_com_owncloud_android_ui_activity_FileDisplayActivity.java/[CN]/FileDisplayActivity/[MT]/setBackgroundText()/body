@@ -5,7 +5,7 @@
     if (!mSyncInProgress) {
       message=R.string.file_list_empty;
     }
-    ocFileListFragment.setMessageforEmptyView(getString(message));
+    ocFileListFragment.setMessageForEmptyList(getString(message));
   }
  else {
     Log.e(TAG,"OCFileListFragment is null");
