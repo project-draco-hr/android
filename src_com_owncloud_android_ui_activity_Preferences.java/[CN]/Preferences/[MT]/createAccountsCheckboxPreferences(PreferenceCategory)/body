@@ -9,6 +9,25 @@
     if (a.name.equals(currentAccount.name)) {
       checkBoxPreference.setChecked(true);
     }
+    checkBoxPreference.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
+      @Override public boolean onPreferenceChange(      Preference preference,      Object newValue){
+        String key=preference.getKey();
+        AccountManager am=(AccountManager)getSystemService(ACCOUNT_SERVICE);
+        Account accounts[]=am.getAccountsByType(MainApp.getAccountType());
+        for (        Account a : accounts) {
+          @SuppressWarnings("deprecation") CheckBoxPreference p=(CheckBoxPreference)findPreference(a.name);
+          if (key.equals(a.name)) {
+            p.setChecked(true);
+            AccountUtils.setCurrentOwnCloudAccount(getApplicationContext(),a.name);
+          }
+ else {
+            p.setChecked(false);
+          }
+        }
+        return (Boolean)newValue;
+      }
+    }
+);
     accountsPrefCategory.addPreference(checkBoxPreference);
   }
 }

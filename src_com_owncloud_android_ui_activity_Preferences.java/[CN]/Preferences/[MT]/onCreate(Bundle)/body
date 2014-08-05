@@ -5,10 +5,29 @@
   ActionBar actionBar=getSherlock().getActionBar();
   actionBar.setIcon(DisplayUtils.getSeasonalIconId());
   actionBar.setDisplayHomeAsUpEnabled(true);
+  if (savedInstanceState != null) {
+    mPreviousAccount=savedInstanceState.getParcelable(PREVIOUS_ACCOUNT_KEY);
+  }
+ else {
+    mPreviousAccount=AccountUtils.getCurrentOwnCloudAccount(this);
+  }
   PreferenceCategory accountsPrefCategory=(PreferenceCategory)findPreference("accounts_category");
   createAccountsCheckboxPreferences(accountsPrefCategory);
-  Preference p=findPreference("manage_account");
-  if (p != null)   p.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+  if (!getResources().getBoolean(R.bool.multiaccount_support)) {
+    PreferenceMultiline addAccountPreference=(PreferenceMultiline)findPreference("add_account");
+    accountsPrefCategory.removePreference(addAccountPreference);
+  }
+  Preference pAddAccount=findPreference("add_account");
+  if (pAddAccount != null)   pAddAccount.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+    @Override public boolean onPreferenceClick(    Preference preference){
+      AccountManager am=AccountManager.get(getApplicationContext());
+      am.addAccount(MainApp.getAccountType(),null,null,null,Preferences.this,null,null);
+      return true;
+    }
+  }
+);
+  Preference pManageAccount=findPreference("manage_account");
+  if (pManageAccount != null)   pManageAccount.setOnPreferenceClickListener(new OnPreferenceClickListener(){
     @Override public boolean onPreferenceClick(    Preference preference){
       Intent i=new Intent(getApplicationContext(),AccountSelectActivity.class);
       startActivity(i);
