@@ -5,6 +5,8 @@
   ActionBar actionBar=getSherlock().getActionBar();
   actionBar.setIcon(DisplayUtils.getSeasonalIconId());
   actionBar.setDisplayHomeAsUpEnabled(true);
+  PreferenceCategory accountsPrefCategory=(PreferenceCategory)findPreference("accounts_category");
+  createAccountsCheckboxPreferences(accountsPrefCategory);
   Preference p=findPreference("manage_account");
   if (p != null)   p.setOnPreferenceClickListener(new OnPreferenceClickListener(){
     @Override public boolean onPreferenceClick(    Preference preference){

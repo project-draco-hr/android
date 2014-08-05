@@ -1,0 +1,14 @@
+{
+  AccountManager am=(AccountManager)getSystemService(ACCOUNT_SERVICE);
+  Account accounts[]=am.getAccountsByType(MainApp.getAccountType());
+  Account currentAccount=AccountUtils.getCurrentOwnCloudAccount(getApplicationContext());
+  for (  Account a : accounts) {
+    CheckBoxPreference checkBoxPreference=new CheckBoxPreference(this);
+    checkBoxPreference.setKey(a.name);
+    checkBoxPreference.setTitle(a.name);
+    if (a.name.equals(currentAccount.name)) {
+      checkBoxPreference.setChecked(true);
+    }
+    accountsPrefCategory.addPreference(checkBoxPreference);
+  }
+}
