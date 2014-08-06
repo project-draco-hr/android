@@ -28,6 +28,6 @@
       }
     }
 );
-    accountsPrefCategory.addPreference(checkBoxPreference);
+    mAccountsPrefCategory.addPreference(checkBoxPreference);
   }
 }

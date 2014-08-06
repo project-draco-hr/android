@@ -11,21 +11,11 @@
  else {
     mPreviousAccount=AccountUtils.getCurrentOwnCloudAccount(this);
   }
-  PreferenceCategory accountsPrefCategory=(PreferenceCategory)findPreference("accounts_category");
-  createAccountsCheckboxPreferences(accountsPrefCategory);
-  if (!getResources().getBoolean(R.bool.multiaccount_support)) {
-    PreferenceMultiline addAccountPreference=(PreferenceMultiline)findPreference("add_account");
-    accountsPrefCategory.removePreference(addAccountPreference);
+  mAccountsPrefCategory=(PreferenceCategory)findPreference("accounts_category");
+  createAccountsCheckboxPreferences();
+  if (getResources().getBoolean(R.bool.multiaccount_support)) {
+    createAddAccountPreference();
   }
-  Preference pAddAccount=findPreference("add_account");
-  if (pAddAccount != null)   pAddAccount.setOnPreferenceClickListener(new OnPreferenceClickListener(){
-    @Override public boolean onPreferenceClick(    Preference preference){
-      AccountManager am=AccountManager.get(getApplicationContext());
-      am.addAccount(MainApp.getAccountType(),null,null,null,Preferences.this,null,null);
-      return true;
-    }
-  }
-);
   pCode=(CheckBoxPreference)findPreference("set_pincode");
   if (pCode != null) {
     pCode.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
