@@ -26,15 +26,6 @@
     }
   }
 );
-  Preference pManageAccount=findPreference("manage_account");
-  if (pManageAccount != null)   pManageAccount.setOnPreferenceClickListener(new OnPreferenceClickListener(){
-    @Override public boolean onPreferenceClick(    Preference preference){
-      Intent i=new Intent(getApplicationContext(),AccountSelectActivity.class);
-      startActivity(i);
-      return true;
-    }
-  }
-);
   pCode=(CheckBoxPreference)findPreference("set_pincode");
   if (pCode != null) {
     pCode.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
