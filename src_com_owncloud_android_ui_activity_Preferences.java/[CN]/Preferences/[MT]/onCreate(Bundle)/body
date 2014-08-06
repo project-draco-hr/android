@@ -12,10 +12,6 @@
     mPreviousAccount=AccountUtils.getCurrentOwnCloudAccount(this);
   }
   mAccountsPrefCategory=(PreferenceCategory)findPreference("accounts_category");
-  createAccountsCheckboxPreferences();
-  if (getResources().getBoolean(R.bool.multiaccount_support)) {
-    createAddAccountPreference();
-  }
   pCode=(CheckBoxPreference)findPreference("set_pincode");
   if (pCode != null) {
     pCode.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){

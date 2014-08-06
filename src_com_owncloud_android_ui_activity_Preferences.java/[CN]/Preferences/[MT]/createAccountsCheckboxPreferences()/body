@@ -1,4 +1,7 @@
 {
+  if (mAccountsPrefCategory.getPreferenceCount() > 0) {
+    mAccountsPrefCategory.removeAll();
+  }
   AccountManager am=(AccountManager)getSystemService(ACCOUNT_SERVICE);
   Account accounts[]=am.getAccountsByType(MainApp.getAccountType());
   Account currentAccount=AccountUtils.getCurrentOwnCloudAccount(getApplicationContext());
@@ -29,5 +32,8 @@
     }
 );
     mAccountsPrefCategory.addPreference(checkBoxPreference);
+  }
+  if (getResources().getBoolean(R.bool.multiaccount_support)) {
+    createAddAccountPreference();
   }
 }
