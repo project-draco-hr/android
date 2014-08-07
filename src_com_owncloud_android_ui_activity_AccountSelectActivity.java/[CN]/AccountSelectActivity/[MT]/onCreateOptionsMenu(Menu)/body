@@ -1,7 +1,0 @@
-{
-  if (getResources().getBoolean(R.bool.multiaccount_support)) {
-    MenuInflater inflater=getSherlock().getMenuInflater();
-    inflater.inflate(R.menu.account_picker,menu);
-  }
-  return true;
-}
