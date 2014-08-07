@@ -1,0 +1,9 @@
+{
+  super.onWindowFocusChanged(hasFocus);
+  if (hasFocus) {
+    delayedHide(INITIAL_HIDE_DELAY);
+  }
+ else {
+    mHideSystemUiHandler.removeMessages(0);
+  }
+}
