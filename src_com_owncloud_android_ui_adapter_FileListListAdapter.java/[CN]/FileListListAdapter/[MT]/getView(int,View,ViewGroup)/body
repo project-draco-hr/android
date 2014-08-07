@@ -7,7 +7,6 @@
   if (mFiles != null && mFiles.size() > position) {
     OCFile file=mFiles.get(position);
     TextView fileName=(TextView)view.findViewById(R.id.Filename);
-    fileName.setVisibility(View.GONE);
     String name=file.getFileName();
     fileName.setText(name);
     ImageView fileIcon=(ImageView)view.findViewById(R.id.imageView1);
