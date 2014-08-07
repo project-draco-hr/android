@@ -7,6 +7,6 @@
       if (accounts.length != 0)       accountName=accounts[0].name;
       AccountUtils.setCurrentOwnCloudAccount(this,accountName);
     }
-    createAccountsCheckboxPreferences();
+    addAccountsCheckboxPreferences();
   }
 }

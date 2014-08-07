@@ -13,6 +13,7 @@
       LongClickableCheckBoxPreference accountPreference=new LongClickableCheckBoxPreference(this);
       accountPreference.setKey(a.name);
       accountPreference.setTitle(a.name);
+      mAccountsPrefCategory.addPreference(accountPreference);
       if (a.name.equals(currentAccount.name)) {
         accountPreference.setChecked(true);
       }
@@ -38,7 +39,6 @@
         }
       }
 );
-      mAccountsPrefCategory.addPreference(accountPreference);
     }
     if (getResources().getBoolean(R.bool.multiaccount_support)) {
       createAddAccountPreference();
