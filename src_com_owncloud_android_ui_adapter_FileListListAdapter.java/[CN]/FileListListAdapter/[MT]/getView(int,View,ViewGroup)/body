@@ -1,39 +1,16 @@
 {
-  double count=0;
-  for (  OCFile file : mFiles) {
-    if (file.isImage()) {
-      count++;
-    }
-  }
-  boolean fileView=true;
-  if ((count / mFiles.size()) >= 0.5) {
-    Log_OC.i("FileListListAdapter","Image View");
-    fileView=false;
-  }
- else {
-    Log_OC.i("FileListListAdapter","File View");
-    fileView=true;
-  }
   View view=convertView;
-  LayoutInflater inflator=(LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-  if (fileView) {
+  if (view == null) {
+    LayoutInflater inflator=(LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     view=inflator.inflate(R.layout.list_item,null);
   }
- else {
-    view=inflator.inflate(R.layout.image_item,null);
-    View frame=view.findViewById(R.id.imageItemFrame);
-    frame.setVisibility(View.GONE);
-  }
-  view.invalidate();
   if (mFiles != null && mFiles.size() > position) {
     OCFile file=mFiles.get(position);
     TextView fileName=(TextView)view.findViewById(R.id.Filename);
-    if (!fileView) {
-      fileName.setVisibility(View.GONE);
-    }
+    fileName.setVisibility(View.GONE);
     String name=file.getFileName();
     fileName.setText(name);
-    ImageView fileIcon=(ImageView)view.findViewById(R.id.thumbnail);
+    ImageView fileIcon=(ImageView)view.findViewById(R.id.imageView1);
     ImageView sharedIconV=(ImageView)view.findViewById(R.id.sharedIcon);
     ImageView sharedWithMeIconV=(ImageView)view.findViewById(R.id.sharedWithMeIcon);
     sharedWithMeIconV.setVisibility(View.GONE);
@@ -70,8 +47,8 @@
  else {
         view.findViewById(R.id.imageView3).setVisibility(View.VISIBLE);
       }
-      GridView parentList=(GridView)parent;
-      if (parentList.getChoiceMode() == GridView.CHOICE_MODE_NONE) {
+      ListView parentList=(ListView)parent;
+      if (parentList.getChoiceMode() == ListView.CHOICE_MODE_NONE) {
         checkBoxV.setVisibility(View.GONE);
       }
  else {
@@ -98,7 +75,6 @@
     }
  else {
       fileSizeV.setVisibility(View.INVISIBLE);
-      fileSizeV.setText(DisplayUtils.bytesToHumanReadable(file.getFileLength()));
       lastModV.setVisibility(View.VISIBLE);
       lastModV.setText(DisplayUtils.unixTimeToHumanReadable(file.getModificationTimestamp()));
       checkBoxV.setVisibility(View.GONE);
