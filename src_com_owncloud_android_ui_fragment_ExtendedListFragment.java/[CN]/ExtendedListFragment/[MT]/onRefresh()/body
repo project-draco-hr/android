@@ -1,3 +1,4 @@
 {
   mRefreshLayout.setRefreshing(false);
+  mRefreshEmptyLayout.setRefreshing(false);
 }

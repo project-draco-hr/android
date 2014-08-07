@@ -8,6 +8,7 @@
     mFirstPositions=savedInstanceState.getIntegerArrayList(KEY_FIRST_POSITIONS);
     mTops=savedInstanceState.getIntegerArrayList(KEY_TOPS);
     mHeightCell=savedInstanceState.getInt(KEY_HEIGHT_CELL);
+    setMessageForEmptyList(savedInstanceState.getString(KEY_EMPTY_LIST_MESSAGE));
   }
  else {
     mIndexes=new ArrayList<Integer>();

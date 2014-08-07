@@ -1,6 +1,7 @@
 {
   Log_OC.e(TAG,"onCreateView");
   View v=inflater.inflate(R.layout.list_fragment,null);
+  mEmptyListMessage=(TextView)v.findViewById(R.id.empty_list_view);
   mList=(ExtendedListView)(v.findViewById(R.id.list_root));
   mList.setOnItemClickListener(this);
   mList.setDivider(getResources().getDrawable(R.drawable.uploader_list_separator));
@@ -10,7 +11,9 @@
     setReferencePosition(referencePosition);
   }
   mRefreshLayout=(SwipeRefreshLayout)v.findViewById(R.id.swipe_refresh_files);
-  mRefreshLayout.setColorScheme(R.color.background_color,R.color.background_color,R.color.background_color,R.color.background_color);
-  mRefreshLayout.setOnRefreshListener(this);
+  mRefreshEmptyLayout=(SwipeRefreshLayout)v.findViewById(R.id.swipe_refresh_files_emptyView);
+  onCreateSwipeToRefresh(mRefreshLayout);
+  onCreateSwipeToRefresh(mRefreshEmptyLayout);
+  mList.setEmptyView(mRefreshEmptyLayout);
   return v;
 }
