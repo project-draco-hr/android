@@ -1,0 +1,14 @@
+{
+  Preference addAccountPref=new Preference(this);
+  addAccountPref.setKey("add_account");
+  addAccountPref.setTitle(getString(R.string.prefs_add_account));
+  mAccountsPrefCategory.addPreference(addAccountPref);
+  addAccountPref.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+    @Override public boolean onPreferenceClick(    Preference preference){
+      AccountManager am=AccountManager.get(getApplicationContext());
+      am.addAccount(MainApp.getAccountType(),null,null,null,Preferences.this,null,null);
+      return true;
+    }
+  }
+);
+}
