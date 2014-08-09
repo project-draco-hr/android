@@ -2,4 +2,5 @@
   mContext=context;
   mAccount=AccountUtils.getCurrentOwnCloudAccount(mContext);
   mTransferServiceGetter=transferServiceGetter;
+  new InitDiskCacheTask().execute();
 }

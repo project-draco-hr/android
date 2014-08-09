@@ -1,0 +1,24 @@
+{
+synchronized (mDiskCacheLock) {
+    mDiskLruCache=new DiskLruImageCache(mContext,"thumbnailCache",DISK_CACHE_SIZE,mCompressFormat,mCompressQuality);
+    try {
+      OwnCloudAccount ocAccount=new OwnCloudAccount(mAccount,mContext);
+      mClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,mContext);
+    }
+ catch (    AccountNotFoundException e) {
+      e.printStackTrace();
+    }
+catch (    AuthenticatorException e) {
+      e.printStackTrace();
+    }
+catch (    OperationCanceledException e) {
+      e.printStackTrace();
+    }
+catch (    IOException e) {
+      e.printStackTrace();
+    }
+    mDiskCacheStarting=false;
+    mDiskCacheLock.notifyAll();
+  }
+  return null;
+}

@@ -1,0 +1,15 @@
+{
+synchronized (mDiskCacheLock) {
+    while (mDiskCacheStarting) {
+      try {
+        mDiskCacheLock.wait();
+      }
+ catch (      InterruptedException e) {
+      }
+    }
+    if (mDiskLruCache != null) {
+      return (Bitmap)mDiskLruCache.getBitmap(key);
+    }
+  }
+  return null;
+}

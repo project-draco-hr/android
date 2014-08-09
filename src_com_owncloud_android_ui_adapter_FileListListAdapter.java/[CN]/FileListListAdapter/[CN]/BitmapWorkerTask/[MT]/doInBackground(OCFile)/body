@@ -1,0 +1,38 @@
+{
+  OCFile file=params[0];
+  final String imageKey=String.valueOf(file.getRemoteId());
+  Bitmap thumbnail=getBitmapFromDiskCache(imageKey);
+  if (thumbnail == null) {
+    Resources r=mContext.getResources();
+    int px=(int)Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,150,r.getDisplayMetrics()));
+    if (file.isDown()) {
+      Bitmap bitmap=BitmapFactory.decodeFile(file.getStoragePath());
+      thumbnail=ThumbnailUtils.extractThumbnail(bitmap,px,px);
+      addBitmapToCache(imageKey,thumbnail);
+    }
+ else {
+      DefaultHttpClient httpclient=new DefaultHttpClient();
+      try {
+        httpclient.getCredentialsProvider().setCredentials(new AuthScope(mClient.getBaseUri().toString().replace("https://",""),443),new UsernamePasswordCredentials(mClient.getCredentials().getUsername(),mClient.getCredentials().getAuthToken()));
+        HttpGet httpget=new HttpGet(mClient.getBaseUri() + "/ocs/v1.php/thumbnail?path=" + URLEncoder.encode(file.getRemotePath(),"UTF-8"));
+        HttpResponse response=httpclient.execute(httpget);
+        HttpEntity entity=response.getEntity();
+        if (entity != null) {
+          byte[] bytes=EntityUtils.toByteArray(entity);
+          Bitmap bitmap=BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+          thumbnail=ThumbnailUtils.extractThumbnail(bitmap,px,px);
+          if (thumbnail != null) {
+            addBitmapToCache(imageKey,thumbnail);
+          }
+        }
+      }
+ catch (      Exception e) {
+        e.printStackTrace();
+      }
+ finally {
+        httpclient.getConnectionManager().shutdown();
+      }
+    }
+  }
+  return thumbnail;
+}

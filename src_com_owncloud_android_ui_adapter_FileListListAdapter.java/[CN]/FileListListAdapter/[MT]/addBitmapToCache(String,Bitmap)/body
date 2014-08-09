@@ -1,0 +1,7 @@
+{
+synchronized (mDiskCacheLock) {
+    if (mDiskLruCache != null && mDiskLruCache.getBitmap(key) == null) {
+      mDiskLruCache.put(key,bitmap);
+    }
+  }
+}

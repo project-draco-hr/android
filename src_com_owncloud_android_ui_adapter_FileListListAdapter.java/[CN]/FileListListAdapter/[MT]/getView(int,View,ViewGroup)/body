@@ -60,6 +60,15 @@
         checkBoxV.setVisibility(View.VISIBLE);
       }
       fileIcon.setImageResource(DisplayUtils.getResourceId(file.getMimetype(),file.getFileName()));
+      if (file.isImage()) {
+        Bitmap thumbnail=getBitmapFromDiskCache(String.valueOf(file.getRemoteId()));
+        if (thumbnail != null) {
+          fileIcon.setImageBitmap(thumbnail);
+        }
+ else {
+          new BitmapWorkerTask(fileIcon).execute(file);
+        }
+      }
       if (checkIfFileIsSharedWithMe(file)) {
         sharedWithMeIconV.setVisibility(View.VISIBLE);
       }
