@@ -14,7 +14,7 @@
       DefaultHttpClient httpclient=new DefaultHttpClient();
       try {
         httpclient.getCredentialsProvider().setCredentials(new AuthScope(mClient.getBaseUri().toString().replace("https://",""),443),new UsernamePasswordCredentials(mClient.getCredentials().getUsername(),mClient.getCredentials().getAuthToken()));
-        HttpGet httpget=new HttpGet(mClient.getBaseUri() + "/ocs/v1.php/thumbnail?path=" + URLEncoder.encode(file.getRemotePath(),"UTF-8"));
+        HttpGet httpget=new HttpGet(mClient.getBaseUri() + "/ocs/v1.php/thumbnail?x=50&y=50&path=" + URLEncoder.encode(file.getRemotePath(),"UTF-8"));
         HttpResponse response=httpclient.execute(httpget);
         HttpEntity entity=response.getEntity();
         if (entity != null) {
