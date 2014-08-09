@@ -1,0 +1,5 @@
+Context context
+String uniqueName
+int diskCacheSize
+CompressFormat compressFormat
+int quality

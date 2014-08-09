@@ -1,0 +1,12 @@
+{
+  OutputStream out=null;
+  try {
+    out=new BufferedOutputStream(editor.newOutputStream(0),Utils.IO_BUFFER_SIZE);
+    return bitmap.compress(mCompressFormat,mCompressQuality,out);
+  }
+  finally {
+    if (out != null) {
+      out.close();
+    }
+  }
+}
