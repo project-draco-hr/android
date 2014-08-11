@@ -9,20 +9,22 @@
   if (getIntent().getExtras() != null && savedInstanceState == null && fromNotification()) {
     requestPinCode();
   }
-  mFullScreenAnchorView=getWindow().getDecorView();
-  mFullScreenAnchorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener(){
-    @SuppressLint("InlinedApi") @Override public void onSystemUiVisibilityChange(    int flags){
-      boolean visible=(flags & View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) == 0;
-      ActionBar actionBar=getSupportActionBar();
-      if (visible) {
-        actionBar.show();
-      }
+  if (isHoneycombOrHigher()) {
+    mFullScreenAnchorView=getWindow().getDecorView();
+    mFullScreenAnchorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener(){
+      @SuppressLint("InlinedApi") @Override public void onSystemUiVisibilityChange(      int flags){
+        boolean visible=(flags & View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) == 0;
+        ActionBar actionBar=getSupportActionBar();
+        if (visible) {
+          actionBar.show();
+        }
  else {
-        actionBar.hide();
+          actionBar.hide();
+        }
       }
     }
-  }
 );
+  }
   if (savedInstanceState != null) {
     mRequestWaitingForBinder=savedInstanceState.getBoolean(KEY_WAITING_FOR_BINDER);
   }
