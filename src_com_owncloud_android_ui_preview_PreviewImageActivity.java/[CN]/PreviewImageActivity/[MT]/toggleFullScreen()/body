@@ -1,10 +1,20 @@
 {
-  ActionBar actionBar=getSupportActionBar();
-  if (mFullScreen) {
-    actionBar.show();
+  if (isHoneycombOrHigher()) {
+    boolean visible=(mFullScreenAnchorView.getSystemUiVisibility() & View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) == 0;
+    if (visible) {
+      hideSystemUI(mFullScreenAnchorView);
+    }
+ else {
+      showSystemUI(mFullScreenAnchorView);
+    }
   }
  else {
-    actionBar.hide();
+    ActionBar actionBar=getSupportActionBar();
+    if (!actionBar.isShowing()) {
+      actionBar.show();
+    }
+ else {
+      actionBar.hide();
+    }
   }
-  mFullScreen=!mFullScreen;
 }

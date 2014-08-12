@@ -1,0 +1,4 @@
+{
+  super.onPostCreate(savedInstanceState);
+  delayedHide(INITIAL_HIDE_DELAY);
+}
