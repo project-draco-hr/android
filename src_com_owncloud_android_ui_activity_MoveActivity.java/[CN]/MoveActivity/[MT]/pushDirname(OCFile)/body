@@ -1,0 +1,7 @@
+{
+  if (!directory.isFolder()) {
+    throw new IllegalArgumentException("Only directories may be pushed!");
+  }
+  mDirectories.insert(directory.getFileName(),0);
+  setFile(directory);
+}

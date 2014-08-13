@@ -1,0 +1,13 @@
+{
+  OCFile file=(OCFile)mAdapter.getItem(position);
+  if (file != null) {
+    if (file.isFolder()) {
+      listDirectory(file);
+      mContainerActivity.onBrowsedDownTo(file);
+      saveIndexAndTopPosition(position);
+    }
+  }
+ else {
+    Log_OC.d(TAG,"Null object in ListAdapter!!");
+  }
+}

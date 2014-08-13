@@ -1,0 +1,13 @@
+{
+  MoveFileListFragment MoveFileListFragment=getListOfFilesFragment();
+  if (MoveFileListFragment != null) {
+    int message=R.string.file_list_loading;
+    if (!mSyncInProgress) {
+      message=R.string.file_list_empty_moving;
+    }
+    MoveFileListFragment.setMessageForEmptyList(getString(message));
+  }
+ else {
+    Log.e(TAG,"MoveFileListFragment is null");
+  }
+}

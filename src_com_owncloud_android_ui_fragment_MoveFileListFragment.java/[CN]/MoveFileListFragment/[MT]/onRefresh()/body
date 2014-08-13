@@ -1,0 +1,8 @@
+{
+  super.onRefresh();
+  if (mFile != null) {
+    mFile=mContainerActivity.getStorageManager().getFileById(mFile.getFileId());
+    listDirectory(mFile);
+    ((MoveActivity)mContainerActivity).startSyncFolderOperation(mFile);
+  }
+}

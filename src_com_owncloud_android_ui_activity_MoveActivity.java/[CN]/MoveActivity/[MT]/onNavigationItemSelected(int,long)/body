@@ -1,0 +1,15 @@
+{
+  if (itemPosition != 0) {
+    String targetPath="";
+    for (int i=itemPosition; i < mDirectories.getCount() - 1; i++) {
+      targetPath=mDirectories.getItem(i) + OCFile.PATH_SEPARATOR + targetPath;
+    }
+    targetPath=OCFile.PATH_SEPARATOR + targetPath;
+    OCFile targetFolder=getStorageManager().getFileByPath(targetPath);
+    if (targetFolder != null) {
+      browseTo(targetFolder);
+    }
+    if (getSupportActionBar().getNavigationMode() == ActionBar.NAVIGATION_MODE_LIST && itemPosition != 0)     getSupportActionBar().setSelectedNavigationItem(0);
+  }
+  return true;
+}

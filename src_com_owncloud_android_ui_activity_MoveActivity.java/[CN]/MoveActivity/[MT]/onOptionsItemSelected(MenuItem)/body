@@ -1,0 +1,22 @@
+{
+  boolean retval=true;
+switch (item.getItemId()) {
+case R.id.action_create_dir:
+{
+      CreateFolderDialogFragment dialog=CreateFolderDialogFragment.newInstance(getCurrentDir());
+      dialog.show(getSupportFragmentManager(),"createdirdialog");
+      break;
+    }
+case android.R.id.home:
+{
+    OCFile currentDir=getCurrentDir();
+    if (currentDir != null && currentDir.getParentId() != 0) {
+      onBackPressed();
+    }
+    break;
+  }
+default :
+retval=super.onOptionsItemSelected(item);
+}
+return retval;
+}

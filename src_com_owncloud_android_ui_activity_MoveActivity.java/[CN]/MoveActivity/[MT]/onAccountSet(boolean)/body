@@ -1,0 +1,30 @@
+{
+  super.onAccountSet(stateWasRecovered);
+  if (getAccount() != null) {
+    OCFile file=getFile();
+    String parentPath="";
+    if (file != null) {
+      if (file.isDown() && file.getLastSyncDateForProperties() == 0) {
+        parentPath=file.getRemotePath().substring(0,file.getRemotePath().lastIndexOf(file.getFileName()));
+        if (getStorageManager().getFileByPath(parentPath) == null)         file=null;
+      }
+ else {
+        file=getStorageManager().getFileByPath(file.getRemotePath());
+      }
+    }
+    if (file == null) {
+      file=getStorageManager().getFileByPath(OCFile.ROOT_PATH);
+    }
+    setFile(file);
+    setNavigationListWithFolder(file);
+    if (!stateWasRecovered) {
+      Log_OC.e(TAG,"Initializing Fragments in onAccountChanged..");
+      if (file.isFolder()) {
+        startSyncFolderOperation(file);
+      }
+    }
+ else {
+      updateNavigationElementsInActionBar(file.isFolder() ? null : file);
+    }
+  }
+}

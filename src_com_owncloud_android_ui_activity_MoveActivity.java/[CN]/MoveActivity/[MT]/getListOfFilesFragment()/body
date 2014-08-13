@@ -1,0 +1,8 @@
+{
+  Fragment listOfFiles=getSupportFragmentManager().findFragmentByTag(MoveActivity.TAG_LIST_OF_FILES);
+  if (listOfFiles != null) {
+    return (MoveFileListFragment)listOfFiles;
+  }
+  Log_OC.wtf(TAG,"Access to unexisting list of files fragment!!");
+  return null;
+}

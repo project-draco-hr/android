@@ -1,0 +1,19 @@
+{
+  Log_OC.d(TAG,"onCreate() start");
+  requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+  super.onCreate(savedInstanceState);
+  if (savedInstanceState == null) {
+    Intent initObserversIntent=FileObserverService.makeInitIntent(this);
+    startService(initObserversIntent);
+  }
+  setContentView(R.layout.files_move);
+  if (savedInstanceState == null) {
+    createMinFragments();
+  }
+  initControls();
+  mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
+  getSupportActionBar().setHomeButtonEnabled(true);
+  setSupportProgressBarIndeterminateVisibility(mSyncInProgress);
+  setBackgroundText();
+  Log_OC.d(TAG,"onCreate() end");
+}
