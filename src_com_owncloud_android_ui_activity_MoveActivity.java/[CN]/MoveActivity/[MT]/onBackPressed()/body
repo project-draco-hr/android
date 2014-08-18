@@ -1,16 +1,12 @@
 {
   MoveFileListFragment listOfFiles=getListOfFilesFragment();
   if (listOfFiles != null) {
-    if (mDirectories.getCount() <= 1) {
+    int levelsUp=listOfFiles.onBrowseUp();
+    if (levelsUp == 0) {
       finish();
       return;
     }
-    int levelsUp=listOfFiles.onBrowseUp();
-    for (int i=0; i < levelsUp && mDirectories.getCount() > 1; i++) {
-      popDirname();
-    }
-  }
-  if (listOfFiles != null) {
     setFile(listOfFiles.getCurrentFile());
+    updateNavigationElementsInActionBar();
   }
 }

@@ -12,9 +12,9 @@
       }
  else {
         OCFile currentFile=(getFile() == null) ? null : getStorageManager().getFileByPath(getFile().getRemotePath());
-        OCFile currentDir=(getCurrentDir() == null) ? null : getStorageManager().getFileByPath(getCurrentDir().getRemotePath());
+        OCFile currentDir=(getCurrentFolder() == null) ? null : getStorageManager().getFileByPath(getCurrentFolder().getRemotePath());
         if (currentDir == null) {
-          Toast.makeText(MoveActivity.this,String.format(getString(R.string.sync_current_folder_was_removed),mDirectories.getItem(0)),Toast.LENGTH_LONG).show();
+          Toast.makeText(MoveActivity.this,String.format(getString(R.string.sync_current_folder_was_removed),"PLACEHOLDER"),Toast.LENGTH_LONG).show();
           browseToRoot();
         }
  else {

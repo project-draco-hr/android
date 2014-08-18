@@ -1,4 +1,5 @@
 {
-  pushDirname(directory);
+  setFile(directory);
+  updateNavigationElementsInActionBar();
   startSyncFolderOperation(directory);
 }

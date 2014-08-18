@@ -2,4 +2,8 @@
   if (v == mCancelBtn) {
     finish();
   }
+ else   if (v == mChooseBtn) {
+    Toast.makeText(MoveActivity.this,"TODO: MOVE IMPLEMENTATION",Toast.LENGTH_LONG).show();
+    finish();
+  }
 }

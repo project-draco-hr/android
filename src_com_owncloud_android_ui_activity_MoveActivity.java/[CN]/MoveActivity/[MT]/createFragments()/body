@@ -1,6 +1,6 @@
 {
   MoveFileListFragment listOfFiles=new MoveFileListFragment();
   FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
-  transaction.add(R.id.fragment_container,listOfFiles,TAG_LIST_OF_FILES);
+  transaction.add(R.id.fragment_container,listOfFiles,TAG_LIST_OF_FOLDERS);
   transaction.commit();
 }
