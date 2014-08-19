@@ -1,6 +1,6 @@
 {
   Log_OC.i(TAG,"onActivityCreated() start");
-  super.onCreate(savedInstanceState);
+  super.onActivityCreated(savedInstanceState);
   mAdapter=new LocalFileListAdapter(mContainerActivity.getInitialDirectory(),getActivity());
   setListAdapter(mAdapter);
   Log_OC.i(TAG,"onActivityCreated() stop");
