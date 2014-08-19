@@ -1,5 +1,5 @@
 {
-  MoveFileListFragment fileListFragment=getListOfFilesFragment();
+  OCFileListFragment fileListFragment=getListOfFilesFragment();
   if (fileListFragment != null) {
     fileListFragment.listDirectory();
   }

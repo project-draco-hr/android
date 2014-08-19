@@ -21,7 +21,7 @@
     }
     mFile=parentDir;
     listDirectory(mFile);
-    ((FileDisplayActivity)mContainerActivity).startSyncFolderOperation(mFile);
+    onRefresh();
     restoreIndexAndTopPosition();
   }
   return moveCount;

@@ -1,5 +1,5 @@
 {
-  MoveFileListFragment listOfFiles=getListOfFilesFragment();
+  OCFileListFragment listOfFiles=getListOfFilesFragment();
   if (listOfFiles != null) {
     int levelsUp=listOfFiles.onBrowseUp();
     if (levelsUp == 0) {

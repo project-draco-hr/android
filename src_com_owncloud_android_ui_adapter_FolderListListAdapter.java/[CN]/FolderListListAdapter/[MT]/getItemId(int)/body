@@ -1,4 +1,0 @@
-{
-  if (mFolders == null || mFolders.size() <= position)   return 0;
-  return mFolders.get(position).getFileId();
-}

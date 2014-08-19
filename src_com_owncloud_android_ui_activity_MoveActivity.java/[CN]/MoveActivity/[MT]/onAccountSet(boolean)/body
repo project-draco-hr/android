@@ -8,7 +8,7 @@
       folder=getFile();
     }
     if (!stateWasRecovered) {
-      MoveFileListFragment listOfFolders=getListOfFilesFragment();
+      OCFileListFragment listOfFolders=getListOfFilesFragment();
       listOfFolders.listDirectory(folder);
       startSyncFolderOperation(folder);
     }

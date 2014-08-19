@@ -2,9 +2,11 @@
   super.onActivityCreated(savedInstanceState);
   Log_OC.e(TAG,"onActivityCreated() start");
   if (savedInstanceState != null) {
-    mFile=savedInstanceState.getParcelable(EXTRA_FILE);
+    mFile=savedInstanceState.getParcelable(KEY_FILE);
   }
-  mAdapter=new FileListListAdapter(getSherlockActivity(),mContainerActivity);
+  Bundle args=getArguments();
+  boolean justFolders=(args == null) ? false : args.getBoolean(ARG_JUST_FOLDERS,false);
+  mAdapter=new FileListListAdapter(justFolders,getSherlockActivity(),mContainerActivity);
   setListAdapter(mAdapter);
   registerForContextMenu(getListView());
   getListView().setOnCreateContextMenuListener(this);

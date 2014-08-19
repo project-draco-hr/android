@@ -1,4 +1,0 @@
-{
-  mContainerActivity=null;
-  super.onDetach();
-}

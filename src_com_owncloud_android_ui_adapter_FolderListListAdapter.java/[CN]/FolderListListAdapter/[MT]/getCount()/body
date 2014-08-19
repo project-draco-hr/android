@@ -1,3 +1,0 @@
-{
-  return mFolders != null ? mFolders.size() : 0;
-}
