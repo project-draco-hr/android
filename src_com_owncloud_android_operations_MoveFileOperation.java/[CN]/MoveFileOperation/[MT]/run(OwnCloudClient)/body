@@ -8,9 +8,13 @@
     return new RemoteOperationResult(ResultCode.FILE_NOT_FOUND);
   }
   String targetPath=mTargetParentPath + mFile.getFileName();
+  if (mFile.isFolder()) {
+    targetPath+=OCFile.PATH_SEPARATOR;
+  }
   MoveRemoteFileOperation operation=new MoveRemoteFileOperation(mSrcPath,targetPath,false);
   result=operation.execute(client);
   if (result.isSuccess()) {
+    getStorageManager().moveLocalFile(mFile,targetPath,mTargetParentPath);
   }
   return result;
 }
