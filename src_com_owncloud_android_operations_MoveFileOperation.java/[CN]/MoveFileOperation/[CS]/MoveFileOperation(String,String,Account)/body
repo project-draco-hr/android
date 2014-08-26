@@ -1,7 +1,8 @@
 {
-  mPath=path;
-  mNewParentPath=newParentPath;
-  mAccount=account;
+  mSrcPath=srcPath;
+  mTargetParentPath=targetParentPath;
+  if (!mTargetParentPath.endsWith(OCFile.PATH_SEPARATOR)) {
+    mTargetParentPath+=OCFile.PATH_SEPARATOR;
+  }
   mFile=null;
-  mNewPath="";
 }

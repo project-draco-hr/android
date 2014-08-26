@@ -1,22 +1,16 @@
 {
   RemoteOperationResult result=null;
-  mFile=getStorageManager().getFileByPath(mPath);
-  try {
-    MoveRemoteFileOperation operation=new MoveRemoteFileOperation(mFile.getRemotePath(),mNewPath,false);
-    result=operation.execute(client);
-    if (result.isSuccess()) {
-    }
-    String parentPath=(new File(mFile.getRemotePath())).getParent();
-    parentPath=(parentPath.endsWith(OCFile.PATH_SEPARATOR)) ? parentPath : parentPath + OCFile.PATH_SEPARATOR;
-    mNewPath=mNewParentPath + mFile.getFileName();
-    if (mFile.isFolder() && !mNewPath.endsWith(OCFile.PATH_SEPARATOR)) {
-      mNewPath+=OCFile.PATH_SEPARATOR;
-    }
-    if (getStorageManager().getFileByPath(mPath) != null) {
-      return new RemoteOperationResult(ResultCode.INVALID_OVERWRITE);
-    }
+  if (mTargetParentPath.startsWith(mSrcPath)) {
+    return new RemoteOperationResult(ResultCode.INVALID_MOVE_INTO_DESCENDANT);
   }
-  finally {
+  mFile=getStorageManager().getFileByPath(mSrcPath);
+  if (mFile == null) {
+    return new RemoteOperationResult(ResultCode.FILE_NOT_FOUND);
+  }
+  String targetPath=mTargetParentPath + mFile.getFileName();
+  MoveRemoteFileOperation operation=new MoveRemoteFileOperation(mSrcPath,targetPath,false);
+  result=operation.execute(client);
+  if (result.isSuccess()) {
   }
   return result;
 }
