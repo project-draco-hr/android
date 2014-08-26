@@ -113,6 +113,12 @@
     if (result.getCode() == ResultCode.INVALID_MOVE_INTO_DESCENDANT) {
       message=res.getString(R.string.move_file_invalid_into_descendent);
     }
+ else     if (result.getCode() == ResultCode.INVALID_OVERWRITE) {
+      message=res.getString(R.string.move_file_invalid_overwrite);
+    }
+ else     if (result.getCode() == ResultCode.FORBIDDEN) {
+      message=res.getString(R.string.move_file_forbidden);
+    }
  else {
       message=res.getString(R.string.move_file_error);
     }
