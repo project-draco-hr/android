@@ -1,4 +1,5 @@
 {
   OCFile folderToMoveAt=(OCFile)data.getParcelableExtra(MoveActivity.EXTRA_CURRENT_FOLDER);
-  getFileOperationsHelper().moveFile(folderToMoveAt,getCurrentDir());
+  OCFile targetFile=(OCFile)data.getParcelableExtra(MoveActivity.EXTRA_TARGET_FILE);
+  getFileOperationsHelper().moveFile(folderToMoveAt,targetFile);
 }

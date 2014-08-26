@@ -55,6 +55,7 @@ return true;
 case R.id.action_move:
 {
 Intent action=new Intent(getActivity(),MoveActivity.class);
+action.putExtra(MoveActivity.EXTRA_TARGET_FILE,mTargetFile);
 getActivity().startActivityForResult(action,FileDisplayActivity.ACTION_MOVE_FILES);
 return true;
 }
