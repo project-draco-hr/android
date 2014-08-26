@@ -1,22 +1,3 @@
 {
-  if (mNewName == null || mNewName.length() <= 0 || mNewName.contains(File.separator) || mNewName.contains("%")) {
-    return false;
-  }
-  String tmpFolderName=FileStorageUtils.getTemporalPath("");
-  File testFile=new File(tmpFolderName + mNewName);
-  File tmpFolder=testFile.getParentFile();
-  tmpFolder.mkdirs();
-  if (!tmpFolder.isDirectory()) {
-    throw new IOException("Unexpected error: temporal directory could not be created");
-  }
-  try {
-    testFile.createNewFile();
-  }
- catch (  IOException e) {
-    Log_OC.i(TAG,"Test for validity of name " + mNewName + " in the file system failed");
-    return false;
-  }
-  boolean result=(testFile.exists() && testFile.isFile());
-  testFile.delete();
-  return result;
+  return true;
 }

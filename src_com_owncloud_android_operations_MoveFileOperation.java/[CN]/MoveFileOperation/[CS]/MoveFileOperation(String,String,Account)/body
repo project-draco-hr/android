@@ -3,4 +3,5 @@
   mNewParentPath=newParentPath;
   mAccount=account;
   mFile=null;
+  mNewPath="";
 }

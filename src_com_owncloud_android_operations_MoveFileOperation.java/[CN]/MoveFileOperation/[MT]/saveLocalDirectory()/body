@@ -1,8 +1,8 @@
 {
-  getStorageManager().moveFolder(mFile,mNewParentPath);
+  getStorageManager().moveFolder(mFile,mNewPath);
   String localPath=FileStorageUtils.getDefaultSavePathFor(mAccount.name,mFile);
   File localDir=new File(localPath);
   if (localDir.exists()) {
-    localDir.renameTo(new File(FileStorageUtils.getSavePath(mAccount.name) + mNewParentPath));
+    localDir.renameTo(new File(FileStorageUtils.getSavePath(mAccount.name) + mNewPath));
   }
 }
