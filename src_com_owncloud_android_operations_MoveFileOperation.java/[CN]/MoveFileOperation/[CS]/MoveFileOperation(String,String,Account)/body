@@ -1,0 +1,6 @@
+{
+  mPath=path;
+  mNewParentPath=newParentPath;
+  mAccount=account;
+  mFile=null;
+}

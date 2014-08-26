@@ -1,0 +1,29 @@
+{
+  RemoteOperationResult result=null;
+  mFile=getStorageManager().getFileByPath(mPath);
+  try {
+    String parentPath=(new File(mFile.getRemotePath())).getParent();
+    parentPath=(parentPath.endsWith(OCFile.PATH_SEPARATOR)) ? parentPath : parentPath + OCFile.PATH_SEPARATOR;
+    String mNewPath=mNewParentPath + mFile.getFileName();
+    if (mFile.isFolder() && !mNewPath.endsWith(OCFile.PATH_SEPARATOR)) {
+      mNewPath+=OCFile.PATH_SEPARATOR;
+    }
+    if (getStorageManager().getFileByPath(mPath) != null) {
+      return new RemoteOperationResult(ResultCode.INVALID_OVERWRITE);
+    }
+    MoveRemoteFileOperation operation=new MoveRemoteFileOperation(mFile.getRemotePath(),mNewPath,mFile.isFolder());
+    result=operation.execute(client);
+    if (result.isSuccess()) {
+      if (mFile.isFolder()) {
+        saveLocalDirectory();
+      }
+ else {
+        saveLocalFile();
+      }
+    }
+  }
+ catch (  IOException e) {
+    Log_OC.e(TAG,"Move " + mFile.getRemotePath() + " to "+ (mNewParentPath == null)+ ": "+ ((result != null) ? result.getLogMessage() : ""),e);
+  }
+  return result;
+}
