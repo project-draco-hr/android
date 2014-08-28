@@ -22,6 +22,7 @@
     public void onClick(    DialogInterface dialog,    int whichButton){
       dialog.dismiss();
       mWebView.stopLoading();
+      mIsFirstAttempt=true;
     }
   }
 );

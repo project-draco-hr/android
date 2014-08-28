@@ -1,4 +1,10 @@
 {
   Log_OC.d(TAG,"onReceivedHttpAuthRequest : " + host);
   createAuthenticationDialog(view,handler);
+  if (!mIsFirstAttempt) {
+    Toast.makeText(mContext,mContext.getText(R.string.saml_authentication_wrong_pass),Toast.LENGTH_LONG).show();
+  }
+ else {
+    mIsFirstAttempt=false;
+  }
 }
