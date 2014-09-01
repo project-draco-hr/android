@@ -1,5 +1,0 @@
-{
-  if (bitmap != null) {
-    fileIcon.setImageBitmap(bitmap);
-  }
-}

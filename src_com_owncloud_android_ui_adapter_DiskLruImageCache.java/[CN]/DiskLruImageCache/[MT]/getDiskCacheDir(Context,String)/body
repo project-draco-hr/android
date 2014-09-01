@@ -1,5 +1,5 @@
 {
-  final String cachePath=Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()) || !Utils.isExternalStorageRemovable() ? Utils.getExternalCacheDir(context).getPath() : context.getCacheDir().getPath();
+  final String cachePath=context.getExternalCacheDir().getPath();
   Log_OC.d("DiskCache","create dir: " + cachePath + File.separator+ uniqueName);
   return new File(cachePath + File.separator + uniqueName);
 }

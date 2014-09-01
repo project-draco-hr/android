@@ -1,7 +1,0 @@
-{
-  if (hasExternalCacheDir()) {
-    return context.getExternalCacheDir();
-  }
-  final String cacheDir="/Android/data/" + context.getPackageName() + "/cache/";
-  return new File(Environment.getExternalStorageDirectory().getPath() + cacheDir);
-}

@@ -1,0 +1,17 @@
+{
+  file=params[0];
+  final String imageKey=String.valueOf(file.getRemoteId());
+  Bitmap thumbnail=getBitmapFromDiskCache(imageKey);
+  if (thumbnail == null) {
+    Resources r=mContext.getResources();
+    int px=(int)Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,150,r.getDisplayMetrics()));
+    if (file.isDown()) {
+      Bitmap bitmap=BitmapFactory.decodeFile(file.getStoragePath());
+      thumbnail=ThumbnailUtils.extractThumbnail(bitmap,px,px);
+      addBitmapToCache(imageKey,thumbnail);
+    }
+ else {
+    }
+  }
+  return thumbnail;
+}
