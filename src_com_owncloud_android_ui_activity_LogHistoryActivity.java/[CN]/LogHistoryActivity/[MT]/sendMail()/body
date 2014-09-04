@@ -1,0 +1,14 @@
+{
+  String emailAddresses[]={getText(R.string.mail_logger).toString()};
+  Uri uri=Uri.parse("file://" + mLogPath + File.separator+ LOGGER_FILE_NAME);
+  Intent intent=new Intent(Intent.ACTION_SEND);
+  intent.setClassName("com.google.android.gm","com.google.android.gm.ComposeActivityGmail");
+  intent.putExtra(Intent.EXTRA_EMAIL,emailAddresses);
+  intent.putExtra(Intent.EXTRA_SUBJECT,getText(R.string.log_mail_subject));
+  intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+  intent.setType(MAIL_ATTACHMENT_TYPE);
+  intent.putExtra(Intent.EXTRA_STREAM,uri);
+  if (intent.resolveActivity(getPackageManager()) != null) {
+    startActivity(intent);
+  }
+}

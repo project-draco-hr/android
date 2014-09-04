@@ -1,0 +1,16 @@
+{
+  File file=new File(mLogPath,LOGGER_FILE_NAME);
+  StringBuilder text=new StringBuilder();
+  try {
+    BufferedReader br=new BufferedReader(new FileReader(file));
+    String line;
+    while ((line=br.readLine()) != null) {
+      text.append(line);
+      text.append('\n');
+    }
+  }
+ catch (  IOException e) {
+  }
+  TextView logTV=(TextView)findViewById(R.id.logTV);
+  logTV.setText(text);
+}

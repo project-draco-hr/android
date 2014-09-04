@@ -8,4 +8,10 @@
  else {
     OwnCloudClientManagerFactory.setDefaultPolicy(Policy.ALWAYS_NEW_CLIENT);
   }
+  if (BuildConfig.DEBUG) {
+    String logpath=Environment.getExternalStorageDirectory() + File.separator + "owncloud"+ File.separator+ "log";
+    Log_OC.d("Debug","start logging");
+    Log_OC.v("PATH",logpath);
+    Log_OC.startLogging(logpath);
+  }
 }
