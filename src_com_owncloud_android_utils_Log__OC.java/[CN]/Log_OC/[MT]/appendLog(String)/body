@@ -1,8 +1,11 @@
 {
   if (isEnabled) {
+    String timeStamp=new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());
     try {
-      buf.append(text);
+      buf=new BufferedWriter(new FileWriter(logFile,true));
+      buf.write(timeStamp + " -> " + text);
       buf.newLine();
+      buf.close();
     }
  catch (    IOException e) {
       e.printStackTrace();

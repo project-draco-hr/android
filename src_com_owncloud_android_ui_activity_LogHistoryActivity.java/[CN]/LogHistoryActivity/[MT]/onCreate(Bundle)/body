@@ -9,16 +9,7 @@
   Button sendHistoryButton=(Button)findViewById(R.id.sendLogHistoryButton);
   deleteHistoryButton.setOnClickListener(new OnClickListener(){
     @Override public void onClick(    View v){
-      File dir=new File(mLogPath);
-      if (dir != null) {
-        File[] files=dir.listFiles();
-        if (files != null) {
-          for (          File f : files) {
-            f.delete();
-          }
-        }
-        dir.delete();
-      }
+      Log_OC.stopLogging();
       finish();
     }
   }

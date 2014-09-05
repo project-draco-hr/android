@@ -1,14 +1,19 @@
 {
   folder=new File(logPath);
   logFile=new File(folder + File.separator + "log.txt");
+  boolean isFileCreated=false;
   if (!folder.exists()) {
     folder.mkdirs();
+    isFileCreated=true;
+    Log.d("LOG_OC","Log file created");
   }
   try {
     logFile.createNewFile();
     buf=new BufferedWriter(new FileWriter(logFile,true));
     isEnabled=true;
-    appendPhoneInfo();
+    if (isFileCreated) {
+      appendPhoneInfo();
+    }
   }
  catch (  IOException e) {
     e.printStackTrace();
