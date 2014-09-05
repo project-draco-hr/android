@@ -20,6 +20,12 @@
     toShow.add(R.id.action_rename_file);
   }
   if (mFile == null || downloading || uploading) {
+    toHide.add(R.id.action_move);
+  }
+ else {
+    toShow.add(R.id.action_move);
+  }
+  if (mFile == null || downloading || uploading) {
     toHide.add(R.id.action_remove_file);
   }
  else {

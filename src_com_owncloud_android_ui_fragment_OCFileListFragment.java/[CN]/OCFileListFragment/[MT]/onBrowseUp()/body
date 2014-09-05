@@ -20,10 +20,8 @@
       moveCount++;
     }
     mFile=parentDir;
-  }
-  if (mFile != null) {
     listDirectory(mFile);
-    ((FileDisplayActivity)mContainerActivity).startSyncFolderOperation(mFile);
+    onRefresh();
     restoreIndexAndTopPosition();
   }
   return moveCount;
