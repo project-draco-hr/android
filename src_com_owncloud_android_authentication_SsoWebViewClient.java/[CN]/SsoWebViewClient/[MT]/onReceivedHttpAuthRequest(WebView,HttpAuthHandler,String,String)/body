@@ -1,4 +1,4 @@
 {
   Log_OC.d(TAG,"onReceivedHttpAuthRequest : " + host);
-  ((AuthenticatorActivity)mContext).showAuthenticationDialog(view,handler);
+  ((AuthenticatorActivity)mContext).createAuthenticationDialog(view,handler);
 }
