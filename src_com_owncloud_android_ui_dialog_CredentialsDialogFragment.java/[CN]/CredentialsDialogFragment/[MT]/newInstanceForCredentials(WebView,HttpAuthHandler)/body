@@ -1,0 +1,9 @@
+{
+  if (handler == null) {
+    throw new IllegalArgumentException("Trying to create instance with parameter handler == null");
+  }
+  CredentialsDialogFragment frag=new CredentialsDialogFragment();
+  frag.mHandler=handler;
+  frag.mWebView=webView;
+  return frag;
+}
