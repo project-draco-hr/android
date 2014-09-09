@@ -5,12 +5,7 @@
   ActionBar actionBar=getSherlock().getActionBar();
   actionBar.setIcon(DisplayUtils.getSeasonalIconId());
   actionBar.setDisplayHomeAsUpEnabled(true);
-  if (savedInstanceState != null) {
-    mPreviousAccount=savedInstanceState.getParcelable(PREVIOUS_ACCOUNT_KEY);
-  }
- else {
-    mPreviousAccount=AccountUtils.getCurrentOwnCloudAccount(this);
-  }
+  actionBar.setTitle(R.string.actionbar_settings);
   mAccountsPrefCategory=(PreferenceCategory)findPreference("accounts_category");
   ListView listView=getListView();
   listView.setOnItemLongClickListener(new OnItemLongClickListener(){
