@@ -18,4 +18,7 @@
  else   if (operation instanceof UnshareLinkOperation) {
     onUnshareLinkOperationFinish((UnshareLinkOperation)operation,result);
   }
+ else   if (operation instanceof MoveFileOperation) {
+    onMoveFileOperationFinish((MoveFileOperation)operation,result);
+  }
 }
