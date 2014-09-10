@@ -1,10 +1,9 @@
 {
-  if (logFile != null) {
-    isEnabled=false;
+  if (mLogFile != null) {
     try {
-      buf=new BufferedWriter(new FileWriter(logFile,false));
-      buf.append("");
-      buf.close();
+      mBuf=new BufferedWriter(new FileWriter(mLogFile,false));
+      mBuf.append("");
+      mBuf.close();
     }
  catch (    IOException e) {
       e.printStackTrace();

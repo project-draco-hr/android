@@ -1,18 +1,28 @@
 {
-  folder=new File(logPath);
-  logFile=new File(folder + File.separator + "log.txt");
+  mFolder=new File(logPath);
+  mLogFile=new File(mFolder + File.separator + mLogFileNames[0]);
   boolean isFileCreated=false;
-  if (!folder.exists()) {
-    folder.mkdirs();
+  if (!mFolder.exists()) {
+    mFolder.mkdirs();
     isFileCreated=true;
     Log.d("LOG_OC","Log file created");
   }
   try {
-    logFile.createNewFile();
-    buf=new BufferedWriter(new FileWriter(logFile,true));
-    isEnabled=true;
+    if (isMaxFileSizeReached) {
+      File secondLogFile=new File(mFolder + File.separator + mLogFileNames[1]);
+      if (mLogFile.exists()) {
+        mLogFile.renameTo(secondLogFile);
+      }
+      mLogFile=new File(mFolder + File.separator + mLogFileNames[0]);
+      isMaxFileSizeReached=false;
+    }
+    mLogFile.createNewFile();
+    mBuf=new BufferedWriter(new FileWriter(mLogFile,true));
     if (isFileCreated) {
       appendPhoneInfo();
+    }
+    if (mLogFile.length() > MAX_FILE_SIZE) {
+      isMaxFileSizeReached=true;
     }
   }
  catch (  IOException e) {

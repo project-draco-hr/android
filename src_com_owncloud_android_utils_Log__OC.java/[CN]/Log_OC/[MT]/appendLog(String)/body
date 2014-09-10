@@ -1,16 +1,14 @@
 {
-  if (isEnabled) {
-    String logPath=Environment.getExternalStorageDirectory() + File.separator + "owncloud"+ File.separator+ "log";
-    startLogging(logPath);
-    String timeStamp=new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());
-    try {
-      buf=new BufferedWriter(new FileWriter(logFile,true));
-      buf.write(timeStamp + " -> " + text);
-      buf.newLine();
-      buf.close();
-    }
- catch (    IOException e) {
-      e.printStackTrace();
-    }
+  String logPath=Environment.getExternalStorageDirectory() + File.separator + "owncloud"+ File.separator+ "log";
+  startLogging(logPath);
+  String timeStamp=new SimpleDateFormat(SIMPLE_DATE_FORMAT).format(Calendar.getInstance().getTime());
+  try {
+    mBuf=new BufferedWriter(new FileWriter(mLogFile,true));
+    mBuf.write(timeStamp + " -> " + text);
+    mBuf.newLine();
+    mBuf.close();
+  }
+ catch (  IOException e) {
+    e.printStackTrace();
   }
 }
