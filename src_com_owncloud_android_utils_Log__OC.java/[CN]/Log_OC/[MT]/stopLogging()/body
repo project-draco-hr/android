@@ -1,5 +1,4 @@
 {
-  SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd_HHmmss",Locale.getDefault());
   if (logFile != null) {
     isEnabled=false;
     try {

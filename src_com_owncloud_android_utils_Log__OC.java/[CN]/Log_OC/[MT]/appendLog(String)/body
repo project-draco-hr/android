@@ -1,5 +1,7 @@
 {
   if (isEnabled) {
+    String logPath=Environment.getExternalStorageDirectory() + File.separator + "owncloud"+ File.separator+ "log";
+    startLogging(logPath);
     String timeStamp=new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());
     try {
       buf=new BufferedWriter(new FileWriter(logFile,true));
