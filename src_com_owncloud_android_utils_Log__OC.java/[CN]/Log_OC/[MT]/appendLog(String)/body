@@ -3,7 +3,10 @@
   String timeStamp=new SimpleDateFormat(SIMPLE_DATE_FORMAT).format(Calendar.getInstance().getTime());
   try {
     mBuf=new BufferedWriter(new FileWriter(mLogFile,true));
-    mBuf.write(timeStamp + " -> " + text);
+    mBuf.newLine();
+    mBuf.write(timeStamp);
+    mBuf.newLine();
+    mBuf.write(text);
     mBuf.newLine();
     mBuf.close();
   }
