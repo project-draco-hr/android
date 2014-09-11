@@ -19,6 +19,5 @@
  catch (  IOException e) {
     Log_OC.d(TAG,e.getMessage().toString());
   }
-  TextView logTV=(TextView)findViewById(R.id.logTV);
-  logTV.setText(text);
+  return text.toString();
 }

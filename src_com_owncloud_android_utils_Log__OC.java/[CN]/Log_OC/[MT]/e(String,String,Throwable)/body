@@ -1,4 +1,0 @@
-{
-  Log.e(TAG,message,e);
-  appendLog(TAG + " : " + message+ " Exception : "+ e.getStackTrace());
-}

@@ -1,0 +1,6 @@
+{
+  mLogTV.setText(result);
+  if (mPd != null) {
+    mPd.dismiss();
+  }
+}

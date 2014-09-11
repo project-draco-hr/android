@@ -20,10 +20,12 @@
     }
   }
 );
+  mLogTV=(TextView)findViewById(R.id.logTV);
   if (mLogPath != null) {
     logDIR=new File(mLogPath);
   }
   if (logDIR != null && logDIR.isDirectory()) {
-    readLogFile();
+    mPd=ProgressDialog.show(this,getText(R.string.actionbar_logger),getText(R.string.log_progress_dialog_text),true,false);
+    new LoadingLogTask().execute();
   }
 }
