@@ -9,9 +9,9 @@
   }
   try {
     if (isMaxFileSizeReached) {
-      File secondLogFile=new File(mFolder + File.separator + mLogFileNames[1]);
+      File olderFile=new File(mFolder + File.separator + mLogFileNames[1]);
       if (mLogFile.exists()) {
-        mLogFile.renameTo(secondLogFile);
+        mLogFile.renameTo(olderFile);
       }
       mLogFile=new File(mFolder + File.separator + mLogFileNames[0]);
       isMaxFileSizeReached=false;
