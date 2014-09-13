@@ -73,6 +73,9 @@
           }
         }
       }
+ else {
+        fileIcon.setImageResource(DisplayUtils.getResourceId(file.getMimetype(),file.getFileName()));
+      }
       if (checkIfFileIsSharedWithMe(file)) {
         sharedWithMeIconV.setVisibility(View.VISIBLE);
       }
