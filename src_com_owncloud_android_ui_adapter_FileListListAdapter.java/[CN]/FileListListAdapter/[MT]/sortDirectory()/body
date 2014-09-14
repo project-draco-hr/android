@@ -1,0 +1,17 @@
+{
+switch (sort) {
+case NAME:
+    sortByName();
+  break;
+case SIZE:
+sortBySize();
+break;
+case DATE:
+sortByDate();
+break;
+}
+if (!sortAscending) {
+Collections.reverse(mFiles);
+}
+notifyDataSetChanged();
+}

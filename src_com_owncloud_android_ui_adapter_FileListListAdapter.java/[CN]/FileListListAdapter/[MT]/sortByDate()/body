@@ -1,0 +1,22 @@
+{
+  Collections.sort(mFiles,new Comparator<OCFile>(){
+    public int compare(    OCFile o1,    OCFile o2){
+      if (o1.isFolder() && o2.isFolder()) {
+        return Long.compare(o1.getModificationTimestamp(),o2.getModificationTimestamp());
+      }
+ else       if (o1.isFolder()) {
+        return -1;
+      }
+ else       if (o2.isFolder()) {
+        return 1;
+      }
+ else       if (o1.getModificationTimestamp() == 0 || o2.getModificationTimestamp() == 0) {
+        return 0;
+      }
+ else {
+        return Long.compare(o1.getModificationTimestamp(),o2.getModificationTimestamp());
+      }
+    }
+  }
+);
+}

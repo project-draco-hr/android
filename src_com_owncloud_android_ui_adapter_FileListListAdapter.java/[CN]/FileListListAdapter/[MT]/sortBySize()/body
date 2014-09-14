@@ -1,0 +1,22 @@
+{
+  Collections.sort(mFiles,new Comparator<OCFile>(){
+    public int compare(    OCFile o1,    OCFile o2){
+      if (o1.isFolder() && o2.isFolder()) {
+        return o1.getRemotePath().toLowerCase().compareTo(o2.getRemotePath().toLowerCase());
+      }
+ else       if (o1.isFolder()) {
+        return -1;
+      }
+ else       if (o2.isFolder()) {
+        return 1;
+      }
+ else       if (o1.getFileLength() == 0 || o2.getFileLength() == 0) {
+        return 0;
+      }
+ else {
+        return Long.compare(o1.getFileLength(),o2.getFileLength());
+      }
+    }
+  }
+);
+}

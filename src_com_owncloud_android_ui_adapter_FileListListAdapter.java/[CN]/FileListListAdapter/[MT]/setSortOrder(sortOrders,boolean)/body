@@ -1,0 +1,5 @@
+{
+  sort=order;
+  sortAscending=descending;
+  sortDirectory();
+}
