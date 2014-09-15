@@ -1,5 +1,4 @@
 {
-  imageView.setNumColumns(3);
-  mList.invalidate();
+  imageView.setNumColumns(GridView.AUTO_FIT);
   imageView.invalidate();
 }

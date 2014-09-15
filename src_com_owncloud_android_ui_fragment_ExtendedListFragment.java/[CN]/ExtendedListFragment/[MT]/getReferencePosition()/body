@@ -1,6 +1,6 @@
 {
-  if (mList != null) {
-    return (mList.getFirstVisiblePosition() + mList.getLastVisiblePosition()) / 2;
+  if (imageView != null) {
+    return (imageView.getFirstVisiblePosition() + imageView.getLastVisiblePosition()) / 2;
   }
  else {
     return 0;

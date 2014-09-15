@@ -8,6 +8,6 @@
   boolean justFolders=(args == null) ? false : args.getBoolean(ARG_JUST_FOLDERS,false);
   mAdapter=new FileListListAdapter(justFolders,getSherlockActivity(),mContainerActivity);
   setListAdapter(mAdapter);
-  registerForContextMenu(getListView());
-  getListView().setOnCreateContextMenuListener(this);
+  registerForContextMenu(getGridView());
+  getGridView().setOnCreateContextMenuListener(this);
 }

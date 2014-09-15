@@ -16,7 +16,7 @@
     }
     mAdapter.swapDirectory(directory,storageManager);
     if (mFile == null || !mFile.equals(directory)) {
-      mList.setSelectionFromTop(0,0);
+      imageView.setSelection(0);
     }
     mFile=directory;
     double count=0;

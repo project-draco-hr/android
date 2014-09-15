@@ -1,5 +1,4 @@
 {
   imageView.setNumColumns(1);
-  mList.invalidate();
   imageView.invalidate();
 }

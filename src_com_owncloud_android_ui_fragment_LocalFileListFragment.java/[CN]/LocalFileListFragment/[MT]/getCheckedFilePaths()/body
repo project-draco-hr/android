@@ -1,11 +1,11 @@
 {
   String[] result=null;
-  SparseBooleanArray positions=mList.getCheckedItemPositions();
+  SparseBooleanArray positions=imageView.getCheckedItemPositions();
   if (positions.size() > 0) {
     Log_OC.d(TAG,"Returning " + positions.size() + " selected files");
     result=new String[positions.size()];
     for (int i=0; i < positions.size(); i++) {
-      result[i]=((File)mList.getItemAtPosition(positions.keyAt(i))).getAbsolutePath();
+      result[i]=((File)imageView.getItemAtPosition(positions.keyAt(i))).getAbsolutePath();
     }
   }
   return result;
