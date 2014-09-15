@@ -9,7 +9,7 @@
   Collections.sort(mFiles,new Comparator<OCFile>(){
     public int compare(    OCFile o1,    OCFile o2){
       if (o1.isFolder() && o2.isFolder()) {
-        return o1.getRemotePath().toLowerCase().compareTo(o2.getRemotePath().toLowerCase());
+        return val * Long.compare(getFolderSize(new File(FileStorageUtils.getDefaultSavePathFor(mAccount.name,o1))),getFolderSize(new File(FileStorageUtils.getDefaultSavePathFor(mAccount.name,o2))));
       }
  else       if (o1.isFolder()) {
         return -1;
