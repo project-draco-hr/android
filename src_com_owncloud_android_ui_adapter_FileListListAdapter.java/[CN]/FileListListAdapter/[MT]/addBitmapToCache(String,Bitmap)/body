@@ -1,0 +1,7 @@
+{
+synchronized (thumbnailDiskCacheLock) {
+    if (mThumbnailCache != null && mThumbnailCache.getBitmap(key) == null) {
+      mThumbnailCache.put(key,bitmap);
+    }
+  }
+}

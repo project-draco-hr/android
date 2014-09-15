@@ -1,0 +1,11 @@
+{
+  try {
+    final File diskCacheDir=getDiskCacheDir(context,uniqueName);
+    mDiskCache=DiskLruCache.open(diskCacheDir,CACHE_VERSION,VALUE_COUNT,diskCacheSize);
+    mCompressFormat=compressFormat;
+    mCompressQuality=quality;
+  }
+ catch (  IOException e) {
+    e.printStackTrace();
+  }
+}

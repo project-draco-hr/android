@@ -59,7 +59,23 @@
         }
         checkBoxV.setVisibility(View.VISIBLE);
       }
-      fileIcon.setImageResource(DisplayUtils.getResourceId(file.getMimetype(),file.getFileName()));
+      if (file.isImage()) {
+        Bitmap thumbnail=getBitmapFromDiskCache(String.valueOf(file.getRemoteId()));
+        if (thumbnail != null) {
+          fileIcon.setImageBitmap(thumbnail);
+        }
+ else {
+          if (cancelPotentialWork(file,fileIcon)) {
+            final ThumbnailGenerationTask task=new ThumbnailGenerationTask(fileIcon);
+            final AsyncDrawable asyncDrawable=new AsyncDrawable(mContext.getResources(),defaultImg,task);
+            fileIcon.setImageDrawable(asyncDrawable);
+            task.execute(file);
+          }
+        }
+      }
+ else {
+        fileIcon.setImageResource(DisplayUtils.getResourceId(file.getMimetype(),file.getFileName()));
+      }
       if (checkIfFileIsSharedWithMe(file)) {
         sharedWithMeIconV.setVisibility(View.VISIBLE);
       }
