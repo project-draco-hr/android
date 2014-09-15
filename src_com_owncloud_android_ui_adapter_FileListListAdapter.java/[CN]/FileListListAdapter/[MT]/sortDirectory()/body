@@ -1,17 +1,14 @@
 {
 switch (sort) {
 case NAME:
-    sortByName();
+    sortByName(sortAscending);
   break;
 case SIZE:
-sortBySize();
+sortBySize(sortAscending);
 break;
 case DATE:
-sortByDate();
+sortByDate(sortAscending);
 break;
-}
-if (!sortAscending) {
-Collections.reverse(mFiles);
 }
 notifyDataSetChanged();
 }
