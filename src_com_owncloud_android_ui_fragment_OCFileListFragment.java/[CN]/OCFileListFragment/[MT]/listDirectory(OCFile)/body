@@ -19,5 +19,20 @@
       mList.setSelectionFromTop(0,0);
     }
     mFile=directory;
+    double count=0;
+    Vector<OCFile> files=storageManager.getFolderContent(directory);
+    for (    OCFile file : files) {
+      if (file.isImage()) {
+        count++;
+      }
+    }
+    if ((count / files.size()) >= 0.5) {
+      Log_OC.i(TAG,"Image View");
+      switchImageView();
+    }
+ else {
+      Log_OC.i(TAG,"Folder View");
+      switchFileView();
+    }
   }
 }
