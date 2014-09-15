@@ -10,7 +10,7 @@
     if (!stateWasRecovered) {
       OCFileListFragment listOfFolders=getListOfFilesFragment();
       listOfFolders.listDirectory(folder);
-      startSyncFolderOperation(folder);
+      startSyncFolderOperation(folder,false);
     }
     updateNavigationElementsInActionBar();
   }

@@ -2,6 +2,7 @@ OCFile folder
 long currentSyncTime
 boolean syncFullAccount
 boolean isShareSupported
+boolean ignoreTag
 FileDataStorageManager dataStorageManager
 Account account
 Context context
