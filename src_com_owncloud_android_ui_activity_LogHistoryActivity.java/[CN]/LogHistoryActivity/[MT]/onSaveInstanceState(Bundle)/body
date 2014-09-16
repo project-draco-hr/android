@@ -1,0 +1,6 @@
+{
+  Log_OC.e(TAG,"onSaveInstanceState() start");
+  super.onSaveInstanceState(outState);
+  outState.putString(LogHistoryActivity.KEY_LOG_TEXT,mLogTV.getText().toString());
+  Log_OC.d(TAG,"onSaveInstanceState() end");
+}

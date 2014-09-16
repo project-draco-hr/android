@@ -21,11 +21,15 @@
   }
 );
   mLogTV=(TextView)findViewById(R.id.logTV);
+  if (savedInstanceState != null) {
+    String logTextSaved=savedInstanceState.getString(LogHistoryActivity.KEY_LOG_TEXT);
+    mLogTV.setText(logTextSaved);
+  }
   if (mLogPath != null) {
     logDIR=new File(mLogPath);
   }
   if (logDIR != null && logDIR.isDirectory()) {
-    mPd=ProgressDialog.show(this,getText(R.string.actionbar_logger),getText(R.string.log_progress_dialog_text),true,false);
+    showLoadingDialog();
     new LoadingLogTask().execute();
   }
 }
