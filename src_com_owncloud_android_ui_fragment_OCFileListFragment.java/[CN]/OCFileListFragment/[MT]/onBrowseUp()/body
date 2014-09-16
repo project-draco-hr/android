@@ -21,7 +21,7 @@
     }
     mFile=parentDir;
     listDirectory(mFile);
-    onRefresh();
+    onRefreshForced(false);
     restoreIndexAndTopPosition();
   }
   return moveCount;

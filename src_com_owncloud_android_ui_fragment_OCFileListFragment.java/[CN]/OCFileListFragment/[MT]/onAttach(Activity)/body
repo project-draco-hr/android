@@ -8,7 +8,7 @@
     throw new ClassCastException(activity.toString() + " must implement " + FileFragment.ContainerActivity.class.getSimpleName());
   }
   try {
-    setOnRefreshListener((SwipeRefreshLayout.OnRefreshListener)activity);
+    setOnRefreshListener((SwipeRefresh)activity);
   }
  catch (  ClassCastException e) {
     throw new ClassCastException(activity.toString() + " must implement " + SwipeRefreshLayout.OnRefreshListener.class.getSimpleName());

@@ -1,9 +1,3 @@
 {
-  OCFileListFragment listOfFiles=getListOfFilesFragment();
-  if (listOfFiles != null) {
-    OCFile folder=listOfFiles.getCurrentFile();
-    if (folder != null) {
-      startSyncFolderOperation(folder,true);
-    }
-  }
+  refreshList(true);
 }
