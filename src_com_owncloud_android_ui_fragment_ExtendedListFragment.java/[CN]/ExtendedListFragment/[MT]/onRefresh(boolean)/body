@@ -2,6 +2,6 @@
   mRefreshLayout.setRefreshing(false);
   mRefreshEmptyLayout.setRefreshing(false);
   if (mOnRefreshListener != null) {
-    mOnRefreshListener.onRefreshForced(ingnoreTag);
+    mOnRefreshListener.onRefresh(ignoreETag);
   }
 }

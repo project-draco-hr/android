@@ -3,7 +3,7 @@
   if (listOfFiles != null) {
     OCFile folder=listOfFiles.getCurrentFile();
     if (folder != null) {
-      startSyncFolderOperation(folder,ignoreTag);
+      startSyncFolderOperation(folder,ignoreETag);
     }
   }
 }

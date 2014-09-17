@@ -8,5 +8,5 @@
   mContext=context;
   mForgottenLocalFiles=new HashMap<String,String>();
   mRemoteFolderChanged=false;
-  mIgnoreTag=ignoreTag;
+  mIgnoreETag=ignoreETag;
 }
