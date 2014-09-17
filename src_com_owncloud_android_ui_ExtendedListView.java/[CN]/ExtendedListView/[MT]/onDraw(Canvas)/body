@@ -1,7 +1,7 @@
 {
   super.onDraw(canvas);
-  if (mPositionToSetAndCenter > 0) {
-    this.setSelection(mPositionToSetAndCenter);
-    mPositionToSetAndCenter=0;
+  if (mPositionToSetTopLeft > 0) {
+    this.smoothScrollToPosition(mPositionToSetTopLeft);
+    mPositionToSetTopLeft=0;
   }
 }

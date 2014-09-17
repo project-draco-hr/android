@@ -3,16 +3,11 @@
     int index=mIndexes.remove(mIndexes.size() - 1);
     int firstPosition=mFirstPositions.remove(mFirstPositions.size() - 1);
     int top=mTops.remove(mTops.size() - 1);
-    imageView.setSelection(firstPosition);
+    imageView.smoothScrollToPosition(firstPosition);
     int indexPosition=mHeightCell * index;
     int height=imageView.getHeight();
     if (indexPosition > height) {
-      if (android.os.Build.VERSION.SDK_INT >= 11) {
-        imageView.smoothScrollToPosition(index);
-      }
- else       if (android.os.Build.VERSION.SDK_INT >= 8) {
-        imageView.setSelection(index);
-      }
+      imageView.smoothScrollToPosition(index);
     }
   }
 }
