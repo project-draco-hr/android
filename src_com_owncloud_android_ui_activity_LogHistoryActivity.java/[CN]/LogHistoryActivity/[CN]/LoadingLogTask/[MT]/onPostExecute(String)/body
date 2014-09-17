@@ -1,4 +1,9 @@
 {
-  mLogTV.setText(result);
-  dismissLoadingDialog();
+  if (textViewReference != null && result != null) {
+    final TextView logTV=textViewReference.get();
+    if (logTV != null) {
+      logTV.setText(result);
+      dismissLoadingDialog();
+    }
+  }
 }

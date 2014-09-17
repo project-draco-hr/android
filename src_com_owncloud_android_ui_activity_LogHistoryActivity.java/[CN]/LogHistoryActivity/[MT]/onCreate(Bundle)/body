@@ -20,16 +20,13 @@
     }
   }
 );
-  mLogTV=(TextView)findViewById(R.id.logTV);
-  if (savedInstanceState != null) {
-    String logTextSaved=savedInstanceState.getString(LogHistoryActivity.KEY_LOG_TEXT);
-    mLogTV.setText(logTextSaved);
-  }
   if (mLogPath != null) {
     logDIR=new File(mLogPath);
   }
   if (logDIR != null && logDIR.isDirectory()) {
     showLoadingDialog();
-    new LoadingLogTask().execute();
+    TextView logTV=(TextView)findViewById(R.id.logTV);
+    LoadingLogTask task=new LoadingLogTask(logTV);
+    task.execute();
   }
 }
