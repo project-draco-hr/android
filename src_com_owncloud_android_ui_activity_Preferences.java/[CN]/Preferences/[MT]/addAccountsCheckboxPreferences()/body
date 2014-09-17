@@ -12,7 +12,7 @@
     for (    Account a : accounts) {
       LongClickableCheckBoxPreference accountPreference=new LongClickableCheckBoxPreference(this);
       accountPreference.setKey(a.name);
-      accountPreference.setTitle(a.name);
+      accountPreference.setTitle(DisplayUtils.convertIdn(a.name,false));
       mAccountsPrefCategory.addPreference(accountPreference);
       if (a.name.equals(currentAccount.name)) {
         accountPreference.setChecked(true);
