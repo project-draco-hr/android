@@ -1,4 +1,5 @@
 {
+  setOnRefreshListener(null);
   mContainerActivity=null;
   super.onDetach();
 }

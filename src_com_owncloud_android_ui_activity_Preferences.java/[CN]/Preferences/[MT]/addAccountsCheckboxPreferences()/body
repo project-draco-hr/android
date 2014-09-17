@@ -28,8 +28,17 @@
           for (          Account a : accounts) {
             CheckBoxPreference p=(CheckBoxPreference)findPreference(a.name);
             if (key.equals(a.name)) {
+              boolean accountChanged=!p.isChecked();
               p.setChecked(true);
               AccountUtils.setCurrentOwnCloudAccount(getApplicationContext(),a.name);
+              if (accountChanged) {
+                Intent i=new Intent(Preferences.this,FileDisplayActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+              }
+ else {
+                finish();
+              }
             }
  else {
               p.setChecked(false);

@@ -1,0 +1,14 @@
+{
+  CredentialsDialogFragment dialog=CredentialsDialogFragment.newInstanceForCredentials(webView,handler);
+  FragmentManager fm=getSupportFragmentManager();
+  FragmentTransaction ft=fm.beginTransaction();
+  ft.addToBackStack(null);
+  dialog.setCancelable(false);
+  dialog.show(ft,CREDENTIALS_DIALOG_TAG);
+  if (!mIsFirstAuthAttempt) {
+    Toast.makeText(getApplicationContext(),getText(R.string.saml_authentication_wrong_pass),Toast.LENGTH_LONG).show();
+  }
+ else {
+    mIsFirstAuthAttempt=false;
+  }
+}

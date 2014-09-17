@@ -16,4 +16,5 @@
   outState.putInt(KEY_AUTH_STATUS_ICON,mAuthStatusIcon);
   outState.putInt(KEY_AUTH_STATUS_TEXT,mAuthStatusText);
   outState.putString(KEY_AUTH_TOKEN,mAuthToken);
+  outState.putBoolean(KEY_AUTH_IS_FIRST_ATTEMPT_TAG,mIsFirstAuthAttempt);
 }
