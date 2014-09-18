@@ -1,13 +1,14 @@
 {
   String[] logFileName=Log_OC.getLogFileNames();
   StringBuilder text=new StringBuilder();
+  BufferedReader br=null;
   try {
     String line;
     for (int i=logFileName.length - 1; i >= 0; i--) {
       File file=new File(mLogPath,logFileName[i]);
       if (file.exists()) {
         if (new FileReader(file).ready()) {
-          BufferedReader br=new BufferedReader(new FileReader(file));
+          br=new BufferedReader(new FileReader(file));
           while ((line=br.readLine()) != null) {
             text.append(line);
             text.append('\n');
@@ -18,6 +19,15 @@
   }
  catch (  IOException e) {
     Log_OC.d(TAG,e.getMessage().toString());
+  }
+ finally {
+    if (br != null) {
+      try {
+        br.close();
+      }
+ catch (      IOException e) {
+      }
+    }
   }
   return text.toString();
 }
