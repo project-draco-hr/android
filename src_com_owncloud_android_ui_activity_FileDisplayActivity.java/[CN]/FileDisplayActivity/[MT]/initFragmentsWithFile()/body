@@ -5,7 +5,7 @@
       listOfFiles.listDirectory(getCurrentDir());
     }
  else {
-      Log.e(TAG,"Still have a chance to lose the initializacion of list fragment >(");
+      Log_OC.e(TAG,"Still have a chance to lose the initializacion of list fragment >(");
     }
     OCFile file=getFile();
     Fragment secondFragment=chooseInitialSecondFragment(file);
@@ -19,12 +19,12 @@
     }
   }
  else {
-    Log.wtf(TAG,"initFragments() called with invalid NULLs!");
+    Log_OC.wtf(TAG,"initFragments() called with invalid NULLs!");
     if (getAccount() == null) {
-      Log.wtf(TAG,"\t account is NULL");
+      Log_OC.wtf(TAG,"\t account is NULL");
     }
     if (getFile() == null) {
-      Log.wtf(TAG,"\t file is NULL");
+      Log_OC.wtf(TAG,"\t file is NULL");
     }
   }
 }

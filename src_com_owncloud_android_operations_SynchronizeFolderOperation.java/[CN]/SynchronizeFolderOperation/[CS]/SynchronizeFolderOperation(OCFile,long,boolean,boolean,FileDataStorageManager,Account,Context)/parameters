@@ -1,7 +1,0 @@
-OCFile folder
-long currentSyncTime
-boolean syncFullAccount
-boolean isShareSupported
-FileDataStorageManager dataStorageManager
-Account account
-Context context
