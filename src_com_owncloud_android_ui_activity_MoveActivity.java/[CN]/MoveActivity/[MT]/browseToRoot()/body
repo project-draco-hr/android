@@ -5,6 +5,6 @@
     listOfFiles.listDirectory(root);
     setFile(listOfFiles.getCurrentFile());
     updateNavigationElementsInActionBar();
-    startSyncFolderOperation(root);
+    startSyncFolderOperation(root,false);
   }
 }
