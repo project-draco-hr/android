@@ -8,6 +8,6 @@
     ocFileListFragment.setMessageForEmptyList(getString(message));
   }
  else {
-    Log.e(TAG,"OCFileListFragment is null");
+    Log_OC.e(TAG,"OCFileListFragment is null");
   }
 }

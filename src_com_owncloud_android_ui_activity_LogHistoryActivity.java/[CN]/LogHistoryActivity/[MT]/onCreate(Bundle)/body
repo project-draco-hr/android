@@ -1,43 +1,32 @@
 {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.log_send_file);
-  setTitle("Log History");
+  setTitle(getText(R.string.actionbar_logger));
   ActionBar actionBar=getSherlock().getActionBar();
   actionBar.setIcon(DisplayUtils.getSeasonalIconId());
   actionBar.setDisplayHomeAsUpEnabled(true);
-  ListView listView=(ListView)findViewById(android.R.id.list);
   Button deleteHistoryButton=(Button)findViewById(R.id.deleteLogHistoryButton);
+  Button sendHistoryButton=(Button)findViewById(R.id.sendLogHistoryButton);
   deleteHistoryButton.setOnClickListener(new OnClickListener(){
     @Override public void onClick(    View v){
-      File dir=new File(logpath);
-      if (dir != null) {
-        File[] files=dir.listFiles();
-        if (files != null) {
-          for (          File f : files) {
-            f.delete();
-          }
-        }
-        dir.delete();
-      }
-      Intent intent=new Intent(getBaseContext(),Preferences.class);
-      intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-      startActivity(intent);
+      Log_OC.deleteHistoryLogging();
+      finish();
     }
   }
 );
-  if (logpath != null) {
-    logDIR=new File(logpath);
+  sendHistoryButton.setOnClickListener(new OnClickListener(){
+    @Override public void onClick(    View v){
+      sendMail();
+    }
+  }
+);
+  if (mLogPath != null) {
+    logDIR=new File(mLogPath);
   }
   if (logDIR != null && logDIR.isDirectory()) {
-    File[] files=logDIR.listFiles();
-    if (files != null && files.length != 0) {
-      ArrayList<String> logfiles_name=new ArrayList<String>();
-      for (      File file : files) {
-        logfiles_name.add(file.getName());
-      }
-      String[] logFiles2Array=logfiles_name.toArray(new String[logfiles_name.size()]);
-      LogListAdapter listadapter=new LogListAdapter(this,logFiles2Array);
-      listView.setAdapter(listadapter);
-    }
+    showLoadingDialog();
+    TextView logTV=(TextView)findViewById(R.id.logTV);
+    LoadingLogTask task=new LoadingLogTask(logTV);
+    task.execute();
   }
 }
