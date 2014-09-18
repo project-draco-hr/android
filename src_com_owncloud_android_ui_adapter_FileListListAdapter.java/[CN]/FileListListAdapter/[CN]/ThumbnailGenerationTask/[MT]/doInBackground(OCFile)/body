@@ -7,8 +7,10 @@
     int px=(int)Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,150,r.getDisplayMetrics()));
     if (file.isDown()) {
       Bitmap bitmap=BitmapFactory.decodeFile(file.getStoragePath());
-      thumbnail=ThumbnailUtils.extractThumbnail(bitmap,px,px);
-      addBitmapToCache(imageKey,thumbnail);
+      if (bitmap != null) {
+        thumbnail=ThumbnailUtils.extractThumbnail(bitmap,px,px);
+        addBitmapToCache(imageKey,thumbnail);
+      }
     }
  else {
     }
