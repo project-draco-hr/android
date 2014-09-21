@@ -1,5 +1,22 @@
 {
 synchronized (thumbnailDiskCacheLock) {
+    OwnCloudAccount ocAccount;
+    try {
+      ocAccount=new OwnCloudAccount(mAccount,mContext);
+      client=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,mContext);
+    }
+ catch (    AccountNotFoundException e) {
+      e.printStackTrace();
+    }
+catch (    AuthenticatorException e) {
+      e.printStackTrace();
+    }
+catch (    OperationCanceledException e) {
+      e.printStackTrace();
+    }
+catch (    IOException e) {
+      e.printStackTrace();
+    }
     mThumbnailCache=new DiskLruImageCache(mContext,"thumbnailCache",DISK_CACHE_SIZE,mCompressFormat,mCompressQuality);
     mThumbnailCacheStarting=false;
     thumbnailDiskCacheLock.notifyAll();

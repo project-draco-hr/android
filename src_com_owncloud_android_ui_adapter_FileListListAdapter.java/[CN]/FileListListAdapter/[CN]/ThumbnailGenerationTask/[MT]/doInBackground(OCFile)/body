@@ -1,6 +1,7 @@
 {
   file=params[0];
-  final String imageKey=String.valueOf(file.getRemoteId());
+  final String imageKey=String.valueOf(file.getRemoteId()).toLowerCase();
+  Log_OC.d("Thumbnail",imageKey);
   Bitmap thumbnail=getBitmapFromDiskCache(imageKey);
   if (thumbnail == null) {
     Resources r=mContext.getResources();
@@ -13,6 +14,24 @@
       }
     }
  else {
+      try {
+        int status=-1;
+        String uri=client.getBaseUri() + "/index.php/apps/files/api/v1/thumbnail/100/100" + URLEncoder.encode(file.getRemotePath(),"UTF-8");
+        Log_OC.d("Thumbnail","URI: " + uri);
+        GetMethod get=new GetMethod(uri);
+        status=client.executeMethod(get);
+        if (isSuccess(status)) {
+          byte[] bytes=get.getResponseBody();
+          Bitmap bitmap=BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+          thumbnail=ThumbnailUtils.extractThumbnail(bitmap,px,px);
+          if (thumbnail != null) {
+            addBitmapToCache(imageKey,thumbnail);
+          }
+        }
+      }
+ catch (      Exception e) {
+        e.printStackTrace();
+      }
     }
   }
   return thumbnail;

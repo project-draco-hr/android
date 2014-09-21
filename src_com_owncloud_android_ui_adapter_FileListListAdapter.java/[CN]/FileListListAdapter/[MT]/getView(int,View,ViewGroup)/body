@@ -60,7 +60,7 @@
         checkBoxV.setVisibility(View.VISIBLE);
       }
       if (file.isImage()) {
-        Bitmap thumbnail=getBitmapFromDiskCache(String.valueOf(file.getRemoteId()));
+        Bitmap thumbnail=getBitmapFromDiskCache(String.valueOf(file.getRemoteId().toLowerCase()));
         if (thumbnail != null) {
           fileIcon.setImageBitmap(thumbnail);
         }
