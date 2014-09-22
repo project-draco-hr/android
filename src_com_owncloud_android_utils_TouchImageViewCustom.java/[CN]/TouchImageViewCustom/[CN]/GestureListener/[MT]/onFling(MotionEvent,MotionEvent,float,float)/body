@@ -1,0 +1,8 @@
+{
+  if (fling != null) {
+    fling.cancelFling();
+  }
+  fling=new Fling((int)velocityX,(int)velocityY);
+  compatPostOnAnimation(fling);
+  return super.onFling(e1,e2,velocityX,velocityY);
+}

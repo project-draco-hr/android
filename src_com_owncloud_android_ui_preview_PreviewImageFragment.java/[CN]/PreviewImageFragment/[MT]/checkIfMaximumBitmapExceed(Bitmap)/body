@@ -1,6 +1,0 @@
-{
-  if (bitmap.getWidth() > MAX_OPENGL_TEXTURE_WIDTH || bitmap.getHeight() > MAX_OPENGL_TEXTURE_HEIGHT) {
-    return true;
-  }
-  return false;
-}

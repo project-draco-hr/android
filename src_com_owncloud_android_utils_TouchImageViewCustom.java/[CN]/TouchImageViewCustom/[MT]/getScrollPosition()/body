@@ -1,0 +1,12 @@
+{
+  Drawable drawable=getDrawable();
+  if (drawable == null) {
+    return null;
+  }
+  int drawableWidth=drawable.getIntrinsicWidth();
+  int drawableHeight=drawable.getIntrinsicHeight();
+  PointF point=transformCoordTouchToBitmap(viewWidth / 2,viewHeight / 2,true);
+  point.x/=drawableWidth;
+  point.y/=drawableHeight;
+  return point;
+}

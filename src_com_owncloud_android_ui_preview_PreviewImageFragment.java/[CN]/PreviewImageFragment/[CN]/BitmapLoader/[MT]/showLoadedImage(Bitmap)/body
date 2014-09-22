@@ -1,10 +1,8 @@
 {
   if (mImageViewRef != null) {
-    final ImageView imageView=mImageViewRef.get();
+    final ImageViewCustom imageView=mImageViewRef.get();
     if (imageView != null) {
-      if (IS_HONEYCOMB_OR_HIGHER && checkIfMaximumBitmapExceed(result)) {
-        imageView.setLayerType(View.LAYER_TYPE_SOFTWARE,null);
-      }
+      imageView.setBitmap(result);
       imageView.setImageBitmap(result);
       imageView.setVisibility(View.VISIBLE);
       mBitmap=result;
