@@ -3,7 +3,10 @@
   if (params.length != 1)   return result;
   String storagePath=params[0];
   try {
-    result=BitmapFactory.decodeFile(storagePath);
+    File picture=new File(storagePath);
+    if (picture != null) {
+      result=BitmapFactory.decodeStream(new FlushedInputStream(new BufferedInputStream(new FileInputStream(picture))));
+    }
     if (result == null) {
       mErrorMessageId=R.string.preview_image_error_unknown_format;
       Log_OC.e(TAG,"File could not be loaded as a bitmap: " + storagePath);
