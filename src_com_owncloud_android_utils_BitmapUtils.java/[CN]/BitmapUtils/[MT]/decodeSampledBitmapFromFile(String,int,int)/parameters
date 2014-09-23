@@ -1,0 +1,3 @@
+String srcPath
+int reqWidth
+int reqHeight
