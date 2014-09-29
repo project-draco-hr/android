@@ -1,6 +1,6 @@
 {
 synchronized (thumbnailDiskCacheLock) {
-    if (mThumbnailCache != null && mThumbnailCache.getBitmap(key) == null) {
+    if (mThumbnailCache != null) {
       mThumbnailCache.put(key,bitmap);
     }
   }

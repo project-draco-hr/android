@@ -61,7 +61,7 @@
       }
       if (file.isImage()) {
         Bitmap thumbnail=getBitmapFromDiskCache(String.valueOf(file.getRemoteId()));
-        if (thumbnail != null) {
+        if (thumbnail != null && !file.needsUpdateThumbnail()) {
           fileIcon.setImageBitmap(thumbnail);
         }
  else {
