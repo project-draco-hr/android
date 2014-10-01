@@ -1,0 +1,28 @@
+{
+  Bitmap thumbnail=null;
+  try {
+    file=params[0];
+    final String imageKey=String.valueOf(file.getRemoteId());
+    thumbnail=getBitmapFromDiskCache(imageKey);
+    if (thumbnail == null || file.needsUpdateThumbnail()) {
+      Resources r=mContext.getResources();
+      int px=(int)Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,150,r.getDisplayMetrics()));
+      if (file.isDown()) {
+        Bitmap bitmap=BitmapUtils.decodeSampledBitmapFromFile(file.getStoragePath(),px,px);
+        if (bitmap != null) {
+          thumbnail=ThumbnailUtils.extractThumbnail(bitmap,px,px);
+          addBitmapToCache(imageKey,thumbnail);
+          file.setNeedsUpdateThumbnail(false);
+          mStorageManager.saveFile(file);
+        }
+      }
+    }
+  }
+ catch (  Throwable t) {
+    Log_OC.e(TAG,"Generation of thumbnail for " + file + " failed",t);
+    if (t instanceof OutOfMemoryError) {
+      System.gc();
+    }
+  }
+  return thumbnail;
+}

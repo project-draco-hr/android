@@ -1,0 +1,13 @@
+{
+  final ThumbnailGenerationTask bitmapWorkerTask=getBitmapWorkerTask(imageView);
+  if (bitmapWorkerTask != null) {
+    final OCFile bitmapData=bitmapWorkerTask.file;
+    if (bitmapData == null || bitmapData != file) {
+      bitmapWorkerTask.cancel(true);
+    }
+ else {
+      return false;
+    }
+  }
+  return true;
+}
