@@ -16,8 +16,6 @@
           mStorageManager.saveFile(file);
         }
       }
- else {
-      }
     }
   }
  catch (  Throwable t) {
