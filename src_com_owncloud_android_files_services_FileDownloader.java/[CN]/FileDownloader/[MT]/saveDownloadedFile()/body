@@ -3,6 +3,7 @@
   long syncDate=System.currentTimeMillis();
   file.setLastSyncDateForProperties(syncDate);
   file.setLastSyncDateForData(syncDate);
+  file.setNeedsUpdateThumbnail(true);
   file.setModificationTimestamp(mCurrentDownload.getModificationTimestamp());
   file.setModificationTimestampAtLastSyncForData(mCurrentDownload.getModificationTimestamp());
   file.setMimetype(mCurrentDownload.getMimeType());

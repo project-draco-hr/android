@@ -17,4 +17,5 @@
   mPublicLink=null;
   mPermissions=null;
   mRemoteId=null;
+  mNeedsUpdateThumbnail=false;
 }

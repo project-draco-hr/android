@@ -1,0 +1,11 @@
+{
+  if (BuildConfig.DEBUG) {
+    Log.d("cache_test_DISK_","disk cache CLEARED");
+  }
+  try {
+    mDiskCache.delete();
+  }
+ catch (  IOException e) {
+    e.printStackTrace();
+  }
+}
