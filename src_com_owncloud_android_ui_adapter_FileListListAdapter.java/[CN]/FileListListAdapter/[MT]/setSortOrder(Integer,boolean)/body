@@ -1,6 +1,6 @@
 {
   SharedPreferences.Editor editor=appPreferences.edit();
-  editor.putString("sortOrder",order);
+  editor.putInt("sortOrder",order);
   editor.putBoolean("sortAscending",ascending);
   editor.commit();
   sortOrder=order;
