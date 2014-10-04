@@ -3,4 +3,7 @@
   mContext=context;
   mAccount=AccountUtils.getCurrentOwnCloudAccount(mContext);
   mTransferServiceGetter=transferServiceGetter;
+  appPreferences=PreferenceManager.getDefaultSharedPreferences(mContext);
+  sortOrder=appPreferences.getString("sortOrder","name");
+  sortAscending=appPreferences.getBoolean("sortAscending",true);
 }

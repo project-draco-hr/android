@@ -1,14 +1,12 @@
 {
-switch (sort) {
-case NAME:
+  if (sortOrder.equals("name")) {
     sortByName(sortAscending);
-  break;
-case SIZE:
-sortBySize(sortAscending);
-break;
-case DATE:
-sortByDate(sortAscending);
-break;
-}
-notifyDataSetChanged();
+  }
+ else   if (sortOrder.equals("size")) {
+    sortBySize(sortAscending);
+  }
+ else   if (sortOrder.equals("date")) {
+    sortByDate(sortAscending);
+  }
+  notifyDataSetChanged();
 }
