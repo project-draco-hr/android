@@ -27,6 +27,22 @@
     }
 );
   }
+  pSaveLocation=(CheckBoxPreferenceWithLongTitle)findPreference("save_last_upload_location");
+  if (pSaveLocation != null) {
+    pSaveLocation.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
+      @Override public boolean onPreferenceChange(      Preference preference,      Object newValue){
+        if (newValue instanceof Boolean) {
+          if (!(Boolean)newValue) {
+            SharedPreferences.Editor appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
+            appPrefs.remove("last_upload_path");
+            appPrefs.commit();
+          }
+        }
+        return true;
+      }
+    }
+);
+  }
   PreferenceCategory preferenceCategory=(PreferenceCategory)findPreference("more");
   boolean helpEnabled=getResources().getBoolean(R.bool.help_enabled);
   Preference pHelp=findPreference("help");
