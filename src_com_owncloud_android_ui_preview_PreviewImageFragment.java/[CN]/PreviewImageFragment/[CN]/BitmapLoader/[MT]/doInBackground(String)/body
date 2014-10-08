@@ -13,8 +13,12 @@
     }
   }
  catch (  OutOfMemoryError e) {
-    mErrorMessageId=R.string.preview_image_error_unknown_format;
     Log_OC.e(TAG,"Out of memory occured for file " + storagePath,e);
+    result=loadScaledImage(storagePath);
+    if (result == null) {
+      mErrorMessageId=R.string.preview_image_error_unknown_format;
+      Log_OC.e(TAG,"File could not be loaded as a bitmap: " + storagePath);
+    }
   }
 catch (  NoSuchFieldError e) {
     mErrorMessageId=R.string.common_error_unknown;
