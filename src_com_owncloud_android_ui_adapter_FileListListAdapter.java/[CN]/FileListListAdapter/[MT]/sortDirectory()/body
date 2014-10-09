@@ -1,0 +1,14 @@
+{
+switch (sortOrder) {
+case 0:
+    sortByName(sortAscending);
+  break;
+case 1:
+sortByDate(sortAscending);
+break;
+case 2:
+sortBySize(sortAscending);
+break;
+}
+notifyDataSetChanged();
+}

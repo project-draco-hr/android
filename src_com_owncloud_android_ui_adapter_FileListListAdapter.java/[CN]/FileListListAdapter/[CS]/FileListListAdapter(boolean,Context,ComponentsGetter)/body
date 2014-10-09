@@ -3,6 +3,9 @@
   mContext=context;
   mAccount=AccountUtils.getCurrentOwnCloudAccount(mContext);
   mTransferServiceGetter=transferServiceGetter;
+  appPreferences=PreferenceManager.getDefaultSharedPreferences(mContext);
+  sortOrder=appPreferences.getInt("sortOrder",0);
+  sortAscending=appPreferences.getBoolean("sortAscending",true);
   defaultImg=BitmapFactory.decodeResource(mContext.getResources(),DisplayUtils.getResourceId("image/png","default.png"));
   new InitDiskCacheTask().execute();
 }
