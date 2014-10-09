@@ -6,7 +6,9 @@
     final ImageView imageView=imageViewReference.get();
     final ThumbnailGenerationTask bitmapWorkerTask=getBitmapWorkerTask(imageView);
     if (this == bitmapWorkerTask && imageView != null) {
-      imageView.setImageBitmap(bitmap);
+      if (imageView.getTag().equals(file.getFileId())) {
+        imageView.setImageBitmap(bitmap);
+      }
     }
   }
 }
