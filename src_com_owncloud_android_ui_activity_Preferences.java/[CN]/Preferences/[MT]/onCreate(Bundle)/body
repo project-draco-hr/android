@@ -31,12 +31,10 @@
   if (pSaveLocation != null) {
     pSaveLocation.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
       @Override public boolean onPreferenceChange(      Preference preference,      Object newValue){
-        if (newValue instanceof Boolean) {
-          if (!(Boolean)newValue) {
-            SharedPreferences.Editor appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
-            appPrefs.remove("last_upload_path");
-            appPrefs.commit();
-          }
+        if (newValue instanceof Boolean && !(Boolean)newValue) {
+          SharedPreferences.Editor appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
+          appPrefs.remove("last_upload_path");
+          appPrefs.apply();
         }
         return true;
       }
