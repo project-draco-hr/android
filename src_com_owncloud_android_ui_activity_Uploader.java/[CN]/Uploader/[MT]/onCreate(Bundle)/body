@@ -1,7 +1,8 @@
 {
   super.onCreate(savedInstanceState);
-  getWindow().requestFeature(Window.FEATURE_NO_TITLE);
   mParents=new Stack<String>();
+  ActionBar actionBar=getSherlock().getActionBar();
+  actionBar.setIcon(DisplayUtils.getSeasonalIconId());
   SharedPreferences appPreferences=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
   mSaveUploadLocation=appPreferences.getBoolean("save_last_upload_location",false);
   if (mSaveUploadLocation) {

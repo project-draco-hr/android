@@ -1,5 +1,12 @@
 {
   setContentView(R.layout.uploader_layout);
+  String current_dir=mParents.peek();
+  if (current_dir.equals("")) {
+    getActionBar().setTitle(getString(R.string.default_display_name_for_root_folder));
+  }
+ else {
+    getActionBar().setTitle(current_dir);
+  }
   String full_path="";
   for (  String a : mParents)   full_path+=a + "/";
   Log_OC.d(TAG,"Populating view with content of : " + full_path);
