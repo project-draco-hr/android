@@ -1,0 +1,10 @@
+{
+  String uploadPathInitialSlash="/";
+  if (uploadPath.isEmpty()) {
+    uploadPath=getString(R.string.instant_upload_path);
+  }
+ else   if (!uploadPath.startsWith(uploadPathInitialSlash)) {
+    uploadPath=uploadPathInitialSlash.concat(uploadPath);
+  }
+  return uploadPath;
+}
