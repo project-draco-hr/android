@@ -22,7 +22,7 @@
     }
   }
   if (BuildConfig.DEBUG) {
-    Log.d("cache_test_DISK_",bitmap == null ? "not found" : "image read from disk " + validKey);
+    Log_OC.d("cache_test_DISK_",bitmap == null ? "not found" : "image read from disk " + validKey);
   }
   return bitmap;
 }

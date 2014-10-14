@@ -2,7 +2,7 @@
   String validKey=convertToValidKey(key);
   try {
     mDiskCache.remove(validKey);
-    Log.d(TAG,"removeKey from cache: " + validKey);
+    Log_OC.d(TAG,"removeKey from cache: " + validKey);
   }
  catch (  IOException e) {
     e.printStackTrace();
