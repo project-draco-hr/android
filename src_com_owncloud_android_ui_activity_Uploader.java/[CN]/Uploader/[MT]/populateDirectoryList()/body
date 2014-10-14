@@ -7,8 +7,7 @@
  else {
     getActionBar().setTitle(current_dir);
   }
-  String full_path="";
-  for (  String a : mParents)   full_path+=a + "/";
+  String full_path=generatePath(mParents);
   Log_OC.d(TAG,"Populating view with content of : " + full_path);
   mFile=mStorageManager.getFileByPath(full_path);
   if (mFile != null) {
