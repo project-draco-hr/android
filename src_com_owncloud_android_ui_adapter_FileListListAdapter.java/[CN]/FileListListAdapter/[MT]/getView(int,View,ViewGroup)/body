@@ -60,7 +60,7 @@
         }
         checkBoxV.setVisibility(View.VISIBLE);
       }
-      if (file.isImage()) {
+      if (file.isImage() && file.getRemoteId() != null) {
         Bitmap thumbnail=ThumbnailsCacheManager.getBitmapFromDiskCache(String.valueOf(file.getRemoteId()));
         if (thumbnail != null && !file.needsUpdateThumbnail()) {
           fileIcon.setImageBitmap(thumbnail);
