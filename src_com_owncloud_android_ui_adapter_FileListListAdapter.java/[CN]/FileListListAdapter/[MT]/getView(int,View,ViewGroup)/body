@@ -61,14 +61,14 @@
         checkBoxV.setVisibility(View.VISIBLE);
       }
       if (file.isImage()) {
-        Bitmap thumbnail=getBitmapFromDiskCache(String.valueOf(file.getRemoteId()));
+        Bitmap thumbnail=ThumbnailsCacheManager.getBitmapFromDiskCache(String.valueOf(file.getRemoteId()));
         if (thumbnail != null && !file.needsUpdateThumbnail()) {
           fileIcon.setImageBitmap(thumbnail);
         }
  else {
-          if (cancelPotentialWork(file,fileIcon)) {
-            final ThumbnailGenerationTask task=new ThumbnailGenerationTask(fileIcon);
-            final AsyncDrawable asyncDrawable=new AsyncDrawable(mContext.getResources(),defaultImg,task);
+          if (ThumbnailsCacheManager.cancelPotentialWork(file,fileIcon)) {
+            final ThumbnailsCacheManager.ThumbnailGenerationTask task=new ThumbnailsCacheManager.ThumbnailGenerationTask(fileIcon,mStorageManager);
+            final AsyncDrawable asyncDrawable=new AsyncDrawable(mContext.getResources(),ThumbnailsCacheManager.mDefaultImg,task);
             fileIcon.setImageDrawable(asyncDrawable);
             task.execute(file);
           }

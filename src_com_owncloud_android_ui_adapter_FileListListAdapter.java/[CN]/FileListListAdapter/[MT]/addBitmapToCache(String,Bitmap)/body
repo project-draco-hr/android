@@ -1,7 +1,0 @@
-{
-synchronized (thumbnailDiskCacheLock) {
-    if (mThumbnailCache != null) {
-      mThumbnailCache.put(key,bitmap);
-    }
-  }
-}
