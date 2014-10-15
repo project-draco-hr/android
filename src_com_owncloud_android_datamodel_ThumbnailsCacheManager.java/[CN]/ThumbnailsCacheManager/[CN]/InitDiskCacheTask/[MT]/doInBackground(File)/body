@@ -1,14 +1,17 @@
 {
 synchronized (mThumbnailsDiskCacheLock) {
-    try {
-      final String cachePath=MainApp.getAppContext().getExternalCacheDir().getPath() + File.separator + CACHE_FOLDER;
-      Log_OC.d(TAG,"create dir: " + cachePath);
-      final File diskCacheDir=new File(cachePath);
-      mThumbnailCache=new DiskLruImageCache(diskCacheDir,DISK_CACHE_SIZE,mCompressFormat,mCompressQuality);
-    }
- catch (    Exception e) {
-      Log_OC.d(TAG,"Thumbnail cache could not be opened ",e);
-      mThumbnailCache=null;
+    mThumbnailCacheStarting=true;
+    if (mThumbnailCache == null) {
+      try {
+        final String cachePath=MainApp.getAppContext().getExternalCacheDir().getPath() + File.separator + CACHE_FOLDER;
+        Log_OC.d(TAG,"create dir: " + cachePath);
+        final File diskCacheDir=new File(cachePath);
+        mThumbnailCache=new DiskLruImageCache(diskCacheDir,DISK_CACHE_SIZE,mCompressFormat,mCompressQuality);
+      }
+ catch (      Exception e) {
+        Log_OC.d(TAG,"Thumbnail cache could not be opened ",e);
+        mThumbnailCache=null;
+      }
     }
     mThumbnailCacheStarting=false;
     mThumbnailsDiskCacheLock.notifyAll();
