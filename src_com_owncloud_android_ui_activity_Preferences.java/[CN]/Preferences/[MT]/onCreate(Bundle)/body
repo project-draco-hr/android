@@ -6,7 +6,7 @@
   actionBar.setIcon(DisplayUtils.getSeasonalIconId());
   actionBar.setDisplayHomeAsUpEnabled(true);
   actionBar.setTitle(R.string.actionbar_settings);
-  loadUploadPath();
+  loadInstantUploadPath();
   mAccountsPrefCategory=(PreferenceCategory)findPreference("accounts_category");
   ListView listView=getListView();
   listView.setOnItemLongClickListener(new OnItemLongClickListener(){
@@ -136,7 +136,7 @@
   Preference pInstantUploadPathApp=(Preference)findPreference("instant_upload_path");
   pInstantUploadPathApp.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
     @Override public boolean onPreferenceChange(    Preference preference,    Object newValue){
-      mUploadPath=updateUploadPath(newValue.toString());
+      mUploadPath=updateInstantUploadPath(newValue.toString());
       return true;
     }
   }
