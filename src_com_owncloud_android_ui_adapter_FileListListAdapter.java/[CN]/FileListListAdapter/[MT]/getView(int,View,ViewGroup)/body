@@ -68,7 +68,10 @@
  else {
           if (ThumbnailsCacheManager.cancelPotentialWork(file,fileIcon)) {
             final ThumbnailsCacheManager.ThumbnailGenerationTask task=new ThumbnailsCacheManager.ThumbnailGenerationTask(fileIcon,mStorageManager);
-            final AsyncDrawable asyncDrawable=new AsyncDrawable(mContext.getResources(),ThumbnailsCacheManager.mDefaultImg,task);
+            if (thumbnail == null) {
+              thumbnail=ThumbnailsCacheManager.mDefaultImg;
+            }
+            final AsyncDrawable asyncDrawable=new AsyncDrawable(mContext.getResources(),thumbnail,task);
             fileIcon.setImageDrawable(asyncDrawable);
             task.execute(file);
           }
