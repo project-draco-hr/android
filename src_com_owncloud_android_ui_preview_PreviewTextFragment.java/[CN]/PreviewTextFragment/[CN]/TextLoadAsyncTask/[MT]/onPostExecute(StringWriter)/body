@@ -1,0 +1,6 @@
+{
+  super.onPostExecute(stringWriter);
+  mProgressBar.setVisibility(View.GONE);
+  mScrollView.setVisibility(View.VISIBLE);
+  mTextView.setText(new String(stringWriter.getBuffer()));
+}

@@ -1,0 +1,9 @@
+{
+  super.onCreateView(inflater,container,savedInstanceState);
+  Log_OC.e(TAG,"onCreateView");
+  View ret=inflater.inflate(R.layout.text_file_preview,container,false);
+  mScrollView=(ScrollView)ret.findViewById(R.id.text_scrollview);
+  mTextPreview=(TextView)ret.findViewById(R.id.text_preview);
+  mProgressBar=(ProgressBar)ret.findViewById(R.id.progress_bar);
+  return ret;
+}
