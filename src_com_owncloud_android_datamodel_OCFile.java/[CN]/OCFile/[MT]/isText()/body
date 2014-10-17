@@ -1,0 +1,3 @@
+{
+  return !isFolder() && !isAudio() && !isVideo()&& !isImage()&& ((mMimeType != null && mMimeType.startsWith("text/")) || getMimeTypeFromName().startsWith("text/"));
+}

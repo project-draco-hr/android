@@ -1,0 +1,3 @@
+{
+  mProgressBar.setVisibility(View.VISIBLE);
+}
