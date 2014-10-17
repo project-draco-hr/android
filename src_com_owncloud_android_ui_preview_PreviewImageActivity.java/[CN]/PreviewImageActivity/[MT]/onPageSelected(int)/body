@@ -10,5 +10,6 @@
         requestForDownload(currentFile);
       }
     }
+    ((PreviewImagePagerAdapter)mViewPager.getAdapter()).resetZoom();
   }
 }

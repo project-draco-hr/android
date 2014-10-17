@@ -5,15 +5,26 @@
   ActionBar actionBar=getSherlock().getActionBar();
   actionBar.setIcon(DisplayUtils.getSeasonalIconId());
   actionBar.setDisplayHomeAsUpEnabled(true);
-  Preference p=findPreference("manage_account");
-  if (p != null)   p.setOnPreferenceClickListener(new OnPreferenceClickListener(){
-    @Override public boolean onPreferenceClick(    Preference preference){
-      Intent i=new Intent(getApplicationContext(),AccountSelectActivity.class);
-      startActivity(i);
-      return true;
+  actionBar.setTitle(R.string.actionbar_settings);
+  mAccountsPrefCategory=(PreferenceCategory)findPreference("accounts_category");
+  ListView listView=getListView();
+  listView.setOnItemLongClickListener(new OnItemLongClickListener(){
+    @Override public boolean onItemLongClick(    AdapterView<?> parent,    View view,    int position,    long id){
+      ListView listView=(ListView)parent;
+      ListAdapter listAdapter=listView.getAdapter();
+      Object obj=listAdapter.getItem(position);
+      if (obj != null && obj instanceof LongClickableCheckBoxPreference) {
+        mShowContextMenu=true;
+        mAccountName=obj.toString();
+        Preferences.this.openContextMenu(listView);
+        View.OnLongClickListener longListener=(View.OnLongClickListener)obj;
+        return longListener.onLongClick(view);
+      }
+      return false;
     }
   }
 );
+  registerForContextMenu(getListView());
   pCode=(CheckBoxPreference)findPreference("set_pincode");
   if (pCode != null) {
     pCode.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
@@ -34,7 +45,7 @@
         if (newValue instanceof Boolean && !(Boolean)newValue) {
           SharedPreferences.Editor appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
           appPrefs.remove("last_upload_path");
-          appPrefs.apply();
+          appPrefs.commit();
         }
         return true;
       }

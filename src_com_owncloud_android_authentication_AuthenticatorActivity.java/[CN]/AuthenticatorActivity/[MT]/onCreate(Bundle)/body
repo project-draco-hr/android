@@ -1,6 +1,7 @@
 {
   super.onCreate(savedInstanceState);
   getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+  mIsFirstAuthAttempt=true;
   mOperationsServiceConnection=new OperationsServiceConnection();
   if (!bindService(new Intent(this,OperationsService.class),mOperationsServiceConnection,Context.BIND_AUTO_CREATE)) {
     Toast.makeText(this,R.string.error_cant_bind_to_operations_service,Toast.LENGTH_LONG).show();
@@ -16,6 +17,7 @@
  else {
     mAuthTokenType=savedInstanceState.getString(KEY_AUTH_TOKEN_TYPE);
     mWaitingForOpId=savedInstanceState.getLong(KEY_WAITING_FOR_OP_ID);
+    mIsFirstAuthAttempt=savedInstanceState.getBoolean(KEY_AUTH_IS_FIRST_ATTEMPT_TAG);
   }
   setContentView(R.layout.account_setup);
   initOverallUi(savedInstanceState);

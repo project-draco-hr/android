@@ -1,0 +1,15 @@
+{
+synchronized (thumbnailDiskCacheLock) {
+    while (mThumbnailCacheStarting) {
+      try {
+        thumbnailDiskCacheLock.wait();
+      }
+ catch (      InterruptedException e) {
+      }
+    }
+    if (mThumbnailCache != null) {
+      return (Bitmap)mThumbnailCache.getBitmap(key);
+    }
+  }
+  return null;
+}

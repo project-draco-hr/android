@@ -2,4 +2,9 @@
   super.onSaveInstanceState(savedInstanceState);
   Log_OC.e(TAG,"onSaveInstanceState()");
   savedInstanceState.putInt(KEY_SAVED_LIST_POSITION,getReferencePosition());
+  savedInstanceState.putIntegerArrayList(KEY_INDEXES,mIndexes);
+  savedInstanceState.putIntegerArrayList(KEY_FIRST_POSITIONS,mFirstPositions);
+  savedInstanceState.putIntegerArrayList(KEY_TOPS,mTops);
+  savedInstanceState.putInt(KEY_HEIGHT_CELL,mHeightCell);
+  savedInstanceState.putString(KEY_EMPTY_LIST_MESSAGE,getEmptyViewText());
 }

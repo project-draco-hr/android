@@ -17,4 +17,5 @@
   dest.writeString(mPublicLink);
   dest.writeString(mPermissions);
   dest.writeString(mRemoteId);
+  dest.writeInt(mNeedsUpdateThumbnail ? 1 : 0);
 }

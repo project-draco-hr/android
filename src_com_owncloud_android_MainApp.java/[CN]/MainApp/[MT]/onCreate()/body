@@ -8,4 +8,10 @@
  else {
     OwnCloudClientManagerFactory.setDefaultPolicy(Policy.ALWAYS_NEW_CLIENT);
   }
+  if (BuildConfig.DEBUG) {
+    String dataFolder=getDataFolder();
+    Log_OC.setLogDataFolder(dataFolder);
+    Log_OC.startLogging();
+    Log_OC.d("Debug","start logging");
+  }
 }
