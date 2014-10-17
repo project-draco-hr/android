@@ -2,9 +2,12 @@
   String accountName=intent.getStringExtra(FileDownloader.ACCOUNT_NAME);
   String downloadedRemotePath=intent.getStringExtra(FileDownloader.EXTRA_REMOTE_PATH);
   if (getAccount().name.equals(accountName) && downloadedRemotePath != null) {
-    OCFile file=mStorageManager.getFileByPath(downloadedRemotePath);
+    final OCFile file=mStorageManager.getFileByPath(downloadedRemotePath);
     int position=mPreviewImagePagerAdapter.getFilePosition(file);
     boolean downloadWasFine=intent.getBooleanExtra(FileDownloader.EXTRA_DOWNLOAD_RESULT,false);
+    if (downloadWasFine) {
+      MediaScannerConnection.scanFile(context,new String[]{file.getStoragePath()},null,null);
+    }
     if (position >= 0 && intent.getAction().equals(FileDownloader.getDownloadFinishMessage())) {
       if (downloadWasFine) {
         mPreviewImagePagerAdapter.updateFile(position,file);

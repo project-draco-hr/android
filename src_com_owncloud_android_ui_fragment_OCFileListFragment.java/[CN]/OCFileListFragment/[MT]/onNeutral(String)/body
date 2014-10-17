@@ -1,5 +1,7 @@
 {
+  String path=new File(mTargetFile.getStoragePath()).getParent();
   mContainerActivity.getStorageManager().removeFile(mTargetFile,false,true);
+  triggerMediaScan(path);
   listDirectory();
   mContainerActivity.onTransferStateChanged(mTargetFile,false,false);
 }

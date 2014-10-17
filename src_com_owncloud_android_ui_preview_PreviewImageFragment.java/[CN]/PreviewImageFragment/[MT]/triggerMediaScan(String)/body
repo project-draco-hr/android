@@ -1,0 +1,3 @@
+{
+  MediaScannerConnection.scanFile(getActivity().getApplicationContext(),new String[]{path},null,null);
+}
