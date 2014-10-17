@@ -8,7 +8,7 @@ synchronized (thumbnailDiskCacheLock) {
       }
     }
     if (mThumbnailCache != null) {
-      return (Bitmap)mThumbnailCache.getBitmap(key);
+      return mThumbnailCache.getBitmap(key);
     }
   }
   return null;

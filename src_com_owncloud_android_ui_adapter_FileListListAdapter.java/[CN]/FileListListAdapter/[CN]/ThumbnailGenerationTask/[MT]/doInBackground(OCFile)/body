@@ -5,7 +5,7 @@
   Bitmap thumbnail=getBitmapFromDiskCache(imageKey);
   if (thumbnail == null) {
     Resources r=mContext.getResources();
-    int px=(int)Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,150,r.getDisplayMetrics()));
+    int px=Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,32,r.getDisplayMetrics()));
     if (file.isDown()) {
       Bitmap bitmap=BitmapFactory.decodeFile(file.getStoragePath());
       if (bitmap != null) {
@@ -16,7 +16,7 @@
  else {
       try {
         int status=-1;
-        String uri=client.getBaseUri() + "/index.php/apps/files/api/v1/thumbnail/100/100/" + URLEncoder.encode(file.getRemotePath(),"UTF-8").replaceAll("%2F","/");
+        String uri=client.getBaseUri() + "/index.php/apps/files/api/v1/thumbnail/" + px+ "/"+ px+ "/"+ Uri.encode(file.getRemotePath(),"/");
         Log_OC.d("Thumbnail","URI: " + uri);
         GetMethod get=new GetMethod(uri);
         status=client.executeMethod(get);
