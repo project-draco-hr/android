@@ -1,0 +1,6 @@
+{
+  super.onRemoteOperationFinish(operation,result);
+  if (operation instanceof CreateFolderOperation) {
+    onCreateFolderOperationFinish((CreateFolderOperation)operation,result);
+  }
+}

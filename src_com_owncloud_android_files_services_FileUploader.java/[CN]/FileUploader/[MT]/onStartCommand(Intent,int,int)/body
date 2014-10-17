@@ -9,6 +9,9 @@
     return Service.START_NOT_STICKY;
   }
   Account account=intent.getParcelableExtra(KEY_ACCOUNT);
+  if (!AccountUtils.exists(account,getApplicationContext())) {
+    return Service.START_NOT_STICKY;
+  }
   String[] localPaths=null, remotePaths=null, mimeTypes=null;
   OCFile[] files=null;
   if (uploadType == UPLOAD_SINGLE_FILE) {

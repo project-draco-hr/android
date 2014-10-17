@@ -26,7 +26,7 @@
  else   if (result.isIdPRedirection()) {
     authMethod=AuthenticationMethod.SAML_WEB_SSO;
   }
-  Log.d(TAG,"Authentication method found: " + authenticationMethodToString(authMethod));
+  Log_OC.d(TAG,"Authentication method found: " + authenticationMethodToString(authMethod));
   if (!authMethod.equals(AuthenticationMethod.UNKNOWN)) {
     result=new RemoteOperationResult(true,result.getHttpCode(),null);
   }

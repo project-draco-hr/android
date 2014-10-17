@@ -1,0 +1,5 @@
+{
+  super.onResume();
+  mUsernameET.setText(mUsernameStr);
+  mPasswordET.setText(mPasswordStr);
+}

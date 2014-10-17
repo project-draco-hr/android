@@ -1,0 +1,8 @@
+OCFile folder
+long currentSyncTime
+boolean syncFullAccount
+boolean isShareSupported
+boolean ignoreETag
+FileDataStorageManager dataStorageManager
+Account account
+Context context

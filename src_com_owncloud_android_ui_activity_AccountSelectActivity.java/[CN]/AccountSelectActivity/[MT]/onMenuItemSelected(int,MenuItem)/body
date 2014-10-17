@@ -1,8 +1,0 @@
-{
-  if (item.getItemId() == R.id.createAccount) {
-    AccountManager am=AccountManager.get(getApplicationContext());
-    am.addAccount(MainApp.getAccountType(),null,null,null,this,null,null);
-    return true;
-  }
-  return false;
-}

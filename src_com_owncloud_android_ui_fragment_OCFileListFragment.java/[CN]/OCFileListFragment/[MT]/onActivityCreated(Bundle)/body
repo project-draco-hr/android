@@ -1,21 +1,12 @@
 {
   super.onActivityCreated(savedInstanceState);
   Log_OC.e(TAG,"onActivityCreated() start");
-  mAdapter=new FileListListAdapter(getSherlockActivity(),mContainerActivity);
   if (savedInstanceState != null) {
-    mFile=savedInstanceState.getParcelable(EXTRA_FILE);
-    mIndexes=savedInstanceState.getIntegerArrayList(KEY_INDEXES);
-    mFirstPositions=savedInstanceState.getIntegerArrayList(KEY_FIRST_POSITIONS);
-    mTops=savedInstanceState.getIntegerArrayList(KEY_TOPS);
-    mHeightCell=savedInstanceState.getInt(KEY_HEIGHT_CELL);
+    mFile=savedInstanceState.getParcelable(KEY_FILE);
   }
- else {
-    mIndexes=new ArrayList<Integer>();
-    mFirstPositions=new ArrayList<Integer>();
-    mTops=new ArrayList<Integer>();
-    mHeightCell=0;
-  }
-  mAdapter=new FileListListAdapter(getSherlockActivity(),mContainerActivity);
+  Bundle args=getArguments();
+  boolean justFolders=(args == null) ? false : args.getBoolean(ARG_JUST_FOLDERS,false);
+  mAdapter=new FileListListAdapter(justFolders,getSherlockActivity(),mContainerActivity);
   setListAdapter(mAdapter);
   registerForContextMenu(getListView());
   getListView().setOnCreateContextMenuListener(this);

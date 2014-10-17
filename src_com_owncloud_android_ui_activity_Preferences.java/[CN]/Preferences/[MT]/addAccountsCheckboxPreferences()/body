@@ -1,0 +1,56 @@
+{
+  if (mAccountsPrefCategory.getPreferenceCount() > 0) {
+    mAccountsPrefCategory.removeAll();
+  }
+  AccountManager am=(AccountManager)getSystemService(ACCOUNT_SERVICE);
+  Account accounts[]=am.getAccountsByType(MainApp.getAccountType());
+  Account currentAccount=AccountUtils.getCurrentOwnCloudAccount(getApplicationContext());
+  if (am.getAccountsByType(MainApp.getAccountType()).length == 0) {
+    am.addAccount(MainApp.getAccountType(),null,null,null,this,null,null);
+  }
+ else {
+    for (    Account a : accounts) {
+      LongClickableCheckBoxPreference accountPreference=new LongClickableCheckBoxPreference(this);
+      accountPreference.setKey(a.name);
+      accountPreference.setTitle(a.name);
+      mAccountsPrefCategory.addPreference(accountPreference);
+      if (a.name.equals(currentAccount.name)) {
+        accountPreference.setChecked(true);
+      }
+ else {
+        accountPreference.setChecked(false);
+      }
+      accountPreference.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
+        @Override public boolean onPreferenceChange(        Preference preference,        Object newValue){
+          String key=preference.getKey();
+          AccountManager am=(AccountManager)getSystemService(ACCOUNT_SERVICE);
+          Account accounts[]=am.getAccountsByType(MainApp.getAccountType());
+          for (          Account a : accounts) {
+            CheckBoxPreference p=(CheckBoxPreference)findPreference(a.name);
+            if (key.equals(a.name)) {
+              boolean accountChanged=!p.isChecked();
+              p.setChecked(true);
+              AccountUtils.setCurrentOwnCloudAccount(getApplicationContext(),a.name);
+              if (accountChanged) {
+                Intent i=new Intent(Preferences.this,FileDisplayActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+              }
+ else {
+                finish();
+              }
+            }
+ else {
+              p.setChecked(false);
+            }
+          }
+          return (Boolean)newValue;
+        }
+      }
+);
+    }
+    if (getResources().getBoolean(R.bool.multiaccount_support)) {
+      createAddAccountPreference();
+    }
+  }
+}

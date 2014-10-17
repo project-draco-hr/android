@@ -1,0 +1,12 @@
+{
+  if (isCancelled()) {
+    bitmap=null;
+  }
+  if (imageViewReference != null && bitmap != null) {
+    final ImageView imageView=imageViewReference.get();
+    final ThumbnailGenerationTask bitmapWorkerTask=getBitmapWorkerTask(imageView);
+    if (this == bitmapWorkerTask && imageView != null) {
+      imageView.setImageBitmap(bitmap);
+    }
+  }
+}

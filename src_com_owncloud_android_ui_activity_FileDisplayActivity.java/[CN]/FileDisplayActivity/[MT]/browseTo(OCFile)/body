@@ -7,7 +7,7 @@
     setNavigationListWithFolder(folder);
     listOfFiles.listDirectory(folder);
     setFile(listOfFiles.getCurrentFile());
-    startSyncFolderOperation(folder);
+    startSyncFolderOperation(folder,false);
   }
  else {
     Log_OC.e(TAG,"Unexpected null when accessing list fragment");

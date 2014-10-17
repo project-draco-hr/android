@@ -7,7 +7,7 @@
     OCFile root=getStorageManager().getFileByPath(OCFile.ROOT_PATH);
     listOfFiles.listDirectory(root);
     setFile(listOfFiles.getCurrentFile());
-    startSyncFolderOperation(root);
+    startSyncFolderOperation(root,false);
   }
   cleanSecondFragment();
 }

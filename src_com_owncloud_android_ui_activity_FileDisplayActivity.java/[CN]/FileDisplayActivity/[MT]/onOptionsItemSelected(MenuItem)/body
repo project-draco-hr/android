@@ -23,6 +23,12 @@ Intent settingsIntent=new Intent(this,Preferences.class);
 startActivity(settingsIntent);
 break;
 }
+case R.id.action_logger:
+{
+Intent loggerIntent=new Intent(getApplicationContext(),LogHistoryActivity.class);
+startActivity(loggerIntent);
+break;
+}
 case android.R.id.home:
 {
 FileFragment second=getSecondFragment();

@@ -1,0 +1,5 @@
+{
+  if (mEmptyListMessage != null) {
+    mEmptyListMessage.setText(message);
+  }
+}
