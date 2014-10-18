@@ -1,0 +1,5 @@
+{
+  super.onPostExecute(aVoid);
+  mProgressBar.setVisibility(View.GONE);
+  mTextPreviewList.setVisibility(View.VISIBLE);
+}

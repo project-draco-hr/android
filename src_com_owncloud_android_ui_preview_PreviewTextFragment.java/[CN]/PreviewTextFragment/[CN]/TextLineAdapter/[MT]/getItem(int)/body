@@ -1,0 +1,4 @@
+{
+  if (position >= items.size())   throw new IllegalArgumentException();
+  return items.get(position);
+}
