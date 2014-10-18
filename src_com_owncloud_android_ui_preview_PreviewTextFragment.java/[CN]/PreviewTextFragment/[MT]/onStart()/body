@@ -1,5 +1,4 @@
 {
   super.onStart();
   Log_OC.e(TAG,"onStart");
-  loadAndShowTextPreview(getFile().getStoragePath(),mTextPreview);
 }
