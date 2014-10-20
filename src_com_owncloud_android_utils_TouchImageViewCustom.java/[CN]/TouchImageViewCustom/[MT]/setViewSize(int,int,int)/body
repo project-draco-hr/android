@@ -1,0 +1,18 @@
+{
+  int viewSize;
+switch (mode) {
+case MeasureSpec.EXACTLY:
+    viewSize=size;
+  break;
+case MeasureSpec.AT_MOST:
+viewSize=Math.min(drawableWidth,size);
+break;
+case MeasureSpec.UNSPECIFIED:
+viewSize=drawableWidth;
+break;
+default :
+viewSize=size;
+break;
+}
+return viewSize;
+}

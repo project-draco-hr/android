@@ -1,4 +1,5 @@
 {
   mMediaController.setMediaPlayer(mVideoPreview);
-  mVideoPreview.setVideoPath(getFile().getStoragePath());
+  Uri uri=Uri.parse(getFile().getStoragePath());
+  mVideoPreview.setVideoPath(uri.encode(getFile().getStoragePath()));
 }

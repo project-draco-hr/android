@@ -11,7 +11,7 @@
     showServerStatus();
     Intent getServerInfoIntent=new Intent();
     getServerInfoIntent.setAction(OperationsService.ACTION_GET_SERVER_INFO);
-    getServerInfoIntent.putExtra(OperationsService.EXTRA_SERVER_URL,uri);
+    getServerInfoIntent.putExtra(OperationsService.EXTRA_SERVER_URL,normalizeUrlSuffix(uri));
     if (mOperationsServiceBinder != null) {
       mWaitingForOpId=mOperationsServiceBinder.newOperation(getServerInfoIntent);
     }

@@ -1,0 +1,6 @@
+{
+  float targetX=startTouch.x + t * (endTouch.x - startTouch.x);
+  float targetY=startTouch.y + t * (endTouch.y - startTouch.y);
+  PointF curr=transformCoordBitmapToTouch(bitmapX,bitmapY);
+  matrix.postTranslate(targetX - curr.x,targetY - curr.y);
+}

@@ -1,5 +1,0 @@
-{
-  final String cachePath=context.getExternalCacheDir().getPath();
-  Log_OC.d(TAG,"create dir: " + cachePath + File.separator+ uniqueName);
-  return new File(cachePath + File.separator + uniqueName);
-}

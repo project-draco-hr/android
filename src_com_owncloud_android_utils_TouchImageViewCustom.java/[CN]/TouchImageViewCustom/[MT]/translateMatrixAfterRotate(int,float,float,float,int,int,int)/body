@@ -1,0 +1,12 @@
+{
+  if (imageSize < viewSize) {
+    m[axis]=(viewSize - (drawableSize * m[Matrix.MSCALE_X])) * 0.5f;
+  }
+ else   if (trans > 0) {
+    m[axis]=-((imageSize - viewSize) * 0.5f);
+  }
+ else {
+    float percentage=(Math.abs(trans) + (0.5f * prevViewSize)) / prevImageSize;
+    m[axis]=-((percentage * imageSize) - (viewSize * 0.5f));
+  }
+}

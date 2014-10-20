@@ -1,0 +1,8 @@
+{
+  if (isPreGingerbread) {
+    return scroller.getCurrY();
+  }
+ else {
+    return overScroller.getCurrY();
+  }
+}

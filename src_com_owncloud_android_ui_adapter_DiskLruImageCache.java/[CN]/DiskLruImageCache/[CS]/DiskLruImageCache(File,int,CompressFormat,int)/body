@@ -1,0 +1,5 @@
+{
+  mDiskCache=DiskLruCache.open(diskCacheDir,CACHE_VERSION,VALUE_COUNT,diskCacheSize);
+  mCompressFormat=compressFormat;
+  mCompressQuality=quality;
+}

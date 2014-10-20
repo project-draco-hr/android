@@ -1,0 +1,17 @@
+{
+  Drawable drawable=getDrawable();
+  if (drawable == null || drawable.getIntrinsicWidth() == 0 || drawable.getIntrinsicHeight() == 0) {
+    setMeasuredDimension(0,0);
+    return;
+  }
+  int drawableWidth=drawable.getIntrinsicWidth();
+  int drawableHeight=drawable.getIntrinsicHeight();
+  int widthSize=MeasureSpec.getSize(widthMeasureSpec);
+  int widthMode=MeasureSpec.getMode(widthMeasureSpec);
+  int heightSize=MeasureSpec.getSize(heightMeasureSpec);
+  int heightMode=MeasureSpec.getMode(heightMeasureSpec);
+  viewWidth=setViewSize(widthMode,widthSize,drawableWidth);
+  viewHeight=setViewSize(heightMode,heightSize,drawableHeight);
+  setMeasuredDimension(viewWidth,viewHeight);
+  fitImageToView();
+}

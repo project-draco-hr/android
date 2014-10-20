@@ -1,0 +1,10 @@
+{
+  if (mScaleType == ScaleType.FIT_XY) {
+    throw new UnsupportedOperationException("getZoomedRect() not supported with FIT_XY");
+  }
+  PointF topLeft=transformCoordTouchToBitmap(0,0,true);
+  PointF bottomRight=transformCoordTouchToBitmap(viewWidth,viewHeight,true);
+  float w=getDrawable().getIntrinsicWidth();
+  float h=getDrawable().getIntrinsicHeight();
+  return new RectF(topLeft.x / w,topLeft.y / h,bottomRight.x / w,bottomRight.y / h);
+}

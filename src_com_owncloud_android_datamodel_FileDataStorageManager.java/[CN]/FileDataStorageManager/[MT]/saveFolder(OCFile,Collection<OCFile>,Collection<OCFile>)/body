@@ -38,6 +38,10 @@
       whereArgs=new String[]{mAccount.name,file.getRemotePath()};
       if (file.isFolder()) {
         operations.add(ContentProviderOperation.newDelete(ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_DIR,file.getFileId())).withSelection(where,whereArgs).build());
+        File localFolder=new File(FileStorageUtils.getDefaultSavePathFor(mAccount.name,file));
+        if (localFolder.exists()) {
+          removeLocalFolder(localFolder);
+        }
       }
  else {
         operations.add(ContentProviderOperation.newDelete(ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_FILE,file.getFileId())).withSelection(where,whereArgs).build());

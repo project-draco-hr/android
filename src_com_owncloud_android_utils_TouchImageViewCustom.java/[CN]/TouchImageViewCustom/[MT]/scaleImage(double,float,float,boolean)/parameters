@@ -1,0 +1,4 @@
+double deltaScale
+float focusX
+float focusY
+boolean stretchImageToSuper
