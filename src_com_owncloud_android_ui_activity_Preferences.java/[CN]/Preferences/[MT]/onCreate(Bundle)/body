@@ -6,6 +6,7 @@
   actionBar.setIcon(DisplayUtils.getSeasonalIconId());
   actionBar.setDisplayHomeAsUpEnabled(true);
   actionBar.setTitle(R.string.actionbar_settings);
+  loadInstantUploadPath();
   mAccountsPrefCategory=(PreferenceCategory)findPreference("accounts_category");
   ListView listView=getListView();
   listView.setOnItemLongClickListener(new OnItemLongClickListener(){
@@ -132,6 +133,14 @@
       preferenceCategory.removePreference(pImprint);
     }
   }
+  Preference pInstantUploadPathApp=(Preference)findPreference("instant_upload_path");
+  pInstantUploadPathApp.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
+    @Override public boolean onPreferenceChange(    Preference preference,    Object newValue){
+      mUploadPath=updateInstantUploadPath(newValue.toString());
+      return true;
+    }
+  }
+);
   pAboutApp=(Preference)findPreference("about_app");
   if (pAboutApp != null) {
     pAboutApp.setTitle(String.format(getString(R.string.about_android),getString(R.string.app_name)));
