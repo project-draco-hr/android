@@ -1,3 +1,3 @@
 {
-  mAdapter.setSortOrder(FileListListAdapter.mSortDate,descending);
+  mAdapter.setSortOrder(FileListListAdapter.SORT_DATE,descending);
 }
