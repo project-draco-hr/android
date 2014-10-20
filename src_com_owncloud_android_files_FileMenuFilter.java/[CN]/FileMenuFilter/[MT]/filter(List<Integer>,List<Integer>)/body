@@ -7,7 +7,7 @@
     FileUploaderBinder uploaderBinder=mComponentsGetter.getFileUploaderBinder();
     uploading=uploaderBinder != null && uploaderBinder.isUploading(mAccount,mFile);
   }
-  if (mFile == null || mFile.isFolder() || mFile.isDown() || downloading || uploading) {
+  if (mFile == null || mFile.isDown() || downloading || uploading) {
     toHide.add(R.id.action_download_file);
   }
  else {
