@@ -1,4 +1,4 @@
 {
-  Log_OC.d(SAML_DIALOG_TAG,"onCancel");
+  Log_OC.d(TAG,"onCancel");
   super.onCancel(dialog);
 }

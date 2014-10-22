@@ -1,9 +1,9 @@
 {
-  if (!instantUploadEnabled(context)) {
-    Log_OC.d(TAG,"Instant upload disabled, abording uploading");
+  if (!instantPictureUploadEnabled(context)) {
+    Log_OC.d(TAG,"Instant upload disabled, don't upload anything");
     return;
   }
-  if (!intent.hasExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY) && isOnline(context) && (!instantUploadViaWiFiOnly(context) || (instantUploadViaWiFiOnly(context) == isConnectedViaWiFi(context) == true))) {
+  if (!intent.hasExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY) && isOnline(context) && (!instantPictureUploadViaWiFiOnly(context) || (instantPictureUploadViaWiFiOnly(context) == isConnectedViaWiFi(context) == true))) {
     DbHandler db=new DbHandler(context);
     Cursor c=db.getAwaitingFiles();
     if (c.moveToFirst()) {

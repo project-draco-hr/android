@@ -1,4 +1,0 @@
-{
-  Log_OC.d(TAG,"onCreateDialog");
-  return super.onCreateDialog(savedInstanceState);
-}

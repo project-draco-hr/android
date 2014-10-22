@@ -2,9 +2,15 @@
   super.onAttach(activity);
   Log_OC.e(TAG,"onAttach");
   try {
-    mContainerActivity=(ContainerActivity)activity;
+    mContainerActivity=(FileFragment.ContainerActivity)activity;
   }
  catch (  ClassCastException e) {
-    throw new ClassCastException(activity.toString() + " must implement " + OCFileListFragment.ContainerActivity.class.getSimpleName());
+    throw new ClassCastException(activity.toString() + " must implement " + FileFragment.ContainerActivity.class.getSimpleName());
+  }
+  try {
+    setOnRefreshListener((OnEnforceableRefreshListener)activity);
+  }
+ catch (  ClassCastException e) {
+    throw new ClassCastException(activity.toString() + " must implement " + SwipeRefreshLayout.OnRefreshListener.class.getSimpleName());
   }
 }

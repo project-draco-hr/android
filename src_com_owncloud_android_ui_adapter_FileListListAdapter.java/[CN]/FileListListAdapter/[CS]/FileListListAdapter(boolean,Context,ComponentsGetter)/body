@@ -1,0 +1,7 @@
+{
+  mJustFolders=justFolders;
+  mContext=context;
+  mAccount=AccountUtils.getCurrentOwnCloudAccount(mContext);
+  mTransferServiceGetter=transferServiceGetter;
+  new ThumbnailsCacheManager.InitDiskCacheTask().execute();
+}

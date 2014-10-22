@@ -1,0 +1,10 @@
+{
+  Log_OC.d(TAG,"onCreate");
+  super.onCreate();
+  mDownloadReceiver=new DownloadCompletedReceiver();
+  IntentFilter filter=new IntentFilter();
+  filter.addAction(FileDownloader.getDownloadAddedMessage());
+  filter.addAction(FileDownloader.getDownloadFinishMessage());
+  registerReceiver(mDownloadReceiver,filter);
+  mFolderObserversMap=new HashMap<String,FolderObserver>();
+}

@@ -1,0 +1,5 @@
+{
+  mUrl=trimWebdavSuffix(url);
+  mContext=context;
+  mResultData=new ServerInfo();
+}

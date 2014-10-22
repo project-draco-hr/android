@@ -1,0 +1,7 @@
+{
+  getDialog().cancel();
+  if (mHandler != null) {
+    mHandler.cancel();
+  }
+  ((OnSslUntrustedCertListener)getSherlockActivity()).onCancelCertificate();
+}

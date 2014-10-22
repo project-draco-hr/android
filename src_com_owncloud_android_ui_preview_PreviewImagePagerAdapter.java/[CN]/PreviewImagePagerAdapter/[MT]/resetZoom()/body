@@ -1,0 +1,9 @@
+{
+  Iterator<FileFragment> entries=mCachedFragments.values().iterator();
+  while (entries.hasNext()) {
+    FileFragment fileFragment=(FileFragment)entries.next();
+    if (fileFragment instanceof PreviewImageFragment) {
+      ((PreviewImageFragment)fileFragment).getImageView().resetZoom();
+    }
+  }
+}

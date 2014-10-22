@@ -1,0 +1,17 @@
+{
+  long totalBytesSkipped=0L;
+  while (totalBytesSkipped < n) {
+    long bytesSkipped=in.skip(n - totalBytesSkipped);
+    if (bytesSkipped == 0L) {
+      int byteValue=read();
+      if (byteValue < 0) {
+        break;
+      }
+ else {
+        bytesSkipped=1;
+      }
+    }
+    totalBytesSkipped+=bytesSkipped;
+  }
+  return totalBytesSkipped;
+}

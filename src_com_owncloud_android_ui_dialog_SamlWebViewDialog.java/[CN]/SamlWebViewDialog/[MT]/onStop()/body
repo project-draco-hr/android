@@ -1,4 +1,4 @@
 {
-  Log_OC.d(SAML_DIALOG_TAG,"onStop");
+  Log_OC.d(TAG,"onStop");
   super.onStop();
 }

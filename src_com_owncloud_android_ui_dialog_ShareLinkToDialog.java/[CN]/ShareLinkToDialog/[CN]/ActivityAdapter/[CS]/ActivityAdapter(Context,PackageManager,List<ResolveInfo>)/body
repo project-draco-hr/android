@@ -1,0 +1,4 @@
+{
+  super(context,R.layout.activity_row,apps);
+  this.mPackageManager=pm;
+}

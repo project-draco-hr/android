@@ -1,0 +1,13 @@
+{
+  GetRemoteSharesOperation operation=new GetRemoteSharesOperation();
+  RemoteOperationResult result=operation.execute(client);
+  if (result.isSuccess()) {
+    Log_OC.d(TAG,"Share list size = " + result.getData().size());
+    ArrayList<OCShare> shares=new ArrayList<OCShare>();
+    for (    Object obj : result.getData()) {
+      shares.add((OCShare)obj);
+    }
+    getStorageManager().saveSharesDB(shares);
+  }
+  return result;
+}

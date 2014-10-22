@@ -5,11 +5,11 @@
       targetPath=mDirectories.getItem(i) + OCFile.PATH_SEPARATOR + targetPath;
     }
     targetPath=OCFile.PATH_SEPARATOR + targetPath;
-    OCFile targetFolder=mStorageManager.getFileByPath(targetPath);
+    OCFile targetFolder=getStorageManager().getFileByPath(targetPath);
     if (targetFolder != null) {
       browseTo(targetFolder);
     }
-    getSupportActionBar().setSelectedNavigationItem(0);
+    if (getSupportActionBar().getNavigationMode() == ActionBar.NAVIGATION_MODE_LIST && itemPosition != 0)     getSupportActionBar().setSelectedNavigationItem(0);
   }
   return true;
 }

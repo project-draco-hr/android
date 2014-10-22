@@ -1,3 +1,0 @@
-def set_log_level(level):
-    'Set the level for the logger.\n\n    Args:\n        level: A string among DEBUG, INFO, WARNING, ERROR, CRITICAL.\n    '
-    logger.setLevel(getattr(logging, level))

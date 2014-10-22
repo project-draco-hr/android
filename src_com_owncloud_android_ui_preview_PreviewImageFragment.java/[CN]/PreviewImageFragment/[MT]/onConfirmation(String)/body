@@ -1,9 +1,0 @@
-{
-  if (mStorageManager.getFileById(getFile().getFileId()) != null) {
-    String path=new File(getFile().getStoragePath()).getParent();
-    mLastRemoteOperation=new RemoveFileOperation(getFile(),true,mStorageManager);
-    mLastRemoteOperation.execute(mAccount,getSherlockActivity(),this,mHandler,getSherlockActivity());
-    ((PreviewImageActivity)getActivity()).showLoadingDialog();
-    triggerMediaScan(path);
-  }
-}

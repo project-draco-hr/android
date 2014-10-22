@@ -1,0 +1,14 @@
+{
+  float minTrans, maxTrans;
+  if (contentSize <= viewSize) {
+    minTrans=0;
+    maxTrans=viewSize - contentSize;
+  }
+ else {
+    minTrans=viewSize - contentSize;
+    maxTrans=0;
+  }
+  if (trans < minTrans)   return -trans + minTrans;
+  if (trans > maxTrans)   return -trans + maxTrans;
+  return 0;
+}

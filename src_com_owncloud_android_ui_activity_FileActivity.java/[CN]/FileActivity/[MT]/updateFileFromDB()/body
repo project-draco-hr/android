@@ -1,0 +1,7 @@
+{
+  OCFile file=getFile();
+  if (file != null) {
+    file=getStorageManager().getFileByPath(file.getRemotePath());
+    setFile(file);
+  }
+}

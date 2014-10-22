@@ -1,3 +1,0 @@
-{
-  return authenticate(credentials,"ISO-8859-1");
-}

@@ -1,0 +1,10 @@
+{
+  boolean pinStart=false;
+  SharedPreferences appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+  pinStart=appPrefs.getBoolean("set_pincode",false);
+  if (pinStart) {
+    Intent i=new Intent(getApplicationContext(),PinCodeActivity.class);
+    i.putExtra(PinCodeActivity.EXTRA_ACTIVITY,"PreviewImageActivity");
+    startActivity(i);
+  }
+}

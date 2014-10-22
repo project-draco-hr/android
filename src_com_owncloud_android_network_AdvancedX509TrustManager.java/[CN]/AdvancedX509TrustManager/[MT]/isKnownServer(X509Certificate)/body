@@ -1,9 +1,0 @@
-{
-  try {
-    return (mKnownServersKeyStore.getCertificateAlias(cert) != null);
-  }
- catch (  KeyStoreException e) {
-    Log_OC.d(TAG,"Fail while checking certificate in the known-servers store");
-    return false;
-  }
-}

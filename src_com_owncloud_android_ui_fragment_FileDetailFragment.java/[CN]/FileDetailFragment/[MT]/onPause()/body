@@ -1,7 +1,0 @@
-{
-  super.onPause();
-  if (mUploadFinishReceiver != null) {
-    getActivity().unregisterReceiver(mUploadFinishReceiver);
-    mUploadFinishReceiver=null;
-  }
-}

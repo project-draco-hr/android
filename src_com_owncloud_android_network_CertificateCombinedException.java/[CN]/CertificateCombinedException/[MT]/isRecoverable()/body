@@ -1,3 +1,0 @@
-{
-  return (mCertificateExpiredException != null || mCertificateNotYetValidException != null || mCertPathValidatorException != null || mSslPeerUnverifiedException != null);
-}

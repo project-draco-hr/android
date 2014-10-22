@@ -1,4 +1,0 @@
-def popitem(self):
-    (key, val) = dict.popitem(self)
-    dict.__delitem__(self._flip, val)
-    return (key, val)

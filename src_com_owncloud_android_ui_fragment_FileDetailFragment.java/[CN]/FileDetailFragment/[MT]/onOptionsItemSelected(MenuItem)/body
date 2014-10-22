@@ -1,26 +1,53 @@
 {
 switch (item.getItemId()) {
-case R.id.action_open_file_with:
+case R.id.action_share_file:
 {
-      mContainerActivity.openFile(getFile());
+      mContainerActivity.getFileOperationsHelper().shareFileWithLink(getFile());
       return true;
     }
-case R.id.action_remove_file:
+case R.id.action_unshare_file:
 {
-    removeFile();
+    mContainerActivity.getFileOperationsHelper().unshareFileWithLink(getFile());
     return true;
   }
-case R.id.action_rename_file:
+case R.id.action_open_file_with:
 {
-  renameFile();
+  mContainerActivity.getFileOperationsHelper().openFile(getFile());
   return true;
 }
-case R.id.action_download_file:
+case R.id.action_remove_file:
+{
+RemoveFileDialogFragment dialog=RemoveFileDialogFragment.newInstance(getFile());
+dialog.show(getFragmentManager(),FTAG_CONFIRMATION);
+return true;
+}
+case R.id.action_rename_file:
+{
+RenameFileDialogFragment dialog=RenameFileDialogFragment.newInstance(getFile());
+dialog.show(getFragmentManager(),FTAG_RENAME_FILE);
+return true;
+}
 case R.id.action_cancel_download:
 case R.id.action_cancel_upload:
+{
+((FileDisplayActivity)mContainerActivity).cancelTransference(getFile());
+return true;
+}
+case R.id.action_download_file:
 case R.id.action_sync_file:
 {
-synchronizeFile();
+mContainerActivity.getFileOperationsHelper().syncFile(getFile());
+return true;
+}
+case R.id.action_send_file:
+{
+if (!getFile().isDown()) {
+Log_OC.d(TAG,getFile().getRemotePath() + " : File must be downloaded");
+((FileDisplayActivity)mContainerActivity).startDownloadForSending(getFile());
+}
+ else {
+mContainerActivity.getFileOperationsHelper().sendDownloadedFile(getFile());
+}
 return true;
 }
 default :

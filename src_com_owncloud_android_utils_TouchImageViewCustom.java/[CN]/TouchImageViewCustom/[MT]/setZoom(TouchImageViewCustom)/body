@@ -1,0 +1,4 @@
+{
+  PointF center=img.getScrollPosition();
+  setZoom(img.getCurrentZoom(),center.x,center.y,img.getScaleType());
+}

@@ -1,0 +1,18 @@
+{
+  Cursor c;
+  if (getContentResolver() != null) {
+    c=getContentResolver().query(ProviderTableMeta.CONTENT_URI_SHARE,null,cmp_key + "=? AND " + ProviderTableMeta.OCSHARES_ACCOUNT_OWNER+ "=?",new String[]{value,mAccount.name},null);
+  }
+ else {
+    try {
+      c=getContentProviderClient().query(ProviderTableMeta.CONTENT_URI_SHARE,null,cmp_key + "=? AND " + ProviderTableMeta.OCSHARES_ACCOUNT_OWNER+ "=?",new String[]{value,mAccount.name},null);
+    }
+ catch (    RemoteException e) {
+      Log_OC.e(TAG,"Couldn't determine file existance, assuming non existance: " + e.getMessage());
+      return false;
+    }
+  }
+  boolean retval=c.moveToFirst();
+  c.close();
+  return retval;
+}

@@ -1,3 +1,6 @@
 {
   mCancellationRequested.set(true);
+  if (mDownloadOperation != null) {
+    mDownloadOperation.cancel();
+  }
 }

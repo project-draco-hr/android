@@ -1,6 +1,0 @@
-def color_text(text, color_name, bold=False):
-    '\n    This command can be used to colorify command line output. If the shell\n    doesn\'t support this or the --disable-colors options has been set, it just\n    returns the plain text.\n\n    Usage:\n        print "%s" % color_text("This text is red", "RED")\n    '
-    if ((color_name in COLORS) and (not DISABLE_COLORS)):
-        return ('\x1b[%s;%sm%s\x1b[0m' % (int(bold), (COLORS.index(color_name) + 30), text))
-    else:
-        return text

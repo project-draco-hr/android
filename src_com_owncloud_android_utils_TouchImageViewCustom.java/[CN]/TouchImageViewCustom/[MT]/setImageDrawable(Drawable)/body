@@ -1,0 +1,5 @@
+{
+  super.setImageDrawable(drawable);
+  savePreviousImageValues();
+  fitImageToView();
+}

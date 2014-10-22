@@ -1,5 +1,0 @@
-{
-  mVersion=0;
-  mIsValid=false;
-  parseVersionString(version);
-}

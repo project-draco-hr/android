@@ -1,5 +1,0 @@
-{
-  String accountName=((TextView)v.findViewById(android.R.id.text1)).getText().toString();
-  AccountUtils.setCurrentOwnCloudAccount(this,accountName);
-  finish();
-}

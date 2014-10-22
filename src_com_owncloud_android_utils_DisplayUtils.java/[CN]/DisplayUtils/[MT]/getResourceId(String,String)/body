@@ -1,0 +1,51 @@
+{
+  if (mimetype == null || "DIR".equals(mimetype)) {
+    return R.drawable.ic_menu_archive;
+  }
+ else {
+    String[] parts=mimetype.split("/");
+    String type=parts[0];
+    String subtype=(parts.length > 1) ? parts[1] : "";
+    if (TYPE_TXT.equals(type)) {
+      return R.drawable.file_doc;
+    }
+ else     if (TYPE_IMAGE.equals(type)) {
+      return R.drawable.file_image;
+    }
+ else     if (TYPE_VIDEO.equals(type)) {
+      return R.drawable.file_movie;
+    }
+ else     if (TYPE_AUDIO.equals(type)) {
+      return R.drawable.file_sound;
+    }
+ else     if (TYPE_APPLICATION.equals(type)) {
+      if (SUBTYPE_PDF.equals(subtype)) {
+        return R.drawable.file_pdf;
+      }
+ else       if (SUBTYPES_DOCUMENT_SET.contains(subtype)) {
+        return R.drawable.file_doc;
+      }
+ else       if (SUBTYPES_SPREADSHEET_SET.contains(subtype)) {
+        return R.drawable.file_xls;
+      }
+ else       if (SUBTYPES_PRESENTATION_SET.contains(subtype)) {
+        return R.drawable.file_ppt;
+      }
+ else       if (SUBTYPES_COMPRESSED_SET.contains(subtype)) {
+        return R.drawable.file_zip;
+      }
+ else       if (SUBTYPE_OCTET_STREAM.equals(subtype)) {
+        if (getExtension(filename).equalsIgnoreCase(EXTENSION_RAR)) {
+          return R.drawable.file_zip;
+        }
+ else         if (getExtension(filename).equalsIgnoreCase(EXTENSION_RTF)) {
+          return R.drawable.file_doc;
+        }
+ else         if (getExtension(filename).equalsIgnoreCase(EXTENSION_3GP)) {
+          return R.drawable.file_movie;
+        }
+      }
+    }
+  }
+  return R.drawable.file;
+}

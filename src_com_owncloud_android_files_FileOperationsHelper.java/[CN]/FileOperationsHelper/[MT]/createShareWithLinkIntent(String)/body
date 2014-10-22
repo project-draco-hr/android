@@ -1,0 +1,6 @@
+{
+  Intent intentToShareLink=new Intent(Intent.ACTION_SEND);
+  intentToShareLink.putExtra(Intent.EXTRA_TEXT,link);
+  intentToShareLink.setType(HTTP.PLAIN_TEXT_TYPE);
+  return intentToShareLink;
+}

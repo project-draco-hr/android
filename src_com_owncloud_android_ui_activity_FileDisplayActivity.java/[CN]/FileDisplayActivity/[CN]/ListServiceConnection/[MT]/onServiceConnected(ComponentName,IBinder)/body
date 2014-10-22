@@ -2,8 +2,11 @@
   if (component.equals(new ComponentName(FileDisplayActivity.this,FileDownloader.class))) {
     Log_OC.d(TAG,"Download service connected");
     mDownloaderBinder=(FileDownloaderBinder)service;
-    if (mWaitingToPreview != null) {
-      requestForDownload();
+    if (mWaitingToPreview != null)     if (getStorageManager() != null) {
+      mWaitingToPreview=getStorageManager().getFileById(mWaitingToPreview.getFileId());
+      if (!mWaitingToPreview.isDown()) {
+        requestForDownload();
+      }
     }
   }
  else   if (component.equals(new ComponentName(FileDisplayActivity.this,FileUploader.class))) {

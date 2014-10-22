@@ -1,7 +1,0 @@
-def status_parser():
-    'Return the command-line parser for the status command.'
-    usage = 'usage: %prog [tx_options] status [options]'
-    description = 'Prints the status of the current project by reading the data in the configuration file.'
-    parser = OptionParser(usage=usage, description=description)
-    parser.add_option('-r', '--resource', action='store', dest='resources', default=[], help='Specify resources')
-    return parser

@@ -13,4 +13,9 @@
   mLastSyncDateForProperties=source.readLong();
   mLastSyncDateForData=source.readLong();
   mEtag=source.readString();
+  mShareByLink=source.readInt() == 1;
+  mPublicLink=source.readString();
+  mPermissions=source.readString();
+  mRemoteId=source.readString();
+  mNeedsUpdateThumbnail=source.readInt() == 0;
 }

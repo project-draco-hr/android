@@ -1,16 +1,15 @@
 {
-  if (mDiscoveredVersion == null || !mDiscoveredVersion.isVersionValid() || mHostBaseUrl == null || mHostBaseUrl.length() == 0) {
+  if (mServerInfo.mVersion == null || !mServerInfo.mVersion.isVersionValid() || mServerInfo.mBaseUrl == null || mServerInfo.mBaseUrl.length() == 0) {
     mServerStatusIcon=R.drawable.common_error;
     mServerStatusText=R.string.auth_wtf_reenter_URL;
     showServerStatus();
     mOkButton.setEnabled(false);
-    Log_OC.wtf(TAG,"The user was allowed to click 'connect' to an unchecked server!!");
     return;
   }
-  if (MainApp.getAuthTokenTypeAccessToken().equals(mAuthTokenType)) {
+  if (AccountTypeUtils.getAuthTokenTypeAccessToken(MainApp.getAccountType()).equals(mAuthTokenType)) {
     startOauthorization();
   }
- else   if (MainApp.getAuthTokenTypeSamlSessionCookie().equals(mAuthTokenType)) {
+ else   if (AccountTypeUtils.getAuthTokenTypeSamlSessionCookie(MainApp.getAccountType()).equals(mAuthTokenType)) {
     startSamlBasedFederatedSingleSignOnAuthorization();
   }
  else {

@@ -1,0 +1,13 @@
+{
+  OCFileListFragment ocFileListFragment=getListOfFilesFragment();
+  if (ocFileListFragment != null) {
+    int message=R.string.file_list_loading;
+    if (!mSyncInProgress) {
+      message=R.string.file_list_empty;
+    }
+    ocFileListFragment.setMessageForEmptyList(getString(message));
+  }
+ else {
+    Log_OC.e(TAG,"OCFileListFragment is null");
+  }
+}

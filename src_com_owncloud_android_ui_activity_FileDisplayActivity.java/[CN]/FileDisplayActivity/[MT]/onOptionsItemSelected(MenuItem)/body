@@ -3,7 +3,7 @@
 switch (item.getItemId()) {
 case R.id.action_create_dir:
 {
-      EditNameDialog dialog=EditNameDialog.newInstance(getString(R.string.uploader_info_dirname),"",-1,-1,this);
+      CreateFolderDialogFragment dialog=CreateFolderDialogFragment.newInstance(getCurrentDir());
       dialog.show(getSupportFragmentManager(),"createdirdialog");
       break;
     }
@@ -21,6 +21,12 @@ case R.id.action_settings:
 {
 Intent settingsIntent=new Intent(this,Preferences.class);
 startActivity(settingsIntent);
+break;
+}
+case R.id.action_logger:
+{
+Intent loggerIntent=new Intent(getApplicationContext(),LogHistoryActivity.class);
+startActivity(loggerIntent);
 break;
 }
 case android.R.id.home:

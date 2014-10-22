@@ -1,28 +1,30 @@
 {
+  boolean success=true;
   if (file != null) {
     if (file.isFolder()) {
-      removeFolder(file,removeDBData,removeLocalCopy);
+      success=removeFolder(file,removeDBData,removeLocalCopy);
     }
  else {
       if (removeDBData) {
         Uri file_uri=ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_FILE,file.getFileId());
         String where=ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?" + " AND "+ ProviderTableMeta.FILE_PATH+ "=?";
         String[] whereArgs=new String[]{mAccount.name,file.getRemotePath()};
+        int deleted=0;
         if (getContentProviderClient() != null) {
           try {
-            getContentProviderClient().delete(file_uri,where,whereArgs);
+            deleted=getContentProviderClient().delete(file_uri,where,whereArgs);
           }
  catch (          RemoteException e) {
             e.printStackTrace();
           }
         }
  else {
-          getContentResolver().delete(file_uri,where,whereArgs);
+          deleted=getContentResolver().delete(file_uri,where,whereArgs);
         }
-        updateFolderSize(file.getParentId());
+        success&=(deleted > 0);
       }
-      if (removeLocalCopy && file.isDown()) {
-        boolean success=new File(file.getStoragePath()).delete();
+      if (removeLocalCopy && file.isDown() && file.getStoragePath() != null && success) {
+        success=new File(file.getStoragePath()).delete();
         if (!removeDBData && success) {
           file.setStoragePath(null);
           saveFile(file);
@@ -30,4 +32,5 @@
       }
     }
   }
+  return success;
 }

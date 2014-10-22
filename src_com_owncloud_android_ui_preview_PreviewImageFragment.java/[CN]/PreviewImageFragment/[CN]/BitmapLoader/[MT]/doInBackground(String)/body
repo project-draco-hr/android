@@ -3,50 +3,22 @@
   if (params.length != 1)   return result;
   String storagePath=params[0];
   try {
-    BitmapFactory.Options options=new Options();
-    options.inScaled=true;
-    options.inPurgeable=true;
-    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.GINGERBREAD_MR1) {
-      options.inPreferQualityOverSpeed=false;
+    File picture=new File(storagePath);
+    if (picture != null) {
+      result=BitmapFactory.decodeStream(new FlushedInputStream(new BufferedInputStream(new FileInputStream(picture))));
     }
-    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
-      options.inMutable=false;
-    }
-    options.inJustDecodeBounds=true;
-    BitmapFactory.decodeFile(storagePath,options);
-    int width=options.outWidth;
-    int height=options.outHeight;
-    int scale=1;
-    Display display=getActivity().getWindowManager().getDefaultDisplay();
-    Point size=new Point();
-    int screenWidth;
-    int screenHeight;
-    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB_MR2) {
-      display.getSize(size);
-      screenWidth=size.x;
-      screenHeight=size.y;
-    }
- else {
-      screenWidth=display.getWidth();
-      screenHeight=display.getHeight();
-    }
-    if (width > screenWidth) {
-      scale=(int)Math.floor((float)width / screenWidth);
-    }
-    if (height > screenHeight) {
-      scale=Math.max(scale,(int)Math.floor((float)height / screenHeight));
-    }
-    options.inSampleSize=scale;
-    options.inJustDecodeBounds=false;
-    result=BitmapFactory.decodeFile(storagePath,options);
     if (result == null) {
       mErrorMessageId=R.string.preview_image_error_unknown_format;
       Log_OC.e(TAG,"File could not be loaded as a bitmap: " + storagePath);
     }
   }
  catch (  OutOfMemoryError e) {
-    mErrorMessageId=R.string.preview_image_error_unknown_format;
     Log_OC.e(TAG,"Out of memory occured for file " + storagePath,e);
+    result=loadScaledImage(storagePath);
+    if (result == null) {
+      mErrorMessageId=R.string.preview_image_error_unknown_format;
+      Log_OC.e(TAG,"File could not be loaded as a bitmap: " + storagePath);
+    }
   }
 catch (  NoSuchFieldError e) {
     mErrorMessageId=R.string.common_error_unknown;

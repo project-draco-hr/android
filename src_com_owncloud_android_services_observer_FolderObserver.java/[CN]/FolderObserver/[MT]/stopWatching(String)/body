@@ -1,0 +1,9 @@
+{
+synchronized (mObservedChildren) {
+    mObservedChildren.remove(fileName);
+    if (mObservedChildren.isEmpty()) {
+      stopWatching();
+      Log_OC.d(TAG,"Stopped watching parent folder " + mPath + "/");
+    }
+  }
+}

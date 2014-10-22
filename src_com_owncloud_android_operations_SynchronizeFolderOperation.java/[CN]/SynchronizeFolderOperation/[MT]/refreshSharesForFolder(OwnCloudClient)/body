@@ -1,0 +1,13 @@
+{
+  RemoteOperationResult result=null;
+  GetRemoteSharesForFileOperation operation=new GetRemoteSharesForFileOperation(mLocalFolder.getRemotePath(),false,true);
+  result=operation.execute(client);
+  if (result.isSuccess()) {
+    ArrayList<OCShare> shares=new ArrayList<OCShare>();
+    for (    Object obj : result.getData()) {
+      shares.add((OCShare)obj);
+    }
+    mStorageManager.saveSharesInFolder(shares,mLocalFolder);
+  }
+  return result;
+}

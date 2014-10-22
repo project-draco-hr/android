@@ -1,13 +1,10 @@
 {
   int i;
   OCFile newFile=null;
-  String etag=null;
-  boolean syncDown=false;
   for (i=0; i < files.size() && !mCancellation; i++) {
     newFile=files.get(i);
     if (newFile.isFolder()) {
       synchronizeFolder(newFile);
-      sendStickyBroadcast(true,parent.getRemotePath(),null);
     }
   }
   if (mCancellation && i < files.size())   Log_OC.d(TAG,"Leaving synchronization before synchronizing " + files.get(i).getRemotePath() + " due to cancelation request");

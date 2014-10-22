@@ -1,0 +1,58 @@
+{
+  Drawable drawable=getDrawable();
+  if (drawable == null || drawable.getIntrinsicWidth() == 0 || drawable.getIntrinsicHeight() == 0) {
+    return;
+  }
+  if (matrix == null || prevMatrix == null) {
+    return;
+  }
+  int drawableWidth=drawable.getIntrinsicWidth();
+  int drawableHeight=drawable.getIntrinsicHeight();
+  float scaleX=(float)viewWidth / drawableWidth;
+  float scaleY=(float)viewHeight / drawableHeight;
+switch (mScaleType) {
+case CENTER:
+    scaleX=scaleY=1;
+  break;
+case CENTER_CROP:
+scaleX=scaleY=Math.max(scaleX,scaleY);
+break;
+case CENTER_INSIDE:
+scaleX=scaleY=Math.min(1,Math.min(scaleX,scaleY));
+case FIT_CENTER:
+scaleX=scaleY=Math.min(scaleX,scaleY);
+break;
+case FIT_XY:
+break;
+default :
+throw new UnsupportedOperationException("TouchImageView does not support FIT_START or FIT_END");
+}
+float redundantXSpace=viewWidth - (scaleX * drawableWidth);
+float redundantYSpace=viewHeight - (scaleY * drawableHeight);
+matchViewWidth=viewWidth - redundantXSpace;
+matchViewHeight=viewHeight - redundantYSpace;
+if (!isZoomed() && !imageRenderedAtLeastOnce) {
+matrix.setScale(scaleX,scaleY);
+matrix.postTranslate(redundantXSpace / 2,redundantYSpace / 2);
+normalizedScale=1;
+}
+ else {
+if (prevMatchViewWidth == 0 || prevMatchViewHeight == 0) {
+savePreviousImageValues();
+}
+prevMatrix.getValues(m);
+m[Matrix.MSCALE_X]=matchViewWidth / drawableWidth * normalizedScale;
+m[Matrix.MSCALE_Y]=matchViewHeight / drawableHeight * normalizedScale;
+float transX=m[Matrix.MTRANS_X];
+float transY=m[Matrix.MTRANS_Y];
+float prevActualWidth=prevMatchViewWidth * normalizedScale;
+float actualWidth=getImageWidth();
+translateMatrixAfterRotate(Matrix.MTRANS_X,transX,prevActualWidth,actualWidth,prevViewWidth,viewWidth,drawableWidth);
+float prevActualHeight=prevMatchViewHeight * normalizedScale;
+float actualHeight=getImageHeight();
+translateMatrixAfterRotate(Matrix.MTRANS_Y,transY,prevActualHeight,actualHeight,prevViewHeight,viewHeight,drawableHeight);
+matrix.setValues(m);
+}
+fixTrans();
+setImageMatrix(matrix);
+}

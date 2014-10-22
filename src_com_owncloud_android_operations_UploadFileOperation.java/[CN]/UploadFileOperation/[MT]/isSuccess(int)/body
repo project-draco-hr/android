@@ -1,3 +1,0 @@
-{
-  return ((status == HttpStatus.SC_OK || status == HttpStatus.SC_CREATED || status == HttpStatus.SC_NO_CONTENT));
-}

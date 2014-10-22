@@ -9,6 +9,9 @@
     return Service.START_NOT_STICKY;
   }
   Account account=intent.getParcelableExtra(KEY_ACCOUNT);
+  if (!AccountUtils.exists(account,getApplicationContext())) {
+    return Service.START_NOT_STICKY;
+  }
   String[] localPaths=null, remotePaths=null, mimeTypes=null;
   OCFile[] files=null;
   if (uploadType == UPLOAD_SINGLE_FILE) {
@@ -60,7 +63,9 @@
       }
     }
   }
-  OwnCloudVersion ocv=new OwnCloudVersion(AccountManager.get(this).getUserData(account,AccountAuthenticator.KEY_OC_VERSION));
+  AccountManager aMgr=AccountManager.get(this);
+  String version=aMgr.getUserData(account,Constants.KEY_OC_VERSION);
+  OwnCloudVersion ocv=new OwnCloudVersion(version);
   boolean chunked=FileUploader.chunkedUploadIsSupported(ocv);
   AbstractList<String> requestedUploads=new Vector<String>();
   String uploadKey=null;
@@ -68,12 +73,7 @@
   try {
     for (int i=0; i < files.length; i++) {
       uploadKey=buildRemoteName(account,files[i].getRemotePath());
-      if (chunked) {
-        newUpload=new ChunkedUploadFileOperation(account,files[i],isInstant,forceOverwrite,localAction);
-      }
- else {
-        newUpload=new UploadFileOperation(account,files[i],isInstant,forceOverwrite,localAction);
-      }
+      newUpload=new UploadFileOperation(account,files[i],chunked,isInstant,forceOverwrite,localAction,getApplicationContext());
       if (isInstant) {
         newUpload.setRemoteFolderToBeCreated();
       }

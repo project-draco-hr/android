@@ -1,0 +1,8 @@
+{
+  mLocalFile=localFile;
+  mServerFile=serverFile;
+  mRemotePath=localFile.getRemotePath();
+  mAccount=account;
+  mSyncFileContents=syncFileContents;
+  mContext=context;
+}

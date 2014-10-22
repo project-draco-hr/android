@@ -1,4 +1,0 @@
-def __init__(self, path_to_tx=None, init=True):
-    '\n        Initialize the Project attributes.\n        '
-    if init:
-        self._init(path_to_tx)

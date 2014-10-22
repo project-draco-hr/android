@@ -1,0 +1,8 @@
+{
+  if (isPreGingerbread) {
+    scroller.fling(startX,startY,velocityX,velocityY,minX,maxX,minY,maxY);
+  }
+ else {
+    overScroller.fling(startX,startY,velocityX,velocityY,minX,maxX,minY,maxY);
+  }
+}

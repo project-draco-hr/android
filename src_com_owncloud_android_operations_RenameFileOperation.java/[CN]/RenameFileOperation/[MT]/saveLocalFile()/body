@@ -8,5 +8,5 @@
       mFile.setStoragePath(parentStoragePath + mNewName);
     }
   }
-  mStorageManager.saveFile(mFile);
+  getStorageManager().saveFile(mFile);
 }
