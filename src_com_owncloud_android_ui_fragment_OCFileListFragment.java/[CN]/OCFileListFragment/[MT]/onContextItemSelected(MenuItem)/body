@@ -28,9 +28,6 @@ case R.id.action_download_file:
 case R.id.action_sync_file:
 {
 mContainerActivity.getFileOperationsHelper().syncFile(mTargetFile);
-Log_OC.d("mediascan","path: " + mTargetFile.getRemotePath());
-FileDataStorageManager storageManager=mContainerActivity.getStorageManager();
-Log_OC.d("mediaScan","path: " + storageManager.getFileByPath(mTargetFile.getRemotePath()).getStoragePath());
 return true;
 }
 case R.id.action_cancel_download:
