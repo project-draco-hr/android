@@ -74,6 +74,11 @@ case R.id.action_unfavorite_file:
 mContainerActivity.getFileOperationsHelper().toggleFavorite(mTargetFile,false);
 return true;
 }
+case R.id.action_copy:
+Intent action=new Intent(getActivity(),CopyActivity.class);
+action.putExtra(FolderPickerActivity.EXTRA_FILE,mTargetFile);
+getActivity().startActivityForResult(action,FileDisplayActivity.ACTION_COPY_FILES);
+return true;
 default :
 return super.onContextItemSelected(item);
 }

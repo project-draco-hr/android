@@ -1,0 +1,8 @@
+{
+  Fragment listOfFiles=getSupportFragmentManager().findFragmentByTag(CopyActivity.TAG_LIST_OF_FOLDERS);
+  if (listOfFiles != null) {
+    return (OCFileListFragment)listOfFiles;
+  }
+  Log_OC.wtf(TAG,"Access to unexisting list of files fragment!!");
+  return null;
+}
