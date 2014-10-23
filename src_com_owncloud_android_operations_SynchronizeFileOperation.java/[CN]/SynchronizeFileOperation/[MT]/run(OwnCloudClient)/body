@@ -33,6 +33,7 @@
         result=new RemoteOperationResult(ResultCode.OK);
       }
  else       if (serverChanged) {
+        mLocalFile.setRemoteId(mServerFile.getRemoteId());
         if (mSyncFileContents) {
           requestForDownload(mLocalFile);
         }

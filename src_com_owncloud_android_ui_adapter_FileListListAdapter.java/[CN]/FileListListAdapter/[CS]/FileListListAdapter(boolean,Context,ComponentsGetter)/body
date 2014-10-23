@@ -3,6 +3,5 @@
   mContext=context;
   mAccount=AccountUtils.getCurrentOwnCloudAccount(mContext);
   mTransferServiceGetter=transferServiceGetter;
-  defaultImg=BitmapFactory.decodeResource(mContext.getResources(),DisplayUtils.getResourceId("image/png","default.png"));
-  new InitDiskCacheTask().execute();
+  new ThumbnailsCacheManager.InitDiskCacheTask().execute();
 }

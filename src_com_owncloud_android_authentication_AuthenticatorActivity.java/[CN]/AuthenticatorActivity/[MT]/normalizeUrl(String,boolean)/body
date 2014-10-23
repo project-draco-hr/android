@@ -9,10 +9,7 @@
         url="http://" + url;
       }
     }
-    url=trimUrlWebdav(url);
-    if (url.endsWith("/")) {
-      url=url.substring(0,url.length() - 1);
-    }
+    url=normalizeUrlSuffix(url);
   }
   return (url != null ? url : "");
 }

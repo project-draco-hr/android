@@ -1,0 +1,37 @@
+{
+  mScaleDetector.onTouchEvent(event);
+  mGestureDetector.onTouchEvent(event);
+  PointF curr=new PointF(event.getX(),event.getY());
+  if (state == State.NONE || state == State.DRAG || state == State.FLING) {
+switch (event.getAction()) {
+case MotionEvent.ACTION_DOWN:
+      last.set(curr);
+    if (fling != null)     fling.cancelFling();
+  setState(State.DRAG);
+break;
+case MotionEvent.ACTION_MOVE:
+if (state == State.DRAG) {
+float deltaX=curr.x - last.x;
+float deltaY=curr.y - last.y;
+float fixTransX=getFixDragTrans(deltaX,viewWidth,getImageWidth());
+float fixTransY=getFixDragTrans(deltaY,viewHeight,getImageHeight());
+matrix.postTranslate(fixTransX,fixTransY);
+fixTrans();
+last.set(curr.x,curr.y);
+}
+break;
+case MotionEvent.ACTION_UP:
+case MotionEvent.ACTION_POINTER_UP:
+setState(State.NONE);
+break;
+}
+}
+setImageMatrix(matrix);
+if (userTouchListener != null) {
+userTouchListener.onTouch(v,event);
+}
+if (touchImageViewListener != null) {
+touchImageViewListener.onMove();
+}
+return true;
+}

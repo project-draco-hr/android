@@ -1,0 +1,16 @@
+{
+  if (state instanceof Bundle) {
+    Bundle bundle=(Bundle)state;
+    normalizedScale=bundle.getFloat("saveScale");
+    m=bundle.getFloatArray("matrix");
+    prevMatrix.setValues(m);
+    prevMatchViewHeight=bundle.getFloat("matchViewHeight");
+    prevMatchViewWidth=bundle.getFloat("matchViewWidth");
+    prevViewHeight=bundle.getInt("viewHeight");
+    prevViewWidth=bundle.getInt("viewWidth");
+    imageRenderedAtLeastOnce=bundle.getBoolean("imageRendered");
+    super.onRestoreInstanceState(bundle.getParcelable("instanceState"));
+    return;
+  }
+  super.onRestoreInstanceState(state);
+}

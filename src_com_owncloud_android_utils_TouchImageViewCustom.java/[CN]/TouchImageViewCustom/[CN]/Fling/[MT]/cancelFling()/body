@@ -1,0 +1,6 @@
+{
+  if (scroller != null) {
+    setState(State.NONE);
+    scroller.forceFinished(true);
+  }
+}

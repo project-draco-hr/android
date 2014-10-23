@@ -1,0 +1,3 @@
+{
+  setZoom(scale,focusX,focusY,mScaleType);
+}

@@ -1,0 +1,4 @@
+{
+  minScale=min;
+  superMinScale=SUPER_MIN_MULTIPLIER * minScale;
+}

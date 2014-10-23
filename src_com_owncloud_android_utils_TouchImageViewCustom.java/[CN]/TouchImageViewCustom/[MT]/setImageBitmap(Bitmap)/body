@@ -1,0 +1,5 @@
+{
+  super.setImageBitmap(bm);
+  savePreviousImageValues();
+  fitImageToView();
+}

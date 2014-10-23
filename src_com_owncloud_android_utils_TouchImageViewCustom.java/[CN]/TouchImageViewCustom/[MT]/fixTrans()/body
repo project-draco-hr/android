@@ -1,0 +1,10 @@
+{
+  matrix.getValues(m);
+  float transX=m[Matrix.MTRANS_X];
+  float transY=m[Matrix.MTRANS_Y];
+  float fixTransX=getFixTrans(transX,viewWidth,getImageWidth());
+  float fixTransY=getFixTrans(transY,viewHeight,getImageHeight());
+  if (fixTransX != 0 || fixTransY != 0) {
+    matrix.postTranslate(fixTransX,fixTransY);
+  }
+}

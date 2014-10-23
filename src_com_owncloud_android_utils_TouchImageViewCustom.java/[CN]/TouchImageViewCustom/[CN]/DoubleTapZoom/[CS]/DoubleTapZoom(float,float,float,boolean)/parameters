@@ -1,0 +1,4 @@
+float targetZoom
+float focusX
+float focusY
+boolean stretchImageToSuper

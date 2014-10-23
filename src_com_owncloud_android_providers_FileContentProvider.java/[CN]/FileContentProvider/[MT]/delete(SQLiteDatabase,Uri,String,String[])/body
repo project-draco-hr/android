@@ -2,23 +2,29 @@
   int count=0;
 switch (mUriMatcher.match(uri)) {
 case SINGLE_FILE:
-    count=db.delete(ProviderTableMeta.FILE_TABLE_NAME,ProviderTableMeta._ID + "=" + uri.getPathSegments().get(1)+ (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),whereArgs);
-  break;
+    Cursor c=query(db,uri,null,where,whereArgs,null);
+  String remoteId="";
+if (c != null && c.moveToFirst()) {
+  remoteId=c.getString(c.getColumnIndex(ProviderTableMeta.FILE_REMOTE_ID));
+}
+Log_OC.d(TAG,"Removing FILE " + remoteId);
+count=db.delete(ProviderTableMeta.FILE_TABLE_NAME,ProviderTableMeta._ID + "=" + uri.getPathSegments().get(1)+ (!TextUtils.isEmpty(where) ? " AND (" + where + ")" : ""),whereArgs);
+break;
 case DIRECTORY:
 Cursor children=query(uri,null,null,null,null);
 if (children != null && children.moveToFirst()) {
 long childId;
 boolean isDir;
 while (!children.isAfterLast()) {
-  childId=children.getLong(children.getColumnIndex(ProviderTableMeta._ID));
-  isDir="DIR".equals(children.getString(children.getColumnIndex(ProviderTableMeta.FILE_CONTENT_TYPE)));
-  if (isDir) {
-    count+=delete(db,ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_DIR,childId),null,null);
-  }
+childId=children.getLong(children.getColumnIndex(ProviderTableMeta._ID));
+isDir="DIR".equals(children.getString(children.getColumnIndex(ProviderTableMeta.FILE_CONTENT_TYPE)));
+if (isDir) {
+count+=delete(db,ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_DIR,childId),null,null);
+}
  else {
-    count+=delete(db,ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_FILE,childId),null,null);
-  }
-  children.moveToNext();
+count+=delete(db,ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_FILE,childId),null,null);
+}
+children.moveToNext();
 }
 children.close();
 }

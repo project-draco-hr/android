@@ -1,0 +1,23 @@
+{
+  float lowerScale, upperScale;
+  if (stretchImageToSuper) {
+    lowerScale=superMinScale;
+    upperScale=superMaxScale;
+  }
+ else {
+    lowerScale=minScale;
+    upperScale=maxScale;
+  }
+  float origScale=normalizedScale;
+  normalizedScale*=deltaScale;
+  if (normalizedScale > upperScale) {
+    normalizedScale=upperScale;
+    deltaScale=upperScale / origScale;
+  }
+ else   if (normalizedScale < lowerScale) {
+    normalizedScale=lowerScale;
+    deltaScale=lowerScale / origScale;
+  }
+  matrix.postScale((float)deltaScale,(float)deltaScale,focusX,focusY);
+  fixScaleTrans();
+}
