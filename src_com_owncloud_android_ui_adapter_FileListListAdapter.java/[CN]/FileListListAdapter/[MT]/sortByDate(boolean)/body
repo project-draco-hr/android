@@ -9,7 +9,8 @@
   Collections.sort(mFiles,new Comparator<OCFile>(){
     public int compare(    OCFile o1,    OCFile o2){
       if (o1.isFolder() && o2.isFolder()) {
-        return val * Long.compare(o1.getModificationTimestamp(),o2.getModificationTimestamp());
+        Long obj1=o1.getModificationTimestamp();
+        return val * obj1.compareTo(o2.getModificationTimestamp());
       }
  else       if (o1.isFolder()) {
         return -1;
@@ -21,7 +22,8 @@
         return 0;
       }
  else {
-        return val * Long.compare(o1.getModificationTimestamp(),o2.getModificationTimestamp());
+        Long obj1=o1.getModificationTimestamp();
+        return val * obj1.compareTo(o2.getModificationTimestamp());
       }
     }
   }
