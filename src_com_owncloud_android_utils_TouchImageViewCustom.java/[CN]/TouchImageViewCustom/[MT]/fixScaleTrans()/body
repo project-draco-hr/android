@@ -1,0 +1,11 @@
+{
+  fixTrans();
+  matrix.getValues(m);
+  if (getImageWidth() < viewWidth) {
+    m[Matrix.MTRANS_X]=(viewWidth - getImageWidth()) / 2;
+  }
+  if (getImageHeight() < viewHeight) {
+    m[Matrix.MTRANS_Y]=(viewHeight - getImageHeight()) / 2;
+  }
+  matrix.setValues(m);
+}

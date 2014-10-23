@@ -1,0 +1,4 @@
+{
+  saveInstantUploadPathOnPreferences();
+  super.onPause();
+}

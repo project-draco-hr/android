@@ -1,11 +1,3 @@
 {
-  Matcher capitalLettersMatcher=CAPITAL_LETTERS.matcher(key);
-  mValidKeyBuffer.delete(0,mValidKeyBuffer.length());
-  mConversionBuffer.delete(1,mConversionBuffer.length());
-  while (capitalLettersMatcher.find()) {
-    mConversionBuffer.replace(1,2,capitalLettersMatcher.group(0).toLowerCase());
-    capitalLettersMatcher.appendReplacement(mValidKeyBuffer,mConversionBuffer.toString());
-  }
-  capitalLettersMatcher.appendTail(mValidKeyBuffer);
-  return mValidKeyBuffer.toString();
+  return Integer.toString(key.hashCode());
 }

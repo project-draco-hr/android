@@ -1,6 +1,6 @@
 {
   if (BuildConfig.DEBUG) {
-    Log.d("cache_test_DISK_","disk cache CLEARED");
+    Log_OC.d("cache_test_DISK_","disk cache CLEARED");
   }
   try {
     mDiskCache.delete();

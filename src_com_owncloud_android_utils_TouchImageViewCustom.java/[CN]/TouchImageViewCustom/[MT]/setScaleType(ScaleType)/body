@@ -1,0 +1,14 @@
+{
+  if (type == ScaleType.FIT_START || type == ScaleType.FIT_END) {
+    throw new UnsupportedOperationException("TouchImageView does not support FIT_START or FIT_END");
+  }
+  if (type == ScaleType.MATRIX) {
+    super.setScaleType(ScaleType.MATRIX);
+  }
+ else {
+    mScaleType=type;
+    if (onDrawReady) {
+      setZoom(this);
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  Log_OC.d("OC","Canvas maximum: " + canvas.getMaximumBitmapWidth() + " - "+ canvas.getMaximumBitmapHeight());
+  if (mBitmap != null && (mBitmap.getWidth() > canvas.getMaximumBitmapWidth() || mBitmap.getHeight() > canvas.getMaximumBitmapHeight())) {
+    return true;
+  }
+  return false;
+}

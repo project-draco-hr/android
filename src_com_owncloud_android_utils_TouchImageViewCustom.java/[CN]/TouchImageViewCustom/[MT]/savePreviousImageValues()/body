@@ -1,0 +1,10 @@
+{
+  if (matrix != null && viewHeight != 0 && viewWidth != 0) {
+    matrix.getValues(m);
+    prevMatrix.setValues(m);
+    prevMatchViewHeight=matchViewHeight;
+    prevMatchViewWidth=matchViewWidth;
+    prevViewHeight=viewHeight;
+    prevViewWidth=viewWidth;
+  }
+}
