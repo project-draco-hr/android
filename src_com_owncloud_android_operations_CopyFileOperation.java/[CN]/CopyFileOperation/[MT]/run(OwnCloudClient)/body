@@ -1,0 +1,20 @@
+{
+  RemoteOperationResult result;
+  if (mTargetParentPath.startsWith(mSrcPath)) {
+    return new RemoteOperationResult(ResultCode.INVALID_MOVE_INTO_DESCENDANT);
+  }
+  mFile=getStorageManager().getFileByPath(mSrcPath);
+  if (mFile == null) {
+    return new RemoteOperationResult(ResultCode.FILE_NOT_FOUND);
+  }
+  String targetPath=mTargetParentPath + mFile.getFileName();
+  if (mFile.isFolder()) {
+    targetPath+=OCFile.PATH_SEPARATOR;
+  }
+  CopyRemoteFileOperation operation=new CopyRemoteFileOperation(mSrcPath,targetPath,false);
+  result=operation.execute(client);
+  if (result.isSuccess()) {
+    getStorageManager().copyLocalFile(mFile,targetPath);
+  }
+  return result;
+}
