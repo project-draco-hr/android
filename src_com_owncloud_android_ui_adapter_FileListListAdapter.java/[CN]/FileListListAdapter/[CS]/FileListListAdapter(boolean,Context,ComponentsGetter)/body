@@ -3,8 +3,8 @@
   mContext=context;
   mAccount=AccountUtils.getCurrentOwnCloudAccount(mContext);
   mTransferServiceGetter=transferServiceGetter;
-  appPreferences=PreferenceManager.getDefaultSharedPreferences(mContext);
-  sortOrder=appPreferences.getInt("sortOrder",0);
-  sortAscending=appPreferences.getBoolean("sortAscending",true);
+  mAppPreferences=PreferenceManager.getDefaultSharedPreferences(mContext);
+  mSortOrder=mAppPreferences.getInt("sortOrder",0);
+  mSortAscending=mAppPreferences.getBoolean("sortAscending",true);
   new ThumbnailsCacheManager.InitDiskCacheTask().execute();
 }

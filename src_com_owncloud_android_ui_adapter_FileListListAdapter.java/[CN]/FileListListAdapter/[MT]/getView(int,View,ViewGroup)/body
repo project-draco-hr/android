@@ -85,13 +85,7 @@
       }
     }
  else {
-      if (FileStorageUtils.getDefaultSavePathFor(mAccount.name,file) != null) {
-        fileSizeV.setVisibility(View.VISIBLE);
-        fileSizeV.setText(getFolderSizeHuman(FileStorageUtils.getDefaultSavePathFor(mAccount.name,file)));
-      }
- else {
-        fileSizeV.setVisibility(View.INVISIBLE);
-      }
+      fileSizeV.setVisibility(View.INVISIBLE);
       lastModV.setVisibility(View.VISIBLE);
       lastModV.setText(DisplayUtils.unixTimeToHumanReadable(file.getModificationTimestamp()));
       checkBoxV.setVisibility(View.GONE);

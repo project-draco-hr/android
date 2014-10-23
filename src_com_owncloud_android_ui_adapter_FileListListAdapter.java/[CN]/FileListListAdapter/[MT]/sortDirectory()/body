@@ -1,13 +1,13 @@
 {
-switch (sortOrder) {
+switch (mSortOrder) {
 case 0:
-    sortByName(sortAscending);
+    sortByName(mSortAscending);
   break;
 case 1:
-sortByDate(sortAscending);
+sortByDate(mSortAscending);
 break;
 case 2:
-sortBySize(sortAscending);
+sortBySize(mSortAscending);
 break;
 }
 notifyDataSetChanged();
