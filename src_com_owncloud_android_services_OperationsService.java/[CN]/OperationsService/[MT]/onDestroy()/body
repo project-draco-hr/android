@@ -3,7 +3,16 @@
   try {
     OwnCloudClientManagerFactory.getDefaultSingleton().saveAllClients(this,MainApp.getAccountType());
   }
- catch (  AccountNotFoundException|AuthenticatorException|OperationCanceledException|IOException e) {
+ catch (  AccountNotFoundException e) {
+    e.printStackTrace();
+  }
+catch (  AuthenticatorException e) {
+    e.printStackTrace();
+  }
+catch (  OperationCanceledException e) {
+    e.printStackTrace();
+  }
+catch (  IOException e) {
     e.printStackTrace();
   }
   mUndispatchedFinishedOperations.clear();
