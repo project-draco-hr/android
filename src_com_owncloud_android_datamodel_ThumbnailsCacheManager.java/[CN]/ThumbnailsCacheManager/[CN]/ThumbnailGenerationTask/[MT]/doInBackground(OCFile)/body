@@ -16,6 +16,26 @@
           mStorageManager.saveFile(mFile);
         }
       }
+ else {
+        try {
+          int status=-1;
+          String uri=mClient.getBaseUri() + "/index.php/apps/files/api/v1/thumbnail/" + px+ "/"+ px+ Uri.encode(mFile.getRemotePath(),"/");
+          Log_OC.d("Thumbnail","URI: " + uri);
+          GetMethod get=new GetMethod(uri);
+          status=mClient.executeMethod(get);
+          if (status == HttpStatus.SC_OK) {
+            byte[] bytes=get.getResponseBody();
+            Bitmap bitmap=BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+            thumbnail=ThumbnailUtils.extractThumbnail(bitmap,px,px);
+            if (thumbnail != null) {
+              addBitmapToCache(imageKey,thumbnail);
+            }
+          }
+        }
+ catch (        Exception e) {
+          e.printStackTrace();
+        }
+      }
     }
   }
  catch (  Throwable t) {

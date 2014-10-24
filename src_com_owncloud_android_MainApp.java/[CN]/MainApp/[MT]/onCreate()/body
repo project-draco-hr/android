@@ -8,7 +8,7 @@
  else {
     OwnCloudClientManagerFactory.setDefaultPolicy(Policy.ALWAYS_NEW_CLIENT);
   }
-  new ThumbnailsCacheManager.InitDiskCacheTask().execute();
+  new ThumbnailsCacheManager.InitDiskCacheTask(AccountUtils.getCurrentOwnCloudAccount(mContext),mContext).execute();
   if (BuildConfig.DEBUG) {
     String dataFolder=getDataFolder();
     Log_OC.setLogDataFolder(dataFolder);

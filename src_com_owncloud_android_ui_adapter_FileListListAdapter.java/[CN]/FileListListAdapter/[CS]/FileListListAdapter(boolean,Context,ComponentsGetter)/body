@@ -3,5 +3,5 @@
   mContext=context;
   mAccount=AccountUtils.getCurrentOwnCloudAccount(mContext);
   mTransferServiceGetter=transferServiceGetter;
-  new ThumbnailsCacheManager.InitDiskCacheTask().execute();
+  new ThumbnailsCacheManager.InitDiskCacheTask(mAccount,mContext).execute();
 }
