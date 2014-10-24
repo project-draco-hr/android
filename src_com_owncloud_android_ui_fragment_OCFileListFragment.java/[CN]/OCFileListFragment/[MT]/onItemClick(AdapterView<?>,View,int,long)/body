@@ -1,0 +1,29 @@
+{
+  OCFile file=(OCFile)mAdapter.getItem(position);
+  if (file != null) {
+    if (file.isFolder()) {
+      listDirectory(file);
+      mContainerActivity.onBrowsedDownTo(file);
+      saveIndexAndTopPosition(position);
+    }
+ else {
+      if (PreviewImageFragment.canBePreviewed(file)) {
+        ((FileDisplayActivity)mContainerActivity).startImagePreview(file);
+      }
+ else       if (file.isDown()) {
+        if (PreviewMediaFragment.canBePreviewed(file)) {
+          ((FileDisplayActivity)mContainerActivity).startMediaPreview(file,0,true);
+        }
+ else {
+          mContainerActivity.getFileOperationsHelper().openFile(file);
+        }
+      }
+ else {
+        ((FileDisplayActivity)mContainerActivity).startDownloadForPreview(file);
+      }
+    }
+  }
+ else {
+    Log_OC.d(TAG,"Null object in ListAdapter!!");
+  }
+}
