@@ -1,0 +1,6 @@
+{
+  if (result.isSuccess()) {
+    refreshShowDetails();
+    refreshListOfFilesFragment();
+  }
+}

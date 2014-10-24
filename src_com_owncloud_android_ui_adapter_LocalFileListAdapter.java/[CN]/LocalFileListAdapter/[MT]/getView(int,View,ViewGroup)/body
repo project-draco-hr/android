@@ -45,6 +45,8 @@
     }
     view.findViewById(R.id.imageView2).setVisibility(View.INVISIBLE);
     view.findViewById(R.id.imageView3).setVisibility(View.GONE);
+    view.findViewById(R.id.sharedIcon).setVisibility(View.GONE);
+    view.findViewById(R.id.sharedWithMeIcon).setVisibility(View.GONE);
   }
   return view;
 }

@@ -1,0 +1,15 @@
+{
+  mAuthTokenType=getIntent().getExtras().getString(AccountAuthenticator.KEY_AUTH_TOKEN_TYPE);
+  if (mAuthTokenType == null) {
+    if (mAccount != null) {
+      boolean oAuthRequired=(mAccountMgr.getUserData(mAccount,Constants.KEY_SUPPORTS_OAUTH2) != null);
+      boolean samlWebSsoRequired=(mAccountMgr.getUserData(mAccount,Constants.KEY_SUPPORTS_SAML_WEB_SSO) != null);
+      mAuthTokenType=chooseAuthTokenType(oAuthRequired,samlWebSsoRequired);
+    }
+ else {
+      boolean oAuthSupported=AUTH_ON.equals(getString(R.string.auth_method_oauth2));
+      boolean samlWebSsoSupported=AUTH_ON.equals(getString(R.string.auth_method_saml_web_sso));
+      mAuthTokenType=chooseAuthTokenType(oAuthSupported,samlWebSsoSupported);
+    }
+  }
+}

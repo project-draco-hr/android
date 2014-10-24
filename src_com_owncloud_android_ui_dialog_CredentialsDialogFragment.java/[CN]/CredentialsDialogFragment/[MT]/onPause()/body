@@ -1,0 +1,5 @@
+{
+  super.onPause();
+  mUsernameStr=mUsernameET.getText().toString();
+  mPasswordStr=mPasswordET.getText().toString();
+}

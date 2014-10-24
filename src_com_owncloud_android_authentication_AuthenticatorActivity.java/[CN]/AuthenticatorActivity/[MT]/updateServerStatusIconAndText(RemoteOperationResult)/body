@@ -60,6 +60,10 @@ case UNHANDLED_HTTP_CODE:
 case UNKNOWN_ERROR:
 mServerStatusText=R.string.auth_unknown_error_title;
 break;
+case OK_REDIRECT_TO_NON_SECURE_CONNECTION:
+mServerStatusIcon=android.R.drawable.ic_partial_secure;
+mServerStatusText=R.string.auth_redirect_non_secure_connection_title;
+break;
 default :
 mServerStatusText=0;
 mServerStatusIcon=0;

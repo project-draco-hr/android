@@ -7,7 +7,7 @@
       mDirectories.add(fileIt.getFileName());
     }
     parentPath=fileIt.getRemotePath().substring(0,fileIt.getRemotePath().lastIndexOf(fileIt.getFileName()));
-    fileIt=mStorageManager.getFileByPath(parentPath);
+    fileIt=getStorageManager().getFileByPath(parentPath);
   }
   mDirectories.add(OCFile.PATH_SEPARATOR);
 }

@@ -1,4 +1,0 @@
-def pop(self, key, *args):
-    val = dict.pop(self, key, *args)
-    dict.__delitem__(self._flip, val)
-    return val

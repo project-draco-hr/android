@@ -1,0 +1,4 @@
+File diskCacheDir
+int diskCacheSize
+CompressFormat compressFormat
+int quality

@@ -1,9 +1,14 @@
 {
   super.onCreateView(inflater,container,savedInstanceState);
   mView=inflater.inflate(R.layout.preview_image_fragment,container,false);
-  mImageView=(ImageView)mView.findViewById(R.id.image);
+  mImageView=(TouchImageViewCustom)mView.findViewById(R.id.image);
   mImageView.setVisibility(View.GONE);
-  mView.setOnTouchListener((OnTouchListener)getActivity());
+  mImageView.setOnClickListener(new OnClickListener(){
+    @Override public void onClick(    View v){
+      ((PreviewImageActivity)getActivity()).toggleFullScreen();
+    }
+  }
+);
   mMessageView=(TextView)mView.findViewById(R.id.message);
   mMessageView.setVisibility(View.GONE);
   mProgressWheel=(ProgressBar)mView.findViewById(R.id.progressWheel);

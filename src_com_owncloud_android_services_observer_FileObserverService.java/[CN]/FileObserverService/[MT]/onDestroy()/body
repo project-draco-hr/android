@@ -1,0 +1,11 @@
+{
+  Log_OC.d(TAG,"onDestroy - finishing observation of favorite files");
+  unregisterReceiver(mDownloadReceiver);
+  Iterator<FolderObserver> itOCFolder=mFolderObserversMap.values().iterator();
+  while (itOCFolder.hasNext()) {
+    itOCFolder.next().stopWatching();
+  }
+  mFolderObserversMap.clear();
+  mFolderObserversMap=null;
+  super.onDestroy();
+}

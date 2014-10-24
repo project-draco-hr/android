@@ -1,11 +1,12 @@
 {
   if (readyToShow()) {
-    if (refresh && mStorageManager != null) {
-      setFile(mStorageManager.getFileByPath(getFile().getRemotePath()));
+    FileDataStorageManager storageManager=mContainerActivity.getStorageManager();
+    if (refresh && storageManager != null) {
+      setFile(storageManager.getFileByPath(getFile().getRemotePath()));
     }
     OCFile file=getFile();
     setFilename(file.getFileName());
-    setFiletype(file.getMimetype());
+    setFiletype(file.getMimetype(),file.getFileName());
     setFilesize(file.getFileLength());
     if (ocVersionSupportsTimeCreated()) {
       setTimeCreated(file.getCreationTimestamp());

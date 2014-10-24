@@ -1,0 +1,7 @@
+{
+  RenameFileDialogFragment frag=new RenameFileDialogFragment();
+  Bundle args=new Bundle();
+  args.putParcelable(ARG_TARGET_FILE,file);
+  frag.setArguments(args);
+  return frag;
+}

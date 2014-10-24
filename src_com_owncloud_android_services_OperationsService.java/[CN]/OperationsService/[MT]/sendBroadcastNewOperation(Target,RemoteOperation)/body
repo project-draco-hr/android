@@ -1,0 +1,10 @@
+{
+  Intent intent=new Intent(ACTION_OPERATION_ADDED);
+  if (target.mAccount != null) {
+    intent.putExtra(EXTRA_ACCOUNT,target.mAccount);
+  }
+ else {
+    intent.putExtra(EXTRA_SERVER_URL,target.mServerUrl);
+  }
+  sendStickyBroadcast(intent);
+}

@@ -1,0 +1,7 @@
+{
+  Notification result=super.build();
+  if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+    result.contentView=mContentView;
+  }
+  return result;
+}

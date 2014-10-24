@@ -1,0 +1,5 @@
+OCFile localFile
+OCFile serverFile
+Account account
+boolean syncFileContents
+Context context

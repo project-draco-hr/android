@@ -1,5 +1,0 @@
-{
-  super.onActivityCreated(savedInstanceState);
-  if (mAccount != null) {
-  }
-}

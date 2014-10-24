@@ -1,11 +1,10 @@
 {
-  TextView tv=(TextView)findViewById(R.id.server_status_text);
   if (mServerStatusIcon == 0 && mServerStatusText == 0) {
-    tv.setVisibility(View.INVISIBLE);
+    mServerStatusView.setVisibility(View.INVISIBLE);
   }
  else {
-    tv.setText(mServerStatusText);
-    tv.setCompoundDrawablesWithIntrinsicBounds(mServerStatusIcon,0,0,0);
-    tv.setVisibility(View.VISIBLE);
+    mServerStatusView.setText(mServerStatusText);
+    mServerStatusView.setCompoundDrawablesWithIntrinsicBounds(mServerStatusIcon,0,0,0);
+    mServerStatusView.setVisibility(View.VISIBLE);
   }
 }

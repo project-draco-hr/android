@@ -1,0 +1,12 @@
+{
+  setState(State.ANIMATE_ZOOM);
+  startTime=System.currentTimeMillis();
+  this.startZoom=normalizedScale;
+  this.targetZoom=targetZoom;
+  this.stretchImageToSuper=stretchImageToSuper;
+  PointF bitmapPoint=transformCoordTouchToBitmap(focusX,focusY,false);
+  this.bitmapX=bitmapPoint.x;
+  this.bitmapY=bitmapPoint.y;
+  startTouch=transformCoordBitmapToTouch(bitmapX,bitmapY);
+  endTouch=new PointF(viewWidth / 2,viewHeight / 2);
+}

@@ -1,3 +1,0 @@
-{
-  return getAppContext().getResources().getString(R.string.account_type) + ".password";
-}

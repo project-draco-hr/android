@@ -1,0 +1,10 @@
+{
+  dismissLoadingDialog();
+  if (result.isSuccess()) {
+    updateFileFromDB();
+  }
+ else {
+    Toast t=Toast.makeText(this,ErrorMessageAdapter.getErrorCauseMessage(result,operation,getResources()),Toast.LENGTH_LONG);
+    t.show();
+  }
+}

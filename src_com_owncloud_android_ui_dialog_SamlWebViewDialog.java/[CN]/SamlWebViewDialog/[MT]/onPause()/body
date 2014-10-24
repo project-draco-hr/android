@@ -1,4 +1,5 @@
 {
-  Log_OC.d(SAML_DIALOG_TAG,"onPause");
+  Log_OC.d(TAG,"onPause");
+  mSsoWebView.onPause();
   super.onPause();
 }

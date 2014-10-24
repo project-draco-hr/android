@@ -1,0 +1,14 @@
+{
+  if (isSharedSupported()) {
+    Intent service=new Intent(mFileActivity,OperationsService.class);
+    service.setAction(OperationsService.ACTION_UNSHARE);
+    service.putExtra(OperationsService.EXTRA_ACCOUNT,mFileActivity.getAccount());
+    service.putExtra(OperationsService.EXTRA_REMOTE_PATH,file.getRemotePath());
+    mWaitingForOpId=mFileActivity.getOperationsServiceBinder().newOperation(service);
+    mFileActivity.showLoadingDialog();
+  }
+ else {
+    Toast t=Toast.makeText(mFileActivity,mFileActivity.getString(R.string.share_link_no_support_share_api),Toast.LENGTH_LONG);
+    t.show();
+  }
+}

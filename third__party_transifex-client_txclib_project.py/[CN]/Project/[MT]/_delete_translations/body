@@ -1,5 +1,0 @@
-def _delete_translations(self, project_details, resource, stats, languages):
-    'Delete the specified translations for the specified resource.'
-    logger.info(('Deleting translations from resource %s:' % resource))
-    for language in languages:
-        self._delete_translation(project_details, resource, stats, language)

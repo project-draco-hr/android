@@ -1,0 +1,10 @@
+{
+  mJustFolders=justFolders;
+  mContext=context;
+  mAccount=AccountUtils.getCurrentOwnCloudAccount(mContext);
+  mTransferServiceGetter=transferServiceGetter;
+  mAppPreferences=PreferenceManager.getDefaultSharedPreferences(mContext);
+  mSortOrder=mAppPreferences.getInt("sortOrder",0);
+  mSortAscending=mAppPreferences.getBoolean("sortAscending",true);
+  new ThumbnailsCacheManager.InitDiskCacheTask().execute();
+}

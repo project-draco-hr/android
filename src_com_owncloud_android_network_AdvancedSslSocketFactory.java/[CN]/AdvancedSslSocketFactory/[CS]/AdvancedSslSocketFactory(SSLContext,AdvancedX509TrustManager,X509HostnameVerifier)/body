@@ -1,7 +1,0 @@
-{
-  if (sslContext == null)   throw new IllegalArgumentException("AdvancedSslSocketFactory can not be created with a null SSLContext");
-  if (trustManager == null)   throw new IllegalArgumentException("AdvancedSslSocketFactory can not be created with a null Trust Manager");
-  mSslContext=sslContext;
-  mTrustManager=trustManager;
-  mHostnameVerifier=hostnameVerifier;
-}

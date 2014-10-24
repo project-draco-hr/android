@@ -1,36 +1,81 @@
 {
-  boolean inProgress=intent.getBooleanExtra(FileSyncService.IN_PROGRESS,false);
-  String accountName=intent.getStringExtra(FileSyncService.ACCOUNT_NAME);
-  RemoteOperationResult synchResult=(RemoteOperationResult)intent.getSerializableExtra(FileSyncService.SYNC_RESULT);
-  if (getAccount() != null && accountName.equals(getAccount().name) && mStorageManager != null) {
-    String synchFolderRemotePath=intent.getStringExtra(FileSyncService.SYNC_FOLDER_REMOTE_PATH);
-    OCFile currentFile=(getFile() == null) ? null : mStorageManager.getFileByPath(getFile().getRemotePath());
-    OCFile currentDir=(getCurrentDir() == null) ? null : mStorageManager.getFileByPath(getCurrentDir().getRemotePath());
-    if (currentDir == null) {
-      Toast.makeText(FileDisplayActivity.this,String.format(getString(R.string.sync_current_folder_was_removed),mDirectories.getItem(0)),Toast.LENGTH_LONG).show();
-      browseToRoot();
-    }
- else {
-      if (currentFile == null && !getFile().isFolder()) {
-        cleanSecondFragment();
-        currentFile=currentDir;
+  try {
+    String event=intent.getAction();
+    Log_OC.d(TAG,"Received broadcast " + event);
+    String accountName=intent.getStringExtra(FileSyncAdapter.EXTRA_ACCOUNT_NAME);
+    String synchFolderRemotePath=intent.getStringExtra(FileSyncAdapter.EXTRA_FOLDER_PATH);
+    RemoteOperationResult synchResult=(RemoteOperationResult)intent.getSerializableExtra(FileSyncAdapter.EXTRA_RESULT);
+    boolean sameAccount=(getAccount() != null && accountName.equals(getAccount().name) && getStorageManager() != null);
+    if (sameAccount) {
+      if (FileSyncAdapter.EVENT_FULL_SYNC_START.equals(event)) {
+        mSyncInProgress=true;
       }
-      if (synchFolderRemotePath != null && currentDir.getRemotePath().equals(synchFolderRemotePath)) {
-        OCFileListFragment fileListFragment=getListOfFilesFragment();
-        if (fileListFragment != null) {
-          fileListFragment.listDirectory(currentDir);
+ else {
+        OCFile currentFile=(getFile() == null) ? null : getStorageManager().getFileByPath(getFile().getRemotePath());
+        OCFile currentDir=(getCurrentDir() == null) ? null : getStorageManager().getFileByPath(getCurrentDir().getRemotePath());
+        if (currentDir == null) {
+          Toast.makeText(FileDisplayActivity.this,String.format(getString(R.string.sync_current_folder_was_removed),mDirectories.getItem(0)),Toast.LENGTH_LONG).show();
+          browseToRoot();
+        }
+ else {
+          if (currentFile == null && !getFile().isFolder()) {
+            cleanSecondFragment();
+            currentFile=currentDir;
+          }
+          if (synchFolderRemotePath != null && currentDir.getRemotePath().equals(synchFolderRemotePath)) {
+            OCFileListFragment fileListFragment=getListOfFilesFragment();
+            if (fileListFragment != null) {
+              fileListFragment.listDirectory(currentDir);
+            }
+          }
+          setFile(currentFile);
+        }
+        mSyncInProgress=(!FileSyncAdapter.EVENT_FULL_SYNC_END.equals(event) && !SynchronizeFolderOperation.EVENT_SINGLE_FOLDER_SHARES_SYNCED.equals(event));
+        if (SynchronizeFolderOperation.EVENT_SINGLE_FOLDER_CONTENTS_SYNCED.equals(event) && synchResult != null && !synchResult.isSuccess() && (synchResult.getCode() == ResultCode.UNAUTHORIZED || synchResult.isIdPRedirection() || (synchResult.isException() && synchResult.getException() instanceof AuthenticatorException))) {
+          OwnCloudClient client=null;
+          try {
+            OwnCloudAccount ocAccount=new OwnCloudAccount(getAccount(),context);
+            client=(OwnCloudClientManagerFactory.getDefaultSingleton().removeClientFor(ocAccount));
+          }
+ catch (          AccountNotFoundException e) {
+            e.printStackTrace();
+          }
+catch (          AuthenticatorException e) {
+            e.printStackTrace();
+          }
+catch (          OperationCanceledException e) {
+            e.printStackTrace();
+          }
+catch (          IOException e) {
+            e.printStackTrace();
+          }
+          if (client != null) {
+            OwnCloudCredentials cred=client.getCredentials();
+            if (cred != null) {
+              AccountManager am=AccountManager.get(context);
+              if (cred.authTokenExpires()) {
+                am.invalidateAuthToken(getAccount().type,cred.getAuthToken());
+              }
+ else {
+                am.clearPassword(getAccount());
+              }
+            }
+          }
+          requestCredentialsUpdate();
         }
       }
-      setFile(currentFile);
+      removeStickyBroadcast(intent);
+      Log_OC.d(TAG,"Setting progress visibility to " + mSyncInProgress);
+      setSupportProgressBarIndeterminateVisibility(mSyncInProgress);
+      setBackgroundText();
     }
-    setSupportProgressBarIndeterminateVisibility(inProgress);
-    removeStickyBroadcast(intent);
-    mSyncInProgress=inProgress;
+    if (synchResult != null) {
+      if (synchResult.getCode().equals(RemoteOperationResult.ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED)) {
+        mLastSslUntrustedServerResult=synchResult;
+      }
+    }
   }
-  if (synchResult != null) {
-    if (synchResult.getCode().equals(RemoteOperationResult.ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED)) {
-      mLastSslUntrustedServerResult=synchResult;
-      showDialog(DIALOG_SSL_VALIDATOR);
-    }
+ catch (  RuntimeException e) {
+    removeStickyBroadcast(intent);
   }
 }

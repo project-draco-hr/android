@@ -1,4 +1,0 @@
-@property
-def flip(self):
-    'The inverse mapping.'
-    return self._flip

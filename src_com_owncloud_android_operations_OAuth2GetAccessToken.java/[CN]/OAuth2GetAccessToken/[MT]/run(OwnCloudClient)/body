@@ -1,0 +1,62 @@
+{
+  RemoteOperationResult result=null;
+  PostMethod postMethod=null;
+  try {
+    parseAuthorizationResponse();
+    if (mOAuth2ParsedAuthorizationResponse.keySet().contains(OAuth2Constants.KEY_ERROR)) {
+      if (OAuth2Constants.VALUE_ERROR_ACCESS_DENIED.equals(mOAuth2ParsedAuthorizationResponse.get(OAuth2Constants.KEY_ERROR))) {
+        result=new RemoteOperationResult(ResultCode.OAUTH2_ERROR_ACCESS_DENIED);
+      }
+ else {
+        result=new RemoteOperationResult(ResultCode.OAUTH2_ERROR);
+      }
+    }
+    if (result == null) {
+      NameValuePair[] nameValuePairs=new NameValuePair[4];
+      nameValuePairs[0]=new NameValuePair(OAuth2Constants.KEY_GRANT_TYPE,mGrantType);
+      nameValuePairs[1]=new NameValuePair(OAuth2Constants.KEY_CODE,mOAuth2ParsedAuthorizationResponse.get(OAuth2Constants.KEY_CODE));
+      nameValuePairs[2]=new NameValuePair(OAuth2Constants.KEY_REDIRECT_URI,mRedirectUri);
+      nameValuePairs[3]=new NameValuePair(OAuth2Constants.KEY_CLIENT_ID,mClientId);
+      postMethod=new PostMethod(client.getWebdavUri().toString());
+      postMethod.setRequestBody(nameValuePairs);
+      int status=client.executeMethod(postMethod);
+      String response=postMethod.getResponseBodyAsString();
+      if (response != null && response.length() > 0) {
+        JSONObject tokenJson=new JSONObject(response);
+        parseAccessTokenResult(tokenJson);
+        if (mResultTokenMap.get(OAuth2Constants.KEY_ERROR) != null || mResultTokenMap.get(OAuth2Constants.KEY_ACCESS_TOKEN) == null) {
+          result=new RemoteOperationResult(ResultCode.OAUTH2_ERROR);
+        }
+ else {
+          result=new RemoteOperationResult(true,status,postMethod.getResponseHeaders());
+          ArrayList<Object> data=new ArrayList<Object>();
+          data.add(mResultTokenMap);
+          result.setData(data);
+        }
+      }
+ else {
+        client.exhaustResponse(postMethod.getResponseBodyAsStream());
+        result=new RemoteOperationResult(false,status,postMethod.getResponseHeaders());
+      }
+    }
+  }
+ catch (  Exception e) {
+    result=new RemoteOperationResult(e);
+  }
+ finally {
+    if (postMethod != null)     postMethod.releaseConnection();
+    if (result.isSuccess()) {
+      Log_OC.i(TAG,"OAuth2 TOKEN REQUEST with auth code " + mOAuth2ParsedAuthorizationResponse.get("code") + " to "+ client.getWebdavUri()+ ": "+ result.getLogMessage());
+    }
+ else     if (result.getException() != null) {
+      Log_OC.e(TAG,"OAuth2 TOKEN REQUEST with auth code " + mOAuth2ParsedAuthorizationResponse.get("code") + " to "+ client.getWebdavUri()+ ": "+ result.getLogMessage(),result.getException());
+    }
+ else     if (result.getCode() == ResultCode.OAUTH2_ERROR) {
+      Log_OC.e(TAG,"OAuth2 TOKEN REQUEST with auth code " + mOAuth2ParsedAuthorizationResponse.get("code") + " to "+ client.getWebdavUri()+ ": "+ ((mResultTokenMap != null) ? mResultTokenMap.get(OAuth2Constants.KEY_ERROR) : "NULL"));
+    }
+ else {
+      Log_OC.e(TAG,"OAuth2 TOKEN REQUEST with auth code " + mOAuth2ParsedAuthorizationResponse.get("code") + " to "+ client.getWebdavUri()+ ": "+ result.getLogMessage());
+    }
+  }
+  return result;
+}

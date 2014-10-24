@@ -1,0 +1,8 @@
+{
+  if (isPreGingerbread) {
+    return scroller.isFinished();
+  }
+ else {
+    return overScroller.isFinished();
+  }
+}

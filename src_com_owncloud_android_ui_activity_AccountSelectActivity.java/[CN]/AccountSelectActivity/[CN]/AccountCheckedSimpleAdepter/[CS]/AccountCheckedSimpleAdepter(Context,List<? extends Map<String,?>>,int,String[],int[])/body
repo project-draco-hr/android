@@ -1,5 +1,0 @@
-{
-  super(context,data,resource,from,to);
-  mCurrentAccount=AccountUtils.getCurrentOwnCloudAccount(AccountSelectActivity.this);
-  mPrivateData=data;
-}

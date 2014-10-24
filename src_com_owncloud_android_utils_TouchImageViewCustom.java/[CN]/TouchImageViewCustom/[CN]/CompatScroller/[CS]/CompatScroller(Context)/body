@@ -1,0 +1,10 @@
+{
+  if (VERSION.SDK_INT < VERSION_CODES.GINGERBREAD) {
+    isPreGingerbread=true;
+    scroller=new Scroller(context);
+  }
+ else {
+    isPreGingerbread=false;
+    overScroller=new OverScroller(context);
+  }
+}

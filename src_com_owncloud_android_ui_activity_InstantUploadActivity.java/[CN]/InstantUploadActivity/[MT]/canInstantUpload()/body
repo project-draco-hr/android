@@ -1,8 +1,0 @@
-{
-  if (!InstantUploadBroadcastReceiver.isOnline(this) || (InstantUploadBroadcastReceiver.instantUploadViaWiFiOnly(this) && !InstantUploadBroadcastReceiver.isConnectedViaWiFi(this))) {
-    return false;
-  }
- else {
-    return true;
-  }
-}

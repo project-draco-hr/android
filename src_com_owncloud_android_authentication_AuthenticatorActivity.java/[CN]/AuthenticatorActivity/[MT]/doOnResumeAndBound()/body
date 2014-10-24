@@ -1,0 +1,9 @@
+{
+  mOperationsServiceBinder.addOperationListener(AuthenticatorActivity.this,mHandler);
+  if (mWaitingForOpId <= Integer.MAX_VALUE) {
+    mOperationsServiceBinder.dispatchResultIfFinished((int)mWaitingForOpId,this);
+  }
+  if (mPendingAutoCheck) {
+    checkOcServer();
+  }
+}

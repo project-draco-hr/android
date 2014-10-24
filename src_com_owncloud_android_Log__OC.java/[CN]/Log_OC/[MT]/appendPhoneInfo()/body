@@ -1,8 +1,0 @@
-{
-  appendLog("Model : " + android.os.Build.MODEL);
-  appendLog("Brand : " + android.os.Build.BRAND);
-  appendLog("Product : " + android.os.Build.PRODUCT);
-  appendLog("Device : " + android.os.Build.DEVICE);
-  appendLog("Version-Codename : " + android.os.Build.VERSION.CODENAME);
-  appendLog("Version-Release : " + android.os.Build.VERSION.RELEASE);
-}

@@ -1,0 +1,4 @@
+String remotePath
+Account account
+boolean syncFileContents
+Context context

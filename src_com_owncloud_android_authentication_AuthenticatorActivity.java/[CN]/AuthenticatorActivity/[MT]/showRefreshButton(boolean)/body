@@ -1,0 +1,8 @@
+{
+  if (show) {
+    mRefreshButton.setVisibility(View.VISIBLE);
+  }
+ else {
+    mRefreshButton.setVisibility(View.GONE);
+  }
+}

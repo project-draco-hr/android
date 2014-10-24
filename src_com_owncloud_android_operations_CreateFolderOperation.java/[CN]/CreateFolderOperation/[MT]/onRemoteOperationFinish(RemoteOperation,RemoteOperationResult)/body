@@ -1,0 +1,5 @@
+{
+  if (operation instanceof CreateRemoteFolderOperation) {
+    onCreateRemoteFolderOperationFinish((CreateRemoteFolderOperation)operation,result);
+  }
+}

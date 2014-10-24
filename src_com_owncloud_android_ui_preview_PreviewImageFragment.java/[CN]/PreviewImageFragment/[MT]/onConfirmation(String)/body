@@ -1,7 +1,0 @@
-{
-  if (mStorageManager.getFileById(getFile().getFileId()) != null) {
-    mLastRemoteOperation=new RemoveFileOperation(getFile(),true,mStorageManager);
-    mLastRemoteOperation.execute(mAccount,getSherlockActivity(),this,mHandler,getSherlockActivity());
-    ((PreviewImageActivity)getActivity()).showLoadingDialog();
-  }
-}

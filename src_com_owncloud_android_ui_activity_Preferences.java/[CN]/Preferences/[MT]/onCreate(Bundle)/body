@@ -1,19 +1,31 @@
 {
   super.onCreate(savedInstanceState);
   mDbHandler=new DbHandler(getBaseContext());
-  mSessions=new Vector<OwnCloudSession>();
   addPreferencesFromResource(R.xml.preferences);
   ActionBar actionBar=getSherlock().getActionBar();
+  actionBar.setIcon(DisplayUtils.getSeasonalIconId());
   actionBar.setDisplayHomeAsUpEnabled(true);
-  Preference p=findPreference("manage_account");
-  if (p != null)   p.setOnPreferenceClickListener(new OnPreferenceClickListener(){
-    @Override public boolean onPreferenceClick(    Preference preference){
-      Intent i=new Intent(getApplicationContext(),AccountSelectActivity.class);
-      startActivity(i);
-      return true;
+  actionBar.setTitle(R.string.actionbar_settings);
+  loadInstantUploadPath();
+  mAccountsPrefCategory=(PreferenceCategory)findPreference("accounts_category");
+  ListView listView=getListView();
+  listView.setOnItemLongClickListener(new OnItemLongClickListener(){
+    @Override public boolean onItemLongClick(    AdapterView<?> parent,    View view,    int position,    long id){
+      ListView listView=(ListView)parent;
+      ListAdapter listAdapter=listView.getAdapter();
+      Object obj=listAdapter.getItem(position);
+      if (obj != null && obj instanceof LongClickableCheckBoxPreference) {
+        mShowContextMenu=true;
+        mAccountName=obj.toString();
+        Preferences.this.openContextMenu(listView);
+        View.OnLongClickListener longListener=(View.OnLongClickListener)obj;
+        return longListener.onLongClick(view);
+      }
+      return false;
     }
   }
 );
+  registerForContextMenu(getListView());
   pCode=(CheckBoxPreference)findPreference("set_pincode");
   if (pCode != null) {
     pCode.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
@@ -57,13 +69,16 @@
         @Override public boolean onPreferenceClick(        Preference preference){
           Intent intent=new Intent(Intent.ACTION_SENDTO);
           intent.setType("text/plain");
-          String appName=getString(R.string.app_name);
-          String recommendSubject=String.format(getString(R.string.recommend_subject),appName);
-          intent.putExtra(Intent.EXTRA_SUBJECT,recommendSubject);
-          String recommendText=String.format(getString(R.string.recommend_text),getString(R.string.app_name),getString(R.string.url_app_download));
-          intent.putExtra(Intent.EXTRA_TEXT,recommendText);
           intent.setData(Uri.parse(getString(R.string.mail_recommend)));
           intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+          String appName=getString(R.string.app_name);
+          String downloadUrl=getString(R.string.url_app_download);
+          Account currentAccount=AccountUtils.getCurrentOwnCloudAccount(Preferences.this);
+          String username=currentAccount.name.substring(0,currentAccount.name.lastIndexOf('@'));
+          String recommendSubject=String.format(getString(R.string.recommend_subject),appName);
+          String recommendText=String.format(getString(R.string.recommend_text),appName,downloadUrl,username);
+          intent.putExtra(Intent.EXTRA_SUBJECT,recommendSubject);
+          intent.putExtra(Intent.EXTRA_TEXT,recommendText);
           startActivity(intent);
           return (true);
         }
@@ -118,6 +133,14 @@
       preferenceCategory.removePreference(pImprint);
     }
   }
+  Preference pInstantUploadPathApp=(Preference)findPreference("instant_upload_path");
+  pInstantUploadPathApp.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
+    @Override public boolean onPreferenceChange(    Preference preference,    Object newValue){
+      mUploadPath=updateInstantUploadPath(newValue.toString());
+      return true;
+    }
+  }
+);
   pAboutApp=(Preference)findPreference("about_app");
   if (pAboutApp != null) {
     pAboutApp.setTitle(String.format(getString(R.string.about_android),getString(R.string.app_name)));

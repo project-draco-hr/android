@@ -1,0 +1,31 @@
+{
+  boolean check=existsFile(wc,remotePath);
+  if (!check) {
+    return remotePath;
+  }
+  int pos=remotePath.lastIndexOf(".");
+  String suffix="";
+  String extension="";
+  if (pos >= 0) {
+    extension=remotePath.substring(pos + 1);
+    remotePath=remotePath.substring(0,pos);
+  }
+  int count=2;
+  do {
+    suffix=" (" + count + ")";
+    if (pos >= 0) {
+      check=existsFile(wc,remotePath + suffix + "."+ extension);
+    }
+ else {
+      check=existsFile(wc,remotePath + suffix);
+    }
+    count++;
+  }
+ while (check);
+  if (pos >= 0) {
+    return remotePath + suffix + "."+ extension;
+  }
+ else {
+    return remotePath + suffix;
+  }
+}

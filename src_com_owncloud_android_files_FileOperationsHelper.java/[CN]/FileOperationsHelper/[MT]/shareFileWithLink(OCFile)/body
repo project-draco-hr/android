@@ -1,0 +1,18 @@
+{
+  if (isSharedSupported()) {
+    if (file != null) {
+      String link="https://fake.url";
+      Intent intent=createShareWithLinkIntent(link);
+      String[] packagesToExclude=new String[]{mFileActivity.getPackageName()};
+      DialogFragment chooserDialog=ShareLinkToDialog.newInstance(intent,packagesToExclude,file);
+      chooserDialog.show(mFileActivity.getSupportFragmentManager(),FTAG_CHOOSER_DIALOG);
+    }
+ else {
+      Log_OC.wtf(TAG,"Trying to share a NULL OCFile");
+    }
+  }
+ else {
+    Toast t=Toast.makeText(mFileActivity,mFileActivity.getString(R.string.share_link_no_support_share_api),Toast.LENGTH_LONG);
+    t.show();
+  }
+}

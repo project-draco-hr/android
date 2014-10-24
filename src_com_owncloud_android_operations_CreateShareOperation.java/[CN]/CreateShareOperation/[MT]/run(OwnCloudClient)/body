@@ -1,0 +1,16 @@
+{
+  RemoteOperation operation=null;
+  operation=new GetRemoteSharesForFileOperation(mPath,false,false);
+  RemoteOperationResult result=((GetRemoteSharesForFileOperation)operation).execute(client);
+  if (!result.isSuccess() || result.getData().size() <= 0) {
+    operation=new CreateRemoteShareOperation(mPath,mShareType,mShareWith,mPublicUpload,mPassword,mPermissions);
+    result=((CreateRemoteShareOperation)operation).execute(client);
+  }
+  if (result.isSuccess()) {
+    if (result.getData().size() > 0) {
+      OCShare share=(OCShare)result.getData().get(0);
+      updateData(share);
+    }
+  }
+  return result;
+}

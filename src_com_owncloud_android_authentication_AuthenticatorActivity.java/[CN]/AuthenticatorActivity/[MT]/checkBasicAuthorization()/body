@@ -1,10 +1,7 @@
 {
-  String webdav_path=AccountUtils.getWebdavPath(mDiscoveredVersion,mAuthTokenType);
   String username=mUsernameInput.getText().toString();
   String password=mPasswordInput.getText().toString();
-  showDialog(DIALOG_LOGIN_PROGRESS);
-  mAuthCheckOperation=new ExistenceCheckOperation("",this,false);
-  WebdavClient client=OwnCloudClientUtils.createOwnCloudClient(Uri.parse(mHostBaseUrl + webdav_path),this,true);
-  client.setBasicCredentials(username,password);
-  mOperationThread=mAuthCheckOperation.execute(client,this,mHandler);
+  IndeterminateProgressDialog dialog=IndeterminateProgressDialog.newInstance(R.string.auth_trying_to_login,true);
+  dialog.show(getSupportFragmentManager(),WAIT_DIALOG_TAG);
+  accessRootFolderRemoteOperation(username,password);
 }

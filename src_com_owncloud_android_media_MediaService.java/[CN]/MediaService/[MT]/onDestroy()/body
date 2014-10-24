@@ -2,4 +2,5 @@
   mState=State.STOPPED;
   releaseResources(true);
   giveUpAudioFocus();
+  super.onDestroy();
 }

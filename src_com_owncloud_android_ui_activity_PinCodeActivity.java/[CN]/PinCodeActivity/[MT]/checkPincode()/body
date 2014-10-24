@@ -4,11 +4,11 @@
   String pText2=appPrefs.getString("PrefPinCode2",null);
   String pText3=appPrefs.getString("PrefPinCode3",null);
   String pText4=appPrefs.getString("PrefPinCode4",null);
-  if (tempText[0].equals(pText1) && tempText[1].equals(pText2) && tempText[2].equals(pText3)&& tempText[3].equals(pText4)) {
+  if (mTempText[0].equals(pText1) && mTempText[1].equals(pText2) && mTempText[2].equals(pText3)&& mTempText[3].equals(pText4)) {
     return true;
   }
  else {
-    Arrays.fill(tempText,null);
+    Arrays.fill(mTempText,null);
     AlertDialog aDialog=new AlertDialog.Builder(this).create();
     CharSequence errorSeq=getString(R.string.common_error);
     aDialog.setTitle(errorSeq);
@@ -25,8 +25,8 @@
     clearBoxes();
     mPinHdr.setText(R.string.pincode_enter_pin_code);
     mPinHdrExplanation.setVisibility(View.INVISIBLE);
-    newPasswordEntered=true;
-    confirmingPinCode=false;
+    mNewPasswordEntered=true;
+    mConfirmingPinCode=false;
   }
   return false;
 }

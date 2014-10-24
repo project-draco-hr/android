@@ -1,0 +1,9 @@
+{
+  Intent service=new Intent(mFileActivity,OperationsService.class);
+  service.setAction(OperationsService.ACTION_SYNC_FILE);
+  service.putExtra(OperationsService.EXTRA_ACCOUNT,mFileActivity.getAccount());
+  service.putExtra(OperationsService.EXTRA_REMOTE_PATH,file.getRemotePath());
+  service.putExtra(OperationsService.EXTRA_SYNC_FILE_CONTENTS,true);
+  mWaitingForOpId=mFileActivity.getOperationsServiceBinder().newOperation(service);
+  mFileActivity.showLoadingDialog();
+}

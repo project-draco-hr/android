@@ -1,0 +1,13 @@
+{
+  SslUntrustedCertDialog dialog=null;
+  if (x509Certificate == null) {
+    dialog=SslUntrustedCertDialog.newInstanceForEmptySslError(error,handler);
+  }
+ else {
+    dialog=SslUntrustedCertDialog.newInstanceForFullSslError(x509Certificate,error,handler);
+  }
+  FragmentManager fm=getSupportFragmentManager();
+  FragmentTransaction ft=fm.beginTransaction();
+  ft.addToBackStack(null);
+  dialog.show(ft,UNTRUSTED_CERT_DIALOG_TAG);
+}

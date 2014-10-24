@@ -1,0 +1,7 @@
+{
+  Log_OC.d(TAG,"onCreate, savedInstanceState is " + savedInstanceState);
+  super.onCreate(savedInstanceState);
+  setRetainInstance(true);
+  setCancelable(false);
+  mView=null;
+}

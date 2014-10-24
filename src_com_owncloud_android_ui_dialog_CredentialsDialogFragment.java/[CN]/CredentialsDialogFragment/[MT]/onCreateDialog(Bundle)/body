@@ -1,0 +1,17 @@
+{
+  mUsernameET=new EditText(getSherlockActivity());
+  mUsernameET.setHint(getSherlockActivity().getText(R.string.auth_username));
+  mPasswordET=new EditText(getSherlockActivity());
+  mPasswordET.setHint(getSherlockActivity().getText(R.string.auth_password));
+  mPasswordET.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+  LinearLayout ll=new LinearLayout(getSherlockActivity());
+  ll.setOrientation(LinearLayout.VERTICAL);
+  ll.addView(mUsernameET);
+  ll.addView(mPasswordET);
+  ll.requestFocus();
+  setRetainInstance(true);
+  Builder authDialog=new AlertDialog.Builder(getSherlockActivity()).setTitle(getSherlockActivity().getText(R.string.saml_authentication_required_text)).setView(ll).setCancelable(false).setPositiveButton(R.string.common_ok,this).setNegativeButton(R.string.common_cancel,this);
+  Dialog d=authDialog.create();
+  d.getWindow().setSoftInputMode(LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+  return d;
+}
