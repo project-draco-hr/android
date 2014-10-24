@@ -1,8 +1,8 @@
 {
   if (mFailedResultsCounter > MAX_FAILED_RESULTS || isFinisher(mLastFailedResult))   return;
-  SynchronizeFolderOperation synchFolderOp=new SynchronizeFolderOperation(folder,mCurrentSyncTime,true,getStorageManager(),getAccount(),getContext());
+  SynchronizeFolderOperation synchFolderOp=new SynchronizeFolderOperation(folder,mCurrentSyncTime,true,mIsShareSupported,false,getStorageManager(),getAccount(),getContext());
   RemoteOperationResult result=synchFolderOp.execute(getClient());
-  sendStickyBroadcast(true,folder.getRemotePath(),null);
+  sendLocalBroadcast(EVENT_FULL_SYNC_FOLDER_CONTENTS_SYNCED,folder.getRemotePath(),result);
   if (result.isSuccess() || result.getCode() == ResultCode.SYNC_CONFLICT) {
     if (result.getCode() == ResultCode.SYNC_CONFLICT) {
       mConflictsFound+=synchFolderOp.getConflictsFound();
@@ -17,7 +17,7 @@
     }
   }
  else {
-    if (result.getCode() == RemoteOperationResult.ResultCode.UNAUTHORIZED || (result.isIdPRedirection() && MainApp.getAuthTokenTypeSamlSessionCookie().equals(getClient().getAuthTokenType()))) {
+    if (result.getCode() == RemoteOperationResult.ResultCode.UNAUTHORIZED || result.isIdPRedirection()) {
       mSyncResult.stats.numAuthExceptions++;
     }
  else     if (result.getException() instanceof DavException) {

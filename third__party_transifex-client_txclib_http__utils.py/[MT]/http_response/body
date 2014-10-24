@@ -1,9 +1,0 @@
-def http_response(response):
-    '\n    Return the response of a HTTP request.\n\n    If the response has been gzipped, gunzip it first.\n\n    :param response: The raw response of a HTTP request.\n    :returns: A response suitable to be used by clients.\n    '
-    metadata = response.info()
-    data = response.read()
-    response.close()
-    if (metadata.get('content-encoding') == 'gzip'):
-        return _gzip_decode(data)
-    else:
-        return data

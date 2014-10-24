@@ -1,0 +1,17 @@
+{
+  mWaitingForOpId=Long.MAX_VALUE;
+  dismissDialog(WAIT_DIALOG_TAG);
+  if (result.isSuccess()) {
+    IndeterminateProgressDialog dialog=IndeterminateProgressDialog.newInstance(R.string.auth_trying_to_login,true);
+    dialog.show(getSupportFragmentManager(),WAIT_DIALOG_TAG);
+    @SuppressWarnings("unchecked") Map<String,String> tokens=(Map<String,String>)(result.getData().get(0));
+    mAuthToken=tokens.get(OAuth2Constants.KEY_ACCESS_TOKEN);
+    Log_OC.d(TAG,"Got ACCESS TOKEN: " + mAuthToken);
+    accessRootFolderRemoteOperation("","");
+  }
+ else {
+    updateAuthStatusIconAndText(result);
+    showAuthStatus();
+    Log_OC.d(TAG,"Access failed: " + result.getLogMessage());
+  }
+}

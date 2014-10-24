@@ -1,0 +1,8 @@
+{
+  if (mOperationsServiceBinder != null) {
+    mOperationsServiceBinder.removeOperationListener(this);
+  }
+  mHostUrlInput.removeTextChangedListener(mHostUrlInputWatcher);
+  mHostUrlInput.setOnFocusChangeListener(null);
+  super.onPause();
+}

@@ -1,4 +1,0 @@
-{
-  getParams().setSoTimeout(defaultDataTimeout);
-  getHttpConnectionManager().getParams().setConnectionTimeout(defaultConnectionTimeout);
-}

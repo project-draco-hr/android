@@ -3,5 +3,6 @@
   super.onSaveInstanceState(outState);
   outState.putParcelable(FileDisplayActivity.KEY_WAITING_TO_PREVIEW,mWaitingToPreview);
   outState.putBoolean(FileDisplayActivity.KEY_SYNC_IN_PROGRESS,mSyncInProgress);
+  outState.putParcelable(FileDisplayActivity.KEY_WAITING_TO_SEND,mWaitingToSend);
   Log_OC.d(TAG,"onSaveInstanceState() end");
 }

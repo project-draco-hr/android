@@ -1,0 +1,25 @@
+{
+  int titleId;
+  if (sendAction) {
+    titleId=R.string.activity_chooser_send_file_title;
+  }
+ else {
+    titleId=R.string.activity_chooser_title;
+  }
+  return new AlertDialog.Builder(getSherlockActivity()).setTitle(titleId).setAdapter(mAdapter,new DialogInterface.OnClickListener(){
+    @Override public void onClick(    DialogInterface dialog,    int which){
+      ResolveInfo chosen=mAdapter.getItem(which);
+      ActivityInfo actInfo=chosen.activityInfo;
+      ComponentName name=new ComponentName(actInfo.applicationInfo.packageName,actInfo.name);
+      mIntent.setComponent(name);
+      if (sendAction) {
+        dialog.dismiss();
+        ((FileActivity)getSherlockActivity()).startActivity(mIntent);
+      }
+ else {
+        ((ComponentsGetter)getSherlockActivity()).getFileOperationsHelper().shareFileWithLinkToApp(mFile,mIntent);
+      }
+    }
+  }
+).create();
+}

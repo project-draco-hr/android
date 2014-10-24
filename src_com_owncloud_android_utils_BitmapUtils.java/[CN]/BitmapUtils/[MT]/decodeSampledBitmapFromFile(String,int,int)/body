@@ -1,0 +1,16 @@
+{
+  final Options options=new Options();
+  options.inScaled=true;
+  options.inPurgeable=true;
+  if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.GINGERBREAD_MR1) {
+    options.inPreferQualityOverSpeed=false;
+  }
+  if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
+    options.inMutable=false;
+  }
+  options.inJustDecodeBounds=true;
+  BitmapFactory.decodeFile(srcPath,options);
+  options.inSampleSize=calculateSampleFactor(options,reqWidth,reqHeight);
+  options.inJustDecodeBounds=false;
+  return BitmapFactory.decodeFile(srcPath,options);
+}

@@ -1,6 +1,0 @@
-def parse_csv_option(option):
-    'Return a list out of the comma-separated option or an empty list.'
-    if option:
-        return option.split(',')
-    else:
-        return []

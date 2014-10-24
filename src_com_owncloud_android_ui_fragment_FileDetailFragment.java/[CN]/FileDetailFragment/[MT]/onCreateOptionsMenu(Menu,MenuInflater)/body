@@ -1,9 +1,4 @@
 {
   super.onCreateOptionsMenu(menu,inflater);
   inflater.inflate(R.menu.file_actions_menu,menu);
-  MenuItem item=menu.findItem(R.id.action_see_details);
-  if (item != null) {
-    item.setVisible(false);
-    item.setEnabled(false);
-  }
 }

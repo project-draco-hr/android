@@ -1,0 +1,16 @@
+{
+  String remotePath=mLocalFolder.getRemotePath();
+  ReadRemoteFolderOperation operation=new ReadRemoteFolderOperation(remotePath);
+  RemoteOperationResult result=operation.execute(client);
+  Log_OC.d(TAG,"Synchronizing " + mAccount.name + remotePath);
+  if (result.isSuccess()) {
+    synchronizeData(result.getData(),client);
+    if (mConflictsFound > 0 || mFailsInFavouritesFound > 0) {
+      result=new RemoteOperationResult(ResultCode.SYNC_CONFLICT);
+    }
+  }
+ else {
+    if (result.getCode() == ResultCode.FILE_NOT_FOUND)     removeLocalFolder();
+  }
+  return result;
+}

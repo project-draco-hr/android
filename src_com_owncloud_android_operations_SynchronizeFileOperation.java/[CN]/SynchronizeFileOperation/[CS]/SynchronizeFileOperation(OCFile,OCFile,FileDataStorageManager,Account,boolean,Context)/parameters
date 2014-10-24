@@ -1,6 +1,0 @@
-OCFile localFile
-OCFile serverFile
-FileDataStorageManager storageManager
-Account account
-boolean syncFileContents
-Context context

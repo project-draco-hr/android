@@ -1,5 +1,0 @@
-{
-  if (client == null)   throw new IllegalArgumentException("Trying to execute a remote operation with a NULL WebdavClient");
-  mClient=client;
-  return run(client);
-}

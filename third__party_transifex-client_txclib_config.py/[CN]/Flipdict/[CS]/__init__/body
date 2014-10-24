@@ -1,5 +1,0 @@
-def __init__(self, *args, **kw):
-    self._flip = dict.__new__(self.__class__)
-    setattr(self._flip, '_flip', self)
-    for (key, val) in dict(*args, **kw).iteritems():
-        self[key] = val

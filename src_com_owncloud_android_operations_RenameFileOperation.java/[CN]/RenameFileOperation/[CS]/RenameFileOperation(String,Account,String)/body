@@ -1,0 +1,6 @@
+{
+  mRemotePath=remotePath;
+  mAccount=account;
+  mNewName=newName;
+  mNewRemotePath=null;
+}

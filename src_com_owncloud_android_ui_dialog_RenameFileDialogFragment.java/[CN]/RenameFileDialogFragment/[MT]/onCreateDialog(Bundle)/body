@@ -1,0 +1,20 @@
+{
+  mTargetFile=getArguments().getParcelable(ARG_TARGET_FILE);
+  LayoutInflater inflater=getSherlockActivity().getLayoutInflater();
+  View v=inflater.inflate(R.layout.edit_box_dialog,null);
+  String currentName=mTargetFile.getFileName();
+  EditText inputText=((EditText)v.findViewById(R.id.user_input));
+  inputText.setText(currentName);
+  int selectionStart=0;
+  int extensionStart=mTargetFile.isFolder() ? -1 : currentName.lastIndexOf(".");
+  int selectionEnd=(extensionStart >= 0) ? extensionStart : currentName.length();
+  if (selectionStart >= 0 && selectionEnd >= 0) {
+    inputText.setSelection(Math.min(selectionStart,selectionEnd),Math.max(selectionStart,selectionEnd));
+  }
+  inputText.requestFocus();
+  AlertDialog.Builder builder=new AlertDialog.Builder(getSherlockActivity());
+  builder.setView(v).setPositiveButton(R.string.common_ok,this).setNegativeButton(R.string.common_cancel,this).setTitle(R.string.rename_dialog_title);
+  Dialog d=builder.create();
+  d.getWindow().setSoftInputMode(LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+  return d;
+}

@@ -1,4 +1,4 @@
 {
-  super.onStop();
   leaveTransferProgress();
+  super.onStop();
 }

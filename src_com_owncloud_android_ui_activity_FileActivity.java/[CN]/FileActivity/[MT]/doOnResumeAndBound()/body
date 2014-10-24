@@ -1,0 +1,10 @@
+{
+  mOperationsServiceBinder.addOperationListener(FileActivity.this,mHandler);
+  long waitingForOpId=mFileOperationsHelper.getOpIdWaitingFor();
+  if (waitingForOpId <= Integer.MAX_VALUE) {
+    boolean wait=mOperationsServiceBinder.dispatchResultIfFinished((int)waitingForOpId,this);
+    if (!wait) {
+      dismissLoadingDialog();
+    }
+  }
+}

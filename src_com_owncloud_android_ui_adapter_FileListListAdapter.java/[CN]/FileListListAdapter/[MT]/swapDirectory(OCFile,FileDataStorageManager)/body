@@ -6,9 +6,12 @@
   }
   if (mStorageManager != null) {
     mFiles=mStorageManager.getFolderContent(mFile);
+    if (mJustFolders) {
+      mFiles=getFolders(mFiles);
+    }
   }
  else {
     mFiles=null;
   }
-  notifyDataSetChanged();
+  sortDirectory();
 }

@@ -1,0 +1,8 @@
+{
+  mAccount=account;
+  mServerUrl=serverUrl;
+  mUsername=username;
+  mPassword=password;
+  mAuthToken=authToken;
+  mCookie=cookie;
+}

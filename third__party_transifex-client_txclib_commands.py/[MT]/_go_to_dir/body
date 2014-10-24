@@ -1,5 +1,0 @@
-def _go_to_dir(path):
-    'Change the current working directory to the directory specified as\n    argument.\n\n    Args:\n        path: The path to chdor to.\n    Raises:\n        UnInitializedError, in case the directory has not been initialized.\n    '
-    if (path is None):
-        raise UnInitializedError("Directory has not been initialzied. Did you forget to run 'tx init' first?")
-    os.chdir(path)

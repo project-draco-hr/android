@@ -1,0 +1,11 @@
+{
+  if (!url.toLowerCase().startsWith("http://") && !url.toLowerCase().startsWith("https://")) {
+    if (isSslConn) {
+      return "https://" + url;
+    }
+ else {
+      return "http://" + url;
+    }
+  }
+  return url;
+}

@@ -1,5 +1,5 @@
 {
-  confirmingPinCode=false;
-  pinCodeChecked=false;
-  newPasswordEntered=false;
+  mConfirmingPinCode=false;
+  mPinCodeChecked=false;
+  mNewPasswordEntered=false;
 }

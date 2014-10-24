@@ -1,0 +1,15 @@
+{
+  if (url != null && url.length() > 0) {
+    url=url.trim();
+    if (!url.toLowerCase().startsWith("http://") && !url.toLowerCase().startsWith("https://")) {
+      if (sslWhenUnprefixed) {
+        url="https://" + url;
+      }
+ else {
+        url="http://" + url;
+      }
+    }
+    url=normalizeUrlSuffix(url);
+  }
+  return (url != null ? url : "");
+}

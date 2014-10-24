@@ -1,3 +1,0 @@
-{
-  mRefreshButton.setVisibility(View.GONE);
-}

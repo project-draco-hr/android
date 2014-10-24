@@ -1,0 +1,12 @@
+{
+  if (which == AlertDialog.BUTTON_POSITIVE) {
+    String username=mUsernameET.getText().toString();
+    String password=mPasswordET.getText().toString();
+    mHandler.proceed(username,password);
+  }
+ else   if (which == AlertDialog.BUTTON_NEGATIVE) {
+    mWebView.stopLoading();
+    ((AuthenticatorActivity)getActivity()).doNegativeAuthenticatioDialogClick();
+  }
+  dialog.dismiss();
+}

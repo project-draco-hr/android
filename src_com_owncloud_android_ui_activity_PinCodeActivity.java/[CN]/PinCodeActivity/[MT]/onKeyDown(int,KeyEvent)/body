@@ -1,6 +1,6 @@
 {
   if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-    if (activity.equals("preferences")) {
+    if (mActivity.equals("preferences")) {
       SharedPreferences.Editor appPrefsE=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
       SharedPreferences appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
       boolean state=appPrefs.getBoolean("set_pincode",false);

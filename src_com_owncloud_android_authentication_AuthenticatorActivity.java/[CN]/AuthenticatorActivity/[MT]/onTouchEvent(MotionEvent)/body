@@ -1,5 +1,5 @@
 {
-  if (MainApp.getAuthTokenTypeSamlSessionCookie().equals(mAuthTokenType) && mHostUrlInput.hasFocus() && event.getAction() == MotionEvent.ACTION_DOWN) {
+  if (AccountTypeUtils.getAuthTokenTypeSamlSessionCookie(MainApp.getAccountType()).equals(mAuthTokenType) && mHostUrlInput.hasFocus() && event.getAction() == MotionEvent.ACTION_DOWN) {
     checkOcServer();
   }
   return super.onTouchEvent(event);

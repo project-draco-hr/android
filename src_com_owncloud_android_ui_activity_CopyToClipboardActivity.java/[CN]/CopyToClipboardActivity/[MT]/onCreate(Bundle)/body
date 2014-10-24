@@ -1,0 +1,15 @@
+{
+  super.onCreate(savedInstanceState);
+  ClipboardManager clipboardManager=(ClipboardManager)this.getSystemService(CLIPBOARD_SERVICE);
+  Intent intent=getIntent();
+  CharSequence text=intent.getCharSequenceExtra(Intent.EXTRA_TEXT);
+  if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
+    ClipData clip=ClipData.newPlainText("ownCloud was here",text);
+    ((android.content.ClipboardManager)clipboardManager).setPrimaryClip(clip);
+  }
+ else {
+    clipboardManager.setText(text);
+  }
+  Toast.makeText(this,R.string.clipboard_text_copied,Toast.LENGTH_SHORT).show();
+  finish();
+}

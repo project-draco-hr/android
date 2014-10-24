@@ -1,0 +1,6 @@
+{
+  String basic=AccountTypeUtils.getAuthTokenTypePass(MainApp.getAccountType());
+  String oAuth=AccountTypeUtils.getAuthTokenTypeAccessToken(MainApp.getAccountType());
+  String saml=AccountTypeUtils.getAuthTokenTypeSamlSessionCookie(MainApp.getAccountType());
+  return ((mAuthTokenType.equals(basic) && authMethod.equals(AuthenticationMethod.BASIC_HTTP_AUTH)) || (mAuthTokenType.equals(oAuth) && authMethod.equals(AuthenticationMethod.BEARER_TOKEN)) || (mAuthTokenType.equals(saml) && authMethod.equals(AuthenticationMethod.SAML_WEB_SSO)));
+}

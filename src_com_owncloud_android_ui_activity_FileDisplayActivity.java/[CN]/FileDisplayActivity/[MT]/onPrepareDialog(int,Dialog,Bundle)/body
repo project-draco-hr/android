@@ -1,5 +1,0 @@
-{
-  if (id == DIALOG_SSL_VALIDATOR && mLastSslUntrustedServerResult != null) {
-    ((SslValidatorDialog)dialog).updateResult(mLastSslUntrustedServerResult);
-  }
-}

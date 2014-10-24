@@ -1,4 +1,0 @@
-{
-  processChallenge(challenge);
-  mComplete=true;
-}

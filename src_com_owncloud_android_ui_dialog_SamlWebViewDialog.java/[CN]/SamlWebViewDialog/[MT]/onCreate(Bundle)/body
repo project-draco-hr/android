@@ -1,7 +1,8 @@
 {
-  Log_OC.d(TAG,"onCreate");
+  Log_OC.d(TAG,"onCreate, savedInstanceState is " + savedInstanceState);
   super.onCreate(savedInstanceState);
-  CookieSyncManager.createInstance(getActivity());
+  setRetainInstance(true);
+  CookieSyncManager.createInstance(getSherlockActivity().getApplicationContext());
   if (savedInstanceState == null) {
     mInitialUrl=getArguments().getString(ARG_INITIAL_URL);
     mTargetUrl=getArguments().getString(ARG_TARGET_URL);

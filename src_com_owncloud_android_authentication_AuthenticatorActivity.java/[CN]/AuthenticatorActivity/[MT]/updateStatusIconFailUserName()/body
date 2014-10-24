@@ -1,0 +1,4 @@
+{
+  mAuthStatusIcon=R.drawable.common_error;
+  mAuthStatusText=R.string.auth_fail_get_user_name;
+}

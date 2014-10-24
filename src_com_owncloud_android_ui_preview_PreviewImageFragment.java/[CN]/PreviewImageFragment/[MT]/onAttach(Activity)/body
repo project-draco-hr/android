@@ -1,4 +1,0 @@
-{
-  super.onAttach(activity);
-  if (!(activity instanceof FileFragment.ContainerActivity))   throw new ClassCastException(activity.toString() + " must implement " + FileFragment.ContainerActivity.class.getSimpleName());
-}

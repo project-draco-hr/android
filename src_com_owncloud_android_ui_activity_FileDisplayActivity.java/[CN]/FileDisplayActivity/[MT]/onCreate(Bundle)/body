@@ -2,24 +2,25 @@
   Log_OC.d(TAG,"onCreate() start");
   requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
   super.onCreate(savedInstanceState);
-  mHandler=new Handler();
-  mUploadConnection=new ListServiceConnection();
-  mDownloadConnection=new ListServiceConnection();
-  bindService(new Intent(this,FileUploader.class),mUploadConnection,Context.BIND_AUTO_CREATE);
-  bindService(new Intent(this,FileDownloader.class),mDownloadConnection,Context.BIND_AUTO_CREATE);
   if (getIntent().getAction() != null && getIntent().getAction().equals(Intent.ACTION_MAIN) && savedInstanceState == null) {
     requestPinCode();
   }
-  Intent observer_intent=new Intent(this,FileObserverService.class);
-  observer_intent.putExtra(FileObserverService.KEY_FILE_CMD,FileObserverService.CMD_INIT_OBSERVED_LIST);
-  startService(observer_intent);
+ else   if (getIntent().getAction() == null && savedInstanceState == null) {
+    requestPinCode();
+  }
+  if (savedInstanceState == null) {
+    Intent initObserversIntent=FileObserverService.makeInitIntent(this);
+    startService(initObserversIntent);
+  }
   if (savedInstanceState != null) {
     mWaitingToPreview=(OCFile)savedInstanceState.getParcelable(FileDisplayActivity.KEY_WAITING_TO_PREVIEW);
     mSyncInProgress=savedInstanceState.getBoolean(KEY_SYNC_IN_PROGRESS);
+    mWaitingToSend=(OCFile)savedInstanceState.getParcelable(FileDisplayActivity.KEY_WAITING_TO_SEND);
   }
  else {
     mWaitingToPreview=null;
     mSyncInProgress=false;
+    mWaitingToSend=null;
   }
   setContentView(R.layout.files);
   mDualPane=getResources().getBoolean(R.bool.large_land_layout);
@@ -31,5 +32,6 @@
   mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
   getSupportActionBar().setHomeButtonEnabled(true);
   setSupportProgressBarIndeterminateVisibility(mSyncInProgress);
+  setBackgroundText();
   Log_OC.d(TAG,"onCreate() end");
 }

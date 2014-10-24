@@ -1,0 +1,4 @@
+float scale
+float focusX
+float focusY
+ScaleType scaleType

@@ -1,3 +1,6 @@
 {
-  checkOcServer();
+  Fragment fd=getSupportFragmentManager().findFragmentByTag(SAML_DIALOG_TAG);
+  if (fd == null) {
+    checkOcServer();
+  }
 }

@@ -7,5 +7,7 @@
   mUriMatcher.addURI(authority,"file/#",SINGLE_FILE);
   mUriMatcher.addURI(authority,"dir/",DIRECTORY);
   mUriMatcher.addURI(authority,"dir/#",DIRECTORY);
+  mUriMatcher.addURI(authority,"shares/",SHARES);
+  mUriMatcher.addURI(authority,"shares/#",SHARES);
   return true;
 }

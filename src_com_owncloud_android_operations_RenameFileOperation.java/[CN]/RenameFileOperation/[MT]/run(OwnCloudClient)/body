@@ -1,0 +1,32 @@
+{
+  RemoteOperationResult result=null;
+  mFile=getStorageManager().getFileByPath(mRemotePath);
+  try {
+    if (!isValidNewName()) {
+      return new RemoteOperationResult(ResultCode.INVALID_LOCAL_FILE_NAME);
+    }
+    String parent=(new File(mFile.getRemotePath())).getParent();
+    parent=(parent.endsWith(OCFile.PATH_SEPARATOR)) ? parent : parent + OCFile.PATH_SEPARATOR;
+    mNewRemotePath=parent + mNewName;
+    if (mFile.isFolder()) {
+      mNewRemotePath+=OCFile.PATH_SEPARATOR;
+    }
+    if (getStorageManager().getFileByPath(mNewRemotePath) != null) {
+      return new RemoteOperationResult(ResultCode.INVALID_OVERWRITE);
+    }
+    RenameRemoteFileOperation operation=new RenameRemoteFileOperation(mFile.getFileName(),mFile.getRemotePath(),mNewName,mFile.isFolder());
+    result=operation.execute(client);
+    if (result.isSuccess()) {
+      if (mFile.isFolder()) {
+        saveLocalDirectory();
+      }
+ else {
+        saveLocalFile();
+      }
+    }
+  }
+ catch (  IOException e) {
+    Log_OC.e(TAG,"Rename " + mFile.getRemotePath() + " to "+ ((mNewRemotePath == null) ? mNewName : mNewRemotePath)+ ": "+ ((result != null) ? result.getLogMessage() : ""),e);
+  }
+  return result;
+}

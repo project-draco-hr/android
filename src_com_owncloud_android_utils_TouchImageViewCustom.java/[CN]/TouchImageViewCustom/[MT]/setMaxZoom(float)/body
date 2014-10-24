@@ -1,0 +1,4 @@
+{
+  maxScale=max;
+  superMaxScale=SUPER_MAX_MULTIPLIER * maxScale;
+}

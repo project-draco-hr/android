@@ -1,4 +1,0 @@
-{
-  super.onSaveInstanceState(outState);
-  outState.putParcelable(EXTRA_FILE,mFile);
-}

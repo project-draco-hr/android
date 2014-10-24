@@ -1,0 +1,21 @@
+{
+  if (touchImageViewListener != null) {
+    touchImageViewListener.onMove();
+  }
+  if (scroller.isFinished()) {
+    scroller=null;
+    return;
+  }
+  if (scroller.computeScrollOffset()) {
+    int newX=scroller.getCurrX();
+    int newY=scroller.getCurrY();
+    int transX=newX - currX;
+    int transY=newY - currY;
+    currX=newX;
+    currY=newY;
+    matrix.postTranslate(transX,transY);
+    fixTrans();
+    setImageMatrix(matrix);
+    compatPostOnAnimation(this);
+  }
+}

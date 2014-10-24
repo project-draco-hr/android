@@ -1,0 +1,4 @@
+{
+  mHideSystemUiHandler.removeMessages(0);
+  mHideSystemUiHandler.sendEmptyMessageDelayed(0,delayMillis);
+}

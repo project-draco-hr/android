@@ -1,0 +1,6 @@
+{
+  if (doubleTapListener != null) {
+    return doubleTapListener.onDoubleTapEvent(e);
+  }
+  return false;
+}

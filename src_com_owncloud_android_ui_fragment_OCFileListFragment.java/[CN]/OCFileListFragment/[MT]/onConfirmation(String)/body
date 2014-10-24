@@ -1,9 +1,0 @@
-{
-  if (callerTag.equals(FileDetailFragment.FTAG_CONFIRMATION)) {
-    if (mContainerActivity.getStorageManager().getFileById(mTargetFile.getFileId()) != null) {
-      RemoteOperation operation=new RemoveFileOperation(mTargetFile,true,mContainerActivity.getStorageManager());
-      operation.execute(AccountUtils.getCurrentOwnCloudAccount(getSherlockActivity()),getSherlockActivity(),mContainerActivity,mHandler,getSherlockActivity());
-      ((FileDisplayActivity)getActivity()).showLoadingDialog();
-    }
-  }
-}

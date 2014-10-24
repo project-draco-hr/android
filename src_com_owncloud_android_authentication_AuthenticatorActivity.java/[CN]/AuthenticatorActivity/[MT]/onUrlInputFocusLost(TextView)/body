@@ -1,11 +1,9 @@
 {
-  if (!mHostBaseUrl.equals(normalizeUrl(mHostUrlInput.getText().toString()))) {
+  if (!mServerInfo.mBaseUrl.equals(normalizeUrl(mHostUrlInput.getText().toString(),mServerInfo.mIsSslConn))) {
     checkOcServer();
   }
  else {
     mOkButton.setEnabled(mServerIsValid);
-    if (!mServerIsValid) {
-      showRefreshButton();
-    }
+    showRefreshButton(!mServerIsValid);
   }
 }

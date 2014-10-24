@@ -1,0 +1,11 @@
+{
+  if (saml) {
+    return AccountTypeUtils.getAuthTokenTypeSamlSessionCookie(MainApp.getAccountType());
+  }
+ else   if (oauth) {
+    return AccountTypeUtils.getAuthTokenTypeAccessToken(MainApp.getAccountType());
+  }
+ else {
+    return AccountTypeUtils.getAuthTokenTypePass(MainApp.getAccountType());
+  }
+}

@@ -1,0 +1,6 @@
+{
+  super.onResume();
+  if (mOperationsServiceBinder != null) {
+    doOnResumeAndBound();
+  }
+}
