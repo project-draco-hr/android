@@ -1,4 +1,8 @@
 {
   super.onProgressUpdate(values);
-  ((TextLineAdapter)mTextPreviewList.getAdapter()).add(values[0].toString());
+  final char[] newTextAsCharArray=values[0].toString().toCharArray();
+  for (  char c : newTextAsCharArray) {
+    accumulatedText.add(c);
+  }
+  addLine();
 }

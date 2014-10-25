@@ -32,5 +32,8 @@
       sc.close();
     }
   }
+  while (!accumulatedText.isEmpty()) {
+    addLine();
+  }
   return null;
 }
