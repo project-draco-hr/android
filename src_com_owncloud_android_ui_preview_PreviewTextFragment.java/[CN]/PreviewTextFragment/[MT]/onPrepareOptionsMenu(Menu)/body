@@ -19,4 +19,24 @@
     item.setVisible(false);
     item.setEnabled(false);
   }
+  item=menu.findItem(R.id.action_settings);
+  if (item != null) {
+    item.setVisible(false);
+    item.setEnabled(false);
+  }
+  item=menu.findItem(R.id.action_logger);
+  if (item != null) {
+    item.setVisible(false);
+    item.setEnabled(false);
+  }
+  item=menu.findItem(R.id.action_sync_file);
+  if (item != null) {
+    item.setVisible(false);
+    item.setEnabled(false);
+  }
+  item=menu.findItem(R.id.action_sync_account);
+  if (item != null) {
+    item.setVisible(false);
+    item.setEnabled(false);
+  }
 }
