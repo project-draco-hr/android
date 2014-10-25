@@ -28,5 +28,6 @@ catch (  Throwable t) {
     mErrorMessageId=R.string.common_error_unknown;
     Log_OC.e(TAG,"Unexpected error loading " + getFile().getStoragePath(),t);
   }
+  result=rotateImage(result,storagePath);
   return result;
 }
