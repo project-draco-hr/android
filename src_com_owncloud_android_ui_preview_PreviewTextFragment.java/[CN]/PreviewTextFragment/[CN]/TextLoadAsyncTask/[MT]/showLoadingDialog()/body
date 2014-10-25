@@ -1,0 +1,6 @@
+{
+  LoadingDialog loading=new LoadingDialog(getResources().getString(R.string.wait_a_moment));
+  FragmentManager fm=getActivity().getSupportFragmentManager();
+  FragmentTransaction ft=fm.beginTransaction();
+  loading.show(ft,DIALOG_WAIT_TAG);
+}

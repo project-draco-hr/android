@@ -4,6 +4,5 @@
   View ret=inflater.inflate(R.layout.text_file_preview,container,false);
   mTextPreviewList=(ListView)ret.findViewById(R.id.text_preview_list);
   mTextPreviewList.setAdapter(new TextLineAdapter());
-  mProgressBar=(ProgressBar)ret.findViewById(R.id.progress_bar);
   return ret;
 }
