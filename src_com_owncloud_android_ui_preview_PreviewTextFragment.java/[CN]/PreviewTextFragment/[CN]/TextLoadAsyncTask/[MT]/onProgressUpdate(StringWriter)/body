@@ -1,8 +1,0 @@
-{
-  super.onProgressUpdate(values);
-  final char[] newTextAsCharArray=values[0].toString().toCharArray();
-  for (  char c : newTextAsCharArray) {
-    accumulatedText.add(c);
-  }
-  addLine();
-}

@@ -1,3 +1,8 @@
 {
-  getSherlockActivity().onBackPressed();
+  getActivity().runOnUiThread(new Runnable(){
+    @Override public void run(){
+      getSherlockActivity().onBackPressed();
+    }
+  }
+);
 }
