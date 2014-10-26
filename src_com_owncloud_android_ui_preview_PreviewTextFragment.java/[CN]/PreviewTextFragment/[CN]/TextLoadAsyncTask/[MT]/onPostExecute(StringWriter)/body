@@ -1,0 +1,5 @@
+{
+  mTextView.setText(new String(stringWriter.getBuffer()));
+  mTextView.setVisibility(View.VISIBLE);
+  dismissLoadingDialog();
+}

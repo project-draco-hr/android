@@ -1,9 +1,0 @@
-{
-  items.clear();
-  getActivity().runOnUiThread(new Runnable(){
-    @Override public void run(){
-      notifyDataSetChanged();
-    }
-  }
-);
-}

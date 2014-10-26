@@ -1,1 +1,1 @@
-AsyncTask<Object,StringWriter,Void>
+AsyncTask<Object,Void,StringWriter>

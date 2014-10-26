@@ -1,18 +1,19 @@
 {
-  if (params.length != 1)   throw new IllegalArgumentException("The parameter to " + TextLoadAsyncTask.class.getName() + " must be the file location only");
+  if (params.length != 2)   throw new IllegalArgumentException("The parameters to " + TextLoadAsyncTask.class.getName() + " must be (1) the file location and (2) the text view to update");
   final String location=(String)params[0];
+  mTextView=(TextView)params[1];
   FileInputStream inputStream=null;
   Scanner sc=null;
+  StringWriter source=new StringWriter();
+  BufferedWriter bufferedWriter=new BufferedWriter(source);
   try {
     inputStream=new FileInputStream(location);
     sc=new Scanner(inputStream);
     while (sc.hasNextLine()) {
-      StringWriter target=new StringWriter();
-      BufferedWriter bufferedWriter=new BufferedWriter(target);
-      if (sc.hasNextLine())       bufferedWriter.write(sc.nextLine());
-      bufferedWriter.close();
-      publishProgress(target);
+      bufferedWriter.append(sc.nextLine());
+      if (sc.hasNextLine())       bufferedWriter.append("\n");
     }
+    bufferedWriter.close();
     IOException exc=sc.ioException();
     if (exc != null)     throw exc;
   }
@@ -32,8 +33,5 @@
       sc.close();
     }
   }
-  while (!accumulatedText.isEmpty()) {
-    addLine();
-  }
-  return null;
+  return source;
 }

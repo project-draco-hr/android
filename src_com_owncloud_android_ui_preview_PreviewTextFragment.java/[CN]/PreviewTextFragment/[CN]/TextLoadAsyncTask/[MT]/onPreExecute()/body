@@ -1,9 +1,3 @@
 {
-  ((TextLineAdapter)mTextPreviewList.getAdapter()).clear();
-  DisplayMetrics displaymetrics=new DisplayMetrics();
-  getActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-  TEXTVIEW_WIDTH=displaymetrics.widthPixels;
-  TEXTVIEW_SIZE=((TextView)((LayoutInflater)getActivity().getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.text_file_preview_list_item,null)).getTextSize();
   showLoadingDialog();
-  paint.setTextSize(TEXTVIEW_SIZE);
 }

@@ -1,5 +1,0 @@
-{
-  super.onPostExecute(aVoid);
-  mTextPreviewList.setVisibility(View.VISIBLE);
-  dismissLoadingDialog();
-}

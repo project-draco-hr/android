@@ -1,5 +1,0 @@
-{
-  paint.getTextBounds(text,0,text.length(),bounds);
-  int lineWidth=(int)Math.ceil(bounds.width());
-  return lineWidth / TEXTVIEW_WIDTH > 1;
-}
