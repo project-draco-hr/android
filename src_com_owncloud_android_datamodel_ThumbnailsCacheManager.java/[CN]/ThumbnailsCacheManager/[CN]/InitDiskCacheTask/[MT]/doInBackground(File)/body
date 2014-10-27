@@ -5,8 +5,12 @@ synchronized (mThumbnailsDiskCacheLock) {
       try {
         OwnCloudAccount ocAccount;
         try {
-          ocAccount=new OwnCloudAccount(mAccount,mContext);
-          mClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,mContext);
+          if (mAccount != null) {
+            AccountManager accountMgr=AccountManager.get(mContext);
+            mServerVersion=accountMgr.getUserData(mAccount,Constants.KEY_OC_VERSION);
+            ocAccount=new OwnCloudAccount(mAccount,mContext);
+            mClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,mContext);
+          }
         }
  catch (        AccountNotFoundException e) {
           e.printStackTrace();
