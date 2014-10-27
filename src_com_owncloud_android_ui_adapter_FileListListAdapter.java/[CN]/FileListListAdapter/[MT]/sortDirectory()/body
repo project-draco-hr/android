@@ -1,0 +1,14 @@
+{
+switch (mSortOrder) {
+case 0:
+    sortByName(mSortAscending);
+  break;
+case 1:
+sortByDate(mSortAscending);
+break;
+case 2:
+sortBySize(mSortAscending);
+break;
+}
+notifyDataSetChanged();
+}
