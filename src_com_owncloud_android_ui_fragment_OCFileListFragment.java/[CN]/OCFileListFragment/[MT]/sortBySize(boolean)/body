@@ -1,0 +1,3 @@
+{
+  mAdapter.setSortOrder(FileListListAdapter.SORT_SIZE,descending);
+}
