@@ -3,9 +3,7 @@
   for (int i=0; i < numberOfFiles; i++) {
     File file=(File)mAdapter.getItem(i);
     if (file != null) {
-      if (file.isDirectory()) {
-      }
- else {
+      if (!file.isDirectory()) {
         getListView().setItemChecked(i,true);
         mContainerActivity.onFileClick(file);
       }
