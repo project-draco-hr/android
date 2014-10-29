@@ -10,5 +10,4 @@
     ActionBar actionBar=getSupportActionBar();
     actionBar.setDisplayHomeAsUpEnabled(false);
   }
-  toggleOffSelectAll();
 }
