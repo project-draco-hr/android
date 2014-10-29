@@ -30,7 +30,7 @@
     resultBitmap=Bitmap.createBitmap(bitmap,0,0,bitmap.getWidth(),bitmap.getHeight(),matrix,true);
   }
  catch (  Exception exception) {
-    Log_OC.e(TAG,"Could not rotate the image: " + storagePath);
+    Log_OC.e("BitmapUtil","Could not rotate the image: " + storagePath);
   }
   return resultBitmap;
 }

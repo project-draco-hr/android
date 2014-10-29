@@ -11,7 +11,7 @@
         Bitmap bitmap=BitmapUtils.decodeSampledBitmapFromFile(mFile.getStoragePath(),px,px);
         if (bitmap != null) {
           thumbnail=ThumbnailUtils.extractThumbnail(bitmap,px,px);
-          thumbnail=rotateImage(thumbnail,mFile.getStoragePath());
+          thumbnail=BitmapUtils.rotateImage(thumbnail,mFile.getStoragePath());
           addBitmapToCache(imageKey,thumbnail);
           mFile.setNeedsUpdateThumbnail(false);
           mStorageManager.saveFile(mFile);
