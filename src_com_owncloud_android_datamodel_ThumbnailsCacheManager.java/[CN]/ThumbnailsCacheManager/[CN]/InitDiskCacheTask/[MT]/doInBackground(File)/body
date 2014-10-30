@@ -3,27 +3,6 @@ synchronized (mThumbnailsDiskCacheLock) {
     mThumbnailCacheStarting=true;
     if (mThumbnailCache == null) {
       try {
-        OwnCloudAccount ocAccount;
-        try {
-          if (mAccount != null) {
-            AccountManager accountMgr=AccountManager.get(mContext);
-            mServerVersion=accountMgr.getUserData(mAccount,Constants.KEY_OC_VERSION);
-            ocAccount=new OwnCloudAccount(mAccount,mContext);
-            mClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,mContext);
-          }
-        }
- catch (        AccountNotFoundException e) {
-          e.printStackTrace();
-        }
-catch (        AuthenticatorException e) {
-          e.printStackTrace();
-        }
-catch (        OperationCanceledException e) {
-          e.printStackTrace();
-        }
-catch (        IOException e) {
-          e.printStackTrace();
-        }
         final String cachePath=MainApp.getAppContext().getExternalCacheDir().getPath() + File.separator + CACHE_FOLDER;
         Log_OC.d(TAG,"create dir: " + cachePath);
         final File diskCacheDir=new File(cachePath);
