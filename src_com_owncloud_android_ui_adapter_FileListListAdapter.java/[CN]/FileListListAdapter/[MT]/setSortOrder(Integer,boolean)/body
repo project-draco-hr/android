@@ -3,7 +3,8 @@
   editor.putInt("sortOrder",order);
   editor.putBoolean("sortAscending",ascending);
   editor.commit();
-  mSortOrder=order;
-  mSortAscending=ascending;
-  sortDirectory();
+  FileStorageUtils.mSortOrder=order;
+  FileStorageUtils.mSortAscending=ascending;
+  mFiles=FileStorageUtils.sortDirectory(mFiles);
+  notifyDataSetChanged();
 }

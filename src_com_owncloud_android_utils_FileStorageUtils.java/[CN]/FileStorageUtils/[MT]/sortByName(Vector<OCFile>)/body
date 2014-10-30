@@ -1,12 +1,12 @@
 {
   final Integer val;
-  if (sortAscending) {
+  if (mSortAscending) {
     val=1;
   }
  else {
     val=-1;
   }
-  Collections.sort(mFiles,new Comparator<OCFile>(){
+  Collections.sort(files,new Comparator<OCFile>(){
     public int compare(    OCFile o1,    OCFile o2){
       if (o1.isFolder() && o2.isFolder()) {
         return val * o1.getRemotePath().toLowerCase().compareTo(o2.getRemotePath().toLowerCase());
@@ -21,4 +21,5 @@
     }
   }
 );
+  return files;
 }
