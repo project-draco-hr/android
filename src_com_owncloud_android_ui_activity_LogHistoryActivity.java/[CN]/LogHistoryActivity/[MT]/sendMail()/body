@@ -9,9 +9,15 @@
   }
   Intent intent=new Intent(Intent.ACTION_SEND_MULTIPLE);
   intent.putExtra(Intent.EXTRA_EMAIL,emailAddress);
-  intent.putExtra(Intent.EXTRA_SUBJECT,getText(R.string.log_mail_subject));
+  intent.putExtra(Intent.EXTRA_SUBJECT,getText(R.string.log_send_mail_subject));
   intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
   intent.setType(MAIL_ATTACHMENT_TYPE);
   intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM,uris);
-  startActivity(Intent.createChooser(intent,getString(R.string.log_send_chooser_title)));
+  try {
+    startActivity(intent);
+  }
+ catch (  ActivityNotFoundException e) {
+    Toast.makeText(this,getString(R.string.log_send_no_mail_app),Toast.LENGTH_LONG).show();
+    Log_OC.i(TAG,"Could not find app for sending log history.");
+  }
 }
