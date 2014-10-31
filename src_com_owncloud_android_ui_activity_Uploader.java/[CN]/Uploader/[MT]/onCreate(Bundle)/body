@@ -1,7 +1,7 @@
 {
   super.onCreate(savedInstanceState);
   mParents=new Stack<String>();
-  ActionBar actionBar=getSherlock().getActionBar();
+  ActionBar actionBar=getSupportActionBar();
   actionBar.setIcon(DisplayUtils.getSeasonalIconId());
   if (prepareStreamsToUpload()) {
     mAccountManager=(AccountManager)getSystemService(Context.ACCOUNT_SERVICE);
