@@ -1,0 +1,5 @@
+{
+  String full_path="";
+  for (  String a : dirs)   full_path+=a + "/";
+  return full_path;
+}
