@@ -1,4 +1,5 @@
 {
+  Vector<OCFile> mImageFiles=mStorageManager.getFolderImages(mLocalFolder);
   mLocalFolder=mStorageManager.getFileByPath(mLocalFolder.getRemotePath());
   OCFile remoteFolder=fillOCFile((RemoteFile)folderAndFiles.get(0));
   remoteFolder.setParentId(mLocalFolder.getParentId());
@@ -26,6 +27,14 @@
       remoteFile.setEtag(localFile.getEtag());
       if (remoteFile.isFolder()) {
         remoteFile.setFileLength(localFile.getFileLength());
+      }
+ else       if (mRemoteFolderChanged && remoteFile.isImage()) {
+        for (        OCFile fileImage : mImageFiles) {
+          if (remoteFile.getRemoteId().equals(fileImage.getRemoteId()) && remoteFile.getModificationTimestamp() > fileImage.getModificationTimestamp()) {
+            remoteFile.setNeedsUpdateThumbnail(true);
+            Log.d(TAG,"Image " + remoteFile.getFileName() + " updated on the server");
+          }
+        }
       }
       remoteFile.setPublicLink(localFile.getPublicLink());
       remoteFile.setShareByLink(localFile.isShareByLink());
