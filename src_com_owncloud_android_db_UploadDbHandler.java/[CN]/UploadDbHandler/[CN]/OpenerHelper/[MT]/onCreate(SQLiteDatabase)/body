@@ -1,0 +1,3 @@
+{
+  db.execSQL("CREATE TABLE " + TABLE_UPLOAD + " ("+ " _id INTEGER PRIMARY KEY, "+ " path TEXT,"+ " account TEXT,attempt INTEGER,message TEXT);");
+}

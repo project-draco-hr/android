@@ -1,6 +1,6 @@
 {
   super.onCreate(savedInstanceState);
-  mDbHandler=new DbHandler(getBaseContext());
+  mDbHandler=new UploadDbHandler(getBaseContext());
   addPreferencesFromResource(R.xml.preferences);
   ActionBar actionBar=getSherlock().getActionBar();
   actionBar.setIcon(DisplayUtils.getSeasonalIconId());

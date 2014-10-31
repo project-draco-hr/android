@@ -4,7 +4,7 @@
     return;
   }
   if (!intent.hasExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY) && isOnline(context) && (!instantPictureUploadViaWiFiOnly(context) || (instantPictureUploadViaWiFiOnly(context) == isConnectedViaWiFi(context) == true))) {
-    DbHandler db=new DbHandler(context);
+    UploadDbHandler db=new UploadDbHandler(context);
     Cursor c=db.getAwaitingFiles();
     if (c.moveToFirst()) {
       do {

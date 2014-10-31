@@ -24,7 +24,7 @@
   mime_type=c.getString(c.getColumnIndex(Images.Media.MIME_TYPE));
   c.close();
   Log_OC.d(TAG,file_path + "");
-  DbHandler db=new DbHandler(context);
+  UploadDbHandler db=new UploadDbHandler(context);
   db.putFileForLater(file_path,account.name,null);
   db.close();
   if (!isOnline(context) || (instantPictureUploadViaWiFiOnly(context) && !isConnectedViaWiFi(context))) {
