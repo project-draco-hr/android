@@ -27,7 +27,7 @@
           String message=uploadResult.getLogMessage() + " errorCode: " + uploadResult.getCode();
           Log_OC.e(TAG,message + " Http-Code: " + uploadResult.getHttpCode());
           if (uploadResult.getCode() == ResultCode.QUOTA_EXCEEDED) {
-            if (db.updateFileState(upload.getOriginalStoragePath(),DbHandler.UPLOAD_STATUS_UPLOAD_FAILED,message) == 0) {
+            if (db.updateFileState(upload.getOriginalStoragePath(),DbHandler.UploadStatus.UPLOAD_STATUS_UPLOAD_FAILED,message) == 0) {
               db.putFileForLater(upload.getOriginalStoragePath(),upload.getAccount().name,message);
             }
           }
@@ -43,7 +43,7 @@
     mNotificationManager.notify(tickerId,mNotificationBuilder.build());
     if (uploadResult.isSuccess()) {
       DbHandler db=new DbHandler(this.getBaseContext());
-      db.removeIUPendingFile(mCurrentUpload.getOriginalStoragePath());
+      db.removePendingFile(mCurrentUpload.getOriginalStoragePath());
       db.close();
       NotificationDelayer.cancelWithDelay(mNotificationManager,R.string.uploader_upload_succeeded_ticker,2000);
     }
