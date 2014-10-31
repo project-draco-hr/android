@@ -7,6 +7,10 @@
  else {
     getSupportActionBar().setTitle(current_dir);
   }
+  boolean notRoot=(mParents.size() > 1);
+  ActionBar actionBar=getSupportActionBar();
+  actionBar.setDisplayHomeAsUpEnabled(notRoot);
+  actionBar.setHomeButtonEnabled(notRoot);
   String full_path=generatePath(mParents);
   Log_OC.d(TAG,"Populating view with content of : " + full_path);
   mFile=mStorageManager.getFileByPath(full_path);
