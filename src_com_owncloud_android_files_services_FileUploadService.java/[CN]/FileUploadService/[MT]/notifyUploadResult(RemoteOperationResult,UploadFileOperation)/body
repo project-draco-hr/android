@@ -20,22 +20,23 @@
     }
  else {
       mNotificationBuilder.setContentText(content);
-      if (upload.isInstant()) {
-        UploadDbHandler db=null;
-        try {
-          db=new UploadDbHandler(this.getBaseContext());
-          String message=uploadResult.getLogMessage() + " errorCode: " + uploadResult.getCode();
-          Log_OC.e(TAG,message + " Http-Code: " + uploadResult.getHttpCode());
-          if (uploadResult.getCode() == ResultCode.QUOTA_EXCEEDED) {
-            if (db.updateFileState(upload.getOriginalStoragePath(),UploadDbHandler.UploadStatus.UPLOAD_STATUS_UPLOAD_FAILED,message) == 0) {
-              db.putFileForLater(upload.getOriginalStoragePath(),upload.getAccount().name,message);
-            }
+      UploadDbHandler db=null;
+      try {
+        db=new UploadDbHandler(this.getBaseContext());
+        String message=uploadResult.getLogMessage() + " errorCode: " + uploadResult.getCode();
+        Log_OC.e(TAG,message + " Http-Code: " + uploadResult.getHttpCode());
+        if (uploadResult.getCode() == ResultCode.QUOTA_EXCEEDED) {
+          int updatedFiles=db.updateFileState(upload.getOriginalStoragePath(),UploadDbHandler.UploadStatus.UPLOAD_STATUS_UPLOAD_FAILED,message);
+          if (updatedFiles == 0) {
+            db.storeFile(upload.getOriginalStoragePath(),upload.getAccount().name,message);
           }
         }
+ else {
+        }
+      }
   finally {
-          if (db != null) {
-            db.close();
-          }
+        if (db != null) {
+          db.close();
         }
       }
     }
@@ -43,7 +44,7 @@
     mNotificationManager.notify(tickerId,mNotificationBuilder.build());
     if (uploadResult.isSuccess()) {
       UploadDbHandler db=new UploadDbHandler(this.getBaseContext());
-      db.removePendingFile(mCurrentUpload.getOriginalStoragePath());
+      db.removeFile(mCurrentUpload.getOriginalStoragePath());
       db.close();
       NotificationDelayer.cancelWithDelay(mNotificationManager,R.string.uploader_upload_succeeded_ticker,2000);
     }

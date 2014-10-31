@@ -7,4 +7,6 @@
   mServiceLooper=thread.getLooper();
   mServiceHandler=new ServiceHandler(mServiceLooper,this);
   mBinder=new FileUploaderBinder();
+  mConnectivityChangeReceiver=new ConnectivityChangeReceiver();
+  registerReceiver(mConnectivityChangeReceiver,new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 }

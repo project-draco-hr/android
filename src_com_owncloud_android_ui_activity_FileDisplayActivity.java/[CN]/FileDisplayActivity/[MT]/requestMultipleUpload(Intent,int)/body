@@ -10,12 +10,12 @@
     for (int j=0; j < remotePaths.length; j++) {
       remotePaths[j]=remotePathBase + (new File(filePaths[j])).getName();
     }
-    Intent i=new Intent(this,FileUploader.class);
-    i.putExtra(FileUploader.KEY_ACCOUNT,getAccount());
-    i.putExtra(FileUploader.KEY_LOCAL_FILE,filePaths);
-    i.putExtra(FileUploader.KEY_REMOTE_FILE,remotePaths);
-    i.putExtra(FileUploader.KEY_UPLOAD_TYPE,FileUploader.UPLOAD_MULTIPLE_FILES);
-    if (resultCode == UploadFilesActivity.RESULT_OK_AND_MOVE)     i.putExtra(FileUploader.KEY_LOCAL_BEHAVIOUR,FileUploader.LOCAL_BEHAVIOUR_MOVE);
+    Intent i=new Intent(this,FileUploadService.class);
+    i.putExtra(FileUploadService.KEY_ACCOUNT,getAccount());
+    i.putExtra(FileUploadService.KEY_LOCAL_FILE,filePaths);
+    i.putExtra(FileUploadService.KEY_REMOTE_FILE,remotePaths);
+    i.putExtra(FileUploadService.KEY_UPLOAD_TYPE,FileUploadService.UPLOAD_MULTIPLE_FILES);
+    if (resultCode == UploadFilesActivity.RESULT_OK_AND_MOVE)     i.putExtra(FileUploadService.KEY_LOCAL_BEHAVIOUR,FileUploadService.LOCAL_BEHAVIOUR_MOVE);
     startService(i);
   }
  else {

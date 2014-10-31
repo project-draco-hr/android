@@ -1,0 +1,4 @@
+{
+  unregisterReceiver(mConnectivityChangeReceiver);
+  super.onDestroy();
+}

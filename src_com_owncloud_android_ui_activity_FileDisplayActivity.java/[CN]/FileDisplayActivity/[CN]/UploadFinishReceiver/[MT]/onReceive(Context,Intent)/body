@@ -1,15 +1,15 @@
 {
   try {
     String uploadedRemotePath=intent.getStringExtra(FileDownloader.EXTRA_REMOTE_PATH);
-    String accountName=intent.getStringExtra(FileUploader.ACCOUNT_NAME);
+    String accountName=intent.getStringExtra(FileUploadService.ACCOUNT_NAME);
     boolean sameAccount=getAccount() != null && accountName.equals(getAccount().name);
     OCFile currentDir=getCurrentDir();
     boolean isDescendant=(currentDir != null) && (uploadedRemotePath != null) && (uploadedRemotePath.startsWith(currentDir.getRemotePath()));
     if (sameAccount && isDescendant) {
       refreshListOfFilesFragment();
     }
-    boolean uploadWasFine=intent.getBooleanExtra(FileUploader.EXTRA_UPLOAD_RESULT,false);
-    boolean renamedInUpload=getFile().getRemotePath().equals(intent.getStringExtra(FileUploader.EXTRA_OLD_REMOTE_PATH));
+    boolean uploadWasFine=intent.getBooleanExtra(FileUploadService.EXTRA_UPLOAD_RESULT,false);
+    boolean renamedInUpload=getFile().getRemotePath().equals(intent.getStringExtra(FileUploadService.EXTRA_OLD_REMOTE_PATH));
     boolean sameFile=getFile().getRemotePath().equals(uploadedRemotePath) || renamedInUpload;
     FileFragment details=getSecondFragment();
     boolean detailFragmentIsShown=(details != null && details instanceof FileDetailFragment);

@@ -9,7 +9,7 @@
       }
     }
   }
- else   if (component.equals(new ComponentName(FileDisplayActivity.this,FileUploader.class))) {
+ else   if (component.equals(new ComponentName(FileDisplayActivity.this,FileUploadService.class))) {
     Log_OC.d(TAG,"Upload service connected");
     mUploaderBinder=(FileUploaderBinder)service;
   }

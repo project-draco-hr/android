@@ -24,18 +24,13 @@
   mime_type=c.getString(c.getColumnIndex(Images.Media.MIME_TYPE));
   c.close();
   Log_OC.d(TAG,file_path + "");
-  UploadDbHandler db=new UploadDbHandler(context);
-  db.putFileForLater(file_path,account.name,null);
-  db.close();
-  if (!isOnline(context) || (instantPictureUploadViaWiFiOnly(context) && !isConnectedViaWiFi(context))) {
-    return;
-  }
-  Intent i=new Intent(context,FileUploader.class);
-  i.putExtra(FileUploader.KEY_ACCOUNT,account);
-  i.putExtra(FileUploader.KEY_LOCAL_FILE,file_path);
-  i.putExtra(FileUploader.KEY_REMOTE_FILE,FileStorageUtils.getInstantUploadFilePath(context,file_name));
-  i.putExtra(FileUploader.KEY_UPLOAD_TYPE,FileUploader.UPLOAD_SINGLE_FILE);
-  i.putExtra(FileUploader.KEY_MIME_TYPE,mime_type);
-  i.putExtra(FileUploader.KEY_INSTANT_UPLOAD,true);
+  Intent i=new Intent(context,FileUploadService.class);
+  i.putExtra(FileUploadService.KEY_ACCOUNT,account);
+  i.putExtra(FileUploadService.KEY_LOCAL_FILE,file_path);
+  i.putExtra(FileUploadService.KEY_REMOTE_FILE,FileStorageUtils.getInstantUploadFilePath(context,file_name));
+  i.putExtra(FileUploadService.KEY_UPLOAD_TYPE,FileUploadService.UPLOAD_SINGLE_FILE);
+  i.putExtra(FileUploadService.KEY_MIME_TYPE,mime_type);
+  i.putExtra(FileUploadService.KEY_CREATE_REMOTE_FOLDER,true);
+  i.putExtra(FileUploadService.KEY_WIFI_ONLY,instantPictureUploadViaWiFiOnly(context));
   context.startService(i);
 }

@@ -23,6 +23,6 @@
   }
   mUploadServiceConnection=newTransferenceServiceConnection();
   if (mUploadServiceConnection != null) {
-    bindService(new Intent(this,FileUploader.class),mUploadServiceConnection,Context.BIND_AUTO_CREATE);
+    bindService(new Intent(this,FileUploadService.class),mUploadServiceConnection,Context.BIND_AUTO_CREATE);
   }
 }

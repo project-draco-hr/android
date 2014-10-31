@@ -19,17 +19,17 @@
       return;
     }
   }
-  Intent i=new Intent(this,FileUploader.class);
-  i.putExtra(FileUploader.KEY_ACCOUNT,getAccount());
+  Intent i=new Intent(this,FileUploadService.class);
+  i.putExtra(FileUploadService.KEY_ACCOUNT,getAccount());
   String remotepath=new String();
   for (int j=mDirectories.getCount() - 2; j >= 0; --j) {
     remotepath+=OCFile.PATH_SEPARATOR + mDirectories.getItem(j);
   }
   if (!remotepath.endsWith(OCFile.PATH_SEPARATOR))   remotepath+=OCFile.PATH_SEPARATOR;
   remotepath+=new File(filepath).getName();
-  i.putExtra(FileUploader.KEY_LOCAL_FILE,filepath);
-  i.putExtra(FileUploader.KEY_REMOTE_FILE,remotepath);
-  i.putExtra(FileUploader.KEY_UPLOAD_TYPE,FileUploader.UPLOAD_SINGLE_FILE);
-  if (resultCode == UploadFilesActivity.RESULT_OK_AND_MOVE)   i.putExtra(FileUploader.KEY_LOCAL_BEHAVIOUR,FileUploader.LOCAL_BEHAVIOUR_MOVE);
+  i.putExtra(FileUploadService.KEY_LOCAL_FILE,filepath);
+  i.putExtra(FileUploadService.KEY_REMOTE_FILE,remotepath);
+  i.putExtra(FileUploadService.KEY_UPLOAD_TYPE,FileUploadService.UPLOAD_SINGLE_FILE);
+  if (resultCode == UploadFilesActivity.RESULT_OK_AND_MOVE)   i.putExtra(FileUploadService.KEY_LOCAL_BEHAVIOUR,FileUploadService.LOCAL_BEHAVIOUR_MOVE);
   startService(i);
 }

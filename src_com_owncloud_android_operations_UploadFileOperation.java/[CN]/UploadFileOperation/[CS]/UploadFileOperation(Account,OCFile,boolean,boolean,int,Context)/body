@@ -8,7 +8,6 @@
   mFile=file;
   mRemotePath=file.getRemotePath();
   mChunked=chunked;
-  mIsInstant=isInstant;
   mForceOverwrite=forceOverwrite;
   mLocalBehaviour=localBehaviour;
   mOriginalStoragePath=mFile.getStoragePath();
