@@ -1,5 +1,6 @@
 {
   setContentView(R.layout.uploader_layout);
+  ListView mListView=(ListView)findViewById(android.R.id.list);
   String full_path="";
   for (  String a : mParents)   full_path+=a + "/";
   Log_OC.d(TAG,"Populating view with content of : " + full_path);
@@ -15,9 +16,11 @@
       }
     }
     SimpleAdapter sa=new SimpleAdapter(this,data,R.layout.uploader_list_item_layout,new String[]{"dirname"},new int[]{R.id.textView1});
-    setListAdapter(sa);
-    Button btn=(Button)findViewById(R.id.uploader_choose_folder);
-    btn.setOnClickListener(this);
-    getListView().setOnItemClickListener(this);
+    mListView.setAdapter(sa);
+    Button btnChooseFolder=(Button)findViewById(R.id.uploader_choose_folder);
+    btnChooseFolder.setOnClickListener(this);
+    Button btnNewFolder=(Button)findViewById(R.id.uploader_new_folder);
+    btnNewFolder.setOnClickListener(this);
+    mListView.setOnItemClickListener(this);
   }
 }
