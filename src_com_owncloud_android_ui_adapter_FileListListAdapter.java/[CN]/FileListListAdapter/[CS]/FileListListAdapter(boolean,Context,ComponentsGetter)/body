@@ -6,5 +6,5 @@
   mAppPreferences=PreferenceManager.getDefaultSharedPreferences(mContext);
   mSortOrder=mAppPreferences.getInt("sortOrder",0);
   mSortAscending=mAppPreferences.getBoolean("sortAscending",true);
-  new ThumbnailsCacheManager.InitDiskCacheTask(mContext).execute();
+  new ThumbnailsCacheManager.InitDiskCacheTask().execute();
 }
