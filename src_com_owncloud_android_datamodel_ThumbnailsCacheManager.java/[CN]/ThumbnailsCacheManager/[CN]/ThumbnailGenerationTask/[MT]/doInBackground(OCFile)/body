@@ -12,7 +12,7 @@
     thumbnail=getBitmapFromDiskCache(imageKey);
     if (thumbnail == null || mFile.needsUpdateThumbnail()) {
       Resources r=MainApp.getAppContext().getResources();
-      int px=(int)Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,150,r.getDisplayMetrics()));
+      int px=(int)Math.round(r.getDimension(R.dimen.file_icon_size));
       if (mFile.isDown()) {
         Bitmap bitmap=BitmapUtils.decodeSampledBitmapFromFile(mFile.getStoragePath(),px,px);
         if (bitmap != null) {
