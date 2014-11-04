@@ -1,0 +1,13 @@
+{
+  try {
+    ByteArrayOutputStream bo=new ByteArrayOutputStream();
+    ObjectOutputStream so=new ObjectOutputStream(bo);
+    so.writeObject(this);
+    so.flush();
+    return bo.toString();
+  }
+ catch (  Exception e) {
+    System.out.println(e);
+  }
+  return null;
+}

@@ -1,106 +1,77 @@
 {
+  AbstractList<PersistentUploadObject> requestedUploads=new Vector<PersistentUploadObject>();
   if (intent == null) {
   }
-  if (!intent.hasExtra(KEY_ACCOUNT) || !intent.hasExtra(KEY_UPLOAD_TYPE) || !(intent.hasExtra(KEY_LOCAL_FILE) || intent.hasExtra(KEY_FILE))) {
-    Log_OC.e(TAG,"Not enough information provided in intent");
-    return Service.START_NOT_STICKY;
-  }
-  int uploadType=intent.getIntExtra(KEY_UPLOAD_TYPE,-1);
-  if (uploadType == -1) {
-    Log_OC.e(TAG,"Incorrect upload type provided");
-    return Service.START_NOT_STICKY;
-  }
-  Account account=intent.getParcelableExtra(KEY_ACCOUNT);
-  if (!AccountUtils.exists(account,getApplicationContext())) {
-    return Service.START_NOT_STICKY;
-  }
-  String[] localPaths=null, remotePaths=null, mimeTypes=null;
-  OCFile[] files=null;
-  if (uploadType == UPLOAD_SINGLE_FILE) {
+ else {
+    int uploadType=intent.getIntExtra(KEY_UPLOAD_TYPE,-1);
+    if (uploadType == -1) {
+      Log_OC.e(TAG,"Incorrect or no upload type provided");
+      return Service.START_NOT_STICKY;
+    }
+    Account account=intent.getParcelableExtra(KEY_ACCOUNT);
+    if (!AccountUtils.exists(account,getApplicationContext())) {
+      Log_OC.e(TAG,"KEY_ACCOUNT no set or provided KEY_ACCOUNT does not exist");
+      return Service.START_NOT_STICKY;
+    }
+    OCFile[] files=null;
     if (intent.hasExtra(KEY_FILE)) {
-      files=new OCFile[]{intent.getParcelableExtra(KEY_FILE)};
+      if (uploadType == UPLOAD_SINGLE_FILE) {
+        files=new OCFile[]{intent.getParcelableExtra(KEY_FILE)};
+      }
+ else {
+        files=(OCFile[])intent.getParcelableArrayExtra(KEY_FILE);
+      }
     }
  else {
-      localPaths=new String[]{intent.getStringExtra(KEY_LOCAL_FILE)};
-      remotePaths=new String[]{intent.getStringExtra(KEY_REMOTE_FILE)};
-      mimeTypes=new String[]{intent.getStringExtra(KEY_MIME_TYPE)};
-    }
-  }
- else {
-    if (intent.hasExtra(KEY_FILE)) {
-      files=(OCFile[])intent.getParcelableArrayExtra(KEY_FILE);
-    }
- else {
-      localPaths=intent.getStringArrayExtra(KEY_LOCAL_FILE);
-      remotePaths=intent.getStringArrayExtra(KEY_REMOTE_FILE);
-      mimeTypes=intent.getStringArrayExtra(KEY_MIME_TYPE);
-    }
-  }
-  FileDataStorageManager storageManager=new FileDataStorageManager(account,getContentResolver());
-  boolean forceOverwrite=intent.getBooleanExtra(KEY_FORCE_OVERWRITE,false);
-  boolean isCreateRemoteFolder=intent.getBooleanExtra(KEY_CREATE_REMOTE_FOLDER,false);
-  boolean isUseWifiOnly=intent.getBooleanExtra(KEY_WIFI_ONLY,true);
-  int localAction=intent.getIntExtra(KEY_LOCAL_BEHAVIOUR,LOCAL_BEHAVIOUR_COPY);
-  if (intent.hasExtra(KEY_FILE) && files == null) {
-    Log_OC.e(TAG,"Incorrect array for OCFiles provided in upload intent");
-    return Service.START_NOT_STICKY;
-  }
- else   if (!intent.hasExtra(KEY_FILE)) {
-    if (localPaths == null) {
-      Log_OC.e(TAG,"Incorrect array for local paths provided in upload intent");
-      return Service.START_NOT_STICKY;
-    }
-    if (remotePaths == null) {
-      Log_OC.e(TAG,"Incorrect array for remote paths provided in upload intent");
-      return Service.START_NOT_STICKY;
-    }
-    if (localPaths.length != remotePaths.length) {
-      Log_OC.e(TAG,"Different number of remote paths and local paths!");
-      return Service.START_NOT_STICKY;
-    }
-    files=new OCFile[localPaths.length];
-    for (int i=0; i < localPaths.length; i++) {
-      files[i]=obtainNewOCFileToUpload(remotePaths[i],localPaths[i],((mimeTypes != null) ? mimeTypes[i] : (String)null),storageManager);
-      if (files[i] == null) {
+      if (!intent.hasExtra(KEY_LOCAL_FILE) || !intent.hasExtra(KEY_REMOTE_FILE) || !(intent.hasExtra(KEY_MIME_TYPE))) {
+        Log_OC.e(TAG,"Not enough information provided in intent");
         return Service.START_NOT_STICKY;
       }
-    }
-  }
-  UploadDbHandler db=new UploadDbHandler(this.getBaseContext());
-  for (int i=0; i < localPaths.length; i++) {
-    db.storeFile(localPaths[i],account.name,null);
-  }
-  db.close();
-  AccountManager aMgr=AccountManager.get(this);
-  String version=aMgr.getUserData(account,Constants.KEY_OC_VERSION);
-  OwnCloudVersion ocv=new OwnCloudVersion(version);
-  boolean chunked=FileUploadService.chunkedUploadIsSupported(ocv);
-  AbstractList<String> requestedUploads=new Vector<String>();
-  String uploadKey=null;
-  UploadFileOperation newUpload=null;
-  try {
-    for (int i=0; i < files.length; i++) {
-      uploadKey=buildRemoteName(account,files[i].getRemotePath());
-      newUpload=new UploadFileOperation(account,files[i],chunked,forceOverwrite,localAction,getApplicationContext());
-      if (isCreateRemoteFolder) {
-        newUpload.setRemoteFolderToBeCreated();
+      String[] localPaths;
+      String[] remotePaths;
+      String[] mimeTypes;
+      if (uploadType == UPLOAD_SINGLE_FILE) {
+        localPaths=new String[]{intent.getStringExtra(KEY_LOCAL_FILE)};
+        remotePaths=new String[]{intent.getStringExtra(KEY_REMOTE_FILE)};
+        mimeTypes=new String[]{intent.getStringExtra(KEY_MIME_TYPE)};
       }
-      mPendingUploads.putIfAbsent(uploadKey,newUpload);
-      newUpload.addDatatransferProgressListener((FileUploaderBinder)mBinder);
-      requestedUploads.add(uploadKey);
+ else {
+        localPaths=intent.getStringArrayExtra(KEY_LOCAL_FILE);
+        remotePaths=intent.getStringArrayExtra(KEY_REMOTE_FILE);
+        mimeTypes=intent.getStringArrayExtra(KEY_MIME_TYPE);
+      }
+      if (localPaths.length != remotePaths.length) {
+        Log_OC.e(TAG,"Different number of remote paths and local paths!");
+        return Service.START_NOT_STICKY;
+      }
+      files=new OCFile[localPaths.length];
+      for (int i=0; i < localPaths.length; i++) {
+        files[i]=obtainNewOCFileToUpload(remotePaths[i],localPaths[i],((mimeTypes != null) ? mimeTypes[i] : (String)null));
+        if (files[i] == null) {
+          Log_OC.e(TAG,"obtainNewOCFileToUpload() returned null for remotePaths[i]:" + remotePaths[i] + " and localPaths[i]:"+ localPaths[i]);
+          return Service.START_NOT_STICKY;
+        }
+      }
     }
-  }
- catch (  IllegalArgumentException e) {
-    Log_OC.e(TAG,"Not enough information provided in intent: " + e.getMessage());
-    return START_NOT_STICKY;
-  }
-catch (  IllegalStateException e) {
-    Log_OC.e(TAG,"Bad information provided in intent: " + e.getMessage());
-    return START_NOT_STICKY;
-  }
-catch (  Exception e) {
-    Log_OC.e(TAG,"Unexpected exception while processing upload intent",e);
-    return START_NOT_STICKY;
+    boolean forceOverwrite=intent.getBooleanExtra(KEY_FORCE_OVERWRITE,false);
+    boolean isCreateRemoteFolder=intent.getBooleanExtra(KEY_CREATE_REMOTE_FOLDER,false);
+    boolean isUseWifiOnly=intent.getBooleanExtra(KEY_WIFI_ONLY,true);
+    LocalBehaviour localAction=(LocalBehaviour)intent.getSerializableExtra(KEY_LOCAL_BEHAVIOUR);
+    if (localAction == null)     localAction=LocalBehaviour.LOCAL_BEHAVIOUR_COPY;
+    UploadDbHandler db=new UploadDbHandler(this.getBaseContext());
+    for (int i=0; i < files.length; i++) {
+      PersistentUploadObject uploadObject=new PersistentUploadObject();
+      uploadObject.setRemotePath(files[i].getRemotePath());
+      uploadObject.setLocalPath(files[i].getStoragePath());
+      uploadObject.setMimeType(files[0].getMimetype());
+      uploadObject.setAccountName(account.name);
+      uploadObject.setForceOverwrite(forceOverwrite);
+      uploadObject.setLocalAction(localAction);
+      uploadObject.setUseWifiOnly(isUseWifiOnly);
+      db.storeUpload(uploadObject,"upload at " + new Date());
+      requestedUploads.add(uploadObject);
+    }
+    db.close();
   }
   if (requestedUploads.size() > 0) {
     Message msg=mServiceHandler.obtainMessage();

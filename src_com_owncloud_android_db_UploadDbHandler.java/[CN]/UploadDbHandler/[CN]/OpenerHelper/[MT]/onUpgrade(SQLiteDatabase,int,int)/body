@@ -2,5 +2,10 @@
   if (oldVersion < 2) {
     db.execSQL("ALTER TABLE " + TABLE_UPLOAD + " ADD COLUMN attempt INTEGER;");
   }
-  db.execSQL("ALTER TABLE " + TABLE_UPLOAD + " ADD COLUMN message TEXT;");
+  if (oldVersion < 3) {
+    db.execSQL("ALTER TABLE " + TABLE_UPLOAD + " ADD COLUMN message TEXT;");
+  }
+  if (oldVersion < 4) {
+    db.execSQL("ALTER TABLE " + TABLE_UPLOAD + " ADD COLUMN uploadObject TEXT;");
+  }
 }
