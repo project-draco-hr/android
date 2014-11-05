@@ -1,6 +1,6 @@
 {
-synchronized (mPendingUploads) {
-    mCurrentUpload=mPendingUploads.get(uploadKey);
+synchronized (mActiveUploads) {
+    mCurrentUpload=mActiveUploads.get(uploadDbObject.getRemotePath());
   }
   if (mCurrentUpload != null) {
     notifyUploadStart(mCurrentUpload);
@@ -36,8 +36,8 @@ catch (    IOException e) {
       uploadResult=new RemoteOperationResult(e);
     }
  finally {
-synchronized (mPendingUploads) {
-        mPendingUploads.remove(uploadKey);
+synchronized (mActiveUploads) {
+        mActiveUploads.remove(uploadDbObject);
         Log_OC.i(TAG,"Remove CurrentUploadItem from pending upload Item Map.");
       }
       if (uploadResult.isException()) {

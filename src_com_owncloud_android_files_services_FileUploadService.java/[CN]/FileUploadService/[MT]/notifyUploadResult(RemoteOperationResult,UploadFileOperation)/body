@@ -20,32 +20,25 @@
     }
  else {
       mNotificationBuilder.setContentText(content);
-      UploadDbHandler db=null;
       try {
-        db=new UploadDbHandler(this.getBaseContext());
         String message=uploadResult.getLogMessage() + " errorCode: " + uploadResult.getCode();
         Log_OC.e(TAG,message + " Http-Code: " + uploadResult.getHttpCode());
         if (uploadResult.getCode() == ResultCode.QUOTA_EXCEEDED) {
-          int updatedFiles=db.updateFileState(upload.getOriginalStoragePath(),UploadDbHandler.UploadStatus.UPLOAD_FAILED,message);
+          int updatedFiles=mDb.updateFileState(upload.getOriginalStoragePath(),UploadDbHandler.UploadStatus.UPLOAD_FAILED,message);
           if (updatedFiles == 0) {
-            db.storeFile(upload.getOriginalStoragePath(),upload.getAccount().name,message);
+            mDb.storeFile(upload.getOriginalStoragePath(),upload.getAccount().name,message);
           }
         }
  else {
         }
       }
   finally {
-        if (db != null) {
-          db.close();
-        }
       }
     }
     mNotificationBuilder.setContentText(content);
     mNotificationManager.notify(tickerId,mNotificationBuilder.build());
     if (uploadResult.isSuccess()) {
-      UploadDbHandler db=new UploadDbHandler(this.getBaseContext());
-      db.removeFile(mCurrentUpload.getOriginalStoragePath());
-      db.close();
+      mDb.removeFile(mCurrentUpload.getOriginalStoragePath());
       NotificationDelayer.cancelWithDelay(mNotificationManager,R.string.uploader_upload_succeeded_ticker,2000);
     }
   }

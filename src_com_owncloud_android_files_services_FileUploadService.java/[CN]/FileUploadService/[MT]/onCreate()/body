@@ -1,6 +1,6 @@
 {
   super.onCreate();
-  Log_OC.i(TAG,"mPendingUploads size:" + mPendingUploads.size());
+  Log_OC.i(TAG,"mPendingUploads size:" + mActiveUploads.size());
   mNotificationManager=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
   HandlerThread thread=new HandlerThread("FileUploaderThread",Process.THREAD_PRIORITY_BACKGROUND);
   thread.start();
@@ -9,4 +9,5 @@
   mBinder=new FileUploaderBinder();
   mConnectivityChangeReceiver=new ConnectivityChangeReceiver();
   registerReceiver(mConnectivityChangeReceiver,new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+  mDb=new UploadDbHandler(this.getBaseContext());
 }

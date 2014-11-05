@@ -1,9 +1,9 @@
 {
   if (account == null || file == null)   return false;
   String targetKey=buildRemoteName(account,file);
-synchronized (mPendingUploads) {
+synchronized (mActiveUploads) {
     if (file.isFolder()) {
-      Iterator<String> it=mPendingUploads.keySet().iterator();
+      Iterator<String> it=mActiveUploads.keySet().iterator();
       boolean found=false;
       while (it.hasNext() && !found) {
         found=it.next().startsWith(targetKey);
@@ -11,7 +11,7 @@ synchronized (mPendingUploads) {
       return found;
     }
  else {
-      return (mPendingUploads.containsKey(targetKey));
+      return (mActiveUploads.containsKey(targetKey));
     }
   }
 }
