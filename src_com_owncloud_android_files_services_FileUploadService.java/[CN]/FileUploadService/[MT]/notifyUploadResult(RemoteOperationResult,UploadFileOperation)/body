@@ -26,7 +26,7 @@
         String message=uploadResult.getLogMessage() + " errorCode: " + uploadResult.getCode();
         Log_OC.e(TAG,message + " Http-Code: " + uploadResult.getHttpCode());
         if (uploadResult.getCode() == ResultCode.QUOTA_EXCEEDED) {
-          int updatedFiles=db.updateFileState(upload.getOriginalStoragePath(),UploadDbHandler.UploadStatus.UPLOAD_STATUS_UPLOAD_FAILED,message);
+          int updatedFiles=db.updateFileState(upload.getOriginalStoragePath(),UploadDbHandler.UploadStatus.UPLOAD_FAILED,message);
           if (updatedFiles == 0) {
             db.storeFile(upload.getOriginalStoragePath(),upload.getAccount().name,message);
           }

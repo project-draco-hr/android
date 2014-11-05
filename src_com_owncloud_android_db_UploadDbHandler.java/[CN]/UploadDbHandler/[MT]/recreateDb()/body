@@ -1,0 +1,10 @@
+{
+  mDB.beginTransaction();
+  try {
+    mHelper.onUpgrade(mDB,0,mDatabaseVersion);
+    mDB.setTransactionSuccessful();
+  }
+  finally {
+    mDB.endTransaction();
+  }
+}

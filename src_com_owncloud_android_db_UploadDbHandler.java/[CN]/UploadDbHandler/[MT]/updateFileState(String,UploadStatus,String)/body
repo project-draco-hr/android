@@ -1,8 +1,4 @@
 {
-  ContentValues cv=new ContentValues();
-  cv.put("attempt",status.getValue());
-  cv.put("message",message);
-  int result=mDB.update(TABLE_UPLOAD,cv,"path=?",new String[]{filepath});
-  Log_OC.d(TABLE_UPLOAD,"updateFileState returns with: " + result + " for file: "+ filepath);
-  return result;
+  Log_OC.i(TAG,"obsolete method called");
+  return 0;
 }

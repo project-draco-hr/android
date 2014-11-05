@@ -1,10 +1,4 @@
 {
-  ContentValues cv=new ContentValues();
-  cv.put("path",filepath);
-  cv.put("account",account);
-  cv.put("attempt",UploadStatus.UPLOAD_STATUS_UPLOAD_LATER.getValue());
-  cv.put("message",message);
-  long result=mDB.insert(TABLE_UPLOAD,null,cv);
-  Log_OC.d(TABLE_UPLOAD,"putFileForLater returns with: " + result + " for file: "+ filepath);
-  return result != -1;
+  Log_OC.i(TAG,"obsolete method called");
+  return false;
 }

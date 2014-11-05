@@ -1,9 +1,8 @@
 {
-  @SuppressWarnings("unchecked") AbstractList<String> requestedUploads=(AbstractList<String>)msg.obj;
+  @SuppressWarnings("unchecked") AbstractList<UploadDbObject> requestedUploads=(AbstractList<UploadDbObject>)msg.obj;
   if (msg.obj != null) {
-    Iterator<String> it=requestedUploads.iterator();
+    Iterator<UploadDbObject> it=requestedUploads.iterator();
     while (it.hasNext()) {
-      mService.uploadFile(it.next());
     }
   }
   mService.stopSelf(msg.arg1);

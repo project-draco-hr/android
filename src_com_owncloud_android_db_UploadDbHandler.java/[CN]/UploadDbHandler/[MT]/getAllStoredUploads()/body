@@ -1,0 +1,19 @@
+{
+  Cursor c=mDB.query(TABLE_UPLOAD,null,null,null,null,null,null);
+  List<UploadDbObject> list=new ArrayList<UploadDbObject>();
+  if (c.moveToFirst()) {
+    do {
+      String file_path=c.getString(c.getColumnIndex("path"));
+      String uploadObjectString=c.getString(c.getColumnIndex("uploadObject"));
+      UploadDbObject uploadObject=UploadDbObject.fromString(uploadObjectString);
+      if (uploadObject == null) {
+        Log_OC.e(TAG,"Could not deserialize UploadDbObject " + uploadObjectString);
+      }
+ else {
+        list.add(uploadObject);
+      }
+    }
+ while (c.moveToNext());
+  }
+  return list;
+}

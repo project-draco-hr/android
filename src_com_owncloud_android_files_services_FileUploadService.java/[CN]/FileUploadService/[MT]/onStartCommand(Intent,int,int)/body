@@ -1,10 +1,13 @@
 {
-  AbstractList<PersistentUploadObject> requestedUploads=new Vector<PersistentUploadObject>();
+  AbstractList<UploadDbObject> requestedUploads=new Vector<UploadDbObject>();
   if (intent == null) {
+    UploadDbHandler db=new UploadDbHandler(this.getBaseContext());
+    List<UploadDbObject> list=db.getAllStoredUploads();
+    requestedUploads.addAll(list);
   }
  else {
-    int uploadType=intent.getIntExtra(KEY_UPLOAD_TYPE,-1);
-    if (uploadType == -1) {
+    UploadSingleMulti uploadType=(UploadSingleMulti)intent.getSerializableExtra(KEY_UPLOAD_TYPE);
+    if (uploadType == null) {
       Log_OC.e(TAG,"Incorrect or no upload type provided");
       return Service.START_NOT_STICKY;
     }
@@ -15,7 +18,7 @@
     }
     OCFile[] files=null;
     if (intent.hasExtra(KEY_FILE)) {
-      if (uploadType == UPLOAD_SINGLE_FILE) {
+      if (uploadType == UploadSingleMulti.UPLOAD_SINGLE_FILE) {
         files=new OCFile[]{intent.getParcelableExtra(KEY_FILE)};
       }
  else {
@@ -23,14 +26,14 @@
       }
     }
  else {
-      if (!intent.hasExtra(KEY_LOCAL_FILE) || !intent.hasExtra(KEY_REMOTE_FILE) || !(intent.hasExtra(KEY_MIME_TYPE))) {
+      if (!intent.hasExtra(KEY_LOCAL_FILE) || !intent.hasExtra(KEY_REMOTE_FILE)) {
         Log_OC.e(TAG,"Not enough information provided in intent");
         return Service.START_NOT_STICKY;
       }
       String[] localPaths;
       String[] remotePaths;
       String[] mimeTypes;
-      if (uploadType == UPLOAD_SINGLE_FILE) {
+      if (uploadType == UploadSingleMulti.UPLOAD_SINGLE_FILE) {
         localPaths=new String[]{intent.getStringExtra(KEY_LOCAL_FILE)};
         remotePaths=new String[]{intent.getStringExtra(KEY_REMOTE_FILE)};
         mimeTypes=new String[]{intent.getStringExtra(KEY_MIME_TYPE)};
@@ -60,18 +63,23 @@
     if (localAction == null)     localAction=LocalBehaviour.LOCAL_BEHAVIOUR_COPY;
     UploadDbHandler db=new UploadDbHandler(this.getBaseContext());
     for (int i=0; i < files.length; i++) {
-      PersistentUploadObject uploadObject=new PersistentUploadObject();
+      UploadDbObject uploadObject=new UploadDbObject();
       uploadObject.setRemotePath(files[i].getRemotePath());
       uploadObject.setLocalPath(files[i].getStoragePath());
-      uploadObject.setMimeType(files[0].getMimetype());
+      uploadObject.setMimeType(files[i].getMimetype());
       uploadObject.setAccountName(account.name);
       uploadObject.setForceOverwrite(forceOverwrite);
+      uploadObject.setCreateRemoteFolder(isCreateRemoteFolder);
       uploadObject.setLocalAction(localAction);
       uploadObject.setUseWifiOnly(isUseWifiOnly);
+      uploadObject.setLastResult(new RemoteOperationResult(ResultCode.OK));
+      uploadObject.setLocalAction(LocalBehaviour.LOCAL_BEHAVIOUR_COPY);
+      uploadObject.setUploadStatus(UploadStatus.UPLOAD_LATER);
       db.storeUpload(uploadObject,"upload at " + new Date());
       requestedUploads.add(uploadObject);
     }
     db.close();
+    return Service.START_NOT_STICKY;
   }
   if (requestedUploads.size() > 0) {
     Message msg=mServiceHandler.obtainMessage();

@@ -16,7 +16,7 @@ return;
 }
 i.putExtra(FileUploadService.KEY_ACCOUNT,getAccount());
 i.putExtra(FileUploadService.KEY_FILE,getFile());
-i.putExtra(FileUploadService.KEY_UPLOAD_TYPE,FileUploadService.UPLOAD_SINGLE_FILE);
+i.putExtra(FileUploadService.KEY_UPLOAD_TYPE,FileUploadService.UploadSingleMulti.UPLOAD_SINGLE_FILE);
 startService(i);
 finish();
 }

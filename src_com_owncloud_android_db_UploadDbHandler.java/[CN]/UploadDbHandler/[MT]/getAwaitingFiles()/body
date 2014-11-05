@@ -1,3 +1,4 @@
 {
-  return mDB.query(TABLE_UPLOAD,null,"attempt=" + UploadStatus.UPLOAD_STATUS_UPLOAD_LATER,null,null,null,null);
+  Log_OC.i(TAG,"obsolete method called");
+  return null;
 }
