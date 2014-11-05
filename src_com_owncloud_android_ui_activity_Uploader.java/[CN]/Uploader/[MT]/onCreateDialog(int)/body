@@ -43,6 +43,7 @@ builder.setItems(ac,new OnClickListener(){
 @Override public void onClick(DialogInterface dialog,int which){
 mAccount=mAccountManager.getAccountsByType(MainApp.getAccountType())[which];
 mStorageManager=new FileDataStorageManager(mAccount,getContentResolver());
+initTargetFolder();
 populateDirectoryList();
 }
 }
