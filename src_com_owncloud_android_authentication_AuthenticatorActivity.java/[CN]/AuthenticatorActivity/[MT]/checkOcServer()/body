@@ -6,12 +6,13 @@
   mServerInfo=new GetServerInfoOperation.ServerInfo();
   showRefreshButton(false);
   if (uri.length() != 0) {
+    uri=DisplayUtils.convertIdn(uri,true);
     mServerStatusText=R.string.auth_testing_connection;
     mServerStatusIcon=R.drawable.progress_small;
     showServerStatus();
     Intent getServerInfoIntent=new Intent();
     getServerInfoIntent.setAction(OperationsService.ACTION_GET_SERVER_INFO);
-    getServerInfoIntent.putExtra(OperationsService.EXTRA_SERVER_URL,uri);
+    getServerInfoIntent.putExtra(OperationsService.EXTRA_SERVER_URL,normalizeUrlSuffix(uri));
     if (mOperationsServiceBinder != null) {
       mWaitingForOpId=mOperationsServiceBinder.newOperation(getServerInfoIntent);
     }

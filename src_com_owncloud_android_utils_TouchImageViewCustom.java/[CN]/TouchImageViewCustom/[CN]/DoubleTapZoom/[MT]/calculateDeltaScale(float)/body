@@ -1,0 +1,4 @@
+{
+  double zoom=startZoom + t * (targetZoom - startZoom);
+  return zoom / normalizedScale;
+}

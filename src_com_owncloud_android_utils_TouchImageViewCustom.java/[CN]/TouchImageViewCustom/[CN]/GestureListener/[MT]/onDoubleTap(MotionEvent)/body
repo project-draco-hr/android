@@ -1,0 +1,13 @@
+{
+  boolean consumed=false;
+  if (doubleTapListener != null) {
+    consumed=doubleTapListener.onDoubleTap(e);
+  }
+  if (state == State.NONE) {
+    float targetZoom=(normalizedScale == minScale) ? maxScale : minScale;
+    DoubleTapZoom doubleTap=new DoubleTapZoom(targetZoom,e.getX(),e.getY(),false);
+    compatPostOnAnimation(doubleTap);
+    consumed=true;
+  }
+  return consumed;
+}

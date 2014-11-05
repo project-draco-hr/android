@@ -1,0 +1,14 @@
+{
+  matrix.getValues(m);
+  float origW=getDrawable().getIntrinsicWidth();
+  float origH=getDrawable().getIntrinsicHeight();
+  float transX=m[Matrix.MTRANS_X];
+  float transY=m[Matrix.MTRANS_Y];
+  float finalX=((x - transX) * origW) / getImageWidth();
+  float finalY=((y - transY) * origH) / getImageHeight();
+  if (clipToBitmap) {
+    finalX=Math.min(Math.max(finalX,0),origW);
+    finalY=Math.min(Math.max(finalY,0),origH);
+  }
+  return new PointF(finalX,finalY);
+}

@@ -1,0 +1,6 @@
+{
+  if (IS_ICS_OR_HIGHER && checkIfMaximumBitmapExceed(canvas)) {
+    setLayerType(View.LAYER_TYPE_SOFTWARE,null);
+  }
+  super.onDraw(canvas);
+}

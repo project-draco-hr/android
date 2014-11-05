@@ -1,0 +1,10 @@
+{
+  matrix.getValues(m);
+  float origW=getDrawable().getIntrinsicWidth();
+  float origH=getDrawable().getIntrinsicHeight();
+  float px=bx / origW;
+  float py=by / origH;
+  float finalX=m[Matrix.MTRANS_X] + getImageWidth() * px;
+  float finalY=m[Matrix.MTRANS_Y] + getImageHeight() * py;
+  return new PointF(finalX,finalY);
+}

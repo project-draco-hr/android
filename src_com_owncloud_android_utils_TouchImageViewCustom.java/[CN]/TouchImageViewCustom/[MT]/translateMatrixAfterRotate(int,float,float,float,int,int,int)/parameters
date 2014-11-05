@@ -1,0 +1,7 @@
+int axis
+float trans
+float prevImageSize
+float imageSize
+int prevViewSize
+int viewSize
+int drawableSize

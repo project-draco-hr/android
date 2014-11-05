@@ -23,6 +23,12 @@ Intent settingsIntent=new Intent(this,Preferences.class);
 startActivity(settingsIntent);
 break;
 }
+case R.id.action_logger:
+{
+Intent loggerIntent=new Intent(getApplicationContext(),LogHistoryActivity.class);
+startActivity(loggerIntent);
+break;
+}
 case android.R.id.home:
 {
 FileFragment second=getSecondFragment();
@@ -30,6 +36,28 @@ OCFile currentDir=getCurrentDir();
 if ((currentDir != null && currentDir.getParentId() != 0) || (second != null && second.getFile() != null)) {
 onBackPressed();
 }
+break;
+}
+case R.id.action_sort:
+{
+SharedPreferences appPreferences=PreferenceManager.getDefaultSharedPreferences(this);
+Integer sortOrder=appPreferences.getInt("sortOrder",FileListListAdapter.SORT_NAME);
+AlertDialog.Builder builder=new AlertDialog.Builder(this);
+builder.setTitle(R.string.actionbar_sort_title).setSingleChoiceItems(R.array.actionbar_sortby,sortOrder,new DialogInterface.OnClickListener(){
+public void onClick(DialogInterface dialog,int which){
+switch (which) {
+case 0:
+sortByName(true);
+break;
+case 1:
+sortByDate(false);
+break;
+}
+dialog.dismiss();
+}
+}
+);
+builder.create().show();
 break;
 }
 default :

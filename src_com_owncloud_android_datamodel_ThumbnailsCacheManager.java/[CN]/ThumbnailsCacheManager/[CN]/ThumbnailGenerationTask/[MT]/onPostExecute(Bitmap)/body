@@ -1,0 +1,14 @@
+{
+  if (isCancelled()) {
+    bitmap=null;
+  }
+  if (mImageViewReference != null && bitmap != null) {
+    final ImageView imageView=mImageViewReference.get();
+    final ThumbnailGenerationTask bitmapWorkerTask=getBitmapWorkerTask(imageView);
+    if (this == bitmapWorkerTask && imageView != null) {
+      if (imageView.getTag().equals(mFile.getFileId())) {
+        imageView.setImageBitmap(bitmap);
+      }
+    }
+  }
+}

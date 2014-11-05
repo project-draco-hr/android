@@ -1,0 +1,9 @@
+{
+  SharedPreferences.Editor editor=mAppPreferences.edit();
+  editor.putInt("sortOrder",order);
+  editor.putBoolean("sortAscending",ascending);
+  editor.commit();
+  mSortOrder=order;
+  mSortAscending=ascending;
+  sortDirectory();
+}

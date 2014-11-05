@@ -28,7 +28,7 @@
     mServerInfo.mAuthMethod=AuthenticationMethod.valueOf(savedInstanceState.getString(KEY_SERVER_AUTH_METHOD));
   }
   mHostUrlInput=(EditText)findViewById(R.id.hostUrlInput);
-  mHostUrlInput.setText(mServerInfo.mBaseUrl);
+  mHostUrlInput.setText(DisplayUtils.convertIdn(mServerInfo.mBaseUrl,false));
   if (mAction != ACTION_CREATE) {
     mHostUrlInput.setEnabled(false);
     mHostUrlInput.setFocusable(false);

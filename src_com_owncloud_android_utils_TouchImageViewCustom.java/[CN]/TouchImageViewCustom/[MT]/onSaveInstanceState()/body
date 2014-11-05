@@ -1,0 +1,13 @@
+{
+  Bundle bundle=new Bundle();
+  bundle.putParcelable("instanceState",super.onSaveInstanceState());
+  bundle.putFloat("saveScale",normalizedScale);
+  bundle.putFloat("matchViewHeight",matchViewHeight);
+  bundle.putFloat("matchViewWidth",matchViewWidth);
+  bundle.putInt("viewWidth",viewWidth);
+  bundle.putInt("viewHeight",viewHeight);
+  matrix.getValues(m);
+  bundle.putFloatArray("matrix",m);
+  bundle.putBoolean("imageRendered",imageRenderedAtLeastOnce);
+  return bundle;
+}

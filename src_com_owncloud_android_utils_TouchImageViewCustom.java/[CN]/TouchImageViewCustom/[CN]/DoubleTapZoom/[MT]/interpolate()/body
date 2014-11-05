@@ -1,0 +1,6 @@
+{
+  long currTime=System.currentTimeMillis();
+  float elapsed=(currTime - startTime) / ZOOM_TIME;
+  elapsed=Math.min(1f,elapsed);
+  return interpolator.getInterpolation(elapsed);
+}
