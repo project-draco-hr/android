@@ -68,6 +68,9 @@
       intent.putExtra(FileUploadService.KEY_REMOTE_FILE,remote.toArray(new String[remote.size()]));
       intent.putExtra(FileUploadService.KEY_ACCOUNT,mAccount);
       startService(intent);
+      SharedPreferences.Editor appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
+      appPrefs.putString("last_upload_path",mUploadPath);
+      appPrefs.apply();
       finish();
     }
   }

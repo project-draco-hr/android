@@ -67,7 +67,7 @@
         }
  else {
           if (ThumbnailsCacheManager.cancelPotentialWork(file,fileIcon)) {
-            final ThumbnailsCacheManager.ThumbnailGenerationTask task=new ThumbnailsCacheManager.ThumbnailGenerationTask(fileIcon,mStorageManager);
+            final ThumbnailsCacheManager.ThumbnailGenerationTask task=new ThumbnailsCacheManager.ThumbnailGenerationTask(fileIcon,mStorageManager,mAccount);
             if (thumbnail == null) {
               thumbnail=ThumbnailsCacheManager.mDefaultImg;
             }
