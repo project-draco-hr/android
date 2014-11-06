@@ -4,7 +4,6 @@
     ByteArrayInputStream bi=new ByteArrayInputStream(b);
     ObjectInputStream si=new ObjectInputStream(bi);
     UploadDbObject obj=(UploadDbObject)si.readObject();
-    Log.e(TAG,"SUCCESS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     return obj;
   }
  catch (  Exception e) {
