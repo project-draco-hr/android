@@ -1,10 +1,27 @@
 {
 synchronized (mActiveUploads) {
     mCurrentUpload=mActiveUploads.get(uploadDbObject.getRemotePath());
+    if (mCurrentUpload == null) {
+      AccountManager aMgr=AccountManager.get(this);
+      Account account=uploadDbObject.getAccount(getApplicationContext());
+      String version=aMgr.getUserData(account,Constants.KEY_OC_VERSION);
+      OwnCloudVersion ocv=new OwnCloudVersion(version);
+      boolean chunked=FileUploadService.chunkedUploadIsSupported(ocv);
+      String uploadKey=null;
+      uploadKey=buildRemoteName(account,uploadDbObject.getRemotePath());
+      OCFile file=obtainNewOCFileToUpload(uploadDbObject.getRemotePath(),uploadDbObject.getLocalPath(),uploadDbObject.getMimeType());
+      mCurrentUpload=new UploadFileOperation(account,file,chunked,uploadDbObject.isForceOverwrite(),uploadDbObject.getLocalAction(),getApplicationContext());
+      if (uploadDbObject.isCreateRemoteFolder()) {
+        mCurrentUpload.setRemoteFolderToBeCreated();
+      }
+      mActiveUploads.putIfAbsent(uploadKey,mCurrentUpload);
+      mCurrentUpload.addDatatransferProgressListener((FileUploaderBinder)mBinder);
+    }
   }
   if (mCurrentUpload != null) {
     notifyUploadStart(mCurrentUpload);
     RemoteOperationResult uploadResult=null, grantResult=null;
+    UploadFileOperation justFinishedUpload;
     try {
       if (mUploadClient == null || !mLastAccount.equals(mCurrentUpload.getAccount())) {
         mLastAccount=mCurrentUpload.getAccount();

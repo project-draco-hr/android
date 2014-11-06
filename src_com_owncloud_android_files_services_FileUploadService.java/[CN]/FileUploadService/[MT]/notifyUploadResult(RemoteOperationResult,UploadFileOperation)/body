@@ -38,7 +38,7 @@
     mNotificationBuilder.setContentText(content);
     mNotificationManager.notify(tickerId,mNotificationBuilder.build());
     if (uploadResult.isSuccess()) {
-      mDb.removeFile(mCurrentUpload.getOriginalStoragePath());
+      mDb.removeUpload(mCurrentUpload.getOriginalStoragePath());
       NotificationDelayer.cancelWithDelay(mNotificationManager,R.string.uploader_upload_succeeded_ticker,2000);
     }
   }

@@ -71,16 +71,20 @@
       uploadObject.setLocalAction(localAction);
       uploadObject.setUseWifiOnly(isUseWifiOnly);
       uploadObject.setUploadStatus(UploadStatus.UPLOAD_LATER);
-      mDb.storeUpload(uploadObject,"upload at " + new Date());
+      boolean success=mDb.storeUpload(uploadObject,"upload at " + new Date());
+      if (!success) {
+        Log_OC.e(TAG,"Could not add upload to database.");
+      }
       requestedUploads.add(uploadObject);
     }
   }
+  Log_OC.i(TAG,"mPendingUploads size:" + mActiveUploads.size());
   if (requestedUploads.size() > 0) {
     Message msg=mServiceHandler.obtainMessage();
     msg.arg1=startId;
     msg.obj=requestedUploads;
     mServiceHandler.sendMessage(msg);
+    return Service.START_STICKY;
   }
-  Log_OC.i(TAG,"mPendingUploads size:" + mActiveUploads.size());
   return Service.START_NOT_STICKY;
 }
