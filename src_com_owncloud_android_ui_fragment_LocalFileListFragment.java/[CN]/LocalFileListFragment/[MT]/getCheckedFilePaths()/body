@@ -1,6 +1,6 @@
 {
   ArrayList<String> result=new ArrayList<String>();
-  SparseBooleanArray positions=imageView.getCheckedItemPositions();
+  SparseBooleanArray positions=mList.getCheckedItemPositions();
   if (positions.size() > 0) {
     for (int i=0; i < positions.size(); i++) {
       if (positions.get(positions.keyAt(i)) == true) {
