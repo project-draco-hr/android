@@ -29,6 +29,12 @@ Intent loggerIntent=new Intent(getApplicationContext(),LogHistoryActivity.class)
 startActivity(loggerIntent);
 break;
 }
+case R.id.action_uploads_list:
+{
+Intent uploadListIntent=new Intent(getApplicationContext(),UploadsListActivity.class);
+startActivity(uploadListIntent);
+break;
+}
 case android.R.id.home:
 {
 FileFragment second=getSecondFragment();

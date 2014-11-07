@@ -1,0 +1,9 @@
+{
+  Log_OC.i(TAG,"onCreateView() start");
+  View v=super.onCreateView(inflater,container,savedInstanceState);
+  getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+  disableSwipe();
+  setMessageForEmptyList("No uploads available.");
+  Log_OC.i(TAG,"onCreateView() end");
+  return v;
+}

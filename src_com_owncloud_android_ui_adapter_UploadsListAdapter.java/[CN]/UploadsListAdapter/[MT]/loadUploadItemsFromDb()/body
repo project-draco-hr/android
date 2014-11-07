@@ -1,0 +1,17 @@
+{
+  UploadDbHandler mDb=new UploadDbHandler(mContext);
+  List<UploadDbObject> list=mDb.getAllStoredUploads();
+  mUploads=list.toArray(new UploadDbObject[list.size()]);
+  if (mUploads != null) {
+    Arrays.sort(mUploads,new Comparator<UploadDbObject>(){
+      @Override public int compare(      UploadDbObject lhs,      UploadDbObject rhs){
+        return compareNames(lhs,rhs);
+      }
+      private int compareNames(      UploadDbObject lhs,      UploadDbObject rhs){
+        return lhs.getLocalPath().toLowerCase().compareTo(rhs.getLocalPath().toLowerCase());
+      }
+    }
+);
+  }
+  notifyDataSetChanged();
+}

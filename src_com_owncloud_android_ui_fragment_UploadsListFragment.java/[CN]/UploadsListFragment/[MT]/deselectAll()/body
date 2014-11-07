@@ -1,0 +1,4 @@
+{
+  mAdapter=new UploadsListAdapter(getActivity());
+  setListAdapter(mAdapter);
+}

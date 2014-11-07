@@ -1,0 +1,24 @@
+{
+  View view=convertView;
+  if (view == null) {
+    LayoutInflater inflator=(LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    view=inflator.inflate(R.layout.uploads_list_item,null);
+  }
+  if (mUploads != null && mUploads.length > position) {
+    UploadDbObject file=mUploads[position];
+    TextView fileName=(TextView)view.findViewById(R.id.Filename);
+    String name=file.getLocalPath();
+    fileName.setText(name);
+    TextView fileSizeV=(TextView)view.findViewById(R.id.file_size);
+    TextView lastModV=(TextView)view.findViewById(R.id.last_mod);
+    ImageView checkBoxV=(ImageView)view.findViewById(R.id.custom_checkbox);
+    fileSizeV.setVisibility(View.GONE);
+    lastModV.setVisibility(View.GONE);
+    checkBoxV.setVisibility(View.GONE);
+    view.findViewById(R.id.imageView2).setVisibility(View.INVISIBLE);
+    view.findViewById(R.id.imageView3).setVisibility(View.GONE);
+    view.findViewById(R.id.sharedIcon).setVisibility(View.GONE);
+    view.findViewById(R.id.sharedWithMeIcon).setVisibility(View.GONE);
+  }
+  return view;
+}

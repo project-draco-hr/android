@@ -1,0 +1,7 @@
+{
+  Log_OC.i(TAG,"onActivityCreated() start");
+  super.onActivityCreated(savedInstanceState);
+  mAdapter=new UploadsListAdapter(getActivity());
+  setListAdapter(mAdapter);
+  Log_OC.i(TAG,"onActivityCreated() stop");
+}

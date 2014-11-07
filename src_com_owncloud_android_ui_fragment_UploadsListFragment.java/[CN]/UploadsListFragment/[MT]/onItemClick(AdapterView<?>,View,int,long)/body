@@ -1,0 +1,18 @@
+{
+  File file=(File)mAdapter.getItem(position);
+  if (file != null) {
+    mContainerActivity.onUploadItemClick(file);
+    ImageView checkBoxV=(ImageView)v.findViewById(R.id.custom_checkbox);
+    if (checkBoxV != null) {
+      if (getListView().isItemChecked(position)) {
+        checkBoxV.setImageResource(android.R.drawable.checkbox_on_background);
+      }
+ else {
+        checkBoxV.setImageResource(android.R.drawable.checkbox_off_background);
+      }
+    }
+  }
+ else {
+    Log_OC.w(TAG,"Null object in ListAdapter!!");
+  }
+}

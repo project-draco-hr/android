@@ -1,0 +1,3 @@
+{
+  return mUploads != null ? mUploads.length : 0;
+}

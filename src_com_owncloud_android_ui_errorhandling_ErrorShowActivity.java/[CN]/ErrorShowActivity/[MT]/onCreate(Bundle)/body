@@ -1,0 +1,8 @@
+{
+  super.onCreate(savedInstanceState);
+  Log.e(TAG,"ErrorShowActivity was called. See above for StackTrace.");
+  Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
+  setContentView(R.layout.errorhandling_showerror);
+  error=(TextView)findViewById(R.id.errorTextView);
+  error.setText(getIntent().getStringExtra("error"));
+}
