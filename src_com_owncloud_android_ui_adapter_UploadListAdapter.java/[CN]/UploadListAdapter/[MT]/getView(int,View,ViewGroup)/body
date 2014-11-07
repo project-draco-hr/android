@@ -2,7 +2,7 @@
   View view=convertView;
   if (view == null) {
     LayoutInflater inflator=(LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    view=inflator.inflate(R.layout.uploads_list_item,null);
+    view=inflator.inflate(R.layout.upload_list_item,null);
   }
   if (mUploads != null && mUploads.length > position) {
     UploadDbObject file=mUploads[position];

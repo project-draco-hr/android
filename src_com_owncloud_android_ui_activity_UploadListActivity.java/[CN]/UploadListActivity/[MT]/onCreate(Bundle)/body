@@ -1,5 +1,5 @@
 {
   super.onCreate(savedInstanceState);
   Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
-  setContentView(R.layout.uploads_list_layout);
+  setContentView(R.layout.upload_list_layout);
 }
