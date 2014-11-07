@@ -1,7 +1,7 @@
 {
   super.onActivityResult(requestCode,resultCode,data);
   if (requestCode == ACTION_SELECT_CONTENT_FROM_APPS && (resultCode == RESULT_OK || resultCode == UploadFilesActivity.RESULT_OK_AND_MOVE)) {
-    if (data.getData() == null) {
+    if (data.getData() == null && Build.VERSION.SDK_INT >= 16) {
       for (int i=0; i < data.getClipData().getItemCount(); i++) {
         Intent intent=new Intent();
         intent.setData(data.getClipData().getItemAt(i).getUri());
