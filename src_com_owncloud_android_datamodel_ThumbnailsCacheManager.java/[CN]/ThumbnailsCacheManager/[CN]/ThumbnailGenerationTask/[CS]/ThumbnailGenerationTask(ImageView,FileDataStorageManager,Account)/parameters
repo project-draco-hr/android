@@ -1,2 +1,3 @@
 ImageView imageView
 FileDataStorageManager storageManager
+Account account

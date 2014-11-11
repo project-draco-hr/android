@@ -1,0 +1,6 @@
+{
+  MenuInflater inflater=getSherlock().getMenuInflater();
+  inflater.inflate(R.menu.file_select_all,menu);
+  this.menu=menu;
+  return true;
+}
