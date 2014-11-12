@@ -1,0 +1,11 @@
+{
+  if (time > System.currentTimeMillis()) {
+    return DisplayUtils.unixTimeToHumanReadable(time);
+  }
+ else   if ((System.currentTimeMillis() - time) < 60000) {
+    return c.getString(R.string.file_list_seconds_ago) + ", " + DateFormat.getTimeFormat(c).format(new Date(time));
+  }
+ else {
+    return DateUtils.getRelativeDateTimeString(c,time,minResolution,transitionResolution,flags);
+  }
+}
