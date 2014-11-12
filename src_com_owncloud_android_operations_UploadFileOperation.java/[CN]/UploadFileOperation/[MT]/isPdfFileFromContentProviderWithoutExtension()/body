@@ -1,0 +1,3 @@
+{
+  return mOriginalStoragePath.startsWith(URI_CONTENT_SCHEME) && mFile.getMimetype().equals(MIME_TYPE_PDF) && !mFile.getFileName().endsWith(FILE_EXTENSION_PDF);
+}

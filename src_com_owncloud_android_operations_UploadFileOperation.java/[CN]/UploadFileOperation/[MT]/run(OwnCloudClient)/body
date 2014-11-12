@@ -20,6 +20,10 @@
       }
  else {
         String temporalPath=FileStorageUtils.getTemporalPath(mAccount.name) + mFile.getRemotePath();
+        if (isPdfFileFromContentProviderWithoutExtension()) {
+          temporalPath+=FILE_EXTENSION_PDF;
+          mFile.setRemotePath(mFile.getRemotePath() + FILE_EXTENSION_PDF);
+        }
         mFile.setStoragePath(temporalPath);
         temporalFile=new File(temporalPath);
         File temporalParent=temporalFile.getParentFile();
@@ -34,7 +38,7 @@
         InputStream in=null;
         OutputStream out=null;
         try {
-          if (mOriginalStoragePath.startsWith("content://")) {
+          if (mOriginalStoragePath.startsWith(URI_CONTENT_SCHEME)) {
             Uri uri=Uri.parse(mOriginalStoragePath);
             in=MainApp.getAppContext().getContentResolver().openInputStream(uri);
             out=new FileOutputStream(temporalFile);
