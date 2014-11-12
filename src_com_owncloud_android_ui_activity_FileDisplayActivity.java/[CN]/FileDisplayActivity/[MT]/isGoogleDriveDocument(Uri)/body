@@ -1,3 +1,0 @@
-{
-  return "com.google.android.apps.docs.storage".equals(uri.getAuthority());
-}

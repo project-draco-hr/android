@@ -26,7 +26,7 @@
     remotepath+=OCFile.PATH_SEPARATOR + mDirectories.getItem(j);
   }
   if (!remotepath.endsWith(OCFile.PATH_SEPARATOR))   remotepath+=OCFile.PATH_SEPARATOR;
-  if (filepath.startsWith("content://")) {
+  if (filepath.startsWith(URI_TYPE_OF_CONTENT_PROVIDER)) {
     Cursor cursor=MainApp.getAppContext().getContentResolver().query(Uri.parse(filepath),null,null,null,null,null);
     try {
       if (cursor != null && cursor.moveToFirst()) {

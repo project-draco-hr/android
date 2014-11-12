@@ -32,7 +32,7 @@
       final String[] selectionArgs=new String[]{split[1]};
       return getDataColumn(getApplicationContext(),contentUri,selection,selectionArgs);
     }
- else     if (isAContentDocument(uri)) {
+ else     if (isContentDocument(uri)) {
       return uri.toString();
     }
   }
