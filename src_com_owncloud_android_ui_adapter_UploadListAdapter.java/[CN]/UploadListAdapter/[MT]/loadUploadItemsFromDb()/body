@@ -1,5 +1,5 @@
 {
-  UploadDbHandler mDb=new UploadDbHandler(mContext);
+  Log_OC.d(TAG,"loadUploadItemsFromDb");
   List<UploadDbObject> list=mDb.getAllStoredUploads();
   mUploads=list.toArray(new UploadDbObject[list.size()]);
   if (mUploads != null) {
@@ -13,5 +13,10 @@
     }
 );
   }
-  notifyDataSetChanged();
+  mActivity.runOnUiThread(new Runnable(){
+    @Override public void run(){
+      notifyDataSetChanged();
+    }
+  }
+);
 }

@@ -38,8 +38,14 @@
     mNotificationBuilder.setContentText(content);
     mNotificationManager.notify(tickerId,mNotificationBuilder.build());
     if (uploadResult.isSuccess()) {
-      mDb.removeUpload(mCurrentUpload.getOriginalStoragePath());
+      mDb.updateUpload(upload.getOriginalStoragePath(),UploadStatus.UPLOAD_SUCCEEDED,uploadResult);
       NotificationDelayer.cancelWithDelay(mNotificationManager,R.string.uploader_upload_succeeded_ticker,2000);
     }
+ else {
+      mDb.updateUpload(upload.getOriginalStoragePath(),UploadStatus.UPLOAD_FAILED,uploadResult);
+    }
+  }
+ else {
+    mDb.updateUpload(upload.getOriginalStoragePath(),UploadStatus.UPLOAD_FAILED,uploadResult);
   }
 }

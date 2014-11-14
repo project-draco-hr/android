@@ -1,0 +1,6 @@
+{
+  Log_OC.d(TAG,"UploadListAdapter");
+  mActivity=context;
+  mDb=UploadDbHandler.getInstance(mActivity);
+  loadUploadItemsFromDb();
+}

@@ -3,5 +3,4 @@
   super.onActivityCreated(savedInstanceState);
   mAdapter=new UploadListAdapter(getActivity());
   setListAdapter(mAdapter);
-  Log_OC.i(TAG,"onActivityCreated() stop");
 }

@@ -1,7 +1,12 @@
 {
   AbstractList<UploadDbObject> requestedUploads=new Vector<UploadDbObject>();
   if (intent == null) {
-    List<UploadDbObject> list=mDb.getAllStoredUploads();
+    List<UploadDbObject> list=mDb.getAllPendingUploads();
+    for (    UploadDbObject uploadDbObject : list) {
+      uploadDbObject.setUploadStatus(UploadStatus.UPLOAD_LATER);
+      uploadDbObject.setLastResult(null);
+      mDb.updateUpload(uploadDbObject);
+    }
     requestedUploads.addAll(list);
   }
  else {
@@ -71,7 +76,7 @@
       uploadObject.setLocalAction(localAction);
       uploadObject.setUseWifiOnly(isUseWifiOnly);
       uploadObject.setUploadStatus(UploadStatus.UPLOAD_LATER);
-      boolean success=mDb.storeUpload(uploadObject,"upload at " + new Date());
+      boolean success=mDb.storeUpload(uploadObject);
       if (!success) {
         Log_OC.e(TAG,"Could not add upload to database.");
       }

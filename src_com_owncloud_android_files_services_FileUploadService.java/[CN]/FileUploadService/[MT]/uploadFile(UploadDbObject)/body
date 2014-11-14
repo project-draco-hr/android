@@ -1,7 +1,16 @@
 {
+  if (uploadDbObject.getUploadStatus() == UploadStatus.UPLOAD_SUCCEEDED) {
+    Log_OC.w(TAG,"Already succeeded uploadObject was again scheduled for upload. Fix that!");
+    return;
+  }
+  UploadFileOperation currentUpload=null;
 synchronized (mActiveUploads) {
-    mCurrentUpload=mActiveUploads.get(uploadDbObject.getRemotePath());
-    if (mCurrentUpload == null) {
+    currentUpload=mActiveUploads.get(uploadDbObject.getRemotePath());
+    if (currentUpload == null) {
+      if (uploadDbObject.isUseWifiOnly() && !InstantUploadBroadcastReceiver.isConnectedViaWiFi(getApplicationContext())) {
+        Log_OC.d(TAG,"Do not start upload because it is wifi-only.");
+        return;
+      }
       AccountManager aMgr=AccountManager.get(this);
       Account account=uploadDbObject.getAccount(getApplicationContext());
       String version=aMgr.getUserData(account,Constants.KEY_OC_VERSION);
@@ -10,34 +19,33 @@ synchronized (mActiveUploads) {
       String uploadKey=null;
       uploadKey=buildRemoteName(account,uploadDbObject.getRemotePath());
       OCFile file=obtainNewOCFileToUpload(uploadDbObject.getRemotePath(),uploadDbObject.getLocalPath(),uploadDbObject.getMimeType());
-      mCurrentUpload=new UploadFileOperation(account,file,chunked,uploadDbObject.isForceOverwrite(),uploadDbObject.getLocalAction(),getApplicationContext());
+      currentUpload=new UploadFileOperation(account,file,chunked,uploadDbObject.isForceOverwrite(),uploadDbObject.getLocalAction(),getApplicationContext());
       if (uploadDbObject.isCreateRemoteFolder()) {
-        mCurrentUpload.setRemoteFolderToBeCreated();
+        currentUpload.setRemoteFolderToBeCreated();
       }
-      mActiveUploads.putIfAbsent(uploadKey,mCurrentUpload);
-      mCurrentUpload.addDatatransferProgressListener((FileUploaderBinder)mBinder);
+      mActiveUploads.putIfAbsent(uploadKey,currentUpload);
+      currentUpload.addDatatransferProgressListener((FileUploaderBinder)mBinder);
     }
   }
-  if (mCurrentUpload != null) {
-    notifyUploadStart(mCurrentUpload);
+  if (currentUpload != null) {
+    notifyUploadStart(currentUpload);
     RemoteOperationResult uploadResult=null, grantResult=null;
-    UploadFileOperation justFinishedUpload;
     try {
-      if (mUploadClient == null || !mLastAccount.equals(mCurrentUpload.getAccount())) {
-        mLastAccount=mCurrentUpload.getAccount();
+      if (mUploadClient == null || !mLastAccount.equals(currentUpload.getAccount())) {
+        mLastAccount=currentUpload.getAccount();
         mStorageManager=new FileDataStorageManager(mLastAccount,getContentResolver());
         OwnCloudAccount ocAccount=new OwnCloudAccount(mLastAccount,this);
         mUploadClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,this);
       }
-      String remoteParentPath=new File(mCurrentUpload.getRemotePath()).getParent();
+      String remoteParentPath=new File(currentUpload.getRemotePath()).getParent();
       remoteParentPath=remoteParentPath.endsWith(OCFile.PATH_SEPARATOR) ? remoteParentPath : remoteParentPath + OCFile.PATH_SEPARATOR;
-      grantResult=grantFolderExistence(remoteParentPath);
+      grantResult=grantFolderExistence(currentUpload,remoteParentPath);
       if (grantResult.isSuccess()) {
         OCFile parent=mStorageManager.getFileByPath(remoteParentPath);
-        mCurrentUpload.getFile().setParentId(parent.getFileId());
-        uploadResult=mCurrentUpload.execute(mUploadClient);
+        currentUpload.getFile().setParentId(parent.getFileId());
+        uploadResult=currentUpload.execute(mUploadClient);
         if (uploadResult.isSuccess()) {
-          saveUploadedFile();
+          saveUploadedFile(currentUpload);
         }
       }
  else {
@@ -61,7 +69,7 @@ synchronized (mActiveUploads) {
         mUploadClient=null;
       }
     }
-    notifyUploadResult(uploadResult,mCurrentUpload);
-    sendFinalBroadcast(mCurrentUpload,uploadResult);
+    notifyUploadResult(uploadResult,currentUpload);
+    sendFinalBroadcast(currentUpload,uploadResult);
   }
 }

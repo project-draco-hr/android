@@ -3,7 +3,8 @@
   if (msg.obj != null) {
     Iterator<UploadDbObject> it=requestedUploads.iterator();
     while (it.hasNext()) {
-      mService.uploadFile(it.next());
+      UploadDbObject uploadObject=it.next();
+      mService.uploadFile(uploadObject);
     }
   }
   mService.stopSelf(msg.arg1);

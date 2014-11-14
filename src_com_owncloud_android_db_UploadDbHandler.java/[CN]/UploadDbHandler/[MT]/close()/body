@@ -1,3 +1,4 @@
 {
   mDB.close();
+  me=null;
 }

@@ -1,3 +1,5 @@
 {
-  onStartCommand(null,0,0);
+  if (InstantUploadBroadcastReceiver.isOnline(getApplicationContext())) {
+    onStartCommand(null,0,0);
+  }
 }

@@ -1,0 +1,5 @@
+{
+  super.registerDataSetObserver(observer);
+  mDb.addObserver(this);
+  Log_OC.d(TAG,"registerDataSetObserver");
+}

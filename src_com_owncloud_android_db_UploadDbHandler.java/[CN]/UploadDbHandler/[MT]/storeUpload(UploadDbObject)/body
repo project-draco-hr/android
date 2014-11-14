@@ -1,8 +1,15 @@
 {
   ContentValues cv=new ContentValues();
   cv.put("path",uploadObject.getLocalPath());
+  cv.put("uploadStatus",uploadObject.getUploadStatus().value);
   cv.put("uploadObject",uploadObject.toString());
   long result=mDB.insert(TABLE_UPLOAD,null,cv);
   Log_OC.d(TAG,"putFileForLater returns with: " + result + " for file: "+ uploadObject.getLocalPath());
+  if (result == 1) {
+    notifyObserversNow();
+  }
+ else {
+    Log_OC.e(TAG,"Failed to insert item into upload db.");
+  }
   return result != -1;
 }

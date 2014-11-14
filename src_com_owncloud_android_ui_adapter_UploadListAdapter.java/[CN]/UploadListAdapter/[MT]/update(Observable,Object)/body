@@ -1,4 +1,4 @@
 {
-  mContext=context;
+  Log_OC.d(TAG,"update");
   loadUploadItemsFromDb();
 }

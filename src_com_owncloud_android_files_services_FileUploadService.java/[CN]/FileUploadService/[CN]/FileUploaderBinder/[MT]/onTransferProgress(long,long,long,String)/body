@@ -1,7 +1,18 @@
 {
-  String key=buildRemoteName(mCurrentUpload.getAccount(),mCurrentUpload.getFile());
+  Set<Entry<String,UploadFileOperation>> uploads=mActiveUploads.entrySet();
+  UploadFileOperation currentUpload=null;
+  for (  Entry<String,UploadFileOperation> entry : uploads) {
+    if (entry.getValue().getStoragePath().equals(localFileName)) {
+      if (currentUpload != null) {
+        Log_OC.e(TAG,"Found two current uploads with same remote path. Ignore.");
+        return;
+      }
+      currentUpload=entry.getValue();
+    }
+  }
+  String key=buildRemoteName(currentUpload.getAccount(),currentUpload.getFile());
   OnDatatransferProgressListener boundListener=mBoundListeners.get(key);
   if (boundListener != null) {
-    boundListener.onTransferProgress(progressRate,totalTransferredSoFar,totalToTransfer,fileName);
+    boundListener.onTransferProgress(progressRate,totalTransferredSoFar,totalToTransfer,localFileName);
   }
 }
