@@ -1,5 +1,5 @@
 {
-  Cursor c=mDB.query(TABLE_UPLOAD,null,selection,selectionArgs,null,null,null);
+  Cursor c=getDB().query(TABLE_UPLOAD,null,selection,selectionArgs,null,null,null);
   List<UploadDbObject> list=new ArrayList<UploadDbObject>();
   if (c.moveToFirst()) {
     do {

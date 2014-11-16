@@ -4,11 +4,15 @@
   for (  Entry<String,UploadFileOperation> entry : uploads) {
     if (entry.getValue().getStoragePath().equals(localFileName)) {
       if (currentUpload != null) {
-        Log_OC.e(TAG,"Found two current uploads with same remote path. Ignore.");
+        Log_OC.e(TAG,"Found two current uploads with same remote path " + localFileName + ". Ignore.");
         return;
       }
       currentUpload=entry.getValue();
     }
+  }
+  if (currentUpload == null) {
+    Log_OC.e(TAG,"Found no current upload with remote path " + localFileName + ". Ignore.");
+    return;
   }
   String key=buildRemoteName(currentUpload.getAccount(),currentUpload.getFile());
   OnDatatransferProgressListener boundListener=mBoundListeners.get(key);

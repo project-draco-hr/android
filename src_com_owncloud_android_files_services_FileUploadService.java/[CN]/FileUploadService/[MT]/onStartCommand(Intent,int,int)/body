@@ -78,9 +78,11 @@
       uploadObject.setUploadStatus(UploadStatus.UPLOAD_LATER);
       boolean success=mDb.storeUpload(uploadObject);
       if (!success) {
-        Log_OC.e(TAG,"Could not add upload to database.");
+        Log_OC.e(TAG,"Could not add upload to database. It is probably a duplicate. Ignore.");
       }
-      requestedUploads.add(uploadObject);
+ else {
+        requestedUploads.add(uploadObject);
+      }
     }
   }
   Log_OC.i(TAG,"mPendingUploads size:" + mActiveUploads.size());

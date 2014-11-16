@@ -1,5 +1,5 @@
 {
-  Cursor c=mDB.query(TABLE_UPLOAD,null,"path=?",new String[]{filepath},null,null,null);
+  Cursor c=getDB().query(TABLE_UPLOAD,null,"path=?",new String[]{filepath},null,null,null);
   if (c.getCount() != 1) {
     Log_OC.e(TAG,c.getCount() + " items for path=" + filepath+ " available in UploadDb. Expected 1.");
     return 0;
@@ -13,7 +13,7 @@
     ContentValues cv=new ContentValues();
     cv.put("uploadStatus",status.value);
     cv.put("uploadObject",uploadObjectString);
-    int r=mDB.update(TABLE_UPLOAD,cv,"path=?",new String[]{filepath});
+    int r=getDB().update(TABLE_UPLOAD,cv,"path=?",new String[]{filepath});
     if (r == 1) {
       notifyObserversNow();
     }

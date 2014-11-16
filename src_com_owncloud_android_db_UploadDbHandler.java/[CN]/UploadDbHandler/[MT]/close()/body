@@ -1,4 +1,5 @@
 {
-  mDB.close();
+  getDB().close();
+  setDB(null);
   me=null;
 }

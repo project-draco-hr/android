@@ -3,7 +3,7 @@
   cv.put("path",uploadObject.getLocalPath());
   cv.put("uploadStatus",uploadObject.getUploadStatus().value);
   cv.put("uploadObject",uploadObject.toString());
-  long result=mDB.insert(TABLE_UPLOAD,null,cv);
+  long result=getDB().insert(TABLE_UPLOAD,null,cv);
   Log_OC.d(TAG,"putFileForLater returns with: " + result + " for file: "+ uploadObject.getLocalPath());
   if (result == 1) {
     notifyObserversNow();

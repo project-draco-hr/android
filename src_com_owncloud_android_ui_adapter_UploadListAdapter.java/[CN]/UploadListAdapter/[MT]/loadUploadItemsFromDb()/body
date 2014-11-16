@@ -5,10 +5,13 @@
   if (mUploads != null) {
     Arrays.sort(mUploads,new Comparator<UploadDbObject>(){
       @Override public int compare(      UploadDbObject lhs,      UploadDbObject rhs){
-        return compareNames(lhs,rhs);
+        return compareUploadTime(lhs,rhs);
       }
       private int compareNames(      UploadDbObject lhs,      UploadDbObject rhs){
         return lhs.getLocalPath().toLowerCase().compareTo(rhs.getLocalPath().toLowerCase());
+      }
+      private int compareUploadTime(      UploadDbObject lhs,      UploadDbObject rhs){
+        return rhs.getUploadTime().compareTo(lhs.getUploadTime());
       }
     }
 );

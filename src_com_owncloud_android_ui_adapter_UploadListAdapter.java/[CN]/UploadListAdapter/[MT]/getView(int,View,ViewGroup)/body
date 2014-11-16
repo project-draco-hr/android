@@ -7,8 +7,7 @@
   if (mUploads != null && mUploads.length > position) {
     UploadDbObject uploadObject=mUploads[position];
     TextView fileName=(TextView)view.findViewById(R.id.upload_name);
-    String name=FileStorageUtils.removeDataFolderPath(uploadObject.getLocalPath());
-    fileName.setText(name);
+    fileName.setText(uploadObject.getLocalPath());
     TextView statusView=(TextView)view.findViewById(R.id.upload_status);
     String status=uploadObject.getUploadStatus().toString();
     if (uploadObject.getLastResult() != null && !uploadObject.getLastResult().isSuccess()) {
@@ -16,8 +15,9 @@
     }
     statusView.setText(status);
     TextView fileSizeV=(TextView)view.findViewById(R.id.file_size);
+    CharSequence dateString=DisplayUtils.getRelativeDateTimeString(mActivity,uploadObject.getUploadTime().getTimeInMillis(),DateUtils.SECOND_IN_MILLIS,DateUtils.WEEK_IN_MILLIS,0);
+    fileSizeV.setText(dateString);
     ImageView checkBoxV=(ImageView)view.findViewById(R.id.custom_checkbox);
-    fileSizeV.setVisibility(View.GONE);
     checkBoxV.setVisibility(View.GONE);
     view.findViewById(R.id.imageView2).setVisibility(View.INVISIBLE);
     view.findViewById(R.id.imageView3).setVisibility(View.GONE);
