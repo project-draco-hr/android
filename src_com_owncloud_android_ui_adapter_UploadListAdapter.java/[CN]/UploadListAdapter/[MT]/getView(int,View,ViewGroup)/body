@@ -14,6 +14,8 @@
       status+=": " + uploadObject.getLastResult().getLogMessage();
     }
     statusView.setText(status);
+    ImageView fileIcon=(ImageView)view.findViewById(R.id.imageView1);
+    fileIcon.setImageResource(R.drawable.file);
     TextView fileSizeV=(TextView)view.findViewById(R.id.file_size);
     CharSequence dateString=DisplayUtils.getRelativeDateTimeString(mActivity,uploadObject.getUploadTime().getTimeInMillis(),DateUtils.SECOND_IN_MILLIS,DateUtils.WEEK_IN_MILLIS,0);
     fileSizeV.setText(dateString);
