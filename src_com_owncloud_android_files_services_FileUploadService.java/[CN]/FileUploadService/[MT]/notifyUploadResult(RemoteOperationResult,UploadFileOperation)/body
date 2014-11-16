@@ -18,23 +18,6 @@
       mNotificationBuilder.setContentIntent(PendingIntent.getActivity(this,(int)System.currentTimeMillis(),updateAccountCredentials,PendingIntent.FLAG_ONE_SHOT));
       mUploadClient=null;
     }
- else {
-      mNotificationBuilder.setContentText(content);
-      try {
-        String message=uploadResult.getLogMessage() + " errorCode: " + uploadResult.getCode();
-        Log_OC.e(TAG,message + " Http-Code: " + uploadResult.getHttpCode());
-        if (uploadResult.getCode() == ResultCode.QUOTA_EXCEEDED) {
-          int updatedFiles=mDb.updateFileState(upload.getOriginalStoragePath(),UploadDbHandler.UploadStatus.UPLOAD_FAILED,message);
-          if (updatedFiles == 0) {
-            mDb.storeFile(upload.getOriginalStoragePath(),upload.getAccount().name,message);
-          }
-        }
- else {
-        }
-      }
-  finally {
-      }
-    }
     mNotificationBuilder.setContentText(content);
     mNotificationManager.notify(tickerId,mNotificationBuilder.build());
     if (uploadResult.isSuccess()) {
@@ -42,7 +25,12 @@
       NotificationDelayer.cancelWithDelay(mNotificationManager,R.string.uploader_upload_succeeded_ticker,2000);
     }
  else {
-      mDb.updateUpload(upload.getOriginalStoragePath(),UploadStatus.UPLOAD_FAILED,uploadResult);
+      if (uploadResult.getCode() == ResultCode.QUOTA_EXCEEDED) {
+        mDb.updateUpload(upload.getOriginalStoragePath(),UploadDbHandler.UploadStatus.UPLOAD_FAILED_GIVE_UP,uploadResult);
+      }
+ else {
+        mDb.updateUpload(upload.getOriginalStoragePath(),UploadStatus.UPLOAD_FAILED,uploadResult);
+      }
     }
   }
  else {

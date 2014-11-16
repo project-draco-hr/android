@@ -11,6 +11,11 @@ synchronized (mActiveUploads) {
         Log_OC.d(TAG,"Do not start upload because it is wifi-only.");
         return;
       }
+      if (!new File(uploadDbObject.getLocalPath()).exists()) {
+        mDb.updateUpload(uploadDbObject.getLocalPath(),UploadStatus.UPLOAD_FAILED_GIVE_UP,new RemoteOperationResult(ResultCode.FILE_NOT_FOUND));
+        Log_OC.d(TAG,"Do not start upload because local file does not exist.");
+        return;
+      }
       AccountManager aMgr=AccountManager.get(this);
       Account account=uploadDbObject.getAccount(getApplicationContext());
       String version=aMgr.getUserData(account,Constants.KEY_OC_VERSION);
