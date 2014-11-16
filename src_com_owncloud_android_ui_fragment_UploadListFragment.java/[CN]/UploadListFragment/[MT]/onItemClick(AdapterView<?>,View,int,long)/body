@@ -1,7 +1,7 @@
 {
-  File file=(File)mAdapter.getItem(position);
-  if (file != null) {
-    mContainerActivity.onUploadItemClick(file);
+  UploadDbObject uploadDbObject=(UploadDbObject)mAdapter.getItem(position);
+  if (uploadDbObject != null) {
+    mContainerActivity.onUploadItemClick(uploadDbObject);
     ImageView checkBoxV=(ImageView)v.findViewById(R.id.custom_checkbox);
     if (checkBoxV != null) {
       if (getListView().isItemChecked(position)) {
