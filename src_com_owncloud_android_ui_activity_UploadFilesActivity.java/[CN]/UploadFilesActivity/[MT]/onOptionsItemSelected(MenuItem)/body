@@ -8,8 +8,18 @@ case android.R.id.home:
       }
       break;
     }
+case R.id.actionbar_select_all:
+{
+    if (selectAllToggled) {
+      toggleOffSelectAll();
+    }
+ else {
+      toggleOnSelectAll(item);
+    }
+    break;
+  }
 default :
-  retval=super.onOptionsItemSelected(item);
+retval=super.onOptionsItemSelected(item);
 }
 return retval;
 }
