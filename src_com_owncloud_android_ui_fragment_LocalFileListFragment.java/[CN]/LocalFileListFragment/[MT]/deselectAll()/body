@@ -1,0 +1,4 @@
+{
+  mAdapter=new LocalFileListAdapter(mContainerActivity.getInitialDirectory(),getActivity());
+  setListAdapter(mAdapter);
+}
