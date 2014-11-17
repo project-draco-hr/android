@@ -40,7 +40,7 @@
       fileSizeV.setVisibility(View.VISIBLE);
       fileSizeV.setText(DisplayUtils.bytesToHumanReadable(file.getFileLength()));
       lastModV.setVisibility(View.VISIBLE);
-      lastModV.setText(DisplayUtils.unixTimeToHumanReadable(file.getModificationTimestamp()));
+      lastModV.setText(showRelativeTimestamp(file));
       if (!file.keepInSync()) {
         view.findViewById(R.id.imageView3).setVisibility(View.GONE);
       }
@@ -87,7 +87,7 @@
  else {
       fileSizeV.setVisibility(View.INVISIBLE);
       lastModV.setVisibility(View.VISIBLE);
-      lastModV.setText(DisplayUtils.unixTimeToHumanReadable(file.getModificationTimestamp()));
+      lastModV.setText(showRelativeTimestamp(file));
       checkBoxV.setVisibility(View.GONE);
       view.findViewById(R.id.imageView3).setVisibility(View.GONE);
       if (checkIfFileIsSharedWithMe(file)) {
