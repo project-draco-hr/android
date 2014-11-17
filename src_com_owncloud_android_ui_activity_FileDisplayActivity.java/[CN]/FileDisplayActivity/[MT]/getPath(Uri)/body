@@ -1,7 +1,7 @@
 {
   final boolean isKitKat=Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
   if (isKitKat && DocumentsContract.isDocumentUri(getApplicationContext(),uri)) {
-    if (isExternalStorageDocument(uri)) {
+    if (UriUtils.isExternalStorageDocument(uri)) {
       final String docId=DocumentsContract.getDocumentId(uri);
       final String[] split=docId.split(":");
       final String type=split[0];
@@ -9,12 +9,12 @@
         return Environment.getExternalStorageDirectory() + "/" + split[1];
       }
     }
- else     if (isDownloadsDocument(uri)) {
+ else     if (UriUtils.isDownloadsDocument(uri)) {
       final String id=DocumentsContract.getDocumentId(uri);
       final Uri contentUri=ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"),Long.valueOf(id));
-      return getDataColumn(getApplicationContext(),contentUri,null,null);
+      return UriUtils.getDataColumn(getApplicationContext(),contentUri,null,null);
     }
- else     if (isMediaDocument(uri)) {
+ else     if (UriUtils.isMediaDocument(uri)) {
       final String docId=DocumentsContract.getDocumentId(uri);
       final String[] split=docId.split(":");
       final String type=split[0];
@@ -30,15 +30,15 @@
       }
       final String selection="_id=?";
       final String[] selectionArgs=new String[]{split[1]};
-      return getDataColumn(getApplicationContext(),contentUri,selection,selectionArgs);
+      return UriUtils.getDataColumn(getApplicationContext(),contentUri,selection,selectionArgs);
     }
- else     if (isContentDocument(uri)) {
+ else     if (UriUtils.isContentDocument(uri)) {
       return uri.toString();
     }
   }
  else   if ("content".equalsIgnoreCase(uri.getScheme())) {
-    if (isGooglePhotosUri(uri))     return uri.getLastPathSegment();
-    return getDataColumn(getApplicationContext(),uri,null,null);
+    if (UriUtils.isGooglePhotosUri(uri))     return uri.getLastPathSegment();
+    return UriUtils.getDataColumn(getApplicationContext(),uri,null,null);
   }
  else   if ("file".equalsIgnoreCase(uri.getScheme())) {
     return uri.getPath();

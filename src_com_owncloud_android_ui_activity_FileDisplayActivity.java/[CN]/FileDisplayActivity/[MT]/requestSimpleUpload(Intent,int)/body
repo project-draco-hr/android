@@ -28,13 +28,13 @@
     remotepath+=OCFile.PATH_SEPARATOR + mDirectories.getItem(j);
   }
   if (!remotepath.endsWith(OCFile.PATH_SEPARATOR))   remotepath+=OCFile.PATH_SEPARATOR;
-  if (filepath.startsWith(URI_CONTENT_SCHEME)) {
+  if (filepath.startsWith(UriUtils.URI_CONTENT_SCHEME)) {
     Cursor cursor=MainApp.getAppContext().getContentResolver().query(Uri.parse(filepath),null,null,null,null,null);
     try {
       if (cursor != null && cursor.moveToFirst()) {
         String displayName=cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
         Log.i(TAG,"Display Name: " + displayName + "; mimeType: "+ mimeType);
-        remotepath+=displayName + getComposedFileExtension(filepath);
+        remotepath+=displayName + DisplayUtils.getComposedFileExtension(filepath);
       }
     }
   finally {
