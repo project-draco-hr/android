@@ -14,7 +14,7 @@
         OCFile currentFile=(getFile() == null) ? null : getStorageManager().getFileByPath(getFile().getRemotePath());
         OCFile currentDir=(getCurrentFolder() == null) ? null : getStorageManager().getFileByPath(getCurrentFolder().getRemotePath());
         if (currentDir == null) {
-          Toast.makeText(MoveActivity.this,String.format(getString(R.string.sync_current_folder_was_removed),getCurrentFolder().getFileName()),Toast.LENGTH_LONG).show();
+          Toast.makeText(FolderPickerActivity.this,String.format(getString(R.string.sync_current_folder_was_removed),getCurrentFolder().getFileName()),Toast.LENGTH_LONG).show();
           browseToRoot();
         }
  else {

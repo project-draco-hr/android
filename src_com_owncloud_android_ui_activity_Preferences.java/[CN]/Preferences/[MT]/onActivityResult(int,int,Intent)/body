@@ -1,7 +1,7 @@
 {
   super.onActivityResult(requestCode,resultCode,data);
-  if (requestCode == ACTION_SELECT_UPLOAD_PATH && (resultCode == RESULT_OK || resultCode == MoveActivity.RESULT_OK_AND_MOVE)) {
-    OCFile folderToMoveAt=(OCFile)data.getParcelableExtra(MoveActivity.EXTRA_CURRENT_FOLDER);
+  if (requestCode == ACTION_SELECT_UPLOAD_PATH && (resultCode == RESULT_OK || resultCode == UploadPathActivity.RESULT_OK_SET_UPLOAD_PATH)) {
+    OCFile folderToMoveAt=(OCFile)data.getParcelableExtra(UploadPathActivity.EXTRA_CURRENT_FOLDER);
     mUploadPath=folderToMoveAt.getRemotePath();
     saveInstantUploadPathOnPreferences();
   }

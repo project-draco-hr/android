@@ -1,5 +1,5 @@
 {
-  Fragment listOfFiles=getSupportFragmentManager().findFragmentByTag(MoveActivity.TAG_LIST_OF_FOLDERS);
+  Fragment listOfFiles=getSupportFragmentManager().findFragmentByTag(FolderPickerActivity.TAG_LIST_OF_FOLDERS);
   if (listOfFiles != null) {
     return (OCFileListFragment)listOfFiles;
   }
