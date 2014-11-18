@@ -1,4 +1,5 @@
 {
+  mPrefInstantUploadPath.setSummary(mUploadPath);
   SharedPreferences appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
   SharedPreferences.Editor editor=appPrefs.edit();
   editor.putString("instant_upload_path",mUploadPath);
