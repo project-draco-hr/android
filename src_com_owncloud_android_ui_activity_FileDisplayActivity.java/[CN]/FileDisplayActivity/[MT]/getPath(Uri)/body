@@ -1,6 +1,6 @@
 {
-  final boolean isKitKat=Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
-  if (isKitKat && DocumentsContract.isDocumentUri(getApplicationContext(),uri)) {
+  final boolean isKitKatOrLater=Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
+  if (isKitKatOrLater && DocumentsContract.isDocumentUri(getApplicationContext(),uri)) {
     if (UriUtils.isExternalStorageDocument(uri)) {
       final String docId=DocumentsContract.getDocumentId(uri);
       final String[] split=docId.split(":");
