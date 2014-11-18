@@ -1,7 +1,6 @@
 {
   super.onCreate(savedInstanceState);
-  Intent intent=getIntent();
-  String instantUploadPath=intent.getStringExtra("instant_upload_path");
+  String instantUploadPath=getIntent().getStringExtra(KEY_INSTANT_UPLOAD_PATH);
   OCFile folder=new OCFile(instantUploadPath);
-  Toast.makeText(getApplicationContext(),instantUploadPath,Toast.LENGTH_LONG).show();
+  setFile(folder);
 }

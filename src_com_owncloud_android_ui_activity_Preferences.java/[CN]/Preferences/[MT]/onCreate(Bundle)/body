@@ -137,7 +137,7 @@
     mPrefInstantUploadPath.setOnPreferenceClickListener(new OnPreferenceClickListener(){
       @Override public boolean onPreferenceClick(      Preference preference){
         Intent intent=new Intent(Preferences.this,UploadPathActivity.class);
-        intent.putExtra("instant_upload_path",mUploadPath);
+        intent.putExtra(UploadPathActivity.KEY_INSTANT_UPLOAD_PATH,mUploadPath);
         startActivityForResult(intent,ACTION_SELECT_UPLOAD_PATH);
         return true;
       }
