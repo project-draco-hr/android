@@ -1,0 +1,5 @@
+Context c
+long time
+long minResolution
+long transitionResolution
+int flags

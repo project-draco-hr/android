@@ -19,14 +19,18 @@
       imageView.setSelection(0);
     }
     mFile=directory;
-    double count=0;
+    double countImages=0;
+    double countFiles=0;
     Vector<OCFile> files=storageManager.getFolderContent(directory);
     for (    OCFile file : files) {
-      if (file.isImage()) {
-        count++;
+      if (!file.isFolder()) {
+        countFiles++;
+        if (file.isImage()) {
+          countImages++;
+        }
       }
     }
-    if ((count / files.size()) >= 0.5) {
+    if ((countImages / countFiles) >= 0.5) {
       Log_OC.i(TAG,"Image View");
       switchImageView();
     }

@@ -1,12 +1,16 @@
 {
-  double count=0;
+  double countImages=0;
+  double countFiles=0;
   for (  OCFile file : mFiles) {
-    if (file.isImage()) {
-      count++;
+    if (!file.isFolder()) {
+      countFiles++;
+      if (file.isImage()) {
+        countImages++;
+      }
     }
   }
   boolean fileView=true;
-  if ((count / mFiles.size()) >= 0.5) {
+  if ((countImages / countFiles) >= 0.5) {
     fileView=false;
   }
  else {
@@ -53,7 +57,7 @@ TextView fileSizeV=(TextView)view.findViewById(R.id.file_size);
 TextView lastModV=(TextView)view.findViewById(R.id.last_mod);
 ImageView checkBoxV=(ImageView)view.findViewById(R.id.custom_checkbox);
 lastModV.setVisibility(View.VISIBLE);
-lastModV.setText(DisplayUtils.unixTimeToHumanReadable(file.getModificationTimestamp()));
+lastModV.setText(showRelativeTimestamp(file));
 checkBoxV.setVisibility(View.GONE);
 fileSizeV.setVisibility(View.VISIBLE);
 fileSizeV.setText(DisplayUtils.bytesToHumanReadable(file.getFileLength()));
