@@ -1,0 +1,3 @@
+{
+  return "com.android.providers.downloads.documents".equals(uri.getAuthority());
+}
