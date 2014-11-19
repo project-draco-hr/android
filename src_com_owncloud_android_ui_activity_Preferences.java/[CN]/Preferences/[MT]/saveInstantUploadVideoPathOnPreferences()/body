@@ -1,0 +1,7 @@
+{
+  mPrefInstantVideoUploadPath.setSummary(mUploadVideoPath);
+  SharedPreferences appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+  SharedPreferences.Editor editor=appPrefs.edit();
+  editor.putString("instant_video_upload_path",mUploadVideoPath);
+  editor.commit();
+}

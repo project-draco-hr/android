@@ -1,8 +1,13 @@
 {
   super.onActivityResult(requestCode,resultCode,data);
   if (requestCode == ACTION_SELECT_UPLOAD_PATH && (resultCode == RESULT_OK || resultCode == UploadPathActivity.RESULT_OK_SET_UPLOAD_PATH)) {
-    OCFile folderToMoveAt=(OCFile)data.getParcelableExtra(UploadPathActivity.EXTRA_CURRENT_FOLDER);
-    mUploadPath=folderToMoveAt.getRemotePath();
+    OCFile folderToUpload=(OCFile)data.getParcelableExtra(UploadPathActivity.EXTRA_CURRENT_FOLDER);
+    mUploadPath=folderToUpload.getRemotePath();
     saveInstantUploadPathOnPreferences();
+  }
+ else   if (requestCode == ACTION_SELECT_UPLOAD_VIDEO_PATH && (resultCode == RESULT_OK || resultCode == UploadPathActivity.RESULT_OK_SET_UPLOAD_PATH)) {
+    OCFile folderToUploadVideo=(OCFile)data.getParcelableExtra(UploadPathActivity.EXTRA_CURRENT_FOLDER);
+    mUploadVideoPath=folderToUploadVideo.getRemotePath();
+    saveInstantUploadVideoPathOnPreferences();
   }
 }

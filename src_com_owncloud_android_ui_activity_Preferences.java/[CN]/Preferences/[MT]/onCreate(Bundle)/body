@@ -144,6 +144,18 @@
     }
 );
   }
+  mPrefInstantVideoUploadPath=findPreference("instant_video_upload_path");
+  if (mPrefInstantVideoUploadPath != null) {
+    mPrefInstantVideoUploadPath.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+      @Override public boolean onPreferenceClick(      Preference preference){
+        Intent intent=new Intent(Preferences.this,UploadPathActivity.class);
+        intent.putExtra(UploadPathActivity.KEY_INSTANT_UPLOAD_PATH,mUploadVideoPath);
+        startActivityForResult(intent,ACTION_SELECT_UPLOAD_VIDEO_PATH);
+        return true;
+      }
+    }
+);
+  }
   pAboutApp=(Preference)findPreference("about_app");
   if (pAboutApp != null) {
     pAboutApp.setTitle(String.format(getString(R.string.about_android),getString(R.string.app_name)));
@@ -157,4 +169,5 @@
     }
   }
   loadInstantUploadPath();
+  loadInstantUploadVideoPath();
 }
