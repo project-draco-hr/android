@@ -1,0 +1,4 @@
+Context context
+Uri uri
+String selection
+String[] selectionArgs
