@@ -22,44 +22,57 @@
         String temporalPath=FileStorageUtils.getTemporalPath(mAccount.name) + mFile.getRemotePath();
         mFile.setStoragePath(temporalPath);
         temporalFile=new File(temporalPath);
-        if (!mOriginalStoragePath.equals(temporalPath)) {
-          InputStream in=null;
-          OutputStream out=null;
-          try {
-            File temporalParent=temporalFile.getParentFile();
-            temporalParent.mkdirs();
-            if (!temporalParent.isDirectory()) {
-              throw new IOException("Unexpected error: parent directory could not be created");
-            }
-            temporalFile.createNewFile();
-            if (!temporalFile.isFile()) {
-              throw new IOException("Unexpected error: target file could not be created");
-            }
-            in=new FileInputStream(originalFile);
+        File temporalParent=temporalFile.getParentFile();
+        temporalParent.mkdirs();
+        if (!temporalParent.isDirectory()) {
+          throw new IOException("Unexpected error: parent directory could not be created");
+        }
+        temporalFile.createNewFile();
+        if (!temporalFile.isFile()) {
+          throw new IOException("Unexpected error: target file could not be created");
+        }
+        InputStream in=null;
+        OutputStream out=null;
+        try {
+          if (mOriginalStoragePath.startsWith(UriUtils.URI_CONTENT_SCHEME)) {
+            Uri uri=Uri.parse(mOriginalStoragePath);
+            in=MainApp.getAppContext().getContentResolver().openInputStream(uri);
             out=new FileOutputStream(temporalFile);
-            byte[] buf=new byte[1024];
-            int len;
-            while ((len=in.read(buf)) > 0) {
-              out.write(buf,0,len);
+            int nRead;
+            byte[] data=new byte[16384];
+            while ((nRead=in.read(data,0,data.length)) != -1) {
+              out.write(data,0,nRead);
             }
+            out.flush();
+          }
+ else {
+            if (!mOriginalStoragePath.equals(temporalPath)) {
+              in=new FileInputStream(originalFile);
+              out=new FileOutputStream(temporalFile);
+              byte[] buf=new byte[1024];
+              int len;
+              while ((len=in.read(buf)) > 0) {
+                out.write(buf,0,len);
+              }
+            }
+          }
+        }
+ catch (        Exception e) {
+          result=new RemoteOperationResult(ResultCode.LOCAL_STORAGE_NOT_COPIED);
+          return result;
+        }
+ finally {
+          try {
+            if (in != null)             in.close();
           }
  catch (          Exception e) {
-            result=new RemoteOperationResult(ResultCode.LOCAL_STORAGE_NOT_COPIED);
-            return result;
+            Log_OC.d(TAG,"Weird exception while closing input stream for " + mOriginalStoragePath + " (ignoring)",e);
           }
- finally {
-            try {
-              if (in != null)               in.close();
-            }
- catch (            Exception e) {
-              Log_OC.d(TAG,"Weird exception while closing input stream for " + mOriginalStoragePath + " (ignoring)",e);
-            }
-            try {
-              if (out != null)               out.close();
-            }
- catch (            Exception e) {
-              Log_OC.d(TAG,"Weird exception while closing output stream for " + expectedPath + " (ignoring)",e);
-            }
+          try {
+            if (out != null)             out.close();
+          }
+ catch (          Exception e) {
+            Log_OC.d(TAG,"Weird exception while closing output stream for " + expectedPath + " (ignoring)",e);
           }
         }
       }

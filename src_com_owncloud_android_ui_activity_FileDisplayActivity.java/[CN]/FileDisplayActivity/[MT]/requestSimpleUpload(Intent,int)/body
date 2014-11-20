@@ -1,7 +1,9 @@
 {
   String filepath=null;
+  String mimeType=null;
+  Uri selectedImageUri=data.getData();
   try {
-    Uri selectedImageUri=data.getData();
+    mimeType=getContentResolver().getType(selectedImageUri);
     String filemanagerstring=selectedImageUri.getPath();
     String selectedImagePath=getPath(selectedImageUri);
     if (selectedImagePath != null)     filepath=selectedImagePath;
@@ -26,14 +28,32 @@
     remotepath+=OCFile.PATH_SEPARATOR + mDirectories.getItem(j);
   }
   if (!remotepath.endsWith(OCFile.PATH_SEPARATOR))   remotepath+=OCFile.PATH_SEPARATOR;
-  remotepath+=new File(filepath).getName();
   i.putExtra(FileUploadService.KEY_LOCAL_FILE,filepath);
   i.putExtra(FileUploadService.KEY_REMOTE_FILE,remotepath);
+  i.putExtra(FileUploadService.KEY_MIME_TYPE,mimeType);
   i.putExtra(FileUploadService.KEY_UPLOAD_TYPE,FileUploadService.UploadSingleMulti.UPLOAD_SINGLE_FILE);
   if (resultCode == UploadFilesActivity.RESULT_OK_AND_MOVE) {
     i.putExtra(FileUploadService.KEY_LOCAL_BEHAVIOUR,FileUploadService.LocalBehaviour.LOCAL_BEHAVIOUR_MOVE);
   }
   if (startService(i) == null) {
     Log_OC.e(TAG,"FileUploadService could not be started");
+  }
+  if (filepath.startsWith(UriUtils.URI_CONTENT_SCHEME)) {
+    Cursor cursor=MainApp.getAppContext().getContentResolver().query(Uri.parse(filepath),null,null,null,null,null);
+    try {
+      if (cursor != null && cursor.moveToFirst()) {
+        String displayName=cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+        Log.i(TAG,"Display Name: " + displayName + "; mimeType: "+ mimeType);
+        displayName.replace(File.separatorChar,'_');
+        displayName.replace(File.pathSeparatorChar,'_');
+        remotepath+=displayName + DisplayUtils.getComposedFileExtension(filepath);
+      }
+    }
+  finally {
+      cursor.close();
+    }
+  }
+ else {
+    remotepath+=new File(filepath).getName();
   }
 }
