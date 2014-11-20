@@ -1,5 +1,14 @@
 {
-  String emailAddress=getString(R.string.mail_logger);
+  String emailAddress;
+  try {
+    Class<?> stringClass=R.string.class;
+    Field mailLoggerField=stringClass.getField("mail_logger");
+    int emailAddressId=(Integer)mailLoggerField.get(null);
+    emailAddress=getString(emailAddressId);
+  }
+ catch (  Exception e) {
+    emailAddress="";
+  }
   ArrayList<Uri> uris=new ArrayList<Uri>();
   for (  String file : Log_OC.getLogFileNames()) {
     File logFile=new File(mLogPath,file);
@@ -9,7 +18,8 @@
   }
   Intent intent=new Intent(Intent.ACTION_SEND_MULTIPLE);
   intent.putExtra(Intent.EXTRA_EMAIL,emailAddress);
-  intent.putExtra(Intent.EXTRA_SUBJECT,getText(R.string.log_send_mail_subject));
+  String subject=String.format(getString(R.string.log_send_mail_subject),getString(R.string.app_name));
+  intent.putExtra(Intent.EXTRA_SUBJECT,subject);
   intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
   intent.setType(MAIL_ATTACHMENT_TYPE);
   intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM,uris);
