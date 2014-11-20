@@ -136,6 +136,9 @@
   if (mPrefInstantUploadPath != null) {
     mPrefInstantUploadPath.setOnPreferenceClickListener(new OnPreferenceClickListener(){
       @Override public boolean onPreferenceClick(      Preference preference){
+        if (!mUploadPath.endsWith(OCFile.PATH_SEPARATOR)) {
+          mUploadPath+=OCFile.PATH_SEPARATOR;
+        }
         Intent intent=new Intent(Preferences.this,UploadPathActivity.class);
         intent.putExtra(UploadPathActivity.KEY_INSTANT_UPLOAD_PATH,mUploadPath);
         startActivityForResult(intent,ACTION_SELECT_UPLOAD_PATH);
@@ -148,6 +151,9 @@
   if (mPrefInstantVideoUploadPath != null) {
     mPrefInstantVideoUploadPath.setOnPreferenceClickListener(new OnPreferenceClickListener(){
       @Override public boolean onPreferenceClick(      Preference preference){
+        if (!mUploadVideoPath.endsWith(OCFile.PATH_SEPARATOR)) {
+          mUploadVideoPath+=OCFile.PATH_SEPARATOR;
+        }
         Intent intent=new Intent(Preferences.this,UploadPathActivity.class);
         intent.putExtra(UploadPathActivity.KEY_INSTANT_UPLOAD_PATH,mUploadVideoPath);
         startActivityForResult(intent,ACTION_SELECT_UPLOAD_VIDEO_PATH);
