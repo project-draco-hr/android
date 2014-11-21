@@ -1,0 +1,19 @@
+{
+  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+    int hostStart=0;
+    if (url.indexOf("//") != -1) {
+      hostStart=url.indexOf("//") + "//".length();
+    }
+ else     if (url.indexOf("@") != -1) {
+      hostStart=url.indexOf("@") + "@".length();
+    }
+    int hostEnd=url.substring(hostStart).indexOf("/");
+    hostEnd=(hostEnd == -1 ? url.length() : hostStart + hostEnd);
+    String host=url.substring(hostStart,hostEnd);
+    host=(toASCII ? IDN.toASCII(host) : IDN.toUnicode(host));
+    return url.substring(0,hostStart) + host + url.substring(hostEnd);
+  }
+ else {
+    return url;
+  }
+}
