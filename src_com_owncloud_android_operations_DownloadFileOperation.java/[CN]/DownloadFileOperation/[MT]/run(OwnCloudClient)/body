@@ -20,7 +20,6 @@ synchronized (mCancellationRequested) {
     newFile=new File(getSavePath());
     newFile.getParentFile().mkdirs();
     moved=tmpFile.renameTo(newFile);
-    Log_OC.d("mediaScan","mediaScan : " + newFile.getAbsolutePath());
     MediaScannerConnection.scanFile(MainApp.getAppContext(),new String[]{newFile.getAbsolutePath()},null,null);
     if (!moved)     result=new RemoteOperationResult(RemoteOperationResult.ResultCode.LOCAL_STORAGE_NOT_MOVED);
   }
