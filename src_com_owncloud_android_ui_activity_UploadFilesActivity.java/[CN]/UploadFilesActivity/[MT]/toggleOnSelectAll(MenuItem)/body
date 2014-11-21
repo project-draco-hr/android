@@ -1,5 +1,0 @@
-{
-  selectAllToggled=true;
-  item.setIcon(android.R.drawable.checkbox_on_background);
-  mFileListFragment.selectAll();
-}
