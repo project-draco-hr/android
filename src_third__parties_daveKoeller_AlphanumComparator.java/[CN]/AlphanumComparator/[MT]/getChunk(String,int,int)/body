@@ -1,0 +1,23 @@
+{
+  StringBuilder chunk=new StringBuilder();
+  char c=s.charAt(marker);
+  chunk.append(c);
+  marker++;
+  if (isDigit(c)) {
+    while (marker < slength) {
+      c=s.charAt(marker);
+      if (!isDigit(c))       break;
+      chunk.append(c);
+      marker++;
+    }
+  }
+ else {
+    while (marker < slength) {
+      c=s.charAt(marker);
+      if (isDigit(c))       break;
+      chunk.append(c);
+      marker++;
+    }
+  }
+  return chunk.toString();
+}
