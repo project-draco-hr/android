@@ -1,0 +1,3 @@
+Resources res
+Bitmap bitmap
+ThumbnailLocalGenerationTask bitmapWorkerTask

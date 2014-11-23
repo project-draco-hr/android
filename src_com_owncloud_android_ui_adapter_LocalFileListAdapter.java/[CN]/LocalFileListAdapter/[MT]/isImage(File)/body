@@ -1,0 +1,6 @@
+{
+  Uri selectedUri=Uri.fromFile(file);
+  String fileExtension=MimeTypeMap.getFileExtensionFromUrl(selectedUri.toString());
+  String mimeType=MimeTypeMap.getSingleton().getMimeTypeFromExtension(fileExtension);
+  return (mimeType != null && mimeType.startsWith("image/"));
+}

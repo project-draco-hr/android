@@ -16,6 +16,7 @@
  else {
       fileIcon.setImageResource(R.drawable.ic_menu_archive);
     }
+    fileIcon.setTag(file.hashCode());
     TextView fileSizeV=(TextView)view.findViewById(R.id.file_size);
     TextView lastModV=(TextView)view.findViewById(R.id.last_mod);
     ImageView checkBoxV=(ImageView)view.findViewById(R.id.custom_checkbox);
@@ -36,6 +37,29 @@
           checkBoxV.setImageResource(android.R.drawable.checkbox_off_background);
         }
         checkBoxV.setVisibility(View.VISIBLE);
+      }
+      if (isImage(file)) {
+        Bitmap thumbnail=ThumbnailsCacheManager.getBitmapFromDiskCache(String.valueOf(file.hashCode()));
+        if (thumbnail != null) {
+          fileIcon.setImageBitmap(thumbnail);
+        }
+ else {
+          if (ThumbnailsCacheManager.cancelPotentialWork(file,fileIcon)) {
+            final ThumbnailsCacheManager.ThumbnailLocalGenerationTask task=new ThumbnailsCacheManager.ThumbnailLocalGenerationTask(fileIcon);
+            if (thumbnail == null) {
+              thumbnail=ThumbnailsCacheManager.mDefaultImg;
+            }
+            final AsyncLocalDrawable asyncDrawable=new AsyncLocalDrawable(mContext.getResources(),thumbnail,task);
+            fileIcon.setImageDrawable(asyncDrawable);
+            task.execute(file);
+          }
+        }
+      }
+ else {
+        Uri selectedUri=Uri.fromFile(file);
+        String fileExtension=MimeTypeMap.getFileExtensionFromUrl(selectedUri.toString());
+        String mimeType=MimeTypeMap.getSingleton().getMimeTypeFromExtension(fileExtension);
+        fileIcon.setImageResource(DisplayUtils.getResourceId(mimeType,file.getName()));
       }
     }
  else {
