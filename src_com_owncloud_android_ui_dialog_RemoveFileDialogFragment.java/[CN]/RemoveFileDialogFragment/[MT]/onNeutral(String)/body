@@ -1,5 +1,5 @@
 {
-  String path=new File(mTargetFile.getStoragePath()).getParent();
+  String path=mTargetFile.getStoragePath();
   ComponentsGetter cg=(ComponentsGetter)getSherlockActivity();
   cg.getFileOperationsHelper().removeFile(mTargetFile,true);
   FileDataStorageManager storageManager=cg.getStorageManager();
