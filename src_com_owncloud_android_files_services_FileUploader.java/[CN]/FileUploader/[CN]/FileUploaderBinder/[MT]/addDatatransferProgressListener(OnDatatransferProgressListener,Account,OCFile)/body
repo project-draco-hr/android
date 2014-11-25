@@ -1,5 +1,0 @@
-{
-  if (account == null || file == null || listener == null)   return;
-  String targetKey=buildRemoteName(account,file);
-  mBoundListeners.put(targetKey,listener);
-}
