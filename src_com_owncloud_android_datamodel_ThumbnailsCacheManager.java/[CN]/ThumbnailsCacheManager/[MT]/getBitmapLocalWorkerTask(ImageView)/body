@@ -1,7 +1,7 @@
 {
   if (imageView != null) {
     final Drawable drawable=imageView.getDrawable();
-    if (drawable instanceof AsyncDrawable) {
+    if (drawable instanceof AsyncLocalDrawable) {
       final AsyncLocalDrawable asyncDrawable=(AsyncLocalDrawable)drawable;
       return asyncDrawable.getBitmapWorkerTask();
     }

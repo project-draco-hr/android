@@ -2,8 +2,8 @@
   if (isCancelled()) {
     bitmap=null;
   }
-  if (mImageViewReference != null && bitmap != null) {
-    final ImageView imageView=mImageViewReference.get();
+  if (mImageViewLocalReference != null && bitmap != null) {
+    final ImageView imageView=mImageViewLocalReference.get();
     final ThumbnailLocalGenerationTask bitmapWorkerTask=getBitmapLocalWorkerTask(imageView);
     if (this == bitmapWorkerTask && imageView != null) {
       if (imageView.getTag().equals(mFile.hashCode())) {
