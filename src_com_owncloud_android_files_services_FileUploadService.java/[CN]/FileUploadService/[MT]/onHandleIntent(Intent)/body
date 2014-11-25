@@ -2,7 +2,7 @@
   if (intent == null || intent.hasExtra(KEY_RETRY)) {
     List<UploadDbObject> list=mDb.getAllPendingUploads();
     for (    UploadDbObject uploadDbObject : list) {
-      String uploadKey=buildRemoteName(uploadDbObject.getAccount(getApplicationContext()),uploadDbObject.getRemotePath());
+      String uploadKey=buildRemoteName(uploadDbObject);
       UploadDbObject previous=mPendingUploads.putIfAbsent(uploadKey,uploadDbObject);
       if (previous == null) {
         uploadDbObject.setUploadStatus(UploadStatus.UPLOAD_LATER);
@@ -79,7 +79,7 @@
       uploadObject.setLocalAction(localAction);
       uploadObject.setUseWifiOnly(isUseWifiOnly);
       uploadObject.setUploadStatus(UploadStatus.UPLOAD_LATER);
-      String uploadKey=buildRemoteName(uploadObject.getAccount(getApplicationContext()),uploadObject.getRemotePath());
+      String uploadKey=buildRemoteName(uploadObject);
       UploadDbObject previous=mPendingUploads.putIfAbsent(uploadKey,uploadObject);
       if (previous == null) {
         boolean success=mDb.storeUpload(uploadObject);
@@ -88,6 +88,7 @@
         }
       }
  else {
+        Log_OC.w(TAG,"FileUploadService got upload intent for file which is already queued: " + uploadObject.getRemotePath());
       }
     }
   }

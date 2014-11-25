@@ -1,5 +1,0 @@
-{
-  mDb.close();
-  unregisterReceiver(mConnectivityChangeReceiver);
-  super.onDestroy();
-}

@@ -11,5 +11,8 @@
  else {
       Log.v(TAG,"no extras");
     }
+    if (InstantUploadBroadcastReceiver.isOnline(context)) {
+      FileUploadService.retry(context);
+    }
   }
 }
