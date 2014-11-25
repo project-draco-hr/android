@@ -1,0 +1,5 @@
+{
+  MenuInflater inflater=getSherlock().getMenuInflater();
+  inflater.inflate(R.menu.upload_list_menu,menu);
+  return true;
+}

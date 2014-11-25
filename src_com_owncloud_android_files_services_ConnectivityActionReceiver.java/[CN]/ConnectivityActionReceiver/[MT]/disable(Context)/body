@@ -1,0 +1,5 @@
+{
+  PackageManager pm=context.getPackageManager();
+  ComponentName compName=new ComponentName(context.getApplicationContext(),ConnectivityActionReceiver.class);
+  pm.setComponentEnabledSetting(compName,PackageManager.COMPONENT_ENABLED_STATE_DISABLED,PackageManager.DONT_KILL_APP);
+}

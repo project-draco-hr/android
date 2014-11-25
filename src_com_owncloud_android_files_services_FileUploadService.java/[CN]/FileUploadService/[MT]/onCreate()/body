@@ -1,6 +1,6 @@
 {
   super.onCreate();
-  Log_OC.i(TAG,"mPendingUploads size:" + mActiveUploads.size());
+  Log_OC.i(TAG,"mPendingUploads size:" + mPendingUploads.size());
   mNotificationManager=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
   HandlerThread thread=new HandlerThread("FileUploaderThread",Process.THREAD_PRIORITY_BACKGROUND);
   thread.start();
@@ -11,4 +11,9 @@
   registerReceiver(mConnectivityChangeReceiver,new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
   mDb=UploadDbHandler.getInstance(this.getBaseContext());
   mDb.recreateDb();
+  List<UploadDbObject> current=mDb.getCurrentUpload();
+  for (  UploadDbObject uploadDbObject : current) {
+    uploadDbObject.setUploadStatus(UploadStatus.UPLOAD_LATER);
+    mDb.updateUpload(uploadDbObject);
+  }
 }

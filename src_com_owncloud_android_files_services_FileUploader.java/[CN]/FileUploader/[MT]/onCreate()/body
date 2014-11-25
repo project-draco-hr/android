@@ -1,0 +1,10 @@
+{
+  super.onCreate();
+  Log_OC.i(TAG,"mPendingUploads size:" + mPendingUploads.size());
+  mNotificationManager=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+  HandlerThread thread=new HandlerThread("FileUploaderThread",Process.THREAD_PRIORITY_BACKGROUND);
+  thread.start();
+  mServiceLooper=thread.getLooper();
+  mServiceHandler=new ServiceHandler(mServiceLooper,this);
+  mBinder=new FileUploaderBinder();
+}

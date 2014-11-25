@@ -1,0 +1,12 @@
+{
+  String[] where=new String[3];
+  where[0]=String.valueOf(UploadStatus.UPLOAD_CANCELLED.value);
+  where[1]=String.valueOf(UploadStatus.UPLOAD_FAILED_GIVE_UP.value);
+  where[2]=String.valueOf(UploadStatus.UPLOAD_SUCCEEDED.value);
+  long result=getDB().delete(TABLE_UPLOAD,"uploadStatus = ? OR uploadStatus = ? OR uploadStatus = ?",where);
+  Log_OC.d(TABLE_UPLOAD,"delete all done uploads");
+  if (result > 0) {
+    notifyObserversNow();
+  }
+  return result;
+}

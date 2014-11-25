@@ -1,15 +1,6 @@
 {
-  Set<Entry<String,UploadFileOperation>> uploads=mActiveUploads.entrySet();
-  UploadFileOperation currentUpload=null;
-  for (  Entry<String,UploadFileOperation> entry : uploads) {
-    if (entry.getValue().getStoragePath().equals(localFileName)) {
-      if (currentUpload != null) {
-        Log_OC.e(TAG,"Found two current uploads with same remote path " + localFileName + ". Ignore.");
-        return;
-      }
-      currentUpload=entry.getValue();
-    }
-  }
+  Set<Entry<String,UploadDbObject>> uploads=mPendingUploads.entrySet();
+  UploadFileOperation currentUpload=mCurrentUpload;
   if (currentUpload == null) {
     Log_OC.e(TAG,"Found no current upload with remote path " + localFileName + ". Ignore.");
     return;

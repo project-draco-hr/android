@@ -1,0 +1,3 @@
+{
+  return getUploads("uploadStatus==" + UploadStatus.UPLOAD_IN_PROGRESS.value,null);
+}

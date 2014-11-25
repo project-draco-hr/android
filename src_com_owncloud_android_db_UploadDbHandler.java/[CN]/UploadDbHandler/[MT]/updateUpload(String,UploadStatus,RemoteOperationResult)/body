@@ -7,8 +7,8 @@
   if (c.moveToFirst()) {
     String uploadObjectString=c.getString(c.getColumnIndex("uploadObject"));
     UploadDbObject uploadObject=UploadDbObject.fromString(uploadObjectString);
-    uploadObject.setLastResult(result);
     uploadObject.setUploadStatus(status);
+    uploadObject.setLastResult(result);
     uploadObjectString=uploadObject.toString();
     ContentValues cv=new ContentValues();
     cv.put("uploadStatus",status.value);

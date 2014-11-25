@@ -1,0 +1,19 @@
+{
+  boolean retval=true;
+switch (item.getItemId()) {
+case R.id.action_retry_uploads:
+{
+      FileUploadService.retry(this);
+      break;
+    }
+case R.id.action_clear_upload_list:
+{
+    UploadDbHandler db=UploadDbHandler.getInstance(this);
+    db.cleanDoneUploads();
+    break;
+  }
+default :
+retval=super.onOptionsItemSelected(item);
+}
+return retval;
+}

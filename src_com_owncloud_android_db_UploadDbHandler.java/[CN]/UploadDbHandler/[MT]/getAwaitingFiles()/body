@@ -1,4 +1,0 @@
-{
-  Log_OC.i(TAG,"obsolete method called");
-  return null;
-}

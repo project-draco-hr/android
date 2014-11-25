@@ -1,9 +1,10 @@
 {
-  UploadFileOperation upload=null;
-synchronized (mActiveUploads) {
-    upload=mActiveUploads.remove(buildRemoteName(account,file));
-  }
-  if (upload != null) {
-    upload.cancel();
+  UploadDbObject upload=null;
+  upload=mPendingUploads.remove(buildRemoteName(account,file));
+  upload.setUploadStatus(UploadStatus.UPLOAD_CANCELLED);
+  mDb.updateUpload(upload);
+  if (mCurrentUpload != null) {
+    mCurrentUpload.cancel();
+    mCurrentUpload=null;
   }
 }

@@ -1,0 +1,104 @@
+{
+  if (intent == null || intent.hasExtra(KEY_RETRY)) {
+    List<UploadDbObject> list=mDb.getAllPendingUploads();
+    for (    UploadDbObject uploadDbObject : list) {
+      String uploadKey=buildRemoteName(uploadDbObject.getAccount(getApplicationContext()),uploadDbObject.getRemotePath());
+      UploadDbObject previous=mPendingUploads.putIfAbsent(uploadKey,uploadDbObject);
+      if (previous == null) {
+        uploadDbObject.setUploadStatus(UploadStatus.UPLOAD_LATER);
+        mDb.updateUpload(uploadDbObject);
+      }
+ else {
+      }
+    }
+  }
+ else {
+    UploadSingleMulti uploadType=(UploadSingleMulti)intent.getSerializableExtra(KEY_UPLOAD_TYPE);
+    if (uploadType == null) {
+      Log_OC.e(TAG,"Incorrect or no upload type provided");
+      return;
+    }
+    Account account=intent.getParcelableExtra(KEY_ACCOUNT);
+    if (!AccountUtils.exists(account,getApplicationContext())) {
+      Log_OC.e(TAG,"KEY_ACCOUNT no set or provided KEY_ACCOUNT does not exist");
+      return;
+    }
+    OCFile[] files=null;
+    if (intent.hasExtra(KEY_FILE)) {
+      if (uploadType == UploadSingleMulti.UPLOAD_SINGLE_FILE) {
+        files=new OCFile[]{intent.getParcelableExtra(KEY_FILE)};
+      }
+ else {
+        files=(OCFile[])intent.getParcelableArrayExtra(KEY_FILE);
+      }
+    }
+ else {
+      if (!intent.hasExtra(KEY_LOCAL_FILE) || !intent.hasExtra(KEY_REMOTE_FILE)) {
+        Log_OC.e(TAG,"Not enough information provided in intent");
+        return;
+      }
+      String[] localPaths;
+      String[] remotePaths;
+      String[] mimeTypes;
+      if (uploadType == UploadSingleMulti.UPLOAD_SINGLE_FILE) {
+        localPaths=new String[]{intent.getStringExtra(KEY_LOCAL_FILE)};
+        remotePaths=new String[]{intent.getStringExtra(KEY_REMOTE_FILE)};
+        mimeTypes=new String[]{intent.getStringExtra(KEY_MIME_TYPE)};
+      }
+ else {
+        localPaths=intent.getStringArrayExtra(KEY_LOCAL_FILE);
+        remotePaths=intent.getStringArrayExtra(KEY_REMOTE_FILE);
+        mimeTypes=intent.getStringArrayExtra(KEY_MIME_TYPE);
+      }
+      if (localPaths.length != remotePaths.length) {
+        Log_OC.e(TAG,"Different number of remote paths and local paths!");
+        return;
+      }
+      files=new OCFile[localPaths.length];
+      for (int i=0; i < localPaths.length; i++) {
+        files[i]=obtainNewOCFileToUpload(remotePaths[i],localPaths[i],((mimeTypes != null) ? mimeTypes[i] : (String)null));
+        if (files[i] == null) {
+          Log_OC.e(TAG,"obtainNewOCFileToUpload() returned null for remotePaths[i]:" + remotePaths[i] + " and localPaths[i]:"+ localPaths[i]);
+          return;
+        }
+      }
+    }
+    boolean forceOverwrite=intent.getBooleanExtra(KEY_FORCE_OVERWRITE,false);
+    boolean isCreateRemoteFolder=intent.getBooleanExtra(KEY_CREATE_REMOTE_FOLDER,false);
+    boolean isUseWifiOnly=intent.getBooleanExtra(KEY_WIFI_ONLY,true);
+    LocalBehaviour localAction=(LocalBehaviour)intent.getSerializableExtra(KEY_LOCAL_BEHAVIOUR);
+    if (localAction == null)     localAction=LocalBehaviour.LOCAL_BEHAVIOUR_COPY;
+    for (int i=0; i < files.length; i++) {
+      UploadDbObject uploadObject=new UploadDbObject();
+      uploadObject.setRemotePath(files[i].getRemotePath());
+      uploadObject.setLocalPath(files[i].getStoragePath());
+      uploadObject.setMimeType(files[i].getMimetype());
+      uploadObject.setAccountName(account.name);
+      uploadObject.setForceOverwrite(forceOverwrite);
+      uploadObject.setCreateRemoteFolder(isCreateRemoteFolder);
+      uploadObject.setLocalAction(localAction);
+      uploadObject.setUseWifiOnly(isUseWifiOnly);
+      uploadObject.setUploadStatus(UploadStatus.UPLOAD_LATER);
+      String uploadKey=buildRemoteName(uploadObject.getAccount(getApplicationContext()),uploadObject.getRemotePath());
+      UploadDbObject previous=mPendingUploads.putIfAbsent(uploadKey,uploadObject);
+      if (previous == null) {
+        boolean success=mDb.storeUpload(uploadObject);
+        if (!success) {
+          Log_OC.e(TAG,"Could not add upload to database. It might be a duplicate. Ignore.");
+        }
+      }
+ else {
+      }
+    }
+  }
+  Log_OC.i(TAG,"mPendingUploads size:" + mPendingUploads.size());
+  try {
+    Iterator<String> it=mPendingUploads.keySet().iterator();
+    while (it.hasNext()) {
+      UploadDbObject uploadDbObject=mPendingUploads.get(it.next());
+      boolean uploadSuccessful=uploadFile(uploadDbObject);
+    }
+  }
+ catch (  ConcurrentModificationException e) {
+  }
+}

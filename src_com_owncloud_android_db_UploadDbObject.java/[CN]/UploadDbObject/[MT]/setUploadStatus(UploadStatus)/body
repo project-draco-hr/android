@@ -1,3 +1,4 @@
 {
   this.uploadStatus=uploadStatus;
+  setLastResult(null);
 }

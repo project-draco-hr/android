@@ -1,0 +1,9 @@
+{
+  UploadFileOperation upload=null;
+synchronized (mPendingUploads) {
+    upload=mPendingUploads.remove(buildRemoteName(account,file));
+  }
+  if (upload != null) {
+    upload.cancel();
+  }
+}
