@@ -73,10 +73,7 @@
     LocalBehaviour localAction=(LocalBehaviour)intent.getSerializableExtra(KEY_LOCAL_BEHAVIOUR);
     if (localAction == null)     localAction=LocalBehaviour.LOCAL_BEHAVIOUR_COPY;
     for (int i=0; i < files.length; i++) {
-      UploadDbObject uploadObject=new UploadDbObject();
-      uploadObject.setRemotePath(files[i].getRemotePath());
-      uploadObject.setLocalPath(files[i].getStoragePath());
-      uploadObject.setMimeType(files[i].getMimetype());
+      UploadDbObject uploadObject=new UploadDbObject(files[i]);
       uploadObject.setAccountName(account.name);
       uploadObject.setForceOverwrite(forceOverwrite);
       uploadObject.setCreateRemoteFolder(isCreateRemoteFolder);

@@ -55,7 +55,7 @@ return true;
 case R.id.action_move:
 {
 Intent action=new Intent(getActivity(),MoveActivity.class);
-action.putExtra(MoveActivity.EXTRA_TARGET_FILE,mTargetFile);
+action.putExtra(MoveActivity.EXTRA_TARGET_FILE,(Parcelable)mTargetFile);
 getActivity().startActivityForResult(action,FileDisplayActivity.ACTION_MOVE_FILES);
 return true;
 }

@@ -1,8 +1,0 @@
-{
-  OCFile file=new OCFile(o.getRemotePath());
-  File localFile=new File(o.getLocalPath());
-  file.setFileLength(localFile.length());
-  file.setMimetype(o.getMimeType());
-  file.setStoragePath(o.getLocalPath());
-  return file;
-}

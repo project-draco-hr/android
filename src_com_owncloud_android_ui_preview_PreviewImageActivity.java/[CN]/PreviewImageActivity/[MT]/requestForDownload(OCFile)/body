@@ -5,7 +5,7 @@
  else   if (!mDownloaderBinder.isDownloading(getAccount(),file)) {
     Intent i=new Intent(this,FileDownloader.class);
     i.putExtra(FileDownloader.EXTRA_ACCOUNT,getAccount());
-    i.putExtra(FileDownloader.EXTRA_FILE,file);
+    i.putExtra(FileDownloader.EXTRA_FILE,(Parcelable)file);
     startService(i);
   }
 }

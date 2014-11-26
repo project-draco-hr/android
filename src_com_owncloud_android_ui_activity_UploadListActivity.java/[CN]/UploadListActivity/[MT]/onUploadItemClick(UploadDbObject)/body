@@ -1,5 +1,5 @@
 {
-  OCFile ocFile=FileStorageUtils.fillOCFile(file);
+  OCFile ocFile=file.getOCFile();
 switch (file.getUploadStatus()) {
 case UPLOAD_IN_PROGRESS:
     if (ocFile != null) {
@@ -11,7 +11,7 @@ case UPLOAD_IN_PROGRESS:
   break;
 case UPLOAD_SUCCEEDED:
 Intent showDetailsIntent=new Intent(this,FileDisplayActivity.class);
-showDetailsIntent.putExtra(FileActivity.EXTRA_FILE,ocFile);
+showDetailsIntent.putExtra(FileActivity.EXTRA_FILE,(Parcelable)ocFile);
 showDetailsIntent.putExtra(FileActivity.EXTRA_ACCOUNT,file.getAccount(this));
 startActivity(showDetailsIntent);
 break;

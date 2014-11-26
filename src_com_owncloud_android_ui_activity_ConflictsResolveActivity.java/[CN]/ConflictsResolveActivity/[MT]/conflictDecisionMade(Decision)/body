@@ -15,7 +15,7 @@ Log_OC.wtf(TAG,"Unhandled conflict decision " + decision);
 return;
 }
 i.putExtra(FileUploadService.KEY_ACCOUNT,getAccount());
-i.putExtra(FileUploadService.KEY_FILE,getFile());
+i.putExtra(FileUploadService.KEY_FILE,(Parcelable)getFile());
 i.putExtra(FileUploadService.KEY_UPLOAD_TYPE,FileUploadService.UploadSingleMulti.UPLOAD_SINGLE_FILE);
 startService(i);
 finish();

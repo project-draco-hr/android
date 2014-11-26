@@ -23,7 +23,7 @@
   boolean chunked=FileUploadService.chunkedUploadIsSupported(ocv);
   String uploadKey=null;
   uploadKey=buildRemoteName(account,uploadDbObject.getRemotePath());
-  OCFile file=obtainNewOCFileToUpload(uploadDbObject.getRemotePath(),uploadDbObject.getLocalPath(),uploadDbObject.getMimeType());
+  OCFile file=uploadDbObject.getOCFile();
   mCurrentUpload=new UploadFileOperation(account,file,chunked,uploadDbObject.isForceOverwrite(),uploadDbObject.getLocalAction(),getApplicationContext());
   if (uploadDbObject.isCreateRemoteFolder()) {
     mCurrentUpload.setRemoteFolderToBeCreated();
