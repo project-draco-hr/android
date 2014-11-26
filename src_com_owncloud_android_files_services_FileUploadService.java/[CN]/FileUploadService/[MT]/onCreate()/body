@@ -14,6 +14,7 @@
     mDb.updateUpload(uploadDbObject);
   }
   if (InstantUploadBroadcastReceiver.isOnline(getApplicationContext())) {
+    Log_OC.d(TAG,"FileUploadService.retry() called by onCreate()");
     FileUploadService.retry(getApplicationContext());
   }
 }

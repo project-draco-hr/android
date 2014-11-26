@@ -1,5 +1,8 @@
 {
+  Log_OC.i(TAG,"onHandleIntent start");
+  Log_OC.i(TAG,"mPendingUploads size:" + mPendingUploads.size() + " - before adding new uploads.");
   if (intent == null || intent.hasExtra(KEY_RETRY)) {
+    Log_OC.d(TAG,"Receive null intent.");
     List<UploadDbObject> list=mDb.getAllPendingUploads();
     for (    UploadDbObject uploadDbObject : list) {
       String uploadKey=buildRemoteName(uploadDbObject);
@@ -13,6 +16,7 @@
     }
   }
  else {
+    Log_OC.d(TAG,"Receive upload intent.");
     UploadSingleMulti uploadType=(UploadSingleMulti)intent.getSerializableExtra(KEY_UPLOAD_TYPE);
     if (uploadType == null) {
       Log_OC.e(TAG,"Incorrect or no upload type provided");
@@ -92,14 +96,18 @@
       }
     }
   }
-  Log_OC.i(TAG,"mPendingUploads size:" + mPendingUploads.size());
+  Log_OC.i(TAG,"mPendingUploads size:" + mPendingUploads.size() + " - before uploading.");
   try {
     Iterator<String> it=mPendingUploads.keySet().iterator();
     while (it.hasNext()) {
-      UploadDbObject uploadDbObject=mPendingUploads.get(it.next());
+      String up=it.next();
+      Log_OC.d(TAG,"Calling uploadFile for " + up);
+      UploadDbObject uploadDbObject=mPendingUploads.get(up);
       boolean uploadSuccessful=uploadFile(uploadDbObject);
     }
   }
  catch (  ConcurrentModificationException e) {
   }
+  Log_OC.i(TAG,"mPendingUploads size:" + mPendingUploads.size() + " - after uploading.");
+  Log_OC.i(TAG,"onHandleIntent end");
 }

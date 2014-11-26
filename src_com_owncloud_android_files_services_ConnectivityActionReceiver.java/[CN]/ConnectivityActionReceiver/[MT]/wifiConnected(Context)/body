@@ -1,0 +1,4 @@
+{
+  Log_OC.d(TAG,"FileUploadService.retry() called by onReceive()");
+  FileUploadService.retry(context);
+}

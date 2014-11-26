@@ -22,6 +22,7 @@ file.setUploadStatus(UploadStatus.UPLOAD_LATER);
 db.updateUpload(file);
 case UPLOAD_LATER:
 case UPLOAD_FAILED_RETRY:
+Log_OC.d(TAG,"FileUploadService.retry() called by onUploadItemClick()");
 FileUploadService.retry(this);
 break;
 default :

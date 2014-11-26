@@ -3,6 +3,7 @@
 switch (item.getItemId()) {
 case R.id.action_retry_uploads:
 {
+      Log_OC.d(TAG,"FileUploadService.retry() called by onMenuItemSelected()");
       FileUploadService.retry(this);
       break;
     }
