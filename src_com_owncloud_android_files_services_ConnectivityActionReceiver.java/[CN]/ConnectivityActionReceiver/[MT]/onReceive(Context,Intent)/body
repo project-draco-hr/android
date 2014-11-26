@@ -1,18 +1,16 @@
 {
-  if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
-    Log.v(TAG,"action: " + intent.getAction());
-    Log.v(TAG,"component: " + intent.getComponent());
-    Bundle extras=intent.getExtras();
-    if (extras != null) {
-      for (      String key : extras.keySet()) {
-        Log.v(TAG,"key [" + key + "]: "+ extras.get(key));
-      }
+  Log.v(TAG,"action: " + intent.getAction());
+  Log.v(TAG,"component: " + intent.getComponent());
+  Bundle extras=intent.getExtras();
+  if (extras != null) {
+    for (    String key : extras.keySet()) {
+      Log.v(TAG,"key [" + key + "]: "+ extras.get(key));
     }
+  }
  else {
-      Log.v(TAG,"no extras");
-    }
-    if (InstantUploadBroadcastReceiver.isOnline(context)) {
-      FileUploadService.retry(context);
-    }
+    Log.v(TAG,"no extras");
+  }
+  if (InstantUploadBroadcastReceiver.isOnline(context)) {
+    FileUploadService.retry(context);
   }
 }

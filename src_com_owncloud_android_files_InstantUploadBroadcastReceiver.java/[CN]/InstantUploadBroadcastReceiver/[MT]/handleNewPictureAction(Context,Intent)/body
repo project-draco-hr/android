@@ -23,7 +23,12 @@
   file_name=c.getString(c.getColumnIndex(Images.Media.DISPLAY_NAME));
   mime_type=c.getString(c.getColumnIndex(Images.Media.MIME_TYPE));
   c.close();
-  Log_OC.d(TAG,file_path + "");
+  if (file_path.equals(lastUploadedPhotoPath)) {
+    Log_OC.d(TAG,"Duplicate detected: " + file_path + ". Ignore.");
+    return;
+  }
+  lastUploadedPhotoPath=file_path;
+  Log_OC.d(TAG,"Path: " + file_path + "");
   Intent i=new Intent(context,FileUploadService.class);
   i.putExtra(FileUploadService.KEY_ACCOUNT,account);
   i.putExtra(FileUploadService.KEY_LOCAL_FILE,file_path);
