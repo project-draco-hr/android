@@ -1,14 +1,14 @@
 {
   super.onActivityResult(requestCode,resultCode,data);
-  if (requestCode == ACTION_SELECT_UPLOAD_PATH && (resultCode == RESULT_OK || resultCode == UploadPathActivity.RESULT_OK_SET_UPLOAD_PATH)) {
-    OCFile folderToUpload=(OCFile)data.getParcelableExtra(UploadPathActivity.EXTRA_CURRENT_FOLDER);
+  if (requestCode == ACTION_SELECT_UPLOAD_PATH && resultCode == RESULT_OK) {
+    OCFile folderToUpload=(OCFile)data.getParcelableExtra(UploadPathActivity.EXTRA_FOLDER);
     mUploadPath=folderToUpload.getRemotePath();
     mUploadPath=DisplayUtils.getPathWithoutLastSlash(mUploadPath);
     mPrefInstantUploadPath.setSummary(mUploadPath);
     saveInstantUploadPathOnPreferences();
   }
- else   if (requestCode == ACTION_SELECT_UPLOAD_VIDEO_PATH && (resultCode == RESULT_OK || resultCode == UploadPathActivity.RESULT_OK_SET_UPLOAD_PATH)) {
-    OCFile folderToUploadVideo=(OCFile)data.getParcelableExtra(UploadPathActivity.EXTRA_CURRENT_FOLDER);
+ else   if (requestCode == ACTION_SELECT_UPLOAD_VIDEO_PATH && resultCode == RESULT_OK) {
+    OCFile folderToUploadVideo=(OCFile)data.getParcelableExtra(UploadPathActivity.EXTRA_FOLDER);
     mUploadVideoPath=folderToUploadVideo.getRemotePath();
     mUploadVideoPath=DisplayUtils.getPathWithoutLastSlash(mUploadVideoPath);
     mPrefInstantVideoUploadPath.setSummary(mUploadVideoPath);

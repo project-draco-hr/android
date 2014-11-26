@@ -55,7 +55,7 @@ return true;
 case R.id.action_move:
 {
 Intent action=new Intent(getActivity(),FolderPickerActivity.class);
-action.putExtra(FolderPickerActivity.EXTRA_TARGET_FILE,mTargetFile);
+action.putExtra(FolderPickerActivity.EXTRA_FILE,mTargetFile);
 getActivity().startActivityForResult(action,FileDisplayActivity.ACTION_MOVE_FILES);
 return true;
 }
