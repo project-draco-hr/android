@@ -18,6 +18,12 @@
       mNotificationBuilder.setContentIntent(PendingIntent.getActivity(this,(int)System.currentTimeMillis(),updateAccountCredentials,PendingIntent.FLAG_ONE_SHOT));
       mUploadClient=null;
     }
+    if (!uploadResult.isSuccess()) {
+      Intent showUploadListIntent=new Intent(this,UploadListActivity.class);
+      showUploadListIntent.putExtra(FileActivity.EXTRA_FILE,(Parcelable)upload.getFile());
+      showUploadListIntent.putExtra(FileActivity.EXTRA_ACCOUNT,upload.getAccount());
+      mNotificationBuilder.setContentIntent(PendingIntent.getActivity(this,(int)System.currentTimeMillis(),showUploadListIntent,0));
+    }
     mNotificationBuilder.setContentText(content);
     mNotificationManager.notify(tickerId,mNotificationBuilder.build());
     if (uploadResult.isSuccess()) {
