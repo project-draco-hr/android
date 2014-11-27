@@ -1,0 +1,11 @@
+{
+  boolean handled=false;
+  UploadDbObject uploadDbObject=(UploadDbObject)mAdapter.getChild(groupPosition,childPosition);
+  if (uploadDbObject != null) {
+    handled=mContainerActivity.onUploadItemClick(uploadDbObject);
+  }
+ else {
+    Log_OC.w(TAG,"Null object in ListAdapter!!");
+  }
+  return handled;
+}

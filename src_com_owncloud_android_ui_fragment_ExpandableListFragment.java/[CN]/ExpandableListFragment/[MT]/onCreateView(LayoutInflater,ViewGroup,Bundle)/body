@@ -3,7 +3,8 @@
   View v=inflater.inflate(R.layout.list_fragment_expandable,null);
   mEmptyListMessage=(TextView)v.findViewById(R.id.empty_list_view);
   mList=(ExpandableListView)(v.findViewById(R.id.list_root));
-  mList.setOnItemClickListener(this);
+  mList.setOnChildClickListener(this);
+  mList.setOnItemLongClickListener(this);
   mList.setDivider(getResources().getDrawable(R.drawable.uploader_list_separator));
   mList.setDividerHeight(1);
   if (savedInstanceState != null) {

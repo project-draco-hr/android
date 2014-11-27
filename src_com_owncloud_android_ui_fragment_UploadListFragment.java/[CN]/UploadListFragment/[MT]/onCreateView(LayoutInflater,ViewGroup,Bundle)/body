@@ -1,0 +1,5 @@
+{
+  View v=super.onCreateView(inflater,container,savedInstanceState);
+  getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+  return v;
+}
