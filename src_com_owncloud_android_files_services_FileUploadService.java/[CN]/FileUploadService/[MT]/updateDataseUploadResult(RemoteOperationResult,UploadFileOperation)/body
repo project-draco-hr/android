@@ -1,0 +1,18 @@
+{
+  if (uploadResult.isCancelled()) {
+    mDb.updateUpload(upload.getOriginalStoragePath(),UploadStatus.UPLOAD_CANCELLED,uploadResult);
+  }
+ else {
+    if (uploadResult.isSuccess()) {
+      mDb.updateUpload(upload.getOriginalStoragePath(),UploadStatus.UPLOAD_SUCCEEDED,uploadResult);
+    }
+ else {
+      if (shouldRetryFailedUpload(uploadResult)) {
+        mDb.updateUpload(upload.getOriginalStoragePath(),UploadStatus.UPLOAD_FAILED_RETRY,uploadResult);
+      }
+ else {
+        mDb.updateUpload(upload.getOriginalStoragePath(),UploadDbHandler.UploadStatus.UPLOAD_FAILED_GIVE_UP,uploadResult);
+      }
+    }
+  }
+}

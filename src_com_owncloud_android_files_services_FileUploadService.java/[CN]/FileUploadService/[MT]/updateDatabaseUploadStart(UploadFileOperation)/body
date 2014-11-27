@@ -1,0 +1,3 @@
+{
+  mDb.updateUpload(upload.getOriginalStoragePath(),UploadStatus.UPLOAD_IN_PROGRESS,null);
+}
