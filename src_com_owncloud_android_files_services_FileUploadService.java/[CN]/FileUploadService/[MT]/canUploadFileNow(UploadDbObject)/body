@@ -3,7 +3,7 @@
     Log_OC.w(TAG,"Already succeeded uploadObject was again scheduled for upload. Fix that!");
     return CanUploadFileNowStatus.ERROR;
   }
-  if (uploadDbObject.isUseWifiOnly() && !InstantUploadBroadcastReceiver.isConnectedViaWiFi(getApplicationContext())) {
+  if (uploadDbObject.isUseWifiOnly() && !UploadUtils.isConnectedViaWiFi(getApplicationContext())) {
     Log_OC.d(TAG,"Do not start upload because it is wifi-only.");
     return CanUploadFileNowStatus.LATER;
   }

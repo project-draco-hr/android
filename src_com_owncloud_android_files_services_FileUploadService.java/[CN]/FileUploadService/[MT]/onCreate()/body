@@ -13,7 +13,7 @@
     uploadDbObject.setUploadStatus(UploadStatus.UPLOAD_LATER);
     mDb.updateUpload(uploadDbObject);
   }
-  if (InstantUploadBroadcastReceiver.isOnline(getApplicationContext())) {
+  if (UploadUtils.isOnline(getApplicationContext())) {
     Log_OC.d(TAG,"FileUploadService.retry() called by onCreate()");
     FileUploadService.retry(getApplicationContext());
   }
