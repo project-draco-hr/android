@@ -25,6 +25,16 @@
     }
   }
 );
+  String temp;
+  try {
+    PackageInfo pkg=getPackageManager().getPackageInfo(getPackageName(),0);
+    temp=pkg.versionName;
+  }
+ catch (  NameNotFoundException e) {
+    temp="";
+    Log_OC.e(TAG,"Error while showing about dialog",e);
+  }
+  final String appVersion=temp;
   registerForContextMenu(getListView());
   pCode=(CheckBoxPreference)findPreference("set_pincode");
   if (pCode != null) {
@@ -96,7 +106,7 @@
       pFeedback.setOnPreferenceClickListener(new OnPreferenceClickListener(){
         @Override public boolean onPreferenceClick(        Preference preference){
           String feedbackMail=(String)getText(R.string.mail_feedback);
-          String feedback=(String)getText(R.string.prefs_feedback);
+          String feedback=(String)getText(R.string.prefs_feedback) + " - android v" + appVersion;
           Intent intent=new Intent(Intent.ACTION_SENDTO);
           intent.setType("text/plain");
           intent.putExtra(Intent.EXTRA_SUBJECT,feedback);
@@ -144,13 +154,6 @@
   pAboutApp=(Preference)findPreference("about_app");
   if (pAboutApp != null) {
     pAboutApp.setTitle(String.format(getString(R.string.about_android),getString(R.string.app_name)));
-    PackageInfo pkg;
-    try {
-      pkg=getPackageManager().getPackageInfo(getPackageName(),0);
-      pAboutApp.setSummary(String.format(getString(R.string.about_version),pkg.versionName));
-    }
- catch (    NameNotFoundException e) {
-      Log_OC.e(TAG,"Error while showing about dialog",e);
-    }
+    pAboutApp.setSummary(String.format(getString(R.string.about_version),appVersion));
   }
 }
