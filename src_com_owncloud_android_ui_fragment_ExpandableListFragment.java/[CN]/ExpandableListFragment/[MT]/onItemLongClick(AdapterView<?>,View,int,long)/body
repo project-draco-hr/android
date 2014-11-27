@@ -1,4 +1,0 @@
-{
-  Log_OC.e(TAG,"onItemLongClick(). This method should be overriden!");
-  return false;
-}

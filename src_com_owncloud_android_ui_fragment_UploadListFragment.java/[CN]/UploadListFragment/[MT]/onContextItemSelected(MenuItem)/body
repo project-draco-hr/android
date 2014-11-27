@@ -1,0 +1,28 @@
+{
+  ExpandableListContextMenuInfo info=(ExpandableListContextMenuInfo)item.getMenuInfo();
+  int childPosition=ExpandableListView.getPackedPositionChild(info.packedPosition);
+  int groupPosition=ExpandableListView.getPackedPositionGroup(info.packedPosition);
+  UploadDbObject uploadFile=(UploadDbObject)mAdapter.getChild(groupPosition,childPosition);
+switch (item.getItemId()) {
+case R.id.action_cancel_upload:
+{
+      ((FileActivity)getActivity()).getFileOperationsHelper().cancelTransference(uploadFile.getOCFile());
+      return true;
+    }
+case R.id.action_see_details:
+{
+    Intent showDetailsIntent=new Intent(getActivity(),FileDisplayActivity.class);
+    showDetailsIntent.putExtra(FileActivity.EXTRA_FILE,(Parcelable)uploadFile.getOCFile());
+    showDetailsIntent.putExtra(FileActivity.EXTRA_ACCOUNT,uploadFile.getAccount(getActivity()));
+    startActivity(showDetailsIntent);
+    return true;
+  }
+case R.id.action_open_file_with:
+{
+  ((FileActivity)getActivity()).getFileOperationsHelper().openFile(uploadFile.getOCFile());
+  return true;
+}
+default :
+return super.onContextItemSelected(item);
+}
+}
