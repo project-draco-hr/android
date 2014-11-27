@@ -74,6 +74,7 @@
     boolean isCreateRemoteFolder=intent.getBooleanExtra(KEY_CREATE_REMOTE_FOLDER,false);
     boolean isUseWifiOnly=intent.getBooleanExtra(KEY_WIFI_ONLY,true);
     boolean isWhileChargingOnly=intent.getBooleanExtra(KEY_WHILE_CHARGING_ONLY,true);
+    long uploadTimestamp=intent.getLongExtra(KEY_UPLOAD_TIMESTAMP,-1);
     LocalBehaviour localAction=(LocalBehaviour)intent.getSerializableExtra(KEY_LOCAL_BEHAVIOUR);
     if (localAction == null)     localAction=LocalBehaviour.LOCAL_BEHAVIOUR_COPY;
     for (int i=0; i < files.length; i++) {
@@ -84,6 +85,7 @@
       uploadObject.setLocalAction(localAction);
       uploadObject.setUseWifiOnly(isUseWifiOnly);
       uploadObject.setWhileChargingOnly(isWhileChargingOnly);
+      uploadObject.setUploadTimestamp(uploadTimestamp);
       uploadObject.setUploadStatus(UploadStatus.UPLOAD_LATER);
       String uploadKey=buildRemoteName(uploadObject);
       UploadDbObject previous=mPendingUploads.putIfAbsent(uploadKey,uploadObject);
