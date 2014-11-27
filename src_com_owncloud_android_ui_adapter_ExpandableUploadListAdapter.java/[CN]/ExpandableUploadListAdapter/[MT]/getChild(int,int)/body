@@ -1,0 +1,3 @@
+{
+  return mUploadGroups[groupPosition].items[childPosition];
+}

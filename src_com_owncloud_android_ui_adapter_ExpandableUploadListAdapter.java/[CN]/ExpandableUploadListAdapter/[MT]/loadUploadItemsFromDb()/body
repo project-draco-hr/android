@@ -1,0 +1,12 @@
+{
+  Log_OC.d(TAG,"loadUploadItemsFromDb");
+  for (  UploadGroup group : mUploadGroups) {
+    group.refresh();
+  }
+  mActivity.runOnUiThread(new Runnable(){
+    @Override public void run(){
+      notifyDataSetChanged();
+    }
+  }
+);
+}

@@ -1,4 +1,0 @@
-{
-  if (mUploads == null || mUploads.length <= position)   return null;
-  return mUploads[position];
-}

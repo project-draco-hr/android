@@ -4,7 +4,7 @@
   if (intent == null || intent.hasExtra(KEY_RETRY)) {
     Log_OC.d(TAG,"Receive null intent.");
     int countAddedEntries=0;
-    List<UploadDbObject> list=mDb.getAllPendingUploads();
+    UploadDbObject[] list=mDb.getPendingUploads();
     for (    UploadDbObject uploadDbObject : list) {
       String uploadKey=buildRemoteName(uploadDbObject);
       UploadDbObject previous=mPendingUploads.putIfAbsent(uploadKey,uploadDbObject);

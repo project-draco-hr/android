@@ -1,0 +1,3 @@
+{
+  return getUploads("uploadStatus==" + UploadStatus.UPLOAD_IN_PROGRESS.value + " OR uploadStatus=="+ UploadStatus.UPLOAD_LATER.value+ " OR uploadStatus=="+ UploadStatus.UPLOAD_FAILED_RETRY.value+ " OR uploadStatus=="+ UploadStatus.UPLOAD_PAUSED.value,null);
+}

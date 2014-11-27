@@ -1,0 +1,3 @@
+{
+  return groupPosition * 1000l + childPosition;
+}

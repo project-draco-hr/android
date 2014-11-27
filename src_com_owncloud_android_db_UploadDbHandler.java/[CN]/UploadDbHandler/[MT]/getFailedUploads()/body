@@ -1,0 +1,3 @@
+{
+  return getUploads("uploadStatus==" + UploadStatus.UPLOAD_FAILED_GIVE_UP.value + " OR uploadStatus=="+ UploadStatus.UPLOAD_CANCELLED.value,null);
+}

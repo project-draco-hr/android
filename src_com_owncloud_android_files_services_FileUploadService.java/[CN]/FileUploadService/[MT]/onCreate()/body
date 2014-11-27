@@ -8,7 +8,7 @@
   mBinder=new FileUploaderBinder();
   mDb=UploadDbHandler.getInstance(this.getBaseContext());
   mDb.recreateDb();
-  List<UploadDbObject> current=mDb.getCurrentUpload();
+  UploadDbObject[] current=mDb.getCurrentUpload();
   for (  UploadDbObject uploadDbObject : current) {
     uploadDbObject.setUploadStatus(UploadStatus.UPLOAD_LATER);
     mDb.updateUpload(uploadDbObject);

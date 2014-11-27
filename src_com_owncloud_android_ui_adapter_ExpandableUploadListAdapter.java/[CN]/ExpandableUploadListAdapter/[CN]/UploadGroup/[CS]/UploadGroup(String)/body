@@ -1,0 +1,4 @@
+{
+  this.name=groupName;
+  items=new UploadDbObject[0];
+}
