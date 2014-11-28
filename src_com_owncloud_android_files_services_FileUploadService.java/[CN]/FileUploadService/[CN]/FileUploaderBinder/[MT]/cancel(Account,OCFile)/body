@@ -1,10 +1,12 @@
 {
-  UploadDbObject upload=null;
-  upload=mPendingUploads.remove(buildRemoteName(account,file));
-  upload.setUploadStatus(UploadStatus.UPLOAD_CANCELLED);
-  mDb.updateUpload(upload);
   if (mCurrentUpload != null) {
     mCurrentUpload.cancel();
-    mCurrentUpload=null;
+  }
+ else {
+    Log_OC.e(TAG,"mCurrentUpload == null. Cannot cancel upload. Fix that!");
+    UploadDbObject upload=mPendingUploads.remove(buildRemoteName(account,file));
+    upload.setUploadStatus(UploadStatus.UPLOAD_CANCELLED);
+    upload.getOCFile().setStoragePath(file.getStoragePath());
+    mDb.updateUpload(upload);
   }
 }

@@ -1,5 +1,5 @@
 {
-  long result=getDB().delete(TABLE_UPLOAD,"path = ?",new String[]{localPath});
+  int result=getDB().delete(TABLE_UPLOAD,"path = ?",new String[]{localPath});
   Log_OC.d(TABLE_UPLOAD,"delete returns with: " + result + " for file: "+ localPath);
-  return result != 0;
+  return result;
 }

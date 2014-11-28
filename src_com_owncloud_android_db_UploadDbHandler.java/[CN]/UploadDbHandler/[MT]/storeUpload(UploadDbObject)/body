@@ -1,4 +1,5 @@
 {
+  Log_OC.e(TAG,"Inserting " + uploadObject.getLocalPath() + " with uploadStatus="+ uploadObject.getUploadStatus());
   ContentValues cv=new ContentValues();
   cv.put("path",uploadObject.getLocalPath());
   cv.put("uploadStatus",uploadObject.getUploadStatus().value);
@@ -9,7 +10,7 @@
     notifyObserversNow();
   }
  else {
-    Log_OC.e(TAG,"Failed to insert item into upload db.");
+    Log_OC.e(TAG,"Failed to insert item " + uploadObject.getLocalPath() + " into upload db.");
   }
   return result != -1;
 }

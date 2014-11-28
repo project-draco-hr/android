@@ -1,0 +1,3 @@
+{
+  return getLocalPath() + " status:" + getUploadStatus()+ " result:"+ getLastResult();
+}

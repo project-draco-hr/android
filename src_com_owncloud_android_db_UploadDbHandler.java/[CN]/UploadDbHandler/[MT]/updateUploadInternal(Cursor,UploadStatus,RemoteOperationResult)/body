@@ -1,0 +1,23 @@
+{
+  while (c.moveToNext()) {
+    String uploadObjectString=c.getString(c.getColumnIndex("uploadObject"));
+    UploadDbObject uploadObject=UploadDbObject.fromString(uploadObjectString);
+    String path=c.getString(c.getColumnIndex("path"));
+    Log_OC.e(TAG,"Updating " + path + ": "+ uploadObject.getLocalPath()+ " with uploadStatus="+ status+ "(old:"+ uploadObject.getUploadStatus()+ ") and result="+ result+ "(old:"+ uploadObject.getLastResult());
+    uploadObject.setUploadStatus(status);
+    uploadObject.setLastResult(result);
+    uploadObjectString=uploadObject.toString();
+    ContentValues cv=new ContentValues();
+    cv.put("uploadStatus",status.value);
+    cv.put("uploadObject",uploadObjectString);
+    int r=getDB().update(TABLE_UPLOAD,cv,"path=?",new String[]{path});
+    if (r == 1) {
+      notifyObserversNow();
+    }
+ else {
+      Log_OC.e(TAG,"Failed to update upload db.");
+    }
+    return r;
+  }
+  return 0;
+}

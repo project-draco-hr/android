@@ -1,0 +1,4 @@
+{
+  Cursor c=getDB().query(TABLE_UPLOAD,null,"uploadStatus==" + UploadStatus.UPLOAD_IN_PROGRESS.value,null,null,null,null);
+  updateUploadInternal(c,UploadStatus.UPLOAD_LATER,null);
+}

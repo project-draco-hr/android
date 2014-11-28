@@ -1,4 +1,5 @@
 {
+  Log_OC.d(TAG,"updateDataseUploadResult uploadResult: " + uploadResult + " upload: "+ upload);
   if (uploadResult.isCancelled()) {
     mDb.updateUpload(upload.getOriginalStoragePath(),UploadStatus.UPLOAD_CANCELLED,uploadResult);
   }

@@ -1,16 +1,16 @@
 {
-  Log_OC.i(TAG,"onHandleIntent start");
-  Log_OC.i(TAG,"mPendingUploads size:" + mPendingUploads.size() + " - before adding new uploads.");
+  Log_OC.d(TAG,"onHandleIntent start");
+  Log_OC.d(TAG,"mPendingUploads size:" + mPendingUploads.size() + " - before adding new uploads.");
   if (intent == null || intent.hasExtra(KEY_RETRY)) {
-    Log_OC.d(TAG,"Receive null intent.");
+    Log_OC.d(TAG,"Received null intent.");
     int countAddedEntries=0;
     UploadDbObject[] list=mDb.getPendingUploads();
     for (    UploadDbObject uploadDbObject : list) {
+      Log_OC.d(TAG,"Retrieved from DB: " + uploadDbObject.toFormattedString());
       String uploadKey=buildRemoteName(uploadDbObject);
       UploadDbObject previous=mPendingUploads.putIfAbsent(uploadKey,uploadDbObject);
       if (previous == null) {
-        uploadDbObject.setUploadStatus(UploadStatus.UPLOAD_LATER);
-        mDb.updateUpload(uploadDbObject);
+        Log_OC.d(TAG,"mPendingUploads added: " + uploadDbObject.toFormattedString());
         countAddedEntries++;
       }
  else {
@@ -90,9 +90,13 @@
       String uploadKey=buildRemoteName(uploadObject);
       UploadDbObject previous=mPendingUploads.putIfAbsent(uploadKey,uploadObject);
       if (previous == null) {
+        Log_OC.d(TAG,"mPendingUploads added: " + uploadObject.toFormattedString());
+        if (mDb.removeUpload(uploadObject.getLocalPath()) > 0) {
+          Log_OC.w(TAG,"There was an old DB entry " + uploadObject.getLocalPath() + " which had to be removed in order to add new one.");
+        }
         boolean success=mDb.storeUpload(uploadObject);
         if (!success) {
-          Log_OC.e(TAG,"Could not add upload to database. It might be a duplicate. Ignore.");
+          Log_OC.e(TAG,"Could not add upload " + uploadObject.getLocalPath() + " to database. This should not happen.");
         }
       }
  else {
@@ -100,7 +104,7 @@
       }
     }
   }
-  Log_OC.i(TAG,"mPendingUploads size:" + mPendingUploads.size() + " - before uploading.");
+  Log_OC.d(TAG,"mPendingUploads size:" + mPendingUploads.size() + " - before uploading.");
   Iterator<String> it=mPendingUploads.keySet().iterator();
   while (it.hasNext()) {
     String upload=it.next();
@@ -116,6 +120,7 @@ if (!shouldRetryFailedUpload(uploadResult)) {
 Log_OC.d(TAG,"Upload with result " + uploadResult.getCode() + ": "+ uploadResult.getLogMessage()+ " will be abandoned.");
 mPendingUploads.remove(buildRemoteName(uploadDbObject));
 }
+Log_OC.d(TAG,"mCurrentUpload = null");
 mCurrentUpload=null;
 break;
 case LATER:
@@ -129,6 +134,6 @@ Log_OC.e(TAG,"canUploadFileNow() returned ERROR. Fix that!");
 break;
 }
 }
-Log_OC.i(TAG,"mPendingUploads size:" + mPendingUploads.size() + " - after uploading.");
-Log_OC.i(TAG,"onHandleIntent end");
+Log_OC.d(TAG,"mPendingUploads size:" + mPendingUploads.size() + " - after uploading.");
+Log_OC.d(TAG,"onHandleIntent end");
 }

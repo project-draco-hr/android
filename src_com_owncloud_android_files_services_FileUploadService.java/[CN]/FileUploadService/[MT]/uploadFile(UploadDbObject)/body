@@ -11,11 +11,13 @@
   String uploadKey=null;
   uploadKey=buildRemoteName(account,uploadDbObject.getRemotePath());
   OCFile file=uploadDbObject.getOCFile();
+  Log_OC.d(TAG,"mCurrentUpload = new UploadFileOperation");
   mCurrentUpload=new UploadFileOperation(account,file,chunked,uploadDbObject.isForceOverwrite(),uploadDbObject.getLocalAction(),getApplicationContext());
   if (uploadDbObject.isCreateRemoteFolder()) {
     mCurrentUpload.setRemoteFolderToBeCreated();
   }
   mCurrentUpload.addDatatransferProgressListener((FileUploaderBinder)mBinder);
+  mCurrentUpload.addDatatransferProgressListener(this);
   notifyUploadStart(mCurrentUpload);
   RemoteOperationResult uploadResult=null, grantResult=null;
   try {
@@ -49,7 +51,7 @@ catch (  IOException e) {
     uploadResult=new RemoteOperationResult(e);
   }
  finally {
-    Log_OC.i(TAG,"Remove CurrentUploadItem from pending upload Item Map.");
+    Log_OC.d(TAG,"Remove CurrentUploadItem from pending upload Item Map.");
     if (uploadResult.isException()) {
       mUploadClient=null;
     }

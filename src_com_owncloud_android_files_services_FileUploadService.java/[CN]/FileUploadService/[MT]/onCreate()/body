@@ -1,6 +1,6 @@
 {
   super.onCreate();
-  Log_OC.i(TAG,"mPendingUploads size:" + mPendingUploads.size());
+  Log_OC.d(TAG,"mPendingUploads size:" + mPendingUploads.size());
   mNotificationManager=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
   HandlerThread thread=new HandlerThread("FileUploaderThread",Process.THREAD_PRIORITY_BACKGROUND);
   thread.start();
@@ -8,11 +8,7 @@
   mBinder=new FileUploaderBinder();
   mDb=UploadDbHandler.getInstance(this.getBaseContext());
   mDb.recreateDb();
-  UploadDbObject[] current=mDb.getCurrentUpload();
-  for (  UploadDbObject uploadDbObject : current) {
-    uploadDbObject.setUploadStatus(UploadStatus.UPLOAD_LATER);
-    mDb.updateUpload(uploadDbObject);
-  }
+  mDb.setAllCurrentToUploadLater();
   if (UploadUtils.isOnline(getApplicationContext())) {
     Log_OC.d(TAG,"FileUploadService.retry() called by onCreate()");
     FileUploadService.retry(getApplicationContext());
