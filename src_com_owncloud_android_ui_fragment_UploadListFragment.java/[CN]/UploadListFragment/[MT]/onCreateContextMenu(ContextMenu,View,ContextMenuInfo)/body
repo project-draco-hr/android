@@ -6,8 +6,22 @@
   int childPosition=ExpandableListView.getPackedPositionChild(info.packedPosition);
   int groupPosition=ExpandableListView.getPackedPositionGroup(info.packedPosition);
   UploadDbObject uploadFile=(UploadDbObject)mAdapter.getChild(groupPosition,childPosition);
-  if (uploadFile.getUploadStatus() == UploadStatus.UPLOAD_SUCCEEDED || uploadFile.getUploadStatus() == UploadStatus.UPLOAD_FAILED_GIVE_UP) {
+  if (uploadFile.getUploadStatus() != UploadStatus.UPLOAD_IN_PROGRESS) {
     MenuItem item=menu.findItem(R.id.action_cancel_upload);
+    if (item != null) {
+      item.setVisible(false);
+      item.setEnabled(false);
+    }
+  }
+ else {
+    MenuItem item=menu.findItem(R.id.action_remove_upload);
+    if (item != null) {
+      item.setVisible(false);
+      item.setEnabled(false);
+    }
+  }
+  if (!(uploadFile.getUploadStatus() == UploadStatus.UPLOAD_CANCELLED || uploadFile.getUploadStatus() == UploadStatus.UPLOAD_FAILED_RETRY)) {
+    MenuItem item=menu.findItem(R.id.action_retry_upload);
     if (item != null) {
       item.setVisible(false);
       item.setEnabled(false);

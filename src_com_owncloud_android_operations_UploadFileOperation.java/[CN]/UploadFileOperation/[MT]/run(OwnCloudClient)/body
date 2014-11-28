@@ -1,4 +1,6 @@
 {
+  mCancellationRequested.set(false);
+  mUploadStarted.set(true);
   RemoteOperationResult result=null;
   boolean localCopyPassed=false, nameCheckPassed=false;
   File temporalFile=null, originalFile=new File(mOriginalStoragePath), expectedFile=null;
@@ -13,6 +15,9 @@
     nameCheckPassed=true;
     String expectedPath=FileStorageUtils.getDefaultSavePathFor(mAccount.name,mFile);
     expectedFile=new File(expectedPath);
+    if (mCancellationRequested.get()) {
+      throw new OperationCancelledException();
+    }
     if (!mOriginalStoragePath.equals(expectedPath) && mLocalBehaviour == FileUploadService.LocalBehaviour.LOCAL_BEHAVIOUR_COPY) {
       if (FileStorageUtils.getUsableSpace(mAccount.name) < originalFile.length()) {
         result=new RemoteOperationResult(ResultCode.LOCAL_STORAGE_FULL);
@@ -78,6 +83,9 @@
       }
     }
     localCopyPassed=true;
+    if (mCancellationRequested.get()) {
+      throw new OperationCancelledException();
+    }
     if (mChunked && (new File(mFile.getStoragePath())).length() > ChunkedUploadRemoteFileOperation.CHUNK_SIZE) {
       mUploadOperation=new ChunkedUploadRemoteFileOperation(mFile.getStoragePath(),mFile.getRemotePath(),mFile.getMimetype());
     }
@@ -121,6 +129,7 @@
     }
   }
  finally {
+    mUploadStarted.set(false);
     if (temporalFile != null && !originalFile.equals(temporalFile)) {
       temporalFile.delete();
     }

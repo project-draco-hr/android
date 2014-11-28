@@ -1,0 +1,9 @@
+{
+  if (component.equals(new ComponentName(UploadListActivity.this,FileUploadService.class))) {
+    Log_OC.d(TAG,"UploadListActivty connected to Upload service");
+    mUploaderBinder=(FileUploaderBinder)service;
+  }
+ else {
+    return;
+  }
+}

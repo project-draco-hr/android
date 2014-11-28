@@ -1,0 +1,3 @@
+{
+  return getUploads("path = ?",new String[]{localPath});
+}

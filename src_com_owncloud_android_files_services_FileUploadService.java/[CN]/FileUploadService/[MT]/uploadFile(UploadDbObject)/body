@@ -18,6 +18,8 @@
   }
   mCurrentUpload.addDatatransferProgressListener((FileUploaderBinder)mBinder);
   mCurrentUpload.addDatatransferProgressListener(this);
+  mCancellationRequested.set(false);
+  mCancellationPossible.set(true);
   notifyUploadStart(mCurrentUpload);
   RemoteOperationResult uploadResult=null, grantResult=null;
   try {
@@ -30,6 +32,10 @@
     String remoteParentPath=new File(mCurrentUpload.getRemotePath()).getParent();
     remoteParentPath=remoteParentPath.endsWith(OCFile.PATH_SEPARATOR) ? remoteParentPath : remoteParentPath + OCFile.PATH_SEPARATOR;
     grantResult=grantFolderExistence(mCurrentUpload,remoteParentPath);
+    if (mCancellationRequested.get()) {
+      throw new OperationCancelledException();
+    }
+    mCancellationPossible.set(false);
     if (grantResult.isSuccess()) {
       OCFile parent=mStorageManager.getFileByPath(remoteParentPath);
       mCurrentUpload.getFile().setParentId(parent.getFileId());
@@ -48,6 +54,9 @@
   }
 catch (  IOException e) {
     Log_OC.e(TAG,"Error while trying to get autorization for " + mLastAccount.name,e);
+    uploadResult=new RemoteOperationResult(e);
+  }
+catch (  OperationCancelledException e) {
     uploadResult=new RemoteOperationResult(e);
   }
  finally {

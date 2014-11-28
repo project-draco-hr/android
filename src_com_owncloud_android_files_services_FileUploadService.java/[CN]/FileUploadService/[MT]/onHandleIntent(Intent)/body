@@ -105,10 +105,24 @@
     }
   }
   Log_OC.d(TAG,"mPendingUploads size:" + mPendingUploads.size() + " - before uploading.");
-  Iterator<String> it=mPendingUploads.keySet().iterator();
+  Iterator<String> it;
+  if (intent != null && intent.getStringExtra(KEY_RETRY_REMOTE_PATH) != null) {
+    ArrayList<String> list=new ArrayList<String>(1);
+    String remotePath=intent.getStringExtra(KEY_RETRY_REMOTE_PATH);
+    list.add(remotePath);
+    it=list.iterator();
+    Log_OC.d(TAG,"Start uploading " + remotePath);
+  }
+ else {
+    it=mPendingUploads.keySet().iterator();
+  }
   while (it.hasNext()) {
     String upload=it.next();
     UploadDbObject uploadDbObject=mPendingUploads.get(upload);
+    if (uploadDbObject == null) {
+      Log_OC.e(TAG,"Cannot upload null. Fix that!");
+      continue;
+    }
 switch (canUploadFileNow(uploadDbObject)) {
 case NOW:
       Log_OC.d(TAG,"Calling uploadFile for " + upload);

@@ -1,0 +1,10 @@
+{
+  UploadDbObject upload=mPendingUploads.remove(buildRemoteName(account,file));
+  if (upload == null) {
+    Log_OC.e(TAG,"Could not delete upload " + file + " from mPendingUploads.");
+  }
+  int d=mDb.removeUpload(file.getStoragePath());
+  if (d == 0) {
+    Log_OC.e(TAG,"Could not delete upload " + file.getStoragePath() + " from database.");
+  }
+}

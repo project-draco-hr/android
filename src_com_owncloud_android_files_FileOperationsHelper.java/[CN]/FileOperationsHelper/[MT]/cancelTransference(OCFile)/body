@@ -12,7 +12,7 @@
       downloaderBinder.cancel(account,file);
     }
  else {
-      Log_OC.d(TAG,"Download for " + file + " not in progress. Cannot cancel.");
+      Log_OC.d(TAG,"Download for " + file + " not in progress. Cannot cancel "+ file);
     }
   }
   if (uploaderBinder != null) {

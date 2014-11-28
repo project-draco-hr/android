@@ -1,7 +1,15 @@
 {
   if (mUploadOperation == null) {
-    Log_OC.e(TAG,"UploadFileOperation.cancel(): mUploadOperation == null for file: " + mFile + ". Fix that.");
-    return;
+    if (mUploadStarted.get()) {
+      Log_OC.d(TAG,"Cancelling upload during upload preparations.");
+      mCancellationRequested.set(true);
+    }
+ else {
+      Log_OC.e(TAG,"No upload in progress. This should not happen.");
+    }
   }
-  mUploadOperation.cancel();
+ else {
+    Log_OC.d(TAG,"Cancelling upload during actual upload operation.");
+    mUploadOperation.cancel();
+  }
 }
