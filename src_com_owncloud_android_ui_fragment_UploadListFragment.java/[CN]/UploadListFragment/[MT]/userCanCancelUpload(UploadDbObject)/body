@@ -1,0 +1,9 @@
+{
+switch (uploadFile.getUploadStatus()) {
+case UPLOAD_IN_PROGRESS:
+case UPLOAD_LATER:
+    return true;
+default :
+  return false;
+}
+}

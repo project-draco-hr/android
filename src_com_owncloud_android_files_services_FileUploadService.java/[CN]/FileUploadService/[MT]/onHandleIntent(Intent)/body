@@ -111,6 +111,10 @@
     String remotePath=intent.getStringExtra(KEY_RETRY_REMOTE_PATH);
     list.add(remotePath);
     it=list.iterator();
+    UploadDbObject uploadDbObject=mPendingUploads.get(remotePath);
+    uploadDbObject.setUploadStatus(UploadStatus.UPLOAD_LATER);
+    uploadDbObject.setLastResult(null);
+    mDb.updateUpload(uploadDbObject);
     Log_OC.d(TAG,"Start uploading " + remotePath);
   }
  else {
