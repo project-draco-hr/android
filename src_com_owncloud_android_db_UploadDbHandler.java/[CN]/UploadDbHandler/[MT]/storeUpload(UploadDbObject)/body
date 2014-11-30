@@ -6,11 +6,12 @@
   cv.put("uploadObject",uploadObject.toString());
   long result=getDB().insert(TABLE_UPLOAD,null,cv);
   Log_OC.d(TAG,"putFileForLater returns with: " + result + " for file: "+ uploadObject.getLocalPath());
-  if (result == 1) {
-    notifyObserversNow();
+  if (result == -1) {
+    Log_OC.e(TAG,"Failed to insert item " + uploadObject.getLocalPath() + " into upload db.");
+    return false;
   }
  else {
-    Log_OC.e(TAG,"Failed to insert item " + uploadObject.getLocalPath() + " into upload db.");
+    notifyObserversNow();
+    return true;
   }
-  return result != -1;
 }
