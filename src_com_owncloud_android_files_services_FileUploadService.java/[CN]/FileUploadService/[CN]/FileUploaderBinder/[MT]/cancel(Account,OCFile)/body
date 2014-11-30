@@ -6,7 +6,6 @@
     mCancellationRequested.set(true);
   }
  else {
-    Log_OC.e(TAG,"Cannot cancel upload because not in progress. Instead remove from pending upload list. This should not happen.");
     UploadDbObject upload=mPendingUploads.remove(buildRemoteName(account,file));
     upload.setUploadStatus(UploadStatus.UPLOAD_CANCELLED);
     upload.setLastResult(new RemoteOperationResult(ResultCode.CANCELLED));

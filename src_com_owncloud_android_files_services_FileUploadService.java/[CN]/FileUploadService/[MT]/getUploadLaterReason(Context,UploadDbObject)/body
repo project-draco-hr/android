@@ -21,7 +21,7 @@
     }
   }
   reason.append(".");
-  if (reason.length() > 0) {
+  if (reason.length() > 1) {
     return reason.toString();
   }
   if (uploadDbObject.getUploadStatus() == UploadStatus.UPLOAD_LATER) {

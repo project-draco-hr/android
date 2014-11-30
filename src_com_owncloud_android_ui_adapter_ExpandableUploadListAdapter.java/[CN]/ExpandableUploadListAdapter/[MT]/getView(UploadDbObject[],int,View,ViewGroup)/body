@@ -12,7 +12,7 @@
     TextView localPath=(TextView)view.findViewById(R.id.upload_local_path);
     String path=uploadObject.getOCFile().getStoragePath();
     path=path.substring(0,path.length() - file.length() - 1);
-    localPath.setText(path);
+    localPath.setText("Path: " + path);
     TextView fileSize=(TextView)view.findViewById(R.id.upload_file_size);
     fileSize.setText(DisplayUtils.bytesToHumanReadable(uploadObject.getOCFile().getFileLength()));
     TextView statusView=(TextView)view.findViewById(R.id.upload_status);
@@ -41,15 +41,10 @@ case UPLOAD_LATER:
 status=FileUploadService.getUploadLaterReason(mActivity,uploadObject);
 break;
 case UPLOAD_SUCCEEDED:
-status="";
+status="Completed.";
 break;
 case UPLOAD_CANCELLED:
-if (uploadObject.getLastResult() == null) {
 status="Upload cancelled.";
-}
- else {
-status=uploadObject.getLastResult().getLogMessage();
-}
 break;
 case UPLOAD_PAUSED:
 status="Upload paused.";
