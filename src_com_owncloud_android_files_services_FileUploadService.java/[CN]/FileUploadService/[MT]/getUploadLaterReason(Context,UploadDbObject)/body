@@ -1,16 +1,31 @@
 {
-  if (uploadDbObject.isUseWifiOnly() && !UploadUtils.isConnectedViaWiFi(context)) {
-    return "Upload is wifi-only.";
-  }
-  if (uploadDbObject.isWhileChargingOnly() && !UploadUtils.isCharging(context)) {
-    return "Upload is charging-only.";
-  }
+  StringBuilder reason=new StringBuilder();
   Date now=new Date();
   if (now.getTime() < uploadDbObject.getUploadTimestamp()) {
-    return "Upload scheduled for " + DisplayUtils.unixTimeToHumanReadable(uploadDbObject.getUploadTimestamp());
+    reason.append("Waiting for " + DisplayUtils.unixTimeToHumanReadable(uploadDbObject.getUploadTimestamp()));
+  }
+  if (uploadDbObject.isUseWifiOnly() && !UploadUtils.isConnectedViaWiFi(context)) {
+    if (reason.length() > 0) {
+      reason.append(" and wifi connectivity");
+    }
+ else {
+      reason.append("Waiting for wifi connectivity");
+    }
+  }
+  if (uploadDbObject.isWhileChargingOnly() && !UploadUtils.isCharging(context)) {
+    if (reason.length() > 0) {
+      reason.append(" and charging");
+    }
+ else {
+      reason.append("Waiting for charging");
+    }
+  }
+  reason.append(".");
+  if (reason.length() > 0) {
+    return reason.toString();
   }
   if (uploadDbObject.getUploadStatus() == UploadStatus.UPLOAD_LATER) {
-    return "Upload delayed for unknown reason.";
+    return "Upload delayed for unknown reason. Fix that!";
   }
   return null;
 }

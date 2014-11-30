@@ -17,6 +17,7 @@
       }
     }
     Log_OC.d(TAG,"added " + countAddedEntries + " entrie(s) to mPendingUploads (this should be 0 except for the first time).");
+    mDb.notifyObserversNow();
   }
  else {
     Log_OC.d(TAG,"Receive upload intent.");
