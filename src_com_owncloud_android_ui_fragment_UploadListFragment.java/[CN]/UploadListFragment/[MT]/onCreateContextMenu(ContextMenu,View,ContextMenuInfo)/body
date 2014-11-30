@@ -20,7 +20,7 @@
       item.setEnabled(false);
     }
   }
-  if (!(uploadFile.getUploadStatus() == UploadStatus.UPLOAD_CANCELLED || uploadFile.getUploadStatus() == UploadStatus.UPLOAD_FAILED_RETRY)) {
+  if (!userCanRetryUpload(uploadFile)) {
     MenuItem item=menu.findItem(R.id.action_retry_upload);
     if (item != null) {
       item.setVisible(false);

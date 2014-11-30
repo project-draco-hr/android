@@ -6,6 +6,7 @@ switch (uploadResult.getCode()) {
 case HOST_NOT_AVAILABLE:
 case NO_NETWORK_CONNECTION:
 case TIMEOUT:
+case WRONG_CONNECTION:
     return true;
 default :
   return false;

@@ -13,6 +13,9 @@
     if (uploadObject.getLastResult() != null && !uploadObject.getLastResult().isSuccess()) {
       status+=": " + uploadObject.getLastResult().getLogMessage();
     }
+    if (uploadObject.getUploadStatus() == UploadStatus.UPLOAD_LATER) {
+      status+=": " + FileUploadService.getUploadLaterReason(mActivity,uploadObject);
+    }
     statusView.setText(status);
     ImageView fileIcon=(ImageView)view.findViewById(R.id.imageView1);
     fileIcon.setImageResource(R.drawable.file);
