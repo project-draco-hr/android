@@ -1,16 +1,11 @@
 {
   super.onCreate();
-  Log_OC.d(TAG,"mPendingUploads size:" + mPendingUploads.size());
+  Log_OC.d(TAG,"mPendingUploads size:" + mPendingUploads.size() + " - onCreate");
   mNotificationManager=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-  HandlerThread thread=new HandlerThread("FileUploaderThread",Process.THREAD_PRIORITY_BACKGROUND);
-  thread.start();
-  mServiceLooper=thread.getLooper();
   mBinder=new FileUploaderBinder();
   mDb=UploadDbHandler.getInstance(this.getBaseContext());
   mDb.recreateDb();
   mDb.setAllCurrentToUploadLater();
-  if (UploadUtils.isOnline(getApplicationContext())) {
-    Log_OC.d(TAG,"FileUploadService.retry() called by onCreate()");
-    FileUploadService.retry(getApplicationContext());
-  }
+  Log_OC.d(TAG,"FileUploadService.retry() called by onCreate()");
+  FileUploadService.retry(getApplicationContext());
 }
