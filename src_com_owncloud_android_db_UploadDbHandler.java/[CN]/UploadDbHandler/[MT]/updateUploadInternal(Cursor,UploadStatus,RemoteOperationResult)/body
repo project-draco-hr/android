@@ -3,7 +3,7 @@
     String uploadObjectString=c.getString(c.getColumnIndex("uploadObject"));
     UploadDbObject uploadObject=UploadDbObject.fromString(uploadObjectString);
     String path=c.getString(c.getColumnIndex("path"));
-    Log_OC.e(TAG,"Updating " + path + ": "+ uploadObject.getLocalPath()+ " with uploadStatus="+ status+ "(old:"+ uploadObject.getUploadStatus()+ ") and result="+ result+ "(old:"+ uploadObject.getLastResult());
+    Log_OC.d(TAG,"Updating " + path + ": "+ uploadObject.getLocalPath()+ " with uploadStatus="+ status+ "(old:"+ uploadObject.getUploadStatus()+ ") and result="+ result+ "(old:"+ uploadObject.getLastResult());
     uploadObject.setUploadStatus(status);
     uploadObject.setLastResult(result);
     uploadObjectString=uploadObject.toString();

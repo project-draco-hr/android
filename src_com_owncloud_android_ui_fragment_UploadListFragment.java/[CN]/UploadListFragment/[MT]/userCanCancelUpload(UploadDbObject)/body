@@ -2,6 +2,7 @@
 switch (uploadFile.getUploadStatus()) {
 case UPLOAD_IN_PROGRESS:
 case UPLOAD_LATER:
+case UPLOAD_FAILED_RETRY:
     return true;
 default :
   return false;

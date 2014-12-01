@@ -1,7 +1,6 @@
 {
 switch (uploadFile.getUploadStatus()) {
 case UPLOAD_CANCELLED:
-case UPLOAD_FAILED_RETRY:
 case UPLOAD_FAILED_GIVE_UP:
     return true;
 default :
