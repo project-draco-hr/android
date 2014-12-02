@@ -1,5 +1,4 @@
 {
-  String path=mTargetFile.getStoragePath();
   ComponentsGetter cg=(ComponentsGetter)getSherlockActivity();
   cg.getFileOperationsHelper().removeFile(mTargetFile,true);
   FileDataStorageManager storageManager=cg.getStorageManager();
@@ -22,5 +21,4 @@
     folder.setEtag("");
     storageManager.saveFile(folder);
   }
-  storageManager.triggerMediaScan(path);
 }

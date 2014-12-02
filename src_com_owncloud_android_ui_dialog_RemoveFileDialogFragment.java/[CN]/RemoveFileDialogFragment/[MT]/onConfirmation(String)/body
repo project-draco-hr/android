@@ -3,6 +3,5 @@
   FileDataStorageManager storageManager=cg.getStorageManager();
   if (storageManager.getFileById(mTargetFile.getFileId()) != null) {
     cg.getFileOperationsHelper().removeFile(mTargetFile,false);
-    storageManager.triggerMediaScan(mTargetFile.getStoragePath());
   }
 }
