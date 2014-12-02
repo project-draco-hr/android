@@ -2,6 +2,7 @@
   if (file != null && file.fileExists() && !OCFile.ROOT_PATH.equals(file.getFileName())) {
     OCFile targetParent=getFileByPath(targetParentPath);
     if (targetParent == null) {
+      throw new IllegalStateException("Parent folder of the target path does not exist!!");
     }
     Cursor c=null;
     if (getContentProviderClient() != null) {
@@ -57,9 +58,14 @@
       }
       renamed=localFile.renameTo(targetFile);
     }
-    Log_OC.d(TAG,"Local file RENAMED : " + renamed);
-    triggerMediaScan(file.getStoragePath());
-    triggerMediaScan(defaultSavePath + targetPath);
+    if (renamed) {
+      if (file.isFolder()) {
+      }
+ else {
+        triggerMediaScan(file.getStoragePath());
+        triggerMediaScan(defaultSavePath + targetPath);
+      }
+    }
     Log_OC.d(TAG,"uri old: " + file.getStoragePath());
     Log_OC.d(TAG,"uri new: " + defaultSavePath + targetPath);
   }
