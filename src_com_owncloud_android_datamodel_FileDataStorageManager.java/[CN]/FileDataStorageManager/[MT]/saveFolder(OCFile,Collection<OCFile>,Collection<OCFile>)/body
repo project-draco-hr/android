@@ -48,10 +48,8 @@
         operations.add(ContentProviderOperation.newDelete(ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_FILE,file.getFileId())).withSelection(where,whereArgs).build());
         if (file.isDown()) {
           String path=file.getStoragePath();
-          new File(file.getStoragePath()).delete();
-          Intent intent=new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-          intent.setData(Uri.fromFile(new File(path)));
-          MainApp.getAppContext().sendBroadcast(intent);
+          new File(path).delete();
+          triggerMediaScan(path);
         }
       }
     }

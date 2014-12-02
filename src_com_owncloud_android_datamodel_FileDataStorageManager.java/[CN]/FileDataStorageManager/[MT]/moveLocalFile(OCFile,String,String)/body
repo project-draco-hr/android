@@ -58,12 +58,8 @@
       renamed=localFile.renameTo(targetFile);
     }
     Log_OC.d(TAG,"Local file RENAMED : " + renamed);
-    Intent intent1=new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-    intent1.setData(Uri.fromFile(new File(file.getStoragePath())));
-    MainApp.getAppContext().sendBroadcast(intent1);
-    Intent intent2=new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-    intent2.setData(Uri.fromFile(new File(defaultSavePath + targetPath)));
-    MainApp.getAppContext().sendBroadcast(intent2);
+    triggerMediaScan(file.getStoragePath());
+    triggerMediaScan(defaultSavePath + targetPath);
     Log_OC.d(TAG,"uri old: " + file.getStoragePath());
     Log_OC.d(TAG,"uri new: " + defaultSavePath + targetPath);
   }
