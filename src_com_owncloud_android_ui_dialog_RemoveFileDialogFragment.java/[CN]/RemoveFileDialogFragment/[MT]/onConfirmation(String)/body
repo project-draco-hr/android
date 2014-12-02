@@ -2,8 +2,7 @@
   ComponentsGetter cg=(ComponentsGetter)getSherlockActivity();
   FileDataStorageManager storageManager=cg.getStorageManager();
   if (storageManager.getFileById(mTargetFile.getFileId()) != null) {
-    String path=mTargetFile.getStoragePath();
     cg.getFileOperationsHelper().removeFile(mTargetFile,false);
-    triggerMediaScan(path);
+    storageManager.triggerMediaScan(mTargetFile.getStoragePath());
   }
 }

@@ -22,5 +22,5 @@
     folder.setEtag("");
     storageManager.saveFile(folder);
   }
-  triggerMediaScan(path);
+  storageManager.triggerMediaScan(path);
 }
