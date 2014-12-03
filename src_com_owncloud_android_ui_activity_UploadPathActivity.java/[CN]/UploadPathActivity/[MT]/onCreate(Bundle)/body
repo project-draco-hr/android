@@ -1,0 +1,6 @@
+{
+  super.onCreate(savedInstanceState);
+  String instantUploadPath=getIntent().getStringExtra(KEY_INSTANT_UPLOAD_PATH);
+  OCFile folder=new OCFile(instantUploadPath);
+  setFile(folder);
+}
