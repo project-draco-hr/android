@@ -1,0 +1,5 @@
+{
+  mRemotePath=remotePath;
+  mNewName=newName;
+  mNewRemotePath=null;
+}
