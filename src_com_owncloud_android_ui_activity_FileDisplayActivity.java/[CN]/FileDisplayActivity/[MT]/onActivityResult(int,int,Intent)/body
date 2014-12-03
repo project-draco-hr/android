@@ -24,7 +24,7 @@
     }
 ,DELAY_TO_REQUEST_OPERATION_ON_ACTIVITY_RESULTS);
   }
- else   if (requestCode == ACTION_COPY_FILES && (resultCode == RESULT_OK || resultCode == CopyActivity.RESULT_OK_AND_COPY)) {
+ else   if (requestCode == ACTION_COPY_FILES && resultCode == RESULT_OK) {
     final Intent fData=data;
     final int fResultCode=resultCode;
     getHandler().postDelayed(new Runnable(){

@@ -75,8 +75,8 @@ mContainerActivity.getFileOperationsHelper().toggleFavorite(mTargetFile,false);
 return true;
 }
 case R.id.action_copy:
-Intent action=new Intent(getActivity(),CopyActivity.class);
-action.putExtra(CopyActivity.EXTRA_TARGET_FILE,mTargetFile);
+Intent action=new Intent(getActivity(),FolderPickerActivity.class);
+action.putExtra(FolderPickerActivity.EXTRA_FILE,mTargetFile);
 getActivity().startActivityForResult(action,FileDisplayActivity.ACTION_COPY_FILES);
 return true;
 default :

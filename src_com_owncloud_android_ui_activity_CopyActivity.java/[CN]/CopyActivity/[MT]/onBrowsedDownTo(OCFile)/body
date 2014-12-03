@@ -1,5 +1,0 @@
-{
-  setFile(directory);
-  updateNavigationElementsInActionBar();
-  startSyncFolderOperation(directory,false);
-}

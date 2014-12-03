@@ -1,6 +1,0 @@
-{
-  OCFileListFragment fileListFragment=getListOfFilesFragment();
-  if (fileListFragment != null) {
-    fileListFragment.listDirectory();
-  }
-}

@@ -1,9 +1,0 @@
-{
-  Log_OC.e(TAG,"onPause() start");
-  if (mSyncBroadcastReceiver != null) {
-    unregisterReceiver(mSyncBroadcastReceiver);
-    mSyncBroadcastReceiver=null;
-  }
-  Log_OC.d(TAG,"onPause() end");
-  super.onPause();
-}
