@@ -1,4 +1,0 @@
-{
-  MenuItem item=menu.findItem(R.id.actionbar_select_all);
-  toggleOffSelectAll(item);
-}
