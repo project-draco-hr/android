@@ -16,6 +16,8 @@
     builder.setExpedited(true);
     builder.setManual(true);
     builder.syncOnce();
+    Bundle extras=new Bundle();
+    builder.setExtras(extras);
     SyncRequest request=builder.build();
     ContentResolver.requestSync(request);
   }

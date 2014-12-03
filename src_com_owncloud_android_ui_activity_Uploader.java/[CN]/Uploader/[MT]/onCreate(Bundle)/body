@@ -1,8 +1,8 @@
 {
   super.onCreate(savedInstanceState);
-  getWindow().requestFeature(Window.FEATURE_NO_TITLE);
   mParents=new Stack<String>();
-  mParents.add("");
+  ActionBar actionBar=getSupportActionBar();
+  actionBar.setIcon(DisplayUtils.getSeasonalIconId());
   if (prepareStreamsToUpload()) {
     mAccountManager=(AccountManager)getSystemService(Context.ACCOUNT_SERVICE);
     Account[] accounts=mAccountManager.getAccountsByType(MainApp.getAccountType());
@@ -17,6 +17,7 @@
  else {
       mAccount=accounts[0];
       mStorageManager=new FileDataStorageManager(mAccount,getContentResolver());
+      initTargetFolder();
       populateDirectoryList();
     }
   }

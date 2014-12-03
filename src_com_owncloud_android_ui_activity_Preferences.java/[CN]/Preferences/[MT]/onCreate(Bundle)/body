@@ -15,7 +15,7 @@
       Object obj=listAdapter.getItem(position);
       if (obj != null && obj instanceof LongClickableCheckBoxPreference) {
         mShowContextMenu=true;
-        mAccountName=obj.toString();
+        mAccountName=((LongClickableCheckBoxPreference)obj).getKey();
         Preferences.this.openContextMenu(listView);
         View.OnLongClickListener longListener=(View.OnLongClickListener)obj;
         return longListener.onLongClick(view);
@@ -132,6 +132,36 @@
       preferenceCategory.removePreference(pImprint);
     }
   }
+  mPrefInstantUploadPath=findPreference("instant_upload_path");
+  if (mPrefInstantUploadPath != null) {
+    mPrefInstantUploadPath.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+      @Override public boolean onPreferenceClick(      Preference preference){
+        if (!mUploadPath.endsWith(OCFile.PATH_SEPARATOR)) {
+          mUploadPath+=OCFile.PATH_SEPARATOR;
+        }
+        Intent intent=new Intent(Preferences.this,UploadPathActivity.class);
+        intent.putExtra(UploadPathActivity.KEY_INSTANT_UPLOAD_PATH,mUploadPath);
+        startActivityForResult(intent,ACTION_SELECT_UPLOAD_PATH);
+        return true;
+      }
+    }
+);
+  }
+  mPrefInstantVideoUploadPath=findPreference("instant_video_upload_path");
+  if (mPrefInstantVideoUploadPath != null) {
+    mPrefInstantVideoUploadPath.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+      @Override public boolean onPreferenceClick(      Preference preference){
+        if (!mUploadVideoPath.endsWith(OCFile.PATH_SEPARATOR)) {
+          mUploadVideoPath+=OCFile.PATH_SEPARATOR;
+        }
+        Intent intent=new Intent(Preferences.this,UploadPathActivity.class);
+        intent.putExtra(UploadPathActivity.KEY_INSTANT_UPLOAD_PATH,mUploadVideoPath);
+        startActivityForResult(intent,ACTION_SELECT_UPLOAD_VIDEO_PATH);
+        return true;
+      }
+    }
+);
+  }
   pAboutApp=(Preference)findPreference("about_app");
   if (pAboutApp != null) {
     pAboutApp.setTitle(String.format(getString(R.string.about_android),getString(R.string.app_name)));
@@ -144,4 +174,6 @@
       Log_OC.e(TAG,"Error while showing about dialog",e);
     }
   }
+  loadInstantUploadPath();
+  loadInstantUploadVideoPath();
 }

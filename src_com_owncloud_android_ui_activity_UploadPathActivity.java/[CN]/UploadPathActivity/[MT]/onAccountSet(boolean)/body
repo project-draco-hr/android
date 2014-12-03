@@ -1,0 +1,18 @@
+{
+  super.onAccountSet(stateWasRecovered);
+  if (getAccount() != null) {
+    updateFileFromDB();
+    OCFile folder=getFile();
+    if (folder == null || !folder.isFolder()) {
+      setFile(getStorageManager().getFileByPath(OCFile.ROOT_PATH));
+      folder=getFile();
+    }
+    onBrowsedDownTo(folder);
+    if (!stateWasRecovered) {
+      OCFileListFragment listOfFolders=getListOfFilesFragment();
+      listOfFolders.listDirectory(folder);
+      startSyncFolderOperation(folder,false);
+    }
+    updateNavigationElementsInActionBar();
+  }
+}

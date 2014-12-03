@@ -27,6 +27,10 @@
       if (remoteFile.isFolder()) {
         remoteFile.setFileLength(localFile.getFileLength());
       }
+ else       if (mRemoteFolderChanged && remoteFile.isImage() && remoteFile.getModificationTimestamp() != localFile.getModificationTimestamp()) {
+        remoteFile.setNeedsUpdateThumbnail(true);
+        Log.d(TAG,"Image " + remoteFile.getFileName() + " updated on the server");
+      }
       remoteFile.setPublicLink(localFile.getPublicLink());
       remoteFile.setShareByLink(localFile.isShareByLink());
     }

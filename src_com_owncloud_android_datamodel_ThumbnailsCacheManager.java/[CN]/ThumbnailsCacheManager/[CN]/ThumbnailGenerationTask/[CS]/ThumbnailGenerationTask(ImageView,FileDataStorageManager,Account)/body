@@ -1,0 +1,6 @@
+{
+  mImageViewReference=new WeakReference<ImageView>(imageView);
+  if (storageManager == null)   throw new IllegalArgumentException("storageManager must not be NULL");
+  mStorageManager=storageManager;
+  mAccount=account;
+}

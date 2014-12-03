@@ -13,5 +13,5 @@
  else {
     mFiles=null;
   }
-  notifyDataSetChanged();
+  sortDirectory();
 }
