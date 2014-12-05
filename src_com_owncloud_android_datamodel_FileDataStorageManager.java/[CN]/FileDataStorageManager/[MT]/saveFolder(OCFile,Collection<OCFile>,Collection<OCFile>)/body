@@ -47,7 +47,9 @@
  else {
         operations.add(ContentProviderOperation.newDelete(ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_FILE,file.getFileId())).withSelection(where,whereArgs).build());
         if (file.isDown()) {
-          new File(file.getStoragePath()).delete();
+          String path=file.getStoragePath();
+          new File(path).delete();
+          triggerMediaScan(path);
         }
       }
     }
