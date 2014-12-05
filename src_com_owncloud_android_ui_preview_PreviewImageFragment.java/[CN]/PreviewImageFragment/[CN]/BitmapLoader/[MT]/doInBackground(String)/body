@@ -11,6 +11,9 @@
       mErrorMessageId=R.string.preview_image_error_unknown_format;
       Log_OC.e(TAG,"File could not be loaded as a bitmap: " + storagePath);
     }
+ else {
+      result=BitmapUtils.rotateImage(result,storagePath);
+    }
   }
  catch (  OutOfMemoryError e) {
     Log_OC.e(TAG,"Out of memory occured for file " + storagePath,e);
@@ -18,6 +21,9 @@
     if (result == null) {
       mErrorMessageId=R.string.preview_image_error_unknown_format;
       Log_OC.e(TAG,"File could not be loaded as a bitmap: " + storagePath);
+    }
+ else {
+      result=BitmapUtils.rotateImage(result,storagePath);
     }
   }
 catch (  NoSuchFieldError e) {
@@ -28,6 +34,5 @@ catch (  Throwable t) {
     mErrorMessageId=R.string.common_error_unknown;
     Log_OC.e(TAG,"Unexpected error loading " + getFile().getStoragePath(),t);
   }
-  result=BitmapUtils.rotateImage(result,storagePath);
   return result;
 }
