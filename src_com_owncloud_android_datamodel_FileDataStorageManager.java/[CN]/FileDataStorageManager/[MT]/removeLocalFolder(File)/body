@@ -7,7 +7,9 @@
         success&=removeLocalFolder(localFile);
       }
  else {
+        String path=localFile.getAbsolutePath();
         success&=localFile.delete();
+        triggerMediaScan(path);
       }
     }
   }
