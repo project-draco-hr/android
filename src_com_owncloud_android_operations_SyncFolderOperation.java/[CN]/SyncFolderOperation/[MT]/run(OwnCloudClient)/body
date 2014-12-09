@@ -1,0 +1,28 @@
+{
+  RemoteOperationResult result=null;
+  mFailsInFavouritesFound=0;
+  mConflictsFound=0;
+  mForgottenLocalFiles.clear();
+  if (FileUtils.PATH_SEPARATOR.equals(mLocalFolder.getRemotePath()) && !mSyncFullAccount) {
+    updateOCVersion(client);
+  }
+  result=checkForChanges(client);
+  if (result.isSuccess()) {
+    if (mRemoteFolderChanged) {
+      result=fetchAndSyncRemoteFolder(client);
+    }
+ else {
+      mChildren=mStorageManager.getFolderContent(mLocalFolder);
+    }
+  }
+  if (!mSyncFullAccount) {
+    sendLocalBroadcast(EVENT_SINGLE_FOLDER_CONTENTS_SYNCED,mLocalFolder.getRemotePath(),result);
+  }
+  if (result.isSuccess() && mIsShareSupported && !mSyncFullAccount) {
+    refreshSharesForFolder(client);
+  }
+  if (!mSyncFullAccount) {
+    sendLocalBroadcast(EVENT_SINGLE_FOLDER_SHARES_SYNCED,mLocalFolder.getRemotePath(),result);
+  }
+  return result;
+}
