@@ -43,6 +43,9 @@
       SynchronizeFileOperation operation=new SynchronizeFileOperation(localFile,remoteFile,mAccount,true,mContext);
       filesToSyncContents.add(operation);
     }
+    if (!remoteFile.isFolder()) {
+      requestForDownloadFile(remoteFile);
+    }
     updatedFiles.add(remoteFile);
   }
   mStorageManager.saveFolder(remoteFolder,updatedFiles,localFilesMap.values());
