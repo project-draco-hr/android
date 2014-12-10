@@ -1,41 +1,19 @@
 {
-  Vector<OCFile> filesList=new Vector<OCFile>();
   if (!file.isFolder()) {
-    filesList.add(file);
-  }
- else {
-    FileDataStorageManager storageManager=mFileActivity.getStorageManager();
-    filesList.addAll(storageManager.getFolderContent(file));
-    boolean newfiles;
-    do {
-      Vector<OCFile> tmpFolders=new Vector<OCFile>();
-      for (      OCFile tmpfile : filesList) {
-        if (tmpfile.isFolder()) {
-          tmpFolders.add(tmpfile);
-        }
-      }
-      if (tmpFolders.isEmpty()) {
-        newfiles=false;
-      }
- else {
-        for (        OCFile tmpFolder : tmpFolders) {
-          filesList.remove(tmpFolder);
-          filesList.addAll(storageManager.getFolderContent(tmpFolder));
-        }
-        newfiles=true;
-      }
-    }
- while (newfiles);
-  }
-  for (  OCFile childFile : filesList) {
-    Intent service=new Intent(mFileActivity,OperationsService.class);
-    service.setAction(OperationsService.ACTION_SYNC_FILE);
-    service.putExtra(OperationsService.EXTRA_ACCOUNT,mFileActivity.getAccount());
-    service.putExtra(OperationsService.EXTRA_REMOTE_PATH,childFile.getRemotePath());
-    service.putExtra(OperationsService.EXTRA_SYNC_FILE_CONTENTS,true);
-    mWaitingForOpId=mFileActivity.getOperationsServiceBinder().newOperation(service);
-  }
-  if (!file.isFolder()) {
+    Intent intent=new Intent(mFileActivity,OperationsService.class);
+    intent.setAction(OperationsService.ACTION_SYNC_FILE);
+    intent.putExtra(OperationsService.EXTRA_ACCOUNT,mFileActivity.getAccount());
+    intent.putExtra(OperationsService.EXTRA_REMOTE_PATH,file.getRemotePath());
+    intent.putExtra(OperationsService.EXTRA_SYNC_FILE_CONTENTS,true);
+    mWaitingForOpId=mFileActivity.getOperationsServiceBinder().queueNewOperation(intent);
     mFileActivity.showLoadingDialog();
+  }
+ else {
+    Intent intent=new Intent(mFileActivity,OperationsService.class);
+    intent.setAction(OperationsService.ACTION_SYNC_FOLDER);
+    intent.putExtra(OperationsService.EXTRA_ACCOUNT,mFileActivity.getAccount());
+    intent.putExtra(OperationsService.EXTRA_REMOTE_PATH,file.getRemotePath());
+    intent.putExtra(OperationsService.EXTRA_SYNC_FILE_CONTENTS,true);
+    mFileActivity.startService(intent);
   }
 }
