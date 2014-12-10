@@ -28,6 +28,9 @@
       matrix.postRotate(270);
     }
     resultBitmap=Bitmap.createBitmap(bitmap,0,0,bitmap.getWidth(),bitmap.getHeight(),matrix,true);
+    if (resultBitmap != bitmap) {
+      bitmap.recycle();
+    }
   }
  catch (  Exception exception) {
     Log_OC.e("BitmapUtil","Could not rotate the image: " + storagePath);
