@@ -1,3 +1,9 @@
 {
-  return mUploadGroups.length;
+  int size=0;
+  for (  UploadGroup uploadGroup : mUploadGroups) {
+    if (uploadGroup.items.length > 0) {
+      size++;
+    }
+  }
+  return size;
 }
