@@ -3,10 +3,12 @@
   if (params.length != 1)   return result;
   String storagePath=params[0];
   try {
+    if (isCancelled())     return result;
     File picture=new File(storagePath);
     if (picture != null) {
       result=BitmapFactory.decodeStream(new FlushedInputStream(new BufferedInputStream(new FileInputStream(picture))));
     }
+    if (isCancelled())     return result;
     if (result == null) {
       mErrorMessageId=R.string.preview_image_error_unknown_format;
       Log_OC.e(TAG,"File could not be loaded as a bitmap: " + storagePath);
@@ -17,6 +19,7 @@
   }
  catch (  OutOfMemoryError e) {
     Log_OC.e(TAG,"Out of memory occured for file " + storagePath,e);
+    if (isCancelled())     return result;
     result=loadScaledImage(storagePath);
     if (result == null) {
       mErrorMessageId=R.string.preview_image_error_unknown_format;

@@ -1,7 +1,7 @@
 {
   super.onStart();
   if (getFile() != null) {
-    BitmapLoader bl=new BitmapLoader(mImageView,mMessageView,mProgressWheel);
-    bl.execute(new String[]{getFile().getStoragePath()});
+    mLoadBitmapTask=new LoadBitmapTask(mImageView,mMessageView,mProgressWheel);
+    mLoadBitmapTask.execute(new String[]{getFile().getStoragePath()});
   }
 }
