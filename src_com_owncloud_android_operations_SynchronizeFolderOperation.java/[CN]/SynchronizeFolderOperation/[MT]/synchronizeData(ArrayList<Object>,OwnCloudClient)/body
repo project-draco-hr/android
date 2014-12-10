@@ -48,7 +48,7 @@
       requestForDownloadFile(remoteFile);
     }
  else {
-      RemoteOperation synchFolderOp=new SyncFolderOperation(mContext,remoteFile.getRemotePath(),mAccount,mCurrentSyncTime);
+      SynchronizeFolderOperation synchFolderOp=new SynchronizeFolderOperation(mContext,remoteFile.getRemotePath(),mAccount,mCurrentSyncTime);
       synchFolderOp.execute(mAccount,mContext,null,null);
     }
     updatedFiles.add(remoteFile);
