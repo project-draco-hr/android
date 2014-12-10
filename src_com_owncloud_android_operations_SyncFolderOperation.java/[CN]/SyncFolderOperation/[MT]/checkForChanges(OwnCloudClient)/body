@@ -8,9 +8,7 @@
   result=operation.execute(client);
   if (result.isSuccess()) {
     OCFile remoteFolder=FileStorageUtils.fillOCFile((RemoteFile)result.getData().get(0));
-    if (!mIgnoreETag) {
-      mRemoteFolderChanged=!(remoteFolder.getEtag().equalsIgnoreCase(mLocalFolder.getEtag()));
-    }
+    mRemoteFolderChanged=!(remoteFolder.getEtag().equalsIgnoreCase(mLocalFolder.getEtag()));
     result=new RemoteOperationResult(ResultCode.OK);
     Log_OC.i(TAG,"Checked " + mAccount.name + remotePath+ " : "+ (mRemoteFolderChanged ? "changed" : "not changed"));
   }

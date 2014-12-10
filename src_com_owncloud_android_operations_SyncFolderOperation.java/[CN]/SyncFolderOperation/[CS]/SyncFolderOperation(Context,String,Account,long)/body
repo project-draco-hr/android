@@ -1,12 +1,9 @@
 {
-  mLocalFolder=folder;
+  mLocalFolder=new OCFile(remotePath);
   mCurrentSyncTime=currentSyncTime;
-  mSyncFullAccount=syncFullAccount;
-  mIsShareSupported=isShareSupported;
-  mStorageManager=dataStorageManager;
+  mStorageManager=getStorageManager();
   mAccount=account;
   mContext=context;
   mForgottenLocalFiles=new HashMap<String,String>();
   mRemoteFolderChanged=false;
-  mIgnoreETag=ignoreETag;
 }
