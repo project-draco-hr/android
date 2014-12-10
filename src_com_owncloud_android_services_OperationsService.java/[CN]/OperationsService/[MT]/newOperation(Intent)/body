@@ -62,6 +62,10 @@
         boolean syncFileContents=operationIntent.getBooleanExtra(EXTRA_SYNC_FILE_CONTENTS,true);
         operation=new SynchronizeFileOperation(remotePath,account,syncFileContents,getApplicationContext());
       }
+ else       if (action.equals(ACTION_SYNC_FOLDER)) {
+        String remotePath=operationIntent.getStringExtra(EXTRA_REMOTE_PATH);
+        boolean syncFileContents=operationIntent.getBooleanExtra(EXTRA_SYNC_FILE_CONTENTS,true);
+      }
  else       if (action.equals(ACTION_MOVE_FILE)) {
         String remotePath=operationIntent.getStringExtra(EXTRA_REMOTE_PATH);
         String newParentPath=operationIntent.getStringExtra(EXTRA_NEW_PARENT_PATH);
@@ -74,11 +78,9 @@
     operation=null;
   }
   if (operation != null) {
-    mPendingOperations.add(new Pair<Target,RemoteOperation>(target,operation));
-    startService(new Intent(OperationsService.this,OperationsService.class));
-    return operation.hashCode();
+    return new Pair<Target,RemoteOperation>(target,operation);
   }
  else {
-    return Long.MAX_VALUE;
+    return null;
   }
 }

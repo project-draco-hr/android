@@ -1,4 +1,10 @@
 {
+  if (ACTION_SYNC_FOLDER.equals(intent.getAction())) {
+    Pair<Target,RemoteOperation> itemToQueue=newOperation(intent);
+    if (itemToQueue != null) {
+      mPendingOperations.add(itemToQueue);
+    }
+  }
   Message msg=mServiceHandler.obtainMessage();
   msg.arg1=startId;
   mServiceHandler.sendMessage(msg);

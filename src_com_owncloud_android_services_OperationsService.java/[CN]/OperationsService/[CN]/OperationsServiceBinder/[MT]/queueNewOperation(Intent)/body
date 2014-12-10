@@ -1,0 +1,11 @@
+{
+  Pair<Target,RemoteOperation> itemToQueue=newOperation(operationIntent);
+  if (itemToQueue != null) {
+    mPendingOperations.add(itemToQueue);
+    startService(new Intent(OperationsService.this,OperationsService.class));
+    return itemToQueue.second.hashCode();
+  }
+ else {
+    return Long.MAX_VALUE;
+  }
+}
