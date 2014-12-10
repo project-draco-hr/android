@@ -13,9 +13,9 @@
       ListView listView=(ListView)parent;
       ListAdapter listAdapter=listView.getAdapter();
       Object obj=listAdapter.getItem(position);
-      if (obj != null && obj instanceof LongClickableCheckBoxPreference) {
+      if (obj != null && obj instanceof RadioButtonPreference) {
         mShowContextMenu=true;
-        mAccountName=((LongClickableCheckBoxPreference)obj).getKey();
+        mAccountName=((RadioButtonPreference)obj).getKey();
         Preferences.this.openContextMenu(listView);
         View.OnLongClickListener longListener=(View.OnLongClickListener)obj;
         return longListener.onLongClick(view);
