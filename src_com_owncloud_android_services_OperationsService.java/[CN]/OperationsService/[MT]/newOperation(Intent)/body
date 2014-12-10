@@ -64,7 +64,6 @@
       }
  else       if (action.equals(ACTION_SYNC_FOLDER)) {
         String remotePath=operationIntent.getStringExtra(EXTRA_REMOTE_PATH);
-        boolean syncFileContents=operationIntent.getBooleanExtra(EXTRA_SYNC_FILE_CONTENTS,true);
         operation=new SynchronizeFolderOperation(this,remotePath,account,System.currentTimeMillis());
       }
  else       if (action.equals(ACTION_MOVE_FILE)) {
