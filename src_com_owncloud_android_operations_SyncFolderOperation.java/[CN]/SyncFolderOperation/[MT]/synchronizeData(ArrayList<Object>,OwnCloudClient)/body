@@ -46,6 +46,10 @@
     if (!remoteFile.isFolder()) {
       requestForDownloadFile(remoteFile);
     }
+ else {
+      RemoteOperation synchFolderOp=new SyncFolderOperation(mContext,remoteFile.getRemotePath(),mAccount,mCurrentSyncTime);
+      synchFolderOp.execute(mAccount,mContext,null,null);
+    }
     updatedFiles.add(remoteFile);
   }
   mStorageManager.saveFolder(remoteFolder,updatedFiles,localFilesMap.values());
