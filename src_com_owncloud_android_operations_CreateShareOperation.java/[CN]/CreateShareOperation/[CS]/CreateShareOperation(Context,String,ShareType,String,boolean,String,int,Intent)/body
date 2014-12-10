@@ -1,4 +1,5 @@
 {
+  mContext=context;
   mPath=path;
   mShareType=shareType;
   mShareWith=shareWith;
