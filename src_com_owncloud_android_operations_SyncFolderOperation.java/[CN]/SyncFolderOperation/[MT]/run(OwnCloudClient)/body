@@ -1,0 +1,16 @@
+{
+  RemoteOperationResult result=null;
+  mFailsInFavouritesFound=0;
+  mConflictsFound=0;
+  mForgottenLocalFiles.clear();
+  result=checkForChanges(client);
+  if (result.isSuccess()) {
+    if (mRemoteFolderChanged) {
+      result=fetchAndSyncRemoteFolder(client);
+    }
+ else {
+      mChildren=mStorageManager.getFolderContent(mLocalFolder);
+    }
+  }
+  return result;
+}

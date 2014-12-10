@@ -1,0 +1,54 @@
+{
+  mLocalFolder=mStorageManager.getFileByPath(mLocalFolder.getRemotePath());
+  OCFile remoteFolder=fillOCFile((RemoteFile)folderAndFiles.get(0));
+  remoteFolder.setParentId(mLocalFolder.getParentId());
+  remoteFolder.setFileId(mLocalFolder.getFileId());
+  Log_OC.d(TAG,"Remote folder " + mLocalFolder.getRemotePath() + " changed - starting update of local data ");
+  List<OCFile> updatedFiles=new Vector<OCFile>(folderAndFiles.size() - 1);
+  List<SynchronizeFileOperation> filesToSyncContents=new Vector<SynchronizeFileOperation>();
+  List<OCFile> localFiles=mStorageManager.getFolderContent(mLocalFolder);
+  Map<String,OCFile> localFilesMap=new HashMap<String,OCFile>(localFiles.size());
+  for (  OCFile file : localFiles) {
+    localFilesMap.put(file.getRemotePath(),file);
+  }
+  OCFile remoteFile=null, localFile=null;
+  for (int i=1; i < folderAndFiles.size(); i++) {
+    remoteFile=fillOCFile((RemoteFile)folderAndFiles.get(i));
+    remoteFile.setParentId(mLocalFolder.getFileId());
+    localFile=localFilesMap.remove(remoteFile.getRemotePath());
+    remoteFile.setLastSyncDateForProperties(mCurrentSyncTime);
+    if (localFile != null) {
+      remoteFile.setFileId(localFile.getFileId());
+      remoteFile.setKeepInSync(localFile.keepInSync());
+      remoteFile.setLastSyncDateForData(localFile.getLastSyncDateForData());
+      remoteFile.setModificationTimestampAtLastSyncForData(localFile.getModificationTimestampAtLastSyncForData());
+      remoteFile.setStoragePath(localFile.getStoragePath());
+      remoteFile.setEtag(localFile.getEtag());
+      if (remoteFile.isFolder()) {
+        remoteFile.setFileLength(localFile.getFileLength());
+      }
+ else       if (mRemoteFolderChanged && remoteFile.isImage() && remoteFile.getModificationTimestamp() != localFile.getModificationTimestamp()) {
+        remoteFile.setNeedsUpdateThumbnail(true);
+        Log.d(TAG,"Image " + remoteFile.getFileName() + " updated on the server");
+      }
+      remoteFile.setPublicLink(localFile.getPublicLink());
+      remoteFile.setShareByLink(localFile.isShareByLink());
+    }
+ else {
+      remoteFile.setEtag("");
+    }
+    checkAndFixForeignStoragePath(remoteFile);
+    searchForLocalFileInDefaultPath(remoteFile);
+    if (remoteFile.keepInSync()) {
+      SynchronizeFileOperation operation=new SynchronizeFileOperation(localFile,remoteFile,mAccount,true,mContext);
+      filesToSyncContents.add(operation);
+    }
+    if (!remoteFile.isFolder()) {
+      requestForDownloadFile(remoteFile);
+    }
+    updatedFiles.add(remoteFile);
+  }
+  mStorageManager.saveFolder(remoteFolder,updatedFiles,localFilesMap.values());
+  startContentSynchronizations(filesToSyncContents,client);
+  mChildren=updatedFiles;
+}

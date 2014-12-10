@@ -1,0 +1,9 @@
+{
+  mLocalFolder=new OCFile(remotePath);
+  mCurrentSyncTime=currentSyncTime;
+  mStorageManager=getStorageManager();
+  mAccount=account;
+  mContext=context;
+  mForgottenLocalFiles=new HashMap<String,String>();
+  mRemoteFolderChanged=false;
+}
