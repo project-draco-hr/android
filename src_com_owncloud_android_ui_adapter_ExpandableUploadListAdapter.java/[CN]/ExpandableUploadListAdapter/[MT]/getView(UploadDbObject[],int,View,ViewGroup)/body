@@ -67,15 +67,9 @@ fileIcon.setImageBitmap(b);
 }
  catch (NullPointerException e) {
 }
-TextView uploadDateV=(TextView)view.findViewById(R.id.upload_date);
+TextView uploadDate=(TextView)view.findViewById(R.id.upload_date);
 CharSequence dateString=DisplayUtils.getRelativeDateTimeString(mActivity,uploadObject.getUploadTime().getTimeInMillis(),DateUtils.SECOND_IN_MILLIS,DateUtils.WEEK_IN_MILLIS,0);
-uploadDateV.setText(dateString);
-ImageView checkBoxV=(ImageView)view.findViewById(R.id.custom_checkbox);
-checkBoxV.setVisibility(View.GONE);
-view.findViewById(R.id.imageView2).setVisibility(View.INVISIBLE);
-view.findViewById(R.id.imageView3).setVisibility(View.GONE);
-view.findViewById(R.id.sharedIcon).setVisibility(View.GONE);
-view.findViewById(R.id.sharedWithMeIcon).setVisibility(View.GONE);
+uploadDate.setText(dateString);
 }
 return view;
 }
