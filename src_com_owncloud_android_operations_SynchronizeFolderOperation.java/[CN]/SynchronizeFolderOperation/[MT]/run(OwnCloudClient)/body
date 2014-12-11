@@ -8,6 +8,7 @@ synchronized (mCancellationRequested) {
       return new RemoteOperationResult(new OperationCancelledException());
     }
   }
+  OCFile mLocalFolder=getStorageManager().getFileByPath(mRemotePath);
   result=checkForChanges(client);
   if (result.isSuccess()) {
     if (mRemoteFolderChanged) {

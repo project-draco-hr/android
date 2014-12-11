@@ -1,5 +1,5 @@
 {
-  mLocalFolder=new OCFile(remotePath);
+  mRemotePath=remotePath;
   mCurrentSyncTime=currentSyncTime;
   mAccount=account;
   mContext=context;

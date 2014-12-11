@@ -1,6 +1,5 @@
 {
   FileDataStorageManager storageManager=getStorageManager();
-  mLocalFolder=storageManager.getFileByPath(mLocalFolder.getRemotePath());
   OCFile remoteFolder=fillOCFile((RemoteFile)folderAndFiles.get(0));
   remoteFolder.setParentId(mLocalFolder.getParentId());
   remoteFolder.setFileId(mLocalFolder.getFileId());
