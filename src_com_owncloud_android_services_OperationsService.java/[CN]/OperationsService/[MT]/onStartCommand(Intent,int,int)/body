@@ -8,6 +8,8 @@
       mSyncFolderHandler.sendMessage(msg);
     }
   }
+ else   if (ACTION_CANCEL_SYNC_FOLDER.equals(intent.getAction())) {
+  }
  else {
     Message msg=mOperationsHandler.obtainMessage();
     msg.arg1=startId;
