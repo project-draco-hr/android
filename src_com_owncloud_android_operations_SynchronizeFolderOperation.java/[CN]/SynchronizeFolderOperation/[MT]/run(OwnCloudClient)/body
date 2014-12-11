@@ -9,7 +9,7 @@
       result=fetchAndSyncRemoteFolder(client);
     }
  else {
-      mChildren=mStorageManager.getFolderContent(mLocalFolder);
+      mChildren=getStorageManager().getFolderContent(mLocalFolder);
     }
   }
   return result;

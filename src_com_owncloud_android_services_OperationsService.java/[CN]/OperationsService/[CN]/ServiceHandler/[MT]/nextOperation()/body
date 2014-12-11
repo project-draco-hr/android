@@ -10,9 +10,9 @@ synchronized (mPendingOperations) {
       if (mLastTarget == null || !mLastTarget.equals(next.first)) {
         mLastTarget=next.first;
         if (mLastTarget.mAccount != null) {
-          OwnCloudAccount ocAccount=new OwnCloudAccount(mLastTarget.mAccount,this);
-          mOwnCloudClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,this);
-          mStorageManager=new FileDataStorageManager(mLastTarget.mAccount,getContentResolver());
+          OwnCloudAccount ocAccount=new OwnCloudAccount(mLastTarget.mAccount,mService);
+          mOwnCloudClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,mService);
+          mStorageManager=new FileDataStorageManager(mLastTarget.mAccount,mService.getContentResolver());
         }
  else {
           OwnCloudCredentials credentials=null;
@@ -26,7 +26,7 @@ synchronized (mPendingOperations) {
             credentials=OwnCloudCredentialsFactory.newSamlSsoCredentials(mLastTarget.mCookie);
           }
           OwnCloudAccount ocAccount=new OwnCloudAccount(mLastTarget.mServerUrl,credentials);
-          mOwnCloudClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,this);
+          mOwnCloudClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,mService);
           mStorageManager=null;
         }
       }
@@ -69,6 +69,6 @@ synchronized (mPendingOperations) {
         mPendingOperations.poll();
       }
     }
-    dispatchResultToOperationListeners(mLastTarget,mCurrentOperation,result);
+    mService.dispatchResultToOperationListeners(mLastTarget,mCurrentOperation,result);
   }
 }

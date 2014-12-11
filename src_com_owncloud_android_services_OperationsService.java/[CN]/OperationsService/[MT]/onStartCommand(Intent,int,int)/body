@@ -2,11 +2,16 @@
   if (ACTION_SYNC_FOLDER.equals(intent.getAction())) {
     Pair<Target,RemoteOperation> itemToQueue=newOperation(intent);
     if (itemToQueue != null) {
-      mPendingOperations.add(itemToQueue);
+      mSyncFolderHandler.mPendingOperations.add(itemToQueue);
+      Message msg=mSyncFolderHandler.obtainMessage();
+      msg.arg1=startId;
+      mSyncFolderHandler.sendMessage(msg);
     }
   }
-  Message msg=mServiceHandler.obtainMessage();
-  msg.arg1=startId;
-  mServiceHandler.sendMessage(msg);
+ else {
+    Message msg=mOperationsHandler.obtainMessage();
+    msg.arg1=startId;
+    mOperationsHandler.sendMessage(msg);
+  }
   return START_NOT_STICKY;
 }

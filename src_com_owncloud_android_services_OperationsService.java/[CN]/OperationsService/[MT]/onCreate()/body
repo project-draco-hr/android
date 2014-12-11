@@ -1,8 +1,10 @@
 {
   super.onCreate();
-  HandlerThread thread=new HandlerThread("Operations service thread",Process.THREAD_PRIORITY_BACKGROUND);
+  HandlerThread thread=new HandlerThread("Operations thread",Process.THREAD_PRIORITY_BACKGROUND);
   thread.start();
-  mServiceLooper=thread.getLooper();
-  mServiceHandler=new ServiceHandler(mServiceLooper,this);
-  mBinder=new OperationsServiceBinder();
+  mOperationsHandler=new ServiceHandler(thread.getLooper(),this);
+  mOperationsBinder=new OperationsServiceBinder(mOperationsHandler);
+  thread=new HandlerThread("Syncfolder thread",Process.THREAD_PRIORITY_BACKGROUND);
+  thread.start();
+  mSyncFolderHandler=new ServiceHandler(thread.getLooper(),this);
 }
