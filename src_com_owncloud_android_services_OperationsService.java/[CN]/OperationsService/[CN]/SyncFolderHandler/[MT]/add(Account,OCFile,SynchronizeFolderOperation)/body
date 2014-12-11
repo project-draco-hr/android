@@ -1,0 +1,4 @@
+{
+  String syncKey=buildRemoteName(account,file);
+  mPendingOperations.putIfAbsent(syncKey,syncFolderOperation);
+}
