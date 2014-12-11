@@ -18,7 +18,7 @@
     result=operation.execute(client);
     if (result.isSuccess()) {
       if (mFile.isFolder()) {
-        saveLocalDirectory();
+        getStorageManager().moveLocalFile(mFile,mNewRemotePath,parent);
       }
  else {
         saveLocalFile();

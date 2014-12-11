@@ -1,0 +1,4 @@
+{
+  super(context,null,android.R.attr.checkBoxPreferenceStyle);
+  setWidgetLayoutResource(R.layout.preference_widget_radiobutton);
+}
