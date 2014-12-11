@@ -1,0 +1,7 @@
+{
+  super.onBindView(view);
+  TextView titleView=(TextView)view.findViewById(android.R.id.summary);
+  titleView.setSingleLine(true);
+  titleView.setMaxLines(1);
+  titleView.setEllipsize(TextUtils.TruncateAt.MIDDLE);
+}

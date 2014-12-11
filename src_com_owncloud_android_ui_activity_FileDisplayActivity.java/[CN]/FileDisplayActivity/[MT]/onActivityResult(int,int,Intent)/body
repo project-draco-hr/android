@@ -6,7 +6,7 @@
  else   if (requestCode == ACTION_SELECT_MULTIPLE_FILES && (resultCode == RESULT_OK || resultCode == UploadFilesActivity.RESULT_OK_AND_MOVE)) {
     requestMultipleUpload(data,resultCode);
   }
- else   if (requestCode == ACTION_MOVE_FILES && (resultCode == RESULT_OK || resultCode == MoveActivity.RESULT_OK_AND_MOVE)) {
+ else   if (requestCode == ACTION_MOVE_FILES && resultCode == RESULT_OK) {
     final Intent fData=data;
     final int fResultCode=resultCode;
     getHandler().postDelayed(new Runnable(){
