@@ -1,0 +1,5 @@
+{
+  setUseWifiOnly(false);
+  setWhileChargingOnly(false);
+  setUploadTimestamp(0);
+}

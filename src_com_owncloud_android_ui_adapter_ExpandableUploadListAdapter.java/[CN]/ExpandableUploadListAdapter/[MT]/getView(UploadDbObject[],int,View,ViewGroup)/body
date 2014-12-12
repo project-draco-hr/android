@@ -62,7 +62,7 @@ if (UploadUtils.userCanRetryUpload(uploadObject)) {
 rightButton.setText("\u21BA");
 rightButton.setOnClickListener(new OnClickListener(){
 @Override public void onClick(View v){
-parentFileActivity.getFileOperationsHelper().retryUpload(uploadObject.getOCFile());
+parentFileActivity.getFileOperationsHelper().retryUpload(uploadObject);
 }
 }
 );
@@ -80,7 +80,7 @@ parentFileActivity.getFileOperationsHelper().cancelTransference(uploadObject.get
 rightButton.setText("\u267B");
 rightButton.setOnClickListener(new OnClickListener(){
 @Override public void onClick(View v){
-parentFileActivity.getFileOperationsHelper().removeUploadFromList(uploadObject.getOCFile());
+parentFileActivity.getFileOperationsHelper().removeUploadFromList(uploadObject);
 }
 }
 );

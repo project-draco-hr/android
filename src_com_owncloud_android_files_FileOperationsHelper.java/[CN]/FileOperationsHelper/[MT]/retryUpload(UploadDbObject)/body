@@ -2,9 +2,10 @@
   Account account=mFileActivity.getAccount();
   FileUploaderBinder uploaderBinder=mFileActivity.getFileUploaderBinder();
   if (uploaderBinder != null) {
-    uploaderBinder.retry(account,file);
+    upload.removeAllUploadRestrictions();
+    uploaderBinder.retry(account,upload);
   }
  else {
-    Log_OC.w(TAG,"uploaderBinder not set. Cannot remove " + file);
+    Log_OC.w(TAG,"uploaderBinder not set. Cannot remove " + upload.getOCFile());
   }
 }

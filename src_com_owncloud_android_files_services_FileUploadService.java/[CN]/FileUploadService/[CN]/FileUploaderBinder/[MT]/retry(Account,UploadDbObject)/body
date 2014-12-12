@@ -1,0 +1,5 @@
+{
+  String uploadKey=buildRemoteName(upload);
+  mPendingUploads.put(uploadKey,upload);
+  FileUploadService.retry(getApplicationContext(),uploadKey);
+}

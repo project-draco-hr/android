@@ -2,9 +2,9 @@
   Account account=mFileActivity.getAccount();
   FileUploaderBinder uploaderBinder=mFileActivity.getFileUploaderBinder();
   if (uploaderBinder != null) {
-    uploaderBinder.remove(account,file);
+    uploaderBinder.remove(account,upload.getOCFile());
   }
  else {
-    Log_OC.w(TAG,"uploaderBinder not set. Cannot remove " + file);
+    Log_OC.w(TAG,"uploaderBinder not set. Cannot remove " + upload.getOCFile());
   }
 }
