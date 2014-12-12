@@ -6,5 +6,5 @@
   mOperationsBinder=new OperationsServiceBinder(mOperationsHandler);
   thread=new HandlerThread("Syncfolder thread",Process.THREAD_PRIORITY_BACKGROUND);
   thread.start();
-  mSyncFolderHandler=new ServiceHandler(thread.getLooper(),this);
+  mSyncFolderHandler=new SyncFolderHandler(thread.getLooper(),this);
 }

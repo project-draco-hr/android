@@ -3,6 +3,11 @@
   mFailsInFavouritesFound=0;
   mConflictsFound=0;
   mForgottenLocalFiles.clear();
+synchronized (mCancellationRequested) {
+    if (mCancellationRequested.get()) {
+      return new RemoteOperationResult(new OperationCancelledException());
+    }
+  }
   result=checkForChanges(client);
   if (result.isSuccess()) {
     if (mRemoteFolderChanged) {
