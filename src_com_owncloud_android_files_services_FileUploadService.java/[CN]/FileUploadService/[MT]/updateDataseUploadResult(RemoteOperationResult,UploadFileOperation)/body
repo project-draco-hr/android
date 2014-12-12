@@ -1,18 +1,18 @@
 {
   Log_OC.d(TAG,"updateDataseUploadResult uploadResult: " + uploadResult + " upload: "+ upload);
   if (uploadResult.isCancelled()) {
-    mDb.updateUpload(upload.getOriginalStoragePath(),UploadStatus.UPLOAD_CANCELLED,uploadResult);
+    mDb.updateUploadStatus(upload.getOriginalStoragePath(),UploadStatus.UPLOAD_CANCELLED,uploadResult);
   }
  else {
     if (uploadResult.isSuccess()) {
-      mDb.updateUpload(upload.getOriginalStoragePath(),UploadStatus.UPLOAD_SUCCEEDED,uploadResult);
+      mDb.updateUploadStatus(upload.getOriginalStoragePath(),UploadStatus.UPLOAD_SUCCEEDED,uploadResult);
     }
  else {
       if (shouldRetryFailedUpload(uploadResult)) {
-        mDb.updateUpload(upload.getOriginalStoragePath(),UploadStatus.UPLOAD_FAILED_RETRY,uploadResult);
+        mDb.updateUploadStatus(upload.getOriginalStoragePath(),UploadStatus.UPLOAD_FAILED_RETRY,uploadResult);
       }
  else {
-        mDb.updateUpload(upload.getOriginalStoragePath(),UploadDbHandler.UploadStatus.UPLOAD_FAILED_GIVE_UP,uploadResult);
+        mDb.updateUploadStatus(upload.getOriginalStoragePath(),UploadDbHandler.UploadStatus.UPLOAD_FAILED_GIVE_UP,uploadResult);
       }
     }
   }

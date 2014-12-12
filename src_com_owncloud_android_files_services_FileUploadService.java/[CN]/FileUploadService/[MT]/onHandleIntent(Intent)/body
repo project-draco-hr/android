@@ -115,7 +115,7 @@
     UploadDbObject uploadDbObject=mPendingUploads.get(remotePath);
     uploadDbObject.setUploadStatus(UploadStatus.UPLOAD_LATER);
     uploadDbObject.setLastResult(null);
-    mDb.updateUpload(uploadDbObject);
+    mDb.updateUploadStatus(uploadDbObject);
     Log_OC.d(TAG,"Start uploading " + remotePath);
   }
  else {
@@ -145,7 +145,7 @@ break;
 case LATER:
 break;
 case FILE_GONE:
-mDb.updateUpload(uploadDbObject.getLocalPath(),UploadStatus.UPLOAD_FAILED_GIVE_UP,new RemoteOperationResult(ResultCode.FILE_NOT_FOUND));
+mDb.updateUploadStatus(uploadDbObject.getLocalPath(),UploadStatus.UPLOAD_FAILED_GIVE_UP,new RemoteOperationResult(ResultCode.FILE_NOT_FOUND));
 it.remove();
 break;
 case ERROR:

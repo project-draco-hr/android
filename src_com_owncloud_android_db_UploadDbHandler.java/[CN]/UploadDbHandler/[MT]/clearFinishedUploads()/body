@@ -1,5 +1,5 @@
 {
-  String[] where=new String[3];
+  String[] where=new String[1];
   where[0]=String.valueOf(UploadStatus.UPLOAD_SUCCEEDED.value);
   long result=getDB().delete(TABLE_UPLOAD,"uploadStatus = ?",where);
   Log_OC.d(TABLE_UPLOAD,"delete all finished uploads");

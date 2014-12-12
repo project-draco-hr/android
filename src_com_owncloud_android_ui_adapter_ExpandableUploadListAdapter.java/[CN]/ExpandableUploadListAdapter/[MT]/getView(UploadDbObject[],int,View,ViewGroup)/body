@@ -32,6 +32,10 @@ break;
 case UPLOAD_FAILED_RETRY:
 if (uploadObject.getLastResult() != null) {
 status="Last failure: " + uploadObject.getLastResult().getLogMessage();
+String laterReason=FileUploadService.getUploadLaterReason(mActivity,uploadObject);
+if (laterReason != null) {
+  status+="\n" + laterReason;
+}
 }
  else {
 status="Upload will be retried shortly.";

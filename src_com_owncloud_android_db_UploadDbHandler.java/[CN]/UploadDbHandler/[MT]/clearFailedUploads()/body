@@ -1,5 +1,5 @@
 {
-  String[] where=new String[3];
+  String[] where=new String[2];
   where[0]=String.valueOf(UploadStatus.UPLOAD_CANCELLED.value);
   where[1]=String.valueOf(UploadStatus.UPLOAD_FAILED_GIVE_UP.value);
   long result=getDB().delete(TABLE_UPLOAD,"uploadStatus = ? OR uploadStatus = ?",where);

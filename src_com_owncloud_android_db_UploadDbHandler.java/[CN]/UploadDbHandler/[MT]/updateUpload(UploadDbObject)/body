@@ -1,3 +1,0 @@
-{
-  return updateUpload(uploadDbObject.getLocalPath(),uploadDbObject.getUploadStatus(),uploadDbObject.getLastResult());
-}
