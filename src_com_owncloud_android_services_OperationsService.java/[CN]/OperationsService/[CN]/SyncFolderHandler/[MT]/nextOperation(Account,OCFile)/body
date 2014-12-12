@@ -9,11 +9,11 @@ synchronized (mPendingOperations) {
       OwnCloudAccount ocAccount=new OwnCloudAccount(account,mService);
       mOwnCloudClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,mService);
       mStorageManager=new FileDataStorageManager(account,mService.getContentResolver());
-      if (mCurrentOperation instanceof SyncOperation) {
-        operationResult=((SyncOperation)mCurrentOperation).execute(mOwnCloudClient,mStorageManager);
+      if (mCurrentSyncOperation instanceof SyncOperation) {
+        operationResult=((SyncOperation)mCurrentSyncOperation).execute(mOwnCloudClient,mStorageManager);
       }
  else {
-        operationResult=mCurrentOperation.execute(mOwnCloudClient);
+        operationResult=mCurrentSyncOperation.execute(mOwnCloudClient);
       }
     }
  catch (    AccountsException e) {

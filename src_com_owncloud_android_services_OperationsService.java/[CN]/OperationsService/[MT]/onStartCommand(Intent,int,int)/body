@@ -5,7 +5,8 @@
       return START_NOT_STICKY;
     }
     Account account=intent.getParcelableExtra(EXTRA_ACCOUNT);
-    OCFile file=intent.getParcelableExtra(EXTRA_REMOTE_PATH);
+    String remotePath=intent.getStringExtra(EXTRA_REMOTE_PATH);
+    OCFile file=new OCFile(remotePath);
     Pair<Account,OCFile> itemSyncKey=new Pair<Account,OCFile>(account,file);
     Pair<Target,RemoteOperation> itemToQueue=newOperation(intent);
     if (itemToQueue != null) {
@@ -22,7 +23,8 @@
       return START_NOT_STICKY;
     }
     Account account=intent.getParcelableExtra(EXTRA_ACCOUNT);
-    OCFile file=intent.getParcelableExtra(EXTRA_REMOTE_PATH);
+    String remotePath=intent.getStringExtra(EXTRA_REMOTE_PATH);
+    OCFile file=new OCFile(remotePath);
     mSyncFolderHandler.cancel(account,file);
   }
  else {
