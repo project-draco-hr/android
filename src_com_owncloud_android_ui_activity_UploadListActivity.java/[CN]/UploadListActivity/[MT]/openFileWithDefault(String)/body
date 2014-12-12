@@ -1,0 +1,15 @@
+{
+  Intent myIntent=new Intent(android.content.Intent.ACTION_VIEW);
+  File file=new File(localPath);
+  String extension=android.webkit.MimeTypeMap.getFileExtensionFromUrl(Uri.fromFile(file).toString());
+  String mimetype=android.webkit.MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
+  if (mimetype == null)   mimetype="*/*";
+  myIntent.setDataAndType(Uri.fromFile(file),mimetype);
+  try {
+    startActivity(myIntent);
+  }
+ catch (  ActivityNotFoundException e) {
+    Toast.makeText(this,"Found no app to open this file.",Toast.LENGTH_LONG).show();
+    Log_OC.i(TAG,"Could not find app for sending log history.");
+  }
+}
