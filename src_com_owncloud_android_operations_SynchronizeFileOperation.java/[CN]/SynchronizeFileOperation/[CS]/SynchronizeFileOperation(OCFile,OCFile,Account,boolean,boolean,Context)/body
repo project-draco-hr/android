@@ -1,9 +1,4 @@
 {
-  mLocalFile=localFile;
-  mServerFile=serverFile;
-  mRemotePath=localFile.getRemotePath();
-  mAccount=account;
-  mSyncFileContents=syncFileContents;
-  mContext=context;
+  this(localFile,serverFile,account,syncFileContents,context);
   mAllowUploads=allowUploads;
 }

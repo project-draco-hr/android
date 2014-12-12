@@ -5,6 +5,7 @@
   remoteFolder.setFileId(mLocalFolder.getFileId());
   Log_OC.d(TAG,"Remote folder " + mLocalFolder.getRemotePath() + " changed - starting update of local data ");
   List<OCFile> updatedFiles=new Vector<OCFile>(folderAndFiles.size() - 1);
+  mFilesForDirectDownload.clear();
   mFilesToSyncContentsWithoutUpload.clear();
   mFavouriteFilesToSyncContents.clear();
   mFoldersToWalkDown.clear();
