@@ -132,7 +132,7 @@ switch (canUploadFileNow(uploadDbObject)) {
 case NOW:
       Log_OC.d(TAG,"Calling uploadFile for " + upload);
     RemoteOperationResult uploadResult=uploadFile(uploadDbObject);
-  updateDataseUploadResult(uploadResult,mCurrentUpload);
+  updateDatabaseUploadResult(uploadResult,mCurrentUpload);
 notifyUploadResult(uploadResult,mCurrentUpload);
 sendFinalBroadcast(uploadResult,mCurrentUpload);
 if (!shouldRetryFailedUpload(uploadResult)) {
