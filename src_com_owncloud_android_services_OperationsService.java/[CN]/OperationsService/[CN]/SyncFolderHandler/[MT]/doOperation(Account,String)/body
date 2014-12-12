@@ -1,28 +1,20 @@
 {
-  String syncKey=buildRemoteName(account,file);
+  String syncKey=buildRemoteName(account,remotePath);
 synchronized (mPendingOperations) {
     mCurrentSyncOperation=mPendingOperations.get(syncKey);
   }
   if (mCurrentSyncOperation != null) {
-    RemoteOperationResult operationResult=null;
     try {
       OwnCloudAccount ocAccount=new OwnCloudAccount(account,mService);
       mOwnCloudClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,mService);
       mStorageManager=new FileDataStorageManager(account,mService.getContentResolver());
-      if (mCurrentSyncOperation instanceof SyncOperation) {
-        operationResult=((SyncOperation)mCurrentSyncOperation).execute(mOwnCloudClient,mStorageManager);
-      }
- else {
-        operationResult=mCurrentSyncOperation.execute(mOwnCloudClient);
-      }
+      mCurrentSyncOperation.execute(mOwnCloudClient,mStorageManager);
     }
  catch (    AccountsException e) {
       Log_OC.e(TAG,"Error while trying to get autorization",e);
-      operationResult=new RemoteOperationResult(e);
     }
 catch (    IOException e) {
       Log_OC.e(TAG,"Error while trying to get autorization",e);
-      operationResult=new RemoteOperationResult(e);
     }
  finally {
 synchronized (mPendingOperations) {

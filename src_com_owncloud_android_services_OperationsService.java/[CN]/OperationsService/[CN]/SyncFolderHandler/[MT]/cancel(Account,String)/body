@@ -1,7 +1,7 @@
 {
   SynchronizeFolderOperation syncOperation=null;
 synchronized (mPendingOperations) {
-    syncOperation=mPendingOperations.remove(buildRemoteName(account,file));
+    syncOperation=mPendingOperations.remove(buildRemoteName(account,remotePath));
   }
   if (syncOperation != null) {
     syncOperation.cancel();

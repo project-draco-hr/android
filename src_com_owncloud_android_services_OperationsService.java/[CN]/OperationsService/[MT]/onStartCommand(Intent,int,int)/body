@@ -6,11 +6,10 @@
     }
     Account account=intent.getParcelableExtra(EXTRA_ACCOUNT);
     String remotePath=intent.getStringExtra(EXTRA_REMOTE_PATH);
-    OCFile file=new OCFile(remotePath);
-    Pair<Account,OCFile> itemSyncKey=new Pair<Account,OCFile>(account,file);
+    Pair<Account,String> itemSyncKey=new Pair<Account,String>(account,remotePath);
     Pair<Target,RemoteOperation> itemToQueue=newOperation(intent);
     if (itemToQueue != null) {
-      mSyncFolderHandler.add(account,file,(SynchronizeFolderOperation)itemToQueue.second);
+      mSyncFolderHandler.add(account,remotePath,(SynchronizeFolderOperation)itemToQueue.second);
       Message msg=mSyncFolderHandler.obtainMessage();
       msg.arg1=startId;
       msg.obj=itemSyncKey;
@@ -24,8 +23,7 @@
     }
     Account account=intent.getParcelableExtra(EXTRA_ACCOUNT);
     String remotePath=intent.getStringExtra(EXTRA_REMOTE_PATH);
-    OCFile file=new OCFile(remotePath);
-    mSyncFolderHandler.cancel(account,file);
+    mSyncFolderHandler.cancel(account,remotePath);
   }
  else {
     Message msg=mOperationsHandler.obtainMessage();

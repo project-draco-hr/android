@@ -1,5 +1,5 @@
 {
-  Pair<Account,OCFile> itemSyncKey=(Pair<Account,OCFile>)msg.obj;
-  nextOperation(itemSyncKey.first,itemSyncKey.second);
+  Pair<Account,String> itemSyncKey=(Pair<Account,String>)msg.obj;
+  doOperation(itemSyncKey.first,itemSyncKey.second);
   mService.stopSelf(msg.arg1);
 }
