@@ -3,6 +3,8 @@
   mCurrentSyncTime=currentSyncTime;
   mAccount=account;
   mContext=context;
-  mForgottenLocalFiles=new HashMap<String,String>();
   mRemoteFolderChanged=false;
+  mFilesToSyncContentsWithoutUpload=new Vector<SyncOperation>();
+  mFavouriteFilesToSyncContents=new Vector<SyncOperation>();
+  mFoldersToWalkDown=new Vector<SyncOperation>();
 }

@@ -4,7 +4,7 @@
   Log_OC.d(TAG,"Synchronizing " + mAccount.name + mRemotePath);
   if (result.isSuccess()) {
     synchronizeData(result.getData(),client);
-    if (mConflictsFound > 0 || mFailsInFavouritesFound > 0) {
+    if (mConflictsFound > 0 || mFailsInFileSyncsFound > 0) {
       result=new RemoteOperationResult(ResultCode.SYNC_CONFLICT);
     }
   }

@@ -1,0 +1,8 @@
+{
+  for (  OCFile file : mFilesForDirectDownload) {
+    Intent i=new Intent(mContext,FileDownloader.class);
+    i.putExtra(FileDownloader.EXTRA_ACCOUNT,mAccount);
+    i.putExtra(FileDownloader.EXTRA_FILE,file);
+    mContext.startService(i);
+  }
+}

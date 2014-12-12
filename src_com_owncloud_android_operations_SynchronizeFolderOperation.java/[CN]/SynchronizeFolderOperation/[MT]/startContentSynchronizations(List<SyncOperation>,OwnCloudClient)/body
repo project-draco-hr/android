@@ -1,18 +1,18 @@
 {
   RemoteOperationResult contentsResult=null;
-  for (  SynchronizeFileOperation op : filesToSyncContents) {
+  for (  SyncOperation op : filesToSyncContents) {
     contentsResult=op.execute(getStorageManager(),mContext);
     if (!contentsResult.isSuccess()) {
       if (contentsResult.getCode() == ResultCode.SYNC_CONFLICT) {
         mConflictsFound++;
       }
  else {
-        mFailsInFavouritesFound++;
+        mFailsInFileSyncsFound++;
         if (contentsResult.getException() != null) {
-          Log_OC.e(TAG,"Error while synchronizing favourites : " + contentsResult.getLogMessage(),contentsResult.getException());
+          Log_OC.e(TAG,"Error while synchronizing file : " + contentsResult.getLogMessage(),contentsResult.getException());
         }
  else {
-          Log_OC.e(TAG,"Error while synchronizing favourites : " + contentsResult.getLogMessage());
+          Log_OC.e(TAG,"Error while synchronizing file : " + contentsResult.getLogMessage());
         }
       }
     }
