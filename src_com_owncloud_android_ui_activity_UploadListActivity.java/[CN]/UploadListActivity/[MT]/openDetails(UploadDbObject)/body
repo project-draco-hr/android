@@ -1,0 +1,7 @@
+{
+  OCFile ocFile=file.getOCFile();
+  Intent showDetailsIntent=new Intent(this,FileDisplayActivity.class);
+  showDetailsIntent.putExtra(FileActivity.EXTRA_FILE,(Parcelable)ocFile);
+  showDetailsIntent.putExtra(FileActivity.EXTRA_ACCOUNT,file.getAccount(this));
+  startActivity(showDetailsIntent);
+}

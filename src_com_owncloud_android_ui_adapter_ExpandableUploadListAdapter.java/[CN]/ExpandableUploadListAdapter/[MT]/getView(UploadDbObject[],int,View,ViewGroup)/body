@@ -5,7 +5,7 @@
     view=inflator.inflate(R.layout.upload_list_item,null);
   }
   if (uploadsItems != null && uploadsItems.length > position) {
-    UploadDbObject uploadObject=uploadsItems[position];
+    final UploadDbObject uploadObject=uploadsItems[position];
     TextView fileName=(TextView)view.findViewById(R.id.upload_name);
     String file=uploadObject.getOCFile().getFileName();
     fileName.setText(file);
@@ -57,6 +57,34 @@ uploadObject.getLastResult().getLogMessage();
 break;
 }
 statusView.setText(status);
+Button rightButton=(Button)view.findViewById(R.id.upload_right_button);
+if (UploadUtils.userCanRetryUpload(uploadObject)) {
+rightButton.setText("\u21BA");
+rightButton.setOnClickListener(new OnClickListener(){
+@Override public void onClick(View v){
+parentFileActivity.getFileOperationsHelper().retryUpload(uploadObject.getOCFile());
+}
+}
+);
+}
+ else if (UploadUtils.userCanCancelUpload(uploadObject)) {
+rightButton.setText("\u274C");
+rightButton.setOnClickListener(new OnClickListener(){
+@Override public void onClick(View v){
+parentFileActivity.getFileOperationsHelper().cancelTransference(uploadObject.getOCFile());
+}
+}
+);
+}
+ else {
+rightButton.setText("\u267B");
+rightButton.setOnClickListener(new OnClickListener(){
+@Override public void onClick(View v){
+parentFileActivity.getFileOperationsHelper().removeUploadFromList(uploadObject.getOCFile());
+}
+}
+);
+}
 ImageView fileIcon=(ImageView)view.findViewById(R.id.imageView1);
 fileIcon.setImageResource(R.drawable.file);
 try {

@@ -4,6 +4,7 @@
   super.onActivityCreated(savedInstanceState);
   mAdapter=new ExpandableUploadListAdapter(getActivity());
   setListAdapter(mAdapter);
+  mAdapter.setFileActivity(((FileActivity)getActivity()));
   registerForContextMenu(getListView());
   getListView().setOnCreateContextMenuListener(this);
 }
