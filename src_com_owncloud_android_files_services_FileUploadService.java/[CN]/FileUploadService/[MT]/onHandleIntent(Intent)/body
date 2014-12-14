@@ -105,7 +105,6 @@
       }
     }
   }
-  Log_OC.d(TAG,"mPendingUploads size:" + mPendingUploads.size() + " - before uploading.");
   Iterator<String> it;
   if (intent != null && intent.getStringExtra(KEY_RETRY_REMOTE_PATH) != null) {
     ArrayList<String> list=new ArrayList<String>(1);
@@ -128,31 +127,8 @@
       Log_OC.e(TAG,"Cannot upload null. Fix that!");
       continue;
     }
-switch (canUploadFileNow(uploadDbObject)) {
-case NOW:
-      Log_OC.d(TAG,"Calling uploadFile for " + upload);
-    RemoteOperationResult uploadResult=uploadFile(uploadDbObject);
-  updateDatabaseUploadResult(uploadResult,mCurrentUpload);
-notifyUploadResult(uploadResult,mCurrentUpload);
-sendFinalBroadcast(uploadResult,mCurrentUpload);
-if (!shouldRetryFailedUpload(uploadResult)) {
-Log_OC.d(TAG,"Upload with result " + uploadResult.getCode() + ": "+ uploadResult.getLogMessage()+ " will be abandoned.");
-mPendingUploads.remove(buildRemoteName(uploadDbObject));
-}
-Log_OC.d(TAG,"mCurrentUpload = null");
-mCurrentUpload=null;
-break;
-case LATER:
-break;
-case FILE_GONE:
-mDb.updateUploadStatus(uploadDbObject.getLocalPath(),UploadStatus.UPLOAD_FAILED_GIVE_UP,new RemoteOperationResult(ResultCode.FILE_NOT_FOUND));
-it.remove();
-break;
-case ERROR:
-Log_OC.e(TAG,"canUploadFileNow() returned ERROR. Fix that!");
-break;
-}
-}
-Log_OC.d(TAG,"mPendingUploads size:" + mPendingUploads.size() + " - after uploading.");
-Log_OC.d(TAG,"onHandleIntent end");
+    UploadTask uploadTask=new UploadTask(uploadDbObject);
+    uploadExecutor.submit(uploadTask);
+  }
+  Log_OC.d(TAG,"onHandleIntent end");
 }
