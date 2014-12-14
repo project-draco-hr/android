@@ -25,7 +25,7 @@
     return reason.toString();
   }
   if (uploadDbObject.getUploadStatus() == UploadStatus.UPLOAD_LATER) {
-    return "Upload delayed for unknown reason. Fix that!";
+    return "Upload is pending and will start shortly.";
   }
   return null;
 }

@@ -62,7 +62,7 @@ break;
 }
 statusView.setText(status);
 Button rightButton=(Button)view.findViewById(R.id.upload_right_button);
-if (UploadUtils.userCanRetryUpload(uploadObject)) {
+if (UploadUtils.userCanRetryUpload(uploadObject) && uploadObject.getUploadStatus() != UploadStatus.UPLOAD_SUCCEEDED) {
 rightButton.setText("\u21BA");
 rightButton.setOnClickListener(new OnClickListener(){
 @Override public void onClick(View v){

@@ -6,6 +6,10 @@
   mDb=UploadDbHandler.getInstance(this.getBaseContext());
   mDb.recreateDb();
   mDb.setAllCurrentToUploadLater();
+  HandlerThread thread=new HandlerThread("FileUploadService");
+  thread.start();
+  mServiceLooper=thread.getLooper();
+  mServiceHandler=new ServiceHandler(mServiceLooper);
   Log_OC.d(TAG,"FileUploadService.retry() called by onCreate()");
   FileUploadService.retry(getApplicationContext());
 }

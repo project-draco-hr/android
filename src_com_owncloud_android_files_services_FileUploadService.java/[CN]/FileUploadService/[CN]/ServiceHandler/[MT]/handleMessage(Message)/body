@@ -1,0 +1,4 @@
+{
+  onHandleIntent((Intent)msg.obj);
+  stopSelf(msg.arg1);
+}
