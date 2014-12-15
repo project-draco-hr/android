@@ -1,6 +1,6 @@
 {
   Message msg=mServiceHandler.obtainMessage();
-  msg.arg1=startId;
+  msg.arg1=intentStartId;
   msg.obj=intent;
   mServiceHandler.sendMessage(msg);
 }

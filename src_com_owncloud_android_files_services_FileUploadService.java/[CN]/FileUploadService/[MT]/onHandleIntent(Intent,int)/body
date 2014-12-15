@@ -120,15 +120,22 @@
  else {
     it=mPendingUploads.keySet().iterator();
   }
-  while (it.hasNext()) {
-    String upload=it.next();
-    UploadDbObject uploadDbObject=mPendingUploads.get(upload);
-    if (uploadDbObject == null) {
-      Log_OC.e(TAG,"Cannot upload null. Fix that!");
-      continue;
+  if (it.hasNext()) {
+    while (it.hasNext()) {
+      String upload=it.next();
+      UploadDbObject uploadDbObject=mPendingUploads.get(upload);
+      if (uploadDbObject == null) {
+        Log_OC.e(TAG,"Cannot upload null. Fix that!");
+        continue;
+      }
+      UploadTask uploadTask=new UploadTask(uploadDbObject);
+      uploadExecutor.submit(uploadTask);
     }
-    UploadTask uploadTask=new UploadTask(uploadDbObject);
-    uploadExecutor.submit(uploadTask);
+    StopSelfTask stopSelfTask=new StopSelfTask(intentStartId);
+    uploadExecutor.submit(stopSelfTask);
+  }
+ else {
+    stopSelf(intentStartId);
   }
   Log_OC.d(TAG,"onHandleIntent end");
 }

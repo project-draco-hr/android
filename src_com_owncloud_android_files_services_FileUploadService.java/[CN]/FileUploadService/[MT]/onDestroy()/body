@@ -1,0 +1,5 @@
+{
+  Log_OC.d(TAG,"mPendingUploads size:" + mPendingUploads.size() + " - onDestroy");
+  mServiceLooper.quit();
+  uploadExecutor.shutdown();
+}
