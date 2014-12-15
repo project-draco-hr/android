@@ -1,6 +1,6 @@
 {
   if (component.equals(new ComponentName(UploadListActivity.this,FileUploadService.class))) {
-    Log_OC.d(TAG,"UploadListActivty suddenly disconnected from Upload service");
+    Log_OC.d(TAG,"UploadListActivity suddenly disconnected from Upload service");
     mUploaderBinder=null;
   }
 }
