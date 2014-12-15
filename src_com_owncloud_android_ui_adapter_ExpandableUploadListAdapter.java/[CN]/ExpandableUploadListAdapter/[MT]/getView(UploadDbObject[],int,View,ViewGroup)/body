@@ -20,14 +20,18 @@
 switch (uploadObject.getUploadStatus()) {
 case UPLOAD_IN_PROGRESS:
       status=mActivity.getResources().getString(R.string.uploader_upload_in_progress_ticker);
-    break;
+    ProgressBar progressBar=(ProgressBar)view.findViewById(R.id.upload_progress_bar);
+  progressBar.setVisibility(View.VISIBLE);
+mProgressListener=new ProgressListener(progressBar);
+parentFileActivity.getFileUploaderBinder().addDatatransferProgressListener(mProgressListener,uploadObject.getAccount(mActivity),uploadObject.getOCFile());
+break;
 case UPLOAD_FAILED_GIVE_UP:
-  if (uploadObject.getLastResult() != null) {
-    status="Upload failed: " + uploadObject.getLastResult().getLogMessage();
-  }
+if (uploadObject.getLastResult() != null) {
+status="Upload failed: " + uploadObject.getLastResult().getLogMessage();
+}
  else {
-    status="Upload failed.";
-  }
+status="Upload failed.";
+}
 break;
 case UPLOAD_FAILED_RETRY:
 if (uploadObject.getLastResult() != null) {
@@ -59,6 +63,12 @@ if (uploadObject.getLastResult() != null) {
 uploadObject.getLastResult().getLogMessage();
 }
 break;
+}
+if (uploadObject.getUploadStatus() != UploadStatus.UPLOAD_IN_PROGRESS) {
+ProgressBar progressBar=(ProgressBar)view.findViewById(R.id.upload_progress_bar);
+progressBar.setVisibility(View.GONE);
+parentFileActivity.getFileUploaderBinder().removeDatatransferProgressListener(mProgressListener,uploadObject.getAccount(mActivity),uploadObject.getOCFile());
+mProgressListener=null;
 }
 statusView.setText(status);
 Button rightButton=(Button)view.findViewById(R.id.upload_right_button);
