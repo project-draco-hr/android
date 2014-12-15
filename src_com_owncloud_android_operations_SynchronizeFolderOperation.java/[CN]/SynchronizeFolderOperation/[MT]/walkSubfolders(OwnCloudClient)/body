@@ -1,0 +1,14 @@
+{
+  RemoteOperationResult contentsResult=null;
+  for (  SyncOperation op : mFoldersToWalkDown) {
+    contentsResult=op.execute(client,getStorageManager());
+    if (!contentsResult.isSuccess()) {
+      if (contentsResult.getException() != null) {
+        Log_OC.e(TAG,"Non blocking exception : " + contentsResult.getLogMessage(),contentsResult.getException());
+      }
+ else {
+        Log_OC.e(TAG,"Non blocking error : " + contentsResult.getLogMessage());
+      }
+    }
+  }
+}

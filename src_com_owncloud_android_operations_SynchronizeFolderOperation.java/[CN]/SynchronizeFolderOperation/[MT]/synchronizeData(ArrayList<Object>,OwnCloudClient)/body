@@ -1,12 +1,14 @@
 {
   FileDataStorageManager storageManager=getStorageManager();
-  mLocalFolder=storageManager.getFileByPath(mLocalFolder.getRemotePath());
   OCFile remoteFolder=fillOCFile((RemoteFile)folderAndFiles.get(0));
   remoteFolder.setParentId(mLocalFolder.getParentId());
   remoteFolder.setFileId(mLocalFolder.getFileId());
   Log_OC.d(TAG,"Remote folder " + mLocalFolder.getRemotePath() + " changed - starting update of local data ");
   List<OCFile> updatedFiles=new Vector<OCFile>(folderAndFiles.size() - 1);
-  List<SynchronizeFileOperation> filesToSyncContents=new Vector<SynchronizeFileOperation>();
+  mFilesForDirectDownload.clear();
+  mFilesToSyncContentsWithoutUpload.clear();
+  mFavouriteFilesToSyncContents.clear();
+  mFoldersToWalkDown.clear();
   List<OCFile> localFiles=storageManager.getFolderContent(mLocalFolder);
   Map<String,OCFile> localFilesMap=new HashMap<String,OCFile>(localFiles.size());
   for (  OCFile file : localFiles) {
@@ -38,22 +40,20 @@
  else {
       remoteFile.setEtag("");
     }
-    checkAndFixForeignStoragePath(remoteFile);
     searchForLocalFileInDefaultPath(remoteFile);
-    if (remoteFile.keepInSync()) {
-      SynchronizeFileOperation operation=new SynchronizeFileOperation(localFile,remoteFile,mAccount,true,mContext);
-      filesToSyncContents.add(operation);
+    if (remoteFile.isFolder()) {
+      SynchronizeFolderOperation synchFolderOp=new SynchronizeFolderOperation(mContext,remoteFile.getRemotePath(),mAccount,mCurrentSyncTime);
+      mFoldersToWalkDown.add(synchFolderOp);
     }
-    if (!remoteFile.isFolder()) {
-      requestForDownloadFile(remoteFile);
+ else     if (remoteFile.keepInSync()) {
+      SynchronizeFileOperation operation=new SynchronizeFileOperation(localFile,remoteFile,mAccount,true,mContext);
+      mFavouriteFilesToSyncContents.add(operation);
     }
  else {
-      SynchronizeFolderOperation synchFolderOp=new SynchronizeFolderOperation(mContext,remoteFile.getRemotePath(),mAccount,mCurrentSyncTime);
-      synchFolderOp.execute(mAccount,mContext,null,null);
+      SynchronizeFileOperation operation=new SynchronizeFileOperation(localFile,remoteFile,mAccount,true,false,mContext);
+      mFilesToSyncContentsWithoutUpload.add(operation);
     }
     updatedFiles.add(remoteFile);
   }
   storageManager.saveFolder(remoteFolder,updatedFiles,localFilesMap.values());
-  startContentSynchronizations(filesToSyncContents,client);
-  mChildren=updatedFiles;
 }

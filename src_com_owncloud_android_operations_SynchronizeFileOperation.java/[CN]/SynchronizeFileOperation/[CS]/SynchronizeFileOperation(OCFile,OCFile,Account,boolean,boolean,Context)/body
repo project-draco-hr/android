@@ -1,0 +1,4 @@
+{
+  this(localFile,serverFile,account,syncFileContents,context);
+  mAllowUploads=allowUploads;
+}

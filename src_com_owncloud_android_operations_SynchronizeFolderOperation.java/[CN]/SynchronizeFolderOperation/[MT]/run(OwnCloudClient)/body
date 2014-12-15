@@ -1,20 +1,23 @@
 {
   RemoteOperationResult result=null;
-  mFailsInFavouritesFound=0;
+  mFailsInFileSyncsFound=0;
   mConflictsFound=0;
-  mForgottenLocalFiles.clear();
 synchronized (mCancellationRequested) {
     if (mCancellationRequested.get()) {
       return new RemoteOperationResult(new OperationCancelledException());
     }
   }
+  mLocalFolder=getStorageManager().getFileByPath(mRemotePath);
   result=checkForChanges(client);
   if (result.isSuccess()) {
     if (mRemoteFolderChanged) {
       result=fetchAndSyncRemoteFolder(client);
     }
  else {
-      mChildren=getStorageManager().getFolderContent(mLocalFolder);
+      prepareOpsFromLocalKnowledge();
+    }
+    if (result.isSuccess()) {
+      syncContents(client);
     }
   }
   return result;
