@@ -2,5 +2,5 @@
   startDirectDownloads();
   startContentSynchronizations(mFilesToSyncContentsWithoutUpload,client);
   startContentSynchronizations(mFavouriteFilesToSyncContents,client);
-  walkSubfolders(mFoldersToWalkDown,client);
+  walkSubfolders(client);
 }
