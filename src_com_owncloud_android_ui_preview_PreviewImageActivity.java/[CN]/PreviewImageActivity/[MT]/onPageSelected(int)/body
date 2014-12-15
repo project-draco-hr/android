@@ -1,4 +1,6 @@
 {
+  mSavedPosition=position;
+  mHasSavedPosition=true;
   if (mDownloaderBinder == null) {
     mRequestWaitingForBinder=true;
   }
