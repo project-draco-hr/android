@@ -1,0 +1,7 @@
+{
+  if (account == null || remotePath == null)   return false;
+  String targetKey=buildRemoteName(account,remotePath);
+synchronized (mPendingOperations) {
+    return (mPendingOperations.containsKey(targetKey));
+  }
+}

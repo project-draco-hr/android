@@ -1,0 +1,7 @@
+{
+  Intent added=new Intent(FileDownloader.getDownloadAddedMessage());
+  added.putExtra(FileDownloader.ACCOUNT_NAME,account.name);
+  added.putExtra(FileDownloader.EXTRA_REMOTE_PATH,remotePath);
+  added.putExtra(FileDownloader.EXTRA_FILE_PATH,FileStorageUtils.getSavePath(account.name) + remotePath);
+  sendStickyBroadcast(added);
+}
