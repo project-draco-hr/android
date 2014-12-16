@@ -10,6 +10,7 @@
     Pair<Target,RemoteOperation> itemToQueue=newOperation(intent);
     if (itemToQueue != null) {
       mSyncFolderHandler.add(account,remotePath,(SynchronizeFolderOperation)itemToQueue.second);
+      sendBroadcastNewSyncFolder(account,remotePath);
       Message msg=mSyncFolderHandler.obtainMessage();
       msg.arg1=startId;
       msg.obj=itemSyncKey;
