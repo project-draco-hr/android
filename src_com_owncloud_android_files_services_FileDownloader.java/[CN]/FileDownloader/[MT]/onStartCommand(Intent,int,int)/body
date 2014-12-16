@@ -4,16 +4,21 @@
     return START_NOT_STICKY;
   }
  else {
-    Account account=intent.getParcelableExtra(EXTRA_ACCOUNT);
-    OCFile file=intent.getParcelableExtra(EXTRA_FILE);
+    mAccount=intent.getParcelableExtra(EXTRA_ACCOUNT);
+    mFile=intent.getParcelableExtra(EXTRA_FILE);
     if (ACTION_CANCEL_FILE_DOWNLOAD.equals(intent.getAction())) {
-      cancel(account,file);
+      new Thread(new Runnable(){
+        public void run(){
+          cancel(mAccount,mFile);
+        }
+      }
+).start();
     }
  else {
       AbstractList<String> requestedDownloads=new Vector<String>();
-      String downloadKey=buildRemoteName(account,file);
+      String downloadKey=buildRemoteName(mAccount,mFile);
       try {
-        DownloadFileOperation newDownload=new DownloadFileOperation(account,file);
+        DownloadFileOperation newDownload=new DownloadFileOperation(mAccount,mFile);
         mPendingDownloads.putIfAbsent(downloadKey,newDownload);
         newDownload.addDatatransferProgressListener(this);
         newDownload.addDatatransferProgressListener((FileDownloaderBinder)mBinder);
