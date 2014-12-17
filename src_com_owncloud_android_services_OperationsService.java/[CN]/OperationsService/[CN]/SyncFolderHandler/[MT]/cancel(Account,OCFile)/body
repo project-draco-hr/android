@@ -6,9 +6,9 @@ synchronized (mPendingOperations) {
   if (syncOperation != null) {
     syncOperation.cancel();
   }
-  Intent intent=new Intent(MainApp.getAppContext(),FileDownloader.class);
+  Intent intent=new Intent(mService,FileDownloader.class);
   intent.setAction(FileDownloader.ACTION_CANCEL_FILE_DOWNLOAD);
   intent.putExtra(FileDownloader.EXTRA_ACCOUNT,account);
   intent.putExtra(FileDownloader.EXTRA_FILE,file);
-  MainApp.getAppContext().startService(intent);
+  mService.startService(intent);
 }
