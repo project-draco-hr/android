@@ -2,25 +2,25 @@
   RemoteOperationResult result=null;
   mFailsInFileSyncsFound=0;
   mConflictsFound=0;
-synchronized (mCancellationRequested) {
-    if (mCancellationRequested.get()) {
-      for (      SyncOperation synchOp : mFoldersToWalkDown) {
-        ((SynchronizeFolderOperation)synchOp).cancel();
+  try {
+    mLocalFolder=getStorageManager().getFileByPath(mRemotePath);
+    result=checkForChanges(client);
+    if (result.isSuccess()) {
+      if (mRemoteFolderChanged) {
+        result=fetchAndSyncRemoteFolder(client);
       }
-      return new RemoteOperationResult(new OperationCancelledException());
+ else {
+        prepareOpsFromLocalKnowledge();
+      }
+      if (result.isSuccess()) {
+        syncContents(client);
+      }
     }
   }
-  mLocalFolder=getStorageManager().getFileByPath(mRemotePath);
-  result=checkForChanges(client);
-  if (result.isSuccess()) {
-    if (mRemoteFolderChanged) {
-      result=fetchAndSyncRemoteFolder(client);
-    }
- else {
-      prepareOpsFromLocalKnowledge();
-    }
-    if (result.isSuccess()) {
-      syncContents(client);
+ catch (  OperationCancelledException e) {
+    result=new RemoteOperationResult(e);
+    for (    SyncOperation synchOp : mFoldersToWalkDown) {
+      ((SynchronizeFolderOperation)synchOp).cancel();
     }
   }
   return result;

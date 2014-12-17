@@ -8,4 +8,5 @@
   mFilesToSyncContentsWithoutUpload=new Vector<SyncOperation>();
   mFavouriteFilesToSyncContents=new Vector<SyncOperation>();
   mFoldersToWalkDown=new Vector<SyncOperation>();
+  mCancellationRequested=new AtomicBoolean(false);
 }

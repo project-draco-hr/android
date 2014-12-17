@@ -2,6 +2,9 @@
   Log_OC.d(TAG,"Checking changes in " + mAccount.name + mRemotePath);
   mRemoteFolderChanged=true;
   RemoteOperationResult result=null;
+  if (mCancellationRequested.get()) {
+    throw new OperationCancelledException();
+  }
   ReadRemoteFileOperation operation=new ReadRemoteFileOperation(mRemotePath);
   result=operation.execute(client);
   if (result.isSuccess()) {

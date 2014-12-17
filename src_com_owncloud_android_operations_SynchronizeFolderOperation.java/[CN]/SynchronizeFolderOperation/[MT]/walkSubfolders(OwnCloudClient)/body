@@ -1,6 +1,9 @@
 {
   RemoteOperationResult contentsResult=null;
   for (  SyncOperation op : mFoldersToWalkDown) {
+    if (mCancellationRequested.get()) {
+      throw new OperationCancelledException();
+    }
     contentsResult=op.execute(client,getStorageManager());
     if (!contentsResult.isSuccess()) {
       if (contentsResult.getException() != null) {
