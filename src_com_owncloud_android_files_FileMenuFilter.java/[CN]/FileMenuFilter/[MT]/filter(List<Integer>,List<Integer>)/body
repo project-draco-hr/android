@@ -4,6 +4,8 @@
   if (mComponentsGetter != null && mFile != null && mAccount != null) {
     FileDownloaderBinder downloaderBinder=mComponentsGetter.getFileDownloaderBinder();
     downloading=downloaderBinder != null && downloaderBinder.isDownloading(mAccount,mFile);
+    OperationsServiceBinder opsBinder=mComponentsGetter.getOperationsServiceBinder();
+    downloading|=(opsBinder != null && opsBinder.isSynchronizing(mAccount,mFile.getRemotePath()));
     FileUploaderBinder uploaderBinder=mComponentsGetter.getFileUploaderBinder();
     uploading=uploaderBinder != null && uploaderBinder.isUploading(mAccount,mFile);
   }
