@@ -13,6 +13,6 @@
  else {
     mFiles=null;
   }
-  mFiles=FileStorageUtils.sortDirectory(mFiles);
+  mFiles=FileStorageUtils.sortFolder(mFiles);
   notifyDataSetChanged();
 }

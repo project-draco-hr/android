@@ -5,6 +5,6 @@
   editor.commit();
   FileStorageUtils.mSortOrder=order;
   FileStorageUtils.mSortAscending=ascending;
-  mFiles=FileStorageUtils.sortDirectory(mFiles);
+  mFiles=FileStorageUtils.sortFolder(mFiles);
   notifyDataSetChanged();
 }
