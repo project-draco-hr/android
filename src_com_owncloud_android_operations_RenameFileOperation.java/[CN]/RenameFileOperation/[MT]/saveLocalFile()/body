@@ -1,11 +1,15 @@
 {
   mFile.setFileName(mNewName);
   if (mFile.isDown()) {
-    File f=new File(mFile.getStoragePath());
+    String oldPath=mFile.getStoragePath();
+    File f=new File(oldPath);
     String parentStoragePath=f.getParent();
     if (!parentStoragePath.endsWith(File.separator))     parentStoragePath+=File.separator;
     if (f.renameTo(new File(parentStoragePath + mNewName))) {
-      mFile.setStoragePath(parentStoragePath + mNewName);
+      String newPath=parentStoragePath + mNewName;
+      mFile.setStoragePath(newPath);
+      getStorageManager().triggerMediaScan(oldPath);
+      getStorageManager().triggerMediaScan(newPath);
     }
   }
   getStorageManager().saveFile(mFile);
