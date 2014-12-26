@@ -1,3 +1,4 @@
+Context context
 String path
 ShareType shareType
 String shareWith
