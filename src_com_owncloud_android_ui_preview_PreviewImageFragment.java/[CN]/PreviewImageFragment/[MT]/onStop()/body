@@ -1,0 +1,7 @@
+{
+  super.onStop();
+  if (mLoadBitmapTask != null) {
+    mLoadBitmapTask.cancel(true);
+    mLoadBitmapTask=null;
+  }
+}

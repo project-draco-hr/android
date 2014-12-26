@@ -11,19 +11,23 @@
   }
   ArrayList<Uri> uris=new ArrayList<Uri>();
   for (  String file : Log_OC.getLogFileNames()) {
-    if (new File(mLogPath + File.separator,file).exists()) {
-      Uri u=Uri.parse("file://" + mLogPath + File.separator+ file);
-      uris.add(u);
+    File logFile=new File(mLogPath,file);
+    if (logFile.exists()) {
+      uris.add(Uri.fromFile(logFile));
     }
   }
   Intent intent=new Intent(Intent.ACTION_SEND_MULTIPLE);
-  intent.setClassName("com.google.android.gm","com.google.android.gm.ComposeActivityGmail");
-  intent.putExtra(Intent.EXTRA_EMAIL,new String[]{emailAddress});
-  intent.putExtra(Intent.EXTRA_SUBJECT,getText(R.string.log_mail_subject));
+  intent.putExtra(Intent.EXTRA_EMAIL,emailAddress);
+  String subject=String.format(getString(R.string.log_send_mail_subject),getString(R.string.app_name));
+  intent.putExtra(Intent.EXTRA_SUBJECT,subject);
   intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
   intent.setType(MAIL_ATTACHMENT_TYPE);
   intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM,uris);
-  if (intent.resolveActivity(getPackageManager()) != null) {
+  try {
     startActivity(intent);
+  }
+ catch (  ActivityNotFoundException e) {
+    Toast.makeText(this,getString(R.string.log_send_no_mail_app),Toast.LENGTH_LONG).show();
+    Log_OC.i(TAG,"Could not find app for sending log history.");
   }
 }
