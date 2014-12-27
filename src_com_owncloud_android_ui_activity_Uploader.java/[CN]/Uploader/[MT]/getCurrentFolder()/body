@@ -1,0 +1,13 @@
+{
+  OCFile file=mFile;
+  if (file != null) {
+    if (file.isFolder()) {
+      return file;
+    }
+ else     if (mStorageManager != null) {
+      String parentPath=file.getRemotePath().substring(0,file.getRemotePath().lastIndexOf(file.getFileName()));
+      return mStorageManager.getFileByPath(parentPath);
+    }
+  }
+  return null;
+}

@@ -1,0 +1,31 @@
+{
+  View vi=convertView;
+  if (convertView == null)   vi=inflater.inflate(R.layout.uploader_list_item_layout,null);
+  HashMap<String,OCFile> data=(HashMap<String,OCFile>)getItem(position);
+  OCFile file=data.get("dirname");
+  TextView filename=(TextView)vi.findViewById(R.id.textView1);
+  filename.setText((CharSequence)file.getFileName());
+  ImageView fileIcon=(ImageView)vi.findViewById(R.id.imageView1);
+  fileIcon.setTag(file.getFileId());
+  if (file.isImage() && file.getRemoteId() != null) {
+    Bitmap thumbnail=ThumbnailsCacheManager.getBitmapFromDiskCache(String.valueOf(file.getRemoteId()));
+    if (thumbnail != null && !file.needsUpdateThumbnail()) {
+      fileIcon.setImageBitmap(thumbnail);
+    }
+ else {
+      if (ThumbnailsCacheManager.cancelPotentialWork(file,fileIcon)) {
+        final ThumbnailsCacheManager.ThumbnailGenerationTask task=new ThumbnailsCacheManager.ThumbnailGenerationTask(fileIcon,mStorageManager,mAccount);
+        if (thumbnail == null) {
+          thumbnail=ThumbnailsCacheManager.mDefaultImg;
+        }
+        final AsyncDrawable asyncDrawable=new AsyncDrawable(mContext.getResources(),thumbnail,task);
+        fileIcon.setImageDrawable(asyncDrawable);
+        task.execute(file);
+      }
+    }
+  }
+ else {
+    fileIcon.setImageResource(DisplayUtils.getResourceId(file.getMimetype(),file.getFileName()));
+  }
+  return vi;
+}

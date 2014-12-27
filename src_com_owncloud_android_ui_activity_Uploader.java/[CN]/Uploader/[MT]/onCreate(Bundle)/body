@@ -24,4 +24,8 @@
  else {
     showDialog(DIALOG_NO_STREAM);
   }
+  IntentFilter syncIntentFilter=new IntentFilter(SynchronizeFolderOperation.EVENT_SINGLE_FOLDER_CONTENTS_SYNCED);
+  syncIntentFilter.addAction(SynchronizeFolderOperation.EVENT_SINGLE_FOLDER_SHARES_SYNCED);
+  mSyncBroadcastReceiver=new SyncBroadcastReceiver();
+  registerReceiver(mSyncBroadcastReceiver,syncIntentFilter);
 }
