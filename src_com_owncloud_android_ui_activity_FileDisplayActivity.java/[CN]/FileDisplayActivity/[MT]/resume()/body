@@ -1,0 +1,18 @@
+{
+  refreshListOfFilesFragment();
+  IntentFilter syncIntentFilter=new IntentFilter(FileSyncAdapter.EVENT_FULL_SYNC_START);
+  syncIntentFilter.addAction(FileSyncAdapter.EVENT_FULL_SYNC_END);
+  syncIntentFilter.addAction(FileSyncAdapter.EVENT_FULL_SYNC_FOLDER_CONTENTS_SYNCED);
+  syncIntentFilter.addAction(SynchronizeFolderOperation.EVENT_SINGLE_FOLDER_CONTENTS_SYNCED);
+  syncIntentFilter.addAction(SynchronizeFolderOperation.EVENT_SINGLE_FOLDER_SHARES_SYNCED);
+  mSyncBroadcastReceiver=new SyncBroadcastReceiver();
+  registerReceiver(mSyncBroadcastReceiver,syncIntentFilter);
+  IntentFilter uploadIntentFilter=new IntentFilter(FileUploader.getUploadFinishMessage());
+  mUploadFinishReceiver=new UploadFinishReceiver();
+  registerReceiver(mUploadFinishReceiver,uploadIntentFilter);
+  IntentFilter downloadIntentFilter=new IntentFilter(FileDownloader.getDownloadAddedMessage());
+  downloadIntentFilter.addAction(FileDownloader.getDownloadFinishMessage());
+  mDownloadFinishReceiver=new DownloadFinishReceiver();
+  registerReceiver(mDownloadFinishReceiver,downloadIntentFilter);
+  Log_OC.d(TAG,"onResume() end");
+}

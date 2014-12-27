@@ -1,5 +1,12 @@
 {
   super.onActivityResult(requestCode,resultCode,data);
+  Log_OC.d(TAG,"requestCode: " + requestCode);
+  if (requestCode == PinCodeActivity.EXTRA_PIN_CORRECT) {
+    Log_OC.d(TAG,"Extra pin: " + resultCode);
+    if (resultCode == RESULT_OK) {
+      resume();
+    }
+  }
   if (requestCode == ACTION_SELECT_CONTENT_FROM_APPS && (resultCode == RESULT_OK || resultCode == UploadFilesActivity.RESULT_OK_AND_MOVE)) {
     if (data.getData() == null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
       for (int i=0; i < data.getClipData().getItemCount(); i++) {

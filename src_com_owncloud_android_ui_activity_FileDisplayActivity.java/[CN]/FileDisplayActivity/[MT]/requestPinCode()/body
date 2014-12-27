@@ -4,7 +4,6 @@
   pinStart=appPrefs.getBoolean("set_pincode",false);
   if (pinStart) {
     Intent i=new Intent(getApplicationContext(),PinCodeActivity.class);
-    i.putExtra(PinCodeActivity.EXTRA_ACTIVITY,"FileDisplayActivity");
-    startActivity(i);
+    startActivityForResult(i,PinCodeActivity.EXTRA_PIN_CORRECT);
   }
 }
