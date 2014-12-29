@@ -12,8 +12,7 @@
     thumbnail=getBitmapFromDiskCache(imageKey);
     if (mFile instanceof AsyncTaskOCFile) {
       if (thumbnail == null || mFile.getNeedsUpdateThumbnail()) {
-        Resources r=MainApp.getAppContext().getResources();
-        int px=(int)Math.round(r.getDimension(R.dimen.file_icon_size));
+        int px=getThumbnailDimension();
         if (mFile.getIsDown()) {
           Bitmap bitmap=BitmapUtils.decodeSampledBitmapFromFile(mFile.getPath(),px,px);
           if (bitmap != null) {
@@ -54,8 +53,7 @@
     }
  else     if (mFile instanceof AsyncTaskFileLocal) {
       if (thumbnail == null) {
-        Resources r=MainApp.getAppContext().getResources();
-        int px=(int)Math.round(r.getDimension(R.dimen.file_icon_size));
+        int px=getThumbnailDimension();
         Bitmap bitmap=BitmapUtils.decodeSampledBitmapFromFile(mFile.getPath(),px,px);
         if (bitmap != null) {
           thumbnail=addThumbnailToCache(imageKey,bitmap,mFile.getPath(),px);
