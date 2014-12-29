@@ -38,7 +38,7 @@
         }
         checkBoxV.setVisibility(View.VISIBLE);
       }
-      if (isImage(file)) {
+      if (BitmapUtils.isImage(file)) {
         Bitmap thumbnail=ThumbnailsCacheManager.getBitmapFromDiskCache(String.valueOf(file.hashCode()));
         if (thumbnail != null) {
           fileIcon.setImageBitmap(thumbnail);
