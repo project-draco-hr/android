@@ -1,9 +1,0 @@
-{
-  boolean pinStart=false;
-  SharedPreferences appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-  pinStart=appPrefs.getBoolean("set_pincode",false);
-  if (pinStart) {
-    Intent i=new Intent(getApplicationContext(),PinCodeActivity.class);
-    startActivityForResult(i,PinCodeActivity.EXTRA_PIN_CORRECT);
-  }
-}

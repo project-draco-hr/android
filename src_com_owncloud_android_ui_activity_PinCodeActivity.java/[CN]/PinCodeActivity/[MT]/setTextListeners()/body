@@ -121,7 +121,8 @@
         if (!mPinCodeChecked) {
           mPinCodeChecked=checkPincode();
         }
-        if (mPinCodeChecked && (mActivity.equals("FileDisplayActivity") || mActivity.equals("PreviewImageActivity"))) {
+        if (mPinCodeChecked) {
+          PinCheck.setUnlockTimestamp();
           finish();
         }
  else         if (mPinCodeChecked) {

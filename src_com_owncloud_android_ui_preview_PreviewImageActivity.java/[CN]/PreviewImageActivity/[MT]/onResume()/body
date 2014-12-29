@@ -1,7 +1,8 @@
 {
   super.onResume();
-  mDownloadFinishReceiver=new DownloadFinishReceiver();
-  IntentFilter filter=new IntentFilter(FileDownloader.getDownloadFinishMessage());
-  filter.addAction(FileDownloader.getDownloadAddedMessage());
-  registerReceiver(mDownloadFinishReceiver,filter);
+  if (PinCheck.checkIfPinEntry()) {
+    Intent i=new Intent(MainApp.getAppContext(),PinCodeActivity.class);
+    i.putExtra(PinCodeActivity.EXTRA_ACTIVITY,"FileDisplayActivity");
+    startActivity(i);
+  }
 }

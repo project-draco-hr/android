@@ -1,8 +1,0 @@
-{
-  if (getIntent().getAction() != null && getIntent().getAction().equals(Intent.ACTION_MAIN) && savedInstanceState == null) {
-    requestPinCode();
-  }
- else   if (getIntent().getAction() == null && savedInstanceState == null) {
-    requestPinCode();
-  }
-}

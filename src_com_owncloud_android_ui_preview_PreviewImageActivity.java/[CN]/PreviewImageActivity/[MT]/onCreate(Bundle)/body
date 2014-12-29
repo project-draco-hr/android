@@ -6,8 +6,10 @@
   actionBar.setIcon(DisplayUtils.getSeasonalIconId());
   actionBar.setDisplayHomeAsUpEnabled(true);
   actionBar.hide();
-  if (getIntent().getExtras() != null && savedInstanceState == null && fromNotification()) {
-    requestPinCode();
+  if (PinCheck.checkIfPinEntry()) {
+    Intent i=new Intent(MainApp.getAppContext(),PinCodeActivity.class);
+    i.putExtra(PinCodeActivity.EXTRA_ACTIVITY,"FileDisplayActivity");
+    startActivity(i);
   }
   if (isHoneycombOrHigher()) {
     mFullScreenAnchorView=getWindow().getDecorView();

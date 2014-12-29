@@ -12,6 +12,7 @@
     unregisterReceiver(mDownloadFinishReceiver);
     mDownloadFinishReceiver=null;
   }
+  PinCheck.setUnlockTimestamp();
   Log_OC.d(TAG,"onPause() end");
   super.onPause();
 }

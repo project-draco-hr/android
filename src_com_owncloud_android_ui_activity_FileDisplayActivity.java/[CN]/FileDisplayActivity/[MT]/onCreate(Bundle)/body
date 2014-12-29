@@ -2,7 +2,11 @@
   Log_OC.d(TAG,"onCreate() start");
   requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
   super.onCreate(savedInstanceState);
-  checkIfRequestPin(savedInstanceState);
+  if (PinCheck.checkIfPinEntry()) {
+    Intent i=new Intent(MainApp.getAppContext(),PinCodeActivity.class);
+    i.putExtra(PinCodeActivity.EXTRA_ACTIVITY,"FileDisplayActivity");
+    startActivity(i);
+  }
   if (savedInstanceState == null) {
     Intent initObserversIntent=FileObserverService.makeInitIntent(this);
     startService(initObserversIntent);
