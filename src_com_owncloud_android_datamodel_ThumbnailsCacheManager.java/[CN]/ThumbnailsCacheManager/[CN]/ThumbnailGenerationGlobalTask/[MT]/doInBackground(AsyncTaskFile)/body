@@ -1,0 +1,73 @@
+{
+  Bitmap thumbnail=null;
+  try {
+    if (mAccount != null) {
+      AccountManager accountMgr=AccountManager.get(MainApp.getAppContext());
+      mServerVersion=accountMgr.getUserData(mAccount,Constants.KEY_OC_VERSION);
+      OwnCloudAccount ocAccount=new OwnCloudAccount(mAccount,MainApp.getAppContext());
+      mClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,MainApp.getAppContext());
+    }
+    mFile=params[0];
+    final String imageKey=String.valueOf(mFile.getId());
+    thumbnail=getBitmapFromDiskCache(imageKey);
+    if (mFile instanceof AsyncTaskOCFile) {
+      if (thumbnail == null || mFile.getNeedsUpdateThumbnail()) {
+        Resources r=MainApp.getAppContext().getResources();
+        int px=(int)Math.round(r.getDimension(R.dimen.file_icon_size));
+        if (mFile.getIsDown()) {
+          Bitmap bitmap=BitmapUtils.decodeSampledBitmapFromFile(mFile.getPath(),px,px);
+          if (bitmap != null) {
+            thumbnail=addThumbnailToCache(imageKey,bitmap,mFile.getPath(),px);
+            mFile.setNeedsUpdateThumbnail(false);
+            mStorageManager.saveFile((OCFile)mFile.getFile());
+          }
+        }
+ else {
+          if (mClient != null && mServerVersion != null) {
+            OwnCloudVersion serverOCVersion=new OwnCloudVersion(mServerVersion);
+            if (serverOCVersion.compareTo(new OwnCloudVersion(MINOR_SERVER_VERSION_FOR_THUMBS)) >= 0) {
+              try {
+                int status=-1;
+                String uri=mClient.getBaseUri() + "/index.php/apps/files/api/v1/thumbnail/" + px+ "/"+ px+ Uri.encode(mFile.getRemotePath(),"/");
+                Log_OC.d("Thumbnail","URI: " + uri);
+                GetMethod get=new GetMethod(uri);
+                status=mClient.executeMethod(get);
+                if (status == HttpStatus.SC_OK) {
+                  byte[] bytes=get.getResponseBody();
+                  Bitmap bitmap=BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+                  thumbnail=ThumbnailUtils.extractThumbnail(bitmap,px,px);
+                  if (thumbnail != null) {
+                    addBitmapToCache(imageKey,thumbnail);
+                  }
+                }
+              }
+ catch (              Exception e) {
+                e.printStackTrace();
+              }
+            }
+ else {
+              Log_OC.d(TAG,"Server too old");
+            }
+          }
+        }
+      }
+    }
+ else     if (mFile instanceof AsyncTaskFileLocal) {
+      if (thumbnail == null) {
+        Resources r=MainApp.getAppContext().getResources();
+        int px=(int)Math.round(r.getDimension(R.dimen.file_icon_size));
+        Bitmap bitmap=BitmapUtils.decodeSampledBitmapFromFile(mFile.getPath(),px,px);
+        if (bitmap != null) {
+          thumbnail=addThumbnailToCache(imageKey,bitmap,mFile.getPath(),px);
+        }
+      }
+    }
+  }
+ catch (  Throwable t) {
+    Log_OC.e(TAG,"Generation of thumbnail for " + mFile + " failed",t);
+    if (t instanceof OutOfMemoryError) {
+      System.gc();
+    }
+  }
+  return thumbnail;
+}

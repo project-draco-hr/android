@@ -1,0 +1,13 @@
+{
+  final ThumbnailGenerationGlobalTask bitmapWorkerTask=getBitmapGlobalWorkerTask(imageView);
+  if (bitmapWorkerTask != null) {
+    final AsyncTaskFile bitmapData=bitmapWorkerTask.mFile;
+    if (bitmapData == null || bitmapData != file) {
+      bitmapWorkerTask.cancel(true);
+    }
+ else {
+      return false;
+    }
+  }
+  return true;
+}

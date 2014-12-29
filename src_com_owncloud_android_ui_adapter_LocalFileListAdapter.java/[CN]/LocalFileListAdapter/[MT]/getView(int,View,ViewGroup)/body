@@ -44,14 +44,15 @@
           fileIcon.setImageBitmap(thumbnail);
         }
  else {
-          if (ThumbnailsCacheManager.cancelPotentialWork(file,fileIcon)) {
-            final ThumbnailsCacheManager.ThumbnailLocalGenerationTask task=new ThumbnailsCacheManager.ThumbnailLocalGenerationTask(fileIcon);
+          ThumbnailsCacheManager.AsyncTaskFile asyncTaskFile=new ThumbnailsCacheManager.AsyncTaskFileLocal(file);
+          if (ThumbnailsCacheManager.cancelPotentialGlobalWork(asyncTaskFile,fileIcon)) {
+            final ThumbnailsCacheManager.ThumbnailGenerationGlobalTask task=new ThumbnailsCacheManager.ThumbnailGenerationGlobalTask(fileIcon);
             if (thumbnail == null) {
               thumbnail=ThumbnailsCacheManager.mDefaultImg;
             }
-            final AsyncLocalDrawable asyncDrawable=new AsyncLocalDrawable(mContext.getResources(),thumbnail,task);
+            final ThumbnailsCacheManager.AsyncGlobalDrawable asyncDrawable=new ThumbnailsCacheManager.AsyncGlobalDrawable(mContext.getResources(),thumbnail,task);
             fileIcon.setImageDrawable(asyncDrawable);
-            task.execute(file);
+            task.execute(asyncTaskFile);
           }
         }
       }

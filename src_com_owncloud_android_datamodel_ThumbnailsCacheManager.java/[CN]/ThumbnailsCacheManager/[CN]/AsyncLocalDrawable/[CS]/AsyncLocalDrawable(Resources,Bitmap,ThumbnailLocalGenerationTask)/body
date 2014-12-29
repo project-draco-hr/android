@@ -1,4 +1,0 @@
-{
-  super(res,bitmap);
-  bitmapWorkerLocalTaskReference=new WeakReference<ThumbnailLocalGenerationTask>(bitmapWorkerTask);
-}
