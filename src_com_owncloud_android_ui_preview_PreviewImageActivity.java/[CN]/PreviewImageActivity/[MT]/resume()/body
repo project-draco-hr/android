@@ -1,6 +1,0 @@
-{
-  mDownloadFinishReceiver=new DownloadFinishReceiver();
-  IntentFilter filter=new IntentFilter(FileDownloader.getDownloadFinishMessage());
-  filter.addAction(FileDownloader.getDownloadAddedMessage());
-  registerReceiver(mDownloadFinishReceiver,filter);
-}

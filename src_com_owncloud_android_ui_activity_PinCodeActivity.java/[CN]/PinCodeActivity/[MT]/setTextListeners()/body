@@ -121,11 +121,12 @@
         if (!mPinCodeChecked) {
           mPinCodeChecked=checkPincode();
         }
-        if (mPinCodeChecked) {
+        if (mPinCodeChecked && (mActivity.equals("FileDisplayActivity") || mActivity.equals("PreviewImageActivity"))) {
           PinCheck.setUnlockTimestamp();
           finish();
         }
  else         if (mPinCodeChecked) {
+          PinCheck.setUnlockTimestamp();
           Intent intent=getIntent();
           String newState=intent.getStringExtra(EXTRA_NEW_STATE);
           if (newState.equals("false")) {

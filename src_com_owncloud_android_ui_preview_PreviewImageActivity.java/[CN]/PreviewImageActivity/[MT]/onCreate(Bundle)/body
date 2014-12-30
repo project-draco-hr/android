@@ -8,7 +8,7 @@
   actionBar.hide();
   if (PinCheck.checkIfPinEntry()) {
     Intent i=new Intent(MainApp.getAppContext(),PinCodeActivity.class);
-    i.putExtra(PinCodeActivity.EXTRA_ACTIVITY,"FileDisplayActivity");
+    i.putExtra(PinCodeActivity.EXTRA_ACTIVITY,"PreviewImageActivity");
     startActivity(i);
   }
   if (isHoneycombOrHigher()) {
