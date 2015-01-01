@@ -1,6 +1,11 @@
 {
   super.onCreate(savedInstanceState);
   mParents=new Stack<String>();
+  if (PinCheck.checkIfPinEntry()) {
+    Intent i=new Intent(MainApp.getAppContext(),PinCodeActivity.class);
+    i.putExtra(PinCodeActivity.EXTRA_ACTIVITY,"ownCloudUploader");
+    startActivity(i);
+  }
   ActionBar actionBar=getSupportActionBar();
   actionBar.setIcon(DisplayUtils.getSeasonalIconId());
   if (prepareStreamsToUpload()) {

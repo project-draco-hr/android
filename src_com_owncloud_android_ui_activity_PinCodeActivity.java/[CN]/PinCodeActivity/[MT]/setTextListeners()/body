@@ -121,7 +121,7 @@
         if (!mPinCodeChecked) {
           mPinCodeChecked=checkPincode();
         }
-        if (mPinCodeChecked && (mActivity.equals("FileDisplayActivity") || mActivity.equals("PreviewImageActivity"))) {
+        if (mPinCodeChecked && (mActivity.equals("FileDisplayActivity") || mActivity.equals("PreviewImageActivity") || mActivity.equals("ownCloudUploader"))) {
           PinCheck.setUnlockTimestamp();
           finish();
         }
