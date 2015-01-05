@@ -5,7 +5,7 @@
   OCFileListFragment listOfFiles=getListOfFilesFragment();
   if (listOfFiles != null) {
     setNavigationListWithFolder(folder);
-    listOfFiles.listDirectory(folder);
+    listOfFiles.listDirectory(folder,MainApp.getOnlyOnDevice());
     setFile(listOfFiles.getCurrentFile());
     startSyncFolderOperation(folder,false);
   }

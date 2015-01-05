@@ -3,8 +3,8 @@
   if (chosenFile == null || mDualPane) {
     OCFile currentDir=getCurrentDir();
     boolean noRoot=(currentDir != null && currentDir.getParentId() != 0);
-    actionBar.setDisplayHomeAsUpEnabled(noRoot);
-    actionBar.setDisplayShowTitleEnabled(!noRoot);
+    actionBar.setDisplayHomeAsUpEnabled(true);
+    actionBar.setDisplayShowTitleEnabled(true);
     if (!noRoot) {
       actionBar.setTitle(getString(R.string.default_display_name_for_root_folder));
     }

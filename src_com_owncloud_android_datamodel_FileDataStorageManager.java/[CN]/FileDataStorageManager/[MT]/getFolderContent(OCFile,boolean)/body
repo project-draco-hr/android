@@ -1,0 +1,8 @@
+{
+  if (f != null && f.isFolder() && f.getFileId() != -1) {
+    return getFolderContent(f.getFileId(),onlyOnDevice);
+  }
+ else {
+    return new Vector<OCFile>();
+  }
+}

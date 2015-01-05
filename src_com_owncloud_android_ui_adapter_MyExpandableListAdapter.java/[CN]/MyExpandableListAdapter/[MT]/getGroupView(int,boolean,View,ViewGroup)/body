@@ -1,0 +1,16 @@
+{
+  if (convertView == null) {
+    convertView=inflater.inflate(R.layout.listrow_group,null);
+  }
+  final Group group=(Group)getGroup(groupPosition);
+  if (group.children.size() == 0) {
+    convertView.setOnClickListener(new OnClickListener(){
+      @Override public void onClick(      View v){
+        Toast.makeText(activity,group.string,Toast.LENGTH_SHORT).show();
+      }
+    }
+);
+  }
+  ((TextView)convertView).setText(group.string);
+  return convertView;
+}

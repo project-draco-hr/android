@@ -20,7 +20,7 @@
       moveCount++;
     }
     mFile=parentDir;
-    listDirectory(mFile);
+    listDirectory(mFile,MainApp.getOnlyOnDevice());
     onRefresh(false);
     restoreIndexAndTopPosition();
   }

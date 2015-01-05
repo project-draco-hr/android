@@ -2,7 +2,7 @@
   if (folder != null) {
     String where=ProviderTableMeta.OCSHARES_PATH + "=?" + " AND "+ ProviderTableMeta.OCSHARES_ACCOUNT_OWNER+ "=?";
     String[] whereArgs=new String[]{"",mAccount.name};
-    Vector<OCFile> files=getFolderContent(folder);
+    Vector<OCFile> files=getFolderContent(folder,false);
     for (    OCFile file : files) {
       whereArgs[0]=file.getRemotePath();
       preparedOperations.add(ContentProviderOperation.newDelete(ProviderTableMeta.CONTENT_URI_SHARE).withSelection(where,whereArgs).build());

@@ -1,6 +1,6 @@
 {
   Log_OC.d(TAG,"on item click");
-  Vector<OCFile> tmpfiles=mStorageManager.getFolderContent(mFile);
+  Vector<OCFile> tmpfiles=mStorageManager.getFolderContent(mFile,false);
   if (tmpfiles.size() <= 0)   return;
   Vector<OCFile> files=new Vector<OCFile>();
   for (  OCFile f : tmpfiles)   if (f.isFolder())   files.add(f);

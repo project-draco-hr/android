@@ -2,7 +2,7 @@
   boolean success=true;
   File localFolder=new File(FileStorageUtils.getDefaultSavePathFor(mAccount.name,folder));
   if (localFolder.exists()) {
-    Vector<OCFile> files=getFolderContent(folder.getFileId());
+    Vector<OCFile> files=getFolderContent(folder.getFileId(),false);
     if (files != null) {
       for (      OCFile file : files) {
         if (file.isFolder()) {

@@ -15,7 +15,7 @@
   Log_OC.d(TAG,"Populating view with content of : " + full_path);
   mFile=mStorageManager.getFileByPath(full_path);
   if (mFile != null) {
-    Vector<OCFile> files=mStorageManager.getFolderContent(mFile);
+    Vector<OCFile> files=mStorageManager.getFolderContent(mFile,false);
     List<HashMap<String,Object>> data=new LinkedList<HashMap<String,Object>>();
     for (    OCFile f : files) {
       HashMap<String,Object> h=new HashMap<String,Object>();
@@ -24,7 +24,7 @@
         data.add(h);
       }
     }
-    SimpleAdapter sa=new SimpleAdapter(this,data,R.layout.uploader_list_item_layout,new String[]{"dirname"},new int[]{R.id.textView1});
+    SimpleAdapter sa=new SimpleAdapter(this,data,R.layout.uploader_list_item_layout,new String[]{"dirname"},new int[]{R.id.drawer_username});
     setListAdapter(sa);
     Button btn=(Button)findViewById(R.id.uploader_choose_folder);
     btn.setOnClickListener(this);

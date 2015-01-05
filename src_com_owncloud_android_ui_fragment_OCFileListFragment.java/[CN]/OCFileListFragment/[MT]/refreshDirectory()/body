@@ -1,0 +1,3 @@
+{
+  listDirectory(getCurrentFile(),MainApp.getOnlyOnDevice());
+}

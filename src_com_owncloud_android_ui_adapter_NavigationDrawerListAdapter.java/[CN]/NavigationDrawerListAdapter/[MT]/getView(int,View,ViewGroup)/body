@@ -1,0 +1,44 @@
+{
+  LayoutInflater inflator=(LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+  if (all.size() > position) {
+    if (all.get(position) instanceof String) {
+      View view=inflator.inflate(R.layout.drawer_list_item,null);
+      view.setMinimumHeight(40);
+      TextView textView=(TextView)view.findViewById(R.id.drawer_textView);
+      String entry=(String)all.get(position);
+      textView.setText(entry);
+      return view;
+    }
+    if (all.get(position) instanceof Account[]) {
+      final View view=inflator.inflate(R.layout.drawer_account_group,null);
+      final RadioGroup group=(RadioGroup)view.findViewById(R.id.drawer_radio_group);
+      for (      Account account : mAccounts) {
+        RadioButton rb=new RadioButton(mContext);
+        rb.setText(account.name);
+        rb.setTextColor(mContext.getResources().getColor(R.color.black));
+        RadioGroup.LayoutParams params=new RadioGroup.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
+        params.weight=1.0f;
+        params.setMargins(15,5,5,5);
+        if (account.name.equals(currentAccount.name)) {
+          rb.setChecked(true);
+        }
+ else {
+          rb.setChecked(false);
+        }
+        group.addView(rb,params);
+      }
+      group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+        public void onCheckedChanged(        RadioGroup group,        int checkedId){
+          RadioButton rb=(RadioButton)view.findViewById(checkedId);
+          AccountUtils.setCurrentOwnCloudAccount(mContext,rb.getText().toString());
+          notifyDataSetChanged();
+          mFileDisplayActivity.closeDrawer();
+          mFileDisplayActivity.restart();
+        }
+      }
+);
+      return view;
+    }
+  }
+  return convertView;
+}

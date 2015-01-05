@@ -1,0 +1,11 @@
+{
+  mFileDisplayActivity=fileDisplayActivity;
+  mContext=context;
+  for (  String string : mContext.getResources().getStringArray(R.array.drawer_items)) {
+    mDrawerItems.add(string);
+  }
+  AccountManager am=(AccountManager)mContext.getSystemService(mContext.ACCOUNT_SERVICE);
+  mAccounts=am.getAccountsByType(MainApp.getAccountType());
+  currentAccount=AccountUtils.getCurrentOwnCloudAccount(mContext);
+  all.addAll(mDrawerItems);
+}

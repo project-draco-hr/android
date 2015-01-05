@@ -18,7 +18,7 @@
   }
   OCFileListFragment listOfFiles=getListOfFilesFragment();
   if (listOfFiles != null) {
-    listOfFiles.listDirectory();
+    listOfFiles.listDirectory(MainApp.getOnlyOnDevice());
   }
   FileFragment secondFragment=getSecondFragment();
   if (secondFragment != null && secondFragment instanceof FileDetailFragment) {
