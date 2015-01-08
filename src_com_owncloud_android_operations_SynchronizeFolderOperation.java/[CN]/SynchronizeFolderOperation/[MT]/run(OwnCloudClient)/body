@@ -19,12 +19,18 @@
         sendBroadcastForNotifyingUIUpdate(result.isSuccess());
       }
     }
+    if (mCancellationRequested.get()) {
+      throw new OperationCancelledException();
+    }
   }
  catch (  OperationCancelledException e) {
     result=new RemoteOperationResult(e);
-    for (    SyncOperation synchOp : mFoldersToWalkDown) {
-      ((SynchronizeFolderOperation)synchOp).cancel();
-    }
+    sendBroadcastForNotifyingUIUpdate(false);
+    Intent intent=new Intent(mContext,FileDownloader.class);
+    intent.setAction(FileDownloader.ACTION_CANCEL_FILE_DOWNLOAD);
+    intent.putExtra(FileDownloader.EXTRA_ACCOUNT,mAccount);
+    intent.putExtra(FileDownloader.EXTRA_FILE,mLocalFolder);
+    mContext.startService(intent);
   }
   return result;
 }

@@ -8,7 +8,12 @@
   mFilesForDirectDownload.clear();
   mFilesToSyncContentsWithoutUpload.clear();
   mFavouriteFilesToSyncContents.clear();
-  mFoldersToWalkDown.clear();
+synchronized (mFoldersToWalkDown) {
+    if (mCancellationRequested.get()) {
+      throw new OperationCancelledException();
+    }
+    mFoldersToWalkDown.clear();
+  }
   List<OCFile> localFiles=storageManager.getFolderContent(mLocalFolder);
   Map<String,OCFile> localFilesMap=new HashMap<String,OCFile>(localFiles.size());
   for (  OCFile file : localFiles) {
@@ -43,7 +48,12 @@
     searchForLocalFileInDefaultPath(remoteFile);
     if (remoteFile.isFolder()) {
       SynchronizeFolderOperation synchFolderOp=new SynchronizeFolderOperation(mContext,remoteFile.getRemotePath(),mAccount,mCurrentSyncTime);
-      mFoldersToWalkDown.add(synchFolderOp);
+synchronized (mFoldersToWalkDown) {
+        if (mCancellationRequested.get()) {
+          throw new OperationCancelledException();
+        }
+        mFoldersToWalkDown.add(synchFolderOp);
+      }
     }
  else     if (remoteFile.keepInSync()) {
       SynchronizeFileOperation operation=new SynchronizeFileOperation(localFile,remoteFile,mAccount,true,mContext);
