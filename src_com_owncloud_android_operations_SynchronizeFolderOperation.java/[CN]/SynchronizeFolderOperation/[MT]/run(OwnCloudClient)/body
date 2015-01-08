@@ -25,6 +25,7 @@
   }
  catch (  OperationCancelledException e) {
     result=new RemoteOperationResult(e);
+    sendBroadcastForNotifyingUIUpdate(result.isSuccess());
     Intent intent=new Intent(mContext,FileDownloader.class);
     intent.setAction(FileDownloader.ACTION_CANCEL_FILE_DOWNLOAD);
     intent.putExtra(FileDownloader.EXTRA_ACCOUNT,mAccount);
