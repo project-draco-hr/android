@@ -10,11 +10,13 @@
         }
  else {
           if (file.isDown()) {
+            String path=file.getStoragePath();
             File localFile=new File(file.getStoragePath());
             success&=localFile.delete();
             if (success) {
               file.setStoragePath(null);
               saveFile(file);
+              triggerMediaScan(path);
             }
           }
         }

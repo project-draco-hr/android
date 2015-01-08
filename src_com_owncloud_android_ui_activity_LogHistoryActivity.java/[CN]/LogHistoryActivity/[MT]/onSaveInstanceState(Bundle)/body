@@ -1,0 +1,4 @@
+{
+  super.onSaveInstanceState(outState);
+  outState.putString(KEY_LOG_TEXT,mLogText);
+}
