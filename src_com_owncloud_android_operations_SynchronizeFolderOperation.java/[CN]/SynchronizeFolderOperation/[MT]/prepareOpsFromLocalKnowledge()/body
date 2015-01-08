@@ -3,7 +3,12 @@
   for (  OCFile child : children) {
     if (child.isFolder()) {
       SynchronizeFolderOperation synchFolderOp=new SynchronizeFolderOperation(mContext,child.getRemotePath(),mAccount,mCurrentSyncTime);
-      mFoldersToWalkDown.add(synchFolderOp);
+synchronized (mFoldersToWalkDown) {
+        if (mCancellationRequested.get()) {
+          throw new OperationCancelledException();
+        }
+        mFoldersToWalkDown.add(synchFolderOp);
+      }
     }
  else {
       if (!child.isDown()) {

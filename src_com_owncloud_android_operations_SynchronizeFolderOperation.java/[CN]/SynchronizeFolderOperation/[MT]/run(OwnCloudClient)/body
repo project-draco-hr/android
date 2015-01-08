@@ -25,9 +25,6 @@
   }
  catch (  OperationCancelledException e) {
     result=new RemoteOperationResult(e);
-    for (    SyncOperation synchOp : mFoldersToWalkDown) {
-      ((SynchronizeFolderOperation)synchOp).cancel();
-    }
     Intent intent=new Intent(mContext,FileDownloader.class);
     intent.setAction(FileDownloader.ACTION_CANCEL_FILE_DOWNLOAD);
     intent.putExtra(FileDownloader.EXTRA_ACCOUNT,mAccount);
