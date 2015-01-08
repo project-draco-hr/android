@@ -1,8 +1,12 @@
 {
   if (mimetype == null) {
-    return R.drawable.file;
+    String fileExtension=getExtension(filename);
+    mimetype=MimeTypeMap.getSingleton().getMimeTypeFromExtension(fileExtension);
+    if (mimetype == null) {
+      mimetype=TYPE_APPLICATION + "/" + SUBTYPE_OCTET_STREAM;
+    }
   }
- else   if ("DIR".equals(mimetype)) {
+  if ("DIR".equals(mimetype)) {
     return R.drawable.ic_menu_archive;
   }
  else {
@@ -49,6 +53,9 @@
         }
  else         if (getExtension(filename).equalsIgnoreCase(EXTENSION_3GP)) {
           return R.drawable.file_movie;
+        }
+ else         if (getExtension(filename).equalsIgnoreCase(EXTENSION_PY) || getExtension(filename).equalsIgnoreCase(EXTENSION_JS)) {
+          return R.drawable.file_doc;
         }
       }
     }
