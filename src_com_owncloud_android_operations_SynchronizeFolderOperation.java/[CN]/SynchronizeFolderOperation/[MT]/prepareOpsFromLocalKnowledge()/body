@@ -2,12 +2,9 @@
   List<OCFile> children=getStorageManager().getFolderContent(mLocalFolder);
   for (  OCFile child : children) {
     if (child.isFolder()) {
-      SynchronizeFolderOperation synchFolderOp=new SynchronizeFolderOperation(mContext,child.getRemotePath(),mAccount,mCurrentSyncTime);
-synchronized (mFoldersToWalkDown) {
-        if (mCancellationRequested.get()) {
-          throw new OperationCancelledException();
-        }
-        mFoldersToWalkDown.add(synchFolderOp);
+      startSyncFolderOperation(child.getRemotePath());
+      if (mCancellationRequested.get()) {
+        throw new OperationCancelledException();
       }
     }
  else {
