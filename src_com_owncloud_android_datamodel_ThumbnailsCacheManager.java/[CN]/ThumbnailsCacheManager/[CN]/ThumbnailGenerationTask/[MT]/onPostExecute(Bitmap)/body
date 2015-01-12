@@ -1,0 +1,21 @@
+{
+  if (isCancelled()) {
+    bitmap=null;
+  }
+  if (mImageViewReference != null && bitmap != null) {
+    final ImageView imageView=mImageViewReference.get();
+    final ThumbnailGenerationTask bitmapWorkerTask=getBitmapWorkerTask(imageView);
+    if (this == bitmapWorkerTask && imageView != null) {
+      String tagId="";
+      if (mFile instanceof OCFile) {
+        tagId=String.valueOf(((OCFile)mFile).getFileId());
+      }
+ else       if (mFile instanceof File) {
+        tagId=String.valueOf(((File)mFile).hashCode());
+      }
+      if (String.valueOf(imageView.getTag()).equals(tagId)) {
+        imageView.setImageBitmap(bitmap);
+      }
+    }
+  }
+}

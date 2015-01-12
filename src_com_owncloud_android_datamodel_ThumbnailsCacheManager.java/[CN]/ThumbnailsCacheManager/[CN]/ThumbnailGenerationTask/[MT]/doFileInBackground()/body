@@ -1,0 +1,13 @@
+{
+  Bitmap thumbnail=null;
+  final String imageKey=String.valueOf(mFile.hashCode());
+  thumbnail=getBitmapFromDiskCache(imageKey);
+  if (thumbnail == null) {
+    int px=getThumbnailDimension();
+    Bitmap bitmap=BitmapUtils.decodeSampledBitmapFromFile(((File)mFile).getAbsolutePath(),px,px);
+    if (bitmap != null) {
+      thumbnail=addThumbnailToCache(imageKey,bitmap,((File)mFile).getPath(),px);
+    }
+  }
+  return thumbnail;
+}
