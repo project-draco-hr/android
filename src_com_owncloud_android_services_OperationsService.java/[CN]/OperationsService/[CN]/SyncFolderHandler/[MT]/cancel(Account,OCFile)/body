@@ -1,10 +1,31 @@
 {
   SynchronizeFolderOperation syncOperation=null;
+  String targetKey=buildRemoteName(account,file.getRemotePath());
+  ArrayList<String> keyItems=new ArrayList<String>();
 synchronized (mPendingOperations) {
-    syncOperation=mPendingOperations.remove(buildRemoteName(account,file.getRemotePath()));
+    if (file.isFolder()) {
+      Log_OC.d(TAG,"Canceling pending sync operations");
+      Iterator<String> it=mPendingOperations.keySet().iterator();
+      boolean found=false;
+      while (it.hasNext()) {
+        String keySyncOperation=it.next();
+        found=keySyncOperation.startsWith(targetKey);
+        if (found) {
+          keyItems.add(keySyncOperation);
+        }
+      }
+    }
+ else {
+      Log_OC.d(TAG,"Canceling sync operation");
+      keyItems.add(buildRemoteName(account,file.getRemotePath()));
+    }
   }
-  if (syncOperation != null) {
-    syncOperation.cancel();
+  for (  String item : keyItems) {
+    syncOperation=mPendingOperations.remove(item);
+    Log_OC.d(TAG,"Key sync operations removed: " + item);
+    if (syncOperation != null) {
+      syncOperation.cancel();
+    }
   }
   Intent intent=new Intent(mService,FileDownloader.class);
   intent.setAction(FileDownloader.ACTION_CANCEL_FILE_DOWNLOAD);
