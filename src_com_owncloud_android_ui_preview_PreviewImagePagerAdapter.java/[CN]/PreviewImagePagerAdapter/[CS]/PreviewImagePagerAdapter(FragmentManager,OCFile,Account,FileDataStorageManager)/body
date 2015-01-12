@@ -12,6 +12,7 @@
   mAccount=account;
   mStorageManager=storageManager;
   mImageFiles=mStorageManager.getFolderImages(parentFolder);
+  mImageFiles=FileStorageUtils.sortFolder(mImageFiles);
   mObsoleteFragments=new HashSet<Object>();
   mObsoletePositions=new HashSet<Integer>();
   mDownloadErrors=new HashSet<Integer>();
