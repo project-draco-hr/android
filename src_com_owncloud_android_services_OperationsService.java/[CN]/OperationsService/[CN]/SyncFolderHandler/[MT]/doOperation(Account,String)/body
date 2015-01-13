@@ -22,6 +22,7 @@ synchronized (mPendingOperations) {
         mPendingOperations.remove(syncKey);
       }
       mService.dispatchResultToOperationListeners(null,mCurrentSyncOperation,result);
+      sendBroadcastFinishedSyncFolder(account,remotePath,result.isSuccess());
     }
   }
 }

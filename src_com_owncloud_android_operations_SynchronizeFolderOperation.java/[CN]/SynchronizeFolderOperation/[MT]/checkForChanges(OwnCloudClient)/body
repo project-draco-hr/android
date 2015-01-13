@@ -23,7 +23,6 @@
  else {
       Log_OC.e(TAG,"Checked " + mAccount.name + mRemotePath+ " : "+ result.getLogMessage());
     }
-    sendBroadcastForNotifyingUIUpdate(result.isSuccess());
   }
   return result;
 }

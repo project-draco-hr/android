@@ -2,6 +2,11 @@
   if (account == null || remotePath == null)   return false;
   String targetKey=buildRemoteName(account,remotePath);
 synchronized (mPendingOperations) {
-    return (mPendingOperations.containsKey(targetKey));
+    Iterator<String> it=mPendingOperations.keySet().iterator();
+    boolean found=false;
+    while (it.hasNext() && !found) {
+      found=it.next().startsWith(targetKey);
+    }
+    return found;
   }
 }

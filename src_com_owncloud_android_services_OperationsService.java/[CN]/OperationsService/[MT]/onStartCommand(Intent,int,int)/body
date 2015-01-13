@@ -10,7 +10,7 @@
     Pair<Target,RemoteOperation> itemToQueue=newOperation(intent);
     if (itemToQueue != null) {
       mSyncFolderHandler.add(account,remotePath,(SynchronizeFolderOperation)itemToQueue.second);
-      sendBroadcastNewSyncFolder(account,remotePath);
+      mSyncFolderHandler.sendBroadcastNewSyncFolder(account,remotePath);
       Message msg=mSyncFolderHandler.obtainMessage();
       msg.arg1=startId;
       msg.obj=itemSyncKey;
@@ -22,9 +22,14 @@
       Log_OC.e(TAG,"Not enough information provided in intent");
       return START_NOT_STICKY;
     }
-    Account account=intent.getParcelableExtra(EXTRA_ACCOUNT);
-    OCFile file=intent.getParcelableExtra(EXTRA_FILE);
-    mSyncFolderHandler.cancel(account,file);
+    final Account account=intent.getParcelableExtra(EXTRA_ACCOUNT);
+    final OCFile file=intent.getParcelableExtra(EXTRA_FILE);
+    new Thread(new Runnable(){
+      public void run(){
+        mSyncFolderHandler.cancel(account,file);
+      }
+    }
+).start();
   }
  else {
     Message msg=mOperationsHandler.obtainMessage();

@@ -1,6 +1,7 @@
 {
   SynchronizeFolderOperation syncOperation=null;
   String targetKey=buildRemoteName(account,file.getRemotePath());
+  ArrayList<String> keyItems=new ArrayList<String>();
 synchronized (mPendingOperations) {
     if (file.isFolder()) {
       Log_OC.d(TAG,"Canceling pending sync operations");
@@ -10,16 +11,16 @@ synchronized (mPendingOperations) {
         String keySyncOperation=it.next();
         found=keySyncOperation.startsWith(targetKey);
         if (found) {
-          syncOperation=mPendingOperations.get(keySyncOperation);
-          if (syncOperation != null) {
-            syncOperation.cancel();
-          }
+          keyItems.add(keySyncOperation);
         }
       }
     }
  else {
       Log_OC.d(TAG,"Canceling sync operation");
-      syncOperation=mPendingOperations.get(buildRemoteName(account,file.getRemotePath()));
+      keyItems.add(buildRemoteName(account,file.getRemotePath()));
+    }
+    for (    String item : keyItems) {
+      syncOperation=mPendingOperations.remove(item);
       if (syncOperation != null) {
         syncOperation.cancel();
       }
