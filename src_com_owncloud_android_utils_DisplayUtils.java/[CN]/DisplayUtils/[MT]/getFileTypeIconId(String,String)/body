@@ -1,5 +1,12 @@
 {
-  if (mimetype == null || "DIR".equals(mimetype)) {
+  if (mimetype == null) {
+    String fileExtension=getExtension(filename);
+    mimetype=MimeTypeMap.getSingleton().getMimeTypeFromExtension(fileExtension);
+    if (mimetype == null) {
+      mimetype=TYPE_APPLICATION + "/" + SUBTYPE_OCTET_STREAM;
+    }
+  }
+  if ("DIR".equals(mimetype)) {
     return R.drawable.ic_menu_archive;
   }
  else {
@@ -22,6 +29,9 @@
       if (SUBTYPE_PDF.equals(subtype)) {
         return R.drawable.file_pdf;
       }
+ else       if (SUBTYPE_XML.equals(subtype)) {
+        return R.drawable.file_doc;
+      }
  else       if (SUBTYPES_DOCUMENT_SET.contains(subtype)) {
         return R.drawable.file_doc;
       }
@@ -43,6 +53,9 @@
         }
  else         if (getExtension(filename).equalsIgnoreCase(EXTENSION_3GP)) {
           return R.drawable.file_movie;
+        }
+ else         if (getExtension(filename).equalsIgnoreCase(EXTENSION_PY) || getExtension(filename).equalsIgnoreCase(EXTENSION_JS)) {
+          return R.drawable.file_doc;
         }
       }
     }

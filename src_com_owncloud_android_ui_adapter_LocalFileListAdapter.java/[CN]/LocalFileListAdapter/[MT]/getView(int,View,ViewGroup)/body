@@ -16,6 +16,7 @@
  else {
       fileIcon.setImageResource(R.drawable.ic_menu_archive);
     }
+    fileIcon.setTag(file.hashCode());
     TextView fileSizeV=(TextView)view.findViewById(R.id.file_size);
     TextView lastModV=(TextView)view.findViewById(R.id.last_mod);
     ImageView checkBoxV=(ImageView)view.findViewById(R.id.custom_checkbox);
@@ -36,6 +37,26 @@
           checkBoxV.setImageResource(android.R.drawable.checkbox_off_background);
         }
         checkBoxV.setVisibility(View.VISIBLE);
+      }
+      if (BitmapUtils.isImage(file)) {
+        Bitmap thumbnail=ThumbnailsCacheManager.getBitmapFromDiskCache(String.valueOf(file.hashCode()));
+        if (thumbnail != null) {
+          fileIcon.setImageBitmap(thumbnail);
+        }
+ else {
+          if (ThumbnailsCacheManager.cancelPotentialWork(file,fileIcon)) {
+            final ThumbnailsCacheManager.ThumbnailGenerationTask task=new ThumbnailsCacheManager.ThumbnailGenerationTask(fileIcon);
+            if (thumbnail == null) {
+              thumbnail=ThumbnailsCacheManager.mDefaultImg;
+            }
+            final ThumbnailsCacheManager.AsyncDrawable asyncDrawable=new ThumbnailsCacheManager.AsyncDrawable(mContext.getResources(),thumbnail,task);
+            fileIcon.setImageDrawable(asyncDrawable);
+            task.execute(file);
+          }
+        }
+      }
+ else {
+        fileIcon.setImageResource(DisplayUtils.getFileTypeIconId(null,file.getName()));
       }
     }
  else {

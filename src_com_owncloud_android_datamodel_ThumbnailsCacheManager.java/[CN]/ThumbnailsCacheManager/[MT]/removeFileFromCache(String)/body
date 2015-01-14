@@ -1,8 +1,0 @@
-{
-synchronized (mThumbnailsDiskCacheLock) {
-    if (mThumbnailCache != null) {
-      mThumbnailCache.removeKey(fileRemoteId);
-    }
-    mThumbnailsDiskCacheLock.notifyAll();
-  }
-}
