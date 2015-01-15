@@ -20,4 +20,5 @@
   }
   file.setNeedsUpdateThumbnail(true);
   mStorageManager.saveFile(file);
+  mStorageManager.triggerMediaScan(file.getStoragePath());
 }
