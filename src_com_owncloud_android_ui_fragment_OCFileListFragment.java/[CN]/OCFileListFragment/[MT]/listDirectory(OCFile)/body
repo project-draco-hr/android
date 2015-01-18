@@ -19,6 +19,10 @@
       imageView.setSelection(0);
     }
     mFile=directory;
+    TextView footerText=(TextView)mFooterView.findViewById(R.id.footerText);
+    Log_OC.d("footer",String.valueOf(System.currentTimeMillis()));
+    footerText.setText(generateFooterText(directory));
+    Log_OC.d("footer",String.valueOf(System.currentTimeMillis()));
     double countImages=0;
     double countFiles=0;
     Vector<OCFile> files=storageManager.getFolderContent(directory);

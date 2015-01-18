@@ -1,6 +1,0 @@
-{
-  mCancelBtn=(Button)findViewById(R.id.move_files_btn_cancel);
-  mCancelBtn.setOnClickListener(this);
-  mChooseBtn=(Button)findViewById(R.id.move_files_btn_choose);
-  mChooseBtn.setOnClickListener(this);
-}
