@@ -19,27 +19,13 @@
       imageView.setSelection(0);
     }
     mFile=directory;
-    TextView footerText=(TextView)mFooterView.findViewById(R.id.footerText);
-    Log_OC.d("footer",String.valueOf(System.currentTimeMillis()));
-    footerText.setText(generateFooterText(directory));
-    Log_OC.d("footer",String.valueOf(System.currentTimeMillis()));
-    double countImages=0;
-    double countFiles=0;
     Vector<OCFile> files=storageManager.getFolderContent(directory);
-    for (    OCFile file : files) {
-      if (!file.isFolder()) {
-        countFiles++;
-        if (file.isImage()) {
-          countImages++;
-        }
-      }
-    }
-    if ((countImages / countFiles) >= 0.5) {
-      Log_OC.i(TAG,"Image View");
+    if (DisplayUtils.decideViewLayout(files)) {
       switchImageView();
     }
  else {
-      Log_OC.i(TAG,"Folder View");
+      TextView footerText=(TextView)mFooterView.findViewById(R.id.footerText);
+      footerText.setText(generateFooterText(directory));
       switchFileView();
     }
   }

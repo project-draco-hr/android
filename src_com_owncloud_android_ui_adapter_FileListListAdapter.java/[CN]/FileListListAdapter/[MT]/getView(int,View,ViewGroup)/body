@@ -1,21 +1,5 @@
 {
-  double countImages=0;
-  double countFiles=0;
-  for (  OCFile file : mFiles) {
-    if (!file.isFolder()) {
-      countFiles++;
-      if (file.isImage()) {
-        countImages++;
-      }
-    }
-  }
-  boolean fileView=true;
-  if ((countImages / countFiles) >= 0.5) {
-    fileView=false;
-  }
- else {
-    fileView=true;
-  }
+  boolean fileView=DisplayUtils.decideViewLayout(mFiles);
   View view=convertView;
   OCFile file=null;
   LayoutInflater inflator=(LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -23,7 +7,7 @@
     file=mFiles.get(position);
   }
   ViewType viewType;
-  if (fileView) {
+  if (!fileView) {
     viewType=ViewType.LIST_ITEM;
   }
  else   if (file.isImage()) {
