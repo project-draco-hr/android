@@ -1,2 +1,27 @@
 {
+  Bitmap thumbnail=null;
+  try {
+    if (mAccount != null) {
+      AccountManager accountMgr=AccountManager.get(MainApp.getAppContext());
+      mServerVersion=accountMgr.getUserData(mAccount,Constants.KEY_OC_VERSION);
+      OwnCloudAccount ocAccount=new OwnCloudAccount(mAccount,MainApp.getAppContext());
+      mClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,MainApp.getAppContext());
+    }
+    mFile=params[0];
+    if (mFile instanceof OCFile) {
+      thumbnail=doOCFileInBackground();
+    }
+ else     if (mFile instanceof File) {
+      thumbnail=doFileInBackground();
+    }
+ else {
+    }
+  }
+ catch (  Throwable t) {
+    Log_OC.e(TAG,"Generation of thumbnail for " + mFile + " failed",t);
+    if (t instanceof OutOfMemoryError) {
+      System.gc();
+    }
+  }
+  return thumbnail;
 }

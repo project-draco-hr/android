@@ -1,4 +1,2 @@
 {
-  mList.addFooterView(footer,null,false);
-  mList.invalidate();
 }
