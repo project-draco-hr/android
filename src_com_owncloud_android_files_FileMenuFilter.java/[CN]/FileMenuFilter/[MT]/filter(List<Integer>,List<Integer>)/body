@@ -1,13 +1,9 @@
 {
   boolean downloading=false;
   boolean uploading=false;
-  if (mComponentsGetter != null && mFile != null && mAccount != null) {
-    FileDownloaderBinder downloaderBinder=mComponentsGetter.getFileDownloaderBinder();
-    downloading=downloaderBinder != null && downloaderBinder.isDownloading(mAccount,mFile);
-    OperationsServiceBinder opsBinder=mComponentsGetter.getOperationsServiceBinder();
-    downloading|=(mFile.isFolder() && opsBinder != null && opsBinder.isSynchronizing(mAccount,mFile.getRemotePath()));
-    FileUploaderBinder uploaderBinder=mComponentsGetter.getFileUploaderBinder();
-    uploading=uploaderBinder != null && uploaderBinder.isUploading(mAccount,mFile);
+  if (mFile != null && mAccount != null) {
+    downloading=mFile.isDownloading() || mFile.isSynchronizing();
+    uploading=mFile.isUploading();
   }
   if (mFile == null || mFile.isDown() || downloading || uploading) {
     toHide.add(R.id.action_download_file);

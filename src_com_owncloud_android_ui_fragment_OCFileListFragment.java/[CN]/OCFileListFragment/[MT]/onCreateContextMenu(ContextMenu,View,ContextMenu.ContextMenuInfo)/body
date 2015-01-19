@@ -8,7 +8,7 @@
     AdapterContextMenuInfo info=(AdapterContextMenuInfo)menuInfo;
     OCFile targetFile=(OCFile)mAdapter.getItem(info.position);
     if (mContainerActivity.getStorageManager() != null) {
-      FileMenuFilter mf=new FileMenuFilter(targetFile,mContainerActivity.getStorageManager().getAccount(),mContainerActivity,getSherlockActivity());
+      FileMenuFilter mf=new FileMenuFilter(targetFile,mContainerActivity.getStorageManager().getAccount(),getSherlockActivity());
       mf.filter(menu);
     }
     MenuItem item=menu.findItem(R.id.action_open_file_with);
