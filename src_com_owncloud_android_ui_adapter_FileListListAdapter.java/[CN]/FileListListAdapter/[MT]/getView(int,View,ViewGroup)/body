@@ -72,14 +72,14 @@
             if (thumbnail == null) {
               thumbnail=ThumbnailsCacheManager.mDefaultImg;
             }
-            final AsyncDrawable asyncDrawable=new AsyncDrawable(mContext.getResources(),thumbnail,task);
+            final ThumbnailsCacheManager.AsyncDrawable asyncDrawable=new ThumbnailsCacheManager.AsyncDrawable(mContext.getResources(),thumbnail,task);
             fileIcon.setImageDrawable(asyncDrawable);
             task.execute(file);
           }
         }
       }
  else {
-        fileIcon.setImageResource(DisplayUtils.getResourceId(file.getMimetype(),file.getFileName()));
+        fileIcon.setImageResource(DisplayUtils.getFileTypeIconId(file.getMimetype(),file.getFileName()));
       }
       if (checkIfFileIsSharedWithMe(file)) {
         sharedWithMeIconV.setVisibility(View.VISIBLE);
@@ -96,7 +96,7 @@
         sharedWithMeIconV.setVisibility(View.VISIBLE);
       }
  else {
-        fileIcon.setImageResource(DisplayUtils.getResourceId(file.getMimetype(),file.getFileName()));
+        fileIcon.setImageResource(DisplayUtils.getFileTypeIconId(file.getMimetype(),file.getFileName()));
       }
       if (file.isShareByLink()) {
         fileIcon.setImageResource(R.drawable.folder_public);
