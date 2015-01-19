@@ -28,6 +28,8 @@
     file.setPermissions(c.getString(c.getColumnIndex(ProviderTableMeta.FILE_PERMISSIONS)));
     file.setRemoteId(c.getString(c.getColumnIndex(ProviderTableMeta.FILE_REMOTE_ID)));
     file.setNeedsUpdateThumbnail(c.getInt(c.getColumnIndex(ProviderTableMeta.FILE_UPDATE_THUMBNAIL)) == 1 ? true : false);
+    file.setDownloading(c.getInt(c.getColumnIndex(ProviderTableMeta.FILE_IS_DOWNLOADING)) == 1 ? true : false);
+    file.setUploading(c.getInt(c.getColumnIndex(ProviderTableMeta.FILE_IS_UPLOADING)) == 1 ? true : false);
   }
   return file;
 }

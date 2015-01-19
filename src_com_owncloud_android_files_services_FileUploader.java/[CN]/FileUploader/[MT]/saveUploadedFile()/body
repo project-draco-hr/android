@@ -19,5 +19,7 @@
     }
   }
   file.setNeedsUpdateThumbnail(true);
+  file.setDownloading(false);
+  file.setUploading(false);
   mStorageManager.saveFile(file);
 }

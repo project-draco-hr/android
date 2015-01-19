@@ -18,4 +18,6 @@
   mPermissions=null;
   mRemoteId=null;
   mNeedsUpdateThumbnail=false;
+  mIsDownloading=false;
+  mIsUploading=false;
 }

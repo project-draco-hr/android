@@ -18,4 +18,6 @@
   mPermissions=source.readString();
   mRemoteId=source.readString();
   mNeedsUpdateThumbnail=source.readInt() == 0;
+  mIsDownloading=source.readInt() == 0;
+  mIsUploading=source.readInt() == 0;
 }
