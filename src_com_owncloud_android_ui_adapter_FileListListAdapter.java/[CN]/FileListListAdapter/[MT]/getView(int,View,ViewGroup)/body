@@ -16,10 +16,8 @@
     sharedWithMeIconV.setVisibility(View.GONE);
     ImageView localStateView=(ImageView)view.findViewById(R.id.imageView2);
     localStateView.bringToFront();
-    FileDownloaderBinder downloaderBinder=mTransferServiceGetter.getFileDownloaderBinder();
     FileUploaderBinder uploaderBinder=mTransferServiceGetter.getFileUploaderBinder();
-    OperationsServiceBinder opsBinder=mTransferServiceGetter.getOperationsServiceBinder();
-    if ((downloaderBinder != null && downloaderBinder.isDownloading(mAccount,file)) || (file.isFolder() && opsBinder != null && opsBinder.isSynchronizing(mAccount,file.getRemotePath()))) {
+    if (file.isSynchronizing() || file.isDownloading()) {
       localStateView.setImageResource(R.drawable.downloading_file_indicator);
       localStateView.setVisibility(View.VISIBLE);
     }

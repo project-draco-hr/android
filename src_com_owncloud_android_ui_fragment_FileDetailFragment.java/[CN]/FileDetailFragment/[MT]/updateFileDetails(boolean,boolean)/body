@@ -14,9 +14,8 @@
     setTimeModified(file.getModificationTimestamp());
     CheckBox cb=(CheckBox)getView().findViewById(R.id.fdKeepInSync);
     cb.setChecked(file.keepInSync());
-    FileDownloaderBinder downloaderBinder=mContainerActivity.getFileDownloaderBinder();
     FileUploaderBinder uploaderBinder=mContainerActivity.getFileUploaderBinder();
-    if (transferring || (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,file)) || (uploaderBinder != null && uploaderBinder.isUploading(mAccount,file))) {
+    if (transferring || file.isDownloading() || uploaderBinder.isUploading(mAccount,file)) {
       setButtonsForTransferring();
     }
  else     if (file.isDown()) {

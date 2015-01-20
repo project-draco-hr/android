@@ -3,7 +3,7 @@
   if (!file.isFolder()) {
     FileDownloaderBinder downloaderBinder=mFileActivity.getFileDownloaderBinder();
     FileUploaderBinder uploaderBinder=mFileActivity.getFileUploaderBinder();
-    if (downloaderBinder != null && downloaderBinder.isDownloading(account,file)) {
+    if (downloaderBinder != null && file.isDownloading()) {
       if (file.keepInSync()) {
         OCFile parent=mFileActivity.getStorageManager().getFileById(file.getParentId());
         parent.setEtag("");

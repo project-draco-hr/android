@@ -4,9 +4,8 @@
     getView().findViewById(R.id.fdProgressBlock).setVisibility(View.VISIBLE);
     TextView progressText=(TextView)getView().findViewById(R.id.fdProgressText);
     progressText.setVisibility(View.VISIBLE);
-    FileDownloaderBinder downloaderBinder=mContainerActivity.getFileDownloaderBinder();
     FileUploaderBinder uploaderBinder=mContainerActivity.getFileUploaderBinder();
-    if (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,getFile())) {
+    if (getFile().isDownloading()) {
       progressText.setText(R.string.downloader_download_in_progress_ticker);
     }
  else     if (uploaderBinder != null && uploaderBinder.isUploading(mAccount,getFile())) {
