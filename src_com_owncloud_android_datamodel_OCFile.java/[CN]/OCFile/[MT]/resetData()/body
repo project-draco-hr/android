@@ -19,5 +19,4 @@
   mRemoteId=null;
   mNeedsUpdateThumbnail=false;
   mIsDownloading=false;
-  mIsUploading=false;
 }

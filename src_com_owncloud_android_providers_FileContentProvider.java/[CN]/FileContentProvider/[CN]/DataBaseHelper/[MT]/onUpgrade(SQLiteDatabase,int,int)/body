@@ -93,7 +93,6 @@
     db.beginTransaction();
     try {
       db.execSQL("ALTER TABLE " + ProviderTableMeta.FILE_TABLE_NAME + " ADD COLUMN "+ ProviderTableMeta.FILE_IS_DOWNLOADING+ " INTEGER "+ " DEFAULT 0");
-      db.execSQL("ALTER TABLE " + ProviderTableMeta.FILE_TABLE_NAME + " ADD COLUMN "+ ProviderTableMeta.FILE_IS_UPLOADING+ " INTEGER "+ " DEFAULT 0");
       upgraded=true;
       db.setTransactionSuccessful();
     }

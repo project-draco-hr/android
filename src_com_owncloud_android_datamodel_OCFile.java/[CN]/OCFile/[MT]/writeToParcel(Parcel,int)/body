@@ -19,5 +19,4 @@
   dest.writeString(mRemoteId);
   dest.writeInt(mNeedsUpdateThumbnail ? 1 : 0);
   dest.writeInt(mIsDownloading ? 1 : 0);
-  dest.writeInt(mIsUploading ? 1 : 0);
 }

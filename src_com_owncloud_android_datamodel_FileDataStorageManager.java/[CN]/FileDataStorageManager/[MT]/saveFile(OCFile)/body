@@ -21,7 +21,6 @@
   cv.put(ProviderTableMeta.FILE_REMOTE_ID,file.getRemoteId());
   cv.put(ProviderTableMeta.FILE_UPDATE_THUMBNAIL,file.needsUpdateThumbnail());
   cv.put(ProviderTableMeta.FILE_IS_DOWNLOADING,file.isDownloading());
-  cv.put(ProviderTableMeta.FILE_IS_UPLOADING,file.isUploading());
   boolean sameRemotePath=fileExists(file.getRemotePath());
   if (sameRemotePath || fileExists(file.getFileId())) {
     OCFile oldFile=null;
