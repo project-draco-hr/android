@@ -1,0 +1,5 @@
+{
+  OCFile file=mStorageManager.getFileById(mCurrentDownload.getFile().getFileId());
+  file.setDownloading(false);
+  mStorageManager.saveFile(file);
+}

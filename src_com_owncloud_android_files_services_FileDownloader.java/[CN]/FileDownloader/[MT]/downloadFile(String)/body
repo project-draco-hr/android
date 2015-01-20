@@ -16,6 +16,9 @@ synchronized (mPendingDownloads) {
       if (downloadResult.isSuccess()) {
         saveDownloadedFile();
       }
+ else {
+        updateUnsuccessfulDownloadedFile();
+      }
     }
  catch (    AccountsException e) {
       Log_OC.e(TAG,"Error while trying to get autorization for " + mLastAccount.name,e);

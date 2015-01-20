@@ -23,6 +23,9 @@
         newDownload.addDatatransferProgressListener(this);
         newDownload.addDatatransferProgressListener((FileDownloaderBinder)mBinder);
         requestedDownloads.add(downloadKey);
+        FileDataStorageManager storageManager=new FileDataStorageManager(account,getContentResolver());
+        file.setDownloading(true);
+        storageManager.saveFile(file);
         sendBroadcastNewDownload(newDownload);
       }
  catch (      IllegalArgumentException e) {
