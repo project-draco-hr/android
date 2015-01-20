@@ -1,9 +1,10 @@
 {
   boolean downloading=false;
   boolean uploading=false;
-  if (mFile != null && mAccount != null) {
+  if (mComponentsGetter != null && mFile != null && mAccount != null) {
     downloading=mFile.isDownloading() || mFile.isSynchronizing();
-    uploading=mFile.isUploading();
+    FileUploaderBinder uploaderBinder=mComponentsGetter.getFileUploaderBinder();
+    uploading=(uploaderBinder != null && uploaderBinder.isUploading(mAccount,mFile));
   }
   if (mFile == null || mFile.isDown() || downloading || uploading) {
     toHide.add(R.id.action_download_file);

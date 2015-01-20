@@ -1,3 +1,4 @@
 OCFile targetFile
 Account account
+ComponentsGetter cg
 Context context

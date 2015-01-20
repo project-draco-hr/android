@@ -16,11 +16,12 @@
     sharedWithMeIconV.setVisibility(View.GONE);
     ImageView localStateView=(ImageView)view.findViewById(R.id.imageView2);
     localStateView.bringToFront();
+    FileUploaderBinder uploaderBinder=mTransferServiceGetter.getFileUploaderBinder();
     if (file.isSynchronizing() || file.isDownloading()) {
       localStateView.setImageResource(R.drawable.downloading_file_indicator);
       localStateView.setVisibility(View.VISIBLE);
     }
- else     if (file.isUploading()) {
+ else     if (uploaderBinder != null && uploaderBinder.isUploading(mAccount,file)) {
       localStateView.setImageResource(R.drawable.uploading_file_indicator);
       localStateView.setVisibility(View.VISIBLE);
     }
