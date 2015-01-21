@@ -94,6 +94,7 @@ sharedWithMeIconV.setVisibility(View.GONE);
 }
 }
  else {
+fileSizeV.setVisibility(View.INVISIBLE);
 localStateView.setVisibility(View.INVISIBLE);
 }
 break;
