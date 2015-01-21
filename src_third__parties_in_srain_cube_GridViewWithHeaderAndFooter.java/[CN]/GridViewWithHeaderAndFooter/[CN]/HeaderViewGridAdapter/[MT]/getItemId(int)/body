@@ -1,0 +1,11 @@
+{
+  int numHeadersAndPlaceholders=getHeadersCount() * mNumColumns;
+  if (mAdapter != null && position >= numHeadersAndPlaceholders) {
+    int adjPosition=position - numHeadersAndPlaceholders;
+    int adapterCount=mAdapter.getCount();
+    if (adjPosition < adapterCount) {
+      return mAdapter.getItemId(adjPosition);
+    }
+  }
+  return -1;
+}
