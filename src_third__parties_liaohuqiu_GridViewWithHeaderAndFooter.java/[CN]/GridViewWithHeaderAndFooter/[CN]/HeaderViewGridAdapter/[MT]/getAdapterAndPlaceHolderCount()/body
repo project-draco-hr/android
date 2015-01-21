@@ -1,0 +1,4 @@
+{
+  final int adapterCount=(int)(Math.ceil(1f * mAdapter.getCount() / mNumColumns) * mNumColumns);
+  return adapterCount;
+}

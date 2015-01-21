@@ -1,7 +1,7 @@
 {
   Log_OC.e(TAG,"onCreateView");
   View v=inflater.inflate(R.layout.list_fragment,null);
-  imageView=(ExtendedListView)(v.findViewById(R.id.list_root));
+  imageView=(GridViewWithHeaderAndFooter)(v.findViewById(R.id.list_root));
   imageView.setOnItemClickListener(this);
   if (savedInstanceState != null) {
     int referencePosition=savedInstanceState.getInt(KEY_SAVED_LIST_POSITION);
@@ -9,7 +9,9 @@
   }
   mRefreshLayout=(SwipeRefreshLayout)v.findViewById(R.id.swipe_refresh_files);
   mRefreshEmptyLayout=(SwipeRefreshLayout)v.findViewById(R.id.swipe_refresh_files_emptyView);
+  mEmptyListMessage=(TextView)v.findViewById(R.id.empty_list_view);
   onCreateSwipeToRefresh(mRefreshLayout);
   onCreateSwipeToRefresh(mRefreshEmptyLayout);
+  imageView.setEmptyView(mRefreshEmptyLayout);
   return v;
 }

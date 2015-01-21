@@ -1,0 +1,14 @@
+{
+  int count=mAdapter == null ? 1 : mAdapter.getViewTypeCount();
+  if (mCachePlaceHoldView) {
+    int offset=mHeaderViewInfos.size() + 1 + mFooterViewInfos.size();
+    if (mCacheFirstHeaderView) {
+      offset+=1;
+    }
+    count+=offset;
+  }
+  if (DEBUG) {
+    Log.d(LOG_TAG,String.format("getViewTypeCount: %s",count));
+  }
+  return count;
+}
