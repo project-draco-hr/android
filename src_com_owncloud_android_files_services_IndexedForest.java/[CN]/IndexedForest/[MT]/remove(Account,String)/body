@@ -2,6 +2,7 @@
   String targetKey=buildKey(account,remotePath);
   Node<V> firstRemoved=mMap.remove(targetKey);
   if (firstRemoved != null) {
+    removeDescendants(firstRemoved);
     Node<V> removed=firstRemoved;
     Node<V> parent=removed.getParent();
     while (parent != null) {

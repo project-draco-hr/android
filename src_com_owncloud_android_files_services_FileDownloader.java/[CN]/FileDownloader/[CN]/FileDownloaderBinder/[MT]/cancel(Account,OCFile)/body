@@ -4,4 +4,9 @@
   if (download != null) {
     download.cancel();
   }
+ else {
+    if (mCurrentDownload.getRemotePath().startsWith(file.getRemotePath()) && account.name.equals(mLastAccount)) {
+      mCurrentDownload.cancel();
+    }
+  }
 }

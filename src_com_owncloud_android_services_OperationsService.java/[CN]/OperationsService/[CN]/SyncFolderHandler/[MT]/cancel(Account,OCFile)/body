@@ -26,9 +26,4 @@ synchronized (mPendingOperations) {
       }
     }
   }
-  Intent intent=new Intent(mService,FileDownloader.class);
-  intent.setAction(FileDownloader.ACTION_CANCEL_FILE_DOWNLOAD);
-  intent.putExtra(FileDownloader.EXTRA_ACCOUNT,account);
-  intent.putExtra(FileDownloader.EXTRA_FILE,file);
-  mService.startService(intent);
 }
