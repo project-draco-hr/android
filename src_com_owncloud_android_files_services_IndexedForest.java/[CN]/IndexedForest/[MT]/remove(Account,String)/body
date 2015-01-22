@@ -1,0 +1,24 @@
+{
+  String targetKey=buildKey(account,remotePath);
+  Node<V> firstRemoved=mMap.remove(targetKey);
+  if (firstRemoved != null) {
+    Node<V> removed=firstRemoved;
+    Node<V> parent=removed.getParent();
+    while (parent != null) {
+      parent.removeChild(removed);
+      if (!parent.hasChildren()) {
+        removed=mMap.remove(parent.getKey());
+        parent=removed.getParent();
+      }
+ else {
+        parent=null;
+      }
+    }
+  }
+  if (firstRemoved != null) {
+    return firstRemoved.getPayload();
+  }
+ else {
+    return null;
+  }
+}

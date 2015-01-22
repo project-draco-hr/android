@@ -1,7 +1,8 @@
 {
-  if (file.isDownloading()) {
+  Account account=getAccount();
+  if (!mDownloaderBinder.isDownloading(account,mWaitingToPreview)) {
     Intent i=new Intent(this,FileDownloader.class);
-    i.putExtra(FileDownloader.EXTRA_ACCOUNT,getAccount());
+    i.putExtra(FileDownloader.EXTRA_ACCOUNT,account);
     i.putExtra(FileDownloader.EXTRA_FILE,file);
     startService(i);
   }

@@ -1,28 +1,12 @@
 {
   DownloadFileOperation download=null;
-  String targetKey=buildRemoteName(account,file);
   ArrayList<String> keyItems=new ArrayList<String>();
-synchronized (mPendingDownloads) {
-    if (file.isFolder()) {
-      Log_OC.d(TAG,"Folder download. Canceling pending downloads (from folder)");
-      Iterator<String> it=mPendingDownloads.keySet().iterator();
-      boolean found=false;
-      while (it.hasNext()) {
-        String keyDownloadOperation=it.next();
-        found=keyDownloadOperation.startsWith(targetKey);
-        if (found) {
-          keyItems.add(keyDownloadOperation);
-        }
-      }
-    }
- else {
-      Log_OC.d(TAG,"Canceling file download");
-      keyItems.add(buildRemoteName(account,file));
-    }
+  if (file.isFolder()) {
+    Log_OC.d(TAG,"Folder download. Canceling pending downloads (from folder)");
   }
-  for (  String item : keyItems) {
-    download=mPendingDownloads.remove(item);
-    Log_OC.d(TAG,"Key removed: " + item);
+ else {
+    Log_OC.d(TAG,"Canceling file download");
+    download=mPendingDownloads.remove(account,file.getRemotePath());
     if (download != null) {
       download.cancel();
     }

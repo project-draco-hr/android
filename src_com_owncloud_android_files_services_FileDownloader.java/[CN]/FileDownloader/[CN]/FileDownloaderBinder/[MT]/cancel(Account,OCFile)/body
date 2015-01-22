@@ -1,8 +1,6 @@
 {
   DownloadFileOperation download=null;
-synchronized (mPendingDownloads) {
-    download=mPendingDownloads.remove(buildRemoteName(account,file));
-  }
+  download=mPendingDownloads.remove(account,file.getRemotePath());
   if (download != null) {
     download.cancel();
   }

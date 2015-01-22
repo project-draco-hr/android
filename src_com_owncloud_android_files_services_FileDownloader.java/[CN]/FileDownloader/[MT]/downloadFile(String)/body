@@ -1,7 +1,5 @@
 {
-synchronized (mPendingDownloads) {
-    mCurrentDownload=mPendingDownloads.get(downloadKey);
-  }
+  mCurrentDownload=mPendingDownloads.get(downloadKey);
   if (mCurrentDownload != null) {
     notifyDownloadStart(mCurrentDownload);
     RemoteOperationResult downloadResult=null;
@@ -16,22 +14,17 @@ synchronized (mPendingDownloads) {
       if (downloadResult.isSuccess()) {
         saveDownloadedFile();
       }
- else {
-        updateUnsuccessfulDownloadedFile();
-      }
     }
  catch (    AccountsException e) {
-      Log_OC.e(TAG,"Error while trying to get autorization for " + mLastAccount.name,e);
+      Log_OC.e(TAG,"Error while trying to get authorization for " + mLastAccount.name,e);
       downloadResult=new RemoteOperationResult(e);
     }
 catch (    IOException e) {
-      Log_OC.e(TAG,"Error while trying to get autorization for " + mLastAccount.name,e);
+      Log_OC.e(TAG,"Error while trying to get authorization for " + mLastAccount.name,e);
       downloadResult=new RemoteOperationResult(e);
     }
  finally {
-synchronized (mPendingDownloads) {
-        mPendingDownloads.remove(downloadKey);
-      }
+      mPendingDownloads.remove(mLastAccount,mCurrentDownload.getRemotePath());
     }
     notifyDownloadResult(mCurrentDownload,downloadResult);
     sendBroadcastDownloadFinished(mCurrentDownload,downloadResult);

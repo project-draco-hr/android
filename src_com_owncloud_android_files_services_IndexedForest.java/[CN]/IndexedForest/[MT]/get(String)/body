@@ -1,0 +1,9 @@
+{
+  Node<V> node=mMap.get(key);
+  if (node != null) {
+    return node.getPayload();
+  }
+ else {
+    return null;
+  }
+}

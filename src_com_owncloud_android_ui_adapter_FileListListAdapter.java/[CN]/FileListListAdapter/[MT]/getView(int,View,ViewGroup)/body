@@ -16,8 +16,9 @@
     sharedWithMeIconV.setVisibility(View.GONE);
     ImageView localStateView=(ImageView)view.findViewById(R.id.imageView2);
     localStateView.bringToFront();
+    FileDownloaderBinder downloaderBinder=mTransferServiceGetter.getFileDownloaderBinder();
     FileUploaderBinder uploaderBinder=mTransferServiceGetter.getFileUploaderBinder();
-    if (file.isSynchronizing() || file.isDownloading()) {
+    if (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,file)) {
       localStateView.setImageResource(R.drawable.downloading_file_indicator);
       localStateView.setVisibility(View.VISIBLE);
     }
