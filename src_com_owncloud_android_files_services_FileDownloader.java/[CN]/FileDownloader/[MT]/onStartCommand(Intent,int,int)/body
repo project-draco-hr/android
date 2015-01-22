@@ -6,34 +6,25 @@
  else {
     final Account account=intent.getParcelableExtra(EXTRA_ACCOUNT);
     final OCFile file=intent.getParcelableExtra(EXTRA_FILE);
-    if (ACTION_CANCEL_FILE_DOWNLOAD.equals(intent.getAction())) {
-      new Thread(new Runnable(){
-        public void run(){
-          cancel(account,file);
-        }
-      }
-).start();
+    AbstractList<String> requestedDownloads=new Vector<String>();
+    try {
+      DownloadFileOperation newDownload=new DownloadFileOperation(account,file);
+      Pair<String,String> putResult=mPendingDownloads.putIfAbsent(account,file.getRemotePath(),newDownload);
+      String downloadKey=putResult.first;
+      newDownload.addDatatransferProgressListener(this);
+      newDownload.addDatatransferProgressListener((FileDownloaderBinder)mBinder);
+      requestedDownloads.add(downloadKey);
+      sendBroadcastNewDownload(newDownload,putResult.second);
     }
- else {
-      AbstractList<String> requestedDownloads=new Vector<String>();
-      try {
-        DownloadFileOperation newDownload=new DownloadFileOperation(account,file);
-        String downloadKey=mPendingDownloads.putIfAbsent(account,file.getRemotePath(),newDownload);
-        newDownload.addDatatransferProgressListener(this);
-        newDownload.addDatatransferProgressListener((FileDownloaderBinder)mBinder);
-        requestedDownloads.add(downloadKey);
-        sendBroadcastNewDownload(newDownload);
-      }
- catch (      IllegalArgumentException e) {
-        Log_OC.e(TAG,"Not enough information provided in intent: " + e.getMessage());
-        return START_NOT_STICKY;
-      }
-      if (requestedDownloads.size() > 0) {
-        Message msg=mServiceHandler.obtainMessage();
-        msg.arg1=startId;
-        msg.obj=requestedDownloads;
-        mServiceHandler.sendMessage(msg);
-      }
+ catch (    IllegalArgumentException e) {
+      Log_OC.e(TAG,"Not enough information provided in intent: " + e.getMessage());
+      return START_NOT_STICKY;
+    }
+    if (requestedDownloads.size() > 0) {
+      Message msg=mServiceHandler.obtainMessage();
+      msg.arg1=startId;
+      msg.obj=requestedDownloads;
+      mServiceHandler.sendMessage(msg);
     }
   }
   return START_NOT_STICKY;

@@ -1,0 +1,4 @@
+{
+  OCFile currentDir=getCurrentDir();
+  return (currentDir != null && currentDir.getRemotePath().startsWith(linkedToRemotePath));
+}

@@ -24,9 +24,9 @@ catch (    IOException e) {
       downloadResult=new RemoteOperationResult(e);
     }
  finally {
-      mPendingDownloads.remove(mLastAccount,mCurrentDownload.getRemotePath());
+      Pair<DownloadFileOperation,String> removeResult=mPendingDownloads.remove(mLastAccount,mCurrentDownload.getRemotePath());
+      notifyDownloadResult(mCurrentDownload,downloadResult);
+      sendBroadcastDownloadFinished(mCurrentDownload,downloadResult,removeResult.second);
     }
-    notifyDownloadResult(mCurrentDownload,downloadResult);
-    sendBroadcastDownloadFinished(mCurrentDownload,downloadResult);
   }
 }

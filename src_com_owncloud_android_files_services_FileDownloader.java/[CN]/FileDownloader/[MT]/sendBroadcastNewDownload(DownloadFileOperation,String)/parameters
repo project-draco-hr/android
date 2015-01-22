@@ -1,1 +1,2 @@
 DownloadFileOperation download
+String linkedToRemotePath

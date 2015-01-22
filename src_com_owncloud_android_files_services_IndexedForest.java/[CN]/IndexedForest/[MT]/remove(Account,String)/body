@@ -1,10 +1,12 @@
 {
   String targetKey=buildKey(account,remotePath);
   Node<V> firstRemoved=mMap.remove(targetKey);
+  String unlinkedFrom=null;
   if (firstRemoved != null) {
     removeDescendants(firstRemoved);
     Node<V> removed=firstRemoved;
     Node<V> parent=removed.getParent();
+    boolean unlinked=false;
     while (parent != null) {
       parent.removeChild(removed);
       if (!parent.hasChildren()) {
@@ -12,14 +14,17 @@
         parent=removed.getParent();
       }
  else {
-        parent=null;
+        break;
       }
+    }
+    if (parent != null) {
+      unlinkedFrom=parent.getKey().substring(account.name.length());
     }
   }
   if (firstRemoved != null) {
-    return firstRemoved.getPayload();
+    return new Pair<V,String>(firstRemoved.getPayload(),unlinkedFrom);
   }
  else {
-    return null;
+    return new Pair<V,String>(null,unlinkedFrom);
   }
 }

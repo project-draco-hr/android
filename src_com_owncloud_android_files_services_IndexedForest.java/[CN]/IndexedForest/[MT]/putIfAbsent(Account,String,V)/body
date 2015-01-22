@@ -24,5 +24,9 @@
     currentPath=parentPath;
     currentNode=parentNode;
   }
-  return targetKey;
+  String linkedTo=OCFile.ROOT_PATH;
+  if (linked) {
+    linkedTo=parentNode.getKey().substring(account.name.length());
+  }
+  return new Pair<String,String>(targetKey,linkedTo);
 }
