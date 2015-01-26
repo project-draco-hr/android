@@ -1,5 +1,4 @@
 {
-  Log_OC.v("NOW " + TAG + ", thread "+ Thread.currentThread().getName(),"Getting download of " + downloadKey);
   mCurrentDownload=mPendingDownloads.get(downloadKey);
   if (mCurrentDownload != null) {
     notifyDownloadStart(mCurrentDownload);
@@ -11,7 +10,6 @@
         OwnCloudAccount ocAccount=new OwnCloudAccount(mCurrentAccount,this);
         mDownloadClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,this);
       }
-      Log_OC.v("NOW " + TAG + ", thread "+ Thread.currentThread().getName(),"Executing download of " + mCurrentDownload.getRemotePath());
       downloadResult=mCurrentDownload.execute(mDownloadClient);
       if (downloadResult.isSuccess()) {
         saveDownloadedFile();
@@ -26,7 +24,6 @@ catch (    IOException e) {
       downloadResult=new RemoteOperationResult(e);
     }
  finally {
-      Log_OC.v("NOW " + TAG + ", thread "+ Thread.currentThread().getName(),"Removing payload " + mCurrentDownload.getRemotePath());
       Pair<DownloadFileOperation,String> removeResult=mPendingDownloads.removePayload(mCurrentAccount,mCurrentDownload.getRemotePath());
       notifyDownloadResult(mCurrentDownload,downloadResult);
       sendBroadcastDownloadFinished(mCurrentDownload,downloadResult,removeResult.second);

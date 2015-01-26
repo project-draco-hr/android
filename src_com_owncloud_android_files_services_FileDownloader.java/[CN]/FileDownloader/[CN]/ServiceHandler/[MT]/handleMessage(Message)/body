@@ -4,7 +4,6 @@
     Iterator<String> it=requestedDownloads.iterator();
     while (it.hasNext()) {
       String next=it.next();
-      Log_OC.v("NOW " + TAG + ", thread "+ Thread.currentThread().getName(),"Handling download file " + next);
       mService.downloadFile(next);
     }
   }
