@@ -1,3 +1,4 @@
 {
+  Log_OC.v("NOW " + TAG + ", thread "+ Thread.currentThread().getName(),"Received request to cancel folder " + file.getRemotePath());
   mSyncFolderHandler.cancel(account,file);
 }

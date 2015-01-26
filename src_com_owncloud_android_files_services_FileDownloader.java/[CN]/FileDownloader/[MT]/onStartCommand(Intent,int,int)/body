@@ -6,6 +6,7 @@
  else {
     final Account account=intent.getParcelableExtra(EXTRA_ACCOUNT);
     final OCFile file=intent.getParcelableExtra(EXTRA_FILE);
+    Log_OC.v("NOW " + TAG + ", thread "+ Thread.currentThread().getName(),"Received request to download file");
     AbstractList<String> requestedDownloads=new Vector<String>();
     try {
       DownloadFileOperation newDownload=new DownloadFileOperation(account,file);
@@ -14,6 +15,7 @@
       Pair<String,String> putResult=mPendingDownloads.putIfAbsent(account,file.getRemotePath(),newDownload);
       String downloadKey=putResult.first;
       requestedDownloads.add(downloadKey);
+      Log_OC.v("NOW " + TAG + ", thread "+ Thread.currentThread().getName(),"Download on " + file.getRemotePath() + " added to queue");
       sendBroadcastNewDownload(newDownload,putResult.second);
     }
  catch (    IllegalArgumentException e) {

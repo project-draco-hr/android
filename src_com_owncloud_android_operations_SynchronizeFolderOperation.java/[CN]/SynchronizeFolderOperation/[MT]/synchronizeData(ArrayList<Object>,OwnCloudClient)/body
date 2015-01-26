@@ -44,9 +44,11 @@
     }
     searchForLocalFileInDefaultPath(remoteFile);
     if (remoteFile.isFolder()) {
-      startSyncFolderOperation(remoteFile.getRemotePath());
-      if (mCancellationRequested.get()) {
-        throw new OperationCancelledException();
+synchronized (mCancellationRequested) {
+        if (mCancellationRequested.get()) {
+          throw new OperationCancelledException();
+        }
+        startSyncFolderOperation(remoteFile.getRemotePath());
       }
     }
  else     if (remoteFile.keepInSync()) {

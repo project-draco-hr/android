@@ -1,11 +1,15 @@
 {
+  Log_OC.v("NOW " + TAG + ", thread "+ Thread.currentThread().getName(),"Received request to cancel download of " + file.getRemotePath());
+  Log_OC.v("NOW " + TAG + ", thread "+ Thread.currentThread().getName(),"Removing download of " + file.getRemotePath());
   Pair<DownloadFileOperation,String> removeResult=mPendingDownloads.remove(account,file.getRemotePath());
   DownloadFileOperation download=removeResult.first;
   if (download != null) {
+    Log_OC.v("NOW " + TAG + ", thread "+ Thread.currentThread().getName(),"Canceling returned download of " + file.getRemotePath());
     download.cancel();
   }
  else {
     if (mCurrentDownload != null && mCurrentAccount != null && mCurrentDownload.getRemotePath().startsWith(file.getRemotePath()) && account.name.equals(mCurrentAccount.name)) {
+      Log_OC.v("NOW " + TAG + ", thread "+ Thread.currentThread().getName(),"Canceling current sync as descendant: " + mCurrentDownload.getRemotePath());
       mCurrentDownload.cancel();
     }
   }

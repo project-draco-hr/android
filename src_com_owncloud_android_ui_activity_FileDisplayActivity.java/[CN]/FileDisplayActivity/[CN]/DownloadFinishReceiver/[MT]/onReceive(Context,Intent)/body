@@ -6,7 +6,6 @@
     if (sameAccount && isDescendant) {
       String linkedToRemotePath=intent.getStringExtra(FileDownloader.EXTRA_LINKED_TO_PATH);
       if (linkedToRemotePath == null || isAscendant(linkedToRemotePath)) {
-        Log_OC.v(TAG,"NOW: refresh #" + ++refreshCounter);
         refreshListOfFilesFragment();
       }
       refreshSecondFragment(intent.getAction(),downloadedRemotePath,intent.getBooleanExtra(FileDownloader.EXTRA_DOWNLOAD_RESULT,false));

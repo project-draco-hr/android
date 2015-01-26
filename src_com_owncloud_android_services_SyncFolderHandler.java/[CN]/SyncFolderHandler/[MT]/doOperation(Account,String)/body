@@ -1,4 +1,5 @@
 {
+  Log_OC.v("NOW " + TAG + ", thread "+ Thread.currentThread().getName(),"Getting sync folder " + remotePath);
   mCurrentSyncOperation=mPendingOperations.get(account,remotePath);
   if (mCurrentSyncOperation != null) {
     RemoteOperationResult result=null;
@@ -9,15 +10,17 @@
         OwnCloudAccount ocAccount=new OwnCloudAccount(account,mService);
         mOwnCloudClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,mService);
       }
+      Log_OC.v("NOW " + TAG + ", thread "+ Thread.currentThread().getName(),"Executing sync folder " + remotePath);
       result=mCurrentSyncOperation.execute(mOwnCloudClient,mStorageManager);
     }
  catch (    AccountsException e) {
-      Log_OC.e(TAG,"Error while trying to get autorization",e);
+      Log_OC.e(TAG,"Error while trying to get authorization",e);
     }
 catch (    IOException e) {
-      Log_OC.e(TAG,"Error while trying to get autorization",e);
+      Log_OC.e(TAG,"Error while trying to get authorization",e);
     }
  finally {
+      Log_OC.v("NOW " + TAG + ", thread "+ Thread.currentThread().getName(),"Removing payload " + remotePath);
       mPendingOperations.removePayload(account,remotePath);
       mService.dispatchResultToOperationListeners(null,mCurrentSyncOperation,result);
       sendBroadcastFinishedSyncFolder(account,remotePath,result.isSuccess());

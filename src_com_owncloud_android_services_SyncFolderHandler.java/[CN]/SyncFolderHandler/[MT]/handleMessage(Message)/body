@@ -1,5 +1,6 @@
 {
   Pair<Account,String> itemSyncKey=(Pair<Account,String>)msg.obj;
+  Log_OC.v("NOW " + TAG + ", thread "+ Thread.currentThread().getName(),"Handling sync folder " + itemSyncKey.second);
   doOperation(itemSyncKey.first,itemSyncKey.second);
   mService.stopSelf(msg.arg1);
 }
