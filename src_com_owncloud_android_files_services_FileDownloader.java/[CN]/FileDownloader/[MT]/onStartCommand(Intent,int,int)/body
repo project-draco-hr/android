@@ -9,10 +9,10 @@
     AbstractList<String> requestedDownloads=new Vector<String>();
     try {
       DownloadFileOperation newDownload=new DownloadFileOperation(account,file);
-      Pair<String,String> putResult=mPendingDownloads.putIfAbsent(account,file.getRemotePath(),newDownload);
-      String downloadKey=putResult.first;
       newDownload.addDatatransferProgressListener(this);
       newDownload.addDatatransferProgressListener((FileDownloaderBinder)mBinder);
+      Pair<String,String> putResult=mPendingDownloads.putIfAbsent(account,file.getRemotePath(),newDownload);
+      String downloadKey=putResult.first;
       requestedDownloads.add(downloadKey);
       sendBroadcastNewDownload(newDownload,putResult.second);
     }

@@ -1,29 +1,16 @@
 {
-  SynchronizeFolderOperation syncOperation=null;
-  String targetKey=buildRemoteName(account,file.getRemotePath());
-  ArrayList<String> keyItems=new ArrayList<String>();
-synchronized (mPendingOperations) {
-    if (file.isFolder()) {
-      Log_OC.d(TAG,"Canceling pending sync operations");
-      Iterator<String> it=mPendingOperations.keySet().iterator();
-      boolean found=false;
-      while (it.hasNext()) {
-        String keySyncOperation=it.next();
-        found=keySyncOperation.startsWith(targetKey);
-        if (found) {
-          keyItems.add(keySyncOperation);
-        }
-      }
-    }
+  if (account == null || file == null) {
+    Log_OC.e(TAG,"Cannot cancel with NULL parameters");
+    return;
+  }
+  Pair<SynchronizeFolderOperation,String> removeResult=mPendingOperations.remove(account,file.getRemotePath());
+  SynchronizeFolderOperation synchronization=removeResult.first;
+  if (synchronization != null) {
+    synchronization.cancel();
+  }
  else {
-      Log_OC.d(TAG,"Canceling sync operation");
-      keyItems.add(buildRemoteName(account,file.getRemotePath()));
-    }
-    for (    String item : keyItems) {
-      syncOperation=mPendingOperations.remove(item);
-      if (syncOperation != null) {
-        syncOperation.cancel();
-      }
+    if (mCurrentSyncOperation != null && mCurrentAccount != null && mCurrentSyncOperation.getFolderPath().startsWith(file.getRemotePath()) && account.name.equals(mCurrentAccount.name)) {
+      mCurrentSyncOperation.cancel();
     }
   }
 }

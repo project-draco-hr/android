@@ -1,3 +1,0 @@
-{
-  return account.name + path;
-}

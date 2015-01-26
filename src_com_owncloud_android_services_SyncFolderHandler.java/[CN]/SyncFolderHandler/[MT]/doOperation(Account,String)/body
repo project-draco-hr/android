@@ -1,14 +1,14 @@
 {
-  String syncKey=buildRemoteName(account,remotePath);
-synchronized (mPendingOperations) {
-    mCurrentSyncOperation=mPendingOperations.get(syncKey);
-  }
+  mCurrentSyncOperation=mPendingOperations.get(account,remotePath);
   if (mCurrentSyncOperation != null) {
     RemoteOperationResult result=null;
     try {
-      OwnCloudAccount ocAccount=new OwnCloudAccount(account,mService);
-      mOwnCloudClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,mService);
-      mStorageManager=new FileDataStorageManager(account,mService.getContentResolver());
+      if (mOwnCloudClient == null || !account.equals(mCurrentAccount)) {
+        mCurrentAccount=account;
+        mStorageManager=new FileDataStorageManager(account,mService.getContentResolver());
+        OwnCloudAccount ocAccount=new OwnCloudAccount(account,mService);
+        mOwnCloudClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,mService);
+      }
       result=mCurrentSyncOperation.execute(mOwnCloudClient,mStorageManager);
     }
  catch (    AccountsException e) {
@@ -18,9 +18,7 @@ catch (    IOException e) {
       Log_OC.e(TAG,"Error while trying to get autorization",e);
     }
  finally {
-synchronized (mPendingOperations) {
-        mPendingOperations.remove(syncKey);
-      }
+      mPendingOperations.removePayload(account,remotePath);
       mService.dispatchResultToOperationListeners(null,mCurrentSyncOperation,result);
       sendBroadcastFinishedSyncFolder(account,remotePath,result.isSuccess());
     }

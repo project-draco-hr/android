@@ -20,11 +20,7 @@
     if (parent != null) {
       unlinkedFrom=parent.getKey().substring(account.name.length());
     }
-  }
-  if (firstRemoved != null) {
     return new Pair<V,String>(firstRemoved.getPayload(),unlinkedFrom);
   }
- else {
-    return new Pair<V,String>(null,unlinkedFrom);
-  }
+  return new Pair<V,String>(null,null);
 }

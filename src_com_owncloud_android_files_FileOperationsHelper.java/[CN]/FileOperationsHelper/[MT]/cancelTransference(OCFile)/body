@@ -1,11 +1,10 @@
 {
   Account account=mFileActivity.getAccount();
   if (file.isFolder()) {
-    Intent intent=new Intent(mFileActivity,OperationsService.class);
-    intent.setAction(OperationsService.ACTION_CANCEL_SYNC_FOLDER);
-    intent.putExtra(OperationsService.EXTRA_ACCOUNT,account);
-    intent.putExtra(OperationsService.EXTRA_FILE,file);
-    mFileActivity.startService(intent);
+    OperationsService.OperationsServiceBinder opsBinder=mFileActivity.getOperationsServiceBinder();
+    if (opsBinder != null) {
+      opsBinder.cancel(account,file);
+    }
   }
   FileDownloaderBinder downloaderBinder=mFileActivity.getFileDownloaderBinder();
   FileUploaderBinder uploaderBinder=mFileActivity.getFileUploaderBinder();

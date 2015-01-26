@@ -1,5 +1,4 @@
 {
-  String syncKey=buildRemoteName(account,remotePath);
-  mPendingOperations.putIfAbsent(syncKey,syncFolderOperation);
+  mPendingOperations.putIfAbsent(account,remotePath,syncFolderOperation);
   sendBroadcastNewSyncFolder(account,remotePath);
 }
