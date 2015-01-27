@@ -4,12 +4,12 @@
     notifyDownloadStart(mCurrentDownload);
     RemoteOperationResult downloadResult=null;
     try {
-      if (mDownloadClient == null || !mCurrentAccount.equals(mCurrentDownload.getAccount())) {
+      if (mCurrentAccount == null || !mCurrentAccount.equals(mCurrentDownload.getAccount())) {
         mCurrentAccount=mCurrentDownload.getAccount();
         mStorageManager=new FileDataStorageManager(mCurrentAccount,getContentResolver());
-        OwnCloudAccount ocAccount=new OwnCloudAccount(mCurrentAccount,this);
-        mDownloadClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,this);
       }
+      OwnCloudAccount ocAccount=new OwnCloudAccount(mCurrentAccount,this);
+      mDownloadClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,this);
       downloadResult=mCurrentDownload.execute(mDownloadClient);
       if (downloadResult.isSuccess()) {
         saveDownloadedFile();
