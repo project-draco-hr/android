@@ -1,0 +1,12 @@
+{
+  String path=file.getStoragePath();
+  if (file.isImage()) {
+    getContentResolver().delete(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,MediaStore.Images.Media.DATA + "=?",new String[]{path});
+  }
+ else   if (file.isAudio()) {
+    getContentResolver().delete(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,MediaStore.Audio.Media.DATA + "=?",new String[]{path});
+  }
+ else   if (file.isVideo()) {
+    getContentResolver().delete(MediaStore.Video.Media.EXTERNAL_CONTENT_URI,MediaStore.Video.Media.DATA + "=?",new String[]{path});
+  }
+}

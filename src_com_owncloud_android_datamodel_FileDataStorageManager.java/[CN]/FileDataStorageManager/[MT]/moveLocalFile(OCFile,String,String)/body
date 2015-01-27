@@ -67,12 +67,12 @@
     if (renamed) {
       Iterator<String> it=originalPathsToTriggerMediaScan.iterator();
       while (it.hasNext()) {
-        deleteFileInMediaScan(file.getStoragePath());
+        deleteFileInMediaScan(file);
         triggerMediaScan(it.next());
       }
       it=newPathsToTriggerMediaScan.iterator();
       while (it.hasNext()) {
-        deleteFileInMediaScan(file.getStoragePath());
+        deleteFileInMediaScan(file);
         triggerMediaScan(it.next());
       }
     }

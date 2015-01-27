@@ -14,7 +14,7 @@
             File localFile=new File(file.getStoragePath());
             success&=localFile.delete();
             if (success) {
-              deleteFileInMediaScan(file.getStoragePath());
+              deleteFileInMediaScan(file);
               file.setStoragePath(null);
               saveFile(file);
             }
