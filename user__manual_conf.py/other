@@ -1,0 +1,30 @@
+import sys, os, inspect
+scriptpath = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+extensions = ['sphinx.ext.todo']
+templates_path = [(scriptpath + '/ocdoc/_shared_assets/templates')]
+source_suffix = '.rst'
+master_doc = 'index'
+project = u'ownCloud Android App Manual'
+copyright = u'2013-2015, The ownCloud developers'
+version = '@VERSION_MAJOR@.@VERSION_MINOR@'
+release = '@VERSION@'
+exclude_patterns = ['_build', 'scripts/*', 'ocdoc/*']
+2
+pygments_style = 'sphinx'
+html_theme_path = [(scriptpath + '/ocdoc/_shared_assets/themes')]
+html_theme = 'default'
+html_short_title = 'Android App Manual'
+html_static_path = [(scriptpath + '/ocdoc/_shared_assets/static')]
+html_last_updated_fmt = '%b %d, %Y'
+html_show_sphinx = False
+htmlhelp_basename = 'ownCloudAndroidAppManual'
+latex_elements = {}
+latex_documents = [('index', 'ownCloudAndroidAppManual.tex', u'ownCloud Android App Manual', u'The ownCloud developers', 'manual')]
+man_pages = [('owncloud.1', 'owncloud', u'Android synchronisation and file management utility.', [u'The ownCloud developers'], 1), ('owncloudcmd.1', 'owncloudcmd', u'ownCloud Android app.', [u'The ownCloud developers'], 1)]
+man_show_urls = True
+texinfo_documents = [('index', 'ownCloudClientManual', u'ownCloud Android App Manual', u'The ownCloud developers', 'ownCloud', 'The ownCloud Android App Manual.', 'Miscellaneous')]
+epub_title = u'ownCloud Android App Manual'
+epub_author = u'The ownCloud developers'
+epub_publisher = u'The ownCloud developers'
+epub_copyright = u'2013-2015, The ownCloud developers'
+todo_include_todos = True
