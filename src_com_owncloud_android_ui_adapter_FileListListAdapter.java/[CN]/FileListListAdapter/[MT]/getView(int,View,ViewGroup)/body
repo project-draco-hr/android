@@ -34,9 +34,6 @@ TextView fileName;
 String name;
 switch (viewType) {
 case LIST_ITEM:
-fileName=(TextView)view.findViewById(R.id.Filename);
-name=file.getFileName();
-fileName.setText(name);
 TextView fileSizeV=(TextView)view.findViewById(R.id.file_size);
 TextView lastModV=(TextView)view.findViewById(R.id.last_mod);
 ImageView checkBoxV=(ImageView)view.findViewById(R.id.custom_checkbox);
@@ -45,14 +42,6 @@ lastModV.setText(showRelativeTimestamp(file));
 checkBoxV.setVisibility(View.GONE);
 fileSizeV.setVisibility(View.VISIBLE);
 fileSizeV.setText(DisplayUtils.bytesToHumanReadable(file.getFileLength()));
-ImageView sharedIconV=(ImageView)view.findViewById(R.id.sharedIcon);
-if (file.isShareByLink()) {
-sharedIconV.setVisibility(View.VISIBLE);
-}
- else {
-sharedIconV.setVisibility(View.GONE);
-}
-ImageView localStateView=(ImageView)view.findViewById(R.id.localFileIndicator);
 if (!file.isFolder()) {
 GridView parentList=(GridView)parent;
 if (parentList.getChoiceMode() == GridView.CHOICE_MODE_NONE) {
@@ -67,6 +56,24 @@ checkBoxV.setImageResource(android.R.drawable.checkbox_off_background);
 }
 checkBoxV.setVisibility(View.VISIBLE);
 }
+}
+ else {
+fileSizeV.setVisibility(View.INVISIBLE);
+}
+case GRID_ITEM:
+fileName=(TextView)view.findViewById(R.id.Filename);
+name=file.getFileName();
+fileName.setText(name);
+case GRID_IMAGE:
+ImageView sharedIconV=(ImageView)view.findViewById(R.id.sharedIcon);
+if (file.isShareByLink()) {
+sharedIconV.setVisibility(View.VISIBLE);
+sharedIconV.bringToFront();
+}
+ else {
+sharedIconV.setVisibility(View.GONE);
+}
+ImageView localStateView=(ImageView)view.findViewById(R.id.localFileIndicator);
 localStateView.bringToFront();
 FileDownloaderBinder downloaderBinder=mTransferServiceGetter.getFileDownloaderBinder();
 FileUploaderBinder uploaderBinder=mTransferServiceGetter.getFileUploaderBinder();
@@ -85,7 +92,9 @@ localStateView.setVisibility(View.VISIBLE);
  else {
 localStateView.setVisibility(View.INVISIBLE);
 }
+if (!file.isFolder()) {
 ImageView sharedWithMeIconV=(ImageView)view.findViewById(R.id.sharedWithMeIcon);
+sharedWithMeIconV.bringToFront();
 if (checkIfFileIsSharedWithMe(file)) {
 sharedWithMeIconV.setVisibility(View.VISIBLE);
 }
@@ -93,17 +102,6 @@ sharedWithMeIconV.setVisibility(View.VISIBLE);
 sharedWithMeIconV.setVisibility(View.GONE);
 }
 }
- else {
-fileSizeV.setVisibility(View.INVISIBLE);
-localStateView.setVisibility(View.INVISIBLE);
-}
-break;
-case GRID_ITEM:
-fileName=(TextView)view.findViewById(R.id.Filename);
-name=file.getFileName();
-fileName.setText(name);
-break;
-case GRID_IMAGE:
 break;
 }
 if (!file.keepInSync()) {
