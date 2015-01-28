@@ -18,7 +18,10 @@
     localStateView.bringToFront();
     FileDownloaderBinder downloaderBinder=mTransferServiceGetter.getFileDownloaderBinder();
     FileUploaderBinder uploaderBinder=mTransferServiceGetter.getFileUploaderBinder();
-    if (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,file)) {
+    boolean downloading=(downloaderBinder != null && downloaderBinder.isDownloading(mAccount,file));
+    OperationsServiceBinder opsBinder=mTransferServiceGetter.getOperationsServiceBinder();
+    downloading|=(opsBinder != null && opsBinder.isSynchronizing(mAccount,file.getRemotePath()));
+    if (downloading) {
       localStateView.setImageResource(R.drawable.downloading_file_indicator);
       localStateView.setVisibility(View.VISIBLE);
     }

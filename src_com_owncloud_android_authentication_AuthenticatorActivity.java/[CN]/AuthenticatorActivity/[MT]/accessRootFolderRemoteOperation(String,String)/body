@@ -7,6 +7,6 @@
   existenceCheckIntent.putExtra(OperationsService.EXTRA_PASSWORD,password);
   existenceCheckIntent.putExtra(OperationsService.EXTRA_AUTH_TOKEN,mAuthToken);
   if (mOperationsServiceBinder != null) {
-    mWaitingForOpId=mOperationsServiceBinder.newOperation(existenceCheckIntent);
+    mWaitingForOpId=mOperationsServiceBinder.queueNewOperation(existenceCheckIntent);
   }
 }

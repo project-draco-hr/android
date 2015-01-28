@@ -25,7 +25,7 @@
         result=new RemoteOperationResult(ResultCode.SYNC_CONFLICT);
       }
  else       if (localChanged) {
-        if (mSyncFileContents) {
+        if (mSyncFileContents && mAllowUploads) {
           requestForUpload(mLocalFile);
         }
  else {

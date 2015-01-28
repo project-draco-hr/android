@@ -1,0 +1,7 @@
+{
+  super(looper);
+  if (service == null) {
+    throw new IllegalArgumentException("Received invalid NULL in parameter 'service'");
+  }
+  mService=service;
+}
