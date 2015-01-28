@@ -1,6 +1,25 @@
 {
-  Message msg=mServiceHandler.obtainMessage();
-  msg.arg1=startId;
-  mServiceHandler.sendMessage(msg);
+  if (ACTION_SYNC_FOLDER.equals(intent.getAction())) {
+    if (!intent.hasExtra(EXTRA_ACCOUNT) || !intent.hasExtra(EXTRA_REMOTE_PATH)) {
+      Log_OC.e(TAG,"Not enough information provided in intent");
+      return START_NOT_STICKY;
+    }
+    Account account=intent.getParcelableExtra(EXTRA_ACCOUNT);
+    String remotePath=intent.getStringExtra(EXTRA_REMOTE_PATH);
+    Pair<Account,String> itemSyncKey=new Pair<Account,String>(account,remotePath);
+    Pair<Target,RemoteOperation> itemToQueue=newOperation(intent);
+    if (itemToQueue != null) {
+      mSyncFolderHandler.add(account,remotePath,(SynchronizeFolderOperation)itemToQueue.second);
+      Message msg=mSyncFolderHandler.obtainMessage();
+      msg.arg1=startId;
+      msg.obj=itemSyncKey;
+      mSyncFolderHandler.sendMessage(msg);
+    }
+  }
+ else {
+    Message msg=mOperationsHandler.obtainMessage();
+    msg.arg1=startId;
+    mOperationsHandler.sendMessage(msg);
+  }
   return START_NOT_STICKY;
 }

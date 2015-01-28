@@ -14,7 +14,7 @@
     getServerInfoIntent.setAction(OperationsService.ACTION_GET_SERVER_INFO);
     getServerInfoIntent.putExtra(OperationsService.EXTRA_SERVER_URL,normalizeUrlSuffix(uri));
     if (mOperationsServiceBinder != null) {
-      mWaitingForOpId=mOperationsServiceBinder.newOperation(getServerInfoIntent);
+      mWaitingForOpId=mOperationsServiceBinder.queueNewOperation(getServerInfoIntent);
     }
  else {
       Log_OC.wtf(TAG,"Server check tried with OperationService unbound!");

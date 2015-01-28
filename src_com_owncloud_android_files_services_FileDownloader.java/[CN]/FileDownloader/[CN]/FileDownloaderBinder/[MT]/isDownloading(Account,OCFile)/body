@@ -1,17 +1,4 @@
 {
   if (account == null || file == null)   return false;
-  String targetKey=buildRemoteName(account,file);
-synchronized (mPendingDownloads) {
-    if (file.isFolder()) {
-      Iterator<String> it=mPendingDownloads.keySet().iterator();
-      boolean found=false;
-      while (it.hasNext() && !found) {
-        found=it.next().startsWith(targetKey);
-      }
-      return found;
-    }
- else {
-      return (mPendingDownloads.containsKey(targetKey));
-    }
-  }
+  return (mPendingDownloads.contains(account,file.getRemotePath()));
 }

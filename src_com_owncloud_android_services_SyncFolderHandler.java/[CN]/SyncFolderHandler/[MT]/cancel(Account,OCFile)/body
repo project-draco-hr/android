@@ -1,0 +1,18 @@
+{
+  if (account == null || file == null) {
+    Log_OC.e(TAG,"Cannot cancel with NULL parameters");
+    return;
+  }
+  Pair<SynchronizeFolderOperation,String> removeResult=mPendingOperations.remove(account,file.getRemotePath());
+  SynchronizeFolderOperation synchronization=removeResult.first;
+  if (synchronization != null) {
+    synchronization.cancel();
+  }
+ else {
+    if (mCurrentSyncOperation != null && mCurrentAccount != null && mCurrentSyncOperation.getRemotePath().startsWith(file.getRemotePath()) && account.name.equals(mCurrentAccount.name)) {
+      mCurrentSyncOperation.cancel();
+    }
+ else {
+    }
+  }
+}

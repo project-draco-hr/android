@@ -1,0 +1,3 @@
+{
+  mSyncFolderHandler.cancel(account,file);
+}

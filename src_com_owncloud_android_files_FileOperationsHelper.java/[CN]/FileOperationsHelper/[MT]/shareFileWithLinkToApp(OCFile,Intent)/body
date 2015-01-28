@@ -6,7 +6,7 @@
     service.putExtra(OperationsService.EXTRA_ACCOUNT,mFileActivity.getAccount());
     service.putExtra(OperationsService.EXTRA_REMOTE_PATH,file.getRemotePath());
     service.putExtra(OperationsService.EXTRA_SEND_INTENT,sendIntent);
-    mWaitingForOpId=mFileActivity.getOperationsServiceBinder().newOperation(service);
+    mWaitingForOpId=mFileActivity.getOperationsServiceBinder().queueNewOperation(service);
   }
  else {
     Log_OC.wtf(TAG,"Trying to open a NULL OCFile");

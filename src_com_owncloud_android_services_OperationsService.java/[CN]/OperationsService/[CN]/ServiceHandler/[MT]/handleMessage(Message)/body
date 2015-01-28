@@ -1,4 +1,4 @@
 {
-  mService.nextOperation();
+  nextOperation();
   mService.stopSelf(msg.arg1);
 }

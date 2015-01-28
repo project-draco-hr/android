@@ -16,7 +16,7 @@
   OCFile[] files=null;
   if (uploadType == UPLOAD_SINGLE_FILE) {
     if (intent.hasExtra(KEY_FILE)) {
-      files=new OCFile[]{intent.getParcelableExtra(KEY_FILE)};
+      files=new OCFile[]{(OCFile)intent.getParcelableExtra(KEY_FILE)};
     }
  else {
       localPaths=new String[]{intent.getStringExtra(KEY_LOCAL_FILE)};
