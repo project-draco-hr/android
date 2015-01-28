@@ -6,8 +6,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 project = u'ownCloud Android App Manual'
 copyright = u'2013-2015, The ownCloud developers'
-version = '@VERSION_MAJOR@.@VERSION_MINOR@'
-release = '@VERSION@'
+version = '1.6.2'
+release = version
 exclude_patterns = ['_build', 'scripts/*', 'ocdoc/*']
 2
 pygments_style = 'sphinx'
