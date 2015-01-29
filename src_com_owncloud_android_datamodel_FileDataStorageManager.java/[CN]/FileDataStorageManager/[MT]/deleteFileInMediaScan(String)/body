@@ -1,12 +1,12 @@
 {
-  String path=file.getStoragePath();
-  if (file.isImage()) {
+  String mimetypeString=FileStorageUtils.getMimeTypeFromName(path);
+  if (mimetypeString.startsWith("image/")) {
     getContentResolver().delete(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,MediaStore.Images.Media.DATA + "=?",new String[]{path});
   }
- else   if (file.isAudio()) {
+ else   if (mimetypeString.startsWith("audio/")) {
     getContentResolver().delete(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,MediaStore.Audio.Media.DATA + "=?",new String[]{path});
   }
- else   if (file.isVideo()) {
+ else   if (mimetypeString.startsWith("video/")) {
     getContentResolver().delete(MediaStore.Video.Media.EXTERNAL_CONTENT_URI,MediaStore.Video.Media.DATA + "=?",new String[]{path});
   }
 }

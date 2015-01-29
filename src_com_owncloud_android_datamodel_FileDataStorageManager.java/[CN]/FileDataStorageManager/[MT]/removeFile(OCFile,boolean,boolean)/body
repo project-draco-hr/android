@@ -27,7 +27,7 @@
       if (removeLocalCopy && file.isDown() && localPath != null && success) {
         success=new File(localPath).delete();
         if (success) {
-          deleteFileInMediaScan(file);
+          deleteFileInMediaScan(localPath);
         }
         if (!removeDBData && success) {
           file.setStoragePath(null);
