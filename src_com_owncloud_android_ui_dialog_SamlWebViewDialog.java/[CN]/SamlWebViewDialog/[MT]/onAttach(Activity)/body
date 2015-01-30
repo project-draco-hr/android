@@ -1,5 +1,5 @@
 {
-  Log_OC.d(TAG,"onAttach");
+  Log_OC.v(TAG,"onAttach");
   super.onAttach(activity);
   try {
     mSsoWebViewClientListener=(SsoWebViewClientListener)activity;
