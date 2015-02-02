@@ -51,6 +51,7 @@ synchronized (mPendingUploads) {
     }
  else {
       Log_OC.d(TAG,"Account " + mCurrentUpload.getAccount().toString() + " doesn't exist");
+      cancelUploadForAccount(mCurrentUpload.getAccount().name);
     }
   }
 }
