@@ -1,0 +1,6 @@
+OCFile localFile
+OCFile serverFile
+Account account
+boolean syncFileContents
+boolean allowUploads
+Context context

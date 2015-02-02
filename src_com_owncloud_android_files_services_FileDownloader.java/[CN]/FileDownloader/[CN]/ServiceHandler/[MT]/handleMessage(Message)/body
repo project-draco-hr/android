@@ -3,7 +3,8 @@
   if (msg.obj != null) {
     Iterator<String> it=requestedDownloads.iterator();
     while (it.hasNext()) {
-      mService.downloadFile(it.next());
+      String next=it.next();
+      mService.downloadFile(next);
     }
   }
   mService.stopSelf(msg.arg1);

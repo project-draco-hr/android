@@ -1,0 +1,4 @@
+{
+  mChildren.add(child);
+  child.setParent(this);
+}

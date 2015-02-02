@@ -4,6 +4,6 @@
   service.putExtra(OperationsService.EXTRA_NEW_PARENT_PATH,newfile.getRemotePath());
   service.putExtra(OperationsService.EXTRA_REMOTE_PATH,currentFile.getRemotePath());
   service.putExtra(OperationsService.EXTRA_ACCOUNT,mFileActivity.getAccount());
-  mWaitingForOpId=mFileActivity.getOperationsServiceBinder().newOperation(service);
+  mWaitingForOpId=mFileActivity.getOperationsServiceBinder().queueNewOperation(service);
   mFileActivity.showLoadingDialog();
 }

@@ -1,28 +1,27 @@
 {
+  Log_OC.d(TAG,"Checking changes in " + mAccount.name + mRemotePath);
   mRemoteFolderChanged=true;
   RemoteOperationResult result=null;
-  String remotePath=null;
-  remotePath=mLocalFolder.getRemotePath();
-  Log_OC.d(TAG,"Checking changes in " + mAccount.name + remotePath);
-  ReadRemoteFileOperation operation=new ReadRemoteFileOperation(remotePath);
+  if (mCancellationRequested.get()) {
+    throw new OperationCancelledException();
+  }
+  ReadRemoteFileOperation operation=new ReadRemoteFileOperation(mRemotePath);
   result=operation.execute(client);
   if (result.isSuccess()) {
     OCFile remoteFolder=FileStorageUtils.fillOCFile((RemoteFile)result.getData().get(0));
-    if (!mIgnoreETag) {
-      mRemoteFolderChanged=!(remoteFolder.getEtag().equalsIgnoreCase(mLocalFolder.getEtag()));
-    }
+    mRemoteFolderChanged=!(remoteFolder.getEtag().equalsIgnoreCase(mLocalFolder.getEtag()));
     result=new RemoteOperationResult(ResultCode.OK);
-    Log_OC.i(TAG,"Checked " + mAccount.name + remotePath+ " : "+ (mRemoteFolderChanged ? "changed" : "not changed"));
+    Log_OC.i(TAG,"Checked " + mAccount.name + mRemotePath+ " : "+ (mRemoteFolderChanged ? "changed" : "not changed"));
   }
  else {
     if (result.getCode() == ResultCode.FILE_NOT_FOUND) {
       removeLocalFolder();
     }
     if (result.isException()) {
-      Log_OC.e(TAG,"Checked " + mAccount.name + remotePath+ " : "+ result.getLogMessage(),result.getException());
+      Log_OC.e(TAG,"Checked " + mAccount.name + mRemotePath+ " : "+ result.getLogMessage(),result.getException());
     }
  else {
-      Log_OC.e(TAG,"Checked " + mAccount.name + remotePath+ " : "+ result.getLogMessage());
+      Log_OC.e(TAG,"Checked " + mAccount.name + mRemotePath+ " : "+ result.getLogMessage());
     }
   }
   return result;

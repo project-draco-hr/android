@@ -1,0 +1,23 @@
+{
+  RemoteOperationResult contentsResult=null;
+  for (  SyncOperation op : filesToSyncContents) {
+    if (mCancellationRequested.get()) {
+      throw new OperationCancelledException();
+    }
+    contentsResult=op.execute(getStorageManager(),mContext);
+    if (!contentsResult.isSuccess()) {
+      if (contentsResult.getCode() == ResultCode.SYNC_CONFLICT) {
+        mConflictsFound++;
+      }
+ else {
+        mFailsInFileSyncsFound++;
+        if (contentsResult.getException() != null) {
+          Log_OC.e(TAG,"Error while synchronizing file : " + contentsResult.getLogMessage(),contentsResult.getException());
+        }
+ else {
+          Log_OC.e(TAG,"Error while synchronizing file : " + contentsResult.getLogMessage());
+        }
+      }
+    }
+  }
+}

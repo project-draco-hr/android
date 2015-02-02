@@ -8,7 +8,7 @@
     if (f.renameTo(new File(parentStoragePath + mNewName))) {
       String newPath=parentStoragePath + mNewName;
       mFile.setStoragePath(newPath);
-      getStorageManager().triggerMediaScan(oldPath);
+      getStorageManager().deleteFileInMediaScan(oldPath);
       getStorageManager().triggerMediaScan(newPath);
     }
   }

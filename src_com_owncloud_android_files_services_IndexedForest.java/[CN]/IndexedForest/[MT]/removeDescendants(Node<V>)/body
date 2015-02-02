@@ -1,0 +1,9 @@
+{
+  Iterator<Node<V>> childrenIt=removed.getChildren().iterator();
+  Node<V> child=null;
+  while (childrenIt.hasNext()) {
+    child=childrenIt.next();
+    mMap.remove(child.getKey());
+    removeDescendants(child);
+  }
+}

@@ -1,0 +1,8 @@
+{
+  Intent finished=new Intent(FileDownloader.getDownloadFinishMessage());
+  finished.putExtra(FileDownloader.ACCOUNT_NAME,account.name);
+  finished.putExtra(FileDownloader.EXTRA_REMOTE_PATH,remotePath);
+  finished.putExtra(FileDownloader.EXTRA_FILE_PATH,FileStorageUtils.getSavePath(account.name) + remotePath);
+  finished.putExtra(FileDownloader.EXTRA_DOWNLOAD_RESULT,success);
+  mService.sendStickyBroadcast(finished);
+}

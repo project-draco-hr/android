@@ -1,0 +1,3 @@
+Account account
+String remotePath
+SynchronizeFolderOperation syncFolderOperation
