@@ -1,0 +1,8 @@
+{
+  super.setNumColumns(numColumns);
+  mNumColumns=numColumns;
+  ListAdapter adapter=getAdapter();
+  if (adapter != null && adapter instanceof HeaderViewGridAdapter) {
+    ((HeaderViewGridAdapter)adapter).setNumColumns(numColumns);
+  }
+}

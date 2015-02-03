@@ -1,0 +1,12 @@
+{
+  for (int i=0; i < mHeaderViewInfos.size(); i++) {
+    FixedViewInfo info=mHeaderViewInfos.get(i);
+    if (info.view == v) {
+      mHeaderViewInfos.remove(i);
+      mAreAllFixedViewsSelectable=areAllListInfosSelectable(mHeaderViewInfos) && areAllListInfosSelectable(mFooterViewInfos);
+      mDataSetObservable.notifyChanged();
+      return true;
+    }
+  }
+  return false;
+}

@@ -1,0 +1,9 @@
+{
+  if (numColumns < 1) {
+    return;
+  }
+  if (mNumColumns != numColumns) {
+    mNumColumns=numColumns;
+    notifyDataSetChanged();
+  }
+}

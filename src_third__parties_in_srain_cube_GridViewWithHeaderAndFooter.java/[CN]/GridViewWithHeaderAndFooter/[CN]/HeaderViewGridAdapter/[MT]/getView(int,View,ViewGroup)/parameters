@@ -1,0 +1,3 @@
+int position
+View convertView
+ViewGroup parent

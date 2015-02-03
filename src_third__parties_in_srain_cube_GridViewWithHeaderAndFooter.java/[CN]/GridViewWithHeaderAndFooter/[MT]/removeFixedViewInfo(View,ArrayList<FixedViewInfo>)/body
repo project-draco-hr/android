@@ -1,0 +1,10 @@
+{
+  int len=where.size();
+  for (int i=0; i < len; ++i) {
+    FixedViewInfo info=where.get(i);
+    if (info.view == v) {
+      where.remove(i);
+      break;
+    }
+  }
+}

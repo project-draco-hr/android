@@ -1,0 +1,8 @@
+{
+  if (mAdapter != null) {
+    return mAreAllFixedViewsSelectable && mAdapter.areAllItemsEnabled();
+  }
+ else {
+    return true;
+  }
+}

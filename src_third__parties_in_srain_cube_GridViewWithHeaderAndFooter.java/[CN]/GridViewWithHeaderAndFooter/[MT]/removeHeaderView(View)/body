@@ -1,0 +1,12 @@
+{
+  if (mHeaderViewInfos.size() > 0) {
+    boolean result=false;
+    ListAdapter adapter=getAdapter();
+    if (adapter != null && ((HeaderViewGridAdapter)adapter).removeHeader(v)) {
+      result=true;
+    }
+    removeFixedViewInfo(v,mHeaderViewInfos);
+    return result;
+  }
+  return false;
+}

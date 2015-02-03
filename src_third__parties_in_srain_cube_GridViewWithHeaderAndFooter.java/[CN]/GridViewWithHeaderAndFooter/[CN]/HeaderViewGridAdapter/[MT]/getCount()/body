@@ -1,0 +1,8 @@
+{
+  if (mAdapter != null) {
+    return (getFootersCount() + getHeadersCount()) * mNumColumns + getAdapterAndPlaceHolderCount();
+  }
+ else {
+    return (getFootersCount() + getHeadersCount()) * mNumColumns;
+  }
+}
