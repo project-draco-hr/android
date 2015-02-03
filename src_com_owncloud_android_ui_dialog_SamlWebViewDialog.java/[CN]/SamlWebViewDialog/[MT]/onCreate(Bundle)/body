@@ -1,5 +1,5 @@
 {
-  Log_OC.d(TAG,"onCreate, savedInstanceState is " + savedInstanceState);
+  Log_OC.v(TAG,"onCreate, savedInstanceState is " + savedInstanceState);
   super.onCreate(savedInstanceState);
   setRetainInstance(true);
   CookieSyncManager.createInstance(getSherlockActivity().getApplicationContext());
