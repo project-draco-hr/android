@@ -9,7 +9,7 @@
     TextView fileName=(TextView)view.findViewById(R.id.Filename);
     String name=file.getName();
     fileName.setText(name);
-    ImageView fileIcon=(ImageView)view.findViewById(R.id.imageView1);
+    ImageView fileIcon=(ImageView)view.findViewById(R.id.thumbnail);
     if (!file.isDirectory()) {
       fileIcon.setImageResource(R.drawable.file);
     }
@@ -25,7 +25,7 @@
       fileSizeV.setText(DisplayUtils.bytesToHumanReadable(file.length()));
       lastModV.setVisibility(View.VISIBLE);
       lastModV.setText(DisplayUtils.unixTimeToHumanReadable(file.lastModified()));
-      ListView parentList=(ListView)parent;
+      GridViewWithHeaderAndFooter parentList=(GridViewWithHeaderAndFooter)parent;
       if (parentList.getChoiceMode() == ListView.CHOICE_MODE_NONE) {
         checkBoxV.setVisibility(View.GONE);
       }
@@ -64,8 +64,8 @@
       lastModV.setVisibility(View.GONE);
       checkBoxV.setVisibility(View.GONE);
     }
-    view.findViewById(R.id.imageView2).setVisibility(View.INVISIBLE);
-    view.findViewById(R.id.imageView3).setVisibility(View.GONE);
+    view.findViewById(R.id.localFileIndicator).setVisibility(View.INVISIBLE);
+    view.findViewById(R.id.favoriteIcon).setVisibility(View.GONE);
     view.findViewById(R.id.sharedIcon).setVisibility(View.GONE);
     view.findViewById(R.id.sharedWithMeIcon).setVisibility(View.GONE);
   }

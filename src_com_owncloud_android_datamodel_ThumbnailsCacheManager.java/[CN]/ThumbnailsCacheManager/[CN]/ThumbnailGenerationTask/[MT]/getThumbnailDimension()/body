@@ -1,4 +1,4 @@
 {
   Resources r=MainApp.getAppContext().getResources();
-  return (int)Math.round(r.getDimension(R.dimen.file_icon_size));
+  return (int)Math.round(r.getDimension(R.dimen.file_icon_size_grid));
 }

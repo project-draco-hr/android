@@ -1,0 +1,3 @@
+{
+  return (mAdapter == null || mAdapter.isEmpty()) && getHeadersCount() == 0 && getFootersCount() == 0;
+}

@@ -1,0 +1,7 @@
+{
+  int realLeft=GridViewWithHeaderAndFooter.this.getPaddingLeft() + getPaddingLeft();
+  if (realLeft != left) {
+    offsetLeftAndRight(realLeft - left);
+  }
+  super.onLayout(changed,left,top,right,bottom);
+}

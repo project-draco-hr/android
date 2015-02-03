@@ -29,5 +29,14 @@
  else   if (folders > 1) {
     output=output + folders.toString() + " "+ getResources().getString(R.string.file_list_folders);
   }
+  if (folders == 0 && files == 0) {
+    removeFooterView(mFooterView);
+  }
+ else {
+    if (getFooterViewCount() == 0) {
+      ((ViewGroup)mFooterView.getParent()).removeView(mFooterView);
+      setFooterView(mFooterView);
+    }
+  }
   return output;
 }
