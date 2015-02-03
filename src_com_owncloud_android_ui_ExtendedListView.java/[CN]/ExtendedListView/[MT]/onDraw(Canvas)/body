@@ -1,7 +1,0 @@
-{
-  super.onDraw(canvas);
-  if (mPositionToSetTopLeft > 0) {
-    this.smoothScrollToPosition(mPositionToSetTopLeft);
-    mPositionToSetTopLeft=0;
-  }
-}
