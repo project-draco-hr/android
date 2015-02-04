@@ -1,12 +1,13 @@
 {
   Iterator<String> it=mPendingUploads.keySet().iterator();
   Log_OC.d(TAG,"Number of pending updloads= " + mPendingUploads.size());
-  boolean found;
   while (it.hasNext()) {
     String key=it.next();
-    Log_OC.d(TAG,"mPendingUploads CANCELLED" + key);
+    Log_OC.d(TAG,"mPendingUploads CANCELLED " + key);
     if (key.startsWith(accountName)) {
-      mPendingUploads.remove(key);
+synchronized (mPendingUploads) {
+        mPendingUploads.remove(key);
+      }
     }
   }
 }

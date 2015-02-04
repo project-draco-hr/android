@@ -1,0 +1,24 @@
+{
+  Log_OC.d(TAG,"Account= " + account.name);
+  if (mCurrentUpload != null) {
+    Log_OC.d(TAG,"Current Upload Account= " + mCurrentUpload.getAccount().name);
+    if (mCurrentUpload.getAccount().name == account.name) {
+      mCurrentUpload.cancel();
+    }
+  }
+  Iterator<String> it=mPendingUploads.keySet().iterator();
+  Log_OC.d(TAG,"Number of pending updloads= " + mPendingUploads.size());
+  while (it.hasNext()) {
+    String key=it.next();
+    Log_OC.d(TAG,"mPendingUploads CANCELLED " + key);
+    if (key.startsWith(account.name)) {
+      UploadFileOperation upload;
+synchronized (mPendingUploads) {
+        upload=mPendingUploads.remove(key);
+      }
+      if (upload != null) {
+        upload.cancel();
+      }
+    }
+  }
+}

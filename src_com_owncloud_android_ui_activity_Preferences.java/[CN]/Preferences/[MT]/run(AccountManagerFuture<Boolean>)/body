@@ -1,5 +1,9 @@
 {
   if (future.isDone()) {
+    Account account=new Account(mAccountName,MainApp.getAccountType());
+    if (!AccountUtils.exists(account,MainApp.getAppContext())) {
+      mUploaderBinder.cancel(account);
+    }
     Account a=AccountUtils.getCurrentOwnCloudAccount(this);
     String accountName="";
     if (a == null) {

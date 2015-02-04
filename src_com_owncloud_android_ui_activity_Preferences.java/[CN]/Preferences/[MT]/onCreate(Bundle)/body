@@ -200,4 +200,12 @@
   }
   loadInstantUploadPath();
   loadInstantUploadVideoPath();
+  mDownloadServiceConnection=newTransferenceServiceConnection();
+  if (mDownloadServiceConnection != null) {
+    bindService(new Intent(this,FileDownloader.class),mDownloadServiceConnection,Context.BIND_AUTO_CREATE);
+  }
+  mUploadServiceConnection=newTransferenceServiceConnection();
+  if (mUploadServiceConnection != null) {
+    bindService(new Intent(this,FileUploader.class),mUploadServiceConnection,Context.BIND_AUTO_CREATE);
+  }
 }
