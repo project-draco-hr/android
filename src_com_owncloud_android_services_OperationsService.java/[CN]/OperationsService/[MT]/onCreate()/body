@@ -1,5 +1,6 @@
 {
   super.onCreate();
+  Log_OC.d(TAG,"Creating service");
   HandlerThread thread=new HandlerThread("Operations thread",Process.THREAD_PRIORITY_BACKGROUND);
   thread.start();
   mOperationsHandler=new ServiceHandler(thread.getLooper(),this);
