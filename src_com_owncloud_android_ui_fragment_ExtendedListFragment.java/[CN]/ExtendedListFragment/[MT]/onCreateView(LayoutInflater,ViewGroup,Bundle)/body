@@ -1,5 +1,5 @@
 {
-  Log_OC.e(TAG,"onCreateView");
+  Log_OC.d(TAG,"onCreateView");
   View v=inflater.inflate(R.layout.list_fragment,null);
   imageView=(GridViewWithHeaderAndFooter)(v.findViewById(R.id.list_root));
   imageView.setOnItemClickListener(this);

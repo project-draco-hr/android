@@ -1,6 +1,6 @@
 {
   super.onSaveInstanceState(savedInstanceState);
-  Log_OC.e(TAG,"onSaveInstanceState()");
+  Log_OC.d(TAG,"onSaveInstanceState()");
   savedInstanceState.putInt(KEY_SAVED_LIST_POSITION,getReferencePosition());
   savedInstanceState.putIntegerArrayList(KEY_INDEXES,mIndexes);
   savedInstanceState.putIntegerArrayList(KEY_FIRST_POSITIONS,mFirstPositions);
