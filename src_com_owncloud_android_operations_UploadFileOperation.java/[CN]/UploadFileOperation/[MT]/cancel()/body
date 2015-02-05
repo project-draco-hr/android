@@ -1,3 +1,6 @@
 {
-  if (mUploadOperation != null)   mUploadOperation.cancel();
+  mCancellationRequested=new AtomicBoolean(true);
+  if (mUploadOperation != null) {
+    mUploadOperation.cancel();
+  }
 }
