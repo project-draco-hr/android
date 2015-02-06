@@ -1,4 +1,7 @@
 {
+  if (mAction == ACTION_UPDATE_TOKEN || mAction == ACTION_UPDATE_EXPIRED_TOKEN) {
+    mAccountMgr.setUserData(mAccount,Constants.KEY_COOKIES,null);
+  }
   Intent existenceCheckIntent=new Intent();
   existenceCheckIntent.setAction(OperationsService.ACTION_EXISTENCE_CHECK);
   existenceCheckIntent.putExtra(OperationsService.EXTRA_SERVER_URL,mServerInfo.mBaseUrl);

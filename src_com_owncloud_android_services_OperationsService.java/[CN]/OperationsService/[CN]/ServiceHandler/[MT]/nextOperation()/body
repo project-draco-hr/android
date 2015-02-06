@@ -7,11 +7,11 @@ synchronized (mPendingOperations) {
     mCurrentOperation=next.second;
     RemoteOperationResult result=null;
     try {
+      OwnCloudAccount ocAccount;
       if (mLastTarget == null || !mLastTarget.equals(next.first)) {
         mLastTarget=next.first;
         if (mLastTarget.mAccount != null) {
-          OwnCloudAccount ocAccount=new OwnCloudAccount(mLastTarget.mAccount,mService);
-          mOwnCloudClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,mService);
+          ocAccount=new OwnCloudAccount(mLastTarget.mAccount,mService);
           mStorageManager=new FileDataStorageManager(mLastTarget.mAccount,mService.getContentResolver());
         }
  else {
@@ -25,10 +25,10 @@ synchronized (mPendingOperations) {
  else           if (mLastTarget.mCookie != null && mLastTarget.mCookie.length() > 0) {
             credentials=OwnCloudCredentialsFactory.newSamlSsoCredentials(mLastTarget.mCookie);
           }
-          OwnCloudAccount ocAccount=new OwnCloudAccount(mLastTarget.mServerUrl,credentials);
-          mOwnCloudClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,mService);
+          ocAccount=new OwnCloudAccount(mLastTarget.mServerUrl,credentials);
           mStorageManager=null;
         }
+        mOwnCloudClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,mService);
       }
       if (mCurrentOperation instanceof SyncOperation) {
         result=((SyncOperation)mCurrentOperation).execute(mOwnCloudClient,mStorageManager);
