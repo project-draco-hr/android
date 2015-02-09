@@ -1,0 +1,8 @@
+{
+  if (AccountTypeUtils.getAuthTokenTypeSamlSessionCookie(MainApp.getAccountType()).equals(mAuthTokenType)) {
+    onSamlBasedFederatedSingleSignOnAuthorizationStart(result);
+  }
+ else {
+    onAuthorizationCheckFinish(result);
+  }
+}
