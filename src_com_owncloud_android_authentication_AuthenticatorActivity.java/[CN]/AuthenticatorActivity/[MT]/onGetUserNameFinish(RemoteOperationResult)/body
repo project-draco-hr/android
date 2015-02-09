@@ -16,7 +16,7 @@
         Log_OC.d(TAG,result.getLogMessage());
       }
  else {
-        updateToken();
+        updateAccountAuthentication();
         success=true;
       }
     }
