@@ -22,7 +22,7 @@
     Vector<OCFile> files=storageManager.getFolderContent(directory);
     TextView footerText=(TextView)mFooterView.findViewById(R.id.footerText);
     footerText.setText(generateFooterText(directory));
-    if (DisplayUtils.decideViewLayout(files)) {
+    if (DisplayUtils.decideViewLayout(files) && !mJustFolders) {
       switchImageView();
     }
  else {

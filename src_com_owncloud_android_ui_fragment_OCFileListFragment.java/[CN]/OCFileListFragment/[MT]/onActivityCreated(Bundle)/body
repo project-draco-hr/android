@@ -7,8 +7,8 @@
   mFooterView=((LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.list_footer,null,false);
   setFooterView(mFooterView);
   Bundle args=getArguments();
-  boolean justFolders=(args == null) ? false : args.getBoolean(ARG_JUST_FOLDERS,false);
-  mAdapter=new FileListListAdapter(justFolders,getSherlockActivity(),mContainerActivity);
+  mJustFolders=(args == null) ? false : args.getBoolean(ARG_JUST_FOLDERS,false);
+  mAdapter=new FileListListAdapter(mJustFolders,getSherlockActivity(),mContainerActivity);
   setListAdapter(mAdapter);
   registerForContextMenu(getGridView());
   getGridView().setOnCreateContextMenuListener(this);
