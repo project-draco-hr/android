@@ -1,4 +1,5 @@
 {
+  OwnCloudClientManagerFactory.getDefaultSingleton().removeClientFor(new OwnCloudAccount(mAccount,this));
   Bundle response=new Bundle();
   response.putString(AccountManager.KEY_ACCOUNT_NAME,mAccount.name);
   response.putString(AccountManager.KEY_ACCOUNT_TYPE,mAccount.type);
