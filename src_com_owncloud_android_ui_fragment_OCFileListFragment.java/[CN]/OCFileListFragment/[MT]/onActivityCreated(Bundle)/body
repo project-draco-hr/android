@@ -5,7 +5,12 @@
     mFile=savedInstanceState.getParcelable(KEY_FILE);
   }
   mFooterView=((LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.list_footer,null,false);
-  setFooterView(mFooterView);
+  if (mJustFolders) {
+    removeFooterView(mFooterView);
+  }
+ else {
+    setFooterView(mFooterView);
+  }
   Bundle args=getArguments();
   mJustFolders=(args == null) ? false : args.getBoolean(ARG_JUST_FOLDERS,false);
   mAdapter=new FileListListAdapter(mJustFolders,getSherlockActivity(),mContainerActivity);
