@@ -1,4 +1,5 @@
 {
   mContext=activity.getApplicationContext();
   mListener=new WeakReference<>((OnAuthenticatorTaskListener)activity);
+  mActivity=activity;
 }

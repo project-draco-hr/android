@@ -17,4 +17,14 @@
   outState.putInt(KEY_AUTH_STATUS_TEXT,mAuthStatusText);
   outState.putString(KEY_AUTH_TOKEN,mAuthToken);
   outState.putBoolean(KEY_AUTH_IS_FIRST_ATTEMPT_TAG,mIsFirstAuthAttempt);
+  outState.putString(KEY_USERNAME,mUsernameInput.getText().toString());
+  outState.putString(KEY_PASSWORD,mPasswordInput.getText().toString());
+  if (mAsyncTask != null) {
+    mAsyncTask.cancel(true);
+    outState.putBoolean(KEY_ASYNC_TASK_IN_PROGRESS,true);
+  }
+ else {
+    outState.putBoolean(KEY_ASYNC_TASK_IN_PROGRESS,false);
+  }
+  mAsyncTask=null;
 }
