@@ -40,7 +40,7 @@
             out=new FileOutputStream(temporalFile);
             int nRead;
             byte[] data=new byte[16384];
-            while ((nRead=in.read(data,0,data.length)) != -1) {
+            while (!mCancellationRequested.get() && (nRead=in.read(data,0,data.length)) != -1) {
               out.write(data,0,nRead);
             }
             out.flush();
@@ -51,7 +51,7 @@
               out=new FileOutputStream(temporalFile);
               byte[] buf=new byte[1024];
               int len;
-              while ((len=in.read(buf)) > 0) {
+              while (!mCancellationRequested.get() && (len=in.read(buf)) > 0) {
                 out.write(buf,0,len);
               }
             }
@@ -88,7 +88,9 @@
     while (listener.hasNext()) {
       mUploadOperation.addDatatransferProgressListener(listener.next());
     }
-    result=mUploadOperation.execute(client);
+    if (!mCancellationRequested.get()) {
+      result=mUploadOperation.execute(client);
+    }
     if (result.isSuccess()) {
       if (mLocalBehaviour == FileUploader.LOCAL_BEHAVIOUR_FORGET) {
         mFile.setStoragePath(null);
@@ -114,6 +116,7 @@
   }
  catch (  Exception e) {
     if (mCancellationRequested.get()) {
+      mUploadOperation.cancel();
       result=new RemoteOperationResult(new OperationCancelledException());
     }
  else {

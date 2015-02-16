@@ -17,7 +17,7 @@ synchronized (mPendingUploads) {
         upload=mPendingUploads.remove(key);
       }
       if (upload != null) {
-        upload.cancel();
+        mCurrentUpload.cancel();
       }
     }
   }
