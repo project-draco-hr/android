@@ -1,0 +1,7 @@
+{
+  super.onDraw(canvas);
+  if (mPositionToSetAndCenter > 0) {
+    this.setSelectionFromTop(mPositionToSetAndCenter,getHeight() / 2);
+    mPositionToSetAndCenter=0;
+  }
+}

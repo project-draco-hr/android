@@ -1,0 +1,22 @@
+{
+  if (enabled) {
+    if (mGridView.getFooterViewCount() == 0) {
+      if (mGridFooterView.getParent() != null) {
+        ((ViewGroup)mGridFooterView.getParent()).removeView(mGridFooterView);
+      }
+      mGridView.addFooterView(mGridFooterView,null,false);
+    }
+    mGridFooterView.invalidate();
+    if (mListView.getFooterViewsCount() == 0) {
+      if (mListFooterView.getParent() != null) {
+        ((ViewGroup)mListFooterView.getParent()).removeView(mListFooterView);
+      }
+      mListView.addFooterView(mListFooterView,null,false);
+    }
+    mListFooterView.invalidate();
+  }
+ else {
+    mGridView.removeFooterView(mGridFooterView);
+    mListView.removeFooterView(mListFooterView);
+  }
+}
