@@ -10,8 +10,14 @@
   mGridFooterView=inflater.inflate(R.layout.list_footer,null,false);
   if (savedInstanceState != null) {
     int referencePosition=savedInstanceState.getInt(KEY_SAVED_LIST_POSITION);
-    mListView.setAndCenterSelection(referencePosition);
-    mGridView.setSelection(referencePosition);
+    if (mCurrentListView == mListView) {
+      Log_OC.v(TAG,"Setting and centering around list position " + referencePosition);
+      mListView.setAndCenterSelection(referencePosition);
+    }
+ else {
+      Log_OC.v(TAG,"Setting grid position " + referencePosition);
+      mGridView.setSelection(referencePosition);
+    }
   }
   mRefreshListLayout=(SwipeRefreshLayout)v.findViewById(R.id.swipe_containing_list);
   mRefreshGridLayout=(SwipeRefreshLayout)v.findViewById(R.id.swipe_containing_grid);
