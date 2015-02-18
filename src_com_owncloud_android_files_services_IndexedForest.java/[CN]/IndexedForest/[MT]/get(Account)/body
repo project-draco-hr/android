@@ -1,0 +1,14 @@
+{
+  ConcurrentMap<String,Node<V>> accountMap=new ConcurrentHashMap<String,Node<V>>();
+  Iterator<String> it=mMap.keySet().iterator();
+  while (it.hasNext()) {
+    String key=it.next();
+    Log_OC.d("IndexedForest","Number of pending downloads= " + mMap.size());
+    if (key.startsWith(account.name)) {
+synchronized (accountMap) {
+        accountMap.putIfAbsent(key,mMap.get(key));
+      }
+    }
+  }
+  return accountMap;
+}
