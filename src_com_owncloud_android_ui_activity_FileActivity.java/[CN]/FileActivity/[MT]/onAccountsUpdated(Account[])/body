@@ -1,5 +1,9 @@
 {
   Log_OC.d(TAG,"onAccountsUpdated");
-  mDownloaderBinder.reviewDownloads();
-  mUploaderBinder.reviewUploads();
+  if (mDownloaderBinder != null) {
+    mDownloaderBinder.checkAccountOfCurrentDownload();
+  }
+  if (mUploaderBinder != null) {
+    mUploaderBinder.checkAccountOfCurrentUpload();
+  }
 }

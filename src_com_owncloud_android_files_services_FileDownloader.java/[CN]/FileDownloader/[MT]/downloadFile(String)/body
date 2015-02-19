@@ -2,7 +2,7 @@
   mCurrentDownload=mPendingDownloads.get(downloadKey);
   if (mCurrentDownload != null) {
     if (AccountUtils.exists(mCurrentDownload.getAccount(),getApplicationContext())) {
-      Log_OC.d(TAG,"Account " + mCurrentDownload.getAccount().toString() + " exists");
+      Log_OC.d(TAG,"Account " + mCurrentDownload.getAccount().name + " exists");
       notifyDownloadStart(mCurrentDownload);
       RemoteOperationResult downloadResult=null;
       try {

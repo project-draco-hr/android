@@ -4,7 +4,7 @@ synchronized (mPendingUploads) {
   }
   if (mCurrentUpload != null) {
     if (AccountUtils.exists(mCurrentUpload.getAccount(),getApplicationContext())) {
-      Log_OC.d(TAG,"Account " + mCurrentUpload.getAccount().toString() + " exists");
+      Log_OC.d(TAG,"Account " + mCurrentUpload.getAccount().name + " exists");
       notifyUploadStart(mCurrentUpload);
       RemoteOperationResult uploadResult=null, grantResult=null;
       try {

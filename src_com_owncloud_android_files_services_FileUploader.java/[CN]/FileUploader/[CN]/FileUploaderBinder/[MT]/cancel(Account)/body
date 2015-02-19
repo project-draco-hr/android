@@ -6,15 +6,5 @@
       mCurrentUpload.cancel();
     }
   }
-  Iterator<String> it=mPendingUploads.keySet().iterator();
-  Log_OC.d(TAG,"Number of pending uploads= " + mPendingUploads.size());
-  while (it.hasNext()) {
-    String key=it.next();
-    Log_OC.d(TAG,"mPendingUploads CANCELLED " + key);
-    if (key.startsWith(account.name)) {
-synchronized (mPendingUploads) {
-        mPendingUploads.remove(key);
-      }
-    }
-  }
+  cancelUploadForAccount(account.name);
 }

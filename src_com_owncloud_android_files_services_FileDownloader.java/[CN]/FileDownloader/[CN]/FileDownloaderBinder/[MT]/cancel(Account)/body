@@ -6,23 +6,5 @@
       mCurrentDownload.cancel();
     }
   }
-  ConcurrentMap downloadsAccount=mPendingDownloads.get(account);
-  Iterator<String> it=downloadsAccount.keySet().iterator();
-  Log_OC.d(TAG,"Number of pending downloads= " + downloadsAccount.size());
-  while (it.hasNext()) {
-    String key=it.next();
-    Log_OC.d(TAG,"download CANCELLED " + key);
-    if (key.startsWith(account.name)) {
-      DownloadFileOperation download;
-synchronized (mPendingDownloads) {
-        download=mPendingDownloads.get(key);
-        if (download != null) {
-          String remotePath=download.getRemotePath();
-          if (mPendingDownloads.contains(account,remotePath)) {
-            mPendingDownloads.remove(account,remotePath);
-          }
-        }
-      }
-    }
-  }
+  cancelDownloadsForAccount(account);
 }

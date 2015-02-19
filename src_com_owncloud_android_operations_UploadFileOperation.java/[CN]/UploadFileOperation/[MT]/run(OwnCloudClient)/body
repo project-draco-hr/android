@@ -90,25 +90,25 @@
     }
     if (!mCancellationRequested.get()) {
       result=mUploadOperation.execute(client);
-    }
-    if (result.isSuccess()) {
-      if (mLocalBehaviour == FileUploader.LOCAL_BEHAVIOUR_FORGET) {
-        mFile.setStoragePath(null);
-      }
- else {
-        mFile.setStoragePath(expectedPath);
-        File fileToMove=null;
-        if (temporalFile != null) {
-          fileToMove=temporalFile;
+      if (result.isSuccess()) {
+        if (mLocalBehaviour == FileUploader.LOCAL_BEHAVIOUR_FORGET) {
+          mFile.setStoragePath(null);
         }
  else {
-          fileToMove=originalFile;
-        }
-        if (!expectedFile.equals(fileToMove)) {
-          File expectedFolder=expectedFile.getParentFile();
-          expectedFolder.mkdirs();
-          if (!expectedFolder.isDirectory() || !fileToMove.renameTo(expectedFile)) {
-            mFile.setStoragePath(null);
+          mFile.setStoragePath(expectedPath);
+          File fileToMove=null;
+          if (temporalFile != null) {
+            fileToMove=temporalFile;
+          }
+ else {
+            fileToMove=originalFile;
+          }
+          if (!expectedFile.equals(fileToMove)) {
+            File expectedFolder=expectedFile.getParentFile();
+            expectedFolder.mkdirs();
+            if (!expectedFolder.isDirectory() || !fileToMove.renameTo(expectedFile)) {
+              mFile.setStoragePath(null);
+            }
           }
         }
       }
@@ -116,7 +116,6 @@
   }
  catch (  Exception e) {
     if (mCancellationRequested.get()) {
-      mUploadOperation.cancel();
       result=new RemoteOperationResult(new OperationCancelledException());
     }
  else {
