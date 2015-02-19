@@ -1,7 +1,13 @@
 {
   super.onCreate();
   MainApp.mContext=getApplicationContext();
-  OwnCloudClientManagerFactory.setDefaultPolicy(Policy.SINGLE_SESSION_PER_ACCOUNT);
+  boolean isSamlAuth=AUTH_ON.equals(getString(R.string.auth_method_saml_web_sso));
+  if (isSamlAuth) {
+    OwnCloudClientManagerFactory.setDefaultPolicy(Policy.SINGLE_SESSION_PER_ACCOUNT);
+  }
+ else {
+    OwnCloudClientManagerFactory.setDefaultPolicy(Policy.ALWAYS_NEW_CLIENT);
+  }
   new ThumbnailsCacheManager.InitDiskCacheTask().execute();
   if (BuildConfig.DEBUG) {
     String dataFolder=getDataFolder();

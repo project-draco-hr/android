@@ -1,5 +1,0 @@
-{
-  if (imageView != null) {
-    imageView.setSelection(position);
-  }
-}
