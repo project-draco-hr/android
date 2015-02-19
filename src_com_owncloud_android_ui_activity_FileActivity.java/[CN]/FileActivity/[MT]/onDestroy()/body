@@ -11,5 +11,7 @@
     unbindService(mUploadServiceConnection);
     mUploadServiceConnection=null;
   }
+  AccountManager am=AccountManager.get(getApplicationContext());
+  am.removeOnAccountsUpdatedListener(this);
   super.onDestroy();
 }

@@ -25,4 +25,6 @@
   if (mUploadServiceConnection != null) {
     bindService(new Intent(this,FileUploader.class),mUploadServiceConnection,Context.BIND_AUTO_CREATE);
   }
+  AccountManager am=AccountManager.get(getApplicationContext());
+  am.addOnAccountsUpdatedListener(this,null,false);
 }
