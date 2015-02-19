@@ -1,4 +1,5 @@
 {
+  Log_OC.d(TAG,"Starting command with id " + startId);
   if (!intent.hasExtra(EXTRA_ACCOUNT) || !intent.hasExtra(EXTRA_FILE)) {
     Log_OC.e(TAG,"Not enough information provided in intent");
     return START_NOT_STICKY;

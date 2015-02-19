@@ -1,5 +1,5 @@
 {
-  Log_OC.e(TAG,"onSaveInstanceState() start");
+  Log_OC.d(TAG,"onSaveInstanceState() start");
   super.onSaveInstanceState(outState);
   outState.putParcelable(FileDisplayActivity.KEY_WAITING_TO_PREVIEW,mWaitingToPreview);
   outState.putBoolean(FileDisplayActivity.KEY_SYNC_IN_PROGRESS,mSyncInProgress);

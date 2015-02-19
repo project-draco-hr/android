@@ -1,5 +1,6 @@
 {
-  mRefreshLayout.setRefreshing(false);
+  mRefreshListLayout.setRefreshing(false);
+  mRefreshGridLayout.setRefreshing(false);
   mRefreshEmptyLayout.setRefreshing(false);
   if (mOnRefreshListener != null) {
     mOnRefreshListener.onRefresh();

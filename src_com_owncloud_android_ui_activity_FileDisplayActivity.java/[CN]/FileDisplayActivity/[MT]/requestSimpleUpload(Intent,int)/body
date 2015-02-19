@@ -15,7 +15,7 @@
   }
  finally {
     if (filepath == null) {
-      Log_OC.e(TAG,"Couldnt resolve path to file");
+      Log_OC.e(TAG,"Couldn't resolve path to file");
       Toast t=Toast.makeText(this,getString(R.string.filedisplay_unexpected_bad_get_content),Toast.LENGTH_LONG);
       t.show();
       return;

@@ -1,4 +1,4 @@
 {
-  Log_OC.d(TAG,"onStop");
+  Log_OC.v(TAG,"onStop");
   super.onStop();
 }

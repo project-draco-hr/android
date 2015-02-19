@@ -1,4 +1,0 @@
-{
-  imageView.setNumColumns(1);
-  imageView.invalidate();
-}

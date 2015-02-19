@@ -1,13 +1,24 @@
 {
   if (mIndexes.size() > 0) {
     int index=mIndexes.remove(mIndexes.size() - 1);
-    int firstPosition=mFirstPositions.remove(mFirstPositions.size() - 1);
+    final int firstPosition=mFirstPositions.remove(mFirstPositions.size() - 1);
     int top=mTops.remove(mTops.size() - 1);
-    imageView.smoothScrollToPosition(firstPosition);
-    int indexPosition=mHeightCell * index;
-    int height=imageView.getHeight();
-    if (indexPosition > height) {
-      imageView.smoothScrollToPosition(index);
+    Log_OC.v(TAG,"Setting selection to position: " + firstPosition + "; top: "+ top+ "; index: "+ index);
+    if (mCurrentListView == mListView) {
+      if (mHeightCell * index <= mListView.getHeight()) {
+        mListView.setSelectionFromTop(firstPosition,top);
+      }
+ else {
+        mListView.setSelectionFromTop(index,0);
+      }
+    }
+ else {
+      if (mHeightCell * index <= mGridView.getHeight()) {
+        mGridView.setSelection(firstPosition);
+      }
+ else {
+        mGridView.setSelection(index);
+      }
     }
   }
 }

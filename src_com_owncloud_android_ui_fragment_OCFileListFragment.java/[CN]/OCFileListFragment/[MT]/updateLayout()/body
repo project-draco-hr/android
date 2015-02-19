@@ -1,0 +1,26 @@
+{
+  if (!mJustFolders) {
+    int filesCount=0, foldersCount=0, imagesCount=0;
+    int count=mAdapter.getCount();
+    OCFile file;
+    for (int i=0; i < count; i++) {
+      file=(OCFile)mAdapter.getItem(i);
+      if (file.isFolder()) {
+        foldersCount++;
+      }
+ else {
+        filesCount++;
+        if (file.isImage()) {
+          imagesCount++;
+        }
+      }
+    }
+    setFooterText(generateFooterText(filesCount,foldersCount));
+    if (((double)imagesCount / (double)filesCount) >= THUMBNAIL_THRESHOLD) {
+      switchToGridView();
+    }
+ else {
+      switchToListView();
+    }
+  }
+}

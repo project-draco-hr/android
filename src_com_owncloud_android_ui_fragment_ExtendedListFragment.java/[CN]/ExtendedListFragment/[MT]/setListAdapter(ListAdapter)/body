@@ -1,4 +1,5 @@
 {
-  imageView.setAdapter(listAdapter);
-  imageView.invalidate();
+  mAdapter=listAdapter;
+  mCurrentListView.setAdapter(listAdapter);
+  mCurrentListView.invalidate();
 }
