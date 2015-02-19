@@ -1,5 +1,0 @@
-{
-  imageView.setNumColumns(GridView.AUTO_FIT);
-  imageView.invalidateRowHeight();
-  imageView.invalidate();
-}

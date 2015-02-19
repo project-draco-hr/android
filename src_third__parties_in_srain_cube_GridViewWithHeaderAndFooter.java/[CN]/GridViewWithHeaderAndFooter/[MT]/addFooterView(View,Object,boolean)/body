@@ -8,7 +8,7 @@
   FrameLayout fl=new FullWidthFixedViewLayout(getContext());
   if (lyp != null) {
     v.setLayoutParams(new FrameLayout.LayoutParams(lyp.width,lyp.height));
-    fl.setLayoutParams(new AbsListView.LayoutParams(lyp.width,lyp.height));
+    fl.setLayoutParams(new LayoutParams(lyp.width,lyp.height));
   }
   fl.addView(v);
   info.view=v;

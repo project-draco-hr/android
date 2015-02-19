@@ -1,0 +1,4 @@
+{
+  mListView.setChoiceMode(choiceMode);
+  mGridView.setChoiceMode(choiceMode);
+}

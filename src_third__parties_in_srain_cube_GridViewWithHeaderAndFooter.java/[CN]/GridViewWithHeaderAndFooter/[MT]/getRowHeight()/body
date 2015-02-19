@@ -9,9 +9,9 @@
   }
   int mColumnWidth=getColumnWidthCompatible();
   View view=getAdapter().getView(numColumns * mHeaderViewInfos.size(),mViewForMeasureRowHeight,this);
-  AbsListView.LayoutParams p=(AbsListView.LayoutParams)view.getLayoutParams();
+  LayoutParams p=(LayoutParams)view.getLayoutParams();
   if (p == null) {
-    p=new AbsListView.LayoutParams(-1,-2,0);
+    p=new LayoutParams(-1,-2,0);
     view.setLayoutParams(p);
   }
   int childHeightSpec=getChildMeasureSpec(MeasureSpec.makeMeasureSpec(0,MeasureSpec.UNSPECIFIED),0,p.height);

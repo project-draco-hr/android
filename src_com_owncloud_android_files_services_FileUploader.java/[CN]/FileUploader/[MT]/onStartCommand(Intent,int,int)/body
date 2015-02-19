@@ -1,4 +1,5 @@
 {
+  Log_OC.d(TAG,"Starting command with id " + startId);
   if (!intent.hasExtra(KEY_ACCOUNT) || !intent.hasExtra(KEY_UPLOAD_TYPE) || !(intent.hasExtra(KEY_LOCAL_FILE) || intent.hasExtra(KEY_FILE))) {
     Log_OC.e(TAG,"Not enough information provided in intent");
     return Service.START_NOT_STICKY;

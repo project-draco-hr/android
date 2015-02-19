@@ -1,4 +1,0 @@
-{
-  imageView.addFooterView(footer,null,false);
-  imageView.invalidate();
-}

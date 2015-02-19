@@ -12,7 +12,5 @@
     if (mCurrentSyncOperation != null && mCurrentAccount != null && mCurrentSyncOperation.getRemotePath().startsWith(file.getRemotePath()) && account.name.equals(mCurrentAccount.name)) {
       mCurrentSyncOperation.cancel();
     }
- else {
-    }
   }
 }
