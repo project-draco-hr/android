@@ -1,5 +1,4 @@
 {
   AccountManager am=AccountManager.get(getApplicationContext());
   am.addAccount(MainApp.getAccountType(),null,null,null,this,new AccountCreationCallback(),null);
-  am.addOnAccountsUpdatedListener(this,null,true);
 }

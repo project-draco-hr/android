@@ -5,5 +5,7 @@
   mServiceLooper.quit();
   mServiceLooper=null;
   mNotificationManager=null;
+  AccountManager am=AccountManager.get(getApplicationContext());
+  am.removeOnAccountsUpdatedListener(this);
   super.onDestroy();
 }
