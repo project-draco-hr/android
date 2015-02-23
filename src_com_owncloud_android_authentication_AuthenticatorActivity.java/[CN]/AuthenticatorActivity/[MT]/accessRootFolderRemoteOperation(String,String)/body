@@ -1,8 +1,0 @@
-{
-  if (mAction == ACTION_UPDATE_TOKEN || mAction == ACTION_UPDATE_EXPIRED_TOKEN) {
-    mAccountMgr.setUserData(mAccount,Constants.KEY_COOKIES,null);
-  }
-  mAsyncTask=new AuthenticatorAsyncTask(this);
-  String[] params={mServerInfo.mBaseUrl,username,password,mAuthToken,mAuthTokenType};
-  mAsyncTask.execute(params);
-}

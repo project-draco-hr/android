@@ -1,13 +1,13 @@
 {
   if (view.getId() == R.id.hostUrlInput) {
     if (!hasFocus) {
-      onUrlInputFocusLost((TextView)view);
+      onUrlInputFocusLost();
     }
  else {
       showRefreshButton(false);
     }
   }
  else   if (view.getId() == R.id.account_password) {
-    onPasswordFocusChanged((TextView)view,hasFocus);
+    onPasswordFocusChanged(hasFocus);
   }
 }

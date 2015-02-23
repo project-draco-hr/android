@@ -8,11 +8,8 @@
  else {
       Account account=operationIntent.getParcelableExtra(EXTRA_ACCOUNT);
       String serverUrl=operationIntent.getStringExtra(EXTRA_SERVER_URL);
-      String username=operationIntent.getStringExtra(EXTRA_USERNAME);
-      String password=operationIntent.getStringExtra(EXTRA_PASSWORD);
-      String authToken=operationIntent.getStringExtra(EXTRA_AUTH_TOKEN);
       String cookie=operationIntent.getStringExtra(EXTRA_COOKIE);
-      target=new Target(account,(serverUrl == null) ? null : Uri.parse(serverUrl),username,password,authToken,cookie);
+      target=new Target(account,(serverUrl == null) ? null : Uri.parse(serverUrl),cookie);
       String action=operationIntent.getAction();
       if (action.equals(ACTION_CREATE_SHARE)) {
         String remotePath=operationIntent.getStringExtra(EXTRA_REMOTE_PATH);
@@ -33,11 +30,6 @@
  else       if (action.equals(ACTION_OAUTH2_GET_ACCESS_TOKEN)) {
         String oauth2QueryParameters=operationIntent.getStringExtra(EXTRA_OAUTH2_QUERY_PARAMETERS);
         operation=new OAuth2GetAccessToken(getString(R.string.oauth2_client_id),getString(R.string.oauth2_redirect_uri),getString(R.string.oauth2_grant_type),oauth2QueryParameters);
-      }
- else       if (action.equals(ACTION_EXISTENCE_CHECK)) {
-        String remotePath=operationIntent.getStringExtra(EXTRA_REMOTE_PATH);
-        boolean successIfAbsent=operationIntent.getBooleanExtra(EXTRA_SUCCESS_IF_ABSENT,false);
-        operation=new ExistenceCheckRemoteOperation(remotePath,OperationsService.this,successIfAbsent);
       }
  else       if (action.equals(ACTION_GET_USER_NAME)) {
         operation=new GetRemoteUserNameOperation();

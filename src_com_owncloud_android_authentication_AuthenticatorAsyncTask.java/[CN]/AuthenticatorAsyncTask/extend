@@ -1,1 +1,1 @@
-AsyncTask<String,Void,RemoteOperationResult>
+AsyncTask<Object,Void,RemoteOperationResult>

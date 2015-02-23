@@ -2,10 +2,15 @@
   super.onRestoreInstanceState(savedInstanceState);
   boolean inProgress=savedInstanceState.getBoolean(KEY_ASYNC_TASK_IN_PROGRESS);
   if (inProgress) {
-    mAsyncTask=new AuthenticatorAsyncTask(this);
     String username=savedInstanceState.getString(KEY_USERNAME);
     String password=savedInstanceState.getString(KEY_PASSWORD);
-    String[] params={mServerInfo.mBaseUrl,username,password,mAuthToken,mAuthTokenType};
-    mAsyncTask.execute(params);
+    OwnCloudCredentials credentials=null;
+    if (BASIC_TOKEN_TYPE.equals(mAuthTokenType)) {
+      credentials=OwnCloudCredentialsFactory.newBasicCredentials(username,password);
+    }
+ else     if (OAUTH_TOKEN_TYPE.equals(mAuthTokenType)) {
+      credentials=OwnCloudCredentialsFactory.newBearerCredentials(mAuthToken);
+    }
+    accessRootFolder(credentials);
   }
 }
