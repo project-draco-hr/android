@@ -1,32 +1,39 @@
 {
   mCurrentDownload=mPendingDownloads.get(downloadKey);
   if (mCurrentDownload != null) {
-    notifyDownloadStart(mCurrentDownload);
-    RemoteOperationResult downloadResult=null;
-    try {
-      if (mCurrentAccount == null || !mCurrentAccount.equals(mCurrentDownload.getAccount())) {
-        mCurrentAccount=mCurrentDownload.getAccount();
-        mStorageManager=new FileDataStorageManager(mCurrentAccount,getContentResolver());
+    if (AccountUtils.exists(mCurrentDownload.getAccount(),getApplicationContext())) {
+      Log_OC.d(TAG,"Account " + mCurrentDownload.getAccount().name + " exists");
+      notifyDownloadStart(mCurrentDownload);
+      RemoteOperationResult downloadResult=null;
+      try {
+        if (mCurrentAccount == null || !mCurrentAccount.equals(mCurrentDownload.getAccount())) {
+          mCurrentAccount=mCurrentDownload.getAccount();
+          mStorageManager=new FileDataStorageManager(mCurrentAccount,getContentResolver());
+        }
+        OwnCloudAccount ocAccount=new OwnCloudAccount(mCurrentAccount,this);
+        mDownloadClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,this);
+        downloadResult=mCurrentDownload.execute(mDownloadClient);
+        if (downloadResult.isSuccess()) {
+          saveDownloadedFile();
+        }
       }
-      OwnCloudAccount ocAccount=new OwnCloudAccount(mCurrentAccount,this);
-      mDownloadClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,this);
-      downloadResult=mCurrentDownload.execute(mDownloadClient);
-      if (downloadResult.isSuccess()) {
-        saveDownloadedFile();
+ catch (      AccountsException e) {
+        Log_OC.e(TAG,"Error while trying to get authorization for " + mCurrentAccount.name,e);
+        downloadResult=new RemoteOperationResult(e);
       }
-    }
- catch (    AccountsException e) {
-      Log_OC.e(TAG,"Error while trying to get authorization for " + mCurrentAccount.name,e);
-      downloadResult=new RemoteOperationResult(e);
-    }
-catch (    IOException e) {
-      Log_OC.e(TAG,"Error while trying to get authorization for " + mCurrentAccount.name,e);
-      downloadResult=new RemoteOperationResult(e);
-    }
+catch (      IOException e) {
+        Log_OC.e(TAG,"Error while trying to get authorization for " + mCurrentAccount.name,e);
+        downloadResult=new RemoteOperationResult(e);
+      }
  finally {
-      Pair<DownloadFileOperation,String> removeResult=mPendingDownloads.removePayload(mCurrentAccount,mCurrentDownload.getRemotePath());
-      notifyDownloadResult(mCurrentDownload,downloadResult);
-      sendBroadcastDownloadFinished(mCurrentDownload,downloadResult,removeResult.second);
+        Pair<DownloadFileOperation,String> removeResult=mPendingDownloads.removePayload(mCurrentAccount,mCurrentDownload.getRemotePath());
+        notifyDownloadResult(mCurrentDownload,downloadResult);
+        sendBroadcastDownloadFinished(mCurrentDownload,downloadResult,removeResult.second);
+      }
+    }
+ else {
+      Log_OC.d(TAG,"Account " + mCurrentDownload.getAccount().toString() + " doesn't exist");
+      cancelDownloadsForAccount(mCurrentDownload.getAccount());
     }
   }
 }

@@ -1,0 +1,5 @@
+{
+  if (mCurrentUpload != null && !AccountUtils.exists(mCurrentUpload.getAccount(),getApplicationContext())) {
+    mCurrentUpload.cancel();
+  }
+}
