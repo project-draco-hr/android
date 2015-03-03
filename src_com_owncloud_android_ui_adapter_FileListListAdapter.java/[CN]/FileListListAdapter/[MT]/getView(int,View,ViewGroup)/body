@@ -8,6 +8,8 @@
     OCFile file=mFiles.get(position);
     TextView fileName=(TextView)view.findViewById(R.id.Filename);
     String name=file.getFileName();
+    LinearLayout linearLayout=(LinearLayout)view.findViewById(R.id.ListItemLayout);
+    linearLayout.setContentDescription("LinearLayout-" + name);
     fileName.setText(name);
     ImageView fileIcon=(ImageView)view.findViewById(R.id.imageView1);
     fileIcon.setTag(file.getFileId());
