@@ -7,6 +7,8 @@
   }
  else {
     if (result.getCode() == ResultCode.SHARE_FORBIDDEN) {
+      SharePasswordDialogFragment dialog=SharePasswordDialogFragment.newInstance(getFile());
+      dialog.show(getSupportFragmentManager(),DIALOG_SHARE_PASSWORD);
     }
  else {
       Toast t=Toast.makeText(this,ErrorMessageAdapter.getErrorCauseMessage(result,operation,getResources()),Toast.LENGTH_LONG);
