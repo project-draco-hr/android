@@ -13,9 +13,10 @@
       String action=operationIntent.getAction();
       if (action.equals(ACTION_CREATE_SHARE)) {
         String remotePath=operationIntent.getStringExtra(EXTRA_REMOTE_PATH);
+        String password=operationIntent.getStringExtra(EXTRA_PASSWORD_SHARE);
         Intent sendIntent=operationIntent.getParcelableExtra(EXTRA_SEND_INTENT);
         if (remotePath.length() > 0) {
-          operation=new CreateShareOperation(OperationsService.this,remotePath,ShareType.PUBLIC_LINK,"",false,"",1,sendIntent);
+          operation=new CreateShareOperation(OperationsService.this,remotePath,ShareType.PUBLIC_LINK,"",false,password,1,sendIntent);
         }
       }
  else       if (action.equals(ACTION_UNSHARE)) {

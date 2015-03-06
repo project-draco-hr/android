@@ -1,6 +1,8 @@
 {
   SharePasswordDialogFragment frag=new SharePasswordDialogFragment();
   Bundle args=new Bundle();
+  args.putParcelable(ARG_FILE,file);
+  args.putParcelable(ARG_SEND_INTENT,sendIntent);
   frag.setArguments(args);
   return frag;
 }

@@ -5,5 +5,6 @@
       Toast.makeText(getActivity(),R.string.share_link_empty_password,Toast.LENGTH_LONG).show();
       return;
     }
+    ((FileActivity)getSherlockActivity()).getFileOperationsHelper().shareFileWithLinkToApp(mFile,password,mSendIntent);
   }
 }

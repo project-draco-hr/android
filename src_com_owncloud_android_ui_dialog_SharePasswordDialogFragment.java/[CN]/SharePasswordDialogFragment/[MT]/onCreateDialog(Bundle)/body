@@ -1,4 +1,6 @@
 {
+  mFile=getArguments().getParcelable(ARG_FILE);
+  mSendIntent=getArguments().getParcelable(ARG_SEND_INTENT);
   LayoutInflater inflater=getActivity().getLayoutInflater();
   View v=inflater.inflate(R.layout.password_dialog,null);
   EditText inputText=((EditText)v.findViewById(R.id.share_password));

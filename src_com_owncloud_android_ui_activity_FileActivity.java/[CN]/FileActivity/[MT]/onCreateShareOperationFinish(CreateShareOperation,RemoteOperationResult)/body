@@ -7,7 +7,7 @@
   }
  else {
     if (result.getCode() == ResultCode.SHARE_FORBIDDEN) {
-      SharePasswordDialogFragment dialog=SharePasswordDialogFragment.newInstance(getFile());
+      SharePasswordDialogFragment dialog=SharePasswordDialogFragment.newInstance(new OCFile(operation.getPath()),operation.getSendIntent());
       dialog.show(getSupportFragmentManager(),DIALOG_SHARE_PASSWORD);
     }
  else {
