@@ -1,14 +1,21 @@
 {
   dismissLoadingDialog();
   if (result.isSuccess()) {
+    mTryShareAgain=false;
     updateFileFromDB();
     Intent sendIntent=operation.getSendIntent();
     startActivity(sendIntent);
   }
  else {
     if (result.getCode() == ResultCode.SHARE_FORBIDDEN) {
-      SharePasswordDialogFragment dialog=SharePasswordDialogFragment.newInstance(new OCFile(operation.getPath()),operation.getSendIntent());
-      dialog.show(getSupportFragmentManager(),DIALOG_SHARE_PASSWORD);
+      if (!isTryShareAgain()) {
+        SharePasswordDialogFragment dialog=SharePasswordDialogFragment.newInstance(new OCFile(operation.getPath()),operation.getSendIntent());
+        dialog.show(getSupportFragmentManager(),DIALOG_SHARE_PASSWORD);
+      }
+ else {
+        Toast t=Toast.makeText(this,ErrorMessageAdapter.getErrorCauseMessage(result,operation,getResources()),Toast.LENGTH_LONG);
+        t.show();
+      }
     }
  else {
       Toast t=Toast.makeText(this,ErrorMessageAdapter.getErrorCauseMessage(result,operation,getResources()),Toast.LENGTH_LONG);
