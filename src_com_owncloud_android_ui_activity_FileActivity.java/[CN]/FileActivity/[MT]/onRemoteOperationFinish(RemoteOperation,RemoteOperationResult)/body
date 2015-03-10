@@ -8,6 +8,7 @@
       Toast t=Toast.makeText(this,ErrorMessageAdapter.getErrorCauseMessage(result,operation,getResources()),Toast.LENGTH_LONG);
       t.show();
     }
+    mTryShareAgain=false;
   }
  else   if (operation instanceof CreateShareOperation) {
     onCreateShareOperationFinish((CreateShareOperation)operation,result);
