@@ -1,6 +1,0 @@
-Account account
-Uri serverUrl
-String username
-String password
-String authToken
-String cookie

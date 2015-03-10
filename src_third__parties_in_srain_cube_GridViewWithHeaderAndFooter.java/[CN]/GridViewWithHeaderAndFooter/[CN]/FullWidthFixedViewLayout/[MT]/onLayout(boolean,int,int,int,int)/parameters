@@ -1,0 +1,5 @@
+boolean changed
+int left
+int top
+int right
+int bottom

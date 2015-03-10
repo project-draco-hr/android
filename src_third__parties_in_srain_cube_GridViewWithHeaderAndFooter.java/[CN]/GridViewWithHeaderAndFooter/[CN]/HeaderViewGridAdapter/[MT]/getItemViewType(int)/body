@@ -1,0 +1,42 @@
+{
+  final int numHeadersAndPlaceholders=getHeadersCount() * mNumColumns;
+  final int adapterViewTypeStart=mAdapter == null ? 0 : mAdapter.getViewTypeCount() - 1;
+  int type=AdapterView.ITEM_VIEW_TYPE_HEADER_OR_FOOTER;
+  if (mCachePlaceHoldView) {
+    if (position < numHeadersAndPlaceholders) {
+      if (position == 0) {
+        if (mCacheFirstHeaderView) {
+          type=adapterViewTypeStart + mHeaderViewInfos.size() + mFooterViewInfos.size()+ 1+ 1;
+        }
+      }
+      if (position % mNumColumns != 0) {
+        type=adapterViewTypeStart + (position / mNumColumns + 1);
+      }
+    }
+  }
+  final int adjPosition=position - numHeadersAndPlaceholders;
+  int adapterCount=0;
+  if (mAdapter != null) {
+    adapterCount=getAdapterAndPlaceHolderCount();
+    if (adjPosition >= 0 && adjPosition < adapterCount) {
+      if (adjPosition < mAdapter.getCount()) {
+        type=mAdapter.getItemViewType(adjPosition);
+      }
+ else {
+        if (mCachePlaceHoldView) {
+          type=adapterViewTypeStart + mHeaderViewInfos.size() + 1;
+        }
+      }
+    }
+  }
+  if (mCachePlaceHoldView) {
+    final int footerPosition=adjPosition - adapterCount;
+    if (footerPosition >= 0 && footerPosition < getCount() && (footerPosition % mNumColumns) != 0) {
+      type=adapterViewTypeStart + mHeaderViewInfos.size() + 1+ (footerPosition / mNumColumns + 1);
+    }
+  }
+  if (DEBUG) {
+    Log.d(LOG_TAG,String.format("getItemViewType: pos: %s, result: %s",position,type,mCachePlaceHoldView,mCacheFirstHeaderView));
+  }
+  return type;
+}

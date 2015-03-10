@@ -1,0 +1,23 @@
+{
+  if (mRowHeight > 0) {
+    return mRowHeight;
+  }
+  ListAdapter adapter=getAdapter();
+  int numColumns=getNumColumnsCompatible();
+  if (adapter == null || adapter.getCount() <= numColumns * (mHeaderViewInfos.size() + mFooterViewInfos.size())) {
+    return -1;
+  }
+  int mColumnWidth=getColumnWidthCompatible();
+  View view=getAdapter().getView(numColumns * mHeaderViewInfos.size(),mViewForMeasureRowHeight,this);
+  LayoutParams p=(LayoutParams)view.getLayoutParams();
+  if (p == null) {
+    p=new LayoutParams(-1,-2,0);
+    view.setLayoutParams(p);
+  }
+  int childHeightSpec=getChildMeasureSpec(MeasureSpec.makeMeasureSpec(0,MeasureSpec.UNSPECIFIED),0,p.height);
+  int childWidthSpec=getChildMeasureSpec(MeasureSpec.makeMeasureSpec(mColumnWidth,MeasureSpec.EXACTLY),0,p.width);
+  view.measure(childWidthSpec,childHeightSpec);
+  mViewForMeasureRowHeight=view;
+  mRowHeight=view.getMeasuredHeight();
+  return mRowHeight;
+}

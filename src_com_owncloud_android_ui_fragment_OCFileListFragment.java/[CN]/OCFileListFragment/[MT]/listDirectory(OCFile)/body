@@ -16,12 +16,9 @@
     }
     mAdapter.swapDirectory(directory,storageManager);
     if (mFile == null || !mFile.equals(directory)) {
-      mList.setSelectionFromTop(0,0);
+      mCurrentListView.setSelection(0);
     }
     mFile=directory;
-    TextView footerText=(TextView)mFooterView.findViewById(R.id.footerText);
-    Log_OC.d("footer",String.valueOf(System.currentTimeMillis()));
-    footerText.setText(generateFooterText(directory));
-    Log_OC.d("footer",String.valueOf(System.currentTimeMillis()));
+    updateLayout();
   }
 }

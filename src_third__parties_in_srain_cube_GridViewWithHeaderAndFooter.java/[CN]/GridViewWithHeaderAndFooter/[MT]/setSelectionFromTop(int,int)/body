@@ -1,0 +1,6 @@
+{
+  if (getAdapter() == null) {
+    return;
+  }
+  setSelection(position);
+}

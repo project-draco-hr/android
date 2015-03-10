@@ -1,0 +1,6 @@
+{
+  Pair<Account,String> itemSyncKey=(Pair<Account,String>)msg.obj;
+  doOperation(itemSyncKey.first,itemSyncKey.second);
+  Log_OC.d(TAG,"Stopping after command with id " + msg.arg1);
+  mService.stopSelf(msg.arg1);
+}

@@ -1,0 +1,6 @@
+{
+  Bitmap thumbnail=ThumbnailUtils.extractThumbnail(bitmap,px,px);
+  thumbnail=BitmapUtils.rotateImage(thumbnail,path);
+  addBitmapToCache(imageKey,thumbnail);
+  return thumbnail;
+}

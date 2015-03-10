@@ -6,6 +6,8 @@
   }
   if (mStorageManager != null) {
     mFiles=mStorageManager.getFolderContent(mFile);
+    mFilesOrig.clear();
+    mFilesOrig.addAll(mFiles);
     if (mJustFolders) {
       mFiles=getFolders(mFiles);
     }
@@ -13,5 +15,6 @@
  else {
     mFiles=null;
   }
-  sortDirectory();
+  mFiles=FileStorageUtils.sortFolder(mFiles);
+  notifyDataSetChanged();
 }

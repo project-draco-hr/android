@@ -159,6 +159,17 @@
     }
 );
   }
+  mPrefInstantUploadCategory=(PreferenceCategory)findPreference("instant_uploading_category");
+  mPrefInstantUploadPathWiFi=findPreference("instant_upload_on_wifi");
+  mPrefInstantUpload=findPreference("instant_uploading");
+  toggleInstantPictureOptions(((CheckBoxPreference)mPrefInstantUpload).isChecked());
+  mPrefInstantUpload.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
+    @Override public boolean onPreferenceChange(    Preference preference,    Object newValue){
+      toggleInstantPictureOptions((Boolean)newValue);
+      return true;
+    }
+  }
+);
   mPrefInstantVideoUploadPath=findPreference("instant_video_upload_path");
   if (mPrefInstantVideoUploadPath != null) {
     mPrefInstantVideoUploadPath.setOnPreferenceClickListener(new OnPreferenceClickListener(){
@@ -174,6 +185,16 @@
     }
 );
   }
+  mPrefInstantVideoUploadPathWiFi=findPreference("instant_video_upload_on_wifi");
+  mPrefInstantVideoUpload=findPreference("instant_video_uploading");
+  toggleInstantVideoOptions(((CheckBoxPreference)mPrefInstantVideoUpload).isChecked());
+  mPrefInstantVideoUpload.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
+    @Override public boolean onPreferenceChange(    Preference preference,    Object newValue){
+      toggleInstantVideoOptions((Boolean)newValue);
+      return true;
+    }
+  }
+);
   pAboutApp=(Preference)findPreference("about_app");
   if (pAboutApp != null) {
     pAboutApp.setTitle(String.format(getString(R.string.about_android),getString(R.string.app_name)));
@@ -181,4 +202,12 @@
   }
   loadInstantUploadPath();
   loadInstantUploadVideoPath();
+  mDownloadServiceConnection=newTransferenceServiceConnection();
+  if (mDownloadServiceConnection != null) {
+    bindService(new Intent(this,FileDownloader.class),mDownloadServiceConnection,Context.BIND_AUTO_CREATE);
+  }
+  mUploadServiceConnection=newTransferenceServiceConnection();
+  if (mUploadServiceConnection != null) {
+    bindService(new Intent(this,FileUploader.class),mUploadServiceConnection,Context.BIND_AUTO_CREATE);
+  }
 }

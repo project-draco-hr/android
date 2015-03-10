@@ -1,0 +1,5 @@
+{
+  startDirectDownloads();
+  startContentSynchronizations(mFilesToSyncContentsWithoutUpload,client);
+  startContentSynchronizations(mFavouriteFilesToSyncContents,client);
+}
