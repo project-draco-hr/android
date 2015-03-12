@@ -44,6 +44,7 @@ fileSizeV.setVisibility(View.VISIBLE);
 fileSizeV.setText(DisplayUtils.bytesToHumanReadable(file.getFileLength()));
 if (!file.isFolder()) {
 AbsListView parentList=(AbsListView)parent;
+if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 if (parentList.getChoiceMode() == AbsListView.CHOICE_MODE_NONE) {
 checkBoxV.setVisibility(View.GONE);
 }
@@ -55,6 +56,7 @@ checkBoxV.setImageResource(android.R.drawable.checkbox_on_background);
 checkBoxV.setImageResource(android.R.drawable.checkbox_off_background);
 }
 checkBoxV.setVisibility(View.VISIBLE);
+}
 }
 }
  else {

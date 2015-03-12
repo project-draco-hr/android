@@ -1,4 +1,6 @@
 {
-  mListView.setChoiceMode(choiceMode);
-  mGridView.setChoiceMode(choiceMode);
+  if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+    mListView.setChoiceMode(choiceMode);
+    mGridView.setChoiceMode(choiceMode);
+  }
 }
