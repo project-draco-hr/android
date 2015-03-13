@@ -1,6 +1,6 @@
 {
   GetRemoteStatusOperation getStatus=new GetRemoteStatusOperation(mContext);
-  RemoteOperationResult result=getStatus.execute(client);
+  RemoteOperationResult result=getStatus.execute(client,MainApp.getUserAgent());
   if (result.isSuccess()) {
     mResultData.mVersion=(OwnCloudVersion)(result.getData().get(0));
     mResultData.mIsSslConn=(result.getCode() == ResultCode.OK_SSL);

@@ -6,7 +6,7 @@
   long syncDate=System.currentTimeMillis();
   file.setLastSyncDateForData(syncDate);
   ReadRemoteFileOperation operation=new ReadRemoteFileOperation(mCurrentUpload.getRemotePath());
-  RemoteOperationResult result=operation.execute(mUploadClient);
+  RemoteOperationResult result=operation.execute(mUploadClient,MainApp.getUserAgent());
   if (result.isSuccess()) {
     updateOCFile(file,(RemoteFile)result.getData().get(0));
     file.setLastSyncDateForProperties(syncDate);

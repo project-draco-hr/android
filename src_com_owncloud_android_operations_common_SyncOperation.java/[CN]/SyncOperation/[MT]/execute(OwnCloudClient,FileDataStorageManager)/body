@@ -1,5 +1,5 @@
 {
-  if (storageManager == null)   throw new IllegalArgumentException("Trying to execute a sync operation with a NULL storage manager");
+  if (storageManager == null)   throw new IllegalArgumentException("Trying to execute a sync operation with a " + "NULL storage manager");
   mStorageManager=storageManager;
-  return super.execute(client);
+  return super.execute(client,MainApp.getUserAgent());
 }

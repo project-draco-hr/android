@@ -12,7 +12,7 @@
     targetPath+=OCFile.PATH_SEPARATOR;
   }
   MoveRemoteFileOperation operation=new MoveRemoteFileOperation(mSrcPath,targetPath,false);
-  result=operation.execute(client);
+  result=operation.execute(client,MainApp.getUserAgent());
   if (result.isSuccess()) {
     getStorageManager().moveLocalFile(mFile,targetPath,mTargetParentPath);
   }

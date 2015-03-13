@@ -4,7 +4,7 @@
   boolean localRemovalFailed=false;
   if (!mOnlyLocalCopy) {
     RemoveRemoteFileOperation operation=new RemoveRemoteFileOperation(mRemotePath);
-    result=operation.execute(client);
+    result=operation.execute(client,MainApp.getUserAgent());
     if (result.isSuccess() || result.getCode() == ResultCode.FILE_NOT_FOUND) {
       localRemovalFailed=!(getStorageManager().removeFile(mFileToRemove,true,true));
     }

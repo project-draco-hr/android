@@ -1,6 +1,6 @@
 {
   RemoteOperation operation=new ExistenceCheckRemoteOperation(pathToGrant,this,false);
-  RemoteOperationResult result=operation.execute(mUploadClient);
+  RemoteOperationResult result=operation.execute(mUploadClient,MainApp.getUserAgent());
   if (!result.isSuccess() && result.getCode() == ResultCode.FILE_NOT_FOUND && mCurrentUpload.isRemoteFolderToBeCreated()) {
     SyncOperation syncOp=new CreateFolderOperation(pathToGrant,true);
     result=syncOp.execute(mUploadClient,mStorageManager);

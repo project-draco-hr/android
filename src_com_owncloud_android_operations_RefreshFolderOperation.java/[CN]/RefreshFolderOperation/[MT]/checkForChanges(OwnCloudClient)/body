@@ -5,7 +5,7 @@
   remotePath=mLocalFolder.getRemotePath();
   Log_OC.d(TAG,"Checking changes in " + mAccount.name + remotePath);
   ReadRemoteFileOperation operation=new ReadRemoteFileOperation(remotePath);
-  result=operation.execute(client);
+  result=operation.execute(client,MainApp.getUserAgent());
   if (result.isSuccess()) {
     OCFile remoteFolder=FileStorageUtils.fillOCFile((RemoteFile)result.getData().get(0));
     if (!mIgnoreETag) {

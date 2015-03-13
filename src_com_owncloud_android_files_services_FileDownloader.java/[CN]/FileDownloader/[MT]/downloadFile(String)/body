@@ -12,7 +12,7 @@
         }
         OwnCloudAccount ocAccount=new OwnCloudAccount(mCurrentAccount,this);
         mDownloadClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,this);
-        downloadResult=mCurrentDownload.execute(mDownloadClient);
+        downloadResult=mCurrentDownload.execute(mDownloadClient,MainApp.getUserAgent());
         if (downloadResult.isSuccess()) {
           saveDownloadedFile();
         }

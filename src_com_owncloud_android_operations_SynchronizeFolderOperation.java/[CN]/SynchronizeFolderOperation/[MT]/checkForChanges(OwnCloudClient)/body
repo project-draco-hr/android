@@ -6,7 +6,7 @@
     throw new OperationCancelledException();
   }
   ReadRemoteFileOperation operation=new ReadRemoteFileOperation(mRemotePath);
-  result=operation.execute(client);
+  result=operation.execute(client,MainApp.getUserAgent());
   if (result.isSuccess()) {
     OCFile remoteFolder=FileStorageUtils.fillOCFile((RemoteFile)result.getData().get(0));
     mRemoteFolderChanged=!(remoteFolder.getEtag().equalsIgnoreCase(mLocalFolder.getEtag()));

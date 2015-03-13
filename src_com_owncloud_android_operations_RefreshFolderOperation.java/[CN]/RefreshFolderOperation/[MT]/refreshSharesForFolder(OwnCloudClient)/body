@@ -1,7 +1,7 @@
 {
   RemoteOperationResult result=null;
   GetRemoteSharesForFileOperation operation=new GetRemoteSharesForFileOperation(mLocalFolder.getRemotePath(),false,true);
-  result=operation.execute(client);
+  result=operation.execute(client,MainApp.getUserAgent());
   if (result.isSuccess()) {
     ArrayList<OCShare> shares=new ArrayList<OCShare>();
     for (    Object obj : result.getData()) {

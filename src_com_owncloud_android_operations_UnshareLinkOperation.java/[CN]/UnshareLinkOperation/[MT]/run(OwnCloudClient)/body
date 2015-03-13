@@ -3,7 +3,7 @@
   OCShare share=getStorageManager().getFirstShareByPathAndType(mRemotePath,ShareType.PUBLIC_LINK);
   if (share != null) {
     RemoveRemoteShareOperation operation=new RemoveRemoteShareOperation((int)share.getIdRemoteShared());
-    result=operation.execute(client);
+    result=operation.execute(client,MainApp.getUserAgent());
     if (result.isSuccess() || result.getCode() == ResultCode.SHARE_NOT_FOUND) {
       Log_OC.d(TAG,"Share id = " + share.getIdRemoteShared() + " deleted");
       OCFile file=getStorageManager().getFileByPath(mRemotePath);

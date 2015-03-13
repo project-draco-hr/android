@@ -15,7 +15,7 @@
       return new RemoteOperationResult(ResultCode.INVALID_OVERWRITE);
     }
     RenameRemoteFileOperation operation=new RenameRemoteFileOperation(mFile.getFileName(),mFile.getRemotePath(),mNewName,mFile.isFolder());
-    result=operation.execute(client);
+    result=operation.execute(client,MainApp.getUserAgent());
     if (result.isSuccess()) {
       if (mFile.isFolder()) {
         getStorageManager().moveLocalFile(mFile,mNewRemotePath,parent);

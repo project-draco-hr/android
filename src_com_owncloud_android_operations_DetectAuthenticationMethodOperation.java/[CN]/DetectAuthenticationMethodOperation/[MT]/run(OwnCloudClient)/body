@@ -4,11 +4,11 @@
   RemoteOperation operation=new ExistenceCheckRemoteOperation("",mContext,false);
   client.clearCredentials();
   client.setFollowRedirects(false);
-  result=operation.execute(client);
+  result=operation.execute(client,MainApp.getUserAgent());
   String redirectedLocation=result.getRedirectedLocation();
   while (redirectedLocation != null && redirectedLocation.length() > 0 && !result.isIdPRedirection()) {
     client.setBaseUri(Uri.parse(result.getRedirectedLocation()));
-    result=operation.execute(client);
+    result=operation.execute(client,MainApp.getUserAgent());
     redirectedLocation=result.getRedirectedLocation();
   }
   if (result.getCode() == ResultCode.UNAUTHORIZED) {

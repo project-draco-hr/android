@@ -2,7 +2,7 @@
   long currentSyncTime=System.currentTimeMillis();
   mSyncInProgress=true;
   RemoteOperation synchFolderOp=new RefreshFolderOperation(folder,currentSyncTime,false,getFileOperationsHelper().isSharedSupported(),ignoreETag,getStorageManager(),getAccount(),getApplicationContext());
-  synchFolderOp.execute(getAccount(),this,null,null);
+  synchFolderOp.execute(getAccount(),this,MainApp.getUserAgent(),null,null);
   setSupportProgressBarIndeterminateVisibility(true);
   setBackgroundText();
 }

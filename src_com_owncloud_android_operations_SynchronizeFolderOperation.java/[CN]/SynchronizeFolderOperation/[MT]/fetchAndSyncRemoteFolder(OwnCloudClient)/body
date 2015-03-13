@@ -3,7 +3,7 @@
     throw new OperationCancelledException();
   }
   ReadRemoteFolderOperation operation=new ReadRemoteFolderOperation(mRemotePath);
-  RemoteOperationResult result=operation.execute(client);
+  RemoteOperationResult result=operation.execute(client,MainApp.getUserAgent());
   Log_OC.d(TAG,"Synchronizing " + mAccount.name + mRemotePath);
   if (result.isSuccess()) {
     synchronizeData(result.getData(),client);
