@@ -3,4 +3,7 @@
     mListView.setChoiceMode(choiceMode);
     mGridView.setChoiceMode(choiceMode);
   }
+ else {
+    ((ListView)mListView).setChoiceMode(choiceMode);
+  }
 }
