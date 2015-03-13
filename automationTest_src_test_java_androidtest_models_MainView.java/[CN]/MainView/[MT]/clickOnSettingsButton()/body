@@ -1,0 +1,5 @@
+{
+  settingsButton.click();
+  SettingsView settingsView=new SettingsView(driver);
+  return settingsView;
+}

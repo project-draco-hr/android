@@ -1,0 +1,4 @@
+{
+  remoteAndLocalButton.click();
+  waitAMomentText=(AndroidElement)driver.findElementByName("Wait a moment");
+}

@@ -1,0 +1,20 @@
+{
+  String NEW_FOLDER_NAME="testCreateFolder";
+  MainView mainView=login(Config.URL,Config.user,Config.password);
+  assertTrue(waitForTextPresent("ownCloud",mainView.getTitleTextElement()));
+  mainView.clickOnNewFolderButton();
+  mainView.typeNewFolderName(NEW_FOLDER_NAME);
+  mainView.clickOnNewFolderOkButton();
+  assertTrue(waitForTextPresent("Wait a moment",mainView.getWaitAMomentTextElement()));
+  while (mainView.getWaitAMomentTextElement().isDisplayed()) {
+  }
+  AndroidElement newFolderElement=mainView.scrollTillFindElement(NEW_FOLDER_NAME);
+  assertTrue(newFolderElement.isDisplayed());
+  newFolderElement.tap(1,1000);
+  mainView.clickOnRemoveFileElement();
+  mainView.clickOnRemoteAndLocalButton();
+  assertTrue(waitForTextPresent("Wait a moment",mainView.getWaitAMomentTextElement()));
+  while (mainView.getWaitAMomentTextElement().isDisplayed()) {
+  }
+  Actions.deleteAccount(mainView);
+}

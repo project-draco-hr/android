@@ -1,0 +1,5 @@
+{
+  hostUrlInput.clear();
+  hostUrlInput.sendKeys(hostUrl);
+  driver.sendKeyEvent(android.view.KeyEvent.KEYCODE_BACK);
+}

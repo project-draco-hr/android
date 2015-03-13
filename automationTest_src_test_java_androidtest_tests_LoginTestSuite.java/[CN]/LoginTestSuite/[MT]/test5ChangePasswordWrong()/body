@@ -1,0 +1,13 @@
+{
+  MainView mainView=login(Config.URL,Config.user,Config.password);
+  assertTrue(waitForTextPresent("ownCloud",mainView.getTitleTextElement()));
+  mainView.clickOnMenuButton();
+  SettingsView settingView=mainView.clickOnSettingsButton();
+  settingView.tapOnAccountElement(1,1000);
+  LoginForm changePasswordForm=settingView.clickOnChangePasswordElement();
+  changePasswordForm.typePassword("WrongPassword");
+  changePasswordForm.clickOnConnectButton();
+  assertTrue(waitForTextPresent("Wrong username or password",changePasswordForm.getAuthStatusText()));
+  driver.sendKeyEvent(android.view.KeyEvent.KEYCODE_BACK);
+  Actions.deleteAccount(settingView);
+}

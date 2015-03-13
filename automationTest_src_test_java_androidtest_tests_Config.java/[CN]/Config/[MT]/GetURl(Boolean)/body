@@ -1,0 +1,8 @@
+{
+  if (hasSubdirectory) {
+    return server + "/owncloud";
+  }
+ else {
+    return server;
+  }
+}

@@ -1,0 +1,19 @@
+{
+  String FILE_NAME="test";
+  MainView mainView=login(Config.URL,Config.user,Config.password);
+  assertTrue(waitForTextPresent("ownCloud",mainView.getTitleTextElement()));
+  mainView.clickOnUploadButton();
+  FilesView filesView=mainView.clickOnFilesElementUploadFile();
+  filesView.clickOnFileName(FILE_NAME);
+  MainView mainViewAfterUploadFile=filesView.clickOnUploadButton();
+  Thread.sleep(3000);
+  mainViewAfterUploadFile.scrollTillFindElement(FILE_NAME);
+  assertTrue(mainViewAfterUploadFile.getFileElement().isDisplayed());
+  mainViewAfterUploadFile.tapOnFileElement(FILE_NAME);
+  mainViewAfterUploadFile.clickOnRemoveFileElement();
+  mainViewAfterUploadFile.clickOnRemoteAndLocalButton();
+  assertTrue(waitForTextPresent("Wait a moment",mainViewAfterUploadFile.getWaitAMomentTextElement()));
+  while (mainViewAfterUploadFile.getWaitAMomentTextElement().isDisplayed()) {
+  }
+  Actions.deleteAccount(mainViewAfterUploadFile);
+}

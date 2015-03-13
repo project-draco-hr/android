@@ -1,0 +1,5 @@
+{
+  filesElementUploadFile.click();
+  FilesView filesView=new FilesView(driver);
+  return filesView;
+}

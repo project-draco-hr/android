@@ -1,0 +1,12 @@
+{
+  for (int second=0; ; second++) {
+    if (second >= waitingTime)     return false;
+    try {
+      if (text.equals(element.getText()))       break;
+    }
+ catch (    Exception e) {
+    }
+    Thread.sleep(1000);
+  }
+  return true;
+}
