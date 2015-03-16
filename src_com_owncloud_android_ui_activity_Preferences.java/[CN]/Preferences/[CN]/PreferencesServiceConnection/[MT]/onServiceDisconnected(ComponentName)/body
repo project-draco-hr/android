@@ -1,0 +1,10 @@
+{
+  if (component.equals(new ComponentName(Preferences.this,FileDownloader.class))) {
+    Log_OC.d(TAG,"Download service suddenly disconnected");
+    mDownloaderBinder=null;
+  }
+ else   if (component.equals(new ComponentName(Preferences.this,FileUploader.class))) {
+    Log_OC.d(TAG,"Upload service suddenly disconnected");
+    mUploaderBinder=null;
+  }
+}

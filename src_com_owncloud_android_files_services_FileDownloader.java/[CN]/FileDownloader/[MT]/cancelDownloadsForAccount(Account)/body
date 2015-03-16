@@ -1,0 +1,3 @@
+{
+  mPendingDownloads.remove(account);
+}

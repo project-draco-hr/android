@@ -1,5 +1,4 @@
 {
-  Log_OC.d(TAG,"New instance");
   SamlWebViewDialog fragment=new SamlWebViewDialog();
   Bundle args=new Bundle();
   args.putString(ARG_INITIAL_URL,url);

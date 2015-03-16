@@ -1,0 +1,14 @@
+{
+  mFile=getArguments().getParcelable(ARG_FILE);
+  mSendIntent=getArguments().getParcelable(ARG_SEND_INTENT);
+  LayoutInflater inflater=getActivity().getLayoutInflater();
+  View v=inflater.inflate(R.layout.password_dialog,null);
+  EditText inputText=((EditText)v.findViewById(R.id.share_password));
+  inputText.setText("");
+  inputText.requestFocus();
+  AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+  builder.setView(v).setPositiveButton(R.string.common_ok,this).setNegativeButton(R.string.common_cancel,this).setTitle(R.string.share_link_password_title);
+  Dialog d=builder.create();
+  d.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+  return d;
+}

@@ -1,4 +1,5 @@
 {
-  mList.setAdapter(listAdapter);
-  mList.invalidate();
+  mAdapter=listAdapter;
+  mCurrentListView.setAdapter(listAdapter);
+  mCurrentListView.invalidate();
 }

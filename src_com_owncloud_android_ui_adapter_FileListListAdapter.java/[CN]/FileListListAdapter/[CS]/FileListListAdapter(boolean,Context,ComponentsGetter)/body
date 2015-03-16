@@ -7,4 +7,5 @@
   FileStorageUtils.mSortOrder=mAppPreferences.getInt("sortOrder",0);
   FileStorageUtils.mSortAscending=mAppPreferences.getBoolean("sortAscending",true);
   new ThumbnailsCacheManager.InitDiskCacheTask().execute();
+  mGridMode=false;
 }

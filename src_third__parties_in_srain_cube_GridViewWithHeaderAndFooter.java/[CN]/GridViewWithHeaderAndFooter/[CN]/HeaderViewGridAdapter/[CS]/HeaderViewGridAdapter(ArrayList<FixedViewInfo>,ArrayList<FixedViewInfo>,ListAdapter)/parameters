@@ -1,0 +1,3 @@
+ArrayList<FixedViewInfo> headerViewInfos
+ArrayList<FixedViewInfo> footViewInfos
+ListAdapter adapter
