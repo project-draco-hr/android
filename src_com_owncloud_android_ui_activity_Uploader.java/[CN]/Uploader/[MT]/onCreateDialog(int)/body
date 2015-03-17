@@ -45,6 +45,8 @@ mAccount=mAccountManager.getAccountsByType(MainApp.getAccountType())[which];
 mStorageManager=new FileDataStorageManager(mAccount,getContentResolver());
 initTargetFolder();
 populateDirectoryList();
+dialog.dismiss();
+mAccountSelected=true;
 }
 }
 );

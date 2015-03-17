@@ -1,6 +1,6 @@
 {
   if (mStorageManager == null) {
-    throw new IllegalStateException("Do not call this method before initializing mStorageManager");
+    throw new IllegalStateException("Do not call this method before " + "initializing mStorageManager");
   }
   SharedPreferences appPreferences=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
   String last_path=appPreferences.getString("last_upload_path","");

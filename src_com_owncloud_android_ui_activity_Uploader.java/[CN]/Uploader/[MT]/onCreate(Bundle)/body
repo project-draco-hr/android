@@ -1,6 +1,15 @@
 {
   super.onCreate(savedInstanceState);
-  mParents=new Stack<String>();
+  if (savedInstanceState == null) {
+    mParents=new Stack<String>();
+  }
+ else {
+    mParents=(Stack<String>)savedInstanceState.getSerializable(KEY_PARENTS);
+    mAccount=savedInstanceState.getParcelable(KEY_ACCOUNT);
+    mFile=savedInstanceState.getParcelable(KEY_FILE);
+    mStorageManager=new FileDataStorageManager(mAccount,getContentResolver());
+    mAccountSelected=savedInstanceState.getBoolean(KEY_ACCOUNT_SELECTED);
+  }
   ActionBar actionBar=getSupportActionBar();
   actionBar.setIcon(DisplayUtils.getSeasonalIconId());
   if (prepareStreamsToUpload()) {
@@ -10,8 +19,8 @@
       Log_OC.i(TAG,"No ownCloud account is available");
       showDialog(DIALOG_NO_ACCOUNT);
     }
- else     if (accounts.length > 1) {
-      Log_OC.i(TAG,"More then one ownCloud is available");
+ else     if (accounts.length > 1 && !mAccountSelected) {
+      Log_OC.i(TAG,"More than one ownCloud is available");
       showDialog(DIALOG_MULTIPLE_ACCOUNT);
     }
  else {
