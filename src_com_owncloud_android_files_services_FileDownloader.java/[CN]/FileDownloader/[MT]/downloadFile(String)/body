@@ -11,7 +11,7 @@
           mStorageManager=new FileDataStorageManager(mCurrentAccount,getContentResolver());
         }
         OwnCloudAccount ocAccount=new OwnCloudAccount(mCurrentAccount,this);
-        mDownloadClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,this);
+        mDownloadClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,this,MainApp.getUserAgent());
         downloadResult=mCurrentDownload.execute(mDownloadClient,MainApp.getUserAgent());
         if (downloadResult.isSuccess()) {
           saveDownloadedFile();
