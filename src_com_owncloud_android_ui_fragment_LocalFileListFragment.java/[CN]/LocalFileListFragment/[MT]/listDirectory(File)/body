@@ -12,7 +12,7 @@
     Log_OC.w(TAG,"You see, that is not a directory -> " + directory.toString());
     directory=directory.getParentFile();
   }
-  mCurrentListView.clearChoices();
+  ((ListView)mCurrentListView).clearChoices();
   mAdapter.swapDirectory(directory);
   if (mDirectory == null || !mDirectory.equals(directory)) {
     mCurrentListView.setSelection(0);
