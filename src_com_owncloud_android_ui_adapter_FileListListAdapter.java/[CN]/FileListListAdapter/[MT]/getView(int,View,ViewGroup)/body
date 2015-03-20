@@ -31,7 +31,9 @@ if (file != null) {
 ImageView fileIcon=(ImageView)view.findViewById(R.id.thumbnail);
 fileIcon.setTag(file.getFileId());
 TextView fileName;
-String name;
+String name=file.getFileName();
+LinearLayout linearLayout=(LinearLayout)view.findViewById(R.id.ListItemLayout);
+linearLayout.setContentDescription("LinearLayout-" + name);
 switch (viewType) {
 case LIST_ITEM:
 TextView fileSizeV=(TextView)view.findViewById(R.id.file_size);
