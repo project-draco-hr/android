@@ -2,7 +2,6 @@
   Log_OC.d(TAG,"onSaveInstanceState() start");
   super.onSaveInstanceState(outState);
   outState.putSerializable(KEY_PARENTS,mParents);
-  outState.putParcelable(KEY_ACCOUNT,mAccount);
   outState.putParcelable(KEY_FILE,mFile);
   outState.putBoolean(KEY_ACCOUNT_SELECTED,mAccountSelected);
   Log_OC.d(TAG,"onSaveInstanceState() end");
