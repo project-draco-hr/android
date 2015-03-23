@@ -1,14 +1,15 @@
 {
   prepareStreamsToUpload();
-  super.onCreate(savedInstanceState);
   if (savedInstanceState == null) {
     mParents=new Stack<String>();
+    mAccountSelected=false;
   }
  else {
     mParents=(Stack<String>)savedInstanceState.getSerializable(KEY_PARENTS);
     mFile=savedInstanceState.getParcelable(KEY_FILE);
     mAccountSelected=savedInstanceState.getBoolean(KEY_ACCOUNT_SELECTED);
   }
+  super.onCreate(savedInstanceState);
   ActionBar actionBar=getSupportActionBar();
   actionBar.setIcon(DisplayUtils.getSeasonalIconId());
 }
