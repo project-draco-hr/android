@@ -1,3 +1,16 @@
 {
-  return getAppContext().getResources().getString(R.string.user_agent);
+  String appString=getAppContext().getResources().getString(R.string.user_agent);
+  String packageName=getAppContext().getPackageName();
+  PackageInfo pInfo=null;
+  try {
+    pInfo=getAppContext().getPackageManager().getPackageInfo(packageName,0);
+  }
+ catch (  PackageManager.NameNotFoundException e) {
+  }
+  String version="";
+  if (pInfo != null) {
+    version=pInfo.versionName;
+  }
+  String userAgent="Mozilla/5.0 " + appString + "/"+ version;
+  return userAgent;
 }
