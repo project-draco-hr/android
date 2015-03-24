@@ -1,7 +1,7 @@
 {
   if (mFailedResultsCounter > MAX_FAILED_RESULTS || isFinisher(mLastFailedResult))   return;
   RefreshFolderOperation synchFolderOp=new RefreshFolderOperation(folder,mCurrentSyncTime,true,mIsShareSupported,false,getStorageManager(),getAccount(),getContext());
-  RemoteOperationResult result=synchFolderOp.execute(getClient(),MainApp.getUserAgent());
+  RemoteOperationResult result=synchFolderOp.execute(getClient());
   sendLocalBroadcast(EVENT_FULL_SYNC_FOLDER_CONTENTS_SYNCED,folder.getRemotePath(),result);
   if (result.isSuccess() || result.getCode() == ResultCode.SYNC_CONFLICT) {
     if (result.getCode() == ResultCode.SYNC_CONFLICT) {

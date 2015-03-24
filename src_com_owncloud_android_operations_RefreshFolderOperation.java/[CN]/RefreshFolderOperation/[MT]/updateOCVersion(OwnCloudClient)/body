@@ -1,6 +1,6 @@
 {
   UpdateOCVersionOperation update=new UpdateOCVersionOperation(mAccount,mContext);
-  RemoteOperationResult result=update.execute(client,MainApp.getUserAgent());
+  RemoteOperationResult result=update.execute(client);
   if (result.isSuccess()) {
     mIsShareSupported=update.getOCVersion().isSharedSupported();
   }

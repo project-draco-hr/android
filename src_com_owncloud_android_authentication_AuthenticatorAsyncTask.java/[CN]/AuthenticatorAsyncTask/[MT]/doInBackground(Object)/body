@@ -4,10 +4,10 @@
     String url=(String)params[0];
     OwnCloudCredentials credentials=(OwnCloudCredentials)params[1];
     Uri uri=Uri.parse(url);
-    OwnCloudClient client=OwnCloudClientFactory.createOwnCloudClient(uri,mContext,true,MainApp.getUserAgent());
+    OwnCloudClient client=OwnCloudClientFactory.createOwnCloudClient(uri,mContext,true);
     client.setCredentials(credentials);
     ExistenceCheckRemoteOperation operation=new ExistenceCheckRemoteOperation(REMOTE_PATH,mContext,SUCCESS_IF_ABSENT);
-    result=operation.execute(client,MainApp.getUserAgent());
+    result=operation.execute(client);
   }
  else {
     result=new RemoteOperationResult(RemoteOperationResult.ResultCode.UNKNOWN_ERROR);

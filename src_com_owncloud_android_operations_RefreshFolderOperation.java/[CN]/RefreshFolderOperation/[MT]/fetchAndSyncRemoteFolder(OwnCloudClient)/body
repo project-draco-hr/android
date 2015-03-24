@@ -1,7 +1,7 @@
 {
   String remotePath=mLocalFolder.getRemotePath();
   ReadRemoteFolderOperation operation=new ReadRemoteFolderOperation(remotePath);
-  RemoteOperationResult result=operation.execute(client,MainApp.getUserAgent());
+  RemoteOperationResult result=operation.execute(client);
   Log_OC.d(TAG,"Synchronizing " + mAccount.name + remotePath);
   if (result.isSuccess()) {
     synchronizeData(result.getData(),client);

@@ -8,7 +8,7 @@
         mStorageManager=new FileDataStorageManager(account,mService.getContentResolver());
       }
       OwnCloudAccount ocAccount=new OwnCloudAccount(account,mService);
-      mOwnCloudClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,mService,MainApp.getUserAgent());
+      mOwnCloudClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,mService);
       result=mCurrentSyncOperation.execute(mOwnCloudClient,mStorageManager);
     }
  catch (    AccountsException e) {

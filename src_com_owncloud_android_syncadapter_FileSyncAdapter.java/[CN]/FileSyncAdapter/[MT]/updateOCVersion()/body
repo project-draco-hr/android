@@ -1,6 +1,6 @@
 {
   UpdateOCVersionOperation update=new UpdateOCVersionOperation(getAccount(),getContext());
-  RemoteOperationResult result=update.execute(getClient(),MainApp.getUserAgent());
+  RemoteOperationResult result=update.execute(getClient());
   if (!result.isSuccess()) {
     mLastFailedResult=result;
   }

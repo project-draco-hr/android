@@ -6,5 +6,5 @@
     throw new IllegalArgumentException("Trying to execute a sync operation with a " + "storage manager for a NULL account");
   }
   mStorageManager=storageManager;
-  return super.execute(mStorageManager.getAccount(),context,getUserAgent());
+  return super.execute(mStorageManager.getAccount(),context);
 }

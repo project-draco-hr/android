@@ -1,5 +1,5 @@
 {
   Log_OC.d(TAG,"Trying empty authorization to detect authentication method");
   DetectAuthenticationMethodOperation operation=new DetectAuthenticationMethodOperation(mContext);
-  return operation.execute(client,MainApp.getUserAgent());
+  return operation.execute(client);
 }
