@@ -9,8 +9,8 @@
   }
   String version="";
   if (pInfo != null) {
-    version=pInfo.versionName;
+    version="/" + pInfo.versionName;
   }
-  String userAgent="Mozilla/5.0 " + appString + "/"+ version;
+  String userAgent=appString + version;
   return userAgent;
 }
