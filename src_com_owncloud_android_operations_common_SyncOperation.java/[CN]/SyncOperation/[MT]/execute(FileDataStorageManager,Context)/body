@@ -1,9 +1,9 @@
 {
   if (storageManager == null) {
-    throw new IllegalArgumentException("Trying to execute a sync operation with a NULL storage manager");
+    throw new IllegalArgumentException("Trying to execute a sync operation with a " + "NULL storage manager");
   }
   if (storageManager.getAccount() == null) {
-    throw new IllegalArgumentException("Trying to execute a sync operation with a storage manager for a NULL account");
+    throw new IllegalArgumentException("Trying to execute a sync operation with a " + "storage manager for a NULL account");
   }
   mStorageManager=storageManager;
   return super.execute(mStorageManager.getAccount(),context);

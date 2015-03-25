@@ -4,7 +4,7 @@
   if (mLocalFile != null) {
     mRemotePath=mLocalFile.getRemotePath();
     if (mServerFile != null && !mServerFile.getRemotePath().equals(mRemotePath)) {
-      throw new IllegalArgumentException("serverFile and localFile do not correspond to the same OC file");
+      throw new IllegalArgumentException("serverFile and localFile do not correspond" + " to the same OC file");
     }
   }
  else   if (mServerFile != null) {

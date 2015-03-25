@@ -19,7 +19,7 @@
         if (serverOCVersion.compareTo(new OwnCloudVersion(MINOR_SERVER_VERSION_FOR_THUMBS)) >= 0) {
           try {
             int status=-1;
-            String uri=mClient.getBaseUri() + "/index.php/apps/files/api/v1/thumbnail/" + px+ "/"+ px+ Uri.encode(file.getRemotePath(),"/");
+            String uri=mClient.getBaseUri() + "" + "/index.php/apps/files/api/v1/thumbnail/"+ px+ "/"+ px+ Uri.encode(file.getRemotePath(),"/");
             Log_OC.d("Thumbnail","URI: " + uri);
             GetMethod get=new GetMethod(uri);
             status=mClient.executeMethod(get);

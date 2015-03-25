@@ -41,10 +41,10 @@ ac[i]=DisplayUtils.convertIdn(mAccountManager.getAccountsByType(MainApp.getAccou
 builder.setTitle(R.string.common_choose_account);
 builder.setItems(ac,new OnClickListener(){
 @Override public void onClick(DialogInterface dialog,int which){
-mAccount=mAccountManager.getAccountsByType(MainApp.getAccountType())[which];
-mStorageManager=new FileDataStorageManager(mAccount,getContentResolver());
-initTargetFolder();
-populateDirectoryList();
+setAccount(mAccountManager.getAccountsByType(MainApp.getAccountType())[which]);
+onAccountSet(mAccountWasRestored);
+dialog.dismiss();
+mAccountSelected=true;
 }
 }
 );
