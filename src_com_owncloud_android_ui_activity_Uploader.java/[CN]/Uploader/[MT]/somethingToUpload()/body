@@ -1,0 +1,3 @@
+{
+  return (mStreamsToUpload != null && mStreamsToUpload.get(0) != null);
+}

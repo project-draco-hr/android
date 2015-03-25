@@ -11,7 +11,7 @@
       showDialog(DIALOG_NO_ACCOUNT);
     }
  else {
-      mAccount=accounts[0];
+      setAccount(accounts[0]);
       populateDirectoryList();
     }
   }
