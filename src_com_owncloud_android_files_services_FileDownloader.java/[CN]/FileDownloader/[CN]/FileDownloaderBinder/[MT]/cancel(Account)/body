@@ -1,0 +1,10 @@
+{
+  Log_OC.d(TAG,"Account= " + account.name);
+  if (mCurrentDownload != null) {
+    Log_OC.d(TAG,"Current Download Account= " + mCurrentDownload.getAccount().name);
+    if (mCurrentDownload.getAccount().name.equals(account.name)) {
+      mCurrentDownload.cancel();
+    }
+  }
+  cancelDownloadsForAccount(account);
+}

@@ -1,0 +1,8 @@
+{
+  if (result != null) {
+    OnAuthenticatorTaskListener listener=mListener.get();
+    if (listener != null) {
+      listener.onAuthenticatorTaskCallback(result);
+    }
+  }
+}

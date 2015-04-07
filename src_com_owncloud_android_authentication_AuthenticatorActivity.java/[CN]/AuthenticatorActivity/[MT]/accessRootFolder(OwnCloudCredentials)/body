@@ -1,0 +1,5 @@
+{
+  mAsyncTask=new AuthenticatorAsyncTask(this);
+  Object[] params={mServerInfo.mBaseUrl,credentials};
+  mAsyncTask.execute(params);
+}

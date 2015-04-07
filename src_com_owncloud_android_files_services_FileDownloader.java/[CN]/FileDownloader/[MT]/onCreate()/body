@@ -7,4 +7,6 @@
   mServiceLooper=thread.getLooper();
   mServiceHandler=new ServiceHandler(mServiceLooper,this);
   mBinder=new FileDownloaderBinder();
+  AccountManager am=AccountManager.get(getApplicationContext());
+  am.addOnAccountsUpdatedListener(this,null,false);
 }

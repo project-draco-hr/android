@@ -6,6 +6,11 @@
   actionBar.setIcon(DisplayUtils.getSeasonalIconId());
   actionBar.setDisplayHomeAsUpEnabled(true);
   actionBar.setTitle(R.string.actionbar_settings);
+  int actionBarTitleId=getResources().getIdentifier("action_bar_title","id","android");
+  View actionBarTitleView=getWindow().getDecorView().findViewById(actionBarTitleId);
+  if (actionBarTitleView != null) {
+    getWindow().getDecorView().findViewById(actionBarTitleId).setContentDescription(getString(R.string.actionbar_settings));
+  }
   mAccountsPrefCategory=(PreferenceCategory)findPreference("accounts_category");
   ListView listView=getListView();
   listView.setOnItemLongClickListener(new OnItemLongClickListener(){
@@ -200,4 +205,12 @@
   }
   loadInstantUploadPath();
   loadInstantUploadVideoPath();
+  mDownloadServiceConnection=newTransferenceServiceConnection();
+  if (mDownloadServiceConnection != null) {
+    bindService(new Intent(this,FileDownloader.class),mDownloadServiceConnection,Context.BIND_AUTO_CREATE);
+  }
+  mUploadServiceConnection=newTransferenceServiceConnection();
+  if (mUploadServiceConnection != null) {
+    bindService(new Intent(this,FileUploader.class),mUploadServiceConnection,Context.BIND_AUTO_CREATE);
+  }
 }

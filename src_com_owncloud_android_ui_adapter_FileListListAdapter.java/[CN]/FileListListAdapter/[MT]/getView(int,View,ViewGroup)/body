@@ -31,7 +31,9 @@ if (file != null) {
 ImageView fileIcon=(ImageView)view.findViewById(R.id.thumbnail);
 fileIcon.setTag(file.getFileId());
 TextView fileName;
-String name;
+String name=file.getFileName();
+LinearLayout linearLayout=(LinearLayout)view.findViewById(R.id.ListItemLayout);
+linearLayout.setContentDescription("LinearLayout-" + name);
 switch (viewType) {
 case LIST_ITEM:
 TextView fileSizeV=(TextView)view.findViewById(R.id.file_size);
@@ -44,6 +46,7 @@ fileSizeV.setVisibility(View.VISIBLE);
 fileSizeV.setText(DisplayUtils.bytesToHumanReadable(file.getFileLength()));
 if (!file.isFolder()) {
 AbsListView parentList=(AbsListView)parent;
+if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 if (parentList.getChoiceMode() == AbsListView.CHOICE_MODE_NONE) {
 checkBoxV.setVisibility(View.GONE);
 }
@@ -55,6 +58,7 @@ checkBoxV.setImageResource(android.R.drawable.checkbox_on_background);
 checkBoxV.setImageResource(android.R.drawable.checkbox_off_background);
 }
 checkBoxV.setVisibility(View.VISIBLE);
+}
 }
 }
  else {

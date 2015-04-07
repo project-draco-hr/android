@@ -1,0 +1,17 @@
+{
+  String appString=getAppContext().getResources().getString(R.string.user_agent);
+  String packageName=getAppContext().getPackageName();
+  String version="";
+  PackageInfo pInfo=null;
+  try {
+    pInfo=getAppContext().getPackageManager().getPackageInfo(packageName,0);
+    if (pInfo != null) {
+      version="/" + pInfo.versionName;
+    }
+  }
+ catch (  PackageManager.NameNotFoundException e) {
+    Log_OC.e(TAG,"Trying to get packageName",e.getCause());
+  }
+  String userAgent=appString + version;
+  return userAgent;
+}
