@@ -7,7 +7,10 @@
   actionBar.setDisplayHomeAsUpEnabled(true);
   actionBar.setTitle(R.string.actionbar_settings);
   int actionBarTitleId=getResources().getIdentifier("action_bar_title","id","android");
-  getWindow().getDecorView().findViewById(actionBarTitleId).setContentDescription(getString(R.string.actionbar_settings));
+  View actionBarTitleView=getWindow().getDecorView().findViewById(actionBarTitleId);
+  if (actionBarTitleView != null) {
+    getWindow().getDecorView().findViewById(actionBarTitleId).setContentDescription(getString(R.string.actionbar_settings));
+  }
   mAccountsPrefCategory=(PreferenceCategory)findPreference("accounts_category");
   ListView listView=getListView();
   listView.setOnItemLongClickListener(new OnItemLongClickListener(){
