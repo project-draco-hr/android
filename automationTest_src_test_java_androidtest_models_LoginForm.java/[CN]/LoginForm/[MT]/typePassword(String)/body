@@ -1,5 +1,5 @@
 {
   passwordInput.clear();
   passwordInput.sendKeys(password);
-  driver.sendKeyEvent(android.view.KeyEvent.KEYCODE_BACK);
+  driver.hideKeyboard();
 }

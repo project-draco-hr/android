@@ -1,0 +1,10 @@
+{
+  MainView mainView=Actions.login(Config.URL,Config.user,Config.password,Config.isTrusted,driver);
+  waitForTextPresent("ownCloud",mainView.getTitleTextElement());
+  MainView mainViewAfterUploadFile=Actions.uploadFile(FILE_NAME,mainView);
+  mainViewAfterUploadFile.scrollTillFindElement(FILE_NAME);
+  waitTillElementIsNotPresent(mainViewAfterUploadFile.getProgressCircular(),1000);
+  wait.until(ExpectedConditions.visibilityOf(mainViewAfterUploadFile.getFileElementLayout().findElement(By.id(MainView.getLocalFileIndicator()))));
+  Actions.deleteElement(FILE_NAME,mainViewAfterUploadFile,driver);
+  assertFalse(mainViewAfterUploadFile.getFileElement().isDisplayed());
+}

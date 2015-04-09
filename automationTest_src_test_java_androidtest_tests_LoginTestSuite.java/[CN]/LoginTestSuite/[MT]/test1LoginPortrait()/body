@@ -1,8 +1,5 @@
 {
-  System.out.println("Hello" + Config.server);
-  String testName="loginPortrait";
   driver.rotate(ScreenOrientation.PORTRAIT);
-  MainView mainView=login(Config.URL,Config.user,Config.password);
+  MainView mainView=Actions.login(Config.URL,Config.user,Config.password,Config.isTrusted,driver);
   assertTrue(waitForTextPresent("ownCloud",mainView.getTitleTextElement()));
-  Actions.deleteAccount(mainView);
 }

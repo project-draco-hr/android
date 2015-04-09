@@ -1,0 +1,4 @@
+{
+  driver.removeApp("com.owncloud.android");
+  driver.quit();
+}

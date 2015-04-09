@@ -1,0 +1,8 @@
+{
+  MainView mainView=new MainView(driver);
+  driver.sendKeyEvent(android.view.KeyEvent.KEYCODE_BACK);
+  Actions.deleteElement(FOLDER_WHERE_MOVE,mainView,driver);
+  Actions.deleteElement(FILE_NAME,mainView,driver);
+  driver.removeApp("com.owncloud.android");
+  driver.quit();
+}

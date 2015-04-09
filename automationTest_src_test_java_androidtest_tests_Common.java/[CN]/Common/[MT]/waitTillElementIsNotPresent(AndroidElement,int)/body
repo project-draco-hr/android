@@ -1,0 +1,13 @@
+{
+  for (int time=0; ; time+=pollingTime) {
+    if (time >= waitingTime * 1000)     break;
+    try {
+      element.isDisplayed();
+    }
+ catch (    NoSuchElementException e) {
+      return;
+    }
+    Thread.sleep(pollingTime);
+  }
+  throw new TimeoutException();
+}

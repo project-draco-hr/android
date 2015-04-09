@@ -1,7 +1,3 @@
 {
-  HashMap<String,String> scrollObject=new HashMap<String,String>();
-  scrollObject.put("text",fileName);
-  scrollObject.put("element",((RemoteWebElement)fileLayout).getId());
-  driver.executeScript("mobile: scrollTo",scrollObject);
-  fileElement=(AndroidElement)driver.findElementByName(fileName);
+  fileElement=Actions.scrollTillFindElement(fileName,filesLayout,driver);
 }

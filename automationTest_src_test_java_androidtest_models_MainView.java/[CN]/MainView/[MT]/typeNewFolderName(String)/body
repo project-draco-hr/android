@@ -1,5 +1,0 @@
-{
-  newFolderNameField.clear();
-  newFolderNameField.sendKeys(newFolderName);
-  driver.sendKeyEvent(android.view.KeyEvent.KEYCODE_BACK);
-}

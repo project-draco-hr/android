@@ -1,0 +1,16 @@
+{
+  AndroidElement fileElement;
+  WaitAMomentPopUp waitAMomentPopUp;
+  try {
+    fileElement=(AndroidElement)driver.findElementByName(elementName);
+    ElementMenuOptions menuOptions=mainView.longPressOnElement(elementName);
+    RemoveConfirmationView removeConfirmationView=menuOptions.clickOnRemove();
+    ;
+    waitAMomentPopUp=removeConfirmationView.clickOnRemoteAndLocalButton();
+    Common.waitTillElementIsNotPresent(waitAMomentPopUp.getWaitAMomentTextElement(),100);
+  }
+ catch (  NoSuchElementException e) {
+    fileElement=null;
+  }
+  return fileElement;
+}

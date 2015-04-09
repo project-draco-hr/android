@@ -1,5 +1,5 @@
 {
   userNameInput.clear();
   userNameInput.sendKeys(userName);
-  driver.sendKeyEvent(android.view.KeyEvent.KEYCODE_BACK);
+  driver.hideKeyboard();
 }

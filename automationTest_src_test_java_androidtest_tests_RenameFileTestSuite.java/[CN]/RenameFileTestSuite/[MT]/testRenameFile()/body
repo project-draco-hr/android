@@ -1,0 +1,21 @@
+{
+  MainView mainView=Actions.login(Config.URL,Config.user,Config.password,Config.isTrusted,driver);
+  waitForTextPresent("ownCloud",mainView.getTitleTextElement());
+  MainView mainViewAfterUploadFile=Actions.uploadFile(OLD_FILE_NAME,mainView);
+  Actions.deleteElement(FILE_NAME,mainView,driver);
+  mainViewAfterUploadFile.scrollTillFindElement(OLD_FILE_NAME);
+  assertTrue(fileHasBeenCreated=mainViewAfterUploadFile.getFileElement().isDisplayed());
+  CurrentCreatedFile=OLD_FILE_NAME;
+  waitTillElementIsNotPresent(mainViewAfterUploadFile.getProgressCircular(),1000);
+  wait.until(ExpectedConditions.visibilityOf(mainViewAfterUploadFile.getFileElementLayout().findElement(By.id(MainView.getLocalFileIndicator()))));
+  ElementMenuOptions menuOptions=mainViewAfterUploadFile.longPressOnElement(OLD_FILE_NAME);
+  NewFolderPopUp newFolderPopUp=menuOptions.clickOnRename();
+  newFolderPopUp.typeNewFolderName(FILE_NAME);
+  WaitAMomentPopUp waitAMomentPopUp=newFolderPopUp.clickOnNewFolderOkButton();
+  waitTillElementIsNotPresent(waitAMomentPopUp.getWaitAMomentTextElement(),100);
+  mainViewAfterUploadFile.scrollTillFindElement(FILE_NAME);
+  assertNotNull(mainViewAfterUploadFile.getFileElement());
+  assertTrue(mainViewAfterUploadFile.getFileElement().isDisplayed());
+  assertEquals(FILE_NAME,mainViewAfterUploadFile.getFileElement().getText());
+  CurrentCreatedFile=FILE_NAME;
+}

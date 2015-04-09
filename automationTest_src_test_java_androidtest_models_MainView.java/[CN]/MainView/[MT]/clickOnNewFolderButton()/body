@@ -1,3 +1,5 @@
 {
   newFolderButton.click();
+  NewFolderPopUp newFolderPopUp=new NewFolderPopUp(driver);
+  return newFolderPopUp;
 }

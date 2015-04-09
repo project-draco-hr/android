@@ -1,4 +1,0 @@
-{
-  scrollTillFindElement(fileName);
-  fileElement.tap(1,1000);
-}

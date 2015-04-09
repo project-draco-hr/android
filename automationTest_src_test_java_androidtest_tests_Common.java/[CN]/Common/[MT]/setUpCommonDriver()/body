@@ -1,0 +1,15 @@
+{
+  File rootPath=new File(System.getProperty("user.dir"));
+  File appDir=new File(rootPath,"src/test/resources");
+  File app=new File(appDir,"ownCloud.apk");
+  DesiredCapabilities capabilities=new DesiredCapabilities();
+  capabilities.setCapability("platformName","Android");
+  capabilities.setCapability("deviceName","Device");
+  capabilities.setCapability("app",app.getAbsolutePath());
+  capabilities.setCapability("app-package","com.owncloud.android");
+  capabilities.setCapability("app-activity",".ui.activity.FileDisplayActivity");
+  capabilities.setCapability("appWaitActivity",".authentication.AuthenticatorActivity");
+  driver=new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),capabilities);
+  driver.manage().timeouts().implicitlyWait(waitingTime,TimeUnit.SECONDS);
+  wait=new WebDriverWait(driver,waitingTime,50);
+}

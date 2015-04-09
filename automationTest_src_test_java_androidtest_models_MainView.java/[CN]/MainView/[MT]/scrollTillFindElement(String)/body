@@ -1,11 +1,10 @@
 {
-  HashMap<String,String> scrollObject=new HashMap<String,String>();
-  scrollObject.put("text",fileName);
-  scrollObject.put("element",((RemoteWebElement)filesLayout).getId());
-  if (filesLayout.getAttribute("scrollable").equals("true")) {
-    driver.executeScript("mobile: scrollTo",scrollObject);
+  fileElement=Actions.scrollTillFindElement(elementName,filesLayout,driver);
+  try {
+    fileElementLayout=(AndroidElement)driver.findElementByAndroidUIAutomator("new UiSelector().description(\"LinearLayout-" + elementName + "\")");
   }
-  fileElement=(AndroidElement)driver.findElementByName(fileName);
-  fileElementLayout=(AndroidElement)driver.findElementByAndroidUIAutomator("new UiSelector().description(\"LinearLayout-" + fileName + "\")");
+ catch (  NoSuchElementException e) {
+    fileElementLayout=null;
+  }
   return fileElement;
 }

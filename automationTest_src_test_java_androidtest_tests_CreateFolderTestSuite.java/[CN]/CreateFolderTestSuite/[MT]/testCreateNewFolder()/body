@@ -1,0 +1,13 @@
+{
+  String NEW_FOLDER_NAME="testCreateFolder";
+  MainView mainView=Actions.login(Config.URL,Config.user,Config.password,Config.isTrusted,driver);
+  assertTrue(waitForTextPresent("ownCloud",mainView.getTitleTextElement()));
+  Actions.deleteElement(NEW_FOLDER_NAME,mainView,driver);
+  WaitAMomentPopUp waitAMomentPopUp=Actions.createFolder(NEW_FOLDER_NAME,mainView);
+  waitTillElementIsNotPresent(waitAMomentPopUp.getWaitAMomentTextElement(),100);
+  mainView.scrollTillFindElement(FOLDER_NAME);
+  assertNotNull(mainView.getFileElement());
+  assertTrue(folderHasBeenCreated=mainView.getFileElement().isDisplayed());
+  CurrentCreatedFolder=FOLDER_NAME;
+  assertEquals(FOLDER_NAME,mainView.getFileElement().getText());
+}

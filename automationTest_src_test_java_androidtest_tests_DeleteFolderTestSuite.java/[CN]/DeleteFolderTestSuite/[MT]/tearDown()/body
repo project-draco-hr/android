@@ -1,0 +1,8 @@
+{
+  if (folderHasBeenCreated) {
+    MainView mainView=new MainView(driver);
+    Actions.deleteElement(FOLDER_NAME,mainView,driver);
+  }
+  driver.removeApp("com.owncloud.android");
+  driver.quit();
+}

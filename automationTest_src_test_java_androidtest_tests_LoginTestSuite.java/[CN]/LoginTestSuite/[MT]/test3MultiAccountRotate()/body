@@ -1,13 +1,11 @@
 {
-  String testName="MultiAccountRotate";
   driver.rotate(ScreenOrientation.LANDSCAPE);
-  MainView mainView=login(Config.URL,Config.user,Config.password);
+  MainView mainView=Actions.login(Config.URL,Config.user,Config.password,Config.isTrusted,driver);
   assertTrue(waitForTextPresent("ownCloud",mainView.getTitleTextElement()));
   driver.rotate(ScreenOrientation.PORTRAIT);
-  mainView.clickOnMenuButton();
-  SettingsView settingsView=mainView.clickOnSettingsButton();
+  MenuList menu=mainView.clickOnMenuButton();
+  SettingsView settingsView=menu.clickOnSettingsButton();
   settingsView.tapOnAddAccount(1,1000);
-  mainView=login(Config.URL,Config.user2,Config.password2);
+  mainView=Actions.login(Config.URL2,Config.user2,Config.password2,Config.isTrusted2,driver);
   assertTrue(waitForTextPresent("Settings",mainView.getTitleTextElement()));
-  Actions.deleteAccount(settingsView);
 }
