@@ -6,12 +6,12 @@
   try {
     pInfo=getAppContext().getPackageManager().getPackageInfo(packageName,0);
     if (pInfo != null) {
-      version="/" + pInfo.versionName;
+      version=pInfo.versionName;
     }
   }
  catch (  PackageManager.NameNotFoundException e) {
     Log_OC.e(TAG,"Trying to get packageName",e.getCause());
   }
-  String userAgent=appString + version;
+  String userAgent=String.format(appString,version);
   return userAgent;
 }
