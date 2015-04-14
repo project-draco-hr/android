@@ -1,0 +1,31 @@
+{
+  AccountManager ama=AccountManager.get(getContext());
+  boolean upgradedResult=true;
+  boolean upgraded=false;
+  try {
+    Account[] accounts=AccountManager.get(getContext()).getAccountsByType(MainApp.getAccountType());
+    for (    Account account : accounts) {
+      String serverUrl=ama.getUserData(account,AccountUtils.Constants.KEY_OC_BASE_URL);
+      String username=account.name.substring(0,account.name.lastIndexOf('@'));
+      String newAccountName=AccountUtils.buildAccountName(Uri.parse(serverUrl),username);
+      db.beginTransaction();
+      try {
+        db.execSQL("UPDATE " + ProviderTableMeta.FILE_TABLE_NAME + " SET "+ ProviderTableMeta.FILE_ACCOUNT_OWNER+ " ='"+ newAccountName+ "' "+ " WHERE "+ ProviderTableMeta.FILE_ACCOUNT_OWNER+ " ='"+ account.name+ "' ");
+        upgraded=true;
+        db.setTransactionSuccessful();
+      }
+ catch (      SQLException e) {
+        upgraded=false;
+        Log_OC.i("SQL","OUT of the UpdateAccountName in onUpgrade; account.name == " + account.name + ", newAccountName == "+ newAccountName);
+      }
+ finally {
+        db.endTransaction();
+      }
+      upgradedResult=upgraded && upgradedResult;
+    }
+  }
+ catch (  Exception e) {
+    Log_OC.i("Exception","Exception:" + e);
+  }
+  return upgradedResult;
+}
