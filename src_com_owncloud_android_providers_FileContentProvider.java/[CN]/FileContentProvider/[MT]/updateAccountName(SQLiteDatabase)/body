@@ -17,7 +17,7 @@
         int num=db.update(ProviderTableMeta.FILE_TABLE_NAME,cv,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?",new String[]{oldAccountName});
         upgraded=true;
         db.setTransactionSuccessful();
-        Log_OC.i("SQL","Updated account in database: old name == " + oldAccountName + ", new name == "+ account.name+ " ("+ num+ " rows updated )");
+        Log_OC.d("SQL","Updated account in database: old name == " + oldAccountName + ", new name == "+ account.name+ " ("+ num+ " rows updated )");
       }
  catch (      SQLException e) {
         upgraded=false;
