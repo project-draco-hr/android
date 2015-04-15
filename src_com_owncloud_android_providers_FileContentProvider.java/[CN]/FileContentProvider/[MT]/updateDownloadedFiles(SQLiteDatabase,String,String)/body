@@ -1,7 +1,6 @@
 {
   boolean upgradedResult=true;
   boolean upgraded=false;
-  boolean renamedResult=true;
   boolean renamed=false;
   String selectQuery="SELECT " + ProviderTableMeta._ID + " FROM "+ ProviderTableMeta.FILE_TABLE_NAME+ " WHERE "+ ProviderTableMeta.FILE_ACCOUNT_OWNER+ "=? AND "+ ProviderTableMeta.FILE_STORAGE_PATH+ " IS NOT NULL;";
   Cursor c=db.rawQuery(selectQuery,new String[]{newAccountName});
@@ -9,10 +8,9 @@
     String oldAccountPath=FileStorageUtils.getSavePath(oldAccountName);
     String newAccountPath=FileStorageUtils.getSavePath(newAccountName);
     if (oldAccountPath != newAccountPath) {
+      File oldAccountFolder=new File(oldAccountPath);
       File newAccountFolder=new File(newAccountPath);
-      if (!newAccountFolder.exists()) {
-        newAccountFolder.mkdirs();
-      }
+      renamed=oldAccountFolder.renameTo(newAccountFolder);
       do {
         String oldPath=c.getString(c.getColumnIndex(ProviderTableMeta.FILE_STORAGE_PATH));
         OCFile file=new OCFile(c.getString(c.getColumnIndex(ProviderTableMeta.FILE_PATH)));
@@ -33,25 +31,8 @@
           db.endTransaction();
         }
         upgradedResult=upgraded && upgradedResult;
-        File oldFile=new File(oldPath);
-        renamed=false;
-        if (oldFile.exists()) {
-          File newFile=new File(newPath);
-          File newFolder=newFile.getParentFile();
-          if (!newFolder.exists()) {
-            newFolder.mkdirs();
-          }
-          renamed=newFile.renameTo(newFile);
-        }
-        renamedResult=renamed && renamedResult;
       }
  while (c.moveToNext());
-      if (renamed && upgradedResult) {
-        File oldAccountFolder=new File(oldAccountPath);
-        if (oldAccountFolder.exists()) {
-          oldAccountFolder.delete();
-        }
-      }
     }
   }
   c.close();
