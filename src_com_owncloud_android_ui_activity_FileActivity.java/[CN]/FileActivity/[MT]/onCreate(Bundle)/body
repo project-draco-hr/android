@@ -15,6 +15,7 @@
     mFile=getIntent().getParcelableExtra(FileActivity.EXTRA_FILE);
     mFromNotification=getIntent().getBooleanExtra(FileActivity.EXTRA_FROM_NOTIFICATION,false);
   }
+  AccountUtils.updateAccountVersion(this);
   setAccount(account,savedInstanceState != null);
   mOperationsServiceConnection=new OperationsServiceConnection();
   bindService(new Intent(this,OperationsService.class),mOperationsServiceConnection,Context.BIND_AUTO_CREATE);
