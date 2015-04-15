@@ -1,4 +1,5 @@
 {
+  Log_OC.d("SQL","THREAD:  " + Thread.currentThread().getName());
   AccountManager ama=AccountManager.get(getContext());
   boolean upgradedResult=true;
   boolean upgraded=false;
@@ -11,10 +12,12 @@
       oldAccountName=AccountUtils.buildAccountNameOld(Uri.parse(serverUrl),username);
       db.beginTransaction();
       try {
-        db.execSQL("UPDATE " + ProviderTableMeta.FILE_TABLE_NAME + " SET "+ ProviderTableMeta.FILE_ACCOUNT_OWNER+ " ='"+ account.name+ "' "+ " WHERE "+ ProviderTableMeta.FILE_ACCOUNT_OWNER+ " ='"+ oldAccountName+ "' ");
+        ContentValues cv=new ContentValues();
+        cv.put(ProviderTableMeta.FILE_ACCOUNT_OWNER,account.name);
+        int num=db.update(ProviderTableMeta.FILE_TABLE_NAME,cv,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?",new String[]{oldAccountName});
         upgraded=true;
         db.setTransactionSuccessful();
-        Log_OC.i("SQL","Updated account in database: old name == " + oldAccountName + ", new name == "+ account.name);
+        Log_OC.i("SQL","Updated account in database: old name == " + oldAccountName + ", new name == "+ account.name+ " ("+ num+ " rows updated )");
       }
  catch (      SQLException e) {
         upgraded=false;
