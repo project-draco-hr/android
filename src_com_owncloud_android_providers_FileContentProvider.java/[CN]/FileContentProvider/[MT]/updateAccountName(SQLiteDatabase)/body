@@ -18,6 +18,7 @@
         upgraded=true;
         db.setTransactionSuccessful();
         Log_OC.d("SQL","Updated account in database: old name == " + oldAccountName + ", new name == "+ account.name+ " ("+ num+ " rows updated )");
+        upgraded=updateDownloadedFiles(db,account.name,oldAccountName);
       }
  catch (      SQLException e) {
         upgraded=false;
