@@ -21,7 +21,6 @@
           cv.put(ProviderTableMeta.FILE_STORAGE_PATH,newPath);
           db.update(ProviderTableMeta.FILE_TABLE_NAME,cv,ProviderTableMeta.FILE_STORAGE_PATH + "=?",new String[]{oldPath});
           upgraded=true;
-          db.setTransactionSuccessful();
           Log_OC.d("SQL","Updated downloaded files: old file name == " + oldPath + ", new file name == "+ newPath);
         }
  catch (        SQLException e) {
