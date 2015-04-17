@@ -1,20 +1,19 @@
 {
-  String filepath=null;
+  String filePath=null;
   String mimeType=null;
   Uri selectedImageUri=data.getData();
   try {
     mimeType=getContentResolver().getType(selectedImageUri);
-    String filemanagerstring=selectedImageUri.getPath();
-    String selectedImagePath=getPath(selectedImageUri);
-    if (selectedImagePath != null)     filepath=selectedImagePath;
- else     filepath=filemanagerstring;
+    String fileManagerString=selectedImageUri.getPath();
+    String selectedImagePath=UriUtils.getLocalPath(selectedImageUri,this);
+    if (selectedImagePath != null)     filePath=selectedImagePath;
+ else     filePath=fileManagerString;
   }
  catch (  Exception e) {
     Log_OC.e(TAG,"Unexpected exception when trying to read the result of Intent.ACTION_GET_CONTENT",e);
-    e.printStackTrace();
   }
  finally {
-    if (filepath == null) {
+    if (filePath == null) {
       Log_OC.e(TAG,"Couldn't resolve path to file");
       Toast t=Toast.makeText(this,getString(R.string.filedisplay_unexpected_bad_get_content),Toast.LENGTH_LONG);
       t.show();
@@ -23,20 +22,17 @@
   }
   Intent i=new Intent(this,FileUploader.class);
   i.putExtra(FileUploader.KEY_ACCOUNT,getAccount());
-  String remotepath=new String();
-  for (int j=mDirectories.getCount() - 2; j >= 0; --j) {
-    remotepath+=OCFile.PATH_SEPARATOR + mDirectories.getItem(j);
-  }
-  if (!remotepath.endsWith(OCFile.PATH_SEPARATOR))   remotepath+=OCFile.PATH_SEPARATOR;
-  if (filepath.startsWith(UriUtils.URI_CONTENT_SCHEME)) {
-    Cursor cursor=MainApp.getAppContext().getContentResolver().query(Uri.parse(filepath),null,null,null,null,null);
+  OCFile currentDir=getCurrentDir();
+  String remotePath=(currentDir != null) ? currentDir.getRemotePath() : OCFile.ROOT_PATH;
+  if (filePath.startsWith(UriUtils.URI_CONTENT_SCHEME)) {
+    Cursor cursor=getContentResolver().query(Uri.parse(filePath),null,null,null,null);
     try {
       if (cursor != null && cursor.moveToFirst()) {
         String displayName=cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
-        Log_OC.i(TAG,"Display Name: " + displayName + "; mimeType: "+ mimeType);
+        Log_OC.v(TAG,"Display Name: " + displayName);
         displayName.replace(File.separatorChar,'_');
         displayName.replace(File.pathSeparatorChar,'_');
-        remotepath+=displayName + DisplayUtils.getComposedFileExtension(filepath);
+        remotePath+=displayName + DisplayUtils.getComposedFileExtension(filePath);
       }
     }
   finally {
@@ -44,10 +40,10 @@
     }
   }
  else {
-    remotepath+=new File(filepath).getName();
+    remotePath+=new File(filePath).getName();
   }
-  i.putExtra(FileUploader.KEY_LOCAL_FILE,filepath);
-  i.putExtra(FileUploader.KEY_REMOTE_FILE,remotepath);
+  i.putExtra(FileUploader.KEY_LOCAL_FILE,filePath);
+  i.putExtra(FileUploader.KEY_REMOTE_FILE,remotePath);
   i.putExtra(FileUploader.KEY_MIME_TYPE,mimeType);
   i.putExtra(FileUploader.KEY_UPLOAD_TYPE,FileUploader.UPLOAD_SINGLE_FILE);
   if (resultCode == UploadFilesActivity.RESULT_OK_AND_MOVE)   i.putExtra(FileUploader.KEY_LOCAL_BEHAVIOUR,FileUploader.LOCAL_BEHAVIOUR_MOVE);

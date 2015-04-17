@@ -1,6 +1,6 @@
 {
   final boolean isKitKatOrLater=Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
-  if (isKitKatOrLater && DocumentsContract.isDocumentUri(this,uri)) {
+  if (isKitKatOrLater && DocumentsContract.isDocumentUri(context,uri)) {
     if (UriUtils.isExternalStorageDocument(uri)) {
       final String docId=DocumentsContract.getDocumentId(uri);
       final String[] split=docId.split(":");
@@ -12,7 +12,7 @@
  else     if (UriUtils.isDownloadsDocument(uri)) {
       final String id=DocumentsContract.getDocumentId(uri);
       final Uri contentUri=ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"),Long.valueOf(id));
-      return UriUtils.getDataColumn(this,contentUri,null,null);
+      return UriUtils.getDataColumn(context,contentUri,null,null);
     }
  else     if (UriUtils.isMediaDocument(uri)) {
       final String docId=DocumentsContract.getDocumentId(uri);
@@ -30,7 +30,7 @@
       }
       final String selection="_id=?";
       final String[] selectionArgs=new String[]{split[1]};
-      return UriUtils.getDataColumn(this,contentUri,selection,selectionArgs);
+      return UriUtils.getDataColumn(context,contentUri,selection,selectionArgs);
     }
  else     if (UriUtils.isContentDocument(uri)) {
       return uri.toString();
@@ -38,7 +38,7 @@
   }
  else   if ("content".equalsIgnoreCase(uri.getScheme())) {
     if (UriUtils.isGooglePhotosUri(uri))     return uri.getLastPathSegment();
-    return UriUtils.getDataColumn(this,uri,null,null);
+    return UriUtils.getDataColumn(context,uri,null,null);
   }
  else   if ("file".equalsIgnoreCase(uri.getScheme())) {
     return uri.getPath();
