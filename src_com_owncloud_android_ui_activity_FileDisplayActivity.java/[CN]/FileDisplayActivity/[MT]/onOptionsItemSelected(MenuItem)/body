@@ -4,7 +4,7 @@ switch (item.getItemId()) {
 case R.id.action_create_dir:
 {
       CreateFolderDialogFragment dialog=CreateFolderDialogFragment.newInstance(getCurrentDir());
-      dialog.show(getSupportFragmentManager(),"createDirDialog");
+      dialog.show(getSupportFragmentManager(),DIALOG_CREATE_FOLDER);
       break;
     }
 case R.id.action_sync_account:
@@ -15,7 +15,7 @@ case R.id.action_sync_account:
 case R.id.action_upload:
 {
   UploadSourceDialogFragment dialog=UploadSourceDialogFragment.newInstance(getAccount());
-  dialog.show(getSupportFragmentManager(),"uploadSourceDialog");
+  dialog.show(getSupportFragmentManager(),DIALOG_UPLOAD_SOURCE);
   break;
 }
 case R.id.action_settings:
