@@ -1,4 +1,6 @@
 {
+  Log_OC.d(TAG,"onStart() start");
   super.onStart();
   getSupportActionBar().setIcon(DisplayUtils.getSeasonalIconId());
+  Log_OC.d(TAG,"onStart() end");
 }

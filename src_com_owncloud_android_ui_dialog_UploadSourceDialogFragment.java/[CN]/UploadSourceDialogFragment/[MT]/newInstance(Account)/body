@@ -1,0 +1,7 @@
+{
+  UploadSourceDialogFragment f=new UploadSourceDialogFragment();
+  Bundle args=new Bundle();
+  args.putParcelable(ARG_ACCOUNT,account);
+  f.setArguments(args);
+  return f;
+}
