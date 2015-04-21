@@ -1,8 +1,6 @@
 {
   Log_OC.d("SQL","THREAD:  " + Thread.currentThread().getName());
   AccountManager ama=AccountManager.get(getContext());
-  boolean upgradedResult=true;
-  boolean upgraded=false;
   try {
     Account[] accounts=AccountManager.get(getContext()).getAccountsByType(MainApp.getAccountType());
     String serverUrl, username, oldAccountName, newAccountName;
@@ -16,21 +14,19 @@
         ContentValues cv=new ContentValues();
         cv.put(ProviderTableMeta.FILE_ACCOUNT_OWNER,newAccountName);
         int num=db.update(ProviderTableMeta.FILE_TABLE_NAME,cv,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?",new String[]{oldAccountName});
-        upgraded=true;
         Log_OC.d("SQL","Updated account in database: old name == " + oldAccountName + ", new name == "+ newAccountName+ " ("+ num+ " rows updated )");
-        upgraded=updateDownloadedFiles(db,newAccountName,oldAccountName);
+        updateDownloadedFiles(db,newAccountName,oldAccountName);
+        db.setTransactionSuccessful();
       }
  catch (      SQLException e) {
-        upgraded=false;
+        Log_OC.e(TAG,"SQL Exception upgrading account names or paths in database",e);
       }
  finally {
         db.endTransaction();
       }
-      upgradedResult=upgraded && upgradedResult;
     }
   }
  catch (  Exception e) {
-    Log_OC.i("Exception","Exception:" + e);
+    Log_OC.e(TAG,"Exception upgrading account names or paths in database",e);
   }
-  return upgradedResult;
 }
