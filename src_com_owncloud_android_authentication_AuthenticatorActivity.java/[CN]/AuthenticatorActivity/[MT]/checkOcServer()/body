@@ -6,9 +6,7 @@
   mServerInfo=new GetServerInfoOperation.ServerInfo();
   showRefreshButton(false);
   if (uri.length() != 0) {
-    if (!uri.startsWith(".")) {
-      uri=DisplayUtils.convertIdn(uri,true);
-    }
+    uri=DisplayUtils.convertIdn(uri,true);
     mServerStatusText=R.string.auth_testing_connection;
     mServerStatusIcon=R.drawable.progress_small;
     showServerStatus();
