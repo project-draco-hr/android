@@ -101,4 +101,10 @@
     }
   }
   if (!upgraded)   Log_OC.i("SQL","OUT of the ADD in onUpgrade; oldVersion == " + oldVersion + ", newVersion == "+ newVersion);
+  if (oldVersion < 10 && newVersion >= 10) {
+    Log_OC.i("SQL","Entering in the #10 ADD in onUpgrade");
+    updateAccountName(db);
+    upgraded=true;
+  }
+  if (!upgraded)   Log_OC.i("SQL","OUT of the ADD in onUpgrade; oldVersion == " + oldVersion + ", newVersion == "+ newVersion);
 }
