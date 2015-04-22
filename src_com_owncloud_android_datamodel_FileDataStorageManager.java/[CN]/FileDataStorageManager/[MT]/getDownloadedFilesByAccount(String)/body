@@ -1,4 +1,0 @@
-{
-  Vector<OCFile> ret=new Vector<OCFile>();
-  return ret;
-}
