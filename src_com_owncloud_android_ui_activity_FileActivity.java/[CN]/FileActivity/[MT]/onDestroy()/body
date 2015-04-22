@@ -1,4 +1,5 @@
 {
+  Log_OC.v(TAG,"onDestroy() start");
   if (mOperationsServiceConnection != null) {
     unbindService(mOperationsServiceConnection);
     mOperationsServiceBinder=null;
@@ -12,4 +13,5 @@
     mUploadServiceConnection=null;
   }
   super.onDestroy();
+  Log_OC.v(TAG,"onDestroy() end");
 }
