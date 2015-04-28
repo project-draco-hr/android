@@ -1,0 +1,47 @@
+{
+  Account currentAccount=AccountUtils.getCurrentOwnCloudAccount(context);
+  AccountManager accountMgr=AccountManager.get(context);
+  if (currentAccount != null) {
+    String currentAccountVersion=accountMgr.getUserData(currentAccount,Constants.KEY_OC_ACCOUNT_VERSION);
+    if (currentAccountVersion == null) {
+      Log_OC.i(TAG,"Upgrading accounts to account version #" + ACCOUNT_VERSION);
+      Account[] ocAccounts=accountMgr.getAccountsByType(MainApp.getAccountType());
+      String serverUrl, username, newAccountName, password;
+      Account newAccount;
+      for (      Account account : ocAccounts) {
+        serverUrl=accountMgr.getUserData(account,Constants.KEY_OC_BASE_URL);
+        username=account.name.substring(0,account.name.lastIndexOf('@'));
+        newAccountName=com.owncloud.android.lib.common.accounts.AccountUtils.buildAccountName(Uri.parse(serverUrl),username);
+        if (!newAccountName.equals(account.name)) {
+          Log_OC.d(TAG,"Upgrading " + account.name + " to "+ newAccountName);
+          newAccount=new Account(newAccountName,MainApp.getAccountType());
+          password=accountMgr.getPassword(account);
+          accountMgr.addAccountExplicitly(newAccount,(password != null) ? password : "",null);
+          accountMgr.setUserData(newAccount,Constants.KEY_OC_BASE_URL,serverUrl);
+          accountMgr.setUserData(newAccount,Constants.KEY_OC_VERSION,accountMgr.getUserData(account,Constants.KEY_OC_VERSION));
+          accountMgr.setUserData(newAccount,Constants.KEY_COOKIES,accountMgr.getUserData(account,Constants.KEY_COOKIES));
+          String isSamlStr=accountMgr.getUserData(account,Constants.KEY_SUPPORTS_SAML_WEB_SSO);
+          boolean isSaml="TRUE".equals(isSamlStr);
+          if (isSaml) {
+            accountMgr.setUserData(newAccount,Constants.KEY_SUPPORTS_SAML_WEB_SSO,"TRUE");
+          }
+          String isOauthStr=accountMgr.getUserData(account,Constants.KEY_SUPPORTS_OAUTH2);
+          boolean isOAuth="TRUE".equals(isOauthStr);
+          if (isOAuth) {
+            accountMgr.setUserData(newAccount,Constants.KEY_SUPPORTS_OAUTH2,"TRUE");
+          }
+          if (currentAccount != null && currentAccount.name.equals(account.name)) {
+            AccountUtils.setCurrentOwnCloudAccount(context,newAccountName);
+          }
+          accountMgr.removeAccount(account,null,null);
+        }
+ else {
+          Log_OC.d(TAG,account.name + " needs no upgrade ");
+          newAccount=account;
+        }
+        Log_OC.d(TAG,"Setting version " + ACCOUNT_VERSION + " to "+ newAccountName);
+        accountMgr.setUserData(newAccount,Constants.KEY_OC_ACCOUNT_VERSION,Integer.toString(ACCOUNT_VERSION));
+      }
+    }
+  }
+}

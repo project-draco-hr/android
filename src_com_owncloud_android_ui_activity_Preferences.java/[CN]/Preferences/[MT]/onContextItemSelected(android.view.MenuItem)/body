@@ -11,6 +11,7 @@
       }
  else       if (item.getItemId() == R.id.delete_account) {
         am.removeAccount(a,this,mHandler);
+        Log_OC.d(TAG,"Remove an account " + a.name);
       }
     }
   }

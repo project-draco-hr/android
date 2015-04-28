@@ -1,0 +1,21 @@
+{
+  String output="";
+  if (filesCount > 0) {
+    if (filesCount == 1) {
+      output=output + filesCount + " "+ getResources().getString(R.string.file_list_file);
+    }
+ else {
+      output=output + filesCount + " "+ getResources().getString(R.string.file_list_files);
+    }
+  }
+  if (foldersCount > 0 && filesCount > 0) {
+    output=output + ", ";
+  }
+  if (foldersCount == 1) {
+    output=output + foldersCount + " "+ getResources().getString(R.string.file_list_folder);
+  }
+ else   if (foldersCount > 1) {
+    output=output + foldersCount + " "+ getResources().getString(R.string.file_list_folders);
+  }
+  return output;
+}

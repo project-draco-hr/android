@@ -1,1 +1,1 @@
-AsyncTask<OCFile,Void,Bitmap>
+AsyncTask<Object,Void,Bitmap>

@@ -1,19 +1,33 @@
 {
-  Log_OC.e(TAG,"onCreateView");
+  Log_OC.d(TAG,"onCreateView");
   View v=inflater.inflate(R.layout.list_fragment,null);
-  mEmptyListMessage=(TextView)v.findViewById(R.id.empty_list_view);
-  mList=(ExtendedListView)(v.findViewById(R.id.list_root));
-  mList.setOnItemClickListener(this);
-  mList.setDivider(getResources().getDrawable(R.drawable.uploader_list_separator));
-  mList.setDividerHeight(1);
+  mListView=(ExtendedListView)(v.findViewById(R.id.list_root));
+  mListView.setOnItemClickListener(this);
+  mListFooterView=inflater.inflate(R.layout.list_footer,null,false);
+  mGridView=(GridViewWithHeaderAndFooter)(v.findViewById(R.id.grid_root));
+  mGridView.setNumColumns(GridView.AUTO_FIT);
+  mGridView.setOnItemClickListener(this);
+  mGridFooterView=inflater.inflate(R.layout.list_footer,null,false);
   if (savedInstanceState != null) {
     int referencePosition=savedInstanceState.getInt(KEY_SAVED_LIST_POSITION);
-    setReferencePosition(referencePosition);
+    if (mCurrentListView == mListView) {
+      Log_OC.v(TAG,"Setting and centering around list position " + referencePosition);
+      mListView.setAndCenterSelection(referencePosition);
+    }
+ else {
+      Log_OC.v(TAG,"Setting grid position " + referencePosition);
+      mGridView.setSelection(referencePosition);
+    }
   }
-  mRefreshLayout=(SwipeRefreshLayout)v.findViewById(R.id.swipe_refresh_files);
-  mRefreshEmptyLayout=(SwipeRefreshLayout)v.findViewById(R.id.swipe_refresh_files_emptyView);
-  onCreateSwipeToRefresh(mRefreshLayout);
+  mRefreshListLayout=(SwipeRefreshLayout)v.findViewById(R.id.swipe_containing_list);
+  mRefreshGridLayout=(SwipeRefreshLayout)v.findViewById(R.id.swipe_containing_grid);
+  mRefreshEmptyLayout=(SwipeRefreshLayout)v.findViewById(R.id.swipe_containing_empty);
+  mEmptyListMessage=(TextView)v.findViewById(R.id.empty_list_view);
+  onCreateSwipeToRefresh(mRefreshListLayout);
+  onCreateSwipeToRefresh(mRefreshGridLayout);
   onCreateSwipeToRefresh(mRefreshEmptyLayout);
-  mList.setEmptyView(mRefreshEmptyLayout);
+  mListView.setEmptyView(mRefreshEmptyLayout);
+  mGridView.setEmptyView(mRefreshEmptyLayout);
+  mCurrentListView=mListView;
   return v;
 }

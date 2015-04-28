@@ -6,7 +6,14 @@
     final ImageView imageView=mImageViewReference.get();
     final ThumbnailGenerationTask bitmapWorkerTask=getBitmapWorkerTask(imageView);
     if (this == bitmapWorkerTask && imageView != null) {
-      if (imageView.getTag().equals(mFile.getFileId())) {
+      String tagId="";
+      if (mFile instanceof OCFile) {
+        tagId=String.valueOf(((OCFile)mFile).getFileId());
+      }
+ else       if (mFile instanceof File) {
+        tagId=String.valueOf(((File)mFile).hashCode());
+      }
+      if (String.valueOf(imageView.getTag()).equals(tagId)) {
         imageView.setImageBitmap(bitmap);
       }
     }

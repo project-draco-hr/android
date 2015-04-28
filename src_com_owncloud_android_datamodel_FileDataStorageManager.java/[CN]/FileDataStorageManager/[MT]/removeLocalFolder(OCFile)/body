@@ -1,6 +1,7 @@
 {
   boolean success=true;
-  File localFolder=new File(FileStorageUtils.getDefaultSavePathFor(mAccount.name,folder));
+  String localFolderPath=FileStorageUtils.getDefaultSavePathFor(mAccount.name,folder);
+  File localFolder=new File(localFolderPath);
   if (localFolder.exists()) {
     Vector<OCFile> files=getFolderContent(folder.getFileId());
     if (files != null) {
@@ -10,13 +11,12 @@
         }
  else {
           if (file.isDown()) {
-            String path=file.getStoragePath();
             File localFile=new File(file.getStoragePath());
             success&=localFile.delete();
             if (success) {
+              deleteFileInMediaScan(file.getStoragePath());
               file.setStoragePath(null);
               saveFile(file);
-              triggerMediaScan(path);
             }
           }
         }

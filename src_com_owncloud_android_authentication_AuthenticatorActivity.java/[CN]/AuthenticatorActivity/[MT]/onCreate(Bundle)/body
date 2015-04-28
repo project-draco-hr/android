@@ -20,7 +20,7 @@
     mIsFirstAuthAttempt=savedInstanceState.getBoolean(KEY_AUTH_IS_FIRST_ATTEMPT_TAG);
   }
   setContentView(R.layout.account_setup);
-  initOverallUi(savedInstanceState);
+  initOverallUi();
   mOkButton=findViewById(R.id.buttonOK);
   initServerPreFragment(savedInstanceState);
   initAuthorizationPreFragment(savedInstanceState);

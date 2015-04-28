@@ -1,0 +1,10 @@
+{
+  if (infos != null) {
+    for (    FixedViewInfo info : infos) {
+      if (!info.isSelectable) {
+        return false;
+      }
+    }
+  }
+  return true;
+}

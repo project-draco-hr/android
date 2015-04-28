@@ -1,8 +1,20 @@
 {
   mLocalFile=localFile;
   mServerFile=serverFile;
-  mRemotePath=localFile.getRemotePath();
+  if (mLocalFile != null) {
+    mRemotePath=mLocalFile.getRemotePath();
+    if (mServerFile != null && !mServerFile.getRemotePath().equals(mRemotePath)) {
+      throw new IllegalArgumentException("serverFile and localFile do not correspond" + " to the same OC file");
+    }
+  }
+ else   if (mServerFile != null) {
+    mRemotePath=mServerFile.getRemotePath();
+  }
+ else {
+    throw new IllegalArgumentException("Both serverFile and localFile are NULL");
+  }
   mAccount=account;
   mSyncFileContents=syncFileContents;
   mContext=context;
+  mAllowUploads=true;
 }

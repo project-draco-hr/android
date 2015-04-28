@@ -1,0 +1,7 @@
+{
+  if (key == null) {
+    throw new IllegalArgumentException("Argument key MUST NOT be null");
+  }
+  mKey=key;
+  mPayload=payload;
+}

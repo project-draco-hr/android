@@ -2,7 +2,7 @@
   mAuthStatusIcon=R.drawable.progress_small;
   mAuthStatusText=R.string.auth_connecting_auth_server;
   showAuthStatus();
-  IndeterminateProgressDialog dialog=IndeterminateProgressDialog.newInstance(R.string.auth_trying_to_login,true);
-  dialog.show(getSupportFragmentManager(),WAIT_DIALOG_TAG);
-  accessRootFolderRemoteOperation("","");
+  String targetUrl=mServerInfo.mBaseUrl + AccountUtils.getWebdavPath(mServerInfo.mVersion,mAuthTokenType);
+  SamlWebViewDialog dialog=SamlWebViewDialog.newInstance(targetUrl,targetUrl);
+  dialog.show(getSupportFragmentManager(),SAML_DIALOG_TAG);
 }

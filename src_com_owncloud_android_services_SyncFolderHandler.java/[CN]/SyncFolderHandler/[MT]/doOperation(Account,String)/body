@@ -1,0 +1,26 @@
+{
+  mCurrentSyncOperation=mPendingOperations.get(account,remotePath);
+  if (mCurrentSyncOperation != null) {
+    RemoteOperationResult result=null;
+    try {
+      if (mCurrentAccount == null || !mCurrentAccount.equals(account)) {
+        mCurrentAccount=account;
+        mStorageManager=new FileDataStorageManager(account,mService.getContentResolver());
+      }
+      OwnCloudAccount ocAccount=new OwnCloudAccount(account,mService);
+      mOwnCloudClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,mService);
+      result=mCurrentSyncOperation.execute(mOwnCloudClient,mStorageManager);
+    }
+ catch (    AccountsException e) {
+      Log_OC.e(TAG,"Error while trying to get authorization",e);
+    }
+catch (    IOException e) {
+      Log_OC.e(TAG,"Error while trying to get authorization",e);
+    }
+ finally {
+      mPendingOperations.removePayload(account,remotePath);
+      mService.dispatchResultToOperationListeners(mCurrentSyncOperation,result);
+      sendBroadcastFinishedSyncFolder(account,remotePath,result.isSuccess());
+    }
+  }
+}

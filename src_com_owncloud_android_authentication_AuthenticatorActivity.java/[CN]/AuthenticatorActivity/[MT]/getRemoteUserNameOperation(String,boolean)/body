@@ -4,6 +4,6 @@
   getUserNameIntent.putExtra(OperationsService.EXTRA_SERVER_URL,mServerInfo.mBaseUrl);
   getUserNameIntent.putExtra(OperationsService.EXTRA_COOKIE,sessionCookie);
   if (mOperationsServiceBinder != null) {
-    mWaitingForOpId=mOperationsServiceBinder.newOperation(getUserNameIntent);
+    mWaitingForOpId=mOperationsServiceBinder.queueNewOperation(getUserNameIntent);
   }
 }

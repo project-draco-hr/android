@@ -1,5 +1,0 @@
-{
-  if (mList != null) {
-    mList.setAndCenterSelection(position);
-  }
-}
