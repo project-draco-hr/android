@@ -1,0 +1,5 @@
+{
+  mContentResolver=((FileActivity)activity).getContentResolver();
+  mAccountName=((FileActivity)activity).getAccount().name;
+  mListener=new WeakReference<OnCopyTmpFileTaskListener>((OnCopyTmpFileTaskListener)activity);
+}

@@ -1,0 +1,6 @@
+{
+  OnCopyTmpFileTaskListener listener=mListener.get();
+  if (listener != null) {
+    listener.OnCopyTmpFileTaskListener(result);
+  }
+}

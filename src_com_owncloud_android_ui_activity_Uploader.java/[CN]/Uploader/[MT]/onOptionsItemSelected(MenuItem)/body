@@ -2,14 +2,12 @@
   boolean retval=true;
 switch (item.getItemId()) {
 case android.R.id.home:
-{
-      if ((mParents.size() > 1)) {
-        onBackPressed();
-      }
-      break;
+    if ((mParents.size() > 1)) {
+      onBackPressed();
     }
+  break;
 default :
-  retval=super.onOptionsItemSelected(item);
+retval=super.onOptionsItemSelected(item);
 }
 return retval;
 }
