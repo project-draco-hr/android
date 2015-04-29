@@ -121,27 +121,27 @@
         if (!mPinCodeChecked) {
           mPinCodeChecked=checkPincode();
         }
-        if (mPinCodeChecked && (mActivity.equals("FileDisplayActivity") || mActivity.equals("PreviewImageActivity") || mActivity.equals("ownCloudUploader"))) {
+        if (mPinCodeChecked) {
           PinCheck.setUnlockTimestamp();
-          finish();
-        }
- else         if (mPinCodeChecked) {
-          PinCheck.setUnlockTimestamp();
-          Intent intent=getIntent();
-          String newState=intent.getStringExtra(EXTRA_NEW_STATE);
-          if (newState.equals("false")) {
-            SharedPreferences.Editor appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
-            appPrefs.putBoolean("set_pincode",false);
-            appPrefs.commit();
-            setInitVars();
-            pinCodeEnd(false);
+          if (ACTION_REQUEST.equals(getIntent().getAction())) {
+            finish();
           }
- else {
-            if (!mConfirmingPinCode) {
-              pinCodeChangeRequest();
+ else           if (mPinCodeChecked) {
+            String newState=getIntent().getStringExtra(EXTRA_NEW_STATE);
+            if (newState.equals("false")) {
+              SharedPreferences.Editor appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
+              appPrefs.putBoolean("set_pincode",false);
+              appPrefs.commit();
+              setInitVars();
+              pinCodeEnd(false);
             }
  else {
-              confirmPincode();
+              if (!mConfirmingPinCode) {
+                pinCodeChangeRequest();
+              }
+ else {
+                confirmPincode();
+              }
             }
           }
         }

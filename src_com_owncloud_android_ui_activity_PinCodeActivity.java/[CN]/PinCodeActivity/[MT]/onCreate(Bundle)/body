@@ -1,8 +1,6 @@
 {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.pincodelock);
-  Intent intent=getIntent();
-  mActivity=intent.getStringExtra(EXTRA_ACTIVITY);
   mBCancel=(Button)findViewById(R.id.cancel);
   mPinHdr=(TextView)findViewById(R.id.pinHdr);
   mPinHdrExplanation=(TextView)findViewById(R.id.pinHdrExpl);
@@ -20,7 +18,7 @@
   }
  else {
     if (appPrefs.getBoolean("set_pincode",false)) {
-      if (mActivity.equals("preferences")) {
+      if (ACTION_TOGGLE.equals(getIntent().getAction())) {
         mPinHdr.setText(R.string.pincode_configure_your_pin);
         mPinHdrExplanation.setVisibility(View.VISIBLE);
         mPinCodeChecked=true;

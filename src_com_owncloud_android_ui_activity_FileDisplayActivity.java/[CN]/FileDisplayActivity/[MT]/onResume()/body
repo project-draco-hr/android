@@ -1,11 +1,6 @@
 {
   Log_OC.d(TAG,"onResume() start");
   super.onResume();
-  if (PinCheck.checkIfPinEntry()) {
-    Intent i=new Intent(MainApp.getAppContext(),PinCodeActivity.class);
-    i.putExtra(PinCodeActivity.EXTRA_ACTIVITY,"FileDisplayActivity");
-    startActivity(i);
-  }
   refreshListOfFilesFragment();
   IntentFilter syncIntentFilter=new IntentFilter(FileSyncAdapter.EVENT_FULL_SYNC_START);
   syncIntentFilter.addAction(FileSyncAdapter.EVENT_FULL_SYNC_END);

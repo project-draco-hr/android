@@ -16,4 +16,36 @@
     Log_OC.startLogging();
     Log_OC.d("Debug","start logging");
   }
+  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+    this.registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks(){
+      @Override public void onActivityCreated(      Activity activity,      Bundle savedInstanceState){
+        Log_OC.d(TAG,activity.getClass().getSimpleName() + " in onCreate(Bundle)");
+      }
+      @Override public void onActivityStarted(      Activity activity){
+        Log_OC.d(TAG,activity.getClass().getSimpleName() + " in onStart()");
+      }
+      @Override public void onActivityResumed(      Activity activity){
+        Log_OC.d(TAG,activity.getClass().getSimpleName() + " in onResume()");
+        if (!sExemptOfPasscodeActivites.contains(activity.getClass().getCanonicalName()) && PinCheck.checkIfPinEntry()) {
+          Intent i=new Intent(MainApp.getAppContext(),PinCodeActivity.class);
+          i.setAction(PinCodeActivity.ACTION_REQUEST);
+          activity.startActivity(i);
+        }
+      }
+      @Override public void onActivityPaused(      Activity activity){
+        Log_OC.d(TAG,activity.getClass().getSimpleName() + " in onPause()");
+        PinCheck.setUnlockTimestamp();
+      }
+      @Override public void onActivityStopped(      Activity activity){
+        Log_OC.d(TAG,activity.getClass().getSimpleName() + " in onStop()");
+      }
+      @Override public void onActivitySaveInstanceState(      Activity activity,      Bundle outState){
+        Log_OC.d(TAG,activity.getClass().getSimpleName() + " in onSaveInstanceState(Bundle)");
+      }
+      @Override public void onActivityDestroyed(      Activity activity){
+        Log_OC.d(TAG,activity.getClass().getSimpleName() + " in onDestroy()");
+      }
+    }
+);
+  }
 }
