@@ -4,6 +4,8 @@
     ArrayList<String> remote=new ArrayList<String>();
     for (    Parcelable mStream : mStreamsToUpload) {
       Uri uri=(Uri)mStream;
+      String data=null;
+      String filePath="";
       if (uri != null) {
         if (uri.getScheme().equals("content")) {
           String mimeType=getContentResolver().getType(uri);
@@ -12,55 +14,51 @@
             Cursor c=getContentResolver().query(uri,CONTENT_PROJECTION,null,null,null);
             c.moveToFirst();
             int index=c.getColumnIndex(Images.Media.DATA);
-            String data=c.getString(index);
-            String filePath=mUploadPath + c.getString(c.getColumnIndex(Images.Media.DISPLAY_NAME));
-            if (data == null) {
-              CopyTmpFileAsyncTask copyTask=new CopyTmpFileAsyncTask(this);
-              Object[] params={uri,filePath};
-              try {
-                data=copyTask.execute(params).get();
-              }
- catch (              ExecutionException e) {
-                Log_OC.e(TAG,"ExecutionException " + e);
-              }
-catch (              InterruptedException e) {
-                Log_OC.e(TAG,"InterruptedException " + e);
-              }
-            }
-            local.add(data);
-            remote.add(mUploadPath + c.getString(c.getColumnIndex(Images.Media.DISPLAY_NAME)));
+            data=c.getString(index);
+            filePath=mUploadPath + c.getString(c.getColumnIndex(Images.Media.DISPLAY_NAME));
           }
  else           if (mimeType.contains("video")) {
             String[] CONTENT_PROJECTION={Video.Media.DATA,Video.Media.DISPLAY_NAME,Video.Media.MIME_TYPE,Video.Media.SIZE,Video.Media.DATE_MODIFIED};
             Cursor c=getContentResolver().query(uri,CONTENT_PROJECTION,null,null,null);
             c.moveToFirst();
             int index=c.getColumnIndex(Video.Media.DATA);
-            String data=c.getString(index);
-            local.add(data);
-            remote.add(mUploadPath + c.getString(c.getColumnIndex(Video.Media.DISPLAY_NAME)));
+            data=c.getString(index);
+            filePath=mUploadPath + c.getString(c.getColumnIndex(Video.Media.DISPLAY_NAME));
           }
  else           if (mimeType.contains("audio")) {
             String[] CONTENT_PROJECTION={Audio.Media.DATA,Audio.Media.DISPLAY_NAME,Audio.Media.MIME_TYPE,Audio.Media.SIZE};
             Cursor c=getContentResolver().query(uri,CONTENT_PROJECTION,null,null,null);
             c.moveToFirst();
             int index=c.getColumnIndex(Audio.Media.DATA);
-            String data=c.getString(index);
-            local.add(data);
-            remote.add(mUploadPath + c.getString(c.getColumnIndex(Audio.Media.DISPLAY_NAME)));
+            data=c.getString(index);
+            filePath=mUploadPath + c.getString(c.getColumnIndex(Audio.Media.DISPLAY_NAME));
           }
  else {
-            String filePath=Uri.decode(uri.toString()).replace(uri.getScheme() + "://","");
-            if (filePath.contains("mnt")) {
-              String splitedFilePath[]=filePath.split("/mnt");
-              filePath=splitedFilePath[1];
+            Cursor cursor=getContentResolver().query(uri,new String[]{MediaStore.MediaColumns.DISPLAY_NAME},null,null,null);
+            cursor.moveToFirst();
+            int nameIndex=cursor.getColumnIndex(cursor.getColumnNames()[0]);
+            if (nameIndex >= 0) {
+              filePath=mUploadPath + cursor.getString(nameIndex);
             }
-            final File file=new File(filePath);
-            local.add(file.getAbsolutePath());
-            remote.add(mUploadPath + file.getName());
           }
+          if (data == null) {
+            CopyTmpFileAsyncTask copyTask=new CopyTmpFileAsyncTask(this);
+            Object[] params={uri,filePath};
+            try {
+              data=copyTask.execute(params).get();
+            }
+ catch (            ExecutionException e) {
+              Log_OC.e(TAG,"ExecutionException " + e);
+            }
+catch (            InterruptedException e) {
+              Log_OC.e(TAG,"InterruptedException " + e);
+            }
+          }
+          local.add(data);
+          remote.add(filePath);
         }
  else         if (uri.getScheme().equals("file")) {
-          String filePath=Uri.decode(uri.toString()).replace(uri.getScheme() + "://","");
+          filePath=Uri.decode(uri.toString()).replace(uri.getScheme() + "://","");
           if (filePath.contains("mnt")) {
             String splitedFilePath[]=filePath.split("/mnt");
             filePath=splitedFilePath[1];
