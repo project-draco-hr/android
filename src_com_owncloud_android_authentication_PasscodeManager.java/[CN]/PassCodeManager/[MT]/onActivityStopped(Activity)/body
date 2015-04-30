@@ -1,0 +1,6 @@
+{
+  if (mVisibleActivitiesCounter > 0) {
+    mVisibleActivitiesCounter--;
+  }
+  setUnlockTimestamp();
+}

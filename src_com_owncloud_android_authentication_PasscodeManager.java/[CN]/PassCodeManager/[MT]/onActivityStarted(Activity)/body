@@ -1,0 +1,8 @@
+{
+  if (!sExemptOfPasscodeActivites.contains(activity.getClass()) && passCodeShouldBeRequested()) {
+    Intent i=new Intent(MainApp.getAppContext(),PinCodeActivity.class);
+    i.setAction(PinCodeActivity.ACTION_REQUEST);
+    activity.startActivity(i);
+  }
+  mVisibleActivitiesCounter++;
+}

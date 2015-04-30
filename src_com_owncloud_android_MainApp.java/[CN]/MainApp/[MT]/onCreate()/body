@@ -23,21 +23,17 @@
       }
       @Override public void onActivityStarted(      Activity activity){
         Log_OC.d(TAG,activity.getClass().getSimpleName() + " in onStart()");
+        PassCodeManager.getPassCodeManager().onActivityStarted(activity);
       }
       @Override public void onActivityResumed(      Activity activity){
         Log_OC.d(TAG,activity.getClass().getSimpleName() + " in onResume()");
-        if (!sExemptOfPasscodeActivites.contains(activity.getClass().getCanonicalName()) && PinCheck.checkIfPinEntry()) {
-          Intent i=new Intent(MainApp.getAppContext(),PinCodeActivity.class);
-          i.setAction(PinCodeActivity.ACTION_REQUEST);
-          activity.startActivity(i);
-        }
       }
       @Override public void onActivityPaused(      Activity activity){
         Log_OC.d(TAG,activity.getClass().getSimpleName() + " in onPause()");
-        PinCheck.setUnlockTimestamp();
       }
       @Override public void onActivityStopped(      Activity activity){
         Log_OC.d(TAG,activity.getClass().getSimpleName() + " in onStop()");
+        PassCodeManager.getPassCodeManager().onActivityStopped(activity);
       }
       @Override public void onActivitySaveInstanceState(      Activity activity,      Bundle outState){
         Log_OC.d(TAG,activity.getClass().getSimpleName() + " in onSaveInstanceState(Bundle)");

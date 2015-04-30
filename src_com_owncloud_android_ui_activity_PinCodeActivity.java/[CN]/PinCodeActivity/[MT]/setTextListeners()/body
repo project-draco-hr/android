@@ -122,7 +122,6 @@
           mPinCodeChecked=checkPincode();
         }
         if (mPinCodeChecked) {
-          PinCheck.setUnlockTimestamp();
           if (ACTION_REQUEST.equals(getIntent().getAction())) {
             finish();
           }

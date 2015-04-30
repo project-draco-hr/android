@@ -1,8 +1,7 @@
 {
-  if ((System.currentTimeMillis() - timestamp) > PINCODE_TIMEOUT && (System.currentTimeMillis() - lastStart) > PINCODE_TIMEOUT) {
+  if ((System.currentTimeMillis() - mTimestamp) > PASS_CODE_TIMEOUT && mVisibleActivitiesCounter <= 0) {
     SharedPreferences appPrefs=PreferenceManager.getDefaultSharedPreferences(MainApp.getAppContext());
     if (appPrefs.getBoolean("set_pincode",false)) {
-      lastStart=System.currentTimeMillis();
       return true;
     }
   }
