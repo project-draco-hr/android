@@ -3,11 +3,15 @@
   if (savedInstanceState == null) {
     mParents=new Stack<String>();
     mAccountSelected=false;
+    mNumCacheFile=0;
+    mRemoteCacheData=new ArrayList<String>();
   }
  else {
     mParents=(Stack<String>)savedInstanceState.getSerializable(KEY_PARENTS);
     mFile=savedInstanceState.getParcelable(KEY_FILE);
     mAccountSelected=savedInstanceState.getBoolean(KEY_ACCOUNT_SELECTED);
+    mNumCacheFile=savedInstanceState.getInt(KEY_NUM_CACHE_FILE);
+    mRemoteCacheData=savedInstanceState.getStringArrayList(KEY_REMOTE_CACHE_DATA);
   }
   super.onCreate(savedInstanceState);
   ActionBar actionBar=getSupportActionBar();

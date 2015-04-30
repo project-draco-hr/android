@@ -41,21 +41,6 @@
               filePath=mUploadPath + cursor.getString(nameIndex);
             }
           }
-          if (data == null) {
-            CopyTmpFileAsyncTask copyTask=new CopyTmpFileAsyncTask(this);
-            Object[] params={uri,filePath};
-            try {
-              data=copyTask.execute(params).get();
-            }
- catch (            ExecutionException e) {
-              Log_OC.e(TAG,"ExecutionException " + e);
-            }
-catch (            InterruptedException e) {
-              Log_OC.e(TAG,"InterruptedException " + e);
-            }
-          }
-          local.add(data);
-          remote.add(filePath);
         }
  else         if (uri.getScheme().equals("file")) {
           filePath=Uri.decode(uri.toString()).replace(uri.getScheme() + "://","");
@@ -64,11 +49,23 @@ catch (            InterruptedException e) {
             filePath=splitedFilePath[1];
           }
           final File file=new File(filePath);
-          local.add(file.getAbsolutePath());
-          remote.add(mUploadPath + file.getName());
+          data=file.getAbsolutePath();
+          filePath=mUploadPath + file.getName();
         }
  else {
           throw new SecurityException();
+        }
+        if (data == null) {
+          mRemoteCacheData.add(filePath);
+          CopyTmpFileAsyncTask copyTask=new CopyTmpFileAsyncTask(this);
+          Object[] params={uri,filePath,mRemoteCacheData.size() - 1};
+          mNumCacheFile++;
+          showWaitingCopyDialog();
+          copyTask.execute(params);
+        }
+ else {
+          remote.add(filePath);
+          local.add(data);
         }
       }
  else {

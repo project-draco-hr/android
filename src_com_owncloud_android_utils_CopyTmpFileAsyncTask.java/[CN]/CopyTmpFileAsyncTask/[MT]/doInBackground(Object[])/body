@@ -1,8 +1,9 @@
 {
   String result=null;
-  if (params.length == 2) {
+  if (params.length == 3) {
     Uri uri=(Uri)params[0];
     String filePath=(String)params[1];
+    mIndex=(int)params[2];
     String fullTempPath=FileStorageUtils.getTemporalPath(mAccountName) + filePath;
     InputStream inputStream=null;
     FileOutputStream outputStream=null;
