@@ -14,6 +14,9 @@
     mRemoteCacheData=savedInstanceState.getStringArrayList(KEY_REMOTE_CACHE_DATA);
   }
   super.onCreate(savedInstanceState);
+  if (mAccountSelected) {
+    setAccount((Account)savedInstanceState.getParcelable(FileActivity.EXTRA_ACCOUNT));
+  }
   ActionBar actionBar=getSupportActionBar();
   actionBar.setIcon(DisplayUtils.getSeasonalIconId());
 }
