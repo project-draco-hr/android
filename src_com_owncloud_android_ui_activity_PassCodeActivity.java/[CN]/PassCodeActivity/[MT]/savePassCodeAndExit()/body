@@ -1,10 +1,11 @@
 {
   SharedPreferences.Editor appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
-  appPrefs.putString("PrefPinCode1",mTempText[0]);
-  appPrefs.putString("PrefPinCode2",mTempText[1]);
-  appPrefs.putString("PrefPinCode3",mTempText[2]);
-  appPrefs.putString("PrefPinCode4",mTempText[3]);
+  appPrefs.putString("PrefPinCode1",mPassCodeDigits[0]);
+  appPrefs.putString("PrefPinCode2",mPassCodeDigits[1]);
+  appPrefs.putString("PrefPinCode3",mPassCodeDigits[2]);
+  appPrefs.putString("PrefPinCode4",mPassCodeDigits[3]);
   appPrefs.putBoolean("set_pincode",true);
   appPrefs.commit();
-  passCodeEnd(true);
+  Toast.makeText(this,R.string.pass_code_stored,Toast.LENGTH_LONG).show();
+  finish();
 }

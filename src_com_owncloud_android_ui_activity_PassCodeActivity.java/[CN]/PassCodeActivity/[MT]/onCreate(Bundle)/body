@@ -4,40 +4,29 @@
   mBCancel=(Button)findViewById(R.id.cancel);
   mPassCodeHdr=(TextView)findViewById(R.id.header);
   mPassCodeHdrExplanation=(TextView)findViewById(R.id.explanation);
-  mText1=(EditText)findViewById(R.id.txt1);
-  mText1.requestFocus();
+  mText0=(EditText)findViewById(R.id.txt0);
+  mText0.requestFocus();
   getWindow().setSoftInputMode(android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+  mText1=(EditText)findViewById(R.id.txt1);
   mText2=(EditText)findViewById(R.id.txt2);
   mText3=(EditText)findViewById(R.id.txt3);
-  mText4=(EditText)findViewById(R.id.txt4);
-  SharedPreferences appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-  if ((appPrefs.getString("PrefPinCode1",null) == null)) {
-    setChangePassCodeView(true);
-    mPassCodeChecked=true;
-    mNewPasswordEntered=true;
+  if (ACTION_REQUEST.equals(getIntent().getAction())) {
+    mPassCodeHdr.setText(R.string.pass_code_enter_pass_code);
+    mPassCodeHdrExplanation.setVisibility(View.INVISIBLE);
+    setCancelButtonEnabled(false);
+  }
+ else   if (ACTION_ENABLE.equals(getIntent().getAction())) {
+    mPassCodeHdr.setText(R.string.pass_code_configure_your_pass_code);
+    mPassCodeHdrExplanation.setVisibility(View.VISIBLE);
+    setCancelButtonEnabled(true);
+  }
+ else   if (ACTION_DISABLE.equals(getIntent().getAction())) {
+    mPassCodeHdr.setText(R.string.pass_code_remove_your_pass_code);
+    mPassCodeHdrExplanation.setVisibility(View.INVISIBLE);
+    setCancelButtonEnabled(true);
   }
  else {
-    if (appPrefs.getBoolean("set_pincode",false)) {
-      if (ACTION_TOGGLE.equals(getIntent().getAction())) {
-        mPassCodeHdr.setText(R.string.pass_code_configure_your_pass_code);
-        mPassCodeHdrExplanation.setVisibility(View.VISIBLE);
-        mPassCodeChecked=true;
-        setChangePassCodeView(true);
-      }
- else {
-        mBCancel.setVisibility(View.INVISIBLE);
-        mBCancel.setVisibility(View.GONE);
-        mPassCodeHdr.setText(R.string.pass_code_enter_pass_code);
-        mPassCodeHdrExplanation.setVisibility(View.INVISIBLE);
-        setChangePassCodeView(false);
-      }
-    }
- else {
-      mPassCodeHdr.setText(R.string.pass_code_remove_your_pass_code);
-      mPassCodeHdrExplanation.setVisibility(View.INVISIBLE);
-      mPassCodeChecked=false;
-      setChangePassCodeView(true);
-    }
+    throw new IllegalArgumentException("A valid ACTION is needed in the Intent passed to " + TAG);
   }
   setTextListeners();
   ActionBar actionBar=getSupportActionBar();

@@ -1,7 +1,7 @@
 {
+  mText0.setText("");
   mText1.setText("");
   mText2.setText("");
   mText3.setText("");
-  mText4.setText("");
-  mText1.requestFocus();
+  mText0.requestFocus();
 }

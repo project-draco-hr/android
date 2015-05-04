@@ -1,0 +1,33 @@
+{
+  if (ACTION_REQUEST.equals(getIntent().getAction())) {
+    if (checkPassCode()) {
+      finish();
+    }
+ else {
+      showErrorAndRestart(R.string.common_error,R.string.pass_code_enter_pass_code,View.INVISIBLE);
+    }
+  }
+ else   if (ACTION_DISABLE.equals(getIntent().getAction())) {
+    if (checkPassCode()) {
+      SharedPreferences.Editor appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
+      appPrefs.putBoolean("set_pincode",false);
+      appPrefs.commit();
+      Toast.makeText(PassCodeActivity.this,R.string.pass_code_removed,Toast.LENGTH_LONG).show();
+      finish();
+    }
+ else {
+      showErrorAndRestart(R.string.common_error,R.string.pass_code_enter_pass_code,View.INVISIBLE);
+    }
+  }
+ else   if (ACTION_ENABLE.equals(getIntent().getAction())) {
+    if (!mConfirmingPassCode) {
+      requestPassCodeConfirmation();
+    }
+ else     if (confirmPassCode()) {
+      savePassCodeAndExit();
+    }
+ else {
+      showErrorAndRestart(R.string.pass_code_mismatch,R.string.pass_code_configure_your_pass_code,View.VISIBLE);
+    }
+  }
+}

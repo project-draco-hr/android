@@ -1,13 +1,7 @@
 {
   if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-    if (ACTION_TOGGLE.equals(getIntent().getAction())) {
-      SharedPreferences.Editor appPrefsE=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
-      SharedPreferences appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-      boolean state=appPrefs.getBoolean("set_pincode",false);
-      appPrefsE.putBoolean("set_pincode",!state);
-      appPrefsE.commit();
-      setInitVars();
-      finish();
+    if (ACTION_ENABLE.equals(getIntent().getAction()) || ACTION_DISABLE.equals(getIntent().getAction())) {
+      revertActionAndExit();
     }
     return true;
   }

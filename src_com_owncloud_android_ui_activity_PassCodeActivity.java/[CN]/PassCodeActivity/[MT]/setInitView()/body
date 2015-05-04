@@ -1,6 +1,0 @@
-{
-  mBCancel.setVisibility(View.INVISIBLE);
-  mBCancel.setVisibility(View.GONE);
-  mPassCodeHdr.setText(R.string.pass_code_enter_pass_code);
-  mPassCodeHdrExplanation.setVisibility(View.INVISIBLE);
-}

@@ -1,21 +1,9 @@
 {
   SharedPreferences appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-  String pText1=appPrefs.getString("PrefPinCode1",null);
-  String pText2=appPrefs.getString("PrefPinCode2",null);
-  String pText3=appPrefs.getString("PrefPinCode3",null);
-  String pText4=appPrefs.getString("PrefPinCode4",null);
-  if (mTempText[0].equals(pText1) && mTempText[1].equals(pText2) && mTempText[2].equals(pText3)&& mTempText[3].equals(pText4)) {
-    return true;
-  }
- else {
-    Arrays.fill(mTempText,null);
-    CharSequence errorSeq=getString(R.string.common_error);
-    Toast.makeText(this,errorSeq,Toast.LENGTH_LONG).show();
-    clearBoxes();
-    mPassCodeHdr.setText(R.string.pass_code_enter_pass_code);
-    mPassCodeHdrExplanation.setVisibility(View.INVISIBLE);
-    mNewPasswordEntered=true;
-    mConfirmingPassCode=false;
-  }
-  return false;
+  String savedPassCodeDigits[]=new String[4];
+  savedPassCodeDigits[0]=appPrefs.getString("PrefPinCode1",null);
+  savedPassCodeDigits[1]=appPrefs.getString("PrefPinCode2",null);
+  savedPassCodeDigits[2]=appPrefs.getString("PrefPinCode3",null);
+  savedPassCodeDigits[3]=appPrefs.getString("PrefPinCode4",null);
+  return (mPassCodeDigits[0].equals(savedPassCodeDigits[0]) && mPassCodeDigits[1].equals(savedPassCodeDigits[0]) && mPassCodeDigits[2].equals(savedPassCodeDigits[0])&& mPassCodeDigits[3].equals(savedPassCodeDigits[0]));
 }
