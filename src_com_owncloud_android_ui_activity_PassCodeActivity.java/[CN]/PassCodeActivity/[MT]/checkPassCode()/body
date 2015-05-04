@@ -12,10 +12,10 @@
     CharSequence errorSeq=getString(R.string.common_error);
     Toast.makeText(this,errorSeq,Toast.LENGTH_LONG).show();
     clearBoxes();
-    mPinHdr.setText(R.string.pincode_enter_pin_code);
-    mPinHdrExplanation.setVisibility(View.INVISIBLE);
+    mPassCodeHdr.setText(R.string.pass_code_enter_pass_code);
+    mPassCodeHdrExplanation.setVisibility(View.INVISIBLE);
     mNewPasswordEntered=true;
-    mConfirmingPinCode=false;
+    mConfirmingPassCode=false;
   }
   return false;
 }

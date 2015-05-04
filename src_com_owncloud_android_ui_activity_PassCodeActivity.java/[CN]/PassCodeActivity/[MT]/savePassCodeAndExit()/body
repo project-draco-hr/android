@@ -6,5 +6,5 @@
   appPrefs.putString("PrefPinCode4",mTempText[3]);
   appPrefs.putBoolean("set_pincode",true);
   appPrefs.commit();
-  pinCodeEnd(true);
+  passCodeEnd(true);
 }

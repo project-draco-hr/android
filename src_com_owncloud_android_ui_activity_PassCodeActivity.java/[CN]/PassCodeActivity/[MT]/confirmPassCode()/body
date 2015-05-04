@@ -1,18 +1,18 @@
 {
-  mConfirmingPinCode=false;
+  mConfirmingPassCode=false;
   String rText1=mText1.getText().toString();
   String rText2=mText2.getText().toString();
   String rText3=mText3.getText().toString();
   String rText4=mText4.getText().toString();
   if (mTempText[0].equals(rText1) && mTempText[1].equals(rText2) && mTempText[2].equals(rText3)&& mTempText[3].equals(rText4)) {
-    savePincodeAndExit();
+    savePassCodeAndExit();
   }
  else {
     Arrays.fill(mTempText,null);
-    CharSequence cseq=getString(R.string.pincode_mismatch);
+    CharSequence cseq=getString(R.string.pass_code_mismatch);
     Toast.makeText(this,cseq,Toast.LENGTH_LONG).show();
-    mPinHdr.setText(R.string.pincode_configure_your_pin);
-    mPinHdrExplanation.setVisibility(View.VISIBLE);
+    mPassCodeHdr.setText(R.string.pass_code_configure_your_pass_code);
+    mPassCodeHdrExplanation.setVisibility(View.VISIBLE);
     clearBoxes();
   }
 }

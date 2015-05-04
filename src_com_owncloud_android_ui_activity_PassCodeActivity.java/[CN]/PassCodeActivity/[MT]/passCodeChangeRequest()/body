@@ -1,0 +1,6 @@
+{
+  clearBoxes();
+  mPassCodeHdr.setText(R.string.pass_code_reenter_your_pass_code);
+  mPassCodeHdrExplanation.setVisibility(View.INVISIBLE);
+  mConfirmingPassCode=true;
+}

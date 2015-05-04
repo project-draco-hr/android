@@ -1,0 +1,5 @@
+{
+  mConfirmingPassCode=false;
+  mPassCodeChecked=false;
+  mNewPasswordEntered=false;
+}
