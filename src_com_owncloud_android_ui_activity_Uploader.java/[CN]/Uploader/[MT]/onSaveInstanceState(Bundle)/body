@@ -4,6 +4,7 @@
   outState.putSerializable(KEY_PARENTS,mParents);
   outState.putParcelable(KEY_FILE,mFile);
   outState.putBoolean(KEY_ACCOUNT_SELECTED,mAccountSelected);
+  outState.putBoolean(KEY_ACCOUNT_SELECTION_SHOWING,mAccountSelectionShowing);
   outState.putInt(KEY_NUM_CACHE_FILE,mNumCacheFile);
   outState.putStringArrayList(KEY_REMOTE_CACHE_DATA,mRemoteCacheData);
   outState.putParcelable(FileActivity.EXTRA_ACCOUNT,getAccount());
