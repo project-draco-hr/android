@@ -1,0 +1,32 @@
+{
+  Log_OC.d("SQL","THREAD:  " + Thread.currentThread().getName());
+  AccountManager ama=AccountManager.get(getContext());
+  try {
+    Account[] accounts=AccountManager.get(getContext()).getAccountsByType(MainApp.getAccountType());
+    String serverUrl, username, oldAccountName, newAccountName;
+    for (    Account account : accounts) {
+      serverUrl=ama.getUserData(account,AccountUtils.Constants.KEY_OC_BASE_URL);
+      username=account.name.substring(0,account.name.lastIndexOf('@'));
+      oldAccountName=AccountUtils.buildAccountNameOld(Uri.parse(serverUrl),username);
+      newAccountName=AccountUtils.buildAccountName(Uri.parse(serverUrl),username);
+      db.beginTransaction();
+      try {
+        ContentValues cv=new ContentValues();
+        cv.put(ProviderTableMeta.FILE_ACCOUNT_OWNER,newAccountName);
+        int num=db.update(ProviderTableMeta.FILE_TABLE_NAME,cv,ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?",new String[]{oldAccountName});
+        Log_OC.d("SQL","Updated account in database: old name == " + oldAccountName + ", new name == "+ newAccountName+ " ("+ num+ " rows updated )");
+        updateDownloadedFiles(db,newAccountName,oldAccountName);
+        db.setTransactionSuccessful();
+      }
+ catch (      SQLException e) {
+        Log_OC.e(TAG,"SQL Exception upgrading account names or paths in database",e);
+      }
+ finally {
+        db.endTransaction();
+      }
+    }
+  }
+ catch (  Exception e) {
+    Log_OC.e(TAG,"Exception upgrading account names or paths in database",e);
+  }
+}

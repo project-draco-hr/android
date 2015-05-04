@@ -1,5 +1,0 @@
-{
-  Uri uri=Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_VCARD_URI,lookupKey);
-  AssetFileDescriptor fd=getContext().getContentResolver().openAssetFileDescriptor(uri,"r");
-  return fd.createInputStream();
-}

@@ -23,6 +23,7 @@
  else {
       mAccountMgr.addAccountExplicitly(mAccount,mPasswordInput.getText().toString(),null);
     }
+    mAccountMgr.setUserData(mAccount,Constants.KEY_OC_ACCOUNT_VERSION,Integer.toString(AccountUtils.ACCOUNT_VERSION));
     Account defaultAccount=AccountUtils.getCurrentOwnCloudAccount(this);
     if (defaultAccount == null) {
       SharedPreferences.Editor editor=PreferenceManager.getDefaultSharedPreferences(this).edit();
