@@ -1,14 +1,16 @@
 {
   String result=null;
-  if (params.length == 3) {
+  if (params != null && params.length == 5) {
     Uri uri=(Uri)params[0];
     String filePath=(String)params[1];
     mIndex=((Integer)params[2]).intValue();
-    String fullTempPath=FileStorageUtils.getTemporalPath(mAccountName) + filePath;
+    String accountName=(String)params[3];
+    ContentResolver contentResolver=(ContentResolver)params[4];
+    String fullTempPath=FileStorageUtils.getTemporalPath(accountName) + filePath;
     InputStream inputStream=null;
     FileOutputStream outputStream=null;
     try {
-      inputStream=mContentResolver.openInputStream(uri);
+      inputStream=contentResolver.openInputStream(uri);
       File cacheFile=new File(fullTempPath);
       File tempDir=cacheFile.getParentFile();
       if (!tempDir.exists()) {
@@ -51,7 +53,7 @@
     }
   }
  else {
-    Log_OC.e(TAG,"Error in parameters number");
+    throw new IllegalArgumentException("Error in parameters number");
   }
   return result;
 }
