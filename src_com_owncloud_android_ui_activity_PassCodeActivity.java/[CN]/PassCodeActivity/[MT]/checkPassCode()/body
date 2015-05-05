@@ -5,5 +5,9 @@
   savedPassCodeDigits[1]=appPrefs.getString("PrefPinCode2",null);
   savedPassCodeDigits[2]=appPrefs.getString("PrefPinCode3",null);
   savedPassCodeDigits[3]=appPrefs.getString("PrefPinCode4",null);
-  return (mPassCodeDigits[0].equals(savedPassCodeDigits[0]) && mPassCodeDigits[1].equals(savedPassCodeDigits[0]) && mPassCodeDigits[2].equals(savedPassCodeDigits[0])&& mPassCodeDigits[3].equals(savedPassCodeDigits[0]));
+  boolean result=true;
+  for (int i=0; i < mPassCodeDigits.length && result; i++) {
+    result=result && (mPassCodeDigits[i] != null) && mPassCodeDigits[i].equals(savedPassCodeDigits[i]);
+  }
+  return result;
 }

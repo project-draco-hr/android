@@ -1,45 +1,11 @@
 {
-  mText0.addTextChangedListener(new TextWatcher(){
-    @Override public void onTextChanged(    CharSequence s,    int start,    int before,    int count){
-    }
-    @Override public void beforeTextChanged(    CharSequence s,    int start,    int count,    int after){
-    }
-    @Override public void afterTextChanged(    Editable s){
-      if (s.length() > 0) {
-        if (!mConfirmingPassCode) {
-          mPassCodeDigits[0]=mText0.getText().toString();
-        }
-        mText1.requestFocus();
-      }
- else {
-        Log_OC.w(TAG,"Input in text box 0 resulted in empty string");
-      }
-    }
-  }
-);
-  mText1.addTextChangedListener(new TextWatcher(){
-    @Override public void onTextChanged(    CharSequence s,    int start,    int before,    int count){
-    }
-    @Override public void beforeTextChanged(    CharSequence s,    int start,    int count,    int after){
-    }
-    @Override public void afterTextChanged(    Editable s){
-      if (s.length() > 0) {
-        if (!mConfirmingPassCode) {
-          mPassCodeDigits[1]=mText1.getText().toString();
-        }
-        mText2.requestFocus();
-      }
- else {
-        Log_OC.w(TAG,"Input in text box 1 resulted in empty string");
-      }
-    }
-  }
-);
-  mText1.setOnKeyListener(new OnKeyListener(){
+  mPassCodeEditTexts[0].addTextChangedListener(new PassCodeDigitTextWatcher(0,false));
+  mPassCodeEditTexts[1].addTextChangedListener(new PassCodeDigitTextWatcher(1,false));
+  mPassCodeEditTexts[1].setOnKeyListener(new View.OnKeyListener(){
     @Override public boolean onKey(    View v,    int keyCode,    KeyEvent event){
       if (keyCode == KeyEvent.KEYCODE_DEL && mBChange) {
-        mText0.setText("");
-        mText0.requestFocus();
+        mPassCodeEditTexts[0].setText("");
+        mPassCodeEditTexts[0].requestFocus();
         if (!mConfirmingPassCode)         mPassCodeDigits[0]="";
         mBChange=false;
       }
@@ -50,43 +16,26 @@
     }
   }
 );
-  mText1.setOnFocusChangeListener(new OnFocusChangeListener(){
+  mPassCodeEditTexts[1].setOnFocusChangeListener(new View.OnFocusChangeListener(){
     @Override public void onFocusChange(    View v,    boolean hasFocus){
-      mText1.setCursorVisible(true);
-      if (mText0.getText().toString().equals("")) {
-        mText1.setSelected(false);
-        mText1.setCursorVisible(false);
-        mText0.requestFocus();
-        mText0.setSelected(true);
-        mText0.setSelection(0);
+      mPassCodeEditTexts[1].setCursorVisible(true);
+      if (mPassCodeEditTexts[0].getText().toString().equals("")) {
+        mPassCodeEditTexts[1].setSelected(false);
+        mPassCodeEditTexts[1].setCursorVisible(false);
+        mPassCodeEditTexts[0].requestFocus();
+        mPassCodeEditTexts[0].setSelected(true);
+        mPassCodeEditTexts[0].setSelection(0);
       }
     }
   }
 );
-  mText2.addTextChangedListener(new TextWatcher(){
-    @Override public void onTextChanged(    CharSequence s,    int start,    int before,    int count){
-    }
-    @Override public void beforeTextChanged(    CharSequence s,    int start,    int count,    int after){
-    }
-    @Override public void afterTextChanged(    Editable s){
-      if (s.length() > 0) {
-        if (!mConfirmingPassCode) {
-          mPassCodeDigits[2]=mText2.getText().toString();
-        }
-        mText3.requestFocus();
-      }
- else {
-        Log_OC.w(TAG,"Input in text box 2 resulted in empty string");
-      }
-    }
-  }
-);
-  mText2.setOnKeyListener(new OnKeyListener(){
+  mPassCodeEditTexts[2].addTextChangedListener(new PassCodeDigitTextWatcher(2,false));
+  mPassCodeEditTexts[2].setOnKeyListener(new View.OnKeyListener(){
     @Override public boolean onKey(    View v,    int keyCode,    KeyEvent event){
       if (keyCode == KeyEvent.KEYCODE_DEL && mBChange) {
-        mText1.requestFocus();
+        mPassCodeEditTexts[1].requestFocus();
         if (!mConfirmingPassCode)         mPassCodeDigits[1]="";
-        mText1.setText("");
+        mPassCodeEditTexts[1].setText("");
         mBChange=false;
       }
  else       if (!mBChange) {
@@ -96,51 +45,33 @@
     }
   }
 );
-  mText2.setOnFocusChangeListener(new OnFocusChangeListener(){
+  mPassCodeEditTexts[2].setOnFocusChangeListener(new View.OnFocusChangeListener(){
     @Override public void onFocusChange(    View v,    boolean hasFocus){
-      mText2.setCursorVisible(true);
-      if (mText0.getText().toString().equals("")) {
-        mText2.setSelected(false);
-        mText2.setCursorVisible(false);
-        mText0.requestFocus();
-        mText0.setSelected(true);
-        mText0.setSelection(0);
+      mPassCodeEditTexts[2].setCursorVisible(true);
+      if (mPassCodeEditTexts[0].getText().toString().equals("")) {
+        mPassCodeEditTexts[2].setSelected(false);
+        mPassCodeEditTexts[2].setCursorVisible(false);
+        mPassCodeEditTexts[0].requestFocus();
+        mPassCodeEditTexts[0].setSelected(true);
+        mPassCodeEditTexts[0].setSelection(0);
       }
- else       if (mText1.getText().toString().equals("")) {
-        mText2.setSelected(false);
-        mText2.setCursorVisible(false);
-        mText1.requestFocus();
-        mText1.setSelected(true);
-        mText1.setSelection(0);
-      }
-    }
-  }
-);
-  mText3.addTextChangedListener(new TextWatcher(){
-    @Override public void onTextChanged(    CharSequence s,    int start,    int before,    int count){
-    }
-    @Override public void beforeTextChanged(    CharSequence s,    int start,    int count,    int after){
-    }
-    @Override public void afterTextChanged(    Editable s){
-      if (s.length() > 0) {
-        if (!mConfirmingPassCode) {
-          mPassCodeDigits[3]=mText3.getText().toString();
-        }
-        mText0.requestFocus();
-        processFullPassCode();
-      }
- else {
-        Log_OC.w(TAG,"Input in text box 3 resulted in empty string");
+ else       if (mPassCodeEditTexts[1].getText().toString().equals("")) {
+        mPassCodeEditTexts[2].setSelected(false);
+        mPassCodeEditTexts[2].setCursorVisible(false);
+        mPassCodeEditTexts[1].requestFocus();
+        mPassCodeEditTexts[1].setSelected(true);
+        mPassCodeEditTexts[1].setSelection(0);
       }
     }
   }
 );
-  mText3.setOnKeyListener(new OnKeyListener(){
+  mPassCodeEditTexts[3].addTextChangedListener(new PassCodeDigitTextWatcher(3,true));
+  mPassCodeEditTexts[3].setOnKeyListener(new View.OnKeyListener(){
     @Override public boolean onKey(    View v,    int keyCode,    KeyEvent event){
       if (keyCode == KeyEvent.KEYCODE_DEL && mBChange) {
-        mText2.requestFocus();
+        mPassCodeEditTexts[2].requestFocus();
         if (!mConfirmingPassCode)         mPassCodeDigits[2]="";
-        mText2.setText("");
+        mPassCodeEditTexts[2].setText("");
         mBChange=false;
       }
  else       if (!mBChange) {
@@ -150,29 +81,29 @@
     }
   }
 );
-  mText3.setOnFocusChangeListener(new OnFocusChangeListener(){
+  mPassCodeEditTexts[3].setOnFocusChangeListener(new View.OnFocusChangeListener(){
     @Override public void onFocusChange(    View v,    boolean hasFocus){
-      mText3.setCursorVisible(true);
-      if (mText0.getText().toString().equals("")) {
-        mText3.setSelected(false);
-        mText3.setCursorVisible(false);
-        mText0.requestFocus();
-        mText0.setSelected(true);
-        mText0.setSelection(0);
+      mPassCodeEditTexts[3].setCursorVisible(true);
+      if (mPassCodeEditTexts[0].getText().toString().equals("")) {
+        mPassCodeEditTexts[3].setSelected(false);
+        mPassCodeEditTexts[3].setCursorVisible(false);
+        mPassCodeEditTexts[0].requestFocus();
+        mPassCodeEditTexts[0].setSelected(true);
+        mPassCodeEditTexts[0].setSelection(0);
       }
- else       if (mText1.getText().toString().equals("")) {
-        mText3.setSelected(false);
-        mText3.setCursorVisible(false);
-        mText1.requestFocus();
-        mText1.setSelected(true);
-        mText1.setSelection(0);
+ else       if (mPassCodeEditTexts[1].getText().toString().equals("")) {
+        mPassCodeEditTexts[3].setSelected(false);
+        mPassCodeEditTexts[3].setCursorVisible(false);
+        mPassCodeEditTexts[1].requestFocus();
+        mPassCodeEditTexts[1].setSelected(true);
+        mPassCodeEditTexts[1].setSelection(0);
       }
- else       if (mText2.getText().toString().equals("")) {
-        mText3.setSelected(false);
-        mText3.setCursorVisible(false);
-        mText2.requestFocus();
-        mText2.setSelected(true);
-        mText2.setSelection(0);
+ else       if (mPassCodeEditTexts[2].getText().toString().equals("")) {
+        mPassCodeEditTexts[3].setSelected(false);
+        mPassCodeEditTexts[3].setCursorVisible(false);
+        mPassCodeEditTexts[2].requestFocus();
+        mPassCodeEditTexts[2].setSelected(true);
+        mPassCodeEditTexts[2].setSelection(0);
       }
     }
   }

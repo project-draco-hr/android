@@ -1,7 +1,6 @@
 {
-  mText0.setText("");
-  mText1.setText("");
-  mText2.setText("");
-  mText3.setText("");
-  mText0.requestFocus();
+  for (int i=0; i < mPassCodeEditTexts.length; i++) {
+    mPassCodeEditTexts[i].setText("");
+  }
+  mPassCodeEditTexts[0].requestFocus();
 }

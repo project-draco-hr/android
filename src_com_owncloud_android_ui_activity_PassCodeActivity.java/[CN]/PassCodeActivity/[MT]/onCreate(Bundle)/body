@@ -4,12 +4,12 @@
   mBCancel=(Button)findViewById(R.id.cancel);
   mPassCodeHdr=(TextView)findViewById(R.id.header);
   mPassCodeHdrExplanation=(TextView)findViewById(R.id.explanation);
-  mText0=(EditText)findViewById(R.id.txt0);
-  mText0.requestFocus();
+  mPassCodeEditTexts[0]=(EditText)findViewById(R.id.txt0);
+  mPassCodeEditTexts[0].requestFocus();
   getWindow().setSoftInputMode(android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-  mText1=(EditText)findViewById(R.id.txt1);
-  mText2=(EditText)findViewById(R.id.txt2);
-  mText3=(EditText)findViewById(R.id.txt3);
+  mPassCodeEditTexts[1]=(EditText)findViewById(R.id.txt1);
+  mPassCodeEditTexts[2]=(EditText)findViewById(R.id.txt2);
+  mPassCodeEditTexts[3]=(EditText)findViewById(R.id.txt3);
   if (ACTION_REQUEST.equals(getIntent().getAction())) {
     mPassCodeHdr.setText(R.string.pass_code_enter_pass_code);
     mPassCodeHdrExplanation.setVisibility(View.INVISIBLE);
