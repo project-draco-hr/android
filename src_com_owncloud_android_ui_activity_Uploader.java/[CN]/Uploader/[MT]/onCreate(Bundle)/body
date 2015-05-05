@@ -3,13 +3,22 @@
   if (savedInstanceState == null) {
     mParents=new Stack<String>();
     mAccountSelected=false;
+    mAccountSelectionShowing=false;
+    mNumCacheFile=0;
+    mRemoteCacheData=new ArrayList<String>();
   }
  else {
     mParents=(Stack<String>)savedInstanceState.getSerializable(KEY_PARENTS);
     mFile=savedInstanceState.getParcelable(KEY_FILE);
     mAccountSelected=savedInstanceState.getBoolean(KEY_ACCOUNT_SELECTED);
+    mAccountSelectionShowing=savedInstanceState.getBoolean(KEY_ACCOUNT_SELECTION_SHOWING);
+    mNumCacheFile=savedInstanceState.getInt(KEY_NUM_CACHE_FILE);
+    mRemoteCacheData=savedInstanceState.getStringArrayList(KEY_REMOTE_CACHE_DATA);
   }
   super.onCreate(savedInstanceState);
+  if (mAccountSelected) {
+    setAccount((Account)savedInstanceState.getParcelable(FileActivity.EXTRA_ACCOUNT));
+  }
   ActionBar actionBar=getSupportActionBar();
   actionBar.setIcon(DisplayUtils.getSeasonalIconId());
 }
