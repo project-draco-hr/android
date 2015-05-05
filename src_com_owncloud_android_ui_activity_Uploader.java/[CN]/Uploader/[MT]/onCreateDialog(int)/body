@@ -45,12 +45,14 @@ setAccount(mAccountManager.getAccountsByType(MainApp.getAccountType())[which]);
 onAccountSet(mAccountWasRestored);
 dialog.dismiss();
 mAccountSelected=true;
+mAccountSelectionShowing=false;
 }
 }
 );
 builder.setCancelable(true);
 builder.setOnCancelListener(new OnCancelListener(){
 @Override public void onCancel(DialogInterface dialog){
+mAccountSelectionShowing=false;
 dialog.cancel();
 finish();
 }
