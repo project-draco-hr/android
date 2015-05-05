@@ -4,7 +4,7 @@
       finish();
     }
  else {
-      showErrorAndRestart(R.string.common_error,R.string.pass_code_enter_pass_code,View.INVISIBLE);
+      showErrorAndRestart(R.string.pass_code_wrong,R.string.pass_code_enter_pass_code,View.INVISIBLE);
     }
   }
  else   if (ACTION_DISABLE.equals(getIntent().getAction())) {
@@ -16,7 +16,7 @@
       finish();
     }
  else {
-      showErrorAndRestart(R.string.common_error,R.string.pass_code_enter_pass_code,View.INVISIBLE);
+      showErrorAndRestart(R.string.pass_code_wrong,R.string.pass_code_enter_pass_code,View.INVISIBLE);
     }
   }
  else   if (ACTION_ENABLE.equals(getIntent().getAction())) {
