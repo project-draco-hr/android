@@ -19,10 +19,7 @@
   mPassCodeEditTexts[1].setOnFocusChangeListener(new View.OnFocusChangeListener(){
     @Override public void onFocusChange(    View v,    boolean hasFocus){
       if (mPassCodeEditTexts[0].getText().toString().equals("")) {
-        mPassCodeEditTexts[1].setSelected(false);
         mPassCodeEditTexts[0].requestFocus();
-        mPassCodeEditTexts[0].setSelected(true);
-        mPassCodeEditTexts[0].setSelection(0);
       }
     }
   }
@@ -46,16 +43,10 @@
   mPassCodeEditTexts[2].setOnFocusChangeListener(new View.OnFocusChangeListener(){
     @Override public void onFocusChange(    View v,    boolean hasFocus){
       if (mPassCodeEditTexts[0].getText().toString().equals("")) {
-        mPassCodeEditTexts[2].setSelected(false);
         mPassCodeEditTexts[0].requestFocus();
-        mPassCodeEditTexts[0].setSelected(true);
-        mPassCodeEditTexts[0].setSelection(0);
       }
  else       if (mPassCodeEditTexts[1].getText().toString().equals("")) {
-        mPassCodeEditTexts[2].setSelected(false);
         mPassCodeEditTexts[1].requestFocus();
-        mPassCodeEditTexts[1].setSelected(true);
-        mPassCodeEditTexts[1].setSelection(0);
       }
     }
   }
@@ -79,22 +70,13 @@
   mPassCodeEditTexts[3].setOnFocusChangeListener(new View.OnFocusChangeListener(){
     @Override public void onFocusChange(    View v,    boolean hasFocus){
       if (mPassCodeEditTexts[0].getText().toString().equals("")) {
-        mPassCodeEditTexts[3].setSelected(false);
         mPassCodeEditTexts[0].requestFocus();
-        mPassCodeEditTexts[0].setSelected(true);
-        mPassCodeEditTexts[0].setSelection(0);
       }
  else       if (mPassCodeEditTexts[1].getText().toString().equals("")) {
-        mPassCodeEditTexts[3].setSelected(false);
         mPassCodeEditTexts[1].requestFocus();
-        mPassCodeEditTexts[1].setSelected(true);
-        mPassCodeEditTexts[1].setSelection(0);
       }
  else       if (mPassCodeEditTexts[2].getText().toString().equals("")) {
-        mPassCodeEditTexts[3].setSelected(false);
         mPassCodeEditTexts[2].requestFocus();
-        mPassCodeEditTexts[2].setSelected(true);
-        mPassCodeEditTexts[2].setSelection(0);
       }
     }
   }
