@@ -1,0 +1,26 @@
+{
+  String whereClause=ProviderTableMeta.FILE_ACCOUNT_OWNER + "=? AND " + ProviderTableMeta.FILE_STORAGE_PATH+ " IS NOT NULL";
+  Cursor c=db.query(ProviderTableMeta.FILE_TABLE_NAME,null,whereClause,new String[]{newAccountName},null,null,null);
+  try {
+    if (c.moveToFirst()) {
+      String oldAccountPath=FileStorageUtils.getSavePath(oldAccountName);
+      String newAccountPath=FileStorageUtils.getSavePath(newAccountName);
+      File oldAccountFolder=new File(oldAccountPath);
+      File newAccountFolder=new File(newAccountPath);
+      oldAccountFolder.renameTo(newAccountFolder);
+      do {
+        String oldPath=c.getString(c.getColumnIndex(ProviderTableMeta.FILE_STORAGE_PATH));
+        OCFile file=new OCFile(c.getString(c.getColumnIndex(ProviderTableMeta.FILE_PATH)));
+        String newPath=FileStorageUtils.getDefaultSavePathFor(newAccountName,file);
+        ContentValues cv=new ContentValues();
+        cv.put(ProviderTableMeta.FILE_STORAGE_PATH,newPath);
+        db.update(ProviderTableMeta.FILE_TABLE_NAME,cv,ProviderTableMeta.FILE_STORAGE_PATH + "=?",new String[]{oldPath});
+        Log_OC.v("SQL","Updated path of downloaded file: old file name == " + oldPath + ", new file name == "+ newPath);
+      }
+ while (c.moveToNext());
+    }
+  }
+  finally {
+    c.close();
+  }
+}
