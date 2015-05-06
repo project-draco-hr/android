@@ -1,0 +1,84 @@
+{
+  mPassCodeEditTexts[0].addTextChangedListener(new PassCodeDigitTextWatcher(0,false));
+  mPassCodeEditTexts[1].addTextChangedListener(new PassCodeDigitTextWatcher(1,false));
+  mPassCodeEditTexts[1].setOnKeyListener(new View.OnKeyListener(){
+    @Override public boolean onKey(    View v,    int keyCode,    KeyEvent event){
+      if (keyCode == KeyEvent.KEYCODE_DEL && mBChange) {
+        mPassCodeEditTexts[0].setText("");
+        mPassCodeEditTexts[0].requestFocus();
+        if (!mConfirmingPassCode)         mPassCodeDigits[0]="";
+        mBChange=false;
+      }
+ else       if (!mBChange) {
+        mBChange=true;
+      }
+      return false;
+    }
+  }
+);
+  mPassCodeEditTexts[1].setOnFocusChangeListener(new View.OnFocusChangeListener(){
+    @Override public void onFocusChange(    View v,    boolean hasFocus){
+      if (mPassCodeEditTexts[0].getText().toString().equals("")) {
+        mPassCodeEditTexts[0].requestFocus();
+      }
+    }
+  }
+);
+  mPassCodeEditTexts[2].addTextChangedListener(new PassCodeDigitTextWatcher(2,false));
+  mPassCodeEditTexts[2].setOnKeyListener(new View.OnKeyListener(){
+    @Override public boolean onKey(    View v,    int keyCode,    KeyEvent event){
+      if (keyCode == KeyEvent.KEYCODE_DEL && mBChange) {
+        mPassCodeEditTexts[1].requestFocus();
+        if (!mConfirmingPassCode)         mPassCodeDigits[1]="";
+        mPassCodeEditTexts[1].setText("");
+        mBChange=false;
+      }
+ else       if (!mBChange) {
+        mBChange=true;
+      }
+      return false;
+    }
+  }
+);
+  mPassCodeEditTexts[2].setOnFocusChangeListener(new View.OnFocusChangeListener(){
+    @Override public void onFocusChange(    View v,    boolean hasFocus){
+      if (mPassCodeEditTexts[0].getText().toString().equals("")) {
+        mPassCodeEditTexts[0].requestFocus();
+      }
+ else       if (mPassCodeEditTexts[1].getText().toString().equals("")) {
+        mPassCodeEditTexts[1].requestFocus();
+      }
+    }
+  }
+);
+  mPassCodeEditTexts[3].addTextChangedListener(new PassCodeDigitTextWatcher(3,true));
+  mPassCodeEditTexts[3].setOnKeyListener(new View.OnKeyListener(){
+    @Override public boolean onKey(    View v,    int keyCode,    KeyEvent event){
+      if (keyCode == KeyEvent.KEYCODE_DEL && mBChange) {
+        mPassCodeEditTexts[2].requestFocus();
+        if (!mConfirmingPassCode)         mPassCodeDigits[2]="";
+        mPassCodeEditTexts[2].setText("");
+        mBChange=false;
+      }
+ else       if (!mBChange) {
+        mBChange=true;
+      }
+      return false;
+    }
+  }
+);
+  mPassCodeEditTexts[3].setOnFocusChangeListener(new View.OnFocusChangeListener(){
+    @Override public void onFocusChange(    View v,    boolean hasFocus){
+      if (mPassCodeEditTexts[0].getText().toString().equals("")) {
+        mPassCodeEditTexts[0].requestFocus();
+      }
+ else       if (mPassCodeEditTexts[1].getText().toString().equals("")) {
+        mPassCodeEditTexts[1].requestFocus();
+      }
+ else       if (mPassCodeEditTexts[2].getText().toString().equals("")) {
+        mPassCodeEditTexts[2].requestFocus();
+      }
+    }
+  }
+);
+}

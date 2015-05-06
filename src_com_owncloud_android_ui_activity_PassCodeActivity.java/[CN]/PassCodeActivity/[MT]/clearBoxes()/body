@@ -1,0 +1,6 @@
+{
+  for (int i=0; i < mPassCodeEditTexts.length; i++) {
+    mPassCodeEditTexts[i].setText("");
+  }
+  mPassCodeEditTexts[0].requestFocus();
+}

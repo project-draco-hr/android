@@ -1,6 +1,0 @@
-{
-  mBCancel.setVisibility(View.INVISIBLE);
-  mBCancel.setVisibility(View.GONE);
-  mPinHdr.setText(R.string.pincode_enter_pin_code);
-  mPinHdrExplanation.setVisibility(View.INVISIBLE);
-}

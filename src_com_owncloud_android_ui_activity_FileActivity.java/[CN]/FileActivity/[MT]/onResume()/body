@@ -1,8 +1,6 @@
 {
-  Log_OC.v(TAG,"onResume() start");
   super.onResume();
   if (mOperationsServiceBinder != null) {
     doOnResumeAndBound();
   }
-  Log_OC.v(TAG,"onResume() end");
 }

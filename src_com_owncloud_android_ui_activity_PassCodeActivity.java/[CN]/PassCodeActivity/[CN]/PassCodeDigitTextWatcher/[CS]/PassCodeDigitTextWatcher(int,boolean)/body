@@ -1,0 +1,7 @@
+{
+  mIndex=index;
+  mLastOne=lastOne;
+  if (mIndex < 0) {
+    throw new IllegalArgumentException("Invalid index in " + PassCodeDigitTextWatcher.class.getSimpleName() + " constructor");
+  }
+}
