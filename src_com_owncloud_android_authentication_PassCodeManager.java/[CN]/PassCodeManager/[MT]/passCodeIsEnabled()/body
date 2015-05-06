@@ -1,0 +1,4 @@
+{
+  SharedPreferences appPrefs=PreferenceManager.getDefaultSharedPreferences(MainApp.getAppContext());
+  return (appPrefs.getBoolean("set_pincode",false));
+}

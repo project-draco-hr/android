@@ -1,0 +1,10 @@
+{
+  if (mVisibleActivitiesCounter > 0) {
+    mVisibleActivitiesCounter--;
+  }
+  setUnlockTimestamp();
+  PowerManager powerMgr=(PowerManager)activity.getSystemService(Context.POWER_SERVICE);
+  if (passCodeIsEnabled() && powerMgr != null && !powerMgr.isScreenOn()) {
+    activity.moveTaskToBack(true);
+  }
+}

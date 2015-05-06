@@ -1,0 +1,6 @@
+{
+  if (mPassCodeManagerInstance == null) {
+    mPassCodeManagerInstance=new PassCodeManager();
+  }
+  return mPassCodeManagerInstance;
+}

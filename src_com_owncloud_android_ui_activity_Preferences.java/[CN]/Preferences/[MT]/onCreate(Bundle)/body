@@ -44,9 +44,9 @@
   if (pCode != null) {
     pCode.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
       @Override public boolean onPreferenceChange(      Preference preference,      Object newValue){
-        Intent i=new Intent(getApplicationContext(),PinCodeActivity.class);
-        i.putExtra(PinCodeActivity.EXTRA_ACTIVITY,"preferences");
-        i.putExtra(PinCodeActivity.EXTRA_NEW_STATE,newValue.toString());
+        Intent i=new Intent(getApplicationContext(),PassCodeActivity.class);
+        Boolean enable=(Boolean)newValue;
+        i.setAction(enable.booleanValue() ? PassCodeActivity.ACTION_ENABLE : PassCodeActivity.ACTION_DISABLE);
         startActivity(i);
         return true;
       }
