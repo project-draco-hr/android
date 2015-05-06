@@ -1,0 +1,3 @@
+{
+  return mLastOne ? 0 : mIndex + 1;
+}

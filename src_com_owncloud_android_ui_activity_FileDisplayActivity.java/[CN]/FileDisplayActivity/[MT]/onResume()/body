@@ -1,5 +1,5 @@
 {
-  Log_OC.d(TAG,"onResume() start");
+  Log_OC.v(TAG,"onResume() start");
   super.onResume();
   refreshListOfFilesFragment();
   IntentFilter syncIntentFilter=new IntentFilter(FileSyncAdapter.EVENT_FULL_SYNC_START);
@@ -16,5 +16,5 @@
   downloadIntentFilter.addAction(FileDownloader.getDownloadFinishMessage());
   mDownloadFinishReceiver=new DownloadFinishReceiver();
   registerReceiver(mDownloadFinishReceiver,downloadIntentFilter);
-  Log_OC.d(TAG,"onResume() end");
+  Log_OC.v(TAG,"onResume() end");
 }

@@ -1,0 +1,8 @@
+{
+  Arrays.fill(mPassCodeDigits,null);
+  CharSequence errorSeq=getString(errorMessage);
+  Toast.makeText(this,errorSeq,Toast.LENGTH_LONG).show();
+  mPassCodeHdr.setText(headerMessage);
+  mPassCodeHdrExplanation.setVisibility(explanationVisibility);
+  clearBoxes();
+}
