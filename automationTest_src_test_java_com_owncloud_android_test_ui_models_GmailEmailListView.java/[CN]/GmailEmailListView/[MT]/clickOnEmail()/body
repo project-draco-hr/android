@@ -1,0 +1,5 @@
+{
+  email.click();
+  GmailEmailView gmailEmailView=new GmailEmailView(driver);
+  return gmailEmailView;
+}

@@ -1,0 +1,14 @@
+{
+  FileListView fileListView=Actions.login(Config.URL,Config.user,Config.password,Config.isTrusted,driver);
+  common.assertIsInFileListView();
+  Common.waitTillElementIsNotPresent(fileListView.getProgressCircular(),1000);
+  FileListView fileListViewAfterUploadFile=Actions.uploadFile(FILE_NAME,fileListView);
+  fileListViewAfterUploadFile.scrollTillFindElement(FILE_NAME);
+  assertTrue(fileListViewAfterUploadFile.getFileElement().isDisplayed());
+  ElementMenuOptions menuOptions=fileListViewAfterUploadFile.longPressOnElement(FILE_NAME);
+  FileDetailsView fileDetailsView=menuOptions.clickOnDetails();
+  fileDetailsView.checkKeepFileUpToDateCheckbox();
+  Thread.sleep(3000);
+  driver.sendKeyEvent(android.view.KeyEvent.KEYCODE_BACK);
+  assertTrue(fileListViewAfterUploadFile.getFileElementLayout().findElement(By.id(FileListView.getFavoriteFileIndicator())).isDisplayed());
+}

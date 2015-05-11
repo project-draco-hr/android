@@ -1,5 +1,0 @@
-{
-  MenuList menulist=mainView.clickOnMenuButton();
-  SettingsView settingView=menulist.clickOnSettingsButton();
-  deleteAccount(settingView);
-}

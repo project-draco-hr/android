@@ -1,5 +1,0 @@
-{
-  detailsFileElement.click();
-  AppDetailsView appDetailsView=new AppDetailsView(driver);
-  return appDetailsView;
-}

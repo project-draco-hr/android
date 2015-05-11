@@ -1,5 +1,0 @@
-{
-  connectButton.click();
-  MainView mainView=new MainView(driver);
-  return mainView;
-}

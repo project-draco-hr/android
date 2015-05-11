@@ -1,0 +1,8 @@
+{
+  fileListView.clickOnUploadButton();
+  UploadFilesView uploadFilesView=fileListView.clickOnFilesElementUploadFile();
+  uploadFilesView.clickOnFileName(elementName);
+  FileListView fileListViewAfterUploadFile=uploadFilesView.clickOnUploadButton();
+  Thread.sleep(15000);
+  return fileListViewAfterUploadFile;
+}

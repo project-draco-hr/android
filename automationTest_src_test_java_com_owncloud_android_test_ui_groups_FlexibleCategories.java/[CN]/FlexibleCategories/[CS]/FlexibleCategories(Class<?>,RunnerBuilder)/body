@@ -1,0 +1,9 @@
+{
+  this(builder,clazz,PatternClasspathClassesFinder.getSuiteClasses(getTestScanPackage(clazz),getTestClassPrefix(clazz),getTestClassSuffix(clazz),getTestMethodAnnotation(clazz)));
+  try {
+    filter(new CategoryFilter(getIncludedCategory(clazz),getExcludedCategory(clazz)));
+  }
+ catch (  NoTestsRemainException e) {
+  }
+  assertNoCategorizedDescendentsOfUncategorizeableParents(getDescription());
+}

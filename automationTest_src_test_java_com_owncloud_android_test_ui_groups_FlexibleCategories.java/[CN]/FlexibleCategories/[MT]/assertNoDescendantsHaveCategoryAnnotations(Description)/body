@@ -1,0 +1,6 @@
+{
+  for (  Description each : description.getChildren()) {
+    if (each.getAnnotation(Category.class) != null)     throw new InitializationError("Category annotations on Parameterized classes are not supported on individual methods.");
+    assertNoDescendantsHaveCategoryAnnotations(each);
+  }
+}

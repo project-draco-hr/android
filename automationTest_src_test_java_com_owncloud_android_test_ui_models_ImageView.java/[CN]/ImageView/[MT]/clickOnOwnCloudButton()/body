@@ -1,0 +1,6 @@
+{
+  if (!ownCloudButton.isDisplayed()) {
+    Actions.scrollTillFindElement("ownCloud",sharingAppsLayout,driver);
+  }
+  ownCloudButton.click();
+}
