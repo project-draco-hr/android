@@ -1,5 +1,4 @@
 {
   userNameInput.clear();
-  userNameInput.sendKeys(userName);
-  driver.hideKeyboard();
+  userNameInput.sendKeys(userName + "\n");
 }

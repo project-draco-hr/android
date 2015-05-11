@@ -1,5 +1,5 @@
 {
-  takeScreenShotOnFailed(getName());
+  common.takeScreenShotOnFailed(name.getMethodName());
   if (folderHasBeenCreated) {
     MainView mainView=new MainView(driver);
     Actions.deleteElement(CurrentCreatedFolder,mainView,driver);

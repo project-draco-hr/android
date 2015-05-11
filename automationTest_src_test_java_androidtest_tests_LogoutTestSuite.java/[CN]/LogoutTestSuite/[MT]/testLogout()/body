@@ -1,6 +1,6 @@
 {
   MainView mainView=Actions.login(Config.URL,Config.user,Config.password,Config.isTrusted,driver);
-  waitForTextPresent("ownCloud",mainView.getTitleTextElement());
+  common.assertIsInMainView();
   MenuList menulist=mainView.clickOnMenuButton();
   SettingsView settingsView=menulist.clickOnSettingsButton();
   settingsView.tapOnAccountElement(1,1000);

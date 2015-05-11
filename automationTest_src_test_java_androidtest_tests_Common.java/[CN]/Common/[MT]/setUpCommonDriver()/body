@@ -4,12 +4,13 @@
   File app=new File(appDir,"ownCloud.apk");
   DesiredCapabilities capabilities=new DesiredCapabilities();
   capabilities.setCapability("platformName","Android");
-  capabilities.setCapability("deviceName","Device");
+  capabilities.setCapability("deviceName","test");
   capabilities.setCapability("app",app.getAbsolutePath());
-  capabilities.setCapability("app-package","com.owncloud.android");
-  capabilities.setCapability("app-activity",".ui.activity.FileDisplayActivity");
+  capabilities.setCapability("appPackage","com.owncloud.android");
+  capabilities.setCapability("appActivity",".ui.activity.FileDisplayActivity");
   capabilities.setCapability("appWaitActivity",".authentication.AuthenticatorActivity");
   driver=new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),capabilities);
   driver.manage().timeouts().implicitlyWait(waitingTime,TimeUnit.SECONDS);
   wait=new WebDriverWait(driver,waitingTime,50);
+  return driver;
 }

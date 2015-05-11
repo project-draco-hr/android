@@ -2,10 +2,15 @@
   LoginForm loginForm=new LoginForm(driver);
   CertificatePopUp certificatePopUp=loginForm.typeHostUrl(url);
   if (!isTrusted) {
-    driver.runAppInBackground(3);
     WebDriverWait wait=new WebDriverWait(driver,30);
-    wait.until(ExpectedConditions.visibilityOf(certificatePopUp.getOkButtonElement()));
-    certificatePopUp.clickOnOkButton();
+    try {
+      wait.until(ExpectedConditions.visibilityOf(certificatePopUp.getOkButtonElement()));
+      driver.rotate(ScreenOrientation.LANDSCAPE);
+      driver.rotate(ScreenOrientation.PORTRAIT);
+      certificatePopUp.clickOnOkButton();
+    }
+ catch (    NoSuchElementException e) {
+    }
   }
   loginForm.typeUserName(user);
   loginForm.typePassword(password);

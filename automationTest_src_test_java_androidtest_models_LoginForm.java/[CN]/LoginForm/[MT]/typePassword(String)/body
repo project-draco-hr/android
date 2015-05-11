@@ -1,5 +1,4 @@
 {
   passwordInput.clear();
-  passwordInput.sendKeys(password);
-  driver.hideKeyboard();
+  passwordInput.sendKeys(password + "\n");
 }

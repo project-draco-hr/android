@@ -1,5 +1,4 @@
 {
   newFolderNameField.clear();
-  newFolderNameField.sendKeys(newFolderName);
-  driver.hideKeyboard();
+  newFolderNameField.sendKeys(newFolderName + "\n");
 }

@@ -1,11 +1,11 @@
 {
   driver.rotate(ScreenOrientation.LANDSCAPE);
   MainView mainView=Actions.login(Config.URL,Config.user,Config.password,Config.isTrusted,driver);
-  assertTrue(waitForTextPresent("ownCloud",mainView.getTitleTextElement()));
+  common.assertIsInMainView();
   driver.rotate(ScreenOrientation.PORTRAIT);
   MenuList menu=mainView.clickOnMenuButton();
   SettingsView settingsView=menu.clickOnSettingsButton();
   settingsView.tapOnAddAccount(1,1000);
   mainView=Actions.login(Config.URL2,Config.user2,Config.password2,Config.isTrusted2,driver);
-  assertTrue(waitForTextPresent("Settings",mainView.getTitleTextElement()));
+  common.assertIsInSettingsView();
 }

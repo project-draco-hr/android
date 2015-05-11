@@ -1,5 +1,5 @@
 {
   driver.rotate(ScreenOrientation.LANDSCAPE);
   MainView mainView=Actions.login(Config.URL,Config.user,Config.password,Config.isTrusted,driver);
-  assertTrue(waitForTextPresent("ownCloud",mainView.getTitleTextElement()));
+  common.assertIsInMainView();
 }

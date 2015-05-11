@@ -1,8 +1,0 @@
-{
-  if (hasSubdirectory) {
-    return server + serverResource;
-  }
- else {
-    return server;
-  }
-}

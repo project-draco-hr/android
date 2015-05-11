@@ -1,8 +1,8 @@
 {
   MainView mainView=Actions.login(Config.URL,Config.user,Config.password,Config.isTrusted,driver);
-  waitForTextPresent("ownCloud",mainView.getTitleTextElement());
+  common.assertIsInMainView();
   WaitAMomentPopUp waitAMomentPopUp=Actions.createFolder(FOLDER_NAME,mainView);
-  waitTillElementIsNotPresent(waitAMomentPopUp.getWaitAMomentTextElement(),100);
+  Common.waitTillElementIsNotPresent(waitAMomentPopUp.getWaitAMomentTextElement(),100);
   mainView.scrollTillFindElement(FOLDER_NAME);
   assertTrue(folderHasBeenCreated=mainView.getFileElement().isDisplayed());
   Actions.deleteElement(FOLDER_NAME,mainView,driver);

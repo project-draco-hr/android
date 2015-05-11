@@ -1,11 +1,12 @@
 {
+  driver.rotate(ScreenOrientation.PORTRAIT);
   MainView mainView=Actions.login(Config.URL,Config.user,Config.password,Config.isTrusted,driver);
-  assertTrue(waitForTextPresent("ownCloud",mainView.getTitleTextElement()));
+  common.assertIsInMainView();
   MenuList menu=mainView.clickOnMenuButton();
   SettingsView settingsView=menu.clickOnSettingsButton();
   settingsView.tapOnAccountElement(1,1000);
   LoginForm changePasswordForm=settingsView.clickOnChangePasswordElement();
   changePasswordForm.typePassword("WrongPassword");
   changePasswordForm.clickOnConnectButton();
-  assertTrue(waitForTextPresent("Wrong username or password",changePasswordForm.getAuthStatusText()));
+  assertTrue(common.waitForTextPresent("Wrong username or password",changePasswordForm.getAuthStatusText()));
 }

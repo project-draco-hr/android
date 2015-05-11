@@ -1,12 +1,12 @@
 {
   driver.rotate(ScreenOrientation.PORTRAIT);
   MainView mainView=Actions.login(Config.URL,Config.user,Config.password,Config.isTrusted,driver);
-  assertTrue(waitForTextPresent("ownCloud",mainView.getTitleTextElement()));
+  common.assertIsInMainView();
   driver.rotate(ScreenOrientation.LANDSCAPE);
   MenuList menu=mainView.clickOnMenuButton();
   SettingsView settingsView=menu.clickOnSettingsButton();
   settingsView.tapOnAddAccount(1,1000);
   LoginForm loginForm=new LoginForm(driver);
   mainView=Actions.login(Config.URL,Config.user,Config.password,Config.isTrusted,driver);
-  assertTrue(waitForTextPresent("An account for the same user and server already exists in the device",loginForm.getAuthStatusText()));
+  assertTrue(common.waitForTextPresent("An account for the same user and server already exists in the device",loginForm.getAuthStatusText()));
 }

@@ -2,6 +2,7 @@
   AndroidElement fileElement;
   WaitAMomentPopUp waitAMomentPopUp;
   try {
+    driver.startActivity("com.owncloud.android",".ui.activity.FileDisplayActivity");
     fileElement=(AndroidElement)driver.findElementByName(elementName);
     ElementMenuOptions menuOptions=mainView.longPressOnElement(elementName);
     RemoveConfirmationView removeConfirmationView=menuOptions.clickOnRemove();

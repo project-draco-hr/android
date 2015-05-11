@@ -1,0 +1,4 @@
+{
+  Point listLocation=listLayout.getLocation();
+  driver.swipe(listLocation.getX(),listLocation.getY(),listLocation.getX(),listLocation.getY() + 1000,5000);
+}

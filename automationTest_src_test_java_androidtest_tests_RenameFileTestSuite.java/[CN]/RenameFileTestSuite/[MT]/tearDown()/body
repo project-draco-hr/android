@@ -1,5 +1,5 @@
 {
-  takeScreenShotOnFailed(getName());
+  common.takeScreenShotOnFailed(name.getMethodName());
   if (fileHasBeenCreated) {
     MainView mainView=new MainView(driver);
     Actions.deleteElement(CurrentCreatedFile,mainView,driver);

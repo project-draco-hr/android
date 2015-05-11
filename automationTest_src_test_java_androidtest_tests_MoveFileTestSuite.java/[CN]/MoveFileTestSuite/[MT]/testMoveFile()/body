@@ -1,12 +1,12 @@
 {
   WaitAMomentPopUp waitAMomentPopUp;
   MainView mainView=Actions.login(Config.URL,Config.user,Config.password,Config.isTrusted,driver);
-  assertTrue(waitForTextPresent("ownCloud",mainView.getTitleTextElement()));
-  waitTillElementIsNotPresent(mainView.getProgressCircular(),1000);
+  common.assertIsInMainView();
+  Common.waitTillElementIsNotPresent(mainView.getProgressCircular(),1000);
   Actions.deleteElement(FOLDER_WHERE_MOVE,mainView,driver);
   Actions.deleteElement(FILE_NAME,mainView,driver);
   waitAMomentPopUp=Actions.createFolder(FOLDER_WHERE_MOVE,mainView);
-  waitTillElementIsNotPresent(waitAMomentPopUp.getWaitAMomentTextElement(),100);
+  Common.waitTillElementIsNotPresent(waitAMomentPopUp.getWaitAMomentTextElement(),100);
   mainView.scrollTillFindElement(FOLDER_WHERE_MOVE);
   assertTrue(mainView.getFileElement().isDisplayed());
   MainView mainViewAfterUploadFile=Actions.uploadFile(FILE_NAME,mainView);
@@ -16,9 +16,9 @@
   MoveView moveView=menuOptions.clickOnMove();
   moveView.scrollTillFindElement(FOLDER_WHERE_MOVE).tap(1,1);
   waitAMomentPopUp=moveView.clickOnChoose();
-  waitTillElementIsNotPresent(waitAMomentPopUp.getWaitAMomentTextElement(),100);
+  Common.waitTillElementIsNotPresent(waitAMomentPopUp.getWaitAMomentTextElement(),100);
   mainView.scrollTillFindElement(FOLDER_WHERE_MOVE).tap(1,1);
-  waitTillElementIsNotPresent(mainView.getProgressCircular(),1000);
+  Common.waitTillElementIsNotPresent(mainView.getProgressCircular(),1000);
   Thread.sleep(1000);
   mainView.scrollTillFindElement(FILE_NAME);
   assertEquals(FILE_NAME,mainView.getFileElement().getText());
