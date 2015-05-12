@@ -18,7 +18,7 @@
     }
   }
  catch (  OutOfMemoryError e) {
-    Log_OC.e(TAG,"Out of memory occured for file " + storagePath,e);
+    Log_OC.w(TAG,"Out of memory rendering file " + storagePath + " in full size; scaling down");
     if (isCancelled())     return result;
     result=loadScaledImage(storagePath);
     if (result == null) {

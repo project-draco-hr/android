@@ -6,4 +6,7 @@
  else {
     showErrorMessage();
   }
+  if (mBitmap != result) {
+    result.recycle();
+  }
 }

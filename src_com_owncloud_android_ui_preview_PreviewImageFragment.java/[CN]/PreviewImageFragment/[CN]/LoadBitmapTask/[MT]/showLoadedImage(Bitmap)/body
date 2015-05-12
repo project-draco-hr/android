@@ -2,7 +2,6 @@
   if (mImageViewRef != null) {
     final ImageViewCustom imageView=mImageViewRef.get();
     if (imageView != null) {
-      imageView.setBitmap(result);
       imageView.setImageBitmap(result);
       imageView.setVisibility(View.VISIBLE);
       mBitmap=result;
