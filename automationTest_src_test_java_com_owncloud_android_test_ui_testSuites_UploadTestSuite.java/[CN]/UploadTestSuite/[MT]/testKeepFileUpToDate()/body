@@ -10,5 +10,6 @@
   fileDetailsView.checkKeepFileUpToDateCheckbox();
   Thread.sleep(3000);
   driver.sendKeyEvent(android.view.KeyEvent.KEYCODE_BACK);
+  assertTrue(common.isElementPresent(fileListViewAfterUploadFile.getFileElementLayout(),MobileBy.id(FileListView.getFavoriteFileIndicator())));
   assertTrue(fileListViewAfterUploadFile.getFileElementLayout().findElement(By.id(FileListView.getFavoriteFileIndicator())).isDisplayed());
 }

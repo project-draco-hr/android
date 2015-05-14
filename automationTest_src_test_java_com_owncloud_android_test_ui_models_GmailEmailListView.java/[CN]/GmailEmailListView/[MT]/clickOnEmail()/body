@@ -1,5 +1,10 @@
 {
-  email.click();
+  try {
+    email.click();
+  }
+ catch (  NoSuchElementException e) {
+    email2.click();
+  }
   GmailEmailView gmailEmailView=new GmailEmailView(driver);
   return gmailEmailView;
 }

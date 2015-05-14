@@ -8,10 +8,18 @@
   imageView.clickOnOptionsButton();
   imageView.clickOnShareButton();
   imageView.clickOnOwnCloudButton();
-  imageView.clickOnJustOnceButton();
+  try {
+    imageView.clickOnJustOnceButton();
+  }
+ catch (  NoSuchElementException e) {
+  }
   UploadView uploadView=new UploadView(driver);
   uploadView.clickOUploadButton();
+  driver.sendKeyEvent(android.view.KeyEvent.KEYCODE_HOME);
   driver.startActivity("com.owncloud.android",".ui.activity.FileDisplayActivity");
-  common.wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.name(Config.fileToTestSendByEmailName)));
-  assertEquals(Config.fileToTestSendByEmailName,driver.findElementByName(Config.fileToTestSendByEmailName).getText());
+  common.wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.name(FILE_GMAIL_NAME)));
+  assertEquals(Config.fileToTestSendByEmailName,driver.findElementByName(FILE_GMAIL_NAME).getText());
+  fileListView=new FileListView(driver);
+  fileListView.scrollTillFindElement(FILE_GMAIL_NAME);
+  assertTrue(fileHasBeenUploadedFromGmail=fileListView.getFileElement().isDisplayed());
 }

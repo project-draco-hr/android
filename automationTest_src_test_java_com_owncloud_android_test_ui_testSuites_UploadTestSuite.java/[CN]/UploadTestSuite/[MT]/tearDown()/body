@@ -1,7 +1,12 @@
 {
   common.takeScreenShotOnFailed(name.getMethodName());
   FileListView fileListView=new FileListView(driver);
-  Actions.deleteElement(FILE_NAME,fileListView,driver);
+  if (fileHasBeenUploadedFromGmail) {
+    Actions.deleteElement(FILE_GMAIL_NAME,fileListView,driver);
+  }
+  if (fileHasBeenUploaded) {
+    Actions.deleteElement(FILE_NAME,fileListView,driver);
+  }
   driver.removeApp("com.owncloud.android");
   driver.quit();
 }

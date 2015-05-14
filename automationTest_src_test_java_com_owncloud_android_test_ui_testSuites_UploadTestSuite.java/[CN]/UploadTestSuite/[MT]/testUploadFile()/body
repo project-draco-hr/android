@@ -8,4 +8,7 @@
   Common.waitTillElementIsNotPresent(fileListViewAfterUploadFile.getProgressCircular(),1000);
   common.wait.until(ExpectedConditions.visibilityOf(fileListViewAfterUploadFile.getFileElementLayout().findElement(By.id(FileListView.getLocalFileIndicator()))));
   assertTrue(fileListViewAfterUploadFile.getFileElementLayout().findElement(By.id(FileListView.getLocalFileIndicator())).isDisplayed());
+  fileListView=new FileListView(driver);
+  fileListView.scrollTillFindElement(FILE_NAME);
+  assertTrue(fileHasBeenUploaded=fileListView.getFileElement().isDisplayed());
 }
