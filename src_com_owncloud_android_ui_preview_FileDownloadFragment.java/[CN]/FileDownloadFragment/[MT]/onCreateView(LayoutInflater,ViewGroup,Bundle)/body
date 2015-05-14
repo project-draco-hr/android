@@ -15,8 +15,8 @@
   mView=view;
   ProgressBar progressBar=(ProgressBar)mView.findViewById(R.id.progressBar);
   mProgressListener=new ProgressListener(progressBar);
-  ((ImageButton)mView.findViewById(R.id.cancelBtn)).setOnClickListener(this);
-  ((LinearLayout)mView.findViewById(R.id.fileDownloadLL)).setOnClickListener(new OnClickListener(){
+  (mView.findViewById(R.id.cancelBtn)).setOnClickListener(this);
+  (mView.findViewById(R.id.fileDownloadLL)).setOnClickListener(new OnClickListener(){
     @Override public void onClick(    View v){
       ((PreviewImageActivity)getActivity()).toggleFullScreen();
     }
