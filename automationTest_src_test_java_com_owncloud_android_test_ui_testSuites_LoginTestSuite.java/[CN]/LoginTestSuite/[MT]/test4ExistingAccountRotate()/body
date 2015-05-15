@@ -8,5 +8,5 @@
   settingsView.tapOnAddAccount(1,1000);
   LoginForm loginForm=new LoginForm(driver);
   fileListView=Actions.login(Config.URL,Config.user,Config.password,Config.isTrusted,driver);
-  assertTrue(common.waitForTextPresent("An account for the same user and server already exists in the device",loginForm.getAuthStatusText()));
+  assertTrue(common.waitForTextPresent("An account for the same user and" + " server already exists in the device",loginForm.getAuthStatusText()));
 }

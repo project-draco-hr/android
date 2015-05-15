@@ -1,7 +1,7 @@
 {
   fileElement=Actions.scrollTillFindElement(elementName,filesLayout,driver);
   try {
-    fileElementLayout=(AndroidElement)driver.findElementByAndroidUIAutomator("new UiSelector().description(\"LinearLayout-" + elementName + "\")");
+    fileElementLayout=(AndroidElement)driver.findElementByAndroidUIAutomator("new UiSelector()" + ".description(\"LinearLayout-" + elementName + "\")");
   }
  catch (  NoSuchElementException e) {
     fileElementLayout=null;
