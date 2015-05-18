@@ -4,7 +4,7 @@
     mHandler.proceed();
   }
   if (m509Certificate != null) {
-    Activity activity=getSherlockActivity();
+    Activity activity=getActivity();
     try {
       NetworkUtils.addCertToKnownServersStore(m509Certificate,activity);
       ((OnSslUntrustedCertListener)activity).onSavedCertificate();

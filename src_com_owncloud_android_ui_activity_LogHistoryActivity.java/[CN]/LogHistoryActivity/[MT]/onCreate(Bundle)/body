@@ -2,7 +2,7 @@
   super.onCreate(savedInstanceState);
   setContentView(R.layout.log_send_file);
   setTitle(getText(R.string.actionbar_logger));
-  ActionBar actionBar=getSherlock().getActionBar();
+  ActionBar actionBar=getSupportActionBar();
   actionBar.setIcon(DisplayUtils.getSeasonalIconId());
   actionBar.setDisplayHomeAsUpEnabled(true);
   Button deleteHistoryButton=(Button)findViewById(R.id.deleteLogHistoryButton);

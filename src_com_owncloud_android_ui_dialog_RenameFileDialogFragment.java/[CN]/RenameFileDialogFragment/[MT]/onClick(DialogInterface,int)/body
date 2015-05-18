@@ -2,13 +2,13 @@
   if (which == AlertDialog.BUTTON_POSITIVE) {
     String newFileName=((TextView)(getDialog().findViewById(R.id.user_input))).getText().toString().trim();
     if (newFileName.length() <= 0) {
-      Toast.makeText(getSherlockActivity(),R.string.filename_empty,Toast.LENGTH_LONG).show();
+      Toast.makeText(getActivity(),R.string.filename_empty,Toast.LENGTH_LONG).show();
       return;
     }
     if (!FileUtils.isValidName(newFileName)) {
-      Toast.makeText(getSherlockActivity(),R.string.filename_forbidden_characters,Toast.LENGTH_LONG).show();
+      Toast.makeText(getActivity(),R.string.filename_forbidden_characters,Toast.LENGTH_LONG).show();
       return;
     }
-    ((ComponentsGetter)getSherlockActivity()).getFileOperationsHelper().renameFile(mTargetFile,newFileName);
+    ((ComponentsGetter)getActivity()).getFileOperationsHelper().renameFile(mTargetFile,newFileName);
   }
 }

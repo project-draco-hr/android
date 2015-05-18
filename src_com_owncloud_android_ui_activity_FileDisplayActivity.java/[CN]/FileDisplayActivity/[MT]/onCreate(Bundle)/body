@@ -23,7 +23,7 @@
   if (savedInstanceState == null) {
     createMinFragments();
   }
-  mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
+  mDirectories=new CustomArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item);
   getSupportActionBar().setHomeButtonEnabled(true);
   setSupportProgressBarIndeterminateVisibility(mSyncInProgress);
   setBackgroundText();
