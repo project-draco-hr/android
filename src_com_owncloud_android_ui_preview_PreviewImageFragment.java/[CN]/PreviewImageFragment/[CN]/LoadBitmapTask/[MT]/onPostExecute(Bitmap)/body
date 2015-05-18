@@ -6,7 +6,7 @@
  else {
     showErrorMessage();
   }
-  if (mBitmap != null && mBitmap != result) {
+  if (result != null && mBitmap != result) {
     result.recycle();
   }
 }

@@ -2,7 +2,7 @@
   super.onActivityCreated(savedInstanceState);
   if (savedInstanceState != null) {
     if (!mIgnoreFirstSavedState) {
-      OCFile file=(OCFile)savedInstanceState.getParcelable(PreviewImageFragment.EXTRA_FILE);
+      OCFile file=savedInstanceState.getParcelable(PreviewImageFragment.EXTRA_FILE);
       setFile(file);
     }
  else {
