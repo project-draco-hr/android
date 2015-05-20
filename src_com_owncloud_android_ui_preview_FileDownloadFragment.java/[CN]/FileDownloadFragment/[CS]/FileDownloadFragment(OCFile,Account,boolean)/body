@@ -1,8 +1,0 @@
-{
-  super(fileToDetail);
-  mAccount=ocAccount;
-  mProgressListener=null;
-  mListening=false;
-  mIgnoreFirstSavedState=ignoreFirstSavedState;
-  mError=false;
-}
