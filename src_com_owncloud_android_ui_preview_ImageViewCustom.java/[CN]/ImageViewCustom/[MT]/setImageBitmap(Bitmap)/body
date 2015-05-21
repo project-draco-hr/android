@@ -1,0 +1,5 @@
+{
+  mBitmapWidth=bm.getWidth();
+  mBitmapHeight=bm.getHeight();
+  super.setImageBitmap(bm);
+}

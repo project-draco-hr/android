@@ -24,8 +24,8 @@
             GetMethod get=new GetMethod(uri);
             status=mClient.executeMethod(get);
             if (status == HttpStatus.SC_OK) {
-              byte[] bytes=get.getResponseBody();
-              Bitmap bitmap=BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+              InputStream inputStream=get.getResponseBodyAsStream();
+              Bitmap bitmap=BitmapFactory.decodeStream(inputStream);
               thumbnail=ThumbnailUtils.extractThumbnail(bitmap,px,px);
               if (thumbnail != null) {
                 addBitmapToCache(imageKey,thumbnail);

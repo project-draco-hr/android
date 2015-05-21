@@ -2,9 +2,8 @@
   super.onActivityCreated(savedInstanceState);
   if (savedInstanceState != null) {
     if (!mIgnoreFirstSavedState) {
-      OCFile file=(OCFile)savedInstanceState.getParcelable(PreviewImageFragment.EXTRA_FILE);
+      OCFile file=savedInstanceState.getParcelable(PreviewImageFragment.EXTRA_FILE);
       setFile(file);
-      mAccount=savedInstanceState.getParcelable(PreviewImageFragment.EXTRA_ACCOUNT);
     }
  else {
       mIgnoreFirstSavedState=false;
@@ -12,9 +11,6 @@
   }
   if (getFile() == null) {
     throw new IllegalStateException("Instanced with a NULL OCFile");
-  }
-  if (mAccount == null) {
-    throw new IllegalStateException("Instanced with a NULL ownCloud Account");
   }
   if (!getFile().isDown()) {
     throw new IllegalStateException("There is no local file to preview");
