@@ -1,4 +1,10 @@
 {
-  mList.setAdapter(listAdapter);
-  mList.invalidate();
+  mAdapter=listAdapter;
+  if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+    mCurrentListView.setAdapter(listAdapter);
+  }
+ else {
+    ((ListView)mCurrentListView).setAdapter(listAdapter);
+  }
+  mCurrentListView.invalidate();
 }

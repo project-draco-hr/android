@@ -6,5 +6,6 @@
       mService.uploadFile(it.next());
     }
   }
+  Log_OC.d(TAG,"Stopping command after id " + msg.arg1);
   mService.stopSelf(msg.arg1);
 }

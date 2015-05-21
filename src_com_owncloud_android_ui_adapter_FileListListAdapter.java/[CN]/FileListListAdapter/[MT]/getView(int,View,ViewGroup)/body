@@ -1,112 +1,160 @@
 {
   View view=convertView;
-  if (view == null) {
-    LayoutInflater inflator=(LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    view=inflator.inflate(R.layout.list_item,null);
-  }
+  OCFile file=null;
+  LayoutInflater inflator=(LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
   if (mFiles != null && mFiles.size() > position) {
-    OCFile file=mFiles.get(position);
-    TextView fileName=(TextView)view.findViewById(R.id.Filename);
-    String name=file.getFileName();
-    fileName.setText(name);
-    ImageView fileIcon=(ImageView)view.findViewById(R.id.drawer_userIcon);
-    fileIcon.setTag(file.getFileId());
-    ImageView sharedIconV=(ImageView)view.findViewById(R.id.sharedIcon);
-    ImageView sharedWithMeIconV=(ImageView)view.findViewById(R.id.sharedWithMeIcon);
-    sharedWithMeIconV.setVisibility(View.GONE);
-    ImageView localStateView=(ImageView)view.findViewById(R.id.imageView2);
-    localStateView.bringToFront();
-    FileDownloaderBinder downloaderBinder=mTransferServiceGetter.getFileDownloaderBinder();
-    FileUploaderBinder uploaderBinder=mTransferServiceGetter.getFileUploaderBinder();
-    if (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,file)) {
-      localStateView.setImageResource(R.drawable.downloading_file_indicator);
-      localStateView.setVisibility(View.VISIBLE);
-    }
- else     if (uploaderBinder != null && uploaderBinder.isUploading(mAccount,file)) {
-      localStateView.setImageResource(R.drawable.uploading_file_indicator);
-      localStateView.setVisibility(View.VISIBLE);
-    }
- else     if (file.isDown()) {
-      localStateView.setImageResource(R.drawable.local_file_indicator);
-      localStateView.setVisibility(View.VISIBLE);
-    }
- else {
-      localStateView.setVisibility(View.INVISIBLE);
-    }
-    TextView fileSizeV=(TextView)view.findViewById(R.id.file_size);
-    TextView lastModV=(TextView)view.findViewById(R.id.last_mod);
-    ImageView checkBoxV=(ImageView)view.findViewById(R.id.custom_checkbox);
-    if (!file.isFolder()) {
-      fileSizeV.setVisibility(View.VISIBLE);
-      fileSizeV.setText(DisplayUtils.bytesToHumanReadable(file.getFileLength()));
-      lastModV.setVisibility(View.VISIBLE);
-      lastModV.setText(showRelativeTimestamp(file));
-      if (!file.keepInSync()) {
-        view.findViewById(R.id.imageView3).setVisibility(View.GONE);
-      }
- else {
-        view.findViewById(R.id.imageView3).setVisibility(View.VISIBLE);
-      }
-      ListView parentList=(ListView)parent;
-      if (parentList.getChoiceMode() == ListView.CHOICE_MODE_NONE) {
-        checkBoxV.setVisibility(View.GONE);
-      }
- else {
-        if (parentList.isItemChecked(position)) {
-          checkBoxV.setImageResource(android.R.drawable.checkbox_on_background);
-        }
- else {
-          checkBoxV.setImageResource(android.R.drawable.checkbox_off_background);
-        }
-        checkBoxV.setVisibility(View.VISIBLE);
-      }
-      if (file.isImage() && file.getRemoteId() != null) {
-        Bitmap thumbnail=ThumbnailsCacheManager.getBitmapFromDiskCache(String.valueOf(file.getRemoteId()));
-        if (thumbnail != null && !file.needsUpdateThumbnail()) {
-          fileIcon.setImageBitmap(thumbnail);
-        }
- else {
-          if (ThumbnailsCacheManager.cancelPotentialWork(file,fileIcon)) {
-            final ThumbnailsCacheManager.ThumbnailGenerationTask task=new ThumbnailsCacheManager.ThumbnailGenerationTask(fileIcon,mStorageManager,mAccount);
-            if (thumbnail == null) {
-              thumbnail=ThumbnailsCacheManager.mDefaultImg;
-            }
-            final AsyncDrawable asyncDrawable=new AsyncDrawable(mContext.getResources(),thumbnail,task);
-            fileIcon.setImageDrawable(asyncDrawable);
-            task.execute(file);
-          }
-        }
-      }
- else {
-        fileIcon.setImageResource(DisplayUtils.getResourceId(file.getMimetype(),file.getFileName()));
-      }
-      if (checkIfFileIsSharedWithMe(file)) {
-        sharedWithMeIconV.setVisibility(View.VISIBLE);
-      }
-    }
- else {
-      fileSizeV.setVisibility(View.INVISIBLE);
-      lastModV.setVisibility(View.VISIBLE);
-      lastModV.setText(showRelativeTimestamp(file));
-      checkBoxV.setVisibility(View.GONE);
-      view.findViewById(R.id.imageView3).setVisibility(View.GONE);
-      if (checkIfFileIsSharedWithMe(file)) {
-        fileIcon.setImageResource(R.drawable.shared_with_me_folder);
-        sharedWithMeIconV.setVisibility(View.VISIBLE);
-      }
- else {
-        fileIcon.setImageResource(DisplayUtils.getResourceId(file.getMimetype(),file.getFileName()));
-      }
-      if (file.isShareByLink()) {
-        fileIcon.setImageResource(R.drawable.folder_public);
-      }
-    }
-    if (file.isShareByLink()) {
-      sharedIconV.setVisibility(View.VISIBLE);
-    }
- else {
-      sharedIconV.setVisibility(View.GONE);
-    }
+    file=mFiles.get(position);
   }
-  return view;
+  ViewType viewType;
+  if (!mGridMode) {
+    viewType=ViewType.LIST_ITEM;
+  }
+ else   if (file.isImage()) {
+    viewType=ViewType.GRID_IMAGE;
+  }
+ else {
+    viewType=ViewType.GRID_ITEM;
+  }
+  if (convertView == null || (convertView != null && convertView.getTag() != viewType)) {
+switch (viewType) {
+case GRID_IMAGE:
+      view=inflator.inflate(R.layout.grid_image,null);
+    view.setTag(ViewType.GRID_IMAGE);
+  break;
+case GRID_ITEM:
+view=inflator.inflate(R.layout.grid_item,null);
+view.setTag(ViewType.GRID_ITEM);
+break;
+case LIST_ITEM:
+view=inflator.inflate(R.layout.list_item,null);
+view.setTag(ViewType.LIST_ITEM);
+break;
+}
+}
+view.invalidate();
+if (file != null) {
+ImageView fileIcon=(ImageView)view.findViewById(R.id.thumbnail);
+fileIcon.setTag(file.getFileId());
+TextView fileName;
+String name=file.getFileName();
+LinearLayout linearLayout=(LinearLayout)view.findViewById(R.id.ListItemLayout);
+linearLayout.setContentDescription("LinearLayout-" + name);
+switch (viewType) {
+case LIST_ITEM:
+TextView fileSizeV=(TextView)view.findViewById(R.id.file_size);
+TextView lastModV=(TextView)view.findViewById(R.id.last_mod);
+ImageView checkBoxV=(ImageView)view.findViewById(R.id.custom_checkbox);
+lastModV.setVisibility(View.VISIBLE);
+lastModV.setText(showRelativeTimestamp(file));
+checkBoxV.setVisibility(View.GONE);
+fileSizeV.setVisibility(View.VISIBLE);
+fileSizeV.setText(DisplayUtils.bytesToHumanReadable(file.getFileLength()));
+if (!file.isFolder()) {
+AbsListView parentList=(AbsListView)parent;
+if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+if (parentList.getChoiceMode() == AbsListView.CHOICE_MODE_NONE) {
+checkBoxV.setVisibility(View.GONE);
+}
+ else {
+if (parentList.isItemChecked(position)) {
+checkBoxV.setImageResource(android.R.drawable.checkbox_on_background);
+}
+ else {
+checkBoxV.setImageResource(android.R.drawable.checkbox_off_background);
+}
+checkBoxV.setVisibility(View.VISIBLE);
+}
+}
+}
+ else {
+fileSizeV.setVisibility(View.INVISIBLE);
+}
+case GRID_ITEM:
+fileName=(TextView)view.findViewById(R.id.Filename);
+name=file.getFileName();
+fileName.setText(name);
+case GRID_IMAGE:
+ImageView sharedIconV=(ImageView)view.findViewById(R.id.sharedIcon);
+if (file.isShareByLink()) {
+sharedIconV.setVisibility(View.VISIBLE);
+sharedIconV.bringToFront();
+}
+ else {
+sharedIconV.setVisibility(View.GONE);
+}
+ImageView localStateView=(ImageView)view.findViewById(R.id.localFileIndicator);
+localStateView.bringToFront();
+FileDownloaderBinder downloaderBinder=mTransferServiceGetter.getFileDownloaderBinder();
+FileUploaderBinder uploaderBinder=mTransferServiceGetter.getFileUploaderBinder();
+boolean downloading=(downloaderBinder != null && downloaderBinder.isDownloading(mAccount,file));
+OperationsServiceBinder opsBinder=mTransferServiceGetter.getOperationsServiceBinder();
+downloading|=(opsBinder != null && opsBinder.isSynchronizing(mAccount,file.getRemotePath()));
+if (downloading) {
+localStateView.setImageResource(R.drawable.downloading_file_indicator);
+localStateView.setVisibility(View.VISIBLE);
+}
+ else if (uploaderBinder != null && uploaderBinder.isUploading(mAccount,file)) {
+localStateView.setImageResource(R.drawable.uploading_file_indicator);
+localStateView.setVisibility(View.VISIBLE);
+}
+ else if (file.isDown()) {
+localStateView.setImageResource(R.drawable.local_file_indicator);
+localStateView.setVisibility(View.VISIBLE);
+}
+ else {
+localStateView.setVisibility(View.INVISIBLE);
+}
+if (!file.isFolder()) {
+ImageView sharedWithMeIconV=(ImageView)view.findViewById(R.id.sharedWithMeIcon);
+sharedWithMeIconV.bringToFront();
+if (checkIfFileIsSharedWithMe(file)) {
+sharedWithMeIconV.setVisibility(View.VISIBLE);
+}
+ else {
+sharedWithMeIconV.setVisibility(View.GONE);
+}
+}
+break;
+}
+if (!file.keepInSync()) {
+view.findViewById(R.id.favoriteIcon).setVisibility(View.GONE);
+}
+ else {
+view.findViewById(R.id.favoriteIcon).setVisibility(View.VISIBLE);
+}
+if (!file.isFolder()) {
+if (file.isImage() && file.getRemoteId() != null) {
+Bitmap thumbnail=ThumbnailsCacheManager.getBitmapFromDiskCache(String.valueOf(file.getRemoteId()));
+if (thumbnail != null && !file.needsUpdateThumbnail()) {
+fileIcon.setImageBitmap(thumbnail);
+}
+ else {
+if (ThumbnailsCacheManager.cancelPotentialWork(file,fileIcon)) {
+final ThumbnailsCacheManager.ThumbnailGenerationTask task=new ThumbnailsCacheManager.ThumbnailGenerationTask(fileIcon,mStorageManager,mAccount);
+if (thumbnail == null) {
+thumbnail=ThumbnailsCacheManager.mDefaultImg;
+}
+final ThumbnailsCacheManager.AsyncDrawable asyncDrawable=new ThumbnailsCacheManager.AsyncDrawable(mContext.getResources(),thumbnail,task);
+fileIcon.setImageDrawable(asyncDrawable);
+task.execute(file);
+}
+}
+}
+ else {
+fileIcon.setImageResource(DisplayUtils.getFileTypeIconId(file.getMimetype(),file.getFileName()));
+}
+}
+ else {
+if (checkIfFileIsSharedWithMe(file)) {
+fileIcon.setImageResource(R.drawable.shared_with_me_folder);
+}
+ else if (file.isShareByLink()) {
+fileIcon.setImageResource(R.drawable.folder_public);
+}
+ else {
+fileIcon.setImageResource(DisplayUtils.getFileTypeIconId(file.getMimetype(),file.getFileName()));
+}
+}
+}
+return view;
 }

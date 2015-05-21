@@ -1,13 +1,7 @@
 {
-  Log_OC.d(TAG,"onCreate() start");
+  Log_OC.v(TAG,"onCreate() start");
   requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
   super.onCreate(savedInstanceState);
-  if (getIntent().getAction() != null && getIntent().getAction().equals(Intent.ACTION_MAIN) && savedInstanceState == null) {
-    requestPinCode();
-  }
- else   if (getIntent().getAction() == null && savedInstanceState == null) {
-    requestPinCode();
-  }
   if (savedInstanceState == null) {
     Intent initObserversIntent=FileObserverService.makeInitIntent(this);
     startService(initObserversIntent);
@@ -99,5 +93,5 @@ getSupportActionBar().setDisplayShowTitleEnabled(true);
 setSupportProgressBarIndeterminateVisibility(mSyncInProgress);
 mDrawerToggle.syncState();
 setBackgroundText();
-Log_OC.d(TAG,"onCreate() end");
+Log_OC.v(TAG,"onCreate() end");
 }

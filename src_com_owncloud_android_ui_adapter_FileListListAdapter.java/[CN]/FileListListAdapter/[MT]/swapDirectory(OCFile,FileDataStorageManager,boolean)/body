@@ -5,7 +5,9 @@
     mAccount=AccountUtils.getCurrentOwnCloudAccount(mContext);
   }
   if (mStorageManager != null) {
-    mFiles=mStorageManager.getFolderContent(mFile,onlyOnDevice);
+    mFiles=mStorageManager.getFolderContent(mFile,false);
+    mFilesOrig.clear();
+    mFilesOrig.addAll(mFiles);
     if (mJustFolders) {
       mFiles=getFolders(mFiles);
     }
@@ -13,5 +15,6 @@
  else {
     mFiles=null;
   }
-  sortDirectory();
+  mFiles=FileStorageUtils.sortFolder(mFiles);
+  notifyDataSetChanged();
 }

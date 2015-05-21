@@ -4,12 +4,13 @@ switch (item.getItemId()) {
 case R.id.action_create_dir:
 {
       CreateFolderDialogFragment dialog=CreateFolderDialogFragment.newInstance(getCurrentDir());
-      dialog.show(getSupportFragmentManager(),"createdirdialog");
+      dialog.show(getSupportFragmentManager(),DIALOG_CREATE_FOLDER);
       break;
     }
 case R.id.action_upload:
 {
-    showDialog(DIALOG_CHOOSE_UPLOAD_SOURCE);
+    UploadSourceDialogFragment dialog=UploadSourceDialogFragment.newInstance(getAccount());
+    dialog.show(getSupportFragmentManager(),DIALOG_UPLOAD_SOURCE);
     break;
   }
 case android.R.id.home:
@@ -25,7 +26,7 @@ case android.R.id.home:
 case R.id.action_sort:
 {
 SharedPreferences appPreferences=PreferenceManager.getDefaultSharedPreferences(this);
-Integer sortOrder=appPreferences.getInt("sortOrder",FileListListAdapter.SORT_NAME);
+Integer sortOrder=appPreferences.getInt("sortOrder",FileStorageUtils.SORT_NAME);
 AlertDialog.Builder builder=new AlertDialog.Builder(this);
 builder.setTitle(R.string.actionbar_sort_title).setSingleChoiceItems(R.array.actionbar_sortby,sortOrder,new DialogInterface.OnClickListener(){
   public void onClick(  DialogInterface dialog,  int which){

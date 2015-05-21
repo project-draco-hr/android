@@ -1,0 +1,6 @@
+{
+  mDataSetObservable.unregisterObserver(observer);
+  if (mAdapter != null) {
+    mAdapter.unregisterDataSetObserver(observer);
+  }
+}

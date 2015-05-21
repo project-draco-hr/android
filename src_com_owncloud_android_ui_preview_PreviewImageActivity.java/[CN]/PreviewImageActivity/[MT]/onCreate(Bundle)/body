@@ -6,9 +6,6 @@
   actionBar.setIcon(DisplayUtils.getSeasonalIconId());
   actionBar.setDisplayHomeAsUpEnabled(true);
   actionBar.hide();
-  if (getIntent().getExtras() != null && savedInstanceState == null && fromNotification()) {
-    requestPinCode();
-  }
   if (isHoneycombOrHigher()) {
     mFullScreenAnchorView=getWindow().getDecorView();
     mFullScreenAnchorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener(){

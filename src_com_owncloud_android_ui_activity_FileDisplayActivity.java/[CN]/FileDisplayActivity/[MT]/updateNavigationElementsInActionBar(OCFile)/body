@@ -1,5 +1,6 @@
 {
   ActionBar actionBar=getSupportActionBar();
+  int actionBarTitleId=getResources().getIdentifier("action_bar_title","id","android");
   if (chosenFile == null || mDualPane) {
     OCFile currentDir=getCurrentDir();
     boolean noRoot=(currentDir != null && currentDir.getParentId() != 0);
@@ -7,6 +8,10 @@
     actionBar.setDisplayShowTitleEnabled(true);
     if (!noRoot) {
       actionBar.setTitle(getString(R.string.default_display_name_for_root_folder));
+      View actionBarTitleView=getWindow().getDecorView().findViewById(actionBarTitleId);
+      if (actionBarTitleView != null) {
+        actionBarTitleView.setContentDescription(getString(R.string.default_display_name_for_root_folder));
+      }
     }
     actionBar.setNavigationMode(!noRoot ? ActionBar.NAVIGATION_MODE_STANDARD : ActionBar.NAVIGATION_MODE_LIST);
     actionBar.setListNavigationCallbacks(mDirectories,this);
@@ -16,5 +21,9 @@
     actionBar.setDisplayShowTitleEnabled(true);
     actionBar.setTitle(chosenFile.getFileName());
     actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+    View actionBarTitleView=getWindow().getDecorView().findViewById(actionBarTitleId);
+    if (actionBarTitleView != null) {
+      getWindow().getDecorView().findViewById(actionBarTitleId).setContentDescription(chosenFile.getFileName());
+    }
   }
 }

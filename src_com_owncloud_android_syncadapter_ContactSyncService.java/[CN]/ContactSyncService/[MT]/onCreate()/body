@@ -1,7 +1,0 @@
-{
-synchronized (syncAdapterLock) {
-    if (mSyncAdapter == null) {
-      mSyncAdapter=new ContactSyncAdapter(getApplicationContext(),true);
-    }
-  }
-}

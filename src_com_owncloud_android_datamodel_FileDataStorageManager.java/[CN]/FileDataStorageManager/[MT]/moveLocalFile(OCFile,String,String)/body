@@ -67,7 +67,7 @@
     if (renamed) {
       Iterator<String> it=originalPathsToTriggerMediaScan.iterator();
       while (it.hasNext()) {
-        triggerMediaScan(it.next());
+        deleteFileInMediaScan(it.next());
       }
       it=newPathsToTriggerMediaScan.iterator();
       while (it.hasNext()) {

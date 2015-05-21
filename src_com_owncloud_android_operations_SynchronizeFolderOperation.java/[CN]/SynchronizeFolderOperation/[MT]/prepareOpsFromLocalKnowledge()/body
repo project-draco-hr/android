@@ -1,0 +1,18 @@
+{
+  List<OCFile> children=getStorageManager().getFolderContent(mLocalFolder,true);
+  for (  OCFile child : children) {
+    if (child.isFolder()) {
+synchronized (mCancellationRequested) {
+        if (mCancellationRequested.get()) {
+          throw new OperationCancelledException();
+        }
+        startSyncFolderOperation(child.getRemotePath());
+      }
+    }
+ else {
+      if (!child.isDown()) {
+        mFilesForDirectDownload.add(child);
+      }
+    }
+  }
+}

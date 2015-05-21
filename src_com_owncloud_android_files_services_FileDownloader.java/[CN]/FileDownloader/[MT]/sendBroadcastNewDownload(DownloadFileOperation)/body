@@ -1,7 +1,0 @@
-{
-  Intent added=new Intent(getDownloadAddedMessage());
-  added.putExtra(ACCOUNT_NAME,download.getAccount().name);
-  added.putExtra(EXTRA_REMOTE_PATH,download.getRemotePath());
-  added.putExtra(EXTRA_FILE_PATH,download.getSavePath());
-  sendStickyBroadcast(added);
-}

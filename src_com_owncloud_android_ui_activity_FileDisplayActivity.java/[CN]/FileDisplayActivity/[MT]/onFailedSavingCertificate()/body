@@ -1,3 +1,4 @@
 {
-  showDialog(DIALOG_CERT_NOT_SAVED);
+  ConfirmationDialogFragment dialog=ConfirmationDialogFragment.newInstance(R.string.ssl_validator_not_saved,new String[]{},R.string.common_ok,-1,-1);
+  dialog.show(getSupportFragmentManager(),DIALOG_CERT_NOT_SAVED);
 }
