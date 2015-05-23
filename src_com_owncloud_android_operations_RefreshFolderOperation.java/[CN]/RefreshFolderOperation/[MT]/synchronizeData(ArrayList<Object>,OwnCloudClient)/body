@@ -6,7 +6,7 @@
   Log_OC.d(TAG,"Remote folder " + mLocalFolder.getRemotePath() + " changed - starting update of local data ");
   List<OCFile> updatedFiles=new Vector<OCFile>(folderAndFiles.size() - 1);
   List<SynchronizeFileOperation> filesToSyncContents=new Vector<SynchronizeFileOperation>();
-  List<OCFile> localFiles=mStorageManager.getFolderContent(mLocalFolder,true);
+  List<OCFile> localFiles=mStorageManager.getFolderContent(mLocalFolder,false);
   Map<String,OCFile> localFilesMap=new HashMap<String,OCFile>(localFiles.size());
   for (  OCFile file : localFiles) {
     localFilesMap.put(file.getRemotePath(),file);

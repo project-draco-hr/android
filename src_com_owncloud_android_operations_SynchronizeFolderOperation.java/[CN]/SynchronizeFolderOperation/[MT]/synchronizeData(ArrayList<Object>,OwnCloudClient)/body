@@ -11,7 +11,7 @@
   if (mCancellationRequested.get()) {
     throw new OperationCancelledException();
   }
-  List<OCFile> localFiles=storageManager.getFolderContent(mLocalFolder,true);
+  List<OCFile> localFiles=storageManager.getFolderContent(mLocalFolder,false);
   Map<String,OCFile> localFilesMap=new HashMap<String,OCFile>(localFiles.size());
   for (  OCFile file : localFiles) {
     localFilesMap.put(file.getRemotePath(),file);

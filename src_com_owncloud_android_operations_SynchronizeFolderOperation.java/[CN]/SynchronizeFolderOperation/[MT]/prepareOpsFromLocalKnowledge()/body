@@ -1,5 +1,5 @@
 {
-  List<OCFile> children=getStorageManager().getFolderContent(mLocalFolder,true);
+  List<OCFile> children=getStorageManager().getFolderContent(mLocalFolder,false);
   for (  OCFile child : children) {
     if (child.isFolder()) {
 synchronized (mCancellationRequested) {

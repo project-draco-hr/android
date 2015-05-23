@@ -1,0 +1,5 @@
+{
+  AccountManager am=(AccountManager)mContext.getSystemService(mContext.ACCOUNT_SERVICE);
+  mAccounts=am.getAccountsByType(MainApp.getAccountType());
+  currentAccount=AccountUtils.getCurrentOwnCloudAccount(mContext);
+}
