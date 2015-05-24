@@ -1,0 +1,14 @@
+{
+  if (h < 0)   h+=1;
+  if (h > 1)   h-=1;
+  if (6 * h < 1) {
+    return p + ((q - p) * 6 * h);
+  }
+  if (2 * h < 1) {
+    return q;
+  }
+  if (3 * h < 2) {
+    return p + ((q - p) * 6 * ((2.0f / 3.0f) - h));
+  }
+  return p;
+}
