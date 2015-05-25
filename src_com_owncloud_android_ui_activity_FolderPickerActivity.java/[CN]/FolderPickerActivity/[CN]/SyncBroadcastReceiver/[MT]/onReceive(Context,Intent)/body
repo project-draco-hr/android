@@ -24,7 +24,7 @@
           if (synchFolderRemotePath != null && currentDir.getRemotePath().equals(synchFolderRemotePath)) {
             OCFileListFragment fileListFragment=getListOfFilesFragment();
             if (fileListFragment != null) {
-              fileListFragment.listDirectory(currentDir,false);
+              fileListFragment.listDirectory(currentDir);
             }
           }
           setFile(currentFile);

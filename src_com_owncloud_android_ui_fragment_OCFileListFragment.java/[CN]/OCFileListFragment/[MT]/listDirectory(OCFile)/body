@@ -14,7 +14,7 @@
       Log_OC.w(TAG,"You see, that is not a directory -> " + directory.toString());
       directory=storageManager.getFileById(directory.getParentId());
     }
-    mAdapter.swapDirectory(directory,storageManager,onlyOnDevice);
+    mAdapter.swapDirectory(directory,storageManager);
     if (mFile == null || !mFile.equals(directory)) {
       mCurrentListView.setSelection(0);
     }

@@ -17,9 +17,7 @@
   if (c.moveToFirst()) {
     do {
       OCFile child=createFileInstance(c);
-      if (child.isFolder() || !onlyOnDevice || onlyOnDevice && child.isDown()) {
-        ret.add(child);
-      }
+      ret.add(child);
     }
  while (c.moveToNext());
   }

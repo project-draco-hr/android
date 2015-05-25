@@ -9,7 +9,7 @@
     }
     if (!stateWasRecovered) {
       OCFileListFragment listOfFolders=getListOfFilesFragment();
-      listOfFolders.listDirectory(folder,false);
+      listOfFolders.listDirectory(folder);
       startSyncFolderOperation(folder,false);
     }
     updateNavigationElementsInActionBar();

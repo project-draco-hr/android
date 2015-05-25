@@ -57,14 +57,9 @@ case 0:
     adapter.notifyDataSetChanged();
   break;
 case 1:
-MainApp.showOnlyFilesOnDevice(false);
 mDrawerLayout.closeDrawers();
 break;
 case 2:
-MainApp.showOnlyFilesOnDevice(true);
-mDrawerLayout.closeDrawers();
-break;
-case 3:
 Intent settingsIntent=new Intent(getApplicationContext(),Preferences.class);
 startActivity(settingsIntent);
 break;
