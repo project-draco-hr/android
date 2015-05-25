@@ -1,5 +1,6 @@
 {
   super.onCreate(savedInstanceState);
+  getWindow().requestFeature(Window.FEATURE_NO_TITLE);
   mIsFirstAuthAttempt=true;
   mOperationsServiceConnection=new OperationsServiceConnection();
   if (!bindService(new Intent(this,OperationsService.class),mOperationsServiceConnection,Context.BIND_AUTO_CREATE)) {
