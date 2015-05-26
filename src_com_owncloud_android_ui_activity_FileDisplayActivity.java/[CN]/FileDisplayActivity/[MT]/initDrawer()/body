@@ -16,7 +16,9 @@
   mDrawerItems.add(new NavigationDrawerItem(mDrawerTitles[0],mDrawerContentDescriptions[0]));
   mDrawerItems.add(new NavigationDrawerItem(mDrawerTitles[1],mDrawerContentDescriptions[1]));
   mDrawerItems.add(new NavigationDrawerItem(mDrawerTitles[2],mDrawerContentDescriptions[2]));
-  mDrawerItems.add(new NavigationDrawerItem(mDrawerTitles[3],mDrawerContentDescriptions[3]));
+  if (BuildConfig.DEBUG) {
+    mDrawerItems.add(new NavigationDrawerItem(mDrawerTitles[3],mDrawerContentDescriptions[3]));
+  }
   mNavigationDrawerAdapter=new NavigationDrawerListAdapter(getApplicationContext(),this,mDrawerItems);
   mDrawerList.setAdapter(mNavigationDrawerAdapter);
   mDrawerToggle=new ActionBarDrawerToggle(this,mDrawerLayout,R.drawable.ic_drawer,R.string.drawer_open,R.string.empty){
