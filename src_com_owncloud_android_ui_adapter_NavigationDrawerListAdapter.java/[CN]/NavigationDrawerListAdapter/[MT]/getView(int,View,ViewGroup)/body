@@ -1,20 +1,23 @@
 {
   LayoutInflater inflator=(LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-  if (all.size() > position) {
-    if (all.get(position) instanceof String) {
+  if (mAll.size() > position) {
+    if (mAll.get(position) instanceof NavigationDrawerItem) {
+      NavigationDrawerItem navItem=(NavigationDrawerItem)mAll.get(position);
       View view=inflator.inflate(R.layout.drawer_list_item,null);
       view.setMinimumHeight(40);
-      TextView textView=(TextView)view.findViewById(R.id.drawer_textView);
-      String entry=(String)all.get(position);
-      textView.setText(entry);
+      LinearLayout itemLayout=(LinearLayout)view.findViewById(R.id.itemLayout);
+      itemLayout.setContentDescription(navItem.getContentDescription());
+      TextView itemText=(TextView)view.findViewById(R.id.itemTitle);
+      itemText.setText(navItem.getTitle());
       return view;
     }
-    if (all.get(position) instanceof Account[]) {
+    if (mAll.get(position) instanceof Account[]) {
       final View view=inflator.inflate(R.layout.drawer_account_group,null);
       final RadioGroup group=(RadioGroup)view.findViewById(R.id.drawer_radio_group);
       for (      Account account : mAccounts) {
         RadioButton rb=new RadioButton(mContext);
         rb.setText(account.name);
+        rb.setContentDescription(account.name);
         try {
           byte[] bytesOfMessage=account.name.substring(0,5).getBytes("UTF-8");
           MessageDigest md=MessageDigest.getInstance("MD5");
@@ -35,7 +38,7 @@
         RadioGroup.LayoutParams params=new RadioGroup.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
         params.weight=1.0f;
         params.setMargins(15,5,5,5);
-        if (account.name.equals(currentAccount.name)) {
+        if (account.name.equals(mCurrentAccount.name)) {
           rb.setChecked(true);
         }
  else {

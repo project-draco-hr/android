@@ -1,0 +1,47 @@
+{
+  mDrawerLayout=(DrawerLayout)findViewById(R.id.drawer_layout);
+  LinearLayout navigationDrawerLayout=(LinearLayout)findViewById(R.id.left_drawer);
+  mDrawerList=(ListView)navigationDrawerLayout.findViewById(R.id.drawer_list);
+  ImageView userIcon=(ImageView)navigationDrawerLayout.findViewById(R.id.drawer_userIcon);
+  userIcon.setImageResource(DisplayUtils.getSeasonalIconId());
+  TextView username=(TextView)navigationDrawerLayout.findViewById(R.id.drawer_username);
+  Account account=AccountUtils.getCurrentOwnCloudAccount(getApplicationContext());
+  if (account != null) {
+    int lastAtPos=account.name.lastIndexOf("@");
+    username.setText(account.name.substring(0,lastAtPos));
+  }
+  mDrawerTitles=getResources().getStringArray(R.array.drawer_items);
+  mDrawerContentDescriptions=getResources().getStringArray(R.array.drawer_content_descriptions);
+  mDrawerItems=new ArrayList<NavigationDrawerItem>();
+  mDrawerItems.add(new NavigationDrawerItem(mDrawerTitles[0],mDrawerContentDescriptions[0]));
+  mDrawerItems.add(new NavigationDrawerItem(mDrawerTitles[1],mDrawerContentDescriptions[1]));
+  mDrawerItems.add(new NavigationDrawerItem(mDrawerTitles[2],mDrawerContentDescriptions[2]));
+  mDrawerItems.add(new NavigationDrawerItem(mDrawerTitles[3],mDrawerContentDescriptions[3]));
+  mNavigationDrawerAdapter=new NavigationDrawerListAdapter(getApplicationContext(),this,mDrawerItems);
+  mDrawerList.setAdapter(mNavigationDrawerAdapter);
+  mDrawerToggle=new ActionBarDrawerToggle(this,mDrawerLayout,R.drawable.ic_drawer,R.string.drawer_open,R.string.empty){
+    /** 
+ * Called when a drawer has settled in a completely closed state. 
+ */
+    public void onDrawerClosed(    View view){
+      super.onDrawerClosed(view);
+      getSupportActionBar().setDisplayShowTitleEnabled(true);
+      getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+      initFragmentsWithFile();
+      invalidateOptionsMenu();
+    }
+    /** 
+ * Called when a drawer has settled in a completely open state. 
+ */
+    public void onDrawerOpened(    View drawerView){
+      super.onDrawerOpened(drawerView);
+      getSupportActionBar().setTitle(R.string.drawer_open);
+      getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+      invalidateOptionsMenu();
+    }
+  }
+;
+  mDrawerToggle.setDrawerIndicatorEnabled(true);
+  mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+  mDrawerLayout.setDrawerListener(mDrawerToggle);
+}

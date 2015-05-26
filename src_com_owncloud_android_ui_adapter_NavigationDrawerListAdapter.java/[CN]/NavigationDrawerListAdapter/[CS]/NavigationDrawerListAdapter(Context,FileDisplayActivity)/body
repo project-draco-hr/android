@@ -1,9 +1,0 @@
-{
-  mFileDisplayActivity=fileDisplayActivity;
-  mContext=context;
-  for (  String string : mContext.getResources().getStringArray(R.array.drawer_items)) {
-    mDrawerItems.add(string);
-  }
-  updateAccountList();
-  all.addAll(mDrawerItems);
-}

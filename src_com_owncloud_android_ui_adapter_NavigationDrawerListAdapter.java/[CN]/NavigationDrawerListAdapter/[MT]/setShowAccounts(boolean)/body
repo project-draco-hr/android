@@ -1,8 +1,8 @@
 {
-  all.clear();
-  all.addAll(mDrawerItems);
+  mAll.clear();
+  mAll.addAll(mNavigationDrawerItems);
   if (value) {
-    all.add(1,mAccounts);
+    mAll.add(1,mAccounts);
   }
   mShowAccounts=value;
 }
