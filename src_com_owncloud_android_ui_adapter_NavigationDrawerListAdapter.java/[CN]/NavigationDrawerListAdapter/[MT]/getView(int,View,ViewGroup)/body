@@ -15,6 +15,10 @@
       for (      Account account : mAccounts) {
         RadioButton rb=new RadioButton(mContext);
         rb.setText(account.name);
+        rb.setTextColor(Color.BLACK);
+        rb.setEllipsize(TextUtils.TruncateAt.MIDDLE);
+        rb.setSingleLine();
+        rb.setCompoundDrawablePadding(30);
         try {
           int lastAtPos=account.name.lastIndexOf("@");
           String username=account.name.substring(0,lastAtPos);
@@ -24,10 +28,9 @@
           Integer seedMd5Int=Math.abs(new String(Hex.encodeHex(seedMd5)).hashCode());
           double maxRange=java.lang.Integer.MAX_VALUE;
           float hue=(float)(seedMd5Int / maxRange * 360);
-          Log_OC.d(TAG,"hue: " + hue);
           int[] rgb=BitmapUtils.HSLtoRGB(hue,90.0f,65.0f,1.0f);
-          rb.setTextColor(Color.rgb(rgb[0],rgb[1],rgb[2]));
-          Log_OC.d(TAG,"Color: " + rgb[0] + " "+ rgb[1]+ " "+ rgb[2]);
+          TextDrawable text=new TextDrawable(username.substring(0,1).toUpperCase(),rgb[0],rgb[1],rgb[2],rb.getTextSize());
+          rb.setCompoundDrawablesWithIntrinsicBounds(text,null,null,null);
         }
  catch (        Exception e) {
           Log_OC.d(TAG,e.toString());

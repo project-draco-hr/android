@@ -1,0 +1,5 @@
+{
+  this.text=text;
+  this.color=Color.rgb(r,g,b);
+  this.size=size;
+}
