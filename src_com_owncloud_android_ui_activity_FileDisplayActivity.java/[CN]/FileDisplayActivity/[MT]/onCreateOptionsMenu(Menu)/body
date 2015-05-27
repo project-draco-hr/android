@@ -1,5 +1,5 @@
 {
-  MenuInflater inflater=getSherlock().getMenuInflater();
+  MenuInflater inflater=getMenuInflater();
   inflater.inflate(R.menu.main_menu,menu);
   return true;
 }

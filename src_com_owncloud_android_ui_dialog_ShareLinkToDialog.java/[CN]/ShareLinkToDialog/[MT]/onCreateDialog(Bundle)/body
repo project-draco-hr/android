@@ -3,7 +3,7 @@
   String[] packagesToExclude=getArguments().getStringArray(ARG_PACKAGES_TO_EXCLUDE);
   List<String> packagesToExcludeList=Arrays.asList(packagesToExclude != null ? packagesToExclude : new String[0]);
   mFile=getArguments().getParcelable(ARG_FILE_TO_SHARE);
-  PackageManager pm=getSherlockActivity().getPackageManager();
+  PackageManager pm=getActivity().getPackageManager();
   List<ResolveInfo> activities=pm.queryIntentActivities(mIntent,PackageManager.MATCH_DEFAULT_ONLY);
   Iterator<ResolveInfo> it=activities.iterator();
   ResolveInfo resolveInfo;
@@ -15,13 +15,13 @@
   }
   boolean sendAction=mIntent.getBooleanExtra(Intent.ACTION_SEND,false);
   if (!sendAction) {
-    Intent copyToClipboardIntent=new Intent(getSherlockActivity(),CopyToClipboardActivity.class);
+    Intent copyToClipboardIntent=new Intent(getActivity(),CopyToClipboardActivity.class);
     List<ResolveInfo> copyToClipboard=pm.queryIntentActivities(copyToClipboardIntent,0);
     if (!copyToClipboard.isEmpty()) {
       activities.add(copyToClipboard.get(0));
     }
   }
   Collections.sort(activities,new ResolveInfo.DisplayNameComparator(pm));
-  mAdapter=new ActivityAdapter(getSherlockActivity(),pm,activities);
+  mAdapter=new ActivityAdapter(getActivity(),pm,activities);
   return createSelector(sendAction);
 }

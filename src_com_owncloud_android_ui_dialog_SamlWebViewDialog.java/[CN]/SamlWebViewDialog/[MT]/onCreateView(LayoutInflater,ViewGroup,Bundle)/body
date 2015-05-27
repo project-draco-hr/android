@@ -2,7 +2,7 @@
   Log_OC.v(TAG,"onCreateView, savedInsanceState is " + savedInstanceState);
   RelativeLayout ssoRootView=(RelativeLayout)inflater.inflate(R.layout.sso_dialog,container,false);
   if (mSsoWebView == null) {
-    mSsoWebView=new SsoWebView(getSherlockActivity().getApplicationContext());
+    mSsoWebView=new SsoWebView(getActivity().getApplicationContext());
     mSsoWebView.setFocusable(true);
     mSsoWebView.setFocusableInTouchMode(true);
     mSsoWebView.setClickable(true);
