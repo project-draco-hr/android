@@ -32,7 +32,7 @@
           double maxRange=java.lang.Integer.MAX_VALUE;
           float hue=(float)(seedMd5Int / maxRange * 360);
           int[] rgb=BitmapUtils.HSLtoRGB(hue,90.0f,65.0f,1.0f);
-          TextDrawable text=new TextDrawable(username.substring(0,1).toUpperCase(),rgb[0],rgb[1],rgb[2],rb.getTextSize());
+          TextDrawable text=new TextDrawable(username.substring(0,1).toUpperCase(),rgb[0],rgb[1],rgb[2]);
           rb.setCompoundDrawablesWithIntrinsicBounds(text,null,null,null);
         }
  catch (        Exception e) {

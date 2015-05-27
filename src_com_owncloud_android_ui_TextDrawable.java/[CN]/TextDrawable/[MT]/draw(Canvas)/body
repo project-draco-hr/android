@@ -1,16 +1,4 @@
 {
-  Paint bg=new Paint();
-  bg.setStyle(Paint.Style.FILL);
-  bg.setColor(color);
   canvas.drawRect(0,-20,20,40,bg);
-  Paint paint=new Paint();
-  paint.setColor(Color.WHITE);
-  paint.setTextSize(20);
-  paint.setAntiAlias(true);
-  paint.setFakeBoldText(true);
-  Rect bounds=new Rect();
-  paint.getTextBounds(text,0,text.length(),bounds);
-  int x=(canvas.getWidth() / 2) - (bounds.width() / 2);
-  int y=(canvas.getHeight() / 2) - (bounds.height() / 2);
   canvas.drawText(text,4,6,paint);
 }

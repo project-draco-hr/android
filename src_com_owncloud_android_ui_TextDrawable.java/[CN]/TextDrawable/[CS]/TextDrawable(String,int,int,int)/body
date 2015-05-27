@@ -1,0 +1,12 @@
+{
+  this.text=text;
+  Integer color=Color.rgb(r,g,b);
+  bg=new Paint();
+  bg.setStyle(Paint.Style.FILL);
+  bg.setColor(color);
+  paint=new Paint();
+  paint.setColor(Color.WHITE);
+  paint.setTextSize(20);
+  paint.setAntiAlias(true);
+  paint.setFakeBoldText(true);
+}
