@@ -27,8 +27,7 @@
           String username=account.name.substring(0,lastAtPos);
           byte[] seed=username.getBytes("UTF-8");
           MessageDigest md=MessageDigest.getInstance("MD5");
-          byte[] seedMd5=md.digest(seed);
-          Integer seedMd5Int=Math.abs(new String(Hex.encodeHex(seedMd5)).hashCode());
+          Integer seedMd5Int=String.format(Locale.ROOT,"%032x",new BigInteger(1,md.digest(seed))).hashCode();
           double maxRange=java.lang.Integer.MAX_VALUE;
           float hue=(float)(seedMd5Int / maxRange * 360);
           int[] rgb=BitmapUtils.HSLtoRGB(hue,90.0f,65.0f,1.0f);
