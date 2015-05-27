@@ -2,7 +2,7 @@
   super.onPrepareOptionsMenu(menu);
   if (mContainerActivity.getStorageManager() != null) {
     setFile(mContainerActivity.getStorageManager().getFileById(getFile().getFileId()));
-    FileMenuFilter mf=new FileMenuFilter(getFile(),mContainerActivity.getStorageManager().getAccount(),mContainerActivity,getSherlockActivity());
+    FileMenuFilter mf=new FileMenuFilter(getFile(),mContainerActivity.getStorageManager().getAccount(),mContainerActivity,getActivity());
     mf.filter(menu);
   }
   MenuItem item=menu.findItem(R.id.action_rename_file);

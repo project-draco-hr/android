@@ -1,11 +1,11 @@
 {
   mParentFolder=getArguments().getParcelable(ARG_PARENT_FOLDER);
-  LayoutInflater inflater=getSherlockActivity().getLayoutInflater();
+  LayoutInflater inflater=getActivity().getLayoutInflater();
   View v=inflater.inflate(R.layout.edit_box_dialog,null);
   EditText inputText=((EditText)v.findViewById(R.id.user_input));
   inputText.setText("");
   inputText.requestFocus();
-  AlertDialog.Builder builder=new AlertDialog.Builder(getSherlockActivity());
+  AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
   builder.setView(v).setPositiveButton(R.string.common_ok,this).setNegativeButton(R.string.common_cancel,this).setTitle(R.string.uploader_info_dirname);
   Dialog d=builder.create();
   d.getWindow().setSoftInputMode(LayoutParams.SOFT_INPUT_STATE_VISIBLE);
