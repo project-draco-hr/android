@@ -1,8 +1,8 @@
 {
   if (mShowAccounts) {
-    return mDrawerItems.size() + 1;
+    return mNavigationDrawerItems.size() + 1;
   }
  else {
-    return mDrawerItems.size();
+    return mNavigationDrawerItems.size();
   }
 }

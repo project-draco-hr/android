@@ -1,0 +1,23 @@
+{
+  if (mShowAccounts && position > 0) {
+    position=position - 1;
+  }
+switch (position) {
+case 0:
+    mShowAccounts=!mShowAccounts;
+  mNavigationDrawerAdapter.setShowAccounts(mShowAccounts);
+mNavigationDrawerAdapter.notifyDataSetChanged();
+break;
+case 1:
+mDrawerLayout.closeDrawers();
+break;
+case 2:
+Intent settingsIntent=new Intent(getApplicationContext(),Preferences.class);
+startActivity(settingsIntent);
+break;
+case 3:
+Intent loggerIntent=new Intent(getApplicationContext(),LogHistoryActivity.class);
+startActivity(loggerIntent);
+break;
+}
+}

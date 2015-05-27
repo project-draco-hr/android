@@ -1,7 +1,7 @@
 {
   Log_OC.v(TAG,"onResume() start");
   super.onResume();
-  adapter.updateAccountList();
+  mNavigationDrawerAdapter.updateAccountList();
   refreshListOfFilesFragment();
   IntentFilter syncIntentFilter=new IntentFilter(FileSyncAdapter.EVENT_FULL_SYNC_START);
   syncIntentFilter.addAction(FileSyncAdapter.EVENT_FULL_SYNC_END);

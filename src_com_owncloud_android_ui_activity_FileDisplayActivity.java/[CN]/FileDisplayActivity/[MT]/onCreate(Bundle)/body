@@ -17,83 +17,20 @@
     mWaitingToSend=null;
   }
   setContentView(R.layout.files);
-  mDrawerLayout=(DrawerLayout)findViewById(R.id.drawer_layout);
-  mDrawerToggle=new ActionBarDrawerToggle(this,mDrawerLayout,R.drawable.ic_drawer,R.string.drawer_open,R.string.empty){
-    /** 
- * Called when a drawer has settled in a completely closed state. 
- */
-    public void onDrawerClosed(    View view){
-      super.onDrawerClosed(view);
-      getSupportActionBar().setDisplayShowTitleEnabled(true);
-      getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-      initFragmentsWithFile();
-      invalidateOptionsMenu();
-    }
-    /** 
- * Called when a drawer has settled in a completely open state. 
- */
-    public void onDrawerOpened(    View drawerView){
-      super.onDrawerOpened(drawerView);
-      getSupportActionBar().setTitle(R.string.drawer_open);
-      getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-      invalidateOptionsMenu();
-    }
+  initDrawer();
+  mDualPane=getResources().getBoolean(R.bool.large_land_layout);
+  mLeftFragmentContainer=findViewById(R.id.left_fragment_container);
+  mRightFragmentContainer=findViewById(R.id.right_fragment_container);
+  if (savedInstanceState == null) {
+    createMinFragments();
   }
-;
-  mDrawerToggle.setDrawerIndicatorEnabled(true);
-  LinearLayout notificatonDrawer=(LinearLayout)findViewById(R.id.left_drawer);
-  ListView listView=(ListView)notificatonDrawer.findViewById(R.id.drawer_list);
-  adapter=new NavigationDrawerListAdapter(getApplicationContext(),this);
-  listView.setAdapter(adapter);
-  listView.setOnItemClickListener(new OnItemClickListener(){
-    @Override public void onItemClick(    AdapterView<?> parent,    View view,    int position,    long id){
-      if (showAccounts && position > 0) {
-        position=position - 1;
-      }
-switch (position) {
-case 0:
-        showAccounts=!showAccounts;
-      adapter.setShowAccounts(showAccounts);
-    adapter.notifyDataSetChanged();
-  break;
-case 1:
-MainApp.showOnlyFilesOnDevice(false);
-mDrawerLayout.closeDrawers();
-break;
-case 2:
-MainApp.showOnlyFilesOnDevice(true);
-mDrawerLayout.closeDrawers();
-break;
-case 3:
-Intent settingsIntent=new Intent(getApplicationContext(),Preferences.class);
-startActivity(settingsIntent);
-break;
-}
-}
-}
-);
-ImageView userIcon=(ImageView)notificatonDrawer.findViewById(R.id.drawer_userIcon);
-userIcon.setImageResource(DisplayUtils.getSeasonalIconId());
-TextView username=(TextView)notificatonDrawer.findViewById(R.id.drawer_username);
-Account account=AccountUtils.getCurrentOwnCloudAccount(getApplicationContext());
-if (account != null) {
-int lastAtPos=account.name.lastIndexOf("@");
-username.setText(account.name.substring(0,lastAtPos));
-}
-mDrawerLayout.setDrawerListener(mDrawerToggle);
-mDualPane=getResources().getBoolean(R.bool.large_land_layout);
-mLeftFragmentContainer=findViewById(R.id.left_fragment_container);
-mRightFragmentContainer=findViewById(R.id.right_fragment_container);
-if (savedInstanceState == null) {
-createMinFragments();
-}
-mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
-getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-getSupportActionBar().setHomeButtonEnabled(true);
-getSupportActionBar().setDisplayShowCustomEnabled(true);
-getSupportActionBar().setDisplayShowTitleEnabled(true);
-setSupportProgressBarIndeterminateVisibility(mSyncInProgress);
-mDrawerToggle.syncState();
-setBackgroundText();
-Log_OC.v(TAG,"onCreate() end");
+  mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
+  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+  getSupportActionBar().setHomeButtonEnabled(true);
+  getSupportActionBar().setDisplayShowCustomEnabled(true);
+  getSupportActionBar().setDisplayShowTitleEnabled(true);
+  setSupportProgressBarIndeterminateVisibility(mSyncInProgress);
+  mDrawerToggle.syncState();
+  setBackgroundText();
+  Log_OC.v(TAG,"onCreate() end");
 }

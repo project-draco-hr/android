@@ -3,7 +3,7 @@
   String localFolderPath=FileStorageUtils.getDefaultSavePathFor(mAccount.name,folder);
   File localFolder=new File(localFolderPath);
   if (localFolder.exists()) {
-    Vector<OCFile> files=getFolderContent(folder.getFileId(),false);
+    Vector<OCFile> files=getFolderContent(folder.getFileId());
     if (files != null) {
       for (      OCFile file : files) {
         if (file.isFolder()) {

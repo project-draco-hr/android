@@ -2,7 +2,7 @@
   OCFile file=(OCFile)mAdapter.getItem(position);
   if (file != null) {
     if (file.isFolder()) {
-      listDirectory(file,MainApp.getOnlyOnDevice());
+      listDirectory(file);
       mContainerActivity.onBrowsedDownTo(file);
       saveIndexAndTopPosition(position);
     }

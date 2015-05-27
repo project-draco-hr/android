@@ -1,5 +1,0 @@
-FragmentManager fragmentManager
-OCFile parentFolder
-Account account
-FileDataStorageManager storageManager
-boolean onlyOnDevice

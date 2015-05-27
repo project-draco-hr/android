@@ -12,7 +12,7 @@
       result=fetchAndSyncRemoteFolder(client);
     }
  else {
-      mChildren=mStorageManager.getFolderContent(mLocalFolder,false);
+      mChildren=mStorageManager.getFolderContent(mLocalFolder);
     }
   }
   if (!mSyncFullAccount) {
