@@ -20,11 +20,18 @@ case R.id.action_upload:
 }
 case android.R.id.home:
 {
-if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-  mDrawerLayout.closeDrawer(GravityCompat.START);
+FileFragment second=getSecondFragment();
+OCFile currentDir=getCurrentDir();
+if ((currentDir != null && currentDir.getParentId() != 0) || (second != null && second.getFile() != null)) {
+  onBackPressed();
 }
  else {
-  mDrawerLayout.openDrawer(GravityCompat.START);
+  if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+    mDrawerLayout.closeDrawer(GravityCompat.START);
+  }
+ else {
+    mDrawerLayout.openDrawer(GravityCompat.START);
+  }
 }
 break;
 }
