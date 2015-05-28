@@ -27,8 +27,9 @@
  */
     public void onDrawerClosed(    View view){
       super.onDrawerClosed(view);
+      updateActionBarTitle();
       getSupportActionBar().setDisplayShowTitleEnabled(true);
-      getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+      getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
       invalidateOptionsMenu();
     }
     /** 

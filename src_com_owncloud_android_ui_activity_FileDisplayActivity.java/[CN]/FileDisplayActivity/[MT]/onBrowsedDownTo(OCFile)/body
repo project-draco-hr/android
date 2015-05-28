@@ -1,5 +1,6 @@
 {
   pushDirname(directory);
   cleanSecondFragment();
+  updateActionBarTitle();
   startSyncFolderOperation(directory,false);
 }

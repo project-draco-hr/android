@@ -8,6 +8,7 @@
     listOfFiles.listDirectory(root);
     setFile(listOfFiles.getCurrentFile());
     startSyncFolderOperation(root,false);
+    updateActionBarTitle();
   }
   cleanSecondFragment();
 }

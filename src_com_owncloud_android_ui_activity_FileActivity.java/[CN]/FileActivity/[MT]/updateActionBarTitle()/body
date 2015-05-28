@@ -1,0 +1,8 @@
+{
+  if (mFile.getParentId() == 0) {
+    getSupportActionBar().setTitle(getString(R.string.default_display_name_for_root_folder));
+  }
+ else {
+    getSupportActionBar().setTitle(mFile.getFileName().toString());
+  }
+}
