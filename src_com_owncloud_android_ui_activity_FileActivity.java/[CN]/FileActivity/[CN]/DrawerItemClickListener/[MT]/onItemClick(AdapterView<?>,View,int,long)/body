@@ -9,6 +9,7 @@ case 0:
 mNavigationDrawerAdapter.notifyDataSetChanged();
 break;
 case 1:
+allFilesOption();
 mDrawerLayout.closeDrawers();
 break;
 case 2:
