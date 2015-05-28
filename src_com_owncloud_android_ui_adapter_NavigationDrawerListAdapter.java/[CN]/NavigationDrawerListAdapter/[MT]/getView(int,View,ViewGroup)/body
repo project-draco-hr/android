@@ -54,8 +54,8 @@
           RadioButton rb=(RadioButton)view.findViewById(checkedId);
           AccountUtils.setCurrentOwnCloudAccount(mContext,rb.getText().toString());
           notifyDataSetChanged();
-          mFileDisplayActivity.closeDrawer();
-          mFileDisplayActivity.restart();
+          mFileActivity.closeDrawer();
+          mFileActivity.restart();
         }
       }
 );

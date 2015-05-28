@@ -1,5 +1,5 @@
 {
-  mFileDisplayActivity=fileDisplayActivity;
+  mFileActivity=fileActivity;
   mContext=context;
   mNavigationDrawerItems=navigationDrawerItems;
   updateAccountList();

@@ -2,6 +2,7 @@
   super.onCreate(savedInstanceState);
   requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
   setContentView(R.layout.preview_image_activity);
+  initDrawer();
   ActionBar actionBar=getSupportActionBar();
   actionBar.setIcon(DisplayUtils.getSeasonalIconId());
   actionBar.setDisplayHomeAsUpEnabled(true);

@@ -29,7 +29,6 @@
       super.onDrawerClosed(view);
       getSupportActionBar().setDisplayShowTitleEnabled(true);
       getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-      initFragmentsWithFile();
       invalidateOptionsMenu();
     }
     /** 

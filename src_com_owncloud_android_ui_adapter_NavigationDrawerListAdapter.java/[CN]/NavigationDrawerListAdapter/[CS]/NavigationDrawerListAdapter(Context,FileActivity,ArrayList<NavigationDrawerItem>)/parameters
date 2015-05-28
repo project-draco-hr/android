@@ -1,3 +1,3 @@
 Context context
-FileDisplayActivity fileDisplayActivity
+FileActivity fileActivity
 ArrayList<NavigationDrawerItem> navigationDrawerItems

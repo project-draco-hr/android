@@ -1,4 +1,0 @@
-{
-  super.onPostCreate(savedInstanceState);
-  mDrawerToggle.syncState();
-}

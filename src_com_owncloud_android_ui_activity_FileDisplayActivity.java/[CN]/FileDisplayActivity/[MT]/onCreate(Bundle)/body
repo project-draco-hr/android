@@ -27,7 +27,6 @@
   mDirectories=new CustomArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item);
   getSupportActionBar().setHomeButtonEnabled(true);
   setSupportProgressBarIndeterminateVisibility(mSyncInProgress);
-  mDrawerToggle.syncState();
   setBackgroundText();
   Log_OC.v(TAG,"onCreate() end");
 }
