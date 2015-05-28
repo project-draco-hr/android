@@ -2,15 +2,15 @@
   if (convertView == null) {
     convertView=inflater.inflate(R.layout.listrow_group,null);
   }
-  final Group group=(Group)getGroup(groupPosition);
-  if (group.children.size() == 0) {
+  final GroupAdapter groupAdapter=(GroupAdapter)getGroup(groupPosition);
+  if (groupAdapter.children.size() == 0) {
     convertView.setOnClickListener(new OnClickListener(){
       @Override public void onClick(      View v){
-        Toast.makeText(activity,group.string,Toast.LENGTH_SHORT).show();
+        Toast.makeText(activity,groupAdapter.string,Toast.LENGTH_SHORT).show();
       }
     }
 );
   }
-  ((TextView)convertView).setText(group.string);
+  ((TextView)convertView).setText(groupAdapter.string);
   return convertView;
 }
