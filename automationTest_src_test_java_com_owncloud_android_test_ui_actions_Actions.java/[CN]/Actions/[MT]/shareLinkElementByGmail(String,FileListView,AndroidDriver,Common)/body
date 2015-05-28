@@ -1,0 +1,17 @@
+{
+  try {
+    driver.startActivity("com.owncloud.android",".ui.activity.FileDisplayActivity");
+    ElementMenuOptions menuOptions=fileListView.longPressOnElement(elementName);
+    ShareView shareView=menuOptions.clickOnShareLinkElement();
+    Actions.scrollTillFindElement("Gmail",shareView.getListViewLayout(),driver).click();
+    GmailSendMailView gmailSendMailView=new GmailSendMailView(driver);
+    gmailSendMailView.typeToEmailAdress(Config.gmailAccount);
+    gmailSendMailView.clickOnSendButton();
+    Common.waitTillElementIsNotPresentWithoutTimeout(fileListView.getProgressCircular(),1000);
+    common.wait.until(ExpectedConditions.visibilityOf(fileListView.getFileElementLayout().findElement(By.id(FileListView.getSharedElementIndicator()))));
+  }
+ catch (  NoSuchElementException e) {
+    return null;
+  }
+  return (AndroidElement)fileListView.getFileElementLayout().findElement(By.id(FileListView.getSharedElementIndicator()));
+}

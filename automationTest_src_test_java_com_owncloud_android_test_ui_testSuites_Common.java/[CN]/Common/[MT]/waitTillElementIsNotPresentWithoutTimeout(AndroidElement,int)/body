@@ -8,5 +8,4 @@
     }
     Thread.sleep(pollingTime);
   }
-  throw new TimeoutException();
 }

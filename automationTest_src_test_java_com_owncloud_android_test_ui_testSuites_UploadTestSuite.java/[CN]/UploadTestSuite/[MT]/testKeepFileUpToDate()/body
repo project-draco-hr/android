@@ -1,7 +1,7 @@
 {
   FileListView fileListView=Actions.login(Config.URL,Config.user,Config.password,Config.isTrusted,driver);
   common.assertIsInFileListView();
-  Common.waitTillElementIsNotPresent(fileListView.getProgressCircular(),1000);
+  Common.waitTillElementIsNotPresentWithoutTimeout(fileListView.getProgressCircular(),1000);
   FileListView fileListViewAfterUploadFile=Actions.uploadFile(FILE_NAME,fileListView);
   fileListViewAfterUploadFile.scrollTillFindElement(FILE_NAME);
   assertTrue(fileHasBeenUploaded=fileListViewAfterUploadFile.getFileElement().isDisplayed());

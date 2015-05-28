@@ -5,7 +5,7 @@
   Actions.deleteElement(FOLDER_WHERE_MOVE,fileListView,driver);
   Actions.deleteElement(FILE_NAME,fileListView,driver);
   waitAMomentPopUp=Actions.createFolder(FOLDER_WHERE_MOVE,fileListView);
-  Common.waitTillElementIsNotPresent(waitAMomentPopUp.getWaitAMomentTextElement(),100);
+  Common.waitTillElementIsNotPresentWithoutTimeout(waitAMomentPopUp.getWaitAMomentTextElement(),100);
   fileListView.scrollTillFindElement(FOLDER_WHERE_MOVE);
   assertTrue(fileListView.getFileElement().isDisplayed());
   FileListView fileListViewAfterUploadFile=Actions.uploadFile(FILE_NAME,fileListView);
@@ -15,9 +15,9 @@
   MoveView moveView=menuOptions.clickOnMove();
   moveView.scrollTillFindElement(FOLDER_WHERE_MOVE).tap(1,1);
   waitAMomentPopUp=moveView.clickOnChoose();
-  Common.waitTillElementIsNotPresent(waitAMomentPopUp.getWaitAMomentTextElement(),100);
+  Common.waitTillElementIsNotPresentWithoutTimeout(waitAMomentPopUp.getWaitAMomentTextElement(),100);
   fileListView.scrollTillFindElement(FOLDER_WHERE_MOVE).tap(1,1);
-  Common.waitTillElementIsNotPresent(fileListView.getProgressCircular(),1000);
+  Common.waitTillElementIsNotPresentWithoutTimeout(fileListView.getProgressCircular(),1000);
   Thread.sleep(1000);
   fileListView.scrollTillFindElement(FILE_NAME);
   assertEquals(FILE_NAME,fileListView.getFileElement().getText());

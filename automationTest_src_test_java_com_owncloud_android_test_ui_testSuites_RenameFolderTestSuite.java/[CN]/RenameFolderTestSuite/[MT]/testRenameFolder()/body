@@ -2,7 +2,7 @@
   FileListView fileListView=Actions.login(Config.URL,Config.user,Config.password,Config.isTrusted,driver);
   common.assertIsInFileListView();
   WaitAMomentPopUp waitAMomentPopUp=Actions.createFolder(OLD_FOLDER_NAME,fileListView);
-  Common.waitTillElementIsNotPresent(waitAMomentPopUp.getWaitAMomentTextElement(),100);
+  Common.waitTillElementIsNotPresentWithoutTimeout(waitAMomentPopUp.getWaitAMomentTextElement(),100);
   fileListView.scrollTillFindElement(OLD_FOLDER_NAME);
   assertTrue(folderHasBeenCreated=fileListView.getFileElement().isDisplayed());
   Actions.deleteElement(FOLDER_NAME,fileListView,driver);
@@ -12,7 +12,7 @@
   FolderPopUp.typeNewFolderName(FOLDER_NAME);
   FolderPopUp.clickOnNewFolderOkButton();
   CurrentCreatedFolder=FOLDER_NAME;
-  Common.waitTillElementIsNotPresent(waitAMomentPopUp.getWaitAMomentTextElement(),100);
+  Common.waitTillElementIsNotPresentWithoutTimeout(waitAMomentPopUp.getWaitAMomentTextElement(),100);
   fileListView.scrollTillFindElement(FOLDER_NAME);
   assertNotNull(fileListView.getFileElement());
   assertTrue(folderHasBeenCreated=fileListView.getFileElement().isDisplayed());

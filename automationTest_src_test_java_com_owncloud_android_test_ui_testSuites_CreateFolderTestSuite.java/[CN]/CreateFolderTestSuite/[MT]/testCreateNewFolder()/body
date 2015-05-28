@@ -4,7 +4,7 @@
   common.assertIsInFileListView();
   Actions.deleteElement(NEW_FOLDER_NAME,fileListView,driver);
   WaitAMomentPopUp waitAMomentPopUp=Actions.createFolder(NEW_FOLDER_NAME,fileListView);
-  Common.waitTillElementIsNotPresent(waitAMomentPopUp.getWaitAMomentTextElement(),100);
+  Common.waitTillElementIsNotPresentWithoutTimeout(waitAMomentPopUp.getWaitAMomentTextElement(),100);
   fileListView.scrollTillFindElement(FOLDER_NAME);
   assertNotNull(fileListView.getFileElement());
   assertTrue(folderHasBeenCreated=fileListView.getFileElement().isDisplayed());

@@ -5,7 +5,7 @@
   FileListView fileListViewAfterUploadFile=Actions.uploadFile(FILE_NAME,fileListView);
   fileListViewAfterUploadFile.scrollTillFindElement(FILE_NAME);
   assertTrue(fileListViewAfterUploadFile.getFileElement().isDisplayed());
-  Common.waitTillElementIsNotPresent(fileListViewAfterUploadFile.getProgressCircular(),1000);
+  Common.waitTillElementIsNotPresentWithoutTimeout(fileListViewAfterUploadFile.getProgressCircular(),1000);
   common.wait.until(ExpectedConditions.visibilityOf(fileListViewAfterUploadFile.getFileElementLayout().findElement(By.id(FileListView.getLocalFileIndicator()))));
   assertTrue(fileListViewAfterUploadFile.getFileElementLayout().findElement(By.id(FileListView.getLocalFileIndicator())).isDisplayed());
   fileListView=new FileListView(driver);
