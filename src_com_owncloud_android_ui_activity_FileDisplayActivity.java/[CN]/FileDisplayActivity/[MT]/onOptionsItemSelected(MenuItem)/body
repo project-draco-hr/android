@@ -22,16 +22,14 @@ case android.R.id.home:
 {
 FileFragment second=getSecondFragment();
 OCFile currentDir=getCurrentDir();
-if ((currentDir != null && currentDir.getParentId() != 0) || (second != null && second.getFile() != null)) {
+if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+  mDrawerLayout.closeDrawer(GravityCompat.START);
+}
+ else if ((currentDir != null && currentDir.getParentId() != 0) || (second != null && second.getFile() != null)) {
   onBackPressed();
 }
  else {
-  if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-    mDrawerLayout.closeDrawer(GravityCompat.START);
-  }
- else {
-    mDrawerLayout.openDrawer(GravityCompat.START);
-  }
+  mDrawerLayout.openDrawer(GravityCompat.START);
 }
 break;
 }

@@ -30,6 +30,7 @@
       super.onDrawerOpened(drawerView);
       getSupportActionBar().setTitle(R.string.drawer_open);
       getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+      mDrawerToggle.setDrawerIndicatorEnabled(true);
       invalidateOptionsMenu();
     }
   }
