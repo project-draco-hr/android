@@ -1,5 +1,5 @@
 {
-  if (IS_ICS_OR_HIGHER && checkIfMaximumBitmapExceed(canvas)) {
+  if (IS_ICS_OR_HIGHER && checkIfMaximumBitmapExceed(canvas) || IS_VERSION_BUGGY_ON_RECYCLES) {
     setLayerType(View.LAYER_TYPE_SOFTWARE,null);
   }
   super.onDraw(canvas);
