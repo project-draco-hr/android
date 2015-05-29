@@ -25,6 +25,9 @@
     createMinFragments();
   }
   getSupportActionBar().setHomeButtonEnabled(true);
+  if (getFile() != null) {
+    updateActionBarTitle();
+  }
   setSupportProgressBarIndeterminateVisibility(mSyncInProgress);
   setBackgroundText();
   Log_OC.v(TAG,"onCreate() end");
