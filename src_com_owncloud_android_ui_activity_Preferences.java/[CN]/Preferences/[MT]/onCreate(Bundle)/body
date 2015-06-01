@@ -2,6 +2,17 @@
   super.onCreate(savedInstanceState);
   mDbHandler=new DbHandler(getBaseContext());
   addPreferencesFromResource(R.xml.preferences);
+  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+    ActionBar actionBar=getActionBar();
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+      actionBar.setIcon(DisplayUtils.getSeasonalIconId());
+    }
+    actionBar.setDisplayHomeAsUpEnabled(true);
+    actionBar.setTitle(R.string.actionbar_settings);
+  }
+ else {
+    setTitle(R.string.actionbar_settings);
+  }
   int actionBarTitleId=getResources().getIdentifier("action_bar_title","id","android");
   View actionBarTitleView=getWindow().getDecorView().findViewById(actionBarTitleId);
   if (actionBarTitleView != null) {
