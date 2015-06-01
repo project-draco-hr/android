@@ -1,6 +1,10 @@
 {
   OCFileListFragment listOfFiles=getListOfFilesFragment();
   if (mDualPane || getSecondFragment() == null) {
+    if (getFile() != null && getFile().getParentId() == 0) {
+      finish();
+      return;
+    }
     if (listOfFiles != null) {
       listOfFiles.onBrowseUp();
     }
