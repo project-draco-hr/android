@@ -12,6 +12,5 @@
   if (listOfFiles != null) {
     setFile(listOfFiles.getCurrentFile());
   }
-  updateActionBarTitle();
   cleanSecondFragment();
 }

@@ -1,6 +1,5 @@
 {
-  cleanSecondFragment();
   setFile(directory);
-  updateActionBarTitle();
+  cleanSecondFragment();
   startSyncFolderOperation(directory,false);
 }

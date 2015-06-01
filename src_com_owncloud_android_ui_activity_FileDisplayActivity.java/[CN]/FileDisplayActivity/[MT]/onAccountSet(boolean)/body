@@ -25,7 +25,7 @@
     }
  else {
       updateFragmentsVisibility(!file.isFolder());
-      updateNavigationElementsInActionBar(file.isFolder() ? null : file);
+      updateActionBarTitleAndHomeButton(file.isFolder() ? null : file);
     }
   }
 }

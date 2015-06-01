@@ -6,6 +6,7 @@
     boolean noRoot=(currentDir != null && currentDir.getParentId() != 0);
     actionBar.setDisplayHomeAsUpEnabled(true);
     actionBar.setDisplayShowTitleEnabled(true);
+    mDrawerToggle.setDrawerIndicatorEnabled(!noRoot);
     if (!noRoot) {
       actionBar.setTitle(getString(R.string.default_display_name_for_root_folder));
       View actionBarTitleView=getWindow().getDecorView().findViewById(actionBarTitleId);
@@ -18,6 +19,7 @@
  else {
     actionBar.setDisplayHomeAsUpEnabled(true);
     actionBar.setDisplayShowTitleEnabled(true);
+    mDrawerToggle.setDrawerIndicatorEnabled(false);
     actionBar.setTitle(chosenFile.getFileName());
     actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
     View actionBarTitleView=getWindow().getDecorView().findViewById(actionBarTitleId);

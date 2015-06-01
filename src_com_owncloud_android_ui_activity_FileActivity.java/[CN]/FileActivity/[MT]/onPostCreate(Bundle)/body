@@ -2,5 +2,9 @@
   super.onPostCreate(savedInstanceState);
   if (mDrawerToggle != null) {
     mDrawerToggle.syncState();
+    if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+      getSupportActionBar().setTitle(R.string.app_name);
+      mDrawerToggle.setDrawerIndicatorEnabled(true);
+    }
   }
 }
