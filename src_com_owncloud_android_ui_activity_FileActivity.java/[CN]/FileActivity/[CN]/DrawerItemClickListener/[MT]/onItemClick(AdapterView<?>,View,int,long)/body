@@ -7,10 +7,12 @@ break;
 case 1:
 Intent settingsIntent=new Intent(getApplicationContext(),Preferences.class);
 startActivity(settingsIntent);
+mDrawerLayout.closeDrawers();
 break;
 case 2:
 Intent loggerIntent=new Intent(getApplicationContext(),LogHistoryActivity.class);
 startActivity(loggerIntent);
+mDrawerLayout.closeDrawers();
 break;
 }
 }
