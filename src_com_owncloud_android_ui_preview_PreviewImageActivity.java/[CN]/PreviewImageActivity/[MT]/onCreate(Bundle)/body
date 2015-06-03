@@ -15,9 +15,11 @@
         ActionBar actionBar=getSupportActionBar();
         if (visible) {
           actionBar.show();
+          mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
         }
  else {
           actionBar.hide();
+          mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         }
       }
     }
