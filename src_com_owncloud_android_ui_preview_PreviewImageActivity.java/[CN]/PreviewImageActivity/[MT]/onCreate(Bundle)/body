@@ -4,9 +4,8 @@
   initDrawer();
   ActionBar actionBar=getSupportActionBar();
   actionBar.setIcon(DisplayUtils.getSeasonalIconId());
-  actionBar.setDisplayHomeAsUpEnabled(true);
+  updateActionBarTitleAndHomeButton(null);
   actionBar.hide();
-  updateActionBarTitleAndHomeButton();
   if (isHoneycombOrHigher()) {
     mFullScreenAnchorView=getWindow().getDecorView();
     mFullScreenAnchorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener(){

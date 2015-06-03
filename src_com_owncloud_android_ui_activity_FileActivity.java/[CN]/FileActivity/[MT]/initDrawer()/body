@@ -1,4 +1,5 @@
 {
+  getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
   mDrawerLayout=(DrawerLayout)findViewById(R.id.drawer_layout);
   LinearLayout navigationDrawerLayout=(LinearLayout)findViewById(R.id.left_drawer);
   mDrawerList=(ListView)navigationDrawerLayout.findViewById(R.id.drawer_list);
@@ -18,9 +19,7 @@
  */
     public void onDrawerClosed(    View view){
       super.onDrawerClosed(view);
-      updateActionBarTitleAndHomeButton();
-      getSupportActionBar().setDisplayShowTitleEnabled(true);
-      getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+      updateActionBarTitleAndHomeButton(null);
       invalidateOptionsMenu();
     }
     /** 
@@ -29,13 +28,11 @@
     public void onDrawerOpened(    View drawerView){
       super.onDrawerOpened(drawerView);
       getSupportActionBar().setTitle(R.string.app_name);
-      getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
       mDrawerToggle.setDrawerIndicatorEnabled(true);
       invalidateOptionsMenu();
     }
   }
 ;
-  mDrawerToggle.setDrawerIndicatorEnabled(true);
   mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
   mDrawerLayout.setDrawerListener(mDrawerToggle);
 }
