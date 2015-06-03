@@ -11,6 +11,9 @@
  else       if (result.getCode() == ResultCode.FORBIDDEN) {
         message=String.format(res.getString(R.string.forbidden_permissions),res.getString(R.string.uploader_upload_forbidden_permissions));
       }
+ else       if (result.getCode() == ResultCode.INVALID_CHARACTER_DETECT_IN_SERVER) {
+        message=res.getString(R.string.filename_forbidden_charaters_from_server);
+      }
  else {
         message=String.format(res.getString(R.string.uploader_upload_failed_content_single),((UploadFileOperation)operation).getFileName());
       }
@@ -57,6 +60,9 @@
     }
  else     if (isNetworkError(result.getCode())) {
       message=getErrorMessage(result,res);
+    }
+ else     if (result.getCode() == ResultCode.INVALID_CHARACTER_DETECT_IN_SERVER) {
+      message=res.getString(R.string.filename_forbidden_charaters_from_server);
     }
  else {
       message=res.getString(R.string.rename_server_fail_msg);
@@ -124,6 +130,9 @@
     }
  else     if (result.getCode() == ResultCode.FORBIDDEN) {
       message=String.format(res.getString(R.string.forbidden_permissions),res.getString(R.string.forbidden_permissions_move));
+    }
+ else     if (result.getCode() == ResultCode.INVALID_CHARACTER_DETECT_IN_SERVER) {
+      message=res.getString(R.string.filename_forbidden_charaters_from_server);
     }
  else {
       message=res.getString(R.string.move_file_error);
