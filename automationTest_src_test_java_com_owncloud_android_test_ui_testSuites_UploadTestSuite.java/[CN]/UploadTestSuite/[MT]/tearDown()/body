@@ -8,6 +8,5 @@
     Actions.deleteElement(FILE_NAME,fileListView,driver);
     Actions.deleteElement(BIG_FILE_NAME,fileListView,driver);
   }
-  driver.removeApp("com.owncloud.android");
   driver.quit();
 }
