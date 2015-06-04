@@ -19,7 +19,7 @@
  */
     public void onDrawerClosed(    View view){
       super.onDrawerClosed(view);
-      updateActionBarTitleAndHomeButton(null);
+      updateActionBarTitleAndHomeButton(mFile);
       invalidateOptionsMenu();
     }
     /** 

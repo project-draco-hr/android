@@ -2,7 +2,14 @@
   String title=getString(R.string.default_display_name_for_root_folder);
   boolean inRoot;
   if (chosenFile == null) {
-    inRoot=(mFile == null || mFile.getParentId() == 0);
+    OCFile currentDir=null;
+    if (mFile != null && mFile.isFolder()) {
+      currentDir=mFile;
+    }
+ else {
+      currentDir=getStorageManager().getFileById(mFile.getParentId());
+    }
+    inRoot=(mFile == null || currentDir.getParentId() == 0);
     if (!inRoot) {
       title=mFile.getFileName();
     }
