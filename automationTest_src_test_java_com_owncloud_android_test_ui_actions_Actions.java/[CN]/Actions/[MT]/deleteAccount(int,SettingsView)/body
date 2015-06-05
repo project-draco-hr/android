@@ -1,0 +1,4 @@
+{
+  settingsView.tapOnAccountElement(accountPosition,1,1000);
+  settingsView.clickOnDeleteAccountElement();
+}
