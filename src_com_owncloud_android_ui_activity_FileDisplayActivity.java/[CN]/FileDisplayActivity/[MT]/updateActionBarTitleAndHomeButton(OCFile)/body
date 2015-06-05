@@ -1,6 +1,6 @@
 {
   if (mDualPane) {
-    super.updateActionBarTitleAndHomeButton(null);
+    super.updateActionBarTitleAndHomeButton(getCurrentDir());
   }
  else {
     super.updateActionBarTitleAndHomeButton(chosenFile);
