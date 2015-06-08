@@ -4,7 +4,7 @@
   common.assertIsInFileListView();
   MenuList menu=fileListView.clickOnMenuButton();
   SettingsView settingsView=menu.clickOnSettingsButton();
-  settingsView.tapOnAccountElement(1,1000);
+  settingsView.tapOnAccountElement(1,1,1000);
   LoginForm changePasswordForm=settingsView.clickOnChangePasswordElement();
   changePasswordForm.typePassword("WrongPassword");
   changePasswordForm.clickOnConnectButton();
