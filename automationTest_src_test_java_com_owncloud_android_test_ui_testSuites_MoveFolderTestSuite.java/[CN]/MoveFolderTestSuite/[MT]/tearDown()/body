@@ -1,0 +1,9 @@
+{
+  common.takeScreenShotOnFailed(name.getMethodName());
+  FileListView fileListView=new FileListView(driver);
+  driver.sendKeyEvent(android.view.KeyEvent.KEYCODE_BACK);
+  Actions.deleteElement(FOLDER_WHERE_MOVE,fileListView,driver);
+  Actions.deleteElement(FOLDER_TO_MOVE,fileListView,driver);
+  driver.removeApp("com.owncloud.android");
+  driver.quit();
+}

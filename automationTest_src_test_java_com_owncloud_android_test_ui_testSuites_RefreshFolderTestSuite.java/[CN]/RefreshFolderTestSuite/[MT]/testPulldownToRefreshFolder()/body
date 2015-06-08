@@ -1,0 +1,7 @@
+{
+  FileListView fileListView=Actions.login(Config.URL,Config.user,Config.password,Config.isTrusted,driver);
+  common.assertIsInFileListView();
+  Thread.sleep(5000);
+  fileListView.pulldownToRefresh();
+  assertTrue(fileListView.getProgressCircular().isDisplayed());
+}

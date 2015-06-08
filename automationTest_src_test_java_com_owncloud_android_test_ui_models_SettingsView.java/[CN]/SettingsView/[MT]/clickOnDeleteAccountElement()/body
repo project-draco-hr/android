@@ -1,0 +1,5 @@
+{
+  deleteAccountElement.click();
+  LoginForm loginForm=new LoginForm(driver);
+  return loginForm;
+}

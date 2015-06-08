@@ -1,0 +1,11 @@
+{
+  for (int time=0; time <= waitingTime * 1000; time+=pollingTime) {
+    try {
+      element.isDisplayed();
+    }
+ catch (    NoSuchElementException e) {
+      return;
+    }
+    Thread.sleep(pollingTime);
+  }
+}

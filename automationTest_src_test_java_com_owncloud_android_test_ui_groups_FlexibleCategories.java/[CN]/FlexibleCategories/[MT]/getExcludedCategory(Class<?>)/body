@@ -1,0 +1,4 @@
+{
+  ExcludeCategory annotation=clazz.getAnnotation(ExcludeCategory.class);
+  return annotation == null ? null : annotation.value();
+}

@@ -1,0 +1,4 @@
+{
+  userNameInput.clear();
+  userNameInput.sendKeys(userName + "\n");
+}

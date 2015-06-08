@@ -1,0 +1,25 @@
+{
+  FileListView fileListView=Actions.login(Config.URL,Config.user,Config.password,Config.isTrusted,driver);
+  driver.startActivity("com.google.android.gm",".ConversationListActivityGmail");
+  GmailEmailListView gmailEmailListView=new GmailEmailListView(driver);
+  Thread.sleep(3000);
+  GmailEmailView gmailEmailView=gmailEmailListView.clickOnEmail();
+  ImageView imageView=gmailEmailView.clickOnfileButton();
+  imageView.clickOnOptionsButton();
+  imageView.clickOnShareButton();
+  imageView.clickOnOwnCloudButton();
+  try {
+    imageView.clickOnJustOnceButton();
+  }
+ catch (  NoSuchElementException e) {
+  }
+  UploadView uploadView=new UploadView(driver);
+  uploadView.clickOUploadButton();
+  driver.sendKeyEvent(android.view.KeyEvent.KEYCODE_HOME);
+  driver.startActivity("com.owncloud.android",".ui.activity.FileDisplayActivity");
+  common.wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.name(FILE_GMAIL_NAME)));
+  assertEquals(Config.fileToTestSendByEmailName,driver.findElementByName(FILE_GMAIL_NAME).getText());
+  fileListView=new FileListView(driver);
+  fileListView.scrollTillFindElement(FILE_GMAIL_NAME);
+  assertTrue(fileHasBeenUploadedFromGmail=fileListView.getFileElement().isDisplayed());
+}

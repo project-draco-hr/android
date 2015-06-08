@@ -1,0 +1,18 @@
+{
+  LoginForm loginForm=new LoginForm(driver);
+  CertificatePopUp certificatePopUp=loginForm.typeHostUrl(url);
+  if (!isTrusted) {
+    WebDriverWait wait=new WebDriverWait(driver,30);
+    try {
+      wait.until(ExpectedConditions.visibilityOf(certificatePopUp.getOkButtonElement()));
+      driver.rotate(ScreenOrientation.LANDSCAPE);
+      driver.rotate(ScreenOrientation.PORTRAIT);
+      certificatePopUp.clickOnOkButton();
+    }
+ catch (    NoSuchElementException e) {
+    }
+  }
+  loginForm.typeUserName(user);
+  loginForm.typePassword(password);
+  return loginForm.clickOnConnectButton();
+}

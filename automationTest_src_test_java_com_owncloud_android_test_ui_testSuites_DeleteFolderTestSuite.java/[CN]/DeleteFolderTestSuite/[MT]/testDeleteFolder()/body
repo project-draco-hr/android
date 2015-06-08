@@ -1,0 +1,10 @@
+{
+  FileListView fileListView=Actions.login(Config.URL,Config.user,Config.password,Config.isTrusted,driver);
+  common.assertIsInFileListView();
+  WaitAMomentPopUp waitAMomentPopUp=Actions.createFolder(FOLDER_NAME,fileListView);
+  Common.waitTillElementIsNotPresentWithoutTimeout(waitAMomentPopUp.getWaitAMomentTextElement(),100);
+  fileListView.scrollTillFindElement(FOLDER_NAME);
+  assertTrue(folderHasBeenCreated=fileListView.getFileElement().isDisplayed());
+  Actions.deleteElement(FOLDER_NAME,fileListView,driver);
+  assertFalse(folderHasBeenCreated=fileListView.getFileElement().isDisplayed());
+}

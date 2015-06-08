@@ -1,0 +1,11 @@
+{
+  try {
+    driver.startActivity("com.owncloud.android",".ui.activity.FileDisplayActivity");
+    ElementMenuOptions menuOptions=fileListView.longPressOnElement(elementName);
+    WaitAMomentPopUp waitAMomentPopUp=menuOptions.clickOnUnshareLinkElement();
+    Common.waitTillElementIsNotPresentWithoutTimeout(waitAMomentPopUp.getWaitAMomentTextElement(),100);
+    Common.waitTillElementIsNotPresent((AndroidElement)fileListView.getFileElementLayout().findElement(By.id(FileListView.getSharedElementIndicator())),100);
+  }
+ catch (  NoSuchElementException e) {
+  }
+}

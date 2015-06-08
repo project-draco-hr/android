@@ -1,0 +1,10 @@
+{
+  try {
+    menuButton.click();
+  }
+ catch (  NoSuchElementException e) {
+    driver.sendKeyEvent(AndroidKeyCode.MENU);
+  }
+  MenuList menuList=new MenuList(driver);
+  return menuList;
+}
