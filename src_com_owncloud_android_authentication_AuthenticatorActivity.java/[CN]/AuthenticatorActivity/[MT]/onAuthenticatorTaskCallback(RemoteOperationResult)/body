@@ -5,7 +5,7 @@
     Log_OC.d(TAG,"Successful access - time to save the account");
     boolean success=false;
     if (mAction == ACTION_CREATE) {
-      success=createAccount();
+      success=createAccount(result);
     }
  else {
       try {
