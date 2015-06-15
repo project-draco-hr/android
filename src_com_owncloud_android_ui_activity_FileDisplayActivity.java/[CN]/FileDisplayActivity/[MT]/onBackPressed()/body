@@ -1,15 +1,12 @@
 {
   OCFileListFragment listOfFiles=getListOfFilesFragment();
   if (mDualPane || getSecondFragment() == null) {
+    if (getFile() != null && getFile().getParentId() == 0) {
+      finish();
+      return;
+    }
     if (listOfFiles != null) {
-      if (mDirectories.getCount() <= 1) {
-        finish();
-        return;
-      }
-      int levelsUp=listOfFiles.onBrowseUp();
-      for (int i=0; i < levelsUp && mDirectories.getCount() > 1; i++) {
-        popDirname();
-      }
+      listOfFiles.onBrowseUp();
     }
   }
   if (listOfFiles != null) {

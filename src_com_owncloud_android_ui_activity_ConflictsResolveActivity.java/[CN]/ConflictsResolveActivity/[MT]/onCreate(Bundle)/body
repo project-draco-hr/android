@@ -1,5 +1,5 @@
 {
   super.onCreate(savedInstanceState);
-  ActionBar actionBar=getSupportActionBar();
+  ActionBar actionBar=getActionBar();
   actionBar.setIcon(DisplayUtils.getSeasonalIconId());
 }

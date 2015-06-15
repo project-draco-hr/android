@@ -1,10 +1,11 @@
 {
-  super.onCreate(savedInstanceState);
   requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+  super.onCreate(savedInstanceState);
   setContentView(R.layout.preview_image_activity);
+  initDrawer();
   ActionBar actionBar=getSupportActionBar();
   actionBar.setIcon(DisplayUtils.getSeasonalIconId());
-  actionBar.setDisplayHomeAsUpEnabled(true);
+  updateActionBarTitleAndHomeButton(null);
   actionBar.hide();
   if (isHoneycombOrHigher()) {
     mFullScreenAnchorView=getWindow().getDecorView();
@@ -14,9 +15,11 @@
         ActionBar actionBar=getSupportActionBar();
         if (visible) {
           actionBar.show();
+          mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
         }
  else {
           actionBar.hide();
+          mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         }
       }
     }

@@ -1,5 +1,5 @@
 {
-  Log_OC.d(TAG,"Received result of operation in FileActivity - common behaviour for all the FileActivities ");
+  Log_OC.d(TAG,"Received result of operation in FileActivity - common behaviour for all the " + "FileActivities ");
   mFileOperationsHelper.setOpIdWaitingFor(Long.MAX_VALUE);
   if (!result.isSuccess() && (result.getCode() == ResultCode.UNAUTHORIZED || result.isIdPRedirection() || (result.isException() && result.getException() instanceof AuthenticatorException))) {
     requestCredentialsUpdate();

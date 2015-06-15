@@ -1,4 +1,0 @@
-{
-  mDirectories.remove(mDirectories.getItem(0));
-  return !mDirectories.isEmpty();
-}

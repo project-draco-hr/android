@@ -1,0 +1,38 @@
+{
+  getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+  mDrawerLayout=(DrawerLayout)findViewById(R.id.drawer_layout);
+  LinearLayout navigationDrawerLayout=(LinearLayout)findViewById(R.id.left_drawer);
+  mDrawerList=(ListView)navigationDrawerLayout.findViewById(R.id.drawer_list);
+  mDrawerTitles=getResources().getStringArray(R.array.drawer_items);
+  mDrawerContentDescriptions=getResources().getStringArray(R.array.drawer_content_descriptions);
+  mDrawerItems=new ArrayList<NavigationDrawerItem>();
+  mDrawerItems.add(new NavigationDrawerItem(mDrawerTitles[0],mDrawerContentDescriptions[0]));
+  mDrawerItems.add(new NavigationDrawerItem(mDrawerTitles[1],mDrawerContentDescriptions[1]));
+  if (BuildConfig.DEBUG) {
+    mDrawerItems.add(new NavigationDrawerItem(mDrawerTitles[2],mDrawerContentDescriptions[2]));
+  }
+  mNavigationDrawerAdapter=new NavigationDrawerListAdapter(getApplicationContext(),this,mDrawerItems);
+  mDrawerList.setAdapter(mNavigationDrawerAdapter);
+  mDrawerToggle=new ActionBarDrawerToggle(this,mDrawerLayout,R.drawable.ic_drawer,R.string.app_name,R.string.drawer_close){
+    /** 
+ * Called when a drawer has settled in a completely closed state. 
+ */
+    public void onDrawerClosed(    View view){
+      super.onDrawerClosed(view);
+      updateActionBarTitleAndHomeButton(null);
+      invalidateOptionsMenu();
+    }
+    /** 
+ * Called when a drawer has settled in a completely open state. 
+ */
+    public void onDrawerOpened(    View drawerView){
+      super.onDrawerOpened(drawerView);
+      getSupportActionBar().setTitle(R.string.app_name);
+      mDrawerToggle.setDrawerIndicatorEnabled(true);
+      invalidateOptionsMenu();
+    }
+  }
+;
+  mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+  mDrawerLayout.setDrawerListener(mDrawerToggle);
+}
