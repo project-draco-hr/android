@@ -1,0 +1,5 @@
+{
+  detailsFileElement.click();
+  FileDetailsView fileDetailsView=new FileDetailsView(driver);
+  return fileDetailsView;
+}

@@ -1,0 +1,26 @@
+{
+  List<Class<?>> classes=new ArrayList<Class<?>>();
+  if (!directory.exists()) {
+    return classes;
+  }
+  File[] files=directory.listFiles();
+  for (  File file : files) {
+    if (file.isDirectory()) {
+      classes.addAll(findClasses(file,packageName + "." + file.getName(),classPrefix,classSuffix,methodAnnotation));
+    }
+ else     if (file.getName().startsWith(classPrefix) && file.getName().endsWith(classSuffix + ".class")) {
+      Class<?> clazz=Class.forName(packageName + '.' + file.getName().substring(0,file.getName().length() - 6));
+      boolean classHasTest=false;
+      for (      Method method : clazz.getMethods()) {
+        if (method.getAnnotation(methodAnnotation) != null) {
+          classHasTest=true;
+          break;
+        }
+      }
+      if (classHasTest) {
+        classes.add(clazz);
+      }
+    }
+  }
+  return classes;
+}

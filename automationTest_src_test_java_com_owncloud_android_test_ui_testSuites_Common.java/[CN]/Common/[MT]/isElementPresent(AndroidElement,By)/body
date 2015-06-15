@@ -1,0 +1,9 @@
+{
+  try {
+    element.findElement(by);
+    return true;
+  }
+ catch (  NoSuchElementException e) {
+    return false;
+  }
+}

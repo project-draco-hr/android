@@ -1,0 +1,6 @@
+{
+  hostUrlInput.clear();
+  hostUrlInput.sendKeys(hostUrl + "\n");
+  CertificatePopUp certificatePopUp=new CertificatePopUp(driver);
+  return certificatePopUp;
+}

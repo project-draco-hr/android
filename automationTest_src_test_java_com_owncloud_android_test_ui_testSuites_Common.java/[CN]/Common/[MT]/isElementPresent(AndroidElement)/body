@@ -1,0 +1,9 @@
+{
+  try {
+    element.isDisplayed();
+  }
+ catch (  NoSuchElementException e) {
+    return false;
+  }
+  return true;
+}

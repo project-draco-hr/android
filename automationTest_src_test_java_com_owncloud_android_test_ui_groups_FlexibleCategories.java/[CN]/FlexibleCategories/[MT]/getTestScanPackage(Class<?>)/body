@@ -1,0 +1,7 @@
+{
+  TestScanPackage annotation=clazz.getAnnotation(TestScanPackage.class);
+  if (annotation == null) {
+    throw new InitializationError("No package given to scan for tests!\nUse the annotation @TestScanPackage(\"my.package\") on the test suite " + clazz + ".");
+  }
+  return annotation.value();
+}
