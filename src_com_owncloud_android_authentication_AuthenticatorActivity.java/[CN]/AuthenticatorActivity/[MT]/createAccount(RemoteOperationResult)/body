@@ -1,6 +1,10 @@
 {
   boolean isOAuth=AccountTypeUtils.getAuthTokenTypeAccessToken(MainApp.getAccountType()).equals(mAuthTokenType);
   boolean isSaml=AccountTypeUtils.getAuthTokenTypeSamlSessionCookie(MainApp.getAccountType()).equals(mAuthTokenType);
+  String lastPermanentLocation=authResult.getLastPermanentLocation();
+  if (lastPermanentLocation != null) {
+    mServerInfo.mBaseUrl=AccountUtils.trimWebdavSuffix(lastPermanentLocation);
+  }
   Uri uri=Uri.parse(mServerInfo.mBaseUrl);
   String username=mUsernameInput.getText().toString().trim();
   if (isOAuth) {
