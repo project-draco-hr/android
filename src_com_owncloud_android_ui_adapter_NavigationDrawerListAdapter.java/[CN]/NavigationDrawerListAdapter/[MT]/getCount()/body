@@ -1,0 +1,8 @@
+{
+  if (mShowAccounts) {
+    return mNavigationDrawerItems.size() + 1;
+  }
+ else {
+    return mNavigationDrawerItems.size();
+  }
+}

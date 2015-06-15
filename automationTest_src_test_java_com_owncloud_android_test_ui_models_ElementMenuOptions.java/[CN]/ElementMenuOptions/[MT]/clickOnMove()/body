@@ -1,0 +1,5 @@
+{
+  moveElement.click();
+  MoveView moveView=new MoveView(driver);
+  return moveView;
+}

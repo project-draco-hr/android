@@ -1,0 +1,4 @@
+{
+  backToDisplayActivity();
+  super.allFilesOption();
+}

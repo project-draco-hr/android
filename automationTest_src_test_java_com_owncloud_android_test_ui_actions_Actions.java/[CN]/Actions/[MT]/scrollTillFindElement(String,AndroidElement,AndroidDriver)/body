@@ -1,0 +1,16 @@
+{
+  AndroidElement fileElement;
+  if (element.getAttribute("scrollable").equals("true")) {
+    HashMap<String,String> scrollObject=new HashMap<String,String>();
+    scrollObject.put("text",elementName);
+    scrollObject.put("element",((RemoteWebElement)element).getId());
+    driver.executeScript("mobile: scrollTo",scrollObject);
+  }
+  try {
+    fileElement=(AndroidElement)driver.findElementByName(elementName);
+  }
+ catch (  NoSuchElementException e) {
+    fileElement=null;
+  }
+  return fileElement;
+}

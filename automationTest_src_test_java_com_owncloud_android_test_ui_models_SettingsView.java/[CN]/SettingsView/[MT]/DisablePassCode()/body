@@ -1,0 +1,7 @@
+{
+  if (passcodeCheckbox.isSelected()) {
+    passcodeCheckbox.click();
+  }
+  PassCodeView passcodeview=new PassCodeView(driver);
+  return passcodeview;
+}

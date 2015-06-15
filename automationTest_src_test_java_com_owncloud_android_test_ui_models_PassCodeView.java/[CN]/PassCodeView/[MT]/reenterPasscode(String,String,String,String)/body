@@ -1,0 +1,5 @@
+{
+  codeElement1.sendKeys(codeNumber1 + codeNumber1 + codeNumber1+ codeNumber1);
+  SettingsView settingsView=new SettingsView(driver);
+  return settingsView;
+}

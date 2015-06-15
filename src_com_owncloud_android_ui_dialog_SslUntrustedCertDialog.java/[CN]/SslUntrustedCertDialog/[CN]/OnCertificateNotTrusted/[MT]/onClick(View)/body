@@ -3,5 +3,5 @@
   if (mHandler != null) {
     mHandler.cancel();
   }
-  ((OnSslUntrustedCertListener)getSherlockActivity()).onCancelCertificate();
+  ((OnSslUntrustedCertListener)getActivity()).onCancelCertificate();
 }

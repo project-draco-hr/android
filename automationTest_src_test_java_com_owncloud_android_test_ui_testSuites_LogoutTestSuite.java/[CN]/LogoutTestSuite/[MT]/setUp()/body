@@ -1,0 +1,4 @@
+{
+  common=new Common();
+  driver=common.setUpCommonDriver();
+}

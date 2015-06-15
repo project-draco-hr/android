@@ -1,0 +1,4 @@
+{
+  newFolderNameField.clear();
+  newFolderNameField.sendKeys(newFolderName + "\n");
+}

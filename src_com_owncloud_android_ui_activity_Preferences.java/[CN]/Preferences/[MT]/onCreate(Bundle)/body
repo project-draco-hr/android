@@ -2,10 +2,17 @@
   super.onCreate(savedInstanceState);
   mDbHandler=new DbHandler(getBaseContext());
   addPreferencesFromResource(R.xml.preferences);
-  ActionBar actionBar=getSherlock().getActionBar();
-  actionBar.setIcon(DisplayUtils.getSeasonalIconId());
-  actionBar.setDisplayHomeAsUpEnabled(true);
-  actionBar.setTitle(R.string.actionbar_settings);
+  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+    ActionBar actionBar=getActionBar();
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+      actionBar.setIcon(DisplayUtils.getSeasonalIconId());
+    }
+    actionBar.setDisplayHomeAsUpEnabled(true);
+    actionBar.setTitle(R.string.actionbar_settings);
+  }
+ else {
+    setTitle(R.string.actionbar_settings);
+  }
   int actionBarTitleId=getResources().getIdentifier("action_bar_title","id","android");
   View actionBarTitleView=getWindow().getDecorView().findViewById(actionBarTitleId);
   if (actionBarTitleView != null) {
@@ -75,6 +82,19 @@
       preferenceCategory.removePreference(pHelp);
     }
   }
+  if (BuildConfig.DEBUG) {
+    Preference pLog=findPreference("log");
+    if (pLog != null) {
+      pLog.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+        @Override public boolean onPreferenceClick(        Preference preference){
+          Intent loggerIntent=new Intent(getApplicationContext(),LogHistoryActivity.class);
+          startActivity(loggerIntent);
+          return true;
+        }
+      }
+);
+    }
+  }
   boolean recommendEnabled=getResources().getBoolean(R.bool.recommend_enabled);
   Preference pRecommend=findPreference("recommend");
   if (pRecommend != null) {
@@ -90,7 +110,7 @@
           Account currentAccount=AccountUtils.getCurrentOwnCloudAccount(Preferences.this);
           String username=currentAccount.name.substring(0,currentAccount.name.lastIndexOf('@'));
           String recommendSubject=String.format(getString(R.string.recommend_subject),appName);
-          String recommendText=String.format(getString(R.string.recommend_text),appName,downloadUrl,username);
+          String recommendText=String.format(getString(R.string.recommend_text),appName,downloadUrl);
           intent.putExtra(Intent.EXTRA_SUBJECT,recommendSubject);
           intent.putExtra(Intent.EXTRA_TEXT,recommendText);
           startActivity(intent);

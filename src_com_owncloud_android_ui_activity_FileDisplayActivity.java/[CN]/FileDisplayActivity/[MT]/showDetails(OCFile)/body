@@ -2,6 +2,6 @@
   Fragment detailFragment=new FileDetailFragment(file,getAccount());
   setSecondFragment(detailFragment);
   updateFragmentsVisibility(true);
-  updateNavigationElementsInActionBar(file);
+  updateActionBarTitleAndHomeButton(file);
   setFile(file);
 }

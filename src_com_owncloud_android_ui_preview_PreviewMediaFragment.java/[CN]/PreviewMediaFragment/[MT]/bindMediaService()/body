@@ -3,5 +3,5 @@
   if (mMediaServiceConnection == null) {
     mMediaServiceConnection=new MediaServiceConnection();
   }
-  getSherlockActivity().bindService(new Intent(getSherlockActivity(),MediaService.class),mMediaServiceConnection,Context.BIND_AUTO_CREATE);
+  getActivity().bindService(new Intent(getActivity(),MediaService.class),mMediaServiceConnection,Context.BIND_AUTO_CREATE);
 }

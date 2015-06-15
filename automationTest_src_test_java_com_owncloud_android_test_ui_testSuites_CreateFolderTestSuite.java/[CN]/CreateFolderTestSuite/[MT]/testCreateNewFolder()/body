@@ -1,0 +1,13 @@
+{
+  String NEW_FOLDER_NAME="testCreateFolder";
+  FileListView fileListView=Actions.login(Config.URL,Config.user,Config.password,Config.isTrusted,driver);
+  common.assertIsInFileListView();
+  Actions.deleteElement(NEW_FOLDER_NAME,fileListView,driver);
+  WaitAMomentPopUp waitAMomentPopUp=Actions.createFolder(NEW_FOLDER_NAME,fileListView);
+  Common.waitTillElementIsNotPresentWithoutTimeout(waitAMomentPopUp.getWaitAMomentTextElement(),100);
+  fileListView.scrollTillFindElement(FOLDER_NAME);
+  assertNotNull(fileListView.getFileElement());
+  assertTrue(folderHasBeenCreated=fileListView.getFileElement().isDisplayed());
+  CurrentCreatedFolder=FOLDER_NAME;
+  assertEquals(FOLDER_NAME,fileListView.getFileElement().getText());
+}

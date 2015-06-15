@@ -10,7 +10,7 @@
  else     filePath=fileManagerString;
   }
  catch (  Exception e) {
-    Log_OC.e(TAG,"Unexpected exception when trying to read the result of Intent.ACTION_GET_CONTENT",e);
+    Log_OC.e(TAG,"Unexpected exception when trying to read the result of " + "Intent.ACTION_GET_CONTENT",e);
   }
  finally {
     if (filePath == null) {

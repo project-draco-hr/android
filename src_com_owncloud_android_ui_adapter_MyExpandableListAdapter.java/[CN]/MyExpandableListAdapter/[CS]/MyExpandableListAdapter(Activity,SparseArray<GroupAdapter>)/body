@@ -1,0 +1,5 @@
+{
+  activity=act;
+  this.groups=groups;
+  inflater=act.getLayoutInflater();
+}

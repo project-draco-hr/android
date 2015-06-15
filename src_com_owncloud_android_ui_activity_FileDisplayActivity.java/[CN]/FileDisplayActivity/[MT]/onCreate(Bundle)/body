@@ -17,13 +17,13 @@
     mWaitingToSend=null;
   }
   setContentView(R.layout.files);
+  initDrawer();
   mDualPane=getResources().getBoolean(R.bool.large_land_layout);
   mLeftFragmentContainer=findViewById(R.id.left_fragment_container);
   mRightFragmentContainer=findViewById(R.id.right_fragment_container);
   if (savedInstanceState == null) {
     createMinFragments();
   }
-  mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
   getSupportActionBar().setHomeButtonEnabled(true);
   setSupportProgressBarIndeterminateVisibility(mSyncInProgress);
   setBackgroundText();

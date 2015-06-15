@@ -1,0 +1,5 @@
+File directory
+String packageName
+String classPrefix
+String classSuffix
+Class<? extends Annotation> methodAnnotation

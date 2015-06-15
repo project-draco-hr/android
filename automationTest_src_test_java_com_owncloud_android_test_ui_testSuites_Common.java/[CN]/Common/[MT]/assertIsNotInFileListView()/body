@@ -1,0 +1,11 @@
+{
+  AndroidElement fileElement;
+  assertTrue(waitForTextPresent("ownCloud",(AndroidElement)driver.findElementByAndroidUIAutomator("new UiSelector()" + ".resourceId(\"android:id/action_bar_title\")")));
+  try {
+    fileElement=(AndroidElement)driver.findElementByAndroidUIAutomator("new UiSelector()" + ".description(\"Upload\")");
+  }
+ catch (  NoSuchElementException e) {
+    fileElement=null;
+  }
+  assertNull(fileElement);
+}

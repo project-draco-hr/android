@@ -1,5 +1,5 @@
 {
-  ComponentsGetter cg=(ComponentsGetter)getSherlockActivity();
+  ComponentsGetter cg=(ComponentsGetter)getActivity();
   cg.getFileOperationsHelper().removeFile(mTargetFile,true);
   FileDataStorageManager storageManager=cg.getStorageManager();
   boolean containsKeepInSync=false;

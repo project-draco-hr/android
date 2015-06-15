@@ -1,0 +1,6 @@
+{
+  super.onConfigurationChanged(newConfig);
+  if (mDrawerToggle != null) {
+    mDrawerToggle.onConfigurationChanged(newConfig);
+  }
+}

@@ -1,6 +1,8 @@
 {
   if (event.getAction() == MotionEvent.ACTION_DOWN && v == mVideoPreview) {
-    startFullScreenVideo();
+    if (event.getX() / Resources.getSystem().getDisplayMetrics().density > 24.0) {
+      startFullScreenVideo();
+    }
     return true;
   }
   return false;

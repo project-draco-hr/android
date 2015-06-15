@@ -1,0 +1,9 @@
+{
+  common.takeScreenShotOnFailed(name.getMethodName());
+  if (folderHasBeenCreated) {
+    FileListView fileListView=new FileListView(driver);
+    Actions.deleteElement(FOLDER_NAME,fileListView,driver);
+  }
+  driver.removeApp("com.owncloud.android");
+  driver.quit();
+}

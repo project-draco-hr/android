@@ -2,10 +2,10 @@
   if (which == AlertDialog.BUTTON_POSITIVE) {
     String newFolderName=((TextView)(getDialog().findViewById(R.id.user_input))).getText().toString().trim();
     if (newFolderName.length() <= 0) {
-      Toast.makeText(getSherlockActivity(),R.string.filename_empty,Toast.LENGTH_LONG).show();
+      Toast.makeText(getActivity(),R.string.filename_empty,Toast.LENGTH_LONG).show();
       return;
     }
-    boolean serverWithForbiddenChars=((ComponentsGetter)getSherlockActivity()).getFileOperationsHelper().isVersionWithForbiddenCharacters();
+    boolean serverWithForbiddenChars=((ComponentsGetter)getActivity()).getFileOperationsHelper().isVersionWithForbiddenCharacters();
     if (!FileUtils.isValidName(newFolderName,serverWithForbiddenChars)) {
       int messageId=0;
       if (serverWithForbiddenChars) {
@@ -14,11 +14,11 @@
  else {
         messageId=R.string.filename_forbidden_characters;
       }
-      Toast.makeText(getSherlockActivity(),messageId,Toast.LENGTH_LONG).show();
+      Toast.makeText(getActivity(),messageId,Toast.LENGTH_LONG).show();
       return;
     }
     String path=mParentFolder.getRemotePath();
     path+=newFolderName + OCFile.PATH_SEPARATOR;
-    ((ComponentsGetter)getSherlockActivity()).getFileOperationsHelper().createFolder(path,false);
+    ((ComponentsGetter)getActivity()).getFileOperationsHelper().createFolder(path,false);
   }
 }

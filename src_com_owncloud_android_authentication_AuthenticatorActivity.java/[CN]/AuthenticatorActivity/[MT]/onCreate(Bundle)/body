@@ -1,6 +1,11 @@
 {
   super.onCreate(savedInstanceState);
-  getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+  if (getSupportActionBar() != null) {
+    getSupportActionBar().hide();
+    getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+    getSupportActionBar().setDisplayShowHomeEnabled(false);
+    getSupportActionBar().setDisplayShowTitleEnabled(false);
+  }
   mIsFirstAuthAttempt=true;
   mOperationsServiceConnection=new OperationsServiceConnection();
   if (!bindService(new Intent(this,OperationsService.class),mOperationsServiceConnection,Context.BIND_AUTO_CREATE)) {

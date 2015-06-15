@@ -14,7 +14,7 @@
         OCFile currentFile=(getFile() == null) ? null : getStorageManager().getFileByPath(getFile().getRemotePath());
         OCFile currentDir=(getCurrentDir() == null) ? null : getStorageManager().getFileByPath(getCurrentDir().getRemotePath());
         if (currentDir == null) {
-          Toast.makeText(FileDisplayActivity.this,String.format(getString(R.string.sync_current_folder_was_removed),mDirectories.getItem(0)),Toast.LENGTH_LONG).show();
+          Toast.makeText(FileDisplayActivity.this,String.format(getString(R.string.sync_current_folder_was_removed),synchFolderRemotePath),Toast.LENGTH_LONG).show();
           browseToRoot();
         }
  else {
@@ -25,7 +25,7 @@
           if (synchFolderRemotePath != null && currentDir.getRemotePath().equals(synchFolderRemotePath)) {
             OCFileListFragment fileListFragment=getListOfFilesFragment();
             if (fileListFragment != null) {
-              fileListFragment.listDirectory(currentDir);
+              fileListFragment.listDirectory();
             }
           }
           setFile(currentFile);
