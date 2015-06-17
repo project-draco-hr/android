@@ -12,6 +12,9 @@ synchronized (mPendingOperations) {
         if (mLastTarget.mAccount != null) {
           OwnCloudAccount ocAccount=new OwnCloudAccount(mLastTarget.mAccount,mService);
           mOwnCloudClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,mService);
+          AccountManager am=AccountManager.get(mService.getApplicationContext());
+          String version=am.getUserData(mLastTarget.mAccount,AccountUtils.Constants.KEY_OC_VERSION);
+          mOwnCloudClient.setOwnCloudVersion(version);
           mStorageManager=new FileDataStorageManager(mLastTarget.mAccount,mService.getContentResolver());
         }
  else {
