@@ -16,7 +16,8 @@
       }
     }
     setFooterText(generateFooterText(filesCount,foldersCount));
-    if (((double)imagesCount / (double)filesCount) >= THUMBNAIL_THRESHOLD) {
+    OwnCloudVersion version=AccountUtils.getServerVersion(((FileActivity)mContainerActivity).getAccount());
+    if (version != null && version.supportsRemoteThumbnails() && imagesCount == filesCount) {
       switchToGridView();
     }
  else {
