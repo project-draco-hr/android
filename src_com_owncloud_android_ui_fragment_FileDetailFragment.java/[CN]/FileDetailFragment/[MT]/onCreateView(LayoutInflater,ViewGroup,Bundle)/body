@@ -6,9 +6,7 @@
   if (getFile() != null && mAccount != null) {
     mLayout=R.layout.file_details_fragment;
   }
-  View view=null;
-  view=inflater.inflate(mLayout,null);
-  mView=view;
+  mView=inflater.inflate(mLayout,null);
   if (mLayout == R.layout.file_details_fragment) {
     mView.findViewById(R.id.fdKeepInSync).setOnClickListener(this);
     ProgressBar progressBar=(ProgressBar)mView.findViewById(R.id.fdProgressBar);
@@ -16,5 +14,5 @@
     mView.findViewById(R.id.fdCancelBtn).setOnClickListener(this);
   }
   updateFileDetails(false,false);
-  return view;
+  return mView;
 }

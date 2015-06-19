@@ -2,5 +2,5 @@
   if (url.toLowerCase().endsWith(AccountUtils.WEBDAV_PATH_4_0_AND_LATER)) {
     url=url.substring(0,url.length() - AccountUtils.WEBDAV_PATH_4_0_AND_LATER.length());
   }
-  return (url != null ? url : "");
+  return url;
 }

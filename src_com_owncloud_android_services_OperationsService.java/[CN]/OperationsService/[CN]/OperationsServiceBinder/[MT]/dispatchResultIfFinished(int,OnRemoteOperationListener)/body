@@ -5,11 +5,6 @@
     return true;
   }
  else {
-    if (!mServiceHandler.mPendingOperations.isEmpty()) {
-      return true;
-    }
- else {
-      return false;
-    }
+    return (!mServiceHandler.mPendingOperations.isEmpty());
   }
 }

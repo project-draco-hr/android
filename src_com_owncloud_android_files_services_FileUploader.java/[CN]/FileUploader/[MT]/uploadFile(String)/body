@@ -6,7 +6,7 @@ synchronized (mPendingUploads) {
     if (AccountUtils.exists(mCurrentUpload.getAccount(),getApplicationContext())) {
       Log_OC.d(TAG,"Account " + mCurrentUpload.getAccount().name + " exists");
       notifyUploadStart(mCurrentUpload);
-      RemoteOperationResult uploadResult=null, grantResult=null;
+      RemoteOperationResult uploadResult=null, grantResult;
       try {
         if (mUploadClient == null || !mLastAccount.equals(mCurrentUpload.getAccount())) {
           mLastAccount=mCurrentUpload.getAccount();
@@ -42,7 +42,7 @@ synchronized (mPendingUploads) {
           mPendingUploads.remove(uploadKey);
           Log_OC.i(TAG,"Remove CurrentUploadItem from pending upload Item Map.");
         }
-        if (uploadResult.isException()) {
+        if (uploadResult != null && uploadResult.isException()) {
           mUploadClient=null;
         }
       }

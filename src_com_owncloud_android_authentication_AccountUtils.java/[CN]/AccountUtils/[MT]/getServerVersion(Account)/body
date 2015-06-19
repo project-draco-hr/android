@@ -1,8 +1,11 @@
 {
+  OwnCloudVersion serverVersion=null;
   if (account != null) {
     AccountManager accountMgr=AccountManager.get(MainApp.getAppContext());
     String serverVersionStr=accountMgr.getUserData(account,Constants.KEY_OC_VERSION);
-    return new OwnCloudVersion(serverVersionStr);
+    if (serverVersionStr != null) {
+      serverVersion=new OwnCloudVersion(serverVersionStr);
+    }
   }
-  return null;
+  return serverVersion;
 }
