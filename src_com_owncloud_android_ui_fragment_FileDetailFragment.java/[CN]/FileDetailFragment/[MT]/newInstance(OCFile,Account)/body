@@ -1,0 +1,8 @@
+{
+  FileDetailFragment frag=new FileDetailFragment();
+  Bundle args=new Bundle();
+  args.putParcelable(ARG_FILE,fileToDetail);
+  args.putParcelable(ARG_ACCOUNT,account);
+  frag.setArguments(args);
+  return frag;
+}

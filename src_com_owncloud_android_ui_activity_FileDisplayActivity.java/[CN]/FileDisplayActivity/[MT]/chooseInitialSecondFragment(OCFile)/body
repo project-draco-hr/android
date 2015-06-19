@@ -7,7 +7,7 @@
       secondFragment=new PreviewMediaFragment(file,getAccount(),startPlaybackPosition,autoplay);
     }
  else {
-      secondFragment=new FileDetailFragment(file,getAccount());
+      secondFragment=FileDetailFragment.newInstance(file,getAccount());
     }
   }
   return secondFragment;
