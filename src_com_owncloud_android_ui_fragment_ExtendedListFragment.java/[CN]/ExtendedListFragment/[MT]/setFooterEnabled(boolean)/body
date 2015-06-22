@@ -16,5 +16,7 @@
     mListFooterView.invalidate();
   }
  else {
+    mGridView.removeFooterView(mGridFooterView);
+    mListView.removeFooterView(mListFooterView);
   }
 }

@@ -17,7 +17,7 @@
     }
     setFooterText(generateFooterText(filesCount,foldersCount));
     OwnCloudVersion version=AccountUtils.getServerVersion(((FileActivity)mContainerActivity).getAccount());
-    if (version != null && version.supportsRemoteThumbnails() && imagesCount == filesCount) {
+    if (version != null && version.supportsRemoteThumbnails() && imagesCount > 0 && imagesCount == filesCount) {
       switchToGridView();
     }
  else {
