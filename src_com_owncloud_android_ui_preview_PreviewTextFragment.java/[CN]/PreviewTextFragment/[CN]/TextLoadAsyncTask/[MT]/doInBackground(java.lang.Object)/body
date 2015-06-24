@@ -20,6 +20,7 @@
     if (exc != null)     throw exc;
   }
  catch (  IOException e) {
+    Log_OC.e(TAG,e.getMessage(),e);
     finish();
   }
  finally {
@@ -28,6 +29,7 @@
         inputStream.close();
       }
  catch (      IOException e) {
+        Log_OC.e(TAG,e.getMessage(),e);
         finish();
       }
     }
