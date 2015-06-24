@@ -1,4 +1,5 @@
 {
   super.onStop();
   Log_OC.e(TAG,"onStop");
+  if (mTextLoadTask != null)   mTextLoadTask.cancel(Boolean.TRUE);
 }

@@ -1,5 +1,8 @@
 {
-  mTextView.setText(new String(stringWriter.getBuffer()));
-  mTextView.setVisibility(View.VISIBLE);
+  final TextView textView=mTextViewReference.get();
+  if (textView != null) {
+    textView.setText(new String(stringWriter.getBuffer()));
+    textView.setVisibility(View.VISIBLE);
+  }
   dismissLoadingDialog();
 }
