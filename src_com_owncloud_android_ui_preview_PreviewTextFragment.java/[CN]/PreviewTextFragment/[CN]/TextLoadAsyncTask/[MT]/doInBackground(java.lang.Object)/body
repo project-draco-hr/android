@@ -1,5 +1,7 @@
 {
-  if (params.length != 2)   throw new IllegalArgumentException("The parameters to " + TextLoadAsyncTask.class.getName() + " must be (1) the file location and (2) the text view to update");
+  if (params.length != 2) {
+    throw new IllegalArgumentException("The parameters to " + TextLoadAsyncTask.class.getName() + " must be (1) the file location and (2) the text view to update");
+  }
   final String location=(String)params[0];
   mTextView=(TextView)params[1];
   FileInputStream inputStream=null;

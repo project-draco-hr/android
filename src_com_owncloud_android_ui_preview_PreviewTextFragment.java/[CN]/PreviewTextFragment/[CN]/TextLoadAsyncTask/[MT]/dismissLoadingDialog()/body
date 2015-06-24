@@ -1,5 +1,5 @@
 {
-  Fragment frag=getActivity().getSupportFragmentManager().findFragmentByTag(DIALOG_WAIT_TAG);
+  final Fragment frag=getActivity().getSupportFragmentManager().findFragmentByTag(DIALOG_WAIT_TAG);
   if (frag != null) {
     LoadingDialog loading=(LoadingDialog)frag;
     loading.dismiss();
