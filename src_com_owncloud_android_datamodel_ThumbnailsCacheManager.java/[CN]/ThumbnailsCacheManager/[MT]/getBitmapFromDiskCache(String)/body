@@ -5,10 +5,11 @@ synchronized (mThumbnailsDiskCacheLock) {
         mThumbnailsDiskCacheLock.wait();
       }
  catch (      InterruptedException e) {
+        Log_OC.e(TAG,"Wait in mThumbnailsDiskCacheLock was interrupted",e);
       }
     }
     if (mThumbnailCache != null) {
-      return (Bitmap)mThumbnailCache.getBitmap(key);
+      return mThumbnailCache.getBitmap(key);
     }
   }
   return null;

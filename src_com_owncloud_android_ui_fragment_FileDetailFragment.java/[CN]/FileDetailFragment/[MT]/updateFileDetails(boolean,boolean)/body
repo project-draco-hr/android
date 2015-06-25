@@ -8,9 +8,6 @@
     setFilename(file.getFileName());
     setFiletype(file.getMimetype(),file.getFileName());
     setFilesize(file.getFileLength());
-    if (ocVersionSupportsTimeCreated()) {
-      setTimeCreated(file.getCreationTimestamp());
-    }
     setTimeModified(file.getModificationTimestamp());
     CheckBox cb=(CheckBox)getView().findViewById(R.id.fdKeepInSync);
     cb.setChecked(file.keepInSync());

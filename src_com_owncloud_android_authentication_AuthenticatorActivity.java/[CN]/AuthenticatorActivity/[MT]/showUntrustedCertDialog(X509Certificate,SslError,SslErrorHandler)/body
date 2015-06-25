@@ -1,5 +1,5 @@
 {
-  SslUntrustedCertDialog dialog=null;
+  SslUntrustedCertDialog dialog;
   if (x509Certificate == null) {
     dialog=SslUntrustedCertDialog.newInstanceForEmptySslError(error,handler);
   }

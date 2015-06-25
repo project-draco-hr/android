@@ -17,7 +17,7 @@
   OCFile[] files=null;
   if (uploadType == UPLOAD_SINGLE_FILE) {
     if (intent.hasExtra(KEY_FILE)) {
-      files=new OCFile[]{(OCFile)intent.getParcelableExtra(KEY_FILE)};
+      files=new OCFile[]{intent.getParcelableExtra(KEY_FILE)};
     }
  else {
       localPaths=new String[]{intent.getStringExtra(KEY_LOCAL_FILE)};
@@ -58,15 +58,13 @@
     }
     files=new OCFile[localPaths.length];
     for (int i=0; i < localPaths.length; i++) {
-      files[i]=obtainNewOCFileToUpload(remotePaths[i],localPaths[i],((mimeTypes != null) ? mimeTypes[i] : (String)null),storageManager);
+      files[i]=obtainNewOCFileToUpload(remotePaths[i],localPaths[i],((mimeTypes != null) ? mimeTypes[i] : null),storageManager);
       if (files[i] == null) {
         return Service.START_NOT_STICKY;
       }
     }
   }
-  AccountManager aMgr=AccountManager.get(this);
-  String version=aMgr.getUserData(account,Constants.KEY_OC_VERSION);
-  OwnCloudVersion ocv=new OwnCloudVersion(version);
+  OwnCloudVersion ocv=AccountUtils.getServerVersion(account);
   boolean chunked=FileUploader.chunkedUploadIsSupported(ocv);
   AbstractList<String> requestedUploads=new Vector<String>();
   String uploadKey=null;

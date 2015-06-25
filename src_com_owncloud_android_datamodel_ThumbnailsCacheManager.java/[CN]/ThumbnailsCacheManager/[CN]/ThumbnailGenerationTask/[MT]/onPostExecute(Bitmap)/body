@@ -2,16 +2,16 @@
   if (isCancelled()) {
     bitmap=null;
   }
-  if (mImageViewReference != null && bitmap != null) {
+  if (bitmap != null) {
     final ImageView imageView=mImageViewReference.get();
     final ThumbnailGenerationTask bitmapWorkerTask=getBitmapWorkerTask(imageView);
-    if (this == bitmapWorkerTask && imageView != null) {
+    if (this == bitmapWorkerTask) {
       String tagId="";
       if (mFile instanceof OCFile) {
         tagId=String.valueOf(((OCFile)mFile).getFileId());
       }
  else       if (mFile instanceof File) {
-        tagId=String.valueOf(((File)mFile).hashCode());
+        tagId=String.valueOf(mFile.hashCode());
       }
       if (String.valueOf(imageView.getTag()).equals(tagId)) {
         imageView.setImageBitmap(bitmap);

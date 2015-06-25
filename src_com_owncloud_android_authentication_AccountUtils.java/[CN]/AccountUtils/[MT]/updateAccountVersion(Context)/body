@@ -30,7 +30,7 @@
           if (isOAuth) {
             accountMgr.setUserData(newAccount,Constants.KEY_SUPPORTS_OAUTH2,"TRUE");
           }
-          if (currentAccount != null && currentAccount.name.equals(account.name)) {
+          if (currentAccount.name.equals(account.name)) {
             AccountUtils.setCurrentOwnCloudAccount(context,newAccountName);
           }
           accountMgr.removeAccount(account,null,null);

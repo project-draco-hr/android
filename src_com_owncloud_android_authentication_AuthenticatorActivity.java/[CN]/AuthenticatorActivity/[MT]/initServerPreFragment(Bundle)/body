@@ -4,10 +4,7 @@
     if (mAccount != null) {
       mServerInfo.mBaseUrl=mAccountMgr.getUserData(mAccount,Constants.KEY_OC_BASE_URL);
       mServerInfo.mIsSslConn=mServerInfo.mBaseUrl.startsWith("https://");
-      String ocVersion=mAccountMgr.getUserData(mAccount,Constants.KEY_OC_VERSION);
-      if (ocVersion != null) {
-        mServerInfo.mVersion=new OwnCloudVersion(ocVersion);
-      }
+      mServerInfo.mVersion=AccountUtils.getServerVersion(mAccount);
     }
  else {
       mServerInfo.mBaseUrl=getString(R.string.server_url).trim();
