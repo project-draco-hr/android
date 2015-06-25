@@ -1,8 +1,7 @@
 {
-  Bitmap thumbnail=null;
   OCFile file=(OCFile)mFile;
   final String imageKey=String.valueOf(file.getRemoteId());
-  thumbnail=getBitmapFromDiskCache(imageKey);
+  Bitmap thumbnail=getBitmapFromDiskCache(imageKey);
   if (thumbnail == null || file.needsUpdateThumbnail()) {
     int px=getThumbnailDimension();
     if (file.isDown()) {
@@ -14,15 +13,14 @@
       }
     }
  else {
-      if (mClient != null && mServerVersion != null) {
-        OwnCloudVersion serverOCVersion=new OwnCloudVersion(mServerVersion);
-        if (serverOCVersion.compareTo(new OwnCloudVersion(MINOR_SERVER_VERSION_FOR_THUMBS)) >= 0) {
+      OwnCloudVersion serverOCVersion=AccountUtils.getServerVersion(mAccount);
+      if (mClient != null && serverOCVersion != null) {
+        if (serverOCVersion.supportsRemoteThumbnails()) {
           try {
-            int status=-1;
             String uri=mClient.getBaseUri() + "" + "/index.php/apps/files/api/v1/thumbnail/"+ px+ "/"+ px+ Uri.encode(file.getRemotePath(),"/");
             Log_OC.d("Thumbnail","URI: " + uri);
             GetMethod get=new GetMethod(uri);
-            status=mClient.executeMethod(get);
+            int status=mClient.executeMethod(get);
             if (status == HttpStatus.SC_OK) {
               InputStream inputStream=get.getResponseBodyAsStream();
               Bitmap bitmap=BitmapFactory.decodeStream(inputStream);
