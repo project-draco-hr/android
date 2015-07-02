@@ -1,7 +1,8 @@
 {
   OCFileListFragment listOfFiles=getListOfFilesFragment();
   if (mDualPane || getSecondFragment() == null) {
-    if (getFile() != null && getFile().getParentId() == 0) {
+    OCFile currentDir=getCurrentDir();
+    if (currentDir == null || currentDir.getParentId() == FileDataStorageManager.ROOT_PARENT_ID) {
       finish();
       return;
     }
