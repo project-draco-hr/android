@@ -1,0 +1,4 @@
+{
+  codeElement1.sendKeys(codeNumber1 + codeNumber1 + codeNumber1+ codeNumber1);
+  return this;
+}

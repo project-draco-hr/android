@@ -12,7 +12,7 @@
   }
   Bundle args=getArguments();
   mJustFolders=(args == null) ? false : args.getBoolean(ARG_JUST_FOLDERS,false);
-  mAdapter=new FileListListAdapter(mJustFolders,getSherlockActivity(),mContainerActivity);
+  mAdapter=new FileListListAdapter(mJustFolders,getActivity(),mContainerActivity);
   setListAdapter(mAdapter);
   registerForContextMenu();
 }

@@ -5,7 +5,7 @@
     String username=(String)result.getData().get(0);
     if (mAction == ACTION_CREATE) {
       mUsernameInput.setText(username);
-      success=createAccount();
+      success=createAccount(result);
     }
  else {
       if (!mUsernameInput.getText().toString().equals(username)) {

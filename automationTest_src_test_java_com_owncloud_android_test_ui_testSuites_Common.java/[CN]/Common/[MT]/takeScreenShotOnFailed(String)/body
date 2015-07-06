@@ -1,0 +1,7 @@
+{
+  File file=((RemoteWebDriver)driver).getScreenshotAs(OutputType.FILE);
+  SimpleDateFormat dt1=new SimpleDateFormat("yyyy-MM-dd");
+  Date today=Calendar.getInstance().getTime();
+  String screenShotName="ScreenShots/" + dt1.format(today) + "/"+ testName+ ".png";
+  FileUtils.copyFile(file,new File(screenShotName));
+}

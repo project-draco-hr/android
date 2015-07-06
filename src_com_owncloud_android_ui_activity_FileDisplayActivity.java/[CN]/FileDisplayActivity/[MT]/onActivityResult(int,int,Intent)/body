@@ -1,5 +1,4 @@
 {
-  super.onActivityResult(requestCode,resultCode,data);
   if (requestCode == ACTION_SELECT_CONTENT_FROM_APPS && (resultCode == RESULT_OK || resultCode == UploadFilesActivity.RESULT_OK_AND_MOVE)) {
     if (data.getData() == null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
       for (int i=0; i < data.getClipData().getItemCount(); i++) {
@@ -24,5 +23,8 @@
       }
     }
 ,DELAY_TO_REQUEST_OPERATION_ON_ACTIVITY_RESULTS);
+  }
+ else {
+    super.onActivityResult(requestCode,resultCode,data);
   }
 }

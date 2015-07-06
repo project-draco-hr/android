@@ -1,0 +1,14 @@
+{
+  if (s.length() > 0) {
+    if (!mConfirmingPassCode) {
+      mPassCodeDigits[mIndex]=mPassCodeEditTexts[mIndex].getText().toString();
+    }
+    mPassCodeEditTexts[next()].requestFocus();
+    if (mLastOne) {
+      processFullPassCode();
+    }
+  }
+ else {
+    Log_OC.d(TAG,"Text box " + mIndex + " was cleaned");
+  }
+}

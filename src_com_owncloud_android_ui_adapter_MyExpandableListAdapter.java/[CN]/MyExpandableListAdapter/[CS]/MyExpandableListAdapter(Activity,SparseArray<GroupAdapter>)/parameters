@@ -1,0 +1,2 @@
+Activity act
+SparseArray<GroupAdapter> groups

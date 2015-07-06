@@ -1,3 +1,5 @@
 {
+  Log_OC.v(TAG,"onDestroy() start");
   super.onDestroy();
+  Log_OC.v(TAG,"onDestroy() end");
 }

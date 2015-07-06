@@ -2,6 +2,6 @@
   super.onStart();
   if (getFile() != null) {
     mLoadBitmapTask=new LoadBitmapTask(mImageView,mMessageView,mProgressWheel);
-    mLoadBitmapTask.execute(new String[]{getFile().getStoragePath()});
+    mLoadBitmapTask.execute(getFile().getStoragePath());
   }
 }

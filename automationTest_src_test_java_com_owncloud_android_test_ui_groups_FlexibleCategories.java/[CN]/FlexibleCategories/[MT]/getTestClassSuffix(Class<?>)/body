@@ -1,0 +1,4 @@
+{
+  TestClassSuffix annotation=clazz.getAnnotation(TestClassSuffix.class);
+  return annotation == null ? "Test" : annotation.value();
+}

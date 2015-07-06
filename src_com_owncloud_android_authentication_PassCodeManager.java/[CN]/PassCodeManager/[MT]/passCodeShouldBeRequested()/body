@@ -1,0 +1,6 @@
+{
+  if ((System.currentTimeMillis() - mTimestamp) > PASS_CODE_TIMEOUT && mVisibleActivitiesCounter <= 0) {
+    return passCodeIsEnabled();
+  }
+  return false;
+}

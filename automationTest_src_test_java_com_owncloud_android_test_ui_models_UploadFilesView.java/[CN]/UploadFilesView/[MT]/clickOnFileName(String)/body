@@ -1,0 +1,4 @@
+{
+  scrollTillFindFile(fileName);
+  fileElement.click();
+}

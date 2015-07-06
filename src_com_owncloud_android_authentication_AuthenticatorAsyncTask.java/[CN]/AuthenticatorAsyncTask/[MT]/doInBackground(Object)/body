@@ -8,6 +8,11 @@
     client.setCredentials(credentials);
     ExistenceCheckRemoteOperation operation=new ExistenceCheckRemoteOperation(REMOTE_PATH,mContext,SUCCESS_IF_ABSENT);
     result=operation.execute(client);
+    if (operation.wasRedirected()) {
+      RedirectionPath redirectionPath=operation.getRedirectionPath();
+      String permanentLocation=redirectionPath.getLastPermanentLocation();
+      result.setLastPermanentLocation(permanentLocation);
+    }
   }
  else {
     result=new RemoteOperationResult(RemoteOperationResult.ResultCode.UNKNOWN_ERROR);

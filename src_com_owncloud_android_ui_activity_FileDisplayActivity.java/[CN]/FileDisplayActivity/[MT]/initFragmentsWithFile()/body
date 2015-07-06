@@ -12,7 +12,7 @@
     if (secondFragment != null) {
       setSecondFragment(secondFragment);
       updateFragmentsVisibility(true);
-      updateNavigationElementsInActionBar(file);
+      updateActionBarTitleAndHomeButton(file);
     }
  else {
       cleanSecondFragment();

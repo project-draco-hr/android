@@ -1,13 +1,7 @@
 {
-  Log_OC.d(TAG,"onCreate() start");
+  Log_OC.v(TAG,"onCreate() start");
   requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
   super.onCreate(savedInstanceState);
-  if (getIntent().getAction() != null && getIntent().getAction().equals(Intent.ACTION_MAIN) && savedInstanceState == null) {
-    requestPinCode();
-  }
- else   if (getIntent().getAction() == null && savedInstanceState == null) {
-    requestPinCode();
-  }
   if (savedInstanceState == null) {
     Intent initObserversIntent=FileObserverService.makeInitIntent(this);
     startService(initObserversIntent);
@@ -23,15 +17,15 @@
     mWaitingToSend=null;
   }
   setContentView(R.layout.files);
+  initDrawer();
   mDualPane=getResources().getBoolean(R.bool.large_land_layout);
   mLeftFragmentContainer=findViewById(R.id.left_fragment_container);
   mRightFragmentContainer=findViewById(R.id.right_fragment_container);
   if (savedInstanceState == null) {
     createMinFragments();
   }
-  mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
   getSupportActionBar().setHomeButtonEnabled(true);
   setSupportProgressBarIndeterminateVisibility(mSyncInProgress);
   setBackgroundText();
-  Log_OC.d(TAG,"onCreate() end");
+  Log_OC.v(TAG,"onCreate() end");
 }

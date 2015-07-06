@@ -2,11 +2,7 @@
   String[] filePaths=data.getStringArrayExtra(UploadFilesActivity.EXTRA_CHOSEN_FILES);
   if (filePaths != null) {
     String[] remotePaths=new String[filePaths.length];
-    String remotePathBase="";
-    for (int j=mDirectories.getCount() - 2; j >= 0; --j) {
-      remotePathBase+=OCFile.PATH_SEPARATOR + mDirectories.getItem(j);
-    }
-    if (!remotePathBase.endsWith(OCFile.PATH_SEPARATOR))     remotePathBase+=OCFile.PATH_SEPARATOR;
+    String remotePathBase=getCurrentDir().getRemotePath();
     for (int j=0; j < remotePaths.length; j++) {
       remotePaths[j]=remotePathBase + (new File(filePaths[j])).getName();
     }

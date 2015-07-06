@@ -2,8 +2,6 @@
   Bitmap thumbnail=null;
   try {
     if (mAccount != null) {
-      AccountManager accountMgr=AccountManager.get(MainApp.getAppContext());
-      mServerVersion=accountMgr.getUserData(mAccount,Constants.KEY_OC_VERSION);
       OwnCloudAccount ocAccount=new OwnCloudAccount(mAccount,MainApp.getAppContext());
       mClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,MainApp.getAppContext());
     }
@@ -13,8 +11,6 @@
     }
  else     if (mFile instanceof File) {
       thumbnail=doFileInBackground();
-    }
- else {
     }
   }
  catch (  Throwable t) {

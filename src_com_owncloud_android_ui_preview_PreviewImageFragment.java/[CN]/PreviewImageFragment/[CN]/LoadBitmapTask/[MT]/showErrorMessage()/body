@@ -1,15 +1,11 @@
 {
-  if (mImageViewRef != null) {
-    final ImageView imageView=mImageViewRef.get();
-    if (imageView != null) {
-      imageView.setVisibility(View.VISIBLE);
-    }
+  final ImageView imageView=mImageViewRef.get();
+  if (imageView != null) {
+    imageView.setVisibility(View.VISIBLE);
   }
-  if (mMessageViewRef != null) {
-    final TextView messageView=mMessageViewRef.get();
-    if (messageView != null) {
-      messageView.setText(mErrorMessageId);
-      messageView.setVisibility(View.VISIBLE);
-    }
+  final TextView messageView=mMessageViewRef.get();
+  if (messageView != null) {
+    messageView.setText(mErrorMessageId);
+    messageView.setVisibility(View.VISIBLE);
   }
 }

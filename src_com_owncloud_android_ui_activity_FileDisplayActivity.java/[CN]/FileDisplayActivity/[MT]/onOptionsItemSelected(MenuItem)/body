@@ -4,7 +4,7 @@ switch (item.getItemId()) {
 case R.id.action_create_dir:
 {
       CreateFolderDialogFragment dialog=CreateFolderDialogFragment.newInstance(getCurrentDir());
-      dialog.show(getSupportFragmentManager(),"createdirdialog");
+      dialog.show(getSupportFragmentManager(),DIALOG_CREATE_FOLDER);
       break;
     }
 case R.id.action_sync_account:
@@ -14,27 +14,22 @@ case R.id.action_sync_account:
   }
 case R.id.action_upload:
 {
-  showDialog(DIALOG_CHOOSE_UPLOAD_SOURCE);
+  UploadSourceDialogFragment dialog=UploadSourceDialogFragment.newInstance(getAccount());
+  dialog.show(getSupportFragmentManager(),DIALOG_UPLOAD_SOURCE);
   break;
-}
-case R.id.action_settings:
-{
-Intent settingsIntent=new Intent(this,Preferences.class);
-startActivity(settingsIntent);
-break;
-}
-case R.id.action_logger:
-{
-Intent loggerIntent=new Intent(getApplicationContext(),LogHistoryActivity.class);
-startActivity(loggerIntent);
-break;
 }
 case android.R.id.home:
 {
 FileFragment second=getSecondFragment();
 OCFile currentDir=getCurrentDir();
-if ((currentDir != null && currentDir.getParentId() != 0) || (second != null && second.getFile() != null)) {
-onBackPressed();
+if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+  mDrawerLayout.closeDrawer(GravityCompat.START);
+}
+ else if ((currentDir != null && currentDir.getParentId() != 0) || (second != null && second.getFile() != null)) {
+  onBackPressed();
+}
+ else {
+  mDrawerLayout.openDrawer(GravityCompat.START);
 }
 break;
 }
@@ -47,8 +42,8 @@ builder.setTitle(R.string.actionbar_sort_title).setSingleChoiceItems(R.array.act
 public void onClick(DialogInterface dialog,int which){
 switch (which) {
 case 0:
-sortByName(true);
-break;
+    sortByName(true);
+  break;
 case 1:
 sortByDate(false);
 break;

@@ -1,0 +1,5 @@
+{
+  scrollTillFindElement(elementName).tap(1,1000);
+  ElementMenuOptions menuOptions=new ElementMenuOptions(driver);
+  return menuOptions;
+}

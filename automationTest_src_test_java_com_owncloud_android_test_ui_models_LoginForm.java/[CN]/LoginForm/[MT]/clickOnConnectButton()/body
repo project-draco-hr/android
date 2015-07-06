@@ -1,0 +1,5 @@
+{
+  connectButton.click();
+  FileListView fileListView=new FileListView(driver);
+  return fileListView;
+}

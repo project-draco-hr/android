@@ -1,5 +1,5 @@
 {
-  pushDirname(directory);
+  setFile(directory);
   cleanSecondFragment();
   startSyncFolderOperation(directory,false);
 }
