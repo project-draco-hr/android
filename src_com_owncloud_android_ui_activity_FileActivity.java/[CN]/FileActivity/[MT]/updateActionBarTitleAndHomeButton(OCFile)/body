@@ -2,17 +2,11 @@
   String title=getString(R.string.default_display_name_for_root_folder);
   boolean inRoot;
   if (chosenFile == null) {
-    inRoot=(mFile == null || mFile.getParentId() == 0);
-    if (!inRoot) {
-      title=mFile.getFileName();
-    }
+    chosenFile=mFile;
   }
- else   if (chosenFile.getParentId() != 0) {
+  inRoot=(chosenFile == null || (chosenFile.isFolder() && chosenFile.getParentId() == FileDataStorageManager.ROOT_PARENT_ID));
+  if (!inRoot) {
     title=chosenFile.getFileName();
-    inRoot=false;
-  }
- else {
-    inRoot=true;
   }
   ActionBar actionBar=getSupportActionBar();
   actionBar.setTitle(title);
