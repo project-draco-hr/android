@@ -9,4 +9,7 @@
  else   if (operation instanceof RemoveFileOperation) {
     finish();
   }
+ else   if (operation instanceof SynchronizeFileOperation) {
+    onSynchronizeFileOperationFinish((SynchronizeFileOperation)operation,result);
+  }
 }
