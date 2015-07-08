@@ -75,7 +75,7 @@ name=file.getFileName();
 fileName.setText(name);
 case GRID_IMAGE:
 ImageView sharedIconV=(ImageView)view.findViewById(R.id.sharedIcon);
-if (file.isShareByLink()) {
+if (file.isShareByLink() && ((mGridMode && !file.isFolder()) || !mGridMode)) {
 sharedIconV.setVisibility(View.VISIBLE);
 sharedIconV.bringToFront();
 }
@@ -106,7 +106,7 @@ localStateView.setVisibility(View.INVISIBLE);
 }
 ImageView sharedWithMeIconV=(ImageView)view.findViewById(R.id.sharedWithMeIcon);
 sharedWithMeIconV.bringToFront();
-if (checkIfFileIsSharedWithMe(file)) {
+if (checkIfFileIsSharedWithMe(file) && ((mGridMode && !file.isFolder()) || !mGridMode)) {
 sharedWithMeIconV.setVisibility(View.VISIBLE);
 }
  else {
