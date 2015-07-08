@@ -75,7 +75,7 @@ name=file.getFileName();
 fileName.setText(name);
 case GRID_IMAGE:
 ImageView sharedIconV=(ImageView)view.findViewById(R.id.sharedIcon);
-if (file.isShareByLink() && ((mGridMode && !file.isFolder()) || !mGridMode)) {
+if (file.isShareByLink()) {
 sharedIconV.setVisibility(View.VISIBLE);
 sharedIconV.bringToFront();
 }
