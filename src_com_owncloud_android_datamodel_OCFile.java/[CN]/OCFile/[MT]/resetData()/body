@@ -14,6 +14,7 @@
   mNeedsUpdating=false;
   mEtag=null;
   mShareByLink=false;
+  mFavorite=false;
   mPublicLink=null;
   mPermissions=null;
   mRemoteId=null;
