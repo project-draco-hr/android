@@ -1,5 +1,4 @@
 {
-  Log_OC.e(TAG,"KeepInSync");
   file.setKeepInSync(isFavorite);
   mFileActivity.getStorageManager().saveFile(file);
   Intent observedFileIntent=FileObserverService.makeObservedFileIntent(mFileActivity,file,mFileActivity.getAccount(),isFavorite);
