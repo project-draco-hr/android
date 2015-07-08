@@ -19,4 +19,7 @@
  else   if (operation instanceof SynchronizeFolderOperation) {
     onSynchronizeFolderOperationFinish((SynchronizeFolderOperation)operation,result);
   }
+ else   if (operation instanceof SynchronizeFileOperation) {
+    onSynchronizeFileOperationFinish((SynchronizeFileOperation)operation,result);
+  }
 }
