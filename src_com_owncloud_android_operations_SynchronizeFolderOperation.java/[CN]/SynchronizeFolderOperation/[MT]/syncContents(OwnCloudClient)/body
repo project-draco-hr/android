@@ -1,5 +1,4 @@
 {
   startDirectDownloads();
-  startContentSynchronizations(mFilesToSyncContentsWithoutUpload,client);
   startContentSynchronizations(mFilesToSyncContents,client);
 }

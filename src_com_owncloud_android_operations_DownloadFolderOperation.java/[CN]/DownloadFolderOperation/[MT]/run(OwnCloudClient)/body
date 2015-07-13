@@ -1,0 +1,27 @@
+{
+  RemoteOperationResult result=null;
+  mFailsInFileSyncsFound=0;
+  mConflictsFound=0;
+  try {
+    mLocalFolder=getStorageManager().getFileByPath(mRemotePath);
+    result=checkForChanges(client);
+    if (result.isSuccess()) {
+      if (mRemoteFolderChanged) {
+        result=fetchAndSyncRemoteFolder(client);
+      }
+ else {
+        prepareOpsFromLocalKnowledge();
+      }
+      if (result.isSuccess()) {
+        syncContents(client);
+      }
+    }
+    if (mCancellationRequested.get()) {
+      throw new OperationCancelledException();
+    }
+  }
+ catch (  OperationCancelledException e) {
+    result=new RemoteOperationResult(e);
+  }
+  return result;
+}

@@ -6,7 +6,8 @@
   Log_OC.d(TAG,"Remote folder " + mLocalFolder.getRemotePath() + " changed - starting update of local data ");
   List<OCFile> updatedFiles=new Vector<OCFile>(folderAndFiles.size() - 1);
   mFilesForDirectDownload.clear();
-  mFilesToSyncContents.clear();
+  mFilesToSyncContentsWithoutUpload.clear();
+  mFavouriteFilesToSyncContents.clear();
   if (mCancellationRequested.get()) {
     throw new OperationCancelledException();
   }
@@ -50,9 +51,13 @@ synchronized (mCancellationRequested) {
         startSyncFolderOperation(remoteFile.getRemotePath());
       }
     }
- else {
+ else     if (remoteFile.isFavorite()) {
       SynchronizeFileOperation operation=new SynchronizeFileOperation(localFile,remoteFile,mAccount,true,mContext);
-      mFilesToSyncContents.add(operation);
+      mFavouriteFilesToSyncContents.add(operation);
+    }
+ else {
+      SynchronizeFileOperation operation=new SynchronizeFileOperation(localFile,remoteFile,mAccount,true,false,mContext);
+      mFilesToSyncContentsWithoutUpload.add(operation);
     }
     updatedFiles.add(remoteFile);
   }

@@ -5,6 +5,7 @@
   mContext=context;
   mRemoteFolderChanged=false;
   mFilesForDirectDownload=new Vector<OCFile>();
-  mFilesToSyncContents=new Vector<SyncOperation>();
+  mFilesToSyncContentsWithoutUpload=new Vector<SyncOperation>();
+  mFavouriteFilesToSyncContents=new Vector<SyncOperation>();
   mCancellationRequested=new AtomicBoolean(false);
 }
