@@ -13,6 +13,10 @@ synchronized (mCancellationRequested) {
       if (!child.isDown()) {
         mFilesForDirectDownload.add(child);
       }
+ else {
+        SynchronizeFileOperation operation=new SynchronizeFileOperation(child,child,mAccount,true,mContext);
+        mFilesToSyncContents.add(operation);
+      }
     }
   }
 }

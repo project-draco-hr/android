@@ -7,7 +7,7 @@
   List<OCFile> updatedFiles=new Vector<OCFile>(folderAndFiles.size() - 1);
   mFilesForDirectDownload.clear();
   mFilesToSyncContentsWithoutUpload.clear();
-  mFavouriteFilesToSyncContents.clear();
+  mFilesToSyncContents.clear();
   if (mCancellationRequested.get()) {
     throw new OperationCancelledException();
   }
@@ -51,13 +51,9 @@ synchronized (mCancellationRequested) {
         startSyncFolderOperation(remoteFile.getRemotePath());
       }
     }
- else     if (remoteFile.isFavorite()) {
-      SynchronizeFileOperation operation=new SynchronizeFileOperation(localFile,remoteFile,mAccount,true,mContext);
-      mFavouriteFilesToSyncContents.add(operation);
-    }
  else {
-      SynchronizeFileOperation operation=new SynchronizeFileOperation(localFile,remoteFile,mAccount,true,false,mContext);
-      mFilesToSyncContentsWithoutUpload.add(operation);
+      SynchronizeFileOperation operation=new SynchronizeFileOperation(localFile,remoteFile,mAccount,true,mContext);
+      mFilesToSyncContents.add(operation);
     }
     updatedFiles.add(remoteFile);
   }

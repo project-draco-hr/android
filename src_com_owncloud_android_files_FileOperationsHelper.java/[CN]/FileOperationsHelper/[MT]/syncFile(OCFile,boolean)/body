@@ -8,6 +8,13 @@
     mWaitingForOpId=mFileActivity.getOperationsServiceBinder().queueNewOperation(intent);
     mFileActivity.showLoadingDialog();
   }
+ else   if (twoWays) {
+    Intent intent=new Intent(mFileActivity,OperationsService.class);
+    intent.setAction(OperationsService.ACTION_SYNC_FOLDER);
+    intent.putExtra(OperationsService.EXTRA_ACCOUNT,mFileActivity.getAccount());
+    intent.putExtra(OperationsService.EXTRA_REMOTE_PATH,file.getRemotePath());
+    mFileActivity.startService(intent);
+  }
  else {
     Intent intent=new Intent(mFileActivity,OperationsService.class);
     intent.setAction(OperationsService.ACTION_SYNC_FOLDER);
