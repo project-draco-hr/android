@@ -6,7 +6,7 @@
     }
     OCFile file=getFile();
     setFilename(file.getFileName());
-    setFiletype(file.getMimetype(),file.getFileName());
+    setFiletype(file);
     setFilesize(file.getFileLength());
     setTimeModified(file.getModificationTimestamp());
     CheckBox cb=(CheckBox)getView().findViewById(R.id.fdKeepInSync);
