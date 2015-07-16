@@ -1,8 +1,7 @@
 {
   UploadFileOperation upload;
-synchronized (mPendingUploads) {
-    upload=mPendingUploads.remove(buildRemoteName(account,file));
-  }
+  Pair<UploadFileOperation,String> removeResult=mPendingUploads.remove(account,file.getRemotePath());
+  upload=removeResult.first;
   if (upload != null) {
     upload.cancel();
   }

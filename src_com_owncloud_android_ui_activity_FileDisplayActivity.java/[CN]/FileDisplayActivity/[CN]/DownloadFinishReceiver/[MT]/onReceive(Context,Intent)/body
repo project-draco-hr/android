@@ -1,6 +1,6 @@
 {
   try {
-    boolean sameAccount=isSameAccount(context,intent);
+    boolean sameAccount=isSameAccount(intent);
     String downloadedRemotePath=intent.getStringExtra(FileDownloader.EXTRA_REMOTE_PATH);
     boolean isDescendant=isDescendant(downloadedRemotePath);
     if (sameAccount && isDescendant) {

@@ -71,14 +71,14 @@
   UploadFileOperation newUpload=null;
   try {
     for (int i=0; i < files.length; i++) {
-      uploadKey=buildRemoteName(account,files[i].getRemotePath());
       newUpload=new UploadFileOperation(account,files[i],chunked,isInstant,forceOverwrite,localAction,getApplicationContext());
       if (isInstant) {
         newUpload.setRemoteFolderToBeCreated();
       }
-      mPendingUploads.putIfAbsent(uploadKey,newUpload);
       newUpload.addDatatransferProgressListener(this);
       newUpload.addDatatransferProgressListener((FileUploaderBinder)mBinder);
+      Pair<String,String> putResult=mPendingUploads.putIfAbsent(account,files[i].getRemotePath(),newUpload);
+      uploadKey=putResult.first;
       requestedUploads.add(uploadKey);
     }
   }
@@ -100,6 +100,5 @@ catch (  Exception e) {
     msg.obj=requestedUploads;
     mServiceHandler.sendMessage(msg);
   }
-  Log_OC.i(TAG,"mPendingUploads size:" + mPendingUploads.size());
   return Service.START_NOT_STICKY;
 }
