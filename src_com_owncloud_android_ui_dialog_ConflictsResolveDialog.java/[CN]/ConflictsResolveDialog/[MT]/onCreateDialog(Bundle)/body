@@ -1,6 +1,6 @@
 {
   String remotepath=getArguments().getString("remotepath");
-  return new AlertDialog.Builder(getActivity()).setIcon(DisplayUtils.getSeasonalIconId()).setTitle(R.string.conflict_title).setMessage(String.format(getString(R.string.conflict_message),remotepath)).setPositiveButton(R.string.conflict_overwrite,new DialogInterface.OnClickListener(){
+  return new AlertDialog.Builder(getActivity()).setIcon(DisplayUtils.getSeasonalIconId()).setTitle(R.string.conflict_title).setMessage(String.format(getString(R.string.conflict_message),remotepath)).setPositiveButton(R.string.conflict_use_local_version,new DialogInterface.OnClickListener(){
     @Override public void onClick(    DialogInterface dialog,    int which){
       if (mListener != null)       mListener.conflictDecisionMade(Decision.OVERWRITE);
     }
@@ -10,7 +10,7 @@
       if (mListener != null)       mListener.conflictDecisionMade(Decision.KEEP_BOTH);
     }
   }
-).setNegativeButton(R.string.conflict_dont_upload,new DialogInterface.OnClickListener(){
+).setNegativeButton(R.string.conflict_use_server_version,new DialogInterface.OnClickListener(){
     @Override public void onClick(    DialogInterface dialog,    int which){
       if (mListener != null)       mListener.conflictDecisionMade(Decision.CANCEL);
     }
