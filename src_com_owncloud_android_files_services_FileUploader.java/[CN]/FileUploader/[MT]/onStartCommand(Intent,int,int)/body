@@ -58,7 +58,7 @@
     }
     files=new OCFile[localPaths.length];
     for (int i=0; i < localPaths.length; i++) {
-      files[i]=obtainNewOCFileToUpload(remotePaths[i],localPaths[i],((mimeTypes != null) ? mimeTypes[i] : null),storageManager);
+      files[i]=obtainNewOCFileToUpload(remotePaths[i],localPaths[i],((mimeTypes != null) ? mimeTypes[i] : null));
       if (files[i] == null) {
         return Service.START_NOT_STICKY;
       }

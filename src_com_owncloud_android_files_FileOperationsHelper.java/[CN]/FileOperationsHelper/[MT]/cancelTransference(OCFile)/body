@@ -7,7 +7,6 @@
     }
   }
   FileDownloaderBinder downloaderBinder=mFileActivity.getFileDownloaderBinder();
-  FileUploaderBinder uploaderBinder=mFileActivity.getFileUploaderBinder();
   if (downloaderBinder != null && downloaderBinder.isDownloading(account,file)) {
     downloaderBinder.cancel(account,file);
     if (file.isFavorite()) {
@@ -16,7 +15,8 @@
       mFileActivity.getStorageManager().saveFile(parent);
     }
   }
- else   if (uploaderBinder != null && uploaderBinder.isUploading(account,file)) {
+  FileUploaderBinder uploaderBinder=mFileActivity.getFileUploaderBinder();
+  if (uploaderBinder != null && uploaderBinder.isUploading(account,file)) {
     uploaderBinder.cancel(account,file);
   }
 }

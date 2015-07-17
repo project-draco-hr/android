@@ -1,8 +1,12 @@
 {
-  UploadFileOperation upload;
   Pair<UploadFileOperation,String> removeResult=mPendingUploads.remove(account,file.getRemotePath());
-  upload=removeResult.first;
+  UploadFileOperation upload=removeResult.first;
   if (upload != null) {
     upload.cancel();
+  }
+ else {
+    if (mCurrentUpload != null && mCurrentAccount != null && mCurrentUpload.getRemotePath().startsWith(file.getRemotePath()) && account.name.equals(mCurrentAccount.name)) {
+      mCurrentUpload.cancel();
+    }
   }
 }

@@ -7,11 +7,11 @@
       notifyUploadStart(mCurrentUpload);
       RemoteOperationResult uploadResult=null, grantResult;
       try {
-        if (mLastAccount == null || !mLastAccount.equals(mCurrentUpload.getAccount())) {
-          mLastAccount=mCurrentUpload.getAccount();
-          mStorageManager=new FileDataStorageManager(mLastAccount,getContentResolver());
+        if (mCurrentAccount == null || !mCurrentAccount.equals(mCurrentUpload.getAccount())) {
+          mCurrentAccount=mCurrentUpload.getAccount();
+          mStorageManager=new FileDataStorageManager(mCurrentAccount,getContentResolver());
         }
-        OwnCloudAccount ocAccount=new OwnCloudAccount(mLastAccount,this);
+        OwnCloudAccount ocAccount=new OwnCloudAccount(mCurrentAccount,this);
         mUploadClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,this);
         String remoteParentPath=new File(mCurrentUpload.getRemotePath()).getParent();
         remoteParentPath=remoteParentPath.endsWith(OCFile.PATH_SEPARATOR) ? remoteParentPath : remoteParentPath + OCFile.PATH_SEPARATOR;
@@ -30,16 +30,16 @@
         }
       }
  catch (      AccountsException e) {
-        Log_OC.e(TAG,"Error while trying to get autorization for " + mLastAccount.name,e);
+        Log_OC.e(TAG,"Error while trying to get autorization for " + mCurrentAccount.name,e);
         uploadResult=new RemoteOperationResult(e);
       }
 catch (      IOException e) {
-        Log_OC.e(TAG,"Error while trying to get autorization for " + mLastAccount.name,e);
+        Log_OC.e(TAG,"Error while trying to get autorization for " + mCurrentAccount.name,e);
         uploadResult=new RemoteOperationResult(e);
       }
  finally {
         Log_OC.v("NOW " + TAG + ", thread "+ Thread.currentThread().getName(),"Removing payload " + mCurrentUpload.getRemotePath());
-        Pair<UploadFileOperation,String> removeResult=mPendingUploads.removePayload(mLastAccount,mCurrentUpload.getRemotePath());
+        Pair<UploadFileOperation,String> removeResult=mPendingUploads.removePayload(mCurrentAccount,mCurrentUpload.getRemotePath());
         notifyUploadResult(mCurrentUpload,uploadResult);
         sendBroadcastUploadFinished(mCurrentUpload,uploadResult,removeResult.second);
       }
