@@ -19,11 +19,11 @@
     if (savedInstanceState != null) {
       mConfirmingPassCode=savedInstanceState.getBoolean(PassCodeActivity.KEY_CONFIRMING_PASSCODE);
       mPassCodeDigits=savedInstanceState.getStringArray(PassCodeActivity.KEY_PASSCODE_DIGITS);
-      if (mConfirmingPassCode) {
-        requestPassCodeConfirmation();
-      }
     }
-    if (savedInstanceState == null || (savedInstanceState != null && !mConfirmingPassCode)) {
+    if (mConfirmingPassCode) {
+      requestPassCodeConfirmation();
+    }
+ else {
       mPassCodeHdr.setText(R.string.pass_code_configure_your_pass_code);
       mPassCodeHdrExplanation.setVisibility(View.VISIBLE);
       setCancelButtonEnabled(true);
