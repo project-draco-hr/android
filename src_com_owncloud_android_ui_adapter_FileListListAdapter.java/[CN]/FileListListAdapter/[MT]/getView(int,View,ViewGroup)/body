@@ -104,15 +104,13 @@ localStateView.setVisibility(View.VISIBLE);
  else {
 localStateView.setVisibility(View.INVISIBLE);
 }
-if (!file.isFolder()) {
 ImageView sharedWithMeIconV=(ImageView)view.findViewById(R.id.sharedWithMeIcon);
 sharedWithMeIconV.bringToFront();
-if (checkIfFileIsSharedWithMe(file)) {
+if (checkIfFileIsSharedWithMe(file) && (!file.isFolder() || !mGridMode)) {
 sharedWithMeIconV.setVisibility(View.VISIBLE);
 }
  else {
 sharedWithMeIconV.setVisibility(View.GONE);
-}
 }
 break;
 }
