@@ -91,39 +91,35 @@
     while (listener.hasNext()) {
       mUploadOperation.addDatatransferProgressListener(listener.next());
     }
-    if (!mCancellationRequested.get()) {
-      result=mUploadOperation.execute(client);
-      if (result.isSuccess()) {
-        if (mLocalBehaviour == FileUploader.LOCAL_BEHAVIOUR_FORGET) {
-          mFile.setStoragePath(null);
+    if (mCancellationRequested.get()) {
+      throw new OperationCancelledException();
+    }
+    result=mUploadOperation.execute(client);
+    if (result.isSuccess()) {
+      if (mLocalBehaviour == FileUploader.LOCAL_BEHAVIOUR_FORGET) {
+        mFile.setStoragePath(null);
+      }
+ else {
+        mFile.setStoragePath(expectedPath);
+        File fileToMove=null;
+        if (temporalFile != null) {
+          fileToMove=temporalFile;
         }
  else {
-          mFile.setStoragePath(expectedPath);
-          File fileToMove=null;
-          if (temporalFile != null) {
-            fileToMove=temporalFile;
-          }
- else {
-            fileToMove=originalFile;
-          }
-          if (!expectedFile.equals(fileToMove)) {
-            File expectedFolder=expectedFile.getParentFile();
-            expectedFolder.mkdirs();
-            if (!expectedFolder.isDirectory() || !fileToMove.renameTo(expectedFile)) {
-              mFile.setStoragePath(null);
-            }
+          fileToMove=originalFile;
+        }
+        if (!expectedFile.equals(fileToMove)) {
+          File expectedFolder=expectedFile.getParentFile();
+          expectedFolder.mkdirs();
+          if (!expectedFolder.isDirectory() || !fileToMove.renameTo(expectedFile)) {
+            mFile.setStoragePath(null);
           }
         }
       }
     }
   }
  catch (  Exception e) {
-    if (mCancellationRequested.get()) {
-      result=new RemoteOperationResult(new OperationCancelledException());
-    }
- else {
-      result=new RemoteOperationResult(e);
-    }
+    result=new RemoteOperationResult(e);
   }
  finally {
     if (temporalFile != null && !originalFile.equals(temporalFile)) {
