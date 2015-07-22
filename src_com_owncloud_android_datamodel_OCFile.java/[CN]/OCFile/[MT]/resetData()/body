@@ -10,7 +10,7 @@
   mModifiedTimestampAtLastSyncForData=0;
   mLastSyncDateForProperties=0;
   mLastSyncDateForData=0;
-  mKeepInSync=false;
+  mFavorite=false;
   mNeedsUpdating=false;
   mEtag=null;
   mShareByLink=false;

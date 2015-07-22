@@ -9,7 +9,7 @@
   mLocalPath=source.readString();
   mMimeType=source.readString();
   mNeedsUpdating=source.readInt() == 0;
-  mKeepInSync=source.readInt() == 1;
+  mFavorite=source.readInt() == 1;
   mLastSyncDateForProperties=source.readLong();
   mLastSyncDateForData=source.readLong();
   mEtag=source.readString();
