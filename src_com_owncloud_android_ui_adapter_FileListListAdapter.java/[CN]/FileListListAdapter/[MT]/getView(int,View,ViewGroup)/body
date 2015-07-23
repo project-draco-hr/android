@@ -114,7 +114,7 @@ sharedWithMeIconV.setVisibility(View.GONE);
 }
 break;
 }
-if (!file.keepInSync()) {
+if (!file.isFavorite()) {
 view.findViewById(R.id.favoriteIcon).setVisibility(View.GONE);
 }
  else {

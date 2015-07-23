@@ -19,7 +19,7 @@
     remoteFile.setLastSyncDateForProperties(mCurrentSyncTime);
     if (localFile != null) {
       remoteFile.setFileId(localFile.getFileId());
-      remoteFile.setKeepInSync(localFile.keepInSync());
+      remoteFile.setFavorite(localFile.isFavorite());
       remoteFile.setLastSyncDateForData(localFile.getLastSyncDateForData());
       remoteFile.setModificationTimestampAtLastSyncForData(localFile.getModificationTimestampAtLastSyncForData());
       remoteFile.setStoragePath(localFile.getStoragePath());
@@ -39,7 +39,7 @@
     }
     checkAndFixForeignStoragePath(remoteFile);
     searchForLocalFileInDefaultPath(remoteFile);
-    if (remoteFile.keepInSync()) {
+    if (remoteFile.isFavorite()) {
       SynchronizeFileOperation operation=new SynchronizeFileOperation(localFile,remoteFile,mAccount,true,mContext);
       filesToSyncContents.add(operation);
     }
