@@ -1,2 +1,3 @@
 String title
 String contentDescription
+int icon

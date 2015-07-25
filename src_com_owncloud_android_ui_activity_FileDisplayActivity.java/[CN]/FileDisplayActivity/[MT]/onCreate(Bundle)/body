@@ -25,7 +25,9 @@
     createMinFragments();
   }
   getSupportActionBar().setHomeButtonEnabled(true);
+  getSupportActionBar().setHomeButtonEnabled(true);
   setSupportProgressBarIndeterminateVisibility(mSyncInProgress);
+  initDrawer();
   setBackgroundText();
   Log_OC.v(TAG,"onCreate() end");
 }

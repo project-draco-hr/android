@@ -1,4 +1,5 @@
 {
   mTitle=title;
   mContentDescription=contentDescription;
+  mIcon=icon;
 }

@@ -9,4 +9,5 @@
     mUploadServiceConnection=null;
   }
   super.onDestroy();
+  getDelegate().onDestroy();
 }

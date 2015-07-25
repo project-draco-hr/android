@@ -1,0 +1,3 @@
+{
+  getDelegate().addContentView(view,params);
+}
