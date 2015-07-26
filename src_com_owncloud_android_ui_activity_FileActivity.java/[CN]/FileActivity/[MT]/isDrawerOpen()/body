@@ -1,0 +1,3 @@
+{
+  return mDrawerLayout.isDrawerOpen(GravityCompat.START);
+}

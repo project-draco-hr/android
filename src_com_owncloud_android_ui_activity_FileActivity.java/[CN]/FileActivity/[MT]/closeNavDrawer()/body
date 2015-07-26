@@ -1,0 +1,3 @@
+{
+  mDrawerLayout.closeDrawer(GravityCompat.START);
+}
