@@ -3,6 +3,6 @@
   mSyncInProgress=true;
   RemoteOperation synchFolderOp=new RefreshFolderOperation(folder,currentSyncTime,false,getFileOperationsHelper().isSharedSupported(),ignoreETag,getStorageManager(),getAccount(),getApplicationContext());
   synchFolderOp.execute(getAccount(),MainApp.getAppContext(),this,null,null);
-  setSupportProgressBarIndeterminateVisibility(true);
+  mProgressBar.setVisibility(View.VISIBLE);
   setBackgroundText();
 }

@@ -32,7 +32,7 @@
         startImagePreview(getFile());
       }
     }
-    setSupportProgressBarIndeterminate(false);
+    mProgressBar.setVisibility(View.INVISIBLE);
   }
   finally {
     if (intent != null) {
