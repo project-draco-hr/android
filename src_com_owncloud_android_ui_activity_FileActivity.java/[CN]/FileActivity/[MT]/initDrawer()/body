@@ -3,6 +3,12 @@
   mDrawerLayout=(DrawerLayout)findViewById(R.id.drawer_layout);
   RelativeLayout navigationDrawerLayout=(RelativeLayout)findViewById(R.id.left_drawer);
   mDrawerList=(ListView)navigationDrawerLayout.findViewById(R.id.drawer_list);
+  Account account=AccountUtils.getCurrentOwnCloudAccount(getApplicationContext());
+  if (account != null) {
+    TextView username=(TextView)navigationDrawerLayout.findViewById(R.id.drawer_username);
+    int lastAtPos=account.name.lastIndexOf("@");
+    username.setText(account.name.substring(0,lastAtPos));
+  }
   mDrawerTitles=getResources().getStringArray(R.array.drawer_items);
   mDrawerContentDescriptions=getResources().getStringArray(R.array.drawer_content_descriptions);
   mDrawerItems=new ArrayList<NavigationDrawerItem>();
