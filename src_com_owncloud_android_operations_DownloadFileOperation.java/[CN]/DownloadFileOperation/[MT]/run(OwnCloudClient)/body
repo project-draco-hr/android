@@ -17,6 +17,7 @@ synchronized (mCancellationRequested) {
   result=mDownloadOperation.execute(client);
   if (result.isSuccess()) {
     mModificationTimestamp=mDownloadOperation.getModificationTimestamp();
+    mEtag=mDownloadOperation.getEtag();
     newFile=new File(getSavePath());
     newFile.getParentFile().mkdirs();
     moved=tmpFile.renameTo(newFile);

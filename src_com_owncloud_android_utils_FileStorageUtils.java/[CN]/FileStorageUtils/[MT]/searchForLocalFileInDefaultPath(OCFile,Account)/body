@@ -1,6 +1,6 @@
 {
   if (file.getStoragePath() == null && !file.isFolder()) {
-    File f=new File(FileStorageUtils.getDefaultSavePathFor(mAccount.name,file));
+    File f=new File(FileStorageUtils.getDefaultSavePathFor(account.name,file));
     if (f.exists()) {
       file.setStoragePath(f.getAbsolutePath());
       file.setLastSyncDateForData(f.lastModified());

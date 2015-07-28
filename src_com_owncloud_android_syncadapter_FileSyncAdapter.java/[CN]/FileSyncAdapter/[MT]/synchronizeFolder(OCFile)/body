@@ -13,7 +13,7 @@
     }
     if (result.isSuccess()) {
       List<OCFile> children=synchFolderOp.getChildren();
-      fetchChildren(folder,children,synchFolderOp.getRemoteFolderChanged());
+      syncChildren(children);
     }
   }
  else {

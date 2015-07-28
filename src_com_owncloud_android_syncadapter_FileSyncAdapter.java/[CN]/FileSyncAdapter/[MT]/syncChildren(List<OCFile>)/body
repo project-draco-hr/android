@@ -1,6 +1,6 @@
 {
   int i;
-  OCFile newFile=null;
+  OCFile newFile;
   for (i=0; i < files.size() && !mCancellation; i++) {
     newFile=files.get(i);
     if (newFile.isFolder()) {

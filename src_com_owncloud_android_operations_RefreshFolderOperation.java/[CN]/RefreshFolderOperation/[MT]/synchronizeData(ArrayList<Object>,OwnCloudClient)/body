@@ -1,11 +1,11 @@
 {
   mLocalFolder=mStorageManager.getFileByPath(mLocalFolder.getRemotePath());
-  OCFile remoteFolder=fillOCFile((RemoteFile)folderAndFiles.get(0));
+  OCFile remoteFolder=FileStorageUtils.fillOCFile((RemoteFile)folderAndFiles.get(0));
   remoteFolder.setParentId(mLocalFolder.getParentId());
   remoteFolder.setFileId(mLocalFolder.getFileId());
   Log_OC.d(TAG,"Remote folder " + mLocalFolder.getRemotePath() + " changed - starting update of local data ");
   List<OCFile> updatedFiles=new Vector<OCFile>(folderAndFiles.size() - 1);
-  List<SynchronizeFileOperation> filesToSyncContents=new Vector<SynchronizeFileOperation>();
+  mFilesToSyncContents.clear();
   List<OCFile> localFiles=mStorageManager.getFolderContent(mLocalFolder);
   Map<String,OCFile> localFilesMap=new HashMap<String,OCFile>(localFiles.size());
   for (  OCFile file : localFiles) {
@@ -13,7 +13,7 @@
   }
   OCFile remoteFile=null, localFile=null;
   for (int i=1; i < folderAndFiles.size(); i++) {
-    remoteFile=fillOCFile((RemoteFile)folderAndFiles.get(i));
+    remoteFile=FileStorageUtils.fillOCFile((RemoteFile)folderAndFiles.get(i));
     remoteFile.setParentId(mLocalFolder.getFileId());
     localFile=localFilesMap.remove(remoteFile.getRemotePath());
     remoteFile.setLastSyncDateForProperties(mCurrentSyncTime);
@@ -37,15 +37,13 @@
  else {
       remoteFile.setEtag("");
     }
-    checkAndFixForeignStoragePath(remoteFile);
-    searchForLocalFileInDefaultPath(remoteFile);
+    FileStorageUtils.searchForLocalFileInDefaultPath(remoteFile,mAccount);
     if (remoteFile.isFavorite()) {
       SynchronizeFileOperation operation=new SynchronizeFileOperation(localFile,remoteFile,mAccount,true,mContext);
-      filesToSyncContents.add(operation);
+      mFilesToSyncContents.add(operation);
     }
     updatedFiles.add(remoteFile);
   }
   mStorageManager.saveFolder(remoteFolder,updatedFiles,localFilesMap.values());
-  startContentSynchronizations(filesToSyncContents,client);
   mChildren=updatedFiles;
 }

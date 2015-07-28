@@ -9,11 +9,6 @@
   FileDownloaderBinder downloaderBinder=mFileActivity.getFileDownloaderBinder();
   if (downloaderBinder != null && downloaderBinder.isDownloading(account,file)) {
     downloaderBinder.cancel(account,file);
-    if (file.isFavorite()) {
-      OCFile parent=mFileActivity.getStorageManager().getFileById(file.getParentId());
-      parent.setEtag("");
-      mFileActivity.getStorageManager().saveFile(parent);
-    }
   }
   FileUploaderBinder uploaderBinder=mFileActivity.getFileUploaderBinder();
   if (uploaderBinder != null && uploaderBinder.isUploading(account,file)) {

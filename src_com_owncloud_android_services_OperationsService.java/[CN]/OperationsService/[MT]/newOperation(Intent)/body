@@ -59,10 +59,6 @@
         String remotePath=operationIntent.getStringExtra(EXTRA_REMOTE_PATH);
         operation=new SynchronizeFolderOperation(this,remotePath,account,System.currentTimeMillis());
       }
- else       if (action.equals(ACTION_DOWNLOAD_FOLDER)) {
-        String remotePath=operationIntent.getStringExtra(EXTRA_REMOTE_PATH);
-        operation=new DownloadFolderOperation(this,remotePath,account,System.currentTimeMillis());
-      }
  else       if (action.equals(ACTION_MOVE_FILE)) {
         String remotePath=operationIntent.getStringExtra(EXTRA_REMOTE_PATH);
         String newParentPath=operationIntent.getStringExtra(EXTRA_NEW_PARENT_PATH);

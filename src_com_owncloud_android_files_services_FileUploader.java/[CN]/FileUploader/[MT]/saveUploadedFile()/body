@@ -11,6 +11,9 @@
     updateOCFile(file,(RemoteFile)result.getData().get(0));
     file.setLastSyncDateForProperties(syncDate);
   }
+ else {
+    Log_OC.e(TAG,"Error reading properties of file after successful upload; this is gonna hurt...");
+  }
   if (mCurrentUpload.wasRenamed()) {
     OCFile oldFile=mCurrentUpload.getOldFile();
     if (oldFile.fileExists()) {

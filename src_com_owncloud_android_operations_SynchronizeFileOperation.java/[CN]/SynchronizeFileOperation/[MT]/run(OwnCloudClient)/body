@@ -19,7 +19,12 @@
     }
     if (mServerFile != null) {
       boolean serverChanged=false;
-      serverChanged=(mServerFile.getModificationTimestamp() != mLocalFile.getModificationTimestampAtLastSyncForData());
+      if (mLocalFile.getEtag() == null || mLocalFile.getEtag().length() == 0) {
+        serverChanged=mServerFile.getModificationTimestamp() != mLocalFile.getModificationTimestampAtLastSyncForData();
+      }
+ else {
+        serverChanged=(!mServerFile.getEtag().equals(mLocalFile.getEtag()));
+      }
       boolean localChanged=(mLocalFile.getLocalModificationTimestamp() > mLocalFile.getLastSyncDateForData());
       Log_OC.d(TAG,"TOKENs checked to SYNC " + mRemotePath);
       Log_OC.d(TAG,"  server#modificationTimestamp " + mServerFile.getModificationTimestamp());

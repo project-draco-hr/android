@@ -1,6 +1,6 @@
 {
   FileDataStorageManager storageManager=getStorageManager();
-  OCFile remoteFolder=fillOCFile((RemoteFile)folderAndFiles.get(0));
+  OCFile remoteFolder=FileStorageUtils.fillOCFile((RemoteFile)folderAndFiles.get(0));
   remoteFolder.setParentId(mLocalFolder.getParentId());
   remoteFolder.setFileId(mLocalFolder.getFileId());
   Log_OC.d(TAG,"Remote folder " + mLocalFolder.getRemotePath() + " changed - starting update of local data ");
@@ -17,7 +17,7 @@
   }
   OCFile remoteFile=null, localFile=null;
   for (int i=1; i < folderAndFiles.size(); i++) {
-    remoteFile=fillOCFile((RemoteFile)folderAndFiles.get(i));
+    remoteFile=FileStorageUtils.fillOCFile((RemoteFile)folderAndFiles.get(i));
     remoteFile.setParentId(mLocalFolder.getFileId());
     localFile=localFilesMap.remove(remoteFile.getRemotePath());
     remoteFile.setLastSyncDateForProperties(mCurrentSyncTime);
