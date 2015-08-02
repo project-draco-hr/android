@@ -9,9 +9,11 @@
         foldersCount++;
       }
  else {
-        filesCount++;
-        if (file.isImage()) {
-          imagesCount++;
+        if (!file.isHidden()) {
+          filesCount++;
+          if (file.isImage()) {
+            imagesCount++;
+          }
         }
       }
     }
