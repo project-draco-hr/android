@@ -12,7 +12,7 @@
   }
 ).setNegativeButton(R.string.conflict_use_server_version,new DialogInterface.OnClickListener(){
     @Override public void onClick(    DialogInterface dialog,    int which){
-      if (mListener != null)       mListener.conflictDecisionMade(Decision.CANCEL);
+      if (mListener != null)       mListener.conflictDecisionMade(Decision.SERVER);
     }
   }
 ).create();
