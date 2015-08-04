@@ -57,7 +57,7 @@
       }
       removeStickyBroadcast(intent);
       Log_OC.d(TAG,"Setting progress visibility to " + mSyncInProgress);
-      mProgressBar.setVisibility((mSyncInProgress) ? View.VISIBLE : View.INVISIBLE);
+      mProgressBar.setIndeterminate(mSyncInProgress);
       setBackgroundText();
     }
     if (synchResult != null) {
