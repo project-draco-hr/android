@@ -28,8 +28,10 @@
  else {
         cleanSecondFragment();
       }
-      if (uploadWasFine && PreviewImageFragment.canBePreviewed(getFile())) {
-        startImagePreview(getFile());
+      if (uploadWasFine) {
+        OCFile ocFile=getFile();
+        if (PreviewImageFragment.canBePreviewed(ocFile))         startImagePreview(getFile());
+ else         if (PreviewTextFragment.canBePreviewed(ocFile))         startTextPreview(ocFile);
       }
     }
   }

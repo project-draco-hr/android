@@ -6,6 +6,9 @@
       boolean autoplay=getIntent().getBooleanExtra(PreviewVideoActivity.EXTRA_AUTOPLAY,true);
       secondFragment=new PreviewMediaFragment(file,getAccount(),startPlaybackPosition,autoplay);
     }
+ else     if (file.isDown() && PreviewTextFragment.canBePreviewed(file)) {
+      secondFragment=null;
+    }
  else {
       secondFragment=FileDetailFragment.newInstance(file,getAccount());
     }
