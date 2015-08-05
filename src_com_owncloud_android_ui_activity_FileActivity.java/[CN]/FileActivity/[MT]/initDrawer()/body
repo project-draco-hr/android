@@ -39,12 +39,6 @@
     }
   }
 ;
-  mDrawerToggle.setToolbarNavigationClickListener(new View.OnClickListener(){
-    @Override public void onClick(    View v){
-      Log.i("IT WORKS :)","");
-    }
-  }
-);
   mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
   mDrawerLayout.setDrawerListener(mDrawerToggle);
   mDrawerToggle.setDrawerIndicatorEnabled(false);
