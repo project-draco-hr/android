@@ -28,7 +28,6 @@
   getSupportActionBar().setHomeButtonEnabled(true);
   getSupportActionBar().setHomeButtonEnabled(true);
   mProgressBar.setIndeterminate(mSyncInProgress);
-  initDrawer();
   setBackgroundText();
   Log_OC.v(TAG,"onCreate() end");
 }
