@@ -8,7 +8,7 @@
     Log_OC.wtf(getTag(),"Calling confirmation dialog without resource or arguments");
     return null;
   }
-  AlertDialog.Builder builder=new AlertDialog.Builder(getActivity(),R.style.Theme_ownCloud_Dialog).setIcon(android.R.drawable.ic_dialog_alert).setMessage(String.format(getString(resourceId),confirmationTarget)).setTitle(android.R.string.dialog_alert_title);
+  AlertDialog.Builder builder=new AlertDialog.Builder(getActivity(),R.style.Theme_ownCloud_Dialog).setIcon(R.drawable.ic_warning).setMessage(String.format(getString(resourceId),confirmationTarget)).setTitle(android.R.string.dialog_alert_title);
   if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
     builder.setIconAttribute(android.R.attr.alertDialogIcon);
   }
