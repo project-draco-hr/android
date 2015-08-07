@@ -10,7 +10,7 @@
   FileUploaderBinder uploaderBinder=mFileActivity.getFileUploaderBinder();
   if (downloaderBinder != null && downloaderBinder.isDownloading(account,file)) {
     downloaderBinder.cancel(account,file);
-    if (file.keepInSync()) {
+    if (file.isFavorite()) {
       OCFile parent=mFileActivity.getStorageManager().getFileById(file.getParentId());
       parent.setEtag("");
       mFileActivity.getStorageManager().saveFile(parent);
