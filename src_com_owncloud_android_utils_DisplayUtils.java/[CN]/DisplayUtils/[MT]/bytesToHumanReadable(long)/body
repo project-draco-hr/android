@@ -5,6 +5,5 @@
     result/=1024.;
     attachedsuff++;
   }
-  result=((int)(result * 100)) / 100.;
-  return result + " " + sizeSuffixes[attachedsuff];
+  return new BigDecimal(result).setScale(sizeScales[attachedsuff],BigDecimal.ROUND_HALF_UP) + " " + sizeSuffixes[attachedsuff];
 }

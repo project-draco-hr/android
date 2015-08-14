@@ -42,11 +42,13 @@ linearLayout.setContentDescription("LinearLayout-" + name);
 switch (viewType) {
 case LIST_ITEM:
 TextView fileSizeV=(TextView)view.findViewById(R.id.file_size);
+TextView fileSizeSeparatorV=(TextView)view.findViewById(R.id.file_separator);
 TextView lastModV=(TextView)view.findViewById(R.id.last_mod);
 ImageView checkBoxV=(ImageView)view.findViewById(R.id.custom_checkbox);
 lastModV.setVisibility(View.VISIBLE);
 lastModV.setText(showRelativeTimestamp(file));
 checkBoxV.setVisibility(View.GONE);
+fileSizeSeparatorV.setVisibility(View.VISIBLE);
 fileSizeV.setVisibility(View.VISIBLE);
 fileSizeV.setText(DisplayUtils.bytesToHumanReadable(file.getFileLength()));
 if (!file.isFolder()) {
@@ -67,6 +69,7 @@ checkBoxV.setVisibility(View.VISIBLE);
 }
 }
  else {
+fileSizeSeparatorV.setVisibility(View.INVISIBLE);
 fileSizeV.setVisibility(View.INVISIBLE);
 }
 case GRID_ITEM:
