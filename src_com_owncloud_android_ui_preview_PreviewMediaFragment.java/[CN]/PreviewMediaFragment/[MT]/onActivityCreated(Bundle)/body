@@ -29,6 +29,7 @@
  else {
       mVideoPreview.setVisibility(View.GONE);
       mImagePreview.setVisibility(View.VISIBLE);
+      extractAndSetCoverArt(file);
     }
   }
 }
