@@ -1,5 +1,6 @@
 {
   MenuInflater inflater=getMenuInflater();
   inflater.inflate(R.menu.main_menu,menu);
+  menu.getItem(2).setTitle(getApplicationContext().getString(R.string.action_switch_grid_view));
   return true;
 }
