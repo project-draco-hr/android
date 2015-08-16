@@ -1,0 +1,8 @@
+{
+  if (parentDir.getRemotePath().compareToIgnoreCase(OCFile.ROOT_PATH) == 0) {
+    return false;
+  }
+ else {
+    return !setting.contains(parentDir.getRemoteId());
+  }
+}

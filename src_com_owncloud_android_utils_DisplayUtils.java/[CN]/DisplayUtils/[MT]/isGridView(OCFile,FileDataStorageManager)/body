@@ -1,0 +1,34 @@
+{
+  if (file != null) {
+    OCFile fileToTest=file;
+    OCFile parentDir=null;
+    String parentPath=null;
+    SharedPreferences setting=MainApp.getAppContext().getSharedPreferences("viewMode",Context.MODE_PRIVATE);
+    if (setting.contains(fileToTest.getRemoteId())) {
+      return setting.getBoolean(fileToTest.getRemoteId(),false);
+    }
+ else {
+      do {
+        if (fileToTest.getParentId() != FileDataStorageManager.ROOT_PARENT_ID) {
+          parentPath=new File(fileToTest.getRemotePath()).getParent();
+          parentPath=parentPath.endsWith(OCFile.PATH_SEPARATOR) ? parentPath : parentPath + OCFile.PATH_SEPARATOR;
+          parentDir=storageManager.getFileByPath(parentPath);
+        }
+ else {
+          parentDir=storageManager.getFileByPath(OCFile.ROOT_PATH);
+        }
+        while (parentDir == null) {
+          parentPath=new File(parentPath).getParent();
+          parentPath=parentPath.endsWith(OCFile.PATH_SEPARATOR) ? parentPath : parentPath + OCFile.PATH_SEPARATOR;
+          parentDir=storageManager.getFileByPath(parentPath);
+        }
+        fileToTest=parentDir;
+      }
+ while (endWhile(parentDir,setting));
+      return setting.getBoolean(fileToTest.getRemoteId(),false);
+    }
+  }
+ else {
+    return false;
+  }
+}

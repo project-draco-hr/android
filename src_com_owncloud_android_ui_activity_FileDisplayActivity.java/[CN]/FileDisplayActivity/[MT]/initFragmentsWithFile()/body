@@ -18,6 +18,12 @@
       cleanSecondFragment();
       if (file.isDown() && PreviewTextFragment.canBePreviewed(file))       startTextPreview(file);
     }
+    if (DisplayUtils.isGridView(getFile(),getStorageManager())) {
+      switchToGridView();
+    }
+ else {
+      switchToListView();
+    }
   }
  else {
     Log_OC.wtf(TAG,"initFragments() called with invalid NULLs!");
