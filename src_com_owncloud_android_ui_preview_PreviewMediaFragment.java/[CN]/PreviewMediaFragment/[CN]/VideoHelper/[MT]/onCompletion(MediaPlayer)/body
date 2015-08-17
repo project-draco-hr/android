@@ -5,12 +5,14 @@
     if (Build.VERSION.SDK_INT == Build.VERSION_CODES.GINGERBREAD) {
       mVideoPreview.pause();
     }
- else     if (Build.VERSION.SDK_INT == Build.VERSION_CODES.GINGERBREAD_MR1) {
-      mMediaController.setEnabled(false);
-      mVideoPreview.stopPlayback();
-      mAutoplay=false;
-      mSavedPlaybackPosition=0;
-      mVideoPreview.setVideoPath(getFile().getStoragePath());
+ else {
+      if (Build.VERSION.SDK_INT == Build.VERSION_CODES.GINGERBREAD_MR1) {
+        mMediaController.setEnabled(false);
+        mVideoPreview.stopPlayback();
+        mAutoplay=false;
+        mSavedPlaybackPosition=0;
+        mVideoPreview.setVideoPath(getFile().getStoragePath());
+      }
     }
   }
   mMediaController.updatePausePlay();
