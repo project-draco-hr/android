@@ -1,0 +1,5 @@
+{
+  menuItemId=menuItem.getItemId();
+  menuText=menuItem.getTitle().toString();
+  menuItem.getMenuInfo();
+}

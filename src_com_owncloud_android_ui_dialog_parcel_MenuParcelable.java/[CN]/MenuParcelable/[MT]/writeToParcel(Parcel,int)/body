@@ -1,0 +1,3 @@
+{
+  outParcel.writeTypedList(menuItems);
+}

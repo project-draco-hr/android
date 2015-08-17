@@ -1,11 +1,12 @@
 {
   Bundle args=getArguments();
+  PopupMenu pm=new PopupMenu(getActivity(),null);
+  Menu menu=pm.getMenu();
   boolean allowContextualActions=(args == null) ? true : args.getBoolean(ARG_ALLOW_CONTEXTUAL_ACTIONS,true);
   if (allowContextualActions) {
     MenuInflater inflater=getActivity().getMenuInflater();
     inflater.inflate(R.menu.file_actions_menu,menu);
-    AdapterContextMenuInfo info=(AdapterContextMenuInfo)menuInfo;
-    OCFile targetFile=(OCFile)mAdapter.getItem(info.position);
+    OCFile targetFile=(OCFile)mAdapter.getItem(fileIndex);
     if (mContainerActivity.getStorageManager() != null) {
       FileMenuFilter mf=new FileMenuFilter(targetFile,mContainerActivity.getStorageManager().getAccount(),mContainerActivity,getActivity());
       mf.filter(menu);
@@ -19,5 +20,9 @@
         item.setEnabled(false);
       }
     }
+    MenuItem menuItem=new DialogMenuItem(item.getItemId());
+    FileActionsDialogFragment dialog=FileActionsDialogFragment.newInstance(menu,fileIndex);
+    dialog.setTargetFragment(this,0);
+    dialog.show(getFragmentManager(),FileActionsDialogFragment.FTAG_FILE_ACTIONS);
   }
 }
