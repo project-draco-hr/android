@@ -29,5 +29,9 @@
   mListView.setEmptyView(mRefreshEmptyLayout);
   mGridView.setEmptyView(mRefreshEmptyLayout);
   mCurrentListView=mListView;
+  fabMain=(FloatingActionsMenu)v.findViewById(R.id.fab_main);
+  fabUpload=(FloatingActionButton)v.findViewById(R.id.fab_upload);
+  fabMkdir=(FloatingActionButton)v.findViewById(R.id.fab_mkdir);
+  fabUploadFromApp=(FloatingActionButton)v.findViewById(R.id.fab_upload_from_app);
   return v;
 }

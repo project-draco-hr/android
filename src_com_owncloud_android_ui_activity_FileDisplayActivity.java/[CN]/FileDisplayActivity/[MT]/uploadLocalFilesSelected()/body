@@ -1,0 +1,5 @@
+{
+  Intent action=new Intent(this,UploadFilesActivity.class);
+  action.putExtra(UploadFilesActivity.EXTRA_ACCOUNT,getAccount());
+  startActivityForResult(action,ACTION_SELECT_MULTIPLE_FILES);
+}

@@ -1,0 +1,27 @@
+{
+  Log_OC.i(TAG,"onCreateView() start");
+  View v=super.onCreateView(inflater,container,savedInstanceState);
+  getFabUpload().setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      ((FileDisplayActivity)getActivity()).uploadLocalFilesSelected();
+      getFabMain().collapse();
+    }
+  }
+);
+  getFabMkdir().setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      ((FileDisplayActivity)getActivity()).createFolder();
+      getFabMain().collapse();
+    }
+  }
+);
+  getFabUploadFromApp().setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      ((FileDisplayActivity)getActivity()).uploadFromOtherAppsSelected();
+      getFabMain().collapse();
+    }
+  }
+);
+  Log_OC.i(TAG,"onCreateView() end");
+  return v;
+}
