@@ -1,5 +1,5 @@
 {
-  final ProgressDialog dialog=new ProgressDialog(getActivity());
+  final ProgressDialog dialog=new ProgressDialog(getActivity(),R.style.ProgressDialogTheme);
   dialog.setIndeterminate(true);
   int messageId=getArguments().getInt(ARG_MESSAGE_ID,R.string.placeholder_sentence);
   dialog.setMessage(getString(messageId));
