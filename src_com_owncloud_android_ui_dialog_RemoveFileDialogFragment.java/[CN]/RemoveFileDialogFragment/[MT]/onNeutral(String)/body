@@ -1,16 +1,16 @@
 {
-  ComponentsGetter cg=(ComponentsGetter)getSherlockActivity();
+  ComponentsGetter cg=(ComponentsGetter)getActivity();
   cg.getFileOperationsHelper().removeFile(mTargetFile,true);
   FileDataStorageManager storageManager=cg.getStorageManager();
-  boolean containsKeepInSync=false;
+  boolean containsFavorite=false;
   if (mTargetFile.isFolder()) {
     Vector<OCFile> files=storageManager.getFolderContent(mTargetFile);
     for (    OCFile file : files) {
-      containsKeepInSync=file.keepInSync() || containsKeepInSync;
-      if (containsKeepInSync)       break;
+      containsFavorite=file.isFavorite() || containsFavorite;
+      if (containsFavorite)       break;
     }
   }
-  if (mTargetFile.keepInSync() || containsKeepInSync) {
+  if (mTargetFile.isFavorite() || containsFavorite) {
     OCFile folder=null;
     if (mTargetFile.isFolder()) {
       folder=mTargetFile;

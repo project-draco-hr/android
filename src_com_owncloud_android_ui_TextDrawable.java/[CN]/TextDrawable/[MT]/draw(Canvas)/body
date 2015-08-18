@@ -1,0 +1,4 @@
+{
+  canvas.drawRect(0,-20,20,40,bg);
+  canvas.drawText(text,4,6,paint);
+}

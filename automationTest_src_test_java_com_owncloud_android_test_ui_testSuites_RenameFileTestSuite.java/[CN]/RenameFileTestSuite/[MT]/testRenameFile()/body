@@ -1,0 +1,21 @@
+{
+  FileListView fileListView=Actions.login(Config.URL,Config.user,Config.password,Config.isTrusted,driver);
+  common.assertIsInFileListView();
+  FileListView fileListViewAfterUploadFile=Actions.uploadFile(OLD_FILE_NAME,fileListView);
+  Actions.deleteElement(FILE_NAME,fileListView,driver);
+  fileListViewAfterUploadFile.scrollTillFindElement(OLD_FILE_NAME);
+  assertTrue(fileHasBeenCreated=fileListViewAfterUploadFile.getFileElement().isDisplayed());
+  CurrentCreatedFile=OLD_FILE_NAME;
+  Common.waitTillElementIsNotPresentWithoutTimeout(fileListViewAfterUploadFile.getProgressCircular(),1000);
+  common.wait.until(ExpectedConditions.visibilityOf(fileListViewAfterUploadFile.getFileElementLayout().findElement(By.id(FileListView.getLocalFileIndicator()))));
+  ElementMenuOptions menuOptions=fileListViewAfterUploadFile.longPressOnElement(OLD_FILE_NAME);
+  NewFolderPopUp newFolderPopUp=menuOptions.clickOnRename();
+  newFolderPopUp.typeNewFolderName(FILE_NAME);
+  WaitAMomentPopUp waitAMomentPopUp=newFolderPopUp.clickOnNewFolderOkButton();
+  Common.waitTillElementIsNotPresentWithoutTimeout(waitAMomentPopUp.getWaitAMomentTextElement(),100);
+  fileListViewAfterUploadFile.scrollTillFindElement(FILE_NAME);
+  assertNotNull(fileListViewAfterUploadFile.getFileElement());
+  assertTrue(fileListViewAfterUploadFile.getFileElement().isDisplayed());
+  assertEquals(FILE_NAME,fileListViewAfterUploadFile.getFileElement().getText());
+  CurrentCreatedFile=FILE_NAME;
+}

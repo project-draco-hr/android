@@ -1,0 +1,44 @@
+{
+  OCFile file=(OCFile)mFile;
+  final String imageKey=String.valueOf(file.getRemoteId());
+  Bitmap thumbnail=getBitmapFromDiskCache(imageKey);
+  if (thumbnail == null || file.needsUpdateThumbnail()) {
+    int px=getThumbnailDimension();
+    if (file.isDown()) {
+      Bitmap bitmap=BitmapUtils.decodeSampledBitmapFromFile(file.getStoragePath(),px,px);
+      if (bitmap != null) {
+        thumbnail=addThumbnailToCache(imageKey,bitmap,file.getStoragePath(),px);
+        file.setNeedsUpdateThumbnail(false);
+        mStorageManager.saveFile(file);
+      }
+    }
+ else {
+      OwnCloudVersion serverOCVersion=AccountUtils.getServerVersion(mAccount);
+      if (mClient != null && serverOCVersion != null) {
+        if (serverOCVersion.supportsRemoteThumbnails()) {
+          try {
+            String uri=mClient.getBaseUri() + "" + "/index.php/apps/files/api/v1/thumbnail/"+ px+ "/"+ px+ Uri.encode(file.getRemotePath(),"/");
+            Log_OC.d("Thumbnail","URI: " + uri);
+            GetMethod get=new GetMethod(uri);
+            int status=mClient.executeMethod(get);
+            if (status == HttpStatus.SC_OK) {
+              InputStream inputStream=get.getResponseBodyAsStream();
+              Bitmap bitmap=BitmapFactory.decodeStream(inputStream);
+              thumbnail=ThumbnailUtils.extractThumbnail(bitmap,px,px);
+              if (thumbnail != null) {
+                addBitmapToCache(imageKey,thumbnail);
+              }
+            }
+          }
+ catch (          Exception e) {
+            e.printStackTrace();
+          }
+        }
+ else {
+          Log_OC.d(TAG,"Server too old");
+        }
+      }
+    }
+  }
+  return thumbnail;
+}

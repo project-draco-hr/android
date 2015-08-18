@@ -1,0 +1,4 @@
+{
+  for (  Description each : description.getChildren())   if (each.getTestClass() == null)   return false;
+  return true;
+}

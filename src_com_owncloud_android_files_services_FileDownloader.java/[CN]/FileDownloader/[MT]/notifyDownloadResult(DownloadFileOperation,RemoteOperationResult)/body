@@ -13,7 +13,6 @@
       updateAccountCredentials.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
       updateAccountCredentials.addFlags(Intent.FLAG_FROM_BACKGROUND);
       mNotificationBuilder.setContentIntent(PendingIntent.getActivity(this,(int)System.currentTimeMillis(),updateAccountCredentials,PendingIntent.FLAG_ONE_SHOT));
-      mDownloadClient=null;
     }
  else {
       Intent showDetailsIntent=new Intent();

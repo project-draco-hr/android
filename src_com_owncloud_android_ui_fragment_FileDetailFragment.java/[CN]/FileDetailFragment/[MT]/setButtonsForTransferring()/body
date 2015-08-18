@@ -1,6 +1,6 @@
 {
   if (!isEmpty()) {
-    getView().findViewById(R.id.fdKeepInSync).setEnabled(false);
+    getView().findViewById(R.id.fdFavorite).setEnabled(false);
     getView().findViewById(R.id.fdProgressBlock).setVisibility(View.VISIBLE);
     TextView progressText=(TextView)getView().findViewById(R.id.fdProgressText);
     progressText.setVisibility(View.VISIBLE);

@@ -1,4 +1,3 @@
 {
   super();
-  Log_OC.d(TAG,"constructor");
 }

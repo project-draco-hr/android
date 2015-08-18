@@ -1,10 +1,13 @@
 {
+  mSavedPosition=position;
+  mHasSavedPosition=true;
   if (mDownloaderBinder == null) {
     mRequestWaitingForBinder=true;
   }
  else {
     OCFile currentFile=mPreviewImagePagerAdapter.getFileAt(position);
     getSupportActionBar().setTitle(currentFile.getFileName());
+    mDrawerToggle.setDrawerIndicatorEnabled(false);
     if (!currentFile.isDown()) {
       if (!mPreviewImagePagerAdapter.pendingErrorAt(position)) {
         requestForDownload(currentFile);

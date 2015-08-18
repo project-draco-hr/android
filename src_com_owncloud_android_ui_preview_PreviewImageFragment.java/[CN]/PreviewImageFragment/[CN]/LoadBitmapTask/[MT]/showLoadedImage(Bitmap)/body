@@ -1,0 +1,13 @@
+{
+  final ImageViewCustom imageView=mImageViewRef.get();
+  if (imageView != null) {
+    Log_OC.d(TAG,"Showing image with resolution " + result.getWidth() + "x"+ result.getHeight());
+    imageView.setImageBitmap(result);
+    imageView.setVisibility(View.VISIBLE);
+    mBitmap=result;
+  }
+  final TextView messageView=mMessageViewRef.get();
+  if (messageView != null) {
+    messageView.setVisibility(View.GONE);
+  }
+}

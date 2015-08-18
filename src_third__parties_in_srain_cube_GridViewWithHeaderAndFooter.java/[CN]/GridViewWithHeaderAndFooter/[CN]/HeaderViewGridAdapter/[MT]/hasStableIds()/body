@@ -1,0 +1,6 @@
+{
+  if (mAdapter != null) {
+    return mAdapter.hasStableIds();
+  }
+  return false;
+}

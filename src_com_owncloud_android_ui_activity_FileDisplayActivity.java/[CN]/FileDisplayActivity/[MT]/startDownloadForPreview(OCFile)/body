@@ -1,9 +1,9 @@
 {
-  Fragment detailFragment=new FileDetailFragment(file,getAccount());
+  Fragment detailFragment=FileDetailFragment.newInstance(file,getAccount());
   setSecondFragment(detailFragment);
   mWaitingToPreview=file;
   requestForDownload();
   updateFragmentsVisibility(true);
-  updateNavigationElementsInActionBar(file);
+  updateActionBarTitleAndHomeButton(file);
   setFile(file);
 }

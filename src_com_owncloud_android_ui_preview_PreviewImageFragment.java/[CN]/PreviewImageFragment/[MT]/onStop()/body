@@ -1,0 +1,8 @@
+{
+  Log_OC.d(TAG,"onStop starts");
+  if (mLoadBitmapTask != null) {
+    mLoadBitmapTask.cancel(true);
+    mLoadBitmapTask=null;
+  }
+  super.onStop();
+}

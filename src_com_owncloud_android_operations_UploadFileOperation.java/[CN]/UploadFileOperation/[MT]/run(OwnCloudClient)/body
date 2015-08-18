@@ -45,7 +45,7 @@
             out=new FileOutputStream(temporalFile);
             int nRead;
             byte[] data=new byte[16384];
-            while ((nRead=in.read(data,0,data.length)) != -1) {
+            while (!mCancellationRequested.get() && (nRead=in.read(data,0,data.length)) != -1) {
               out.write(data,0,nRead);
             }
             out.flush();
@@ -56,10 +56,13 @@
               out=new FileOutputStream(temporalFile);
               byte[] buf=new byte[1024];
               int len;
-              while ((len=in.read(buf)) > 0) {
+              while (!mCancellationRequested.get() && (len=in.read(buf)) > 0) {
                 out.write(buf,0,len);
               }
             }
+          }
+          if (mCancellationRequested.get()) {
+            result=new RemoteOperationResult(new OperationCancelledException());
           }
         }
  catch (        Exception e) {
@@ -82,7 +85,7 @@
         }
       }
     }
-    localCopyPassed=true;
+    localCopyPassed=(result == null);
     if (mCancellationRequested.get()) {
       throw new OperationCancelledException();
     }

@@ -1,0 +1,5 @@
+String url
+String user
+String password
+Boolean isTrusted
+AndroidDriver driver

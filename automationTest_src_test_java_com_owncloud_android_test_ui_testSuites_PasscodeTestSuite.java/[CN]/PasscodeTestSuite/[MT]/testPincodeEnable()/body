@@ -1,0 +1,17 @@
+{
+  driver.rotate(ScreenOrientation.PORTRAIT);
+  FileListView fileListView=Actions.login(Config.URL,Config.user,Config.password,Config.isTrusted,driver);
+  common.assertIsInFileListView();
+  MenuList menu=fileListView.clickOnMenuButton();
+  SettingsView settingsView=menu.clickOnSettingsButton();
+  PassCodeView passCodeview=settingsView.EnablePassCode();
+  PassCodeView passCodeview2=passCodeview.enterPasscode(Config.passcode1,Config.passcode2,Config.passcode3,Config.passcode4);
+  passCodeview2.reenterPasscode(Config.passcode1,Config.passcode2,Config.passcode3,Config.passcode4);
+  driver.sendKeyEvent(android.view.KeyEvent.KEYCODE_HOME);
+  driver.startActivity("com.owncloud.android",".ui.activity.FileDisplayActivity");
+  common.assertIsNotInFileListView();
+  common.assertIsPasscodeRequestView();
+  PassCodeRequestView passCodeReequestView=new PassCodeRequestView(driver);
+  passCodeReequestView.enterPasscode(Config.passcode1,Config.passcode2,Config.passcode3,Config.passcode4);
+  common.assertIsInFileListView();
+}

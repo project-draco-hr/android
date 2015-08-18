@@ -9,7 +9,7 @@
   dest.writeString(mLocalPath);
   dest.writeString(mMimeType);
   dest.writeInt(mNeedsUpdating ? 1 : 0);
-  dest.writeInt(mKeepInSync ? 1 : 0);
+  dest.writeInt(mFavorite ? 1 : 0);
   dest.writeLong(mLastSyncDateForProperties);
   dest.writeLong(mLastSyncDateForData);
   dest.writeString(mEtag);
@@ -18,4 +18,5 @@
   dest.writeString(mPermissions);
   dest.writeString(mRemoteId);
   dest.writeInt(mNeedsUpdateThumbnail ? 1 : 0);
+  dest.writeInt(mIsDownloading ? 1 : 0);
 }

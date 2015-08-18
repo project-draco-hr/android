@@ -1,0 +1,4 @@
+{
+  assertTrue(waitForTextPresent("ownCloud",(AndroidElement)driver.findElementByAndroidUIAutomator("new UiSelector()" + ".resourceId(\"android:id/action_bar_title\")")));
+  assertTrue(((AndroidElement)driver.findElementByAndroidUIAutomator("new UiSelector().text(\"Please, insert your pass code\")")).isDisplayed());
+}

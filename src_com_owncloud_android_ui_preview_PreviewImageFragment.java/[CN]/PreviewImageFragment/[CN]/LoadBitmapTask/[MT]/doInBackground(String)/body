@@ -1,0 +1,50 @@
+{
+  Bitmap result=null;
+  if (params.length != 1)   return null;
+  String storagePath=params[0];
+  try {
+    int maxDownScale=3;
+    Point screenSize=DisplayUtils.getScreenSize(getActivity());
+    int minWidth=screenSize.x;
+    int minHeight=screenSize.y;
+    for (int i=0; i < maxDownScale && result == null; i++) {
+      if (isCancelled())       return null;
+      try {
+        result=BitmapUtils.decodeSampledBitmapFromFile(storagePath,minWidth,minHeight);
+        if (isCancelled())         return result;
+        if (result == null) {
+          mErrorMessageId=R.string.preview_image_error_unknown_format;
+          Log_OC.e(TAG,"File could not be loaded as a bitmap: " + storagePath);
+          break;
+        }
+ else {
+          result=BitmapUtils.rotateImage(result,storagePath);
+        }
+      }
+ catch (      OutOfMemoryError e) {
+        mErrorMessageId=R.string.common_error_out_memory;
+        if (i < maxDownScale - 1) {
+          Log_OC.w(TAG,"Out of memory rendering file " + storagePath + " ; scaling down");
+          minWidth=minWidth / 2;
+          minHeight=minHeight / 2;
+        }
+ else {
+          Log_OC.w(TAG,"Out of memory rendering file " + storagePath + " ; failing");
+        }
+        if (result != null) {
+          result.recycle();
+        }
+        result=null;
+      }
+    }
+  }
+ catch (  NoSuchFieldError e) {
+    mErrorMessageId=R.string.common_error_unknown;
+    Log_OC.e(TAG,"Error from access to unexisting field despite protection; file " + storagePath,e);
+  }
+catch (  Throwable t) {
+    mErrorMessageId=R.string.common_error_unknown;
+    Log_OC.e(TAG,"Unexpected error loading " + getFile().getStoragePath(),t);
+  }
+  return result;
+}

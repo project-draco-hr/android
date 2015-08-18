@@ -1,0 +1,4 @@
+{
+  TestMethodAnnotation annotation=clazz.getAnnotation(TestMethodAnnotation.class);
+  return annotation == null ? Test.class : annotation.value();
+}

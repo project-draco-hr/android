@@ -1,5 +1,3 @@
 {
-  super();
-  mAccount=null;
   mIgnoreFirstSavedState=false;
 }

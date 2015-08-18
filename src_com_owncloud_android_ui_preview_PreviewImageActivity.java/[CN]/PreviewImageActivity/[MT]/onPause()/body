@@ -1,5 +1,7 @@
 {
-  unregisterReceiver(mDownloadFinishReceiver);
-  mDownloadFinishReceiver=null;
+  if (mDownloadFinishReceiver != null) {
+    unregisterReceiver(mDownloadFinishReceiver);
+    mDownloadFinishReceiver=null;
+  }
   super.onPause();
 }

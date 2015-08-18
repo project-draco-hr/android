@@ -10,6 +10,13 @@ break;
 case KEEP_BOTH:
 i.putExtra(FileUploadService.KEY_LOCAL_BEHAVIOUR,FileUploadService.LocalBehaviour.LOCAL_BEHAVIOUR_MOVE);
 break;
+case SERVER:
+Intent intent=new Intent(this,FileDownloader.class);
+intent.putExtra(FileDownloader.EXTRA_ACCOUNT,getAccount());
+intent.putExtra(FileDownloader.EXTRA_FILE,(Parcelable)getFile());
+startService(intent);
+finish();
+return;
 default :
 Log_OC.wtf(TAG,"Unhandled conflict decision " + decision);
 return;

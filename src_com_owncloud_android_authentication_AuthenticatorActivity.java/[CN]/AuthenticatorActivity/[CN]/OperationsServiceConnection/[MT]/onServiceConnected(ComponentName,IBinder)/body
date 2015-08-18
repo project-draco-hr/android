@@ -3,7 +3,4 @@
     mOperationsServiceBinder=(OperationsServiceBinder)service;
     doOnResumeAndBound();
   }
- else {
-    return;
-  }
 }

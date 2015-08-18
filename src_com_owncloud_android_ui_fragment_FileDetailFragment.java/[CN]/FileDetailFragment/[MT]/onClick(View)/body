@@ -1,8 +1,9 @@
 {
 switch (v.getId()) {
-case R.id.fdKeepInSync:
+case R.id.fdFavorite:
 {
-      toggleKeepInSync();
+      CheckBox cb=(CheckBox)getView().findViewById(R.id.fdFavorite);
+      mContainerActivity.getFileOperationsHelper().toggleFavorite(getFile(),cb.isChecked());
       break;
     }
 case R.id.fdCancelBtn:

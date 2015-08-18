@@ -1,7 +1,7 @@
 {
   super.onCreateView(inflater,container,savedInstanceState);
-  mView=inflater.inflate(R.layout.preview_image_fragment,container,false);
-  mImageView=(TouchImageViewCustom)mView.findViewById(R.id.image);
+  View view=inflater.inflate(R.layout.preview_image_fragment,container,false);
+  mImageView=(TouchImageViewCustom)view.findViewById(R.id.image);
   mImageView.setVisibility(View.GONE);
   mImageView.setOnClickListener(new OnClickListener(){
     @Override public void onClick(    View v){
@@ -9,9 +9,9 @@
     }
   }
 );
-  mMessageView=(TextView)mView.findViewById(R.id.message);
+  mMessageView=(TextView)view.findViewById(R.id.message);
   mMessageView.setVisibility(View.GONE);
-  mProgressWheel=(ProgressBar)mView.findViewById(R.id.progressWheel);
+  mProgressWheel=(ProgressBar)view.findViewById(R.id.progressWheel);
   mProgressWheel.setVisibility(View.VISIBLE);
-  return mView;
+  return view;
 }

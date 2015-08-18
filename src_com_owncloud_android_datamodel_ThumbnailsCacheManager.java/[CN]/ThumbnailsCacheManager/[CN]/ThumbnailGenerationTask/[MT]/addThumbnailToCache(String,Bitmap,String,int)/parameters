@@ -1,0 +1,4 @@
+String imageKey
+Bitmap bitmap
+String path
+int px

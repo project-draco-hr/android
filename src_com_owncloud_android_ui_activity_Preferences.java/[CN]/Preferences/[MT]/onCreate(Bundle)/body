@@ -2,10 +2,22 @@
   super.onCreate(savedInstanceState);
   mDbHandler=UploadDbHandler.getInstance(getBaseContext());
   addPreferencesFromResource(R.xml.preferences);
-  ActionBar actionBar=getSherlock().getActionBar();
-  actionBar.setIcon(DisplayUtils.getSeasonalIconId());
-  actionBar.setDisplayHomeAsUpEnabled(true);
-  actionBar.setTitle(R.string.actionbar_settings);
+  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+    ActionBar actionBar=getActionBar();
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+      actionBar.setIcon(DisplayUtils.getSeasonalIconId());
+    }
+    actionBar.setDisplayHomeAsUpEnabled(true);
+    actionBar.setTitle(R.string.actionbar_settings);
+  }
+ else {
+    setTitle(R.string.actionbar_settings);
+  }
+  int actionBarTitleId=getResources().getIdentifier("action_bar_title","id","android");
+  View actionBarTitleView=getWindow().getDecorView().findViewById(actionBarTitleId);
+  if (actionBarTitleView != null) {
+    getWindow().getDecorView().findViewById(actionBarTitleId).setContentDescription(getString(R.string.actionbar_settings));
+  }
   mAccountsPrefCategory=(PreferenceCategory)findPreference("accounts_category");
   ListView listView=getListView();
   listView.setOnItemLongClickListener(new OnItemLongClickListener(){
@@ -13,9 +25,9 @@
       ListView listView=(ListView)parent;
       ListAdapter listAdapter=listView.getAdapter();
       Object obj=listAdapter.getItem(position);
-      if (obj != null && obj instanceof LongClickableCheckBoxPreference) {
+      if (obj != null && obj instanceof RadioButtonPreference) {
         mShowContextMenu=true;
-        mAccountName=((LongClickableCheckBoxPreference)obj).getKey();
+        mAccountName=((RadioButtonPreference)obj).getKey();
         Preferences.this.openContextMenu(listView);
         View.OnLongClickListener longListener=(View.OnLongClickListener)obj;
         return longListener.onLongClick(view);
@@ -24,14 +36,24 @@
     }
   }
 );
+  String temp;
+  try {
+    PackageInfo pkg=getPackageManager().getPackageInfo(getPackageName(),0);
+    temp=pkg.versionName;
+  }
+ catch (  NameNotFoundException e) {
+    temp="";
+    Log_OC.e(TAG,"Error while showing about dialog",e);
+  }
+  final String appVersion=temp;
   registerForContextMenu(getListView());
   pCode=(CheckBoxPreference)findPreference("set_pincode");
   if (pCode != null) {
     pCode.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
       @Override public boolean onPreferenceChange(      Preference preference,      Object newValue){
-        Intent i=new Intent(getApplicationContext(),PinCodeActivity.class);
-        i.putExtra(PinCodeActivity.EXTRA_ACTIVITY,"preferences");
-        i.putExtra(PinCodeActivity.EXTRA_NEW_STATE,newValue.toString());
+        Intent i=new Intent(getApplicationContext(),PassCodeActivity.class);
+        Boolean enable=(Boolean)newValue;
+        i.setAction(enable.booleanValue() ? PassCodeActivity.ACTION_ENABLE : PassCodeActivity.ACTION_DISABLE);
         startActivity(i);
         return true;
       }
@@ -60,6 +82,19 @@
       preferenceCategory.removePreference(pHelp);
     }
   }
+  if (BuildConfig.DEBUG) {
+    Preference pLog=findPreference("log");
+    if (pLog != null) {
+      pLog.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+        @Override public boolean onPreferenceClick(        Preference preference){
+          Intent loggerIntent=new Intent(getApplicationContext(),LogHistoryActivity.class);
+          startActivity(loggerIntent);
+          return true;
+        }
+      }
+);
+    }
+  }
   boolean recommendEnabled=getResources().getBoolean(R.bool.recommend_enabled);
   Preference pRecommend=findPreference("recommend");
   if (pRecommend != null) {
@@ -75,7 +110,7 @@
           Account currentAccount=AccountUtils.getCurrentOwnCloudAccount(Preferences.this);
           String username=currentAccount.name.substring(0,currentAccount.name.lastIndexOf('@'));
           String recommendSubject=String.format(getString(R.string.recommend_subject),appName);
-          String recommendText=String.format(getString(R.string.recommend_text),appName,downloadUrl,username);
+          String recommendText=String.format(getString(R.string.recommend_text),appName,downloadUrl);
           intent.putExtra(Intent.EXTRA_SUBJECT,recommendSubject);
           intent.putExtra(Intent.EXTRA_TEXT,recommendText);
           startActivity(intent);
@@ -95,7 +130,7 @@
       pFeedback.setOnPreferenceClickListener(new OnPreferenceClickListener(){
         @Override public boolean onPreferenceClick(        Preference preference){
           String feedbackMail=(String)getText(R.string.mail_feedback);
-          String feedback=(String)getText(R.string.prefs_feedback);
+          String feedback=(String)getText(R.string.prefs_feedback) + " - android v" + appVersion;
           Intent intent=new Intent(Intent.ACTION_SENDTO);
           intent.setType("text/plain");
           intent.putExtra(Intent.EXTRA_SUBJECT,feedback);
@@ -147,6 +182,17 @@
     }
 );
   }
+  mPrefInstantUploadCategory=(PreferenceCategory)findPreference("instant_uploading_category");
+  mPrefInstantUploadPathWiFi=findPreference("instant_upload_on_wifi");
+  mPrefInstantUpload=findPreference("instant_uploading");
+  toggleInstantPictureOptions(((CheckBoxPreference)mPrefInstantUpload).isChecked());
+  mPrefInstantUpload.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
+    @Override public boolean onPreferenceChange(    Preference preference,    Object newValue){
+      toggleInstantPictureOptions((Boolean)newValue);
+      return true;
+    }
+  }
+);
   mPrefInstantVideoUploadPath=findPreference("instant_video_upload_path");
   if (mPrefInstantVideoUploadPath != null) {
     mPrefInstantVideoUploadPath.setOnPreferenceClickListener(new OnPreferenceClickListener(){
@@ -162,18 +208,29 @@
     }
 );
   }
+  mPrefInstantVideoUploadPathWiFi=findPreference("instant_video_upload_on_wifi");
+  mPrefInstantVideoUpload=findPreference("instant_video_uploading");
+  toggleInstantVideoOptions(((CheckBoxPreference)mPrefInstantVideoUpload).isChecked());
+  mPrefInstantVideoUpload.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
+    @Override public boolean onPreferenceChange(    Preference preference,    Object newValue){
+      toggleInstantVideoOptions((Boolean)newValue);
+      return true;
+    }
+  }
+);
   pAboutApp=(Preference)findPreference("about_app");
   if (pAboutApp != null) {
     pAboutApp.setTitle(String.format(getString(R.string.about_android),getString(R.string.app_name)));
-    PackageInfo pkg;
-    try {
-      pkg=getPackageManager().getPackageInfo(getPackageName(),0);
-      pAboutApp.setSummary(String.format(getString(R.string.about_version),pkg.versionName));
-    }
- catch (    NameNotFoundException e) {
-      Log_OC.e(TAG,"Error while showing about dialog",e);
-    }
+    pAboutApp.setSummary(String.format(getString(R.string.about_version),appVersion));
   }
   loadInstantUploadPath();
   loadInstantUploadVideoPath();
+  mDownloadServiceConnection=newTransferenceServiceConnection();
+  if (mDownloadServiceConnection != null) {
+    bindService(new Intent(this,FileDownloader.class),mDownloadServiceConnection,Context.BIND_AUTO_CREATE);
+  }
+  mUploadServiceConnection=newTransferenceServiceConnection();
+  if (mUploadServiceConnection != null) {
+    bindService(new Intent(this,FileUploadService.class),mUploadServiceConnection,Context.BIND_AUTO_CREATE);
+  }
 }

@@ -1,21 +1,20 @@
 {
-  String filepath=null;
+  String filePath=null;
   String mimeType=null;
   Uri selectedImageUri=data.getData();
   try {
     mimeType=getContentResolver().getType(selectedImageUri);
-    String filemanagerstring=selectedImageUri.getPath();
-    String selectedImagePath=getPath(selectedImageUri);
-    if (selectedImagePath != null)     filepath=selectedImagePath;
- else     filepath=filemanagerstring;
+    String fileManagerString=selectedImageUri.getPath();
+    String selectedImagePath=UriUtils.getLocalPath(selectedImageUri,this);
+    if (selectedImagePath != null)     filePath=selectedImagePath;
+ else     filePath=fileManagerString;
   }
  catch (  Exception e) {
-    Log_OC.e(TAG,"Unexpected exception when trying to read the result of Intent.ACTION_GET_CONTENT",e);
-    e.printStackTrace();
+    Log_OC.e(TAG,"Unexpected exception when trying to read the result of " + "Intent.ACTION_GET_CONTENT",e);
   }
  finally {
-    if (filepath == null) {
-      Log_OC.e(TAG,"Couldnt resolve path to file");
+    if (filePath == null) {
+      Log_OC.e(TAG,"Couldn't resolve path to file");
       Toast t=Toast.makeText(this,getString(R.string.filedisplay_unexpected_bad_get_content),Toast.LENGTH_LONG);
       t.show();
       return;
@@ -23,30 +22,17 @@
   }
   Intent i=new Intent(this,FileUploadService.class);
   i.putExtra(FileUploadService.KEY_ACCOUNT,getAccount());
-  String remotepath=new String();
-  for (int j=mDirectories.getCount() - 2; j >= 0; --j) {
-    remotepath+=OCFile.PATH_SEPARATOR + mDirectories.getItem(j);
-  }
-  if (!remotepath.endsWith(OCFile.PATH_SEPARATOR))   remotepath+=OCFile.PATH_SEPARATOR;
-  i.putExtra(FileUploadService.KEY_LOCAL_FILE,filepath);
-  i.putExtra(FileUploadService.KEY_REMOTE_FILE,remotepath);
-  i.putExtra(FileUploadService.KEY_MIME_TYPE,mimeType);
-  i.putExtra(FileUploadService.KEY_UPLOAD_TYPE,FileUploadService.UploadSingleMulti.UPLOAD_SINGLE_FILE);
-  if (resultCode == UploadFilesActivity.RESULT_OK_AND_MOVE) {
-    i.putExtra(FileUploadService.KEY_LOCAL_BEHAVIOUR,FileUploadService.LocalBehaviour.LOCAL_BEHAVIOUR_MOVE);
-  }
-  if (startService(i) == null) {
-    Log_OC.e(TAG,"FileUploadService could not be started");
-  }
-  if (filepath.startsWith(UriUtils.URI_CONTENT_SCHEME)) {
-    Cursor cursor=MainApp.getAppContext().getContentResolver().query(Uri.parse(filepath),null,null,null,null,null);
+  OCFile currentDir=getCurrentDir();
+  String remotePath=(currentDir != null) ? currentDir.getRemotePath() : OCFile.ROOT_PATH;
+  if (filePath.startsWith(UriUtils.URI_CONTENT_SCHEME)) {
+    Cursor cursor=getContentResolver().query(Uri.parse(filePath),null,null,null,null);
     try {
       if (cursor != null && cursor.moveToFirst()) {
         String displayName=cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
-        Log.i(TAG,"Display Name: " + displayName + "; mimeType: "+ mimeType);
+        Log_OC.v(TAG,"Display Name: " + displayName);
         displayName.replace(File.separatorChar,'_');
         displayName.replace(File.pathSeparatorChar,'_');
-        remotepath+=displayName + DisplayUtils.getComposedFileExtension(filepath);
+        remotePath+=displayName + DisplayUtils.getComposedFileExtension(filePath);
       }
     }
   finally {
@@ -54,6 +40,16 @@
     }
   }
  else {
-    remotepath+=new File(filepath).getName();
+    remotePath+=new File(filePath).getName();
+  }
+  i.putExtra(FileUploadService.KEY_LOCAL_FILE,filePath);
+  i.putExtra(FileUploadService.KEY_REMOTE_FILE,remotePath);
+  i.putExtra(FileUploadService.KEY_MIME_TYPE,mimeType);
+  i.putExtra(FileUploadService.KEY_UPLOAD_TYPE,FileUploadService.UploadSingleMulti.UPLOAD_SINGLE_FILE);
+  if (resultCode == UploadFilesActivity.RESULT_OK_AND_MOVE) {
+    i.putExtra(FileUploadService.KEY_LOCAL_BEHAVIOUR,FileUploadService.LocalBehaviour.LOCAL_BEHAVIOUR_MOVE);
+  }
+  if (startService(i) == null) {
+    Log_OC.e(TAG,"FileUploadService could not be started");
   }
 }

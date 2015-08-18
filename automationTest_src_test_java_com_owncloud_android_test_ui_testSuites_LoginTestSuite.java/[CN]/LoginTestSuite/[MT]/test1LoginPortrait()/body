@@ -1,0 +1,5 @@
+{
+  driver.rotate(ScreenOrientation.PORTRAIT);
+  Actions.login(Config.URL,Config.user,Config.password,Config.isTrusted,driver);
+  common.assertIsInFileListView();
+}

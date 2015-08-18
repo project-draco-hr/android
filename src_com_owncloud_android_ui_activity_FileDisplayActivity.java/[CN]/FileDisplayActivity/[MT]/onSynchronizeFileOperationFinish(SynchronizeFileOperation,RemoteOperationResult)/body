@@ -1,21 +1,9 @@
 {
-  dismissLoadingDialog();
-  OCFile syncedFile=operation.getLocalFile();
-  if (!result.isSuccess()) {
-    if (result.getCode() == ResultCode.SYNC_CONFLICT) {
-      Intent i=new Intent(this,ConflictsResolveActivity.class);
-      i.putExtra(ConflictsResolveActivity.EXTRA_FILE,(Parcelable)syncedFile);
-      i.putExtra(ConflictsResolveActivity.EXTRA_ACCOUNT,getAccount());
-      startActivity(i);
-    }
-  }
- else {
+  if (result.isSuccess()) {
     if (operation.transferWasRequested()) {
+      OCFile syncedFile=operation.getLocalFile();
       onTransferStateChanged(syncedFile,true,true);
-    }
- else {
-      Toast msg=Toast.makeText(this,ErrorMessageAdapter.getErrorCauseMessage(result,operation,getResources()),Toast.LENGTH_LONG);
-      msg.show();
+      invalidateOptionsMenu();
     }
   }
 }

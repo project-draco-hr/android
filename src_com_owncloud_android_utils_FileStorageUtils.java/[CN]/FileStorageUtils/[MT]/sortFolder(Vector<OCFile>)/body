@@ -1,0 +1,13 @@
+{
+switch (mSortOrder) {
+case 0:
+    files=FileStorageUtils.sortByName(files);
+  break;
+case 1:
+files=FileStorageUtils.sortByDate(files);
+break;
+case 2:
+break;
+}
+return files;
+}

@@ -1,0 +1,6 @@
+{
+  final ProgressBar progressWheel=mProgressWheelRef.get();
+  if (progressWheel != null) {
+    progressWheel.setVisibility(View.GONE);
+  }
+}

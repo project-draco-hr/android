@@ -1,0 +1,17 @@
+{
+  mAdapter=adapter;
+  mIsFilterable=adapter instanceof Filterable;
+  if (headerViewInfos == null) {
+    mHeaderViewInfos=EMPTY_INFO_LIST;
+  }
+ else {
+    mHeaderViewInfos=headerViewInfos;
+  }
+  if (footViewInfos == null) {
+    mFooterViewInfos=EMPTY_INFO_LIST;
+  }
+ else {
+    mFooterViewInfos=footViewInfos;
+  }
+  mAreAllFixedViewsSelectable=areAllListInfosSelectable(mHeaderViewInfos) && areAllListInfosSelectable(mFooterViewInfos);
+}

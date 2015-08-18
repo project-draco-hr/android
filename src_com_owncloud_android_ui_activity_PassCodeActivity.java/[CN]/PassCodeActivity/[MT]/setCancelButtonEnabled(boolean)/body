@@ -1,0 +1,16 @@
+{
+  if (enabled) {
+    mBCancel.setVisibility(View.VISIBLE);
+    mBCancel.setOnClickListener(new OnClickListener(){
+      @Override public void onClick(      View v){
+        revertActionAndExit();
+      }
+    }
+);
+  }
+ else {
+    mBCancel.setVisibility(View.GONE);
+    mBCancel.setVisibility(View.INVISIBLE);
+    mBCancel.setOnClickListener(null);
+  }
+}

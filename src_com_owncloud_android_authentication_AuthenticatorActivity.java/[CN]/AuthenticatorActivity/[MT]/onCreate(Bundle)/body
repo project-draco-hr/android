@@ -1,6 +1,11 @@
 {
   super.onCreate(savedInstanceState);
-  getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+  if (getSupportActionBar() != null) {
+    getSupportActionBar().hide();
+    getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+    getSupportActionBar().setDisplayShowHomeEnabled(false);
+    getSupportActionBar().setDisplayShowTitleEnabled(false);
+  }
   mIsFirstAuthAttempt=true;
   mOperationsServiceConnection=new OperationsServiceConnection();
   if (!bindService(new Intent(this,OperationsService.class),mOperationsServiceConnection,Context.BIND_AUTO_CREATE)) {
@@ -20,7 +25,7 @@
     mIsFirstAuthAttempt=savedInstanceState.getBoolean(KEY_AUTH_IS_FIRST_ATTEMPT_TAG);
   }
   setContentView(R.layout.account_setup);
-  initOverallUi(savedInstanceState);
+  initOverallUi();
   mOkButton=findViewById(R.id.buttonOK);
   initServerPreFragment(savedInstanceState);
   initAuthorizationPreFragment(savedInstanceState);

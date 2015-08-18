@@ -1,0 +1,9 @@
+{
+  int lastPos=getAdapter().getCount() - 1;
+  if (Build.VERSION.SDK_INT >= 11) {
+    smoothScrollToPositionFromTop(lastPos,0);
+  }
+ else {
+    setSelection(lastPos);
+  }
+}

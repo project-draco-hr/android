@@ -1,0 +1,12 @@
+{
+  hideProgressWheel();
+  if (result != null) {
+    showLoadedImage(result);
+  }
+ else {
+    showErrorMessage();
+  }
+  if (result != null && mBitmap != result) {
+    result.recycle();
+  }
+}

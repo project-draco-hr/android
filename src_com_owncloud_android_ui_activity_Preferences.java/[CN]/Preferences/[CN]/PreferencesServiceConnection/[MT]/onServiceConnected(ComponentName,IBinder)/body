@@ -1,0 +1,12 @@
+{
+  if (component.equals(new ComponentName(Preferences.this,FileDownloader.class))) {
+    mDownloaderBinder=(FileDownloader.FileDownloaderBinder)service;
+  }
+ else   if (component.equals(new ComponentName(Preferences.this,FileUploadService.class))) {
+    Log_OC.d(TAG,"Upload service connected");
+    mUploaderBinder=(FileUploadService.FileUploaderBinder)service;
+  }
+ else {
+    return;
+  }
+}

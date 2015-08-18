@@ -1,0 +1,10 @@
+{
+  try {
+    emailAmericanFormatDate.click();
+  }
+ catch (  NoSuchElementException e) {
+    emailEuropeanFormatDate.click();
+  }
+  GmailEmailView gmailEmailView=new GmailEmailView(driver);
+  return gmailEmailView;
+}

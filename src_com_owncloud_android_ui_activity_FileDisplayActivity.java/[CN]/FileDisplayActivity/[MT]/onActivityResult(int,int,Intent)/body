@@ -1,7 +1,15 @@
 {
-  super.onActivityResult(requestCode,resultCode,data);
   if (requestCode == ACTION_SELECT_CONTENT_FROM_APPS && (resultCode == RESULT_OK || resultCode == UploadFilesActivity.RESULT_OK_AND_MOVE)) {
-    requestSimpleUpload(data,resultCode);
+    if (data.getData() == null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+      for (int i=0; i < data.getClipData().getItemCount(); i++) {
+        Intent intent=new Intent();
+        intent.setData(data.getClipData().getItemAt(i).getUri());
+        requestSimpleUpload(intent,resultCode);
+      }
+    }
+ else {
+      requestSimpleUpload(data,resultCode);
+    }
   }
  else   if (requestCode == ACTION_SELECT_MULTIPLE_FILES && (resultCode == RESULT_OK || resultCode == UploadFilesActivity.RESULT_OK_AND_MOVE)) {
     requestMultipleUpload(data,resultCode);
@@ -15,5 +23,8 @@
       }
     }
 ,DELAY_TO_REQUEST_OPERATION_ON_ACTIVITY_RESULTS);
+  }
+ else {
+    super.onActivityResult(requestCode,resultCode,data);
   }
 }

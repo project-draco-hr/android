@@ -8,7 +8,7 @@
     mCurrentDir=Environment.getExternalStorageDirectory();
   }
   mAccountOnCreation=getAccount();
-  mDirectories=new CustomArrayAdapter<String>(this,R.layout.sherlock_spinner_dropdown_item);
+  mDirectories=new CustomArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item);
   File currDir=mCurrentDir;
   while (currDir != null && currDir.getParentFile() != null) {
     mDirectories.add(currDir.getName());

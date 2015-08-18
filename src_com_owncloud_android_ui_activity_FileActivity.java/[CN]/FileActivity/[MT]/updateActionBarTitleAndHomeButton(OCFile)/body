@@ -1,0 +1,20 @@
+{
+  String title=getString(R.string.default_display_name_for_root_folder);
+  boolean inRoot;
+  if (chosenFile == null) {
+    chosenFile=mFile;
+  }
+  inRoot=(chosenFile == null || (chosenFile.isFolder() && chosenFile.getParentId() == FileDataStorageManager.ROOT_PARENT_ID));
+  if (!inRoot) {
+    title=chosenFile.getFileName();
+  }
+  ActionBar actionBar=getSupportActionBar();
+  actionBar.setTitle(title);
+  View actionBarTitleView=getWindow().getDecorView().findViewById(getResources().getIdentifier("action_bar_title","id","android"));
+  if (actionBarTitleView != null) {
+    actionBarTitleView.setContentDescription(title);
+  }
+  mDrawerToggle.setDrawerIndicatorEnabled(inRoot);
+  actionBar.setDisplayHomeAsUpEnabled(true);
+  actionBar.setDisplayShowTitleEnabled(true);
+}

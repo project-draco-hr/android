@@ -2,11 +2,12 @@
   super.onCreate(savedInstanceState);
   setContentView(R.layout.log_send_file);
   setTitle(getText(R.string.actionbar_logger));
-  ActionBar actionBar=getSherlock().getActionBar();
+  ActionBar actionBar=getSupportActionBar();
   actionBar.setIcon(DisplayUtils.getSeasonalIconId());
   actionBar.setDisplayHomeAsUpEnabled(true);
   Button deleteHistoryButton=(Button)findViewById(R.id.deleteLogHistoryButton);
   Button sendHistoryButton=(Button)findViewById(R.id.sendLogHistoryButton);
+  TextView logTV=(TextView)findViewById(R.id.logTV);
   deleteHistoryButton.setOnClickListener(new OnClickListener(){
     @Override public void onClick(    View v){
       Log_OC.deleteHistoryLogging();
@@ -20,13 +21,18 @@
     }
   }
 );
-  if (mLogPath != null) {
-    logDIR=new File(mLogPath);
+  if (savedInstanceState == null) {
+    if (mLogPath != null) {
+      logDIR=new File(mLogPath);
+    }
+    if (logDIR != null && logDIR.isDirectory()) {
+      showLoadingDialog();
+      LoadingLogTask task=new LoadingLogTask(logTV);
+      task.execute();
+    }
   }
-  if (logDIR != null && logDIR.isDirectory()) {
-    showLoadingDialog();
-    TextView logTV=(TextView)findViewById(R.id.logTV);
-    LoadingLogTask task=new LoadingLogTask(logTV);
-    task.execute();
+ else {
+    mLogText=savedInstanceState.getString(KEY_LOG_TEXT);
+    logTV.setText(mLogText);
   }
 }

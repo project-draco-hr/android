@@ -10,7 +10,7 @@
   }
  else {
     for (    Account a : accounts) {
-      LongClickableCheckBoxPreference accountPreference=new LongClickableCheckBoxPreference(this);
+      RadioButtonPreference accountPreference=new RadioButtonPreference(this);
       accountPreference.setKey(a.name);
       accountPreference.setTitle(DisplayUtils.convertIdn(a.name,false));
       mAccountsPrefCategory.addPreference(accountPreference);
@@ -26,7 +26,7 @@
           AccountManager am=(AccountManager)getSystemService(ACCOUNT_SERVICE);
           Account accounts[]=am.getAccountsByType(MainApp.getAccountType());
           for (          Account a : accounts) {
-            CheckBoxPreference p=(CheckBoxPreference)findPreference(a.name);
+            RadioButtonPreference p=(RadioButtonPreference)findPreference(a.name);
             if (key.equals(a.name)) {
               boolean accountChanged=!p.isChecked();
               p.setChecked(true);
@@ -34,6 +34,7 @@
               if (accountChanged) {
                 Intent i=new Intent(Preferences.this,FileDisplayActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(i);
               }
  else {

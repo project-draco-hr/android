@@ -10,7 +10,7 @@
   }
   Account account=AccountUtils.getCurrentOwnCloudAccount(context);
   if (account == null) {
-    Log_OC.w(TAG,"No owncloud account found for instant upload, aborting");
+    Log_OC.w(TAG,"No ownCloud account found for instant upload, aborting");
     return;
   }
   String[] CONTENT_PROJECTION={Images.Media.DATA,Images.Media.DISPLAY_NAME,Images.Media.MIME_TYPE,Images.Media.SIZE};

@@ -1,9 +1,0 @@
-{
-  hideProgressWheel();
-  if (result != null) {
-    showLoadedImage(result);
-  }
- else {
-    showErrorMessage();
-  }
-}

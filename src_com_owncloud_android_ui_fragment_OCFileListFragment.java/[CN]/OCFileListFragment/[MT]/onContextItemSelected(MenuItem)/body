@@ -7,16 +7,21 @@ case R.id.action_share_file:
       mContainerActivity.getFileOperationsHelper().shareFileWithLink(mTargetFile);
       return true;
     }
-case R.id.action_unshare_file:
+case R.id.action_open_file_with:
 {
-    mContainerActivity.getFileOperationsHelper().unshareFileWithLink(mTargetFile);
+    mContainerActivity.getFileOperationsHelper().openFile(mTargetFile);
     return true;
   }
+case R.id.action_unshare_file:
+{
+  mContainerActivity.getFileOperationsHelper().unshareFileWithLink(mTargetFile);
+  return true;
+}
 case R.id.action_rename_file:
 {
-  RenameFileDialogFragment dialog=RenameFileDialogFragment.newInstance(mTargetFile);
-  dialog.show(getFragmentManager(),FileDetailFragment.FTAG_RENAME_FILE);
-  return true;
+RenameFileDialogFragment dialog=RenameFileDialogFragment.newInstance(mTargetFile);
+dialog.show(getFragmentManager(),FileDetailFragment.FTAG_RENAME_FILE);
+return true;
 }
 case R.id.action_remove_file:
 {
@@ -57,6 +62,16 @@ case R.id.action_move:
 Intent action=new Intent(getActivity(),FolderPickerActivity.class);
 action.putExtra(FolderPickerActivity.EXTRA_FILE,(Parcelable)mTargetFile);
 getActivity().startActivityForResult(action,FileDisplayActivity.ACTION_MOVE_FILES);
+return true;
+}
+case R.id.action_favorite_file:
+{
+mContainerActivity.getFileOperationsHelper().toggleFavorite(mTargetFile,true);
+return true;
+}
+case R.id.action_unfavorite_file:
+{
+mContainerActivity.getFileOperationsHelper().toggleFavorite(mTargetFile,false);
 return true;
 }
 default :

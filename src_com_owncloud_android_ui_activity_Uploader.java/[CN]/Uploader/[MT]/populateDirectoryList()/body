@@ -1,5 +1,6 @@
 {
   setContentView(R.layout.uploader_layout);
+  ListView mListView=(ListView)findViewById(android.R.id.list);
   String current_dir=mParents.peek();
   if (current_dir.equals("")) {
     getSupportActionBar().setTitle(getString(R.string.default_display_name_for_root_folder));
@@ -13,9 +14,9 @@
   actionBar.setHomeButtonEnabled(notRoot);
   String full_path=generatePath(mParents);
   Log_OC.d(TAG,"Populating view with content of : " + full_path);
-  mFile=mStorageManager.getFileByPath(full_path);
+  mFile=getStorageManager().getFileByPath(full_path);
   if (mFile != null) {
-    Vector<OCFile> files=mStorageManager.getFolderContent(mFile);
+    Vector<OCFile> files=getStorageManager().getFolderContent(mFile);
     List<HashMap<String,Object>> data=new LinkedList<HashMap<String,Object>>();
     for (    OCFile f : files) {
       HashMap<String,Object> h=new HashMap<String,Object>();
@@ -24,10 +25,12 @@
         data.add(h);
       }
     }
-    SimpleAdapter sa=new SimpleAdapter(this,data,R.layout.uploader_list_item_layout,new String[]{"dirname"},new int[]{R.id.textView1});
-    setListAdapter(sa);
-    Button btn=(Button)findViewById(R.id.uploader_choose_folder);
-    btn.setOnClickListener(this);
-    getListView().setOnItemClickListener(this);
+    SimpleAdapter sa=new SimpleAdapter(this,data,R.layout.uploader_list_item_layout,new String[]{"dirname"},new int[]{R.id.filename});
+    mListView.setAdapter(sa);
+    Button btnChooseFolder=(Button)findViewById(R.id.uploader_choose_folder);
+    btnChooseFolder.setOnClickListener(this);
+    Button btnNewFolder=(Button)findViewById(R.id.uploader_new_folder);
+    btnNewFolder.setOnClickListener(this);
+    mListView.setOnItemClickListener(this);
   }
 }

@@ -1,4 +1,6 @@
 {
+  setFile((OCFile)getArguments().getParcelable(ARG_FILE));
+  mAccount=getArguments().getParcelable(ARG_ACCOUNT);
   if (savedInstanceState != null) {
     setFile((OCFile)savedInstanceState.getParcelable(FileActivity.EXTRA_FILE));
     mAccount=savedInstanceState.getParcelable(FileActivity.EXTRA_ACCOUNT);
@@ -6,15 +8,13 @@
   if (getFile() != null && mAccount != null) {
     mLayout=R.layout.file_details_fragment;
   }
-  View view=null;
-  view=inflater.inflate(mLayout,null);
-  mView=view;
+  mView=inflater.inflate(mLayout,null);
   if (mLayout == R.layout.file_details_fragment) {
-    mView.findViewById(R.id.fdKeepInSync).setOnClickListener(this);
+    mView.findViewById(R.id.fdFavorite).setOnClickListener(this);
     ProgressBar progressBar=(ProgressBar)mView.findViewById(R.id.fdProgressBar);
     mProgressListener=new ProgressListener(progressBar);
     mView.findViewById(R.id.fdCancelBtn).setOnClickListener(this);
   }
   updateFileDetails(false,false);
-  return view;
+  return mView;
 }

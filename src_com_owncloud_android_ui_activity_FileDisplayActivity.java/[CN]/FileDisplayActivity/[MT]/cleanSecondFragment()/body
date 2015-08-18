@@ -6,5 +6,5 @@
     tr.commit();
   }
   updateFragmentsVisibility(false);
-  updateNavigationElementsInActionBar(null);
+  updateActionBarTitleAndHomeButton(null);
 }

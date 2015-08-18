@@ -1,10 +1,16 @@
 {
   Account account=mFileActivity.getAccount();
+  if (file.isFolder()) {
+    OperationsService.OperationsServiceBinder opsBinder=mFileActivity.getOperationsServiceBinder();
+    if (opsBinder != null) {
+      opsBinder.cancel(account,file);
+    }
+  }
   FileDownloaderBinder downloaderBinder=mFileActivity.getFileDownloaderBinder();
   FileUploaderBinder uploaderBinder=mFileActivity.getFileUploaderBinder();
   if (downloaderBinder != null) {
     if (downloaderBinder.isDownloading(account,file)) {
-      if (file.keepInSync()) {
+      if (file.isFavorite()) {
         OCFile parent=mFileActivity.getStorageManager().getFileById(file.getParentId());
         parent.setEtag("");
         mFileActivity.getStorageManager().saveFile(parent);

@@ -1,6 +1,0 @@
-{
-  View v=super.getDropDownView(position,convertView,parent);
-  ((TextView)v).setTextColor(getResources().getColorStateList(android.R.color.white));
-  fixRoot((TextView)v);
-  return v;
-}

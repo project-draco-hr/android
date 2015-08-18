@@ -1,5 +1,0 @@
-{
-  if (v.getText().equals(OCFile.PATH_SEPARATOR)) {
-    v.setText(R.string.default_display_name_for_root_folder);
-  }
-}

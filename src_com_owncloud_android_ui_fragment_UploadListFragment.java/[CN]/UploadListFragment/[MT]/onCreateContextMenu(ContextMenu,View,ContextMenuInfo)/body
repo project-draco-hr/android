@@ -1,6 +1,6 @@
 {
   super.onCreateContextMenu(menu,v,menuInfo);
-  MenuInflater inflater=getSherlockActivity().getMenuInflater();
+  MenuInflater inflater=getActivity().getMenuInflater();
   inflater.inflate(R.menu.upload_actions_menu,menu);
   ExpandableListContextMenuInfo info=(ExpandableListContextMenuInfo)menuInfo;
   int childPosition=ExpandableListView.getPackedPositionChild(info.packedPosition);

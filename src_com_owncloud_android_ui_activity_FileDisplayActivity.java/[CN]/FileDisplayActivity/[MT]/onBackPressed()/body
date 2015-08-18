@@ -1,15 +1,13 @@
 {
   OCFileListFragment listOfFiles=getListOfFilesFragment();
   if (mDualPane || getSecondFragment() == null) {
+    OCFile currentDir=getCurrentDir();
+    if (currentDir == null || currentDir.getParentId() == FileDataStorageManager.ROOT_PARENT_ID) {
+      finish();
+      return;
+    }
     if (listOfFiles != null) {
-      if (mDirectories.getCount() <= 1) {
-        finish();
-        return;
-      }
-      int levelsUp=listOfFiles.onBrowseUp();
-      for (int i=0; i < levelsUp && mDirectories.getCount() > 1; i++) {
-        popDirname();
-      }
+      listOfFiles.onBrowseUp();
     }
   }
   if (listOfFiles != null) {

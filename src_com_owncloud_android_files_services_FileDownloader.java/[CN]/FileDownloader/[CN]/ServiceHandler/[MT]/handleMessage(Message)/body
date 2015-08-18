@@ -3,8 +3,10 @@
   if (msg.obj != null) {
     Iterator<String> it=requestedDownloads.iterator();
     while (it.hasNext()) {
-      mService.downloadFile(it.next());
+      String next=it.next();
+      mService.downloadFile(next);
     }
   }
+  Log_OC.d(TAG,"Stopping after command with id " + msg.arg1);
   mService.stopSelf(msg.arg1);
 }
