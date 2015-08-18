@@ -1,0 +1,4 @@
+{
+  dismiss();
+  ((FileActionsDialogFragmentListener)getTargetFragment()).onFileActionChosen(menuItems.get(position).getMenuItemId(),filePosition);
+}
