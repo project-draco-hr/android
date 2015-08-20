@@ -2,7 +2,7 @@
   mServerStatusIcon=R.drawable.common_error;
 switch (result.getCode()) {
 case OK_SSL:
-    mServerStatusIcon=android.R.drawable.ic_secure;
+    mServerStatusIcon=R.drawable.ic_lock;
   mServerStatusText=R.string.auth_secure_connection;
 break;
 case OK_NO_SSL:
@@ -13,7 +13,7 @@ mServerStatusIcon=R.drawable.ic_ok;
 }
  else {
 mServerStatusText=R.string.auth_nossl_plain_ok_title;
-mServerStatusIcon=android.R.drawable.ic_partial_secure;
+mServerStatusIcon=R.drawable.ic_lock_open;
 }
 break;
 case NO_NETWORK_CONNECTION:
@@ -61,7 +61,7 @@ case UNKNOWN_ERROR:
 mServerStatusText=R.string.auth_unknown_error_title;
 break;
 case OK_REDIRECT_TO_NON_SECURE_CONNECTION:
-mServerStatusIcon=android.R.drawable.ic_partial_secure;
+mServerStatusIcon=R.drawable.ic_lock_open;
 mServerStatusText=R.string.auth_redirect_non_secure_connection_title;
 break;
 default :

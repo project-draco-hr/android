@@ -4,7 +4,6 @@
   setContentView(R.layout.preview_image_activity);
   initDrawer();
   ActionBar actionBar=getSupportActionBar();
-  actionBar.setIcon(DisplayUtils.getSeasonalIconId());
   updateActionBarTitleAndHomeButton(null);
   actionBar.hide();
   if (isHoneycombOrHigher()) {
@@ -24,6 +23,9 @@
       }
     }
 );
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+      getWindow().setStatusBarColor(getResources().getColor(R.color.owncloud_blue_dark_transparent));
+    }
   }
   if (savedInstanceState != null) {
     mRequestWaitingForBinder=savedInstanceState.getBoolean(KEY_WAITING_FOR_BINDER);

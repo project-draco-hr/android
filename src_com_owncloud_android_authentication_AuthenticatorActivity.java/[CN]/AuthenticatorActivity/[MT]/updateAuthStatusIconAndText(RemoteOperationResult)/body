@@ -2,7 +2,7 @@
   mAuthStatusIcon=R.drawable.common_error;
 switch (result.getCode()) {
 case OK_SSL:
-    mAuthStatusIcon=android.R.drawable.ic_secure;
+    mAuthStatusIcon=R.drawable.ic_lock;
   mAuthStatusText=R.string.auth_secure_connection;
 break;
 case OK_NO_SSL:
@@ -13,7 +13,7 @@ mAuthStatusIcon=R.drawable.ic_ok;
 }
  else {
 mAuthStatusText=R.string.auth_nossl_plain_ok_title;
-mAuthStatusIcon=android.R.drawable.ic_partial_secure;
+mAuthStatusIcon=R.drawable.ic_lock_open;
 }
 break;
 case NO_NETWORK_CONNECTION:
