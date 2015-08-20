@@ -1,0 +1,3 @@
+{
+  mMenuItems=new ArrayList<MenuItemParcelable>();
+}

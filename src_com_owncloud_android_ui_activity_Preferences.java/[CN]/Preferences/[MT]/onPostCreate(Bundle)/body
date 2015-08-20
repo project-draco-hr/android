@@ -1,0 +1,4 @@
+{
+  super.onPostCreate(savedInstanceState);
+  getDelegate().onPostCreate(savedInstanceState);
+}
