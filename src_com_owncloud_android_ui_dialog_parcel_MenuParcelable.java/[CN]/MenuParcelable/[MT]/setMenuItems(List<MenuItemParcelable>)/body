@@ -1,3 +1,3 @@
 {
-  this.menuItems=menuItems;
+  this.mMenuItems=menuItems;
 }
