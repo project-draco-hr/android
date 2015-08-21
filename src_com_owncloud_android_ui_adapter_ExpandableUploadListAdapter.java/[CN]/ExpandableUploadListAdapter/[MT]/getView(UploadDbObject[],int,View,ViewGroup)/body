@@ -88,9 +88,9 @@ mCurrentUpload=null;
 }
 }
 statusView.setText(status);
-Button rightButton=(Button)view.findViewById(R.id.upload_right_button);
+ImageButton rightButton=(ImageButton)view.findViewById(R.id.upload_right_button);
 if (UploadUtils.userCanRetryUpload(uploadObject) && uploadObject.getUploadStatus() != UploadStatus.UPLOAD_SUCCEEDED) {
-rightButton.setText("\u21BA");
+rightButton.setImageDrawable(mActivity.getDrawable(R.drawable.ic_action_refresh_grey));
 rightButton.setOnClickListener(new OnClickListener(){
 @Override public void onClick(View v){
 parentFileActivity.getFileOperationsHelper().retryUpload(uploadObject);
@@ -99,7 +99,7 @@ parentFileActivity.getFileOperationsHelper().retryUpload(uploadObject);
 );
 }
  else if (UploadUtils.userCanCancelUpload(uploadObject)) {
-rightButton.setText("\u274C");
+rightButton.setImageDrawable(mActivity.getDrawable(R.drawable.ic_cancel));
 rightButton.setOnClickListener(new OnClickListener(){
 @Override public void onClick(View v){
 parentFileActivity.getFileOperationsHelper().cancelTransference(uploadObject.getOCFile());
@@ -108,7 +108,7 @@ parentFileActivity.getFileOperationsHelper().cancelTransference(uploadObject.get
 );
 }
  else {
-rightButton.setText("\u267B");
+rightButton.setImageDrawable(mActivity.getDrawable(R.drawable.ic_delete));
 rightButton.setOnClickListener(new OnClickListener(){
 @Override public void onClick(View v){
 parentFileActivity.getFileOperationsHelper().removeUploadFromList(uploadObject);
