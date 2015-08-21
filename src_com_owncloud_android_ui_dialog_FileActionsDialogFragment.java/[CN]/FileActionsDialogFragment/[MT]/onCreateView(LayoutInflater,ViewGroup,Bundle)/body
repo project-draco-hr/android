@@ -1,0 +1,6 @@
+{
+  View view=inflater.inflate(R.layout.file_actions,null,false);
+  mListView=(ListView)view.findViewById(R.id.file_actions_list);
+  getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+  return view;
+}

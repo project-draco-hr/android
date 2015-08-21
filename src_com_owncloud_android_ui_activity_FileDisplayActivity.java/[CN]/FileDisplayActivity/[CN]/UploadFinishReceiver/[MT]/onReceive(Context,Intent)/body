@@ -32,6 +32,7 @@
         startImagePreview(getFile());
       }
     }
+    mProgressBar.setIndeterminate(false);
   }
   finally {
     if (intent != null) {

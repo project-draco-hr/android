@@ -9,6 +9,7 @@
   }
  else {
     String[] dir_names=last_path.split("/");
+    mParents.clear();
     for (    String dir : dir_names)     mParents.add(dir);
   }
   while (!getStorageManager().fileExists(generatePath(mParents)) && mParents.size() > 1) {

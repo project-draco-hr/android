@@ -1,16 +1,22 @@
 {
-  OCFileListFragment listOfFiles=getListOfFilesFragment();
-  if (mDualPane || getSecondFragment() == null) {
-    if (getFile() != null && getFile().getParentId() == 0) {
-      finish();
-      return;
+  if (!isDrawerOpen()) {
+    OCFileListFragment listOfFiles=getListOfFilesFragment();
+    if (mDualPane || getSecondFragment() == null) {
+      OCFile currentDir=getCurrentDir();
+      if (currentDir == null || currentDir.getParentId() == FileDataStorageManager.ROOT_PARENT_ID) {
+        finish();
+        return;
+      }
+      if (listOfFiles != null) {
+        listOfFiles.onBrowseUp();
+      }
     }
     if (listOfFiles != null) {
-      listOfFiles.onBrowseUp();
+      setFile(listOfFiles.getCurrentFile());
     }
+    cleanSecondFragment();
   }
-  if (listOfFiles != null) {
-    setFile(listOfFiles.getCurrentFile());
+ else {
+    super.onBackPressed();
   }
-  cleanSecondFragment();
 }

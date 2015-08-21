@@ -1,21 +1,37 @@
 {
-  String output="";
-  if (filesCount > 0) {
-    if (filesCount == 1) {
-      output=output + filesCount + " "+ getResources().getString(R.string.file_list_file);
+  String output;
+  if (filesCount <= 0) {
+    if (foldersCount <= 0) {
+      output="";
+    }
+ else     if (foldersCount == 1) {
+      output=getResources().getString(R.string.file_list__footer__folder);
     }
  else {
-      output=output + filesCount + " "+ getResources().getString(R.string.file_list_files);
+      output=getResources().getString(R.string.file_list__footer__folders,foldersCount);
     }
   }
-  if (foldersCount > 0 && filesCount > 0) {
-    output=output + ", ";
+ else   if (filesCount == 1) {
+    if (foldersCount <= 0) {
+      output=getResources().getString(R.string.file_list__footer__file);
+    }
+ else     if (foldersCount == 1) {
+      output=getResources().getString(R.string.file_list__footer__file_and_folder);
+    }
+ else {
+      output=getResources().getString(R.string.file_list__footer__file_and_folders,foldersCount);
+    }
   }
-  if (foldersCount == 1) {
-    output=output + foldersCount + " "+ getResources().getString(R.string.file_list_folder);
-  }
- else   if (foldersCount > 1) {
-    output=output + foldersCount + " "+ getResources().getString(R.string.file_list_folders);
+ else {
+    if (foldersCount <= 0) {
+      output=getResources().getString(R.string.file_list__footer__files,filesCount);
+    }
+ else     if (foldersCount == 1) {
+      output=getResources().getString(R.string.file_list__footer__files_and_folder,filesCount);
+    }
+ else {
+      output=getResources().getString(R.string.file_list__footer__files_and_folders,filesCount,foldersCount);
+    }
   }
   return output;
 }

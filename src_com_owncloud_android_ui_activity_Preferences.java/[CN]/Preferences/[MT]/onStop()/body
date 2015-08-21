@@ -1,0 +1,4 @@
+{
+  super.onStop();
+  getDelegate().onStop();
+}
