@@ -19,7 +19,7 @@ synchronized (mPendingOperations) {
  else {
           OwnCloudCredentials credentials=null;
           if (mLastTarget.mCookie != null && mLastTarget.mCookie.length() > 0) {
-            credentials=OwnCloudCredentialsFactory.newSamlSsoCredentials(mLastTarget.mCookie);
+            credentials=OwnCloudCredentialsFactory.newSamlSsoCredentials(null,mLastTarget.mCookie);
           }
           OwnCloudAccount ocAccount=new OwnCloudAccount(mLastTarget.mServerUrl,credentials);
           mOwnCloudClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,mService);
