@@ -14,5 +14,5 @@
   mJustFolders=(args == null) ? false : args.getBoolean(ARG_JUST_FOLDERS,false);
   mAdapter=new FileListListAdapter(mJustFolders,getActivity(),mContainerActivity);
   setListAdapter(mAdapter);
-  registerForContextMenu();
+  registerLongClickListener();
 }
