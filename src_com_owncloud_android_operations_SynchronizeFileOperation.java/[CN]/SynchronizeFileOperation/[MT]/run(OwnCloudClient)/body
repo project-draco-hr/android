@@ -56,6 +56,9 @@
  else {
         result=new RemoteOperationResult(ResultCode.OK);
       }
+      if (result.getCode() != ResultCode.SYNC_CONFLICT) {
+        getStorageManager().saveConflict(mLocalFile,false);
+      }
     }
   }
   Log_OC.i(TAG,"Synchronizing " + mAccount.name + ", file "+ mLocalFile.getRemotePath()+ ": "+ result.getLogMessage());
