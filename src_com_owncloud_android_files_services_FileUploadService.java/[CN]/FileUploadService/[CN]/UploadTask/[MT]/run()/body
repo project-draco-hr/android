@@ -7,10 +7,6 @@ case NOW:
 updateDatabaseUploadResult(uploadResult,mCurrentUpload);
 notifyUploadResult(uploadResult,mCurrentUpload);
 sendFinalBroadcast(uploadResult,mCurrentUpload);
-if (!shouldRetryFailedUpload(uploadResult)) {
-Log_OC.d(TAG,"Upload with result " + uploadResult.getCode() + ": "+ uploadResult.getLogMessage()+ " will be abandoned.");
-mPendingUploads.remove(buildRemoteName(uploadDbObject));
-}
 Log_OC.d(TAG,"mCurrentUpload = null");
 mCurrentUpload=null;
 break;

@@ -8,12 +8,6 @@
       mDb.updateUploadStatus(upload.getOriginalStoragePath(),UploadStatus.UPLOAD_SUCCEEDED,uploadResult);
     }
  else {
-      if (shouldRetryFailedUpload(uploadResult)) {
-        mDb.updateUploadStatus(upload.getOriginalStoragePath(),UploadStatus.UPLOAD_FAILED_RETRY,uploadResult);
-      }
- else {
-        mDb.updateUploadStatus(upload.getOriginalStoragePath(),UploadDbHandler.UploadStatus.UPLOAD_FAILED_GIVE_UP,uploadResult);
-      }
     }
   }
 }
