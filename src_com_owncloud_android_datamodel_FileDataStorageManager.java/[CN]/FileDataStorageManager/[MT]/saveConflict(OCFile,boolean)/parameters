@@ -1,2 +1,2 @@
-long fileId
+OCFile file
 boolean inConflict
