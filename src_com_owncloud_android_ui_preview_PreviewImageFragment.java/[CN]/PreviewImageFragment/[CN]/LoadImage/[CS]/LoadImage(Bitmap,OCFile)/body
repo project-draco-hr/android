@@ -1,0 +1,4 @@
+{
+  this.bitmap=bitmap;
+  this.ocFile=ocFile;
+}
