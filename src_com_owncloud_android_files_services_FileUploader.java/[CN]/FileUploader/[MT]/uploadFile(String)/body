@@ -1,5 +1,4 @@
 {
-  Log_OC.v("NOW " + TAG + ", thread "+ Thread.currentThread().getName(),"Getting upload of " + uploadKey);
   mCurrentUpload=mPendingUploads.get(uploadKey);
   if (mCurrentUpload != null) {
     if (AccountUtils.exists(mCurrentUpload.getAccount(),getApplicationContext())) {
@@ -17,7 +16,6 @@
         remoteParentPath=remoteParentPath.endsWith(OCFile.PATH_SEPARATOR) ? remoteParentPath : remoteParentPath + OCFile.PATH_SEPARATOR;
         grantResult=grantFolderExistence(remoteParentPath);
         if (grantResult.isSuccess()) {
-          Log_OC.v("NOW " + TAG + ", thread "+ Thread.currentThread().getName(),"Executing upload of " + mCurrentUpload.getRemotePath());
           OCFile parent=mStorageManager.getFileByPath(remoteParentPath);
           mCurrentUpload.getFile().setParentId(parent.getFileId());
           uploadResult=mCurrentUpload.execute(mUploadClient);
@@ -34,7 +32,6 @@
         uploadResult=new RemoteOperationResult(e);
       }
  finally {
-        Log_OC.v("NOW " + TAG + ", thread "+ Thread.currentThread().getName(),"Removing payload " + mCurrentUpload.getRemotePath());
         Pair<UploadFileOperation,String> removeResult;
         if (mCurrentUpload.wasRenamed()) {
           removeResult=mPendingUploads.removePayload(mCurrentAccount,mCurrentUpload.getOldFile().getRemotePath());
