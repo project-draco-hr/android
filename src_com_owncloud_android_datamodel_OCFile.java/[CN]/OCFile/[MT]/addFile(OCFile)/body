@@ -1,8 +1,0 @@
-{
-  if (isFolder()) {
-    file.mParentId=mId;
-    mNeedsUpdating=true;
-    return;
-  }
-  throw new IllegalStateException("This is not a directory where you can add stuff to!");
-}

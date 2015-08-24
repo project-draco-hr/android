@@ -24,7 +24,7 @@
   cv.put(ProviderTableMeta.FILE_IN_CONFLICT,file.isInConflict());
   boolean sameRemotePath=fileExists(file.getRemotePath());
   if (sameRemotePath || fileExists(file.getFileId())) {
-    OCFile oldFile=null;
+    OCFile oldFile;
     if (sameRemotePath) {
       oldFile=getFileByPath(file.getRemotePath());
       file.setFileId(oldFile.getFileId());

@@ -1,7 +1,7 @@
 {
-  RemoteOperationResult result=null;
-  File newFile=null;
-  boolean moved=true;
+  RemoteOperationResult result;
+  File newFile;
+  boolean moved;
   File tmpFile=new File(getTmpPath());
   String tmpFolder=getTmpFolder();
 synchronized (mCancellationRequested) {
