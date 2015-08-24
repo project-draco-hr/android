@@ -1,7 +1,0 @@
-{
-  FileDataStorageManager storageManager=getStorageManager();
-  if (storageManager.fileExists(mLocalFolder.getFileId())) {
-    String currentSavePath=FileStorageUtils.getSavePath(mAccount.name);
-    storageManager.removeFolder(mLocalFolder,true,(mLocalFolder.isDown() && mLocalFolder.getStoragePath().startsWith(currentSavePath)));
-  }
-}

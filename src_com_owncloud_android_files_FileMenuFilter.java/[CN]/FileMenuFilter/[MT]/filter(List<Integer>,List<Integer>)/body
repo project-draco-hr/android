@@ -6,7 +6,7 @@
     FileDownloaderBinder downloaderBinder=mComponentsGetter.getFileDownloaderBinder();
     synchronizing=((opsBinder != null && opsBinder.isSynchronizing(mAccount,mFile.getRemotePath())) || (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,mFile)) || (uploaderBinder != null && uploaderBinder.isUploading(mAccount,mFile)));
   }
-  if (mFile == null || mFile.isDown() || synchronizing) {
+  if (mFile == null || mFile.isDown() || mFile.isFolder() || synchronizing) {
     toHide.add(R.id.action_download_file);
   }
  else {
