@@ -22,7 +22,6 @@
   mUploadBtn=(Button)findViewById(R.id.upload_files_btn_upload);
   mUploadBtn.setOnClickListener(this);
   ActionBar actionBar=getSupportActionBar();
-  actionBar.setIcon(DisplayUtils.getSeasonalIconId());
   actionBar.setHomeButtonEnabled(true);
   actionBar.setDisplayHomeAsUpEnabled(mCurrentDir != null && mCurrentDir.getName() != null);
   actionBar.setDisplayShowTitleEnabled(false);

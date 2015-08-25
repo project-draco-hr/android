@@ -9,9 +9,11 @@
         foldersCount++;
       }
  else {
-        filesCount++;
-        if (file.isImage()) {
-          imagesCount++;
+        if (!file.isHidden()) {
+          filesCount++;
+          if (file.isImage()) {
+            imagesCount++;
+          }
         }
       }
     }
@@ -19,6 +21,7 @@
     OwnCloudVersion version=AccountUtils.getServerVersion(((FileActivity)mContainerActivity).getAccount());
     if (version != null && version.supportsRemoteThumbnails() && imagesCount > 0 && imagesCount == filesCount) {
       switchToGridView();
+      registerLongClickListener();
     }
  else {
       switchToListView();
