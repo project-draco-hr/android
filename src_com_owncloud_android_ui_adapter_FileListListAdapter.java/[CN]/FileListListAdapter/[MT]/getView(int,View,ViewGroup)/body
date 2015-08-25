@@ -147,6 +147,7 @@ fileIcon.setImageResource(DisplayUtils.getFileTypeIconId(file.getMimetype(),file
 }
 }
  else {
+fileIcon.setBackground(null);
 if (checkIfFileIsSharedWithMe(file)) {
 fileIcon.setImageResource(R.drawable.shared_with_me_folder);
 }
