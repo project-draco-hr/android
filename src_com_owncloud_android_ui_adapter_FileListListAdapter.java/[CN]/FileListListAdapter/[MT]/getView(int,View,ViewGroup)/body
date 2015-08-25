@@ -141,6 +141,9 @@ if (file.getMimetype().equalsIgnoreCase("image/png")) {
 Drawable backrepeat=mContext.getResources().getDrawable(R.drawable.backrepeat);
 fileIcon.setBackground(backrepeat);
 }
+ else {
+fileIcon.setBackground(null);
+}
 }
  else {
 fileIcon.setImageResource(DisplayUtils.getFileTypeIconId(file.getMimetype(),file.getFileName()));
