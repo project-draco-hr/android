@@ -38,6 +38,4 @@
     throw new IllegalArgumentException("A valid ACTION is needed in the Intent passed to " + TAG);
   }
   setTextListeners();
-  ActionBar actionBar=getSupportActionBar();
-  actionBar.setIcon(DisplayUtils.getSeasonalIconId());
 }

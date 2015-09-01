@@ -2,5 +2,7 @@
   View v=inflater.inflate(R.layout.loading_dialog,container,false);
   TextView tv=(TextView)v.findViewById(R.id.loadingText);
   tv.setText(mMessage);
+  ProgressBar progressBar=(ProgressBar)v.findViewById(R.id.loadingBar);
+  progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.color_accent),PorterDuff.Mode.SRC_IN);
   return v;
 }

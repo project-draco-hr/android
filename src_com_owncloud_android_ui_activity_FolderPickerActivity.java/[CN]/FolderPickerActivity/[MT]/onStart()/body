@@ -1,4 +1,3 @@
 {
   super.onStart();
-  getSupportActionBar().setIcon(DisplayUtils.getSeasonalIconId());
 }
