@@ -1,3 +1,0 @@
-{
-  return ((mMimeType != null && mMimeType.startsWith("text/")) || getMimeTypeFromName().startsWith("text/"));
-}

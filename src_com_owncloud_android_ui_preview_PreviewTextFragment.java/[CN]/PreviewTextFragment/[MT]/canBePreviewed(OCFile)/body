@@ -1,3 +1,8 @@
 {
-  return (file != null && file.isDown() && file.isText());
+  final List<String> supportedTypes=new LinkedList<String>();
+  supportedTypes.add("text/plain");
+  supportedTypes.add("text/html");
+  supportedTypes.add("text/css");
+  supportedTypes.add("text/csv");
+  return (file != null && file.isDown() && supportedTypes.contains(file.getMimetype()));
 }
