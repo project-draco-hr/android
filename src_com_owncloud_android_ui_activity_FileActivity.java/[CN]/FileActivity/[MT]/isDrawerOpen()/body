@@ -1,0 +1,8 @@
+{
+  if (mDrawerLayout != null) {
+    return mDrawerLayout.isDrawerOpen(GravityCompat.START);
+  }
+ else {
+    return false;
+  }
+}

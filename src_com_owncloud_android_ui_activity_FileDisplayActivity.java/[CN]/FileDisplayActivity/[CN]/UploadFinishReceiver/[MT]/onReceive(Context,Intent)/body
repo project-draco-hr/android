@@ -34,6 +34,7 @@
  else         if (PreviewTextFragment.canBePreviewed(ocFile))         startTextPreview(ocFile);
       }
     }
+    mProgressBar.setIndeterminate(false);
   }
   finally {
     if (intent != null) {

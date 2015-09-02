@@ -1,0 +1,10 @@
+{
+  FileActionsDialogFragment fragment=new FileActionsDialogFragment();
+  Bundle args=new Bundle();
+  MenuParcelable menuParcelable=new MenuParcelable();
+  menuParcelable.setMenuItems(calculateMenuParcel(menu));
+  args.putParcelable(ARG_ITEM_LIST,menuParcelable);
+  args.putInt(ARG_FILE_POSITION,filePosition);
+  fragment.setArguments(args);
+  return fragment;
+}

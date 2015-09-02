@@ -1,5 +1,4 @@
 {
-  super.onCreateContextMenu(menu,v,menuInfo);
   Bundle args=getArguments();
   boolean allowContextualActions=(args == null) ? true : args.getBoolean(ARG_ALLOW_CONTEXTUAL_ACTIONS,true);
   if (allowContextualActions) {

@@ -1,0 +1,7 @@
+{
+  if (isDrawerOpen()) {
+    closeNavDrawer();
+    return;
+  }
+  super.onBackPressed();
+}

@@ -1,6 +1,5 @@
 {
   Log_OC.d(TAG,"onCreate() start");
-  requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
   super.onCreate(savedInstanceState);
   setContentView(R.layout.files_folder_picker);
   if (savedInstanceState == null) {
@@ -10,7 +9,9 @@
   ActionBar actionBar=getSupportActionBar();
   actionBar.setDisplayShowTitleEnabled(true);
   actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-  setSupportProgressBarIndeterminateVisibility(mSyncInProgress);
+  mProgressBar=(ProgressBar)findViewById(R.id.progressBar);
+  mProgressBar.setIndeterminateDrawable(getResources().getDrawable(R.drawable.actionbar_progress_indeterminate_horizontal));
+  mProgressBar.setIndeterminate(mSyncInProgress);
   setBackgroundText();
   Log_OC.d(TAG,"onCreate() end");
 }
