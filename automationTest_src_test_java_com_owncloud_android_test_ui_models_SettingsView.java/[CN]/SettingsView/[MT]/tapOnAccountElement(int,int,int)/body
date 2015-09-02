@@ -1,0 +1,4 @@
+{
+  if (accountPosition == 1)   accountElement.tap(fingers,milliSeconds);
+ else   accountElement2.tap(fingers,milliSeconds);
+}

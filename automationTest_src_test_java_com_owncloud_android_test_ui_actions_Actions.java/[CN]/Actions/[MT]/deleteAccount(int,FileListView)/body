@@ -1,0 +1,5 @@
+{
+  MenuList menulist=fileListView.clickOnMenuButton();
+  SettingsView settingView=menulist.clickOnSettingsButton();
+  deleteAccount(accountPosition,settingView);
+}

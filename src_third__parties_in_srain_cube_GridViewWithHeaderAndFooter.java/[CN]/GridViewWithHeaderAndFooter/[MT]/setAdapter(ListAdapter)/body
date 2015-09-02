@@ -1,0 +1,14 @@
+{
+  if (mHeaderViewInfos.size() > 0 || mFooterViewInfos.size() > 0) {
+    HeaderViewGridAdapter headerViewGridAdapter=new HeaderViewGridAdapter(mHeaderViewInfos,mFooterViewInfos,adapter);
+    int numColumns=getNumColumnsCompatible();
+    if (numColumns > 1) {
+      headerViewGridAdapter.setNumColumns(numColumns);
+    }
+    headerViewGridAdapter.setRowHeight(getRowHeight());
+    super.setAdapter(headerViewGridAdapter);
+  }
+ else {
+    super.setAdapter(adapter);
+  }
+}

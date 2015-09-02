@@ -1,0 +1,4 @@
+{
+  IncludeCategory annotation=clazz.getAnnotation(IncludeCategory.class);
+  return annotation == null ? null : annotation.value();
+}

@@ -1,0 +1,5 @@
+{
+  common.takeScreenShotOnFailed(name.getMethodName());
+  driver.removeApp("com.owncloud.android");
+  driver.quit();
+}

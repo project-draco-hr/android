@@ -2,6 +2,6 @@
   Fragment mediaFragment=new PreviewMediaFragment(file,getAccount(),startPlaybackPosition,autoplay);
   setSecondFragment(mediaFragment);
   updateFragmentsVisibility(true);
-  updateNavigationElementsInActionBar(file);
+  updateActionBarTitleAndHomeButton(file);
   setFile(file);
 }

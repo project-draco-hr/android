@@ -1,0 +1,12 @@
+{
+  AndroidElement sharedElementIndicator;
+  FileListView fileListView=Actions.login(Config.URL,Config.user,Config.password,Config.isTrusted,driver);
+  common.assertIsInFileListView();
+  FileListView fileListViewAfterUploadFile=Actions.uploadFile(FILE_NAME,fileListView);
+  fileListViewAfterUploadFile.scrollTillFindElement(FILE_NAME);
+  assertTrue(fileHasBeenCreated=fileListViewAfterUploadFile.getFileElement().isDisplayed());
+  sharedElementIndicator=Actions.shareLinkElementByCopyLink(FILE_NAME,fileListViewAfterUploadFile,driver,common);
+  assertTrue(sharedElementIndicator.isDisplayed());
+  Actions.unshareLinkElement(FILE_NAME,fileListViewAfterUploadFile,driver,common);
+  assertFalse(sharedElementIndicator.isDisplayed());
+}

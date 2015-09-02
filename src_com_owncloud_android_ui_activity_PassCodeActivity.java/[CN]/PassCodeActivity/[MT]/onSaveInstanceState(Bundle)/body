@@ -1,0 +1,5 @@
+{
+  super.onSaveInstanceState(outState);
+  outState.putBoolean(PassCodeActivity.KEY_CONFIRMING_PASSCODE,mConfirmingPassCode);
+  outState.putStringArray(PassCodeActivity.KEY_PASSCODE_DIGITS,mPassCodeDigits);
+}

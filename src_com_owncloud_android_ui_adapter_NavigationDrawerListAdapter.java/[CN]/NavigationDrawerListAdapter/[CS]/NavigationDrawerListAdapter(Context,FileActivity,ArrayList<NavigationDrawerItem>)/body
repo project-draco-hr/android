@@ -1,0 +1,7 @@
+{
+  mFileActivity=fileActivity;
+  mContext=context;
+  mNavigationDrawerItems=navigationDrawerItems;
+  updateAccountList();
+  mAll.addAll(mNavigationDrawerItems);
+}

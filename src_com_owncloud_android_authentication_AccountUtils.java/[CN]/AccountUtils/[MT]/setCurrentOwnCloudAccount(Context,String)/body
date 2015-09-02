@@ -2,7 +2,7 @@
   boolean result=false;
   if (accountName != null) {
     Account[] ocAccounts=AccountManager.get(context).getAccountsByType(MainApp.getAccountType());
-    boolean found=false;
+    boolean found;
     for (    Account account : ocAccounts) {
       found=(account.name.equals(accountName));
       if (found) {

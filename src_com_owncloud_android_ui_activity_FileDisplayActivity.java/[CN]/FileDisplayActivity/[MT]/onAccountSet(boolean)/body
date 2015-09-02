@@ -16,9 +16,16 @@
       file=getStorageManager().getFileByPath(OCFile.ROOT_PATH);
     }
     setFile(file);
-    setNavigationListWithFolder(file);
+    if (mAccountWasSet) {
+      RelativeLayout navigationDrawerLayout=(RelativeLayout)findViewById(R.id.left_drawer);
+      if (navigationDrawerLayout != null && getAccount() != null) {
+        TextView username=(TextView)navigationDrawerLayout.findViewById(R.id.drawer_username);
+        int lastAtPos=getAccount().name.lastIndexOf("@");
+        username.setText(getAccount().name.substring(0,lastAtPos));
+      }
+    }
     if (!stateWasRecovered) {
-      Log_OC.e(TAG,"Initializing Fragments in onAccountChanged..");
+      Log_OC.d(TAG,"Initializing Fragments in onAccountChanged..");
       initFragmentsWithFile();
       if (file.isFolder()) {
         startSyncFolderOperation(file,false);
@@ -26,7 +33,7 @@
     }
  else {
       updateFragmentsVisibility(!file.isFolder());
-      updateNavigationElementsInActionBar(file.isFolder() ? null : file);
+      updateActionBarTitleAndHomeButton(file.isFolder() ? null : file);
     }
   }
 }

@@ -1,0 +1,41 @@
+{
+  super.onCreate(savedInstanceState);
+  setContentView(R.layout.passcodelock);
+  mBCancel=(Button)findViewById(R.id.cancel);
+  mPassCodeHdr=(TextView)findViewById(R.id.header);
+  mPassCodeHdrExplanation=(TextView)findViewById(R.id.explanation);
+  mPassCodeEditTexts[0]=(EditText)findViewById(R.id.txt0);
+  mPassCodeEditTexts[0].requestFocus();
+  getWindow().setSoftInputMode(android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+  mPassCodeEditTexts[1]=(EditText)findViewById(R.id.txt1);
+  mPassCodeEditTexts[2]=(EditText)findViewById(R.id.txt2);
+  mPassCodeEditTexts[3]=(EditText)findViewById(R.id.txt3);
+  if (ACTION_REQUEST.equals(getIntent().getAction())) {
+    mPassCodeHdr.setText(R.string.pass_code_enter_pass_code);
+    mPassCodeHdrExplanation.setVisibility(View.INVISIBLE);
+    setCancelButtonEnabled(false);
+  }
+ else   if (ACTION_ENABLE.equals(getIntent().getAction())) {
+    if (savedInstanceState != null) {
+      mConfirmingPassCode=savedInstanceState.getBoolean(PassCodeActivity.KEY_CONFIRMING_PASSCODE);
+      mPassCodeDigits=savedInstanceState.getStringArray(PassCodeActivity.KEY_PASSCODE_DIGITS);
+    }
+    if (mConfirmingPassCode) {
+      requestPassCodeConfirmation();
+    }
+ else {
+      mPassCodeHdr.setText(R.string.pass_code_configure_your_pass_code);
+      mPassCodeHdrExplanation.setVisibility(View.VISIBLE);
+      setCancelButtonEnabled(true);
+    }
+  }
+ else   if (ACTION_DISABLE.equals(getIntent().getAction())) {
+    mPassCodeHdr.setText(R.string.pass_code_remove_your_pass_code);
+    mPassCodeHdrExplanation.setVisibility(View.INVISIBLE);
+    setCancelButtonEnabled(true);
+  }
+ else {
+    throw new IllegalArgumentException("A valid ACTION is needed in the Intent passed to " + TAG);
+  }
+  setTextListeners();
+}

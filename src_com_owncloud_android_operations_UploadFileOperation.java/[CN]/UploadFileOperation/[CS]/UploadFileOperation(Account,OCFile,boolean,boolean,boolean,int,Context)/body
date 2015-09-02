@@ -1,5 +1,5 @@
 {
-  if (account == null)   throw new IllegalArgumentException("Illegal NULL account in UploadFileOperation creation");
+  if (account == null)   throw new IllegalArgumentException("Illegal NULL account in UploadFileOperation " + "creation");
   if (file == null)   throw new IllegalArgumentException("Illegal NULL file in UploadFileOperation creation");
   if (file.getStoragePath() == null || file.getStoragePath().length() <= 0) {
     throw new IllegalArgumentException("Illegal file in UploadFileOperation; storage path invalid: " + file.getStoragePath());

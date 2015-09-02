@@ -1,0 +1,10 @@
+{
+  if (text != null && text.length() > 0) {
+    ((TextView)mListFooterView.findViewById(R.id.footerText)).setText(text);
+    ((TextView)mGridFooterView.findViewById(R.id.footerText)).setText(text);
+    setFooterEnabled(true);
+  }
+ else {
+    setFooterEnabled(false);
+  }
+}

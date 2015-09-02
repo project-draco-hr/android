@@ -11,6 +11,9 @@
  else       if (result.getCode() == ResultCode.FORBIDDEN) {
         message=String.format(res.getString(R.string.forbidden_permissions),res.getString(R.string.uploader_upload_forbidden_permissions));
       }
+ else       if (result.getCode() == ResultCode.INVALID_CHARACTER_DETECT_IN_SERVER) {
+        message=res.getString(R.string.filename_forbidden_charaters_from_server);
+      }
  else {
         message=String.format(res.getString(R.string.uploader_upload_failed_content_single),((UploadFileOperation)operation).getFileName());
       }
@@ -58,6 +61,9 @@
  else     if (isNetworkError(result.getCode())) {
       message=getErrorMessage(result,res);
     }
+ else     if (result.getCode() == ResultCode.INVALID_CHARACTER_DETECT_IN_SERVER) {
+      message=res.getString(R.string.filename_forbidden_charaters_from_server);
+    }
  else {
       message=res.getString(R.string.rename_server_fail_msg);
     }
@@ -76,6 +82,9 @@
     }
  else     if (isNetworkError(result.getCode())) {
       message=getErrorMessage(result,res);
+    }
+ else     if (result.getCode() == ResultCode.INVALID_CHARACTER_DETECT_IN_SERVER) {
+      message=res.getString(R.string.filename_forbidden_charaters_from_server);
     }
  else {
       message=res.getString(R.string.create_dir_fail_msg);
@@ -122,8 +131,22 @@
  else     if (result.getCode() == ResultCode.FORBIDDEN) {
       message=String.format(res.getString(R.string.forbidden_permissions),res.getString(R.string.forbidden_permissions_move));
     }
+ else     if (result.getCode() == ResultCode.INVALID_CHARACTER_DETECT_IN_SERVER) {
+      message=res.getString(R.string.filename_forbidden_charaters_from_server);
+    }
  else {
       message=res.getString(R.string.move_file_error);
+    }
+  }
+ else   if (operation instanceof SynchronizeFolderOperation) {
+    if (!result.isSuccess()) {
+      String folderPathName=new File(((SynchronizeFolderOperation)operation).getFolderPath()).getName();
+      if (result.getCode() == ResultCode.FILE_NOT_FOUND) {
+        message=String.format(res.getString(R.string.sync_current_folder_was_removed),folderPathName);
+      }
+ else {
+        message=String.format(res.getString(R.string.download_folder_failed_content),folderPathName);
+      }
     }
   }
   return message;

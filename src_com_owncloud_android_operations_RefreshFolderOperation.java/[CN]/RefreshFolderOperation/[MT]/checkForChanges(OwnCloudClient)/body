@@ -1,0 +1,35 @@
+{
+  mRemoteFolderChanged=true;
+  RemoteOperationResult result=null;
+  String remotePath=null;
+  remotePath=mLocalFolder.getRemotePath();
+  Log_OC.d(TAG,"Checking changes in " + mAccount.name + remotePath);
+  ReadRemoteFileOperation operation=new ReadRemoteFileOperation(remotePath);
+  result=operation.execute(client);
+  if (result.isSuccess()) {
+    OCFile remoteFolder=FileStorageUtils.fillOCFile((RemoteFile)result.getData().get(0));
+    if (!mIgnoreETag) {
+      String remoteFolderETag=remoteFolder.getEtag();
+      if (remoteFolderETag != null) {
+        mRemoteFolderChanged=!(remoteFolderETag.equalsIgnoreCase(mLocalFolder.getEtag()));
+      }
+ else {
+        Log_OC.e(TAG,"Checked " + mAccount.name + remotePath+ " : "+ "No ETag received from server");
+      }
+    }
+    result=new RemoteOperationResult(ResultCode.OK);
+    Log_OC.i(TAG,"Checked " + mAccount.name + remotePath+ " : "+ (mRemoteFolderChanged ? "changed" : "not changed"));
+  }
+ else {
+    if (result.getCode() == ResultCode.FILE_NOT_FOUND) {
+      removeLocalFolder();
+    }
+    if (result.isException()) {
+      Log_OC.e(TAG,"Checked " + mAccount.name + remotePath+ " : "+ result.getLogMessage(),result.getException());
+    }
+ else {
+      Log_OC.e(TAG,"Checked " + mAccount.name + remotePath+ " : "+ result.getLogMessage());
+    }
+  }
+  return result;
+}

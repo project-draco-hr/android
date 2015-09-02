@@ -1,0 +1,4 @@
+{
+  TestClassPrefix annotation=clazz.getAnnotation(TestClassPrefix.class);
+  return annotation == null ? "" : annotation.value();
+}

@@ -1,5 +1,5 @@
 {
-  OCFile root=mStorageManager.getFileByPath(OCFile.ROOT_PATH);
+  OCFile root=getStorageManager().getFileByPath(OCFile.ROOT_PATH);
   mFile=root;
   startSyncFolderOperation(root);
 }

@@ -8,27 +8,33 @@
     Log_OC.wtf(getTag(),"Calling confirmation dialog without resource or arguments");
     return null;
   }
-  AlertDialog.Builder builder=new AlertDialog.Builder(getActivity()).setIcon(android.R.drawable.ic_dialog_alert).setMessage(String.format(getString(resourceId),confirmationTarget)).setTitle(android.R.string.dialog_alert_title);
+  AlertDialog.Builder builder=new AlertDialog.Builder(getActivity(),R.style.Theme_ownCloud_Dialog).setIcon(R.drawable.ic_warning).setMessage(String.format(getString(resourceId),confirmationTarget)).setTitle(android.R.string.dialog_alert_title);
   if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
     builder.setIconAttribute(android.R.attr.alertDialogIcon);
   }
   if (posBtn != -1)   builder.setPositiveButton(posBtn,new DialogInterface.OnClickListener(){
     public void onClick(    DialogInterface dialog,    int whichButton){
-      mListener.onConfirmation(getTag());
+      if (mListener != null) {
+        mListener.onConfirmation(getTag());
+      }
       dialog.dismiss();
     }
   }
 );
   if (neuBtn != -1)   builder.setNeutralButton(neuBtn,new DialogInterface.OnClickListener(){
     public void onClick(    DialogInterface dialog,    int whichButton){
-      mListener.onNeutral(getTag());
+      if (mListener != null) {
+        mListener.onNeutral(getTag());
+      }
       dialog.dismiss();
     }
   }
 );
   if (negBtn != -1)   builder.setNegativeButton(negBtn,new DialogInterface.OnClickListener(){
     @Override public void onClick(    DialogInterface dialog,    int which){
-      mListener.onCancel(getTag());
+      if (mListener != null) {
+        mListener.onCancel(getTag());
+      }
       dialog.dismiss();
     }
   }

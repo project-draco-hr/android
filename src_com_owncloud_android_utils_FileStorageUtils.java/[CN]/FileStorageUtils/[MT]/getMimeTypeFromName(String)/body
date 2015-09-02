@@ -1,0 +1,9 @@
+{
+  String extension="";
+  int pos=path.lastIndexOf('.');
+  if (pos >= 0) {
+    extension=path.substring(pos + 1);
+  }
+  String result=MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension.toLowerCase());
+  return (result != null) ? result : "";
+}

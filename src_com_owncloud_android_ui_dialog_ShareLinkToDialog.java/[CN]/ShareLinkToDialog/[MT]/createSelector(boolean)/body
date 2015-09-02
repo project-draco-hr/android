@@ -6,7 +6,7 @@
  else {
     titleId=R.string.activity_chooser_title;
   }
-  return new AlertDialog.Builder(getSherlockActivity()).setTitle(titleId).setAdapter(mAdapter,new DialogInterface.OnClickListener(){
+  return new AlertDialog.Builder(getActivity()).setTitle(titleId).setAdapter(mAdapter,new DialogInterface.OnClickListener(){
     @Override public void onClick(    DialogInterface dialog,    int which){
       ResolveInfo chosen=mAdapter.getItem(which);
       ActivityInfo actInfo=chosen.activityInfo;
@@ -14,10 +14,10 @@
       mIntent.setComponent(name);
       if (sendAction) {
         dialog.dismiss();
-        ((FileActivity)getSherlockActivity()).startActivity(mIntent);
+        ((FileActivity)getActivity()).startActivity(mIntent);
       }
  else {
-        ((ComponentsGetter)getSherlockActivity()).getFileOperationsHelper().shareFileWithLinkToApp(mFile,mIntent);
+        ((ComponentsGetter)getActivity()).getFileOperationsHelper().shareFileWithLinkToApp(mFile,"",mIntent);
       }
     }
   }

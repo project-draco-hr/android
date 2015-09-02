@@ -1,0 +1,5 @@
+{
+  int targetWidth=GridViewWithHeaderAndFooter.this.getMeasuredWidth() - GridViewWithHeaderAndFooter.this.getPaddingLeft() - GridViewWithHeaderAndFooter.this.getPaddingRight();
+  widthMeasureSpec=MeasureSpec.makeMeasureSpec(targetWidth,MeasureSpec.getMode(widthMeasureSpec));
+  super.onMeasure(widthMeasureSpec,heightMeasureSpec);
+}

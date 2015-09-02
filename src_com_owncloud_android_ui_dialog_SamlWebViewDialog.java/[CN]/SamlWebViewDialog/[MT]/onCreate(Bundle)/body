@@ -1,8 +1,8 @@
 {
-  Log_OC.d(TAG,"onCreate, savedInstanceState is " + savedInstanceState);
+  Log_OC.v(TAG,"onCreate, savedInstanceState is " + savedInstanceState);
   super.onCreate(savedInstanceState);
   setRetainInstance(true);
-  CookieSyncManager.createInstance(getSherlockActivity().getApplicationContext());
+  CookieSyncManager.createInstance(getActivity().getApplicationContext());
   if (savedInstanceState == null) {
     mInitialUrl=getArguments().getString(ARG_INITIAL_URL);
     mTargetUrl=getArguments().getString(ARG_TARGET_URL);
@@ -11,5 +11,5 @@
     mInitialUrl=savedInstanceState.getString(ARG_INITIAL_URL);
     mTargetUrl=savedInstanceState.getString(ARG_TARGET_URL);
   }
-  setStyle(SherlockDialogFragment.STYLE_NO_TITLE,R.style.Theme_ownCloud_Dialog);
+  setStyle(DialogFragment.STYLE_NO_TITLE,R.style.Theme_ownCloud_Dialog);
 }

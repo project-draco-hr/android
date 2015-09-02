@@ -1,0 +1,6 @@
+{
+  NewFolderPopUp newFolderPopUp=fileListView.clickOnNewFolderButton();
+  newFolderPopUp.typeNewFolderName(folderName);
+  WaitAMomentPopUp waitAMomentPopUp=newFolderPopUp.clickOnNewFolderOkButton();
+  return waitAMomentPopUp;
+}

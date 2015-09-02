@@ -1,0 +1,7 @@
+{
+  if (mFileActivity.getAccount() != null) {
+    OwnCloudVersion serverVersion=AccountUtils.getServerVersion(mFileActivity.getAccount());
+    return (serverVersion != null && serverVersion.isVersionWithForbiddenCharacters());
+  }
+  return false;
+}

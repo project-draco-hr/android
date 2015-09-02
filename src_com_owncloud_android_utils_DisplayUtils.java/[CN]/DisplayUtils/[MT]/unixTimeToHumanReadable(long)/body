@@ -1,4 +1,5 @@
 {
   Date date=new Date(milliseconds);
-  return date.toLocaleString();
+  DateFormat df=DateFormat.getDateTimeInstance();
+  return df.format(date);
 }

@@ -2,7 +2,12 @@
   boolean returnValue=false;
 switch (item.getItemId()) {
 case android.R.id.home:
-    backToDisplayActivity();
+    if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+      mDrawerLayout.closeDrawer(GravityCompat.START);
+    }
+ else {
+      backToDisplayActivity();
+    }
   returnValue=true;
 break;
 default :

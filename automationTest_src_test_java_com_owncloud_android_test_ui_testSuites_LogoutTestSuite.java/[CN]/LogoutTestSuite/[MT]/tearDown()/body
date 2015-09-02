@@ -1,0 +1,4 @@
+{
+  common.takeScreenShotOnFailed(name.getMethodName());
+  driver.quit();
+}

@@ -1,0 +1,5 @@
+{
+  shareLinkElement.click();
+  ShareView shareView=new ShareView(driver);
+  return shareView;
+}

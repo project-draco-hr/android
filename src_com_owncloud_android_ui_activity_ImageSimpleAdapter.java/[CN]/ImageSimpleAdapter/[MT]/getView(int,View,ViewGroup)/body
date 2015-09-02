@@ -3,7 +3,7 @@
   if (convertView == null)   vi=inflater.inflate(R.layout.uploader_list_item_layout,null);
   HashMap<String,OCFile> data=(HashMap<String,OCFile>)getItem(position);
   OCFile file=data.get("dirname");
-  TextView filename=(TextView)vi.findViewById(R.id.textView1);
+  TextView filename=(TextView)vi.findViewById(R.id.filename);
   filename.setText((CharSequence)file.getFileName());
   ImageView fileIcon=(ImageView)vi.findViewById(R.id.imageView1);
   fileIcon.setTag(file.getFileId());
@@ -25,7 +25,7 @@
     }
   }
  else {
-    fileIcon.setImageResource(DisplayUtils.getResourceId(file.getMimetype(),file.getFileName()));
+    fileIcon.setImageResource(DisplayUtils.getFileTypeIconId(file.getMimetype(),file.getFileName()));
   }
   return vi;
 }

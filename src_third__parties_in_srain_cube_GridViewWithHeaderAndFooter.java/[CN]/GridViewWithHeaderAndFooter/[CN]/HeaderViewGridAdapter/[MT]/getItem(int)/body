@@ -1,0 +1,29 @@
+{
+  int numHeadersAndPlaceholders=getHeadersCount() * mNumColumns;
+  if (position < numHeadersAndPlaceholders) {
+    if (position % mNumColumns == 0) {
+      return mHeaderViewInfos.get(position / mNumColumns).data;
+    }
+    return null;
+  }
+  final int adjPosition=position - numHeadersAndPlaceholders;
+  int adapterCount=0;
+  if (mAdapter != null) {
+    adapterCount=getAdapterAndPlaceHolderCount();
+    if (adjPosition < adapterCount) {
+      if (adjPosition < mAdapter.getCount()) {
+        return mAdapter.getItem(adjPosition);
+      }
+ else {
+        return null;
+      }
+    }
+  }
+  final int footerPosition=adjPosition - adapterCount;
+  if (footerPosition % mNumColumns == 0) {
+    return mFooterViewInfos.get(footerPosition).data;
+  }
+ else {
+    return null;
+  }
+}

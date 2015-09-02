@@ -1,0 +1,19 @@
+{
+  LayoutInflater inflator=(LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+  if (mAll.size() > position) {
+    if (mAll.get(position) instanceof NavigationDrawerItem) {
+      NavigationDrawerItem navItem=(NavigationDrawerItem)mAll.get(position);
+      View view=inflator.inflate(R.layout.drawer_list_item,null);
+      LinearLayout itemLayout=(LinearLayout)view.findViewById(R.id.itemLayout);
+      itemLayout.setContentDescription(navItem.getContentDescription());
+      TextView itemText=(TextView)view.findViewById(R.id.itemTitle);
+      itemText.setText(navItem.getTitle());
+      if (navItem.getIcon() != 0) {
+        ImageView itemImage=(ImageView)view.findViewById(R.id.itemIcon);
+        itemImage.setImageResource(navItem.getIcon());
+      }
+      return view;
+    }
+  }
+  return convertView;
+}

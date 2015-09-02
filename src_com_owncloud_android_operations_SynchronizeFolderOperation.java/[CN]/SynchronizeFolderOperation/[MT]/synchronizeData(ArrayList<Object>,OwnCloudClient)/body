@@ -1,12 +1,17 @@
 {
-  mLocalFolder=mStorageManager.getFileByPath(mLocalFolder.getRemotePath());
+  FileDataStorageManager storageManager=getStorageManager();
   OCFile remoteFolder=fillOCFile((RemoteFile)folderAndFiles.get(0));
   remoteFolder.setParentId(mLocalFolder.getParentId());
   remoteFolder.setFileId(mLocalFolder.getFileId());
   Log_OC.d(TAG,"Remote folder " + mLocalFolder.getRemotePath() + " changed - starting update of local data ");
   List<OCFile> updatedFiles=new Vector<OCFile>(folderAndFiles.size() - 1);
-  List<SynchronizeFileOperation> filesToSyncContents=new Vector<SynchronizeFileOperation>();
-  List<OCFile> localFiles=mStorageManager.getFolderContent(mLocalFolder);
+  mFilesForDirectDownload.clear();
+  mFilesToSyncContentsWithoutUpload.clear();
+  mFavouriteFilesToSyncContents.clear();
+  if (mCancellationRequested.get()) {
+    throw new OperationCancelledException();
+  }
+  List<OCFile> localFiles=storageManager.getFolderContent(mLocalFolder);
   Map<String,OCFile> localFilesMap=new HashMap<String,OCFile>(localFiles.size());
   for (  OCFile file : localFiles) {
     localFilesMap.put(file.getRemotePath(),file);
@@ -19,7 +24,7 @@
     remoteFile.setLastSyncDateForProperties(mCurrentSyncTime);
     if (localFile != null) {
       remoteFile.setFileId(localFile.getFileId());
-      remoteFile.setKeepInSync(localFile.keepInSync());
+      remoteFile.setFavorite(localFile.isFavorite());
       remoteFile.setLastSyncDateForData(localFile.getLastSyncDateForData());
       remoteFile.setModificationTimestampAtLastSyncForData(localFile.getModificationTimestampAtLastSyncForData());
       remoteFile.setStoragePath(localFile.getStoragePath());
@@ -37,15 +42,24 @@
  else {
       remoteFile.setEtag("");
     }
-    checkAndFixForeignStoragePath(remoteFile);
     searchForLocalFileInDefaultPath(remoteFile);
-    if (remoteFile.keepInSync()) {
+    if (remoteFile.isFolder()) {
+synchronized (mCancellationRequested) {
+        if (mCancellationRequested.get()) {
+          throw new OperationCancelledException();
+        }
+        startSyncFolderOperation(remoteFile.getRemotePath());
+      }
+    }
+ else     if (remoteFile.isFavorite()) {
       SynchronizeFileOperation operation=new SynchronizeFileOperation(localFile,remoteFile,mAccount,true,mContext);
-      filesToSyncContents.add(operation);
+      mFavouriteFilesToSyncContents.add(operation);
+    }
+ else {
+      SynchronizeFileOperation operation=new SynchronizeFileOperation(localFile,remoteFile,mAccount,true,false,mContext);
+      mFilesToSyncContentsWithoutUpload.add(operation);
     }
     updatedFiles.add(remoteFile);
   }
-  mStorageManager.saveFolder(remoteFolder,updatedFiles,localFilesMap.values());
-  startContentSynchronizations(filesToSyncContents,client);
-  mChildren=updatedFiles;
+  storageManager.saveFolder(remoteFolder,updatedFiles,localFilesMap.values());
 }

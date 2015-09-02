@@ -1,31 +1,22 @@
 {
+  prepareStreamsToUpload();
+  if (savedInstanceState == null) {
+    mParents=new Stack<String>();
+    mAccountSelected=false;
+    mAccountSelectionShowing=false;
+    mNumCacheFile=0;
+    mRemoteCacheData=new ArrayList<String>();
+  }
+ else {
+    mParents=(Stack<String>)savedInstanceState.getSerializable(KEY_PARENTS);
+    mFile=savedInstanceState.getParcelable(KEY_FILE);
+    mAccountSelected=savedInstanceState.getBoolean(KEY_ACCOUNT_SELECTED);
+    mAccountSelectionShowing=savedInstanceState.getBoolean(KEY_ACCOUNT_SELECTION_SHOWING);
+    mNumCacheFile=savedInstanceState.getInt(KEY_NUM_CACHE_FILE);
+    mRemoteCacheData=savedInstanceState.getStringArrayList(KEY_REMOTE_CACHE_DATA);
+  }
   super.onCreate(savedInstanceState);
-  mParents=new Stack<String>();
-  ActionBar actionBar=getSupportActionBar();
-  actionBar.setIcon(DisplayUtils.getSeasonalIconId());
-  if (prepareStreamsToUpload()) {
-    mAccountManager=(AccountManager)getSystemService(Context.ACCOUNT_SERVICE);
-    Account[] accounts=mAccountManager.getAccountsByType(MainApp.getAccountType());
-    if (accounts.length == 0) {
-      Log_OC.i(TAG,"No ownCloud account is available");
-      showDialog(DIALOG_NO_ACCOUNT);
-    }
- else     if (accounts.length > 1) {
-      Log_OC.i(TAG,"More then one ownCloud is available");
-      showDialog(DIALOG_MULTIPLE_ACCOUNT);
-    }
- else {
-      mAccount=accounts[0];
-      mStorageManager=new FileDataStorageManager(mAccount,getContentResolver());
-      initTargetFolder();
-      populateDirectoryList();
-    }
+  if (mAccountSelected) {
+    setAccount((Account)savedInstanceState.getParcelable(FileActivity.EXTRA_ACCOUNT));
   }
- else {
-    showDialog(DIALOG_NO_STREAM);
-  }
-  IntentFilter syncIntentFilter=new IntentFilter(SynchronizeFolderOperation.EVENT_SINGLE_FOLDER_CONTENTS_SYNCED);
-  syncIntentFilter.addAction(SynchronizeFolderOperation.EVENT_SINGLE_FOLDER_SHARES_SYNCED);
-  mSyncBroadcastReceiver=new SyncBroadcastReceiver();
-  registerReceiver(mSyncBroadcastReceiver,syncIntentFilter);
 }

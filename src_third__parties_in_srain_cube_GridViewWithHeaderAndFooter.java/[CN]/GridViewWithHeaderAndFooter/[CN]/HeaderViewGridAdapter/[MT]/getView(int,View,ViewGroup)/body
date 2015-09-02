@@ -1,0 +1,55 @@
+{
+  if (DEBUG) {
+    Log.d(LOG_TAG,String.format("getView: %s, reused: %s",position,convertView == null));
+  }
+  int numHeadersAndPlaceholders=getHeadersCount() * mNumColumns;
+  if (position < numHeadersAndPlaceholders) {
+    View headerViewContainer=mHeaderViewInfos.get(position / mNumColumns).viewContainer;
+    if (position % mNumColumns == 0) {
+      return headerViewContainer;
+    }
+ else {
+      if (convertView == null) {
+        convertView=new View(parent.getContext());
+      }
+      convertView.setVisibility(View.INVISIBLE);
+      convertView.setMinimumHeight(headerViewContainer.getHeight());
+      return convertView;
+    }
+  }
+  final int adjPosition=position - numHeadersAndPlaceholders;
+  int adapterCount=0;
+  if (mAdapter != null) {
+    adapterCount=getAdapterAndPlaceHolderCount();
+    if (adjPosition < adapterCount) {
+      if (adjPosition < mAdapter.getCount()) {
+        View view=mAdapter.getView(adjPosition,convertView,parent);
+        return view;
+      }
+ else {
+        if (convertView == null) {
+          convertView=new View(parent.getContext());
+        }
+        convertView.setVisibility(View.INVISIBLE);
+        convertView.setMinimumHeight(mRowHeight);
+        return convertView;
+      }
+    }
+  }
+  final int footerPosition=adjPosition - adapterCount;
+  if (footerPosition < getCount()) {
+    View footViewContainer=mFooterViewInfos.get(footerPosition / mNumColumns).viewContainer;
+    if (position % mNumColumns == 0) {
+      return footViewContainer;
+    }
+ else {
+      if (convertView == null) {
+        convertView=new View(parent.getContext());
+      }
+      convertView.setVisibility(View.INVISIBLE);
+      convertView.setMinimumHeight(footViewContainer.getHeight());
+      return convertView;
+    }
+  }
+  throw new ArrayIndexOutOfBoundsException(position);
+}

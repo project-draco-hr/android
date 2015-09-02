@@ -4,9 +4,9 @@
     if (file.isFolder()) {
       return file;
     }
- else     if (mStorageManager != null) {
+ else     if (getStorageManager() != null) {
       String parentPath=file.getRemotePath().substring(0,file.getRemotePath().lastIndexOf(file.getFileName()));
-      return mStorageManager.getFileByPath(parentPath);
+      return getStorageManager().getFileByPath(parentPath);
     }
   }
   return null;

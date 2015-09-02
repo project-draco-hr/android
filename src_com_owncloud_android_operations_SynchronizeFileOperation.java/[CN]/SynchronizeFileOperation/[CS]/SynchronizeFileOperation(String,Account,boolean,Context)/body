@@ -5,4 +5,5 @@
   mAccount=account;
   mSyncFileContents=syncFileContents;
   mContext=context;
+  mAllowUploads=true;
 }

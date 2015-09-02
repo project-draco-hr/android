@@ -1,7 +1,9 @@
 {
+  Log_OC.v(TAG,"onRestart() start");
   super.onRestart();
-  boolean validAccount=(mAccount != null && AccountUtils.setCurrentOwnCloudAccount(getApplicationContext(),mAccount.name));
+  boolean validAccount=(mAccount != null && AccountUtils.exists(mAccount,this));
   if (!validAccount) {
     swapToDefaultAccount();
   }
+  Log_OC.v(TAG,"onRestart() end");
 }

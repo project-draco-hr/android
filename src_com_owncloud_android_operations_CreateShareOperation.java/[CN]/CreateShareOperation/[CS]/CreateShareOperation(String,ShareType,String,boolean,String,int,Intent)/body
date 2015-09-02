@@ -1,9 +1,0 @@
-{
-  mPath=path;
-  mShareType=shareType;
-  mShareWith=shareWith;
-  mPublicUpload=publicUpload;
-  mPassword=password;
-  mPermissions=permissions;
-  mSendIntent=sendIntent;
-}

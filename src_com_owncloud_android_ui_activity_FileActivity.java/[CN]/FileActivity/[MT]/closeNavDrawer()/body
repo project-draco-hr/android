@@ -1,0 +1,5 @@
+{
+  if (mDrawerLayout != null) {
+    mDrawerLayout.closeDrawer(GravityCompat.START);
+  }
+}

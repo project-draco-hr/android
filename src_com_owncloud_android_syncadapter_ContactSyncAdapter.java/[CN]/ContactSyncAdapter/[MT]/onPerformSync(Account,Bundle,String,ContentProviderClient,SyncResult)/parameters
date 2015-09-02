@@ -1,5 +1,0 @@
-Account account
-Bundle extras
-String authority
-ContentProviderClient provider
-SyncResult syncResult

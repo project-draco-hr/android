@@ -5,7 +5,7 @@
     String username=(String)result.getData().get(0);
     if (mAction == ACTION_CREATE) {
       mUsernameInput.setText(username);
-      success=createAccount();
+      success=createAccount(result);
     }
  else {
       if (!mUsernameInput.getText().toString().equals(username)) {
@@ -16,8 +16,15 @@
         Log_OC.d(TAG,result.getLogMessage());
       }
  else {
-        updateToken();
-        success=true;
+        try {
+          updateAccountAuthentication();
+          success=true;
+        }
+ catch (        AccountNotFoundException e) {
+          Log_OC.e(TAG,"Account " + mAccount + " was removed!",e);
+          Toast.makeText(this,R.string.auth_account_does_not_exist,Toast.LENGTH_SHORT).show();
+          finish();
+        }
       }
     }
     if (success)     finish();

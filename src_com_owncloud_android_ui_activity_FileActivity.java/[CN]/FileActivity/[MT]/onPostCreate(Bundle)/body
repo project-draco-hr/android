@@ -1,0 +1,10 @@
+{
+  super.onPostCreate(savedInstanceState);
+  if (mDrawerToggle != null) {
+    mDrawerToggle.syncState();
+    if (isDrawerOpen()) {
+      getSupportActionBar().setTitle(R.string.app_name);
+      mDrawerToggle.setDrawerIndicatorEnabled(true);
+    }
+  }
+}

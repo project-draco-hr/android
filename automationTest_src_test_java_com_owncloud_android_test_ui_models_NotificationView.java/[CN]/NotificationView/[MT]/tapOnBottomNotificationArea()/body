@@ -1,0 +1,4 @@
+{
+  notificationArea.getSize();
+  notificationArea.tap(1,1000);
+}

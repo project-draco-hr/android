@@ -1,0 +1,10 @@
+{
+  if (seekBar != null && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+    colorPreLollipopHorizontalProgressBar(seekBar);
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+      int color=seekBar.getResources().getColor(R.color.color_accent);
+      seekBar.getThumb().setColorFilter(color,PorterDuff.Mode.SRC_IN);
+      seekBar.getThumb().setColorFilter(color,PorterDuff.Mode.SRC_IN);
+    }
+  }
+}

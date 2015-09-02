@@ -10,13 +10,12 @@
       mIgnoreFirstSavedState=false;
     }
   }
-  View view=null;
-  view=inflater.inflate(R.layout.file_download_fragment,container,false);
-  mView=view;
+  mView=inflater.inflate(R.layout.file_download_fragment,container,false);
   ProgressBar progressBar=(ProgressBar)mView.findViewById(R.id.progressBar);
+  DisplayUtils.colorPreLollipopHorizontalProgressBar(progressBar);
   mProgressListener=new ProgressListener(progressBar);
-  ((ImageButton)mView.findViewById(R.id.cancelBtn)).setOnClickListener(this);
-  ((LinearLayout)mView.findViewById(R.id.fileDownloadLL)).setOnClickListener(new OnClickListener(){
+  (mView.findViewById(R.id.cancelBtn)).setOnClickListener(this);
+  (mView.findViewById(R.id.fileDownloadLL)).setOnClickListener(new OnClickListener(){
     @Override public void onClick(    View v){
       ((PreviewImageActivity)getActivity()).toggleFullScreen();
     }
@@ -28,5 +27,5 @@
  else {
     setButtonsForTransferring();
   }
-  return view;
+  return mView;
 }

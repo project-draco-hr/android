@@ -1,9 +1,12 @@
 {
-  DownloadFileOperation download=null;
-synchronized (mPendingDownloads) {
-    download=mPendingDownloads.remove(buildRemoteName(account,file));
-  }
+  Pair<DownloadFileOperation,String> removeResult=mPendingDownloads.remove(account,file.getRemotePath());
+  DownloadFileOperation download=removeResult.first;
   if (download != null) {
     download.cancel();
+  }
+ else {
+    if (mCurrentDownload != null && mCurrentAccount != null && mCurrentDownload.getRemotePath().startsWith(file.getRemotePath()) && account.name.equals(mCurrentAccount.name)) {
+      mCurrentDownload.cancel();
+    }
   }
 }

@@ -1,4 +1,4 @@
 {
-  ((OperationsServiceBinder)mBinder).clearListeners();
+  mOperationsBinder.clearListeners();
   return false;
 }

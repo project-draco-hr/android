@@ -1,0 +1,5 @@
+{
+  if (keepFileUpToDateCheckbox.getAttribute("checked").equals("false")) {
+    keepFileUpToDateCheckbox.click();
+  }
+}

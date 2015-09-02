@@ -1,0 +1,4 @@
+{
+  if (!canHaveCategorizedChildren(description))   assertNoDescendantsHaveCategoryAnnotations(description);
+  for (  Description each : description.getChildren())   assertNoCategorizedDescendentsOfUncategorizeableParents(each);
+}

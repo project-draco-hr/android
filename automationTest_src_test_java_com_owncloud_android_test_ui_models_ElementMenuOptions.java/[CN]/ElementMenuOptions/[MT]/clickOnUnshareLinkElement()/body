@@ -1,0 +1,5 @@
+{
+  unshareLinkElement.click();
+  WaitAMomentPopUp waitAMomentPopUp=new WaitAMomentPopUp(driver);
+  return waitAMomentPopUp;
+}

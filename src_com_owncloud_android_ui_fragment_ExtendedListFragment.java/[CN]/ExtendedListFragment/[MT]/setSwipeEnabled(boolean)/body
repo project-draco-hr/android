@@ -1,0 +1,5 @@
+{
+  mRefreshListLayout.setEnabled(enabled);
+  mRefreshGridLayout.setEnabled(enabled);
+  mRefreshEmptyLayout.setEnabled(enabled);
+}

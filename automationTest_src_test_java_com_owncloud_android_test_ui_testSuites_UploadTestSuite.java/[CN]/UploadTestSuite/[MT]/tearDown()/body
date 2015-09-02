@@ -1,0 +1,12 @@
+{
+  common.takeScreenShotOnFailed(name.getMethodName());
+  FileListView fileListView=new FileListView(driver);
+  if (fileHasBeenUploadedFromGmail) {
+    Actions.deleteElement(FILE_GMAIL_NAME,fileListView,driver);
+  }
+  if (fileHasBeenUploaded) {
+    Actions.deleteElement(FILE_NAME,fileListView,driver);
+    Actions.deleteElement(BIG_FILE_NAME,fileListView,driver);
+  }
+  driver.quit();
+}

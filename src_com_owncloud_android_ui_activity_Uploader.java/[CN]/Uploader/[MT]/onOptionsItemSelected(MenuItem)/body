@@ -1,15 +1,17 @@
 {
   boolean retval=true;
 switch (item.getItemId()) {
+case R.id.action_create_dir:
+    CreateFolderDialogFragment dialog=CreateFolderDialogFragment.newInstance(mFile);
+  dialog.show(getSupportFragmentManager(),CreateFolderDialogFragment.CREATE_FOLDER_FRAGMENT);
+break;
 case android.R.id.home:
-{
-      if ((mParents.size() > 1)) {
-        onBackPressed();
-      }
-      break;
-    }
+if ((mParents.size() > 1)) {
+onBackPressed();
+}
+break;
 default :
-  retval=super.onOptionsItemSelected(item);
+retval=super.onOptionsItemSelected(item);
 }
 return retval;
 }

@@ -1,0 +1,8 @@
+{
+  if (passCodeIsEnabled()) {
+    activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
+  }
+ else {
+    activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_SECURE);
+  }
+}

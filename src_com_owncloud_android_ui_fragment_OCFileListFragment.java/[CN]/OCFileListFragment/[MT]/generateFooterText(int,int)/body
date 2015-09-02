@@ -1,0 +1,37 @@
+{
+  String output;
+  if (filesCount <= 0) {
+    if (foldersCount <= 0) {
+      output="";
+    }
+ else     if (foldersCount == 1) {
+      output=getResources().getString(R.string.file_list__footer__folder);
+    }
+ else {
+      output=getResources().getString(R.string.file_list__footer__folders,foldersCount);
+    }
+  }
+ else   if (filesCount == 1) {
+    if (foldersCount <= 0) {
+      output=getResources().getString(R.string.file_list__footer__file);
+    }
+ else     if (foldersCount == 1) {
+      output=getResources().getString(R.string.file_list__footer__file_and_folder);
+    }
+ else {
+      output=getResources().getString(R.string.file_list__footer__file_and_folders,foldersCount);
+    }
+  }
+ else {
+    if (foldersCount <= 0) {
+      output=getResources().getString(R.string.file_list__footer__files,filesCount);
+    }
+ else     if (foldersCount == 1) {
+      output=getResources().getString(R.string.file_list__footer__files_and_folder,filesCount);
+    }
+ else {
+      output=getResources().getString(R.string.file_list__footer__files_and_folders,filesCount,foldersCount);
+    }
+  }
+  return output;
+}

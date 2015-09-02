@@ -5,14 +5,14 @@
     String accountName=intent.getStringExtra(FileSyncAdapter.EXTRA_ACCOUNT_NAME);
     String synchFolderRemotePath=intent.getStringExtra(FileSyncAdapter.EXTRA_FOLDER_PATH);
     RemoteOperationResult synchResult=(RemoteOperationResult)intent.getSerializableExtra(FileSyncAdapter.EXTRA_RESULT);
-    boolean sameAccount=(mAccount != null && accountName.equals(mAccount.name) && mStorageManager != null);
+    boolean sameAccount=(getAccount() != null && accountName.equals(getAccount().name) && getStorageManager() != null);
     if (sameAccount) {
       if (FileSyncAdapter.EVENT_FULL_SYNC_START.equals(event)) {
         mSyncInProgress=true;
       }
  else {
-        OCFile currentFile=(mFile == null) ? null : mStorageManager.getFileByPath(mFile.getRemotePath());
-        OCFile currentDir=(getCurrentFolder() == null) ? null : mStorageManager.getFileByPath(getCurrentFolder().getRemotePath());
+        OCFile currentFile=(mFile == null) ? null : getStorageManager().getFileByPath(mFile.getRemotePath());
+        OCFile currentDir=(getCurrentFolder() == null) ? null : getStorageManager().getFileByPath(getCurrentFolder().getRemotePath());
         if (currentDir == null) {
           Toast.makeText(context,String.format(getString(R.string.sync_current_folder_was_removed),getCurrentFolder().getFileName()),Toast.LENGTH_LONG).show();
           browseToRoot();
@@ -26,23 +26,14 @@
           }
           mFile=currentFile;
         }
-        mSyncInProgress=(!FileSyncAdapter.EVENT_FULL_SYNC_END.equals(event) && !SynchronizeFolderOperation.EVENT_SINGLE_FOLDER_SHARES_SYNCED.equals(event));
-        if (SynchronizeFolderOperation.EVENT_SINGLE_FOLDER_CONTENTS_SYNCED.equals(event) && synchResult != null && !synchResult.isSuccess() && (synchResult.getCode() == ResultCode.UNAUTHORIZED || synchResult.isIdPRedirection() || (synchResult.isException() && synchResult.getException() instanceof AuthenticatorException))) {
+        mSyncInProgress=(!FileSyncAdapter.EVENT_FULL_SYNC_END.equals(event) && !RefreshFolderOperation.EVENT_SINGLE_FOLDER_SHARES_SYNCED.equals(event));
+        if (RefreshFolderOperation.EVENT_SINGLE_FOLDER_CONTENTS_SYNCED.equals(event) && synchResult != null && !synchResult.isSuccess() && (synchResult.getCode() == ResultCode.UNAUTHORIZED || synchResult.isIdPRedirection() || (synchResult.isException() && synchResult.getException() instanceof AuthenticatorException))) {
           OwnCloudClient client=null;
           try {
-            OwnCloudAccount ocAccount=new OwnCloudAccount(mAccount,context);
+            OwnCloudAccount ocAccount=new OwnCloudAccount(getAccount(),context);
             client=(OwnCloudClientManagerFactory.getDefaultSingleton().removeClientFor(ocAccount));
           }
  catch (          AccountNotFoundException e) {
-            e.printStackTrace();
-          }
-catch (          AuthenticatorException e) {
-            e.printStackTrace();
-          }
-catch (          OperationCanceledException e) {
-            e.printStackTrace();
-          }
-catch (          IOException e) {
             e.printStackTrace();
           }
           if (client != null) {
@@ -50,10 +41,10 @@ catch (          IOException e) {
             if (cred != null) {
               AccountManager am=AccountManager.get(context);
               if (cred.authTokenExpires()) {
-                am.invalidateAuthToken(mAccount.type,cred.getAuthToken());
+                am.invalidateAuthToken(getAccount().type,cred.getAuthToken());
               }
  else {
-                am.clearPassword(mAccount);
+                am.clearPassword(getAccount());
               }
             }
           }

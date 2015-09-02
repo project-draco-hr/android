@@ -1,5 +1,0 @@
-{
-  super(fileToDetail);
-  mAccount=ocAccount;
-  mIgnoreFirstSavedState=ignoreFirstSavedState;
-}

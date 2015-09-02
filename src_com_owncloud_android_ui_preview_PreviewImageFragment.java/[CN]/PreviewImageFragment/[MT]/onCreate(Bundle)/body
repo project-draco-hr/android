@@ -1,4 +1,7 @@
 {
   super.onCreate(savedInstanceState);
+  Bundle args=getArguments();
+  setFile((OCFile)args.getParcelable(ARG_FILE));
+  mIgnoreFirstSavedState=args.getBoolean(ARG_IGNORE_FIRST);
   setHasOptionsMenu(true);
 }

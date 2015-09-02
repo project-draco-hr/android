@@ -1,0 +1,18 @@
+{
+  if (mNumCacheFile-- == 0) {
+    dismissWaitingCopyDialog();
+  }
+  if (result != null) {
+    Intent intent=new Intent(getApplicationContext(),FileUploader.class);
+    intent.putExtra(FileUploader.KEY_UPLOAD_TYPE,FileUploader.UPLOAD_SINGLE_FILE);
+    intent.putExtra(FileUploader.KEY_LOCAL_FILE,result);
+    intent.putExtra(FileUploader.KEY_REMOTE_FILE,mRemoteCacheData.get(index));
+    intent.putExtra(FileUploader.KEY_ACCOUNT,getAccount());
+    startService(intent);
+  }
+ else {
+    String message=String.format(getString(R.string.uploader_error_forbidden_content),getString(R.string.app_name));
+    Toast.makeText(this,message,Toast.LENGTH_LONG).show();
+    Log_OC.d(TAG,message);
+  }
+}

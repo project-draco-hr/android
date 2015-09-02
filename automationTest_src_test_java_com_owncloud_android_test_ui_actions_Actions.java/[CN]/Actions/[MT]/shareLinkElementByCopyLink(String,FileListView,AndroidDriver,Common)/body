@@ -1,0 +1,15 @@
+{
+  try {
+    driver.startActivity("com.owncloud.android",".ui.activity.FileDisplayActivity");
+    ElementMenuOptions menuOptions=fileListView.longPressOnElement(elementName);
+    ShareView shareView=menuOptions.clickOnShareLinkElement();
+    Actions.scrollTillFindElement("Copy link",shareView.getListViewLayout(),driver).click();
+    WaitAMomentPopUp waitAMomentPopUp=new WaitAMomentPopUp(driver);
+    Common.waitTillElementIsNotPresentWithoutTimeout(waitAMomentPopUp.getWaitAMomentTextElement(),100);
+    common.wait.until(ExpectedConditions.visibilityOf(fileListView.getFileElementLayout().findElement(By.id(FileListView.getSharedElementIndicator()))));
+  }
+ catch (  NoSuchElementException e) {
+    return null;
+  }
+  return (AndroidElement)fileListView.getFileElementLayout().findElement(By.id(FileListView.getSharedElementIndicator()));
+}

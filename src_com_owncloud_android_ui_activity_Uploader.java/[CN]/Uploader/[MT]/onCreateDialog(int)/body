@@ -2,10 +2,17 @@
   final AlertDialog.Builder builder=new Builder(this);
 switch (id) {
 case DIALOG_WAITING:
-    ProgressDialog pDialog=new ProgressDialog(this);
+    final ProgressDialog pDialog=new ProgressDialog(this,R.style.ProgressDialogTheme);
   pDialog.setIndeterminate(false);
 pDialog.setCancelable(false);
 pDialog.setMessage(getResources().getString(R.string.uploader_info_uploading));
+pDialog.setOnShowListener(new DialogInterface.OnShowListener(){
+@Override public void onShow(DialogInterface dialog){
+ProgressBar v=(ProgressBar)pDialog.findViewById(android.R.id.progress);
+v.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.color_accent),android.graphics.PorterDuff.Mode.MULTIPLY);
+}
+}
+);
 return pDialog;
 case DIALOG_NO_ACCOUNT:
 builder.setIcon(android.R.drawable.ic_dialog_alert);
@@ -41,16 +48,18 @@ ac[i]=DisplayUtils.convertIdn(mAccountManager.getAccountsByType(MainApp.getAccou
 builder.setTitle(R.string.common_choose_account);
 builder.setItems(ac,new OnClickListener(){
 @Override public void onClick(DialogInterface dialog,int which){
-mAccount=mAccountManager.getAccountsByType(MainApp.getAccountType())[which];
-mStorageManager=new FileDataStorageManager(mAccount,getContentResolver());
-initTargetFolder();
-populateDirectoryList();
+setAccount(mAccountManager.getAccountsByType(MainApp.getAccountType())[which]);
+onAccountSet(mAccountWasRestored);
+dialog.dismiss();
+mAccountSelected=true;
+mAccountSelectionShowing=false;
 }
 }
 );
 builder.setCancelable(true);
 builder.setOnCancelListener(new OnCancelListener(){
 @Override public void onCancel(DialogInterface dialog){
+mAccountSelectionShowing=false;
 dialog.cancel();
 finish();
 }

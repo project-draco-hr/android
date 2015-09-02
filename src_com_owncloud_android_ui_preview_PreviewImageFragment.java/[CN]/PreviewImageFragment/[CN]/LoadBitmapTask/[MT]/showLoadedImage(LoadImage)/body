@@ -1,0 +1,18 @@
+{
+  final ImageViewCustom imageView=mImageViewRef.get();
+  Bitmap bitmap=result.bitmap;
+  if (imageView != null) {
+    Log_OC.d(TAG,"Showing image with resolution " + bitmap.getWidth() + "x"+ bitmap.getHeight());
+    if (result.ocFile.getMimetype().equalsIgnoreCase("image/png")) {
+      Drawable backrepeat=getResources().getDrawable(R.drawable.backrepeat);
+      imageView.setBackground(backrepeat);
+    }
+    imageView.setImageBitmap(bitmap);
+    imageView.setVisibility(View.VISIBLE);
+    mBitmap=bitmap;
+  }
+  final TextView messageView=mMessageViewRef.get();
+  if (messageView != null) {
+    messageView.setVisibility(View.GONE);
+  }
+}

@@ -34,6 +34,7 @@
               if (accountChanged) {
                 Intent i=new Intent(Preferences.this,FileDisplayActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(i);
               }
  else {

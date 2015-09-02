@@ -1,0 +1,4 @@
+{
+  passwordInput.clear();
+  passwordInput.sendKeys(password + "\n");
+}

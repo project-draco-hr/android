@@ -1,8 +1,8 @@
 {
   Log_OC.i(TAG,"onCreateView() start");
   View v=super.onCreateView(inflater,container,savedInstanceState);
-  getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-  disableSwipe();
+  setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+  setSwipeEnabled(false);
   setMessageForEmptyList(getString(R.string.local_file_list_empty));
   Log_OC.i(TAG,"onCreateView() end");
   return v;

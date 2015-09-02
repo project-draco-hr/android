@@ -4,12 +4,15 @@
   if (savedInstanceState != null) {
     mFile=savedInstanceState.getParcelable(KEY_FILE);
   }
-  mFooterView=((LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.list_footer,null,false);
-  setFooterView(mFooterView);
+  if (mJustFolders) {
+    setFooterEnabled(false);
+  }
+ else {
+    setFooterEnabled(true);
+  }
   Bundle args=getArguments();
-  boolean justFolders=(args == null) ? false : args.getBoolean(ARG_JUST_FOLDERS,false);
-  mAdapter=new FileListListAdapter(justFolders,getSherlockActivity(),mContainerActivity);
+  mJustFolders=(args == null) ? false : args.getBoolean(ARG_JUST_FOLDERS,false);
+  mAdapter=new FileListListAdapter(mJustFolders,getActivity(),mContainerActivity);
   setListAdapter(mAdapter);
-  registerForContextMenu(getListView());
-  getListView().setOnCreateContextMenuListener(this);
+  registerLongClickListener();
 }

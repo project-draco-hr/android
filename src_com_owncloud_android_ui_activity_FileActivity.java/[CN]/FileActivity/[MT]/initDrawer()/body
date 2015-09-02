@@ -1,0 +1,45 @@
+{
+  getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+  mDrawerLayout=(DrawerLayout)findViewById(R.id.drawer_layout);
+  RelativeLayout navigationDrawerLayout=(RelativeLayout)findViewById(R.id.left_drawer);
+  mDrawerList=(ListView)navigationDrawerLayout.findViewById(R.id.drawer_list);
+  Account account=AccountUtils.getCurrentOwnCloudAccount(getApplicationContext());
+  if (account != null) {
+    TextView username=(TextView)navigationDrawerLayout.findViewById(R.id.drawer_username);
+    int lastAtPos=account.name.lastIndexOf("@");
+    username.setText(account.name.substring(0,lastAtPos));
+  }
+  mDrawerTitles=getResources().getStringArray(R.array.drawer_items);
+  mDrawerContentDescriptions=getResources().getStringArray(R.array.drawer_content_descriptions);
+  mDrawerItems=new ArrayList<NavigationDrawerItem>();
+  mDrawerItems.add(new NavigationDrawerItem(mDrawerTitles[0],mDrawerContentDescriptions[0],R.drawable.ic_folder_open));
+  mDrawerItems.add(new NavigationDrawerItem(mDrawerTitles[1],mDrawerContentDescriptions[1],R.drawable.ic_settings));
+  if (BuildConfig.DEBUG) {
+    mDrawerItems.add(new NavigationDrawerItem(mDrawerTitles[2],mDrawerContentDescriptions[2],R.drawable.ic_log));
+  }
+  mNavigationDrawerAdapter=new NavigationDrawerListAdapter(getApplicationContext(),this,mDrawerItems);
+  mDrawerList.setAdapter(mNavigationDrawerAdapter);
+  mDrawerToggle=new ActionBarDrawerToggle(this,mDrawerLayout,R.string.drawer_open,R.string.drawer_close){
+    /** 
+ * Called when a drawer has settled in a completely closed state. 
+ */
+    public void onDrawerClosed(    View view){
+      super.onDrawerClosed(view);
+      updateActionBarTitleAndHomeButton(null);
+      invalidateOptionsMenu();
+    }
+    /** 
+ * Called when a drawer has settled in a completely open state. 
+ */
+    public void onDrawerOpened(    View drawerView){
+      super.onDrawerOpened(drawerView);
+      getSupportActionBar().setTitle(R.string.app_name);
+      mDrawerToggle.setDrawerIndicatorEnabled(true);
+      invalidateOptionsMenu();
+    }
+  }
+;
+  mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+  mDrawerLayout.setDrawerListener(mDrawerToggle);
+  mDrawerToggle.setDrawerIndicatorEnabled(false);
+}
