@@ -23,9 +23,11 @@
   }
   if (mFile == null || downloading || uploading) {
     toHide.add(R.id.action_move);
+    toHide.add(R.id.action_copy);
   }
  else {
     toShow.add(R.id.action_move);
+    toShow.add(R.id.action_copy);
   }
   if (mFile == null || downloading || uploading) {
     toHide.add(R.id.action_remove_file);

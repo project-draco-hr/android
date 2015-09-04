@@ -1,4 +1,6 @@
 {
   TextView tv=(TextView)getView().findViewById(R.id.fdFilename);
-  if (tv != null)   tv.setText(filename);
+  if (tv != null) {
+    tv.setText(filename);
+  }
 }

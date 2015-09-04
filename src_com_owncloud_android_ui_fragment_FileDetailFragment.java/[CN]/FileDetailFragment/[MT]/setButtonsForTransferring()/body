@@ -9,8 +9,10 @@
     if (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,getFile())) {
       progressText.setText(R.string.downloader_download_in_progress_ticker);
     }
- else     if (uploaderBinder != null && uploaderBinder.isUploading(mAccount,getFile())) {
-      progressText.setText(R.string.uploader_upload_in_progress_ticker);
+ else {
+      if (uploaderBinder != null && uploaderBinder.isUploading(mAccount,getFile())) {
+        progressText.setText(R.string.uploader_upload_in_progress_ticker);
+      }
     }
   }
 }
