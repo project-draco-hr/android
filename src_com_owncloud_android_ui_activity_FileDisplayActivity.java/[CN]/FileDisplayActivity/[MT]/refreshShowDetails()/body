@@ -10,7 +10,9 @@
  else       if (details instanceof PreviewTextFragment) {
         ((PreviewTextFragment)details).updateFile(file);
       }
- else       showDetails(file);
+ else {
+        showDetails(file);
+      }
     }
     invalidateOptionsMenu();
   }

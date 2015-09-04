@@ -1,0 +1,16 @@
+{
+  if (result.isSuccess()) {
+    dismissLoadingDialog();
+    refreshListOfFilesFragment();
+  }
+ else {
+    dismissLoadingDialog();
+    try {
+      Toast msg=Toast.makeText(FileDisplayActivity.this,ErrorMessageAdapter.getErrorCauseMessage(result,operation,getResources()),Toast.LENGTH_LONG);
+      msg.show();
+    }
+ catch (    NotFoundException e) {
+      Log_OC.e(TAG,"Error while trying to show fail message ",e);
+    }
+  }
+}
