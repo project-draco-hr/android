@@ -1,0 +1,7 @@
+{
+  Bitmap resultBitmap=Bitmap.createBitmap(px,px,Bitmap.Config.ARGB_8888);
+  Canvas c=new Canvas(resultBitmap);
+  c.drawColor(MainApp.getAppContext().getResources().getColor(R.color.background_color));
+  c.drawBitmap(bitmap,0,0,null);
+  return resultBitmap;
+}

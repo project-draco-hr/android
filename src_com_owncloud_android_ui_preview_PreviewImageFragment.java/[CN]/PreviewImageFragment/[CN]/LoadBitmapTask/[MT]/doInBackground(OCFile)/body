@@ -1,7 +1,8 @@
 {
   Bitmap result=null;
   if (params.length != 1)   return null;
-  String storagePath=params[0];
+  OCFile ocFile=params[0];
+  String storagePath=ocFile.getStoragePath();
   try {
     int maxDownScale=3;
     Point screenSize=DisplayUtils.getScreenSize(getActivity());
@@ -11,7 +12,7 @@
       if (isCancelled())       return null;
       try {
         result=BitmapUtils.decodeSampledBitmapFromFile(storagePath,minWidth,minHeight);
-        if (isCancelled())         return result;
+        if (isCancelled())         return new LoadImage(result,ocFile);
         if (result == null) {
           mErrorMessageId=R.string.preview_image_error_unknown_format;
           Log_OC.e(TAG,"File could not be loaded as a bitmap: " + storagePath);
@@ -46,5 +47,5 @@ catch (  Throwable t) {
     mErrorMessageId=R.string.common_error_unknown;
     Log_OC.e(TAG,"Unexpected error loading " + getFile().getStoragePath(),t);
   }
-  return result;
+  return new LoadImage(result,ocFile);
 }
