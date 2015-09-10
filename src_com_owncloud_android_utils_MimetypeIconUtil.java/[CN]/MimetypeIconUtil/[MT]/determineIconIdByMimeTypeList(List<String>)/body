@@ -1,0 +1,21 @@
+{
+  if (mimetypes == null || mimetypes.size() < 1) {
+    return R.drawable.file;
+  }
+ else {
+    for (    String mimetype : mimetypes) {
+      Integer iconId=MIMETYPE_TO_ICON_MAPPING.get(mimetype);
+      if (iconId != null) {
+        return iconId;
+      }
+    }
+    for (    String mimetype : mimetypes) {
+      String mainMimetypePart=mimetype.split("/")[0];
+      Integer iconId=MAINMIMETYPE_TO_ICON_MAPPING.get(mainMimetypePart);
+      if (iconId != null) {
+        return iconId;
+      }
+    }
+  }
+  return R.drawable.file;
+}
