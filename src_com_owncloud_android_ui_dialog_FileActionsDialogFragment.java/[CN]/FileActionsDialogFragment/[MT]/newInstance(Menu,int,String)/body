@@ -5,6 +5,7 @@
   menuParcelable.setMenuItems(calculateMenuParcel(menu));
   args.putParcelable(ARG_ITEM_LIST,menuParcelable);
   args.putInt(ARG_FILE_POSITION,filePosition);
+  args.putCharSequence(ARG_FILE_NAME,fileName);
   fragment.setArguments(args);
   return fragment;
 }
