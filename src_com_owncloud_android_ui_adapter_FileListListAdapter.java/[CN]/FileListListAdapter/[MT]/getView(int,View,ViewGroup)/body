@@ -146,15 +146,7 @@ fileIcon.setImageResource(MimetypeIconUtil.getFileTypeIconId(file.getMimetype(),
 }
 }
  else {
-if (checkIfFileIsSharedWithMe(file)) {
-fileIcon.setImageResource(R.drawable.shared_with_me_folder);
-}
- else if (file.isShareByLink()) {
-fileIcon.setImageResource(R.drawable.folder_public);
-}
- else {
-fileIcon.setImageResource(MimetypeIconUtil.getFileTypeIconId(file.getMimetype(),file.getFileName()));
-}
+fileIcon.setImageResource(MimetypeIconUtil.getFolderTypeIconId(checkIfFileIsSharedWithMe(file),file.isShareByLink()));
 }
 }
 return view;
