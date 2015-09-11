@@ -1,51 +1,40 @@
 {
   boolean retval=true;
 switch (item.getItemId()) {
-case R.id.action_create_dir:
-{
-      createFolder();
-      break;
-    }
 case R.id.action_sync_account:
 {
-    startSynchronization();
-    break;
-  }
-case R.id.action_upload:
-{
-  UploadSourceDialogFragment dialog=UploadSourceDialogFragment.newInstance(getAccount());
-  dialog.show(getSupportFragmentManager(),DIALOG_UPLOAD_SOURCE);
-  break;
-}
+      startSynchronization();
+      break;
+    }
 case android.R.id.home:
 {
-FileFragment second=getSecondFragment();
-OCFile currentDir=getCurrentDir();
-if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-  mDrawerLayout.closeDrawer(GravityCompat.START);
-}
- else if ((currentDir != null && currentDir.getParentId() != 0) || (second != null && second.getFile() != null)) {
-  onBackPressed();
-}
+    FileFragment second=getSecondFragment();
+    OCFile currentDir=getCurrentDir();
+    if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+      mDrawerLayout.closeDrawer(GravityCompat.START);
+    }
+ else     if ((currentDir != null && currentDir.getParentId() != 0) || (second != null && second.getFile() != null)) {
+      onBackPressed();
+    }
  else {
-  mDrawerLayout.openDrawer(GravityCompat.START);
-}
-break;
-}
+      mDrawerLayout.openDrawer(GravityCompat.START);
+    }
+    break;
+  }
 case R.id.action_sort:
 {
-SharedPreferences appPreferences=PreferenceManager.getDefaultSharedPreferences(this);
-Integer sortOrder=appPreferences.getInt("sortOrder",FileStorageUtils.SORT_NAME);
-AlertDialog.Builder builder=new AlertDialog.Builder(this);
-builder.setTitle(R.string.actionbar_sort_title).setSingleChoiceItems(R.array.actionbar_sortby,sortOrder,new DialogInterface.OnClickListener(){
-public void onClick(DialogInterface dialog,int which){
+  SharedPreferences appPreferences=PreferenceManager.getDefaultSharedPreferences(this);
+  Integer sortOrder=appPreferences.getInt("sortOrder",FileStorageUtils.SORT_NAME);
+  AlertDialog.Builder builder=new AlertDialog.Builder(this);
+  builder.setTitle(R.string.actionbar_sort_title).setSingleChoiceItems(R.array.actionbar_sortby,sortOrder,new DialogInterface.OnClickListener(){
+    public void onClick(    DialogInterface dialog,    int which){
 switch (which) {
 case 0:
-    sortByName(true);
-  break;
+        sortByName(true);
+      break;
 case 1:
-sortByDate(false);
-break;
+    sortByDate(false);
+  break;
 }
 dialog.dismiss();
 }
