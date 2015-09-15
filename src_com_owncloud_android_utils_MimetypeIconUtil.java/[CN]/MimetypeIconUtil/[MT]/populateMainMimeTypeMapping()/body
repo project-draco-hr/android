@@ -3,7 +3,7 @@
   MAINMIMETYPE_TO_ICON_MAPPING.put("database",R.drawable.file);
   MAINMIMETYPE_TO_ICON_MAPPING.put("httpd",R.drawable.file_zip);
   MAINMIMETYPE_TO_ICON_MAPPING.put("image",R.drawable.file_image);
-  MAINMIMETYPE_TO_ICON_MAPPING.put("text",R.drawable.file_doc);
+  MAINMIMETYPE_TO_ICON_MAPPING.put("text",R.drawable.file_text);
   MAINMIMETYPE_TO_ICON_MAPPING.put("video",R.drawable.file_movie);
   MAINMIMETYPE_TO_ICON_MAPPING.put("web",R.drawable.file_code);
 }
