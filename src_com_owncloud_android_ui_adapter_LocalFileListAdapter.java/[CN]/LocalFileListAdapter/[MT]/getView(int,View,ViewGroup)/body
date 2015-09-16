@@ -56,7 +56,7 @@
         }
       }
  else {
-        fileIcon.setImageResource(DisplayUtils.getFileTypeIconId(null,file.getName()));
+        fileIcon.setImageResource(MimetypeIconUtil.getFileTypeIconId(null,file.getName()));
       }
     }
  else {
