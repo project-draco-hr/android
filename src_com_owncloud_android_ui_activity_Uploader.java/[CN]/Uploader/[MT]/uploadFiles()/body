@@ -76,6 +76,7 @@
       intent.putExtra(FileUploader.KEY_LOCAL_FILE,local.toArray(new String[local.size()]));
       intent.putExtra(FileUploader.KEY_REMOTE_FILE,remote.toArray(new String[remote.size()]));
       intent.putExtra(FileUploader.KEY_ACCOUNT,getAccount());
+      intent.putExtra(FileUploader.KEY_LOCAL_BEHAVIOUR,FileUploader.LOCAL_BEHAVIOUR_FORGET);
       startService(intent);
       SharedPreferences.Editor appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
       appPrefs.putString("last_upload_path",mUploadPath);
