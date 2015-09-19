@@ -97,6 +97,10 @@
         if (mLocalBehaviour == FileUploader.LOCAL_BEHAVIOUR_FORGET) {
           mFile.setStoragePath(null);
         }
+ else         if (mLocalBehaviour == FileUploader.LOCAL_BEHAVIOUR_REMOVE) {
+          mFile.setStoragePath(null);
+          originalFile.delete();
+        }
  else {
           mFile.setStoragePath(expectedPath);
           File fileToMove=null;
@@ -114,6 +118,8 @@
             }
           }
         }
+        FileDataStorageManager.triggerMediaScan(originalFile.getAbsolutePath());
+        FileDataStorageManager.triggerMediaScan(expectedFile.getAbsolutePath());
       }
     }
   }
