@@ -1,0 +1,9 @@
+{
+  ArrayList<Integer> ids=new ArrayList<Integer>();
+  for (  Map.Entry<Integer,Boolean> entry : mSelection.entrySet()) {
+    if (entry.getValue()) {
+      ids.add(entry.getKey());
+    }
+  }
+  return ids;
+}
