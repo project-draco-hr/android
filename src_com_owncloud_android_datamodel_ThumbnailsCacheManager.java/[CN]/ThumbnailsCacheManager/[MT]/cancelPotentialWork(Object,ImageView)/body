@@ -4,6 +4,7 @@
     final Object bitmapData=bitmapWorkerTask.mFile;
     if (bitmapData == null || bitmapData != file) {
       bitmapWorkerTask.cancel(true);
+      Log_OC.v(TAG,"Cancelled generation of thumbnail for a reused imageView");
     }
  else {
       return false;
