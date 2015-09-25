@@ -155,7 +155,7 @@ fileIcon.setImageResource(MimetypeIconUtil.getFolderTypeIconId(file.isSharedWith
 }
 }
 if (mSelection.get(position) != null) {
-view.setBackgroundColor(R.color.owncloud_blue);
+view.setBackgroundColor(Color.rgb(248,248,248));
 }
  else {
 view.setBackgroundColor(Color.WHITE);
