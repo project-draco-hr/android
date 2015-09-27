@@ -1,0 +1,9 @@
+{
+  if (which >= 0 && getEntryValues() != null) {
+    String value=getEntryValues()[which].toString();
+    if (callChangeListener(value)) {
+      setValue(value);
+    }
+    dialog.dismiss();
+  }
+}
