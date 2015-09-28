@@ -82,10 +82,10 @@
     }
     localCopyPassed=(result == null);
     if (mChunked && (new File(mFile.getStoragePath())).length() > ChunkedUploadRemoteFileOperation.CHUNK_SIZE) {
-      mUploadOperation=new ChunkedUploadRemoteFileOperation(mFile.getStoragePath(),mFile.getRemotePath(),mFile.getMimetype());
+      mUploadOperation=new ChunkedUploadRemoteFileOperation(mFile.getStoragePath(),mFile.getRemotePath(),mFile.getMimetype(),mFile.getEtag());
     }
  else {
-      mUploadOperation=new UploadRemoteFileOperation(mFile.getStoragePath(),mFile.getRemotePath(),mFile.getMimetype());
+      mUploadOperation=new UploadRemoteFileOperation(mFile.getStoragePath(),mFile.getRemotePath(),mFile.getMimetype(),mFile.getEtag());
     }
     Iterator<OnDatatransferProgressListener> listener=mDataTransferListeners.iterator();
     while (listener.hasNext()) {
@@ -116,6 +116,9 @@
           }
         }
       }
+    }
+ else     if (result.getHttpCode() == HttpStatus.SC_PRECONDITION_FAILED) {
+      result=new RemoteOperationResult(ResultCode.CONFLICT);
     }
   }
  catch (  Exception e) {
