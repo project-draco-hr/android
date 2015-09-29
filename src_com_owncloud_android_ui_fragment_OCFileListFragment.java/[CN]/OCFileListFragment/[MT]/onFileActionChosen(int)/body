@@ -1,0 +1,117 @@
+{
+  if (mAdapter.getCheckedItems().size() == 1) {
+    OCFile mTargetFile=mAdapter.getCheckedItems().get(0);
+switch (menuId) {
+case R.id.action_share_file:
+{
+        mContainerActivity.getFileOperationsHelper().showShareFile(mTargetFile);
+        return true;
+      }
+case R.id.action_open_file_with:
+{
+      mContainerActivity.getFileOperationsHelper().openFile(mTargetFile);
+      return true;
+    }
+case R.id.action_rename_file:
+{
+    RenameFileDialogFragment dialog=RenameFileDialogFragment.newInstance(mTargetFile);
+    dialog.show(getFragmentManager(),FileDetailFragment.FTAG_RENAME_FILE);
+    return true;
+  }
+case R.id.action_remove_file:
+{
+  RemoveFileDialogFragment dialog=RemoveFileDialogFragment.newInstance(mTargetFile);
+  dialog.show(getFragmentManager(),ConfirmationDialogFragment.FTAG_CONFIRMATION);
+  return true;
+}
+case R.id.action_download_file:
+case R.id.action_sync_file:
+{
+mContainerActivity.getFileOperationsHelper().syncFile(mTargetFile);
+return true;
+}
+case R.id.action_cancel_sync:
+{
+((FileDisplayActivity)mContainerActivity).cancelTransference(mTargetFile);
+return true;
+}
+case R.id.action_see_details:
+{
+mContainerActivity.showDetails(mTargetFile);
+return true;
+}
+case R.id.action_send_file:
+{
+if (!mTargetFile.isDown()) {
+Log_OC.d(TAG,mTargetFile.getRemotePath() + " : File must be downloaded");
+((FileDisplayActivity)mContainerActivity).startDownloadForSending(mTargetFile);
+}
+ else {
+mContainerActivity.getFileOperationsHelper().sendDownloadedFile(mTargetFile);
+}
+return true;
+}
+case R.id.action_move:
+{
+Intent action=new Intent(getActivity(),FolderPickerActivity.class);
+ArrayList files=new ArrayList();
+files.add(mTargetFile);
+action.putParcelableArrayListExtra(FolderPickerActivity.EXTRA_FILES,files);
+getActivity().startActivityForResult(action,FileDisplayActivity.REQUEST_CODE__MOVE_FILES);
+return true;
+}
+case R.id.action_favorite_file:
+{
+mContainerActivity.getFileOperationsHelper().toggleFavorite(mTargetFile,true);
+return true;
+}
+case R.id.action_unfavorite_file:
+{
+mContainerActivity.getFileOperationsHelper().toggleFavorite(mTargetFile,false);
+return true;
+}
+case R.id.action_copy:
+Intent action=new Intent(getActivity(),FolderPickerActivity.class);
+action.putExtra(FolderPickerActivity.EXTRA_FILE,mTargetFile);
+getActivity().startActivityForResult(action,FileDisplayActivity.REQUEST_CODE__COPY_FILES);
+return true;
+default :
+return false;
+}
+}
+ else {
+ArrayList<OCFile> mTargetFiles=mAdapter.getCheckedItems();
+switch (menuId) {
+case R.id.action_download_file:
+case R.id.action_sync_file:
+{
+mContainerActivity.getFileOperationsHelper().syncFiles(mTargetFiles);
+return true;
+}
+case R.id.action_move:
+{
+Intent action=new Intent(getActivity(),FolderPickerActivity.class);
+action.putParcelableArrayListExtra(FolderPickerActivity.EXTRA_FILES,mTargetFiles);
+getActivity().startActivityForResult(action,FileDisplayActivity.REQUEST_CODE__MOVE_FILES);
+return true;
+}
+case R.id.action_favorite_file:
+{
+mContainerActivity.getFileOperationsHelper().toggleFavorites(mTargetFiles,true);
+return true;
+}
+case R.id.action_unfavorite_file:
+{
+mContainerActivity.getFileOperationsHelper().toggleFavorites(mTargetFiles,false);
+return true;
+}
+case R.id.action_copy:
+Intent action=new Intent(getActivity(),FolderPickerActivity.class);
+action.putParcelableArrayListExtra(FolderPickerActivity.EXTRA_FILES,mTargetFiles);
+getActivity().startActivityForResult(action,FileDisplayActivity.REQUEST_CODE__COPY_FILES);
+return true;
+default :
+return false;
+}
+}
+}

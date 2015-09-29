@@ -4,8 +4,10 @@
   if (allowContextualActions) {
     MenuInflater inflater=getActivity().getMenuInflater();
     inflater.inflate(R.menu.file_actions_menu,menu);
-    AdapterContextMenuInfo info=(AdapterContextMenuInfo)menuInfo;
-    OCFile targetFile=(OCFile)mAdapter.getItem(info.position);
+    OCFile targetFile=null;
+    if (mAdapter.getCheckedItems().size() == 1) {
+      targetFile=mAdapter.getCheckedItems().get(0);
+    }
     if (mContainerActivity.getStorageManager() != null) {
       FileMenuFilter mf=new FileMenuFilter(targetFile,mContainerActivity.getStorageManager().getAccount(),mContainerActivity,getActivity());
       mf.filter(menu);

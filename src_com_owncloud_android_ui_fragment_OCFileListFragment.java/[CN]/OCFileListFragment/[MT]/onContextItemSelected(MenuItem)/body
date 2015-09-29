@@ -1,6 +1,6 @@
 {
   AdapterContextMenuInfo info=(AdapterContextMenuInfo)item.getMenuInfo();
-  boolean matched=onFileActionChosen(item.getItemId(),((AdapterContextMenuInfo)item.getMenuInfo()).position);
+  boolean matched=onFileActionChosen(item.getItemId());
   if (!matched) {
     return super.onContextItemSelected(item);
   }

@@ -1,5 +1,7 @@
 {
   OCFile folderToMoveAt=data.getParcelableExtra(FolderPickerActivity.EXTRA_FOLDER);
-  OCFile targetFile=data.getParcelableExtra(FolderPickerActivity.EXTRA_FILE);
-  getFileOperationsHelper().copyFile(folderToMoveAt,targetFile);
+  ArrayList<OCFile> files=data.getParcelableArrayListExtra(FolderPickerActivity.EXTRA_FILES);
+  for (  Parcelable file : files) {
+    getFileOperationsHelper().copyFile(folderToMoveAt,(OCFile)file);
+  }
 }
