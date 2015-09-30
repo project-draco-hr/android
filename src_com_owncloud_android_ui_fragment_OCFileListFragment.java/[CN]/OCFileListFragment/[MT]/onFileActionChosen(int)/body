@@ -82,6 +82,12 @@ return false;
  else {
 ArrayList<OCFile> mTargetFiles=mAdapter.getCheckedItems();
 switch (menuId) {
+case R.id.action_remove_file:
+{
+RemoveFilesDialogFragment dialog=RemoveFilesDialogFragment.newInstance(mTargetFiles);
+dialog.show(getFragmentManager(),ConfirmationDialogFragment.FTAG_CONFIRMATION);
+return true;
+}
 case R.id.action_download_file:
 case R.id.action_sync_file:
 {

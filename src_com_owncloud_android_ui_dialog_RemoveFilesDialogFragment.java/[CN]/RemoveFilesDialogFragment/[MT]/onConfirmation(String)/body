@@ -1,0 +1,9 @@
+{
+  ComponentsGetter cg=(ComponentsGetter)getActivity();
+  FileDataStorageManager storageManager=cg.getStorageManager();
+  for (  OCFile targetFile : mTargetFiles) {
+    if (storageManager.getFileById(targetFile.getFileId()) != null) {
+      cg.getFileOperationsHelper().removeFile(targetFile,false);
+    }
+  }
+}
