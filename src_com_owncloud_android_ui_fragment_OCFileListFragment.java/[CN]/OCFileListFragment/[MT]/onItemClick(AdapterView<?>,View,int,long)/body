@@ -10,6 +10,9 @@
       if (PreviewImageFragment.canBePreviewed(file)) {
         ((FileDisplayActivity)mContainerActivity).startImagePreview(file);
       }
+ else       if (PreviewTextFragment.canBePreviewed(file)) {
+        ((FileDisplayActivity)mContainerActivity).startTextPreview(file);
+      }
  else       if (file.isDown()) {
         if (PreviewMediaFragment.canBePreviewed(file)) {
           ((FileDisplayActivity)mContainerActivity).startMediaPreview(file,0,true);

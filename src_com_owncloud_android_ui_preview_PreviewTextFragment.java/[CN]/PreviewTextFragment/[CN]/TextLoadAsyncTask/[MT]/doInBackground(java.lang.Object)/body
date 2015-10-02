@@ -1,0 +1,40 @@
+{
+  if (params.length != 1) {
+    throw new IllegalArgumentException("The parameter to " + TextLoadAsyncTask.class.getName() + " must be (1) the file location");
+  }
+  final String location=(String)params[0];
+  FileInputStream inputStream=null;
+  Scanner sc=null;
+  StringWriter source=new StringWriter();
+  BufferedWriter bufferedWriter=new BufferedWriter(source);
+  try {
+    inputStream=new FileInputStream(location);
+    sc=new Scanner(inputStream);
+    while (sc.hasNextLine()) {
+      bufferedWriter.append(sc.nextLine());
+      if (sc.hasNextLine())       bufferedWriter.append("\n");
+    }
+    bufferedWriter.close();
+    IOException exc=sc.ioException();
+    if (exc != null)     throw exc;
+  }
+ catch (  IOException e) {
+    Log_OC.e(TAG,e.getMessage(),e);
+    finish();
+  }
+ finally {
+    if (inputStream != null) {
+      try {
+        inputStream.close();
+      }
+ catch (      IOException e) {
+        Log_OC.e(TAG,e.getMessage(),e);
+        finish();
+      }
+    }
+    if (sc != null) {
+      sc.close();
+    }
+  }
+  return source;
+}

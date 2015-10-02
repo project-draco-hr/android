@@ -7,6 +7,9 @@
       if (details instanceof PreviewMediaFragment) {
         ((PreviewMediaFragment)details).updateFile(file);
       }
+ else       if (details instanceof PreviewTextFragment) {
+        ((PreviewTextFragment)details).updateFile(file);
+      }
  else {
         showDetails(file);
       }

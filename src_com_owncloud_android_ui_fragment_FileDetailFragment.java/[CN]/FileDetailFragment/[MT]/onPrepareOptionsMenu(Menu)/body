@@ -14,4 +14,9 @@
     item.setVisible(false);
     item.setEnabled(false);
   }
+  item=menu.findItem(R.id.action_copy);
+  if (item != null) {
+    item.setVisible(false);
+    item.setEnabled(false);
+  }
 }
