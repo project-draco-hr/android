@@ -6,9 +6,11 @@
     if (file.isAudio()) {
       bindMediaService();
     }
- else     if (file.isVideo()) {
-      stopAudio();
-      playVideo();
+ else {
+      if (file.isVideo()) {
+        stopAudio();
+        playVideo();
+      }
     }
   }
 }

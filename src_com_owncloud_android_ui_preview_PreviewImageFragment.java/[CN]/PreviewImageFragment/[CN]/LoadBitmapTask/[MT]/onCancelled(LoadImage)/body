@@ -1,5 +1,5 @@
 {
-  if (result.bitmap != null) {
+  if (result != null && result.bitmap != null) {
     result.bitmap.recycle();
   }
 }

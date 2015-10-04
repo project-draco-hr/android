@@ -1,0 +1,10 @@
+{
+  List<String> possibleMimeTypes;
+  if (mimetype == null) {
+    possibleMimeTypes=determineMimeTypesByFilename(filename);
+  }
+ else {
+    possibleMimeTypes=Collections.singletonList(mimetype);
+  }
+  return determineIconIdByMimeTypeList(possibleMimeTypes);
+}

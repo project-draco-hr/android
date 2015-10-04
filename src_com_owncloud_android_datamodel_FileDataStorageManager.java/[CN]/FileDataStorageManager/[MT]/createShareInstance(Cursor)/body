@@ -10,7 +10,7 @@
     share.setExpirationDate(c.getLong(c.getColumnIndex(ProviderTableMeta.OCSHARES_EXPIRATION_DATE)));
     share.setToken(c.getString(c.getColumnIndex(ProviderTableMeta.OCSHARES_TOKEN)));
     share.setSharedWithDisplayName(c.getString(c.getColumnIndex(ProviderTableMeta.OCSHARES_SHARE_WITH_DISPLAY_NAME)));
-    share.setIsFolder(c.getInt(c.getColumnIndex(ProviderTableMeta.OCSHARES_IS_DIRECTORY)) == 1 ? true : false);
+    share.setIsFolder(c.getInt(c.getColumnIndex(ProviderTableMeta.OCSHARES_IS_DIRECTORY)) == 1);
     share.setUserId(c.getLong(c.getColumnIndex(ProviderTableMeta.OCSHARES_USER_ID)));
     share.setIdRemoteShared(c.getLong(c.getColumnIndex(ProviderTableMeta.OCSHARES_ID_REMOTE_SHARED)));
   }
