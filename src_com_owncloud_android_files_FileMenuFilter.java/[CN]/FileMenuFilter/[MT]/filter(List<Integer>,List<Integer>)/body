@@ -63,6 +63,18 @@
  else {
     toShow.add(R.id.action_unshare_file);
   }
+  if (!shareAllowed || mFile == null) {
+    toHide.add(R.id.action_share_with_users);
+  }
+ else {
+    toShow.add(R.id.action_share_with_users);
+  }
+  if (!shareAllowed || (mFile == null || !mFile.isShareByLink())) {
+    toHide.add(R.id.action_unshare_with_users);
+  }
+ else {
+    toShow.add(R.id.action_unshare_with_users);
+  }
   if (mFile == null || mFile.isFolder()) {
     toHide.add(R.id.action_see_details);
   }
