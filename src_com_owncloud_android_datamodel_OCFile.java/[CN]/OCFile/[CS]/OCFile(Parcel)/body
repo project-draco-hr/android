@@ -20,4 +20,5 @@
   mNeedsUpdateThumbnail=source.readInt() == 1;
   mIsDownloading=source.readInt() == 1;
   mEtagInConflict=source.readString();
+  mShareWithUser=source.readInt() == 1;
 }

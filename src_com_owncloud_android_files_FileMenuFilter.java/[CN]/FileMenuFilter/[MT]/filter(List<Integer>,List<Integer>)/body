@@ -71,7 +71,7 @@
  else {
     toShow.add(R.id.action_share_with_users);
   }
-  if (!shareAllowed || !shareWithUsersEnable || (mFile == null || !mFile.isShareByLink())) {
+  if (!shareAllowed || !shareWithUsersEnable || (mFile == null || !mFile.isShareWithUser())) {
     toHide.add(R.id.action_unshare_with_users);
   }
  else {

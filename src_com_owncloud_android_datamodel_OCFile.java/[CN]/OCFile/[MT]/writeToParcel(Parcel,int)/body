@@ -20,4 +20,5 @@
   dest.writeInt(mNeedsUpdateThumbnail ? 1 : 0);
   dest.writeInt(mIsDownloading ? 1 : 0);
   dest.writeString(mEtagInConflict);
+  dest.writeInt(mShareWithUser ? 1 : 0);
 }
