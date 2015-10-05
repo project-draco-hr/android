@@ -1,10 +1,12 @@
 {
+  boolean shareWithUsersEnable=false;
   boolean synchronizing=false;
   if (mComponentsGetter != null && mFile != null && mAccount != null) {
     OperationsServiceBinder opsBinder=mComponentsGetter.getOperationsServiceBinder();
     FileUploaderBinder uploaderBinder=mComponentsGetter.getFileUploaderBinder();
     FileDownloaderBinder downloaderBinder=mComponentsGetter.getFileDownloaderBinder();
     synchronizing=((opsBinder != null && opsBinder.isSynchronizing(mAccount,mFile.getRemotePath())) || (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,mFile)) || (uploaderBinder != null && uploaderBinder.isUploading(mAccount,mFile)));
+    shareWithUsersEnable=AccountUtils.hasSearchUsersSupport(mAccount);
   }
   if (mFile == null || mFile.isDown() || mFile.isFolder() || synchronizing) {
     toHide.add(R.id.action_download_file);
@@ -63,13 +65,13 @@
  else {
     toShow.add(R.id.action_unshare_file);
   }
-  if (!shareAllowed || mFile == null) {
+  if (!shareAllowed || !shareWithUsersEnable || mFile == null) {
     toHide.add(R.id.action_share_with_users);
   }
  else {
     toShow.add(R.id.action_share_with_users);
   }
-  if (!shareAllowed || (mFile == null || !mFile.isShareByLink())) {
+  if (!shareAllowed || !shareWithUsersEnable || (mFile == null || !mFile.isShareByLink())) {
     toHide.add(R.id.action_unshare_with_users);
   }
  else {
