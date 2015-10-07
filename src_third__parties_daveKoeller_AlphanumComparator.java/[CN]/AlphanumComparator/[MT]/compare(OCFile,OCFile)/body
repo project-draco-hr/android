@@ -24,7 +24,9 @@
       }
     }
  else {
-      result=thisChunk.compareTo(thatChunk);
+      Collator collator=Collator.getInstance();
+      collator.setStrength(Collator.PRIMARY);
+      result=collator.compare(thisChunk,thatChunk);
     }
     if (result != 0)     return result;
   }
