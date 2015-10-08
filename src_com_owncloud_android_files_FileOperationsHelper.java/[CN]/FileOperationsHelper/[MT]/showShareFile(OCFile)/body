@@ -1,0 +1,4 @@
+{
+  ShareFileDialogFragment dialog=ShareFileDialogFragment.newInstance(file,mFileActivity.getAccount());
+  dialog.show(mFileActivity.getSupportFragmentManager(),mFileActivity.DIALOG_SHARE_FILE);
+}
