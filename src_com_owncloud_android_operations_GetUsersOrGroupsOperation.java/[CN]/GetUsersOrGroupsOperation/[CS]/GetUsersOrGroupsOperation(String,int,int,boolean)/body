@@ -2,4 +2,5 @@
   mSearchString=searchString;
   mLimit=limit;
   mOffset=offset;
+  mGetGroups=getGroups;
 }

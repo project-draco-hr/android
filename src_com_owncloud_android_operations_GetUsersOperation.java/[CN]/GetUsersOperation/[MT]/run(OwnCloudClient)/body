@@ -1,5 +1,0 @@
-{
-  GetRemoteUsersOperation operation=new GetRemoteUsersOperation(mSearchString,mLimit,mOffset);
-  RemoteOperationResult result=operation.execute(client);
-  return result;
-}
