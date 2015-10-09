@@ -1,0 +1,5 @@
+{
+  mSearchString=searchString;
+  mLimit=limit;
+  mOffset=offset;
+}

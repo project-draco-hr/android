@@ -1,0 +1,3 @@
+String searchString
+int limit
+int offset
