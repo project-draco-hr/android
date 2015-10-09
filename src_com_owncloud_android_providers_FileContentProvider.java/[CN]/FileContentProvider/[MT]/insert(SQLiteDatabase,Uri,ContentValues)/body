@@ -9,6 +9,9 @@ String where=ProviderTableMeta.FILE_PATH + "=? AND " + ProviderTableMeta.FILE_AC
 String[] whereArgs=new String[]{remotePath,accountName};
 Cursor doubleCheck=query(db,uri,projection,where,whereArgs,null);
 if (doubleCheck == null || !doubleCheck.moveToFirst()) {
+if (doubleCheck != null) {
+doubleCheck.close();
+}
 long rowId=db.insert(ProviderTableMeta.FILE_TABLE_NAME,null,values);
 if (rowId > 0) {
 Uri insertedFileUri=ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_FILE,rowId);
@@ -32,6 +35,9 @@ String[] whereArgsShare=new String[]{path,accountNameShare};
 Uri insertedShareUri=null;
 Cursor doubleCheckShare=query(db,uri,projectionShare,whereShare,whereArgsShare,null);
 if (doubleCheckShare == null || !doubleCheckShare.moveToFirst()) {
+if (doubleCheckShare != null) {
+doubleCheckShare.close();
+}
 long rowId=db.insert(ProviderTableMeta.OCSHARES_TABLE_NAME,null,values);
 if (rowId > 0) {
 insertedShareUri=ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_SHARE,rowId);
