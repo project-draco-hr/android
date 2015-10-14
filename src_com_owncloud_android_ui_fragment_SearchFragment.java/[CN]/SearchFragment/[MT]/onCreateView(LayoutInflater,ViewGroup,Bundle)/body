@@ -1,0 +1,4 @@
+{
+  View view=inflater.inflate(R.layout.search_users_groups_layout,container,false);
+  return view;
+}

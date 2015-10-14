@@ -1,0 +1,30 @@
+{
+  super.onCreate(savedInstanceState);
+  setContentView(R.layout.share_activity);
+  Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
+  setSupportActionBar(toolbar);
+  FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
+  if (savedInstanceState != null) {
+    mFile=savedInstanceState.getParcelable(FileActivity.EXTRA_FILE);
+    mAccount=savedInstanceState.getParcelable(FileActivity.EXTRA_ACCOUNT);
+    mShareFileFragment=(ShareFileFragment)getSupportFragmentManager().getFragment(savedInstanceState,TAG_SHARE_FRAGMENT);
+    mSearchFragment=(SearchFragment)getSupportFragmentManager().getFragment(savedInstanceState,TAG_SEARCH_FRAGMENT);
+    if (mShareFileFragment != null) {
+      ft.replace(R.id.share_fragment_container,mShareFileFragment,TAG_SHARE_FRAGMENT);
+      if (mSearchFragment != null) {
+        ft.hide(mShareFileFragment);
+        ft.add(R.id.share_fragment_container,mSearchFragment,TAG_SEARCH_FRAGMENT);
+        ft.addToBackStack(TAG_SEARCH_FRAGMENT);
+      }
+      ft.commit();
+    }
+  }
+ else {
+    mFile=getIntent().getParcelableExtra(FileActivity.EXTRA_FILE);
+    mAccount=getIntent().getParcelableExtra(FileActivity.EXTRA_ACCOUNT);
+    mShareFileFragment=ShareFileFragment.newInstance(mFile,mAccount);
+    ft.replace(R.id.share_fragment_container,mShareFileFragment,TAG_SHARE_FRAGMENT);
+    ft.commit();
+    mSearchFragment=null;
+  }
+}

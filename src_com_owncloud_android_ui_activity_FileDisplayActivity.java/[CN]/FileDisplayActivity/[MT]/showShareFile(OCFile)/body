@@ -1,4 +1,6 @@
 {
-  ShareFileDialogFragment dialog=ShareFileDialogFragment.newInstance(file,getAccount());
-  dialog.show(getSupportFragmentManager(),DIALOG_SHARE_FILE);
+  Intent intent=new Intent(this,ShareActivity.class);
+  intent.putExtra(EXTRA_FILE,file);
+  intent.putExtra(EXTRA_ACCOUNT,getAccount());
+  startActivity(intent);
 }

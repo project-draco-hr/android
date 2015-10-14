@@ -1,0 +1,9 @@
+{
+  super.onSaveInstanceState(outState);
+  outState.putParcelable(FileActivity.EXTRA_FILE,mFile);
+  outState.putParcelable(FileActivity.EXTRA_ACCOUNT,mAccount);
+  getSupportFragmentManager().putFragment(outState,TAG_SHARE_FRAGMENT,mShareFileFragment);
+  if (mSearchFragment != null) {
+    getSupportFragmentManager().putFragment(outState,TAG_SEARCH_FRAGMENT,mSearchFragment);
+  }
+}

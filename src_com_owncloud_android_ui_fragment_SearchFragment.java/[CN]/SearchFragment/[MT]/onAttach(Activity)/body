@@ -1,0 +1,9 @@
+{
+  super.onAttach(activity);
+  try {
+    mListener=(OnSearchFragmentInteractionListener)activity;
+  }
+ catch (  ClassCastException e) {
+    throw new ClassCastException(activity.toString() + " must implement OnFragmentInteractionListener");
+  }
+}
