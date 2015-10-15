@@ -1,8 +1,6 @@
 {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.share_activity);
-  Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
-  setSupportActionBar(toolbar);
   FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
   if (savedInstanceState != null) {
     mFile=savedInstanceState.getParcelable(FileActivity.EXTRA_FILE);

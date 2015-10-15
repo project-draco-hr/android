@@ -18,7 +18,7 @@
  else {
     size.setText(DisplayUtils.bytesToHumanReadable(mFile.getFileLength()));
   }
-  FloatingActionButton addUserGroupButton=(FloatingActionButton)view.findViewById(R.id.addUserButton);
+  Button addUserGroupButton=(Button)view.findViewById(R.id.addUserButton);
   addUserGroupButton.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View view){
       mListener.showSearchUsersAndGroups();
