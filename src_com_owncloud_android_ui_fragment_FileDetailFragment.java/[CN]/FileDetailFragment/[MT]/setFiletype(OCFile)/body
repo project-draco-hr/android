@@ -1,0 +1,23 @@
+{
+  String mimetype=file.getMimetype();
+  TextView tv=(TextView)getView().findViewById(R.id.fdType);
+  if (tv != null) {
+    String printableMimetype=DisplayUtils.convertMIMEtoPrettyPrint(mimetype);
+    tv.setText(printableMimetype);
+  }
+  ImageView iv=(ImageView)getView().findViewById(R.id.fdIcon);
+  if (iv != null) {
+    Bitmap thumbnail=null;
+    if (file.isImage()) {
+      String tagId=String.valueOf(file.getRemoteId());
+      thumbnail=ThumbnailsCacheManager.getBitmapFromDiskCache(tagId);
+    }
+    if (thumbnail != null) {
+      iv.setImageBitmap(thumbnail);
+    }
+ else {
+      String filename=file.getFileName();
+      iv.setImageResource(MimetypeIconUtil.getFileTypeIconId(mimetype,filename));
+    }
+  }
+}
