@@ -138,24 +138,15 @@ task.execute(file);
 }
 }
 if (file.getMimetype().equalsIgnoreCase("image/png")) {
-Drawable backrepeat=mContext.getResources().getDrawable(R.drawable.backrepeat);
-fileIcon.setBackground(backrepeat);
+fileIcon.setBackgroundColor(mContext.getResources().getColor(R.color.background_color));
 }
 }
  else {
-fileIcon.setImageResource(DisplayUtils.getFileTypeIconId(file.getMimetype(),file.getFileName()));
+fileIcon.setImageResource(MimetypeIconUtil.getFileTypeIconId(file.getMimetype(),file.getFileName()));
 }
 }
  else {
-if (checkIfFileIsSharedWithMe(file)) {
-fileIcon.setImageResource(R.drawable.shared_with_me_folder);
-}
- else if (file.isShareByLink()) {
-fileIcon.setImageResource(R.drawable.folder_public);
-}
- else {
-fileIcon.setImageResource(DisplayUtils.getFileTypeIconId(file.getMimetype(),file.getFileName()));
-}
+fileIcon.setImageResource(MimetypeIconUtil.getFolderTypeIconId(checkIfFileIsSharedWithMe(file),file.isShareByLink()));
 }
 }
 return view;

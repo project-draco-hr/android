@@ -6,6 +6,6 @@
   }
   ImageView iv=(ImageView)getView().findViewById(R.id.fdIcon);
   if (iv != null) {
-    iv.setImageResource(DisplayUtils.getFileTypeIconId(mimetype,filename));
+    iv.setImageResource(MimetypeIconUtil.getFileTypeIconId(mimetype,filename));
   }
 }

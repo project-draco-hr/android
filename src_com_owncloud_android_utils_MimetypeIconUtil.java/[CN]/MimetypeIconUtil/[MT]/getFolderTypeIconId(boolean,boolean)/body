@@ -1,0 +1,9 @@
+{
+  if (isSharedWithUser) {
+    return R.drawable.shared_with_me_folder;
+  }
+ else   if (isShareByLink) {
+    return R.drawable.folder_public;
+  }
+  return R.drawable.ic_menu_archive;
+}

@@ -1,0 +1,17 @@
+{
+  if (file != null && file.fileExists() && !OCFile.ROOT_PATH.equals(file.getFileName())) {
+    String localPath=FileStorageUtils.getDefaultSavePathFor(mAccount.name,file);
+    File localFile=new File(localPath);
+    boolean copied=false;
+    String defaultSavePath=FileStorageUtils.getSavePath(mAccount.name);
+    if (localFile.exists()) {
+      File targetFile=new File(defaultSavePath + targetPath);
+      File targetFolder=targetFile.getParentFile();
+      if (!targetFolder.exists()) {
+        targetFolder.mkdirs();
+      }
+      copied=copyFile(localFile,targetFile);
+    }
+    Log_OC.d(TAG,"Local file COPIED : " + copied);
+  }
+}
