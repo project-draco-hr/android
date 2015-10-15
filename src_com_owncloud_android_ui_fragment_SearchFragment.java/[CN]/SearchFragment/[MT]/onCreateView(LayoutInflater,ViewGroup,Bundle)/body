@@ -1,4 +1,8 @@
 {
   View view=inflater.inflate(R.layout.search_users_groups_layout,container,false);
+  SearchView searchView=(SearchView)view.findViewById(R.id.searchView);
+  SearchManager searchManager=(SearchManager)getActivity().getSystemService(Context.SEARCH_SERVICE);
+  searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+  searchView.setIconifiedByDefault(false);
   return view;
 }

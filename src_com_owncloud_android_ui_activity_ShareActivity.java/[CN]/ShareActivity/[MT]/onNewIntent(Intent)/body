@@ -1,0 +1,4 @@
+{
+  setIntent(intent);
+  handleIntent(intent);
+}

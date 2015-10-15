@@ -25,4 +25,5 @@
     ft.commit();
     mSearchFragment=null;
   }
+  handleIntent(getIntent());
 }
