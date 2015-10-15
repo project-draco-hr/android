@@ -7,7 +7,7 @@
     if (result.isSuccess() || result.getCode() == ResultCode.SHARE_NOT_FOUND) {
       Log_OC.d(TAG,"Share id = " + share.getIdRemoteShared() + " deleted");
       OCFile file=getStorageManager().getFileByPath(mRemotePath);
-      file.setShareByLink(false);
+      file.setShareViaLink(false);
       file.setPublicLink("");
       getStorageManager().saveFile(file);
       getStorageManager().removeShare(share);

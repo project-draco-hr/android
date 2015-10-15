@@ -1,5 +1,5 @@
 {
-  cleanSharedFilesInFolder(folder);
+  resetShareFlagsInFolder(folder);
   ArrayList<ContentProviderOperation> operations=new ArrayList<ContentProviderOperation>();
   operations=prepareRemoveSharesInFolder(folder,operations);
   if (shares != null) {
@@ -23,14 +23,13 @@
     }
   }
   if (operations.size() > 0) {
-    @SuppressWarnings("unused") ContentProviderResult[] results=null;
     Log_OC.d(TAG,"Sending " + operations.size() + " operations to FileContentProvider");
     try {
       if (getContentResolver() != null) {
-        results=getContentResolver().applyBatch(MainApp.getAuthority(),operations);
+        getContentResolver().applyBatch(MainApp.getAuthority(),operations);
       }
  else {
-        results=getContentProviderClient().applyBatch(operations);
+        getContentProviderClient().applyBatch(operations);
       }
     }
  catch (    OperationApplicationException e) {

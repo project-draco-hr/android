@@ -18,7 +18,7 @@
       mSendIntent.putExtra(Intent.EXTRA_SUBJECT,String.format(mContext.getString(R.string.subject_token),getClient().getCredentials().getUsername(),file.getFileName()));
     }
     file.setPublicLink(share.getShareLink());
-    file.setShareByLink(true);
+    file.setShareViaLink(true);
     getStorageManager().saveFile(file);
     Log_OC.d(TAG,"Public Link = " + file.getPublicLink());
   }

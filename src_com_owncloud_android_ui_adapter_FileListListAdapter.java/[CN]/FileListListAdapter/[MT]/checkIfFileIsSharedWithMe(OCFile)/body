@@ -1,3 +1,0 @@
-{
-  return (mFile.getPermissions() != null && !mFile.getPermissions().contains(PERMISSION_SHARED_WITH_ME) && file.getPermissions() != null && file.getPermissions().contains(PERMISSION_SHARED_WITH_ME));
-}

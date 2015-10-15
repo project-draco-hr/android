@@ -1,9 +1,10 @@
 {
   ContentValues cv=new ContentValues();
-  cv.put(ProviderTableMeta.FILE_SHARE_BY_LINK,false);
+  cv.put(ProviderTableMeta.FILE_SHARED_VIA_LINK,false);
+  cv.put(ProviderTableMeta.FILE_SHARED_VIA_USERS,false);
   cv.put(ProviderTableMeta.FILE_PUBLIC_LINK,"");
-  String where=ProviderTableMeta.FILE_ACCOUNT_OWNER + "=? AND " + ProviderTableMeta.FILE_PARENT+ "=?";
-  String[] whereArgs=new String[]{mAccount.name,String.valueOf(folder.getFileId())};
+  String where=ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?";
+  String[] whereArgs=new String[]{mAccount.name};
   if (getContentResolver() != null) {
     getContentResolver().update(ProviderTableMeta.CONTENT_URI,cv,where,whereArgs);
   }
@@ -12,7 +13,7 @@
       getContentProviderClient().update(ProviderTableMeta.CONTENT_URI,cv,where,whereArgs);
     }
  catch (    RemoteException e) {
-      Log_OC.e(TAG,"Exception in cleanSharedFilesInFolder " + e.getMessage());
+      Log_OC.e(TAG,"Exception in resetShareFlagsInAllFiles" + e.getMessage());
     }
   }
 }

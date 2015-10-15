@@ -9,7 +9,7 @@
     OCFile file=getFileByPath(path);
     if (file != null) {
       if (share.getShareType().equals(ShareType.PUBLIC_LINK)) {
-        file.setShareByLink(true);
+        file.setShareViaLink(true);
         sharedFiles.add(file);
       }
     }

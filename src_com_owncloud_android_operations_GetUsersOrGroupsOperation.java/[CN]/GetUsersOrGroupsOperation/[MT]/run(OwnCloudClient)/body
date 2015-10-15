@@ -1,5 +1,5 @@
 {
-  GetRemoteUsersOrGroupsOperation operation=new GetRemoteUsersOrGroupsOperation(mSearchString,mLimit,mOffset,mGetGroups);
+  GetRemoteShareesOperation operation=new GetRemoteShareesOperation(mSearchString,mLimit,mOffset);
   RemoteOperationResult result=operation.execute(client);
   return result;
 }

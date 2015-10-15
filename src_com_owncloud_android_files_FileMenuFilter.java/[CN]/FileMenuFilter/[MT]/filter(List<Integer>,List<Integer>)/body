@@ -59,7 +59,7 @@
  else {
     toShow.add(R.id.action_share_file);
   }
-  if (!shareAllowed || (mFile == null || !mFile.isShareByLink())) {
+  if (!shareAllowed || (mFile == null || !mFile.isSharedViaLink())) {
     toHide.add(R.id.action_unshare_file);
   }
  else {
@@ -71,7 +71,7 @@
  else {
     toShow.add(R.id.action_share_with_users);
   }
-  if (!shareAllowed || !shareWithUsersEnable || (mFile == null || !mFile.isShareWithUser())) {
+  if (!shareAllowed || !shareWithUsersEnable || (mFile == null || !mFile.isSharedViaUsers())) {
     toHide.add(R.id.action_unshare_with_users);
   }
  else {

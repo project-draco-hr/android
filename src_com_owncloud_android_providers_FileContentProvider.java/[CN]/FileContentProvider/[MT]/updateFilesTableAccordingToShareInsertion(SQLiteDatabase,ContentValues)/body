@@ -1,0 +1,13 @@
+{
+  ContentValues fileValues=new ContentValues();
+  int newShareType=newShare.getAsInteger(ProviderTableMeta.OCSHARES_SHARE_TYPE);
+  if (newShareType == ShareType.PUBLIC_LINK.getValue()) {
+    fileValues.put(ProviderTableMeta.FILE_SHARED_VIA_LINK,1);
+  }
+ else   if (newShareType == ShareType.USER.getValue() || newShareType == ShareType.GROUP.getValue()) {
+    fileValues.put(ProviderTableMeta.FILE_SHARED_VIA_USERS,1);
+  }
+  String where=ProviderTableMeta.FILE_PATH + "=? AND " + ProviderTableMeta.FILE_ACCOUNT_OWNER+ "=?";
+  String[] whereArgs=new String[]{newShare.getAsString(ProviderTableMeta.OCSHARES_PATH),newShare.getAsString(ProviderTableMeta.OCSHARES_ACCOUNT_OWNER)};
+  db.update(ProviderTableMeta.FILE_TABLE_NAME,fileValues,where,whereArgs);
+}
