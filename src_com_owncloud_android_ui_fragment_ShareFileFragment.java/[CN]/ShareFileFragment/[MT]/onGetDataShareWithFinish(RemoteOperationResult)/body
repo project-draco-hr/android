@@ -1,0 +1,25 @@
+{
+  ((ShareActivity)getActivity()).dismissWaitingLoadDialog();
+  if (result != null && result.isSuccess()) {
+    for (    Object obj : result.getData()) {
+      if (((OCShare)obj).getShareType() == ShareType.USER || ((OCShare)obj).getShareType() == ShareType.GROUP) {
+        mShares.add((OCShare)obj);
+      }
+    }
+    mUserGroupsAdapter=new ShareUserListAdapter(getActivity().getApplicationContext(),R.layout.share_user_item,mShares);
+    TextView noShares=(TextView)getView().findViewById(R.id.shareNoUsers);
+    ListView usersList=(ListView)getView().findViewById(R.id.shareUsersList);
+    if (mShares.size() > 0) {
+      noShares.setVisibility(View.GONE);
+      usersList.setVisibility(View.VISIBLE);
+      usersList.setAdapter(mUserGroupsAdapter);
+    }
+ else {
+      noShares.setVisibility(View.VISIBLE);
+      usersList.setVisibility(View.GONE);
+    }
+  }
+ else {
+    Toast.makeText(getActivity(),result.getLogMessage(),Toast.LENGTH_SHORT).show();
+  }
+}

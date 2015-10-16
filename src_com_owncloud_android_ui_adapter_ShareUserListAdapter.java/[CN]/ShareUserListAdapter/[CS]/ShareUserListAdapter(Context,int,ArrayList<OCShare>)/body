@@ -1,0 +1,5 @@
+{
+  super(context,resource);
+  mContext=context;
+  mShares=shares;
+}

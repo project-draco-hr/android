@@ -18,6 +18,7 @@
  else {
     size.setText(DisplayUtils.bytesToHumanReadable(mFile.getFileLength()));
   }
+  TextView noShares=(TextView)view.findViewById(R.id.shareNoUsers);
   Button addUserGroupButton=(Button)view.findViewById(R.id.addUserButton);
   addUserGroupButton.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View view){

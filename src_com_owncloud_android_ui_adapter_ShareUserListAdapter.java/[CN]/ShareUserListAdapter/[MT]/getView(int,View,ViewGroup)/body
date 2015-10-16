@@ -1,0 +1,14 @@
+{
+  LayoutInflater inflator=(LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+  View view=inflator.inflate(R.layout.share_user_item,parent,false);
+  if (mShares != null && mShares.size() > position) {
+    OCShare share=mShares.get(position);
+    TextView userName=(TextView)view.findViewById(R.id.userOrGroupName);
+    String name=share.getSharedWithDisplayName();
+    if (share.getShareType() == ShareType.GROUP) {
+      name=name + "(group)";
+    }
+    userName.setText(name);
+  }
+  return view;
+}

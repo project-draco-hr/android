@@ -1,0 +1,9 @@
+{
+  mShares=new ArrayList<>();
+  RemoteOperationResult result=null;
+  ((ShareActivity)getActivity()).showWaitingLoadDialog();
+  GetShareWithUserAsyncTask getTask=new GetShareWithUserAsyncTask(this);
+  FileDataStorageManager fileDataStorageManager=new FileDataStorageManager(mAccount,getActivity().getContentResolver());
+  Object[] params={mFile,mAccount,fileDataStorageManager};
+  getTask.execute(params);
+}
