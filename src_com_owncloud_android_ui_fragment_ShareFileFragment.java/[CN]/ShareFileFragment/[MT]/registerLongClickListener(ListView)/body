@@ -8,6 +8,8 @@
  else {
         unshareButton.setVisibility(View.GONE);
       }
+      view.setAlpha(0);
+      view.animate().alpha(1).setDuration(500).start();
       return false;
     }
   }
