@@ -9,6 +9,14 @@
       name=name + "(group)";
     }
     userName.setText(name);
+    mUnshareButton=(ImageView)view.findViewById(R.id.unshareButton);
+    mUnshareButton.setVisibility(View.GONE);
+    mUnshareButton.setOnClickListener(new View.OnClickListener(){
+      @Override public void onClick(      View v){
+        Log_OC.d("TAG - ShareUserListAdapter","TODO Unshare - " + mShares.get(position).getSharedWithDisplayName());
+      }
+    }
+);
   }
   return view;
 }

@@ -6,6 +6,7 @@
     noShares.setVisibility(View.GONE);
     usersList.setVisibility(View.VISIBLE);
     usersList.setAdapter(mUserGroupsAdapter);
+    registerLongClickListener(usersList);
   }
  else {
     noShares.setVisibility(View.VISIBLE);
