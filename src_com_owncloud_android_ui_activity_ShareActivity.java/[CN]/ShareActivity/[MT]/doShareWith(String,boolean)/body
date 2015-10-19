@@ -1,0 +1,8 @@
+{
+  if (isGroup) {
+    Toast.makeText(this,"You want to SHARE with GROUP [" + username + "]",Toast.LENGTH_SHORT).show();
+  }
+ else {
+    Toast.makeText(this,"You want to SHARE with USER [" + username + "]",Toast.LENGTH_SHORT).show();
+  }
+}

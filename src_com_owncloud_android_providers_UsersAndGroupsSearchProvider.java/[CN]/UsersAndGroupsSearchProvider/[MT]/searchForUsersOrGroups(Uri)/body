@@ -1,0 +1,36 @@
+{
+  MatrixCursor response=null;
+  String userQuery=uri.getLastPathSegment().toLowerCase();
+  Account account=AccountUtils.getCurrentOwnCloudAccount(getContext());
+  GetRemoteShareesOperation searchRequest=new GetRemoteShareesOperation(userQuery,REQUESTED_PAGE,RESULTS_PER_PAGE);
+  RemoteOperationResult result=searchRequest.execute(account,getContext());
+  List<Pair<String,Byte>> names=new ArrayList<Pair<String,Byte>>();
+  if (result.isSuccess()) {
+    for (    Object o : result.getData()) {
+      names.add((Pair<String,Byte>)o);
+    }
+  }
+  if (names.size() > 0) {
+    response=new MatrixCursor(COLUMNS);
+    Iterator<Pair<String,Byte>> namesIt=names.iterator();
+    int count=0;
+    Pair<String,Byte> item;
+    String displayName;
+    Uri dataUri;
+    Uri userBaseUri=new Uri.Builder().scheme("content").authority(DATA_USER).build();
+    Uri groupBaseUri=new Uri.Builder().scheme("content").authority(DATA_GROUP).build();
+    while (namesIt.hasNext()) {
+      item=namesIt.next();
+      if (GetRemoteShareesOperation.GROUP_TYPE.equals(item.second)) {
+        displayName=getContext().getString(R.string.share_group_clarification,item.first);
+        dataUri=Uri.withAppendedPath(groupBaseUri,item.first);
+      }
+ else {
+        displayName=item.first;
+        dataUri=Uri.withAppendedPath(userBaseUri,item.first);
+      }
+      response.newRow().add(count++).add(displayName).add(SearchManager.FLAG_QUERY_REFINEMENT).add(dataUri);
+    }
+  }
+  return response;
+}

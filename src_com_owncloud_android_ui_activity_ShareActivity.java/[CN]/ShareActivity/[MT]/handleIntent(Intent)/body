@@ -3,4 +3,11 @@
     String query=intent.getStringExtra(SearchManager.QUERY);
     doMySearch(query);
   }
+ else   if (UsersAndGroupsSearchProvider.ACTION_SHARE_WITH.equals(intent.getAction())) {
+    Uri data=intent.getData();
+    doShareWith(data.getLastPathSegment(),UsersAndGroupsSearchProvider.DATA_GROUP.equals(data.getAuthority()));
+  }
+ else {
+    Log_OC.wtf(TAG,"Unexpected intent " + intent.toString());
+  }
 }
