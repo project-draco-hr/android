@@ -3,7 +3,6 @@
   ArrayList<ContentProviderOperation> operations=new ArrayList<ContentProviderOperation>();
   operations=prepareRemoveSharesInFolder(folder,operations);
   if (shares != null) {
-    Log_OC.d(TAG,"SHARES..............................................");
     for (    OCShare share : shares) {
       ContentValues cv=new ContentValues();
       cv.put(ProviderTableMeta.OCSHARES_FILE_SOURCE,share.getFileSource());
@@ -21,7 +20,6 @@
       cv.put(ProviderTableMeta.OCSHARES_ID_REMOTE_SHARED,share.getIdRemoteShared());
       cv.put(ProviderTableMeta.OCSHARES_ACCOUNT_OWNER,mAccount.name);
       operations.add(ContentProviderOperation.newInsert(ProviderTableMeta.CONTENT_URI_SHARE).withValues(cv).build());
-      Log_OC.d(TAG,"The VALUES are cv " + cv.toString());
     }
   }
   if (operations.size() > 0) {
