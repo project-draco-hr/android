@@ -9,14 +9,8 @@
       name=name + mContext.getResources().getString(R.string.share_group_indicator);
     }
     userName.setText(name);
-    mUnshareButton=(ImageView)view.findViewById(R.id.unshareButton);
-    mUnshareButton.setVisibility(View.GONE);
-    mUnshareButton.setOnClickListener(new View.OnClickListener(){
-      @Override public void onClick(      View v){
-        Log_OC.d("TAG - ShareUserListAdapter","TODO Unshare - " + mShares.get(position).getSharedWithDisplayName());
-      }
-    }
-);
+    ImageView unshareButton=(ImageView)view.findViewById(R.id.unshareButton);
+    unshareButton.setVisibility(View.GONE);
   }
   return view;
 }

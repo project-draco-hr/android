@@ -1,18 +1,18 @@
 {
   RemoteOperationResult result=null;
   if (params != null && params.length == 3) {
-    OCFile file=(OCFile)params[0];
+    int shareId=(int)params[0];
     Account account=(Account)params[1];
     FileDataStorageManager fileDataStorageManager=(FileDataStorageManager)params[2];
     try {
-      GetSharesForFileOperation operation=new GetSharesForFileOperation(file.getRemotePath(),false,false);
+      RemoveRemoteShareOperation operation=new RemoveRemoteShareOperation(shareId);
       OwnCloudAccount ocAccount=new OwnCloudAccount(account,MainApp.getAppContext());
       OwnCloudClient client=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,MainApp.getAppContext());
-      result=operation.execute(client,fileDataStorageManager);
+      result=operation.execute(client);
     }
  catch (    Exception e) {
       result=new RemoteOperationResult(e);
-      Log_OC.e(TAG,"Exception while getting shares",e);
+      Log_OC.e(TAG,"Exception while unshare",e);
     }
   }
  else {

@@ -1,0 +1,9 @@
+{
+  ((ShareActivity)getActivity()).dismissWaitingLoadDialog();
+  if (result != null && result.isSuccess()) {
+    updateListOfUserGroups();
+  }
+ else {
+    Toast.makeText(getActivity(),result.getLogMessage(),Toast.LENGTH_SHORT).show();
+  }
+}
