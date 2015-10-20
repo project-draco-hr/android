@@ -3,8 +3,6 @@
   setContentView(R.layout.share_activity);
   FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
   if (savedInstanceState != null) {
-    mFile=savedInstanceState.getParcelable(FileActivity.EXTRA_FILE);
-    mAccount=savedInstanceState.getParcelable(FileActivity.EXTRA_ACCOUNT);
     mShareFileFragment=(ShareFileFragment)getSupportFragmentManager().getFragment(savedInstanceState,TAG_SHARE_FRAGMENT);
     mSearchFragment=(SearchFragment)getSupportFragmentManager().getFragment(savedInstanceState,TAG_SEARCH_FRAGMENT);
     if (mShareFileFragment != null) {
@@ -18,9 +16,7 @@
     }
   }
  else {
-    mFile=getIntent().getParcelableExtra(FileActivity.EXTRA_FILE);
-    mAccount=getIntent().getParcelableExtra(FileActivity.EXTRA_ACCOUNT);
-    mShareFileFragment=ShareFileFragment.newInstance(mFile,mAccount);
+    mShareFileFragment=ShareFileFragment.newInstance(getFile(),getAccount());
     ft.replace(R.id.share_fragment_container,mShareFileFragment,TAG_SHARE_FRAGMENT);
     ft.commit();
     mSearchFragment=null;

@@ -1,5 +1,5 @@
 {
-  ((ShareActivity)getActivity()).showWaitingLoadDialog();
+  ((ShareActivity)getActivity()).showLoadingDialog(getActivity().getApplicationContext().getString(R.string.common_loading));
   UnshareWithUserAsyncTask unshareTask=new UnshareWithUserAsyncTask(this);
   FileDataStorageManager fileDataStorageManager=new FileDataStorageManager(mAccount,getActivity().getContentResolver());
   Object[] params={shareId,mAccount,fileDataStorageManager};
