@@ -29,7 +29,7 @@
         displayName=item.first;
         dataUri=Uri.withAppendedPath(userBaseUri,item.first);
       }
-      response.newRow().add(count++).add(displayName).add(SearchManager.FLAG_QUERY_REFINEMENT).add(dataUri);
+      response.newRow().add(count++).add(displayName).add(dataUri);
     }
   }
   return response;
