@@ -1,4 +1,5 @@
 {
+  mShares=new ArrayList<>();
   FileDataStorageManager fileDataStorageManager=new FileDataStorageManager(mAccount,getActivity().getContentResolver());
   mShares=fileDataStorageManager.getSharesWithForAFile(mFile.getRemotePath(),mAccount.name);
   updateListOfUserGroups();

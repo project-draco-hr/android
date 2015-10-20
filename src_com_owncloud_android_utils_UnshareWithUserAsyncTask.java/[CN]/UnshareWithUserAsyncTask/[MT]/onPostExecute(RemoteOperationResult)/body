@@ -1,8 +1,0 @@
-{
-  if (result != null) {
-    OnUnshareWithUserTaskListener listener=mListener.get();
-    if (listener != null) {
-      listener.onUnshareWithFinish(result);
-    }
-  }
-}

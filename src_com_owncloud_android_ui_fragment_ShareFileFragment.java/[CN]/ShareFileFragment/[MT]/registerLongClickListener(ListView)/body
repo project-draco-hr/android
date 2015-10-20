@@ -6,7 +6,7 @@
         unshareButton.setVisibility(View.VISIBLE);
         unshareButton.setOnClickListener(new View.OnClickListener(){
           @Override public void onClick(          View v){
-            unshareWith((int)(mShares.get(position).getIdRemoteShared()));
+            unshareWith(mShares.get(position));
             Log_OC.d(TAG,"Unshare - " + mShares.get(position).getSharedWithDisplayName());
           }
         }

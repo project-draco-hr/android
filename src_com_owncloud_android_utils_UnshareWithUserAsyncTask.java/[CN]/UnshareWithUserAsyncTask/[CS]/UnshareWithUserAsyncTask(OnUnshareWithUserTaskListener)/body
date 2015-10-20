@@ -1,3 +1,0 @@
-{
-  mListener=new WeakReference<OnUnshareWithUserTaskListener>(listener);
-}
