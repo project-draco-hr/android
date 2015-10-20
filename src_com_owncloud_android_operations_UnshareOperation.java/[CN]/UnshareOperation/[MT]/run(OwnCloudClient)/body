@@ -1,14 +1,22 @@
 {
   RemoteOperationResult result=null;
-  OCShare share=getStorageManager().getFirstShareByPathAndType(mRemotePath,ShareType.PUBLIC_LINK);
+  OCShare share=getStorageManager().getFirstShareByPathAndType(mRemotePath,mShareType,mShareWith);
   if (share != null) {
     RemoveRemoteShareOperation operation=new RemoveRemoteShareOperation((int)share.getIdRemoteShared());
     result=operation.execute(client);
     if (result.isSuccess() || result.getCode() == ResultCode.SHARE_NOT_FOUND) {
       Log_OC.d(TAG,"Share id = " + share.getIdRemoteShared() + " deleted");
       OCFile file=getStorageManager().getFileByPath(mRemotePath);
-      file.setShareViaLink(false);
-      file.setPublicLink("");
+      if (mShareType == ShareType.PUBLIC_LINK) {
+        file.setShareViaLink(false);
+        file.setPublicLink("");
+      }
+ else       if (mShareType == ShareType.USER || mShareType == ShareType.GROUP) {
+        ArrayList<OCShare> sharesWith=getStorageManager().getSharesWithForAFile(mRemotePath,getStorageManager().getAccount().name);
+        if (sharesWith.size() == 1) {
+          file.setShareViaUsers(false);
+        }
+      }
       getStorageManager().saveFile(file);
       getStorageManager().removeShare(share);
       if (result.getCode() == ResultCode.SHARE_NOT_FOUND) {

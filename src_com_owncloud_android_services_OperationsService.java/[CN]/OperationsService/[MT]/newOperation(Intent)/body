@@ -21,8 +21,10 @@
       }
  else       if (action.equals(ACTION_UNSHARE)) {
         String remotePath=operationIntent.getStringExtra(EXTRA_REMOTE_PATH);
+        ShareType shareType=(ShareType)operationIntent.getSerializableExtra(EXTRA_SHARE_TYPE);
+        String shareWith=operationIntent.getStringExtra(EXTRA_SHARE_WITH);
         if (remotePath.length() > 0) {
-          operation=new UnshareLinkOperation(remotePath,OperationsService.this);
+          operation=new UnshareOperation(remotePath,shareType,shareWith,OperationsService.this);
         }
       }
  else       if (action.equals(ACTION_GET_SERVER_INFO)) {

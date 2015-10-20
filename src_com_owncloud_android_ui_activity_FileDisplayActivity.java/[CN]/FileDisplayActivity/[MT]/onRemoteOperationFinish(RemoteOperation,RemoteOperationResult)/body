@@ -15,8 +15,8 @@
  else   if (operation instanceof CreateShareOperation) {
     onCreateShareOperationFinish((CreateShareOperation)operation,result);
   }
- else   if (operation instanceof UnshareLinkOperation) {
-    onUnshareLinkOperationFinish((UnshareLinkOperation)operation,result);
+ else   if (operation instanceof UnshareOperation) {
+    onUnshareLinkOperationFinish((UnshareOperation)operation,result);
   }
  else   if (operation instanceof MoveFileOperation) {
     onMoveFileOperationFinish((MoveFileOperation)operation,result);

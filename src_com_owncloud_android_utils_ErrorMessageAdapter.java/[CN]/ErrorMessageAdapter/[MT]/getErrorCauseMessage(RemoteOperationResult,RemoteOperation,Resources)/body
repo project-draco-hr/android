@@ -104,7 +104,7 @@
       message=res.getString(R.string.share_link_file_error);
     }
   }
- else   if (operation instanceof UnshareLinkOperation) {
+ else   if (operation instanceof UnshareOperation) {
     if (result.getCode() == ResultCode.SHARE_NOT_FOUND) {
       message=res.getString(R.string.unshare_link_file_no_exist);
     }

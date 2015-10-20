@@ -4,6 +4,8 @@
     service.setAction(OperationsService.ACTION_UNSHARE);
     service.putExtra(OperationsService.EXTRA_ACCOUNT,mFileActivity.getAccount());
     service.putExtra(OperationsService.EXTRA_REMOTE_PATH,file.getRemotePath());
+    service.putExtra(OperationsService.EXTRA_SHARE_TYPE,ShareType.PUBLIC_LINK);
+    service.putExtra(OperationsService.EXTRA_SHARE_WITH,"");
     mWaitingForOpId=mFileActivity.getOperationsServiceBinder().queueNewOperation(service);
     mFileActivity.showLoadingDialog(mFileActivity.getApplicationContext().getString(R.string.wait_a_moment));
   }

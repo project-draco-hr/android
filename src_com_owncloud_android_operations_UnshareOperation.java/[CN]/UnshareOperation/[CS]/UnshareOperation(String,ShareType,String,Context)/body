@@ -1,4 +1,6 @@
 {
   mRemotePath=remotePath;
+  mShareType=shareType;
+  mShareWith=shareWith;
   mContext=context;
 }
