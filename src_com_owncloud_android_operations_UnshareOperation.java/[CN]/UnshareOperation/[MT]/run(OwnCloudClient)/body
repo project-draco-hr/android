@@ -14,7 +14,7 @@
  else       if (mShareType == ShareType.USER || mShareType == ShareType.GROUP) {
         ArrayList<OCShare> sharesWith=getStorageManager().getSharesWithForAFile(mRemotePath,getStorageManager().getAccount().name);
         if (sharesWith.size() == 1) {
-          file.setShareViaUsers(false);
+          file.setShareWithSharee(false);
         }
       }
       getStorageManager().saveFile(file);

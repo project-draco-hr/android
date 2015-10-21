@@ -40,7 +40,7 @@
       }
       updatedFile.setPublicLink(localFile.getPublicLink());
       updatedFile.setShareViaLink(localFile.isSharedViaLink());
-      updatedFile.setShareViaUsers(localFile.isSharedViaUsers());
+      updatedFile.setShareWithSharee(localFile.isSharedWithSharee());
       updatedFile.setEtagInConflict(localFile.getEtagInConflict());
     }
  else {

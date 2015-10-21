@@ -124,7 +124,7 @@
     Log_OC.i("SQL","Entering in the #12 ADD in onUpgrade");
     db.beginTransaction();
     try {
-      db.execSQL("ALTER TABLE " + ProviderTableMeta.FILE_TABLE_NAME + " ADD COLUMN "+ ProviderTableMeta.FILE_SHARED_VIA_USERS+ " INTEGER "+ " DEFAULT 0");
+      db.execSQL("ALTER TABLE " + ProviderTableMeta.FILE_TABLE_NAME + " ADD COLUMN "+ ProviderTableMeta.FILE_SHARED_WITH_SHAREE+ " INTEGER "+ " DEFAULT 0");
       upgraded=true;
       db.setTransactionSuccessful();
     }

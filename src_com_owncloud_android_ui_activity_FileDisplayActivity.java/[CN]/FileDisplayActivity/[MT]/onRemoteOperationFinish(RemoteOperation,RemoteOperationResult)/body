@@ -12,8 +12,9 @@
  else   if (operation instanceof CreateFolderOperation) {
     onCreateFolderOperationFinish((CreateFolderOperation)operation,result);
   }
- else   if (operation instanceof CreateShareOperation) {
-    onCreateShareOperationFinish((CreateShareOperation)operation,result);
+ else   if (operation instanceof CreateShareViaLinkOperation || operation instanceof CreateShareWithShareeOperation) {
+    refreshShowDetails();
+    refreshListOfFilesFragment();
   }
  else   if (operation instanceof UnshareOperation) {
     onUnshareLinkOperationFinish((UnshareOperation)operation,result);

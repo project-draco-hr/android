@@ -80,7 +80,7 @@ sharedIconV.setImageResource(R.drawable.shared_via_link);
 sharedIconV.setVisibility(View.VISIBLE);
 sharedIconV.bringToFront();
 }
- else if (file.isSharedViaUsers() || file.isSharedWithMe()) {
+ else if (file.isSharedWithSharee() || file.isSharedWithMe()) {
 sharedIconV.setImageResource(R.drawable.shared_via_users);
 sharedIconV.setVisibility(View.VISIBLE);
 sharedIconV.bringToFront();
@@ -148,7 +148,7 @@ fileIcon.setImageResource(MimetypeIconUtil.getFileTypeIconId(file.getMimetype(),
 }
 }
  else {
-fileIcon.setImageResource(MimetypeIconUtil.getFolderTypeIconId(file.isSharedWithMe() || file.isSharedViaUsers(),file.isSharedViaLink()));
+fileIcon.setImageResource(MimetypeIconUtil.getFolderTypeIconId(file.isSharedWithMe() || file.isSharedWithSharee(),file.isSharedViaLink()));
 }
 }
 return view;

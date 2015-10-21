@@ -10,8 +10,11 @@
     }
     mTryShareAgain=false;
   }
- else   if (operation instanceof CreateShareOperation) {
-    onCreateShareOperationFinish((CreateShareOperation)operation,result);
+ else   if (operation instanceof CreateShareViaLinkOperation) {
+    onCreateShareViaLinkOperationFinish((CreateShareViaLinkOperation)operation,result);
+  }
+ else   if (operation instanceof CreateShareWithShareeOperation) {
+    onCreateShareWithShareeOperationFinish((CreateShareWithShareeOperation)operation,result);
   }
  else   if (operation instanceof UnshareOperation) {
     onUnshareLinkOperationFinish((UnshareOperation)operation,result);

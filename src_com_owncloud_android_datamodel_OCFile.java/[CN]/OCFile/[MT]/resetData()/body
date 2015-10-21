@@ -20,5 +20,5 @@
   mNeedsUpdateThumbnail=false;
   mIsDownloading=false;
   mEtagInConflict=null;
-  mShareWithUser=false;
+  mShareWithSharee=false;
 }

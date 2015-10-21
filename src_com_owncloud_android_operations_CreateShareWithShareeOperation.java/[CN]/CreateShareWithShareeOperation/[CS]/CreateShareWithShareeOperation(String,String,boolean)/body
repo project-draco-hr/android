@@ -1,0 +1,5 @@
+{
+  mPath=path;
+  mTargetName=targetName;
+  mWithGroup=withGroup;
+}

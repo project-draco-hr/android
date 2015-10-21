@@ -90,7 +90,7 @@
       message=res.getString(R.string.create_dir_fail_msg);
     }
   }
- else   if (operation instanceof CreateShareOperation) {
+ else   if (operation instanceof CreateShareViaLinkOperation || operation instanceof CreateShareWithShareeOperation) {
     if (result.getCode() == ResultCode.SHARE_NOT_FOUND) {
       message=res.getString(R.string.share_link_file_no_exist);
     }

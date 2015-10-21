@@ -1,7 +1,7 @@
 {
   ContentValues cv=new ContentValues();
   cv.put(ProviderTableMeta.FILE_SHARED_VIA_LINK,false);
-  cv.put(ProviderTableMeta.FILE_SHARED_VIA_USERS,false);
+  cv.put(ProviderTableMeta.FILE_SHARED_WITH_SHAREE,false);
   cv.put(ProviderTableMeta.FILE_PUBLIC_LINK,"");
   String where=ProviderTableMeta.FILE_ACCOUNT_OWNER + "=?";
   String[] whereArgs=new String[]{mAccount.name};

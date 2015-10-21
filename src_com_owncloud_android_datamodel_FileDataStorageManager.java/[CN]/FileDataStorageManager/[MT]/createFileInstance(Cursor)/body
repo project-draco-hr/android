@@ -24,7 +24,7 @@
     file.setFavorite(c.getInt(c.getColumnIndex(ProviderTableMeta.FILE_KEEP_IN_SYNC)) == 1 ? true : false);
     file.setEtag(c.getString(c.getColumnIndex(ProviderTableMeta.FILE_ETAG)));
     file.setShareViaLink(c.getInt(c.getColumnIndex(ProviderTableMeta.FILE_SHARED_VIA_LINK)) == 1 ? true : false);
-    file.setShareViaUsers(c.getInt(c.getColumnIndex(ProviderTableMeta.FILE_SHARED_VIA_USERS)) == 1 ? true : false);
+    file.setShareWithSharee(c.getInt(c.getColumnIndex(ProviderTableMeta.FILE_SHARED_WITH_SHAREE)) == 1 ? true : false);
     file.setPublicLink(c.getString(c.getColumnIndex(ProviderTableMeta.FILE_PUBLIC_LINK)));
     file.setPermissions(c.getString(c.getColumnIndex(ProviderTableMeta.FILE_PERMISSIONS)));
     file.setRemoteId(c.getString(c.getColumnIndex(ProviderTableMeta.FILE_REMOTE_ID)));
