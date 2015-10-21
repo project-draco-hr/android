@@ -24,7 +24,7 @@
         String shareeName=operationIntent.getStringExtra(EXTRA_SHARE_WITH);
         ShareType shareType=(ShareType)operationIntent.getSerializableExtra(EXTRA_SHARE_TYPE);
         if (remotePath.length() > 0) {
-          operation=new CreateShareWithShareeOperation(remotePath,shareeName,ShareType.GROUP.equals(shareType));
+          operation=new CreateShareWithShareeOperation(remotePath,shareeName,shareType);
         }
       }
  else       if (action.equals(ACTION_UNSHARE)) {

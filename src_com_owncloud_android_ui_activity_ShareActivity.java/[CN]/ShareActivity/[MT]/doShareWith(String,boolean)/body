@@ -1,8 +1,9 @@
 {
   if (isGroup) {
-    Toast.makeText(this,"You want to SHARE with GROUP [" + username + "]",Toast.LENGTH_SHORT).show();
+    Toast.makeText(this,"You want to SHARE with GROUP [" + shareeName + "]",Toast.LENGTH_SHORT).show();
   }
  else {
-    Toast.makeText(this,"You want to SHARE with USER [" + username + "]",Toast.LENGTH_SHORT).show();
+    Toast.makeText(this,"You want to SHARE with USER [" + shareeName + "]",Toast.LENGTH_SHORT).show();
   }
+  getFileOperationsHelper().shareFileWithSharee(getFile(),shareeName,(isGroup ? ShareType.GROUP : ShareType.USER));
 }

@@ -1,5 +1,6 @@
 {
-  RemoteOperation operation=new CreateRemoteShareOperation(mPath,(mWithGroup ? ShareType.GROUP : ShareType.USER),mTargetName,false,"",READ_ONLY);
+  CreateRemoteShareOperation operation=new CreateRemoteShareOperation(mPath,mShareType,mShareeName,false,"",READ_ONLY);
+  operation.setGetShareDetails(true);
   RemoteOperationResult result=operation.execute(client);
   if (result.isSuccess()) {
     if (result.getData().size() > 0) {

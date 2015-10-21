@@ -1,3 +1,0 @@
-{
-  Toast.makeText(this,"You want to search for [" + query + "]",Toast.LENGTH_SHORT).show();
-}
