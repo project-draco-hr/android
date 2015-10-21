@@ -3,7 +3,7 @@
   if (result.isSuccess()) {
     mTryShareAgain=false;
     updateFileFromDB();
-    Intent sendIntent=operation.getSendIntent();
+    Intent sendIntent=operation.getSendIntentWithSubject(this);
     startActivity(sendIntent);
   }
  else {

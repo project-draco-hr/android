@@ -1,10 +1,10 @@
 {
-  mContext=context;
   mPath=path;
   mShareType=shareType;
-  mShareWith=shareWith;
+  mShareWith=shareWith != null ? shareWith : "";
   mPublicUpload=publicUpload;
   mPassword=password;
   mPermissions=permissions;
   mSendIntent=sendIntent;
+  mFileName=null;
 }
