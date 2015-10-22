@@ -3,6 +3,6 @@
     return new NotificationBuilderWithProgressBar(context);
   }
  else {
-    return new NotificationCompat.Builder(context);
+    return new NotificationCompat.Builder(context).setColor(context.getResources().getColor(R.color.primary));
   }
 }
