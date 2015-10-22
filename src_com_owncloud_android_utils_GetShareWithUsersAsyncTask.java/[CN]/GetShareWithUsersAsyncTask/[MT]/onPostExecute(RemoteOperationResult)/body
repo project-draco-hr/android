@@ -1,0 +1,8 @@
+{
+  if (result != null) {
+    OnGetSharesWithUsersTaskListener listener=mListener.get();
+    if (listener != null) {
+      listener.onGetDataShareWithFinish(result);
+    }
+  }
+}
