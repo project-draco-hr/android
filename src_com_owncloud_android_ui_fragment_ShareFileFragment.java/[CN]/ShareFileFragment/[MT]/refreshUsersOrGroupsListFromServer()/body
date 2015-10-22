@@ -1,5 +1,4 @@
 {
-  mShares=new ArrayList<>();
   ((ShareActivity)getActivity()).showLoadingDialog(getString(R.string.common_loading));
   GetShareWithUsersAsyncTask getTask=new GetShareWithUsersAsyncTask(this);
   Object[] params={mFile,mAccount,mFileDataStorageManager};
