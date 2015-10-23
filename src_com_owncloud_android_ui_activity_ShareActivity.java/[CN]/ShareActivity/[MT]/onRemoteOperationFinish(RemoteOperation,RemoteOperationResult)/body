@@ -1,10 +1,14 @@
 {
   super.onRemoteOperationFinish(operation,result);
-  if (operation instanceof UnshareOperation) {
-    refreshUsersInLists();
-  }
- else   if (operation instanceof CreateShareWithShareeOperation) {
-    refreshUsersInLists();
-    getIntent().setAction(null);
+  if (operation instanceof UnshareOperation || operation instanceof CreateShareWithShareeOperation) {
+    if (result.isSuccess()) {
+      refreshUsersInLists();
+      if (operation instanceof CreateShareWithShareeOperation) {
+        getIntent().setAction(null);
+      }
+    }
+ else {
+      Toast.makeText(this,ErrorMessageAdapter.getErrorCauseMessage(result,operation,getResources()),Toast.LENGTH_LONG).show();
+    }
   }
 }
