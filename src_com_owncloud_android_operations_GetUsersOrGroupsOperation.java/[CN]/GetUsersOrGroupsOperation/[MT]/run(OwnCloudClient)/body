@@ -1,5 +1,0 @@
-{
-  GetRemoteShareesOperation operation=new GetRemoteShareesOperation(mSearchString,mOffset,mLimit);
-  RemoteOperationResult result=operation.execute(client);
-  return result;
-}
