@@ -22,4 +22,5 @@
     mSearchFragment=null;
   }
   handleIntent(getIntent());
+  onAccountSet(false);
 }

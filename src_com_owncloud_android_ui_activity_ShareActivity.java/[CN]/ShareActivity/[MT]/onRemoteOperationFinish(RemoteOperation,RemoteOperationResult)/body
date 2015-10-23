@@ -1,11 +1,9 @@
 {
   super.onRemoteOperationFinish(operation,result);
   if (operation instanceof UnshareOperation) {
-    if (mShareFileFragment != null) {
-      mShareFileFragment.refreshUsersOrGroupsListFromDB();
-    }
+    refreshUsersInLists();
   }
- else   if (operation instanceof GetSharesForFileOperation) {
-    onGetSharesForFileOperationFinish((GetSharesForFileOperation)operation,result);
+ else   if (operation instanceof CreateShareWithShareeOperation) {
+    refreshUsersInLists();
   }
 }

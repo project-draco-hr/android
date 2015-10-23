@@ -1,9 +1,0 @@
-{
-  dismissLoadingDialog();
-  if (!result.isSuccess()) {
-    Toast.makeText(getApplicationContext(),result.getLogMessage(),Toast.LENGTH_LONG).show();
-  }
-  if (mShareFileFragment != null) {
-    mShareFileFragment.refreshUsersOrGroupsListFromDB();
-  }
-}

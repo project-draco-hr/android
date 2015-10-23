@@ -1,5 +1,0 @@
-{
-  if (mListener != null) {
-    mListener.onSearchFragmentInteraction(uri);
-  }
-}

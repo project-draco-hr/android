@@ -1,0 +1,4 @@
+Context context
+int resource
+ArrayList<OCShare> shares
+ShareUserAdapterListener listener

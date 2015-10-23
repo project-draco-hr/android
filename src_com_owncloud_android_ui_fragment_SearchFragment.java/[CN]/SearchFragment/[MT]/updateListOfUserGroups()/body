@@ -1,14 +1,11 @@
 {
   mUserGroupsAdapter=new ShareUserListAdapter(getActivity().getApplicationContext(),R.layout.share_user_item,mShares,this);
-  TextView noShares=(TextView)getView().findViewById(R.id.shareNoUsers);
-  ListView usersList=(ListView)getView().findViewById(R.id.shareUsersList);
+  ListView usersList=(ListView)getView().findViewById(R.id.searchUsersListView);
   if (mShares.size() > 0) {
-    noShares.setVisibility(View.GONE);
     usersList.setVisibility(View.VISIBLE);
     usersList.setAdapter(mUserGroupsAdapter);
   }
  else {
-    noShares.setVisibility(View.VISIBLE);
     usersList.setVisibility(View.GONE);
   }
 }

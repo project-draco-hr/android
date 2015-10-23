@@ -9,8 +9,13 @@
       name=getContext().getString(R.string.share_group_clarification,name);
     }
     userName.setText(name);
-    ImageView unshareButton=(ImageView)view.findViewById(R.id.unshareButton);
-    unshareButton.setVisibility(View.GONE);
+    final ImageView unshareButton=(ImageView)view.findViewById(R.id.unshareButton);
+    unshareButton.setOnClickListener(new View.OnClickListener(){
+      @Override public void onClick(      View v){
+        mListener.unshareButtonPressed(mShares.get(position));
+      }
+    }
+);
   }
   return view;
 }

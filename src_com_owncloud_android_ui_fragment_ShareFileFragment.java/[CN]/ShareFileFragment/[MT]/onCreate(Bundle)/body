@@ -3,6 +3,5 @@
   if (getArguments() != null) {
     mFile=getArguments().getParcelable(ARG_FILE);
     mAccount=getArguments().getParcelable(ARG_ACCOUNT);
-    mFileDataStorageManager=new FileDataStorageManager(mAccount,getActivity().getContentResolver());
   }
 }

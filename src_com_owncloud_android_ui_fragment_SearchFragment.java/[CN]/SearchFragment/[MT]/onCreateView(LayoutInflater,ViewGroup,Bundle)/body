@@ -14,5 +14,11 @@
     }
   }
 );
+  ListView usersList=(ListView)view.findViewById(R.id.searchUsersListView);
+  mUserGroupsAdapter=new ShareUserListAdapter(getActivity().getApplicationContext(),R.layout.share_user_item,mShares,this);
+  if (mShares.size() > 0) {
+    usersList.setVisibility(View.VISIBLE);
+    usersList.setAdapter(mUserGroupsAdapter);
+  }
   return view;
 }

@@ -1,0 +1,8 @@
+{
+  if (mShareFileFragment != null) {
+    mShareFileFragment.refreshUsersOrGroupsListFromDB();
+  }
+  if (mSearchFragment != null) {
+    mSearchFragment.refreshUsersOrGroupsListFromDB();
+  }
+}
