@@ -36,7 +36,6 @@
       Log_OC.e(TAG,"Exception in batch of operations " + e.getMessage());
     }
 catch (    RemoteException e) {
-      Log_OC.e(TAG,"Exception in batch of operations  " + e.getMessage());
     }
   }
 }
