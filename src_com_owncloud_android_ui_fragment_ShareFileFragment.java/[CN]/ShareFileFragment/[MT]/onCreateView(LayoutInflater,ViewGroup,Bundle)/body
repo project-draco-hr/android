@@ -21,7 +21,14 @@
   Button addUserGroupButton=(Button)view.findViewById(R.id.addUserButton);
   addUserGroupButton.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View view){
-      mListener.showSearchUsersAndGroups(mShares);
+      boolean shareWithUsersEnable=AccountUtils.hasSearchUsersSupport(mAccount);
+      if (shareWithUsersEnable) {
+        mListener.showSearchUsersAndGroups(mShares);
+      }
+ else {
+        String message=getString(R.string.share_sharee_unavailable);
+        Toast.makeText(getActivity(),message,Toast.LENGTH_LONG).show();
+      }
     }
   }
 );
