@@ -3,8 +3,5 @@
   if (result != null && result.isSuccess()) {
     Log_OC.d(TAG,"Get Data Share With finishes sucessfully");
   }
- else {
-    Toast.makeText(this,result.getLogMessage(),Toast.LENGTH_SHORT).show();
-  }
   refreshUsersInLists();
 }
