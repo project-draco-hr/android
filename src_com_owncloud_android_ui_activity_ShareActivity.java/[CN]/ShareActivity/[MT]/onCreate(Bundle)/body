@@ -1,5 +1,6 @@
 {
   super.onCreate(savedInstanceState);
+  onAccountSet(false);
   setContentView(R.layout.share_activity);
   FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
   if (savedInstanceState != null) {
@@ -10,7 +11,6 @@
       if (mSearchFragment != null) {
         ft.hide(mShareFileFragment);
         ft.add(R.id.share_fragment_container,mSearchFragment,TAG_SEARCH_FRAGMENT);
-        ft.addToBackStack(TAG_SEARCH_FRAGMENT);
       }
       ft.commit();
     }
@@ -22,5 +22,4 @@
     mSearchFragment=null;
   }
   handleIntent(getIntent());
-  onAccountSet(false);
 }

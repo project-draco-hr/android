@@ -1,8 +1,8 @@
 {
   super.onBackPressed();
   if (mSearchFragment != null) {
-    getSupportFragmentManager().popBackStackImmediate();
     mSearchFragment=null;
+    getSupportFragmentManager().popBackStackImmediate();
     mShareFileFragment.refreshUsersOrGroupsListFromDB();
   }
 }
