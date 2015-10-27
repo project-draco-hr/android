@@ -2,5 +2,6 @@
   mState=State.STOPPED;
   releaseResources(true);
   giveUpAudioFocus();
+  stopForeground(true);
   super.onDestroy();
 }
