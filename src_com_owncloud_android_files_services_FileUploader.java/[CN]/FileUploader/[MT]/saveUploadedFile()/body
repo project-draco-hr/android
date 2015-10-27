@@ -25,4 +25,5 @@
   file.setNeedsUpdateThumbnail(true);
   mStorageManager.saveFile(file);
   mStorageManager.saveConflict(file,false);
+  mStorageManager.triggerMediaScan(file.getStoragePath());
 }
