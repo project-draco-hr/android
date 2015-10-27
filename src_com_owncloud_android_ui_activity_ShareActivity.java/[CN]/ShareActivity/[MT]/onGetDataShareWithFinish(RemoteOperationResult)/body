@@ -1,6 +1,6 @@
 {
   dismissLoadingDialog();
-  if (result != null && result.isSuccess()) {
+  if (result.isSuccess()) {
     Log_OC.d(TAG,"Get Data Share With finishes sucessfully");
   }
   refreshUsersInLists();
