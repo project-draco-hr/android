@@ -14,7 +14,7 @@ synchronized (mCancellationRequested) {
         mFilesForDirectDownload.add(child);
       }
  else {
-        SynchronizeFileOperation operation=new SynchronizeFileOperation(child,(child.isInConflict() ? null : child),mAccount,true,mContext);
+        SynchronizeFileOperation operation=new SynchronizeFileOperation(child,(child.getEtagInConflict() != null ? null : child),mAccount,true,mContext);
         mFilesToSyncContents.add(operation);
       }
     }

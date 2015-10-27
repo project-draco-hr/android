@@ -19,11 +19,11 @@
     if (oldFile.fileExists()) {
       oldFile.setStoragePath(null);
       mStorageManager.saveFile(oldFile);
-      mStorageManager.saveConflict(oldFile,false);
+      mStorageManager.saveConflict(oldFile,null);
     }
   }
   file.setNeedsUpdateThumbnail(true);
   mStorageManager.saveFile(file);
-  mStorageManager.saveConflict(file,false);
+  mStorageManager.saveConflict(file,null);
   mStorageManager.triggerMediaScan(file.getStoragePath());
 }

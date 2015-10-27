@@ -29,7 +29,7 @@
     file.setRemoteId(c.getString(c.getColumnIndex(ProviderTableMeta.FILE_REMOTE_ID)));
     file.setNeedsUpdateThumbnail(c.getInt(c.getColumnIndex(ProviderTableMeta.FILE_UPDATE_THUMBNAIL)) == 1 ? true : false);
     file.setDownloading(c.getInt(c.getColumnIndex(ProviderTableMeta.FILE_IS_DOWNLOADING)) == 1 ? true : false);
-    file.setInConflict(c.getInt(c.getColumnIndex(ProviderTableMeta.FILE_IN_CONFLICT)) == 1 ? true : false);
+    file.setEtagInConflict(c.getString(c.getColumnIndex(ProviderTableMeta.FILE_ETAG_IN_CONFLICT)));
   }
   return file;
 }

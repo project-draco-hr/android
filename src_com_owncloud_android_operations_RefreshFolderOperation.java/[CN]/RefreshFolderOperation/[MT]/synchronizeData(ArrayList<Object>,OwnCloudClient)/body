@@ -36,7 +36,7 @@
       }
       updatedFile.setPublicLink(localFile.getPublicLink());
       updatedFile.setShareByLink(localFile.isShareByLink());
-      updatedFile.setInConflict(localFile.isInConflict());
+      updatedFile.setEtagInConflict(localFile.getEtagInConflict());
     }
  else {
       updatedFile.setEtag("");
