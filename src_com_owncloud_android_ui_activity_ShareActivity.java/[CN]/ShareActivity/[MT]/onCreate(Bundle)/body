@@ -5,7 +5,7 @@
   FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
   if (savedInstanceState != null) {
     mShareFileFragment=(ShareFileFragment)getSupportFragmentManager().getFragment(savedInstanceState,TAG_SHARE_FRAGMENT);
-    mSearchFragment=(SearchFragment)getSupportFragmentManager().getFragment(savedInstanceState,TAG_SEARCH_FRAGMENT);
+    mSearchFragment=(SearchShareesFragment)getSupportFragmentManager().getFragment(savedInstanceState,TAG_SEARCH_FRAGMENT);
     if (mShareFileFragment != null) {
       ft.replace(R.id.share_fragment_container,mShareFileFragment,TAG_SHARE_FRAGMENT);
       if (mSearchFragment != null) {

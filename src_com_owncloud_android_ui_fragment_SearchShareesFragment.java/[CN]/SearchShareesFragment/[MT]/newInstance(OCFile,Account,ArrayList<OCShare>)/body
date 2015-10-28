@@ -1,5 +1,5 @@
 {
-  SearchFragment fragment=new SearchFragment();
+  SearchShareesFragment fragment=new SearchShareesFragment();
   Bundle args=new Bundle();
   args.putParcelable(ARG_FILE,fileToShare);
   args.putParcelable(ARG_ACCOUNT,account);
