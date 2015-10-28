@@ -4,6 +4,7 @@
   SearchManager searchManager=(SearchManager)getActivity().getSystemService(Context.SEARCH_SERVICE);
   searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
   searchView.setIconifiedByDefault(false);
+  searchView.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI);
   searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
     @Override public boolean onQueryTextSubmit(    String query){
       Log_OC.v(TAG,"onQueryTextSubmit intercepted, query: " + query);
