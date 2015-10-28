@@ -3,6 +3,5 @@
   if (getArguments() != null) {
     mFile=getArguments().getParcelable(ARG_FILE);
     mAccount=getArguments().getParcelable(ARG_ACCOUNT);
-    mShares=getArguments().getParcelableArrayList(ARG_SHARES);
   }
 }

@@ -1,7 +1,4 @@
 {
   super.onActivityCreated(savedInstanceState);
   refreshUsersOrGroupsListFromDB();
-  if (mListener != null) {
-    mListener.refreshUsersOrGroupsListFromServer();
-  }
 }

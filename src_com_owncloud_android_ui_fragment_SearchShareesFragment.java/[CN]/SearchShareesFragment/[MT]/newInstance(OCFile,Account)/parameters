@@ -1,3 +1,2 @@
 OCFile fileToShare
 Account account
-ArrayList<OCShare> shares

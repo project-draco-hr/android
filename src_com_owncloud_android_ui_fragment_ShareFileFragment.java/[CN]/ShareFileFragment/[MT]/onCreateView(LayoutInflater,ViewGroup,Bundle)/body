@@ -23,7 +23,7 @@
     @Override public void onClick(    View view){
       boolean shareWithUsersEnable=AccountUtils.hasSearchUsersSupport(mAccount);
       if (shareWithUsersEnable) {
-        mListener.showSearchUsersAndGroups(mShares);
+        mListener.showSearchUsersAndGroups();
       }
  else {
         String message=getString(R.string.share_sharee_unavailable);
