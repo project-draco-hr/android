@@ -1,7 +1,0 @@
-{
-  dismissLoadingDialog();
-  if (result.isSuccess()) {
-    Log_OC.d(TAG,"Get Data Share With finishes sucessfully");
-  }
-  refreshUsersInLists();
-}

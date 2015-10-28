@@ -1,5 +1,4 @@
 {
-  dismissLoadingDialog();
   if (result.isSuccess()) {
     mTryShareAgain=false;
     updateFileFromDB();

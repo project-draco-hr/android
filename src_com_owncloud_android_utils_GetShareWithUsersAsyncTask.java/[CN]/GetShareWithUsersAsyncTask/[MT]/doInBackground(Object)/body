@@ -1,11 +1,12 @@
 {
+  GetSharesForFileOperation operation=null;
   RemoteOperationResult result=null;
   if (params != null && params.length == 3) {
     OCFile file=(OCFile)params[0];
     Account account=(Account)params[1];
     FileDataStorageManager fileDataStorageManager=(FileDataStorageManager)params[2];
     try {
-      GetSharesForFileOperation operation=new GetSharesForFileOperation(file.getRemotePath(),false,false);
+      operation=new GetSharesForFileOperation(file.getRemotePath(),false,false);
       OwnCloudAccount ocAccount=new OwnCloudAccount(account,MainApp.getAppContext());
       OwnCloudClient client=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,MainApp.getAppContext());
       result=operation.execute(client,fileDataStorageManager);
@@ -18,5 +19,5 @@
  else {
     result=new RemoteOperationResult(RemoteOperationResult.ResultCode.UNKNOWN_ERROR);
   }
-  return result;
+  return new Pair(operation,result);
 }
