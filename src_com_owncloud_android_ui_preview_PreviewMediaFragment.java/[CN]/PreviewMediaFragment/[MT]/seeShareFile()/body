@@ -1,4 +1,4 @@
 {
   stopPreview(false);
-  mContainerActivity.showShareFile(getFile());
+  mContainerActivity.getFileOperationsHelper().showShareFile(getFile());
 }

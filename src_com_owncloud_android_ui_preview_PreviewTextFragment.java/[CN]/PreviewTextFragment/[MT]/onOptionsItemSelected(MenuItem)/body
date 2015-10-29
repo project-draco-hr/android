@@ -7,7 +7,7 @@ case R.id.action_share_file:
     }
 case R.id.action_share_with_users:
 {
-    seeShareFile();
+    mContainerActivity.getFileOperationsHelper().showShareFile(getFile());
     return true;
   }
 case R.id.action_unshare_file:
