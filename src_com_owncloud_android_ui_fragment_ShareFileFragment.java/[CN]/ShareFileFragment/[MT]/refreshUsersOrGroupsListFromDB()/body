@@ -1,4 +1,6 @@
 {
-  mShares=((ShareActivity)mListener).getStorageManager().getSharesWithForAFile(mFile.getRemotePath(),mAccount.name);
-  updateListOfUserGroups();
+  if (((FileActivity)mListener).getStorageManager() != null) {
+    mShares=((FileActivity)mListener).getStorageManager().getSharesWithForAFile(mFile.getRemotePath(),mAccount.name);
+    updateListOfUserGroups();
+  }
 }

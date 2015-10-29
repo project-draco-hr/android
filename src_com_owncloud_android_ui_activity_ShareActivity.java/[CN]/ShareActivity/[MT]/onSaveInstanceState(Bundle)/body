@@ -1,7 +1,0 @@
-{
-  super.onSaveInstanceState(outState);
-  getSupportFragmentManager().putFragment(outState,TAG_SHARE_FRAGMENT,mShareFileFragment);
-  if (mSearchFragment != null) {
-    getSupportFragmentManager().putFragment(outState,TAG_SEARCH_FRAGMENT,mSearchFragment);
-  }
-}

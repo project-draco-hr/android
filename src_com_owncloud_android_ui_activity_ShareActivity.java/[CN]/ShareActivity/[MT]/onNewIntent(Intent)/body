@@ -1,4 +1,13 @@
 {
-  setIntent(intent);
-  handleIntent(intent);
+  if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+    String query=intent.getStringExtra(SearchManager.QUERY);
+    Log_OC.w(TAG,"Ignored Intent requesting to query for " + query);
+  }
+ else   if (UsersAndGroupsSearchProvider.ACTION_SHARE_WITH.equals(intent.getAction())) {
+    Uri data=intent.getData();
+    doShareWith(data.getLastPathSegment(),UsersAndGroupsSearchProvider.DATA_GROUP.equals(data.getAuthority()));
+  }
+ else {
+    Log_OC.wtf(TAG,"Unexpected intent " + intent.toString());
+  }
 }

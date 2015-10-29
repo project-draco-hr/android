@@ -1,8 +1,14 @@
 {
-  if (mShareFileFragment != null) {
-    mShareFileFragment.refreshUsersOrGroupsListFromDB();
+  ShareFileFragment shareFileFragment=getShareFileFragment();
+  if (shareFileFragment != null) {
+    if (shareFileFragment.isAdded()) {
+      shareFileFragment.refreshUsersOrGroupsListFromDB();
+    }
   }
-  if (mSearchFragment != null) {
-    mSearchFragment.refreshUsersOrGroupsListFromDB();
+  SearchShareesFragment searchShareesFragment=getSearchFragment();
+  if (searchShareesFragment != null) {
+    if (searchShareesFragment.isAdded()) {
+      searchShareesFragment.refreshUsersOrGroupsListFromDB();
+    }
   }
 }

@@ -1,9 +1,7 @@
 {
   super.onRemoteOperationFinish(operation,result);
   if (result.isSuccess()) {
+    Log_OC.d(TAG,"Refreshing lists on successful sync");
     refreshUsersInLists();
-    if (operation instanceof CreateShareWithShareeOperation) {
-      getIntent().setAction(null);
-    }
   }
 }

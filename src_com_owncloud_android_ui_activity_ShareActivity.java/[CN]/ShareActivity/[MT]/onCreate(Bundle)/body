@@ -1,25 +1,10 @@
 {
   super.onCreate(savedInstanceState);
-  onAccountSet(false);
   setContentView(R.layout.share_activity);
   FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
-  if (savedInstanceState != null) {
-    mShareFileFragment=(ShareFileFragment)getSupportFragmentManager().getFragment(savedInstanceState,TAG_SHARE_FRAGMENT);
-    mSearchFragment=(SearchShareesFragment)getSupportFragmentManager().getFragment(savedInstanceState,TAG_SEARCH_FRAGMENT);
-    if (mShareFileFragment != null) {
-      ft.replace(R.id.share_fragment_container,mShareFileFragment,TAG_SHARE_FRAGMENT);
-      if (mSearchFragment != null) {
-        ft.hide(mShareFileFragment);
-        ft.add(R.id.share_fragment_container,mSearchFragment,TAG_SEARCH_FRAGMENT);
-      }
-      ft.commit();
-    }
-  }
- else {
-    mShareFileFragment=ShareFileFragment.newInstance(getFile(),getAccount());
-    ft.replace(R.id.share_fragment_container,mShareFileFragment,TAG_SHARE_FRAGMENT);
+  if (savedInstanceState == null) {
+    Fragment fragment=ShareFileFragment.newInstance(getFile(),getAccount());
+    ft.replace(R.id.share_fragment_container,fragment,TAG_SHARE_FRAGMENT);
     ft.commit();
-    mSearchFragment=null;
   }
-  handleIntent(getIntent());
 }
