@@ -6,7 +6,6 @@
  else {
     share.setIsFolder(false);
   }
-  share.setPermissions(READ_ONLY);
   getStorageManager().saveShare(share);
   OCFile file=getStorageManager().getFileByPath(mPath);
   if (file != null) {
