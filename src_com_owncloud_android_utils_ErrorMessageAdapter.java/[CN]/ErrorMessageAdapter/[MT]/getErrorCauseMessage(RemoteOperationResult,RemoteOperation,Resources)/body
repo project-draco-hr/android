@@ -148,7 +148,7 @@
         message=String.format(res.getString(R.string.sync_current_folder_was_removed),folderPathName);
       }
  else {
-        message=String.format(res.getString(R.string.download_folder_failed_content),folderPathName);
+        message=String.format(res.getString(R.string.sync_folder_failed_content),folderPathName);
       }
     }
   }

@@ -1,8 +1,0 @@
-{
-  File dir=new File(path);
-  if (dir.exists()) {
-    long bytes=FileStorageUtils.getFolderSize(dir);
-    return DisplayUtils.bytesToHumanReadable(bytes);
-  }
-  return "0 B";
-}

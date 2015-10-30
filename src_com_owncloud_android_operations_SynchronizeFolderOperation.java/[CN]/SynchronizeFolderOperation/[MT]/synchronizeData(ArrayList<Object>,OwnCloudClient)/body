@@ -1,13 +1,12 @@
 {
   FileDataStorageManager storageManager=getStorageManager();
-  OCFile remoteFolder=fillOCFile((RemoteFile)folderAndFiles.get(0));
+  OCFile remoteFolder=FileStorageUtils.fillOCFile((RemoteFile)folderAndFiles.get(0));
   remoteFolder.setParentId(mLocalFolder.getParentId());
   remoteFolder.setFileId(mLocalFolder.getFileId());
   Log_OC.d(TAG,"Remote folder " + mLocalFolder.getRemotePath() + " changed - starting update of local data ");
   List<OCFile> updatedFiles=new Vector<OCFile>(folderAndFiles.size() - 1);
   mFilesForDirectDownload.clear();
-  mFilesToSyncContentsWithoutUpload.clear();
-  mFavouriteFilesToSyncContents.clear();
+  mFilesToSyncContents.clear();
   if (mCancellationRequested.get()) {
     throw new OperationCancelledException();
   }
@@ -16,33 +15,37 @@
   for (  OCFile file : localFiles) {
     localFilesMap.put(file.getRemotePath(),file);
   }
-  OCFile remoteFile=null, localFile=null;
+  OCFile remoteFile=null, localFile=null, updatedFile=null;
+  RemoteFile r;
   for (int i=1; i < folderAndFiles.size(); i++) {
-    remoteFile=fillOCFile((RemoteFile)folderAndFiles.get(i));
-    remoteFile.setParentId(mLocalFolder.getFileId());
+    r=(RemoteFile)folderAndFiles.get(i);
+    remoteFile=FileStorageUtils.fillOCFile(r);
+    updatedFile=FileStorageUtils.fillOCFile(r);
+    updatedFile.setParentId(mLocalFolder.getFileId());
     localFile=localFilesMap.remove(remoteFile.getRemotePath());
-    remoteFile.setLastSyncDateForProperties(mCurrentSyncTime);
+    updatedFile.setLastSyncDateForProperties(mCurrentSyncTime);
     if (localFile != null) {
-      remoteFile.setFileId(localFile.getFileId());
-      remoteFile.setFavorite(localFile.isFavorite());
-      remoteFile.setLastSyncDateForData(localFile.getLastSyncDateForData());
-      remoteFile.setModificationTimestampAtLastSyncForData(localFile.getModificationTimestampAtLastSyncForData());
-      remoteFile.setStoragePath(localFile.getStoragePath());
-      remoteFile.setEtag(localFile.getEtag());
-      if (remoteFile.isFolder()) {
-        remoteFile.setFileLength(localFile.getFileLength());
+      updatedFile.setFileId(localFile.getFileId());
+      updatedFile.setFavorite(localFile.isFavorite());
+      updatedFile.setLastSyncDateForData(localFile.getLastSyncDateForData());
+      updatedFile.setModificationTimestampAtLastSyncForData(localFile.getModificationTimestampAtLastSyncForData());
+      updatedFile.setStoragePath(localFile.getStoragePath());
+      updatedFile.setEtag(localFile.getEtag());
+      if (updatedFile.isFolder()) {
+        updatedFile.setFileLength(localFile.getFileLength());
       }
  else       if (mRemoteFolderChanged && remoteFile.isImage() && remoteFile.getModificationTimestamp() != localFile.getModificationTimestamp()) {
-        remoteFile.setNeedsUpdateThumbnail(true);
+        updatedFile.setNeedsUpdateThumbnail(true);
         Log.d(TAG,"Image " + remoteFile.getFileName() + " updated on the server");
       }
-      remoteFile.setPublicLink(localFile.getPublicLink());
-      remoteFile.setShareByLink(localFile.isShareByLink());
+      updatedFile.setPublicLink(localFile.getPublicLink());
+      updatedFile.setShareByLink(localFile.isShareByLink());
+      updatedFile.setEtagInConflict(localFile.getEtagInConflict());
     }
  else {
-      remoteFile.setEtag("");
+      updatedFile.setEtag("");
     }
-    searchForLocalFileInDefaultPath(remoteFile);
+    searchForLocalFileInDefaultPath(updatedFile);
     if (remoteFile.isFolder()) {
 synchronized (mCancellationRequested) {
         if (mCancellationRequested.get()) {
@@ -51,15 +54,11 @@ synchronized (mCancellationRequested) {
         startSyncFolderOperation(remoteFile.getRemotePath());
       }
     }
- else     if (remoteFile.isFavorite()) {
-      SynchronizeFileOperation operation=new SynchronizeFileOperation(localFile,remoteFile,mAccount,true,mContext);
-      mFavouriteFilesToSyncContents.add(operation);
-    }
  else {
-      SynchronizeFileOperation operation=new SynchronizeFileOperation(localFile,remoteFile,mAccount,true,false,mContext);
-      mFilesToSyncContentsWithoutUpload.add(operation);
+      SynchronizeFileOperation operation=new SynchronizeFileOperation(localFile,remoteFile,mAccount,true,mContext);
+      mFilesToSyncContents.add(operation);
     }
-    updatedFiles.add(remoteFile);
+    updatedFiles.add(updatedFile);
   }
   storageManager.saveFolder(remoteFolder,updatedFiles,localFilesMap.values());
 }

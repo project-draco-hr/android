@@ -1,0 +1,9 @@
+{
+  List<OCFile> children=mStorageManager.getFolderContent(mLocalFolder);
+  for (  OCFile child : children) {
+    if (!child.isFolder() && child.isFavorite()) {
+      SynchronizeFileOperation operation=new SynchronizeFileOperation(child,child,mAccount,true,mContext);
+      mFilesToSyncContents.add(operation);
+    }
+  }
+}
