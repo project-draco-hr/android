@@ -19,5 +19,5 @@
   mRemoteId=source.readString();
   mNeedsUpdateThumbnail=source.readInt() == 1;
   mIsDownloading=source.readInt() == 1;
-  mInConflict=source.readInt() == 1;
+  mEtagInConflict=source.readString();
 }

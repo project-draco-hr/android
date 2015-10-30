@@ -32,7 +32,7 @@
         if (!removeDBData && success) {
           file.setStoragePath(null);
           saveFile(file);
-          saveConflict(file,false);
+          saveConflict(file,null);
         }
       }
     }

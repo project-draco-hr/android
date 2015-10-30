@@ -1,9 +1,9 @@
 {
   if (!file.isDown()) {
-    inConflict=false;
+    etagInConflict=null;
   }
   ContentValues cv=new ContentValues();
-  cv.put(ProviderTableMeta.FILE_IN_CONFLICT,inConflict ? 1 : 0);
+  cv.put(ProviderTableMeta.FILE_ETAG_IN_CONFLICT,etagInConflict);
   int updated=0;
   if (getContentResolver() != null) {
     updated=getContentResolver().update(ProviderTableMeta.CONTENT_URI_FILE,cv,ProviderTableMeta._ID + "=?",new String[]{String.valueOf(file.getFileId())});
@@ -18,7 +18,7 @@
   }
   Log_OC.d(TAG,"Number of files updated with CONFLICT: " + updated);
   if (updated > 0) {
-    if (inConflict) {
+    if (etagInConflict != null) {
       long parentId=file.getParentId();
       Set<String> ancestorIds=new HashSet<String>();
       while (parentId != FileDataStorageManager.ROOT_PARENT_ID) {
@@ -54,7 +54,7 @@
       parentPath=parentPath.substring(0,parentPath.lastIndexOf(OCFile.PATH_SEPARATOR) + 1);
       Log_OC.d(TAG,"checking parents to remove conflict; STARTING with " + parentPath);
       while (parentPath.length() > 0) {
-        String where=ProviderTableMeta.FILE_IN_CONFLICT + " = 1 AND " + ProviderTableMeta.FILE_CONTENT_TYPE+ " != 'DIR' AND "+ ProviderTableMeta.FILE_ACCOUNT_OWNER+ " = ? AND "+ ProviderTableMeta.FILE_PATH+ " LIKE ?";
+        String where=ProviderTableMeta.FILE_ETAG_IN_CONFLICT + " IS NOT NULL AND " + ProviderTableMeta.FILE_CONTENT_TYPE+ " != 'DIR' AND "+ ProviderTableMeta.FILE_ACCOUNT_OWNER+ " = ? AND "+ ProviderTableMeta.FILE_PATH+ " LIKE ?";
         Cursor descendentsInConflict=getContentResolver().query(ProviderTableMeta.CONTENT_URI_FILE,new String[]{ProviderTableMeta._ID},where,new String[]{mAccount.name,parentPath + "%"},null);
         if (descendentsInConflict == null || descendentsInConflict.getCount() == 0) {
           Log_OC.d(TAG,"NO MORE conflicts in " + parentPath);

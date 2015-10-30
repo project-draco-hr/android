@@ -111,7 +111,7 @@
     Log_OC.i("SQL","Entering in the #11 ADD in onUpgrade");
     db.beginTransaction();
     try {
-      db.execSQL("ALTER TABLE " + ProviderTableMeta.FILE_TABLE_NAME + " ADD COLUMN "+ ProviderTableMeta.FILE_IN_CONFLICT+ " INTEGER "+ " DEFAULT 0");
+      db.execSQL("ALTER TABLE " + ProviderTableMeta.FILE_TABLE_NAME + " ADD COLUMN "+ ProviderTableMeta.FILE_ETAG_IN_CONFLICT+ " TEXT "+ " DEFAULT NULL");
       upgraded=true;
       db.setTransactionSuccessful();
     }

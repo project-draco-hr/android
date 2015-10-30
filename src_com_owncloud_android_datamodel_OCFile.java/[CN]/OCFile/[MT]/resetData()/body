@@ -19,5 +19,5 @@
   mRemoteId=null;
   mNeedsUpdateThumbnail=false;
   mIsDownloading=false;
-  mInConflict=false;
+  mEtagInConflict=null;
 }

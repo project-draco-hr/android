@@ -23,7 +23,7 @@
             saveUploadedFile();
           }
  else           if (uploadResult.getCode() == ResultCode.SYNC_CONFLICT) {
-            mStorageManager.saveConflict(mCurrentUpload.getFile(),true);
+            mStorageManager.saveConflict(mCurrentUpload.getFile(),mCurrentUpload.getFile().getEtagInConflict());
           }
         }
  else {
