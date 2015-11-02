@@ -21,9 +21,10 @@
   cv.put(ProviderTableMeta.FILE_REMOTE_ID,file.getRemoteId());
   cv.put(ProviderTableMeta.FILE_UPDATE_THUMBNAIL,file.needsUpdateThumbnail());
   cv.put(ProviderTableMeta.FILE_IS_DOWNLOADING,file.isDownloading());
+  cv.put(ProviderTableMeta.FILE_ETAG_IN_CONFLICT,file.getEtagInConflict());
   boolean sameRemotePath=fileExists(file.getRemotePath());
   if (sameRemotePath || fileExists(file.getFileId())) {
-    OCFile oldFile=null;
+    OCFile oldFile;
     if (sameRemotePath) {
       oldFile=getFileByPath(file.getRemotePath());
       file.setFileId(oldFile.getFileId());

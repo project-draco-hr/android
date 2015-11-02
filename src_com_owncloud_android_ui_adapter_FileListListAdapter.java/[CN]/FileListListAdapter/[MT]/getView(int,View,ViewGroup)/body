@@ -89,23 +89,27 @@ ImageView localStateView=(ImageView)view.findViewById(R.id.localFileIndicator);
 localStateView.bringToFront();
 FileDownloaderBinder downloaderBinder=mTransferServiceGetter.getFileDownloaderBinder();
 FileUploaderBinder uploaderBinder=mTransferServiceGetter.getFileUploaderBinder();
-boolean downloading=(downloaderBinder != null && downloaderBinder.isDownloading(mAccount,file));
 OperationsServiceBinder opsBinder=mTransferServiceGetter.getOperationsServiceBinder();
-downloading|=(opsBinder != null && opsBinder.isSynchronizing(mAccount,file.getRemotePath()));
-if (downloading) {
-localStateView.setImageResource(R.drawable.downloading_file_indicator);
+localStateView.setVisibility(View.INVISIBLE);
+if (opsBinder != null && opsBinder.isSynchronizing(mAccount,file.getRemotePath())) {
+localStateView.setImageResource(R.drawable.synchronizing_file_indicator);
+localStateView.setVisibility(View.VISIBLE);
+}
+ else if (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,file)) {
+localStateView.setImageResource(file.isFolder() ? R.drawable.synchronizing_file_indicator : R.drawable.downloading_file_indicator);
 localStateView.setVisibility(View.VISIBLE);
 }
  else if (uploaderBinder != null && uploaderBinder.isUploading(mAccount,file)) {
-localStateView.setImageResource(R.drawable.uploading_file_indicator);
+localStateView.setImageResource(file.isFolder() ? R.drawable.synchronizing_file_indicator : R.drawable.uploading_file_indicator);
+localStateView.setVisibility(View.VISIBLE);
+}
+ else if (file.getEtagInConflict() != null) {
+localStateView.setImageResource(R.drawable.conflict_file_indicator);
 localStateView.setVisibility(View.VISIBLE);
 }
  else if (file.isDown()) {
 localStateView.setImageResource(R.drawable.local_file_indicator);
 localStateView.setVisibility(View.VISIBLE);
-}
- else {
-localStateView.setVisibility(View.INVISIBLE);
 }
 ImageView sharedWithMeIconV=(ImageView)view.findViewById(R.id.sharedWithMeIcon);
 sharedWithMeIconV.bringToFront();

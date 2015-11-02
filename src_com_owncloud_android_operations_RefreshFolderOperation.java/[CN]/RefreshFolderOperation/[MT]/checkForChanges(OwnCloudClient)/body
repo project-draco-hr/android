@@ -1,8 +1,7 @@
 {
   mRemoteFolderChanged=true;
   RemoteOperationResult result=null;
-  String remotePath=null;
-  remotePath=mLocalFolder.getRemotePath();
+  String remotePath=mLocalFolder.getRemotePath();
   Log_OC.d(TAG,"Checking changes in " + mAccount.name + remotePath);
   ReadRemoteFileOperation operation=new ReadRemoteFileOperation(remotePath);
   result=operation.execute(client);

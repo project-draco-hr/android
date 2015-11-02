@@ -107,4 +107,17 @@
     upgraded=true;
   }
   if (!upgraded)   Log_OC.i("SQL","OUT of the ADD in onUpgrade; oldVersion == " + oldVersion + ", newVersion == "+ newVersion);
+  if (oldVersion < 11 && newVersion >= 11) {
+    Log_OC.i("SQL","Entering in the #11 ADD in onUpgrade");
+    db.beginTransaction();
+    try {
+      db.execSQL("ALTER TABLE " + ProviderTableMeta.FILE_TABLE_NAME + " ADD COLUMN "+ ProviderTableMeta.FILE_ETAG_IN_CONFLICT+ " TEXT "+ " DEFAULT NULL");
+      upgraded=true;
+      db.setTransactionSuccessful();
+    }
+  finally {
+      db.endTransaction();
+    }
+  }
+  if (!upgraded)   Log_OC.i("SQL","OUT of the ADD in onUpgrade; oldVersion == " + oldVersion + ", newVersion == "+ newVersion);
 }

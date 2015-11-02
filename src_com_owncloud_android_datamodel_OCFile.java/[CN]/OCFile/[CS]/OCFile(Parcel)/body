@@ -17,6 +17,7 @@
   mPublicLink=source.readString();
   mPermissions=source.readString();
   mRemoteId=source.readString();
-  mNeedsUpdateThumbnail=source.readInt() == 0;
-  mIsDownloading=source.readInt() == 0;
+  mNeedsUpdateThumbnail=source.readInt() == 1;
+  mIsDownloading=source.readInt() == 1;
+  mEtagInConflict=source.readString();
 }

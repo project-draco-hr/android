@@ -3,7 +3,7 @@
   mFailsInFavouritesFound=0;
   mConflictsFound=0;
   mForgottenLocalFiles.clear();
-  if (FileUtils.PATH_SEPARATOR.equals(mLocalFolder.getRemotePath()) && !mSyncFullAccount) {
+  if (OCFile.ROOT_PATH.equals(mLocalFolder.getRemotePath()) && !mSyncFullAccount) {
     updateOCVersion(client);
   }
   result=checkForChanges(client);
@@ -12,7 +12,11 @@
       result=fetchAndSyncRemoteFolder(client);
     }
  else {
+      fetchFavoritesToSyncFromLocalData();
       mChildren=mStorageManager.getFolderContent(mLocalFolder);
+    }
+    if (result.isSuccess()) {
+      startContentSynchronizations(mFilesToSyncContents,client);
     }
   }
   if (!mSyncFullAccount) {

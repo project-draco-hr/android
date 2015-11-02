@@ -19,4 +19,5 @@
   mRemoteId=null;
   mNeedsUpdateThumbnail=false;
   mIsDownloading=false;
+  mEtagInConflict=null;
 }
