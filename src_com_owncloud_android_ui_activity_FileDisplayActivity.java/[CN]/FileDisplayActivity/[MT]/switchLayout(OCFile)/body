@@ -1,0 +1,8 @@
+{
+  if (DisplayUtils.isGridView(file,getStorageManager())) {
+    switchToGridView();
+  }
+ else {
+    switchToListView();
+  }
+}

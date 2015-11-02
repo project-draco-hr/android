@@ -3,11 +3,6 @@
   inflater.inflate(R.menu.main_menu,menu);
   mOptionsMenu=menu;
   MenuItem menuItem=mOptionsMenu.findItem(R.id.action_switch_view);
-  if (DisplayUtils.isGridView(getFile(),getStorageManager())) {
-    menuItem.setTitle(getApplicationContext().getString(R.string.action_switch_list_view));
-  }
- else {
-    menuItem.setTitle(getApplicationContext().getString(R.string.action_switch_grid_view));
-  }
+  changeGridIcon();
   return true;
 }
