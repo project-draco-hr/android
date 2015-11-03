@@ -1,0 +1,14 @@
+{
+  if (mPublicShare != null && ShareType.PUBLIC_LINK.equals(mPublicShare.getShareType())) {
+    getShareViaLinkSwitch().setChecked(true);
+    getExpirationDateSection().setVisibility(View.VISIBLE);
+    getPasswordSection().setVisibility(View.VISIBLE);
+    getGetLinkButton().setVisibility(View.VISIBLE);
+  }
+ else {
+    getShareViaLinkSwitch().setChecked(false);
+    getExpirationDateSection().setVisibility(View.GONE);
+    getPasswordSection().setVisibility(View.GONE);
+    getGetLinkButton().setVisibility(View.GONE);
+  }
+}

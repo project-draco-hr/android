@@ -3,6 +3,7 @@
   if (shareFileFragment != null) {
     if (shareFileFragment.isAdded()) {
       shareFileFragment.refreshUsersOrGroupsListFromDB();
+      shareFileFragment.refreshPublicShareFromDB();
     }
   }
   SearchShareesFragment searchShareesFragment=getSearchFragment();

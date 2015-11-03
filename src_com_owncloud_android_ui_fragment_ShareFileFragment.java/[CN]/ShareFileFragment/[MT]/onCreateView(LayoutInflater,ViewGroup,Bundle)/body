@@ -32,5 +32,45 @@
     }
   }
 );
+  Switch shareViaLinkSwitch=(Switch)view.findViewById(R.id.shareViaLinkSectionSwitch);
+  shareViaLinkSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+    @Override public void onCheckedChanged(    CompoundButton buttonView,    boolean isChecked){
+      if (isChecked) {
+        getExpirationDateSection().setVisibility(View.VISIBLE);
+        getPasswordSection().setVisibility(View.VISIBLE);
+        getGetLinkButton().setVisibility(View.VISIBLE);
+      }
+ else {
+        getExpirationDateSection().setVisibility(View.GONE);
+        getPasswordSection().setVisibility(View.GONE);
+        getGetLinkButton().setVisibility(View.GONE);
+      }
+    }
+  }
+);
+  Switch shareViaLinkExpirationSwitch=(Switch)view.findViewById(R.id.shareViaLinkExpirationSwitch);
+  shareViaLinkExpirationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+    @Override public void onCheckedChanged(    CompoundButton buttonView,    boolean isChecked){
+      if (isChecked) {
+        getExpirationDateValue().setText(R.string.placeholder_timestamp);
+      }
+ else {
+        getExpirationDateValue().setText(R.string.empty);
+      }
+    }
+  }
+);
+  Switch shareViaLinkPasswordSwitch=(Switch)view.findViewById(R.id.shareViaLinkPasswordSwitch);
+  shareViaLinkPasswordSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+    @Override public void onCheckedChanged(    CompoundButton buttonView,    boolean isChecked){
+      if (isChecked) {
+        getExpirationPasswordValue().setVisibility(View.VISIBLE);
+      }
+ else {
+        getExpirationPasswordValue().setVisibility(View.INVISIBLE);
+      }
+    }
+  }
+);
   return view;
 }

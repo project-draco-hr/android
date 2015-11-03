@@ -1,0 +1,3 @@
+{
+  return (AppCompatButton)getView().findViewById(R.id.shareViewLinkGetLinkButton);
+}
