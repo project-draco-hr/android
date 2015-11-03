@@ -1,12 +1,22 @@
 {
   if (mPublicShare != null && ShareType.PUBLIC_LINK.equals(mPublicShare.getShareType())) {
-    getShareViaLinkSwitch().setChecked(true);
+    Switch shareViaLinkSwitch=getShareViaLinkSwitch();
+    if (!shareViaLinkSwitch.isChecked()) {
+      shareViaLinkSwitch.setOnCheckedChangeListener(null);
+      getShareViaLinkSwitch().setChecked(true);
+      shareViaLinkSwitch.setOnCheckedChangeListener(mOnShareViaLinkSwitchCheckedChangeListener);
+    }
     getExpirationDateSection().setVisibility(View.VISIBLE);
     getPasswordSection().setVisibility(View.VISIBLE);
     getGetLinkButton().setVisibility(View.VISIBLE);
   }
  else {
-    getShareViaLinkSwitch().setChecked(false);
+    Switch shareViaLinkSwitch=getShareViaLinkSwitch();
+    if (shareViaLinkSwitch.isChecked()) {
+      shareViaLinkSwitch.setOnCheckedChangeListener(null);
+      getShareViaLinkSwitch().setChecked(false);
+      shareViaLinkSwitch.setOnCheckedChangeListener(mOnShareViaLinkSwitchCheckedChangeListener);
+    }
     getExpirationDateSection().setVisibility(View.GONE);
     getPasswordSection().setVisibility(View.GONE);
     getGetLinkButton().setVisibility(View.GONE);

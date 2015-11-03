@@ -3,7 +3,9 @@
     mTryShareAgain=false;
     updateFileFromDB();
     Intent sendIntent=operation.getSendIntentWithSubject(this);
-    startActivity(sendIntent);
+    if (sendIntent != null) {
+      startActivity(sendIntent);
+    }
   }
  else {
     if (result.getCode() == ResultCode.SHARE_FORBIDDEN) {

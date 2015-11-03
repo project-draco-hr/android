@@ -32,22 +32,23 @@
     }
   }
 );
-  Switch shareViaLinkSwitch=(Switch)view.findViewById(R.id.shareViaLinkSectionSwitch);
-  shareViaLinkSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+  mOnShareViaLinkSwitchCheckedChangeListener=new CompoundButton.OnCheckedChangeListener(){
     @Override public void onCheckedChanged(    CompoundButton buttonView,    boolean isChecked){
-      if (isChecked) {
-        getExpirationDateSection().setVisibility(View.VISIBLE);
-        getPasswordSection().setVisibility(View.VISIBLE);
-        getGetLinkButton().setVisibility(View.VISIBLE);
-      }
+      if (isResumed()) {
+        if (isChecked) {
+          ((FileActivity)getActivity()).getFileOperationsHelper().shareFileViaLink(mFile);
+        }
  else {
-        getExpirationDateSection().setVisibility(View.GONE);
-        getPasswordSection().setVisibility(View.GONE);
-        getGetLinkButton().setVisibility(View.GONE);
+          getExpirationDateSection().setVisibility(View.GONE);
+          getPasswordSection().setVisibility(View.GONE);
+          getGetLinkButton().setVisibility(View.GONE);
+        }
       }
     }
   }
-);
+;
+  Switch shareViaLinkSwitch=(Switch)view.findViewById(R.id.shareViaLinkSectionSwitch);
+  shareViaLinkSwitch.setOnCheckedChangeListener(mOnShareViaLinkSwitchCheckedChangeListener);
   Switch shareViaLinkExpirationSwitch=(Switch)view.findViewById(R.id.shareViaLinkExpirationSwitch);
   shareViaLinkExpirationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
     @Override public void onCheckedChanged(    CompoundButton buttonView,    boolean isChecked){
