@@ -18,7 +18,7 @@ case R.id.action_open_file_with:
 }
 case R.id.action_unshare_file:
 {
-mContainerActivity.getFileOperationsHelper().unshareFileWithLink(mTargetFile);
+mContainerActivity.getFileOperationsHelper().unshareFileViaLink(mTargetFile);
 return true;
 }
 case R.id.action_rename_file:

@@ -39,9 +39,7 @@
           ((FileActivity)getActivity()).getFileOperationsHelper().shareFileViaLink(mFile);
         }
  else {
-          getExpirationDateSection().setVisibility(View.GONE);
-          getPasswordSection().setVisibility(View.GONE);
-          getGetLinkButton().setVisibility(View.GONE);
+          ((FileActivity)getActivity()).getFileOperationsHelper().unshareFileViaLink(mFile);
         }
       }
     }
