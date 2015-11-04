@@ -69,8 +69,8 @@ checkBoxV.setVisibility(View.VISIBLE);
 }
 }
  else {
-fileSizeSeparatorV.setVisibility(View.INVISIBLE);
-fileSizeV.setVisibility(View.INVISIBLE);
+fileSizeSeparatorV.setVisibility(View.GONE);
+fileSizeV.setVisibility(View.GONE);
 }
 case GRID_ITEM:
 fileName=(TextView)view.findViewById(R.id.Filename);
