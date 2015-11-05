@@ -1,0 +1,8 @@
+{
+  if (result != null) {
+    OnRemoteOperationListener listener=mListener.get();
+    if (listener != null) {
+      listener.onRemoteOperationFinish(result.first,result.second);
+    }
+  }
+}

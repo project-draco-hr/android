@@ -1,0 +1,25 @@
+{
+  if (result.isSuccess()) {
+    mTryShareAgain=false;
+    updateFileFromDB();
+    Intent sendIntent=operation.getSendIntentWithSubject(this);
+    startActivity(sendIntent);
+  }
+ else {
+    if (result.getCode() == ResultCode.SHARE_FORBIDDEN) {
+      if (!isTryShareAgain()) {
+        SharePasswordDialogFragment dialog=SharePasswordDialogFragment.newInstance(new OCFile(operation.getPath()),operation.getSendIntent());
+        dialog.show(getSupportFragmentManager(),DIALOG_SHARE_PASSWORD);
+      }
+ else {
+        Toast t=Toast.makeText(this,ErrorMessageAdapter.getErrorCauseMessage(result,operation,getResources()),Toast.LENGTH_LONG);
+        t.show();
+        mTryShareAgain=false;
+      }
+    }
+ else {
+      Toast t=Toast.makeText(this,ErrorMessageAdapter.getErrorCauseMessage(result,operation,getResources()),Toast.LENGTH_LONG);
+      t.show();
+    }
+  }
+}

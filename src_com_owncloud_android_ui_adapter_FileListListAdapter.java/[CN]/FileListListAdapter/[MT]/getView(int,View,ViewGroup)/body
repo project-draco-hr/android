@@ -75,7 +75,13 @@ name=file.getFileName();
 fileName.setText(name);
 case GRID_IMAGE:
 ImageView sharedIconV=(ImageView)view.findViewById(R.id.sharedIcon);
-if (file.isShareByLink()) {
+if (file.isSharedViaLink()) {
+sharedIconV.setImageResource(R.drawable.shared_via_link);
+sharedIconV.setVisibility(View.VISIBLE);
+sharedIconV.bringToFront();
+}
+ else if (file.isSharedWithSharee() || file.isSharedWithMe()) {
+sharedIconV.setImageResource(R.drawable.shared_via_users);
 sharedIconV.setVisibility(View.VISIBLE);
 sharedIconV.bringToFront();
 }
@@ -107,14 +113,6 @@ localStateView.setVisibility(View.VISIBLE);
  else if (file.isDown()) {
 localStateView.setImageResource(R.drawable.local_file_indicator);
 localStateView.setVisibility(View.VISIBLE);
-}
-ImageView sharedWithMeIconV=(ImageView)view.findViewById(R.id.sharedWithMeIcon);
-sharedWithMeIconV.bringToFront();
-if (checkIfFileIsSharedWithMe(file) && (!file.isFolder() || !mGridMode)) {
-sharedWithMeIconV.setVisibility(View.VISIBLE);
-}
- else {
-sharedWithMeIconV.setVisibility(View.GONE);
 }
 break;
 }
@@ -150,7 +148,7 @@ fileIcon.setImageResource(MimetypeIconUtil.getFileTypeIconId(file.getMimetype(),
 }
 }
  else {
-fileIcon.setImageResource(MimetypeIconUtil.getFolderTypeIconId(checkIfFileIsSharedWithMe(file),file.isShareByLink()));
+fileIcon.setImageResource(MimetypeIconUtil.getFolderTypeIconId(file.isSharedWithMe() || file.isSharedWithSharee(),file.isSharedViaLink()));
 }
 }
 return view;

@@ -1,0 +1,31 @@
+{
+  RemoteOperationResult result=null;
+  OCShare share=getStorageManager().getFirstShareByPathAndType(mRemotePath,mShareType,mShareWith);
+  if (share != null) {
+    OCFile file=getStorageManager().getFileByPath(mRemotePath);
+    RemoveRemoteShareOperation operation=new RemoveRemoteShareOperation((int)share.getIdRemoteShared());
+    result=operation.execute(client);
+    if (result.isSuccess()) {
+      Log_OC.d(TAG,"Share id = " + share.getIdRemoteShared() + " deleted");
+      if (mShareType == ShareType.PUBLIC_LINK) {
+        file.setShareViaLink(false);
+        file.setPublicLink("");
+      }
+ else       if (mShareType == ShareType.USER || mShareType == ShareType.GROUP) {
+        ArrayList<OCShare> sharesWith=getStorageManager().getSharesWithForAFile(mRemotePath,getStorageManager().getAccount().name);
+        if (sharesWith.size() == 1) {
+          file.setShareWithSharee(false);
+        }
+      }
+      getStorageManager().saveFile(file);
+      getStorageManager().removeShare(share);
+    }
+ else     if (!existsFile(client,file.getRemotePath())) {
+      getStorageManager().removeFile(file,true,true);
+    }
+  }
+ else {
+    result=new RemoteOperationResult(ResultCode.SHARE_NOT_FOUND);
+  }
+  return result;
+}

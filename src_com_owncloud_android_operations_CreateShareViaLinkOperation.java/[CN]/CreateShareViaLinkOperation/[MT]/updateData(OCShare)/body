@@ -1,0 +1,17 @@
+{
+  share.setPath(mPath);
+  if (mPath.endsWith(FileUtils.PATH_SEPARATOR)) {
+    share.setIsFolder(true);
+  }
+ else {
+    share.setIsFolder(false);
+  }
+  getStorageManager().saveShare(share);
+  OCFile file=getStorageManager().getFileByPath(mPath);
+  if (file != null) {
+    mSendIntent.putExtra(Intent.EXTRA_TEXT,share.getShareLink());
+    file.setPublicLink(share.getShareLink());
+    file.setShareViaLink(true);
+    getStorageManager().saveFile(file);
+  }
+}
