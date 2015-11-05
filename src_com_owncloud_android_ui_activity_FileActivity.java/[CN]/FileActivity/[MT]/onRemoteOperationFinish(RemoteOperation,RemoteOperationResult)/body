@@ -11,7 +11,7 @@
     }
     mTryShareAgain=false;
   }
- else   if (operation == null || operation instanceof CreateShareWithShareeOperation || operation instanceof UnshareOperation || operation instanceof SynchronizeFolderOperation) {
+ else   if (operation == null || operation instanceof CreateShareWithShareeOperation || operation instanceof UnshareOperation || operation instanceof SynchronizeFolderOperation || operation instanceof UpdateShareViaLinkOperation) {
     if (result.isSuccess()) {
       updateFileFromDB();
     }

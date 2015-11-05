@@ -1,6 +1,6 @@
 {
   if (isSharedSupported()) {
-    mWaitingForOpId=mFileActivity.getOperationsServiceBinder().queueNewOperation(unshareService);
+    mWaitingForOpId=mFileActivity.getOperationsServiceBinder().queueNewOperation(shareIntent);
     mFileActivity.showLoadingDialog(mFileActivity.getApplicationContext().getString(R.string.wait_a_moment));
   }
  else {

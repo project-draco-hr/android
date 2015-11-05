@@ -19,6 +19,13 @@
           operation=new CreateShareViaLinkOperation(remotePath,password,sendIntent);
         }
       }
+ else       if (ACTION_UPDATE_SHARE.equals(action)) {
+        String remotePath=operationIntent.getStringExtra(EXTRA_REMOTE_PATH);
+        String password=operationIntent.getStringExtra(EXTRA_PASSWORD_SHARE);
+        if (remotePath.length() > 0) {
+          operation=new UpdateShareViaLinkOperation(remotePath,password);
+        }
+      }
  else       if (action.equals(ACTION_CREATE_SHARE_WITH_SHAREE)) {
         String remotePath=operationIntent.getStringExtra(EXTRA_REMOTE_PATH);
         String shareeName=operationIntent.getStringExtra(EXTRA_SHARE_WITH);

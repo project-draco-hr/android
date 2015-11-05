@@ -3,12 +3,27 @@
     Switch shareViaLinkSwitch=getShareViaLinkSwitch();
     if (!shareViaLinkSwitch.isChecked()) {
       shareViaLinkSwitch.setOnCheckedChangeListener(null);
-      getShareViaLinkSwitch().setChecked(true);
+      shareViaLinkSwitch.setChecked(true);
       shareViaLinkSwitch.setOnCheckedChangeListener(mOnShareViaLinkSwitchCheckedChangeListener);
     }
     getExpirationDateSection().setVisibility(View.VISIBLE);
     getPasswordSection().setVisibility(View.VISIBLE);
     getGetLinkButton().setVisibility(View.VISIBLE);
+    Switch passwordSwitch=getPasswordSwitch();
+    passwordSwitch.setOnCheckedChangeListener(null);
+    if (mPublicShare.isPasswordProtected()) {
+      if (!passwordSwitch.isChecked()) {
+        passwordSwitch.toggle();
+      }
+      getPasswordValue().setVisibility(View.VISIBLE);
+    }
+ else {
+      if (passwordSwitch.isChecked()) {
+        passwordSwitch.toggle();
+      }
+      getPasswordValue().setVisibility(View.INVISIBLE);
+    }
+    passwordSwitch.setOnCheckedChangeListener(mOnPasswordSwitchCheckedChangeListener);
   }
  else {
     Switch shareViaLinkSwitch=getShareViaLinkSwitch();

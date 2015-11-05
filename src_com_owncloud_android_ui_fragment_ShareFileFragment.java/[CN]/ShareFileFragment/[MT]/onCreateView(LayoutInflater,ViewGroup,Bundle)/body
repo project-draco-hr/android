@@ -34,13 +34,14 @@
 );
   mOnShareViaLinkSwitchCheckedChangeListener=new CompoundButton.OnCheckedChangeListener(){
     @Override public void onCheckedChanged(    CompoundButton buttonView,    boolean isChecked){
-      if (isResumed()) {
-        if (isChecked) {
-          ((FileActivity)getActivity()).getFileOperationsHelper().shareFileViaLink(mFile);
-        }
+      if (!isResumed()) {
+        return;
+      }
+      if (isChecked) {
+        ((FileActivity)getActivity()).getFileOperationsHelper().shareFileViaLink(mFile);
+      }
  else {
-          ((FileActivity)getActivity()).getFileOperationsHelper().unshareFileViaLink(mFile);
-        }
+        ((FileActivity)getActivity()).getFileOperationsHelper().unshareFileViaLink(mFile);
       }
     }
   }
@@ -50,6 +51,9 @@
   Switch shareViaLinkExpirationSwitch=(Switch)view.findViewById(R.id.shareViaLinkExpirationSwitch);
   shareViaLinkExpirationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
     @Override public void onCheckedChanged(    CompoundButton buttonView,    boolean isChecked){
+      if (!isResumed()) {
+        return;
+      }
       if (isChecked) {
         getExpirationDateValue().setText(R.string.placeholder_timestamp);
       }
@@ -59,17 +63,21 @@
     }
   }
 );
-  Switch shareViaLinkPasswordSwitch=(Switch)view.findViewById(R.id.shareViaLinkPasswordSwitch);
-  shareViaLinkPasswordSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+  mOnPasswordSwitchCheckedChangeListener=new CompoundButton.OnCheckedChangeListener(){
     @Override public void onCheckedChanged(    CompoundButton buttonView,    boolean isChecked){
+      if (!isResumed()) {
+        return;
+      }
       if (isChecked) {
-        getExpirationPasswordValue().setVisibility(View.VISIBLE);
+        ((FileActivity)getActivity()).getFileOperationsHelper().requestPasswordForShareViaLink(mFile);
       }
  else {
-        getExpirationPasswordValue().setVisibility(View.INVISIBLE);
+        ((FileActivity)getActivity()).getFileOperationsHelper().setPasswordToShareViaLink(mFile,"");
       }
     }
   }
-);
+;
+  Switch shareViaLinkPasswordSwitch=(Switch)view.findViewById(R.id.shareViaLinkPasswordSwitch);
+  shareViaLinkPasswordSwitch.setOnCheckedChangeListener(mOnShareViaLinkSwitchCheckedChangeListener);
   return view;
 }

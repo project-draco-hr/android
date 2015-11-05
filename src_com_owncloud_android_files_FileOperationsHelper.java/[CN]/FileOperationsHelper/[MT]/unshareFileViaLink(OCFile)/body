@@ -5,5 +5,5 @@
   unshareService.putExtra(OperationsService.EXTRA_REMOTE_PATH,file.getRemotePath());
   unshareService.putExtra(OperationsService.EXTRA_SHARE_TYPE,ShareType.PUBLIC_LINK);
   unshareService.putExtra(OperationsService.EXTRA_SHARE_WITH,"");
-  unshareFile(unshareService);
+  queueShareIntent(unshareService);
 }

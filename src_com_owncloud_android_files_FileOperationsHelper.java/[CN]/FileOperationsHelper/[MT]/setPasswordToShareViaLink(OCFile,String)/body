@@ -1,0 +1,8 @@
+{
+  Intent updateShareIntent=new Intent(mFileActivity,OperationsService.class);
+  updateShareIntent.setAction(OperationsService.ACTION_UPDATE_SHARE);
+  updateShareIntent.putExtra(OperationsService.EXTRA_ACCOUNT,mFileActivity.getAccount());
+  updateShareIntent.putExtra(OperationsService.EXTRA_REMOTE_PATH,file.getRemotePath());
+  updateShareIntent.putExtra(OperationsService.EXTRA_PASSWORD_SHARE,(password == null) ? "" : password);
+  queueShareIntent(updateShareIntent);
+}
