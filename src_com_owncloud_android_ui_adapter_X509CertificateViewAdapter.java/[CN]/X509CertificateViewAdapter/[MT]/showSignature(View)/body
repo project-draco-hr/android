@@ -1,6 +1,19 @@
 {
-  TextView sigView=((TextView)dialogView.findViewById(R.id.value_signature));
+  byte[] cert=null;
+  TextView certFingerprintView=((TextView)dialogView.findViewById(R.id.value_certificate_fingerprint));
   TextView algorithmView=((TextView)dialogView.findViewById(R.id.value_signature_algorithm));
-  sigView.setText(getHex(mCertificate.getSignature()));
-  algorithmView.setText(mCertificate.getSigAlgName());
+  try {
+    cert=mCertificate.getEncoded();
+    if (cert == null) {
+      certFingerprintView.setText(R.string.certificate_load_problem);
+      algorithmView.setText(R.string.certificate_load_problem);
+    }
+ else {
+      certFingerprintView.setText(getDigestHexBytesWithColonsAndNewLines(dialogView,"SHA-256",cert) + getDigestHexBytesWithColonsAndNewLines(dialogView,"SHA-1",cert) + getDigestHexBytesWithColonsAndNewLines(dialogView,"MD5",cert));
+      algorithmView.setText(mCertificate.getSigAlgName());
+    }
+  }
+ catch (  CertificateEncodingException e) {
+    Log.e(TAG,"Problem while trying to decode the certificate.");
+  }
 }

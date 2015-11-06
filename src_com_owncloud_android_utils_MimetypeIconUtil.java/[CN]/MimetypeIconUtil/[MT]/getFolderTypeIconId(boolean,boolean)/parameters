@@ -1,2 +1,2 @@
-boolean isSharedWithUser
-boolean isShareByLink
+boolean isSharedViaUsers
+boolean isSharedViaLink

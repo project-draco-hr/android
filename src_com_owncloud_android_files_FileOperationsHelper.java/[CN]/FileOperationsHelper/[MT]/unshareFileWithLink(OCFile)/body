@@ -1,14 +1,9 @@
 {
-  if (isSharedSupported()) {
-    Intent service=new Intent(mFileActivity,OperationsService.class);
-    service.setAction(OperationsService.ACTION_UNSHARE);
-    service.putExtra(OperationsService.EXTRA_ACCOUNT,mFileActivity.getAccount());
-    service.putExtra(OperationsService.EXTRA_REMOTE_PATH,file.getRemotePath());
-    mWaitingForOpId=mFileActivity.getOperationsServiceBinder().queueNewOperation(service);
-    mFileActivity.showLoadingDialog();
-  }
- else {
-    Toast t=Toast.makeText(mFileActivity,mFileActivity.getString(R.string.share_link_no_support_share_api),Toast.LENGTH_LONG);
-    t.show();
-  }
+  Intent unshareService=new Intent(mFileActivity,OperationsService.class);
+  unshareService.setAction(OperationsService.ACTION_UNSHARE);
+  unshareService.putExtra(OperationsService.EXTRA_ACCOUNT,mFileActivity.getAccount());
+  unshareService.putExtra(OperationsService.EXTRA_REMOTE_PATH,file.getRemotePath());
+  unshareService.putExtra(OperationsService.EXTRA_SHARE_TYPE,ShareType.PUBLIC_LINK);
+  unshareService.putExtra(OperationsService.EXTRA_SHARE_WITH,"");
+  unshareFile(unshareService);
 }

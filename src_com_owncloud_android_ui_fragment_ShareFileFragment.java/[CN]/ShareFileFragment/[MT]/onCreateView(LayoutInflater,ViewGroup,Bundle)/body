@@ -1,0 +1,36 @@
+{
+  View view=inflater.inflate(R.layout.share_file_layout,container,false);
+  ImageView icon=(ImageView)view.findViewById(R.id.shareFileIcon);
+  icon.setImageResource(MimetypeIconUtil.getFileTypeIconId(mFile.getMimetype(),mFile.getFileName()));
+  if (mFile.isImage()) {
+    String remoteId=String.valueOf(mFile.getRemoteId());
+    Bitmap thumbnail=ThumbnailsCacheManager.getBitmapFromDiskCache(remoteId);
+    if (thumbnail != null) {
+      icon.setImageBitmap(thumbnail);
+    }
+  }
+  TextView filename=(TextView)view.findViewById(R.id.shareFileName);
+  filename.setText(mFile.getFileName());
+  TextView size=(TextView)view.findViewById(R.id.shareFileSize);
+  if (mFile.isFolder()) {
+    size.setVisibility(View.GONE);
+  }
+ else {
+    size.setText(DisplayUtils.bytesToHumanReadable(mFile.getFileLength()));
+  }
+  Button addUserGroupButton=(Button)view.findViewById(R.id.addUserButton);
+  addUserGroupButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View view){
+      boolean shareWithUsersEnable=AccountUtils.hasSearchUsersSupport(mAccount);
+      if (shareWithUsersEnable) {
+        mListener.showSearchUsersAndGroups();
+      }
+ else {
+        String message=getString(R.string.share_sharee_unavailable);
+        Toast.makeText(getActivity(),message,Toast.LENGTH_LONG).show();
+      }
+    }
+  }
+);
+  return view;
+}

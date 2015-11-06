@@ -1,10 +1,10 @@
 {
   super.onRemoteOperationFinish(operation,result);
-  if (operation instanceof CreateShareOperation) {
-    onCreateShareOperationFinish((CreateShareOperation)operation,result);
+  if (operation instanceof CreateShareViaLinkOperation || operation instanceof CreateShareWithShareeOperation) {
+    onCreateShareOperationFinish(result);
   }
- else   if (operation instanceof UnshareLinkOperation) {
-    onUnshareLinkOperationFinish((UnshareLinkOperation)operation,result);
+ else   if (operation instanceof UnshareOperation) {
+    onUnshareLinkOperationFinish((UnshareOperation)operation,result);
   }
  else   if (operation instanceof RemoveFileOperation) {
     finish();

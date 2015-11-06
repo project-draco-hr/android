@@ -5,6 +5,7 @@
     share.setId(c.getLong(c.getColumnIndex(ProviderTableMeta._ID)));
     share.setFileSource(c.getLong(c.getColumnIndex(ProviderTableMeta.OCSHARES_ITEM_SOURCE)));
     share.setShareType(ShareType.fromValue(c.getInt(c.getColumnIndex(ProviderTableMeta.OCSHARES_SHARE_TYPE))));
+    share.setShareWith(c.getString(c.getColumnIndex(ProviderTableMeta.OCSHARES_SHARE_WITH)));
     share.setPermissions(c.getInt(c.getColumnIndex(ProviderTableMeta.OCSHARES_PERMISSIONS)));
     share.setSharedDate(c.getLong(c.getColumnIndex(ProviderTableMeta.OCSHARES_SHARED_DATE)));
     share.setExpirationDate(c.getLong(c.getColumnIndex(ProviderTableMeta.OCSHARES_EXPIRATION_DATE)));

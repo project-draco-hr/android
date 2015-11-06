@@ -72,7 +72,6 @@
     view.findViewById(R.id.localFileIndicator).setVisibility(View.INVISIBLE);
     view.findViewById(R.id.favoriteIcon).setVisibility(View.GONE);
     view.findViewById(R.id.sharedIcon).setVisibility(View.GONE);
-    view.findViewById(R.id.sharedWithMeIcon).setVisibility(View.GONE);
   }
   return view;
 }
