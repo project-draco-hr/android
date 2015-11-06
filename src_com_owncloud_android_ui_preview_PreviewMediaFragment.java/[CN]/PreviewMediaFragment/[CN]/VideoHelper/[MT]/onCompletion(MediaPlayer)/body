@@ -11,7 +11,7 @@
         mVideoPreview.stopPlayback();
         mAutoplay=false;
         mSavedPlaybackPosition=0;
-        mVideoPreview.setVideoPath(getFile().getStoragePath());
+        mVideoPreview.setVideoURI(getFile().getStorageUri());
       }
     }
   }

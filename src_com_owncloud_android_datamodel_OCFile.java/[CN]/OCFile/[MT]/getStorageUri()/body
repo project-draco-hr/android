@@ -1,0 +1,12 @@
+{
+  if (mLocalPath == null || mLocalPath.length() == 0) {
+    return null;
+  }
+  if (mLocalUri == null) {
+    Uri.Builder builder=new Uri.Builder();
+    builder.scheme(ContentResolver.SCHEME_FILE);
+    builder.path(mLocalPath);
+    mLocalUri=builder.build();
+  }
+  return mLocalUri;
+}
