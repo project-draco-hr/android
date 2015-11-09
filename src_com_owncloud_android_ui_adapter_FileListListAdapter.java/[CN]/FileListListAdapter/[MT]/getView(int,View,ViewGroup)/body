@@ -46,7 +46,7 @@ TextView fileSizeSeparatorV=(TextView)view.findViewById(R.id.file_separator);
 TextView lastModV=(TextView)view.findViewById(R.id.last_mod);
 ImageView checkBoxV=(ImageView)view.findViewById(R.id.custom_checkbox);
 lastModV.setVisibility(View.VISIBLE);
-lastModV.setText(showRelativeTimestamp(file));
+lastModV.setText(DisplayUtils.getRelativeTimestamp(mContext,file));
 checkBoxV.setVisibility(View.GONE);
 fileSizeSeparatorV.setVisibility(View.VISIBLE);
 fileSizeV.setVisibility(View.VISIBLE);

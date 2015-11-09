@@ -1,0 +1,7 @@
+{
+  SharedPreferences sharedPreferences=PreferenceManager.getDefaultSharedPreferences(this);
+  FileStorageUtils.mSortOrder=sharedPreferences.getInt("sortOrder",0);
+  FileStorageUtils.mSortAscending=sharedPreferences.getBoolean("sortAscending",true);
+  files=FileStorageUtils.sortFolder(files);
+  return files;
+}
