@@ -10,12 +10,12 @@
   mPassCodeEditTexts[1]=(EditText)findViewById(R.id.txt1);
   mPassCodeEditTexts[2]=(EditText)findViewById(R.id.txt2);
   mPassCodeEditTexts[3]=(EditText)findViewById(R.id.txt3);
-  if (ACTION_REQUEST.equals(getIntent().getAction())) {
+  if (ACTION_CHECK.equals(getIntent().getAction())) {
     mPassCodeHdr.setText(R.string.pass_code_enter_pass_code);
     mPassCodeHdrExplanation.setVisibility(View.INVISIBLE);
     setCancelButtonEnabled(false);
   }
- else   if (ACTION_ENABLE.equals(getIntent().getAction())) {
+ else   if (ACTION_REQUEST_WITH_RESULT.equals(getIntent().getAction())) {
     if (savedInstanceState != null) {
       mConfirmingPassCode=savedInstanceState.getBoolean(PassCodeActivity.KEY_CONFIRMING_PASSCODE);
       mPassCodeDigits=savedInstanceState.getStringArray(PassCodeActivity.KEY_PASSCODE_DIGITS);
@@ -29,7 +29,7 @@
       setCancelButtonEnabled(true);
     }
   }
- else   if (ACTION_DISABLE.equals(getIntent().getAction())) {
+ else   if (ACTION_CHECK_WITH_RESULT.equals(getIntent().getAction())) {
     mPassCodeHdr.setText(R.string.pass_code_remove_your_pass_code);
     mPassCodeHdrExplanation.setVisibility(View.INVISIBLE);
     setCancelButtonEnabled(true);
