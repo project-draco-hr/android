@@ -133,4 +133,17 @@
     }
   }
   if (!upgraded)   Log_OC.i("SQL","OUT of the ADD in onUpgrade; oldVersion == " + oldVersion + ", newVersion == "+ newVersion);
+  if (oldVersion < 13 && newVersion >= 13) {
+    Log_OC.i("SQL","Entering in the #13 ADD in onUpgrade");
+    db.beginTransaction();
+    try {
+      createCapabilitiesTable(db);
+      upgraded=true;
+      db.setTransactionSuccessful();
+    }
+  finally {
+      db.endTransaction();
+    }
+  }
+  if (!upgraded)   Log_OC.i("SQL","OUT of the ADD in onUpgrade; oldVersion == " + oldVersion + ", newVersion == "+ newVersion);
 }
