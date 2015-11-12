@@ -3,6 +3,8 @@
   updateShareIntent.setAction(OperationsService.ACTION_UPDATE_SHARE);
   updateShareIntent.putExtra(OperationsService.EXTRA_ACCOUNT,mFileActivity.getAccount());
   updateShareIntent.putExtra(OperationsService.EXTRA_REMOTE_PATH,file.getRemotePath());
-  updateShareIntent.putExtra(OperationsService.EXTRA_SHARE_PASSWORD,(password == null) ? "" : password);
+  updateShareIntent.putExtra(OperationsService.EXTRA_SHARE_EXPIRATION_YEAR,year);
+  updateShareIntent.putExtra(OperationsService.EXTRA_SHARE_EXPIRATION_MONTH_OF_YEAR,monthOfYear);
+  updateShareIntent.putExtra(OperationsService.EXTRA_SHARE_EXPIRATION_DAY_OF_MONTH,dayOfMonth);
   queueShareIntent(updateShareIntent);
 }

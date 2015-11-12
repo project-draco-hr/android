@@ -2,12 +2,13 @@
   OCShare publicShare=getStorageManager().getFirstShareByPathAndType(mPath,ShareType.PUBLIC_LINK,"");
   if (publicShare == null) {
   }
-  RemoteOperation operation=new UpdateRemoteShareOperation(publicShare.getRemoteId());
-  ((UpdateRemoteShareOperation)operation).setPassword(mPassword);
-  RemoteOperationResult result=operation.execute(client);
+  UpdateRemoteShareOperation udpateOp=new UpdateRemoteShareOperation(publicShare.getRemoteId());
+  udpateOp.setPassword(mPassword);
+  udpateOp.setExpirationDate(mExpirationDate);
+  RemoteOperationResult result=udpateOp.execute(client);
   if (result.isSuccess()) {
-    operation=new GetRemoteShareOperation(publicShare.getRemoteId());
-    result=operation.execute(client);
+    RemoteOperation getShareOp=new GetRemoteShareOperation(publicShare.getRemoteId());
+    result=getShareOp.execute(client);
     if (result.isSuccess()) {
       OCShare share=(OCShare)result.getData().get(0);
       updateData(share);

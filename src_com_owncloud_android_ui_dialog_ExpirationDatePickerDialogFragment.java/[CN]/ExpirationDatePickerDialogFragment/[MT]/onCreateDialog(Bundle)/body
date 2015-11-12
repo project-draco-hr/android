@@ -1,0 +1,12 @@
+{
+  mFile=getArguments().getParcelable(ARG_FILE);
+  final Calendar c=Calendar.getInstance();
+  int year=c.get(Calendar.YEAR);
+  int month=c.get(Calendar.MONTH);
+  int day=c.get(Calendar.DAY_OF_MONTH);
+  DatePickerDialog dialog=new DatePickerDialog(getActivity(),this,year,month,day + 1);
+  DatePicker picker=dialog.getDatePicker();
+  picker.setMinDate(System.currentTimeMillis() + DateUtils.DAY_IN_MILLIS - 1000);
+  picker.setCalendarViewShown(false);
+  return dialog;
+}

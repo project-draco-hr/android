@@ -48,21 +48,26 @@
 ;
   Switch shareViaLinkSwitch=(Switch)view.findViewById(R.id.shareViaLinkSectionSwitch);
   shareViaLinkSwitch.setOnCheckedChangeListener(mOnShareViaLinkSwitchCheckedChangeListener);
-  Switch shareViaLinkExpirationSwitch=(Switch)view.findViewById(R.id.shareViaLinkExpirationSwitch);
-  shareViaLinkExpirationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+  mOnExpirationDateSwitchCheckedChangeListener=new CompoundButton.OnCheckedChangeListener(){
     @Override public void onCheckedChanged(    CompoundButton buttonView,    boolean isChecked){
       if (!isResumed()) {
         return;
       }
       if (isChecked) {
-        getExpirationDateValue().setText(R.string.placeholder_timestamp);
+        ExpirationDatePickerDialogFragment dialog=ExpirationDatePickerDialogFragment.newInstance(mFile);
+        dialog.show(getActivity().getSupportFragmentManager(),ExpirationDatePickerDialogFragment.DATE_PICKER_DIALOG);
       }
  else {
-        getExpirationDateValue().setText(R.string.empty);
+        ((FileActivity)getActivity()).getFileOperationsHelper().setExpirationDateToShareViaLink(mFile,-1,-1,-1);
       }
+      buttonView.setOnCheckedChangeListener(null);
+      buttonView.toggle();
+      buttonView.setOnCheckedChangeListener(mOnExpirationDateSwitchCheckedChangeListener);
     }
   }
-);
+;
+  Switch shareViaLinkExpirationSwitch=(Switch)view.findViewById(R.id.shareViaLinkExpirationSwitch);
+  shareViaLinkExpirationSwitch.setOnCheckedChangeListener(mOnExpirationDateSwitchCheckedChangeListener);
   mOnPasswordSwitchCheckedChangeListener=new CompoundButton.OnCheckedChangeListener(){
     @Override public void onCheckedChanged(    CompoundButton buttonView,    boolean isChecked){
       if (!isResumed()) {
@@ -74,6 +79,9 @@
  else {
         ((FileActivity)getActivity()).getFileOperationsHelper().setPasswordToShareViaLink(mFile,"");
       }
+      buttonView.setOnCheckedChangeListener(null);
+      buttonView.toggle();
+      buttonView.setOnCheckedChangeListener(mOnPasswordSwitchCheckedChangeListener);
     }
   }
 ;

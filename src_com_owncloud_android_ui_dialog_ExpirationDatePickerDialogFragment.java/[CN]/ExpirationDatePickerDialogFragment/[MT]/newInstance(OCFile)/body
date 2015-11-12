@@ -1,0 +1,7 @@
+{
+  Bundle arguments=new Bundle();
+  arguments.putParcelable(ARG_FILE,file);
+  ExpirationDatePickerDialogFragment dialog=new ExpirationDatePickerDialogFragment();
+  dialog.setArguments(arguments);
+  return dialog;
+}

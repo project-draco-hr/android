@@ -1,7 +1,7 @@
 {
   super.onRemoteOperationFinish(operation,result);
   if (result.isSuccess()) {
-    Log_OC.d(TAG,"Refreshing lists on successful operation");
+    Log_OC.d(TAG,"Refreshing view on successful operation");
     refreshSharesFromStorageManager();
   }
 }

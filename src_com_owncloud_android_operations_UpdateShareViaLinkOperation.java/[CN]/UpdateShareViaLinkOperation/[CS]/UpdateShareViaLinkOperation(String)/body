@@ -1,0 +1,5 @@
+{
+  mPath=path;
+  mPassword=null;
+  mExpirationDate=null;
+}
