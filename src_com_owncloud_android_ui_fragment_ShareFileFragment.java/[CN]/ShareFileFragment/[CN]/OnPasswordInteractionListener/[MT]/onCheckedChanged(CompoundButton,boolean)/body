@@ -8,7 +8,7 @@
  else {
     ((FileActivity)getActivity()).getFileOperationsHelper().setPasswordToShareViaLink(mFile,"");
   }
-  buttonView.setOnCheckedChangeListener(null);
-  buttonView.toggle();
-  buttonView.setOnCheckedChangeListener(mOnPasswordInteractionListener);
+  switchView.setOnCheckedChangeListener(null);
+  switchView.toggle();
+  switchView.setOnCheckedChangeListener(mOnPasswordInteractionListener);
 }

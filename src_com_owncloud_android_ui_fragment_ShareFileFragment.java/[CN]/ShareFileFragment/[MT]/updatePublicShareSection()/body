@@ -25,7 +25,7 @@
       }
       getExpirationDateValue().setText(R.string.empty);
     }
-    expirationDateSwitch.setOnCheckedChangeListener(mOnExpirationDateSwitchCheckedChangeListener);
+    expirationDateSwitch.setOnCheckedChangeListener(mOnExpirationDateInteractionListener);
     Switch passwordSwitch=getPasswordSwitch();
     passwordSwitch.setOnCheckedChangeListener(null);
     if (mPublicShare.isPasswordProtected()) {

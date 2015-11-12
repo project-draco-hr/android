@@ -1,0 +1,6 @@
+{
+  if (mPublicShare != null && mPublicShare.getExpirationDate() > 0) {
+    ExpirationDatePickerDialogFragment dialog=ExpirationDatePickerDialogFragment.newInstance(mFile);
+    dialog.show(getActivity().getSupportFragmentManager(),ExpirationDatePickerDialogFragment.DATE_PICKER_DIALOG);
+  }
+}
