@@ -17,7 +17,8 @@
         ((FileActivity)getActivity()).startActivity(mIntent);
       }
  else {
-        ((ComponentsGetter)getActivity()).getFileOperationsHelper().shareFileWithLinkToApp(mFile,"",mIntent);
+        dialog.dismiss();
+        ((FileActivity)getActivity()).startActivity(mIntent);
       }
     }
   }

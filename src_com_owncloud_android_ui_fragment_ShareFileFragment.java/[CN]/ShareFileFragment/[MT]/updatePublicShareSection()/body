@@ -8,7 +8,14 @@
     }
     getExpirationDateSection().setVisibility(View.VISIBLE);
     getPasswordSection().setVisibility(View.VISIBLE);
-    getGetLinkButton().setVisibility(View.VISIBLE);
+    AppCompatButton getLinkButton=getGetLinkButton();
+    getLinkButton.setVisibility(View.VISIBLE);
+    getLinkButton.setOnClickListener(new View.OnClickListener(){
+      @Override public void onClick(      View v){
+        ((FileActivity)getActivity()).getFileOperationsHelper().getFileWithLink(mFile);
+      }
+    }
+);
     Switch expirationDateSwitch=getExpirationDateSwitch();
     expirationDateSwitch.setOnCheckedChangeListener(null);
     long expirationDate=mPublicShare.getExpirationDate();
