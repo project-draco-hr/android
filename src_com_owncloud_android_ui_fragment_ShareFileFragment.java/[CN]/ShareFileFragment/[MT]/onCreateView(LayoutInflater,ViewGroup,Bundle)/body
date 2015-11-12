@@ -68,24 +68,6 @@
 ;
   Switch shareViaLinkExpirationSwitch=(Switch)view.findViewById(R.id.shareViaLinkExpirationSwitch);
   shareViaLinkExpirationSwitch.setOnCheckedChangeListener(mOnExpirationDateSwitchCheckedChangeListener);
-  mOnPasswordSwitchCheckedChangeListener=new CompoundButton.OnCheckedChangeListener(){
-    @Override public void onCheckedChanged(    CompoundButton buttonView,    boolean isChecked){
-      if (!isResumed()) {
-        return;
-      }
-      if (isChecked) {
-        ((FileActivity)getActivity()).getFileOperationsHelper().requestPasswordForShareViaLink(mFile);
-      }
- else {
-        ((FileActivity)getActivity()).getFileOperationsHelper().setPasswordToShareViaLink(mFile,"");
-      }
-      buttonView.setOnCheckedChangeListener(null);
-      buttonView.toggle();
-      buttonView.setOnCheckedChangeListener(mOnPasswordSwitchCheckedChangeListener);
-    }
-  }
-;
-  Switch shareViaLinkPasswordSwitch=(Switch)view.findViewById(R.id.shareViaLinkPasswordSwitch);
-  shareViaLinkPasswordSwitch.setOnCheckedChangeListener(mOnShareViaLinkSwitchCheckedChangeListener);
+  initPasswordListener(view);
   return view;
 }

@@ -1,0 +1,5 @@
+{
+  if (mPublicShare != null && mPublicShare.isPasswordProtected()) {
+    ((FileActivity)getActivity()).getFileOperationsHelper().requestPasswordForShareViaLink(mFile);
+  }
+}

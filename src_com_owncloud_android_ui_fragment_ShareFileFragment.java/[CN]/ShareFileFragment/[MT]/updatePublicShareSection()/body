@@ -40,7 +40,7 @@
       }
       getPasswordValue().setVisibility(View.INVISIBLE);
     }
-    passwordSwitch.setOnCheckedChangeListener(mOnPasswordSwitchCheckedChangeListener);
+    passwordSwitch.setOnCheckedChangeListener(mOnPasswordInteractionListener);
   }
  else {
     Switch shareViaLinkSwitch=getShareViaLinkSwitch();

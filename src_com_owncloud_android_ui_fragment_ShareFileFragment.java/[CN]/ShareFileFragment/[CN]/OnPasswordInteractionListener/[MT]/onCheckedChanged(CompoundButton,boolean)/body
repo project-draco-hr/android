@@ -1,0 +1,14 @@
+{
+  if (!isResumed()) {
+    return;
+  }
+  if (isChecked) {
+    ((FileActivity)getActivity()).getFileOperationsHelper().requestPasswordForShareViaLink(mFile);
+  }
+ else {
+    ((FileActivity)getActivity()).getFileOperationsHelper().setPasswordToShareViaLink(mFile,"");
+  }
+  buttonView.setOnCheckedChangeListener(null);
+  buttonView.toggle();
+  buttonView.setOnCheckedChangeListener(mOnPasswordInteractionListener);
+}
