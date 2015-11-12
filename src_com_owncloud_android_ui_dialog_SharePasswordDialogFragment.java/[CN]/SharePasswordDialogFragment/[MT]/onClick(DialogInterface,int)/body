@@ -9,9 +9,6 @@
     if (mSendIntent == null) {
       ((FileActivity)getActivity()).getFileOperationsHelper().setPasswordToShareViaLink(mFile,password);
     }
- else {
-      ((FileActivity)getActivity()).getFileOperationsHelper().shareFileWithLinkToApp(mFile,password,mSendIntent);
-    }
   }
  else {
     ((FileActivity)getActivity()).setTryShareAgain(false);

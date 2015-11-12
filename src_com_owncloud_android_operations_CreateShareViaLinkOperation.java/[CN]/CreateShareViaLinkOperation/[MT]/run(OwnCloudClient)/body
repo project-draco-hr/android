@@ -1,7 +1,17 @@
 {
   RemoteOperation operation=new GetRemoteSharesForFileOperation(mPath,false,false);
   RemoteOperationResult result=operation.execute(client);
-  if (!result.isSuccess() || result.getData().size() <= 0) {
+  boolean shareByLink=false;
+  if (result.isSuccess() && result.getData().size() > 0) {
+    ArrayList<Object> shares=result.getData();
+    for (    Object object : shares) {
+      if (((OCShare)object).getShareType() == ShareType.PUBLIC_LINK) {
+        shareByLink=true;
+        break;
+      }
+    }
+  }
+  if (!result.isSuccess() || !shareByLink) {
     operation=new CreateRemoteShareOperation(mPath,ShareType.PUBLIC_LINK,"",false,mPassword,OCShare.DEFAULT_PERMISSION);
     result=operation.execute(client);
   }

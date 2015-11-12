@@ -12,14 +12,8 @@
       ActivityInfo actInfo=chosen.activityInfo;
       ComponentName name=new ComponentName(actInfo.applicationInfo.packageName,actInfo.name);
       mIntent.setComponent(name);
-      if (sendAction) {
-        dialog.dismiss();
-        ((FileActivity)getActivity()).startActivity(mIntent);
-      }
- else {
-        dialog.dismiss();
-        ((FileActivity)getActivity()).startActivity(mIntent);
-      }
+      dialog.dismiss();
+      ((FileActivity)getActivity()).startActivity(mIntent);
     }
   }
 ).create();
