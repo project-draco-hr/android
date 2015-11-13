@@ -1,6 +1,7 @@
 {
   Bundle arguments=new Bundle();
   arguments.putParcelable(ARG_FILE,file);
+  arguments.putLong(ARG_CHOSEN_DATE_IN_MILLIS,chosenDateInMillis);
   ExpirationDatePickerDialogFragment dialog=new ExpirationDatePickerDialogFragment();
   dialog.setArguments(arguments);
   return dialog;

@@ -25,21 +25,8 @@
           operation=new UpdateShareViaLinkOperation(remotePath);
           String password=operationIntent.getStringExtra(EXTRA_SHARE_PASSWORD);
           ((UpdateShareViaLinkOperation)operation).setPassword(password);
-          int year=operationIntent.getIntExtra(EXTRA_SHARE_EXPIRATION_YEAR,0);
-          if (year > 0) {
-            int monthOfYear=operationIntent.getIntExtra(EXTRA_SHARE_EXPIRATION_MONTH_OF_YEAR,0);
-            int dayOfMonth=operationIntent.getIntExtra(EXTRA_SHARE_EXPIRATION_DAY_OF_MONTH,1);
-            Calendar expirationDate=Calendar.getInstance();
-            expirationDate.set(Calendar.YEAR,year);
-            expirationDate.set(Calendar.MONTH,monthOfYear);
-            expirationDate.set(Calendar.DAY_OF_MONTH,dayOfMonth);
-            ((UpdateShareViaLinkOperation)operation).setExpirationDate(expirationDate);
-          }
- else           if (year < 0) {
-            Calendar zeroDate=Calendar.getInstance();
-            zeroDate.clear();
-            ((UpdateShareViaLinkOperation)operation).setExpirationDate(zeroDate);
-          }
+          long expirationDate=operationIntent.getLongExtra(EXTRA_SHARE_EXPIRATION_DATE_IN_MILLIS,0);
+          ((UpdateShareViaLinkOperation)operation).setExpirationDate(expirationDate);
         }
       }
  else       if (action.equals(ACTION_CREATE_SHARE_WITH_SHAREE)) {

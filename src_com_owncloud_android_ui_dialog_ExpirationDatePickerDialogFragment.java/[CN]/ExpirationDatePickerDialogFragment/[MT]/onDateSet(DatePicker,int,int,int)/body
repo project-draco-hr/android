@@ -3,5 +3,6 @@
   chosenDate.set(Calendar.YEAR,year);
   chosenDate.set(Calendar.MONTH,monthOfYear);
   chosenDate.set(Calendar.DAY_OF_MONTH,dayOfMonth);
-  ((FileActivity)getActivity()).getFileOperationsHelper().setExpirationDateToShareViaLink(mFile,year,monthOfYear,dayOfMonth);
+  long chosenDateInMillis=chosenDate.getTimeInMillis();
+  ((FileActivity)getActivity()).getFileOperationsHelper().setExpirationDateToShareViaLink(mFile,chosenDateInMillis);
 }

@@ -1,5 +1,5 @@
 {
   mPath=path;
   mPassword=null;
-  mExpirationDate=null;
+  mExpirationDateInMillis=0;
 }
