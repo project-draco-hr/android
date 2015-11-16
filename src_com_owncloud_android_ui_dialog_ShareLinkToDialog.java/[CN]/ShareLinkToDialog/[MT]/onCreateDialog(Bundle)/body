@@ -2,7 +2,6 @@
   mIntent=getArguments().getParcelable(ARG_INTENT);
   String[] packagesToExclude=getArguments().getStringArray(ARG_PACKAGES_TO_EXCLUDE);
   List<String> packagesToExcludeList=Arrays.asList(packagesToExclude != null ? packagesToExclude : new String[0]);
-  mFile=getArguments().getParcelable(ARG_FILE_TO_SHARE);
   PackageManager pm=getActivity().getPackageManager();
   List<ResolveInfo> activities=pm.queryIntentActivities(mIntent,PackageManager.MATCH_DEFAULT_ONLY);
   Iterator<ResolveInfo> it=activities.iterator();

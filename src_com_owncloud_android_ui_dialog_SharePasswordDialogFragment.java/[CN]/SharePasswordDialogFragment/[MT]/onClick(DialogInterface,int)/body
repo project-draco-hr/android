@@ -6,9 +6,7 @@
       Toast.makeText(getActivity(),R.string.share_link_empty_password,Toast.LENGTH_LONG).show();
       return;
     }
-    if (mSendIntent == null) {
-      ((FileActivity)getActivity()).getFileOperationsHelper().setPasswordToShareViaLink(mFile,password);
-    }
+    ((FileActivity)getActivity()).getFileOperationsHelper().setPasswordToShareViaLink(mFile,password);
   }
  else {
     ((FileActivity)getActivity()).setTryShareAgain(false);
