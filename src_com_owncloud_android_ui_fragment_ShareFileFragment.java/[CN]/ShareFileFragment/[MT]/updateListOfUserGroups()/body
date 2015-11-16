@@ -6,9 +6,12 @@
     noShares.setVisibility(View.GONE);
     usersList.setVisibility(View.VISIBLE);
     usersList.setAdapter(mUserGroupsAdapter);
+    setListViewHeightBasedOnChildren(usersList);
   }
  else {
     noShares.setVisibility(View.VISIBLE);
     usersList.setVisibility(View.GONE);
   }
+  ScrollView scrollView=(ScrollView)getView().findViewById(R.id.shareScroll);
+  scrollView.scrollTo(0,0);
 }
