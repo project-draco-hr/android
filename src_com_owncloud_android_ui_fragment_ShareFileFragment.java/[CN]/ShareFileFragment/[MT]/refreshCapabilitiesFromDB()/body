@@ -1,0 +1,5 @@
+{
+  if (((FileActivity)mListener).getStorageManager() != null) {
+    mCapabilities=((FileActivity)mListener).getStorageManager().getCapability(mAccount.name);
+  }
+}

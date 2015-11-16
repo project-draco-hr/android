@@ -1,5 +1,6 @@
 {
   super.onActivityCreated(savedInstanceState);
+  refreshCapabilitiesFromDB();
   refreshUsersOrGroupsListFromDB();
   refreshPublicShareFromDB();
 }

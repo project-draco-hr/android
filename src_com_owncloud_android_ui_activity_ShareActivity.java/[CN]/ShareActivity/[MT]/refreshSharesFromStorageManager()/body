@@ -1,6 +1,7 @@
 {
   ShareFileFragment shareFileFragment=getShareFileFragment();
   if (shareFileFragment != null && shareFileFragment.isAdded()) {
+    shareFileFragment.refreshCapabilitiesFromDB();
     shareFileFragment.refreshUsersOrGroupsListFromDB();
     shareFileFragment.refreshPublicShareFromDB();
   }

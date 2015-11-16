@@ -1,5 +1,8 @@
 {
-  if (((FileActivity)mListener).getStorageManager() != null) {
+  if (isPublicShareDisabled()) {
+    hidePublicShare();
+  }
+ else   if (((FileActivity)mListener).getStorageManager() != null) {
     mPublicShare=((FileActivity)mListener).getStorageManager().getFirstShareByPathAndType(mFile.getRemotePath(),ShareType.PUBLIC_LINK,"");
     updatePublicShareSection();
   }
