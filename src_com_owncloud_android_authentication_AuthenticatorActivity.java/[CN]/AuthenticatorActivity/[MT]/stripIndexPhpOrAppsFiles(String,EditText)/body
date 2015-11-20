@@ -1,0 +1,11 @@
+{
+  if (url.endsWith("/index.php")) {
+    url=url.substring(0,url.lastIndexOf("/index.php"));
+    mHostUrlInput.setText(url);
+  }
+ else   if (url.contains("/index.php/apps/")) {
+    url=url.substring(0,url.lastIndexOf("/index.php/apps/"));
+    mHostUrlInput.setText(url);
+  }
+  return url;
+}
