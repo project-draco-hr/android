@@ -1,6 +1,7 @@
 {
   if (getAccount() != null) {
     mStorageManager=new FileDataStorageManager(getAccount(),getContentResolver());
+    mCapabilities=mStorageManager.getCapability(mAccount.name);
   }
  else {
     Log_OC.wtf(TAG,"onAccountChanged was called with NULL account associated!");

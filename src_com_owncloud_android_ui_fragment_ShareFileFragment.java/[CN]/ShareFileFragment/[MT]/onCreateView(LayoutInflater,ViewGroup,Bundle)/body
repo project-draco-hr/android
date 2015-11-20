@@ -1,4 +1,5 @@
 {
+  Log_OC.d(TAG,"onCreateView");
   View view=inflater.inflate(R.layout.share_file_layout,container,false);
   ImageView icon=(ImageView)view.findViewById(R.id.shareFileIcon);
   icon.setImageResource(MimetypeIconUtil.getFileTypeIconId(mFile.getMimetype(),mFile.getFileName()));
@@ -33,21 +34,11 @@
   }
 );
   mOnShareViaLinkSwitchCheckedChangeListener=new CompoundButton.OnCheckedChangeListener(){
-    @Override public void onCheckedChanged(    CompoundButton buttonView,    boolean isChecked){
-      if (!isResumed()) {
-        return;
-      }
-      if (isChecked) {
-        ((FileActivity)getActivity()).getFileOperationsHelper().shareFileViaLink(mFile);
-      }
- else {
-        ((FileActivity)getActivity()).getFileOperationsHelper().unshareFileViaLink(mFile);
-      }
+    @Override public void onCheckedChanged(    CompoundButton switchView,    boolean isChecked){
     }
   }
 ;
-  Switch shareViaLinkSwitch=(Switch)view.findViewById(R.id.shareViaLinkSectionSwitch);
-  shareViaLinkSwitch.setOnCheckedChangeListener(mOnShareViaLinkSwitchCheckedChangeListener);
+  initShareViaLinkListener(view);
   initExpirationListener(view);
   initPasswordListener(view);
   return view;

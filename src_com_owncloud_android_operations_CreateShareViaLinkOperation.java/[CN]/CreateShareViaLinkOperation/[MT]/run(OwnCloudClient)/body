@@ -12,8 +12,9 @@
     }
   }
   if (!result.isSuccess() || !shareByLink) {
-    operation=new CreateRemoteShareOperation(mPath,ShareType.PUBLIC_LINK,"",false,mPassword,OCShare.DEFAULT_PERMISSION);
-    result=operation.execute(client);
+    CreateRemoteShareOperation createOp=new CreateRemoteShareOperation(mPath,ShareType.PUBLIC_LINK,"",false,mPassword,OCShare.DEFAULT_PERMISSION);
+    createOp.setGetShareDetails(true);
+    result=createOp.execute(client);
   }
   if (result.isSuccess()) {
     if (result.getData().size() > 0) {

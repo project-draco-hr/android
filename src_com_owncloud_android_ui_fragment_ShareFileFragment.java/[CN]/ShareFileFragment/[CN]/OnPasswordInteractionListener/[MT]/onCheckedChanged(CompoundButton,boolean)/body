@@ -3,7 +3,7 @@
     return;
   }
   if (isChecked) {
-    ((FileActivity)getActivity()).getFileOperationsHelper().requestPasswordForShareViaLink(mFile);
+    ((FileActivity)getActivity()).getFileOperationsHelper().requestPasswordForShareViaLink(mFile,false);
   }
  else {
     ((FileActivity)getActivity()).getFileOperationsHelper().setPasswordToShareViaLink(mFile,"");
