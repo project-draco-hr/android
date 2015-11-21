@@ -1,6 +1,9 @@
 {
   String message=null;
-  if (operation instanceof UploadFileOperation) {
+  if (!result.isSuccess() && isNetworkError(result.getCode())) {
+    message=getErrorMessage(result,res);
+  }
+ else   if (operation instanceof UploadFileOperation) {
     if (result.isSuccess()) {
       message=String.format(res.getString(R.string.uploader_upload_succeeded_content_single),((UploadFileOperation)operation).getFileName());
     }
@@ -40,9 +43,6 @@
       if (result.getCode().equals(ResultCode.FORBIDDEN)) {
         message=String.format(res.getString(R.string.forbidden_permissions),res.getString(R.string.forbidden_permissions_delete));
       }
- else       if (isNetworkError(result.getCode())) {
-        message=getErrorMessage(result,res);
-      }
  else {
         message=res.getString(R.string.remove_fail_msg);
       }
@@ -57,9 +57,6 @@
     }
  else     if (result.getCode().equals(ResultCode.INVALID_CHARACTER_IN_NAME)) {
       message=res.getString(R.string.filename_forbidden_characters);
-    }
- else     if (isNetworkError(result.getCode())) {
-      message=getErrorMessage(result,res);
     }
  else     if (result.getCode() == ResultCode.INVALID_CHARACTER_DETECT_IN_SERVER) {
       message=res.getString(R.string.filename_forbidden_charaters_from_server);
@@ -80,9 +77,6 @@
  else     if (result.getCode().equals(ResultCode.FORBIDDEN)) {
       message=String.format(res.getString(R.string.forbidden_permissions),res.getString(R.string.forbidden_permissions_create));
     }
- else     if (isNetworkError(result.getCode())) {
-      message=getErrorMessage(result,res);
-    }
  else     if (result.getCode() == ResultCode.INVALID_CHARACTER_DETECT_IN_SERVER) {
       message=res.getString(R.string.filename_forbidden_charaters_from_server);
     }
@@ -90,39 +84,36 @@
       message=res.getString(R.string.create_dir_fail_msg);
     }
   }
- else   if (operation instanceof CreateShareOperation) {
-    if (result.getCode() == ResultCode.SHARE_NOT_FOUND) {
+ else   if (operation instanceof CreateShareViaLinkOperation || operation instanceof CreateShareWithShareeOperation) {
+    if (result.getData() != null && result.getData().size() > 0) {
+      message=(String)result.getData().get(0);
+    }
+ else     if (result.getCode() == ResultCode.SHARE_NOT_FOUND) {
       message=res.getString(R.string.share_link_file_no_exist);
     }
  else     if (result.getCode() == ResultCode.SHARE_FORBIDDEN) {
       message=String.format(res.getString(R.string.forbidden_permissions),res.getString(R.string.share_link_forbidden_permissions));
     }
- else     if (isNetworkError(result.getCode())) {
-      message=getErrorMessage(result,res);
-    }
  else {
       message=res.getString(R.string.share_link_file_error);
     }
   }
- else   if (operation instanceof UnshareLinkOperation) {
-    if (result.getCode() == ResultCode.SHARE_NOT_FOUND) {
+ else   if (operation instanceof UnshareOperation) {
+    if (result.getData() != null && result.getData().size() > 0) {
+      message=(String)result.getData().get(0);
+    }
+ else     if (result.getCode() == ResultCode.SHARE_NOT_FOUND) {
       message=res.getString(R.string.unshare_link_file_no_exist);
     }
  else     if (result.getCode() == ResultCode.SHARE_FORBIDDEN) {
       message=String.format(res.getString(R.string.forbidden_permissions),res.getString(R.string.unshare_link_forbidden_permissions));
-    }
- else     if (isNetworkError(result.getCode())) {
-      message=getErrorMessage(result,res);
     }
  else {
       message=res.getString(R.string.unshare_link_file_error);
     }
   }
  else   if (operation instanceof MoveFileOperation) {
-    if (isNetworkError(result.getCode())) {
-      message=getErrorMessage(result,res);
-    }
- else     if (result.getCode() == ResultCode.FILE_NOT_FOUND) {
+    if (result.getCode() == ResultCode.FILE_NOT_FOUND) {
       message=res.getString(R.string.move_file_not_found);
     }
  else     if (result.getCode() == ResultCode.INVALID_MOVE_INTO_DESCENDANT) {
@@ -148,15 +139,12 @@
         message=String.format(res.getString(R.string.sync_current_folder_was_removed),folderPathName);
       }
  else {
-        message=String.format(res.getString(R.string.download_folder_failed_content),folderPathName);
+        message=String.format(res.getString(R.string.sync_folder_failed_content),folderPathName);
       }
     }
   }
  else   if (operation instanceof CopyFileOperation) {
-    if (isNetworkError(result.getCode())) {
-      message=getErrorMessage(result,res);
-    }
- else     if (result.getCode() == ResultCode.FILE_NOT_FOUND) {
+    if (result.getCode() == ResultCode.FILE_NOT_FOUND) {
       message=res.getString(R.string.copy_file_not_found);
     }
  else     if (result.getCode() == ResultCode.INVALID_COPY_INTO_DESCENDANT) {

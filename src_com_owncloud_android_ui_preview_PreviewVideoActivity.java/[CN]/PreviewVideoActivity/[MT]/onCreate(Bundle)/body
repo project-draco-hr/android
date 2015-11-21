@@ -1,6 +1,6 @@
 {
   super.onCreate(savedInstanceState);
-  Log_OC.e(TAG,"ACTIVITY\t\tonCreate");
+  Log_OC.v(TAG,"onCreate");
   setContentView(R.layout.video_layout);
   if (savedInstanceState == null) {
     Bundle extras=getIntent().getExtras();

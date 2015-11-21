@@ -1,0 +1,3 @@
+{
+  getFileOperationsHelper().shareFileWithSharee(getFile(),shareeName,(isGroup ? ShareType.GROUP : ShareType.USER));
+}

@@ -10,6 +10,7 @@
     String name=file.getName();
     fileName.setText(name);
     ImageView fileIcon=(ImageView)view.findViewById(R.id.thumbnail);
+    boolean allowedToCreateNewThumbnail=(ThumbnailsCacheManager.cancelPotentialWork(file,fileIcon));
     if (!file.isDirectory()) {
       fileIcon.setImageResource(R.drawable.file);
     }
@@ -44,7 +45,7 @@
           fileIcon.setImageBitmap(thumbnail);
         }
  else {
-          if (ThumbnailsCacheManager.cancelPotentialWork(file,fileIcon)) {
+          if (allowedToCreateNewThumbnail) {
             final ThumbnailsCacheManager.ThumbnailGenerationTask task=new ThumbnailsCacheManager.ThumbnailGenerationTask(fileIcon);
             if (thumbnail == null) {
               thumbnail=ThumbnailsCacheManager.mDefaultImg;
@@ -52,6 +53,7 @@
             final ThumbnailsCacheManager.AsyncDrawable asyncDrawable=new ThumbnailsCacheManager.AsyncDrawable(mContext.getResources(),thumbnail,task);
             fileIcon.setImageDrawable(asyncDrawable);
             task.execute(file);
+            Log_OC.v(TAG,"Executing task to generate a new thumbnail");
           }
         }
       }
@@ -67,7 +69,6 @@
     view.findViewById(R.id.localFileIndicator).setVisibility(View.INVISIBLE);
     view.findViewById(R.id.favoriteIcon).setVisibility(View.GONE);
     view.findViewById(R.id.sharedIcon).setVisibility(View.GONE);
-    view.findViewById(R.id.sharedWithMeIcon).setVisibility(View.GONE);
   }
   return view;
 }

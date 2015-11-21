@@ -6,5 +6,5 @@
       mCurrentUpload.cancel();
     }
   }
-  cancelUploadForAccount(account.name);
+  cancelUploadsForAccount(account);
 }

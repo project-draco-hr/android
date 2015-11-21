@@ -4,6 +4,7 @@
       OCFile syncedFile=operation.getLocalFile();
       onTransferStateChanged(syncedFile,true,true);
       invalidateOptionsMenu();
+      refreshShowDetails();
     }
   }
 }

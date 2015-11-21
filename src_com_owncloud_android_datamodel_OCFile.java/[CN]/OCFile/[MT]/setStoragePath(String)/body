@@ -1,3 +1,4 @@
 {
   mLocalPath=storage_path;
+  mLocalUri=null;
 }

@@ -82,54 +82,52 @@
     }
     localCopyPassed=(result == null);
     if (mChunked && (new File(mFile.getStoragePath())).length() > ChunkedUploadRemoteFileOperation.CHUNK_SIZE) {
-      mUploadOperation=new ChunkedUploadRemoteFileOperation(mFile.getStoragePath(),mFile.getRemotePath(),mFile.getMimetype());
+      mUploadOperation=new ChunkedUploadRemoteFileOperation(mFile.getStoragePath(),mFile.getRemotePath(),mFile.getMimetype(),mFile.getEtagInConflict());
     }
  else {
-      mUploadOperation=new UploadRemoteFileOperation(mFile.getStoragePath(),mFile.getRemotePath(),mFile.getMimetype());
+      mUploadOperation=new UploadRemoteFileOperation(mFile.getStoragePath(),mFile.getRemotePath(),mFile.getMimetype(),mFile.getEtagInConflict());
     }
     Iterator<OnDatatransferProgressListener> listener=mDataTransferListeners.iterator();
     while (listener.hasNext()) {
       mUploadOperation.addDatatransferProgressListener(listener.next());
     }
-    if (!mCancellationRequested.get()) {
-      result=mUploadOperation.execute(client);
-      if (result.isSuccess()) {
-        if (mLocalBehaviour == FileUploader.LOCAL_BEHAVIOUR_FORGET) {
-          mFile.setStoragePath(null);
-        }
- else         if (mLocalBehaviour == FileUploader.LOCAL_BEHAVIOUR_REMOVE) {
-          mFile.setStoragePath(null);
-          originalFile.delete();
-        }
- else {
-          mFile.setStoragePath(expectedPath);
-          File fileToMove=null;
-          if (temporalFile != null) {
-            fileToMove=temporalFile;
-          }
- else {
-            fileToMove=originalFile;
-          }
-          if (!expectedFile.equals(fileToMove)) {
-            File expectedFolder=expectedFile.getParentFile();
-            expectedFolder.mkdirs();
-            if (!expectedFolder.isDirectory() || !fileToMove.renameTo(expectedFile)) {
-              mFile.setStoragePath(null);
-            }
-          }
-        }
-        FileDataStorageManager.triggerMediaScan(originalFile.getAbsolutePath());
-        FileDataStorageManager.triggerMediaScan(expectedFile.getAbsolutePath());
+    if (mCancellationRequested.get()) {
+      throw new OperationCancelledException();
+    }
+    if (result.isSuccess()) {
+      if (mLocalBehaviour == FileUploader.LOCAL_BEHAVIOUR_FORGET) {
+        mFile.setStoragePath(null);
       }
+ else       if (mLocalBehaviour == FileUploader.LOCAL_BEHAVIOUR_REMOVE) {
+        mFile.setStoragePath(null);
+        originalFile.delete();
+      }
+ else {
+        mFile.setStoragePath(expectedPath);
+        File fileToMove=null;
+        if (temporalFile != null) {
+          fileToMove=temporalFile;
+        }
+ else {
+          fileToMove=originalFile;
+        }
+        if (!expectedFile.equals(fileToMove)) {
+          File expectedFolder=expectedFile.getParentFile();
+          expectedFolder.mkdirs();
+          if (!expectedFolder.isDirectory() || !fileToMove.renameTo(expectedFile)) {
+            mFile.setStoragePath(null);
+          }
+        }
+      }
+      FileDataStorageManager.triggerMediaScan(originalFile.getAbsolutePath());
+      FileDataStorageManager.triggerMediaScan(expectedFile.getAbsolutePath());
+    }
+ else     if (result.getHttpCode() == HttpStatus.SC_PRECONDITION_FAILED) {
+      result=new RemoteOperationResult(ResultCode.SYNC_CONFLICT);
     }
   }
  catch (  Exception e) {
-    if (mCancellationRequested.get()) {
-      result=new RemoteOperationResult(new OperationCancelledException());
-    }
- else {
-      result=new RemoteOperationResult(e);
-    }
+    result=new RemoteOperationResult(e);
   }
  finally {
     if (temporalFile != null && !originalFile.equals(temporalFile)) {

@@ -1,9 +1,9 @@
 {
-  if (isSharedWithUser) {
-    return R.drawable.shared_with_me_folder;
-  }
- else   if (isShareByLink) {
+  if (isSharedViaLink) {
     return R.drawable.folder_public;
+  }
+ else   if (isSharedViaUsers) {
+    return R.drawable.shared_with_me_folder;
   }
   return R.drawable.ic_menu_archive;
 }

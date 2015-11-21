@@ -1,0 +1,4 @@
+{
+  String permissions=getPermissions();
+  return (permissions != null && permissions.contains(PERMISSION_SHARED_WITH_ME));
+}

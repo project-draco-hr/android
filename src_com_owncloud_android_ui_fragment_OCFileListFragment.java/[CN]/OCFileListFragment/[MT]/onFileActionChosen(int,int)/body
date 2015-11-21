@@ -6,15 +6,20 @@ case R.id.action_share_file:
       mContainerActivity.getFileOperationsHelper().shareFileWithLink(mTargetFile);
       return true;
     }
-case R.id.action_open_file_with:
+case R.id.action_share_with_users:
 {
-    mContainerActivity.getFileOperationsHelper().openFile(mTargetFile);
+    mContainerActivity.getFileOperationsHelper().showShareFile(mTargetFile);
     return true;
   }
+case R.id.action_open_file_with:
+{
+  mContainerActivity.getFileOperationsHelper().openFile(mTargetFile);
+  return true;
+}
 case R.id.action_unshare_file:
 {
-  mContainerActivity.getFileOperationsHelper().unshareFileWithLink(mTargetFile);
-  return true;
+mContainerActivity.getFileOperationsHelper().unshareFileWithLink(mTargetFile);
+return true;
 }
 case R.id.action_rename_file:
 {
@@ -34,8 +39,7 @@ case R.id.action_sync_file:
 mContainerActivity.getFileOperationsHelper().syncFile(mTargetFile);
 return true;
 }
-case R.id.action_cancel_download:
-case R.id.action_cancel_upload:
+case R.id.action_cancel_sync:
 {
 ((FileDisplayActivity)mContainerActivity).cancelTransference(mTargetFile);
 return true;
