@@ -115,7 +115,25 @@
         if (!expectedFile.equals(fileToMove)) {
           File expectedFolder=expectedFile.getParentFile();
           expectedFolder.mkdirs();
-          if (!expectedFolder.isDirectory() || !fileToMove.renameTo(expectedFile)) {
+          if (expectedFolder.isDirectory()) {
+            if (!fileToMove.renameTo(expectedFile)) {
+              expectedFile.createNewFile();
+              FileChannel inChannel=new FileInputStream(fileToMove).getChannel();
+              FileChannel outChannel=new FileOutputStream(expectedFile).getChannel();
+              try {
+                inChannel.transferTo(0,inChannel.size(),outChannel);
+                fileToMove.delete();
+              }
+ catch (              Exception e) {
+                mFile.setStoragePath(null);
+              }
+ finally {
+                if (inChannel != null)                 inChannel.close();
+                if (outChannel != null)                 outChannel.close();
+              }
+            }
+          }
+ else {
             mFile.setStoragePath(null);
           }
         }
