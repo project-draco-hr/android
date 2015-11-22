@@ -63,7 +63,9 @@
  else {
     toShow.add(R.id.action_unshare_file);
   }
-  if (!shareAllowed || mFile == null) {
+  OCCapability capability=mComponentsGetter.getStorageManager().getCapability(mAccount.name);
+  boolean shareApiEnabled=capability != null && (capability.getFilesSharingApiEnabled().isTrue() || capability.getFilesSharingApiEnabled().isUnknown());
+  if (!shareAllowed || mFile == null || !shareApiEnabled) {
     toHide.add(R.id.action_share_with_users);
   }
  else {
