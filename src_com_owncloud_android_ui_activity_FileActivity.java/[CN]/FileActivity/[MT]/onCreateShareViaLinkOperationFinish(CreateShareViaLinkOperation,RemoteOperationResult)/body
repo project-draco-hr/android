@@ -9,7 +9,7 @@
  else {
     if (result.getCode() == ResultCode.SHARE_FORBIDDEN) {
       String password=operation.getPassword();
-      if ((password == null || password.length() == 0) && !getCapabilities().getFilesSharingPublicEnabled().isFalse()) {
+      if ((password == null || password.length() == 0) && getCapabilities().getFilesSharingPublicEnabled().isUnknown()) {
         SharePasswordDialogFragment dialog=SharePasswordDialogFragment.newInstance(new OCFile(operation.getPath()),true);
         dialog.show(getSupportFragmentManager(),DIALOG_SHARE_PASSWORD);
       }
