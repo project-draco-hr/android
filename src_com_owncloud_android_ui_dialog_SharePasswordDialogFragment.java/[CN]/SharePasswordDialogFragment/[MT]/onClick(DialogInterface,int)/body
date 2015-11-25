@@ -1,14 +1,15 @@
 {
   if (which == AlertDialog.BUTTON_POSITIVE) {
-    ((FileActivity)getActivity()).setTryShareAgain(true);
     String password=((TextView)(getDialog().findViewById(R.id.share_password))).getText().toString();
     if (password.length() <= 0) {
       Toast.makeText(getActivity(),R.string.share_link_empty_password,Toast.LENGTH_LONG).show();
       return;
     }
-    ((FileActivity)getActivity()).getFileOperationsHelper().shareFileWithLinkToApp(mFile,password,mSendIntent);
-  }
+    if (mCreateShare) {
+      ((FileActivity)getActivity()).getFileOperationsHelper().shareFileViaLink(mFile,password);
+    }
  else {
-    ((FileActivity)getActivity()).setTryShareAgain(false);
+      ((FileActivity)getActivity()).getFileOperationsHelper().setPasswordToShareViaLink(mFile,password);
+    }
   }
 }

@@ -1,6 +1,6 @@
 {
   super.onAccountSet(stateWasRecovered);
   Log_OC.d(TAG,"Refreshing lists on account set");
-  refreshUsersInLists();
+  refreshSharesFromStorageManager();
   refreshUsersOrGroupsListFromServer();
 }
