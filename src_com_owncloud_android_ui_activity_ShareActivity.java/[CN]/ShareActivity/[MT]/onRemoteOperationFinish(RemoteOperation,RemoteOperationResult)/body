@@ -4,7 +4,7 @@
     Log_OC.d(TAG,"Refreshing view on successful operation or finished refresh");
     refreshSharesFromStorageManager();
   }
-  if (operation instanceof CreateShareViaLinkOperation) {
+  if (operation instanceof CreateShareViaLinkOperation && result.isSuccess()) {
     String link=((OCShare)(result.getData().get(0))).getShareLink();
     Log_OC.d(TAG,"Share link = " + link);
     Intent intentToShareLink=new Intent(Intent.ACTION_SEND);
