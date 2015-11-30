@@ -3,6 +3,9 @@
     String value=getEntryValues()[which].toString();
     if (callChangeListener(value)) {
       setValue(value);
+      if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+        setSummary(getEntries()[which]);
+      }
     }
     dialog.dismiss();
   }
