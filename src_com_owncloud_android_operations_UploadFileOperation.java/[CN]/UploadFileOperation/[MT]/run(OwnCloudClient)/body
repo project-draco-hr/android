@@ -97,10 +97,10 @@
     result=mUploadOperation.execute(client);
     if (result.isSuccess()) {
       if (mLocalBehaviour == FileUploader.LOCAL_BEHAVIOUR_FORGET) {
-        mFile.setStoragePath(null);
+        mFile.setStoragePath("");
       }
  else       if (mLocalBehaviour == FileUploader.LOCAL_BEHAVIOUR_REMOVE) {
-        mFile.setStoragePath(null);
+        mFile.setStoragePath("");
         originalFile.delete();
       }
  else {
