@@ -1,17 +1,18 @@
 {
   RemoteOperation operation=new GetRemoteSharesForFileOperation(mPath,false,false);
   RemoteOperationResult result=operation.execute(client);
-  boolean shareByLink=false;
-  if (result.isSuccess() && result.getData().size() > 0) {
-    ArrayList<Object> shares=result.getData();
-    for (    Object object : shares) {
-      if (((OCShare)object).getShareType() == ShareType.PUBLIC_LINK) {
-        shareByLink=true;
+  boolean publicShareExists=false;
+  if (result.isSuccess()) {
+    OCShare share=null;
+    for (int i=0; i < result.getData().size(); i++) {
+      share=(OCShare)result.getData().get(i);
+      if (ShareType.PUBLIC_LINK.equals(share.getShareType())) {
+        publicShareExists=true;
         break;
       }
     }
   }
-  if (!result.isSuccess() || !shareByLink) {
+  if (!publicShareExists) {
     CreateRemoteShareOperation createOp=new CreateRemoteShareOperation(mPath,ShareType.PUBLIC_LINK,"",false,mPassword,OCShare.DEFAULT_PERMISSION);
     createOp.setGetShareDetails(true);
     result=createOp.execute(client);

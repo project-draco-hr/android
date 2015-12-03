@@ -5,7 +5,9 @@
   }
  else   if (UsersAndGroupsSearchProvider.ACTION_SHARE_WITH.equals(intent.getAction())) {
     Uri data=intent.getData();
-    doShareWith(data.getLastPathSegment(),UsersAndGroupsSearchProvider.DATA_GROUP.equals(data.getAuthority()));
+    String dataString=intent.getDataString();
+    String shareWith=dataString.substring(dataString.lastIndexOf('/') + 1);
+    doShareWith(shareWith,UsersAndGroupsSearchProvider.DATA_GROUP.equals(data.getAuthority()));
   }
  else {
     Log_OC.wtf(TAG,"Unexpected intent " + intent.toString());

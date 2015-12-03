@@ -1,4 +1,6 @@
 {
-  mPendingOperations.putIfAbsent(account,remotePath,syncFolderOperation);
-  sendBroadcastNewSyncFolder(account,remotePath);
+  Pair<String,String> putResult=mPendingOperations.putIfAbsent(account,remotePath,syncFolderOperation);
+  if (putResult != null) {
+    sendBroadcastNewSyncFolder(account,remotePath);
+  }
 }
