@@ -1,10 +1,8 @@
 {
   if (result.isSuccess()) {
-    dismissLoadingDialog();
     populateDirectoryList();
   }
  else {
-    dismissLoadingDialog();
     try {
       Toast msg=Toast.makeText(this,ErrorMessageAdapter.getErrorCauseMessage(result,operation,getResources()),Toast.LENGTH_LONG);
       msg.show();

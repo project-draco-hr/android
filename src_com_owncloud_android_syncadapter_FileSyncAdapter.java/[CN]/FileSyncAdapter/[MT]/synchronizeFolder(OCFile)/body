@@ -13,10 +13,10 @@
     }
     if (result.isSuccess()) {
       List<OCFile> children=synchFolderOp.getChildren();
-      fetchChildren(folder,children,synchFolderOp.getRemoteFolderChanged());
+      syncChildren(children);
     }
   }
- else {
+ else   if (result.getCode() != ResultCode.FILE_NOT_FOUND) {
     if (result.getCode() == RemoteOperationResult.ResultCode.UNAUTHORIZED || result.isIdPRedirection()) {
       mSyncResult.stats.numAuthExceptions++;
     }

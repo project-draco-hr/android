@@ -1,0 +1,3 @@
+{
+  return (SearchShareesFragment)getSupportFragmentManager().findFragmentByTag(TAG_SEARCH_FRAGMENT);
+}

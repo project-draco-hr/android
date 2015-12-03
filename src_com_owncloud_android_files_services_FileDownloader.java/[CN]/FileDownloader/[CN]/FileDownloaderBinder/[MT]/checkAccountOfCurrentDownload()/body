@@ -1,5 +1,0 @@
-{
-  if (mCurrentDownload != null && !AccountUtils.exists(mCurrentDownload.getAccount(),getApplicationContext())) {
-    mCurrentDownload.cancel();
-  }
-}

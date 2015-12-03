@@ -1,0 +1,4 @@
+{
+  OCFile file=getFile();
+  getFileOperationsHelper().unshareFileWithUserOrGroup(file,share.getShareType(),share.getShareWith());
+}

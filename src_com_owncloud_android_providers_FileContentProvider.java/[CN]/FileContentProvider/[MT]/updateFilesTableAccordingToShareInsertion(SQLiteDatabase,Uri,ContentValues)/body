@@ -1,7 +1,0 @@
-{
-  ContentValues fileValues=new ContentValues();
-  fileValues.put(ProviderTableMeta.FILE_SHARE_BY_LINK,ShareType.PUBLIC_LINK.getValue() == shareValues.getAsInteger(ProviderTableMeta.OCSHARES_SHARE_TYPE) ? 1 : 0);
-  String whereShare=ProviderTableMeta.FILE_PATH + "=? AND " + ProviderTableMeta.FILE_ACCOUNT_OWNER+ "=?";
-  String[] whereArgsShare=new String[]{shareValues.getAsString(ProviderTableMeta.OCSHARES_PATH),shareValues.getAsString(ProviderTableMeta.OCSHARES_ACCOUNT_OWNER)};
-  db.update(ProviderTableMeta.FILE_TABLE_NAME,fileValues,whereShare,whereArgsShare);
-}
