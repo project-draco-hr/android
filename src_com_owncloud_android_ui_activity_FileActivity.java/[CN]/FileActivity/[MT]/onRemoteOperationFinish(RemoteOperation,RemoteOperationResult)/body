@@ -9,9 +9,8 @@
       Toast t=Toast.makeText(this,ErrorMessageAdapter.getErrorCauseMessage(result,operation,getResources()),Toast.LENGTH_LONG);
       t.show();
     }
-    mTryShareAgain=false;
   }
- else   if (operation == null || operation instanceof CreateShareWithShareeOperation || operation instanceof UnshareOperation || operation instanceof SynchronizeFolderOperation) {
+ else   if (operation == null || operation instanceof CreateShareWithShareeOperation || operation instanceof UnshareOperation || operation instanceof SynchronizeFolderOperation || operation instanceof UpdateShareViaLinkOperation) {
     if (result.isSuccess()) {
       updateFileFromDB();
     }
@@ -27,10 +26,10 @@
     onSynchronizeFileOperationFinish((SynchronizeFileOperation)operation,result);
   }
  else   if (operation instanceof GetSharesForFileOperation) {
-    if (result.isSuccess()) {
+    if (result.isSuccess() || result.getCode() == ResultCode.SHARE_NOT_FOUND) {
       updateFileFromDB();
     }
- else     if (result.getCode() != ResultCode.SHARE_NOT_FOUND) {
+ else {
       Toast t=Toast.makeText(this,ErrorMessageAdapter.getErrorCauseMessage(result,operation,getResources()),Toast.LENGTH_LONG);
       t.show();
     }

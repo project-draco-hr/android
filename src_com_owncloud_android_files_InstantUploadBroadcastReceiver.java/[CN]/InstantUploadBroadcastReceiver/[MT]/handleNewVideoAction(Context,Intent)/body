@@ -34,5 +34,6 @@
   i.putExtra(FileUploader.KEY_UPLOAD_TYPE,FileUploader.UPLOAD_SINGLE_FILE);
   i.putExtra(FileUploader.KEY_MIME_TYPE,mime_type);
   i.putExtra(FileUploader.KEY_INSTANT_UPLOAD,true);
+  i=addInstantUploadBehaviour(i,context);
   context.startService(i);
 }

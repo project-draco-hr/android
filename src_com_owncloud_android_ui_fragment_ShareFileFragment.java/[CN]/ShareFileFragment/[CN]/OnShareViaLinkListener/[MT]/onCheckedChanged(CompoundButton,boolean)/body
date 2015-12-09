@@ -1,0 +1,19 @@
+{
+  if (!isResumed()) {
+    return;
+  }
+  if (isChecked) {
+    if (mCapabilities != null && mCapabilities.getFilesSharingPublicPasswordEnforced().isTrue()) {
+      ((FileActivity)getActivity()).getFileOperationsHelper().requestPasswordForShareViaLink(mFile,true);
+    }
+ else {
+      ((FileActivity)getActivity()).getFileOperationsHelper().shareFileViaLink(mFile,null);
+    }
+  }
+ else {
+    ((FileActivity)getActivity()).getFileOperationsHelper().unshareFileViaLink(mFile);
+  }
+  switchView.setOnCheckedChangeListener(null);
+  switchView.toggle();
+  switchView.setOnCheckedChangeListener(mOnShareViaLinkSwitchCheckedChangeListener);
+}

@@ -2,29 +2,19 @@
 switch (item.getItemId()) {
 case R.id.action_share_file:
 {
-      mContainerActivity.getFileOperationsHelper().shareFileWithLink(getFile());
+      mContainerActivity.getFileOperationsHelper().showShareFile(getFile());
       return true;
     }
-case R.id.action_share_with_users:
-{
-    mContainerActivity.getFileOperationsHelper().showShareFile(getFile());
-    return true;
-  }
-case R.id.action_unshare_file:
-{
-  mContainerActivity.getFileOperationsHelper().unshareFileWithLink(getFile());
-  return true;
-}
 case R.id.action_open_file_with:
 {
-mContainerActivity.getFileOperationsHelper().openFile(getFile());
-return true;
-}
+    mContainerActivity.getFileOperationsHelper().openFile(getFile());
+    return true;
+  }
 case R.id.action_remove_file:
 {
-RemoveFileDialogFragment dialog=RemoveFileDialogFragment.newInstance(getFile());
-dialog.show(getFragmentManager(),FTAG_CONFIRMATION);
-return true;
+  RemoveFileDialogFragment dialog=RemoveFileDialogFragment.newInstance(getFile());
+  dialog.show(getFragmentManager(),FTAG_CONFIRMATION);
+  return true;
 }
 case R.id.action_rename_file:
 {

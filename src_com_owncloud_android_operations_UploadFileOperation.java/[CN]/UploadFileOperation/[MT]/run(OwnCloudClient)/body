@@ -97,7 +97,7 @@
     result=mUploadOperation.execute(client);
     if (result.isSuccess()) {
       if (mLocalBehaviour == FileUploader.LOCAL_BEHAVIOUR_FORGET) {
-        mFile.setStoragePath(null);
+        mFile.setStoragePath("");
       }
  else {
         mFile.setStoragePath(expectedPath);
@@ -111,11 +111,31 @@
         if (!expectedFile.equals(fileToMove)) {
           File expectedFolder=expectedFile.getParentFile();
           expectedFolder.mkdirs();
-          if (!expectedFolder.isDirectory() || !fileToMove.renameTo(expectedFile)) {
+          if (expectedFolder.isDirectory()) {
+            if (!fileToMove.renameTo(expectedFile)) {
+              expectedFile.createNewFile();
+              FileChannel inChannel=new FileInputStream(fileToMove).getChannel();
+              FileChannel outChannel=new FileOutputStream(expectedFile).getChannel();
+              try {
+                inChannel.transferTo(0,inChannel.size(),outChannel);
+                fileToMove.delete();
+              }
+ catch (              Exception e) {
+                mFile.setStoragePath(null);
+              }
+ finally {
+                if (inChannel != null)                 inChannel.close();
+                if (outChannel != null)                 outChannel.close();
+              }
+            }
+          }
+ else {
             mFile.setStoragePath(null);
           }
         }
       }
+      FileDataStorageManager.triggerMediaScan(originalFile.getAbsolutePath());
+      FileDataStorageManager.triggerMediaScan(expectedFile.getAbsolutePath());
     }
  else     if (result.getHttpCode() == HttpStatus.SC_PRECONDITION_FAILED) {
       result=new RemoteOperationResult(ResultCode.SYNC_CONFLICT);

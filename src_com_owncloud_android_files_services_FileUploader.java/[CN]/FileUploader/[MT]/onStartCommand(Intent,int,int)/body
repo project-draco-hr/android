@@ -38,7 +38,7 @@
   FileDataStorageManager storageManager=new FileDataStorageManager(account,getContentResolver());
   boolean forceOverwrite=intent.getBooleanExtra(KEY_FORCE_OVERWRITE,false);
   boolean isInstant=intent.getBooleanExtra(KEY_INSTANT_UPLOAD,false);
-  int localAction=intent.getIntExtra(KEY_LOCAL_BEHAVIOUR,LOCAL_BEHAVIOUR_COPY);
+  int localAction=intent.getIntExtra(KEY_LOCAL_BEHAVIOUR,LOCAL_BEHAVIOUR_FORGET);
   if (intent.hasExtra(KEY_FILE) && files == null) {
     Log_OC.e(TAG,"Incorrect array for OCFiles provided in upload intent");
     return Service.START_NOT_STICKY;
@@ -78,8 +78,10 @@
       newUpload.addDatatransferProgressListener(this);
       newUpload.addDatatransferProgressListener((FileUploaderBinder)mBinder);
       Pair<String,String> putResult=mPendingUploads.putIfAbsent(account,files[i].getRemotePath(),newUpload);
-      uploadKey=putResult.first;
-      requestedUploads.add(uploadKey);
+      if (putResult != null) {
+        uploadKey=putResult.first;
+        requestedUploads.add(uploadKey);
+      }
     }
   }
  catch (  IllegalArgumentException e) {

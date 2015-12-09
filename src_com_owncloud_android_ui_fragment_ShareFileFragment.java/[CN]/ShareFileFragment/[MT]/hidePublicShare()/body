@@ -1,0 +1,6 @@
+{
+  getShareViaLinkSwitch().setVisibility(View.GONE);
+  getExpirationDateSection().setVisibility(View.GONE);
+  getPasswordSection().setVisibility(View.GONE);
+  getGetLinkButton().setVisibility(View.GONE);
+}

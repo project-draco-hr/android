@@ -1,0 +1,15 @@
+{
+  if (!isResumed()) {
+    return;
+  }
+  if (isChecked) {
+    ExpirationDatePickerDialogFragment dialog=ExpirationDatePickerDialogFragment.newInstance(mFile,-1);
+    dialog.show(getActivity().getSupportFragmentManager(),ExpirationDatePickerDialogFragment.DATE_PICKER_DIALOG);
+  }
+ else {
+    ((FileActivity)getActivity()).getFileOperationsHelper().setExpirationDateToShareViaLink(mFile,-1);
+  }
+  switchView.setOnCheckedChangeListener(null);
+  switchView.toggle();
+  switchView.setOnCheckedChangeListener(mOnExpirationDateInteractionListener);
+}
