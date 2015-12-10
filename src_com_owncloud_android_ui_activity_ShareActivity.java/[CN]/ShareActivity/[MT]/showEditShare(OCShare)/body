@@ -1,0 +1,7 @@
+{
+  FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
+  Fragment editShareFragment=EditShareFragment.newInstance(share,getFile(),getAccount());
+  ft.replace(R.id.share_fragment_container,editShareFragment,TAG_EDIT_SHARE_FRAGMENT);
+  ft.addToBackStack(null);
+  ft.commit();
+}

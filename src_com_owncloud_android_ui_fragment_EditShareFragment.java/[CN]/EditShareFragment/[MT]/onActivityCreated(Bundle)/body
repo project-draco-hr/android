@@ -1,0 +1,5 @@
+{
+  super.onActivityCreated(savedInstanceState);
+  Log_OC.d(TAG,"onActivityCreated");
+  getActivity().setTitle(mShare.getSharedWithDisplayName());
+}

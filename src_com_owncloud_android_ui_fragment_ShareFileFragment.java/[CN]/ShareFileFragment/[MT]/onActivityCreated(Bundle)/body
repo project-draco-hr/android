@@ -1,6 +1,7 @@
 {
   super.onActivityCreated(savedInstanceState);
   Log_OC.d(TAG,"onActivityCreated");
+  getActivity().setTitle(R.string.share_dialog_title);
   refreshCapabilitiesFromDB();
   refreshUsersOrGroupsListFromDB();
   refreshPublicShareFromDB();

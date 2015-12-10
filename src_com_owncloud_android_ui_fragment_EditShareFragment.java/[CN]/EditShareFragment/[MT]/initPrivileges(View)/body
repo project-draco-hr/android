@@ -1,0 +1,33 @@
+{
+  mOnPrivilegeChangeListener=new OnPrivilegeChangeListener();
+  int sharePermissions=mShare.getPermissions();
+  CheckBox checkBox;
+  checkBox=(CheckBox)editShareView.findViewById(R.id.canShareCheckBox);
+  checkBox.setChecked((sharePermissions & OCShare.SHARE_PERMISSION_FLAG) > 0);
+  checkBox.setOnCheckedChangeListener(mOnPrivilegeChangeListener);
+  checkBox=(CheckBox)editShareView.findViewById(R.id.canEditCheckBox);
+  int anyUpdatePermission=OCShare.CREATE_PERMISSION_FLAG | OCShare.UPDATE_PERMISSION_FLAG | OCShare.DELETE_PERMISSION_FLAG;
+  boolean canEdit=(sharePermissions & anyUpdatePermission) > 0;
+  checkBox.setChecked(canEdit);
+  checkBox.setOnCheckedChangeListener(mOnPrivilegeChangeListener);
+  if (mFile.isFolder()) {
+    checkBox=(CheckBox)editShareView.findViewById(R.id.canEditCreateCheckBox);
+    if (canEdit) {
+      checkBox.setVisibility(View.VISIBLE);
+      checkBox.setChecked((sharePermissions & OCShare.CREATE_PERMISSION_FLAG) > 0);
+    }
+    checkBox.setOnCheckedChangeListener(mOnPrivilegeChangeListener);
+    checkBox=(CheckBox)editShareView.findViewById(R.id.canEditChangeCheckBox);
+    if (canEdit) {
+      checkBox.setVisibility(View.VISIBLE);
+      checkBox.setChecked((sharePermissions & OCShare.UPDATE_PERMISSION_FLAG) > 0);
+    }
+    checkBox.setOnCheckedChangeListener(mOnPrivilegeChangeListener);
+    checkBox=(CheckBox)editShareView.findViewById(R.id.canEditDeleteCheckBox);
+    if (canEdit) {
+      checkBox.setVisibility(View.VISIBLE);
+      checkBox.setChecked((sharePermissions & OCShare.DELETE_PERMISSION_FLAG) > 0);
+    }
+    checkBox.setOnCheckedChangeListener(mOnPrivilegeChangeListener);
+  }
+}
