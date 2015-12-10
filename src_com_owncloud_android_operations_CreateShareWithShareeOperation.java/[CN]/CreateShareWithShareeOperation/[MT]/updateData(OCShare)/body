@@ -1,0 +1,10 @@
+{
+  share.setPath(mPath);
+  share.setIsFolder(mPath.endsWith(FileUtils.PATH_SEPARATOR));
+  getStorageManager().saveShare(share);
+  OCFile file=getStorageManager().getFileByPath(mPath);
+  if (file != null) {
+    file.setShareWithSharee(true);
+    getStorageManager().saveFile(file);
+  }
+}

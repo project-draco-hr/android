@@ -37,5 +37,6 @@
   i.putExtra(FileUploadService.KEY_MIME_TYPE,mime_type);
   i.putExtra(FileUploadService.KEY_CREATE_REMOTE_FOLDER,true);
   i.putExtra(FileUploadService.KEY_WIFI_ONLY,instantPictureUploadViaWiFiOnly(context));
+  i=addInstantUploadBehaviour(i,context);
   context.startService(i);
 }

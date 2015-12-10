@@ -1,0 +1,9 @@
+{
+  Cursor c=getCapabilityCursorForAccount(accountName);
+  boolean exists=false;
+  if (c != null) {
+    exists=c.moveToFirst();
+    c.close();
+  }
+  return exists;
+}

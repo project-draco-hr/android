@@ -6,9 +6,8 @@ case R.id.uploader_choose_folder:
 Log_OC.d(TAG,"Uploading file to dir " + mUploadPath);
 uploadFiles();
 break;
-case R.id.uploader_new_folder:
-CreateFolderDialogFragment dialog=CreateFolderDialogFragment.newInstance(mFile);
-dialog.show(getSupportFragmentManager(),"createdirdialog");
+case R.id.uploader_cancel:
+finish();
 break;
 default :
 throw new IllegalArgumentException("Wrong element clicked");

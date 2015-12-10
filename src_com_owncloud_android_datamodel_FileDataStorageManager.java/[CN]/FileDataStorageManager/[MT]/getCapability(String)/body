@@ -1,0 +1,12 @@
+{
+  OCCapability capability=null;
+  Cursor c=getCapabilityCursorForAccount(accountName);
+  if (c.moveToFirst()) {
+    capability=createCapabilityInstance(c);
+  }
+ else {
+    capability=new OCCapability();
+  }
+  c.close();
+  return capability;
+}

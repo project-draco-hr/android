@@ -1,6 +1,5 @@
 {
   super.onSaveInstanceState(outState);
-  Log_OC.e(TAG,"ACTIVITY\t\tonSaveInstanceState");
   outState.putInt(PreviewVideoActivity.EXTRA_START_POSITION,mVideoPlayer.getCurrentPosition());
   outState.putBoolean(PreviewVideoActivity.EXTRA_AUTOPLAY,mVideoPlayer.isPlaying());
 }

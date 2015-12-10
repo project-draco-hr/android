@@ -1,0 +1,27 @@
+{
+  RemoteOperation operation=new GetRemoteSharesForFileOperation(mPath,false,false);
+  RemoteOperationResult result=operation.execute(client);
+  boolean publicShareExists=false;
+  if (result.isSuccess()) {
+    OCShare share=null;
+    for (int i=0; i < result.getData().size(); i++) {
+      share=(OCShare)result.getData().get(i);
+      if (ShareType.PUBLIC_LINK.equals(share.getShareType())) {
+        publicShareExists=true;
+        break;
+      }
+    }
+  }
+  if (!publicShareExists) {
+    CreateRemoteShareOperation createOp=new CreateRemoteShareOperation(mPath,ShareType.PUBLIC_LINK,"",false,mPassword,OCShare.DEFAULT_PERMISSION);
+    createOp.setGetShareDetails(true);
+    result=createOp.execute(client);
+  }
+  if (result.isSuccess()) {
+    if (result.getData().size() > 0) {
+      OCShare share=(OCShare)result.getData().get(0);
+      updateData(share);
+    }
+  }
+  return result;
+}

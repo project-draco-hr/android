@@ -1,0 +1,6 @@
+{
+  showLoadingDialog(getString(R.string.common_loading));
+  GetShareWithUsersAsyncTask getTask=new GetShareWithUsersAsyncTask(this);
+  Object[] params={getFile(),getAccount(),getStorageManager()};
+  getTask.execute(params);
+}

@@ -1,8 +1,0 @@
-Context context
-String path
-ShareType shareType
-String shareWith
-boolean publicUpload
-String password
-int permissions
-Intent sendIntent

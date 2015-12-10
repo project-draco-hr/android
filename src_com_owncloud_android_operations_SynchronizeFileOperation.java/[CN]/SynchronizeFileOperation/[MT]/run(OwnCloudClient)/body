@@ -19,10 +19,16 @@
     }
     if (mServerFile != null) {
       boolean serverChanged=false;
-      serverChanged=(mServerFile.getModificationTimestamp() != mLocalFile.getModificationTimestampAtLastSyncForData());
+      if (mLocalFile.getEtag() == null || mLocalFile.getEtag().length() == 0) {
+        serverChanged=mServerFile.getModificationTimestamp() != mLocalFile.getModificationTimestampAtLastSyncForData();
+      }
+ else {
+        serverChanged=(!mServerFile.getEtag().equals(mLocalFile.getEtag()));
+      }
       boolean localChanged=(mLocalFile.getLocalModificationTimestamp() > mLocalFile.getLastSyncDateForData());
       if (localChanged && serverChanged) {
         result=new RemoteOperationResult(ResultCode.SYNC_CONFLICT);
+        getStorageManager().saveConflict(mLocalFile,mServerFile.getEtag());
       }
  else       if (localChanged) {
         if (mSyncFileContents && mAllowUploads) {
@@ -42,12 +48,16 @@
           mServerFile.setLastSyncDateForData(mLocalFile.getLastSyncDateForData());
           mServerFile.setStoragePath(mLocalFile.getStoragePath());
           mServerFile.setParentId(mLocalFile.getParentId());
+          mServerFile.setEtag(mLocalFile.getEtag());
           getStorageManager().saveFile(mServerFile);
         }
         result=new RemoteOperationResult(ResultCode.OK);
       }
  else {
         result=new RemoteOperationResult(ResultCode.OK);
+      }
+      if (result.getCode() != ResultCode.SYNC_CONFLICT) {
+        getStorageManager().saveConflict(mLocalFile,null);
       }
     }
   }

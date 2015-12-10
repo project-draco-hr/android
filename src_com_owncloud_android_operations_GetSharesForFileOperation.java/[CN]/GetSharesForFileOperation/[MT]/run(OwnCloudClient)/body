@@ -9,5 +9,8 @@
     }
     getStorageManager().saveSharesDB(shares);
   }
+ else   if (result.getCode() == RemoteOperationResult.ResultCode.SHARE_NOT_FOUND) {
+    getStorageManager().removeSharesForFile(mPath);
+  }
   return result;
 }

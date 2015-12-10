@@ -3,7 +3,7 @@
 switch (menuId) {
 case R.id.action_share_file:
 {
-      mContainerActivity.getFileOperationsHelper().shareFileWithLink(mTargetFile);
+      mContainerActivity.getFileOperationsHelper().showShareFile(mTargetFile);
       return true;
     }
 case R.id.action_open_file_with:
@@ -11,16 +11,11 @@ case R.id.action_open_file_with:
     mContainerActivity.getFileOperationsHelper().openFile(mTargetFile);
     return true;
   }
-case R.id.action_unshare_file:
-{
-  mContainerActivity.getFileOperationsHelper().unshareFileWithLink(mTargetFile);
-  return true;
-}
 case R.id.action_rename_file:
 {
-RenameFileDialogFragment dialog=RenameFileDialogFragment.newInstance(mTargetFile);
-dialog.show(getFragmentManager(),FileDetailFragment.FTAG_RENAME_FILE);
-return true;
+  RenameFileDialogFragment dialog=RenameFileDialogFragment.newInstance(mTargetFile);
+  dialog.show(getFragmentManager(),FileDetailFragment.FTAG_RENAME_FILE);
+  return true;
 }
 case R.id.action_remove_file:
 {
@@ -34,8 +29,7 @@ case R.id.action_sync_file:
 mContainerActivity.getFileOperationsHelper().syncFile(mTargetFile);
 return true;
 }
-case R.id.action_cancel_download:
-case R.id.action_cancel_upload:
+case R.id.action_cancel_sync:
 {
 ((FileDisplayActivity)mContainerActivity).cancelTransference(mTargetFile);
 return true;
@@ -73,6 +67,11 @@ case R.id.action_unfavorite_file:
 mContainerActivity.getFileOperationsHelper().toggleFavorite(mTargetFile,false);
 return true;
 }
+case R.id.action_copy:
+Intent action=new Intent(getActivity(),FolderPickerActivity.class);
+action.putExtra(FolderPickerActivity.EXTRA_FILE,(Parcelable)mTargetFile);
+getActivity().startActivityForResult(action,FileDisplayActivity.ACTION_COPY_FILES);
+return true;
 default :
 return false;
 }

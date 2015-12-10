@@ -1,0 +1,4 @@
+String remotePath
+ShareType shareType
+String shareWith
+Context context

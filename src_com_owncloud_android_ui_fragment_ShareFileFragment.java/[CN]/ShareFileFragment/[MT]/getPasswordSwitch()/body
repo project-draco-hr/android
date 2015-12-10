@@ -1,0 +1,3 @@
+{
+  return (Switch)getView().findViewById(R.id.shareViaLinkPasswordSwitch);
+}

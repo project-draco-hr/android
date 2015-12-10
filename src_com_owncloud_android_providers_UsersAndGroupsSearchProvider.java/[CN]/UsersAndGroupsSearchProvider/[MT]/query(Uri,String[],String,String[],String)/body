@@ -1,0 +1,10 @@
+{
+  Log_OC.d(TAG,"query received in thread " + Thread.currentThread().getName());
+  int match=mUriMatcher.match(uri);
+switch (match) {
+case SEARCH:
+    return searchForUsersOrGroups(uri);
+default :
+  return null;
+}
+}
