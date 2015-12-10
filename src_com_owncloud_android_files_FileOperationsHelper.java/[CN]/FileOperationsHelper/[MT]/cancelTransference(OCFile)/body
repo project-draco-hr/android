@@ -7,29 +7,11 @@
     }
   }
   FileDownloaderBinder downloaderBinder=mFileActivity.getFileDownloaderBinder();
+  if (downloaderBinder != null && downloaderBinder.isDownloading(account,file)) {
+    downloaderBinder.cancel(account,file);
+  }
   FileUploaderBinder uploaderBinder=mFileActivity.getFileUploaderBinder();
-  if (downloaderBinder != null) {
-    if (downloaderBinder.isDownloading(account,file)) {
-      if (file.isFavorite()) {
-        OCFile parent=mFileActivity.getStorageManager().getFileById(file.getParentId());
-        parent.setEtag("");
-        mFileActivity.getStorageManager().saveFile(parent);
-      }
-      downloaderBinder.cancel(account,file);
-    }
- else {
-      Log_OC.d(TAG,"Download for " + file + " not in progress. Cannot cancel "+ file);
-    }
-  }
-  if (uploaderBinder != null) {
-    if (uploaderBinder.isUploading(account,file)) {
-      uploaderBinder.cancel(account,file);
-    }
- else {
-      Log_OC.d(TAG,"Upload for " + file + " not in progress. Cannot cancel.");
-    }
-  }
-  if (downloaderBinder == null && uploaderBinder == null) {
-    Log_OC.w(TAG,"Neither downloaderBinder nor uploaderBinder set. Cannot cancel.");
+  if (uploaderBinder != null && uploaderBinder.isUploading(account,file)) {
+    uploaderBinder.cancel(account,file);
   }
 }

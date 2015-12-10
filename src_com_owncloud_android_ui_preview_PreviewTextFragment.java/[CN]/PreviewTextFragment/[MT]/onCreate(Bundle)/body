@@ -1,0 +1,25 @@
+{
+  super.onCreate(savedInstanceState);
+  OCFile file=getFile();
+  Bundle args=getArguments();
+  if (file == null) {
+    file=args.getParcelable(FileDisplayActivity.EXTRA_FILE);
+  }
+  if (mAccount == null) {
+    mAccount=args.getParcelable(FileDisplayActivity.EXTRA_ACCOUNT);
+  }
+  if (savedInstanceState == null) {
+    if (file == null) {
+      throw new IllegalStateException("Instanced with a NULL OCFile");
+    }
+    if (mAccount == null) {
+      throw new IllegalStateException("Instanced with a NULL ownCloud Account");
+    }
+  }
+ else {
+    file=savedInstanceState.getParcelable(EXTRA_FILE);
+    mAccount=savedInstanceState.getParcelable(EXTRA_ACCOUNT);
+  }
+  setFile(file);
+  setHasOptionsMenu(true);
+}

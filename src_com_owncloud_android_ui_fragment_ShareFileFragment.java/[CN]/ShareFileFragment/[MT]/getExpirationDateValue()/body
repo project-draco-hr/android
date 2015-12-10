@@ -1,0 +1,3 @@
+{
+  return (TextView)getView().findViewById(R.id.shareViaLinkExpirationValue);
+}

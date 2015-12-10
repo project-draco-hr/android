@@ -1,0 +1,6 @@
+{
+  Intent intent=new Intent(mFileActivity,ShareActivity.class);
+  intent.putExtra(mFileActivity.EXTRA_FILE,(Parcelable)file);
+  intent.putExtra(mFileActivity.EXTRA_ACCOUNT,mFileActivity.getAccount());
+  mFileActivity.startActivity(intent);
+}

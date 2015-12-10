@@ -1,0 +1,2 @@
+ArrayList<OCShare> shares
+ArrayList<ContentProviderOperation> operations

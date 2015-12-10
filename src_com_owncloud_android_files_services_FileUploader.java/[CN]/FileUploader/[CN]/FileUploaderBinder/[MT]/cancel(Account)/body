@@ -1,0 +1,10 @@
+{
+  Log_OC.d(TAG,"Account= " + account.name);
+  if (mCurrentUpload != null) {
+    Log_OC.d(TAG,"Current Upload Account= " + mCurrentUpload.getAccount().name);
+    if (mCurrentUpload.getAccount().name.equals(account.name)) {
+      mCurrentUpload.cancel();
+    }
+  }
+  cancelUploadsForAccount(account);
+}

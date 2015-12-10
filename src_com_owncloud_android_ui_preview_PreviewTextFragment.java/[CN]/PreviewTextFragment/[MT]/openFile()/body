@@ -1,0 +1,4 @@
+{
+  mContainerActivity.getFileOperationsHelper().openFile(getFile());
+  finish();
+}

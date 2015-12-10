@@ -1,5 +1,5 @@
 {
-  Log_OC.e(TAG,"onPrepared");
+  Log_OC.v(TAG,"onPrepared");
   mVideoPreview.seekTo(mSavedPlaybackPosition);
   if (mAutoplay) {
     mVideoPreview.start();

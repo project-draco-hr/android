@@ -6,7 +6,10 @@
     OCFile currentDir=getCurrentDir();
     boolean isDescendant=(currentDir != null) && (uploadedRemotePath != null) && (uploadedRemotePath.startsWith(currentDir.getRemotePath()));
     if (sameAccount && isDescendant) {
-      refreshListOfFilesFragment();
+      String linkedToRemotePath=intent.getStringExtra(FileUploader.EXTRA_LINKED_TO_PATH);
+      if (linkedToRemotePath == null || isAscendant(linkedToRemotePath)) {
+        refreshListOfFilesFragment();
+      }
     }
     boolean uploadWasFine=intent.getBooleanExtra(FileUploadService.EXTRA_UPLOAD_RESULT,false);
     boolean renamedInUpload=getFile().getRemotePath().equals(intent.getStringExtra(FileUploadService.EXTRA_OLD_REMOTE_PATH));
@@ -30,8 +33,10 @@
  else {
         cleanSecondFragment();
       }
-      if (uploadWasFine && PreviewImageFragment.canBePreviewed(getFile())) {
-        startImagePreview(getFile());
+      if (uploadWasFine) {
+        OCFile ocFile=getFile();
+        if (PreviewImageFragment.canBePreviewed(ocFile))         startImagePreview(getFile());
+ else         if (PreviewTextFragment.canBePreviewed(ocFile))         startTextPreview(ocFile);
       }
     }
     mProgressBar.setIndeterminate(false);

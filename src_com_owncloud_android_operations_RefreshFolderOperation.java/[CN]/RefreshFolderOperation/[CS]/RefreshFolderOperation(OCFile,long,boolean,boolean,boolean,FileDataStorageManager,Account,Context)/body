@@ -9,4 +9,5 @@
   mForgottenLocalFiles=new HashMap<String,String>();
   mRemoteFolderChanged=false;
   mIgnoreETag=ignoreETag;
+  mFilesToSyncContents=new Vector<SynchronizeFileOperation>();
 }

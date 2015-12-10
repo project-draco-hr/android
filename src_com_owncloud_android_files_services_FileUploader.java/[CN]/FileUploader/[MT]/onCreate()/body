@@ -1,0 +1,12 @@
+{
+  super.onCreate();
+  Log_OC.d(TAG,"Creating service");
+  mNotificationManager=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+  HandlerThread thread=new HandlerThread("FileUploaderThread",Process.THREAD_PRIORITY_BACKGROUND);
+  thread.start();
+  mServiceLooper=thread.getLooper();
+  mServiceHandler=new ServiceHandler(mServiceLooper,this);
+  mBinder=new FileUploaderBinder();
+  AccountManager am=AccountManager.get(getApplicationContext());
+  am.addOnAccountsUpdatedListener(this,null,false);
+}

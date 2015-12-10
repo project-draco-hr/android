@@ -33,4 +33,6 @@
   i.putExtra(FileUploadService.KEY_CREATE_REMOTE_FOLDER,true);
   i.putExtra(FileUploadService.KEY_WIFI_ONLY,instantVideoUploadViaWiFiOnly(context));
   context.startService(i);
+  i=addInstantUploadBehaviour(i,context);
+  context.startService(i);
 }

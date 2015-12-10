@@ -1,0 +1,7 @@
+{
+  FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
+  Fragment searchFragment=SearchShareesFragment.newInstance(getFile(),getAccount());
+  ft.replace(R.id.share_fragment_container,searchFragment,TAG_SEARCH_FRAGMENT);
+  ft.addToBackStack(null);
+  ft.commit();
+}

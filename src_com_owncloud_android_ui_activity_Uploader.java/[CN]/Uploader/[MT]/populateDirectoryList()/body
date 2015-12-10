@@ -29,7 +29,7 @@
     mListView.setAdapter(sa);
     Button btnChooseFolder=(Button)findViewById(R.id.uploader_choose_folder);
     btnChooseFolder.setOnClickListener(this);
-    Button btnNewFolder=(Button)findViewById(R.id.uploader_new_folder);
+    Button btnNewFolder=(Button)findViewById(R.id.uploader_cancel);
     btnNewFolder.setOnClickListener(this);
     mListView.setOnItemClickListener(this);
   }

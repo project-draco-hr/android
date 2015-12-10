@@ -1,0 +1,9 @@
+{
+  Intent unshareService=new Intent(mFileActivity,OperationsService.class);
+  unshareService.setAction(OperationsService.ACTION_UNSHARE);
+  unshareService.putExtra(OperationsService.EXTRA_ACCOUNT,mFileActivity.getAccount());
+  unshareService.putExtra(OperationsService.EXTRA_REMOTE_PATH,file.getRemotePath());
+  unshareService.putExtra(OperationsService.EXTRA_SHARE_TYPE,shareType);
+  unshareService.putExtra(OperationsService.EXTRA_SHARE_WITH,userOrGroup);
+  queueShareIntent(unshareService);
+}

@@ -1,5 +1,4 @@
 {
-  dismissLoadingDialog();
   OCFile syncedFile=operation.getLocalFile();
   if (!result.isSuccess()) {
     if (result.getCode() == ResultCode.SYNC_CONFLICT) {

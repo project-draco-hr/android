@@ -1,0 +1,106 @@
+{
+  Log_OC.d(TAG,"Starting command with id " + startId);
+  if (!intent.hasExtra(KEY_ACCOUNT) || !intent.hasExtra(KEY_UPLOAD_TYPE) || !(intent.hasExtra(KEY_LOCAL_FILE) || intent.hasExtra(KEY_FILE))) {
+    Log_OC.e(TAG,"Not enough information provided in intent");
+    return Service.START_NOT_STICKY;
+  }
+  int uploadType=intent.getIntExtra(KEY_UPLOAD_TYPE,-1);
+  if (uploadType == -1) {
+    Log_OC.e(TAG,"Incorrect upload type provided");
+    return Service.START_NOT_STICKY;
+  }
+  Account account=intent.getParcelableExtra(KEY_ACCOUNT);
+  if (!AccountUtils.exists(account,getApplicationContext())) {
+    return Service.START_NOT_STICKY;
+  }
+  String[] localPaths=null, remotePaths=null, mimeTypes=null;
+  OCFile[] files=null;
+  if (uploadType == UPLOAD_SINGLE_FILE) {
+    if (intent.hasExtra(KEY_FILE)) {
+      files=new OCFile[]{intent.getParcelableExtra(KEY_FILE)};
+    }
+ else {
+      localPaths=new String[]{intent.getStringExtra(KEY_LOCAL_FILE)};
+      remotePaths=new String[]{intent.getStringExtra(KEY_REMOTE_FILE)};
+      mimeTypes=new String[]{intent.getStringExtra(KEY_MIME_TYPE)};
+    }
+  }
+ else {
+    if (intent.hasExtra(KEY_FILE)) {
+      files=(OCFile[])intent.getParcelableArrayExtra(KEY_FILE);
+    }
+ else {
+      localPaths=intent.getStringArrayExtra(KEY_LOCAL_FILE);
+      remotePaths=intent.getStringArrayExtra(KEY_REMOTE_FILE);
+      mimeTypes=intent.getStringArrayExtra(KEY_MIME_TYPE);
+    }
+  }
+  FileDataStorageManager storageManager=new FileDataStorageManager(account,getContentResolver());
+  boolean forceOverwrite=intent.getBooleanExtra(KEY_FORCE_OVERWRITE,false);
+  boolean isInstant=intent.getBooleanExtra(KEY_INSTANT_UPLOAD,false);
+  int localAction=intent.getIntExtra(KEY_LOCAL_BEHAVIOUR,LOCAL_BEHAVIOUR_FORGET);
+  if (intent.hasExtra(KEY_FILE) && files == null) {
+    Log_OC.e(TAG,"Incorrect array for OCFiles provided in upload intent");
+    return Service.START_NOT_STICKY;
+  }
+ else   if (!intent.hasExtra(KEY_FILE)) {
+    if (localPaths == null) {
+      Log_OC.e(TAG,"Incorrect array for local paths provided in upload intent");
+      return Service.START_NOT_STICKY;
+    }
+    if (remotePaths == null) {
+      Log_OC.e(TAG,"Incorrect array for remote paths provided in upload intent");
+      return Service.START_NOT_STICKY;
+    }
+    if (localPaths.length != remotePaths.length) {
+      Log_OC.e(TAG,"Different number of remote paths and local paths!");
+      return Service.START_NOT_STICKY;
+    }
+    files=new OCFile[localPaths.length];
+    for (int i=0; i < localPaths.length; i++) {
+      files[i]=obtainNewOCFileToUpload(remotePaths[i],localPaths[i],((mimeTypes != null) ? mimeTypes[i] : null));
+      if (files[i] == null) {
+        return Service.START_NOT_STICKY;
+      }
+    }
+  }
+  OwnCloudVersion ocv=AccountUtils.getServerVersion(account);
+  boolean chunked=FileUploader.chunkedUploadIsSupported(ocv);
+  AbstractList<String> requestedUploads=new Vector<String>();
+  String uploadKey=null;
+  UploadFileOperation newUpload=null;
+  try {
+    for (int i=0; i < files.length; i++) {
+      newUpload=new UploadFileOperation(account,files[i],chunked,forceOverwrite,FileUploadService.LocalBehaviour.values()[localAction],getApplicationContext());
+      if (isInstant) {
+        newUpload.setRemoteFolderToBeCreated();
+      }
+      newUpload.addDatatransferProgressListener(this);
+      newUpload.addDatatransferProgressListener((FileUploaderBinder)mBinder);
+      Pair<String,String> putResult=mPendingUploads.putIfAbsent(account,files[i].getRemotePath(),newUpload);
+      if (putResult != null) {
+        uploadKey=putResult.first;
+        requestedUploads.add(uploadKey);
+      }
+    }
+  }
+ catch (  IllegalArgumentException e) {
+    Log_OC.e(TAG,"Not enough information provided in intent: " + e.getMessage());
+    return START_NOT_STICKY;
+  }
+catch (  IllegalStateException e) {
+    Log_OC.e(TAG,"Bad information provided in intent: " + e.getMessage());
+    return START_NOT_STICKY;
+  }
+catch (  Exception e) {
+    Log_OC.e(TAG,"Unexpected exception while processing upload intent",e);
+    return START_NOT_STICKY;
+  }
+  if (requestedUploads.size() > 0) {
+    Message msg=mServiceHandler.obtainMessage();
+    msg.arg1=startId;
+    msg.obj=requestedUploads;
+    mServiceHandler.sendMessage(msg);
+  }
+  return Service.START_NOT_STICKY;
+}

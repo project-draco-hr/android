@@ -1,0 +1,17 @@
+{
+  mUserGroupsAdapter=new ShareUserListAdapter(getActivity(),R.layout.share_user_item,mPrivateShares,this);
+  TextView noShares=(TextView)getView().findViewById(R.id.shareNoUsers);
+  ListView usersList=(ListView)getView().findViewById(R.id.shareUsersList);
+  if (mPrivateShares.size() > 0) {
+    noShares.setVisibility(View.GONE);
+    usersList.setVisibility(View.VISIBLE);
+    usersList.setAdapter(mUserGroupsAdapter);
+    setListViewHeightBasedOnChildren(usersList);
+  }
+ else {
+    noShares.setVisibility(View.VISIBLE);
+    usersList.setVisibility(View.GONE);
+  }
+  ScrollView scrollView=(ScrollView)getView().findViewById(R.id.shareScroll);
+  scrollView.scrollTo(0,0);
+}

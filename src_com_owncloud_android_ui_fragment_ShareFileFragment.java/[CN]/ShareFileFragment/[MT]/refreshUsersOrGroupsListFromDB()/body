@@ -1,0 +1,6 @@
+{
+  if (((FileActivity)mListener).getStorageManager() != null) {
+    mPrivateShares=((FileActivity)mListener).getStorageManager().getSharesWithForAFile(mFile.getRemotePath(),mAccount.name);
+    updateListOfUserGroups();
+  }
+}

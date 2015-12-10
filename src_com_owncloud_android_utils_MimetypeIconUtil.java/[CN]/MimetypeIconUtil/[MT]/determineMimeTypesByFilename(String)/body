@@ -1,0 +1,16 @@
+{
+  String fileExtension=getExtension(filename);
+  List<String> mimeTypeList=FILE_EXTENSION_TO_MIMETYPE_MAPPING.get(fileExtension);
+  if (mimeTypeList != null && mimeTypeList.size() > 0) {
+    return mimeTypeList;
+  }
+ else {
+    String mimeType=MimeTypeMap.getSingleton().getMimeTypeFromExtension(fileExtension);
+    if (mimeType != null) {
+      return Collections.singletonList(mimeType);
+    }
+ else {
+      return new ArrayList<String>();
+    }
+  }
+}

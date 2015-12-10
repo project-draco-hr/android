@@ -1,0 +1,4 @@
+{
+  if (account == null || file == null)   return false;
+  return (mPendingUploads.contains(account,file.getRemotePath()));
+}

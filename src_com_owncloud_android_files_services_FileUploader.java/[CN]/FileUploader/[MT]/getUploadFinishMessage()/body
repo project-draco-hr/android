@@ -1,0 +1,3 @@
+{
+  return FileUploader.class.getName() + UPLOAD_FINISH_MESSAGE;
+}
