@@ -14,4 +14,7 @@
     DialogFragment chooserDialog=ShareLinkToDialog.newInstance(intentToShareLink,packagesToExclude);
     chooserDialog.show(getSupportFragmentManager(),FTAG_CHOOSER_DIALOG);
   }
+  if (operation instanceof UnshareOperation && result.isSuccess() && getEditShareFragment() != null) {
+    getSupportFragmentManager().popBackStack();
+  }
 }

@@ -1,0 +1,9 @@
+{
+  TextView doneButton=(TextView)editShareView.findViewById(R.id.doneButton);
+  doneButton.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Toast.makeText(getActivity(),"TODO - update permissions in server",Toast.LENGTH_LONG).show();
+    }
+  }
+);
+}

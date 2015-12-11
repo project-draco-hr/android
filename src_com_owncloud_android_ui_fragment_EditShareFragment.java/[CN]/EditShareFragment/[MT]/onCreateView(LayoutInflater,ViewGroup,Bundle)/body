@@ -2,5 +2,7 @@
   Log_OC.d(TAG,"onCreateView");
   View view=inflater.inflate(R.layout.edit_share_layout,container,false);
   initPrivileges(view);
+  initUnshareButton(view);
+  initDoneButton(view);
   return view;
 }
