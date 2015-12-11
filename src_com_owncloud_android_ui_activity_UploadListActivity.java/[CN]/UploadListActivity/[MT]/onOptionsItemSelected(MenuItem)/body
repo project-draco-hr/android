@@ -9,14 +9,14 @@ case R.id.action_retry_uploads:
     }
 case R.id.action_clear_failed_uploads:
 {
-    UploadDbHandler db=UploadDbHandler.getInstance(this);
-    db.clearFailedUploads();
+    UploadsStorageManager usm=new UploadsStorageManager(getContentResolver());
+    usm.clearFailedUploads();
     break;
   }
 case R.id.action_clear_finished_uploads:
 {
-  UploadDbHandler db=UploadDbHandler.getInstance(this);
-  db.clearFinishedUploads();
+  UploadsStorageManager usm=new UploadsStorageManager(getContentResolver());
+  usm.clearFinishedUploads();
   break;
 }
 default :

@@ -1,6 +1,0 @@
-{
-  if (mDB == null) {
-    mDB=mHelper.getWritableDatabase();
-  }
-  return mDB;
-}

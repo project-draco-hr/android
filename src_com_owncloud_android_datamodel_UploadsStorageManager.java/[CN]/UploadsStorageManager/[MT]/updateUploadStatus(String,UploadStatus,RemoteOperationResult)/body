@@ -1,0 +1,8 @@
+{
+  Cursor c=getDB().query(ProviderTableMeta.CONTENT_URI_UPLOADS,null,ProviderTableMeta.UPLOADS_PATH + "=?",new String[]{filepath},null);
+  if (c.getCount() != 1) {
+    Log_OC.e(TAG,c.getCount() + " items for path=" + filepath+ " available in UploadDb. Expected 1. Failed to update upload db.");
+    return 0;
+  }
+  return updateUploadInternal(c,status,result);
+}

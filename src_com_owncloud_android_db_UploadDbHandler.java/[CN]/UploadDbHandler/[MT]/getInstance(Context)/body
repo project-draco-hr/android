@@ -1,6 +1,0 @@
-{
-  if (me == null) {
-    me=new UploadDbHandler(context);
-  }
-  return me;
-}

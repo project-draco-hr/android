@@ -1,5 +1,0 @@
-{
-  getDB().close();
-  setDB(null);
-  me=null;
-}

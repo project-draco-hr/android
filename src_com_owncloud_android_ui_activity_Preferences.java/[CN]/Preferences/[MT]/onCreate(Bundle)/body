@@ -2,7 +2,6 @@
   getDelegate().installViewFactory();
   getDelegate().onCreate(savedInstanceState);
   super.onCreate(savedInstanceState);
-  mDbHandler=UploadDbHandler.getInstance(getBaseContext());
   addPreferencesFromResource(R.xml.preferences);
   ActionBar actionBar=getSupportActionBar();
   actionBar.setDisplayHomeAsUpEnabled(true);

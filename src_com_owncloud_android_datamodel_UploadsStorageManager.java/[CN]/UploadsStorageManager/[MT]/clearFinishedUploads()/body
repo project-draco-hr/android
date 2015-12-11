@@ -1,0 +1,10 @@
+{
+  String[] whereArgs=new String[1];
+  whereArgs[0]=String.valueOf(UploadStatus.UPLOAD_SUCCEEDED.value);
+  long result=getDB().delete(ProviderTableMeta.CONTENT_URI_UPLOADS,ProviderTableMeta.UPLOADS_STATUS + "=? ",whereArgs);
+  Log_OC.d(TAG,"delete all finished uploads");
+  if (result > 0) {
+    notifyObserversNow();
+  }
+  return result;
+}

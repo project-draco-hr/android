@@ -1,4 +1,0 @@
-{
-  mDatabaseName=MainApp.getDBName();
-  mHelper=new OpenerHelper(context);
-}

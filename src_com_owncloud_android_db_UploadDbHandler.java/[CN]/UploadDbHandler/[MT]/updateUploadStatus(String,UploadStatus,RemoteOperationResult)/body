@@ -1,8 +1,0 @@
-{
-  Cursor c=getDB().query(TABLE_UPLOAD,null,"path=?",new String[]{filepath},null,null,null);
-  if (c.getCount() != 1) {
-    Log_OC.e(TAG,c.getCount() + " items for path=" + filepath+ " available in UploadDb. Expected 1. Failed to update upload db.");
-    return 0;
-  }
-  return updateUploadInternal(c,status,result);
-}

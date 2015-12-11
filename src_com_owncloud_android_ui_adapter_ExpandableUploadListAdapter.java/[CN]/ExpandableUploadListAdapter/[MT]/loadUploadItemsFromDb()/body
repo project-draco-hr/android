@@ -3,7 +3,7 @@
   for (  UploadGroup group : mUploadGroups) {
     group.refresh();
   }
-  mActivity.runOnUiThread(new Runnable(){
+  mParentActivity.runOnUiThread(new Runnable(){
     @Override public void run(){
       notifyDataSetChanged();
     }

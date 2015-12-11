@@ -1,7 +1,7 @@
 {
   View view=convertView;
   if (view == null) {
-    LayoutInflater inflator=(LayoutInflater)mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    LayoutInflater inflator=(LayoutInflater)mParentActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     view=inflator.inflate(R.layout.upload_list_item,null);
   }
   if (uploadsItems != null && uploadsItems.length > position) {
@@ -19,13 +19,13 @@
     String status;
 switch (uploadObject.getUploadStatus()) {
 case UPLOAD_IN_PROGRESS:
-      status=mActivity.getResources().getString(R.string.uploader_upload_in_progress_ticker);
+      status=mParentActivity.getString(R.string.uploader_upload_in_progress_ticker);
     ProgressBar progressBar=(ProgressBar)view.findViewById(R.id.upload_progress_bar);
   progressBar.setProgress(0);
 progressBar.setVisibility(View.VISIBLE);
 mProgressListener=new ProgressListener(progressBar);
-if (parentFileActivity.getFileUploaderBinder() != null) {
-mCurrentUpload=parentFileActivity.getFileUploaderBinder().getCurrentUploadOperation();
+if (mParentActivity.getFileUploaderBinder() != null) {
+mCurrentUpload=mParentActivity.getFileUploaderBinder().getCurrentUploadOperation();
 if (mCurrentUpload != null) {
 mCurrentUpload.addDatatransferProgressListener(mProgressListener);
 Log_OC.d(TAG,"added progress listener for current upload: " + mCurrentUpload);
@@ -35,7 +35,7 @@ Log_OC.w(TAG,"getFileUploaderBinder().getCurrentUploadOperation() return null. T
 }
 }
  else {
-Log_OC.e(TAG,"UploadBinder == null. It should have been created on creating parentFileActivity" + " which inherits from FileActivity. Fix that!");
+Log_OC.e(TAG,"UploadBinder == null. It should have been created on creating mParentActivity" + " which inherits from FileActivity. Fix that!");
 }
 break;
 case UPLOAD_FAILED_GIVE_UP:
@@ -53,13 +53,13 @@ status="Last failure: " + uploadObject.getLastResult().getLogMessage();
  else {
 status="Upload will be retried shortly.";
 }
-String laterReason=FileUploadService.getUploadLaterReason(mActivity,uploadObject);
+String laterReason=FileUploadService.getUploadLaterReason(mParentActivity,uploadObject);
 if (laterReason != null) {
 status+="\n" + laterReason;
 }
 break;
 case UPLOAD_LATER:
-status=FileUploadService.getUploadLaterReason(mActivity,uploadObject);
+status=FileUploadService.getUploadLaterReason(mParentActivity,uploadObject);
 break;
 case UPLOAD_SUCCEEDED:
 status="Completed.";
@@ -80,9 +80,9 @@ break;
 if (uploadObject.getUploadStatus() != UploadStatus.UPLOAD_IN_PROGRESS) {
 ProgressBar progressBar=(ProgressBar)view.findViewById(R.id.upload_progress_bar);
 progressBar.setVisibility(View.GONE);
-if (parentFileActivity.getFileUploaderBinder() != null && mProgressListener != null && mCurrentUpload != null) {
+if (mParentActivity.getFileUploaderBinder() != null && mProgressListener != null && mCurrentUpload != null) {
 OCFile currentOcFile=mCurrentUpload.getFile();
-parentFileActivity.getFileUploaderBinder().removeDatatransferProgressListener(mProgressListener,uploadObject.getAccount(mActivity),currentOcFile);
+mParentActivity.getFileUploaderBinder().removeDatatransferProgressListener(mProgressListener,uploadObject.getAccount(mParentActivity),currentOcFile);
 mProgressListener=null;
 mCurrentUpload=null;
 }
@@ -90,28 +90,28 @@ mCurrentUpload=null;
 statusView.setText(status);
 ImageButton rightButton=(ImageButton)view.findViewById(R.id.upload_right_button);
 if (uploadObject.userCanRetryUpload() && uploadObject.getUploadStatus() != UploadStatus.UPLOAD_SUCCEEDED) {
-rightButton.setImageDrawable(mActivity.getDrawable(R.drawable.ic_action_refresh_grey));
+rightButton.setImageDrawable(mParentActivity.getDrawable(R.drawable.ic_action_refresh_grey));
 rightButton.setOnClickListener(new OnClickListener(){
 @Override public void onClick(View v){
-parentFileActivity.getFileOperationsHelper().retryUpload(uploadObject);
+mParentActivity.getFileOperationsHelper().retryUpload(uploadObject);
 }
 }
 );
 }
  else if (uploadObject.userCanCancelUpload()) {
-rightButton.setImageDrawable(mActivity.getDrawable(R.drawable.ic_cancel));
+rightButton.setImageDrawable(mParentActivity.getDrawable(R.drawable.ic_cancel));
 rightButton.setOnClickListener(new OnClickListener(){
 @Override public void onClick(View v){
-parentFileActivity.getFileOperationsHelper().cancelTransference(uploadObject.getOCFile());
+mParentActivity.getFileOperationsHelper().cancelTransference(uploadObject.getOCFile());
 }
 }
 );
 }
  else {
-rightButton.setImageDrawable(mActivity.getDrawable(R.drawable.ic_delete));
+rightButton.setImageDrawable(mParentActivity.getDrawable(R.drawable.ic_delete));
 rightButton.setOnClickListener(new OnClickListener(){
 @Override public void onClick(View v){
-parentFileActivity.getFileOperationsHelper().removeUploadFromList(uploadObject);
+mParentActivity.getFileOperationsHelper().removeUploadFromList(uploadObject);
 }
 }
 );
@@ -127,7 +127,7 @@ fileIcon.setImageBitmap(b);
  catch (NullPointerException e) {
 }
 TextView uploadDate=(TextView)view.findViewById(R.id.upload_date);
-CharSequence dateString=DisplayUtils.getRelativeDateTimeString(mActivity,uploadObject.getUploadTime().getTimeInMillis(),DateUtils.SECOND_IN_MILLIS,DateUtils.WEEK_IN_MILLIS,0);
+CharSequence dateString=DisplayUtils.getRelativeDateTimeString(mParentActivity,uploadObject.getUploadTime().getTimeInMillis(),DateUtils.SECOND_IN_MILLIS,DateUtils.WEEK_IN_MILLIS,0);
 uploadDate.setText(dateString);
 }
 return view;

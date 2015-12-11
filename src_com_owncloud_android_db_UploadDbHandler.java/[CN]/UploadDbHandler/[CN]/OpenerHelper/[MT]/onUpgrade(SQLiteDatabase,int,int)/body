@@ -1,7 +1,0 @@
-{
-  if (newVersion == 4) {
-    db.execSQL("DROP TABLE IF EXISTS " + "instant_upload" + ";");
-    db.execSQL("DROP TABLE IF EXISTS " + TABLE_UPLOAD + ";");
-    onCreate(db);
-  }
-}

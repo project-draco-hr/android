@@ -13,7 +13,7 @@ break;
 case LATER:
 break;
 case FILE_GONE:
-mDb.updateUploadStatus(uploadDbObject.getLocalPath(),UploadStatus.UPLOAD_FAILED_GIVE_UP,new RemoteOperationResult(ResultCode.FILE_NOT_FOUND));
+mUploadsStorageManager.updateUploadStatus(uploadDbObject.getLocalPath(),UploadStatus.UPLOAD_FAILED_GIVE_UP,new RemoteOperationResult(ResultCode.FILE_NOT_FOUND));
 if (mPendingUploads.remove(uploadDbObject.getRemotePath()) == null) {
 Log_OC.w(TAG,"Could remove " + uploadDbObject.getRemotePath() + " from mPendingUploads because it does not exist.");
 }

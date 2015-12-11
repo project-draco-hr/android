@@ -4,7 +4,7 @@
   if (intent == null || intent.hasExtra(KEY_RETRY)) {
     Log_OC.d(TAG,"Received null intent.");
     int countAddedEntries=0;
-    UploadDbObject[] list=mDb.getPendingUploads();
+    UploadDbObject[] list=mUploadsStorageManager.getPendingUploads();
     for (    UploadDbObject uploadDbObject : list) {
       Log_OC.d(TAG,"Retrieved from DB: " + uploadDbObject.toFormattedString());
       String uploadKey=buildRemoteName(uploadDbObject);
@@ -17,7 +17,7 @@
       }
     }
     Log_OC.d(TAG,"added " + countAddedEntries + " entrie(s) to mPendingUploads (this should be 0 except for the first time).");
-    mDb.notifyObserversNow();
+    mUploadsStorageManager.notifyObserversNow();
   }
  else {
     Log_OC.d(TAG,"Receive upload intent.");
@@ -92,10 +92,10 @@
       UploadDbObject previous=mPendingUploads.putIfAbsent(uploadKey,uploadObject);
       if (previous == null) {
         Log_OC.d(TAG,"mPendingUploads added: " + uploadObject.toFormattedString());
-        if (mDb.removeUpload(uploadObject.getLocalPath()) > 0) {
+        if (mUploadsStorageManager.removeUpload(uploadObject.getLocalPath()) > 0) {
           Log_OC.w(TAG,"There was an old DB entry " + uploadObject.getLocalPath() + " which had to be removed in order to add new one.");
         }
-        boolean success=mDb.storeUpload(uploadObject);
+        boolean success=mUploadsStorageManager.storeUpload(uploadObject);
         if (!success) {
           Log_OC.e(TAG,"Could not add upload " + uploadObject.getLocalPath() + " to database. This should not happen.");
         }
@@ -114,7 +114,7 @@
     UploadDbObject uploadDbObject=mPendingUploads.get(remotePath);
     uploadDbObject.setUploadStatus(UploadStatus.UPLOAD_LATER);
     uploadDbObject.setLastResult(null);
-    mDb.updateUploadStatus(uploadDbObject);
+    mUploadsStorageManager.updateUploadStatus(uploadDbObject);
     Log_OC.d(TAG,"Start uploading " + remotePath);
   }
  else {

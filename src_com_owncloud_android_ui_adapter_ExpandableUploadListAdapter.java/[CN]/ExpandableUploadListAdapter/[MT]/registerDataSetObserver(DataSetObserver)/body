@@ -1,5 +1,5 @@
 {
   super.registerDataSetObserver(observer);
-  mDb.addObserver(this);
+  mUploadsStorageManager.addObserver(this);
   Log_OC.d(TAG,"registerDataSetObserver");
 }

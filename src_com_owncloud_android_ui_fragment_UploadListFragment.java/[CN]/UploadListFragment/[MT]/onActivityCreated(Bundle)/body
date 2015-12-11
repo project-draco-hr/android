@@ -1,10 +1,8 @@
 {
-  super.onActivityCreated(savedInstanceState);
   Log_OC.d(TAG,"onActivityCreated() start");
   super.onActivityCreated(savedInstanceState);
-  mAdapter=new ExpandableUploadListAdapter(getActivity());
+  mAdapter=new ExpandableUploadListAdapter((FileActivity)getActivity());
   setListAdapter(mAdapter);
-  mAdapter.setFileActivity(((FileActivity)getActivity()));
   registerForContextMenu(getListView());
   getListView().setOnCreateContextMenuListener(this);
 }

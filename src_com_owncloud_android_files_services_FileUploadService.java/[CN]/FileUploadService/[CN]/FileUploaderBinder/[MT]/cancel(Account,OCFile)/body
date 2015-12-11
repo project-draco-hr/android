@@ -13,6 +13,6 @@
     upload.setUploadStatus(UploadStatus.UPLOAD_CANCELLED);
     upload.setLastResult(new RemoteOperationResult(ResultCode.CANCELLED));
     upload.getOCFile().setStoragePath(file.getStoragePath());
-    mDb.updateUploadStatus(upload);
+    mUploadsStorageManager.updateUploadStatus(upload);
   }
 }

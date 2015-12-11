@@ -1,3 +1,0 @@
-{
-  db.execSQL("CREATE TABLE " + TABLE_UPLOAD + " ("+ " path TEXT PRIMARY KEY NOT NULL UNIQUE,"+ " uploadStatus INTEGER NOT NULL, uploadObject TEXT NOT NULL);");
-}

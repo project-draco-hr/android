@@ -1,5 +1,5 @@
 {
   super.unregisterDataSetObserver(observer);
-  mDb.deleteObserver(this);
+  mUploadsStorageManager.deleteObserver(this);
   Log_OC.d(TAG,"unregisterDataSetObserver");
 }

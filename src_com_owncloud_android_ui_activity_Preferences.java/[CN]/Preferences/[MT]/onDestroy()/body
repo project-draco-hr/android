@@ -1,5 +1,4 @@
 {
-  mDbHandler.close();
   if (mDownloadServiceConnection != null) {
     unbindService(mDownloadServiceConnection);
     mDownloadServiceConnection=null;

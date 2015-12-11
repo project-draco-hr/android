@@ -1,0 +1,8 @@
+{
+  int result=getDB().delete(ProviderTableMeta.CONTENT_URI_UPLOADS,ProviderTableMeta.UPLOADS_PATH,new String[]{localPath});
+  Log_OC.d(TAG,"delete returns with: " + result + " for file: "+ localPath);
+  if (result > 0) {
+    notifyObserversNow();
+  }
+  return result;
+}
