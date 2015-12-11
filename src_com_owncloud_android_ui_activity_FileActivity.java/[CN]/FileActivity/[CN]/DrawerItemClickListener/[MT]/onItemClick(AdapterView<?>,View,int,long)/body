@@ -10,6 +10,11 @@ startActivity(settingsIntent);
 mDrawerLayout.closeDrawers();
 break;
 case 2:
+Intent uploadListIntent=new Intent(getApplicationContext(),UploadListActivity.class);
+startActivity(uploadListIntent);
+mDrawerLayout.closeDrawers();
+break;
+case 3:
 Intent loggerIntent=new Intent(getApplicationContext(),LogHistoryActivity.class);
 startActivity(loggerIntent);
 mDrawerLayout.closeDrawers();

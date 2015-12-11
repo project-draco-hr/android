@@ -18,24 +18,18 @@ case R.id.action_upload:
   dialog.show(getSupportFragmentManager(),DIALOG_UPLOAD_SOURCE);
   break;
 }
-case R.id.action_upload_list:
-{
-Intent uploadListIntent=new Intent(getApplicationContext(),UploadListActivity.class);
-startActivity(uploadListIntent);
-break;
-}
 case android.R.id.home:
 {
 FileFragment second=getSecondFragment();
 OCFile currentDir=getCurrentDir();
 if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-mDrawerLayout.closeDrawer(GravityCompat.START);
+  mDrawerLayout.closeDrawer(GravityCompat.START);
 }
  else if ((currentDir != null && currentDir.getParentId() != 0) || (second != null && second.getFile() != null)) {
-onBackPressed();
+  onBackPressed();
 }
  else {
-mDrawerLayout.openDrawer(GravityCompat.START);
+  mDrawerLayout.openDrawer(GravityCompat.START);
 }
 break;
 }
@@ -48,8 +42,8 @@ builder.setTitle(R.string.actionbar_sort_title).setSingleChoiceItems(R.array.act
 public void onClick(DialogInterface dialog,int which){
 switch (which) {
 case 0:
-  sortByName(true);
-break;
+    sortByName(true);
+  break;
 case 1:
 sortByDate(false);
 break;
