@@ -1,0 +1,3 @@
+{
+  db.execSQL("CREATE TABLE " + ProviderTableMeta.UPLOADS_TABLE_NAME + "("+ ProviderTableMeta._ID+ " INTEGER PRIMARY KEY, "+ ProviderTableMeta.UPLOADS_FILE_ID+ " INTEGER, "+ ProviderTableMeta.UPLOADS_PATH+ " TEXT, "+ ProviderTableMeta.UPLOADS_STATUS+ " INTEGER );");
+}

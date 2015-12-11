@@ -25,6 +25,12 @@ if (uri.getPathSegments().size() > 1) {
 sqlQuery.appendWhere(ProviderTableMeta._ID + "=" + uri.getPathSegments().get(1));
 }
 break;
+case UPLOADS:
+sqlQuery.setTables(ProviderTableMeta.UPLOADS_TABLE_NAME);
+if (uri.getPathSegments().size() > 1) {
+sqlQuery.appendWhere(ProviderTableMeta._ID + "=" + uri.getPathSegments().get(1));
+}
+break;
 default :
 throw new IllegalArgumentException("Unknown uri id: " + uri);
 }
@@ -36,6 +42,9 @@ order=ProviderTableMeta.OCSHARES_DEFAULT_SORT_ORDER;
 break;
 case CAPABILITIES:
 order=ProviderTableMeta.CAPABILITIES_DEFAULT_SORT_ORDER;
+break;
+case UPLOADS:
+order=ProviderTableMeta.UPLOADS_DEFAULT_SORT_ORDER;
 break;
 default :
 order=ProviderTableMeta.FILE_DEFAULT_SORT_ORDER;
