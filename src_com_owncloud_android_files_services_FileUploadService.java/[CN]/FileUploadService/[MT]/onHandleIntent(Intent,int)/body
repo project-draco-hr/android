@@ -21,7 +21,7 @@
   }
  else {
     Log_OC.d(TAG,"Receive upload intent.");
-    UploadSingleMulti uploadType=(UploadSingleMulti)intent.getSerializableExtra(KEY_UPLOAD_TYPE);
+    UploadQuantity uploadType=(UploadQuantity)intent.getSerializableExtra(KEY_UPLOAD_TYPE);
     if (uploadType == null) {
       Log_OC.e(TAG,"Incorrect or no upload type provided");
       return;
@@ -33,7 +33,7 @@
     }
     OCFile[] files=null;
     if (intent.hasExtra(KEY_FILE)) {
-      if (uploadType == UploadSingleMulti.UPLOAD_SINGLE_FILE) {
+      if (uploadType == UploadQuantity.UPLOAD_SINGLE_FILE) {
         files=new OCFile[]{intent.getParcelableExtra(KEY_FILE)};
       }
  else {
@@ -48,7 +48,7 @@
       String[] localPaths;
       String[] remotePaths;
       String[] mimeTypes;
-      if (uploadType == UploadSingleMulti.UPLOAD_SINGLE_FILE) {
+      if (uploadType == UploadQuantity.UPLOAD_SINGLE_FILE) {
         localPaths=new String[]{intent.getStringExtra(KEY_LOCAL_FILE)};
         remotePaths=new String[]{intent.getStringExtra(KEY_REMOTE_FILE)};
         mimeTypes=new String[]{intent.getStringExtra(KEY_MIME_TYPE)};

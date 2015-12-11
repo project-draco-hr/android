@@ -10,7 +10,7 @@
     i.putExtra(FileUploadService.KEY_ACCOUNT,getAccount());
     i.putExtra(FileUploadService.KEY_LOCAL_FILE,filePaths);
     i.putExtra(FileUploadService.KEY_REMOTE_FILE,remotePaths);
-    i.putExtra(FileUploadService.KEY_UPLOAD_TYPE,FileUploadService.UploadSingleMulti.UPLOAD_MULTIPLE_FILES);
+    i.putExtra(FileUploadService.KEY_UPLOAD_TYPE,FileUploadService.UploadQuantity.UPLOAD_MULTIPLE_FILES);
     if (resultCode == UploadFilesActivity.RESULT_OK_AND_MOVE)     i.putExtra(FileUploadService.KEY_LOCAL_BEHAVIOUR,FileUploadService.LocalBehaviour.LOCAL_BEHAVIOUR_MOVE);
     startService(i);
   }

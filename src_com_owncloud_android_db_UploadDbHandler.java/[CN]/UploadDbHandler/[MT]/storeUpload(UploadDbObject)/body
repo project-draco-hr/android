@@ -5,7 +5,7 @@
   cv.put("uploadStatus",uploadObject.getUploadStatus().value);
   cv.put("uploadObject",uploadObject.toString());
   long result=getDB().insert(TABLE_UPLOAD,null,cv);
-  Log_OC.d(TAG,"putFileForLater returns with: " + result + " for file: "+ uploadObject.getLocalPath());
+  Log_OC.d(TAG,"storeUpload returns with: " + result + " for file: "+ uploadObject.getLocalPath());
   if (result == -1) {
     Log_OC.e(TAG,"Failed to insert item " + uploadObject.getLocalPath() + " into upload db.");
     return false;

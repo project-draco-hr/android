@@ -3,8 +3,7 @@
   Log_OC.d(TAG,"mPendingUploads size:" + mPendingUploads.size() + " - onCreate");
   mNotificationManager=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
   mBinder=new FileUploaderBinder();
-  mDb=UploadDbHandler.getInstance(this.getBaseContext());
-  mDb.recreateDb();
+  mDb=UploadDbHandler.getInstance(this);
   mDb.setAllCurrentToUploadLater();
   HandlerThread thread=new HandlerThread("FileUploadService-Requester");
   thread.start();

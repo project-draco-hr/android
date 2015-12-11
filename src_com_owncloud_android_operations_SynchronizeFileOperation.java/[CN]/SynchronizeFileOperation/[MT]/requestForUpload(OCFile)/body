@@ -2,7 +2,7 @@
   Intent i=new Intent(mContext,FileUploadService.class);
   i.putExtra(FileUploadService.KEY_ACCOUNT,mAccount);
   i.putExtra(FileUploadService.KEY_FILE,(Parcelable)file);
-  i.putExtra(FileUploadService.KEY_UPLOAD_TYPE,FileUploadService.UploadSingleMulti.UPLOAD_SINGLE_FILE);
+  i.putExtra(FileUploadService.KEY_UPLOAD_TYPE,FileUploadService.UploadQuantity.UPLOAD_SINGLE_FILE);
   i.putExtra(FileUploadService.KEY_FORCE_OVERWRITE,true);
   mContext.startService(i);
   mTransferWasRequested=true;

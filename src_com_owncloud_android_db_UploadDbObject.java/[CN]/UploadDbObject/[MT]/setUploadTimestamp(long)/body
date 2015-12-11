@@ -1,3 +1,3 @@
 {
-  this.uploadTimestamp=uploadTimestamp;
+  this.mUploadTimestamp=uploadTimestamp;
 }
