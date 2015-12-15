@@ -1,5 +1,5 @@
 {
-  UploadDbObject upload=mPendingUploads.remove(buildRemoteName(account,file));
+  OCUpload upload=mPendingUploads.remove(buildRemoteName(account,file));
   if (upload == null) {
     Log_OC.e(TAG,"Could not delete upload " + file + " from mPendingUploads.");
   }

@@ -4,13 +4,13 @@
   if (intent == null || intent.hasExtra(KEY_RETRY)) {
     Log_OC.d(TAG,"Received null intent.");
     int countAddedEntries=0;
-    UploadDbObject[] list=mUploadsStorageManager.getPendingUploads();
-    for (    UploadDbObject uploadDbObject : list) {
-      Log_OC.d(TAG,"Retrieved from DB: " + uploadDbObject.toFormattedString());
-      String uploadKey=buildRemoteName(uploadDbObject);
-      UploadDbObject previous=mPendingUploads.putIfAbsent(uploadKey,uploadDbObject);
+    OCUpload[] list=mUploadsStorageManager.getPendingUploads();
+    for (    OCUpload OCUpload : list) {
+      Log_OC.d(TAG,"Retrieved from DB: " + OCUpload.toFormattedString());
+      String uploadKey=buildRemoteName(OCUpload);
+      OCUpload previous=mPendingUploads.putIfAbsent(uploadKey,OCUpload);
       if (previous == null) {
-        Log_OC.d(TAG,"mPendingUploads added: " + uploadDbObject.toFormattedString());
+        Log_OC.d(TAG,"mPendingUploads added: " + OCUpload.toFormattedString());
         countAddedEntries++;
       }
  else {
@@ -79,7 +79,7 @@
     LocalBehaviour localAction=(LocalBehaviour)intent.getSerializableExtra(KEY_LOCAL_BEHAVIOUR);
     if (localAction == null)     localAction=LocalBehaviour.LOCAL_BEHAVIOUR_COPY;
     for (int i=0; i < files.length; i++) {
-      UploadDbObject uploadObject=new UploadDbObject(files[i]);
+      OCUpload uploadObject=new OCUpload(files[i]);
       uploadObject.setAccountName(account.name);
       uploadObject.setForceOverwrite(forceOverwrite);
       uploadObject.setCreateRemoteFolder(isCreateRemoteFolder);
@@ -89,7 +89,7 @@
       uploadObject.setUploadTimestamp(uploadTimestamp);
       uploadObject.setUploadStatus(UploadStatus.UPLOAD_LATER);
       String uploadKey=buildRemoteName(uploadObject);
-      UploadDbObject previous=mPendingUploads.putIfAbsent(uploadKey,uploadObject);
+      OCUpload previous=mPendingUploads.putIfAbsent(uploadKey,uploadObject);
       if (previous == null) {
         Log_OC.d(TAG,"mPendingUploads added: " + uploadObject.toFormattedString());
         if (mUploadsStorageManager.removeUpload(uploadObject.getLocalPath()) > 0) {
@@ -111,10 +111,10 @@
     String remotePath=intent.getStringExtra(KEY_RETRY_REMOTE_PATH);
     list.add(remotePath);
     it=list.iterator();
-    UploadDbObject uploadDbObject=mPendingUploads.get(remotePath);
-    uploadDbObject.setUploadStatus(UploadStatus.UPLOAD_LATER);
-    uploadDbObject.setLastResult(null);
-    mUploadsStorageManager.updateUploadStatus(uploadDbObject);
+    OCUpload OCUpload=mPendingUploads.get(remotePath);
+    OCUpload.setUploadStatus(UploadStatus.UPLOAD_LATER);
+    OCUpload.setLastResult(null);
+    mUploadsStorageManager.updateUploadStatus(OCUpload);
     Log_OC.d(TAG,"Start uploading " + remotePath);
   }
  else {
@@ -123,12 +123,12 @@
   if (it.hasNext()) {
     while (it.hasNext()) {
       String upload=it.next();
-      UploadDbObject uploadDbObject=mPendingUploads.get(upload);
-      if (uploadDbObject == null) {
+      OCUpload OCUpload=mPendingUploads.get(upload);
+      if (OCUpload == null) {
         Log_OC.e(TAG,"Cannot upload null. Fix that!");
         continue;
       }
-      UploadTask uploadTask=new UploadTask(uploadDbObject);
+      UploadTask uploadTask=new UploadTask(OCUpload);
       uploadExecutor.submit(uploadTask);
     }
     StopSelfTask stopSelfTask=new StopSelfTask(intentStartId);

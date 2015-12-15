@@ -1,3 +1,0 @@
-{
-  return uploadDbObject.getAccountName() + uploadDbObject.getRemotePath();
-}

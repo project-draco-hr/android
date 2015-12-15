@@ -1,0 +1,4 @@
+{
+  String localPath=getLocalPath() != null ? getLocalPath() : "";
+  return localPath + " status:" + getUploadStatus()+ " result:"+ (getLastResult() == null ? "null" : getLastResult().getValue());
+}

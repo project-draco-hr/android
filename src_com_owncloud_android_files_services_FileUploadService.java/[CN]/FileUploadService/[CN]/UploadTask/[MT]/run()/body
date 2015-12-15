@@ -1,9 +1,9 @@
 {
   Log_OC.d(TAG,"mPendingUploads size:" + mPendingUploads.size() + " - before uploading.");
-switch (canUploadFileNow(uploadDbObject)) {
+switch (canUploadFileNow(OCUpload)) {
 case NOW:
-    Log_OC.d(TAG,"Calling uploadFile for " + uploadDbObject.getRemotePath());
-  RemoteOperationResult uploadResult=uploadFile(uploadDbObject);
+    Log_OC.d(TAG,"Calling uploadFile for " + OCUpload.getRemotePath());
+  RemoteOperationResult uploadResult=uploadFile(OCUpload);
 updateDatabaseUploadResult(uploadResult,mCurrentUpload);
 notifyUploadResult(uploadResult,mCurrentUpload);
 sendFinalBroadcast(uploadResult,mCurrentUpload);
@@ -13,9 +13,9 @@ break;
 case LATER:
 break;
 case FILE_GONE:
-mUploadsStorageManager.updateUploadStatus(uploadDbObject.getLocalPath(),UploadStatus.UPLOAD_FAILED_GIVE_UP,new RemoteOperationResult(ResultCode.FILE_NOT_FOUND));
-if (mPendingUploads.remove(uploadDbObject.getRemotePath()) == null) {
-Log_OC.w(TAG,"Could remove " + uploadDbObject.getRemotePath() + " from mPendingUploads because it does not exist.");
+mUploadsStorageManager.updateUploadStatus(OCUpload.getLocalPath(),UploadStatus.UPLOAD_FAILED_GIVE_UP,com.owncloud.android.db.UploadResult.FILE_ERROR);
+if (mPendingUploads.remove(OCUpload.getRemotePath()) == null) {
+Log_OC.w(TAG,"Could remove " + OCUpload.getRemotePath() + " from mPendingUploads because it does not exist.");
 }
 break;
 case ERROR:

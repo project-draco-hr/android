@@ -1,0 +1,8 @@
+{
+  OCFile file=null;
+  Cursor c=getDB().query(ProviderTableMeta.CONTENT_URI_FILE,null,ProviderTableMeta._ID + "=?",new String[]{String.valueOf(id)},null);
+  if (c.moveToFirst()) {
+    file=createFileInstance(c);
+  }
+  return file;
+}

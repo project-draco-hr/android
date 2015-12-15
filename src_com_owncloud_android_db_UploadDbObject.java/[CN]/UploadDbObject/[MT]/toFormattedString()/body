@@ -1,3 +1,0 @@
-{
-  return getLocalPath() + " status:" + getUploadStatus()+ " result:"+ (getLastResult() == null ? "null" : getLastResult().getCode());
-}

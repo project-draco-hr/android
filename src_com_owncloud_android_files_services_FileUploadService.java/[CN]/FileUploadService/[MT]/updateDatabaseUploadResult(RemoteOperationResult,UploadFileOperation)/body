@@ -1,11 +1,11 @@
 {
   Log_OC.d(TAG,"updateDataseUploadResult uploadResult: " + uploadResult + " upload: "+ upload);
   if (uploadResult.isCancelled()) {
-    mUploadsStorageManager.updateUploadStatus(upload.getOriginalStoragePath(),UploadStatus.UPLOAD_CANCELLED,uploadResult);
+    mUploadsStorageManager.updateUploadStatus(upload.getOriginalStoragePath(),UploadStatus.UPLOAD_CANCELLED,UploadResult.CANCELLED);
   }
  else {
     if (uploadResult.isSuccess()) {
-      mUploadsStorageManager.updateUploadStatus(upload.getOriginalStoragePath(),UploadStatus.UPLOAD_SUCCEEDED,uploadResult);
+      mUploadsStorageManager.updateUploadStatus(upload.getOriginalStoragePath(),UploadStatus.UPLOAD_SUCCEEDED,UploadResult.UPLOADED);
     }
  else {
     }

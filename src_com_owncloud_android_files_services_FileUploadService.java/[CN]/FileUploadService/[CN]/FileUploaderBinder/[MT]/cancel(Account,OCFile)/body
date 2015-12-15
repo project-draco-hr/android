@@ -9,9 +9,9 @@
   }
  else {
     Log_OC.d(TAG,"Calling cancel for " + file.getRemotePath() + " while upload is pending.");
-    UploadDbObject upload=mPendingUploads.remove(buildRemoteName(account,file));
+    OCUpload upload=mPendingUploads.remove(buildRemoteName(account,file));
     upload.setUploadStatus(UploadStatus.UPLOAD_CANCELLED);
-    upload.setLastResult(new RemoteOperationResult(ResultCode.CANCELLED));
+    upload.setLastResult(UploadResult.CANCELLED);
     upload.getOCFile().setStoragePath(file.getStoragePath());
     mUploadsStorageManager.updateUploadStatus(upload);
   }

@@ -1,15 +1,16 @@
 {
   Cursor c=getDB().query(ProviderTableMeta.CONTENT_URI_UPLOADS,null,selection,selectionArgs,null);
-  UploadDbObject[] list=new UploadDbObject[c.getCount()];
+  OCUpload[] list=new OCUpload[c.getCount()];
   if (c.moveToFirst()) {
     do {
-      String uploadObjectString=c.getString(c.getColumnIndex("uploadObject"));
-      UploadDbObject uploadObject=UploadDbObject.fromString(uploadObjectString);
-      if (uploadObject == null) {
-        Log_OC.e(TAG,"Could not deserialize UploadDbObject " + uploadObjectString);
+      long fileUploadId=c.getLong(c.getColumnIndex(ProviderTableMeta.UPLOADS_FILE_ID));
+      OCFile file=getUploadFile(fileUploadId);
+      OCUpload upload=new OCUpload(file);
+      if (upload == null) {
+        Log_OC.e(TAG,"Upload for file id = " + fileUploadId + "not found on DB");
       }
  else {
-        list[c.getPosition()]=uploadObject;
+        list[c.getPosition()]=upload;
       }
     }
  while (c.moveToNext());

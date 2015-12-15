@@ -1,0 +1,11 @@
+{
+switch (value) {
+case 0:
+    return LOCAL_BEHAVIOUR_COPY;
+case 1:
+  return LOCAL_BEHAVIOUR_MOVE;
+case 2:
+return LOCAL_BEHAVIOUR_FORGET;
+}
+return null;
+}

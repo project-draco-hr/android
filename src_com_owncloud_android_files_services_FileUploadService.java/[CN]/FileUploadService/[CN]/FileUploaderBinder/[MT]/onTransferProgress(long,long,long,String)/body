@@ -1,5 +1,5 @@
 {
-  Set<Entry<String,UploadDbObject>> uploads=mPendingUploads.entrySet();
+  Set<Entry<String,OCUpload>> uploads=mPendingUploads.entrySet();
   UploadFileOperation currentUpload=mCurrentUpload;
   if (currentUpload == null) {
     Log_OC.e(TAG,"Found no current upload with remote path " + localFileName + ". Ignore.");

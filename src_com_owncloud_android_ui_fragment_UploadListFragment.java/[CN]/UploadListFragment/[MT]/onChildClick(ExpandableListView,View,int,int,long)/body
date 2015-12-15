@@ -1,8 +1,8 @@
 {
   boolean handled=false;
-  UploadDbObject uploadDbObject=(UploadDbObject)mAdapter.getChild(groupPosition,childPosition);
-  if (uploadDbObject != null) {
-    handled=mContainerActivity.onUploadItemClick(uploadDbObject);
+  OCUpload OCUpload=(OCUpload)mAdapter.getChild(groupPosition,childPosition);
+  if (OCUpload != null) {
+    handled=mContainerActivity.onUploadItemClick(OCUpload);
   }
  else {
     Log_OC.w(TAG,"Null object in ListAdapter!!");

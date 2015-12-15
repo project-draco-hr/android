@@ -1,0 +1,17 @@
+{
+  Log_OC.e(TAG,"Inserting " + ocUpload.getLocalPath() + " with status="+ ocUpload.getUploadStatus());
+  ContentValues cv=new ContentValues();
+  cv.put(ProviderTableMeta.UPLOADS_PATH,ocUpload.getLocalPath());
+  cv.put(ProviderTableMeta.UPLOADS_STATUS,ocUpload.getUploadStatus().value);
+  cv.put(ProviderTableMeta.UPLOADS_FILE_ID,ocUpload.getOCFile().getFileId());
+  Uri result=getDB().insert(ProviderTableMeta.CONTENT_URI_UPLOADS,cv);
+  Log_OC.d(TAG,"storeUpload returns with: " + result + " for file: "+ ocUpload.getLocalPath());
+  if (result == null) {
+    Log_OC.e(TAG,"Failed to insert item " + ocUpload.getLocalPath() + " into upload db.");
+    return false;
+  }
+ else {
+    notifyObserversNow();
+    return true;
+  }
+}

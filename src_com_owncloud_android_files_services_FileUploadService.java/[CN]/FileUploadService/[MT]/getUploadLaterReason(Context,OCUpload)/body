@@ -1,0 +1,31 @@
+{
+  StringBuilder reason=new StringBuilder();
+  Date now=new Date();
+  if (now.getTime() < OCUpload.getUploadTimestamp()) {
+    reason.append("Waiting for " + DisplayUtils.unixTimeToHumanReadable(OCUpload.getUploadTimestamp()));
+  }
+  if (OCUpload.isUseWifiOnly() && !UploadUtils.isConnectedViaWiFi(context)) {
+    if (reason.length() > 0) {
+      reason.append(" and wifi connectivity");
+    }
+ else {
+      reason.append("Waiting for wifi connectivity");
+    }
+  }
+  if (OCUpload.isWhileChargingOnly() && !UploadUtils.isCharging(context)) {
+    if (reason.length() > 0) {
+      reason.append(" and charging");
+    }
+ else {
+      reason.append("Waiting for charging");
+    }
+  }
+  reason.append(".");
+  if (reason.length() > 1) {
+    return reason.toString();
+  }
+  if (OCUpload.getUploadStatus() == UploadStatus.UPLOAD_LATER) {
+    return "Upload is pending and will start shortly.";
+  }
+  return null;
+}

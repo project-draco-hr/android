@@ -2,7 +2,7 @@
   ExpandableListContextMenuInfo info=(ExpandableListContextMenuInfo)item.getMenuInfo();
   int childPosition=ExpandableListView.getPackedPositionChild(info.packedPosition);
   int groupPosition=ExpandableListView.getPackedPositionGroup(info.packedPosition);
-  UploadDbObject uploadFile=(UploadDbObject)mAdapter.getChild(groupPosition,childPosition);
+  OCUpload uploadFile=(OCUpload)mAdapter.getChild(groupPosition,childPosition);
 switch (item.getItemId()) {
 case R.id.action_cancel_upload:
     ((FileActivity)getActivity()).getFileOperationsHelper().cancelTransference(uploadFile.getOCFile());
