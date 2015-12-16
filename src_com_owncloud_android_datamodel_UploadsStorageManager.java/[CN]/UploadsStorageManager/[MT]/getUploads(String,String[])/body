@@ -4,8 +4,7 @@
   if (c.moveToFirst()) {
     do {
       long fileUploadId=c.getLong(c.getColumnIndex(ProviderTableMeta.UPLOADS_FILE_ID));
-      OCFile file=getUploadFile(fileUploadId);
-      OCUpload upload=new OCUpload(file);
+      OCUpload upload=createOCUploadFromCursor(c);
       if (upload == null) {
         Log_OC.e(TAG,"Upload for file id = " + fileUploadId + "not found on DB");
       }
