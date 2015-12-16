@@ -2,7 +2,16 @@
   TextView doneButton=(TextView)editShareView.findViewById(R.id.doneButton);
   doneButton.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
-      Toast.makeText(getActivity(),"TODO - update permissions in server",Toast.LENGTH_LONG).show();
+      SharePermissionsBuilder spb=new SharePermissionsBuilder();
+      spb.setSharePermission(getCanShareCheckBox().isChecked());
+      if (mFile.isFolder()) {
+        spb.setUpdatePermission(getCanEditChangeCheckBox().isChecked()).setCreatePermission(getCanEditCreateCheckBox().isChecked()).setDeletePermission(getCanEditDeleteCheckBox().isChecked());
+      }
+ else {
+        spb.setUpdatePermission(getCanEditCheckBox().isChecked());
+      }
+      int permissions=spb.build();
+      ((FileActivity)getActivity()).getFileOperationsHelper().setPermissionsToShare(mShare,permissions);
     }
   }
 );

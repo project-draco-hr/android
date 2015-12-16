@@ -21,12 +21,18 @@
       }
  else       if (ACTION_UPDATE_SHARE.equals(action)) {
         String remotePath=operationIntent.getStringExtra(EXTRA_REMOTE_PATH);
-        if (remotePath.length() > 0) {
+        long shareId=operationIntent.getLongExtra(EXTRA_SHARE_ID,-1);
+        if (remotePath != null && remotePath.length() > 0) {
           operation=new UpdateShareViaLinkOperation(remotePath);
           String password=operationIntent.getStringExtra(EXTRA_SHARE_PASSWORD);
           ((UpdateShareViaLinkOperation)operation).setPassword(password);
           long expirationDate=operationIntent.getLongExtra(EXTRA_SHARE_EXPIRATION_DATE_IN_MILLIS,0);
           ((UpdateShareViaLinkOperation)operation).setExpirationDate(expirationDate);
+        }
+ else         if (shareId > 0) {
+          operation=new UpdateSharePermissionsOperation(shareId);
+          int permissions=operationIntent.getIntExtra(EXTRA_SHARE_PERMISSIONS,1);
+          ((UpdateSharePermissionsOperation)operation).setPermissions(permissions);
         }
       }
  else       if (action.equals(ACTION_CREATE_SHARE_WITH_SHAREE)) {

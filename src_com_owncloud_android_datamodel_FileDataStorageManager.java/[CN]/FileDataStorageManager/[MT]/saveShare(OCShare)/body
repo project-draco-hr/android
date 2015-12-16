@@ -15,7 +15,7 @@
   cv.put(ProviderTableMeta.OCSHARES_USER_ID,share.getUserId());
   cv.put(ProviderTableMeta.OCSHARES_ID_REMOTE_SHARED,share.getRemoteId());
   cv.put(ProviderTableMeta.OCSHARES_ACCOUNT_OWNER,mAccount.name);
-  if (shareExists(share.getRemoteId())) {
+  if (shareExistsForRemoteId(share.getRemoteId())) {
     overriden=true;
     if (getContentResolver() != null) {
       getContentResolver().update(ProviderTableMeta.CONTENT_URI_SHARE,cv,ProviderTableMeta.OCSHARES_ID_REMOTE_SHARED + "=?",new String[]{String.valueOf(share.getRemoteId())});
