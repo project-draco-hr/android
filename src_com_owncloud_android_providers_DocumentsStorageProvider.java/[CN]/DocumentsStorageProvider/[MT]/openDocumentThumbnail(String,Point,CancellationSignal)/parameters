@@ -1,0 +1,3 @@
+String documentId
+Point sizeHint
+CancellationSignal signal

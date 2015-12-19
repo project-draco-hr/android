@@ -1,5 +1,5 @@
 {
-  Account[] ocAccounts=AccountManager.get(context).getAccountsByType(MainApp.getAccountType());
+  Account[] ocAccounts=getAccounts(context);
   Account defaultAccount=null;
   SharedPreferences appPreferences=PreferenceManager.getDefaultSharedPreferences(context);
   String accountName=appPreferences.getString("select_oc_account",null);

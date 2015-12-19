@@ -1,0 +1,3 @@
+String rootId
+String query
+String[] projection

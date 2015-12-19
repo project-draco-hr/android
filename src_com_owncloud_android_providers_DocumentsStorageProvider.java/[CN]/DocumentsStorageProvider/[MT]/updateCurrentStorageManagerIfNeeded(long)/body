@@ -1,0 +1,5 @@
+{
+  if (mCurrentStorageManager == null || (mRootIdToStorageManager.containsKey(docId) && mCurrentStorageManager != mRootIdToStorageManager.get(docId))) {
+    mCurrentStorageManager=mRootIdToStorageManager.get(docId);
+  }
+}
