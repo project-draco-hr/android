@@ -1,6 +1,6 @@
 {
   SharedPreferences setting=MainApp.getAppContext().getSharedPreferences("viewMode",Context.MODE_PRIVATE);
   SharedPreferences.Editor editor=setting.edit();
-  editor.putBoolean(file.getRemoteId(),setGrid);
+  editor.putBoolean(String.valueOf(file.getFileId()),setGrid);
   editor.commit();
 }

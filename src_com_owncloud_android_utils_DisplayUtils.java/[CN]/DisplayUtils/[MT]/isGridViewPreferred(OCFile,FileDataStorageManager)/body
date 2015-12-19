@@ -4,8 +4,8 @@
     OCFile parentDir=null;
     String parentPath=null;
     SharedPreferences setting=MainApp.getAppContext().getSharedPreferences("viewMode",Context.MODE_PRIVATE);
-    if (setting.contains(fileToTest.getRemoteId())) {
-      return setting.getBoolean(fileToTest.getRemoteId(),false);
+    if (setting.contains(String.valueOf(fileToTest.getFileId()))) {
+      return setting.getBoolean(String.valueOf(fileToTest.getFileId()),false);
     }
  else {
       do {
@@ -25,7 +25,7 @@
         fileToTest=parentDir;
       }
  while (endWhile(parentDir,setting));
-      return setting.getBoolean(fileToTest.getRemoteId(),false);
+      return setting.getBoolean(String.valueOf(fileToTest.getFileId()),false);
     }
   }
  else {

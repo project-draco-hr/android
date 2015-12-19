@@ -3,6 +3,6 @@
     return false;
   }
  else {
-    return !setting.contains(parentDir.getRemoteId());
+    return !setting.contains(String.valueOf(parentDir.getFileId()));
   }
 }

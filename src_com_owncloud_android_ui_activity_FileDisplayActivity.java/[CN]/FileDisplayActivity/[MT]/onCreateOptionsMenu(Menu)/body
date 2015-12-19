@@ -2,7 +2,6 @@
   MenuInflater inflater=getMenuInflater();
   inflater.inflate(R.menu.main_menu,menu);
   mOptionsMenu=menu;
-  MenuItem menuItem=mOptionsMenu.findItem(R.id.action_switch_view);
   changeGridIcon();
   return true;
 }

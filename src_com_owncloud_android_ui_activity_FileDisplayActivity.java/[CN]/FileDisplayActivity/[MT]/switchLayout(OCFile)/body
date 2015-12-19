@@ -1,5 +1,5 @@
 {
-  if (DisplayUtils.isGridView(file,getStorageManager())) {
+  if (DisplayUtils.isGridViewPreferred(file,getStorageManager())) {
     switchToGridView();
   }
  else {

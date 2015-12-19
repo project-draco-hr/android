@@ -2,7 +2,6 @@
   setFile(directory);
   cleanSecondFragment();
   startSyncFolderOperation(directory,false);
-  MenuItem menuItem=mOptionsMenu.findItem(R.id.action_switch_view);
   changeGridIcon();
   switchLayout(directory);
 }
