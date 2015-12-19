@@ -1,7 +1,5 @@
 {
   MenuInflater inflater=getMenuInflater();
   inflater.inflate(R.menu.main_menu,menu);
-  mOptionsMenu=menu;
-  changeGridIcon();
   return true;
 }

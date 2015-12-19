@@ -2,6 +2,4 @@
   setFile(directory);
   cleanSecondFragment();
   startSyncFolderOperation(directory,false);
-  changeGridIcon();
-  switchLayout(directory);
 }

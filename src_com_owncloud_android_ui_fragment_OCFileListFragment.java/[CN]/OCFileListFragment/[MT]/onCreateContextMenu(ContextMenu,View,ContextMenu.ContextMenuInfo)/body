@@ -19,5 +19,6 @@
         item.setEnabled(false);
       }
     }
+    changeGridIcon(menu,targetFile);
   }
 }

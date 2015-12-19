@@ -1,8 +1,0 @@
-{
-  if (DisplayUtils.isGridViewPreferred(file,getStorageManager())) {
-    switchToGridView();
-  }
- else {
-    switchToListView();
-  }
-}

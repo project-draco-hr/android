@@ -18,7 +18,6 @@
       cleanSecondFragment();
       if (file.isDown() && PreviewTextFragment.canBePreviewed(file))       startTextPreview(file);
     }
-    switchLayout(getCurrentDir());
   }
  else {
     Log_OC.wtf(TAG,"initFragments() called with invalid NULLs!");
