@@ -10,12 +10,14 @@
  else {
         mAdapter.removeSelection(position);
       }
-      menu.clear();
-      if (checkedCount == 1) {
-        createContextMenu(menu);
-      }
+      if (menu != null) {
+        menu.clear();
+        if (checkedCount == 1) {
+          createContextMenu(menu);
+        }
  else {
-        getActivity().getMenuInflater().inflate(R.menu.multiple_file_actions_menu,menu);
+          getActivity().getMenuInflater().inflate(R.menu.multiple_file_actions_menu,menu);
+        }
       }
     }
     @Override public boolean onCreateActionMode(    ActionMode mode,    Menu menu){
