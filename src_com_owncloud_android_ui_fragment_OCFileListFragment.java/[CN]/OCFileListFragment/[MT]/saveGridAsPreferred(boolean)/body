@@ -1,0 +1,6 @@
+{
+  SharedPreferences setting=getActivity().getSharedPreferences(GRID_IS_PREFERED_PREFERENCE,Context.MODE_PRIVATE);
+  SharedPreferences.Editor editor=setting.edit();
+  editor.putBoolean(String.valueOf(mFile.getFileId()),setGrid);
+  editor.apply();
+}

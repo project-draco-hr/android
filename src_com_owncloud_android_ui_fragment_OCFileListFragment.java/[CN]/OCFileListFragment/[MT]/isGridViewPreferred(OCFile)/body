@@ -4,7 +4,7 @@
     OCFile parentDir=null;
     String parentPath=null;
     FileDataStorageManager storageManager=mContainerActivity.getStorageManager();
-    SharedPreferences setting=MainApp.getAppContext().getSharedPreferences("viewMode",Context.MODE_PRIVATE);
+    SharedPreferences setting=getActivity().getSharedPreferences(GRID_IS_PREFERED_PREFERENCE,Context.MODE_PRIVATE);
     if (setting.contains(String.valueOf(fileToTest.getFileId()))) {
       return setting.getBoolean(String.valueOf(fileToTest.getFileId()),false);
     }
