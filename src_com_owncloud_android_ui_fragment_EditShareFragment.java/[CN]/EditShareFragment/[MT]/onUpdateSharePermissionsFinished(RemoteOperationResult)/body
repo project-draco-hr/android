@@ -1,0 +1,10 @@
+{
+  if (result.isSuccess()) {
+    getFragmentManager().popBackStack();
+  }
+ else {
+    if (getView() != null) {
+      initPrivileges(getView());
+    }
+  }
+}

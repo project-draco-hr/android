@@ -10,7 +10,7 @@
       t.show();
     }
   }
- else   if (operation == null || operation instanceof CreateShareWithShareeOperation || operation instanceof UnshareOperation || operation instanceof SynchronizeFolderOperation || operation instanceof UpdateShareViaLinkOperation) {
+ else   if (operation == null || operation instanceof CreateShareWithShareeOperation || operation instanceof UnshareOperation || operation instanceof SynchronizeFolderOperation || operation instanceof UpdateShareViaLinkOperation || operation instanceof UpdateSharePermissionsOperation) {
     if (result.isSuccess()) {
       updateFileFromDB();
     }
