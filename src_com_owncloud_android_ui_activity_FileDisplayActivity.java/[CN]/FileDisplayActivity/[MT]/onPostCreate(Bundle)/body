@@ -1,0 +1,21 @@
+{
+  super.onPostCreate(savedInstanceState);
+  if (ContextCompat.checkSelfPermission(this,Manifest.permission.WRITE_EXTERNAL_STORAGE) != android.content.pm.PackageManager.PERMISSION_GRANTED) {
+    if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+      Snackbar.make(findViewById(R.id.ListLayout),"Write access is required to upload/download files.",Snackbar.LENGTH_INDEFINITE).setAction("OK",new View.OnClickListener(){
+        @Override public void onClick(        View v){
+          requestWriteExternalStoreagePermission();
+        }
+      }
+).show();
+    }
+ else {
+      requestWriteExternalStoreagePermission();
+    }
+  }
+  if (savedInstanceState == null) {
+    createMinFragments();
+  }
+  mProgressBar.setIndeterminate(mSyncInProgress);
+  setBackgroundText();
+}
