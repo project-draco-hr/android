@@ -1,4 +1,7 @@
 {
   super.onActivityCreated(savedInstanceState);
+  Log_OC.d(TAG,"onActivityCreated");
+  refreshCapabilitiesFromDB();
   refreshUsersOrGroupsListFromDB();
+  refreshPublicShareFromDB();
 }

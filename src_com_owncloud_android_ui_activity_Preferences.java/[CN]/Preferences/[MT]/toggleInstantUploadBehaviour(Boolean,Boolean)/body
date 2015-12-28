@@ -1,0 +1,8 @@
+{
+  if (picture || video) {
+    mPrefInstantUploadCategory.addPreference(mPrefInstantUploadBehaviour);
+  }
+ else {
+    mPrefInstantUploadCategory.removePreference(mPrefInstantUploadBehaviour);
+  }
+}

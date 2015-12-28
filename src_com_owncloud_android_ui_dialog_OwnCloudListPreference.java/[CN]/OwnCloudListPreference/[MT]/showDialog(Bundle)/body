@@ -1,0 +1,21 @@
+{
+  if (getEntries() == null || getEntryValues() == null) {
+    throw new IllegalStateException("ListPreference requires an entries array and an entryValues array.");
+  }
+  int preselect=findIndexOfValue(getValue());
+  android.support.v7.app.AlertDialog.Builder builder=new android.support.v7.app.AlertDialog.Builder(mContext,R.style.ownCloud_AlertDialog).setTitle(getDialogTitle()).setIcon(getDialogIcon()).setSingleChoiceItems(getEntries(),preselect,this);
+  PreferenceManager pm=getPreferenceManager();
+  try {
+    Method method=pm.getClass().getDeclaredMethod("registerOnActivityDestroyListener",PreferenceManager.OnActivityDestroyListener.class);
+    method.setAccessible(true);
+    method.invoke(pm,this);
+  }
+ catch (  Exception e) {
+    Log_OC.e(TAG,"error invoking registerOnActivityDestroyListener",e);
+  }
+  mDialog=builder.create();
+  if (state != null) {
+    mDialog.onRestoreInstanceState(state);
+  }
+  mDialog.show();
+}

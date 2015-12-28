@@ -2,5 +2,6 @@
   if (mOperationsServiceBinder != null) {
     mOperationsServiceBinder.removeOperationListener(this);
   }
+  mResumed=false;
   super.onPause();
 }

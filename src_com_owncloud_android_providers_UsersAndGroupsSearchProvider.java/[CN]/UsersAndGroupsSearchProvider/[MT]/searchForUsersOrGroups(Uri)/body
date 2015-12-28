@@ -10,6 +10,9 @@
       names.add((JSONObject)o);
     }
   }
+ else {
+    showErrorMessage(result);
+  }
   if (names.size() > 0) {
     response=new MatrixCursor(COLUMNS);
     Iterator<JSONObject> namesIt=names.iterator();

@@ -12,13 +12,6 @@
  else   if (operation instanceof CreateFolderOperation) {
     onCreateFolderOperationFinish((CreateFolderOperation)operation,result);
   }
- else   if (operation instanceof CreateShareViaLinkOperation || operation instanceof CreateShareWithShareeOperation) {
-    refreshShowDetails();
-    refreshListOfFilesFragment();
-  }
- else   if (operation instanceof UnshareOperation) {
-    onUnshareLinkOperationFinish((UnshareOperation)operation,result);
-  }
  else   if (operation instanceof MoveFileOperation) {
     onMoveFileOperationFinish((MoveFileOperation)operation,result);
   }

@@ -1,0 +1,63 @@
+{
+  if (mPublicShare != null && ShareType.PUBLIC_LINK.equals(mPublicShare.getShareType())) {
+    Switch shareViaLinkSwitch=getShareViaLinkSwitch();
+    if (!shareViaLinkSwitch.isChecked()) {
+      shareViaLinkSwitch.setOnCheckedChangeListener(null);
+      shareViaLinkSwitch.setChecked(true);
+      shareViaLinkSwitch.setOnCheckedChangeListener(mOnShareViaLinkSwitchCheckedChangeListener);
+    }
+    getExpirationDateSection().setVisibility(View.VISIBLE);
+    getPasswordSection().setVisibility(View.VISIBLE);
+    AppCompatButton getLinkButton=getGetLinkButton();
+    getLinkButton.setVisibility(View.VISIBLE);
+    getLinkButton.setOnClickListener(new View.OnClickListener(){
+      @Override public void onClick(      View v){
+        ((FileActivity)getActivity()).getFileOperationsHelper().getFileWithLink(mFile);
+      }
+    }
+);
+    Switch expirationDateSwitch=getExpirationDateSwitch();
+    expirationDateSwitch.setOnCheckedChangeListener(null);
+    long expirationDate=mPublicShare.getExpirationDate();
+    if (expirationDate > 0) {
+      if (!expirationDateSwitch.isChecked()) {
+        expirationDateSwitch.toggle();
+      }
+      String formattedDate=SimpleDateFormat.getDateInstance().format(new Date(expirationDate));
+      getExpirationDateValue().setText(formattedDate);
+    }
+ else {
+      if (expirationDateSwitch.isChecked()) {
+        expirationDateSwitch.toggle();
+      }
+      getExpirationDateValue().setText(R.string.empty);
+    }
+    expirationDateSwitch.setOnCheckedChangeListener(mOnExpirationDateInteractionListener);
+    Switch passwordSwitch=getPasswordSwitch();
+    passwordSwitch.setOnCheckedChangeListener(null);
+    if (mPublicShare.isPasswordProtected()) {
+      if (!passwordSwitch.isChecked()) {
+        passwordSwitch.toggle();
+      }
+      getPasswordValue().setVisibility(View.VISIBLE);
+    }
+ else {
+      if (passwordSwitch.isChecked()) {
+        passwordSwitch.toggle();
+      }
+      getPasswordValue().setVisibility(View.INVISIBLE);
+    }
+    passwordSwitch.setOnCheckedChangeListener(mOnPasswordInteractionListener);
+  }
+ else {
+    Switch shareViaLinkSwitch=getShareViaLinkSwitch();
+    if (shareViaLinkSwitch.isChecked()) {
+      shareViaLinkSwitch.setOnCheckedChangeListener(null);
+      getShareViaLinkSwitch().setChecked(false);
+      shareViaLinkSwitch.setOnCheckedChangeListener(mOnShareViaLinkSwitchCheckedChangeListener);
+    }
+    getExpirationDateSection().setVisibility(View.GONE);
+    getPasswordSection().setVisibility(View.GONE);
+    getGetLinkButton().setVisibility(View.GONE);
+  }
+}

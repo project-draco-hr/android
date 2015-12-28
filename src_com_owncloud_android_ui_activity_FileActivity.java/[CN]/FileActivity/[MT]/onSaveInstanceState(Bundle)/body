@@ -3,7 +3,6 @@
   outState.putParcelable(FileActivity.EXTRA_FILE,mFile);
   outState.putBoolean(FileActivity.EXTRA_FROM_NOTIFICATION,mFromNotification);
   outState.putLong(KEY_WAITING_FOR_OP_ID,mFileOperationsHelper.getOpIdWaitingFor());
-  outState.putBoolean(KEY_TRY_SHARE_AGAIN,mTryShareAgain);
   if (getSupportActionBar() != null && getSupportActionBar().getTitle() != null) {
     outState.putString(KEY_ACTION_BAR_TITLE,getSupportActionBar().getTitle().toString());
   }

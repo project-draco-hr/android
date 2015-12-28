@@ -1,0 +1,12 @@
+{
+  ShareFileFragment shareFileFragment=getShareFileFragment();
+  if (shareFileFragment != null && shareFileFragment.isAdded()) {
+    shareFileFragment.refreshCapabilitiesFromDB();
+    shareFileFragment.refreshUsersOrGroupsListFromDB();
+    shareFileFragment.refreshPublicShareFromDB();
+  }
+  SearchShareesFragment searchShareesFragment=getSearchFragment();
+  if (searchShareesFragment != null && searchShareesFragment.isAdded()) {
+    searchShareesFragment.refreshUsersOrGroupsListFromDB();
+  }
+}
