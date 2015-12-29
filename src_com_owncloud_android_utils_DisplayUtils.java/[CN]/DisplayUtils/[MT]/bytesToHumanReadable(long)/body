@@ -1,10 +1,9 @@
 {
   double result=bytes;
-  int attachedsuff=0;
-  while (result > 1024 && attachedsuff < sizeSuffixes.length) {
+  int attachedSuff=0;
+  while (result > 1024 && attachedSuff < sizeSuffixes.length) {
     result/=1024.;
-    attachedsuff++;
+    attachedSuff++;
   }
-  result=((int)(result * 100)) / 100.;
-  return result + " " + sizeSuffixes[attachedsuff];
+  return new BigDecimal(result).setScale(sizeScales[attachedSuff],BigDecimal.ROUND_HALF_UP) + " " + sizeSuffixes[attachedSuff];
 }
