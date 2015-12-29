@@ -2,7 +2,7 @@
   super.onPostCreate(savedInstanceState);
   if (ContextCompat.checkSelfPermission(this,Manifest.permission.WRITE_EXTERNAL_STORAGE) != android.content.pm.PackageManager.PERMISSION_GRANTED) {
     if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-      Snackbar.make(findViewById(R.id.ListLayout),"Write access is required to upload/download files.",Snackbar.LENGTH_INDEFINITE).setAction("OK",new View.OnClickListener(){
+      Snackbar.make(findViewById(R.id.ListLayout),R.string.permission_storage_access,Snackbar.LENGTH_INDEFINITE).setAction(R.string.common_ok,new View.OnClickListener(){
         @Override public void onClick(        View v){
           requestWriteExternalStoreagePermission();
         }
