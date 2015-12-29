@@ -4,5 +4,6 @@
   if (c.moveToFirst()) {
     file=createFileInstance(c);
   }
+  c.close();
   return file;
 }

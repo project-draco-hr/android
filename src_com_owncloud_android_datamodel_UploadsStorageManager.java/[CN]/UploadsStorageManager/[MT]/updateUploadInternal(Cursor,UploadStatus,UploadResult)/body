@@ -15,7 +15,9 @@
  else {
       Log_OC.e(TAG,"Failed to update upload db.");
     }
+    c.close();
     return r;
   }
+  c.close();
   return 0;
 }
