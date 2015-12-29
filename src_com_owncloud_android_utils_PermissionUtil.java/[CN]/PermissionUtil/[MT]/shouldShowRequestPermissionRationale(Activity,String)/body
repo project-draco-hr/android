@@ -1,0 +1,3 @@
+{
+  return ActivityCompat.shouldShowRequestPermissionRationale(activity,permission);
+}

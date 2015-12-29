@@ -1,20 +1,18 @@
 {
   super.onPostCreate(savedInstanceState);
-  if (ContextCompat.checkSelfPermission(this,Manifest.permission.WRITE_EXTERNAL_STORAGE) != android.content.pm.PackageManager.PERMISSION_GRANTED) {
-    if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+  if (PermissionUtil.checkSelfPermission(this,Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+    if (PermissionUtil.shouldShowRequestPermissionRationale(this,Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
       Snackbar snackbar=Snackbar.make(findViewById(R.id.ListLayout),R.string.permission_storage_access,Snackbar.LENGTH_INDEFINITE).setAction(R.string.common_ok,new View.OnClickListener(){
         @Override public void onClick(        View v){
-          requestWriteExternalStoreagePermission();
+          PermissionUtil.requestWriteExternalStoreagePermission(FileDisplayActivity.this);
         }
       }
 );
-      View sbView=snackbar.getView();
-      TextView textView=(TextView)sbView.findViewById(android.support.design.R.id.snackbar_action);
-      textView.setTextColor(ContextCompat.getColor(this,R.color.white));
+      DisplayUtils.colorSnackbar(this,snackbar);
       snackbar.show();
     }
  else {
-      requestWriteExternalStoreagePermission();
+      PermissionUtil.requestWriteExternalStoreagePermission(this);
     }
   }
   if (savedInstanceState == null) {
