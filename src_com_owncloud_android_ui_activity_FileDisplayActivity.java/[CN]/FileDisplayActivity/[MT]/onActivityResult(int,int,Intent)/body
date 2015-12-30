@@ -22,7 +22,7 @@
         requestMoveOperation(fData,fResultCode);
       }
     }
-,DELAY_TO_REQUEST_OPERATION_ON_ACTIVITY_RESULTS);
+,DELAY_TO_REQUEST_OPERATIONS_LATER);
   }
  else   if (requestCode == ACTION_COPY_FILES && resultCode == RESULT_OK) {
     final Intent fData=data;
@@ -32,7 +32,7 @@
         requestCopyOperation(fData,fResultCode);
       }
     }
-,DELAY_TO_REQUEST_OPERATION_ON_ACTIVITY_RESULTS);
+,DELAY_TO_REQUEST_OPERATIONS_LATER);
   }
  else {
     super.onActivityResult(requestCode,resultCode,data);

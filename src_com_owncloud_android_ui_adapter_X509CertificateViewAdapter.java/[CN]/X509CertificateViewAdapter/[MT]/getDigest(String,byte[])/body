@@ -1,0 +1,11 @@
+{
+  MessageDigest md=null;
+  try {
+    md=MessageDigest.getInstance(algorithm);
+  }
+ catch (  NoSuchAlgorithmException e) {
+    return null;
+  }
+  md.reset();
+  return md.digest(message);
+}

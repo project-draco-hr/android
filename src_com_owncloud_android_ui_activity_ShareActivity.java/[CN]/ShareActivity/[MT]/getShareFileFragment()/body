@@ -1,0 +1,3 @@
+{
+  return (ShareFileFragment)getSupportFragmentManager().findFragmentByTag(TAG_SHARE_FRAGMENT);
+}

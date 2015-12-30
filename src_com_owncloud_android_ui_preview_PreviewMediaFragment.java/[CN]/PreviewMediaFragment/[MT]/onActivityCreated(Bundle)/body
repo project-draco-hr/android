@@ -1,6 +1,6 @@
 {
   super.onActivityCreated(savedInstanceState);
-  Log_OC.e(TAG,"onActivityCreated");
+  Log_OC.v(TAG,"onActivityCreated");
   OCFile file=getFile();
   if (savedInstanceState == null) {
     if (file == null) {

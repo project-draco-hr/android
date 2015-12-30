@@ -37,6 +37,9 @@ break;
 case SHARES:
 count=db.delete(ProviderTableMeta.OCSHARES_TABLE_NAME,where,whereArgs);
 break;
+case CAPABILITIES:
+count=db.delete(ProviderTableMeta.CAPABILITIES_TABLE_NAME,where,whereArgs);
+break;
 default :
 throw new IllegalArgumentException("Unknown uri: " + uri.toString());
 }

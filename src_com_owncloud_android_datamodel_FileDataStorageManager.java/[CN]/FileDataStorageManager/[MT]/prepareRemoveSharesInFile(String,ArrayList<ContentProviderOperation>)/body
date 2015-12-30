@@ -1,0 +1,6 @@
+{
+  String where=ProviderTableMeta.OCSHARES_PATH + "=?" + " AND "+ ProviderTableMeta.OCSHARES_ACCOUNT_OWNER+ "=?";
+  String[] whereArgs=new String[]{filePath,mAccount.name};
+  preparedOperations.add(ContentProviderOperation.newDelete(ProviderTableMeta.CONTENT_URI_SHARE).withSelection(where,whereArgs).build());
+  return preparedOperations;
+}

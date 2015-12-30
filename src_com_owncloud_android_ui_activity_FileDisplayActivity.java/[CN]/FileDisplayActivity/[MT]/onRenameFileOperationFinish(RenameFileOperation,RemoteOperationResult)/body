@@ -1,5 +1,4 @@
 {
-  dismissLoadingDialog();
   OCFile renamedFile=operation.getFile();
   if (result.isSuccess()) {
     FileFragment details=getSecondFragment();

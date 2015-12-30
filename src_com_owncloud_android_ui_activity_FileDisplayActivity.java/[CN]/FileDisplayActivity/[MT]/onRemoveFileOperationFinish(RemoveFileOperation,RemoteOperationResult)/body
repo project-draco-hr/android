@@ -1,5 +1,4 @@
 {
-  dismissLoadingDialog();
   Toast msg=Toast.makeText(this,ErrorMessageAdapter.getErrorCauseMessage(result,operation,getResources()),Toast.LENGTH_LONG);
   msg.show();
   if (result.isSuccess()) {

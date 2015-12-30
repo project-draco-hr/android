@@ -8,7 +8,7 @@
   mForgottenLocalFiles=new HashMap<String,String>();
   mSyncResult=syncResult;
   mSyncResult.fullSyncRequested=false;
-  mSyncResult.delayUntil=60 * 60 * 24;
+  mSyncResult.delayUntil=(System.currentTimeMillis() / 1000) + 3 * 60 * 60;
   this.setAccount(account);
   this.setContentProviderClient(providerClient);
   this.setStorageManager(new FileDataStorageManager(account,providerClient));

@@ -1,0 +1,10 @@
+{
+  super.onStart();
+  View searchView=getView().findViewById(R.id.searchView);
+  if (searchView.requestFocus()) {
+    InputMethodManager imm=(InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+    if (imm != null) {
+      imm.showSoftInput(searchView.findFocus(),InputMethodManager.SHOW_IMPLICIT);
+    }
+  }
+}

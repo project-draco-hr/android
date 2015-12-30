@@ -1,0 +1,10 @@
+{
+  super.onCreate(savedInstanceState);
+  setContentView(R.layout.share_activity);
+  FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
+  if (savedInstanceState == null) {
+    Fragment fragment=ShareFileFragment.newInstance(getFile(),getAccount());
+    ft.replace(R.id.share_fragment_container,fragment,TAG_SHARE_FRAGMENT);
+    ft.commit();
+  }
+}

@@ -1,0 +1,3 @@
+{
+  mPendingUploads.remove(account);
+}

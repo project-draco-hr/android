@@ -33,14 +33,18 @@
     }
   }
 );
-  mCenteredRefreshButton=findViewById(R.id.centeredRefreshButton);
-  mCenteredRefreshButton.setOnClickListener(new View.OnClickListener(){
+  findViewById(R.id.centeredRefreshButton).setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
       checkOcServer();
     }
   }
 );
-  mOkButton=findViewById(R.id.buttonOK);
+  findViewById(R.id.embeddedRefreshButton).setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      checkOcServer();
+    }
+  }
+);
   initServerPreFragment(savedInstanceState);
   initAuthorizationPreFragment(savedInstanceState);
 }

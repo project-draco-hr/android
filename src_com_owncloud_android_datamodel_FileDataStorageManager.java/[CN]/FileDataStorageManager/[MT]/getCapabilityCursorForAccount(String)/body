@@ -1,0 +1,15 @@
+{
+  Cursor c=null;
+  if (getContentResolver() != null) {
+    c=getContentResolver().query(ProviderTableMeta.CONTENT_URI_CAPABILITIES,null,ProviderTableMeta.CAPABILITIES_ACCOUNT_NAME + "=? ",new String[]{accountName},null);
+  }
+ else {
+    try {
+      c=getContentProviderClient().query(ProviderTableMeta.CONTENT_URI_CAPABILITIES,null,ProviderTableMeta.CAPABILITIES_ACCOUNT_NAME + "=? ",new String[]{accountName},null);
+    }
+ catch (    RemoteException e) {
+      Log_OC.e(TAG,"Couldn't determine capability existance, assuming non existance: " + e.getMessage());
+    }
+  }
+  return c;
+}
