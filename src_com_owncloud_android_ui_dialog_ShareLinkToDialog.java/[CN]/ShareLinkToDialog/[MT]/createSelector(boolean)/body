@@ -12,13 +12,7 @@
       ActivityInfo actInfo=chosen.activityInfo;
       ComponentName name=new ComponentName(actInfo.applicationInfo.packageName,actInfo.name);
       mIntent.setComponent(name);
-      if (sendAction) {
-        dialog.dismiss();
-        ((FileActivity)getActivity()).startActivity(mIntent);
-      }
- else {
-        ((ComponentsGetter)getActivity()).getFileOperationsHelper().shareFileWithLinkToApp(mFile,"",mIntent);
-      }
+      getActivity().startActivity(mIntent);
     }
   }
 ).create();

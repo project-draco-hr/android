@@ -1,7 +1,7 @@
 {
   Uri share_uri=ProviderTableMeta.CONTENT_URI_SHARE;
-  String where=ProviderTableMeta.OCSHARES_ACCOUNT_OWNER + "=?" + " AND "+ ProviderTableMeta.FILE_PATH+ "=?";
-  String[] whereArgs=new String[]{mAccount.name,share.getPath()};
+  String where=ProviderTableMeta.OCSHARES_ACCOUNT_OWNER + "=?" + " AND "+ ProviderTableMeta._ID+ "=?";
+  String[] whereArgs=new String[]{mAccount.name,Long.toString(share.getId())};
   if (getContentProviderClient() != null) {
     try {
       getContentProviderClient().delete(share_uri,where,whereArgs);

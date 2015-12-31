@@ -1,18 +1,29 @@
 {
-  saveShares(shares);
-  ArrayList<OCFile> sharedFiles=new ArrayList<OCFile>();
+  ArrayList<ContentProviderOperation> operations=new ArrayList<ContentProviderOperation>();
+  String filePath="";
   for (  OCShare share : shares) {
-    String path=share.getPath();
-    if (share.isFolder()) {
-      path=path + FileUtils.PATH_SEPARATOR;
-    }
-    OCFile file=getFileByPath(path);
-    if (file != null) {
-      if (share.getShareType().equals(ShareType.PUBLIC_LINK)) {
-        file.setShareByLink(true);
-        sharedFiles.add(file);
-      }
+    if (filePath != share.getPath()) {
+      filePath=share.getPath();
+      resetShareFlagInAFile(filePath);
+      operations=prepareRemoveSharesInFile(filePath,operations);
     }
   }
-  updateSharedFiles(sharedFiles);
+  operations=prepareInsertShares(shares,operations);
+  if (operations.size() > 0) {
+    Log_OC.d(TAG,"Sending " + operations.size() + " operations to FileContentProvider");
+    try {
+      if (getContentResolver() != null) {
+        getContentResolver().applyBatch(MainApp.getAuthority(),operations);
+      }
+ else {
+        getContentProviderClient().applyBatch(operations);
+      }
+    }
+ catch (    OperationApplicationException e) {
+      Log_OC.e(TAG,"Exception in batch of operations " + e.getMessage());
+    }
+catch (    RemoteException e) {
+      Log_OC.e(TAG,"Exception in batch of operations  " + e.getMessage());
+    }
+  }
 }

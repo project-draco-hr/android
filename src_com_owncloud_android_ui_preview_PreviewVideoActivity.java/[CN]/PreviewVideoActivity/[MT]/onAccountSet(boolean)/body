@@ -11,7 +11,7 @@
     file=getStorageManager().getFileById(file.getFileId());
     if (file != null) {
       if (file.isDown()) {
-        mVideoPlayer.setVideoPath(file.getStoragePath());
+        mVideoPlayer.setVideoURI(file.getStorageUri());
       }
  else {
         String url;
