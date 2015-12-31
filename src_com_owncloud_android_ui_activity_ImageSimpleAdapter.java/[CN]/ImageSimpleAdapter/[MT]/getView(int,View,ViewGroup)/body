@@ -5,7 +5,7 @@
   OCFile file=data.get("dirname");
   TextView filename=(TextView)vi.findViewById(R.id.filename);
   filename.setText((CharSequence)file.getFileName());
-  ImageView fileIcon=(ImageView)vi.findViewById(R.id.imageView1);
+  ImageView fileIcon=(ImageView)vi.findViewById(R.id.thumbnail);
   fileIcon.setTag(file.getFileId());
   if (file.isImage() && file.getRemoteId() != null) {
     Bitmap thumbnail=ThumbnailsCacheManager.getBitmapFromDiskCache(String.valueOf(file.getRemoteId()));
@@ -25,7 +25,7 @@
     }
   }
  else {
-    fileIcon.setImageResource(DisplayUtils.getFileTypeIconId(file.getMimetype(),file.getFileName()));
+    fileIcon.setImageResource(MimetypeIconUtil.getFileTypeIconId(file.getMimetype(),file.getFileName()));
   }
   return vi;
 }
