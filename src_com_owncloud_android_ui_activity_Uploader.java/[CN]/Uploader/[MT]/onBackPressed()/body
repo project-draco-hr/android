@@ -1,10 +1,13 @@
 {
   if (mParents.size() <= 1) {
+    unregisterReceiver(mSyncBroadcastReceiver);
     super.onBackPressed();
     return;
   }
  else {
     mParents.pop();
+    String full_path=generatePath(mParents);
+    startSyncFolderOperation(getStorageManager().getFileByPath(full_path));
     populateDirectoryList();
   }
 }
