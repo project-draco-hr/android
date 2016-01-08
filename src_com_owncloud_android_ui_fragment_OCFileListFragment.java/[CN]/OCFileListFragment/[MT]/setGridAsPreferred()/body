@@ -1,0 +1,4 @@
+{
+  saveGridAsPreferred(true);
+  switchToGridView();
+}
