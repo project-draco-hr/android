@@ -1,0 +1,4 @@
+{
+  saveGridAsPreferred(false);
+  switchToListView();
+}

@@ -1,0 +1,6 @@
+{
+  if (mAdapter instanceof FileListListAdapter) {
+    return ((FileListListAdapter)mAdapter).isGridMode();
+  }
+  return false;
+}
