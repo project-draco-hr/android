@@ -3,5 +3,6 @@
   mAccount=account;
   mStorageManager=storageManager;
   mContext=context;
+  mResource=resource;
   inflater=(LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 }

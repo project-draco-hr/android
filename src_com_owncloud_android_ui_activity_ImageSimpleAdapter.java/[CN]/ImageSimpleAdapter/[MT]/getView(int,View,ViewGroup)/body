@@ -1,6 +1,6 @@
 {
   View vi=convertView;
-  if (convertView == null)   vi=inflater.inflate(R.layout.uploader_list_item_layout,null);
+  if (convertView == null)   vi=inflater.inflate(mResource,null);
   HashMap<String,OCFile> data=(HashMap<String,OCFile>)getItem(position);
   OCFile file=data.get("dirname");
   TextView filename=(TextView)vi.findViewById(R.id.filename);
