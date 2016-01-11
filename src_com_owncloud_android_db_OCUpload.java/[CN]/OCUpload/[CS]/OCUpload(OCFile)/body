@@ -1,3 +1,4 @@
 {
   this.mFile=ocFile;
+  resetData();
 }

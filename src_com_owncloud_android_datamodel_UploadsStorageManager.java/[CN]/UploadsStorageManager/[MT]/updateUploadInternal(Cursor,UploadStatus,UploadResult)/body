@@ -1,23 +1,13 @@
 {
+  int r=0;
   while (c.moveToNext()) {
     OCUpload upload=createOCUploadFromCursor(c);
     String path=c.getString(c.getColumnIndex(ProviderTableMeta.UPLOADS_PATH));
     Log_OC.v(TAG,"Updating " + path + " with status:"+ status+ " and result:"+ (result == null ? "null" : result.toString())+ " (old:"+ upload.toFormattedString()+ ")");
     upload.setUploadStatus(status);
     upload.setLastResult(result);
-    updateUploadStatus(upload);
-    ContentValues cv=new ContentValues();
-    cv.put(ProviderTableMeta.UPLOADS_STATUS,status.value);
-    int r=updateUploadStatus(upload);
-    if (r == 1) {
-      notifyObserversNow();
-    }
- else {
-      Log_OC.e(TAG,"Failed to update upload db.");
-    }
-    c.close();
-    return r;
+    r=updateUpload(upload);
   }
   c.close();
-  return 0;
+  return r;
 }

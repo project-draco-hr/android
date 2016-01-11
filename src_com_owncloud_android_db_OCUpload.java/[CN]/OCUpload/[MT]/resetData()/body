@@ -1,0 +1,13 @@
+{
+  mId=-1;
+  mLocalAction=LocalBehaviour.LOCAL_BEHAVIOUR_COPY;
+  mUploadTime=new GregorianCalendar();
+  mForceOverwrite=false;
+  mIsCreateRemoteFolder=false;
+  mIsUseWifiOnly=true;
+  mIsWhileChargingOnly=false;
+  mUploadTimestamp=-1;
+  mAccountName="";
+  mUploadStatus=UploadStatus.UPLOAD_LATER;
+  mLastResult=UploadResult.UPLOADED;
+}
