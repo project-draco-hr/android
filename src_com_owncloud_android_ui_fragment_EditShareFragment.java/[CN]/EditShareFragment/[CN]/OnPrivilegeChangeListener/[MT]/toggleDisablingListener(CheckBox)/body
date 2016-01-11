@@ -1,5 +1,0 @@
-{
-  checkBoxView.setOnCheckedChangeListener(null);
-  checkBoxView.toggle();
-  checkBoxView.setOnCheckedChangeListener(mOnPrivilegeChangeListener);
-}

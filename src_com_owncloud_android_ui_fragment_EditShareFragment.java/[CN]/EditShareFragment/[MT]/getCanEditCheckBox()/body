@@ -1,3 +1,0 @@
-{
-  return (CheckBox)getView().findViewById(R.id.canEditCheckBox);
-}

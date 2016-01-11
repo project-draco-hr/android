@@ -3,12 +3,12 @@
   doneButton.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
       SharePermissionsBuilder spb=new SharePermissionsBuilder();
-      spb.setSharePermission(getCanShareCheckBox().isChecked());
+      spb.setSharePermission(getCanShareSwitch().isChecked());
       if (mFile.isFolder()) {
         spb.setUpdatePermission(getCanEditChangeCheckBox().isChecked()).setCreatePermission(getCanEditCreateCheckBox().isChecked()).setDeletePermission(getCanEditDeleteCheckBox().isChecked());
       }
  else {
-        spb.setUpdatePermission(getCanEditCheckBox().isChecked());
+        spb.setUpdatePermission(getCanEditSwitch().isChecked());
       }
       int permissions=spb.build();
       ((FileActivity)getActivity()).getFileOperationsHelper().setPermissionsToShare(mShare,permissions);

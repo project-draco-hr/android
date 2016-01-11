@@ -2,17 +2,17 @@
   if (!isResumed()) {
     return;
   }
-  CheckBox subordinate;
-switch (checkBoxView.getId()) {
-case R.id.canShareCheckBox:
+  CompoundButton subordinate;
+switch (compound.getId()) {
+case R.id.canShareSwitch:
     Log_OC.v(TAG,"canShareCheckBox toggled to " + isChecked);
   break;
-case R.id.canEditCheckBox:
+case R.id.canEditSwitch:
 Log_OC.v(TAG,"canEditCheckBox toggled to " + isChecked);
 if (mFile.isFolder()) {
 if (isChecked) {
   for (int i=0; i < sSubordinateCheckBoxIds.length; i++) {
-    subordinate=(CheckBox)getView().findViewById(sSubordinateCheckBoxIds[i]);
+    subordinate=(CompoundButton)getView().findViewById(sSubordinateCheckBoxIds[i]);
     subordinate.setVisibility(View.VISIBLE);
     if (!subordinate.isChecked()) {
       toggleDisablingListener(subordinate);
@@ -21,7 +21,7 @@ if (isChecked) {
 }
  else {
   for (int i=0; i < sSubordinateCheckBoxIds.length; i++) {
-    subordinate=(CheckBox)getView().findViewById(sSubordinateCheckBoxIds[i]);
+    subordinate=(CompoundButton)getView().findViewById(sSubordinateCheckBoxIds[i]);
     subordinate.setVisibility(View.GONE);
     if (subordinate.isChecked()) {
       toggleDisablingListener(subordinate);
@@ -32,15 +32,15 @@ if (isChecked) {
 break;
 case R.id.canEditCreateCheckBox:
 Log_OC.v(TAG,"canEditCreateCheckBox toggled to " + isChecked);
-syncCanEditCheckBox(checkBoxView,isChecked);
+syncCanEditSwitch(compound,isChecked);
 break;
 case R.id.canEditChangeCheckBox:
 Log_OC.v(TAG,"canEditChangeCheckBox toggled to " + isChecked);
-syncCanEditCheckBox(checkBoxView,isChecked);
+syncCanEditSwitch(compound,isChecked);
 break;
 case R.id.canEditDeleteCheckBox:
 Log_OC.v(TAG,"canEditDeleteCheckBox toggled to " + isChecked);
-syncCanEditCheckBox(checkBoxView,isChecked);
+syncCanEditSwitch(compound,isChecked);
 break;
 }
 }

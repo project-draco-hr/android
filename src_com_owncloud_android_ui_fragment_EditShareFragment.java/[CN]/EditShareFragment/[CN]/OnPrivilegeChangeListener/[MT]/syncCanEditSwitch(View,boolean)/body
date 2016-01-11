@@ -1,8 +1,8 @@
 {
-  CheckBox canEditCheckBox=(CheckBox)getView().findViewById(R.id.canEditCheckBox);
+  CompoundButton canEditCompound=(CompoundButton)getView().findViewById(R.id.canEditSwitch);
   if (isChecked) {
-    if (!canEditCheckBox.isChecked()) {
-      toggleDisablingListener(canEditCheckBox);
+    if (!canEditCompound.isChecked()) {
+      toggleDisablingListener(canEditCompound);
     }
   }
  else {
@@ -10,8 +10,8 @@
     for (int i=0; allDisabled && i < sSubordinateCheckBoxIds.length; i++) {
       allDisabled&=sSubordinateCheckBoxIds[i] == subordinateCheckBoxView.getId() || !((CheckBox)getView().findViewById(sSubordinateCheckBoxIds[i])).isChecked();
     }
-    if (canEditCheckBox.isChecked() && allDisabled) {
-      toggleDisablingListener(canEditCheckBox);
+    if (canEditCompound.isChecked() && allDisabled) {
+      toggleDisablingListener(canEditCompound);
       for (int i=0; i < sSubordinateCheckBoxIds.length; i++) {
         getView().findViewById(sSubordinateCheckBoxIds[i]).setVisibility(View.GONE);
       }
