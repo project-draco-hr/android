@@ -3,7 +3,7 @@
   if (!mDownloaderBinder.isDownloading(account,mWaitingToPreview)) {
     Intent i=new Intent(this,FileDownloader.class);
     i.putExtra(FileDownloader.EXTRA_ACCOUNT,account);
-    i.putExtra(FileDownloader.EXTRA_FILE,(Parcelable)file);
+    i.putExtra(FileDownloader.EXTRA_FILE,file);
     startService(i);
   }
 }
