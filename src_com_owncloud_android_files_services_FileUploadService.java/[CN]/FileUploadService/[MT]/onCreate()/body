@@ -1,15 +1,15 @@
 {
   super.onCreate();
-  Log_OC.d(TAG,"mPendingUploads size:" + mPendingUploads.size() + " - onCreate");
+  Log_OC.d(TAG,"Creating service");
   mNotificationManager=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+  HandlerThread thread=new HandlerThread("FileUploaderThread",android.os.Process.THREAD_PRIORITY_BACKGROUND);
+  thread.start();
+  mServiceLooper=thread.getLooper();
+  mServiceHandler=new ServiceHandler(mServiceLooper,this);
   mBinder=new FileUploaderBinder();
   mUploadsStorageManager=new UploadsStorageManager(getContentResolver());
   mUploadsStorageManager.setAllCurrentToUploadLater();
-  HandlerThread thread=new HandlerThread("FileUploadService-Requester");
-  thread.start();
-  mServiceLooper=thread.getLooper();
-  mServiceHandler=new ServiceHandler(mServiceLooper);
-  uploadExecutor=Executors.newFixedThreadPool(1);
+  mUploadExecutor=Executors.newFixedThreadPool(1);
   Log_OC.d(TAG,"FileUploadService.retry() called by onCreate()");
   FileUploadService.retry(getApplicationContext());
 }

@@ -1,5 +1,11 @@
 {
-  Log_OC.d(TAG,"mPendingUploads size:" + mPendingUploads.size() + " - onDestroy");
+  Log_OC.v(TAG,"Destroying service");
+  mBinder=null;
+  mServiceHandler=null;
   mServiceLooper.quit();
-  uploadExecutor.shutdown();
+  mServiceLooper=null;
+  mNotificationManager=null;
+  Log_OC.d(TAG,"mPendingUploads size:" + mPendingUploads.toString() + " - onDestroy");
+  mUploadExecutor.shutdown();
+  super.onDestroy();
 }

@@ -1,9 +1,10 @@
 {
-  OCUpload upload=mPendingUploads.remove(buildRemoteName(account,file));
+  Pair<UploadFileOperation,String> removeResult=mPendingUploads.remove(account,file.getRemotePath());
+  UploadFileOperation upload=removeResult.first;
   if (upload == null) {
     Log_OC.e(TAG,"Could not delete upload " + file + " from mPendingUploads.");
   }
-  int d=mUploadsStorageManager.removeUpload(file.getStoragePath());
+  int d=mUploadsStorageManager.removeUpload(upload.getStoragePath());
   if (d == 0) {
     Log_OC.e(TAG,"Could not delete upload " + file.getStoragePath() + " from database.");
   }
