@@ -12,4 +12,6 @@
   mUploadExecutor=Executors.newFixedThreadPool(1);
   Log_OC.d(TAG,"FileUploadService.retry() called by onCreate()");
   FileUploadService.retry(getApplicationContext());
+  AccountManager am=AccountManager.get(getApplicationContext());
+  am.addOnAccountsUpdatedListener(this,null,false);
 }

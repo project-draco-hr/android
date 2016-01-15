@@ -6,7 +6,7 @@
     OCFile currentDir=getCurrentDir();
     boolean isDescendant=(currentDir != null) && (uploadedRemotePath != null) && (uploadedRemotePath.startsWith(currentDir.getRemotePath()));
     if (sameAccount && isDescendant) {
-      String linkedToRemotePath=intent.getStringExtra(FileUploader.EXTRA_LINKED_TO_PATH);
+      String linkedToRemotePath=intent.getStringExtra(FileUploadService.EXTRA_LINKED_TO_PATH);
       if (linkedToRemotePath == null || isAscendant(linkedToRemotePath)) {
         refreshListOfFilesFragment();
       }
