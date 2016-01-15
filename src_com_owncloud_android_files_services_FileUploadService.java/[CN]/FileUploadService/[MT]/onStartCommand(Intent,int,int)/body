@@ -35,10 +35,14 @@
       mimeTypes=intent.getStringArrayExtra(KEY_MIME_TYPE);
     }
   }
-  FileDataStorageManager storageManager=new FileDataStorageManager(account,getContentResolver());
+  mStorageManager=new FileDataStorageManager(account,getContentResolver());
   boolean forceOverwrite=intent.getBooleanExtra(KEY_FORCE_OVERWRITE,false);
   boolean isInstant=intent.getBooleanExtra(KEY_INSTANT_UPLOAD,false);
   int localAction=intent.getIntExtra(KEY_LOCAL_BEHAVIOUR,LOCAL_BEHAVIOUR_FORGET);
+  boolean isCreateRemoteFolder=intent.getBooleanExtra(KEY_CREATE_REMOTE_FOLDER,false);
+  boolean isUseWifiOnly=intent.getBooleanExtra(KEY_WIFI_ONLY,true);
+  boolean isWhileChargingOnly=intent.getBooleanExtra(KEY_WHILE_CHARGING_ONLY,false);
+  long uploadTimestamp=intent.getLongExtra(KEY_UPLOAD_TIMESTAMP,-1);
   if (intent.hasExtra(KEY_FILE) && files == null) {
     Log_OC.e(TAG,"Incorrect array for OCFiles provided in upload intent");
     return Service.START_NOT_STICKY;
@@ -60,8 +64,11 @@
     for (int i=0; i < localPaths.length; i++) {
       files[i]=obtainNewOCFileToUpload(remotePaths[i],localPaths[i],((mimeTypes != null) ? mimeTypes[i] : null));
       if (files[i] == null) {
+        Log_OC.e(TAG,"obtainNewOCFileToUpload() returned null for remotePaths[i]:" + remotePaths[i] + " and localPaths[i]:"+ localPaths[i]);
         return Service.START_NOT_STICKY;
       }
+      mStorageManager.saveFile(files[i]);
+      files[i]=mStorageManager.getFileByLocalPath(files[i].getStoragePath());
     }
   }
   OwnCloudVersion ocv=AccountUtils.getServerVersion(account);
@@ -81,6 +88,17 @@
       if (putResult != null) {
         uploadKey=putResult.first;
         requestedUploads.add(uploadKey);
+        OCUpload ocUpload=new OCUpload(files[i]);
+        ocUpload.setAccountName(account.name);
+        ocUpload.setForceOverwrite(forceOverwrite);
+        ocUpload.setCreateRemoteFolder(isCreateRemoteFolder);
+        ocUpload.setLocalAction(LocalBehaviour.fromValue(localAction));
+        ocUpload.setUseWifiOnly(isUseWifiOnly);
+        ocUpload.setWhileChargingOnly(isWhileChargingOnly);
+        ocUpload.setUploadTimestamp(uploadTimestamp);
+        ocUpload.setUploadStatus(UploadStatus.UPLOAD_IN_PROGRESS);
+        ocUpload.getOCFile().setStoragePath(localPaths[i]);
+        mUploadsStorageManager.storeUpload(ocUpload);
       }
     }
   }

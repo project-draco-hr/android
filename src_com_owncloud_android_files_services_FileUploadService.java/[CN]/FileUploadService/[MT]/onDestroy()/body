@@ -6,7 +6,6 @@
   mServiceLooper=null;
   mNotificationManager=null;
   Log_OC.d(TAG,"mPendingUploads size:" + mPendingUploads.toString() + " - onDestroy");
-  mUploadExecutor.shutdown();
   AccountManager am=AccountManager.get(getApplicationContext());
   am.removeOnAccountsUpdatedListener(this);
   super.onDestroy();
