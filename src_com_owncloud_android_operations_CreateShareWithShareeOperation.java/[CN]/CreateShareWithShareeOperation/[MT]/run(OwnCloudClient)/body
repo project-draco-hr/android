@@ -1,5 +1,29 @@
 {
-  CreateRemoteShareOperation operation=new CreateRemoteShareOperation(mPath,mShareType,mShareeName,false,"",OCShare.DEFAULT_PERMISSION);
+  int permissions=mPermissions;
+  if (permissions < 0) {
+    RemoteOperation operation=new GetRemoteSharesForFileOperation(mPath,true,false);
+    RemoteOperationResult result=operation.execute(client);
+    if (!result.isSuccess()) {
+      return result;
+    }
+ else {
+      OCShare share=null;
+      Account account=getStorageManager().getAccount();
+      String userId=account.name.substring(0,account.name.lastIndexOf("@"));
+      boolean sharedWithMe=false;
+      for (int i=0; i < result.getData().size() && !sharedWithMe; i++) {
+        share=(OCShare)result.getData().get(i);
+        sharedWithMe=userId.equals(share.getShareWith());
+      }
+      if (share != null && sharedWithMe) {
+        permissions=share.getPermissions();
+      }
+ else {
+        permissions=OCShare.DEFAULT_PERMISSION;
+      }
+    }
+  }
+  CreateRemoteShareOperation operation=new CreateRemoteShareOperation(mPath,mShareType,mShareeName,false,"",permissions);
   operation.setGetShareDetails(true);
   RemoteOperationResult result=operation.execute(client);
   if (result.isSuccess()) {

@@ -39,8 +39,9 @@
         String remotePath=operationIntent.getStringExtra(EXTRA_REMOTE_PATH);
         String shareeName=operationIntent.getStringExtra(EXTRA_SHARE_WITH);
         ShareType shareType=(ShareType)operationIntent.getSerializableExtra(EXTRA_SHARE_TYPE);
+        int permissions=operationIntent.getIntExtra(EXTRA_SHARE_PERMISSIONS,-1);
         if (remotePath.length() > 0) {
-          operation=new CreateShareWithShareeOperation(remotePath,shareeName,shareType);
+          operation=new CreateShareWithShareeOperation(remotePath,shareeName,shareType,permissions);
         }
       }
  else       if (action.equals(ACTION_UNSHARE)) {

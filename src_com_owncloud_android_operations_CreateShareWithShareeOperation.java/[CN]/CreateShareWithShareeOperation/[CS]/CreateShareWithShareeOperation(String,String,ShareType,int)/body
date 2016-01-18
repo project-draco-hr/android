@@ -5,4 +5,5 @@
   mPath=path;
   mShareeName=shareeName;
   mShareType=shareType;
+  mPermissions=permissions;
 }
