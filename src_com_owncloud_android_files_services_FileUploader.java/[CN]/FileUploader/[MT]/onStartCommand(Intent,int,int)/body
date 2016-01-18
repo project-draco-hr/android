@@ -71,7 +71,7 @@
   UploadFileOperation newUpload=null;
   try {
     for (int i=0; i < files.length; i++) {
-      newUpload=new UploadFileOperation(account,files[i],chunked,forceOverwrite,FileUploadService.LocalBehaviour.values()[localAction],getApplicationContext());
+      newUpload=new UploadFileOperation(account,files[i],chunked,forceOverwrite,localAction,getApplicationContext());
       if (isInstant) {
         newUpload.setRemoteFolderToBeCreated();
       }

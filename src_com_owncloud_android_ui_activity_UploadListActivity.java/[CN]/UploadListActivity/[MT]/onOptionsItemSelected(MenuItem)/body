@@ -9,10 +9,6 @@ case android.R.id.home:
       mDrawerLayout.openDrawer(GravityCompat.START);
     }
   break;
-case R.id.action_retry_uploads:
-Log_OC.d(TAG,"FileUploadService.retry() called by onMenuItemSelected()");
-FileUploadService.retry(this);
-break;
 case R.id.action_clear_failed_uploads:
 UploadsStorageManager usm=new UploadsStorageManager(getContentResolver());
 usm.clearFailedUploads();

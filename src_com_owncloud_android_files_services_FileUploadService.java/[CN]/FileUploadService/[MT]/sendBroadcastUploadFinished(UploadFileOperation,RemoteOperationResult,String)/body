@@ -10,5 +10,6 @@
   if (unlinkedFromRemotePath != null) {
     end.putExtra(EXTRA_LINKED_TO_PATH,unlinkedFromRemotePath);
   }
+  updateDatabaseUploadResult(uploadResult,mCurrentUpload);
   sendStickyBroadcast(end);
 }

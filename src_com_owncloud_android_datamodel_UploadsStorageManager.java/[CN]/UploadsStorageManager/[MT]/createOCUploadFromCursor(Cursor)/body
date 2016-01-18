@@ -7,7 +7,7 @@
     upload.setUploadId(c.getLong(c.getColumnIndex(ProviderTableMeta._ID)));
     upload.setUploadStatus(UploadStatus.fromValue(c.getInt(c.getColumnIndex(ProviderTableMeta.UPLOADS_STATUS))));
     upload.setAccountName(c.getString(c.getColumnIndex(ProviderTableMeta.UPLOADS_ACCOUNT_NAME)));
-    upload.setLocalAction(FileUploadService.LocalBehaviour.fromValue(c.getInt(c.getColumnIndex((ProviderTableMeta.UPLOADS_LOCAL_BEHAVIOUR)))));
+    upload.setLocalAction(c.getInt(c.getColumnIndex((ProviderTableMeta.UPLOADS_LOCAL_BEHAVIOUR))));
     upload.setForceOverwrite(c.getInt(c.getColumnIndex(ProviderTableMeta.UPLOADS_FORCE_OVERWRITE)) == 1);
     upload.setCreateRemoteFolder(c.getInt(c.getColumnIndex(ProviderTableMeta.UPLOADS_IS_CREATE_REMOTE_FOLDER)) == 1);
     upload.setWhileChargingOnly(c.getInt(c.getColumnIndex(ProviderTableMeta.UPLOADS_IS_WHILE_CHARGING_ONLY)) == 1);

@@ -9,8 +9,6 @@
   mBinder=new FileUploaderBinder();
   mUploadsStorageManager=new UploadsStorageManager(getContentResolver());
   mUploadsStorageManager.setAllCurrentToUploadLater();
-  Log_OC.d(TAG,"FileUploadService.retry() called by onCreate()");
-  FileUploadService.retry(getApplicationContext());
   AccountManager am=AccountManager.get(getApplicationContext());
   am.addOnAccountsUpdatedListener(this,null,false);
 }

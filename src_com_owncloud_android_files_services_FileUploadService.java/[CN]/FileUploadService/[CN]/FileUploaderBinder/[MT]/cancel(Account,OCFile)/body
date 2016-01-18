@@ -5,24 +5,17 @@
     upload.cancel();
   }
  else {
-    if (mCurrentUpload != null && mCurrentAccount != null && mCurrentUpload.getRemotePath().startsWith(file.getRemotePath()) && account.name.equals(mCurrentAccount.name)) {
+    if (mCurrentUpload != null && mCurrentUpload.isUploadInProgress() && mCurrentUpload.getRemotePath().startsWith(file.getRemotePath()) && account.name.equals(mCurrentAccount.name)) {
+      Log_OC.d(TAG,"Calling cancel for " + file.getRemotePath() + " during upload operation.");
       mCurrentUpload.cancel();
     }
-  }
-  if (mCurrentUpload != null && mCurrentUpload.isUploadInProgress()) {
-    Log_OC.d(TAG,"Calling cancel for " + file.getRemotePath() + " during upload operation.");
-    mCurrentUpload.cancel();
-  }
- else   if (mCancellationPossible.get()) {
-    Log_OC.d(TAG,"Calling cancel for " + file.getRemotePath() + " during preparing for upload.");
-    mCancellationRequested.set(true);
-  }
  else {
-    Log_OC.d(TAG,"Calling cancel for " + file.getRemotePath() + " while upload is pending.");
-    OCUpload ocUpload=mUploadsStorageManager.getUploadByLocalPath(upload.getStoragePath())[0];
-    ocUpload.setUploadStatus(UploadStatus.UPLOAD_CANCELLED);
-    ocUpload.setLastResult(UploadResult.CANCELLED);
-    ocUpload.getOCFile().setStoragePath(file.getStoragePath());
-    mUploadsStorageManager.updateUploadStatus(ocUpload);
+      Log_OC.d(TAG,"Calling cancel for " + file.getRemotePath() + " while upload is pending.");
+      OCUpload ocUpload=mUploadsStorageManager.getUploadByLocalPath(upload.getStoragePath())[0];
+      ocUpload.setUploadStatus(UploadStatus.UPLOAD_CANCELLED);
+      ocUpload.setLastResult(UploadResult.CANCELLED);
+      ocUpload.getOCFile().setStoragePath(file.getStoragePath());
+      mUploadsStorageManager.updateUploadStatus(ocUpload);
+    }
   }
 }

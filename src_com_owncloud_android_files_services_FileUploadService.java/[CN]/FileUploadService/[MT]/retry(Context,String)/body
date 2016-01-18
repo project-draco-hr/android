@@ -1,9 +1,0 @@
-{
-  Log_OC.d(TAG,"FileUploadService.retry()");
-  Intent i=new Intent(context,FileUploadService.class);
-  i.putExtra(FileUploadService.KEY_RETRY,true);
-  if (remotePath != null) {
-    i.putExtra(FileUploadService.KEY_RETRY_REMOTE_PATH,remotePath);
-  }
-  context.startService(i);
-}

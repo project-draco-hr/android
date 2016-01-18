@@ -3,6 +3,8 @@
   if (mCurrentUpload != null) {
     if (AccountUtils.exists(mCurrentUpload.getAccount(),getApplicationContext())) {
       Log_OC.d(TAG,"Account " + mCurrentUpload.getAccount().name + " exists");
+      mCurrentUpload.addDatatransferProgressListener((FileUploaderBinder)mBinder);
+      mCurrentUpload.addDatatransferProgressListener(this);
       notifyUploadStart(mCurrentUpload);
       RemoteOperationResult uploadResult=null, grantResult;
       try {

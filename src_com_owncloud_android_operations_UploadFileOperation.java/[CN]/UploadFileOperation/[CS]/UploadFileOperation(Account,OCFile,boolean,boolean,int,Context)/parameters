@@ -2,5 +2,5 @@ Account account
 OCFile file
 boolean chunked
 boolean forceOverwrite
-LocalBehaviour localBehaviour
+int localBehaviour
 Context context

@@ -1,4 +1,0 @@
-{
-  String uploadKey=buildRemoteName(upload);
-  FileUploadService.retry(getApplicationContext(),uploadKey);
-}

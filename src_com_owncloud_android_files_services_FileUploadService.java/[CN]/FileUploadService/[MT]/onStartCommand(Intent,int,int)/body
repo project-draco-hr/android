@@ -42,7 +42,6 @@
   boolean isCreateRemoteFolder=intent.getBooleanExtra(KEY_CREATE_REMOTE_FOLDER,false);
   boolean isUseWifiOnly=intent.getBooleanExtra(KEY_WIFI_ONLY,true);
   boolean isWhileChargingOnly=intent.getBooleanExtra(KEY_WHILE_CHARGING_ONLY,false);
-  long uploadTimestamp=intent.getLongExtra(KEY_UPLOAD_TIMESTAMP,-1);
   if (intent.hasExtra(KEY_FILE) && files == null) {
     Log_OC.e(TAG,"Incorrect array for OCFiles provided in upload intent");
     return Service.START_NOT_STICKY;
@@ -78,7 +77,7 @@
   UploadFileOperation newUpload=null;
   try {
     for (int i=0; i < files.length; i++) {
-      newUpload=new UploadFileOperation(account,files[i],chunked,forceOverwrite,FileUploadService.LocalBehaviour.values()[localAction],getApplicationContext());
+      newUpload=new UploadFileOperation(account,files[i],chunked,forceOverwrite,localAction,getApplicationContext());
       if (isInstant) {
         newUpload.setRemoteFolderToBeCreated();
       }
@@ -92,11 +91,10 @@
         ocUpload.setAccountName(account.name);
         ocUpload.setForceOverwrite(forceOverwrite);
         ocUpload.setCreateRemoteFolder(isCreateRemoteFolder);
-        ocUpload.setLocalAction(LocalBehaviour.fromValue(localAction));
+        ocUpload.setLocalAction(localAction);
         ocUpload.setUseWifiOnly(isUseWifiOnly);
         ocUpload.setWhileChargingOnly(isWhileChargingOnly);
-        ocUpload.setUploadTimestamp(uploadTimestamp);
-        ocUpload.setUploadStatus(UploadStatus.UPLOAD_IN_PROGRESS);
+        ocUpload.setUploadStatus(UploadStatus.UPLOAD_LATER);
         ocUpload.getOCFile().setStoragePath(localPaths[i]);
         mUploadsStorageManager.storeUpload(ocUpload);
       }

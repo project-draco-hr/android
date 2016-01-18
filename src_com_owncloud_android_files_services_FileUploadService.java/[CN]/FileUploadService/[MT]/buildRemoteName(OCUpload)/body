@@ -1,3 +1,0 @@
-{
-  return OCUpload.getAccountName() + OCUpload.getRemotePath();
-}
