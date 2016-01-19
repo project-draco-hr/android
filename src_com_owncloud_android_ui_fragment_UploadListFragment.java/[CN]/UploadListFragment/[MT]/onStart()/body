@@ -1,0 +1,6 @@
+{
+  Log_OC.d(TAG,"onStart() start");
+  super.onStart();
+  mAdapter=new ExpandableUploadListAdapter((FileActivity)getActivity());
+  setListAdapter(mAdapter);
+}

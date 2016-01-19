@@ -15,7 +15,7 @@ case R.id.action_remove_upload:
 case R.id.action_see_details:
 {
 Intent showDetailsIntent=new Intent(getActivity(),FileDisplayActivity.class);
-showDetailsIntent.putExtra(FileActivity.EXTRA_FILE,(Parcelable)uploadFile.getOCFile());
+showDetailsIntent.putExtra(FileActivity.EXTRA_FILE,uploadFile.getOCFile());
 showDetailsIntent.putExtra(FileActivity.EXTRA_ACCOUNT,uploadFile.getAccount(getActivity()));
 startActivity(showDetailsIntent);
 return true;

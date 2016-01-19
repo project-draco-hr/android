@@ -4,6 +4,7 @@
     LayoutInflater inflator=(LayoutInflater)mParentActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     view=inflator.inflate(R.layout.upload_list_item,null);
   }
+  view.invalidate();
   if (uploadsItems != null && uploadsItems.length > position) {
     final OCUpload upload=uploadsItems[position];
     TextView fileName=(TextView)view.findViewById(R.id.upload_name);

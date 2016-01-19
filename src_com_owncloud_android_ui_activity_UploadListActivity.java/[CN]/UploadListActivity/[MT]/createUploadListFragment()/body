@@ -1,0 +1,6 @@
+{
+  UploadListFragment uploadList=new UploadListFragment();
+  FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
+  transaction.add(R.id.upload_list_fragment,uploadList,TAG_UPLOAD_LIST_FRAGMENT);
+  transaction.commit();
+}

@@ -4,8 +4,8 @@
   listView.setGroupIndicator(null);
   UploadGroup group=(UploadGroup)getGroup(groupPosition);
   if (convertView == null) {
-    LayoutInflater infalInflater=(LayoutInflater)mParentActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    convertView=infalInflater.inflate(R.layout.upload_list_group,null);
+    LayoutInflater inflaInflater=(LayoutInflater)mParentActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    convertView=inflaInflater.inflate(R.layout.upload_list_group,null);
   }
   TextView tv=(TextView)convertView.findViewById(R.id.uploadListGroupName);
   tv.setText(group.getGroupName());
