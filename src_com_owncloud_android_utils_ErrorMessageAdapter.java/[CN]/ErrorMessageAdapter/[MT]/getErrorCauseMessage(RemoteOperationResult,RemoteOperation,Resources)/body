@@ -112,7 +112,7 @@
       message=res.getString(R.string.unshare_link_file_error);
     }
   }
- else   if (operation instanceof UpdateShareViaLinkOperation) {
+ else   if (operation instanceof UpdateShareViaLinkOperation || operation instanceof UpdateSharePermissionsOperation) {
     if (result.getData() != null && result.getData().size() > 0) {
       message=(String)result.getData().get(0);
     }
