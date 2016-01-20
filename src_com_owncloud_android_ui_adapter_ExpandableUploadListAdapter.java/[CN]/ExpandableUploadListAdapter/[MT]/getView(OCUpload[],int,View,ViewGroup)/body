@@ -85,7 +85,7 @@ mCurrentUpload=null;
 statusView.setText(status);
 ImageButton rightButton=(ImageButton)view.findViewById(R.id.upload_right_button);
 if (upload.userCanRetryUpload() && upload.getUploadStatus() != UploadStatus.UPLOAD_SUCCEEDED) {
-rightButton.setImageResource(R.drawable.ic_action_refresh_grey);
+rightButton.setImageResource(R.drawable.ic_refresh);
 rightButton.setOnClickListener(new OnClickListener(){
 @Override public void onClick(View v){
 }
