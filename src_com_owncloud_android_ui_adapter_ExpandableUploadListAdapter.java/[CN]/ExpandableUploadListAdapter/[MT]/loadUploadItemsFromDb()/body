@@ -3,10 +3,5 @@
   for (  UploadGroup group : mUploadGroups) {
     group.refresh();
   }
-  mParentActivity.runOnUiThread(new Runnable(){
-    @Override public void run(){
-      notifyDataSetChanged();
-    }
-  }
-);
+  notifyDataSetChanged();
 }

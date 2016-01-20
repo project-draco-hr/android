@@ -1,8 +1,8 @@
 {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.upload_list_layout);
-  createUploadListFragment();
   initDrawer();
+  createUploadListFragment();
   getSupportActionBar().setHomeButtonEnabled(true);
   mDrawerToggle.setDrawerIndicatorEnabled(true);
   getSupportActionBar().setDisplayHomeAsUpEnabled(true);

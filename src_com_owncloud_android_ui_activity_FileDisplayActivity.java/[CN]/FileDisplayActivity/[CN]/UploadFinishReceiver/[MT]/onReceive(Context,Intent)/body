@@ -1,6 +1,6 @@
 {
   try {
-    String uploadedRemotePath=intent.getStringExtra(FileDownloader.EXTRA_REMOTE_PATH);
+    String uploadedRemotePath=intent.getStringExtra(FileUploadService.EXTRA_REMOTE_PATH);
     String accountName=intent.getStringExtra(FileUploadService.ACCOUNT_NAME);
     boolean sameAccount=getAccount() != null && accountName.equals(getAccount().name);
     OCFile currentDir=getCurrentDir();
