@@ -22,6 +22,9 @@
     }
     @Override public boolean onCreateActionMode(    ActionMode mode,    Menu menu){
       this.menu=menu;
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        getActivity().getWindow().setStatusBarColor(mStatusBarColorActionMode);
+      }
       return true;
     }
     @Override public boolean onPrepareActionMode(    ActionMode mode,    Menu menu){
@@ -32,6 +35,9 @@
     }
     @Override public void onDestroyActionMode(    ActionMode mode){
       mAdapter.removeSelection();
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        getActivity().getWindow().setStatusBarColor(mStatusBarColor);
+      }
     }
   }
 );
