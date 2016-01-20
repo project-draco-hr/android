@@ -1,6 +1,6 @@
 {
   if (getFile().isSharedWithMe()) {
-    return -1;
+    return OCShare.READ_PERMISSION_FLAG;
   }
  else   if (getFile().isFolder()) {
     return OCShare.MAXIMUM_PERMISSIONS_FOR_FOLDER;
