@@ -1,0 +1,19 @@
+{
+  if (enable && mOnPrivilegeChangeListener == null) {
+    mOnPrivilegeChangeListener=new OnPrivilegeChangeListener();
+  }
+  CompoundButton.OnCheckedChangeListener changeListener=enable ? mOnPrivilegeChangeListener : null;
+  CompoundButton compound;
+  compound=(CompoundButton)editShareView.findViewById(R.id.canShareSwitch);
+  compound.setOnCheckedChangeListener(changeListener);
+  compound=(CompoundButton)editShareView.findViewById(R.id.canEditSwitch);
+  compound.setOnCheckedChangeListener(changeListener);
+  if (mFile.isFolder()) {
+    compound=(CompoundButton)editShareView.findViewById(R.id.canEditCreateCheckBox);
+    compound.setOnCheckedChangeListener(changeListener);
+    compound=(CompoundButton)editShareView.findViewById(R.id.canEditChangeCheckBox);
+    compound.setOnCheckedChangeListener(changeListener);
+    compound=(CompoundButton)editShareView.findViewById(R.id.canEditDeleteCheckBox);
+    compound.setOnCheckedChangeListener(changeListener);
+  }
+}

@@ -1,9 +1,0 @@
-{
-  TextView unshareButton=(TextView)editShareView.findViewById(R.id.unshareButton);
-  unshareButton.setOnClickListener(new View.OnClickListener(){
-    @Override public void onClick(    View v){
-      ((FileActivity)getActivity()).getFileOperationsHelper().unshareFileWithUserOrGroup(mFile,mShare.getShareType(),mShare.getShareWith());
-    }
-  }
-);
-}

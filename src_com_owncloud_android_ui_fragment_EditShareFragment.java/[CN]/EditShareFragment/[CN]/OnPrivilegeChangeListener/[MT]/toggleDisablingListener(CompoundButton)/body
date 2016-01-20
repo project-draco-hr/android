@@ -1,5 +1,5 @@
 {
   compound.setOnCheckedChangeListener(null);
   compound.toggle();
-  compound.setOnCheckedChangeListener(mOnPrivilegeChangeListener);
+  compound.setOnCheckedChangeListener(this);
 }

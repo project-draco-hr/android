@@ -17,7 +17,7 @@
   if (operation instanceof UnshareOperation && result.isSuccess() && getEditShareFragment() != null) {
     getSupportFragmentManager().popBackStack();
   }
-  if (operation instanceof UpdateSharePermissionsOperation && getEditShareFragment() != null) {
+  if (operation instanceof UpdateSharePermissionsOperation && getEditShareFragment() != null && getEditShareFragment().isAdded()) {
     getEditShareFragment().onUpdateSharePermissionsFinished(result);
   }
 }

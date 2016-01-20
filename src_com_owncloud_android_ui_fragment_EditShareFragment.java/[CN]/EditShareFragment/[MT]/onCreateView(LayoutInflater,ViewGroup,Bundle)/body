@@ -1,8 +1,7 @@
 {
   Log_OC.d(TAG,"onCreateView");
   View view=inflater.inflate(R.layout.edit_share_layout,container,false);
-  initPermissions(view);
-  initUnshareButton(view);
-  initDoneButton(view);
+  refreshUiFromState(view);
+  setPermissionsListening(view,true);
   return view;
 }

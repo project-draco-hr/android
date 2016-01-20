@@ -1,10 +1,8 @@
 {
   if (result.isSuccess()) {
-    getFragmentManager().popBackStack();
+    refreshUiFromDB(getView());
   }
  else {
-    if (getView() != null) {
-      initPermissions(getView());
-    }
+    refreshUiFromState(getView());
   }
 }
