@@ -19,5 +19,4 @@
   if (mAccountSelected) {
     setAccount((Account)savedInstanceState.getParcelable(FileActivity.EXTRA_ACCOUNT));
   }
-  mProgressBar=(ProgressBar)findViewById(R.id.progressBar);
 }

@@ -53,7 +53,6 @@
       }
       removeStickyBroadcast(intent);
       Log_OC.d(TAG,"Setting progress visibility to " + mSyncInProgress);
-      mProgressBar.setIndeterminate(mSyncInProgress);
     }
   }
  catch (  RuntimeException e) {
