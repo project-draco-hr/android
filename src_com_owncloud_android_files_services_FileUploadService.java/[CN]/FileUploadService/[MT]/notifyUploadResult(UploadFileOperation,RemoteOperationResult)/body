@@ -20,6 +20,7 @@
  else {
       mNotificationBuilder.setContentText(content);
     }
+    updateDatabaseUploadResult(uploadResult,mCurrentUpload);
     if (!uploadResult.isSuccess()) {
       Intent showUploadListIntent=new Intent(this,UploadListActivity.class);
       showUploadListIntent.putExtra(FileActivity.EXTRA_FILE,upload.getFile());
@@ -31,7 +32,6 @@
     mNotificationManager.notify(tickerId,mNotificationBuilder.build());
     if (uploadResult.isSuccess()) {
       mPendingUploads.remove(upload.getAccount(),upload.getFile().getRemotePath());
-      updateDatabaseUploadResult(uploadResult,mCurrentUpload);
       NotificationDelayer.cancelWithDelay(mNotificationManager,R.string.uploader_upload_succeeded_ticker,2000);
     }
   }

@@ -8,6 +8,12 @@
       mUploadsStorageManager.updateUploadStatus(upload.getOriginalStoragePath(),UploadStatus.UPLOAD_SUCCEEDED,UploadResult.UPLOADED);
     }
  else {
+      if (shouldRetryFailedUpload(uploadResult)) {
+        mUploadsStorageManager.updateUploadStatus(upload.getOriginalStoragePath(),UploadStatus.UPLOAD_FAILED_RETRY,UploadResult.fromOperationResult(uploadResult));
+      }
+ else {
+        mUploadsStorageManager.updateUploadStatus(upload.getOriginalStoragePath(),UploadsStorageManager.UploadStatus.UPLOAD_FAILED_GIVE_UP,UploadResult.fromOperationResult(uploadResult));
+      }
     }
   }
 }

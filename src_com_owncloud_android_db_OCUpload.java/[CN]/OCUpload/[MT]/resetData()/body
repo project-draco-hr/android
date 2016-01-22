@@ -9,5 +9,5 @@
   mUploadTimestamp=-1;
   mAccountName="";
   mUploadStatus=UploadStatus.UPLOAD_LATER;
-  mLastResult=UploadResult.UPLOADED;
+  mLastResult=UploadResult.UNKNOWN;
 }

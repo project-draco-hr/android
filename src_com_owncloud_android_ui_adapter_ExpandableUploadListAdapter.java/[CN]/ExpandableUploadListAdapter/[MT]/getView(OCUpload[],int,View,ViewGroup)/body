@@ -42,12 +42,7 @@ status="Upload failed.";
 }
 break;
 case UPLOAD_FAILED_RETRY:
-if (upload.getLastResult() != null) {
-status="Last failure: " + upload.getLastResult().toString();
-}
- else {
 status="Upload will be retried shortly.";
-}
 String laterReason=FileUploadService.getUploadLaterReason(mParentActivity,upload);
 if (laterReason != null) {
 status+="\n" + laterReason;

@@ -3,6 +3,7 @@
   ContentValues cv=new ContentValues();
   cv.put(ProviderTableMeta.UPLOADS_PATH,ocUpload.getLocalPath());
   cv.put(ProviderTableMeta.UPLOADS_STATUS,ocUpload.getUploadStatus().value);
+  cv.put(ProviderTableMeta.UPLOADS_LAST_RESULT,ocUpload.getLastResult().getValue());
   int result=getDB().update(ProviderTableMeta.CONTENT_URI_UPLOADS,cv,ProviderTableMeta.UPLOADS_FILE_ID + "=?",new String[]{String.valueOf(ocUpload.getOCFile().getFileId())});
   Log_OC.d(TAG,"updateUpload returns with: " + result + " for file: "+ ocUpload.getLocalPath());
   if (result != 1) {
