@@ -1,0 +1,13 @@
+{
+  dest.writeLong(mId);
+  dest.writeParcelable(mFile,flags);
+  dest.writeInt(mLocalAction);
+  dest.writeInt(mForceOverwrite ? 1 : 0);
+  dest.writeInt(mIsCreateRemoteFolder ? 1 : 0);
+  dest.writeInt(mIsUseWifiOnly ? 1 : 0);
+  dest.writeInt(mIsWhileChargingOnly ? 1 : 0);
+  dest.writeLong(mUploadTimestamp);
+  dest.writeString(mAccountName);
+  dest.writeString(mUploadStatus.name());
+  dest.writeString(((mLastResult == null) ? "" : mLastResult.name()));
+}

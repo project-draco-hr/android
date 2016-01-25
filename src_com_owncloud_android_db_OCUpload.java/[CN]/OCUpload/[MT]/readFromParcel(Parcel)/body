@@ -1,0 +1,23 @@
+{
+  mId=source.readLong();
+  mFile=source.readParcelable(OCFile.class.getClassLoader());
+  mLocalAction=source.readInt();
+  mForceOverwrite=source.readInt() == 0;
+  mIsCreateRemoteFolder=source.readInt() == 0;
+  mIsUseWifiOnly=source.readInt() == 0;
+  mIsWhileChargingOnly=source.readInt() == 0;
+  mUploadTimestamp=source.readLong();
+  mAccountName=source.readString();
+  try {
+    mUploadStatus=UploadStatus.valueOf(source.readString());
+  }
+ catch (  IllegalArgumentException x) {
+    mUploadStatus=UploadStatus.UPLOAD_LATER;
+  }
+  try {
+    mLastResult=UploadResult.valueOf(source.readString());
+  }
+ catch (  IllegalArgumentException x) {
+    mLastResult=UploadResult.UNKNOWN;
+  }
+}

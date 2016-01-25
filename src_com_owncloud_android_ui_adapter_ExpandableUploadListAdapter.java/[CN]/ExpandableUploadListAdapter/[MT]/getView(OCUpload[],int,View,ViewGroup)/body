@@ -42,7 +42,13 @@ status="Upload failed.";
 }
 break;
 case UPLOAD_FAILED_RETRY:
-status="Upload will be retried shortly.";
+if (upload.getLastResult() == UploadResult.NETWORK_CONNECTION) {
+status=mParentActivity.getString(R.string.uploads_view_upload_status_failed_connection_error);
+}
+ else {
+status=mParentActivity.getString(R.string.uploads_view_upload_status_failed_retry);
+;
+}
 String laterReason=FileUploadService.getUploadLaterReason(mParentActivity,upload);
 if (laterReason != null) {
 status+="\n" + laterReason;
@@ -83,6 +89,8 @@ if (upload.userCanRetryUpload() && upload.getUploadStatus() != UploadStatus.UPLO
 rightButton.setImageResource(R.drawable.ic_refresh);
 rightButton.setOnClickListener(new OnClickListener(){
 @Override public void onClick(View v){
+Log_OC.d(TAG,"Retry unpload CLICK");
+mParentActivity.getFileOperationsHelper().retryUpload(upload);
 }
 }
 );
