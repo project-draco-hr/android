@@ -35,7 +35,8 @@ Log_OC.e(TAG,"PENDING BINDING for upload = " + upload.getLocalPath());
 break;
 case UPLOAD_FAILED_GIVE_UP:
 if (upload.getLastResult() != null) {
-if (upload.getLastResult() == UploadResult.CREDENTIAL_ERROR) {
+switch (upload.getLastResult()) {
+case CREDENTIAL_ERROR:
 status=mParentActivity.getString(R.string.uploads_view_upload_status_failed_credentials_error);
 view.setOnClickListener(new OnClickListener(){
 @Override public void onClick(View v){
@@ -48,12 +49,16 @@ mParentActivity.startActivity(updateAccountCredentials);
 }
 }
 );
-}
- else if (upload.getLastResult() == UploadResult.FOLDER_ERROR) {
+break;
+case FOLDER_ERROR:
 status=mParentActivity.getString(R.string.uploads_view_upload_status_failed_folder_error);
-}
- else {
+break;
+case FILE_ERROR:
+status=mParentActivity.getString(R.string.uploads_view_upload_status_failed_file_error);
+break;
+default :
 status="Upload failed: " + upload.getLastResult().toString();
+break;
 }
 }
  else {
