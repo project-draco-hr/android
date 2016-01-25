@@ -35,7 +35,23 @@ Log_OC.e(TAG,"PENDING BINDING for upload = " + upload.getLocalPath());
 break;
 case UPLOAD_FAILED_GIVE_UP:
 if (upload.getLastResult() != null) {
+if (upload.getLastResult() == UploadResult.CREDENTIAL_ERROR) {
+status=mParentActivity.getString(R.string.uploads_view_upload_status_failed_credentials_error);
+view.setOnClickListener(new OnClickListener(){
+@Override public void onClick(View v){
+Intent updateAccountCredentials=new Intent(mParentActivity,AuthenticatorActivity.class);
+updateAccountCredentials.putExtra(AuthenticatorActivity.EXTRA_ACCOUNT,upload.getAccount(mParentActivity));
+updateAccountCredentials.putExtra(AuthenticatorActivity.EXTRA_ACTION,AuthenticatorActivity.ACTION_UPDATE_EXPIRED_TOKEN);
+updateAccountCredentials.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+updateAccountCredentials.addFlags(Intent.FLAG_FROM_BACKGROUND);
+mParentActivity.startActivity(updateAccountCredentials);
+}
+}
+);
+}
+ else {
 status="Upload failed: " + upload.getLastResult().toString();
+}
 }
  else {
 status="Upload failed.";
@@ -47,7 +63,6 @@ status=mParentActivity.getString(R.string.uploads_view_upload_status_failed_conn
 }
  else {
 status=mParentActivity.getString(R.string.uploads_view_upload_status_failed_retry);
-;
 }
 String laterReason=FileUploadService.getUploadLaterReason(mParentActivity,upload);
 if (laterReason != null) {
@@ -58,13 +73,13 @@ case UPLOAD_LATER:
 status=FileUploadService.getUploadLaterReason(mParentActivity,upload);
 break;
 case UPLOAD_SUCCEEDED:
-status="Completed.";
+status=mParentActivity.getString(R.string.uploads_view_upload_status_succeeded);
 break;
 case UPLOAD_CANCELLED:
-status="Upload cancelled.";
+status=mParentActivity.getString(R.string.uploads_view_upload_status_cancelled);
 break;
 case UPLOAD_PAUSED:
-status="Upload paused.";
+status=mParentActivity.getString(R.string.uploads_view_upload_status_paused);
 break;
 default :
 status=upload.getUploadStatus().toString();
@@ -89,7 +104,6 @@ if (upload.userCanRetryUpload() && upload.getUploadStatus() != UploadStatus.UPLO
 rightButton.setImageResource(R.drawable.ic_refresh);
 rightButton.setOnClickListener(new OnClickListener(){
 @Override public void onClick(View v){
-Log_OC.d(TAG,"Retry unpload CLICK");
 mParentActivity.getFileOperationsHelper().retryUpload(upload);
 }
 }
