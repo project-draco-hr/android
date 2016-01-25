@@ -11,29 +11,14 @@
     compound.setChecked(canEdit);
     if (mFile.isFolder()) {
       compound=(CompoundButton)editShareView.findViewById(R.id.canEditCreateCheckBox);
-      if (canEdit) {
-        compound.setVisibility(View.VISIBLE);
-        compound.setChecked((sharePermissions & OCShare.CREATE_PERMISSION_FLAG) > 0);
-      }
- else {
-        compound.setVisibility(View.GONE);
-      }
+      compound.setChecked((sharePermissions & OCShare.CREATE_PERMISSION_FLAG) > 0);
+      compound.setVisibility(canEdit ? View.VISIBLE : View.GONE);
       compound=(CompoundButton)editShareView.findViewById(R.id.canEditChangeCheckBox);
-      if (canEdit) {
-        compound.setVisibility(View.VISIBLE);
-        compound.setChecked((sharePermissions & OCShare.UPDATE_PERMISSION_FLAG) > 0);
-      }
- else {
-        compound.setVisibility(View.GONE);
-      }
+      compound.setChecked((sharePermissions & OCShare.UPDATE_PERMISSION_FLAG) > 0);
+      compound.setVisibility(canEdit ? View.VISIBLE : View.GONE);
       compound=(CompoundButton)editShareView.findViewById(R.id.canEditDeleteCheckBox);
-      if (canEdit) {
-        compound.setVisibility(View.VISIBLE);
-        compound.setChecked((sharePermissions & OCShare.DELETE_PERMISSION_FLAG) > 0);
-      }
- else {
-        compound.setVisibility(View.GONE);
-      }
+      compound.setChecked((sharePermissions & OCShare.DELETE_PERMISSION_FLAG) > 0);
+      compound.setVisibility(canEdit ? View.VISIBLE : View.GONE);
     }
     setPermissionsListening(editShareView,true);
   }
