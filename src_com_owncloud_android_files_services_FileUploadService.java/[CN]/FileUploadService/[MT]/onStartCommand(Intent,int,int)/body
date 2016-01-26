@@ -97,7 +97,6 @@
           ocUpload.setUseWifiOnly(isUseWifiOnly);
           ocUpload.setWhileChargingOnly(isWhileChargingOnly);
           ocUpload.setUploadStatus(UploadStatus.UPLOAD_LATER);
-          ocUpload.getOCFile().setStoragePath(localPaths[i]);
           long id=mUploadsStorageManager.storeUpload(ocUpload);
           newUpload.setOCUploadId(id);
           Pair<String,String> putResult=mPendingUploads.putIfAbsent(account,files[i].getRemotePath(),newUpload,String.valueOf(id));
