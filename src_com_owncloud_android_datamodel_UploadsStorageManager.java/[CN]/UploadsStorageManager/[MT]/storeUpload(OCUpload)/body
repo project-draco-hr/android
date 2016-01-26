@@ -14,10 +14,12 @@
   Log_OC.d(TAG,"storeUpload returns with: " + result + " for file: "+ ocUpload.getLocalPath());
   if (result == null) {
     Log_OC.e(TAG,"Failed to insert item " + ocUpload.getLocalPath() + " into upload db.");
-    return false;
+    return -1;
   }
  else {
+    long new_id=Long.parseLong(result.getPathSegments().get(1));
+    ocUpload.setUploadId(new_id);
     notifyObserversNow();
-    return true;
+    return new_id;
   }
 }

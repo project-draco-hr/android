@@ -40,6 +40,7 @@
         Pair<UploadFileOperation,String> removeResult;
         if (mCurrentUpload.wasRenamed()) {
           removeResult=mPendingUploads.removePayload(mCurrentAccount,mCurrentUpload.getOldFile().getRemotePath());
+          mUploadsStorageManager.updateFileIdUpload(mCurrentUpload.getOCUploadId(),mCurrentUpload.getFile().getFileId());
         }
  else {
           removeResult=mPendingUploads.removePayload(mCurrentAccount,mCurrentUpload.getRemotePath());

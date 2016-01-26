@@ -1,5 +1,9 @@
 {
-  String key=buildRemoteName(mCurrentUpload.getAccount(),mCurrentUpload.getFile());
+  OCFile uploadFileKey=mCurrentUpload.getFile();
+  if (mCurrentUpload.wasRenamed()) {
+    uploadFileKey=mCurrentUpload.getOldFile();
+  }
+  String key=buildRemoteName(mCurrentUpload.getAccount(),uploadFileKey,mCurrentUpload.getOCUploadId());
   OnDatatransferProgressListener boundListener=mBoundListeners.get(key);
   if (boundListener != null) {
     boundListener.onTransferProgress(progressRate,totalTransferredSoFar,totalToTransfer,fileName);

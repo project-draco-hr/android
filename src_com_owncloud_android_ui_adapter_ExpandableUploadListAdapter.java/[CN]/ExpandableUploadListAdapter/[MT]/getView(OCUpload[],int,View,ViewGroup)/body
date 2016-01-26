@@ -12,7 +12,8 @@
     fileTextView.setText(fileName);
     TextView localPath=(TextView)view.findViewById(R.id.upload_local_path);
     String path=uploadOCFile.getStoragePath();
-    path=path == null ? "" : path.substring(0,path.length() - fileName.length() - 1);
+    Log_OC.d(TAG,"PATH: " + path);
+    path=(path == null || path.isEmpty()) ? "" : path.substring(0,path.length() - fileName.length() - 1);
     localPath.setText("Path: " + path);
     TextView fileSize=(TextView)view.findViewById(R.id.upload_file_size);
     fileSize.setText(DisplayUtils.bytesToHumanReadable(uploadOCFile.getFileLength()));
@@ -26,7 +27,7 @@ case UPLOAD_IN_PROGRESS:
 progressBar.setVisibility(View.VISIBLE);
 mProgressListener=new ProgressListener(progressBar);
 if (mParentActivity.getFileUploaderBinder() != null) {
-mParentActivity.getFileUploaderBinder().addDatatransferProgressListener(mProgressListener,mParentActivity.getAccount(),uploadOCFile);
+mParentActivity.getFileUploaderBinder().addDatatransferProgressListener(mProgressListener,mParentActivity.getAccount(),uploadOCFile,upload.getUploadId());
 }
  else {
 Log_OC.e(TAG,"UploadBinder == null. It should have been created on creating mParentActivity" + " which inherits from FileActivity. Fix that!");
@@ -60,12 +61,13 @@ case PRIVILEDGES_ERROR:
 status=mParentActivity.getString(R.string.uploads_view_upload_status_failed_priviledges_error);
 break;
 default :
-status="Upload failed: " + upload.getLastResult().toString();
+status=mParentActivity.getString(R.string.uploads_view_upload_status_failed) + ": " + upload.getLastResult().toString();
 break;
 }
 }
  else {
-status="Upload failed.";
+status=mParentActivity.getString(R.string.uploads_view_upload_status_failed);
+;
 }
 break;
 case UPLOAD_FAILED_RETRY:
@@ -104,7 +106,7 @@ ProgressBar progressBar=(ProgressBar)view.findViewById(R.id.upload_progress_bar)
 progressBar.setVisibility(View.GONE);
 if (mParentActivity.getFileUploaderBinder() != null && mProgressListener != null && mCurrentUpload != null) {
 OCFile currentOcFile=mCurrentUpload.getFile();
-mParentActivity.getFileUploaderBinder().removeDatatransferProgressListener(mProgressListener,upload.getAccount(mParentActivity),currentOcFile);
+mParentActivity.getFileUploaderBinder().removeDatatransferProgressListener(mProgressListener,upload.getAccount(mParentActivity),currentOcFile,upload.getUploadId());
 mProgressListener=null;
 mCurrentUpload=null;
 }

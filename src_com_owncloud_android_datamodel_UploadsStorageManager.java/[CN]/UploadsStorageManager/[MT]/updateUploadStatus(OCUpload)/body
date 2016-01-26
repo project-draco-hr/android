@@ -1,3 +1,3 @@
 {
-  return updateUploadStatus(ocUpload.getLocalPath(),ocUpload.getUploadStatus(),ocUpload.getLastResult());
+  return updateUploadStatus(ocUpload.getUploadId(),ocUpload.getUploadStatus(),ocUpload.getLastResult());
 }

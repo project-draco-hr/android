@@ -89,20 +89,24 @@
           }
           newUpload.addDatatransferProgressListener(this);
           newUpload.addDatatransferProgressListener((FileUploaderBinder)mBinder);
-          Pair<String,String> putResult=mPendingUploads.putIfAbsent(account,files[i].getRemotePath(),newUpload);
+          OCUpload ocUpload=new OCUpload(files[i]);
+          ocUpload.setAccountName(account.name);
+          ocUpload.setForceOverwrite(forceOverwrite);
+          ocUpload.setCreateRemoteFolder(isCreateRemoteFolder);
+          ocUpload.setLocalAction(localAction);
+          ocUpload.setUseWifiOnly(isUseWifiOnly);
+          ocUpload.setWhileChargingOnly(isWhileChargingOnly);
+          ocUpload.setUploadStatus(UploadStatus.UPLOAD_LATER);
+          ocUpload.getOCFile().setStoragePath(localPaths[i]);
+          long id=mUploadsStorageManager.storeUpload(ocUpload);
+          newUpload.setOCUploadId(id);
+          Pair<String,String> putResult=mPendingUploads.putIfAbsent(account,files[i].getRemotePath(),newUpload,String.valueOf(id));
           if (putResult != null) {
             uploadKey=putResult.first;
             requestedUploads.add(uploadKey);
-            OCUpload ocUpload=new OCUpload(files[i]);
-            ocUpload.setAccountName(account.name);
-            ocUpload.setForceOverwrite(forceOverwrite);
-            ocUpload.setCreateRemoteFolder(isCreateRemoteFolder);
-            ocUpload.setLocalAction(localAction);
-            ocUpload.setUseWifiOnly(isUseWifiOnly);
-            ocUpload.setWhileChargingOnly(isWhileChargingOnly);
-            ocUpload.setUploadStatus(UploadStatus.UPLOAD_LATER);
-            ocUpload.getOCFile().setStoragePath(localPaths[i]);
-            mUploadsStorageManager.storeUpload(ocUpload);
+          }
+ else {
+            mUploadsStorageManager.removeUpload(id);
           }
         }
       }
@@ -131,7 +135,8 @@ catch (      Exception e) {
       }
       newUpload.addDatatransferProgressListener(this);
       newUpload.addDatatransferProgressListener((FileUploaderBinder)mBinder);
-      Pair<String,String> putResult=mPendingUploads.putIfAbsent(account,upload.getOCFile().getRemotePath(),newUpload);
+      newUpload.setOCUploadId(upload.getUploadId());
+      Pair<String,String> putResult=mPendingUploads.putIfAbsent(account,upload.getOCFile().getRemotePath(),newUpload,String.valueOf(upload.getUploadId()));
       if (putResult != null) {
         String uploadKey=putResult.first;
         requestedUploads.add(uploadKey);

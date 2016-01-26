@@ -1,4 +1,3 @@
 {
-  String uploadKey=buildRemoteName(account,upload.getOCFile());
   FileUploadService.retry(getApplicationContext(),account,upload);
 }
