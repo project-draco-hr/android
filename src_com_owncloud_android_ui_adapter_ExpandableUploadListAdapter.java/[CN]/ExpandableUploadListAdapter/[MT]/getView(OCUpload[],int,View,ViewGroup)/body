@@ -101,6 +101,10 @@ accountNameTextView.setVisibility(View.INVISIBLE);
 uploadDateTextView.setVisibility(View.GONE);
 break;
 case UPLOAD_LATER:
+uploadDateTextView.setVisibility(View.GONE);
+pathTextView.setVisibility(View.GONE);
+fileSizeTextView.setVisibility(View.GONE);
+accountNameTextView.setVisibility(View.INVISIBLE);
 status=FileUploadService.getUploadLaterReason(mParentActivity,upload);
 break;
 case UPLOAD_SUCCEEDED:
