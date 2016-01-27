@@ -162,7 +162,27 @@ mParentActivity.getFileOperationsHelper().removeUploadFromList(upload);
 ImageView fileIcon=(ImageView)view.findViewById(R.id.thumbnail);
 fileIcon.setImageResource(R.drawable.file);
 boolean allowedToCreateNewThumbnail=(ThumbnailsCacheManager.cancelPotentialWork(uploadOCFile,fileIcon));
-if (uploadOCFile.isImage() && uploadOCFile.getStoragePath() != null) {
+if ((uploadOCFile.isImage() && uploadOCFile.getRemoteId() != null && upload.getUploadStatus() == UploadStatus.UPLOAD_SUCCEEDED)) {
+Bitmap thumbnail=ThumbnailsCacheManager.getBitmapFromDiskCache(String.valueOf(uploadOCFile.getRemoteId()));
+if (thumbnail != null && !uploadOCFile.needsUpdateThumbnail()) {
+fileIcon.setImageBitmap(thumbnail);
+}
+ else {
+if (allowedToCreateNewThumbnail) {
+final ThumbnailsCacheManager.ThumbnailGenerationTask task=new ThumbnailsCacheManager.ThumbnailGenerationTask(fileIcon,mParentActivity.getStorageManager(),mParentActivity.getAccount());
+if (thumbnail == null) {
+thumbnail=ThumbnailsCacheManager.mDefaultImg;
+}
+final ThumbnailsCacheManager.AsyncDrawable asyncDrawable=new ThumbnailsCacheManager.AsyncDrawable(mParentActivity.getResources(),thumbnail,task);
+fileIcon.setImageDrawable(asyncDrawable);
+task.execute(uploadOCFile);
+}
+}
+if (uploadOCFile.getMimetype().equalsIgnoreCase("image/png")) {
+fileIcon.setBackgroundColor(mParentActivity.getResources().getColor(R.color.background_color));
+}
+}
+ else if (uploadOCFile.isImage() && uploadOCFile.getStoragePath() != null) {
 File file=new File(uploadOCFile.getStoragePath());
 Bitmap thumbnail=ThumbnailsCacheManager.getBitmapFromDiskCache(String.valueOf(file.hashCode()));
 if (thumbnail != null) {
