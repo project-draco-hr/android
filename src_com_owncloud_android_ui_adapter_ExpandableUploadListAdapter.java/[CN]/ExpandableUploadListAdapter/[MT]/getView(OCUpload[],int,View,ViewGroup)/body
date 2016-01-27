@@ -10,15 +10,24 @@
     TextView fileTextView=(TextView)view.findViewById(R.id.upload_name);
     String fileName=uploadOCFile.getFileName();
     fileTextView.setText(fileName);
-    TextView localPath=(TextView)view.findViewById(R.id.upload_local_path);
-    String path=uploadOCFile.getStoragePath();
-    Log_OC.d(TAG,"PATH: " + path);
+    TextView pathTextView=(TextView)view.findViewById(R.id.upload_local_path);
+    String path=uploadOCFile.getRemotePath();
     path=(path == null || path.isEmpty()) ? "" : path.substring(0,path.length() - fileName.length() - 1);
-    localPath.setText("Path: " + path);
-    TextView fileSize=(TextView)view.findViewById(R.id.upload_file_size);
-    fileSize.setText(DisplayUtils.bytesToHumanReadable(uploadOCFile.getFileLength()));
-    TextView statusView=(TextView)view.findViewById(R.id.upload_status);
+    pathTextView.setText(mParentActivity.getString(R.string.app_name) + path);
+    TextView fileSizeTextView=(TextView)view.findViewById(R.id.upload_file_size);
+    fileSizeTextView.setText(DisplayUtils.bytesToHumanReadable(uploadOCFile.getFileLength()) + ", ");
+    TextView uploadDateTextView=(TextView)view.findViewById(R.id.upload_date);
+    CharSequence dateString=DisplayUtils.getRelativeDateTimeString(mParentActivity,uploadOCFile.getModificationTimestamp(),DateUtils.SECOND_IN_MILLIS,DateUtils.WEEK_IN_MILLIS,0);
+    uploadDateTextView.setText(dateString);
+    TextView accountNameTextView=(TextView)view.findViewById(R.id.upload_account);
+    accountNameTextView.setText(upload.getAccountName());
+    TextView statusTextView=(TextView)view.findViewById(R.id.upload_status);
     String status;
+    uploadDateTextView.setVisibility(View.VISIBLE);
+    pathTextView.setVisibility(View.VISIBLE);
+    fileSizeTextView.setVisibility(View.VISIBLE);
+    accountNameTextView.setVisibility(View.VISIBLE);
+    statusTextView.setVisibility(View.VISIBLE);
 switch (upload.getUploadStatus()) {
 case UPLOAD_IN_PROGRESS:
       status=mParentActivity.getString(R.string.uploader_upload_in_progress_ticker);
@@ -33,8 +42,13 @@ mParentActivity.getFileUploaderBinder().addDatatransferProgressListener(mProgres
 Log_OC.e(TAG,"UploadBinder == null. It should have been created on creating mParentActivity" + " which inherits from FileActivity. Fix that!");
 Log_OC.e(TAG,"PENDING BINDING for upload = " + upload.getLocalPath());
 }
+uploadDateTextView.setVisibility(View.GONE);
+pathTextView.setVisibility(View.GONE);
+fileSizeTextView.setVisibility(View.GONE);
+accountNameTextView.setVisibility(View.INVISIBLE);
 break;
 case UPLOAD_FAILED_GIVE_UP:
+uploadDateTextView.setVisibility(View.GONE);
 if (upload.getLastResult() != null) {
 switch (upload.getLastResult()) {
 case CREDENTIAL_ERROR:
@@ -58,7 +72,7 @@ case FILE_ERROR:
 status=mParentActivity.getString(R.string.uploads_view_upload_status_failed_file_error);
 break;
 case PRIVILEDGES_ERROR:
-status=mParentActivity.getString(R.string.uploads_view_upload_status_failed_priviledges_error);
+status=mParentActivity.getString(R.string.uploads_view_upload_status_failed_permission_error);
 break;
 default :
 status=mParentActivity.getString(R.string.uploads_view_upload_status_failed) + ": " + upload.getLastResult().toString();
@@ -79,14 +93,19 @@ status=mParentActivity.getString(R.string.uploads_view_upload_status_failed_retr
 }
 String laterReason=FileUploadService.getUploadLaterReason(mParentActivity,upload);
 if (laterReason != null) {
-status+="\n" + laterReason;
+status=laterReason;
 }
+pathTextView.setVisibility(View.GONE);
+fileSizeTextView.setVisibility(View.GONE);
+accountNameTextView.setVisibility(View.INVISIBLE);
+uploadDateTextView.setVisibility(View.GONE);
 break;
 case UPLOAD_LATER:
 status=FileUploadService.getUploadLaterReason(mParentActivity,upload);
 break;
 case UPLOAD_SUCCEEDED:
 status=mParentActivity.getString(R.string.uploads_view_upload_status_succeeded);
+statusTextView.setVisibility(View.GONE);
 break;
 case UPLOAD_CANCELLED:
 status=mParentActivity.getString(R.string.uploads_view_upload_status_cancelled);
@@ -111,7 +130,7 @@ mProgressListener=null;
 mCurrentUpload=null;
 }
 }
-statusView.setText(status);
+statusTextView.setText(status);
 ImageButton rightButton=(ImageButton)view.findViewById(R.id.upload_right_button);
 if (upload.userCanRetryUpload() && upload.getUploadStatus() != UploadStatus.UPLOAD_SUCCEEDED) {
 rightButton.setImageResource(R.drawable.ic_refresh);
@@ -168,9 +187,6 @@ fileIcon.setBackgroundColor(mParentActivity.getResources().getColor(R.color.back
  else {
 fileIcon.setImageResource(MimetypeIconUtil.getFileTypeIconId(upload.getMimeType(),uploadOCFile.getFileName()));
 }
-TextView uploadDate=(TextView)view.findViewById(R.id.upload_date);
-CharSequence dateString=DisplayUtils.getRelativeDateTimeString(mParentActivity,upload.getUploadTime().getTimeInMillis(),DateUtils.SECOND_IN_MILLIS,DateUtils.WEEK_IN_MILLIS,0);
-uploadDate.setText(dateString);
 }
 return view;
 }
