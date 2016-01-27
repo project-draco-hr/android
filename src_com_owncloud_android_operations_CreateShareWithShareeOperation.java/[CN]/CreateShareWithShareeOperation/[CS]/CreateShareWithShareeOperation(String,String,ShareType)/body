@@ -1,8 +1,0 @@
-{
-  if (!ShareType.USER.equals(shareType) && !ShareType.GROUP.equals(shareType)) {
-    throw new IllegalArgumentException("Illegal share type " + shareType);
-  }
-  mPath=path;
-  mShareeName=shareeName;
-  mShareType=shareType;
-}

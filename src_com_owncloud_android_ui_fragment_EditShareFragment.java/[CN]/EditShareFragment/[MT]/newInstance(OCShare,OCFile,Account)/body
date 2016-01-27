@@ -1,0 +1,9 @@
+{
+  EditShareFragment fragment=new EditShareFragment();
+  Bundle args=new Bundle();
+  args.putParcelable(ARG_SHARE,shareToEdit);
+  args.putParcelable(ARG_FILE,sharedFile);
+  args.putParcelable(ARG_ACCOUNT,account);
+  fragment.setArguments(args);
+  return fragment;
+}

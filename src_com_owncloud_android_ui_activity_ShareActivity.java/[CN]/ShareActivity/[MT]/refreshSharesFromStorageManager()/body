@@ -9,4 +9,8 @@
   if (searchShareesFragment != null && searchShareesFragment.isAdded()) {
     searchShareesFragment.refreshUsersOrGroupsListFromDB();
   }
+  EditShareFragment editShareFragment=getEditShareFragment();
+  if (editShareFragment != null && editShareFragment.isAdded()) {
+    editShareFragment.refreshUiFromDB();
+  }
 }

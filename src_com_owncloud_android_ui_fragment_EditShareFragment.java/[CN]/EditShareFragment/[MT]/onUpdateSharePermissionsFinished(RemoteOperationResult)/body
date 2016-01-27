@@ -1,0 +1,15 @@
+{
+  if (result.isSuccess()) {
+    refreshUiFromDB(getView());
+  }
+ else   if (result.getCode() == RemoteOperationResult.ResultCode.SHARE_NOT_FOUND) {
+    int backStackCount=getFragmentManager().getBackStackEntryCount();
+    for (int i=0; i < backStackCount; i++) {
+      getFragmentManager().popBackStack();
+    }
+    ((ShareFragmentListener)getActivity()).refreshUsersOrGroupsListFromServer();
+  }
+ else {
+    refreshUiFromState(getView());
+  }
+}
