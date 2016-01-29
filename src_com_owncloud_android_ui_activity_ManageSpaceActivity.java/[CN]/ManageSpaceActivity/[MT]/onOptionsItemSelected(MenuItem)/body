@@ -1,0 +1,12 @@
+{
+  super.onOptionsItemSelected(item);
+switch (item.getItemId()) {
+case android.R.id.home:
+    finish();
+  break;
+default :
+Log_OC.w(TAG,"Unknown menu item triggered");
+return false;
+}
+return true;
+}

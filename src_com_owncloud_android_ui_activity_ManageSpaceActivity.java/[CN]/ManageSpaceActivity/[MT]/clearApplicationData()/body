@@ -1,0 +1,13 @@
+{
+  File cache=getCacheDir();
+  File appDir=new File(cache.getParent());
+  if (appDir.exists()) {
+    String[] children=appDir.list();
+    for (    String s : children) {
+      if (!s.equals("lib")) {
+        deleteDir(new File(appDir,s));
+        Log_OC.i(TAG,"*******File /data/data/" + getString(R.string.app_name) + "/"+ s+ " DELETED *******");
+      }
+    }
+  }
+}

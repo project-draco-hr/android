@@ -1,0 +1,23 @@
+{
+  SharedPreferences appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+  boolean passCodeEnable=appPrefs.getBoolean("set_pincode",false);
+  String passCodeDigits[]=new String[4];
+  if (passCodeEnable) {
+    passCodeDigits[0]=appPrefs.getString("PrefPinCode1",null);
+    passCodeDigits[1]=appPrefs.getString("PrefPinCode2",null);
+    passCodeDigits[2]=appPrefs.getString("PrefPinCode3",null);
+    passCodeDigits[3]=appPrefs.getString("PrefPinCode4",null);
+  }
+  clearApplicationData();
+  SharedPreferences.Editor appPrefsEditor=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
+  if (passCodeEnable) {
+    appPrefsEditor.putString("PrefPinCode1",passCodeDigits[0]);
+    appPrefsEditor.putString("PrefPinCode2",passCodeDigits[1]);
+    appPrefsEditor.putString("PrefPinCode3",passCodeDigits[2]);
+    appPrefsEditor.putString("PrefPinCode4",passCodeDigits[3]);
+  }
+  appPrefsEditor.putBoolean("set_pincode",passCodeEnable);
+  appPrefsEditor.commit();
+  String message=getString(R.string.manage_string_message,getString(R.string.app_name));
+  Toast.makeText(this,message,Toast.LENGTH_LONG).show();
+}
