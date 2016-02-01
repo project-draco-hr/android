@@ -1,5 +1,5 @@
 {
-  if (ACTION_REQUEST.equals(getIntent().getAction())) {
+  if (ACTION_CHECK.equals(getIntent().getAction())) {
     if (checkPassCode()) {
       finish();
     }
@@ -7,19 +7,18 @@
       showErrorAndRestart(R.string.pass_code_wrong,R.string.pass_code_enter_pass_code,View.INVISIBLE);
     }
   }
- else   if (ACTION_DISABLE.equals(getIntent().getAction())) {
+ else   if (ACTION_CHECK_WITH_RESULT.equals(getIntent().getAction())) {
     if (checkPassCode()) {
-      SharedPreferences.Editor appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
-      appPrefs.putBoolean("set_pincode",false);
-      appPrefs.commit();
-      Toast.makeText(PassCodeActivity.this,R.string.pass_code_removed,Toast.LENGTH_LONG).show();
+      Intent resultIntent=new Intent();
+      resultIntent.putExtra(KEY_CHECK_RESULT,true);
+      setResult(RESULT_OK,resultIntent);
       finish();
     }
  else {
       showErrorAndRestart(R.string.pass_code_wrong,R.string.pass_code_enter_pass_code,View.INVISIBLE);
     }
   }
- else   if (ACTION_ENABLE.equals(getIntent().getAction())) {
+ else   if (ACTION_REQUEST_WITH_RESULT.equals(getIntent().getAction())) {
     if (!mConfirmingPassCode) {
       requestPassCodeConfirmation();
     }
