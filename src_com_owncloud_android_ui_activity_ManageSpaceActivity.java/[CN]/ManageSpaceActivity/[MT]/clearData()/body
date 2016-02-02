@@ -10,6 +10,8 @@
   }
   clearApplicationData();
   SharedPreferences.Editor appPrefsEditor=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
+  appPrefsEditor.clear();
+  appPrefsEditor.commit();
   if (passCodeEnable) {
     appPrefsEditor.putString("PrefPinCode1",passCodeDigits[0]);
     appPrefsEditor.putString("PrefPinCode2",passCodeDigits[1]);
