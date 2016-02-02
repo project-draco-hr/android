@@ -3,10 +3,10 @@
   if (publicShare == null) {
     return new RemoteOperationResult(RemoteOperationResult.ResultCode.SHARE_NOT_FOUND);
   }
-  UpdateRemoteShareOperation udpateOp=new UpdateRemoteShareOperation(publicShare.getRemoteId());
-  udpateOp.setPassword(mPassword);
-  udpateOp.setExpirationDate(mExpirationDateInMillis);
-  RemoteOperationResult result=udpateOp.execute(client);
+  UpdateRemoteShareOperation updateOp=new UpdateRemoteShareOperation(publicShare.getRemoteId());
+  updateOp.setPassword(mPassword);
+  updateOp.setExpirationDate(mExpirationDateInMillis);
+  RemoteOperationResult result=updateOp.execute(client);
   if (result.isSuccess()) {
     RemoteOperation getShareOp=new GetRemoteShareOperation(publicShare.getRemoteId());
     result=getShareOp.execute(client);

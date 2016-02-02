@@ -1,5 +1,5 @@
 {
-  Cursor c=getCursorForValue(ProviderTableMeta._ID,String.valueOf(id));
+  Cursor c=getFileCursorForValue(ProviderTableMeta._ID,String.valueOf(id));
   OCFile file=null;
   if (c.moveToFirst()) {
     file=createFileInstance(c);

@@ -1,0 +1,11 @@
+{
+  if (getFile().isSharedWithMe()) {
+    return OCShare.READ_PERMISSION_FLAG;
+  }
+ else   if (getFile().isFolder()) {
+    return OCShare.MAXIMUM_PERMISSIONS_FOR_FOLDER;
+  }
+ else {
+    return OCShare.MAXIMUM_PERMISSIONS_FOR_FILE;
+  }
+}

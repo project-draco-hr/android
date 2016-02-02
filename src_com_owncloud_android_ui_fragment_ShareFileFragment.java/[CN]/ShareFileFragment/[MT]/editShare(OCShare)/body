@@ -1,0 +1,4 @@
+{
+  Log_OC.d(TAG,"Editing " + share.getSharedWithDisplayName());
+  mListener.showEditShare(share);
+}

@@ -33,11 +33,6 @@
     }
   }
 );
-  mOnShareViaLinkSwitchCheckedChangeListener=new CompoundButton.OnCheckedChangeListener(){
-    @Override public void onCheckedChanged(    CompoundButton switchView,    boolean isChecked){
-    }
-  }
-;
   initShareViaLinkListener(view);
   initExpirationListener(view);
   initPasswordListener(view);

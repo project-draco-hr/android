@@ -1,3 +1,0 @@
-{
-  return shareExists(ProviderTableMeta.OCSHARES_ID_REMOTE_SHARED,String.valueOf(remoteId));
-}

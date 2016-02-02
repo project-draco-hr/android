@@ -3,14 +3,14 @@
   mFileOperationsHelper.setOpIdWaitingFor(Long.MAX_VALUE);
   dismissLoadingDialog();
   if (!result.isSuccess() && (result.getCode() == ResultCode.UNAUTHORIZED || result.isIdPRedirection() || (result.isException() && result.getException() instanceof AuthenticatorException))) {
-    requestCredentialsUpdate();
+    requestCredentialsUpdate(this);
     if (result.getCode() == ResultCode.UNAUTHORIZED) {
       dismissLoadingDialog();
       Toast t=Toast.makeText(this,ErrorMessageAdapter.getErrorCauseMessage(result,operation,getResources()),Toast.LENGTH_LONG);
       t.show();
     }
   }
- else   if (operation == null || operation instanceof CreateShareWithShareeOperation || operation instanceof UnshareOperation || operation instanceof SynchronizeFolderOperation || operation instanceof UpdateShareViaLinkOperation) {
+ else   if (operation == null || operation instanceof CreateShareWithShareeOperation || operation instanceof UnshareOperation || operation instanceof SynchronizeFolderOperation || operation instanceof UpdateShareViaLinkOperation || operation instanceof UpdateSharePermissionsOperation) {
     if (result.isSuccess()) {
       updateFileFromDB();
     }

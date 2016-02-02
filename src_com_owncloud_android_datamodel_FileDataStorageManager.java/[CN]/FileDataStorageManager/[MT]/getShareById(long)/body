@@ -1,0 +1,11 @@
+{
+  OCShare share=null;
+  Cursor c=getShareCursorForValue(ProviderTableMeta._ID,String.valueOf(id));
+  if (c != null) {
+    if (c.moveToFirst()) {
+      share=createShareInstance(c);
+    }
+    c.close();
+  }
+  return share;
+}

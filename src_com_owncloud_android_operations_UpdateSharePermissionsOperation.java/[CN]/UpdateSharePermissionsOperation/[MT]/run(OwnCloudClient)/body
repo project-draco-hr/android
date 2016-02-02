@@ -1,0 +1,19 @@
+{
+  OCShare share=getStorageManager().getShareById(mShareId);
+  if (share == null) {
+    return new RemoteOperationResult(RemoteOperationResult.ResultCode.SHARE_NOT_FOUND);
+  }
+  mPath=share.getPath();
+  UpdateRemoteShareOperation updateOp=new UpdateRemoteShareOperation(share.getRemoteId());
+  updateOp.setPermissions(mPermissions);
+  RemoteOperationResult result=updateOp.execute(client);
+  if (result.isSuccess()) {
+    RemoteOperation getShareOp=new GetRemoteShareOperation(share.getRemoteId());
+    result=getShareOp.execute(client);
+    if (result.isSuccess()) {
+      share=(OCShare)result.getData().get(0);
+      updateData(share);
+    }
+  }
+  return result;
+}

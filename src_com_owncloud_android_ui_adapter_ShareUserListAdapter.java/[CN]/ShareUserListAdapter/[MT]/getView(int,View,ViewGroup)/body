@@ -9,6 +9,13 @@
       name=getContext().getString(R.string.share_group_clarification,name);
     }
     userName.setText(name);
+    final ImageView editShareButton=(ImageView)view.findViewById(R.id.editShareButton);
+    editShareButton.setOnClickListener(new View.OnClickListener(){
+      @Override public void onClick(      View v){
+        mListener.editShare(mShares.get(position));
+      }
+    }
+);
     final ImageView unshareButton=(ImageView)view.findViewById(R.id.unshareButton);
     unshareButton.setOnClickListener(new View.OnClickListener(){
       @Override public void onClick(      View v){
