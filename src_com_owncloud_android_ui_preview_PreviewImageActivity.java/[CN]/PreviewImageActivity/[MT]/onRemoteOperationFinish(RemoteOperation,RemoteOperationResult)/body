@@ -1,12 +1,6 @@
 {
   super.onRemoteOperationFinish(operation,result);
-  if (operation instanceof CreateShareOperation) {
-    onCreateShareOperationFinish((CreateShareOperation)operation,result);
-  }
- else   if (operation instanceof UnshareLinkOperation) {
-    onUnshareLinkOperationFinish((UnshareLinkOperation)operation,result);
-  }
- else   if (operation instanceof RemoveFileOperation) {
+  if (operation instanceof RemoveFileOperation) {
     finish();
   }
  else   if (operation instanceof SynchronizeFileOperation) {

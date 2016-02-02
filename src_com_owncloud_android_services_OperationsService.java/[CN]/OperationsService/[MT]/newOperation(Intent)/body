@@ -11,18 +11,45 @@
       String cookie=operationIntent.getStringExtra(EXTRA_COOKIE);
       target=new Target(account,(serverUrl == null) ? null : Uri.parse(serverUrl),cookie);
       String action=operationIntent.getAction();
-      if (action.equals(ACTION_CREATE_SHARE)) {
+      if (action.equals(ACTION_CREATE_SHARE_VIA_LINK)) {
         String remotePath=operationIntent.getStringExtra(EXTRA_REMOTE_PATH);
-        String password=operationIntent.getStringExtra(EXTRA_PASSWORD_SHARE);
+        String password=operationIntent.getStringExtra(EXTRA_SHARE_PASSWORD);
         Intent sendIntent=operationIntent.getParcelableExtra(EXTRA_SEND_INTENT);
         if (remotePath.length() > 0) {
-          operation=new CreateShareOperation(OperationsService.this,remotePath,ShareType.PUBLIC_LINK,"",false,password,1,sendIntent);
+          operation=new CreateShareViaLinkOperation(remotePath,password,sendIntent);
+        }
+      }
+ else       if (ACTION_UPDATE_SHARE.equals(action)) {
+        String remotePath=operationIntent.getStringExtra(EXTRA_REMOTE_PATH);
+        long shareId=operationIntent.getLongExtra(EXTRA_SHARE_ID,-1);
+        if (remotePath != null && remotePath.length() > 0) {
+          operation=new UpdateShareViaLinkOperation(remotePath);
+          String password=operationIntent.getStringExtra(EXTRA_SHARE_PASSWORD);
+          ((UpdateShareViaLinkOperation)operation).setPassword(password);
+          long expirationDate=operationIntent.getLongExtra(EXTRA_SHARE_EXPIRATION_DATE_IN_MILLIS,0);
+          ((UpdateShareViaLinkOperation)operation).setExpirationDate(expirationDate);
+        }
+ else         if (shareId > 0) {
+          operation=new UpdateSharePermissionsOperation(shareId);
+          int permissions=operationIntent.getIntExtra(EXTRA_SHARE_PERMISSIONS,1);
+          ((UpdateSharePermissionsOperation)operation).setPermissions(permissions);
+        }
+      }
+ else       if (action.equals(ACTION_CREATE_SHARE_WITH_SHAREE)) {
+        String remotePath=operationIntent.getStringExtra(EXTRA_REMOTE_PATH);
+        String shareeName=operationIntent.getStringExtra(EXTRA_SHARE_WITH);
+        ShareType shareType=(ShareType)operationIntent.getSerializableExtra(EXTRA_SHARE_TYPE);
+        int permissions=operationIntent.getIntExtra(EXTRA_SHARE_PERMISSIONS,-1);
+        if (remotePath.length() > 0) {
+          operation=new CreateShareWithShareeOperation(remotePath,shareeName,shareType,permissions);
         }
       }
  else       if (action.equals(ACTION_UNSHARE)) {
         String remotePath=operationIntent.getStringExtra(EXTRA_REMOTE_PATH);
+        ShareType shareType=(ShareType)operationIntent.getSerializableExtra(EXTRA_SHARE_TYPE);
+        String shareWith=operationIntent.getStringExtra(EXTRA_SHARE_WITH);
         if (remotePath.length() > 0) {
-          operation=new UnshareLinkOperation(remotePath,OperationsService.this);
+          operation=new UnshareOperation(remotePath,shareType,shareWith,OperationsService.this);
         }
       }
  else       if (action.equals(ACTION_GET_SERVER_INFO)) {

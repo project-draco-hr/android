@@ -14,8 +14,7 @@ doubleCheck.close();
 }
 long rowId=db.insert(ProviderTableMeta.FILE_TABLE_NAME,null,values);
 if (rowId > 0) {
-Uri insertedFileUri=ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_FILE,rowId);
-return insertedFileUri;
+return ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_FILE,rowId);
 }
  else {
 throw new SQLException("ERROR " + uri);
@@ -27,17 +26,7 @@ doubleCheck.close();
 return insertedFileUri;
 }
 case SHARES:
-String path=values.getAsString(ProviderTableMeta.OCSHARES_PATH);
-String accountNameShare=values.getAsString(ProviderTableMeta.OCSHARES_ACCOUNT_OWNER);
-String[] projectionShare=new String[]{ProviderTableMeta._ID,ProviderTableMeta.OCSHARES_PATH,ProviderTableMeta.OCSHARES_ACCOUNT_OWNER};
-String whereShare=ProviderTableMeta.OCSHARES_PATH + "=? AND " + ProviderTableMeta.OCSHARES_ACCOUNT_OWNER+ "=?";
-String[] whereArgsShare=new String[]{path,accountNameShare};
 Uri insertedShareUri=null;
-Cursor doubleCheckShare=query(db,uri,projectionShare,whereShare,whereArgsShare,null);
-if (doubleCheckShare == null || !doubleCheckShare.moveToFirst()) {
-if (doubleCheckShare != null) {
-doubleCheckShare.close();
-}
 long rowId=db.insert(ProviderTableMeta.OCSHARES_TABLE_NAME,null,values);
 if (rowId > 0) {
 insertedShareUri=ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_SHARE,rowId);
@@ -45,13 +34,18 @@ insertedShareUri=ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_SHARE,
  else {
 throw new SQLException("ERROR " + uri);
 }
+updateFilesTableAccordingToShareInsertion(db,values);
+return insertedShareUri;
+case CAPABILITIES:
+Uri insertedCapUri=null;
+long id=db.insert(ProviderTableMeta.CAPABILITIES_TABLE_NAME,null,values);
+if (id > 0) {
+insertedCapUri=ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_CAPABILITIES,id);
 }
  else {
-insertedShareUri=ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_SHARE,doubleCheckShare.getLong(doubleCheckShare.getColumnIndex(ProviderTableMeta._ID)));
-doubleCheckShare.close();
+throw new SQLException("ERROR " + uri);
 }
-updateFilesTableAccordingToShareInsertion(db,uri,values);
-return insertedShareUri;
+return insertedCapUri;
 default :
 throw new IllegalArgumentException("Unknown uri id: " + uri);
 }

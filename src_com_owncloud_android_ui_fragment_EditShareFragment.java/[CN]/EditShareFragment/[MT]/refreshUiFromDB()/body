@@ -1,0 +1,5 @@
+{
+  if (getView() != null) {
+    refreshUiFromDB(getView());
+  }
+}

@@ -4,7 +4,16 @@
   if (result) {
     Intent data=new Intent();
     data.putExtra(EXTRA_CHOSEN_FILES,mFileListFragment.getCheckedFilePaths());
-    setResult(RESULT_OK,data);
+    SharedPreferences.Editor appPreferencesEditor=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
+    if (mRadioBtnMoveFiles.isChecked()) {
+      setResult(RESULT_OK_AND_MOVE,data);
+      appPreferencesEditor.putInt("prefs_uploader_behaviour",FileUploader.LOCAL_BEHAVIOUR_MOVE);
+    }
+ else {
+      setResult(RESULT_OK,data);
+      appPreferencesEditor.putInt("prefs_uploader_behaviour",FileUploader.LOCAL_BEHAVIOUR_COPY);
+    }
+    appPreferencesEditor.apply();
     finish();
   }
  else {

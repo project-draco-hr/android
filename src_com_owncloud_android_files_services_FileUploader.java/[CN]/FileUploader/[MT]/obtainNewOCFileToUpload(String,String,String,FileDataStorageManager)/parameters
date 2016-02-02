@@ -1,4 +1,0 @@
-String remotePath
-String localPath
-String mimeType
-FileDataStorageManager storageManager

@@ -1,0 +1,35 @@
+{
+  Cursor c=null;
+  if (shareWith == null) {
+    shareWith="";
+  }
+  String selection=ProviderTableMeta.OCSHARES_PATH + "=? AND " + ProviderTableMeta.OCSHARES_SHARE_TYPE+ "=? AND "+ ProviderTableMeta.OCSHARES_ACCOUNT_OWNER+ "=?";
+  if (!ShareType.PUBLIC_LINK.equals(type)) {
+    selection+=" AND " + ProviderTableMeta.OCSHARES_SHARE_WITH + "=?";
+  }
+  String[] selectionArgs;
+  if (ShareType.PUBLIC_LINK.equals(type)) {
+    selectionArgs=new String[]{path,Integer.toString(type.getValue()),mAccount.name};
+  }
+ else {
+    selectionArgs=new String[]{path,Integer.toString(type.getValue()),mAccount.name,shareWith};
+  }
+  if (getContentResolver() != null) {
+    c=getContentResolver().query(ProviderTableMeta.CONTENT_URI_SHARE,null,selection,selectionArgs,null);
+  }
+ else {
+    try {
+      c=getContentProviderClient().query(ProviderTableMeta.CONTENT_URI_SHARE,null,selection,selectionArgs,null);
+    }
+ catch (    RemoteException e) {
+      Log_OC.e(TAG,"Could not get file details: " + e.getMessage());
+      c=null;
+    }
+  }
+  OCShare share=null;
+  if (c.moveToFirst()) {
+    share=createShareInstance(c);
+  }
+  c.close();
+  return share;
+}

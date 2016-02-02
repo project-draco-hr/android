@@ -1,0 +1,11 @@
+{
+  GetRemoteCapabilitiesOperation getCapabilities=new GetRemoteCapabilitiesOperation();
+  RemoteOperationResult result=getCapabilities.execute(client);
+  if (result.isSuccess()) {
+    if (result.getData() != null && result.getData().size() > 0) {
+      OCCapability capability=(OCCapability)result.getData().get(0);
+      getStorageManager().saveCapabilities(capability);
+    }
+  }
+  return result;
+}

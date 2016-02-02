@@ -1,0 +1,7 @@
+{
+  FileDataStorageManager storageManager=((FileActivity)getActivity()).getStorageManager();
+  if (storageManager != null) {
+    mShare=storageManager.getShareById(mShare.getId());
+    refreshUiFromState(editShareView);
+  }
+}

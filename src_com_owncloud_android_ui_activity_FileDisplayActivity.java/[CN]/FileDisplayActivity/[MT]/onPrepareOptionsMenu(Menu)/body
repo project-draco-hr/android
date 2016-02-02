@@ -4,5 +4,6 @@
   menu.findItem(R.id.action_create_dir).setVisible(!drawerOpen);
   menu.findItem(R.id.action_sort).setVisible(!drawerOpen);
   menu.findItem(R.id.action_sync_account).setVisible(!drawerOpen);
+  menu.findItem(R.id.action_switch_view).setVisible(!drawerOpen);
   return super.onPrepareOptionsMenu(menu);
 }

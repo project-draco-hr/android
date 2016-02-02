@@ -1,0 +1,35 @@
+{
+  if (file != null) {
+    OCFile fileToTest=file;
+    OCFile parentDir=null;
+    String parentPath=null;
+    FileDataStorageManager storageManager=mContainerActivity.getStorageManager();
+    SharedPreferences setting=getActivity().getSharedPreferences(GRID_IS_PREFERED_PREFERENCE,Context.MODE_PRIVATE);
+    if (setting.contains(String.valueOf(fileToTest.getFileId()))) {
+      return setting.getBoolean(String.valueOf(fileToTest.getFileId()),false);
+    }
+ else {
+      do {
+        if (fileToTest.getParentId() != FileDataStorageManager.ROOT_PARENT_ID) {
+          parentPath=new File(fileToTest.getRemotePath()).getParent();
+          parentPath=parentPath.endsWith(OCFile.PATH_SEPARATOR) ? parentPath : parentPath + OCFile.PATH_SEPARATOR;
+          parentDir=storageManager.getFileByPath(parentPath);
+        }
+ else {
+          parentDir=storageManager.getFileByPath(OCFile.ROOT_PATH);
+        }
+        while (parentDir == null) {
+          parentPath=new File(parentPath).getParent();
+          parentPath=parentPath.endsWith(OCFile.PATH_SEPARATOR) ? parentPath : parentPath + OCFile.PATH_SEPARATOR;
+          parentDir=storageManager.getFileByPath(parentPath);
+        }
+        fileToTest=parentDir;
+      }
+ while (endWhile(parentDir,setting));
+      return setting.getBoolean(String.valueOf(fileToTest.getFileId()),false);
+    }
+  }
+ else {
+    return false;
+  }
+}

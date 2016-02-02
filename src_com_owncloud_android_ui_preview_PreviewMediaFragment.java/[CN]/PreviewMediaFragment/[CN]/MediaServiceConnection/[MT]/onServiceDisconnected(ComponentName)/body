@@ -1,6 +1,6 @@
 {
   if (component.equals(new ComponentName(getActivity(),MediaService.class))) {
-    Log_OC.e(TAG,"Media service suddenly disconnected");
+    Log_OC.w(TAG,"Media service suddenly disconnected");
     if (mMediaController != null) {
       mMediaController.setMediaPlayer(null);
     }

@@ -1,0 +1,28 @@
+{
+  LayoutInflater inflator=(LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+  View view=inflator.inflate(R.layout.share_user_item,parent,false);
+  if (mShares != null && mShares.size() > position) {
+    OCShare share=mShares.get(position);
+    TextView userName=(TextView)view.findViewById(R.id.userOrGroupName);
+    String name=share.getSharedWithDisplayName();
+    if (share.getShareType() == ShareType.GROUP) {
+      name=getContext().getString(R.string.share_group_clarification,name);
+    }
+    userName.setText(name);
+    final ImageView editShareButton=(ImageView)view.findViewById(R.id.editShareButton);
+    editShareButton.setOnClickListener(new View.OnClickListener(){
+      @Override public void onClick(      View v){
+        mListener.editShare(mShares.get(position));
+      }
+    }
+);
+    final ImageView unshareButton=(ImageView)view.findViewById(R.id.unshareButton);
+    unshareButton.setOnClickListener(new View.OnClickListener(){
+      @Override public void onClick(      View v){
+        mListener.unshareButtonPressed(mShares.get(position));
+      }
+    }
+);
+  }
+  return view;
+}

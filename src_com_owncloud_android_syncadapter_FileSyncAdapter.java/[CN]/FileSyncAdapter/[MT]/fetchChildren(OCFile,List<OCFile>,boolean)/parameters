@@ -1,3 +1,0 @@
-OCFile parent
-List<OCFile> files
-boolean parentEtagChanged

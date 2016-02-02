@@ -1,0 +1,7 @@
+{
+  GetCapabilitiesOperarion getCapabilities=new GetCapabilitiesOperarion();
+  RemoteOperationResult result=getCapabilities.execute(mStorageManager,mContext);
+  if (!result.isSuccess()) {
+    Log_OC.w(TAG,"Update Capabilities unsuccessfully");
+  }
+}

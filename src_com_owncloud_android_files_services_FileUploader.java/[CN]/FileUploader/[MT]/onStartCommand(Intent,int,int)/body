@@ -46,7 +46,7 @@
   FileDataStorageManager storageManager=new FileDataStorageManager(account,getContentResolver());
   boolean forceOverwrite=intent.getBooleanExtra(KEY_FORCE_OVERWRITE,false);
   boolean isInstant=intent.getBooleanExtra(KEY_INSTANT_UPLOAD,false);
-  int localAction=intent.getIntExtra(KEY_LOCAL_BEHAVIOUR,LOCAL_BEHAVIOUR_COPY);
+  int localAction=intent.getIntExtra(KEY_LOCAL_BEHAVIOUR,LOCAL_BEHAVIOUR_FORGET);
   if (intent.hasExtra(KEY_FILE) && files == null) {
     Log_OC.e(TAG,"Incorrect array for OCFiles provided in upload intent");
     return Service.START_NOT_STICKY;
@@ -66,7 +66,7 @@
     }
     files=new OCFile[localPaths.length];
     for (int i=0; i < localPaths.length; i++) {
-      files[i]=obtainNewOCFileToUpload(remotePaths[i],localPaths[i],((mimeTypes != null) ? mimeTypes[i] : null),storageManager);
+      files[i]=obtainNewOCFileToUpload(remotePaths[i],localPaths[i],((mimeTypes != null) ? mimeTypes[i] : null));
       if (files[i] == null) {
         return Service.START_NOT_STICKY;
       }
@@ -79,15 +79,17 @@
   UploadFileOperation newUpload=null;
   try {
     for (int i=0; i < files.length; i++) {
-      uploadKey=buildRemoteName(account,files[i].getRemotePath());
       newUpload=new UploadFileOperation(account,files[i],chunked,isInstant,forceOverwrite,localAction,getApplicationContext());
       if (isInstant) {
         newUpload.setRemoteFolderToBeCreated();
       }
-      mPendingUploads.putIfAbsent(uploadKey,newUpload);
       newUpload.addDatatransferProgressListener(this);
       newUpload.addDatatransferProgressListener((FileUploaderBinder)mBinder);
-      requestedUploads.add(uploadKey);
+      Pair<String,String> putResult=mPendingUploads.putIfAbsent(account,files[i].getRemotePath(),newUpload);
+      if (putResult != null) {
+        uploadKey=putResult.first;
+        requestedUploads.add(uploadKey);
+      }
     }
   }
  catch (  IllegalArgumentException e) {
@@ -108,6 +110,5 @@ catch (  Exception e) {
     msg.obj=requestedUploads;
     mServiceHandler.sendMessage(msg);
   }
-  Log_OC.i(TAG,"mPendingUploads size:" + mPendingUploads.size());
   return Service.START_NOT_STICKY;
 }

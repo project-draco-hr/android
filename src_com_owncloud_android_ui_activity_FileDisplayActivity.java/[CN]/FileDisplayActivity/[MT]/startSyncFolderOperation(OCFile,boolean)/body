@@ -1,8 +1,15 @@
 {
-  long currentSyncTime=System.currentTimeMillis();
-  mSyncInProgress=true;
-  RemoteOperation synchFolderOp=new RefreshFolderOperation(folder,currentSyncTime,false,getFileOperationsHelper().isSharedSupported(),ignoreETag,getStorageManager(),getAccount(),getApplicationContext());
-  synchFolderOp.execute(getAccount(),MainApp.getAppContext(),this,null,null);
-  mProgressBar.setIndeterminate(true);
-  setBackgroundText();
+  getHandler().postDelayed(new Runnable(){
+    @Override public void run(){
+      if (hasWindowFocus()) {
+        long currentSyncTime=System.currentTimeMillis();
+        mSyncInProgress=true;
+        RemoteOperation synchFolderOp=new RefreshFolderOperation(folder,currentSyncTime,false,getFileOperationsHelper().isSharedSupported(),ignoreETag,getStorageManager(),getAccount(),getApplicationContext());
+        synchFolderOp.execute(getAccount(),MainApp.getAppContext(),FileDisplayActivity.this,null,null);
+        mProgressBar.setIndeterminate(true);
+        setBackgroundText();
+      }
+    }
+  }
+,DELAY_TO_REQUEST_OPERATIONS_LATER);
 }

@@ -1,0 +1,7 @@
+{
+  if (navigationDrawerLayout != null && account != null) {
+    TextView username=(TextView)navigationDrawerLayout.findViewById(R.id.drawer_username);
+    int lastAtPos=account.name.lastIndexOf("@");
+    username.setText(account.name.substring(0,lastAtPos));
+  }
+}

@@ -50,7 +50,7 @@
     Log_OC.i("SQL","Entering in the #5 ADD in onUpgrade");
     db.beginTransaction();
     try {
-      db.execSQL("ALTER TABLE " + ProviderTableMeta.FILE_TABLE_NAME + " ADD COLUMN "+ ProviderTableMeta.FILE_SHARE_BY_LINK+ " INTEGER "+ " DEFAULT 0");
+      db.execSQL("ALTER TABLE " + ProviderTableMeta.FILE_TABLE_NAME + " ADD COLUMN "+ ProviderTableMeta.FILE_SHARED_VIA_LINK+ " INTEGER "+ " DEFAULT 0");
       db.execSQL("ALTER TABLE " + ProviderTableMeta.FILE_TABLE_NAME + " ADD COLUMN "+ ProviderTableMeta.FILE_PUBLIC_LINK+ " TEXT "+ " DEFAULT NULL");
       db.execSQL("CREATE TABLE " + ProviderTableMeta.OCSHARES_TABLE_NAME + "("+ ProviderTableMeta._ID+ " INTEGER PRIMARY KEY, "+ ProviderTableMeta.OCSHARES_FILE_SOURCE+ " INTEGER, "+ ProviderTableMeta.OCSHARES_ITEM_SOURCE+ " INTEGER, "+ ProviderTableMeta.OCSHARES_SHARE_TYPE+ " INTEGER, "+ ProviderTableMeta.OCSHARES_SHARE_WITH+ " TEXT, "+ ProviderTableMeta.OCSHARES_PATH+ " TEXT, "+ ProviderTableMeta.OCSHARES_PERMISSIONS+ " INTEGER, "+ ProviderTableMeta.OCSHARES_SHARED_DATE+ " INTEGER, "+ ProviderTableMeta.OCSHARES_EXPIRATION_DATE+ " INTEGER, "+ ProviderTableMeta.OCSHARES_TOKEN+ " TEXT, "+ ProviderTableMeta.OCSHARES_SHARE_WITH_DISPLAY_NAME+ " TEXT, "+ ProviderTableMeta.OCSHARES_IS_DIRECTORY+ " INTEGER, "+ ProviderTableMeta.OCSHARES_USER_ID+ " INTEGER, "+ ProviderTableMeta.OCSHARES_ID_REMOTE_SHARED+ " INTEGER,"+ ProviderTableMeta.OCSHARES_ACCOUNT_OWNER+ " TEXT );");
       upgraded=true;
@@ -105,6 +105,45 @@
     Log_OC.i("SQL","Entering in the #10 ADD in onUpgrade");
     updateAccountName(db);
     upgraded=true;
+  }
+  if (!upgraded)   Log_OC.i("SQL","OUT of the ADD in onUpgrade; oldVersion == " + oldVersion + ", newVersion == "+ newVersion);
+  if (oldVersion < 11 && newVersion >= 11) {
+    Log_OC.i("SQL","Entering in the #11 ADD in onUpgrade");
+    db.beginTransaction();
+    try {
+      db.execSQL("ALTER TABLE " + ProviderTableMeta.FILE_TABLE_NAME + " ADD COLUMN "+ ProviderTableMeta.FILE_ETAG_IN_CONFLICT+ " TEXT "+ " DEFAULT NULL");
+      upgraded=true;
+      db.setTransactionSuccessful();
+    }
+  finally {
+      db.endTransaction();
+    }
+  }
+  if (!upgraded)   Log_OC.i("SQL","OUT of the ADD in onUpgrade; oldVersion == " + oldVersion + ", newVersion == "+ newVersion);
+  if (oldVersion < 12 && newVersion >= 12) {
+    Log_OC.i("SQL","Entering in the #12 ADD in onUpgrade");
+    db.beginTransaction();
+    try {
+      db.execSQL("ALTER TABLE " + ProviderTableMeta.FILE_TABLE_NAME + " ADD COLUMN "+ ProviderTableMeta.FILE_SHARED_WITH_SHAREE+ " INTEGER "+ " DEFAULT 0");
+      upgraded=true;
+      db.setTransactionSuccessful();
+    }
+  finally {
+      db.endTransaction();
+    }
+  }
+  if (!upgraded)   Log_OC.i("SQL","OUT of the ADD in onUpgrade; oldVersion == " + oldVersion + ", newVersion == "+ newVersion);
+  if (oldVersion < 13 && newVersion >= 13) {
+    Log_OC.i("SQL","Entering in the #13 ADD in onUpgrade");
+    db.beginTransaction();
+    try {
+      createCapabilitiesTable(db);
+      upgraded=true;
+      db.setTransactionSuccessful();
+    }
+  finally {
+      db.endTransaction();
+    }
   }
   if (!upgraded)   Log_OC.i("SQL","OUT of the ADD in onUpgrade; oldVersion == " + oldVersion + ", newVersion == "+ newVersion);
 }

@@ -1,0 +1,10 @@
+{
+  if (isSharedSupported()) {
+    mWaitingForOpId=mFileActivity.getOperationsServiceBinder().queueNewOperation(shareIntent);
+    mFileActivity.showLoadingDialog(mFileActivity.getApplicationContext().getString(R.string.wait_a_moment));
+  }
+ else {
+    Toast t=Toast.makeText(mFileActivity,mFileActivity.getString(R.string.share_link_no_support_share_api),Toast.LENGTH_LONG);
+    t.show();
+  }
+}

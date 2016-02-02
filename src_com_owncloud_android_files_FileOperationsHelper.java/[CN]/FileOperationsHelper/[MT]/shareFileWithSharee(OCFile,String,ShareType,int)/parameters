@@ -1,0 +1,4 @@
+OCFile file
+String shareeName
+ShareType shareType
+int permissions

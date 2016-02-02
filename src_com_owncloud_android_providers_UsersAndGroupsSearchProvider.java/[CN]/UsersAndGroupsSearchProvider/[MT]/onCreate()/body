@@ -1,0 +1,5 @@
+{
+  mUriMatcher=new UriMatcher(UriMatcher.NO_MATCH);
+  mUriMatcher.addURI(AUTHORITY,SearchManager.SUGGEST_URI_PATH_QUERY + "/*",SEARCH);
+  return true;
+}

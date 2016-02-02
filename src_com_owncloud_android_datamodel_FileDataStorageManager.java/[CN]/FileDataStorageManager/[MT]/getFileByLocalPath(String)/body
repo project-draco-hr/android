@@ -1,5 +1,5 @@
 {
-  Cursor c=getCursorForValue(ProviderTableMeta.FILE_STORAGE_PATH,path);
+  Cursor c=getFileCursorForValue(ProviderTableMeta.FILE_STORAGE_PATH,path);
   OCFile file=null;
   if (c.moveToFirst()) {
     file=createFileInstance(c);

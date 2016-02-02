@@ -1,25 +1,37 @@
 {
   Log_OC.d(TAG,"Received result of operation in FileActivity - common behaviour for all the " + "FileActivities ");
   mFileOperationsHelper.setOpIdWaitingFor(Long.MAX_VALUE);
+  dismissLoadingDialog();
   if (!result.isSuccess() && (result.getCode() == ResultCode.UNAUTHORIZED || result.isIdPRedirection() || (result.isException() && result.getException() instanceof AuthenticatorException))) {
-    requestCredentialsUpdate();
+    requestCredentialsUpdate(this);
     if (result.getCode() == ResultCode.UNAUTHORIZED) {
       dismissLoadingDialog();
       Toast t=Toast.makeText(this,ErrorMessageAdapter.getErrorCauseMessage(result,operation,getResources()),Toast.LENGTH_LONG);
       t.show();
     }
-    mTryShareAgain=false;
   }
- else   if (operation instanceof CreateShareOperation) {
-    onCreateShareOperationFinish((CreateShareOperation)operation,result);
+ else   if (operation == null || operation instanceof CreateShareWithShareeOperation || operation instanceof UnshareOperation || operation instanceof SynchronizeFolderOperation || operation instanceof UpdateShareViaLinkOperation || operation instanceof UpdateSharePermissionsOperation) {
+    if (result.isSuccess()) {
+      updateFileFromDB();
+    }
+ else     if (result.getCode() != ResultCode.CANCELLED) {
+      Toast t=Toast.makeText(this,ErrorMessageAdapter.getErrorCauseMessage(result,operation,getResources()),Toast.LENGTH_LONG);
+      t.show();
+    }
   }
- else   if (operation instanceof UnshareLinkOperation) {
-    onUnshareLinkOperationFinish((UnshareLinkOperation)operation,result);
-  }
- else   if (operation instanceof SynchronizeFolderOperation) {
-    onSynchronizeFolderOperationFinish((SynchronizeFolderOperation)operation,result);
+ else   if (operation instanceof CreateShareViaLinkOperation) {
+    onCreateShareViaLinkOperationFinish((CreateShareViaLinkOperation)operation,result);
   }
  else   if (operation instanceof SynchronizeFileOperation) {
     onSynchronizeFileOperationFinish((SynchronizeFileOperation)operation,result);
+  }
+ else   if (operation instanceof GetSharesForFileOperation) {
+    if (result.isSuccess() || result.getCode() == ResultCode.SHARE_NOT_FOUND) {
+      updateFileFromDB();
+    }
+ else {
+      Toast t=Toast.makeText(this,ErrorMessageAdapter.getErrorCauseMessage(result,operation,getResources()),Toast.LENGTH_LONG);
+      t.show();
+    }
   }
 }
