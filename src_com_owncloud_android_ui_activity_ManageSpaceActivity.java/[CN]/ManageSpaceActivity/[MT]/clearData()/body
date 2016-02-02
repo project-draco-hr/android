@@ -18,6 +18,6 @@
   }
   appPrefsEditor.putBoolean("set_pincode",passCodeEnable);
   appPrefsEditor.commit();
-  String message=getString(R.string.manage_string_message,getString(R.string.app_name));
-  Toast.makeText(this,message,Toast.LENGTH_LONG).show();
+  finish();
+  System.exit(0);
 }

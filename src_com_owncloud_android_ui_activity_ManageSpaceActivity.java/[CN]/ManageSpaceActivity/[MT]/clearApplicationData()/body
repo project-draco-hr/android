@@ -5,8 +5,9 @@
     String[] children=appDir.list();
     for (    String s : children) {
       if (!s.equals("lib")) {
-        deleteDir(new File(appDir,s));
-        Log_OC.i(TAG,"*******File /data/data/" + getString(R.string.app_name) + "/"+ s+ " DELETED *******");
+        File fileToDelete=new File(appDir,s);
+        deleteDir(fileToDelete);
+        Log_OC.d(TAG,"Clear Application Data, File: " + fileToDelete.getName() + " DELETED *******");
       }
     }
   }
