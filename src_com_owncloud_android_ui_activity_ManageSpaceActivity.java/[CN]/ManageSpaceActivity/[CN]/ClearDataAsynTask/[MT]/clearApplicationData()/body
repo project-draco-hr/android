@@ -3,12 +3,17 @@
   File appDir=new File(getCacheDir().getParent());
   if (appDir.exists()) {
     String[] children=appDir.list();
-    for (    String s : children) {
-      if (!LIB_FOLDER.equals(s)) {
-        File fileToDelete=new File(appDir,s);
-        clearResult=clearResult && deleteDir(fileToDelete);
-        Log_OC.d(TAG,"Clear Application Data, File: " + fileToDelete.getName() + " DELETED *******");
+    if (children != null) {
+      for (      String s : children) {
+        if (!LIB_FOLDER.equals(s)) {
+          File fileToDelete=new File(appDir,s);
+          clearResult=clearResult && deleteDir(fileToDelete);
+          Log_OC.d(TAG,"Clear Application Data, File: " + fileToDelete.getName() + " DELETED *****");
+        }
       }
+    }
+ else {
+      clearResult=false;
     }
   }
   return clearResult;
