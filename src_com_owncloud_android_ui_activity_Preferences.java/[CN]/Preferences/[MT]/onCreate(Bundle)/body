@@ -72,7 +72,7 @@
   }
   final String appVersion=temp;
   registerForContextMenu(getListView());
-  pCode=(CheckBoxPreference)findPreference("set_pincode");
+  pCode=(CheckBoxPreference)findPreference(PassCodeActivity.PREFERENCE_SET_PASSCODE);
   if (pCode != null) {
     pCode.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
       @Override public boolean onPreferenceChange(      Preference preference,      Object newValue){

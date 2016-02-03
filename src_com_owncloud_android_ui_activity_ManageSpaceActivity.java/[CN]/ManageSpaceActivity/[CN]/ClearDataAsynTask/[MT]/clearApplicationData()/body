@@ -1,14 +1,15 @@
 {
-  File cache=getCacheDir();
-  File appDir=new File(cache.getParent());
+  boolean clearResult=true;
+  File appDir=new File(getCacheDir().getParent());
   if (appDir.exists()) {
     String[] children=appDir.list();
     for (    String s : children) {
-      if (!s.equals("lib")) {
+      if (!LIB_FOLDER.equals(s)) {
         File fileToDelete=new File(appDir,s);
-        deleteDir(fileToDelete);
+        clearResult=clearResult && deleteDir(fileToDelete);
         Log_OC.d(TAG,"Clear Application Data, File: " + fileToDelete.getName() + " DELETED *******");
       }
     }
   }
+  return clearResult;
 }

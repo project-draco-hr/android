@@ -3,10 +3,9 @@
 switch (item.getItemId()) {
 case android.R.id.home:
     finish();
-  break;
+  return true;
 default :
 Log_OC.w(TAG,"Unknown menu item triggered");
 return false;
 }
-return true;
 }

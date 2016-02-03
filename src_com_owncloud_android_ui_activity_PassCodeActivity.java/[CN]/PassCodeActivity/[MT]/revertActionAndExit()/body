@@ -1,8 +1,8 @@
 {
   SharedPreferences.Editor appPrefsE=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
   SharedPreferences appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-  boolean state=appPrefs.getBoolean("set_pincode",false);
-  appPrefsE.putBoolean("set_pincode",!state);
+  boolean state=appPrefs.getBoolean(PREFERENCE_SET_PASSCODE,false);
+  appPrefsE.putBoolean(PREFERENCE_SET_PASSCODE,!state);
   appPrefsE.commit();
   finish();
 }

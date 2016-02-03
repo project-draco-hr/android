@@ -1,7 +1,7 @@
 {
   super.onResume();
   SharedPreferences appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-  boolean state=appPrefs.getBoolean("set_pincode",false);
+  boolean state=appPrefs.getBoolean(PassCodeActivity.PREFERENCE_SET_PASSCODE,false);
   pCode.setChecked(state);
   addAccountsCheckboxPreferences();
 }

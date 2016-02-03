@@ -9,7 +9,8 @@
   Button clearDataButton=(Button)findViewById(R.id.clearDataButton);
   clearDataButton.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
-      clearData();
+      ClearDataAsynTask clearDataTask=new ClearDataAsynTask();
+      clearDataTask.execute();
     }
   }
 );
