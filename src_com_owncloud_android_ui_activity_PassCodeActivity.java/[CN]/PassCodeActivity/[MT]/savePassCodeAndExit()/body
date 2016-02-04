@@ -1,5 +1,4 @@
 {
-  SharedPreferences.Editor appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
   Intent resultIntent=new Intent();
   resultIntent.putExtra(KEY_PASSCODE,mPassCodeDigits[0] + mPassCodeDigits[1] + mPassCodeDigits[2]+ mPassCodeDigits[3]);
   setResult(RESULT_OK,resultIntent);
