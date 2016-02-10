@@ -3,7 +3,7 @@
     mBCancel.setVisibility(View.VISIBLE);
     mBCancel.setOnClickListener(new OnClickListener(){
       @Override public void onClick(      View v){
-        revertActionAndExit();
+        finish();
       }
     }
 );
