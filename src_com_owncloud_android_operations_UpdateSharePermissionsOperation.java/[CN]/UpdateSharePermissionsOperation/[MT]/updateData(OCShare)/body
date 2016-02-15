@@ -1,0 +1,10 @@
+{
+  share.setPath(mPath);
+  if (mPath.endsWith(FileUtils.PATH_SEPARATOR)) {
+    share.setIsFolder(true);
+  }
+ else {
+    share.setIsFolder(false);
+  }
+  getStorageManager().saveShare(share);
+}

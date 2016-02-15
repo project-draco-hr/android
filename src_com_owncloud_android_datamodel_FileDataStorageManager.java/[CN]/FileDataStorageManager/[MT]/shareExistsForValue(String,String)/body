@@ -1,0 +1,6 @@
+{
+  Cursor c=getShareCursorForValue(key,value);
+  boolean retval=c.moveToFirst();
+  c.close();
+  return retval;
+}

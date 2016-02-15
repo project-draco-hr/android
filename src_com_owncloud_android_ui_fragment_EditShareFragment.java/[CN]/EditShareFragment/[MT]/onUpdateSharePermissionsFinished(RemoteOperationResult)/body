@@ -1,0 +1,8 @@
+{
+  if (result.isSuccess()) {
+    refreshUiFromDB(getView());
+  }
+ else {
+    refreshUiFromState(getView());
+  }
+}

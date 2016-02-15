@@ -1,4 +1,4 @@
 {
+  Log_OC.d(TAG,"Unsharing " + share.getSharedWithDisplayName());
   mListener.unshareWith(share);
-  Log_OC.d(TAG,"Unshare - " + share.getSharedWithDisplayName());
 }

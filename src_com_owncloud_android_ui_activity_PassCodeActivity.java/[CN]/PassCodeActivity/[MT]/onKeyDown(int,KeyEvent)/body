@@ -1,7 +1,7 @@
 {
   if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-    if (ACTION_ENABLE.equals(getIntent().getAction()) || ACTION_DISABLE.equals(getIntent().getAction())) {
-      revertActionAndExit();
+    if (ACTION_REQUEST_WITH_RESULT.equals(getIntent().getAction()) || ACTION_CHECK_WITH_RESULT.equals(getIntent().getAction())) {
+      finish();
     }
     return true;
   }

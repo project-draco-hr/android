@@ -1,0 +1,20 @@
+{
+  CompoundButton canEditCompound=(CompoundButton)getView().findViewById(R.id.canEditSwitch);
+  if (isChecked) {
+    if (!canEditCompound.isChecked()) {
+      toggleDisablingListener(canEditCompound);
+    }
+  }
+ else {
+    boolean allDisabled=true;
+    for (int i=0; allDisabled && i < sSubordinateCheckBoxIds.length; i++) {
+      allDisabled&=sSubordinateCheckBoxIds[i] == subordinateCheckBoxView.getId() || !((CheckBox)getView().findViewById(sSubordinateCheckBoxIds[i])).isChecked();
+    }
+    if (canEditCompound.isChecked() && allDisabled) {
+      toggleDisablingListener(canEditCompound);
+      for (int i=0; i < sSubordinateCheckBoxIds.length; i++) {
+        getView().findViewById(sSubordinateCheckBoxIds[i]).setVisibility(View.GONE);
+      }
+    }
+  }
+}

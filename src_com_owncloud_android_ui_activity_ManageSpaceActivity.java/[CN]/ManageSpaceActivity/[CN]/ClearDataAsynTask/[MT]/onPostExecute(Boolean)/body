@@ -1,0 +1,10 @@
+{
+  super.onPostExecute(result);
+  if (!result) {
+    Toast.makeText(getApplicationContext(),getString(R.string.manage_space_clear_data),Toast.LENGTH_LONG).show();
+  }
+ else {
+    finish();
+    System.exit(0);
+  }
+}

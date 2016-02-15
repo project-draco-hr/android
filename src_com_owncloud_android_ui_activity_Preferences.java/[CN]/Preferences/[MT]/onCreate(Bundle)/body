@@ -71,15 +71,15 @@
   }
   final String appVersion=temp;
   registerForContextMenu(getListView());
-  pCode=(CheckBoxPreference)findPreference("set_pincode");
+  pCode=(CheckBoxPreference)findPreference(PassCodeActivity.PREFERENCE_SET_PASSCODE);
   if (pCode != null) {
     pCode.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
       @Override public boolean onPreferenceChange(      Preference preference,      Object newValue){
         Intent i=new Intent(getApplicationContext(),PassCodeActivity.class);
-        Boolean enable=(Boolean)newValue;
-        i.setAction(enable.booleanValue() ? PassCodeActivity.ACTION_ENABLE : PassCodeActivity.ACTION_DISABLE);
-        startActivity(i);
-        return true;
+        Boolean incoming=(Boolean)newValue;
+        i.setAction(incoming.booleanValue() ? PassCodeActivity.ACTION_REQUEST_WITH_RESULT : PassCodeActivity.ACTION_CHECK_WITH_RESULT);
+        startActivityForResult(i,incoming.booleanValue() ? ACTION_REQUEST_PASSCODE : ACTION_CONFIRM_PASSCODE);
+        return false;
       }
     }
 );

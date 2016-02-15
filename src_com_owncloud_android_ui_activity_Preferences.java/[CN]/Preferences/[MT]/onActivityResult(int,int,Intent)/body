@@ -14,4 +14,24 @@
     mPrefInstantVideoUploadPath.setSummary(mUploadVideoPath);
     saveInstantUploadVideoPathOnPreferences();
   }
+ else   if (requestCode == ACTION_REQUEST_PASSCODE && resultCode == RESULT_OK) {
+    String passcode=data.getStringExtra(PassCodeActivity.KEY_PASSCODE);
+    if (passcode != null && passcode.length() == 4) {
+      SharedPreferences.Editor appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
+      for (int i=1; i <= 4; ++i) {
+        appPrefs.putString(PassCodeActivity.PREFERENCE_PASSCODE_D + i,passcode.substring(i - 1,i));
+      }
+      appPrefs.putBoolean(PassCodeActivity.PREFERENCE_SET_PASSCODE,true);
+      appPrefs.commit();
+      Toast.makeText(this,R.string.pass_code_stored,Toast.LENGTH_LONG).show();
+    }
+  }
+ else   if (requestCode == ACTION_CONFIRM_PASSCODE && resultCode == RESULT_OK) {
+    if (data.getBooleanExtra(PassCodeActivity.KEY_CHECK_RESULT,false)) {
+      SharedPreferences.Editor appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
+      appPrefs.putBoolean(PassCodeActivity.PREFERENCE_SET_PASSCODE,false);
+      appPrefs.commit();
+      Toast.makeText(this,R.string.pass_code_removed,Toast.LENGTH_LONG).show();
+    }
+  }
 }
