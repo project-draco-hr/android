@@ -1,0 +1,15 @@
+{
+  String[] whereArgs=new String[6];
+  whereArgs[0]=String.valueOf(UploadStatus.UPLOAD_SUCCEEDED.value);
+  whereArgs[1]=String.valueOf(UploadStatus.UPLOAD_CANCELLED.value);
+  whereArgs[2]=String.valueOf(UploadStatus.UPLOAD_FAILED_GIVE_UP.value);
+  whereArgs[3]=String.valueOf(UploadStatus.UPLOAD_FAILED_RETRY.value);
+  whereArgs[4]=String.valueOf(UploadStatus.UPLOAD_PAUSED.value);
+  whereArgs[5]=String.valueOf(UploadStatus.UPLOAD_IN_PROGRESS.value);
+  long result=getDB().delete(ProviderTableMeta.CONTENT_URI_UPLOADS,ProviderTableMeta.UPLOADS_STATUS + "=? OR " + ProviderTableMeta.UPLOADS_STATUS+ "=? OR "+ ProviderTableMeta.UPLOADS_STATUS+ "=? OR "+ ProviderTableMeta.UPLOADS_STATUS+ "=? OR "+ ProviderTableMeta.UPLOADS_STATUS+ "=? OR "+ ProviderTableMeta.UPLOADS_STATUS+ "=?",whereArgs);
+  Log_OC.d(TAG,"delete all uploads");
+  if (result > 0) {
+    notifyObserversNow();
+  }
+  return result;
+}

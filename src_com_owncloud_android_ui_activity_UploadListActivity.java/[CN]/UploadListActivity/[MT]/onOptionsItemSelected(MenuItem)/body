@@ -22,6 +22,9 @@ storageManager.clearFinishedUploads();
 uploadListFragment.updateUploads();
 break;
 case R.id.action_clear_all_uploads:
+storageManager=new UploadsStorageManager(getContentResolver());
+storageManager.clearAllUploads();
+uploadListFragment.updateUploads();
 break;
 default :
 retval=super.onOptionsItemSelected(item);
