@@ -159,6 +159,7 @@ rightButton.setImageResource(R.drawable.ic_delete);
 rightButton.setOnClickListener(new OnClickListener(){
 @Override public void onClick(View v){
 mParentActivity.getFileOperationsHelper().removeUploadFromList(upload);
+refreshView();
 }
 }
 );
