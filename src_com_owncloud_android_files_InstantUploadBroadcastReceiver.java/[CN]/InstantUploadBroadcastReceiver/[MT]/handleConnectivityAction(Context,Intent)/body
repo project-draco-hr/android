@@ -6,7 +6,7 @@
   if (instantPictureUploadViaWiFiOnly(context) && !isConnectedViaWiFi(context)) {
     Account account=AccountUtils.getCurrentOwnCloudAccount(context);
     if (account == null) {
-      Log_OC.w(TAG,"No owncloud account found for instant upload, aborting");
+      Log_OC.w(TAG,"No account found for instant upload, aborting");
       return;
     }
     Intent i=new Intent(context,FileUploader.class);
