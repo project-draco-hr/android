@@ -75,7 +75,7 @@
             Log_OC.e(TAG,"obtainNewOCFileToUpload() returned null for remotePaths[i]:" + remotePaths[i] + " and localPaths[i]:"+ localPaths[i]);
             return Service.START_NOT_STICKY;
           }
-          mStorageManager.saveFile(files[i]);
+          mStorageManager.saveNewFile(files[i]);
           files[i]=mStorageManager.getFileByLocalPath(files[i].getStoragePath());
         }
       }
