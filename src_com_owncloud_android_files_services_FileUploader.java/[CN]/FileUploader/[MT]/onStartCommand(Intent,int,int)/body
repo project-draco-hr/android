@@ -13,36 +13,19 @@
   OwnCloudVersion ocv=AccountUtils.getServerVersion(account);
   boolean chunked=FileUploader.chunkedUploadIsSupported(ocv);
   if (!retry) {
-    if (!intent.hasExtra(KEY_UPLOAD_TYPE) || !(intent.hasExtra(KEY_LOCAL_FILE) || intent.hasExtra(KEY_FILE))) {
+    if (!(intent.hasExtra(KEY_LOCAL_FILE) || intent.hasExtra(KEY_FILE))) {
       Log_OC.e(TAG,"Not enough information provided in intent");
-      return Service.START_NOT_STICKY;
-    }
-    int uploadType=intent.getIntExtra(KEY_UPLOAD_TYPE,-1);
-    if (uploadType == -1) {
-      Log_OC.e(TAG,"Incorrect upload type provided");
       return Service.START_NOT_STICKY;
     }
     String[] localPaths=null, remotePaths=null, mimeTypes=null;
     OCFile[] files=null;
-    if (uploadType == UPLOAD_SINGLE_FILE) {
-      if (intent.hasExtra(KEY_FILE)) {
-        files=new OCFile[]{intent.getParcelableExtra(KEY_FILE)};
-      }
- else {
-        localPaths=new String[]{intent.getStringExtra(KEY_LOCAL_FILE)};
-        remotePaths=new String[]{intent.getStringExtra(KEY_REMOTE_FILE)};
-        mimeTypes=new String[]{intent.getStringExtra(KEY_MIME_TYPE)};
-      }
+    if (intent.hasExtra(KEY_FILE)) {
+      files=(OCFile[])intent.getParcelableArrayExtra(KEY_FILE);
     }
  else {
-      if (intent.hasExtra(KEY_FILE)) {
-        files=(OCFile[])intent.getParcelableArrayExtra(KEY_FILE);
-      }
- else {
-        localPaths=intent.getStringArrayExtra(KEY_LOCAL_FILE);
-        remotePaths=intent.getStringArrayExtra(KEY_REMOTE_FILE);
-        mimeTypes=intent.getStringArrayExtra(KEY_MIME_TYPE);
-      }
+      localPaths=intent.getStringArrayExtra(KEY_LOCAL_FILE);
+      remotePaths=intent.getStringArrayExtra(KEY_REMOTE_FILE);
+      mimeTypes=intent.getStringArrayExtra(KEY_MIME_TYPE);
     }
     FileDataStorageManager storageManager=new FileDataStorageManager(account,getContentResolver());
     boolean forceOverwrite=intent.getBooleanExtra(KEY_FORCE_OVERWRITE,false);

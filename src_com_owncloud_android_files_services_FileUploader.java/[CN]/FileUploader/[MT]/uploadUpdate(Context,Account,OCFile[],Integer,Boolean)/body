@@ -1,0 +1,9 @@
+{
+  Log_OC.d(TAG,"FileUploader.uploadUpdate()");
+  Intent intent=new Intent(context,FileUploader.class);
+  intent.putExtra(FileUploader.KEY_ACCOUNT,account);
+  intent.putExtra(FileUploader.KEY_FILE,existingFiles);
+  intent.putExtra(FileUploader.KEY_LOCAL_BEHAVIOUR,behaviour);
+  intent.putExtra(FileUploader.KEY_FORCE_OVERWRITE,forceOverwrite);
+  context.startService(intent);
+}

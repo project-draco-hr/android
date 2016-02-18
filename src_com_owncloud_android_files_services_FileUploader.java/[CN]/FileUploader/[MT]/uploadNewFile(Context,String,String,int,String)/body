@@ -1,0 +1,3 @@
+{
+  uploadNewFile(context,null,new String[]{localPath},new String[]{remotePath},resultCode,mimeType,null,null);
+}

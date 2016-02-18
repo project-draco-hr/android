@@ -1,0 +1,8 @@
+Context context
+Account account
+String[] localPaths
+String[] remotePaths
+Integer behaviour
+String mimeType
+Boolean createRemoteFolder
+Boolean wifiOnly

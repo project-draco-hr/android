@@ -1,0 +1,5 @@
+Context context
+String localPath
+String remotePath
+int resultCode
+String mimeType

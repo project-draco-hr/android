@@ -1,0 +1,4 @@
+Context context
+Account account
+String[] localPaths
+String[] remotePaths

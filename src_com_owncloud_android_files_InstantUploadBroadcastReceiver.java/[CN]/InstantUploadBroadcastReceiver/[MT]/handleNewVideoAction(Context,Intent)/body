@@ -24,15 +24,6 @@
   mime_type=c.getString(c.getColumnIndex(Video.Media.MIME_TYPE));
   c.close();
   Log_OC.d(TAG,file_path + "");
-  Intent i=new Intent(context,FileUploader.class);
-  i.putExtra(FileUploader.KEY_ACCOUNT,account);
-  i.putExtra(FileUploader.KEY_LOCAL_FILE,file_path);
-  i.putExtra(FileUploader.KEY_REMOTE_FILE,FileStorageUtils.getInstantUploadFilePath(context,file_name));
-  i.putExtra(FileUploader.KEY_UPLOAD_TYPE,FileUploader.UPLOAD_SINGLE_FILE);
-  i.putExtra(FileUploader.KEY_MIME_TYPE,mime_type);
-  i.putExtra(FileUploader.KEY_CREATE_REMOTE_FOLDER,true);
-  i.putExtra(FileUploader.KEY_WIFI_ONLY,instantVideoUploadViaWiFiOnly(context));
-  context.startService(i);
-  i=addInstantUploadBehaviour(i,context);
-  context.startService(i);
+  int behaviour=getUploadBehaviour(context);
+  FileUploader.uploadNewFile(context,account,file_path,FileStorageUtils.getInstantUploadFilePath(context,file_name),behaviour,mime_type,true,instantPictureUploadViaWiFiOnly(context));
 }

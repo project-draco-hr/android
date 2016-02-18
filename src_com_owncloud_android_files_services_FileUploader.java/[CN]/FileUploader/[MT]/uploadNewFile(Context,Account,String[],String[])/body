@@ -1,0 +1,3 @@
+{
+  uploadNewFile(context,account,localPaths,remotePaths,null,null,null,null);
+}
