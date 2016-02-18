@@ -136,16 +136,7 @@ mCurrentUpload=null;
 }
 statusTextView.setText(status);
 ImageButton rightButton=(ImageButton)view.findViewById(R.id.upload_right_button);
-if (upload.userCanRetryUpload() && upload.getUploadStatus() != UploadStatus.UPLOAD_SUCCEEDED) {
-rightButton.setImageResource(R.drawable.ic_refresh);
-rightButton.setOnClickListener(new OnClickListener(){
-@Override public void onClick(View v){
-mParentActivity.getFileOperationsHelper().retryUpload(upload);
-}
-}
-);
-}
- else if (upload.userCanCancelUpload()) {
+if (upload.userCanCancelUpload()) {
 rightButton.setImageResource(R.drawable.ic_cancel);
 rightButton.setOnClickListener(new OnClickListener(){
 @Override public void onClick(View v){
@@ -160,6 +151,14 @@ rightButton.setOnClickListener(new OnClickListener(){
 @Override public void onClick(View v){
 mParentActivity.getFileOperationsHelper().removeUploadFromList(upload);
 refreshView();
+}
+}
+);
+}
+if (upload.userCanRetryUpload()) {
+view.setOnClickListener(new OnClickListener(){
+@Override public void onClick(View v){
+mParentActivity.getFileOperationsHelper().retryUpload(upload);
 }
 }
 );

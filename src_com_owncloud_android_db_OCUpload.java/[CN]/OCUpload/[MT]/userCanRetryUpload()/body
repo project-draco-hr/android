@@ -4,7 +4,6 @@ case UPLOAD_CANCELLED:
 case UPLOAD_FAILED_RETRY:
 case UPLOAD_FAILED_GIVE_UP:
 case UPLOAD_LATER:
-case UPLOAD_SUCCEEDED:
     return true;
 default :
   return false;
