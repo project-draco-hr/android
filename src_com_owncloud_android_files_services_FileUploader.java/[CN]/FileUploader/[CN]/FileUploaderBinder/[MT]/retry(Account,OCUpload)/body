@@ -1,0 +1,3 @@
+{
+  FileUploader.retry(getApplicationContext(),account,upload);
+}

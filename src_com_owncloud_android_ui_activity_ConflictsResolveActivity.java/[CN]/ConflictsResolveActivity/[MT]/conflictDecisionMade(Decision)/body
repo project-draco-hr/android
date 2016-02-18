@@ -1,14 +1,14 @@
 {
-  Intent i=new Intent(getApplicationContext(),FileUploadService.class);
+  Intent i=new Intent(getApplicationContext(),FileUploader.class);
 switch (decision) {
 case CANCEL:
     finish();
   return;
 case OVERWRITE:
-i.putExtra(FileUploadService.KEY_FORCE_OVERWRITE,true);
+i.putExtra(FileUploader.KEY_FORCE_OVERWRITE,true);
 break;
 case KEEP_BOTH:
-i.putExtra(FileUploadService.KEY_LOCAL_BEHAVIOUR,FileUploadService.LOCAL_BEHAVIOUR_MOVE);
+i.putExtra(FileUploader.KEY_LOCAL_BEHAVIOUR,FileUploader.LOCAL_BEHAVIOUR_MOVE);
 break;
 case SERVER:
 Intent intent=new Intent(this,FileDownloader.class);
@@ -21,9 +21,9 @@ default :
 Log_OC.wtf(TAG,"Unhandled conflict decision " + decision);
 return;
 }
-i.putExtra(FileUploadService.KEY_ACCOUNT,getAccount());
-i.putExtra(FileUploadService.KEY_FILE,getFile());
-i.putExtra(FileUploadService.KEY_UPLOAD_TYPE,FileUploadService.UPLOAD_SINGLE_FILE);
+i.putExtra(FileUploader.KEY_ACCOUNT,getAccount());
+i.putExtra(FileUploader.KEY_FILE,getFile());
+i.putExtra(FileUploader.KEY_UPLOAD_TYPE,FileUploader.UPLOAD_SINGLE_FILE);
 startService(i);
 finish();
 }

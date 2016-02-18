@@ -1,3 +1,0 @@
-{
-  FileUploadService.retry(getApplicationContext(),account,upload);
-}

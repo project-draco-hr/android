@@ -1,7 +1,0 @@
-{
-  if (account == null || file == null || listener == null)   return;
-  String targetKey=buildRemoteName(account,file,uploadId);
-  if (mBoundListeners.get(targetKey) == listener) {
-    mBoundListeners.remove(targetKey);
-  }
-}

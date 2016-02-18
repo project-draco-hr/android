@@ -4,7 +4,7 @@
       mContainerActivity.getFileDownloaderBinder().addDatatransferProgressListener(mProgressListener,mAccount,getFile());
     }
     if (mContainerActivity.getFileUploaderBinder() != null) {
-      mContainerActivity.getFileUploaderBinder().addDatatransferProgressListener(mProgressListener,mAccount,getFile(),0);
+      mContainerActivity.getFileUploaderBinder().addDatatransferProgressListener(mProgressListener,mAccount,getFile());
     }
   }
  else {

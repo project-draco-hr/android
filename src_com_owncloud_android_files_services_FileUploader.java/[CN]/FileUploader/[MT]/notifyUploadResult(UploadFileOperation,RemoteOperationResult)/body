@@ -21,9 +21,17 @@
  else {
       mNotificationBuilder.setContentText(content);
     }
+    if (!uploadResult.isSuccess()) {
+      Intent showUploadListIntent=new Intent(this,UploadListActivity.class);
+      showUploadListIntent.putExtra(FileActivity.EXTRA_FILE,upload.getFile());
+      showUploadListIntent.putExtra(FileActivity.EXTRA_ACCOUNT,upload.getAccount());
+      showUploadListIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+      mNotificationBuilder.setContentIntent(PendingIntent.getActivity(this,(int)System.currentTimeMillis(),showUploadListIntent,0));
+    }
     mNotificationBuilder.setContentText(content);
     mNotificationManager.notify(tickerId,mNotificationBuilder.build());
     if (uploadResult.isSuccess()) {
+      mPendingUploads.remove(upload.getAccount(),upload.getFile().getRemotePath());
       NotificationDelayer.cancelWithDelay(mNotificationManager,R.string.uploader_upload_succeeded_ticker,2000);
     }
   }

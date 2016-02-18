@@ -1,4 +1,0 @@
-{
-  ((FileUploaderBinder)mBinder).clearListeners();
-  return false;
-}

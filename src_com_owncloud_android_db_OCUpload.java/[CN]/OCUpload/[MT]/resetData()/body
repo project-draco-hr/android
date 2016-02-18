@@ -1,6 +1,6 @@
 {
   mId=-1;
-  mLocalAction=FileUploadService.LOCAL_BEHAVIOUR_COPY;
+  mLocalAction=FileUploader.LOCAL_BEHAVIOUR_COPY;
   mUploadTime=new GregorianCalendar();
   mForceOverwrite=false;
   mIsCreateRemoteFolder=false;

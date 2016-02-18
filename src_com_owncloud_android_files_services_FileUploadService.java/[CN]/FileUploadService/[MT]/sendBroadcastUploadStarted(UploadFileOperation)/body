@@ -1,8 +1,0 @@
-{
-  Intent start=new Intent(getUploadStartMessage());
-  start.putExtra(EXTRA_REMOTE_PATH,upload.getRemotePath());
-  start.putExtra(EXTRA_OLD_FILE_PATH,upload.getOriginalStoragePath());
-  start.putExtra(ACCOUNT_NAME,upload.getAccount().name);
-  updateDatabaseUploadStart(mCurrentUpload);
-  sendStickyBroadcast(start);
-}

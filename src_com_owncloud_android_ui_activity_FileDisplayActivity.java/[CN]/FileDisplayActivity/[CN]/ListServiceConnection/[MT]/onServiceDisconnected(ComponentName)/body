@@ -3,7 +3,7 @@
     Log_OC.d(TAG,"Download service disconnected");
     mDownloaderBinder=null;
   }
- else   if (component.equals(new ComponentName(FileDisplayActivity.this,FileUploadService.class))) {
+ else   if (component.equals(new ComponentName(FileDisplayActivity.this,FileUploader.class))) {
     Log_OC.d(TAG,"Upload service disconnected");
     mUploaderBinder=null;
   }

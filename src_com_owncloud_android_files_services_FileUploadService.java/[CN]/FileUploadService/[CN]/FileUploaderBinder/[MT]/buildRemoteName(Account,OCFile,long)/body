@@ -1,7 +1,0 @@
-{
-  String suffix=String.valueOf(uploadId);
-  if (uploadId != -1) {
-    suffix="";
-  }
-  return account.name + file.getRemotePath() + suffix;
-}

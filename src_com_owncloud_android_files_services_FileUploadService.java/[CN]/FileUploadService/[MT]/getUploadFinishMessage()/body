@@ -1,3 +1,0 @@
-{
-  return FileUploadService.class.getName() + UPLOAD_FINISH_MESSAGE;
-}

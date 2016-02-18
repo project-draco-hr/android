@@ -3,11 +3,11 @@
     dismissWaitingCopyDialog();
   }
   if (result != null) {
-    Intent intent=new Intent(getApplicationContext(),FileUploadService.class);
-    intent.putExtra(FileUploadService.KEY_UPLOAD_TYPE,FileUploadService.UPLOAD_SINGLE_FILE);
-    intent.putExtra(FileUploadService.KEY_LOCAL_FILE,result);
-    intent.putExtra(FileUploadService.KEY_REMOTE_FILE,mRemoteCacheData.get(index));
-    intent.putExtra(FileUploadService.KEY_ACCOUNT,getAccount());
+    Intent intent=new Intent(getApplicationContext(),FileUploader.class);
+    intent.putExtra(FileUploader.KEY_UPLOAD_TYPE,FileUploader.UPLOAD_SINGLE_FILE);
+    intent.putExtra(FileUploader.KEY_LOCAL_FILE,result);
+    intent.putExtra(FileUploader.KEY_REMOTE_FILE,mRemoteCacheData.get(index));
+    intent.putExtra(FileUploader.KEY_ACCOUNT,getAccount());
     startService(intent);
   }
  else {

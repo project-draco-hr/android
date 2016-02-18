@@ -1,9 +1,9 @@
 {
-  Intent i=new Intent(mContext,FileUploadService.class);
-  i.putExtra(FileUploadService.KEY_ACCOUNT,mAccount);
-  i.putExtra(FileUploadService.KEY_FILE,file);
-  i.putExtra(FileUploadService.KEY_UPLOAD_TYPE,FileUploadService.UPLOAD_SINGLE_FILE);
-  i.putExtra(FileUploadService.KEY_FORCE_OVERWRITE,true);
+  Intent i=new Intent(mContext,FileUploader.class);
+  i.putExtra(FileUploader.KEY_ACCOUNT,mAccount);
+  i.putExtra(FileUploader.KEY_FILE,file);
+  i.putExtra(FileUploader.KEY_UPLOAD_TYPE,FileUploader.UPLOAD_SINGLE_FILE);
+  i.putExtra(FileUploader.KEY_FORCE_OVERWRITE,true);
   mContext.startService(i);
   mTransferWasRequested=true;
 }

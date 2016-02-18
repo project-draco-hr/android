@@ -7,7 +7,7 @@
       onPageSelected(mViewPager.getCurrentItem());
     }
   }
- else   if (component.equals(new ComponentName(PreviewImageActivity.this,FileUploadService.class))) {
+ else   if (component.equals(new ComponentName(PreviewImageActivity.this,FileUploader.class))) {
     Log_OC.d(TAG,"Upload service connected");
     mUploaderBinder=(FileUploaderBinder)service;
   }

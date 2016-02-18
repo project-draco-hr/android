@@ -20,8 +20,8 @@
       return;
     }
   }
-  Intent i=new Intent(this,FileUploadService.class);
-  i.putExtra(FileUploadService.KEY_ACCOUNT,getAccount());
+  Intent i=new Intent(this,FileUploader.class);
+  i.putExtra(FileUploader.KEY_ACCOUNT,getAccount());
   OCFile currentDir=getCurrentDir();
   String remotePath=(currentDir != null) ? currentDir.getRemotePath() : OCFile.ROOT_PATH;
   if (filePath.startsWith(UriUtils.URI_CONTENT_SCHEME)) {
@@ -42,14 +42,14 @@
  else {
     remotePath+=new File(filePath).getName();
   }
-  i.putExtra(FileUploadService.KEY_LOCAL_FILE,filePath);
-  i.putExtra(FileUploadService.KEY_REMOTE_FILE,remotePath);
-  i.putExtra(FileUploadService.KEY_MIME_TYPE,mimeType);
-  i.putExtra(FileUploadService.KEY_UPLOAD_TYPE,FileUploadService.UPLOAD_SINGLE_FILE);
+  i.putExtra(FileUploader.KEY_LOCAL_FILE,filePath);
+  i.putExtra(FileUploader.KEY_REMOTE_FILE,remotePath);
+  i.putExtra(FileUploader.KEY_MIME_TYPE,mimeType);
+  i.putExtra(FileUploader.KEY_UPLOAD_TYPE,FileUploader.UPLOAD_SINGLE_FILE);
   if (resultCode == UploadFilesActivity.RESULT_OK_AND_MOVE) {
-    i.putExtra(FileUploadService.KEY_LOCAL_BEHAVIOUR,FileUploadService.LOCAL_BEHAVIOUR_MOVE);
+    i.putExtra(FileUploader.KEY_LOCAL_BEHAVIOUR,FileUploader.LOCAL_BEHAVIOUR_MOVE);
   }
   if (startService(i) == null) {
-    Log_OC.e(TAG,"FileUploadService could not be started");
+    Log_OC.e(TAG,"FileUploader could not be started");
   }
 }

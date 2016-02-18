@@ -18,7 +18,7 @@
     if (mCancellationRequested.get()) {
       throw new OperationCancelledException();
     }
-    if (!mOriginalStoragePath.equals(expectedPath) && mLocalBehaviour == FileUploadService.LOCAL_BEHAVIOUR_COPY) {
+    if (!mOriginalStoragePath.equals(expectedPath) && mLocalBehaviour == FileUploader.LOCAL_BEHAVIOUR_COPY) {
       if (FileStorageUtils.getUsableSpace(mAccount.name) < originalFile.length()) {
         result=new RemoteOperationResult(ResultCode.LOCAL_STORAGE_FULL);
         return result;
@@ -104,7 +104,7 @@
     }
     result=mUploadOperation.execute(client);
     if (result.isSuccess()) {
-      if (mLocalBehaviour == FileUploadService.LOCAL_BEHAVIOUR_FORGET) {
+      if (mLocalBehaviour == FileUploader.LOCAL_BEHAVIOUR_FORGET) {
         mFile.setStoragePath("");
       }
  else {

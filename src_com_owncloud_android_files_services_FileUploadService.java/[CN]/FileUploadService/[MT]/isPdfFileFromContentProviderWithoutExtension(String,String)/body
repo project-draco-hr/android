@@ -1,3 +1,0 @@
-{
-  return localPath.startsWith(UriUtils.URI_CONTENT_SCHEME) && mimeType.equals(MIME_TYPE_PDF) && !localPath.endsWith(FILE_EXTENSION_PDF);
-}

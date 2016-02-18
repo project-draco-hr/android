@@ -3,6 +3,7 @@
   if (mCurrentUpload != null) {
     if (AccountUtils.exists(mCurrentUpload.getAccount(),getApplicationContext())) {
       Log_OC.d(TAG,"Account " + mCurrentUpload.getAccount().name + " exists");
+      mUploadsStorageManager.updateDatabaseUploadStart(mCurrentUpload);
       notifyUploadStart(mCurrentUpload);
       RemoteOperationResult uploadResult=null, grantResult;
       try {
@@ -16,8 +17,6 @@
         remoteParentPath=remoteParentPath.endsWith(OCFile.PATH_SEPARATOR) ? remoteParentPath : remoteParentPath + OCFile.PATH_SEPARATOR;
         grantResult=grantFolderExistence(remoteParentPath);
         if (grantResult.isSuccess()) {
-          OCFile parent=mStorageManager.getFileByPath(remoteParentPath);
-          mCurrentUpload.getFile().setParentId(parent.getFileId());
           uploadResult=mCurrentUpload.execute(mUploadClient);
           if (uploadResult.isSuccess()) {
             saveUploadedFile();
@@ -38,10 +37,12 @@
         Pair<UploadFileOperation,String> removeResult;
         if (mCurrentUpload.wasRenamed()) {
           removeResult=mPendingUploads.removePayload(mCurrentAccount,mCurrentUpload.getOldFile().getRemotePath());
+          mUploadsStorageManager.updateFileIdUpload(mCurrentUpload.getOCUploadId(),mCurrentUpload.getFile().getFileId());
         }
  else {
           removeResult=mPendingUploads.removePayload(mCurrentAccount,mCurrentUpload.getRemotePath());
         }
+        mUploadsStorageManager.updateDatabaseUploadResult(uploadResult,mCurrentUpload);
         notifyUploadResult(mCurrentUpload,uploadResult);
         sendBroadcastUploadFinished(mCurrentUpload,uploadResult,removeResult.second);
       }

@@ -1,0 +1,3 @@
+{
+  updateUploadStatus(upload.getOCUploadId(),UploadStatus.UPLOAD_IN_PROGRESS,UploadResult.UNKNOWN);
+}

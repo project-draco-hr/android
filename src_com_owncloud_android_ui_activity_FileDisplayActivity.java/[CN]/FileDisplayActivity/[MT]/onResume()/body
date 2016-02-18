@@ -10,7 +10,7 @@
   syncIntentFilter.addAction(RefreshFolderOperation.EVENT_SINGLE_FOLDER_SHARES_SYNCED);
   mSyncBroadcastReceiver=new SyncBroadcastReceiver();
   registerReceiver(mSyncBroadcastReceiver,syncIntentFilter);
-  IntentFilter uploadIntentFilter=new IntentFilter(FileUploadService.getUploadFinishMessage());
+  IntentFilter uploadIntentFilter=new IntentFilter(FileUploader.getUploadFinishMessage());
   mUploadFinishReceiver=new UploadFinishReceiver();
   registerReceiver(mUploadFinishReceiver,uploadIntentFilter);
   IntentFilter downloadIntentFilter=new IntentFilter(FileDownloader.getDownloadAddedMessage());
