@@ -4,6 +4,6 @@
     uploaderBinder.remove(upload);
   }
  else {
-    Log_OC.w(TAG,"uploaderBinder not set. Cannot remove " + upload.getOCFile());
+    Log_OC.w(TAG,"uploaderBinder not set. Cannot remove " + upload.getLocalPath());
   }
 }

@@ -36,11 +36,10 @@
  finally {
         Pair<UploadFileOperation,String> removeResult;
         if (mCurrentUpload.wasRenamed()) {
-          removeResult=mPendingUploads.removePayload(mCurrentAccount,mCurrentUpload.getOldFile().getRemotePath());
-          mUploadsStorageManager.updateFileIdUpload(mCurrentUpload.getOCUploadId(),mCurrentUpload.getFile().getFileId());
+          removeResult=mPendingUploads.removePayload(mCurrentAccount.name,mCurrentUpload.getOldFile().getRemotePath());
         }
  else {
-          removeResult=mPendingUploads.removePayload(mCurrentAccount,mCurrentUpload.getRemotePath());
+          removeResult=mPendingUploads.removePayload(mCurrentAccount.name,mCurrentUpload.getRemotePath());
         }
         mUploadsStorageManager.updateDatabaseUploadResult(uploadResult,mCurrentUpload);
         notifyUploadResult(mCurrentUpload,uploadResult);

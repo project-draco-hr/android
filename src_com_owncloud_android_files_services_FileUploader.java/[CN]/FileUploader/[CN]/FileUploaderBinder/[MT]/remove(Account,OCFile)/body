@@ -1,5 +1,5 @@
 {
-  Pair<UploadFileOperation,String> removeResult=mPendingUploads.remove(account,file.getRemotePath());
+  Pair<UploadFileOperation,String> removeResult=mPendingUploads.remove(account.name,file.getRemotePath());
   UploadFileOperation upload=removeResult.first;
   if (upload == null) {
     Log_OC.e(TAG,"Could not delete upload " + file + " from mPendingUploads.");

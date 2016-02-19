@@ -3,10 +3,9 @@
   OCUpload[] list=new OCUpload[c.getCount()];
   if (c.moveToFirst()) {
     do {
-      long fileUploadId=c.getLong(c.getColumnIndex(ProviderTableMeta.UPLOADS_FILE_ID));
       OCUpload upload=createOCUploadFromCursor(c);
       if (upload == null) {
-        Log_OC.e(TAG,"Upload for file id = " + fileUploadId + "not found on DB");
+        Log_OC.e(TAG,"OCUpload could not be created from cursor");
       }
  else {
         list[c.getPosition()]=upload;

@@ -1,21 +1,3 @@
 {
-  Pair<UploadFileOperation,String> removeResult=mPendingUploads.remove(account,file.getRemotePath());
-  UploadFileOperation upload=removeResult.first;
-  if (upload != null) {
-    upload.cancel();
-  }
- else {
-    if (mCurrentUpload != null && mCurrentAccount != null && mCurrentUpload.isUploadInProgress() && mCurrentUpload.getRemotePath().startsWith(file.getRemotePath()) && account.name.equals(mCurrentAccount.name)) {
-      Log_OC.d(TAG,"Calling cancel for " + file.getRemotePath() + " during upload operation.");
-      mCurrentUpload.cancel();
-    }
- else {
-      Log_OC.d(TAG,"Calling cancel for " + file.getRemotePath() + " while upload is pending.");
-      OCUpload ocUpload=mUploadsStorageManager.getUploadByLocalPath(upload.getStoragePath())[0];
-      ocUpload.setUploadStatus(UploadStatus.UPLOAD_CANCELLED);
-      ocUpload.setLastResult(UploadResult.CANCELLED);
-      ocUpload.getOCFile().setStoragePath(file.getStoragePath());
-      mUploadsStorageManager.updateUploadStatus(ocUpload);
-    }
-  }
+  cancel(account.name,file.getRemotePath(),file.getStoragePath());
 }

@@ -1,9 +1,6 @@
 {
   StringBuilder reason=new StringBuilder();
   Date now=new Date();
-  if (now.getTime() < getUploadTimestamp()) {
-    reason.append(context.getString(R.string.uploads_view_later_reason_waiting_for) + DisplayUtils.unixTimeToHumanReadable(getUploadTimestamp()));
-  }
   if (isUseWifiOnly() && !UploadUtils.isConnectedViaWiFi(context)) {
     if (reason.length() > 0) {
       reason.append(context.getString(R.string.uploads_view_later_reason_add_wifi_reason));

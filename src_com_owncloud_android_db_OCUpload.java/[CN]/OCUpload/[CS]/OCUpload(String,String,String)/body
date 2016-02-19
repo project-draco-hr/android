@@ -1,0 +1,15 @@
+{
+  if (localPath == null || !localPath.startsWith(File.separator)) {
+    throw new IllegalArgumentException("Local path must be an absolute path in the local file system");
+  }
+  if (remotePath == null || !remotePath.startsWith(OCFile.PATH_SEPARATOR)) {
+    throw new IllegalArgumentException("Remote path must be an absolute path in the local file system");
+  }
+  if (accountName == null || accountName.length() < 1) {
+    throw new IllegalArgumentException("Invalid account name");
+  }
+  resetData();
+  mLocalPath=localPath;
+  mRemotePath=remotePath;
+  mAccountName=accountName;
+}

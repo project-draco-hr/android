@@ -11,11 +11,6 @@
     Log_OC.d(TAG,"Do not start upload because it is while charging only.");
     return CanUploadFileNowStatus.LATER;
   }
-  Date now=new Date();
-  if (now.getTime() < getUploadTimestamp()) {
-    Log_OC.d(TAG,"Do not start upload because it is schedule for " + DisplayUtils.unixTimeToHumanReadable(getUploadTimestamp()));
-    return CanUploadFileNowStatus.LATER;
-  }
   if (!new File(getLocalPath()).exists()) {
     Log_OC.d(TAG,"Do not start upload because local file does not exist.");
     return CanUploadFileNowStatus.FILE_GONE;

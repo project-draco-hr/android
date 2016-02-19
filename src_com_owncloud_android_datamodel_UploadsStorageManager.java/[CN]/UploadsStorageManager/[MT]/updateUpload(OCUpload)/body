@@ -1,7 +1,6 @@
 {
   Log_OC.e(TAG,"Updating " + ocUpload.getLocalPath() + " with status="+ ocUpload.getUploadStatus());
   ContentValues cv=new ContentValues();
-  cv.put(ProviderTableMeta.UPLOADS_PATH,ocUpload.getLocalPath());
   cv.put(ProviderTableMeta.UPLOADS_STATUS,ocUpload.getUploadStatus().value);
   cv.put(ProviderTableMeta.UPLOADS_LAST_RESULT,ocUpload.getLastResult().getValue());
   int result=getDB().update(ProviderTableMeta.CONTENT_URI_UPLOADS,cv,ProviderTableMeta._ID + "=?",new String[]{String.valueOf(ocUpload.getUploadId())});

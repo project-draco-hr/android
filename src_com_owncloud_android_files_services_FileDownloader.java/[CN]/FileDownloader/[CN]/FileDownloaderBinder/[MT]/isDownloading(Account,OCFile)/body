@@ -1,4 +1,4 @@
 {
   if (account == null || file == null)   return false;
-  return (mPendingDownloads.contains(account,file.getRemotePath()));
+  return (mPendingDownloads.contains(account.name,file.getRemotePath()));
 }

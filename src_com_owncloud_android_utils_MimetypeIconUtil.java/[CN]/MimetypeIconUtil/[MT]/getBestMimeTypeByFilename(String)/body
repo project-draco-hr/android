@@ -1,0 +1,7 @@
+{
+  List<String> candidates=determineMimeTypesByFilename(filename);
+  if (candidates == null || candidates.size() < 1) {
+    return "application/octet-stream";
+  }
+  return candidates.get(0);
+}

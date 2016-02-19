@@ -1,5 +1,5 @@
 {
-  mCurrentSyncOperation=mPendingOperations.get(account,remotePath);
+  mCurrentSyncOperation=mPendingOperations.get(account.name,remotePath);
   if (mCurrentSyncOperation != null) {
     RemoteOperationResult result=null;
     try {
@@ -18,7 +18,7 @@ catch (    IOException e) {
       Log_OC.e(TAG,"Error while trying to get authorization",e);
     }
  finally {
-      mPendingOperations.removePayload(account,remotePath);
+      mPendingOperations.removePayload(account.name,remotePath);
       mService.dispatchResultToOperationListeners(mCurrentSyncOperation,result);
       sendBroadcastFinishedSyncFolder(account,remotePath,result.isSuccess());
     }

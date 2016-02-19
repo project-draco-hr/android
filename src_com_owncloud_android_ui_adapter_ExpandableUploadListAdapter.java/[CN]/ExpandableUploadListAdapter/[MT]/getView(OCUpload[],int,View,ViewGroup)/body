@@ -6,18 +6,22 @@
   }
   if (uploadsItems != null && uploadsItems.length > position) {
     final OCUpload upload=uploadsItems[position];
-    final OCFile uploadOCFile=upload.getOCFile();
     TextView fileTextView=(TextView)view.findViewById(R.id.upload_name);
-    String fileName=uploadOCFile.getFileName();
+    File localFile=new File(upload.getLocalPath());
+    String fileName=localFile.getName();
+    if (fileName.length() == 0) {
+      fileName=File.separator;
+    }
     fileTextView.setText(fileName);
     TextView pathTextView=(TextView)view.findViewById(R.id.upload_local_path);
-    String path=uploadOCFile.getRemotePath();
-    path=(path == null || path.isEmpty()) ? "" : path.substring(0,path.length() - fileName.length() - 1);
-    pathTextView.setText(mParentActivity.getString(R.string.app_name) + path);
+    String remoteParentPath=upload.getRemotePath();
+    remoteParentPath=new File(remoteParentPath).getParent();
+    pathTextView.setText(mParentActivity.getString(R.string.app_name) + remoteParentPath);
     TextView fileSizeTextView=(TextView)view.findViewById(R.id.upload_file_size);
-    fileSizeTextView.setText(DisplayUtils.bytesToHumanReadable(uploadOCFile.getFileLength()) + ", ");
+    fileSizeTextView.setText(DisplayUtils.bytesToHumanReadable(localFile.length()) + ", ");
     TextView uploadDateTextView=(TextView)view.findViewById(R.id.upload_date);
-    CharSequence dateString=DisplayUtils.getRelativeDateTimeString(mParentActivity,uploadOCFile.getModificationTimestamp(),DateUtils.SECOND_IN_MILLIS,DateUtils.WEEK_IN_MILLIS,0);
+    long updateTime=(new File(upload.getLocalPath())).lastModified();
+    CharSequence dateString=DisplayUtils.getRelativeDateTimeString(mParentActivity,updateTime,DateUtils.SECOND_IN_MILLIS,DateUtils.WEEK_IN_MILLIS,0);
     uploadDateTextView.setText(dateString);
     TextView accountNameTextView=(TextView)view.findViewById(R.id.upload_account);
     accountNameTextView.setText(upload.getAccountName());
@@ -36,7 +40,7 @@ case UPLOAD_IN_PROGRESS:
 progressBar.setVisibility(View.VISIBLE);
 mProgressListener=new ProgressListener(progressBar);
 if (mParentActivity.getFileUploaderBinder() != null) {
-mParentActivity.getFileUploaderBinder().addDatatransferProgressListener(mProgressListener,mParentActivity.getAccount(),uploadOCFile);
+mParentActivity.getFileUploaderBinder().addDatatransferProgressListener(mProgressListener,mParentActivity.getAccount(),upload);
 }
  else {
 Log_OC.e(TAG,"UploadBinder == null. It should have been created on creating mParentActivity" + " which inherits from FileActivity. Fix that!");
@@ -127,11 +131,9 @@ break;
 if (upload.getUploadStatus() != UploadStatus.UPLOAD_IN_PROGRESS) {
 ProgressBar progressBar=(ProgressBar)view.findViewById(R.id.upload_progress_bar);
 progressBar.setVisibility(View.GONE);
-if (mParentActivity.getFileUploaderBinder() != null && mProgressListener != null && mCurrentUpload != null) {
-OCFile currentOcFile=mCurrentUpload.getFile();
-mParentActivity.getFileUploaderBinder().removeDatatransferProgressListener(mProgressListener,upload.getAccount(mParentActivity),currentOcFile);
+if (mParentActivity.getFileUploaderBinder() != null && mProgressListener != null) {
+mParentActivity.getFileUploaderBinder().removeDatatransferProgressListener(mProgressListener,upload.getAccount(mParentActivity),upload);
 mProgressListener=null;
-mCurrentUpload=null;
 }
 }
 statusTextView.setText(status);
@@ -140,7 +142,10 @@ if (upload.userCanCancelUpload()) {
 rightButton.setImageResource(R.drawable.ic_cancel);
 rightButton.setOnClickListener(new OnClickListener(){
 @Override public void onClick(View v){
-mParentActivity.getFileOperationsHelper().cancelTransference(uploadOCFile);
+FileUploader.FileUploaderBinder uploaderBinder=mParentActivity.getFileUploaderBinder();
+if (uploaderBinder != null) {
+uploaderBinder.cancel(upload);
+}
 }
 }
 );
@@ -165,10 +170,13 @@ mParentActivity.getFileOperationsHelper().retryUpload(upload);
 }
 ImageView fileIcon=(ImageView)view.findViewById(R.id.thumbnail);
 fileIcon.setImageResource(R.drawable.file);
-boolean allowedToCreateNewThumbnail=(ThumbnailsCacheManager.cancelPotentialWork(uploadOCFile,fileIcon));
-if ((uploadOCFile.isImage() && uploadOCFile.getRemoteId() != null && upload.getUploadStatus() == UploadStatus.UPLOAD_SUCCEEDED)) {
-Bitmap thumbnail=ThumbnailsCacheManager.getBitmapFromDiskCache(String.valueOf(uploadOCFile.getRemoteId()));
-if (thumbnail != null && !uploadOCFile.needsUpdateThumbnail()) {
+OCFile fakeFileToCheatThumbnailsCacheManagerInterface=new OCFile(upload.getRemotePath());
+fakeFileToCheatThumbnailsCacheManagerInterface.setStoragePath(upload.getLocalPath());
+fakeFileToCheatThumbnailsCacheManagerInterface.setMimetype(upload.getMimeType());
+boolean allowedToCreateNewThumbnail=(ThumbnailsCacheManager.cancelPotentialWork(fakeFileToCheatThumbnailsCacheManagerInterface,fileIcon));
+if ((fakeFileToCheatThumbnailsCacheManagerInterface.isImage() && fakeFileToCheatThumbnailsCacheManagerInterface.getRemoteId() != null && upload.getUploadStatus() == UploadStatus.UPLOAD_SUCCEEDED)) {
+Bitmap thumbnail=ThumbnailsCacheManager.getBitmapFromDiskCache(String.valueOf(fakeFileToCheatThumbnailsCacheManagerInterface.getRemoteId()));
+if (thumbnail != null && !fakeFileToCheatThumbnailsCacheManagerInterface.needsUpdateThumbnail()) {
 fileIcon.setImageBitmap(thumbnail);
 }
  else {
@@ -179,15 +187,15 @@ thumbnail=ThumbnailsCacheManager.mDefaultImg;
 }
 final ThumbnailsCacheManager.AsyncDrawable asyncDrawable=new ThumbnailsCacheManager.AsyncDrawable(mParentActivity.getResources(),thumbnail,task);
 fileIcon.setImageDrawable(asyncDrawable);
-task.execute(uploadOCFile);
+task.execute(fakeFileToCheatThumbnailsCacheManagerInterface);
 }
 }
-if (uploadOCFile.getMimetype().equalsIgnoreCase("image/png")) {
+if ("image/png".equals(upload.getMimeType())) {
 fileIcon.setBackgroundColor(mParentActivity.getResources().getColor(R.color.background_color));
 }
 }
- else if (uploadOCFile.isImage() && uploadOCFile.getStoragePath() != null) {
-File file=new File(uploadOCFile.getStoragePath());
+ else if (fakeFileToCheatThumbnailsCacheManagerInterface.isImage()) {
+File file=new File(upload.getLocalPath());
 Bitmap thumbnail=ThumbnailsCacheManager.getBitmapFromDiskCache(String.valueOf(file.hashCode()));
 if (thumbnail != null) {
 fileIcon.setImageBitmap(thumbnail);
@@ -204,12 +212,12 @@ task.execute(file);
 Log_OC.v(TAG,"Executing task to generate a new thumbnail");
 }
 }
-if (uploadOCFile.getMimetype().equalsIgnoreCase("image/png")) {
+if ("image/png".equalsIgnoreCase(upload.getMimeType())) {
 fileIcon.setBackgroundColor(mParentActivity.getResources().getColor(R.color.background_color));
 }
 }
  else {
-fileIcon.setImageResource(MimetypeIconUtil.getFileTypeIconId(upload.getMimeType(),uploadOCFile.getFileName()));
+fileIcon.setImageResource(MimetypeIconUtil.getFileTypeIconId(upload.getMimeType(),fileName));
 }
 }
 return view;

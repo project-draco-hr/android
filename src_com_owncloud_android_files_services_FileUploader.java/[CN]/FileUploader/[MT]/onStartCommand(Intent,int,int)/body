@@ -52,7 +52,7 @@
       }
       files=new OCFile[localPaths.length];
       for (int i=0; i < localPaths.length; i++) {
-        files[i]=obtainNewOCFileToUpload(remotePaths[i],localPaths[i],((mimeTypes != null) ? mimeTypes[i] : null));
+        files[i]=UploadFileOperation.obtainNewOCFileToUpload(remotePaths[i],localPaths[i],((mimeTypes != null) ? mimeTypes[i] : null));
         if (files[i] == null) {
           Log_OC.e(TAG,"obtainNewOCFileToUpload() returned null for remotePaths[i]:" + remotePaths[i] + " and localPaths[i]:"+ localPaths[i]);
           return Service.START_NOT_STICKY;
@@ -65,14 +65,13 @@
     UploadFileOperation newUpload=null;
     try {
       for (int i=0; i < files.length; i++) {
-        newUpload=new UploadFileOperation(account,files[i],chunked,forceOverwrite,localAction,getApplicationContext());
+        newUpload=new UploadFileOperation(account,files[i],chunked,forceOverwrite,localAction,this);
         if (isCreateRemoteFolder) {
           newUpload.setRemoteFolderToBeCreated();
         }
         newUpload.addDatatransferProgressListener(this);
         newUpload.addDatatransferProgressListener((FileUploaderBinder)mBinder);
-        OCUpload ocUpload=new OCUpload(files[i]);
-        ocUpload.setAccountName(account.name);
+        OCUpload ocUpload=new OCUpload(files[i],account);
         ocUpload.setForceOverwrite(forceOverwrite);
         ocUpload.setCreateRemoteFolder(isCreateRemoteFolder);
         ocUpload.setLocalAction(localAction);
@@ -81,7 +80,7 @@
         ocUpload.setUploadStatus(UploadStatus.UPLOAD_LATER);
         long id=mUploadsStorageManager.storeUpload(ocUpload);
         newUpload.setOCUploadId(id);
-        Pair<String,String> putResult=mPendingUploads.putIfAbsent(account,files[i].getRemotePath(),newUpload,null);
+        Pair<String,String> putResult=mPendingUploads.putIfAbsent(account.name,files[i].getRemotePath(),newUpload,null);
         if (putResult != null) {
           uploadKey=putResult.first;
           requestedUploads.add(uploadKey);
@@ -110,14 +109,14 @@ catch (    Exception e) {
       return START_NOT_STICKY;
     }
     OCUpload upload=intent.getParcelableExtra(KEY_RETRY_UPLOAD);
-    UploadFileOperation newUpload=new UploadFileOperation(account,upload.getOCFile(),chunked,upload.isForceOverwrite(),upload.getLocalAction(),getApplicationContext());
+    UploadFileOperation newUpload=new UploadFileOperation(account,upload,chunked,upload.isForceOverwrite(),upload.getLocalAction(),this);
     if (upload.isCreateRemoteFolder()) {
       newUpload.setRemoteFolderToBeCreated();
     }
     newUpload.addDatatransferProgressListener(this);
     newUpload.addDatatransferProgressListener((FileUploaderBinder)mBinder);
     newUpload.setOCUploadId(upload.getUploadId());
-    Pair<String,String> putResult=mPendingUploads.putIfAbsent(account,upload.getOCFile().getRemotePath(),newUpload,String.valueOf(upload.getUploadId()));
+    Pair<String,String> putResult=mPendingUploads.putIfAbsent(account.name,upload.getRemotePath(),newUpload,String.valueOf(upload.getUploadId()));
     if (putResult != null) {
       String uploadKey=putResult.first;
       requestedUploads.add(uploadKey);

@@ -1,5 +1,5 @@
 {
-  String key=buildRemoteName(mCurrentUpload.getAccount(),mCurrentUpload.getFile());
+  String key=buildRemoteName(mCurrentUpload.getAccount().name,mCurrentUpload.getFile().getRemotePath());
   OnDatatransferProgressListener boundListener=mBoundListeners.get(key);
   if (boundListener != null) {
     boundListener.onTransferProgress(progressRate,totalTransferredSoFar,totalToTransfer,fileName);

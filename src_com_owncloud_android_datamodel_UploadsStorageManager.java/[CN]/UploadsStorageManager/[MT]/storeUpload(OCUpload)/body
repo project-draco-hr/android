@@ -1,10 +1,10 @@
 {
   Log_OC.e(TAG,"Inserting " + ocUpload.getLocalPath() + " with status="+ ocUpload.getUploadStatus());
   ContentValues cv=new ContentValues();
-  cv.put(ProviderTableMeta.UPLOADS_PATH,ocUpload.getLocalPath());
-  cv.put(ProviderTableMeta.UPLOADS_STATUS,ocUpload.getUploadStatus().value);
-  cv.put(ProviderTableMeta.UPLOADS_FILE_ID,ocUpload.getOCFile().getFileId());
+  cv.put(ProviderTableMeta.UPLOADS_LOCAL_PATH,ocUpload.getLocalPath());
+  cv.put(ProviderTableMeta.UPLOADS_REMOTE_PATH,ocUpload.getRemotePath());
   cv.put(ProviderTableMeta.UPLOADS_ACCOUNT_NAME,ocUpload.getAccountName());
+  cv.put(ProviderTableMeta.UPLOADS_STATUS,ocUpload.getUploadStatus().value);
   cv.put(ProviderTableMeta.UPLOADS_LOCAL_BEHAVIOUR,ocUpload.getLocalAction());
   cv.put(ProviderTableMeta.UPLOADS_FORCE_OVERWRITE,ocUpload.isForceOverwrite() ? 1 : 0);
   cv.put(ProviderTableMeta.UPLOADS_IS_WHILE_CHARGING_ONLY,ocUpload.isWhileChargingOnly() ? 1 : 0);

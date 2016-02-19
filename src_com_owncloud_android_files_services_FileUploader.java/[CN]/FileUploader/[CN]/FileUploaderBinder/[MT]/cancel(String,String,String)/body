@@ -1,0 +1,17 @@
+{
+  Pair<UploadFileOperation,String> removeResult=mPendingUploads.remove(accountName,remotePath);
+  UploadFileOperation upload=removeResult.first;
+  if (upload == null && mCurrentUpload != null && mCurrentAccount != null && mCurrentUpload.getRemotePath().startsWith(remotePath) && accountName.equals(mCurrentAccount.name)) {
+    upload=mCurrentUpload;
+  }
+  if (upload != null) {
+    boolean pending=!upload.isUploadInProgress();
+    upload.cancel();
+    if (pending) {
+      OCUpload ocUpload=mUploadsStorageManager.getUploadByLocalPath(localPath)[0];
+      ocUpload.setUploadStatus(UploadStatus.UPLOAD_CANCELLED);
+      ocUpload.setLastResult(UploadResult.CANCELLED);
+      mUploadsStorageManager.updateUploadStatus(ocUpload);
+    }
+  }
+}

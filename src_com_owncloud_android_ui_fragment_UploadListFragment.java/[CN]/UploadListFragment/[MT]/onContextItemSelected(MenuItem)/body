@@ -5,24 +5,24 @@
   OCUpload uploadFile=(OCUpload)mAdapter.getChild(groupPosition,childPosition);
 switch (item.getItemId()) {
 case R.id.action_cancel_upload:
-    ((FileActivity)getActivity()).getFileOperationsHelper().cancelTransference(uploadFile.getOCFile());
-  return true;
+    FileUploader.FileUploaderBinder uploaderBinder=((FileActivity)getActivity()).getFileUploaderBinder();
+  if (uploaderBinder != null) {
+    uploaderBinder.cancel(uploadFile);
+  }
+return true;
 case R.id.action_remove_upload:
 {
-  ((FileActivity)getActivity()).getFileOperationsHelper().removeUploadFromList(uploadFile);
-  return true;
+((FileActivity)getActivity()).getFileOperationsHelper().removeUploadFromList(uploadFile);
+return true;
 }
 case R.id.action_see_details:
 {
-Intent showDetailsIntent=new Intent(getActivity(),FileDisplayActivity.class);
-showDetailsIntent.putExtra(FileActivity.EXTRA_FILE,uploadFile.getOCFile());
-showDetailsIntent.putExtra(FileActivity.EXTRA_ACCOUNT,uploadFile.getAccount(getActivity()));
-startActivity(showDetailsIntent);
+Toast.makeText(getActivity(),"TO DO",Toast.LENGTH_SHORT).show();
 return true;
 }
 case R.id.action_open_file_with:
 {
-((FileActivity)getActivity()).getFileOperationsHelper().openFile(uploadFile.getOCFile());
+Toast.makeText(getActivity(),"TO DO",Toast.LENGTH_SHORT).show();
 return true;
 }
 default :
