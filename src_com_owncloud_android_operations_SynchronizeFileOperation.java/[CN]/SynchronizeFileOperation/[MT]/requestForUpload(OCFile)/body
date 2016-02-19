@@ -1,4 +1,4 @@
 {
-  FileUploader.uploadUpdate(mContext,mAccount,file,true);
+  FileUploader.uploadUpdate(mContext,mAccount,file,FileUploader.LOCAL_BEHAVIOUR_MOVE,true);
   mTransferWasRequested=true;
 }

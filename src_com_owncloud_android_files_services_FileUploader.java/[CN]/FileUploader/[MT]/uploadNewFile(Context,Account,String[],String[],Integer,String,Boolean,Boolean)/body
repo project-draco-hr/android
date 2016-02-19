@@ -4,9 +4,9 @@
   intent.putExtra(FileUploader.KEY_ACCOUNT,account);
   intent.putExtra(FileUploader.KEY_LOCAL_FILE,localPaths);
   intent.putExtra(FileUploader.KEY_REMOTE_FILE,remotePaths);
-  if (behaviour != null)   intent.putExtra(FileUploader.KEY_LOCAL_BEHAVIOUR,behaviour);
-  if (mimeType != null)   intent.putExtra(FileUploader.KEY_MIME_TYPE,mimeType);
-  if (createRemoteFolder != null)   intent.putExtra(FileUploader.KEY_CREATE_REMOTE_FOLDER,createRemoteFolder);
-  if (wifiOnly != null)   intent.putExtra(FileUploader.KEY_WIFI_ONLY,wifiOnly);
+  intent.putExtra(FileUploader.KEY_LOCAL_BEHAVIOUR,behaviour);
+  intent.putExtra(FileUploader.KEY_MIME_TYPE,mimeType);
+  intent.putExtra(FileUploader.KEY_CREATE_REMOTE_FOLDER,createRemoteFolder);
+  intent.putExtra(FileUploader.KEY_WIFI_ONLY,wifiOnly);
   context.startService(intent);
 }

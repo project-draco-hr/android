@@ -20,7 +20,9 @@
     String[] localPaths=null, remotePaths=null, mimeTypes=null;
     OCFile[] files=null;
     if (intent.hasExtra(KEY_FILE)) {
-      files=(OCFile[])intent.getParcelableArrayExtra(KEY_FILE);
+      Parcelable[] files_temp=intent.getParcelableArrayExtra(KEY_FILE);
+      files=new OCFile[files_temp.length];
+      System.arraycopy(files_temp,0,files,0,files_temp.length);
     }
  else {
       localPaths=intent.getStringArrayExtra(KEY_LOCAL_FILE);
