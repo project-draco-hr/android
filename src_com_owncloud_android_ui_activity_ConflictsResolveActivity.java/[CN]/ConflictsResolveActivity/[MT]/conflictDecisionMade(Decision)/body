@@ -1,5 +1,4 @@
 {
-  Intent i=new Intent(getApplicationContext(),FileUploader.class);
   Integer behaviour=null;
   Boolean forceOverwrite=null;
 switch (decision) {
@@ -23,6 +22,6 @@ default :
 Log_OC.wtf(TAG,"Unhandled conflict decision " + decision);
 return;
 }
-FileUploader.uploadUpdate(getApplicationContext(),getAccount(),getFile(),behaviour,forceOverwrite);
+FileUploader.uploadUpdate(this,getAccount(),getFile(),behaviour,forceOverwrite);
 finish();
 }
