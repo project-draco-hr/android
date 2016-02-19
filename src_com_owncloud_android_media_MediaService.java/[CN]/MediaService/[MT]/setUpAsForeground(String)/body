@@ -1,14 +1,14 @@
 {
-  mNotification=new Notification();
-  mNotification.icon=android.R.drawable.ic_media_play;
-  mNotification.when=System.currentTimeMillis();
-  mNotification.flags|=Notification.FLAG_ONGOING_EVENT;
+  String ticker=String.format(getString(R.string.media_notif_ticker),getString(R.string.app_name));
+  mNotificationBuilder.setSmallIcon(R.drawable.ic_play_arrow);
+  mNotificationBuilder.setWhen(System.currentTimeMillis());
+  mNotificationBuilder.setOngoing(true);
   Intent showDetailsIntent=new Intent(this,FileDisplayActivity.class);
   showDetailsIntent.putExtra(FileActivity.EXTRA_FILE,mFile);
   showDetailsIntent.putExtra(FileActivity.EXTRA_ACCOUNT,mAccount);
   showDetailsIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-  mNotification.contentIntent=PendingIntent.getActivity(getApplicationContext(),(int)System.currentTimeMillis(),showDetailsIntent,PendingIntent.FLAG_UPDATE_CURRENT);
-  String ticker=String.format(getString(R.string.media_notif_ticker),getString(R.string.app_name));
-  mNotification.setLatestEventInfo(getApplicationContext(),ticker,content,mNotification.contentIntent);
-  startForeground(R.string.media_notif_ticker,mNotification);
+  mNotificationBuilder.setContentIntent(PendingIntent.getActivity(getApplicationContext(),(int)System.currentTimeMillis(),showDetailsIntent,PendingIntent.FLAG_UPDATE_CURRENT));
+  mNotificationBuilder.setContentTitle(ticker);
+  mNotificationBuilder.setContentText(content);
+  startForeground(R.string.media_notif_ticker,mNotificationBuilder.build());
 }

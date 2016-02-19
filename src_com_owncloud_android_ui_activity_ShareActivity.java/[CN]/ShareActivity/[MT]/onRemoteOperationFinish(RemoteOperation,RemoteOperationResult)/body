@@ -9,7 +9,7 @@
     Log_OC.d(TAG,"Share link = " + link);
     Intent intentToShareLink=new Intent(Intent.ACTION_SEND);
     intentToShareLink.putExtra(Intent.EXTRA_TEXT,link);
-    intentToShareLink.setType(HTTP.PLAIN_TEXT_TYPE);
+    intentToShareLink.setType("text/plain");
     String[] packagesToExclude=new String[]{getPackageName()};
     DialogFragment chooserDialog=ShareLinkToDialog.newInstance(intentToShareLink,packagesToExclude);
     chooserDialog.show(getSupportFragmentManager(),FTAG_CHOOSER_DIALOG);
