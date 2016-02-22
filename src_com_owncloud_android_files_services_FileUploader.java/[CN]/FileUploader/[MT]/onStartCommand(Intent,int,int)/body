@@ -59,8 +59,6 @@
           Log_OC.e(TAG,"obtainNewOCFileToUpload() returned null for remotePaths[i]:" + remotePaths[i] + " and localPaths[i]:"+ localPaths[i]);
           return Service.START_NOT_STICKY;
         }
-        storageManager.saveNewFile(files[i]);
-        files[i]=storageManager.getFileByLocalPath(files[i].getStoragePath());
       }
     }
     String uploadKey=null;
