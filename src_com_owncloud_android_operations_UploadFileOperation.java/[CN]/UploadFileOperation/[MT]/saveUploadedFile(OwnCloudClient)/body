@@ -1,0 +1,29 @@
+{
+  OCFile file=mFile;
+  if (file.fileExists()) {
+    file=getStorageManager().getFileById(file.getFileId());
+  }
+  long syncDate=System.currentTimeMillis();
+  file.setLastSyncDateForData(syncDate);
+  ReadRemoteFileOperation operation=new ReadRemoteFileOperation(getRemotePath());
+  RemoteOperationResult result=operation.execute(client);
+  if (result.isSuccess()) {
+    updateOCFile(file,(RemoteFile)result.getData().get(0));
+    file.setLastSyncDateForProperties(syncDate);
+  }
+ else {
+    Log_OC.e(TAG,"Error reading properties of file after successful upload; this is gonna hurt...");
+  }
+  if (mWasRenamed) {
+    OCFile oldFile=mOldFile;
+    if (oldFile.fileExists()) {
+      oldFile.setStoragePath(null);
+      getStorageManager().saveFile(oldFile);
+      getStorageManager().saveConflict(oldFile,null);
+    }
+  }
+  file.setNeedsUpdateThumbnail(true);
+  getStorageManager().saveFile(file);
+  getStorageManager().saveConflict(file,null);
+  FileDataStorageManager.triggerMediaScan(file.getStoragePath());
+}

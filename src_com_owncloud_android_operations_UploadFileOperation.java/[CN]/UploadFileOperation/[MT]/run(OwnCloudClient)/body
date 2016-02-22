@@ -4,6 +4,14 @@
   RemoteOperationResult result=null;
   File temporalFile=null, originalFile=new File(mOriginalStoragePath), expectedFile=null;
   try {
+    String remoteParentPath=new File(getRemotePath()).getParent();
+    remoteParentPath=remoteParentPath.endsWith(OCFile.PATH_SEPARATOR) ? remoteParentPath : remoteParentPath + OCFile.PATH_SEPARATOR;
+    RemoteOperationResult grantResult=grantFolderExistence(remoteParentPath,client);
+    if (!grantResult.isSuccess()) {
+      return result;
+    }
+    OCFile parent=getStorageManager().getFileByPath(remoteParentPath);
+    mFile.setParentId(parent.getFileId());
     Log_OC.d(TAG,"Checking name collision in server");
     if (!mForceOverwrite) {
       String remotePath=getAvailableRemotePath(client,mRemotePath);
@@ -90,6 +98,12 @@
         Log_OC.e(TAG,"Upload of " + mOriginalStoragePath + " to "+ mRemotePath+ ": "+ result.getLogMessage());
       }
     }
+  }
+  if (result.isSuccess()) {
+    saveUploadedFile(client);
+  }
+ else   if (result.getCode() == ResultCode.SYNC_CONFLICT) {
+    getStorageManager().saveConflict(mFile,mFile.getEtagInConflict());
   }
   return result;
 }
