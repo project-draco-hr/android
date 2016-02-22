@@ -86,7 +86,7 @@
         ocUpload.setUploadStatus(UploadStatus.UPLOAD_LATER);
         long id=mUploadsStorageManager.storeUpload(ocUpload);
         newUpload.setOCUploadId(id);
-        Pair<String,String> putResult=mPendingUploads.putIfAbsent(account.name,files[i].getRemotePath(),newUpload,null);
+        Pair<String,String> putResult=mPendingUploads.putIfAbsent(account.name,files[i].getRemotePath(),newUpload);
         if (putResult != null) {
           uploadKey=putResult.first;
           requestedUploads.add(uploadKey);
@@ -122,7 +122,7 @@ catch (    Exception e) {
     newUpload.addDatatransferProgressListener(this);
     newUpload.addDatatransferProgressListener((FileUploaderBinder)mBinder);
     newUpload.setOCUploadId(upload.getUploadId());
-    Pair<String,String> putResult=mPendingUploads.putIfAbsent(account.name,upload.getRemotePath(),newUpload,String.valueOf(upload.getUploadId()));
+    Pair<String,String> putResult=mPendingUploads.putIfAbsent(account.name,upload.getRemotePath(),newUpload);
     if (putResult != null) {
       String uploadKey=putResult.first;
       requestedUploads.add(uploadKey);
