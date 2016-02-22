@@ -14,6 +14,7 @@
     NetworkInfo networkInfo=intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
     if (networkInfo.isConnected()) {
       Log_OC.d(TAG,"Wifi is connected: " + String.valueOf(networkInfo));
+      wifiConnected(context);
     }
   }
  else   if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {

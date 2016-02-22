@@ -1,2 +1,15 @@
 {
+  boolean instantPictureWiFiOnly=instantPictureUploadViaWiFiOnly(context);
+  boolean instantVideoWiFiOnly=instantVideoUploadViaWiFiOnly(context);
+  if (instantPictureWiFiOnly || instantVideoWiFiOnly) {
+    Account account=AccountUtils.getCurrentOwnCloudAccount(context);
+    if (account == null) {
+      Log_OC.w(TAG,"No account found for instant upload, aborting");
+      return;
+    }
+    Intent i=new Intent(context,FileUploader.class);
+    i.putExtra(FileUploader.KEY_ACCOUNT,account);
+    i.putExtra(FileUploader.KEY_CANCEL_ALL,true);
+    context.startService(i);
+  }
 }

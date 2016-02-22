@@ -1,0 +1,3 @@
+{
+  Log_OC.w(TAG,"Automatic retry of uploads on WiFi recovery is temporarily disabled due to dev in progress");
+}
