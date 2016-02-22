@@ -3,6 +3,8 @@
   Log_OC.d(TAG,"Creating ownCloud media service");
   mWifiLock=((WifiManager)getSystemService(Context.WIFI_SERVICE)).createWifiLock(WifiManager.WIFI_MODE_FULL,MEDIA_WIFI_LOCK_TAG);
   mNotificationManager=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+  mNotificationBuilder=new NotificationCompat.Builder(this);
+  mNotificationBuilder.setColor(this.getResources().getColor(R.color.primary));
   mAudioManager=(AudioManager)getSystemService(AUDIO_SERVICE);
   mBinder=new MediaServiceBinder(this);
 }

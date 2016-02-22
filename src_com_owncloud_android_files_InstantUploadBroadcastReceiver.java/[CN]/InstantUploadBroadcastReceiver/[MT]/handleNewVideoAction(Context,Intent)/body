@@ -10,7 +10,7 @@
   }
   Account account=AccountUtils.getCurrentOwnCloudAccount(context);
   if (account == null) {
-    Log_OC.w(TAG,"No owncloud account found for instant upload, aborting");
+    Log_OC.w(TAG,"No account found for instant upload, aborting");
     return;
   }
   String[] CONTENT_PROJECTION={Video.Media.DATA,Video.Media.DISPLAY_NAME,Video.Media.MIME_TYPE,Video.Media.SIZE};
@@ -25,5 +25,5 @@
   c.close();
   Log_OC.d(TAG,file_path + "");
   int behaviour=getUploadBehaviour(context);
-  FileUploader.uploadNewFile(context,account,file_path,FileStorageUtils.getInstantUploadFilePath(context,file_name),behaviour,mime_type,true,instantPictureUploadViaWiFiOnly(context));
+  FileUploader.uploadNewFile(context,account,file_path,FileStorageUtils.getInstantVideoUploadFilePath(context,file_name),behaviour,mime_type,true,instantVideoUploadViaWiFiOnly(context));
 }
