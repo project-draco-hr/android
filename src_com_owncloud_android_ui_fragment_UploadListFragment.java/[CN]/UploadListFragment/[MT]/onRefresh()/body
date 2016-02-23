@@ -1,3 +1,5 @@
 {
+  mRefreshEmptyLayout.setRefreshing(false);
+  mRefreshListLayout.setRefreshing(false);
   mAdapter.notifyDataSetChanged();
 }
