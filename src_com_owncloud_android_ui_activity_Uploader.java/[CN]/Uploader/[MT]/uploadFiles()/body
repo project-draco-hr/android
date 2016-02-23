@@ -71,7 +71,7 @@
  else {
         throw new SecurityException();
       }
-      FileUploader.uploadNewFile(this,getAccount(),local.toArray(new String[local.size()]),remote.toArray(new String[remote.size()]),FileUploader.LOCAL_BEHAVIOUR_FORGET,null,false,UploadFileOperation.CREATED_BY_USER);
+      FileUploader.uploadNewFile(this,getAccount(),local.toArray(new String[local.size()]),remote.toArray(new String[remote.size()]),null,FileUploader.LOCAL_BEHAVIOUR_FORGET,false,UploadFileOperation.CREATED_BY_USER);
       SharedPreferences.Editor appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
       appPrefs.putString("last_upload_path",mUploadPath);
       appPrefs.apply();

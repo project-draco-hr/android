@@ -6,12 +6,7 @@
       cancelUploadsForAccount(mCurrentUpload.getAccount());
       return;
     }
-    if (mCurrentUpload.isInstantPicture() && PreferenceReader.instantPictureUploadViaWiFiOnly(this)) {
-      Log_OC.d(TAG,"Upload delayed until WiFi is available: " + mCurrentUpload.getRemotePath());
-      return;
-    }
-    if (mCurrentUpload.isInstantVideo() && PreferenceReader.instantVideoUploadViaWiFiOnly(this)) {
-      Log_OC.d(TAG,"Upload delayed until WiFi is available: " + mCurrentUpload.getRemotePath());
+    if (delayForWifi()) {
       return;
     }
     mUploadsStorageManager.updateDatabaseUploadStart(mCurrentUpload);

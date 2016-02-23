@@ -4,8 +4,8 @@
   intent.putExtra(FileUploader.KEY_ACCOUNT,account);
   intent.putExtra(FileUploader.KEY_LOCAL_FILE,localPaths);
   intent.putExtra(FileUploader.KEY_REMOTE_FILE,remotePaths);
+  intent.putExtra(FileUploader.KEY_MIME_TYPE,mimeTypes);
   intent.putExtra(FileUploader.KEY_LOCAL_BEHAVIOUR,behaviour);
-  intent.putExtra(FileUploader.KEY_MIME_TYPE,mimeType);
   intent.putExtra(FileUploader.KEY_CREATE_REMOTE_FOLDER,createRemoteFolder);
   intent.putExtra(FileUploader.KEY_CREATED_BY,createdBy);
   context.startService(intent);

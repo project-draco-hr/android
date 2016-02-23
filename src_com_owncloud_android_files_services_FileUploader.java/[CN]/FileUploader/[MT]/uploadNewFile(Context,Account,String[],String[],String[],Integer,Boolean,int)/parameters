@@ -2,7 +2,7 @@ Context context
 Account account
 String[] localPaths
 String[] remotePaths
+String[] mimeTypes
 Integer behaviour
-String mimeType
 Boolean createRemoteFolder
 int createdBy
