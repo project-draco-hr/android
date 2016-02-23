@@ -1,19 +1,11 @@
 {
 switch (value) {
 case 0:
-    return UPLOAD_LATER;
+    return UPLOAD_IN_PROGRESS;
 case 1:
-  return UPLOAD_FAILED_RETRY;
+  return UPLOAD_FAILED;
 case 2:
-return UPLOAD_IN_PROGRESS;
-case 3:
-return UPLOAD_PAUSED;
-case 4:
 return UPLOAD_SUCCEEDED;
-case 5:
-return UPLOAD_FAILED_GIVE_UP;
-case 6:
-return UPLOAD_CANCELLED;
 }
 return null;
 }

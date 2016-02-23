@@ -1,11 +1,6 @@
 {
-switch (this.getUploadStatus()) {
-case UPLOAD_CANCELLED:
-case UPLOAD_FAILED_RETRY:
-case UPLOAD_FAILED_GIVE_UP:
-case UPLOAD_LATER:
+  if (getUploadStatus() == UploadStatus.UPLOAD_FAILED) {
     return true;
-default :
+  }
   return false;
-}
 }

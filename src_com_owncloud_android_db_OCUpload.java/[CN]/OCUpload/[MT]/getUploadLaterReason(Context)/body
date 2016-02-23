@@ -21,7 +21,7 @@
   if (reason.length() > 1) {
     return reason.toString();
   }
-  if (getUploadStatus() == UploadStatus.UPLOAD_LATER) {
+  if (getUploadStatus() == UploadStatus.UPLOAD_IN_PROGRESS) {
     return context.getString(R.string.uploads_view_later_waiting_to_upload);
   }
   return null;

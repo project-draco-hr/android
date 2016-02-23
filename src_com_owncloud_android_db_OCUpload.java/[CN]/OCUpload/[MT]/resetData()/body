@@ -8,7 +8,7 @@
   mIsCreateRemoteFolder=false;
   mIsUseWifiOnly=true;
   mIsWhileChargingOnly=false;
-  mUploadStatus=UploadStatus.UPLOAD_LATER;
+  mUploadStatus=UploadStatus.UPLOAD_IN_PROGRESS;
   mLastResult=UploadResult.UNKNOWN;
   mCreatedBy=UploadFileOperation.CREATED_BY_USER;
 }

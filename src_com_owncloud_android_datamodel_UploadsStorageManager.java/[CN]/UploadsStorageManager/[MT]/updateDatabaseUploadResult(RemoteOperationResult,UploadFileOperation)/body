@@ -1,7 +1,7 @@
 {
   Log_OC.d(TAG,"updateDataseUploadResult uploadResult: " + uploadResult + " upload: "+ upload);
   if (uploadResult.isCancelled()) {
-    updateUploadStatus(upload.getOCUploadId(),UploadStatus.UPLOAD_CANCELLED,UploadResult.CANCELLED);
+    updateUploadStatus(upload.getOCUploadId(),UploadStatus.UPLOAD_FAILED,UploadResult.CANCELLED);
   }
  else {
     if (uploadResult.isSuccess()) {
@@ -9,10 +9,10 @@
     }
  else {
       if (shouldRetryFailedUpload(uploadResult)) {
-        updateUploadStatus(upload.getOCUploadId(),UploadStatus.UPLOAD_FAILED_RETRY,UploadResult.fromOperationResult(uploadResult));
+        updateUploadStatus(upload.getOCUploadId(),UploadStatus.UPLOAD_FAILED,UploadResult.fromOperationResult(uploadResult));
       }
  else {
-        updateUploadStatus(upload.getOCUploadId(),UploadsStorageManager.UploadStatus.UPLOAD_FAILED_GIVE_UP,UploadResult.fromOperationResult(uploadResult));
+        updateUploadStatus(upload.getOCUploadId(),UploadsStorageManager.UploadStatus.UPLOAD_FAILED,UploadResult.fromOperationResult(uploadResult));
       }
     }
   }

@@ -83,7 +83,7 @@
         ocUpload.setCreateRemoteFolder(isCreateRemoteFolder);
         ocUpload.setCreatedBy(createdBy);
         ocUpload.setLocalAction(localAction);
-        ocUpload.setUploadStatus(UploadStatus.UPLOAD_LATER);
+        ocUpload.setUploadStatus(UploadStatus.UPLOAD_IN_PROGRESS);
         long id=mUploadsStorageManager.storeUpload(ocUpload);
         newUpload.setOCUploadId(id);
         Pair<String,String> putResult=mPendingUploads.putIfAbsent(account.name,files[i].getRemotePath(),newUpload);
@@ -122,7 +122,7 @@ catch (    Exception e) {
     if (putResult != null) {
       String uploadKey=putResult.first;
       requestedUploads.add(uploadKey);
-      upload.setUploadStatus(UploadStatus.UPLOAD_LATER);
+      upload.setUploadStatus(UploadStatus.UPLOAD_IN_PROGRESS);
       mUploadsStorageManager.updateUpload(upload);
     }
   }

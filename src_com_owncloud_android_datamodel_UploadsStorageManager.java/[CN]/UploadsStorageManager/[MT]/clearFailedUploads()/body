@@ -1,8 +1,5 @@
 {
-  String[] whereArgs=new String[2];
-  whereArgs[0]=String.valueOf(UploadStatus.UPLOAD_CANCELLED.value);
-  whereArgs[1]=String.valueOf(UploadStatus.UPLOAD_FAILED_GIVE_UP.value);
-  long result=getDB().delete(ProviderTableMeta.CONTENT_URI_UPLOADS,ProviderTableMeta.UPLOADS_STATUS + "=? OR " + ProviderTableMeta.UPLOADS_STATUS+ "=?",whereArgs);
+  long result=getDB().delete(ProviderTableMeta.CONTENT_URI_UPLOADS,ProviderTableMeta.UPLOADS_STATUS + "==" + UploadStatus.UPLOAD_FAILED.value,null);
   Log_OC.d(TAG,"delete all failed uploads");
   if (result > 0) {
     notifyObserversNow();

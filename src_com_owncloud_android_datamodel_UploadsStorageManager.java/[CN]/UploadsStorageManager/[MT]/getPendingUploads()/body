@@ -1,3 +1,0 @@
-{
-  return getUploads(ProviderTableMeta.UPLOADS_STATUS + "==" + UploadStatus.UPLOAD_LATER.value+ " OR "+ ProviderTableMeta.UPLOADS_STATUS+ "=="+ UploadStatus.UPLOAD_FAILED_RETRY.value,null);
-}

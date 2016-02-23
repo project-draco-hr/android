@@ -12,7 +12,7 @@
     mUploadStatus=UploadStatus.valueOf(source.readString());
   }
  catch (  IllegalArgumentException x) {
-    mUploadStatus=UploadStatus.UPLOAD_LATER;
+    mUploadStatus=UploadStatus.UPLOAD_IN_PROGRESS;
   }
   try {
     mLastResult=UploadResult.valueOf(source.readString());

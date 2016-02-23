@@ -1,4 +1,0 @@
-{
-  Cursor c=getDB().query(ProviderTableMeta.CONTENT_URI_UPLOADS,null,ProviderTableMeta.UPLOADS_STATUS + "=? ",new String[]{Integer.toString(UploadStatus.UPLOAD_IN_PROGRESS.value)},null);
-  updateUploadInternal(c,UploadStatus.UPLOAD_LATER,UploadResult.UNKNOWN);
-}

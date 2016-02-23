@@ -1,9 +1,6 @@
 {
-switch (this.getUploadStatus()) {
-case UPLOAD_IN_PROGRESS:
-case UPLOAD_LATER:
+  if (getUploadStatus() == UploadStatus.UPLOAD_IN_PROGRESS) {
     return true;
-default :
+  }
   return false;
-}
 }
