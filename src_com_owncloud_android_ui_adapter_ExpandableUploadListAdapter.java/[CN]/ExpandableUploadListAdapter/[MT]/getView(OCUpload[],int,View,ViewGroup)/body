@@ -64,7 +64,7 @@ updateAccountCredentials.putExtra(AuthenticatorActivity.EXTRA_ACCOUNT,upload.get
 updateAccountCredentials.putExtra(AuthenticatorActivity.EXTRA_ACTION,AuthenticatorActivity.ACTION_UPDATE_EXPIRED_TOKEN);
 updateAccountCredentials.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
 updateAccountCredentials.addFlags(Intent.FLAG_FROM_BACKGROUND);
-mParentActivity.startActivity(updateAccountCredentials);
+mParentActivity.startActivityForResult(updateAccountCredentials,FileActivity.UPDATE_CREDENTIALS_REQUEST_CODE);
 }
 }
 );
@@ -139,7 +139,7 @@ refreshView();
 }
 );
 }
-if (upload.userCanRetryUpload()) {
+if (upload.userCanRetryUpload() && upload.getLastResult() != UploadResult.CREDENTIAL_ERROR) {
 view.setOnClickListener(new OnClickListener(){
 @Override public void onClick(View v){
 mParentActivity.getFileOperationsHelper().retryUpload(upload);
