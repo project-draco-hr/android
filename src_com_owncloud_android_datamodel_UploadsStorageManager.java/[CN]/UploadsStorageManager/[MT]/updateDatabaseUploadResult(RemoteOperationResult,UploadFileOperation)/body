@@ -1,7 +1,7 @@
 {
   Log_OC.d(TAG,"updateDataseUploadResult uploadResult: " + uploadResult + " upload: "+ upload);
   if (uploadResult.isCancelled()) {
-    updateUploadStatus(upload.getOCUploadId(),UploadStatus.UPLOAD_FAILED,UploadResult.CANCELLED);
+    removeUpload(upload.getAccount().name,upload.getRemotePath());
   }
  else {
     if (uploadResult.isSuccess()) {

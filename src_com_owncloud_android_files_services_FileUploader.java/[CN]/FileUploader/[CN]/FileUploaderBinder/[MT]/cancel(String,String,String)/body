@@ -8,10 +8,7 @@
     boolean pending=!upload.isUploadInProgress();
     upload.cancel();
     if (pending) {
-      OCUpload ocUpload=mUploadsStorageManager.getUploadByLocalPath(localPath)[0];
-      ocUpload.setUploadStatus(UploadStatus.UPLOAD_FAILED);
-      ocUpload.setLastResult(UploadResult.CANCELLED);
-      mUploadsStorageManager.updateUploadStatus(ocUpload);
+      mUploadsStorageManager.removeUpload(accountName,remotePath);
     }
   }
 }

@@ -1,9 +1,10 @@
 {
   Intent myIntent=new Intent(android.content.Intent.ACTION_VIEW);
   File file=new File(localPath);
-  String extension=android.webkit.MimeTypeMap.getFileExtensionFromUrl(Uri.fromFile(file).toString());
-  String mimetype=android.webkit.MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
-  if (mimetype == null)   mimetype="*/*";
+  String mimetype=MimetypeIconUtil.getBestMimeTypeByFilename(localPath);
+  if ("application/octet-stream".equals(mimetype)) {
+    mimetype="*/*";
+  }
   myIntent.setDataAndType(Uri.fromFile(file),mimetype);
   try {
     startActivity(myIntent);

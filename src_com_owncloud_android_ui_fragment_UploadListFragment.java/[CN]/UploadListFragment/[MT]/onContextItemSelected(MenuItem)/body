@@ -10,11 +10,6 @@ case R.id.action_cancel_upload:
     uploaderBinder.cancel(uploadFile);
   }
 return true;
-case R.id.action_remove_upload:
-{
-((FileActivity)getActivity()).getFileOperationsHelper().removeUploadFromList(uploadFile);
-return true;
-}
 case R.id.action_see_details:
 {
 Toast.makeText(getActivity(),"TO DO",Toast.LENGTH_SHORT).show();

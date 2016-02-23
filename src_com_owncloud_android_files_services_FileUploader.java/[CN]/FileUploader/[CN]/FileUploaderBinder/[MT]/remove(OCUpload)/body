@@ -1,6 +1,0 @@
-{
-  int d=mUploadsStorageManager.removeUpload(upload.getUploadId());
-  if (d == 0) {
-    Log_OC.e(TAG,"Could not delete upload " + upload.getRemotePath() + " from database.");
-  }
-}

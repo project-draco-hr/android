@@ -123,6 +123,7 @@ rightButton.setOnClickListener(new OnClickListener(){
 FileUploader.FileUploaderBinder uploaderBinder=mParentActivity.getFileUploaderBinder();
 if (uploaderBinder != null) {
 uploaderBinder.cancel(upload);
+refreshView();
 }
 }
 }
@@ -132,7 +133,7 @@ uploaderBinder.cancel(upload);
 rightButton.setImageResource(R.drawable.ic_delete);
 rightButton.setOnClickListener(new OnClickListener(){
 @Override public void onClick(View v){
-mParentActivity.getFileOperationsHelper().removeUploadFromList(upload);
+mUploadsStorageManager.removeUpload(upload);
 refreshView();
 }
 }

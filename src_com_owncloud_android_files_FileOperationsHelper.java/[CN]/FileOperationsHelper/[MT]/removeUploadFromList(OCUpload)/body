@@ -1,9 +1,0 @@
-{
-  FileUploaderBinder uploaderBinder=mFileActivity.getFileUploaderBinder();
-  if (uploaderBinder != null) {
-    uploaderBinder.remove(upload);
-  }
- else {
-    Log_OC.w(TAG,"uploaderBinder not set. Cannot remove " + upload.getLocalPath());
-  }
-}

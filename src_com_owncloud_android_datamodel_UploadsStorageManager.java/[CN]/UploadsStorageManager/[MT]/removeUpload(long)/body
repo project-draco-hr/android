@@ -1,8 +1,0 @@
-{
-  int result=getDB().delete(ProviderTableMeta.CONTENT_URI_UPLOADS,ProviderTableMeta._ID + "=?",new String[]{String.valueOf(id)});
-  Log_OC.d(TAG,"delete returns with: " + result + " for file: "+ id);
-  if (result > 0) {
-    notifyObserversNow();
-  }
-  return result;
-}
