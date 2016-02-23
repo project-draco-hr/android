@@ -20,4 +20,5 @@
  catch (  IllegalArgumentException x) {
     mLastResult=UploadResult.UNKNOWN;
   }
+  mCreatedBy=source.readInt();
 }

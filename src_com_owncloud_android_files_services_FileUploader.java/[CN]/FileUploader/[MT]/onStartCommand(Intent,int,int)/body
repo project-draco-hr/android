@@ -39,7 +39,7 @@
     boolean forceOverwrite=intent.getBooleanExtra(KEY_FORCE_OVERWRITE,false);
     int localAction=intent.getIntExtra(KEY_LOCAL_BEHAVIOUR,LOCAL_BEHAVIOUR_FORGET);
     boolean isCreateRemoteFolder=intent.getBooleanExtra(KEY_CREATE_REMOTE_FOLDER,false);
-    boolean isUseWifiOnly=intent.getBooleanExtra(KEY_WIFI_ONLY,true);
+    int createdBy=intent.getIntExtra(KEY_CREATED_BY,UploadFileOperation.CREATED_BY_USER);
     boolean isWhileChargingOnly=intent.getBooleanExtra(KEY_WHILE_CHARGING_ONLY,false);
     if (intent.hasExtra(KEY_FILE) && files == null) {
       Log_OC.e(TAG,"Incorrect array for OCFiles provided in upload intent");
@@ -72,6 +72,7 @@
     try {
       for (int i=0; i < files.length; i++) {
         newUpload=new UploadFileOperation(account,files[i],chunked,forceOverwrite,localAction,this);
+        newUpload.setCreatedBy(createdBy);
         if (isCreateRemoteFolder) {
           newUpload.setRemoteFolderToBeCreated();
         }
@@ -80,9 +81,8 @@
         OCUpload ocUpload=new OCUpload(files[i],account);
         ocUpload.setForceOverwrite(forceOverwrite);
         ocUpload.setCreateRemoteFolder(isCreateRemoteFolder);
+        ocUpload.setCreatedBy(createdBy);
         ocUpload.setLocalAction(localAction);
-        ocUpload.setUseWifiOnly(isUseWifiOnly);
-        ocUpload.setWhileChargingOnly(isWhileChargingOnly);
         ocUpload.setUploadStatus(UploadStatus.UPLOAD_LATER);
         long id=mUploadsStorageManager.storeUpload(ocUpload);
         newUpload.setOCUploadId(id);
@@ -116,12 +116,8 @@ catch (    Exception e) {
     }
     OCUpload upload=intent.getParcelableExtra(KEY_RETRY_UPLOAD);
     UploadFileOperation newUpload=new UploadFileOperation(account,upload,chunked,upload.isForceOverwrite(),upload.getLocalAction(),this);
-    if (upload.isCreateRemoteFolder()) {
-      newUpload.setRemoteFolderToBeCreated();
-    }
     newUpload.addDatatransferProgressListener(this);
     newUpload.addDatatransferProgressListener((FileUploaderBinder)mBinder);
-    newUpload.setOCUploadId(upload.getUploadId());
     Pair<String,String> putResult=mPendingUploads.putIfAbsent(account.name,upload.getRemotePath(),newUpload);
     if (putResult != null) {
       String uploadKey=putResult.first;

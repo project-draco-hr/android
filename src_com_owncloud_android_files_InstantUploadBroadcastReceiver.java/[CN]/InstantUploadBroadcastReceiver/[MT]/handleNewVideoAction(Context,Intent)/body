@@ -3,8 +3,8 @@
   String file_path=null;
   String file_name=null;
   String mime_type=null;
-  Log_OC.w(TAG,"New video received");
-  if (!instantVideoUploadEnabled(context)) {
+  Log_OC.i(TAG,"New video received");
+  if (!PreferenceReader.instantVideoUploadEnabled(context)) {
     Log_OC.d(TAG,"Instant video upload disabled, ignoring new video");
     return;
   }
@@ -25,5 +25,5 @@
   c.close();
   Log_OC.d(TAG,file_path + "");
   int behaviour=getUploadBehaviour(context);
-  FileUploader.uploadNewFile(context,account,file_path,FileStorageUtils.getInstantVideoUploadFilePath(context,file_name),behaviour,mime_type,true,instantVideoUploadViaWiFiOnly(context));
+  FileUploader.uploadNewFile(context,account,file_path,FileStorageUtils.getInstantVideoUploadFilePath(context,file_name),behaviour,mime_type,true,UploadFileOperation.CREATED_AS_INSTANT_VIDEO);
 }

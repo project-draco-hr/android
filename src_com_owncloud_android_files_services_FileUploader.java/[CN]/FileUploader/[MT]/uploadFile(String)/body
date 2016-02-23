@@ -1,40 +1,46 @@
 {
   mCurrentUpload=mPendingUploads.get(uploadKey);
   if (mCurrentUpload != null) {
-    if (AccountUtils.exists(mCurrentUpload.getAccount(),getApplicationContext())) {
-      Log_OC.d(TAG,"Account " + mCurrentUpload.getAccount().name + " exists");
-      mUploadsStorageManager.updateDatabaseUploadStart(mCurrentUpload);
-      notifyUploadStart(mCurrentUpload);
-      RemoteOperationResult uploadResult=null;
-      try {
-        if (mCurrentAccount == null || !mCurrentAccount.equals(mCurrentUpload.getAccount())) {
-          mCurrentAccount=mCurrentUpload.getAccount();
-          mStorageManager=new FileDataStorageManager(mCurrentAccount,getContentResolver());
-        }
-        OwnCloudAccount ocAccount=new OwnCloudAccount(mCurrentAccount,this);
-        mUploadClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,this);
-        uploadResult=mCurrentUpload.execute(mUploadClient,mStorageManager);
-      }
- catch (      Exception e) {
-        Log_OC.e(TAG,"Error uploading",e);
-        uploadResult=new RemoteOperationResult(e);
-      }
- finally {
-        Pair<UploadFileOperation,String> removeResult;
-        if (mCurrentUpload.wasRenamed()) {
-          removeResult=mPendingUploads.removePayload(mCurrentAccount.name,mCurrentUpload.getOldFile().getRemotePath());
-        }
- else {
-          removeResult=mPendingUploads.removePayload(mCurrentAccount.name,mCurrentUpload.getRemotePath());
-        }
-        mUploadsStorageManager.updateDatabaseUploadResult(uploadResult,mCurrentUpload);
-        notifyUploadResult(mCurrentUpload,uploadResult);
-        sendBroadcastUploadFinished(mCurrentUpload,uploadResult,removeResult.second);
-      }
-    }
- else {
-      Log_OC.d(TAG,"Account " + mCurrentUpload.getAccount().toString() + " doesn't exist");
+    if (!AccountUtils.exists(mCurrentUpload.getAccount(),this)) {
+      Log_OC.w(TAG,"Account " + mCurrentUpload.getAccount().name + " does not exist anymore -> cancelling all its uploads");
       cancelUploadsForAccount(mCurrentUpload.getAccount());
+      return;
+    }
+    if (mCurrentUpload.isInstantPicture() && PreferenceReader.instantPictureUploadViaWiFiOnly(this)) {
+      Log_OC.d(TAG,"Upload delayed until WiFi is available: " + mCurrentUpload.getRemotePath());
+      return;
+    }
+    if (mCurrentUpload.isInstantVideo() && PreferenceReader.instantVideoUploadViaWiFiOnly(this)) {
+      Log_OC.d(TAG,"Upload delayed until WiFi is available: " + mCurrentUpload.getRemotePath());
+      return;
+    }
+    mUploadsStorageManager.updateDatabaseUploadStart(mCurrentUpload);
+    notifyUploadStart(mCurrentUpload);
+    RemoteOperationResult uploadResult=null;
+    try {
+      if (mCurrentAccount == null || !mCurrentAccount.equals(mCurrentUpload.getAccount())) {
+        mCurrentAccount=mCurrentUpload.getAccount();
+        mStorageManager=new FileDataStorageManager(mCurrentAccount,getContentResolver());
+      }
+      OwnCloudAccount ocAccount=new OwnCloudAccount(mCurrentAccount,this);
+      mUploadClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,this);
+      uploadResult=mCurrentUpload.execute(mUploadClient,mStorageManager);
+    }
+ catch (    Exception e) {
+      Log_OC.e(TAG,"Error uploading",e);
+      uploadResult=new RemoteOperationResult(e);
+    }
+ finally {
+      Pair<UploadFileOperation,String> removeResult;
+      if (mCurrentUpload.wasRenamed()) {
+        removeResult=mPendingUploads.removePayload(mCurrentAccount.name,mCurrentUpload.getOldFile().getRemotePath());
+      }
+ else {
+        removeResult=mPendingUploads.removePayload(mCurrentAccount.name,mCurrentUpload.getRemotePath());
+      }
+      mUploadsStorageManager.updateDatabaseUploadResult(uploadResult,mCurrentUpload);
+      notifyUploadResult(mCurrentUpload,uploadResult);
+      sendBroadcastUploadFinished(mCurrentUpload,uploadResult,removeResult.second);
     }
   }
 }

@@ -43,5 +43,5 @@
     remotePath+=new File(filePath).getName();
   }
   int behaviour=(resultCode == UploadFilesActivity.RESULT_OK_AND_MOVE) ? FileUploader.LOCAL_BEHAVIOUR_MOVE : FileUploader.LOCAL_BEHAVIOUR_COPY;
-  FileUploader.uploadNewFile(this,getAccount(),filePath,remotePath,behaviour,mimeType,false,false);
+  FileUploader.uploadNewFile(this,getAccount(),filePath,remotePath,behaviour,mimeType,false,UploadFileOperation.CREATED_BY_USER);
 }

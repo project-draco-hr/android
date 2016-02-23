@@ -1,6 +1,6 @@
 {
-  boolean instantPictureWiFiOnly=instantPictureUploadViaWiFiOnly(context);
-  boolean instantVideoWiFiOnly=instantVideoUploadViaWiFiOnly(context);
+  boolean instantPictureWiFiOnly=PreferenceReader.instantPictureUploadViaWiFiOnly(context);
+  boolean instantVideoWiFiOnly=PreferenceReader.instantVideoUploadViaWiFiOnly(context);
   if (instantPictureWiFiOnly || instantVideoWiFiOnly) {
     Account account=AccountUtils.getCurrentOwnCloudAccount(context);
     if (account == null) {

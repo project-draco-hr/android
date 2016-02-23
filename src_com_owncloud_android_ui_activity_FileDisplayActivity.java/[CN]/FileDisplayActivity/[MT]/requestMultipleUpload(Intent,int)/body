@@ -7,7 +7,7 @@
       remotePaths[j]=remotePathBase + (new File(filePaths[j])).getName();
     }
     int behaviour=(resultCode == UploadFilesActivity.RESULT_OK_AND_MOVE) ? FileUploader.LOCAL_BEHAVIOUR_MOVE : FileUploader.LOCAL_BEHAVIOUR_COPY;
-    FileUploader.uploadNewFile(this,getAccount(),filePaths,remotePaths,behaviour,null,false,false);
+    FileUploader.uploadNewFile(this,getAccount(),filePaths,remotePaths,behaviour,null,false,UploadFileOperation.CREATED_BY_USER);
   }
  else {
     Log_OC.d(TAG,"User clicked on 'Update' with no selection");

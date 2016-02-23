@@ -13,4 +13,7 @@
   mOriginalStoragePath=mFile.getStoragePath();
   mOriginalFileName=mFile.getFileName();
   mContext=context;
+  mOCUploadId=upload.getUploadId();
+  mCreatedBy=upload.getCreadtedBy();
+  mRemoteFolderToBeCreated=upload.isCreateRemoteFolder();
 }

@@ -10,4 +10,5 @@
   dest.writeInt(mIsWhileChargingOnly ? 1 : 0);
   dest.writeString(mUploadStatus.name());
   dest.writeString(((mLastResult == null) ? "" : mLastResult.name()));
+  dest.writeInt(mCreatedBy);
 }

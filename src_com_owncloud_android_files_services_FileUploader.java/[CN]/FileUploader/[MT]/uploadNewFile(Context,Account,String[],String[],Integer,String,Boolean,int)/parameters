@@ -5,4 +5,4 @@ String[] remotePaths
 Integer behaviour
 String mimeType
 Boolean createRemoteFolder
-Boolean wifiOnly
+int createdBy

@@ -5,4 +5,4 @@ String remotePath
 int behaviour
 String mimeType
 boolean createRemoteFile
-boolean wifiOnly
+int createdBy

@@ -3,7 +3,7 @@
     dismissWaitingCopyDialog();
   }
   if (result != null) {
-    FileUploader.uploadNewFile(this,getAccount(),result,mRemoteCacheData.get(index),FileUploader.LOCAL_BEHAVIOUR_FORGET,null,false,false);
+    FileUploader.uploadNewFile(this,getAccount(),result,mRemoteCacheData.get(index),FileUploader.LOCAL_BEHAVIOUR_FORGET,null,false,UploadFileOperation.CREATED_BY_USER);
   }
  else {
     String message=String.format(getString(R.string.uploader_error_forbidden_content),getString(R.string.app_name));

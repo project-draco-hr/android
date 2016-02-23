@@ -1,0 +1,3 @@
+{
+  return mCreatedBy == CREATED_AS_INSTANT_PICTURE;
+}

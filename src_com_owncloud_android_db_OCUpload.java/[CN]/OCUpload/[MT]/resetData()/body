@@ -10,4 +10,5 @@
   mIsWhileChargingOnly=false;
   mUploadStatus=UploadStatus.UPLOAD_LATER;
   mLastResult=UploadResult.UNKNOWN;
+  mCreatedBy=UploadFileOperation.CREATED_BY_USER;
 }
