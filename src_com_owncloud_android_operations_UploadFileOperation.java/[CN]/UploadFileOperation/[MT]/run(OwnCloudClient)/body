@@ -3,6 +3,10 @@
   mUploadStarted.set(true);
   RemoteOperationResult result=null;
   File temporalFile=null, originalFile=new File(mOriginalStoragePath), expectedFile=null;
+  if (!originalFile.exists()) {
+    Log_OC.d(TAG,mOriginalStoragePath.toString() + " not exists anymore");
+    return new RemoteOperationResult(ResultCode.LOCAL_FILE_NOT_FOUND);
+  }
   try {
     String remoteParentPath=new File(getRemotePath()).getParent();
     remoteParentPath=remoteParentPath.endsWith(OCFile.PATH_SEPARATOR) ? remoteParentPath : remoteParentPath + OCFile.PATH_SEPARATOR;
