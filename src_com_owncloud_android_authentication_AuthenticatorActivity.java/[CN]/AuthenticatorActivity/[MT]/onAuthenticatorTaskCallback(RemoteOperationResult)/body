@@ -21,7 +21,7 @@
     }
     if (success) {
       if (mAction == ACTION_UPDATE_EXPIRED_TOKEN) {
-        setResult(FileActivity.RESULT_OK);
+        setResult(Activity.RESULT_OK);
       }
       finish();
     }
