@@ -21,7 +21,7 @@
  else {
       mNotificationBuilder.setContentText(content);
     }
-    if (!uploadResult.isSuccess()) {
+    if (!uploadResult.isSuccess() && !needsToUpdateCredentials) {
       Intent showUploadListIntent=new Intent(this,UploadListActivity.class);
       showUploadListIntent.putExtra(FileActivity.EXTRA_FILE,upload.getFile());
       showUploadListIntent.putExtra(FileActivity.EXTRA_ACCOUNT,upload.getAccount());

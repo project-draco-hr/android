@@ -1,0 +1,9 @@
+{
+  UploadsStorageManager uploadsStorageManager=new UploadsStorageManager(context.getContentResolver());
+  OCUpload[] failedUploads=uploadsStorageManager.getFailedUploads();
+  for (  OCUpload upload : failedUploads) {
+    if (upload.getAccountName().equals(account.name) && upload.getLastResult() == UploadResult.CREDENTIAL_ERROR) {
+      retry(context,account,upload);
+    }
+  }
+}

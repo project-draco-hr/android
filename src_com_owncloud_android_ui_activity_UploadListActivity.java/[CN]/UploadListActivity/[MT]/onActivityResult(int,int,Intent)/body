@@ -1,0 +1,7 @@
+{
+  super.onActivityResult(requestCode,resultCode,data);
+  Log_OC.e(TAG,"onActivityResult " + resultCode);
+  if (requestCode == UPDATE_CREDENTIALS_REQUEST_CODE && resultCode == FileActivity.RESULT_OK) {
+    FileUploader.retryUploadsForAccount(getAccount(),this);
+  }
+}
