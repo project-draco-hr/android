@@ -1,0 +1,19 @@
+{
+  getFabUpload().setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      Intent action=new Intent(getActivity(),UploadFilesActivity.class);
+      action.putExtra(UploadFilesActivity.EXTRA_ACCOUNT,((FileActivity)getActivity()).getAccount());
+      getActivity().startActivityForResult(action,FileDisplayActivity.ACTION_SELECT_MULTIPLE_FILES);
+      getFabMain().collapse();
+      recordMiniFabClick();
+    }
+  }
+);
+  getFabUpload().setOnLongClickListener(new View.OnLongClickListener(){
+    @Override public boolean onLongClick(    View v){
+      Toast.makeText(getActivity(),R.string.actionbar_upload,Toast.LENGTH_SHORT).show();
+      return true;
+    }
+  }
+);
+}

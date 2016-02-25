@@ -1,0 +1,18 @@
+{
+  getFabMkdir().setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View v){
+      CreateFolderDialogFragment dialog=CreateFolderDialogFragment.newInstance(mFile);
+      dialog.show(getActivity().getSupportFragmentManager(),FileDisplayActivity.DIALOG_CREATE_FOLDER);
+      getFabMain().collapse();
+      recordMiniFabClick();
+    }
+  }
+);
+  getFabMkdir().setOnLongClickListener(new View.OnLongClickListener(){
+    @Override public boolean onLongClick(    View v){
+      Toast.makeText(getActivity(),R.string.actionbar_mkdir,Toast.LENGTH_SHORT).show();
+      return true;
+    }
+  }
+);
+}

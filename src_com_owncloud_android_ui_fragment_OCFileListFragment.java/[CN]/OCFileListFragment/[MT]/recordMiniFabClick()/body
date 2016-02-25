@@ -1,0 +1,7 @@
+{
+  if (!miniFabClicked) {
+    final SharedPreferences sp=PreferenceManager.getDefaultSharedPreferences(getActivity());
+    sp.edit().putLong(KEY_FAB_EVER_CLICKED,1).commit();
+    miniFabClicked=true;
+  }
+}

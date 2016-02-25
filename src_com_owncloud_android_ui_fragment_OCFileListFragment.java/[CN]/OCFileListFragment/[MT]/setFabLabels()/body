@@ -1,0 +1,5 @@
+{
+  getFabUpload().setTitle(getResources().getString(R.string.actionbar_upload));
+  getFabMkdir().setTitle(getResources().getString(R.string.actionbar_mkdir));
+  getFabUploadFromApp().setTitle(getResources().getString(R.string.actionbar_upload_from_apps));
+}
