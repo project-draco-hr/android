@@ -6,6 +6,7 @@
     Log_OC.v(TAG,"Updating " + path + " with status:"+ status+ " and result:"+ (result == null ? "null" : result.toString())+ " (old:"+ upload.toFormattedString()+ ")");
     upload.setUploadStatus(status);
     upload.setLastResult(result);
+    upload.setRemotePath(remotePath);
     r=updateUpload(upload);
   }
   c.close();
