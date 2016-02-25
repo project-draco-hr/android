@@ -9,6 +9,7 @@
   dest.writeInt(mIsUseWifiOnly ? 1 : 0);
   dest.writeInt(mIsWhileChargingOnly ? 1 : 0);
   dest.writeString(mUploadStatus.name());
+  dest.writeLong(mUploadEndTimeStamp);
   dest.writeString(((mLastResult == null) ? "" : mLastResult.name()));
   dest.writeInt(mCreatedBy);
 }

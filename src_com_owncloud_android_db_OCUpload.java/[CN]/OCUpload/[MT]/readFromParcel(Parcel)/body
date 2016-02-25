@@ -14,6 +14,7 @@
  catch (  IllegalArgumentException x) {
     mUploadStatus=UploadStatus.UPLOAD_IN_PROGRESS;
   }
+  mUploadEndTimeStamp=source.readLong();
   try {
     mLastResult=UploadResult.valueOf(source.readString());
   }
