@@ -7,6 +7,9 @@
     upload.setUploadStatus(status);
     upload.setLastResult(result);
     upload.setRemotePath(remotePath);
+    if (status == UploadStatus.UPLOAD_SUCCEEDED) {
+      upload.setUploadEndTimestamp(Calendar.getInstance().getTimeInMillis());
+    }
     r=updateUpload(upload);
   }
   c.close();

@@ -20,7 +20,7 @@
     TextView fileSizeTextView=(TextView)view.findViewById(R.id.upload_file_size);
     fileSizeTextView.setText(DisplayUtils.bytesToHumanReadable(remoteFile.length()) + ", ");
     TextView uploadDateTextView=(TextView)view.findViewById(R.id.upload_date);
-    long updateTime=(new File(upload.getLocalPath())).lastModified();
+    long updateTime=upload.getUploadEndTimestamp();
     CharSequence dateString=DisplayUtils.getRelativeDateTimeString(mParentActivity,updateTime,DateUtils.SECOND_IN_MILLIS,DateUtils.WEEK_IN_MILLIS,0);
     uploadDateTextView.setText(dateString);
     TextView accountNameTextView=(TextView)view.findViewById(R.id.upload_account);
