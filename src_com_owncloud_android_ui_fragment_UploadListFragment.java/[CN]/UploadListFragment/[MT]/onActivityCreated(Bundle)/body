@@ -1,6 +1,4 @@
 {
   Log_OC.d(TAG,"onActivityCreated() start");
   super.onActivityCreated(savedInstanceState);
-  registerForContextMenu(getListView());
-  getListView().setOnCreateContextMenuListener(this);
 }
