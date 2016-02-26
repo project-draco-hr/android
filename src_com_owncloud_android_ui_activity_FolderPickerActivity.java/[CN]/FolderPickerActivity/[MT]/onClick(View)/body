@@ -6,7 +6,7 @@
     Intent i=getIntent();
     Parcelable targetFile=i.getParcelableExtra(FolderPickerActivity.EXTRA_FILE);
     Intent data=new Intent();
-    data.putExtra(EXTRA_FOLDER,(Parcelable)getCurrentFolder());
+    data.putExtra(EXTRA_FOLDER,getCurrentFolder());
     if (targetFile != null) {
       data.putExtra(EXTRA_FILE,targetFile);
     }

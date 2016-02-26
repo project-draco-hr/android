@@ -1,8 +1,7 @@
 {
   MediaPlayer currentPlayer=mService.getPlayer();
   if (currentPlayer != null) {
-    int pos=currentPlayer.getCurrentPosition();
-    return pos;
+    return currentPlayer.getCurrentPosition();
   }
  else {
     return 0;

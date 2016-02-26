@@ -53,7 +53,7 @@ return true;
 case R.id.action_move:
 {
 Intent action=new Intent(getActivity(),FolderPickerActivity.class);
-action.putExtra(FolderPickerActivity.EXTRA_FILE,(Parcelable)mTargetFile);
+action.putExtra(FolderPickerActivity.EXTRA_FILE,mTargetFile);
 getActivity().startActivityForResult(action,FileDisplayActivity.ACTION_MOVE_FILES);
 return true;
 }
@@ -69,7 +69,7 @@ return true;
 }
 case R.id.action_copy:
 Intent action=new Intent(getActivity(),FolderPickerActivity.class);
-action.putExtra(FolderPickerActivity.EXTRA_FILE,(Parcelable)mTargetFile);
+action.putExtra(FolderPickerActivity.EXTRA_FILE,mTargetFile);
 getActivity().startActivityForResult(action,FileDisplayActivity.ACTION_COPY_FILES);
 return true;
 default :

@@ -17,7 +17,7 @@
     return Service.START_NOT_STICKY;
   }
   OwnCloudVersion ocv=AccountUtils.getServerVersion(account);
-  boolean chunked=FileUploader.chunkedUploadIsSupported(ocv);
+  boolean chunked=ocv.isChunkedUploadSupported();
   if (!retry) {
     if (!(intent.hasExtra(KEY_LOCAL_FILE) || intent.hasExtra(KEY_FILE))) {
       Log_OC.e(TAG,"Not enough information provided in intent");
@@ -35,12 +35,10 @@
       remotePaths=intent.getStringArrayExtra(KEY_REMOTE_FILE);
       mimeTypes=intent.getStringArrayExtra(KEY_MIME_TYPE);
     }
-    FileDataStorageManager storageManager=new FileDataStorageManager(account,getContentResolver());
     boolean forceOverwrite=intent.getBooleanExtra(KEY_FORCE_OVERWRITE,false);
     int localAction=intent.getIntExtra(KEY_LOCAL_BEHAVIOUR,LOCAL_BEHAVIOUR_FORGET);
     boolean isCreateRemoteFolder=intent.getBooleanExtra(KEY_CREATE_REMOTE_FOLDER,false);
     int createdBy=intent.getIntExtra(KEY_CREATED_BY,UploadFileOperation.CREATED_BY_USER);
-    boolean isWhileChargingOnly=intent.getBooleanExtra(KEY_WHILE_CHARGING_ONLY,false);
     if (intent.hasExtra(KEY_FILE) && files == null) {
       Log_OC.e(TAG,"Incorrect array for OCFiles provided in upload intent");
       return Service.START_NOT_STICKY;

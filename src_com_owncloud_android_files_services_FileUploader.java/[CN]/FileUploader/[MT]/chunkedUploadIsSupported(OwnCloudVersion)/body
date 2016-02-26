@@ -1,3 +1,0 @@
-{
-  return (version != null && version.compareTo(OwnCloudVersion.owncloud_v4_5) >= 0);
-}

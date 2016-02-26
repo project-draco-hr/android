@@ -91,7 +91,6 @@ break;
 }
  else {
 status=mParentActivity.getString(R.string.uploads_view_upload_status_failed);
-;
 }
 String laterReason=upload.getUploadLaterReason(mParentActivity);
 if (laterReason != null) {
