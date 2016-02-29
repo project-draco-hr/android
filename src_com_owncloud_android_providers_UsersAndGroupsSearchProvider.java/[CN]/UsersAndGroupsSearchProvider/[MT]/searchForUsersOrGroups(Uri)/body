@@ -9,6 +9,14 @@
     for (    Object o : result.getData()) {
       names.add((JSONObject)o);
     }
+    if (userQuery.contains("@")) {
+      try {
+        names.add(new JSONObject("{\"" + GetRemoteShareesOperation.NODE_VALUE + "\":{\""+ GetRemoteShareesOperation.PROPERTY_SHARE_WITH+ "\":"+ userQuery+ "\",\""+ GetRemoteShareesOperation.PROPERTY_SHARE_TYPE+ "\":6},"+ "\""+ GetRemoteShareesOperation.PROPERTY_LABEL+ "\":\""+ userQuery+ " (remote)\"}]}"));
+      }
+ catch (      JSONException e) {
+        e.printStackTrace();
+      }
+    }
   }
  else {
     showErrorMessage(result);
