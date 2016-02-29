@@ -9,22 +9,14 @@
     for (    Object o : result.getData()) {
       names.add((JSONObject)o);
     }
-    if (userQuery.contains("@")) {
-      try {
-        names.add(new JSONObject("{\"" + GetRemoteShareesOperation.NODE_VALUE + "\":{\""+ GetRemoteShareesOperation.PROPERTY_SHARE_WITH+ "\":"+ userQuery+ "\",\""+ GetRemoteShareesOperation.PROPERTY_SHARE_TYPE+ "\":6},"+ "\""+ GetRemoteShareesOperation.PROPERTY_LABEL+ "\":\""+ userQuery+ " (remote)\"}]}"));
-      }
- catch (      JSONException e) {
-        e.printStackTrace();
-      }
-    }
   }
  else {
     showErrorMessage(result);
   }
+  int count=0;
   if (names.size() > 0) {
     response=new MatrixCursor(COLUMNS);
     Iterator<JSONObject> namesIt=names.iterator();
-    int count=0;
     JSONObject item;
     String displayName;
     Uri dataUri;
@@ -51,6 +43,13 @@
  catch (    JSONException e) {
       Log_OC.e(TAG,"Exception while parsing data of users/groups",e);
     }
+  }
+  if (userQuery.contains("@")) {
+    if (response == null)     response=new MatrixCursor(COLUMNS);
+    Uri remoteBaseUri=new Uri.Builder().scheme("content").authority(DATA_REMOTE).build();
+    String displayName=getContext().getString(R.string.share_remote_clarification,userQuery);
+    Uri dataUri=Uri.withAppendedPath(remoteBaseUri,userQuery);
+    response.newRow().add(count++).add(displayName).add(dataUri);
   }
   return response;
 }
