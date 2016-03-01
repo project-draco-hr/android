@@ -13,5 +13,5 @@ case UsersAndGroupsSearchProvider.REMOTE:
 shareType=ShareType.FEDERATED;
 break;
 }
-getFileOperationsHelper().shareFileWithSharee(getFile(),shareeName,shareType,getAppropiatePermissions());
+getFileOperationsHelper().shareFileWithSharee(getFile(),shareeName,shareType,getAppropiatePermissions(shareType.equals(ShareType.FEDERATED)));
 }
