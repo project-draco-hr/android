@@ -1,5 +1,4 @@
 {
-  Log_OC.d(TAG,"FileUploader.uploadNewFile()");
   Intent intent=new Intent(context,FileUploader.class);
   intent.putExtra(FileUploader.KEY_ACCOUNT,account);
   intent.putExtra(FileUploader.KEY_LOCAL_FILE,localPaths);

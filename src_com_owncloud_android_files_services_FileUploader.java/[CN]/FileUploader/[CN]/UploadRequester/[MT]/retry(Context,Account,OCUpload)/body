@@ -1,5 +1,4 @@
 {
-  Log_OC.d(TAG,"FileUploader.retry()");
   Intent i=new Intent(context,FileUploader.class);
   i.putExtra(FileUploader.KEY_RETRY,true);
   if (upload != null) {
