@@ -2,6 +2,5 @@
   Log_OC.d(TAG,"onCreateView");
   View view=inflater.inflate(R.layout.edit_share_layout,container,false);
   refreshUiFromState(view);
-  setPermissionsListening(view,true);
   return view;
 }
