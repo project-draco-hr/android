@@ -44,7 +44,9 @@
       Log_OC.e(TAG,"Exception while parsing data of users/groups",e);
     }
   }
-  if (userQuery.contains("@")) {
+  FileDataStorageManager manager=new FileDataStorageManager(account,getContext().getContentResolver());
+  boolean federatedShareAllowed=manager.getCapability(account.name).getFilesSharingFederationOutgoing().isTrue();
+  if (userQuery.contains("@") && federatedShareAllowed) {
     if (response == null)     response=new MatrixCursor(COLUMNS);
     Uri remoteBaseUri=new Uri.Builder().scheme("content").authority(DATA_REMOTE).build();
     String displayName=getContext().getString(R.string.share_remote_clarification,userQuery);
