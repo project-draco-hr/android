@@ -34,6 +34,8 @@
   }
   lastUploadedPhotoPath=file_path;
   Log_OC.d(TAG,"Path: " + file_path + "");
+  new FileUploader.UploadRequester();
   int behaviour=getUploadBehaviour(context);
-  FileUploader.uploadNewFile(context,account,file_path,FileStorageUtils.getInstantUploadFilePath(context,file_name),behaviour,mime_type,true,UploadFileOperation.CREATED_AS_INSTANT_PICTURE);
+  FileUploader.UploadRequester requester=new FileUploader.UploadRequester();
+  requester.uploadNewFile(context,account,file_path,FileStorageUtils.getInstantUploadFilePath(context,file_name),behaviour,mime_type,true,UploadFileOperation.CREATED_AS_INSTANT_PICTURE);
 }

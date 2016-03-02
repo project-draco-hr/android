@@ -25,5 +25,6 @@
   c.close();
   Log_OC.d(TAG,file_path + "");
   int behaviour=getUploadBehaviour(context);
-  FileUploader.uploadNewFile(context,account,file_path,FileStorageUtils.getInstantVideoUploadFilePath(context,file_name),behaviour,mime_type,true,UploadFileOperation.CREATED_AS_INSTANT_VIDEO);
+  FileUploader.UploadRequester requester=new FileUploader.UploadRequester();
+  requester.uploadNewFile(context,account,file_path,FileStorageUtils.getInstantVideoUploadFilePath(context,file_name),behaviour,mime_type,true,UploadFileOperation.CREATED_AS_INSTANT_VIDEO);
 }

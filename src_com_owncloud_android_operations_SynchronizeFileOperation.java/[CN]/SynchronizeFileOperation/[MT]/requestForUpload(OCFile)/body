@@ -1,4 +1,5 @@
 {
-  FileUploader.uploadUpdate(mContext,mAccount,file,FileUploader.LOCAL_BEHAVIOUR_MOVE,true);
+  FileUploader.UploadRequester requester=new FileUploader.UploadRequester();
+  requester.uploadUpdate(mContext,mAccount,file,FileUploader.LOCAL_BEHAVIOUR_MOVE,true);
   mTransferWasRequested=true;
 }
