@@ -2,7 +2,7 @@
   getFabMkdir().setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View v){
       CreateFolderDialogFragment dialog=CreateFolderDialogFragment.newInstance(mFile);
-      dialog.show(getActivity().getSupportFragmentManager(),FileDisplayActivity.DIALOG_CREATE_FOLDER);
+      dialog.show(getActivity().getSupportFragmentManager(),DIALOG_CREATE_FOLDER);
       getFabMain().collapse();
       recordMiniFabClick();
     }
