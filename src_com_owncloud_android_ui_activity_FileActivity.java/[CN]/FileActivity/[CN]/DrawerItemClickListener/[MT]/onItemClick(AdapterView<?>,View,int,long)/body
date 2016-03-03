@@ -5,14 +5,14 @@ case 0:
   mDrawerLayout.closeDrawers();
 break;
 case 1:
-Intent settingsIntent=new Intent(getApplicationContext(),Preferences.class);
-startActivity(settingsIntent);
-mDrawerLayout.closeDrawers();
-break;
-case 2:
 Intent uploadListIntent=new Intent(getApplicationContext(),UploadListActivity.class);
 uploadListIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 startActivity(uploadListIntent);
+mDrawerLayout.closeDrawers();
+break;
+case 2:
+Intent settingsIntent=new Intent(getApplicationContext(),Preferences.class);
+startActivity(settingsIntent);
 mDrawerLayout.closeDrawers();
 break;
 case 3:
