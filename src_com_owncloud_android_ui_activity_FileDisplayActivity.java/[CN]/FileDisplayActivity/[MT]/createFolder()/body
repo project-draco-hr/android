@@ -1,4 +1,0 @@
-{
-  CreateFolderDialogFragment dialog=CreateFolderDialogFragment.newInstance(getCurrentDir());
-  dialog.show(getSupportFragmentManager(),DIALOG_CREATE_FOLDER);
-}
