@@ -1,6 +1,5 @@
 {
   if (mParents.size() <= 1) {
-    unregisterReceiver(mSyncBroadcastReceiver);
     super.onBackPressed();
     return;
   }
