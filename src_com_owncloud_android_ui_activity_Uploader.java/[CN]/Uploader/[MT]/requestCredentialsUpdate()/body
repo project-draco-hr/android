@@ -1,5 +1,0 @@
-{
-  Intent updateAccountCredentials=new Intent(this,AuthenticatorActivity.class);
-  updateAccountCredentials.putExtra(AuthenticatorActivity.EXTRA_ACCOUNT,getAccount()).putExtra(AuthenticatorActivity.EXTRA_ACTION,AuthenticatorActivity.ACTION_UPDATE_EXPIRED_TOKEN).addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-  startActivity(updateAccountCredentials);
-}

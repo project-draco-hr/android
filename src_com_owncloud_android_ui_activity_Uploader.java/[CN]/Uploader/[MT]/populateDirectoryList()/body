@@ -23,7 +23,7 @@
       h.put("dirname",f);
       data.add(h);
     }
-    ImageSimpleAdapter sa=new ImageSimpleAdapter(this,data,R.layout.uploader_list_item_layout,new String[]{"dirname"},new int[]{R.id.filename},getStorageManager(),getAccount());
+    UploaderAdapter sa=new UploaderAdapter(this,data,R.layout.uploader_list_item_layout,new String[]{"dirname"},new int[]{R.id.filename},getStorageManager(),getAccount());
     mListView.setAdapter(sa);
     Button btnChooseFolder=(Button)findViewById(R.id.uploader_choose_folder);
     btnChooseFolder.setOnClickListener(this);
