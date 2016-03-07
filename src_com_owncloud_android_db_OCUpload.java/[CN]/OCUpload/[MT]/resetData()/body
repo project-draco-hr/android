@@ -2,6 +2,7 @@
   mRemotePath="";
   mLocalPath="";
   mAccountName="";
+  mFileSize=-1;
   mId=-1;
   mLocalAction=FileUploader.LOCAL_BEHAVIOUR_COPY;
   mForceOverwrite=false;

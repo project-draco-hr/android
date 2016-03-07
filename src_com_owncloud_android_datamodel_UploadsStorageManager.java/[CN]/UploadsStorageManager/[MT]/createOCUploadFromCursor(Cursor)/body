@@ -5,6 +5,7 @@
     String remotePath=c.getString(c.getColumnIndex(ProviderTableMeta.UPLOADS_REMOTE_PATH));
     String accountName=c.getString(c.getColumnIndex(ProviderTableMeta.UPLOADS_ACCOUNT_NAME));
     upload=new OCUpload(localPath,remotePath,accountName);
+    upload.setFileSize(c.getLong(c.getColumnIndex(ProviderTableMeta.UPLOADS_FILE_SIZE)));
     upload.setUploadId(c.getLong(c.getColumnIndex(ProviderTableMeta._ID)));
     upload.setUploadStatus(UploadStatus.fromValue(c.getInt(c.getColumnIndex(ProviderTableMeta.UPLOADS_STATUS))));
     upload.setLocalAction(c.getInt(c.getColumnIndex((ProviderTableMeta.UPLOADS_LOCAL_BEHAVIOUR))));
