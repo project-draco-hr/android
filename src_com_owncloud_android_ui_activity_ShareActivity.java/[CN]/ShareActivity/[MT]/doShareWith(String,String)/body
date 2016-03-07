@@ -1,17 +1,4 @@
 {
-  int lastPointIndex=dataAuthority.lastIndexOf(".");
-  String type=dataAuthority.substring(lastPointIndex + 1);
-  ShareType shareType=null;
-switch (type) {
-case UsersAndGroupsSearchProvider.USER:
-    shareType=ShareType.USER;
-  break;
-case UsersAndGroupsSearchProvider.GROUP:
-shareType=ShareType.GROUP;
-break;
-case UsersAndGroupsSearchProvider.REMOTE:
-shareType=ShareType.FEDERATED;
-break;
-}
-getFileOperationsHelper().shareFileWithSharee(getFile(),shareeName,shareType,getAppropiatePermissions(shareType.equals(ShareType.FEDERATED)));
+  ShareType shareType=UsersAndGroupsSearchProvider.getShareType(dataAuthority);
+  getFileOperationsHelper().shareFileWithSharee(getFile(),shareeName,shareType,getAppropiatePermissions(shareType));
 }

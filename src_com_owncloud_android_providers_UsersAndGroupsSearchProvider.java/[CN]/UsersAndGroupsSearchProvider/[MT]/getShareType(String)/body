@@ -1,0 +1,6 @@
+{
+  if (sShareTypes.containsKey(authority)) {
+    return sShareTypes.get(authority);
+  }
+  return null;
+}

@@ -1,4 +1,5 @@
 {
+  boolean isFederated=shareType.equals(ShareType.FEDERATED);
   if (getFile().isSharedWithMe()) {
     return OCShare.READ_PERMISSION_FLAG;
   }
