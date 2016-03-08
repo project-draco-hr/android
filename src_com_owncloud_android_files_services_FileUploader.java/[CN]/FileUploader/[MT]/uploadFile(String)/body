@@ -11,6 +11,7 @@
     }
     mUploadsStorageManager.updateDatabaseUploadStart(mCurrentUpload);
     notifyUploadStart(mCurrentUpload);
+    sendBroadcastUploadStarted(mCurrentUpload);
     RemoteOperationResult uploadResult=null;
     try {
       if (mCurrentAccount == null || !mCurrentAccount.equals(mCurrentUpload.getAccount())) {

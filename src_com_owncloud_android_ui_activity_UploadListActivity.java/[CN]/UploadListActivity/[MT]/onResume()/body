@@ -3,6 +3,7 @@
   super.onResume();
   mUploadMessagesReceiver=new UploadMessagesReceiver();
   IntentFilter uploadIntentFilter=new IntentFilter();
+  uploadIntentFilter.addAction(FileUploader.getUploadsAddedMessage());
   uploadIntentFilter.addAction(FileUploader.getUploadStartMessage());
   uploadIntentFilter.addAction(FileUploader.getUploadFinishMessage());
   registerReceiver(mUploadMessagesReceiver,uploadIntentFilter);

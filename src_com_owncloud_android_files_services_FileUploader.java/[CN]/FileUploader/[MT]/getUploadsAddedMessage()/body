@@ -1,0 +1,3 @@
+{
+  return FileUploader.class.getName() + UPLOADS_ADDED_MESSAGE;
+}

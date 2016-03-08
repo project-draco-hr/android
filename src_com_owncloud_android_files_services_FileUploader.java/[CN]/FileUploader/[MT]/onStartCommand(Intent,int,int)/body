@@ -124,6 +124,7 @@ catch (    Exception e) {
     msg.arg1=startId;
     msg.obj=requestedUploads;
     mServiceHandler.sendMessage(msg);
+    sendBroadcastUploadsAdded();
   }
   return Service.START_NOT_STICKY;
 }
