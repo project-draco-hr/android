@@ -2,6 +2,6 @@
   if ((PreferenceReader.instantPictureUploadEnabled(context) && PreferenceReader.instantPictureUploadViaWiFiOnly(context)) || (PreferenceReader.instantVideoUploadEnabled(context) && PreferenceReader.instantPictureUploadViaWiFiOnly(context))) {
     Log_OC.d(TAG,"Requesting retry of instant uploads (& friends)");
     FileUploader.UploadRequester requester=new FileUploader.UploadRequester();
-    requester.retryUploads(context,null,UploadResult.NETWORK_CONNECTION);
+    requester.retryFailedUploads(context,null,UploadResult.NETWORK_CONNECTION);
   }
 }

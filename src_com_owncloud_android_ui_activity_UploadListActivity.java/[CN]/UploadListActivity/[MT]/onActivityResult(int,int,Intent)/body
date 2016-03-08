@@ -3,6 +3,6 @@
   Log_OC.e(TAG,"onActivityResult " + resultCode);
   if (requestCode == UPDATE_CREDENTIALS_REQUEST_CODE && resultCode == FileActivity.RESULT_OK) {
     FileUploader.UploadRequester requester=new FileUploader.UploadRequester();
-    requester.retryUploads(this,getAccount(),UploadResult.CREDENTIAL_ERROR);
+    requester.retryFailedUploads(this,getAccount(),UploadResult.CREDENTIAL_ERROR);
   }
 }

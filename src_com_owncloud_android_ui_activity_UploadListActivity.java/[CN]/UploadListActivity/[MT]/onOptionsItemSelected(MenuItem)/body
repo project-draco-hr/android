@@ -11,6 +11,10 @@ case android.R.id.home:
       mDrawerLayout.openDrawer(GravityCompat.START);
     }
   break;
+case R.id.action_retry_uploads:
+FileUploader.UploadRequester requester=new FileUploader.UploadRequester();
+requester.retryFailedUploads(this,null,null);
+break;
 case R.id.action_clear_failed_uploads:
 storageManager=new UploadsStorageManager(getContentResolver());
 storageManager.clearFailedUploads();
