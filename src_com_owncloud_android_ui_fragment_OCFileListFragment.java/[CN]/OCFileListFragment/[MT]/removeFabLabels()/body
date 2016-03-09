@@ -1,0 +1,8 @@
+{
+  getFabUpload().setTitle(null);
+  getFabMkdir().setTitle(null);
+  getFabUploadFromApp().setTitle(null);
+  ((TextView)getFabUpload().getTag(com.getbase.floatingactionbutton.R.id.fab_label)).setVisibility(View.GONE);
+  ((TextView)getFabMkdir().getTag(com.getbase.floatingactionbutton.R.id.fab_label)).setVisibility(View.GONE);
+  ((TextView)getFabUploadFromApp().getTag(com.getbase.floatingactionbutton.R.id.fab_label)).setVisibility(View.GONE);
+}

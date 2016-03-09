@@ -1,0 +1,8 @@
+{
+  if (getListOfFilesFragment() != null && getListOfFilesFragment().getFabMain() != null && getListOfFilesFragment().getFabMain().isExpanded()) {
+    return true;
+  }
+ else {
+    return false;
+  }
+}

@@ -15,4 +15,22 @@
   mAdapter=new FileListListAdapter(mJustFolders,getActivity(),mContainerActivity);
   setListAdapter(mAdapter);
   registerLongClickListener();
+  boolean hideFab=(args != null) && args.getBoolean(ARG_HIDE_FAB,false);
+  if (hideFab) {
+    setFabEnabled(false);
+  }
+ else {
+    setFabEnabled(true);
+    registerFabListeners();
+    final SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(getActivity());
+    if (prefs.getLong(KEY_FAB_EVER_CLICKED,0) > 0) {
+      miniFabClicked=true;
+    }
+    if (!miniFabClicked) {
+      setFabLabels();
+    }
+ else {
+      removeFabLabels();
+    }
+  }
 }

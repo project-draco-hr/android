@@ -1,5 +1,16 @@
 {
-  if (!isDrawerOpen()) {
+  boolean isFabOpen=isFabOpen();
+  boolean isDrawerOpen=isDrawerOpen();
+  if (isDrawerOpen && isFabOpen) {
+    super.onBackPressed();
+  }
+ else   if (isDrawerOpen && !isFabOpen) {
+    super.onBackPressed();
+  }
+ else   if (!isDrawerOpen && isFabOpen) {
+    getListOfFilesFragment().getFabMain().collapse();
+  }
+ else {
     OCFileListFragment listOfFiles=getListOfFilesFragment();
     if (mDualPane || getSecondFragment() == null) {
       OCFile currentDir=getCurrentDir();
@@ -15,8 +26,5 @@
       setFile(listOfFiles.getCurrentFile());
     }
     cleanSecondFragment();
-  }
- else {
-    super.onBackPressed();
   }
 }
