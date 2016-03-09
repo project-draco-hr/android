@@ -1,0 +1,12 @@
+{
+  OCFile file=mFile;
+  if (file != null) {
+    if (file.isFolder()) {
+      return file;
+    }
+ else     if (getStorageManager() != null) {
+      return getStorageManager().getFileByPath(file.getParentRemotePath());
+    }
+  }
+  return null;
+}
