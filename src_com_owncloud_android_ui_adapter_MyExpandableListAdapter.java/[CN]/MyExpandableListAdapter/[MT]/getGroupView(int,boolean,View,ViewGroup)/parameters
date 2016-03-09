@@ -1,4 +1,0 @@
-int groupPosition
-boolean isExpanded
-View convertView
-ViewGroup parent

@@ -1,0 +1,9 @@
+{
+  if (upload != null && context != null) {
+    Account account=AccountUtils.getOwnCloudAccountByName(context,upload.getAccountName());
+    retry(context,account,upload);
+  }
+ else {
+    throw new IllegalArgumentException("Null parameter!");
+  }
+}

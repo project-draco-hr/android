@@ -1,5 +1,0 @@
-{
-  Account account=mFileActivity.getAccount();
-  FileUploader.UploadRequester requester=new FileUploader.UploadRequester();
-  requester.retry(mFileActivity,account,upload);
-}
