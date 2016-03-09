@@ -8,6 +8,10 @@
   mServiceHandler=new ServiceHandler(mServiceLooper,this);
   mBinder=new FileUploaderBinder();
   mUploadsStorageManager=new UploadsStorageManager(getContentResolver());
+  int failedCounter=mUploadsStorageManager.failInProgressUploads(UploadResult.UNKNOWN);
+  if (failedCounter > 0) {
+    resurrection();
+  }
   AccountManager am=AccountManager.get(getApplicationContext());
   am.addOnAccountsUpdatedListener(this,null,false);
 }
