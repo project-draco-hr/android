@@ -22,9 +22,6 @@ if (!subordinate.isChecked() && !mFile.isSharedWithMe()) {
   toggleDisablingListener(subordinate);
 }
 }
-if (!mFile.isSharedWithMe()) {
-updatePermissionsToShare();
-}
 }
  else {
 for (int i=0; i < sSubordinateCheckBoxIds.length; i++) {
@@ -34,10 +31,9 @@ if (subordinate.isChecked()) {
   toggleDisablingListener(subordinate);
 }
 }
-updatePermissionsToShare();
 }
 }
- else {
+if (!(mFile.isFolder() && isChecked && mFile.isSharedWithMe())) {
 updatePermissionsToShare();
 }
 break;
