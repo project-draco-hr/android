@@ -15,7 +15,7 @@
   mAdapter=new FileListListAdapter(mJustFolders,getActivity(),mContainerActivity);
   setListAdapter(mAdapter);
   registerLongClickListener();
-  boolean hideFab=(args != null) && args.getBoolean(ARG_HIDE_FAB,false);
+  hideFab=(args != null) && args.getBoolean(ARG_HIDE_FAB,false);
   if (hideFab) {
     setFabEnabled(false);
   }

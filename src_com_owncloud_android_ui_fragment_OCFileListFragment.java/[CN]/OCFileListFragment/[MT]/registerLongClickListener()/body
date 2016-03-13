@@ -25,6 +25,7 @@
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
         getActivity().getWindow().setStatusBarColor(mStatusBarColorActionMode);
       }
+      setFabEnabled(false);
       return true;
     }
     @Override public boolean onPrepareActionMode(    ActionMode mode,    Menu menu){
@@ -37,6 +38,9 @@
       mAdapter.removeSelection();
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
         getActivity().getWindow().setStatusBarColor(mStatusBarColor);
+      }
+      if (!hideFab) {
+        setFabEnabled(true);
       }
     }
   }
