@@ -1,6 +1,6 @@
 {
   mOnPasswordInteractionListener=new OnPasswordInteractionListener();
-  ((Switch)shareView.findViewById(R.id.shareViaLinkPasswordSwitch)).setOnCheckedChangeListener(mOnPasswordInteractionListener);
+  getPasswordSwitch().setOnCheckedChangeListener(mOnPasswordInteractionListener);
   shareView.findViewById(R.id.shareViaLinkPasswordLabel).setOnClickListener(mOnPasswordInteractionListener);
-  shareView.findViewById(R.id.shareViaLinkPasswordValue).setOnClickListener(mOnPasswordInteractionListener);
+  getPasswordValue().setOnClickListener(mOnPasswordInteractionListener);
 }
