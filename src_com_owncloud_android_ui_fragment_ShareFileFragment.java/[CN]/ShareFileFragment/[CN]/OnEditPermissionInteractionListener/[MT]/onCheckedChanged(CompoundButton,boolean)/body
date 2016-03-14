@@ -1,0 +1,12 @@
+{
+  if (!isResumed()) {
+    return;
+  }
+  if (isChecked) {
+  }
+ else {
+  }
+  switchView.setOnCheckedChangeListener(null);
+  switchView.toggle();
+  switchView.setOnCheckedChangeListener(mOnEditPermissionInteractionListener);
+}

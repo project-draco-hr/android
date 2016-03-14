@@ -8,6 +8,9 @@
     }
     getExpirationDateSection().setVisibility(View.VISIBLE);
     getPasswordSection().setVisibility(View.VISIBLE);
+    if (mFile.isFolder()) {
+      getEditPermissionSection().setVisibility(View.VISIBLE);
+    }
     AppCompatButton getLinkButton=getGetLinkButton();
     getLinkButton.setVisibility(View.VISIBLE);
     getLinkButton.setOnClickListener(new View.OnClickListener(){
@@ -48,6 +51,19 @@
       getPasswordValue().setVisibility(View.INVISIBLE);
     }
     passwordSwitch.setOnCheckedChangeListener(mOnPasswordInteractionListener);
+    Switch editPermissionSwitch=getEditPermissionSwitch();
+    editPermissionSwitch.setOnCheckedChangeListener(null);
+    if (mPublicShare.getPermissions() > OCShare.READ_PERMISSION_FLAG) {
+      if (!editPermissionSwitch.isChecked()) {
+        editPermissionSwitch.toggle();
+      }
+    }
+ else {
+      if (editPermissionSwitch.isChecked()) {
+        editPermissionSwitch.toggle();
+      }
+    }
+    editPermissionSwitch.setOnCheckedChangeListener(mOnEditPermissionInteractionListener);
   }
  else {
     Switch shareViaLinkSwitch=getShareViaLinkSwitch();
@@ -58,6 +74,7 @@
     }
     getExpirationDateSection().setVisibility(View.GONE);
     getPasswordSection().setVisibility(View.GONE);
+    getEditPermissionSection().setVisibility(View.GONE);
     getGetLinkButton().setVisibility(View.GONE);
   }
 }
