@@ -8,8 +8,11 @@
     }
     getExpirationDateSection().setVisibility(View.VISIBLE);
     getPasswordSection().setVisibility(View.VISIBLE);
-    if (mFile.isFolder()) {
+    if (mFile.isFolder() && mCapabilities.getFilesSharingPublicUpload().isTrue()) {
       getEditPermissionSection().setVisibility(View.VISIBLE);
+    }
+ else {
+      getEditPermissionSection().setVisibility(View.GONE);
     }
     AppCompatButton getLinkButton=getGetLinkButton();
     getLinkButton.setVisibility(View.VISIBLE);
@@ -52,18 +55,20 @@
     }
     passwordSwitch.setOnCheckedChangeListener(mOnPasswordInteractionListener);
     Switch editPermissionSwitch=getEditPermissionSwitch();
-    editPermissionSwitch.setOnCheckedChangeListener(null);
-    if (mPublicShare.getPermissions() > OCShare.READ_PERMISSION_FLAG) {
-      if (!editPermissionSwitch.isChecked()) {
-        editPermissionSwitch.toggle();
+    if (getEditPermissionSection().getVisibility() == View.VISIBLE) {
+      editPermissionSwitch.setOnCheckedChangeListener(null);
+      if (mPublicShare.getPermissions() > OCShare.READ_PERMISSION_FLAG) {
+        if (!editPermissionSwitch.isChecked()) {
+          editPermissionSwitch.toggle();
+        }
       }
-    }
  else {
-      if (editPermissionSwitch.isChecked()) {
-        editPermissionSwitch.toggle();
+        if (editPermissionSwitch.isChecked()) {
+          editPermissionSwitch.toggle();
+        }
       }
+      editPermissionSwitch.setOnCheckedChangeListener(mOnEditPermissionInteractionListener);
     }
-    editPermissionSwitch.setOnCheckedChangeListener(mOnEditPermissionInteractionListener);
   }
  else {
     Switch shareViaLinkSwitch=getShareViaLinkSwitch();
