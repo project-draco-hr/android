@@ -1,6 +1,6 @@
 {
   mOnExpirationDateInteractionListener=new OnExpirationDateInteractionListener();
-  getExpirationDateSwitch().setOnCheckedChangeListener(mOnExpirationDateInteractionListener);
+  ((Switch)shareView.findViewById(R.id.shareViaLinkExpirationSwitch)).setOnCheckedChangeListener(mOnExpirationDateInteractionListener);
   shareView.findViewById(R.id.shareViaLinkExpirationLabel).setOnClickListener(mOnExpirationDateInteractionListener);
-  getExpirationDateValue().setOnClickListener(mOnExpirationDateInteractionListener);
+  shareView.findViewById(R.id.shareViaLinkExpirationValue).setOnClickListener(mOnExpirationDateInteractionListener);
 }

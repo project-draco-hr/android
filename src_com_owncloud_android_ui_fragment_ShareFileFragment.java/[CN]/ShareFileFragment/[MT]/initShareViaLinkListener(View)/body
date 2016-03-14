@@ -1,5 +1,5 @@
 {
   mOnShareViaLinkSwitchCheckedChangeListener=new OnShareViaLinkListener();
-  Switch shareViaLinkSwitch=getShareViaLinkSwitch();
+  Switch shareViaLinkSwitch=(Switch)shareView.findViewById(R.id.shareViaLinkSectionSwitch);
   shareViaLinkSwitch.setOnCheckedChangeListener(mOnShareViaLinkSwitchCheckedChangeListener);
 }
