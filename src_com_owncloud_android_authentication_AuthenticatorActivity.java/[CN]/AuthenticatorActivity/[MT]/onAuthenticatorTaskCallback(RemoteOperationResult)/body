@@ -20,9 +20,6 @@
       }
     }
     if (success) {
-      if (mAction == ACTION_UPDATE_EXPIRED_TOKEN) {
-        setResult(Activity.RESULT_OK);
-      }
       finish();
     }
   }
