@@ -10,7 +10,4 @@
  else   if (operation instanceof GetRemoteUserNameOperation) {
     onGetUserNameFinish(result);
   }
-  if (result.isSuccess() && mAction == ACTION_UPDATE_EXPIRED_TOKEN) {
-    setResult(Activity.RESULT_OK);
-  }
 }
