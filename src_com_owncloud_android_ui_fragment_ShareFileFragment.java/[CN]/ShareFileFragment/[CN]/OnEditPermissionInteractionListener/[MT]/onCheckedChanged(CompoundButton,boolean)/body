@@ -2,10 +2,15 @@
   if (!isResumed()) {
     return;
   }
+  boolean permission;
   if (isChecked) {
+    permission=true;
   }
  else {
+    permission=false;
   }
+  ((FileActivity)getActivity()).getFileOperationsHelper().setUploadPermissionsToShare(mFile,permission);
+  ;
   switchView.setOnCheckedChangeListener(null);
   switchView.toggle();
   switchView.setOnCheckedChangeListener(mOnEditPermissionInteractionListener);
