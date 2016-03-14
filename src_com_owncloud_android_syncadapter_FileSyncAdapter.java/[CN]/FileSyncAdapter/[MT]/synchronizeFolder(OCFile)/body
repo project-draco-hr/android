@@ -17,7 +17,7 @@
     }
   }
  else   if (result.getCode() != ResultCode.FILE_NOT_FOUND) {
-    if (result.getCode() == RemoteOperationResult.ResultCode.UNAUTHORIZED || result.isIdPRedirection()) {
+    if (RemoteOperationResult.ResultCode.UNAUTHORIZED.equals(result.getCode())) {
       mSyncResult.stats.numAuthExceptions++;
     }
  else     if (result.getException() instanceof DavException) {

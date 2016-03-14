@@ -11,7 +11,7 @@
     result=operation.execute(client);
     redirectedLocation=result.getRedirectedLocation();
   }
-  if (result.getCode() == ResultCode.UNAUTHORIZED) {
+  if (result.getHttpCode() == HttpStatus.SC_UNAUTHORIZED) {
     String authRequest=((result.getAuthenticateHeader()).trim()).toLowerCase();
     if (authRequest.startsWith("basic")) {
       authMethod=AuthenticationMethod.BASIC_HTTP_AUTH;

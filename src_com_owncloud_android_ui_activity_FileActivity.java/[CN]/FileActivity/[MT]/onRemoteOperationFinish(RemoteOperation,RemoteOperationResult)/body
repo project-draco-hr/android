@@ -2,7 +2,7 @@
   Log_OC.d(TAG,"Received result of operation in FileActivity - common behaviour for all the " + "FileActivities ");
   mFileOperationsHelper.setOpIdWaitingFor(Long.MAX_VALUE);
   dismissLoadingDialog();
-  if (!result.isSuccess() && (result.getCode() == ResultCode.UNAUTHORIZED || result.isIdPRedirection() || (result.isException() && result.getException() instanceof AuthenticatorException))) {
+  if (!result.isSuccess() && (result.getCode() == ResultCode.UNAUTHORIZED || (result.isException() && result.getException() instanceof AuthenticatorException))) {
     requestCredentialsUpdate(this);
     if (result.getCode() == ResultCode.UNAUTHORIZED) {
       dismissLoadingDialog();

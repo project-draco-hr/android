@@ -1,6 +1,6 @@
 {
   NotificationCompat.Builder notificationBuilder=createNotificationBuilder();
-  boolean needsToUpdateCredentials=(mLastFailedResult != null && (mLastFailedResult.getCode() == ResultCode.UNAUTHORIZED || mLastFailedResult.isIdPRedirection()));
+  boolean needsToUpdateCredentials=(mLastFailedResult != null && ResultCode.UNAUTHORIZED.equals(mLastFailedResult.getCode()));
   if (needsToUpdateCredentials) {
     Intent updateAccountCredentials=new Intent(getContext(),AuthenticatorActivity.class);
     updateAccountCredentials.putExtra(AuthenticatorActivity.EXTRA_ACCOUNT,getAccount());
