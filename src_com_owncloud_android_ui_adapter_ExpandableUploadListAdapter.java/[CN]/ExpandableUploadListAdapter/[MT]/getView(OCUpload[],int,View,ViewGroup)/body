@@ -38,13 +38,21 @@ case UPLOAD_IN_PROGRESS:
     ProgressBar progressBar=(ProgressBar)view.findViewById(R.id.upload_progress_bar);
   progressBar.setProgress(0);
 progressBar.setVisibility(View.VISIBLE);
-mProgressListener=new ProgressListener(progressBar);
-if (mParentActivity.getFileUploaderBinder() != null) {
-mParentActivity.getFileUploaderBinder().addDatatransferProgressListener(mProgressListener,mParentActivity.getAccount(),upload);
+FileUploader.FileUploaderBinder binder=mParentActivity.getFileUploaderBinder();
+if (binder != null) {
+if (binder.isUploadingNow(upload)) {
+mProgressListener=new ProgressListener(upload,progressBar);
+binder.addDatatransferProgressListener(mProgressListener,upload);
 }
  else {
-Log_OC.e(TAG,"UploadBinder == null. It should have been created on creating mParentActivity" + " which inherits from FileActivity. Fix that!");
-Log_OC.e(TAG,"PENDING BINDING for upload = " + upload.getLocalPath());
+if (convertView != null && mProgressListener != null && mProgressListener.isWrapping(progressBar)) {
+  binder.removeDatatransferProgressListener(mProgressListener,mProgressListener.getUpload());
+  mProgressListener=null;
+}
+}
+}
+ else {
+Log_OC.w(TAG,"FileUploaderBinder not ready yet for upload " + upload.getRemotePath());
 }
 uploadDateTextView.setVisibility(View.GONE);
 pathTextView.setVisibility(View.GONE);
@@ -111,10 +119,6 @@ break;
 if (upload.getUploadStatus() != UploadStatus.UPLOAD_IN_PROGRESS) {
 ProgressBar progressBar=(ProgressBar)view.findViewById(R.id.upload_progress_bar);
 progressBar.setVisibility(View.GONE);
-if (mParentActivity.getFileUploaderBinder() != null && mProgressListener != null) {
-mParentActivity.getFileUploaderBinder().removeDatatransferProgressListener(mProgressListener,upload.getAccount(mParentActivity),upload);
-mProgressListener=null;
-}
 }
 statusTextView.setText(status);
 ImageButton rightButton=(ImageButton)view.findViewById(R.id.upload_right_button);

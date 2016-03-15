@@ -1,0 +1,7 @@
+{
+  if (ocUpload == null || listener == null)   return;
+  String targetKey=buildRemoteName(ocUpload.getAccountName(),ocUpload.getRemotePath());
+  if (mBoundListeners.get(targetKey) == listener) {
+    mBoundListeners.remove(targetKey);
+  }
+}
