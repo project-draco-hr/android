@@ -1,0 +1,6 @@
+{
+  long currentSyncTime=System.currentTimeMillis();
+  mSyncInProgress=true;
+  RemoteOperation synchFolderOp=new RefreshFolderOperation(folder,currentSyncTime,false,false,false,getStorageManager(),getAccount(),getApplicationContext());
+  synchFolderOp.execute(getAccount(),this,null,null);
+}

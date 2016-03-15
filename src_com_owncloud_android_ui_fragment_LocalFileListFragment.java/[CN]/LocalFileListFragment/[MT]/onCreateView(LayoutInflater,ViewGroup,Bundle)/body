@@ -3,6 +3,7 @@
   View v=super.onCreateView(inflater,container,savedInstanceState);
   setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
   setSwipeEnabled(false);
+  setFabEnabled(false);
   setMessageForEmptyList(getString(R.string.local_file_list_empty));
   Log_OC.i(TAG,"onCreateView() end");
   return v;

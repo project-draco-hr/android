@@ -1,7 +1,5 @@
 {
   try {
-    ArrayList<String> local=new ArrayList<String>();
-    ArrayList<String> remote=new ArrayList<String>();
     for (    Parcelable mStream : mStreamsToUpload) {
       Uri uri=(Uri)mStream;
       String data=null;
@@ -63,16 +61,10 @@
           showWaitingCopyDialog();
           copyTask.execute(params);
         }
- else {
-          remote.add(filePath);
-          local.add(data);
-        }
       }
  else {
         throw new SecurityException();
       }
-      FileUploader.UploadRequester requester=new FileUploader.UploadRequester();
-      requester.uploadNewFile(this,getAccount(),local.toArray(new String[local.size()]),remote.toArray(new String[remote.size()]),null,FileUploader.LOCAL_BEHAVIOUR_FORGET,false,UploadFileOperation.CREATED_BY_USER);
       SharedPreferences.Editor appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
       appPrefs.putString("last_upload_path",mUploadPath);
       appPrefs.apply();

@@ -1,0 +1,8 @@
+{
+  if (enabled) {
+    mFabMain.setVisibility(View.VISIBLE);
+  }
+ else {
+    mFabMain.setVisibility(View.GONE);
+  }
+}

@@ -1,0 +1,6 @@
+{
+  if (mSyncBroadcastReceiver != null) {
+    unregisterReceiver(mSyncBroadcastReceiver);
+  }
+  super.onDestroy();
+}

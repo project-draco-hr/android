@@ -1,5 +1,6 @@
 {
   MenuInflater inflater=getMenuInflater();
   inflater.inflate(R.menu.main_menu,menu);
+  menu.findItem(R.id.action_create_dir).setVisible(false);
   return true;
 }

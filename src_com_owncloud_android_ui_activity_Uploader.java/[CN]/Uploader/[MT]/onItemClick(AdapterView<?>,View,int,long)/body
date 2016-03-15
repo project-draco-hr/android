@@ -3,10 +3,14 @@
   Vector<OCFile> tmpfiles=getStorageManager().getFolderContent(mFile);
   if (tmpfiles.size() <= 0)   return;
   Vector<OCFile> files=new Vector<OCFile>();
-  for (  OCFile f : tmpfiles)   if (f.isFolder())   files.add(f);
+  for (  OCFile f : tmpfiles)   files.add(f);
   if (files.size() < position) {
     throw new IndexOutOfBoundsException("Incorrect item selected");
   }
-  mParents.push(files.get(position).getFileName());
-  populateDirectoryList();
+  if (files.get(position).isFolder()) {
+    OCFile folderToEnter=files.get(position);
+    startSyncFolderOperation(folderToEnter);
+    mParents.push(folderToEnter.getFileName());
+    populateDirectoryList();
+  }
 }

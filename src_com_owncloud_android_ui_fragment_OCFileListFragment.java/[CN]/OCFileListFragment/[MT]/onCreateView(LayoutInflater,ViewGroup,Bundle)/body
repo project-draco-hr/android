@@ -1,0 +1,6 @@
+{
+  Log_OC.i(TAG,"onCreateView() start");
+  View v=super.onCreateView(inflater,container,savedInstanceState);
+  Log_OC.i(TAG,"onCreateView() end");
+  return v;
+}

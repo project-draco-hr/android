@@ -19,4 +19,8 @@
   if (mAccountSelected) {
     setAccount((Account)savedInstanceState.getParcelable(FileActivity.EXTRA_ACCOUNT));
   }
+  IntentFilter syncIntentFilter=new IntentFilter(RefreshFolderOperation.EVENT_SINGLE_FOLDER_CONTENTS_SYNCED);
+  syncIntentFilter.addAction(RefreshFolderOperation.EVENT_SINGLE_FOLDER_SHARES_SYNCED);
+  mSyncBroadcastReceiver=new SyncBroadcastReceiver();
+  registerReceiver(mSyncBroadcastReceiver,syncIntentFilter);
 }
