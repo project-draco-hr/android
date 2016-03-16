@@ -17,4 +17,5 @@
   OwnCloudAccount ocAccount=new OwnCloudAccount(mAccount,this);
   OwnCloudClientManagerFactory.getDefaultSingleton().removeClientFor(ocAccount);
   setAccountAuthenticatorResult(response);
+  setResult(RESULT_OK);
 }
