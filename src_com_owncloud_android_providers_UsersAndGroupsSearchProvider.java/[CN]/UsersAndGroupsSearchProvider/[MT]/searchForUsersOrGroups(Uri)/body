@@ -41,7 +41,8 @@
             displayName=getContext().getString(R.string.share_remote_clarification,userName);
           }
  else {
-            displayName=getContext().getString(R.string.share_known_remote_clarification,userName,shareWith.split("@")[1]);
+            String[] uriSplitted=shareWith.split("@");
+            displayName=getContext().getString(R.string.share_known_remote_clarification,userName,uriSplitted[uriSplitted.length - 1]);
           }
           dataUri=Uri.withAppendedPath(remoteBaseUri,shareWith);
         }
@@ -49,7 +50,9 @@
           displayName=userName;
           dataUri=Uri.withAppendedPath(userBaseUri,shareWith);
         }
-        if (displayName != null && dataUri != null)         response.newRow().add(count++).add(displayName).add(dataUri);
+        if (displayName != null && dataUri != null) {
+          response.newRow().add(count++).add(displayName).add(dataUri);
+        }
       }
     }
  catch (    JSONException e) {
