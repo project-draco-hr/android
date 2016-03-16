@@ -7,7 +7,7 @@
     Uri data=intent.getData();
     String dataString=intent.getDataString();
     String shareWith=dataString.substring(dataString.lastIndexOf('/') + 1);
-    doShareWith(shareWith,UsersAndGroupsSearchProvider.DATA_GROUP.equals(data.getAuthority()));
+    doShareWith(shareWith,data.getAuthority());
   }
  else {
     Log_OC.wtf(TAG,"Unexpected intent " + intent.toString());

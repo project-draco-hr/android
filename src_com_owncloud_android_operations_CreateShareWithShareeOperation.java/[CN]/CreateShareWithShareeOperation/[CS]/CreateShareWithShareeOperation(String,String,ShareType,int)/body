@@ -1,5 +1,5 @@
 {
-  if (!ShareType.USER.equals(shareType) && !ShareType.GROUP.equals(shareType)) {
+  if (!ShareType.USER.equals(shareType) && !ShareType.GROUP.equals(shareType) && !ShareType.FEDERATED.equals(shareType)) {
     throw new IllegalArgumentException("Illegal share type " + shareType);
   }
   mPath=path;
