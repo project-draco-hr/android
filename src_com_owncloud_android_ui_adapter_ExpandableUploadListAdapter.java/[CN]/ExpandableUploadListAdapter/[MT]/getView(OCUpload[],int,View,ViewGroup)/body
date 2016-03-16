@@ -26,29 +26,28 @@
     TextView accountNameTextView=(TextView)view.findViewById(R.id.upload_account);
     accountNameTextView.setText(upload.getAccountName());
     TextView statusTextView=(TextView)view.findViewById(R.id.upload_status);
-    String status;
     uploadDateTextView.setVisibility(View.VISIBLE);
     pathTextView.setVisibility(View.VISIBLE);
     fileSizeTextView.setVisibility(View.VISIBLE);
     accountNameTextView.setVisibility(View.VISIBLE);
     statusTextView.setVisibility(View.VISIBLE);
+    String status=getStatusText(upload);
 switch (upload.getUploadStatus()) {
 case UPLOAD_IN_PROGRESS:
-      status=mParentActivity.getString(R.string.uploader_upload_in_progress_ticker);
-    ProgressBar progressBar=(ProgressBar)view.findViewById(R.id.upload_progress_bar);
-  progressBar.setProgress(0);
-progressBar.setVisibility(View.VISIBLE);
+      ProgressBar progressBar=(ProgressBar)view.findViewById(R.id.upload_progress_bar);
+    progressBar.setProgress(0);
+  progressBar.setVisibility(View.VISIBLE);
 FileUploader.FileUploaderBinder binder=mParentActivity.getFileUploaderBinder();
 if (binder != null) {
 if (binder.isUploadingNow(upload)) {
-mProgressListener=new ProgressListener(upload,progressBar);
-binder.addDatatransferProgressListener(mProgressListener,upload);
+  mProgressListener=new ProgressListener(upload,progressBar);
+  binder.addDatatransferProgressListener(mProgressListener,upload);
 }
  else {
-if (convertView != null && mProgressListener != null && mProgressListener.isWrapping(progressBar)) {
-  binder.removeDatatransferProgressListener(mProgressListener,mProgressListener.getUpload());
-  mProgressListener=null;
-}
+  if (convertView != null && mProgressListener != null && mProgressListener.isWrapping(progressBar)) {
+    binder.removeDatatransferProgressListener(mProgressListener,mProgressListener.getUpload());
+    mProgressListener=null;
+  }
 }
 }
  else {
@@ -61,59 +60,9 @@ accountNameTextView.setVisibility(View.INVISIBLE);
 break;
 case UPLOAD_FAILED:
 uploadDateTextView.setVisibility(View.GONE);
-if (upload.getLastResult() != null) {
-switch (upload.getLastResult()) {
-case CREDENTIAL_ERROR:
-status=mParentActivity.getString(R.string.uploads_view_upload_status_failed_credentials_error);
-view.setOnClickListener(new OnClickListener(){
-@Override public void onClick(View v){
-Intent updateAccountCredentials=new Intent(mParentActivity,AuthenticatorActivity.class);
-updateAccountCredentials.putExtra(AuthenticatorActivity.EXTRA_ACCOUNT,upload.getAccount(mParentActivity));
-updateAccountCredentials.putExtra(AuthenticatorActivity.EXTRA_ACTION,AuthenticatorActivity.ACTION_UPDATE_EXPIRED_TOKEN);
-updateAccountCredentials.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-updateAccountCredentials.addFlags(Intent.FLAG_FROM_BACKGROUND);
-mParentActivity.startActivityForResult(updateAccountCredentials,UploadListActivity.UPDATE_CREDENTIALS_REQUEST_CODE);
-}
-}
-);
-break;
-case FOLDER_ERROR:
-status=mParentActivity.getString(R.string.uploads_view_upload_status_failed_folder_error);
-break;
-case FILE_NOT_FOUND:
-status=mParentActivity.getString(R.string.uploads_view_upload_status_failed_localfile_error);
-break;
-case FILE_ERROR:
-status=mParentActivity.getString(R.string.uploads_view_upload_status_failed_file_error);
-break;
-case PRIVILEDGES_ERROR:
-status=mParentActivity.getString(R.string.uploads_view_upload_status_failed_permission_error);
-break;
-case NETWORK_CONNECTION:
-status=mParentActivity.getString(R.string.uploads_view_upload_status_failed_connection_error);
-break;
-default :
-status=mParentActivity.getString(R.string.uploads_view_upload_status_failed) + ": " + upload.getLastResult().toString();
-break;
-}
-}
- else {
-status=mParentActivity.getString(R.string.uploads_view_upload_status_failed);
-}
-String laterReason=upload.getUploadLaterReason(mParentActivity);
-if (laterReason != null) {
-status=laterReason;
-}
 break;
 case UPLOAD_SUCCEEDED:
-status=mParentActivity.getString(R.string.uploads_view_upload_status_succeeded);
 statusTextView.setVisibility(View.GONE);
-break;
-default :
-status=upload.getUploadStatus().toString();
-if (upload.getLastResult() != null) {
-upload.getLastResult().toString();
-}
 break;
 }
 if (upload.getUploadStatus() != UploadStatus.UPLOAD_IN_PROGRESS) {
@@ -145,7 +94,21 @@ refreshView();
 }
 );
 }
-if (upload.userCanRetryUpload() && upload.getLastResult() != UploadResult.CREDENTIAL_ERROR) {
+if (upload.userCanRetryUpload()) {
+if (UploadResult.CREDENTIAL_ERROR.equals(upload.getLastResult())) {
+view.setOnClickListener(new OnClickListener(){
+@Override public void onClick(View v){
+Intent updateAccountCredentials=new Intent(mParentActivity,AuthenticatorActivity.class);
+updateAccountCredentials.putExtra(AuthenticatorActivity.EXTRA_ACCOUNT,upload.getAccount(mParentActivity));
+updateAccountCredentials.putExtra(AuthenticatorActivity.EXTRA_ACTION,AuthenticatorActivity.ACTION_UPDATE_EXPIRED_TOKEN);
+updateAccountCredentials.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+updateAccountCredentials.addFlags(Intent.FLAG_FROM_BACKGROUND);
+mParentActivity.startActivityForResult(updateAccountCredentials,UploadListActivity.UPDATE_CREDENTIALS_REQUEST_CODE);
+}
+}
+);
+}
+ else {
 view.setOnClickListener(new OnClickListener(){
 @Override public void onClick(View v){
 File file=new File(upload.getLocalPath());
@@ -161,6 +124,7 @@ Toast.makeText(mParentActivity,message,Toast.LENGTH_SHORT).show();
 }
 }
 );
+}
 }
 ImageView fileIcon=(ImageView)view.findViewById(R.id.thumbnail);
 fileIcon.setImageResource(R.drawable.file);
