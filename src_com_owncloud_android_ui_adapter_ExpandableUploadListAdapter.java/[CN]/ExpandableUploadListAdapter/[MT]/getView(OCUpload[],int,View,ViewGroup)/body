@@ -56,7 +56,6 @@ Log_OC.w(TAG,"FileUploaderBinder not ready yet for upload " + upload.getRemotePa
 uploadDateTextView.setVisibility(View.GONE);
 pathTextView.setVisibility(View.GONE);
 fileSizeTextView.setVisibility(View.GONE);
-accountNameTextView.setVisibility(View.INVISIBLE);
 break;
 case UPLOAD_FAILED:
 uploadDateTextView.setVisibility(View.GONE);
