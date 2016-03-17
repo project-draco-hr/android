@@ -12,7 +12,7 @@
         updateUploadStatus(upload.getOCUploadId(),UploadStatus.UPLOAD_FAILED,UploadResult.fromOperationResult(uploadResult),upload.getRemotePath());
       }
  else {
-        updateUploadStatus(upload.getOCUploadId(),UploadsStorageManager.UploadStatus.UPLOAD_FAILED,UploadResult.fromOperationResult(uploadResult),upload.getRemotePath());
+        updateUploadStatus(upload.getOCUploadId(),UploadStatus.UPLOAD_FAILED,UploadResult.fromOperationResult(uploadResult),upload.getRemotePath());
       }
     }
   }
