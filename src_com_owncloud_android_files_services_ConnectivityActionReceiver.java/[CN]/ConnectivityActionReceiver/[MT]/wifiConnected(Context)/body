@@ -1,7 +1,8 @@
 {
-  if ((PreferenceReader.instantPictureUploadEnabled(context) && PreferenceReader.instantPictureUploadViaWiFiOnly(context)) || (PreferenceReader.instantVideoUploadEnabled(context) && PreferenceReader.instantPictureUploadViaWiFiOnly(context))) {
+  if ((PreferenceReader.instantPictureUploadEnabled(context) && PreferenceReader.instantPictureUploadViaWiFiOnly(context)) || (PreferenceReader.instantVideoUploadEnabled(context) && PreferenceReader.instantVideoUploadViaWiFiOnly(context))) {
     Log_OC.d(TAG,"Requesting retry of instant uploads (& friends)");
     FileUploader.UploadRequester requester=new FileUploader.UploadRequester();
     requester.retryFailedUploads(context,null,UploadResult.NETWORK_CONNECTION);
+    requester.retryFailedUploads(context,null,UploadResult.DELAYED_FOR_WIFI);
   }
 }
