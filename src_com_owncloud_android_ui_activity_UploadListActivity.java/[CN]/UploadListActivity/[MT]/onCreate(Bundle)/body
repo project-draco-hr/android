@@ -1,6 +1,7 @@
 {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.upload_list_layout);
+  setFile(null);
   initDrawer();
   if (savedInstanceState == null) {
     createUploadListFragment();
