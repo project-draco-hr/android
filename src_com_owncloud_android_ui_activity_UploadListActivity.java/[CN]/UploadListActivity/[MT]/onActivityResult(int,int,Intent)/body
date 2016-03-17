@@ -1,8 +1,8 @@
 {
   super.onActivityResult(requestCode,resultCode,data);
-  Log_OC.e(TAG,"onActivityResult " + resultCode);
-  if (requestCode == UPDATE_CREDENTIALS_REQUEST_CODE && resultCode == RESULT_OK) {
+  if (requestCode == FileActivity.REQUEST_CODE__UPDATE_CREDENTIALS && resultCode == RESULT_OK) {
+    Account account=AccountUtils.getOwnCloudAccountByName(this,data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME));
     FileUploader.UploadRequester requester=new FileUploader.UploadRequester();
-    requester.retryFailedUploads(this,getAccount(),UploadResult.CREDENTIAL_ERROR);
+    requester.retryFailedUploads(this,account,UploadResult.CREDENTIAL_ERROR);
   }
 }

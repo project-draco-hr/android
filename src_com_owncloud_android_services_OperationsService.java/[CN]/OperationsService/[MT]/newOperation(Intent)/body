@@ -96,6 +96,9 @@
         String newParentPath=operationIntent.getStringExtra(EXTRA_NEW_PARENT_PATH);
         operation=new CopyFileOperation(remotePath,newParentPath,account);
       }
+ else       if (action.equals(ACTION_CHECK_CURRENT_CREDENTIALS)) {
+        operation=new CheckCurrentCredentialsOperation(account);
+      }
     }
   }
  catch (  IllegalArgumentException e) {

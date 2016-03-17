@@ -54,7 +54,7 @@ case R.id.action_move:
 {
 Intent action=new Intent(getActivity(),FolderPickerActivity.class);
 action.putExtra(FolderPickerActivity.EXTRA_FILE,mTargetFile);
-getActivity().startActivityForResult(action,FileDisplayActivity.ACTION_MOVE_FILES);
+getActivity().startActivityForResult(action,FileDisplayActivity.REQUEST_CODE__MOVE_FILES);
 return true;
 }
 case R.id.action_favorite_file:
@@ -70,7 +70,7 @@ return true;
 case R.id.action_copy:
 Intent action=new Intent(getActivity(),FolderPickerActivity.class);
 action.putExtra(FolderPickerActivity.EXTRA_FILE,mTargetFile);
-getActivity().startActivityForResult(action,FileDisplayActivity.ACTION_COPY_FILES);
+getActivity().startActivityForResult(action,FileDisplayActivity.REQUEST_CODE__COPY_FILES);
 return true;
 default :
 return false;

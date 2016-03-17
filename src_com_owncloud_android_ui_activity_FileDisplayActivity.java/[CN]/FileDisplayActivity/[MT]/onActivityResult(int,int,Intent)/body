@@ -1,5 +1,5 @@
 {
-  if (requestCode == ACTION_SELECT_CONTENT_FROM_APPS && (resultCode == RESULT_OK || resultCode == UploadFilesActivity.RESULT_OK_AND_MOVE)) {
+  if (requestCode == REQUEST_CODE__SELECT_CONTENT_FROM_APPS && (resultCode == RESULT_OK || resultCode == UploadFilesActivity.RESULT_OK_AND_MOVE)) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN && data.getClipData() != null && data.getClipData().getItemCount() > 0) {
       for (int i=0; i < data.getClipData().getItemCount(); i++) {
         Intent intent=new Intent();
@@ -11,10 +11,10 @@
       requestSimpleUpload(data,resultCode);
     }
   }
- else   if (requestCode == ACTION_SELECT_MULTIPLE_FILES && (resultCode == RESULT_OK || resultCode == UploadFilesActivity.RESULT_OK_AND_MOVE)) {
+ else   if (requestCode == REQUEST_CODE__SELECT_MULTIPLE_FILES && (resultCode == RESULT_OK || resultCode == UploadFilesActivity.RESULT_OK_AND_MOVE)) {
     requestMultipleUpload(data,resultCode);
   }
- else   if (requestCode == ACTION_MOVE_FILES && resultCode == RESULT_OK) {
+ else   if (requestCode == REQUEST_CODE__MOVE_FILES && resultCode == RESULT_OK) {
     final Intent fData=data;
     final int fResultCode=resultCode;
     getHandler().postDelayed(new Runnable(){
@@ -24,7 +24,7 @@
     }
 ,DELAY_TO_REQUEST_OPERATIONS_LATER);
   }
- else   if (requestCode == ACTION_COPY_FILES && resultCode == RESULT_OK) {
+ else   if (requestCode == REQUEST_CODE__COPY_FILES && resultCode == RESULT_OK) {
     final Intent fData=data;
     final int fResultCode=resultCode;
     getHandler().postDelayed(new Runnable(){

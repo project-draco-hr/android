@@ -24,11 +24,11 @@ builder.setPositiveButton(R.string.uploader_wrn_no_account_setup_btn_text,new On
 if (android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.ECLAIR_MR1) {
 Intent intent=new Intent(android.provider.Settings.ACTION_ADD_ACCOUNT);
 intent.putExtra("authorities",new String[]{MainApp.getAuthTokenType()});
-startActivityForResult(intent,REQUEST_CODE_SETUP_ACCOUNT);
+startActivityForResult(intent,REQUEST_CODE__SETUP_ACCOUNT);
 }
  else {
 Intent intent=new Intent(getBaseContext(),AccountAuthenticator.class);
-startActivityForResult(intent,REQUEST_CODE_SETUP_ACCOUNT);
+startActivityForResult(intent,REQUEST_CODE__SETUP_ACCOUNT);
 }
 }
 }
