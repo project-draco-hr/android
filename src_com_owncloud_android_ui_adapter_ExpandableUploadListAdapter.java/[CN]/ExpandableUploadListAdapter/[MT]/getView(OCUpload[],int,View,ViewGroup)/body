@@ -121,6 +121,9 @@ Toast.makeText(mParentActivity,message,Toast.LENGTH_SHORT).show();
 );
 }
 }
+ else {
+view.setOnClickListener(null);
+}
 ImageView fileIcon=(ImageView)view.findViewById(R.id.thumbnail);
 fileIcon.setImageResource(R.drawable.file);
 OCFile fakeFileToCheatThumbnailsCacheManagerInterface=new OCFile(upload.getRemotePath());
