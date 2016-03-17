@@ -1,0 +1,3 @@
+{
+  return getString(R.string.uploads_view_title);
+}
