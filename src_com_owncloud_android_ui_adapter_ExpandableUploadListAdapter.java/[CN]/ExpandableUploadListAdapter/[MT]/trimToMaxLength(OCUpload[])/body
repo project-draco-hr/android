@@ -1,6 +1,6 @@
 {
-  if (items.length > 30) {
-    OCUpload[] arrayTrim=new OCUpload[30];
+  if (items.length > MAX_NUM_UPLOADS_SHOWN) {
+    OCUpload[] arrayTrim=new OCUpload[MAX_NUM_UPLOADS_SHOWN];
     for (int i=0; i < MAX_NUM_UPLOADS_SHOWN; i++) {
       arrayTrim[i]=items[i];
     }
