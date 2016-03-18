@@ -12,6 +12,5 @@
     }
     r=updateUpload(upload);
   }
-  c.close();
   return r;
 }
