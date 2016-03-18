@@ -8,7 +8,7 @@
   mServiceHandler=new ServiceHandler(mServiceLooper,this);
   mBinder=new FileUploaderBinder();
   mUploadsStorageManager=new UploadsStorageManager(getContentResolver());
-  int failedCounter=mUploadsStorageManager.failInProgressUploads(UploadResult.UNKNOWN);
+  int failedCounter=mUploadsStorageManager.failInProgressUploads(UploadResult.SERVICE_INTERRUPTED);
   if (failedCounter > 0) {
     resurrection();
   }
