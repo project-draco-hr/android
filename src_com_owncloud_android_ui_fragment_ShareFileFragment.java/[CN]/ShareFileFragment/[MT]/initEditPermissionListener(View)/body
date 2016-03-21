@@ -1,4 +1,4 @@
 {
   mOnEditPermissionInteractionListener=new OnEditPermissionInteractionListener();
-  ((Switch)shareView.findViewById(R.id.shareViaLinkEditPermissionSwitch)).setOnCheckedChangeListener(mOnEditPermissionInteractionListener);
+  ((SwitchCompat)shareView.findViewById(R.id.shareViaLinkEditPermissionSwitch)).setOnCheckedChangeListener(mOnEditPermissionInteractionListener);
 }
