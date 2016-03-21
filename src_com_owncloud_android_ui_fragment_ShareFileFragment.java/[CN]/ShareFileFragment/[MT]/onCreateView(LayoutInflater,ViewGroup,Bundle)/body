@@ -36,5 +36,6 @@
   initShareViaLinkListener(view);
   initExpirationListener(view);
   initPasswordListener(view);
+  initEditPermissionListener(view);
   return view;
 }
