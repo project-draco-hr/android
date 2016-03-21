@@ -55,20 +55,18 @@
     }
     passwordSwitch.setOnCheckedChangeListener(mOnPasswordInteractionListener);
     Switch editPermissionSwitch=getEditPermissionSwitch();
-    if (getEditPermissionSection().getVisibility() == View.VISIBLE) {
-      editPermissionSwitch.setOnCheckedChangeListener(null);
-      if (mPublicShare.getPermissions() > OCShare.READ_PERMISSION_FLAG) {
-        if (!editPermissionSwitch.isChecked()) {
-          editPermissionSwitch.toggle();
-        }
+    editPermissionSwitch.setOnCheckedChangeListener(null);
+    if (mPublicShare.getPermissions() > OCShare.READ_PERMISSION_FLAG) {
+      if (!editPermissionSwitch.isChecked()) {
+        editPermissionSwitch.toggle();
       }
- else {
-        if (editPermissionSwitch.isChecked()) {
-          editPermissionSwitch.toggle();
-        }
-      }
-      editPermissionSwitch.setOnCheckedChangeListener(mOnEditPermissionInteractionListener);
     }
+ else {
+      if (editPermissionSwitch.isChecked()) {
+        editPermissionSwitch.toggle();
+      }
+    }
+    editPermissionSwitch.setOnCheckedChangeListener(mOnEditPermissionInteractionListener);
   }
  else {
     Switch shareViaLinkSwitch=getShareViaLinkSwitch();

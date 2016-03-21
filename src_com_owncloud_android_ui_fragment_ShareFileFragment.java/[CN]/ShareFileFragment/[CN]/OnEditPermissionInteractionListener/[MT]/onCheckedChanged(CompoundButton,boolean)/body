@@ -2,14 +2,7 @@
   if (!isResumed()) {
     return;
   }
-  boolean permission;
-  if (isChecked) {
-    permission=true;
-  }
- else {
-    permission=false;
-  }
-  ((FileActivity)getActivity()).getFileOperationsHelper().setUploadPermissionsToShare(mFile,permission);
+  ((FileActivity)getActivity()).getFileOperationsHelper().setUploadPermissionsToShare(mFile,isChecked);
   ;
   switchView.setOnCheckedChangeListener(null);
   switchView.toggle();
