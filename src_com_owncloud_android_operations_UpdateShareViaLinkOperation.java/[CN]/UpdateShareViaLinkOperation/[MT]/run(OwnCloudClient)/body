@@ -6,6 +6,7 @@
   UpdateRemoteShareOperation updateOp=new UpdateRemoteShareOperation(publicShare.getRemoteId());
   updateOp.setPassword(mPassword);
   updateOp.setExpirationDate(mExpirationDateInMillis);
+  updateOp.setPublicUpload(mPublicUpload);
   RemoteOperationResult result=updateOp.execute(client);
   if (result.isSuccess()) {
     RemoteOperation getShareOp=new GetRemoteShareOperation(publicShare.getRemoteId());

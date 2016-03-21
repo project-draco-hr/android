@@ -1,0 +1,4 @@
+{
+  ShareType shareType=UsersAndGroupsSearchProvider.getShareType(dataAuthority);
+  getFileOperationsHelper().shareFileWithSharee(getFile(),shareeName,shareType,getAppropiatePermissions(shareType));
+}

@@ -10,31 +10,30 @@ case R.id.canShareSwitch:
 break;
 case R.id.canEditSwitch:
 Log_OC.v(TAG,"canEditCheckBox toggled to " + isChecked);
+boolean isFederated=ShareType.FEDERATED.equals(mShare.getShareType());
 if (mFile.isFolder()) {
 if (isChecked) {
 for (int i=0; i < sSubordinateCheckBoxIds.length; i++) {
-  subordinate=(CompoundButton)getView().findViewById(sSubordinateCheckBoxIds[i]);
+subordinate=(CompoundButton)getView().findViewById(sSubordinateCheckBoxIds[i]);
+if (!isFederated) {
   subordinate.setVisibility(View.VISIBLE);
-  if (!subordinate.isChecked() && !mFile.isSharedWithMe()) {
-    toggleDisablingListener(subordinate);
-  }
 }
-if (!mFile.isSharedWithMe()) {
-  updatePermissionsToShare();
+if (!subordinate.isChecked() && !mFile.isSharedWithMe()) {
+  toggleDisablingListener(subordinate);
+}
 }
 }
  else {
 for (int i=0; i < sSubordinateCheckBoxIds.length; i++) {
-  subordinate=(CompoundButton)getView().findViewById(sSubordinateCheckBoxIds[i]);
-  subordinate.setVisibility(View.GONE);
-  if (subordinate.isChecked()) {
-    toggleDisablingListener(subordinate);
-  }
-}
-updatePermissionsToShare();
+subordinate=(CompoundButton)getView().findViewById(sSubordinateCheckBoxIds[i]);
+subordinate.setVisibility(View.GONE);
+if (subordinate.isChecked()) {
+  toggleDisablingListener(subordinate);
 }
 }
- else {
+}
+}
+if (!(mFile.isFolder() && isChecked && mFile.isSharedWithMe())) {
 updatePermissionsToShare();
 }
 break;
