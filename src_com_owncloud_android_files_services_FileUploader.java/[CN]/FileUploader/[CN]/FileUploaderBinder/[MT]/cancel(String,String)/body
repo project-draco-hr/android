@@ -1,14 +1,12 @@
 {
   Pair<UploadFileOperation,String> removeResult=mPendingUploads.remove(accountName,remotePath);
   UploadFileOperation upload=removeResult.first;
-  if (upload == null && mCurrentUpload != null && mCurrentAccount != null && mCurrentUpload.getRemotePath().startsWith(remotePath) && accountName.equals(mCurrentAccount.name)) {
+  if (upload == null && mCurrentUpload != null && mCurrentAccount != null && remotePath.contains(mCurrentUpload.getFileName()) && accountName.equals(mCurrentAccount.name)) {
     upload=mCurrentUpload;
   }
   if (upload != null) {
     boolean pending=!upload.isUploadInProgress();
     upload.cancel();
-    if (pending) {
-      mUploadsStorageManager.removeUpload(accountName,remotePath);
-    }
+    mUploadsStorageManager.removeUpload(accountName,remotePath);
   }
 }
