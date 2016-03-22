@@ -53,14 +53,12 @@
  else {
           throw new SecurityException();
         }
-        if (data == null) {
-          mRemoteCacheData.add(filePath);
-          CopyTmpFileAsyncTask copyTask=new CopyTmpFileAsyncTask(this);
-          Object[] params={uri,filePath,mRemoteCacheData.size() - 1,getAccount().name,getContentResolver()};
-          mNumCacheFile++;
-          showWaitingCopyDialog();
-          copyTask.execute(params);
-        }
+        mRemoteCacheData.add(filePath);
+        CopyTmpFileAsyncTask copyTask=new CopyTmpFileAsyncTask(this);
+        Object[] params={uri,filePath,mRemoteCacheData.size() - 1,getAccount().name,getContentResolver()};
+        mNumCacheFile++;
+        showWaitingCopyDialog();
+        copyTask.execute(params);
       }
  else {
         throw new SecurityException();
