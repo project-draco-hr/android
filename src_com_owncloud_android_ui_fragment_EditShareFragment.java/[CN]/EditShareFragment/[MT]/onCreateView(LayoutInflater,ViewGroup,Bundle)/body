@@ -1,6 +1,7 @@
 {
   Log_OC.d(TAG,"onCreateView");
   View view=inflater.inflate(R.layout.edit_share_layout,container,false);
+  ((TextView)view.findViewById(R.id.editShareTitle)).setText(getResources().getString(R.string.share_with_edit_title,mShare.getSharedWithDisplayName()));
   refreshUiFromState(view);
   return view;
 }

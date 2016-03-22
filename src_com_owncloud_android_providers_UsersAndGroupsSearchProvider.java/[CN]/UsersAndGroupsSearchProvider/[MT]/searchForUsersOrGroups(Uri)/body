@@ -18,6 +18,7 @@
     Iterator<JSONObject> namesIt=names.iterator();
     JSONObject item;
     String displayName=null;
+    int icon=0;
     Uri dataUri=null;
     int count=0;
     Uri userBaseUri=new Uri.Builder().scheme(CONTENT).authority(DATA_USER).build();
@@ -34,9 +35,11 @@
         String shareWith=value.getString(GetRemoteShareesOperation.PROPERTY_SHARE_WITH);
         if (ShareType.GROUP.getValue() == type) {
           displayName=getContext().getString(R.string.share_group_clarification,userName);
+          icon=R.drawable.ic_group;
           dataUri=Uri.withAppendedPath(groupBaseUri,shareWith);
         }
  else         if (ShareType.FEDERATED.getValue() == type && federatedShareAllowed) {
+          icon=R.drawable.ic_user;
           if (userName.equals(shareWith)) {
             displayName=getContext().getString(R.string.share_remote_clarification,userName);
           }
@@ -48,10 +51,11 @@
         }
  else         if (ShareType.USER.getValue() == type) {
           displayName=userName;
+          icon=R.drawable.ic_user;
           dataUri=Uri.withAppendedPath(userBaseUri,shareWith);
         }
         if (displayName != null && dataUri != null) {
-          response.newRow().add(count++).add(displayName).add(dataUri);
+          response.newRow().add(count++).add(displayName).add(icon).add(dataUri);
         }
       }
     }

@@ -1,6 +1,6 @@
 {
   if (mPublicShare != null && ShareType.PUBLIC_LINK.equals(mPublicShare.getShareType())) {
-    Switch shareViaLinkSwitch=getShareViaLinkSwitch();
+    SwitchCompat shareViaLinkSwitch=getShareViaLinkSwitch();
     if (!shareViaLinkSwitch.isChecked()) {
       shareViaLinkSwitch.setOnCheckedChangeListener(null);
       shareViaLinkSwitch.setChecked(true);
@@ -22,7 +22,7 @@
       }
     }
 );
-    Switch expirationDateSwitch=getExpirationDateSwitch();
+    SwitchCompat expirationDateSwitch=getExpirationDateSwitch();
     expirationDateSwitch.setOnCheckedChangeListener(null);
     long expirationDate=mPublicShare.getExpirationDate();
     if (expirationDate > 0) {
@@ -39,7 +39,7 @@
       getExpirationDateValue().setText(R.string.empty);
     }
     expirationDateSwitch.setOnCheckedChangeListener(mOnExpirationDateInteractionListener);
-    Switch passwordSwitch=getPasswordSwitch();
+    SwitchCompat passwordSwitch=getPasswordSwitch();
     passwordSwitch.setOnCheckedChangeListener(null);
     if (mPublicShare.isPasswordProtected()) {
       if (!passwordSwitch.isChecked()) {
@@ -54,7 +54,7 @@
       getPasswordValue().setVisibility(View.INVISIBLE);
     }
     passwordSwitch.setOnCheckedChangeListener(mOnPasswordInteractionListener);
-    Switch editPermissionSwitch=getEditPermissionSwitch();
+    SwitchCompat editPermissionSwitch=getEditPermissionSwitch();
     editPermissionSwitch.setOnCheckedChangeListener(null);
     if (mPublicShare.getPermissions() > OCShare.READ_PERMISSION_FLAG) {
       if (!editPermissionSwitch.isChecked()) {
@@ -69,7 +69,7 @@
     editPermissionSwitch.setOnCheckedChangeListener(mOnEditPermissionInteractionListener);
   }
  else {
-    Switch shareViaLinkSwitch=getShareViaLinkSwitch();
+    SwitchCompat shareViaLinkSwitch=getShareViaLinkSwitch();
     if (shareViaLinkSwitch.isChecked()) {
       shareViaLinkSwitch.setOnCheckedChangeListener(null);
       getShareViaLinkSwitch().setChecked(false);

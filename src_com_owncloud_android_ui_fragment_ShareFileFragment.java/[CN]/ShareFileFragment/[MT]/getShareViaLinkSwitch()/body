@@ -1,3 +1,3 @@
 {
-  return (Switch)getView().findViewById(R.id.shareViaLinkSectionSwitch);
+  return (SwitchCompat)getView().findViewById(R.id.shareViaLinkSectionSwitch);
 }

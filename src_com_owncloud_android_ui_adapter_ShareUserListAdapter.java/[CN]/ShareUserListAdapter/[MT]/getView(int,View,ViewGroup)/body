@@ -4,11 +4,15 @@
   if (mShares != null && mShares.size() > position) {
     OCShare share=mShares.get(position);
     TextView userName=(TextView)view.findViewById(R.id.userOrGroupName);
+    ImageView iconView=(ImageView)view.findViewById(R.id.icon);
     String name=share.getSharedWithDisplayName();
+    Drawable icon=getContext().getResources().getDrawable(R.drawable.ic_user);
     if (share.getShareType() == ShareType.GROUP) {
       name=getContext().getString(R.string.share_group_clarification,name);
+      icon=getContext().getResources().getDrawable(R.drawable.ic_group);
     }
     userName.setText(name);
+    iconView.setImageDrawable(icon);
     final ImageView editShareButton=(ImageView)view.findViewById(R.id.editShareButton);
     editShareButton.setOnClickListener(new View.OnClickListener(){
       @Override public void onClick(      View v){
