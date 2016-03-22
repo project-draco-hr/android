@@ -10,9 +10,6 @@
   mDrawerItems.add(new NavigationDrawerItem(mDrawerTitles[0],mDrawerContentDescriptions[0],R.drawable.ic_folder_open));
   mDrawerItems.add(new NavigationDrawerItem(mDrawerTitles[1],mDrawerContentDescriptions[2],R.drawable.ic_uploads));
   mDrawerItems.add(new NavigationDrawerItem(mDrawerTitles[2],mDrawerContentDescriptions[1],R.drawable.ic_settings));
-  if (BuildConfig.DEBUG) {
-    mDrawerItems.add(new NavigationDrawerItem(mDrawerTitles[3],mDrawerContentDescriptions[3],R.drawable.ic_log));
-  }
   mNavigationDrawerAdapter=new NavigationDrawerListAdapter(getApplicationContext(),this,mDrawerItems);
   mDrawerList.setAdapter(mNavigationDrawerAdapter);
   mDrawerToggle=new ActionBarDrawerToggle(this,mDrawerLayout,R.string.drawer_open,R.string.drawer_close){
