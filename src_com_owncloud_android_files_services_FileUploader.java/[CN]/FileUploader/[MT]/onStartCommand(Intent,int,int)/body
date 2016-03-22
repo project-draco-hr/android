@@ -70,6 +70,7 @@
         }
         newUpload.addDatatransferProgressListener(this);
         newUpload.addDatatransferProgressListener((FileUploaderBinder)mBinder);
+        newUpload.addRenameUploadListener(this);
         OCUpload ocUpload=new OCUpload(files[i],account);
         ocUpload.setFileSize(files[i].getFileLength());
         ocUpload.setForceOverwrite(forceOverwrite);
@@ -111,6 +112,7 @@ catch (    Exception e) {
     UploadFileOperation newUpload=new UploadFileOperation(account,upload,chunked,upload.isForceOverwrite(),upload.getLocalAction(),this);
     newUpload.addDatatransferProgressListener(this);
     newUpload.addDatatransferProgressListener((FileUploaderBinder)mBinder);
+    newUpload.addRenameUploadListener(this);
     Pair<String,String> putResult=mPendingUploads.putIfAbsent(account.name,upload.getRemotePath(),newUpload);
     if (putResult != null) {
       String uploadKey=putResult.first;

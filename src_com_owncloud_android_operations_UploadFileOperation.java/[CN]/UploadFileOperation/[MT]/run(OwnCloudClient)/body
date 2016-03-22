@@ -25,8 +25,7 @@
         Log_OC.d(TAG,"File renamed as " + remotePath);
       }
       mRemotePath=remotePath;
-      UploadsStorageManager usm=new UploadsStorageManager(mContext.getContentResolver());
-      usm.updateDatabaseUploadStart(this);
+      mRenameUploadListener.onRenameUpload();
     }
     if (mCancellationRequested.get()) {
       throw new OperationCancelledException();
