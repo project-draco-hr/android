@@ -6,9 +6,6 @@
       cancelUploadsForAccount(mCurrentUpload.getAccount());
       return;
     }
-    if (delayForWifi()) {
-      return;
-    }
     mUploadsStorageManager.updateDatabaseUploadStart(mCurrentUpload);
     notifyUploadStart(mCurrentUpload);
     sendBroadcastUploadStarted(mCurrentUpload);
