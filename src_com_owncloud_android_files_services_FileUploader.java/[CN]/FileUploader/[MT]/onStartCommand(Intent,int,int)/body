@@ -78,15 +78,12 @@
         ocUpload.setCreatedBy(createdBy);
         ocUpload.setLocalAction(localAction);
         ocUpload.setUploadStatus(UploadStatus.UPLOAD_IN_PROGRESS);
-        long id=mUploadsStorageManager.storeUpload(ocUpload);
-        newUpload.setOCUploadId(id);
         Pair<String,String> putResult=mPendingUploads.putIfAbsent(account.name,files[i].getRemotePath(),newUpload);
         if (putResult != null) {
           uploadKey=putResult.first;
           requestedUploads.add(uploadKey);
-        }
- else {
-          mUploadsStorageManager.removeUpload(newUpload.getOCUploadId());
+          long id=mUploadsStorageManager.storeUpload(ocUpload);
+          newUpload.setOCUploadId(id);
         }
       }
     }
