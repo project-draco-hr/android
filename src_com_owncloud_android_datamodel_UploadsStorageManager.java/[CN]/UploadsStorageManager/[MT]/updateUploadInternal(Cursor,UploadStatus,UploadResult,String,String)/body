@@ -7,6 +7,7 @@
     upload.setUploadStatus(status);
     upload.setLastResult(result);
     upload.setRemotePath(remotePath);
+    upload.setLocalPath(localPath);
     if (status == UploadStatus.UPLOAD_SUCCEEDED) {
       upload.setUploadEndTimestamp(Calendar.getInstance().getTimeInMillis());
     }
