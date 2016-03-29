@@ -7,7 +7,6 @@
     @Override public void refresh(){
       items=mUploadsStorageManager.getCurrentAndPendingUploads();
       Arrays.sort(items,comparator);
-      items=trimToMaxLength(items);
     }
     @Override public int getGroupIcon(){
       return R.drawable.upload_in_progress;
@@ -18,7 +17,6 @@
     @Override public void refresh(){
       items=mUploadsStorageManager.getFailedUploads();
       Arrays.sort(items,comparator);
-      items=trimToMaxLength(items);
     }
     @Override public int getGroupIcon(){
       return R.drawable.upload_failed;
@@ -29,7 +27,6 @@
     @Override public void refresh(){
       items=mUploadsStorageManager.getFinishedUploads();
       Arrays.sort(items,comparator);
-      items=trimToMaxLength(items);
     }
     @Override public int getGroupIcon(){
       return R.drawable.upload_finished;

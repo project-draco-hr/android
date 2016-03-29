@@ -1,3 +1,0 @@
-{
-  return getUploads(ProviderTableMeta.UPLOADS_LOCAL_PATH + "=?",new String[]{localPath});
-}

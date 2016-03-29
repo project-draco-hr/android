@@ -51,6 +51,7 @@ Uri insertedUploadUri=null;
 long uploadId=db.insert(ProviderTableMeta.UPLOADS_TABLE_NAME,null,values);
 if (uploadId > 0) {
 insertedUploadUri=ContentUris.withAppendedId(ProviderTableMeta.CONTENT_URI_UPLOADS,uploadId);
+trimSuccessfulUploads(db);
 }
  else {
 throw new SQLException("ERROR " + uri);

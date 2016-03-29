@@ -1,4 +1,0 @@
-{
-  String localPath=(FileUploader.LOCAL_BEHAVIOUR_MOVE == ocUpload.getLocalAction()) ? ocUpload.getLocalPath() : null;
-  return updateUploadStatus(ocUpload.getUploadId(),ocUpload.getUploadStatus(),ocUpload.getLastResult(),ocUpload.getRemotePath(),localPath);
-}

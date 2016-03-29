@@ -1,0 +1,15 @@
+{
+  Cursor c=null;
+  try {
+    c=db.rawQuery("delete from " + ProviderTableMeta.UPLOADS_TABLE_NAME + " where "+ ProviderTableMeta.UPLOADS_STATUS+ " == "+ UploadsStorageManager.UploadStatus.UPLOAD_SUCCEEDED.getValue()+ " and "+ ProviderTableMeta._ID+ " not in (select "+ ProviderTableMeta._ID+ " from "+ ProviderTableMeta.UPLOADS_TABLE_NAME+ " where "+ ProviderTableMeta.UPLOADS_STATUS+ " == "+ UploadsStorageManager.UploadStatus.UPLOAD_SUCCEEDED.getValue()+ " order by "+ ProviderTableMeta.UPLOADS_UPLOAD_END_TIMESTAMP+ " desc limit "+ MAX_SUCCESSFUL_UPLOADS+ ")",null);
+    c.moveToFirst();
+  }
+ catch (  Exception e) {
+    Log_OC.e(TAG,"Something wrong trimming successful uploads, database could grow more than expected",e);
+  }
+ finally {
+    if (c != null) {
+      c.close();
+    }
+  }
+}

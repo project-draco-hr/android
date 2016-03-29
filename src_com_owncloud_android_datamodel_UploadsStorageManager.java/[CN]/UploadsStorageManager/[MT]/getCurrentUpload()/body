@@ -1,3 +1,0 @@
-{
-  return getUploads(ProviderTableMeta.UPLOADS_STATUS + "==" + UploadStatus.UPLOAD_IN_PROGRESS.value,null);
-}
