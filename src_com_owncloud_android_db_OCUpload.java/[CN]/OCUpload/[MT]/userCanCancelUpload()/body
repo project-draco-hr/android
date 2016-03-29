@@ -1,6 +1,0 @@
-{
-  if (getUploadStatus() == UploadStatus.UPLOAD_IN_PROGRESS) {
-    return true;
-  }
-  return false;
-}

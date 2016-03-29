@@ -1,6 +1,0 @@
-{
-  if (getUploadStatus() == UploadStatus.UPLOAD_FAILED) {
-    return true;
-  }
-  return false;
-}

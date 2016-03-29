@@ -70,7 +70,7 @@ break;
 }
 statusTextView.setText(status);
 ImageButton rightButton=(ImageButton)view.findViewById(R.id.upload_right_button);
-if (upload.userCanCancelUpload()) {
+if (upload.getUploadStatus() == UploadStatus.UPLOAD_IN_PROGRESS) {
 rightButton.setImageResource(R.drawable.ic_cancel);
 rightButton.setOnClickListener(new OnClickListener(){
 @Override public void onClick(View v){
@@ -83,7 +83,7 @@ refreshView();
 }
 );
 }
- else {
+ else if (upload.getUploadStatus() == UploadStatus.UPLOAD_FAILED) {
 rightButton.setImageResource(R.drawable.ic_action_delete);
 rightButton.setOnClickListener(new OnClickListener(){
 @Override public void onClick(View v){
@@ -93,7 +93,10 @@ refreshView();
 }
 );
 }
-if (upload.userCanRetryUpload()) {
+ else {
+rightButton.setVisibility(View.INVISIBLE);
+}
+if (upload.getUploadStatus() == UploadStatus.UPLOAD_FAILED) {
 if (UploadResult.CREDENTIAL_ERROR.equals(upload.getLastResult())) {
 view.setOnClickListener(new OnClickListener(){
 @Override public void onClick(View v){
