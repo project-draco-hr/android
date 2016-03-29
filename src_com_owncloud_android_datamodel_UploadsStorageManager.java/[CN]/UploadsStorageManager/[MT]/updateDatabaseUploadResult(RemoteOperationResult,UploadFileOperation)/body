@@ -5,10 +5,10 @@
   }
  else {
     if (uploadResult.isSuccess()) {
-      updateUploadStatus(upload.getOCUploadId(),UploadStatus.UPLOAD_SUCCEEDED,UploadResult.UPLOADED,upload.getRemotePath(),upload.getStoragePath());
+      updateUploadStatus(upload.getOCUploadId(),UploadStatus.UPLOAD_SUCCEEDED,UploadResult.UPLOADED,upload.getRemotePath());
     }
  else {
-      updateUploadStatus(upload.getOCUploadId(),UploadStatus.UPLOAD_FAILED,UploadResult.fromOperationResult(uploadResult),upload.getRemotePath(),upload.getStoragePath());
+      updateUploadStatus(upload.getOCUploadId(),UploadStatus.UPLOAD_FAILED,UploadResult.fromOperationResult(uploadResult),upload.getRemotePath());
     }
   }
 }

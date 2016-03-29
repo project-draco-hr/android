@@ -5,7 +5,7 @@
     Log_OC.e(TAG,c.getCount() + " items for id=" + id+ " available in UploadDb. Expected 1. Failed to update upload db.");
   }
  else {
-    returnValue=updateUploadInternal(c,status,result,remotePath,localPath);
+    returnValue=updateUploadInternal(c,status,result,remotePath);
   }
   c.close();
   return returnValue;
