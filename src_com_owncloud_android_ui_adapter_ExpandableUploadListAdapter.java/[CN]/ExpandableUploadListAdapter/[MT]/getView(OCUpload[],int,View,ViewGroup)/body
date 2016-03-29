@@ -26,32 +26,36 @@
     TextView accountNameTextView=(TextView)view.findViewById(R.id.upload_account);
     accountNameTextView.setText(upload.getAccountName());
     TextView statusTextView=(TextView)view.findViewById(R.id.upload_status);
+    ProgressBar progressBar=(ProgressBar)view.findViewById(R.id.upload_progress_bar);
     uploadDateTextView.setVisibility(View.VISIBLE);
     pathTextView.setVisibility(View.VISIBLE);
     fileSizeTextView.setVisibility(View.VISIBLE);
     accountNameTextView.setVisibility(View.VISIBLE);
     statusTextView.setVisibility(View.VISIBLE);
+    progressBar.setVisibility(View.GONE);
     String status=getStatusText(upload);
 switch (upload.getUploadStatus()) {
 case UPLOAD_IN_PROGRESS:
-      ProgressBar progressBar=(ProgressBar)view.findViewById(R.id.upload_progress_bar);
-    progressBar.setProgress(0);
-  progressBar.setVisibility(View.VISIBLE);
-FileUploader.FileUploaderBinder binder=mParentActivity.getFileUploaderBinder();
+      progressBar.setProgress(0);
+    progressBar.setVisibility(View.VISIBLE);
+  FileUploader.FileUploaderBinder binder=mParentActivity.getFileUploaderBinder();
 if (binder != null) {
-if (binder.isUploadingNow(upload)) {
-  mProgressListener=new ProgressListener(upload,progressBar);
-  binder.addDatatransferProgressListener(mProgressListener,upload);
-}
+  if (binder.isUploadingNow(upload)) {
+    if (mProgressListener != null) {
+      binder.removeDatatransferProgressListener(mProgressListener,mProgressListener.getUpload());
+    }
+    mProgressListener=new ProgressListener(upload,progressBar);
+    binder.addDatatransferProgressListener(mProgressListener,upload);
+  }
  else {
-  if (convertView != null && mProgressListener != null && mProgressListener.isWrapping(progressBar)) {
-    binder.removeDatatransferProgressListener(mProgressListener,mProgressListener.getUpload());
-    mProgressListener=null;
+    if (convertView != null && mProgressListener != null && mProgressListener.isWrapping(progressBar)) {
+      binder.removeDatatransferProgressListener(mProgressListener,mProgressListener.getUpload());
+      mProgressListener=null;
+    }
   }
 }
-}
  else {
-Log_OC.w(TAG,"FileUploaderBinder not ready yet for upload " + upload.getRemotePath());
+  Log_OC.w(TAG,"FileUploaderBinder not ready yet for upload " + upload.getRemotePath());
 }
 uploadDateTextView.setVisibility(View.GONE);
 pathTextView.setVisibility(View.GONE);
@@ -63,10 +67,6 @@ break;
 case UPLOAD_SUCCEEDED:
 statusTextView.setVisibility(View.GONE);
 break;
-}
-if (upload.getUploadStatus() != UploadStatus.UPLOAD_IN_PROGRESS) {
-ProgressBar progressBar=(ProgressBar)view.findViewById(R.id.upload_progress_bar);
-progressBar.setVisibility(View.GONE);
 }
 statusTextView.setText(status);
 ImageButton rightButton=(ImageButton)view.findViewById(R.id.upload_right_button);
