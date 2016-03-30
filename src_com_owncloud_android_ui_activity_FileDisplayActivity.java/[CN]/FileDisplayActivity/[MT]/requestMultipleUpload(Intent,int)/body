@@ -6,13 +6,9 @@
     for (int j=0; j < remotePaths.length; j++) {
       remotePaths[j]=remotePathBase + (new File(filePaths[j])).getName();
     }
-    Intent i=new Intent(this,FileUploader.class);
-    i.putExtra(FileUploader.KEY_ACCOUNT,getAccount());
-    i.putExtra(FileUploader.KEY_LOCAL_FILE,filePaths);
-    i.putExtra(FileUploader.KEY_REMOTE_FILE,remotePaths);
-    i.putExtra(FileUploader.KEY_UPLOAD_TYPE,FileUploader.UPLOAD_MULTIPLE_FILES);
-    if (resultCode == UploadFilesActivity.RESULT_OK_AND_MOVE)     i.putExtra(FileUploader.KEY_LOCAL_BEHAVIOUR,FileUploader.LOCAL_BEHAVIOUR_MOVE);
-    startService(i);
+    int behaviour=(resultCode == UploadFilesActivity.RESULT_OK_AND_MOVE) ? FileUploader.LOCAL_BEHAVIOUR_MOVE : FileUploader.LOCAL_BEHAVIOUR_COPY;
+    FileUploader.UploadRequester requester=new FileUploader.UploadRequester();
+    requester.uploadNewFile(this,getAccount(),filePaths,remotePaths,null,behaviour,false,UploadFileOperation.CREATED_BY_USER);
   }
  else {
     Log_OC.d(TAG,"User clicked on 'Update' with no selection");

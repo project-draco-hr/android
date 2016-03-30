@@ -1,0 +1,11 @@
+{
+switch (value) {
+case 0:
+    return UPLOAD_IN_PROGRESS;
+case 1:
+  return UPLOAD_FAILED;
+case 2:
+return UPLOAD_SUCCEEDED;
+}
+return null;
+}

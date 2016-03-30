@@ -1,0 +1,27 @@
+{
+  if (!targetFile.equals(sourceFile)) {
+    File expectedFolder=targetFile.getParentFile();
+    expectedFolder.mkdirs();
+    if (expectedFolder.isDirectory()) {
+      if (!sourceFile.renameTo(targetFile)) {
+        targetFile.createNewFile();
+        FileChannel inChannel=new FileInputStream(sourceFile).getChannel();
+        FileChannel outChannel=new FileOutputStream(targetFile).getChannel();
+        try {
+          inChannel.transferTo(0,inChannel.size(),outChannel);
+          sourceFile.delete();
+        }
+ catch (        Exception e) {
+          mFile.setStoragePath("");
+        }
+ finally {
+          if (inChannel != null)           inChannel.close();
+          if (outChannel != null)           outChannel.close();
+        }
+      }
+    }
+ else {
+      mFile.setStoragePath("");
+    }
+  }
+}

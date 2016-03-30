@@ -40,6 +40,9 @@ break;
 case CAPABILITIES:
 count=db.delete(ProviderTableMeta.CAPABILITIES_TABLE_NAME,where,whereArgs);
 break;
+case UPLOADS:
+count=db.delete(ProviderTableMeta.UPLOADS_TABLE_NAME,where,whereArgs);
+break;
 default :
 throw new IllegalArgumentException("Unknown uri: " + uri.toString());
 }

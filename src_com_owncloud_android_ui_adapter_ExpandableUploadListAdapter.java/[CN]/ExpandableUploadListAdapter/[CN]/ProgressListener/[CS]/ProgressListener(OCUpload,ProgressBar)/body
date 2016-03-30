@@ -1,0 +1,4 @@
+{
+  mUpload=upload;
+  mProgressBar=new WeakReference<ProgressBar>(progressBar);
+}

@@ -1,0 +1,3 @@
+{
+  getFileOperationsHelper().openFile(ocFile);
+}

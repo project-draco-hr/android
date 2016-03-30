@@ -1,0 +1,4 @@
+{
+  Log_OC.d(TAG,"onActivityCreated() start");
+  super.onActivityCreated(savedInstanceState);
+}

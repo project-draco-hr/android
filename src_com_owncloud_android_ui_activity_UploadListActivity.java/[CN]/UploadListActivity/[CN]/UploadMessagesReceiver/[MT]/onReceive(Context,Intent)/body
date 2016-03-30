@@ -1,0 +1,11 @@
+{
+  try {
+    UploadListFragment uploadListFragment=(UploadListFragment)getSupportFragmentManager().findFragmentByTag(TAG_UPLOAD_LIST_FRAGMENT);
+    uploadListFragment.updateUploads();
+  }
+  finally {
+    if (intent != null) {
+      removeStickyBroadcast(intent);
+    }
+  }
+}

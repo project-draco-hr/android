@@ -1,0 +1,5 @@
+Cursor c
+UploadStatus status
+UploadResult result
+String remotePath
+String localPath

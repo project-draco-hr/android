@@ -1,0 +1,18 @@
+{
+  Cursor c=getDB().query(ProviderTableMeta.CONTENT_URI_UPLOADS,null,selection,selectionArgs,null);
+  OCUpload[] list=new OCUpload[c.getCount()];
+  if (c.moveToFirst()) {
+    do {
+      OCUpload upload=createOCUploadFromCursor(c);
+      if (upload == null) {
+        Log_OC.e(TAG,"OCUpload could not be created from cursor");
+      }
+ else {
+        list[c.getPosition()]=upload;
+      }
+    }
+ while (c.moveToNext());
+  }
+  c.close();
+  return list;
+}

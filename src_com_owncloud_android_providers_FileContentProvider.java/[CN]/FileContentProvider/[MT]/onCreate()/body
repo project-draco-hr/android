@@ -11,5 +11,7 @@
   mUriMatcher.addURI(authority,"shares/#",SHARES);
   mUriMatcher.addURI(authority,"capabilities/",CAPABILITIES);
   mUriMatcher.addURI(authority,"capabilities/#",CAPABILITIES);
+  mUriMatcher.addURI(authority,"uploads/",UPLOADS);
+  mUriMatcher.addURI(authority,"uploads/#",UPLOADS);
   return true;
 }

@@ -1,4 +1,0 @@
-{
-  String key=buildKey(account,remotePath);
-  return get(key);
-}

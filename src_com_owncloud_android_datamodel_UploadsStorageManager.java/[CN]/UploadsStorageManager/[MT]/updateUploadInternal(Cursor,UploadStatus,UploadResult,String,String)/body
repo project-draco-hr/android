@@ -1,0 +1,19 @@
+{
+  int r=0;
+  while (c.moveToNext()) {
+    OCUpload upload=createOCUploadFromCursor(c);
+    String path=c.getString(c.getColumnIndex(ProviderTableMeta.UPLOADS_LOCAL_PATH));
+    Log_OC.v(TAG,"Updating " + path + " with status:"+ status+ " and result:"+ (result == null ? "null" : result.toString())+ " (old:"+ upload.toFormattedString()+ ")");
+    upload.setUploadStatus(status);
+    upload.setLastResult(result);
+    upload.setRemotePath(remotePath);
+    if (localPath != null) {
+      upload.setLocalPath(localPath);
+    }
+    if (status == UploadStatus.UPLOAD_SUCCEEDED) {
+      upload.setUploadEndTimestamp(Calendar.getInstance().getTimeInMillis());
+    }
+    r=updateUpload(upload);
+  }
+  return r;
+}

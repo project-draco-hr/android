@@ -22,7 +22,7 @@
         downloadResult=new RemoteOperationResult(e);
       }
  finally {
-        Pair<DownloadFileOperation,String> removeResult=mPendingDownloads.removePayload(mCurrentAccount,mCurrentDownload.getRemotePath());
+        Pair<DownloadFileOperation,String> removeResult=mPendingDownloads.removePayload(mCurrentAccount.name,mCurrentDownload.getRemotePath());
         notifyDownloadResult(mCurrentDownload,downloadResult);
         sendBroadcastDownloadFinished(mCurrentDownload,downloadResult,removeResult.second);
       }

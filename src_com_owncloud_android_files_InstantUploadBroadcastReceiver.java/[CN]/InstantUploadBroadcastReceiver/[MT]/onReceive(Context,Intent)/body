@@ -1,9 +1,6 @@
 {
   Log_OC.d(TAG,"Received: " + intent.getAction());
-  if (intent.getAction().equals(android.net.ConnectivityManager.CONNECTIVITY_ACTION)) {
-    handleConnectivityAction(context,intent);
-  }
- else   if (intent.getAction().equals(NEW_PHOTO_ACTION_UNOFFICIAL)) {
+  if (intent.getAction().equals(NEW_PHOTO_ACTION_UNOFFICIAL)) {
     handleNewPictureAction(context,intent);
     Log_OC.d(TAG,"UNOFFICIAL processed: com.android.camera.NEW_PICTURE");
   }
@@ -12,10 +9,10 @@
     Log_OC.d(TAG,"OFFICIAL processed: android.hardware.action.NEW_PICTURE");
   }
  else   if (intent.getAction().equals(NEW_VIDEO_ACTION)) {
-    Log_OC.d(TAG,"OFFICIAL processed: android.hardware.action.NEW_VIDEO");
     handleNewVideoAction(context,intent);
+    Log_OC.d(TAG,"OFFICIAL processed: android.hardware.action.NEW_VIDEO");
   }
  else {
-    Log_OC.e(TAG,"Incorrect intent sent: " + intent.getAction());
+    Log_OC.e(TAG,"Incorrect intent received: " + intent.getAction());
   }
 }

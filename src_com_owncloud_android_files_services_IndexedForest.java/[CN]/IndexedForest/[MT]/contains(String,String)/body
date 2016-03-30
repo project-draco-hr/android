@@ -1,0 +1,4 @@
+{
+  String targetKey=buildKey(accountName,remotePath);
+  return mMap.containsKey(targetKey);
+}

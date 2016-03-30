@@ -1,0 +1,23 @@
+{
+  mId=source.readLong();
+  mLocalPath=source.readString();
+  mRemotePath=source.readString();
+  mAccountName=source.readString();
+  mLocalAction=source.readInt();
+  mForceOverwrite=(source.readInt() == 1);
+  mIsCreateRemoteFolder=(source.readInt() == 1);
+  try {
+    mUploadStatus=UploadStatus.valueOf(source.readString());
+  }
+ catch (  IllegalArgumentException x) {
+    mUploadStatus=UploadStatus.UPLOAD_IN_PROGRESS;
+  }
+  mUploadEndTimeStamp=source.readLong();
+  try {
+    mLastResult=UploadResult.valueOf(source.readString());
+  }
+ catch (  IllegalArgumentException x) {
+    mLastResult=UploadResult.UNKNOWN;
+  }
+  mCreatedBy=source.readInt();
+}

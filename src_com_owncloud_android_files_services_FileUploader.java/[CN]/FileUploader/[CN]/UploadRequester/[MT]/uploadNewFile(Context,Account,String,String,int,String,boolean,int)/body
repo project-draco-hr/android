@@ -1,0 +1,3 @@
+{
+  uploadNewFile(context,account,new String[]{localPath},new String[]{remotePath},new String[]{mimeType},behaviour,createRemoteFile,createdBy);
+}

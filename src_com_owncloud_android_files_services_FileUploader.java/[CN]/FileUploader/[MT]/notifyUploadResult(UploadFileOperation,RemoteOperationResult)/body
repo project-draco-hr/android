@@ -4,7 +4,7 @@
   if (!uploadResult.isCancelled()) {
     int tickerId=(uploadResult.isSuccess()) ? R.string.uploader_upload_succeeded_ticker : R.string.uploader_upload_failed_ticker;
     String content;
-    boolean needsToUpdateCredentials=(uploadResult.getCode() == ResultCode.UNAUTHORIZED || uploadResult.isIdPRedirection());
+    boolean needsToUpdateCredentials=(ResultCode.UNAUTHORIZED.equals(uploadResult.getCode()));
     tickerId=(needsToUpdateCredentials) ? R.string.uploader_upload_failed_credentials_error : tickerId;
     mNotificationBuilder.setTicker(getString(tickerId)).setContentTitle(getString(tickerId)).setAutoCancel(true).setOngoing(false).setProgress(0,0,false);
     content=ErrorMessageAdapter.getErrorCauseMessage(uploadResult,upload,getResources());
@@ -16,35 +16,21 @@
       updateAccountCredentials.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
       updateAccountCredentials.addFlags(Intent.FLAG_FROM_BACKGROUND);
       mNotificationBuilder.setContentIntent(PendingIntent.getActivity(this,(int)System.currentTimeMillis(),updateAccountCredentials,PendingIntent.FLAG_ONE_SHOT));
-      mUploadClient=null;
     }
  else {
       mNotificationBuilder.setContentText(content);
-      if (upload.isInstant()) {
-        DbHandler db=null;
-        try {
-          db=new DbHandler(this.getBaseContext());
-          String message=uploadResult.getLogMessage() + " errorCode: " + uploadResult.getCode();
-          Log_OC.e(TAG,message + " Http-Code: " + uploadResult.getHttpCode());
-          if (uploadResult.getCode() == ResultCode.QUOTA_EXCEEDED) {
-            if (db.updateFileState(upload.getOriginalStoragePath(),DbHandler.UPLOAD_STATUS_UPLOAD_FAILED,message) == 0) {
-              db.putFileForLater(upload.getOriginalStoragePath(),upload.getAccount().name,message);
-            }
-          }
-        }
-  finally {
-          if (db != null) {
-            db.close();
-          }
-        }
-      }
+    }
+    if (!uploadResult.isSuccess() && !needsToUpdateCredentials) {
+      Intent showUploadListIntent=new Intent(this,UploadListActivity.class);
+      showUploadListIntent.putExtra(FileActivity.EXTRA_FILE,upload.getFile());
+      showUploadListIntent.putExtra(FileActivity.EXTRA_ACCOUNT,upload.getAccount());
+      showUploadListIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+      mNotificationBuilder.setContentIntent(PendingIntent.getActivity(this,(int)System.currentTimeMillis(),showUploadListIntent,0));
     }
     mNotificationBuilder.setContentText(content);
     mNotificationManager.notify(tickerId,mNotificationBuilder.build());
     if (uploadResult.isSuccess()) {
-      DbHandler db=new DbHandler(this.getBaseContext());
-      db.removeIUPendingFile(mCurrentUpload.getOriginalStoragePath());
-      db.close();
+      mPendingUploads.remove(upload.getAccount().name,upload.getFile().getRemotePath());
       NotificationDelayer.cancelWithDelay(mNotificationManager,R.string.uploader_upload_succeeded_ticker,2000);
     }
   }

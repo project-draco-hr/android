@@ -1,0 +1,4 @@
+{
+  this.mUploadStatus=uploadStatus;
+  setLastResult(UploadResult.UNKNOWN);
+}

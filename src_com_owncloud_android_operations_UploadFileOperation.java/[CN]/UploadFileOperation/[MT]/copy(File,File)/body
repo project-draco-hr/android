@@ -1,0 +1,65 @@
+{
+  Log_OC.d(TAG,"Copying local file");
+  RemoteOperationResult result=null;
+  if (FileStorageUtils.getUsableSpace(mAccount.name) < sourceFile.length()) {
+    result=new RemoteOperationResult(ResultCode.LOCAL_STORAGE_FULL);
+    return result;
+  }
+ else {
+    Log_OC.d(TAG,"Creating temporal folder");
+    File temporalParent=targetFile.getParentFile();
+    temporalParent.mkdirs();
+    if (!temporalParent.isDirectory()) {
+      throw new IOException("Unexpected error: parent directory could not be created");
+    }
+    Log_OC.d(TAG,"Creating temporal file");
+    targetFile.createNewFile();
+    if (!targetFile.isFile()) {
+      throw new IOException("Unexpected error: target file could not be created");
+    }
+    Log_OC.d(TAG,"Copying file contents");
+    InputStream in=null;
+    OutputStream out=null;
+    try {
+      if (!mOriginalStoragePath.equals(targetFile.getAbsolutePath())) {
+        if (mOriginalStoragePath.startsWith(UriUtils.URI_CONTENT_SCHEME)) {
+          Uri uri=Uri.parse(mOriginalStoragePath);
+          in=mContext.getContentResolver().openInputStream(uri);
+        }
+ else {
+          in=new FileInputStream(sourceFile);
+        }
+        out=new FileOutputStream(targetFile);
+        int nRead;
+        byte[] buf=new byte[4096];
+        while (!mCancellationRequested.get() && (nRead=in.read(buf)) > -1) {
+          out.write(buf,0,nRead);
+        }
+        out.flush();
+      }
+      if (mCancellationRequested.get()) {
+        result=new RemoteOperationResult(new OperationCancelledException());
+        return result;
+      }
+    }
+ catch (    Exception e) {
+      result=new RemoteOperationResult(ResultCode.LOCAL_STORAGE_NOT_COPIED);
+      return result;
+    }
+ finally {
+      try {
+        if (in != null)         in.close();
+      }
+ catch (      Exception e) {
+        Log_OC.d(TAG,"Weird exception while closing input stream for " + mOriginalStoragePath + " (ignoring)",e);
+      }
+      try {
+        if (out != null)         out.close();
+      }
+ catch (      Exception e) {
+        Log_OC.d(TAG,"Weird exception while closing output stream for " + targetFile.getAbsolutePath() + " (ignoring)",e);
+      }
+    }
+  }
+  return result;
+}

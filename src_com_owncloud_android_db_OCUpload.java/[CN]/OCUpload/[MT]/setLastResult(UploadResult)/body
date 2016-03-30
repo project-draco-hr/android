@@ -1,0 +1,3 @@
+{
+  this.mLastResult=((lastResult != null) ? lastResult : UploadResult.UNKNOWN);
+}

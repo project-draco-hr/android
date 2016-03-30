@@ -1,0 +1,4 @@
+{
+  mUploadsStorageManager.updateDatabaseUploadStart(mCurrentUpload);
+  sendBroadcastUploadStarted(mCurrentUpload);
+}

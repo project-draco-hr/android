@@ -1,0 +1,6 @@
+{
+  if (account == null) {
+    throw new IllegalArgumentException("NULL account");
+  }
+  mAccount=account;
+}

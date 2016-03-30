@@ -1,5 +1,5 @@
 {
-  Pair<DownloadFileOperation,String> removeResult=mPendingDownloads.remove(account,file.getRemotePath());
+  Pair<DownloadFileOperation,String> removeResult=mPendingDownloads.remove(account.name,file.getRemotePath());
   DownloadFileOperation download=removeResult.first;
   if (download != null) {
     download.cancel();

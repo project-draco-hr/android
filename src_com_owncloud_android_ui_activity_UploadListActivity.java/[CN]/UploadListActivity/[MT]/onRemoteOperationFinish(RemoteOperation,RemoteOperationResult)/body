@@ -1,0 +1,17 @@
+{
+  if (operation instanceof CheckCurrentCredentialsOperation) {
+    getFileOperationsHelper().setOpIdWaitingFor(Long.MAX_VALUE);
+    dismissLoadingDialog();
+    Account account=(Account)result.getData().get(0);
+    if (!result.isSuccess()) {
+      requestCredentialsUpdate(this,account);
+    }
+ else {
+      FileUploader.UploadRequester requester=new FileUploader.UploadRequester();
+      requester.retryFailedUploads(this,account,UploadResult.CREDENTIAL_ERROR);
+    }
+  }
+ else {
+    super.onRemoteOperationFinish(operation,result);
+  }
+}

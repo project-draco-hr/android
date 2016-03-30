@@ -1,4 +1,4 @@
 {
   if (account == null || remotePath == null)   return false;
-  return (mPendingOperations.contains(account,remotePath));
+  return (mPendingOperations.contains(account.name,remotePath));
 }

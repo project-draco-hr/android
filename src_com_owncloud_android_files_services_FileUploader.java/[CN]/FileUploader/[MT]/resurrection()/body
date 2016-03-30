@@ -1,0 +1,3 @@
+{
+  mNotificationManager.cancel(R.string.uploader_upload_in_progress_ticker);
+}

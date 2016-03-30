@@ -1,0 +1,7 @@
+{
+  Log_OC.d(TAG,"loadUploadItemsFromDb");
+  for (  UploadGroup group : mUploadGroups) {
+    group.refresh();
+  }
+  notifyDataSetChanged();
+}

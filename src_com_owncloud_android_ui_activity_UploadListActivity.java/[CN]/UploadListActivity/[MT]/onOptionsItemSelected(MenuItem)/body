@@ -1,0 +1,37 @@
+{
+  boolean retval=true;
+  UploadsStorageManager storageManager=null;
+  UploadListFragment uploadListFragment=(UploadListFragment)getSupportFragmentManager().findFragmentByTag(TAG_UPLOAD_LIST_FRAGMENT);
+switch (item.getItemId()) {
+case android.R.id.home:
+    if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+      mDrawerLayout.closeDrawer(GravityCompat.START);
+    }
+ else {
+      mDrawerLayout.openDrawer(GravityCompat.START);
+    }
+  break;
+case R.id.action_retry_uploads:
+FileUploader.UploadRequester requester=new FileUploader.UploadRequester();
+requester.retryFailedUploads(this,null,null);
+break;
+case R.id.action_clear_failed_uploads:
+storageManager=new UploadsStorageManager(getContentResolver());
+storageManager.clearFailedUploads();
+uploadListFragment.updateUploads();
+break;
+case R.id.action_clear_successfull_uploads:
+storageManager=new UploadsStorageManager(getContentResolver());
+storageManager.clearSuccessfulUploads();
+uploadListFragment.updateUploads();
+break;
+case R.id.action_clear_finished_uploads:
+storageManager=new UploadsStorageManager(getContentResolver());
+storageManager.clearAllFinishedUploads();
+uploadListFragment.updateUploads();
+break;
+default :
+retval=super.onOptionsItemSelected(item);
+}
+return retval;
+}

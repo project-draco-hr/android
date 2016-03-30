@@ -1,3 +1,4 @@
 {
-  mPendingUploads.remove(account);
+  mPendingUploads.remove(account.name);
+  mUploadsStorageManager.removeUploads(account.name);
 }

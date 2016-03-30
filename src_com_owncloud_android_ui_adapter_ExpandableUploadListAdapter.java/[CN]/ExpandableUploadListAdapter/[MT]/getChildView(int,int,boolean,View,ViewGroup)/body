@@ -1,0 +1,3 @@
+{
+  return getView(mUploadGroups[(int)getGroupId(groupPosition)].items,childPosition,convertView,parent);
+}

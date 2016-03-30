@@ -1,0 +1,37 @@
+{
+  Log_OC.d(TAG,"ExpandableUploadListAdapter");
+  mParentActivity=parentActivity;
+  mUploadsStorageManager=new UploadsStorageManager(mParentActivity.getContentResolver());
+  mUploadGroups=new UploadGroup[3];
+  mUploadGroups[0]=new UploadGroup(mParentActivity.getString(R.string.uploads_view_group_current_uploads)){
+    @Override public void refresh(){
+      items=mUploadsStorageManager.getCurrentAndPendingUploads();
+      Arrays.sort(items,comparator);
+    }
+    @Override public int getGroupIcon(){
+      return R.drawable.upload_in_progress;
+    }
+  }
+;
+  mUploadGroups[1]=new UploadGroup(mParentActivity.getString(R.string.uploads_view_group_failed_uploads)){
+    @Override public void refresh(){
+      items=mUploadsStorageManager.getFailedUploads();
+      Arrays.sort(items,comparator);
+    }
+    @Override public int getGroupIcon(){
+      return R.drawable.upload_failed;
+    }
+  }
+;
+  mUploadGroups[2]=new UploadGroup(mParentActivity.getString(R.string.uploads_view_group_finished_uploads)){
+    @Override public void refresh(){
+      items=mUploadsStorageManager.getFinishedUploads();
+      Arrays.sort(items,comparator);
+    }
+    @Override public int getGroupIcon(){
+      return R.drawable.upload_finished;
+    }
+  }
+;
+  loadUploadItemsFromDb();
+}

@@ -1,0 +1,5 @@
+long id
+UploadStatus status
+UploadResult result
+String remotePath
+String localPath

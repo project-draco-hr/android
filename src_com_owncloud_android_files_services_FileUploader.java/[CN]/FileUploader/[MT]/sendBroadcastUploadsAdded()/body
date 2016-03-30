@@ -1,0 +1,4 @@
+{
+  Intent start=new Intent(getUploadsAddedMessage());
+  sendStickyBroadcast(start);
+}

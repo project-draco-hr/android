@@ -1,0 +1,7 @@
+{
+  super.onAccountSet(stateWasRecovered);
+  updateActionBarTitleAndHomeButton(null);
+  if (mAccountWasSet) {
+    setUsernameInDrawer(findViewById(R.id.left_drawer),getAccount());
+  }
+}

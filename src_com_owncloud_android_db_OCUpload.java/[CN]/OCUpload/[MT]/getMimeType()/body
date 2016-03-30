@@ -1,0 +1,3 @@
+{
+  return MimetypeIconUtil.getBestMimeTypeByFilename(mLocalPath);
+}

@@ -1,0 +1,6 @@
+{
+  if (contentResolver == null) {
+    throw new IllegalArgumentException("Cannot create an instance with a NULL contentResolver");
+  }
+  mContentResolver=contentResolver;
+}

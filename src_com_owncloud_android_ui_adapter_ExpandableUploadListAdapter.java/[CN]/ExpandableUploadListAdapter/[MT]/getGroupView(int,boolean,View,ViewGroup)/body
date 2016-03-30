@@ -1,0 +1,13 @@
+{
+  ExpandableListView listView=(ExpandableListView)parent;
+  listView.expandGroup(groupPosition);
+  listView.setGroupIndicator(null);
+  UploadGroup group=(UploadGroup)getGroup(groupPosition);
+  if (convertView == null) {
+    LayoutInflater inflaInflater=(LayoutInflater)mParentActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    convertView=inflaInflater.inflate(R.layout.upload_list_group,null);
+  }
+  TextView tv=(TextView)convertView.findViewById(R.id.uploadListGroupName);
+  tv.setText(group.getGroupName());
+  return convertView;
+}

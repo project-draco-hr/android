@@ -1,0 +1,6 @@
+{
+  mCreatedBy=createdBy;
+  if (createdBy < CREATED_BY_USER || CREATED_AS_INSTANT_VIDEO < createdBy) {
+    mCreatedBy=CREATED_BY_USER;
+  }
+}

@@ -1,0 +1,9 @@
+{
+  if (upload != null) {
+    Intent i=new Intent(context,FileUploader.class);
+    i.putExtra(FileUploader.KEY_RETRY,true);
+    i.putExtra(FileUploader.KEY_ACCOUNT,account);
+    i.putExtra(FileUploader.KEY_RETRY_UPLOAD,upload);
+    context.startService(i);
+  }
+}

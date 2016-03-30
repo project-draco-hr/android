@@ -1,3 +1,0 @@
-{
-  return mDB.query(TABLE_INSTANT_UPLOAD,null,"attempt=" + UPLOAD_STATUS_UPLOAD_LATER,null,null,null,null);
-}

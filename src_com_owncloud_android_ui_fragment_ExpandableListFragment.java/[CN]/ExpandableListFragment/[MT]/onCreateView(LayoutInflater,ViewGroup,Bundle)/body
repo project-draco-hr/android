@@ -1,0 +1,15 @@
+{
+  Log_OC.e(TAG,"onCreateView");
+  View v=inflater.inflate(R.layout.list_fragment_expandable,null);
+  mEmptyListMessage=(TextView)v.findViewById(R.id.empty_list_view);
+  mList=(ExpandableListView)(v.findViewById(R.id.list_root));
+  mList.setOnChildClickListener(this);
+  mList.setDivider(getResources().getDrawable(R.drawable.uploader_list_separator));
+  mList.setDividerHeight(1);
+  mRefreshListLayout=(SwipeRefreshLayout)v.findViewById(R.id.swipe_refresh_files);
+  mRefreshEmptyLayout=(SwipeRefreshLayout)v.findViewById(R.id.swipe_refresh_files_emptyView);
+  onCreateSwipeToRefresh(mRefreshListLayout);
+  onCreateSwipeToRefresh(mRefreshEmptyLayout);
+  mList.setEmptyView(mRefreshEmptyLayout);
+  return v;
+}

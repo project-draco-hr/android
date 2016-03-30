@@ -1,0 +1,11 @@
+{
+  String targetKey=buildKey(accountName,remotePath);
+  Node<V> target=mMap.get(targetKey);
+  if (target != null) {
+    target.clearPayload();
+    if (!target.hasChildren()) {
+      return remove(accountName,remotePath);
+    }
+  }
+  return new Pair<V,String>(null,null);
+}

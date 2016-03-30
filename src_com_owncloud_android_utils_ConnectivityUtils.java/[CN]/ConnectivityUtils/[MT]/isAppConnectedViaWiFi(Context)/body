@@ -1,0 +1,6 @@
+{
+  ConnectivityManager cm=(ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+  boolean result=cm != null && cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().getType() == ConnectivityManager.TYPE_WIFI && cm.getActiveNetworkInfo().getState() == NetworkInfo.State.CONNECTED;
+  Log_OC.d(TAG,"is AppConnectedViaWifi returns " + result);
+  return result;
+}

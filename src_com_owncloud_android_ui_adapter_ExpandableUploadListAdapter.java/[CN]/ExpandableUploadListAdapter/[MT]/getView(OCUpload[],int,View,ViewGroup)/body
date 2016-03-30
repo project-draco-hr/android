@@ -1,0 +1,185 @@
+{
+  View view=convertView;
+  if (view == null) {
+    LayoutInflater inflator=(LayoutInflater)mParentActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    view=inflator.inflate(R.layout.upload_list_item,parent,false);
+  }
+  if (uploadsItems != null && uploadsItems.length > position) {
+    final OCUpload upload=uploadsItems[position];
+    TextView fileTextView=(TextView)view.findViewById(R.id.upload_name);
+    File remoteFile=new File(upload.getRemotePath());
+    String fileName=remoteFile.getName();
+    if (fileName.length() == 0) {
+      fileName=File.separator;
+    }
+    fileTextView.setText(fileName);
+    TextView pathTextView=(TextView)view.findViewById(R.id.upload_remote_path);
+    String remoteParentPath=upload.getRemotePath();
+    remoteParentPath=new File(remoteParentPath).getParent();
+    pathTextView.setText(mParentActivity.getString(R.string.app_name) + remoteParentPath);
+    TextView fileSizeTextView=(TextView)view.findViewById(R.id.upload_file_size);
+    fileSizeTextView.setText(DisplayUtils.bytesToHumanReadable(upload.getFileSize()) + ", ");
+    TextView uploadDateTextView=(TextView)view.findViewById(R.id.upload_date);
+    long updateTime=upload.getUploadEndTimestamp();
+    CharSequence dateString=DisplayUtils.getRelativeDateTimeString(mParentActivity,updateTime,DateUtils.SECOND_IN_MILLIS,DateUtils.WEEK_IN_MILLIS,0);
+    uploadDateTextView.setText(dateString);
+    TextView accountNameTextView=(TextView)view.findViewById(R.id.upload_account);
+    accountNameTextView.setText(upload.getAccountName());
+    TextView statusTextView=(TextView)view.findViewById(R.id.upload_status);
+    ProgressBar progressBar=(ProgressBar)view.findViewById(R.id.upload_progress_bar);
+    uploadDateTextView.setVisibility(View.VISIBLE);
+    pathTextView.setVisibility(View.VISIBLE);
+    fileSizeTextView.setVisibility(View.VISIBLE);
+    accountNameTextView.setVisibility(View.VISIBLE);
+    statusTextView.setVisibility(View.VISIBLE);
+    progressBar.setVisibility(View.GONE);
+    String status=getStatusText(upload);
+switch (upload.getUploadStatus()) {
+case UPLOAD_IN_PROGRESS:
+      progressBar.setProgress(0);
+    progressBar.setVisibility(View.VISIBLE);
+  FileUploader.FileUploaderBinder binder=mParentActivity.getFileUploaderBinder();
+if (binder != null) {
+  if (binder.isUploadingNow(upload)) {
+    if (mProgressListener != null) {
+      binder.removeDatatransferProgressListener(mProgressListener,mProgressListener.getUpload());
+    }
+    mProgressListener=new ProgressListener(upload,progressBar);
+    binder.addDatatransferProgressListener(mProgressListener,upload);
+  }
+ else {
+    if (convertView != null && mProgressListener != null && mProgressListener.isWrapping(progressBar)) {
+      binder.removeDatatransferProgressListener(mProgressListener,mProgressListener.getUpload());
+      mProgressListener=null;
+    }
+  }
+}
+ else {
+  Log_OC.w(TAG,"FileUploaderBinder not ready yet for upload " + upload.getRemotePath());
+}
+uploadDateTextView.setVisibility(View.GONE);
+pathTextView.setVisibility(View.GONE);
+fileSizeTextView.setVisibility(View.GONE);
+progressBar.invalidate();
+break;
+case UPLOAD_FAILED:
+uploadDateTextView.setVisibility(View.GONE);
+break;
+case UPLOAD_SUCCEEDED:
+statusTextView.setVisibility(View.GONE);
+break;
+}
+statusTextView.setText(status);
+ImageButton rightButton=(ImageButton)view.findViewById(R.id.upload_right_button);
+if (upload.getUploadStatus() == UploadStatus.UPLOAD_IN_PROGRESS) {
+rightButton.setImageResource(R.drawable.ic_cancel);
+rightButton.setVisibility(View.VISIBLE);
+rightButton.setOnClickListener(new OnClickListener(){
+@Override public void onClick(View v){
+FileUploader.FileUploaderBinder uploaderBinder=mParentActivity.getFileUploaderBinder();
+if (uploaderBinder != null) {
+uploaderBinder.cancel(upload);
+refreshView();
+}
+}
+}
+);
+}
+ else if (upload.getUploadStatus() == UploadStatus.UPLOAD_FAILED) {
+rightButton.setImageResource(R.drawable.ic_action_delete);
+rightButton.setVisibility(View.VISIBLE);
+rightButton.setOnClickListener(new OnClickListener(){
+@Override public void onClick(View v){
+mUploadsStorageManager.removeUpload(upload);
+refreshView();
+}
+}
+);
+}
+ else {
+rightButton.setVisibility(View.INVISIBLE);
+}
+if (upload.getUploadStatus() == UploadStatus.UPLOAD_FAILED) {
+if (UploadResult.CREDENTIAL_ERROR.equals(upload.getLastResult())) {
+view.setOnClickListener(new OnClickListener(){
+@Override public void onClick(View v){
+mParentActivity.getFileOperationsHelper().checkCurrentCredentials(upload.getAccount(mParentActivity));
+}
+}
+);
+}
+ else {
+view.setOnClickListener(new OnClickListener(){
+@Override public void onClick(View v){
+File file=new File(upload.getLocalPath());
+if (file.exists()) {
+FileUploader.UploadRequester requester=new FileUploader.UploadRequester();
+requester.retry(mParentActivity,upload);
+refreshView();
+}
+ else {
+final String message=String.format(mParentActivity.getString(R.string.local_file_not_found_toast));
+Toast.makeText(mParentActivity,message,Toast.LENGTH_SHORT).show();
+}
+}
+}
+);
+}
+}
+ else {
+view.setOnClickListener(null);
+}
+ImageView fileIcon=(ImageView)view.findViewById(R.id.thumbnail);
+fileIcon.setImageResource(R.drawable.file);
+OCFile fakeFileToCheatThumbnailsCacheManagerInterface=new OCFile(upload.getRemotePath());
+fakeFileToCheatThumbnailsCacheManagerInterface.setStoragePath(upload.getLocalPath());
+fakeFileToCheatThumbnailsCacheManagerInterface.setMimetype(upload.getMimeType());
+boolean allowedToCreateNewThumbnail=(ThumbnailsCacheManager.cancelPotentialWork(fakeFileToCheatThumbnailsCacheManagerInterface,fileIcon));
+if ((fakeFileToCheatThumbnailsCacheManagerInterface.isImage() && fakeFileToCheatThumbnailsCacheManagerInterface.getRemoteId() != null && upload.getUploadStatus() == UploadStatus.UPLOAD_SUCCEEDED)) {
+Bitmap thumbnail=ThumbnailsCacheManager.getBitmapFromDiskCache(String.valueOf(fakeFileToCheatThumbnailsCacheManagerInterface.getRemoteId()));
+if (thumbnail != null && !fakeFileToCheatThumbnailsCacheManagerInterface.needsUpdateThumbnail()) {
+fileIcon.setImageBitmap(thumbnail);
+}
+ else {
+if (allowedToCreateNewThumbnail) {
+final ThumbnailsCacheManager.ThumbnailGenerationTask task=new ThumbnailsCacheManager.ThumbnailGenerationTask(fileIcon,mParentActivity.getStorageManager(),mParentActivity.getAccount());
+if (thumbnail == null) {
+thumbnail=ThumbnailsCacheManager.mDefaultImg;
+}
+final ThumbnailsCacheManager.AsyncDrawable asyncDrawable=new ThumbnailsCacheManager.AsyncDrawable(mParentActivity.getResources(),thumbnail,task);
+fileIcon.setImageDrawable(asyncDrawable);
+task.execute(fakeFileToCheatThumbnailsCacheManagerInterface);
+}
+}
+if ("image/png".equals(upload.getMimeType())) {
+fileIcon.setBackgroundColor(mParentActivity.getResources().getColor(R.color.background_color));
+}
+}
+ else if (fakeFileToCheatThumbnailsCacheManagerInterface.isImage()) {
+File file=new File(upload.getLocalPath());
+Bitmap thumbnail=ThumbnailsCacheManager.getBitmapFromDiskCache(String.valueOf(file.hashCode()));
+if (thumbnail != null) {
+fileIcon.setImageBitmap(thumbnail);
+}
+ else {
+if (allowedToCreateNewThumbnail) {
+final ThumbnailsCacheManager.ThumbnailGenerationTask task=new ThumbnailsCacheManager.ThumbnailGenerationTask(fileIcon);
+if (thumbnail == null) {
+thumbnail=ThumbnailsCacheManager.mDefaultImg;
+}
+final ThumbnailsCacheManager.AsyncDrawable asyncDrawable=new ThumbnailsCacheManager.AsyncDrawable(mParentActivity.getResources(),thumbnail,task);
+fileIcon.setImageDrawable(asyncDrawable);
+task.execute(file);
+Log_OC.v(TAG,"Executing task to generate a new thumbnail");
+}
+}
+if ("image/png".equalsIgnoreCase(upload.getMimeType())) {
+fileIcon.setBackgroundColor(mParentActivity.getResources().getColor(R.color.background_color));
+}
+}
+ else {
+fileIcon.setImageResource(MimetypeIconUtil.getFileTypeIconId(upload.getMimeType(),fileName));
+}
+}
+return view;
+}

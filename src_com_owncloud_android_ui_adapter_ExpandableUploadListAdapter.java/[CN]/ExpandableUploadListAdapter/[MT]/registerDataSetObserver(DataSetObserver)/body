@@ -1,0 +1,5 @@
+{
+  super.registerDataSetObserver(observer);
+  mUploadsStorageManager.addObserver(this);
+  Log_OC.d(TAG,"registerDataSetObserver");
+}

@@ -1,8 +1,7 @@
 {
   MediaPlayer currentPlayer=mService.getPlayer();
   if (currentPlayer != null) {
-    int dur=currentPlayer.getDuration();
-    return dur;
+    return currentPlayer.getDuration();
   }
  else {
     return 0;

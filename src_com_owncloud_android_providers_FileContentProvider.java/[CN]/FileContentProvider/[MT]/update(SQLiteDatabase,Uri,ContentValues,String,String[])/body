@@ -6,6 +6,10 @@ case SHARES:
   return db.update(ProviderTableMeta.OCSHARES_TABLE_NAME,values,selection,selectionArgs);
 case CAPABILITIES:
 return db.update(ProviderTableMeta.CAPABILITIES_TABLE_NAME,values,selection,selectionArgs);
+case UPLOADS:
+int ret=db.update(ProviderTableMeta.UPLOADS_TABLE_NAME,values,selection,selectionArgs);
+trimSuccessfulUploads(db);
+return ret;
 default :
 return db.update(ProviderTableMeta.FILE_TABLE_NAME,values,selection,selectionArgs);
 }

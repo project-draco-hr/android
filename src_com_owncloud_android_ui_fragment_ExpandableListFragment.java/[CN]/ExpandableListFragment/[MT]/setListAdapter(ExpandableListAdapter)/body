@@ -1,0 +1,4 @@
+{
+  mList.setAdapter(listAdapter);
+  mList.invalidate();
+}

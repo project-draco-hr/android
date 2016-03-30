@@ -1,0 +1,8 @@
+Context context
+Account account
+String[] localPaths
+String[] remotePaths
+String[] mimeTypes
+Integer behaviour
+Boolean createRemoteFolder
+int createdBy

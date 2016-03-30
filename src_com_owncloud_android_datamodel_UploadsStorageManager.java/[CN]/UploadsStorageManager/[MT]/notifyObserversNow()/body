@@ -1,0 +1,5 @@
+{
+  Log_OC.d(TAG,"notifyObserversNow");
+  setChanged();
+  notifyObservers();
+}

@@ -2,17 +2,20 @@
 switch (position) {
 case 0:
     allFilesOption();
-  mDrawerLayout.closeDrawers();
-break;
+  break;
 case 1:
-Intent settingsIntent=new Intent(getApplicationContext(),Preferences.class);
-startActivity(settingsIntent);
-mDrawerLayout.closeDrawers();
+Intent uploadListIntent=new Intent(getApplicationContext(),UploadListActivity.class);
+uploadListIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+startActivity(uploadListIntent);
 break;
 case 2:
+Intent settingsIntent=new Intent(getApplicationContext(),Preferences.class);
+startActivity(settingsIntent);
+break;
+case 3:
 Intent loggerIntent=new Intent(getApplicationContext(),LogHistoryActivity.class);
 startActivity(loggerIntent);
-mDrawerLayout.closeDrawers();
 break;
 }
+mDrawerLayout.closeDrawers();
 }

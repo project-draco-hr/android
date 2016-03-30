@@ -7,4 +7,7 @@
       mContainerActivity.getFileUploaderBinder().addDatatransferProgressListener(mProgressListener,mAccount,getFile());
     }
   }
+ else {
+    Log_OC.d(TAG,"mProgressListener == null");
+  }
 }

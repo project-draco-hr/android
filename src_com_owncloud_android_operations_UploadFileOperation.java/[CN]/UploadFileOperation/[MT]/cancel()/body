@@ -1,6 +1,15 @@
 {
-  mCancellationRequested=new AtomicBoolean(true);
-  if (mUploadOperation != null) {
+  if (mUploadOperation == null) {
+    if (mUploadStarted.get()) {
+      Log_OC.d(TAG,"Cancelling upload during upload preparations.");
+      mCancellationRequested.set(true);
+    }
+ else {
+      Log_OC.e(TAG,"No upload in progress. This should not happen.");
+    }
+  }
+ else {
+    Log_OC.d(TAG,"Cancelling upload during actual upload operation.");
     mUploadOperation.cancel();
   }
 }

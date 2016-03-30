@@ -5,4 +5,7 @@ synchronized (mDataTransferListeners) {
   if (mEntity != null) {
     ((ProgressiveDataTransferer)mEntity).removeDatatransferProgressListener(listener);
   }
+  if (mUploadOperation != null) {
+    mUploadOperation.removeDatatransferProgressListener(listener);
+  }
 }

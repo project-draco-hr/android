@@ -1,0 +1,19 @@
+{
+  Log_OC.v(TAG,"Updating " + ocUpload.getLocalPath() + " with status="+ ocUpload.getUploadStatus());
+  ContentValues cv=new ContentValues();
+  cv.put(ProviderTableMeta.UPLOADS_LOCAL_PATH,ocUpload.getLocalPath());
+  cv.put(ProviderTableMeta.UPLOADS_REMOTE_PATH,ocUpload.getRemotePath());
+  cv.put(ProviderTableMeta.UPLOADS_ACCOUNT_NAME,ocUpload.getAccountName());
+  cv.put(ProviderTableMeta.UPLOADS_STATUS,ocUpload.getUploadStatus().value);
+  cv.put(ProviderTableMeta.UPLOADS_LAST_RESULT,ocUpload.getLastResult().getValue());
+  cv.put(ProviderTableMeta.UPLOADS_UPLOAD_END_TIMESTAMP,ocUpload.getUploadEndTimestamp());
+  int result=getDB().update(ProviderTableMeta.CONTENT_URI_UPLOADS,cv,ProviderTableMeta._ID + "=?",new String[]{String.valueOf(ocUpload.getUploadId())});
+  Log_OC.d(TAG,"updateUpload returns with: " + result + " for file: "+ ocUpload.getLocalPath());
+  if (result != 1) {
+    Log_OC.e(TAG,"Failed to update item " + ocUpload.getLocalPath() + " into upload db.");
+  }
+ else {
+    notifyObserversNow();
+  }
+  return result;
+}

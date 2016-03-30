@@ -1,0 +1,10 @@
+{
+  File f=new File(file.getLocalPath());
+  if (!f.exists()) {
+    Toast.makeText(this,"Cannot open. Local file does not exist.",Toast.LENGTH_SHORT).show();
+  }
+ else {
+    openFileWithDefault(file.getLocalPath());
+  }
+  return true;
+}

@@ -1,0 +1,13 @@
+{
+  mRemotePath="";
+  mLocalPath="";
+  mAccountName="";
+  mFileSize=-1;
+  mId=-1;
+  mLocalAction=FileUploader.LOCAL_BEHAVIOUR_COPY;
+  mForceOverwrite=false;
+  mIsCreateRemoteFolder=false;
+  mUploadStatus=UploadStatus.UPLOAD_IN_PROGRESS;
+  mLastResult=UploadResult.UNKNOWN;
+  mCreatedBy=UploadFileOperation.CREATED_BY_USER;
+}

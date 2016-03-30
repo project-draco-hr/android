@@ -1,0 +1,11 @@
+{
+  if (getUploadStatus() == UploadStatus.UPLOAD_SUCCEEDED) {
+    Log_OC.w(TAG,"Already succeeded uploadObject was again scheduled for upload. Fix that!");
+    return CanUploadFileNowStatus.ERROR;
+  }
+  if (!new File(getLocalPath()).exists()) {
+    Log_OC.d(TAG,"Do not start upload because local file does not exist.");
+    return CanUploadFileNowStatus.FILE_GONE;
+  }
+  return CanUploadFileNowStatus.NOW;
+}

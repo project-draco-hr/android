@@ -1,0 +1,19 @@
+{
+  OCUpload upload=null;
+  if (c != null) {
+    String localPath=c.getString(c.getColumnIndex(ProviderTableMeta.UPLOADS_LOCAL_PATH));
+    String remotePath=c.getString(c.getColumnIndex(ProviderTableMeta.UPLOADS_REMOTE_PATH));
+    String accountName=c.getString(c.getColumnIndex(ProviderTableMeta.UPLOADS_ACCOUNT_NAME));
+    upload=new OCUpload(localPath,remotePath,accountName);
+    upload.setFileSize(c.getLong(c.getColumnIndex(ProviderTableMeta.UPLOADS_FILE_SIZE)));
+    upload.setUploadId(c.getLong(c.getColumnIndex(ProviderTableMeta._ID)));
+    upload.setUploadStatus(UploadStatus.fromValue(c.getInt(c.getColumnIndex(ProviderTableMeta.UPLOADS_STATUS))));
+    upload.setLocalAction(c.getInt(c.getColumnIndex((ProviderTableMeta.UPLOADS_LOCAL_BEHAVIOUR))));
+    upload.setForceOverwrite(c.getInt(c.getColumnIndex(ProviderTableMeta.UPLOADS_FORCE_OVERWRITE)) == 1);
+    upload.setCreateRemoteFolder(c.getInt(c.getColumnIndex(ProviderTableMeta.UPLOADS_IS_CREATE_REMOTE_FOLDER)) == 1);
+    upload.setUploadEndTimestamp(c.getLong(c.getColumnIndex(ProviderTableMeta.UPLOADS_UPLOAD_END_TIMESTAMP)));
+    upload.setLastResult(UploadResult.fromValue(c.getInt(c.getColumnIndex(ProviderTableMeta.UPLOADS_LAST_RESULT))));
+    upload.setCreatedBy(c.getInt(c.getColumnIndex(ProviderTableMeta.UPLOADS_CREATED_BY)));
+  }
+  return upload;
+}

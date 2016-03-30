@@ -12,7 +12,7 @@
       DownloadFileOperation newDownload=new DownloadFileOperation(account,file);
       newDownload.addDatatransferProgressListener(this);
       newDownload.addDatatransferProgressListener((FileDownloaderBinder)mBinder);
-      Pair<String,String> putResult=mPendingDownloads.putIfAbsent(account,file.getRemotePath(),newDownload);
+      Pair<String,String> putResult=mPendingDownloads.putIfAbsent(account.name,file.getRemotePath(),newDownload);
       if (putResult != null) {
         String downloadKey=putResult.first;
         requestedDownloads.add(downloadKey);

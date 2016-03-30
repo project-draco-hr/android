@@ -1,0 +1,15 @@
+{
+  Log_OC.d(TAG,"updateDataseUploadResult uploadResult: " + uploadResult + " upload: "+ upload);
+  if (uploadResult.isCancelled()) {
+    removeUpload(upload.getAccount().name,upload.getRemotePath());
+  }
+ else {
+    String localPath=(FileUploader.LOCAL_BEHAVIOUR_MOVE == upload.getLocalBehaviour()) ? upload.getStoragePath() : null;
+    if (uploadResult.isSuccess()) {
+      updateUploadStatus(upload.getOCUploadId(),UploadStatus.UPLOAD_SUCCEEDED,UploadResult.UPLOADED,upload.getRemotePath(),localPath);
+    }
+ else {
+      updateUploadStatus(upload.getOCUploadId(),UploadStatus.UPLOAD_FAILED,UploadResult.fromOperationResult(uploadResult),upload.getRemotePath(),localPath);
+    }
+  }
+}

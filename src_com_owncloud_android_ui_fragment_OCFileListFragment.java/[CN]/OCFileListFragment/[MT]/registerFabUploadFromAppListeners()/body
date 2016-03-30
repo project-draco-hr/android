@@ -6,7 +6,7 @@
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
         action.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
       }
-      getActivity().startActivityForResult(Intent.createChooser(action,getString(R.string.upload_chooser_title)),FileDisplayActivity.ACTION_SELECT_CONTENT_FROM_APPS);
+      getActivity().startActivityForResult(Intent.createChooser(action,getString(R.string.upload_chooser_title)),FileDisplayActivity.REQUEST_CODE__SELECT_CONTENT_FROM_APPS);
       getFabMain().collapse();
       recordMiniFabClick();
     }

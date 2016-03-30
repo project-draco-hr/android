@@ -1,0 +1,61 @@
+{
+  String status;
+switch (upload.getUploadStatus()) {
+case UPLOAD_IN_PROGRESS:
+    status=mParentActivity.getString(R.string.uploads_view_later_waiting_to_upload);
+  FileUploader.FileUploaderBinder binder=mParentActivity.getFileUploaderBinder();
+if (binder != null && binder.isUploadingNow(upload)) {
+  status=mParentActivity.getString(R.string.uploader_upload_in_progress_ticker);
+}
+break;
+case UPLOAD_SUCCEEDED:
+status=mParentActivity.getString(R.string.uploads_view_upload_status_succeeded);
+break;
+case UPLOAD_FAILED:
+switch (upload.getLastResult()) {
+case CREDENTIAL_ERROR:
+status=mParentActivity.getString(R.string.uploads_view_upload_status_failed_credentials_error);
+break;
+case FOLDER_ERROR:
+status=mParentActivity.getString(R.string.uploads_view_upload_status_failed_folder_error);
+break;
+case FILE_NOT_FOUND:
+status=mParentActivity.getString(R.string.uploads_view_upload_status_failed_localfile_error);
+break;
+case FILE_ERROR:
+status=mParentActivity.getString(R.string.uploads_view_upload_status_failed_file_error);
+break;
+case PRIVILEDGES_ERROR:
+status=mParentActivity.getString(R.string.uploads_view_upload_status_failed_permission_error);
+break;
+case NETWORK_CONNECTION:
+status=mParentActivity.getString(R.string.uploads_view_upload_status_failed_connection_error);
+break;
+case DELAYED_FOR_WIFI:
+status=mParentActivity.getString(R.string.uploads_view_upload_status_waiting_for_wifi);
+break;
+case CONFLICT_ERROR:
+status=mParentActivity.getString(R.string.uploads_view_upload_status_conflict);
+break;
+case SERVICE_INTERRUPTED:
+status=mParentActivity.getString(R.string.uploads_view_upload_status_service_interrupted);
+break;
+case UNKNOWN:
+status=mParentActivity.getString(R.string.uploads_view_upload_status_unknown_fail);
+break;
+case CANCELLED:
+status=mParentActivity.getString(R.string.uploads_view_upload_status_cancelled);
+break;
+case UPLOADED:
+status=mParentActivity.getString(R.string.uploads_view_upload_status_succeeded);
+break;
+default :
+status="Naughty devs added a new fail result but no description for the user";
+break;
+}
+break;
+default :
+status="Uncontrolled status: " + upload.getUploadStatus().toString();
+}
+return status;
+}

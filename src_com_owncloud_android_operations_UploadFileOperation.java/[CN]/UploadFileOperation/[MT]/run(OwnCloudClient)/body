@@ -1,86 +1,53 @@
 {
+  mCancellationRequested.set(false);
+  mUploadStarted.set(true);
   RemoteOperationResult result=null;
-  boolean localCopyPassed=false, nameCheckPassed=false;
   File temporalFile=null, originalFile=new File(mOriginalStoragePath), expectedFile=null;
   try {
+    if (delayForWifi()) {
+      Log_OC.d(TAG,"Upload delayed until WiFi is available: " + getRemotePath());
+      return new RemoteOperationResult(ResultCode.DELAYED_FOR_WIFI);
+    }
+    if (!originalFile.exists()) {
+      Log_OC.d(TAG,mOriginalStoragePath.toString() + " not exists anymore");
+      return new RemoteOperationResult(ResultCode.LOCAL_FILE_NOT_FOUND);
+    }
+    String remoteParentPath=new File(getRemotePath()).getParent();
+    remoteParentPath=remoteParentPath.endsWith(OCFile.PATH_SEPARATOR) ? remoteParentPath : remoteParentPath + OCFile.PATH_SEPARATOR;
+    result=grantFolderExistence(remoteParentPath,client);
+    if (!result.isSuccess()) {
+      return result;
+    }
+    OCFile parent=getStorageManager().getFileByPath(remoteParentPath);
+    mFile.setParentId(parent.getFileId());
+    Log_OC.d(TAG,"Checking name collision in server");
     if (!mForceOverwrite) {
       String remotePath=getAvailableRemotePath(client,mRemotePath);
       mWasRenamed=!remotePath.equals(mRemotePath);
       if (mWasRenamed) {
         createNewOCFile(remotePath);
+        Log_OC.d(TAG,"File renamed as " + remotePath);
       }
+      mRemotePath=remotePath;
+      mRenameUploadListener.onRenameUpload();
     }
-    nameCheckPassed=true;
+    if (mCancellationRequested.get()) {
+      throw new OperationCancelledException();
+    }
     String expectedPath=FileStorageUtils.getDefaultSavePathFor(mAccount.name,mFile);
     expectedFile=new File(expectedPath);
-    if (!mOriginalStoragePath.equals(expectedPath) && mLocalBehaviour == FileUploader.LOCAL_BEHAVIOUR_COPY) {
-      if (FileStorageUtils.getUsableSpace(mAccount.name) < originalFile.length()) {
-        result=new RemoteOperationResult(ResultCode.LOCAL_STORAGE_FULL);
+    if (mLocalBehaviour == FileUploader.LOCAL_BEHAVIOUR_COPY && !mOriginalStoragePath.equals(expectedPath)) {
+      String temporalPath=FileStorageUtils.getTemporalPath(mAccount.name) + mFile.getRemotePath();
+      mFile.setStoragePath(temporalPath);
+      temporalFile=new File(temporalPath);
+      result=copy(originalFile,temporalFile);
+      if (result != null) {
         return result;
       }
- else {
-        String temporalPath=FileStorageUtils.getTemporalPath(mAccount.name) + mFile.getRemotePath();
-        mFile.setStoragePath(temporalPath);
-        temporalFile=new File(temporalPath);
-        File temporalParent=temporalFile.getParentFile();
-        temporalParent.mkdirs();
-        if (!temporalParent.isDirectory()) {
-          throw new IOException("Unexpected error: parent directory could not be created");
-        }
-        temporalFile.createNewFile();
-        if (!temporalFile.isFile()) {
-          throw new IOException("Unexpected error: target file could not be created");
-        }
-        InputStream in=null;
-        OutputStream out=null;
-        try {
-          if (mOriginalStoragePath.startsWith(UriUtils.URI_CONTENT_SCHEME)) {
-            Uri uri=Uri.parse(mOriginalStoragePath);
-            in=MainApp.getAppContext().getContentResolver().openInputStream(uri);
-            out=new FileOutputStream(temporalFile);
-            int nRead;
-            byte[] data=new byte[16384];
-            while (!mCancellationRequested.get() && (nRead=in.read(data,0,data.length)) != -1) {
-              out.write(data,0,nRead);
-            }
-            out.flush();
-          }
- else {
-            if (!mOriginalStoragePath.equals(temporalPath)) {
-              in=new FileInputStream(originalFile);
-              out=new FileOutputStream(temporalFile);
-              byte[] buf=new byte[1024];
-              int len;
-              while (!mCancellationRequested.get() && (len=in.read(buf)) > 0) {
-                out.write(buf,0,len);
-              }
-            }
-          }
-          if (mCancellationRequested.get()) {
-            result=new RemoteOperationResult(new OperationCancelledException());
-          }
-        }
- catch (        Exception e) {
-          result=new RemoteOperationResult(ResultCode.LOCAL_STORAGE_NOT_COPIED);
-          return result;
-        }
- finally {
-          try {
-            if (in != null)             in.close();
-          }
- catch (          Exception e) {
-            Log_OC.d(TAG,"Weird exception while closing input stream for " + mOriginalStoragePath + " (ignoring)",e);
-          }
-          try {
-            if (out != null)             out.close();
-          }
- catch (          Exception e) {
-            Log_OC.d(TAG,"Weird exception while closing output stream for " + expectedPath + " (ignoring)",e);
-          }
-        }
-      }
     }
-    localCopyPassed=(result == null);
+    if (mCancellationRequested.get()) {
+      throw new OperationCancelledException();
+    }
     if (mChunked && (new File(mFile.getStoragePath())).length() > ChunkedUploadRemoteFileOperation.CHUNK_SIZE) {
       mUploadOperation=new ChunkedUploadRemoteFileOperation(mFile.getStoragePath(),mFile.getRemotePath(),mFile.getMimetype(),mFile.getEtagInConflict());
     }
@@ -101,38 +68,14 @@
       }
  else {
         mFile.setStoragePath(expectedPath);
-        File fileToMove=null;
+        File fileToMove;
         if (temporalFile != null) {
           fileToMove=temporalFile;
         }
  else {
           fileToMove=originalFile;
         }
-        if (!expectedFile.equals(fileToMove)) {
-          File expectedFolder=expectedFile.getParentFile();
-          expectedFolder.mkdirs();
-          if (expectedFolder.isDirectory()) {
-            if (!fileToMove.renameTo(expectedFile)) {
-              expectedFile.createNewFile();
-              FileChannel inChannel=new FileInputStream(fileToMove).getChannel();
-              FileChannel outChannel=new FileOutputStream(expectedFile).getChannel();
-              try {
-                inChannel.transferTo(0,inChannel.size(),outChannel);
-                fileToMove.delete();
-              }
- catch (              Exception e) {
-                mFile.setStoragePath(null);
-              }
- finally {
-                if (inChannel != null)                 inChannel.close();
-                if (outChannel != null)                 outChannel.close();
-              }
-            }
-          }
- else {
-            mFile.setStoragePath(null);
-          }
-        }
+        move(fileToMove,expectedFile);
       }
       FileDataStorageManager.triggerMediaScan(originalFile.getAbsolutePath());
       FileDataStorageManager.triggerMediaScan(expectedFile.getAbsolutePath());
@@ -145,6 +88,7 @@
     result=new RemoteOperationResult(e);
   }
  finally {
+    mUploadStarted.set(false);
     if (temporalFile != null && !originalFile.equals(temporalFile)) {
       temporalFile.delete();
     }
@@ -156,19 +100,23 @@
     }
  else {
       if (result.getException() != null) {
-        String complement="";
-        if (!nameCheckPassed) {
-          complement=" (while checking file existence in server)";
+        if (result.isCancelled()) {
+          Log_OC.w(TAG,"Upload of " + mOriginalStoragePath + " to "+ mRemotePath+ ": "+ result.getLogMessage());
         }
- else         if (!localCopyPassed) {
-          complement=" (while copying local file to " + FileStorageUtils.getSavePath(mAccount.name) + ")";
+ else {
+          Log_OC.e(TAG,"Upload of " + mOriginalStoragePath + " to "+ mRemotePath+ ": "+ result.getLogMessage(),result.getException());
         }
-        Log_OC.e(TAG,"Upload of " + mOriginalStoragePath + " to "+ mRemotePath+ ": "+ result.getLogMessage()+ complement,result.getException());
       }
  else {
         Log_OC.e(TAG,"Upload of " + mOriginalStoragePath + " to "+ mRemotePath+ ": "+ result.getLogMessage());
       }
     }
+  }
+  if (result.isSuccess()) {
+    saveUploadedFile(client);
+  }
+ else   if (result.getCode() == ResultCode.SYNC_CONFLICT) {
+    getStorageManager().saveConflict(mFile,mFile.getEtagInConflict());
   }
   return result;
 }

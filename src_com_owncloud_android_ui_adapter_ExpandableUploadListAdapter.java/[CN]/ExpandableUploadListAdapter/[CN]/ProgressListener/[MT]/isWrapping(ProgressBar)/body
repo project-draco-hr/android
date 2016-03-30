@@ -1,0 +1,4 @@
+{
+  ProgressBar wrappedProgressBar=mProgressBar.get();
+  return (wrappedProgressBar != null && wrappedProgressBar == progressBar);
+}

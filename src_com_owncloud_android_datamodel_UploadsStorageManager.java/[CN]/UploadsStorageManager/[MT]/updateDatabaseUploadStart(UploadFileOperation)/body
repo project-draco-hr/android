@@ -1,0 +1,4 @@
+{
+  String localPath=(FileUploader.LOCAL_BEHAVIOUR_MOVE == upload.getLocalBehaviour()) ? upload.getStoragePath() : null;
+  updateUploadStatus(upload.getOCUploadId(),UploadStatus.UPLOAD_IN_PROGRESS,UploadResult.UNKNOWN,upload.getRemotePath(),localPath);
+}

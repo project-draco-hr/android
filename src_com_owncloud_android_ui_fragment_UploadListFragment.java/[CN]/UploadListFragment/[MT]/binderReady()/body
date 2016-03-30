@@ -1,0 +1,6 @@
+{
+  setBinderReady(true);
+  if (mAdapter != null) {
+    mAdapter.addBinder();
+  }
+}
