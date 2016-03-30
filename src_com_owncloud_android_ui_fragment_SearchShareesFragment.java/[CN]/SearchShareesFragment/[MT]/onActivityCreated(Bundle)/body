@@ -1,5 +1,5 @@
 {
   super.onActivityCreated(savedInstanceState);
-  getActivity().setTitle(R.string.share_dialog_title);
+  getActivity().setTitle(R.string.share_with_title);
   refreshUsersOrGroupsListFromDB();
 }

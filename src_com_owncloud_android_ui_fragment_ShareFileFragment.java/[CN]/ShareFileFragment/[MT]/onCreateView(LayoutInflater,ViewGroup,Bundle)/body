@@ -10,8 +10,8 @@
       icon.setImageBitmap(thumbnail);
     }
   }
-  TextView filename=(TextView)view.findViewById(R.id.shareFileName);
-  filename.setText(mFile.getFileName());
+  TextView fileNameHeader=(TextView)view.findViewById(R.id.shareFileName);
+  fileNameHeader.setText(getResources().getString(R.string.share_file,mFile.getFileName()));
   TextView size=(TextView)view.findViewById(R.id.shareFileSize);
   if (mFile.isFolder()) {
     size.setVisibility(View.GONE);
