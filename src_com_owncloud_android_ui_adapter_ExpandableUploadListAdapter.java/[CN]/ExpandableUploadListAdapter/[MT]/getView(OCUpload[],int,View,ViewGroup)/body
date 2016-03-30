@@ -60,6 +60,7 @@ if (binder != null) {
 uploadDateTextView.setVisibility(View.GONE);
 pathTextView.setVisibility(View.GONE);
 fileSizeTextView.setVisibility(View.GONE);
+progressBar.invalidate();
 break;
 case UPLOAD_FAILED:
 uploadDateTextView.setVisibility(View.GONE);
