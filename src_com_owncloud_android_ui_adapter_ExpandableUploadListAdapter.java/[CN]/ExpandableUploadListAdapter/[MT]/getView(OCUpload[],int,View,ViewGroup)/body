@@ -13,7 +13,7 @@
       fileName=File.separator;
     }
     fileTextView.setText(fileName);
-    TextView pathTextView=(TextView)view.findViewById(R.id.upload_local_path);
+    TextView pathTextView=(TextView)view.findViewById(R.id.upload_remote_path);
     String remoteParentPath=upload.getRemotePath();
     remoteParentPath=new File(remoteParentPath).getParent();
     pathTextView.setText(mParentActivity.getString(R.string.app_name) + remoteParentPath);
