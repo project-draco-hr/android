@@ -2,9 +2,6 @@
   if (mimeType == null || mimeType.length() <= 0) {
     mimeType=MimetypeIconUtil.getBestMimeTypeByFilename(localPath);
   }
-  if (isPdfFileFromContentProviderWithoutExtension(localPath,mimeType)) {
-    remotePath+=FILE_EXTENSION_PDF;
-  }
   OCFile newFile=new OCFile(remotePath);
   newFile.setStoragePath(localPath);
   newFile.setLastSyncDateForProperties(0);
