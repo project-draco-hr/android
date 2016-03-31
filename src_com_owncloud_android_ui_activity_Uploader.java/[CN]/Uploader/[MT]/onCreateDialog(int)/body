@@ -1,5 +1,15 @@
 {
   final AlertDialog.Builder builder=new Builder(this);
+  DialogInterface.OnKeyListener onKeyListener=new DialogInterface.OnKeyListener(){
+    @Override public boolean onKey(    DialogInterface dialog,    int keyCode,    KeyEvent event){
+      if (keyCode == KeyEvent.KEYCODE_BACK) {
+        finish();
+        dialog.dismiss();
+      }
+      return true;
+    }
+  }
+;
 switch (id) {
 case DIALOG_WAITING:
     final ProgressDialog pDialog=new ProgressDialog(this,R.style.ProgressDialogTheme);
@@ -71,12 +81,13 @@ builder.setIcon(R.drawable.ic_warning);
 builder.setTitle(R.string.uploader_wrn_no_content_title);
 builder.setMessage(R.string.uploader_wrn_no_content_text);
 builder.setCancelable(false);
-builder.setNegativeButton(R.string.common_cancel,new OnClickListener(){
+builder.setNegativeButton(R.string.common_back,new OnClickListener(){
 @Override public void onClick(DialogInterface dialog,int which){
 finish();
 }
 }
 );
+builder.setOnKeyListener(onKeyListener);
 return builder.create();
 default :
 throw new IllegalArgumentException("Unknown dialog id: " + id);
