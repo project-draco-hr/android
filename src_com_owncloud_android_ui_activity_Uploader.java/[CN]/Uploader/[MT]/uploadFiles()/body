@@ -3,7 +3,7 @@
     for (    Parcelable mStream : mStreamsToUpload) {
       Uri uri=(Uri)mStream;
       String[] columnValues;
-      String displayName;
+      String displayName=null;
       String filePath="";
       if (uri != null) {
         if (uri.getScheme().equals("content")) {
@@ -35,9 +35,8 @@
           final File file=new File(filePath);
           displayName=file.getName();
         }
- else {
-          throw new SecurityException();
-        }
+      }
+      if (displayName != null) {
         filePath=mUploadPath + displayName;
         mRemoteCacheData.add(filePath);
         CopyTmpFileAsyncTask copyTask=new CopyTmpFileAsyncTask(this);
@@ -56,7 +55,6 @@
     }
   }
  catch (  SecurityException e) {
-    String message=String.format(getString(R.string.uploader_error_forbidden_content),getString(R.string.app_name));
-    Toast.makeText(this,message,Toast.LENGTH_LONG).show();
+    showDialog(DIALOG_STREAM_UNKNOWN);
   }
 }
