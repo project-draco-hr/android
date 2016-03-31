@@ -20,7 +20,11 @@
  else {
             columnValues=getColumnsValues(uri,Images.Media.DISPLAY_NAME);
           }
-          displayName=(columnValues != null) ? columnValues[0] : uri.getLastPathSegment().replaceAll("\\s","") + "." + MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType);
+          displayName=(columnValues != null) ? columnValues[0] : uri.getLastPathSegment().replaceAll("\\s","");
+          int index=displayName.lastIndexOf(".");
+          if (index != -1 || MimeTypeMap.getSingleton().getMimeTypeFromExtension(displayName.substring(index)) == null) {
+            displayName+="." + MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType);
+          }
         }
  else         if (uri.getScheme().equals("file")) {
           filePath=Uri.decode(uri.toString()).replace(uri.getScheme() + "://","");
