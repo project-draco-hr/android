@@ -7,6 +7,8 @@
   filename.setText(file.getFileName());
   ImageView fileIcon=(ImageView)vi.findViewById(R.id.thumbnail);
   fileIcon.setTag(file.getFileId());
+  TextView lastModV=(TextView)vi.findViewById(R.id.last_mod);
+  lastModV.setText(DisplayUtils.getRelativeTimestamp(mContext,file));
   if (file.isImage() && file.getRemoteId() != null) {
     Bitmap thumbnail=ThumbnailsCacheManager.getBitmapFromDiskCache(String.valueOf(file.getRemoteId()));
     if (thumbnail != null && !file.needsUpdateThumbnail()) {
