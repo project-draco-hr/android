@@ -1,6 +1,0 @@
-{
-  mPath=path;
-  mPassword=password;
-  mSendIntent=sendIntent;
-  mFileName=null;
-}

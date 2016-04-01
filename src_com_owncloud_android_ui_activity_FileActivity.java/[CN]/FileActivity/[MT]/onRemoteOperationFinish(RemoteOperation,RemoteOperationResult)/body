@@ -21,9 +21,6 @@
       t.show();
     }
   }
- else   if (operation instanceof CreateShareViaLinkOperation) {
-    onCreateShareViaLinkOperationFinish((CreateShareViaLinkOperation)operation,result);
-  }
  else   if (operation instanceof SynchronizeFileOperation) {
     onSynchronizeFileOperationFinish((SynchronizeFileOperation)operation,result);
   }

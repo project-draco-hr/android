@@ -4,15 +4,8 @@
     Log_OC.d(TAG,"Refreshing view on successful operation or finished refresh");
     refreshSharesFromStorageManager();
   }
-  if (operation instanceof CreateShareViaLinkOperation && result.isSuccess()) {
-    String link=((OCShare)(result.getData().get(0))).getShareLink();
-    Log_OC.d(TAG,"Share link = " + link);
-    Intent intentToShareLink=new Intent(Intent.ACTION_SEND);
-    intentToShareLink.putExtra(Intent.EXTRA_TEXT,link);
-    intentToShareLink.setType("text/plain");
-    String[] packagesToExclude=new String[]{getPackageName()};
-    DialogFragment chooserDialog=ShareLinkToDialog.newInstance(intentToShareLink,packagesToExclude);
-    chooserDialog.show(getSupportFragmentManager(),FTAG_CHOOSER_DIALOG);
+  if (operation instanceof CreateShareViaLinkOperation) {
+    onCreateShareViaLinkOperationFinish((CreateShareViaLinkOperation)operation,result);
   }
   if (operation instanceof UnshareOperation && result.isSuccess() && getEditShareFragment() != null) {
     getSupportFragmentManager().popBackStack();
