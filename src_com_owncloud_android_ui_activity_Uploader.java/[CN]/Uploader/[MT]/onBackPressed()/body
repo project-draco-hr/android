@@ -6,7 +6,7 @@
  else {
     mParents.pop();
     String full_path=generatePath(mParents);
-    startSyncFolderOperation(getStorageManager().getFileByPath(full_path));
+    startSyncFolderOperation(getStorageManager().getFileByPath(full_path),false);
     populateDirectoryList();
   }
 }
