@@ -1,0 +1,36 @@
+{
+  String displayName=null;
+  String mimeType=context.getContentResolver().getType(uri);
+  if (mimeType != null) {
+    String displayNameColumn;
+    if (mimeType.toLowerCase().startsWith("image/")) {
+      displayNameColumn=MediaStore.Images.ImageColumns.DISPLAY_NAME;
+    }
+ else     if (mimeType.toLowerCase().startsWith("video/")) {
+      displayNameColumn=MediaStore.Video.VideoColumns.DISPLAY_NAME;
+    }
+ else     if (mimeType.toLowerCase().startsWith("audio/")) {
+      displayNameColumn=MediaStore.Audio.AudioColumns.DISPLAY_NAME;
+    }
+ else {
+      displayNameColumn=MediaStore.Files.FileColumns.DISPLAY_NAME;
+    }
+    Cursor cursor=null;
+    try {
+      cursor=context.getContentResolver().query(uri,new String[]{displayNameColumn},null,null,null);
+      if (cursor != null) {
+        cursor.moveToFirst();
+        displayName=cursor.getString(cursor.getColumnIndex(displayNameColumn));
+      }
+    }
+ catch (    Exception e) {
+      Log_OC.e(TAG,"Could not retrieve display name for " + uri.toString());
+    }
+ finally {
+      if (cursor != null) {
+        cursor.close();
+      }
+    }
+  }
+  return displayName;
+}

@@ -1,55 +1,30 @@
 {
-  try {
-    for (    Parcelable mStream : mStreamsToUpload) {
-      Uri uri=(Uri)mStream;
-      String[] columnValues;
-      String displayName=null;
-      String filePath="";
-      if (uri != null) {
-        if (uri.getScheme().equals("content")) {
-          String mimeType=getContentResolver().getType(uri);
-          if (mimeType.contains("image")) {
-            columnValues=getColumnsValues(uri,Images.Media.DISPLAY_NAME);
-          }
- else           if (mimeType.contains("video")) {
-            columnValues=getColumnsValues(uri,Images.Media.DISPLAY_NAME);
-          }
- else           if (mimeType.contains("audio")) {
-            columnValues=getColumnsValues(uri,Images.Media.DISPLAY_NAME);
-          }
+  for (  Parcelable sourceStream : mStreamsToUpload) {
+    Uri sourceUri=(Uri)sourceStream;
+    if (sourceUri == null) {
+      showDialog(DIALOG_NO_STREAM);
+    }
  else {
-            columnValues=getColumnsValues(uri,Images.Media.DISPLAY_NAME);
-          }
-          displayName=(columnValues != null) ? columnValues[0] : uri.getLastPathSegment().replaceAll("\\s","");
-          int index=displayName.lastIndexOf(".");
-          if (index == -1 || MimeTypeMap.getSingleton().getMimeTypeFromExtension(displayName.substring(index + 1)) == null) {
-            String extension=MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType);
-            displayName+=(extension != null) ? "." + extension : "";
-          }
-        }
- else         if (uri.getScheme().equals("file")) {
-          displayName=uri.getLastPathSegment();
-        }
-      }
-      if (displayName != null) {
-        filePath=mUploadPath + displayName;
-        mRemoteCacheData.add(filePath);
-        CopyTmpFileAsyncTask copyTask=new CopyTmpFileAsyncTask(this);
-        Object[] params={uri,filePath,mRemoteCacheData.size() - 1,getAccount().name,getContentResolver()};
-        mNumCacheFile++;
-        showWaitingCopyDialog();
-        copyTask.execute(params);
+      String displayName=UriUtils.getDisplayNameForUri(sourceUri,this);
+      if (displayName == null) {
+        showDialog(DIALOG_NO_STREAM);
       }
  else {
-        throw new SecurityException();
+        String remotePath=mUploadPath + displayName;
+        if (ContentResolver.SCHEME_CONTENT.equals(sourceUri.getScheme())) {
+          copyThenUpload(sourceUri,remotePath);
+        }
+ else         if (ContentResolver.SCHEME_FILE.equals(sourceUri.getScheme())) {
+          requestUpload(sourceUri.getPath(),remotePath);
+        }
+ else {
+          showDialog(DIALOG_STREAM_UNKNOWN);
+        }
       }
-      SharedPreferences.Editor appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
-      appPrefs.putString("last_upload_path",mUploadPath);
-      appPrefs.apply();
-      finish();
     }
   }
- catch (  SecurityException e) {
-    showDialog(DIALOG_STREAM_UNKNOWN);
-  }
+  SharedPreferences.Editor appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
+  appPrefs.putString("last_upload_path",mUploadPath);
+  appPrefs.apply();
+  finish();
 }

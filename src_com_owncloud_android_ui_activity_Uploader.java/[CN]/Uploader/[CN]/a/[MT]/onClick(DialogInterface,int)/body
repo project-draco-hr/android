@@ -1,5 +1,4 @@
 {
   Uploader.this.mUploadPath=mPath + mDirname.getText().toString();
-  Uploader.this.mCreateDir=true;
   uploadFiles();
 }

@@ -2,9 +2,16 @@
 switch (v.getId()) {
 case R.id.uploader_choose_folder:
     mUploadPath="";
-  for (  String p : mParents)   mUploadPath+=p + OCFile.PATH_SEPARATOR;
+  for (  String p : mParents) {
+    mUploadPath+=p + OCFile.PATH_SEPARATOR;
+  }
 Log_OC.d(TAG,"Uploading file to dir " + mUploadPath);
+try {
 uploadFiles();
+}
+ catch (SecurityException e) {
+showDialog(DIALOG_STREAM_UNKNOWN);
+}
 break;
 case R.id.uploader_cancel:
 finish();

@@ -4,6 +4,6 @@
     listener.onTmpFileCopied(result,mIndex);
   }
  else {
-    Log_OC.e(TAG,"Lost upload because of lost context.");
+    Log_OC.i(TAG,"User left Uploader activity before the temporal copies were finished ");
   }
 }

@@ -1,0 +1,6 @@
+{
+  mNumCacheFile++;
+  showWaitingCopyDialog();
+  CopyTmpFileAsyncTask copyTask=new CopyTmpFileAsyncTask(this,this);
+  copyTask.execute(CopyTmpFileAsyncTask.makeParamsToExecute(getAccount(),sourceUri,remotePath,mNumCacheFile));
+}
