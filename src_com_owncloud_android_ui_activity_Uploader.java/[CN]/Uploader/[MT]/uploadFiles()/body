@@ -22,7 +22,7 @@
           }
           displayName=(columnValues != null) ? columnValues[0] : uri.getLastPathSegment().replaceAll("\\s","");
           int index=displayName.lastIndexOf(".");
-          if (index == -1 || MimeTypeMap.getSingleton().getMimeTypeFromExtension(displayName.substring(index)) == null) {
+          if (index == -1 || MimeTypeMap.getSingleton().getMimeTypeFromExtension(displayName.substring(index + 1)) == null) {
             String extension=MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType);
             displayName+=(extension != null) ? "." + extension : "";
           }
