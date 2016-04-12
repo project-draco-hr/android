@@ -1,4 +1,4 @@
 {
   FileUploader.UploadRequester requester=new FileUploader.UploadRequester();
-  requester.uploadNewFile(mContext,account,localPath,remotePath,FileUploader.LOCAL_BEHAVIOUR_MOVE,mimeType,false,UploadFileOperation.CREATED_BY_USER);
+  requester.uploadNewFile(mAppContext,account,localPath,remotePath,FileUploader.LOCAL_BEHAVIOUR_MOVE,mimeType,false,UploadFileOperation.CREATED_BY_USER);
 }

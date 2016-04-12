@@ -1,17 +1,15 @@
 {
   prepareStreamsToUpload();
   if (savedInstanceState == null) {
-    mParents=new Stack<String>();
+    mParents=new Stack<>();
     mAccountSelected=false;
     mAccountSelectionShowing=false;
-    mNumCacheFile=0;
   }
  else {
     mParents=(Stack<String>)savedInstanceState.getSerializable(KEY_PARENTS);
     mFile=savedInstanceState.getParcelable(KEY_FILE);
     mAccountSelected=savedInstanceState.getBoolean(KEY_ACCOUNT_SELECTED);
     mAccountSelectionShowing=savedInstanceState.getBoolean(KEY_ACCOUNT_SELECTION_SHOWING);
-    mNumCacheFile=savedInstanceState.getInt(KEY_NUM_CACHE_FILE);
   }
   super.onCreate(savedInstanceState);
   if (mAccountSelected) {

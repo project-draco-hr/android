@@ -1,0 +1,27 @@
+{
+  OnCopyTmpFilesTaskListener listener=mListener.get();
+  if (listener != null) {
+    listener.onTmpFilesCopied(result);
+  }
+ else {
+    Log_OC.i(TAG,"User left Uploader activity before the temporal copies were finished ");
+    if (result != ResultCode.OK) {
+      int messageId;
+switch (result) {
+case LOCAL_FILE_NOT_FOUND:
+        messageId=R.string.copy_file_not_found;
+      break;
+case LOCAL_STORAGE_NOT_COPIED:
+    messageId=R.string.copy_file_error;
+  break;
+case FORBIDDEN:
+messageId=R.string.uploader_error_forbidden_content;
+break;
+default :
+messageId=R.string.common_error_unknown;
+}
+String message=String.format(mAppContext.getString(messageId),mAppContext.getString(R.string.app_name));
+Toast.makeText(mAppContext,message,Toast.LENGTH_LONG).show();
+}
+}
+}

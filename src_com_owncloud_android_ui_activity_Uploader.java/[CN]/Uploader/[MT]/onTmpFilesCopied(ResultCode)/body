@@ -1,0 +1,9 @@
+{
+  dismissWaitingCopyDialog();
+  if (result != ResultCode.OK) {
+    showDialog(DIALOG_STREAM_UNKNOWN);
+  }
+ else {
+    finish();
+  }
+}

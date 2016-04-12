@@ -1,4 +1,0 @@
-{
-  mListener=new WeakReference<OnCopyTmpFileTaskListener>(listener);
-  mContext=context;
-}

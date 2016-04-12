@@ -1,1 +1,1 @@
-AsyncTask<Object,Void,Integer>
+AsyncTask<Object,Void,ResultCode>
