@@ -17,9 +17,9 @@
   mFile=getStorageManager().getFileByPath(full_path);
   if (mFile != null) {
     Vector<OCFile> files=getStorageManager().getFolderContent(mFile);
-    List<HashMap<String,OCFile>> data=new LinkedList<HashMap<String,OCFile>>();
+    List<HashMap<String,OCFile>> data=new LinkedList<>();
     for (    OCFile f : files) {
-      HashMap<String,OCFile> h=new HashMap<String,OCFile>();
+      HashMap<String,OCFile> h=new HashMap<>();
       h.put("dirname",f);
       data.add(h);
     }
