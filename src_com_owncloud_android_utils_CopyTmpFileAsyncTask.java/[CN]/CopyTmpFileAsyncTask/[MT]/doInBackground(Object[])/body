@@ -1,35 +1,39 @@
 {
-  String pathToCopiedFile=null;
-  if (params != null && params.length == 4) {
+  int numFiles=0;
+  if (params != null && params.length == 3) {
     Account account=(Account)params[0];
-    Uri uri=(Uri)params[1];
-    String remotePath=(String)params[2];
-    mIndex=((Integer)params[3]);
+    Uri[] uris=(Uri[])params[1];
+    String[] remotePaths=(String[])params[2];
     InputStream inputStream=null;
     FileOutputStream outputStream=null;
     String fullTempPath=null;
-    ContentResolver contentResolver=mAppContext.getContentResolver();
+    Uri actualUri=null;
+    String actualRemotePath=null;
+    ContentResolver contentResolver=mContext.getContentResolver();
     try {
-      fullTempPath=FileStorageUtils.getTemporalPath(account.name) + remotePath;
-      inputStream=contentResolver.openInputStream(uri);
-      File cacheFile=new File(fullTempPath);
-      File tempDir=cacheFile.getParentFile();
-      if (!tempDir.exists()) {
-        tempDir.mkdirs();
+      for (int i=0; i < uris.length; i++) {
+        actualUri=uris[i];
+        actualRemotePath=remotePaths[i];
+        fullTempPath=FileStorageUtils.getTemporalPath(account.name) + actualRemotePath;
+        inputStream=contentResolver.openInputStream(actualUri);
+        File cacheFile=new File(fullTempPath);
+        File tempDir=cacheFile.getParentFile();
+        if (!tempDir.exists()) {
+          tempDir.mkdirs();
+        }
+        cacheFile.createNewFile();
+        outputStream=new FileOutputStream(fullTempPath);
+        byte[] buffer=new byte[4096];
+        int count=0;
+        while ((count=inputStream.read(buffer)) > 0) {
+          outputStream.write(buffer,0,count);
+        }
+        requestUpload(account,fullTempPath,actualRemotePath,contentResolver.getType(actualUri));
+        numFiles++;
       }
-      cacheFile.createNewFile();
-      outputStream=new FileOutputStream(fullTempPath);
-      byte[] buffer=new byte[4096];
-      int count=0;
-      while ((count=inputStream.read(buffer)) > 0) {
-        outputStream.write(buffer,0,count);
-      }
-      outputStream.close();
-      inputStream.close();
-      pathToCopiedFile=fullTempPath;
     }
  catch (    Exception e) {
-      Log_OC.e(TAG,"Exception while copying " + uri.toString() + " to temporary file",e);
+      Log_OC.e(TAG,"Exception while copying " + actualUri.toString() + " to temporary file",e);
       if (fullTempPath != null) {
         File f=new File(fullTempPath);
         if (f.exists()) {
@@ -57,17 +61,9 @@
         }
       }
     }
-    if (pathToCopiedFile != null) {
-      requestUpload(account,pathToCopiedFile,remotePath,contentResolver.getType(uri));
-    }
- else {
-      String message=String.format(mAppContext.getString(R.string.uploader_error_forbidden_content),mAppContext.getString(R.string.app_name));
-      Toast.makeText(mAppContext,message,Toast.LENGTH_LONG).show();
-      Log_OC.d(TAG,message);
-    }
   }
  else {
     throw new IllegalArgumentException("Error in parameters number");
   }
-  return pathToCopiedFile;
+  return numFiles;
 }

@@ -1,4 +1,4 @@
 {
   mListener=new WeakReference<OnCopyTmpFileTaskListener>(listener);
-  mAppContext=context.getApplicationContext();
+  mContext=context;
 }

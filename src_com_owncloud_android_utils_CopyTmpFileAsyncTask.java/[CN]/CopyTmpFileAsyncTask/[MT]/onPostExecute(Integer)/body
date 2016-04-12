@@ -1,7 +1,7 @@
 {
   OnCopyTmpFileTaskListener listener=mListener.get();
   if (listener != null) {
-    listener.onTmpFileCopied(result,mIndex);
+    listener.onTmpFileCopied(numFiles.intValue());
   }
  else {
     Log_OC.i(TAG,"User left Uploader activity before the temporal copies were finished ");

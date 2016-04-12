@@ -1,4 +1,6 @@
 {
+  List<Uri> contentUris=new ArrayList<>();
+  List<String> contentRemotePaths=new ArrayList<>();
   for (  Parcelable sourceStream : mStreamsToUpload) {
     Uri sourceUri=(Uri)sourceStream;
     if (sourceUri == null) {
@@ -12,7 +14,8 @@
  else {
         String remotePath=mUploadPath + displayName;
         if (ContentResolver.SCHEME_CONTENT.equals(sourceUri.getScheme())) {
-          copyThenUpload(sourceUri,remotePath);
+          contentUris.add(sourceUri);
+          contentRemotePaths.add(remotePath);
         }
  else         if (ContentResolver.SCHEME_FILE.equals(sourceUri.getScheme())) {
           requestUpload(sourceUri.getPath(),remotePath);
@@ -23,6 +26,7 @@
       }
     }
   }
+  copyThenUpload(contentUris.toArray(new Uri[contentUris.size()]),contentRemotePaths.toArray(new String[contentRemotePaths.size()]));
   SharedPreferences.Editor appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
   appPrefs.putString("last_upload_path",mUploadPath);
   appPrefs.apply();
