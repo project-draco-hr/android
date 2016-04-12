@@ -25,5 +25,5 @@
       Log_OC.e(TAG,"No way to get a display name for " + uri.toString());
     }
   }
-  return displayName;
+  return displayName.replaceAll("/","-");
 }
