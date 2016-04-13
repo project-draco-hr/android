@@ -1,15 +1,5 @@
 {
   final AlertDialog.Builder builder=new Builder(this);
-  DialogInterface.OnKeyListener onKeyListener=new DialogInterface.OnKeyListener(){
-    @Override public boolean onKey(    DialogInterface dialog,    int keyCode,    KeyEvent event){
-      if (keyCode == KeyEvent.KEYCODE_BACK) {
-        Uploader.super.onBackPressed();
-        dialog.dismiss();
-      }
-      return true;
-    }
-  }
-;
 switch (id) {
 case DIALOG_NO_ACCOUNT:
     builder.setIcon(R.drawable.ic_warning);
@@ -62,33 +52,6 @@ finish();
 }
 }
 );
-return builder.create();
-case DIALOG_NO_STREAM:
-builder.setIcon(R.drawable.ic_warning);
-builder.setTitle(R.string.uploader_wrn_no_content_title);
-builder.setMessage(R.string.uploader_wrn_no_content_text);
-builder.setCancelable(false);
-builder.setNegativeButton(R.string.common_back,new OnClickListener(){
-@Override public void onClick(DialogInterface dialog,int which){
-finish();
-}
-}
-);
-builder.setOnKeyListener(onKeyListener);
-return builder.create();
-case DIALOG_STREAM_UNKNOWN:
-builder.setIcon(android.R.drawable.ic_dialog_alert);
-builder.setTitle(R.string.uploader_wrn_unknown_content_title);
-String message=String.format(getString(R.string.uploader_error_forbidden_content),getString(R.string.app_name));
-builder.setMessage(message);
-builder.setCancelable(false);
-builder.setNegativeButton(R.string.common_back,new OnClickListener(){
-@Override public void onClick(DialogInterface dialog,int which){
-finish();
-}
-}
-);
-builder.setOnKeyListener(onKeyListener);
 return builder.create();
 default :
 throw new IllegalArgumentException("Unknown dialog id: " + id);

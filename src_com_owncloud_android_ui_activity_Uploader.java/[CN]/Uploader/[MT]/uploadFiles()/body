@@ -1,17 +1,15 @@
 {
-  List<Uri> contentUris=new ArrayList<>();
-  List<String> contentRemotePaths=new ArrayList<>();
-  for (  Parcelable sourceStream : mStreamsToUpload) {
-    Uri sourceUri=(Uri)sourceStream;
-    if (sourceUri == null) {
-      showDialog(DIALOG_NO_STREAM);
-    }
- else {
-      String displayName=UriUtils.getDisplayNameForUri(sourceUri,this);
-      if (displayName == null) {
-        showDialog(DIALOG_NO_STREAM);
-      }
- else {
+  try {
+    List<Uri> contentUris=new ArrayList<>();
+    List<String> contentRemotePaths=new ArrayList<>();
+    int schemeFileCounter=0;
+    for (    Parcelable sourceStream : mStreamsToUpload) {
+      Uri sourceUri=(Uri)sourceStream;
+      if (sourceUri != null) {
+        String displayName=UriUtils.getDisplayNameForUri(sourceUri,this);
+        if (displayName == null) {
+          displayName=generateDiplayName();
+        }
         String remotePath=mUploadPath + displayName;
         if (ContentResolver.SCHEME_CONTENT.equals(sourceUri.getScheme())) {
           contentUris.add(sourceUri);
@@ -19,20 +17,31 @@
         }
  else         if (ContentResolver.SCHEME_FILE.equals(sourceUri.getScheme())) {
           requestUpload(sourceUri.getPath(),remotePath);
-        }
- else {
-          showDialog(DIALOG_STREAM_UNKNOWN);
+          schemeFileCounter++;
         }
       }
     }
+    if (!contentUris.isEmpty()) {
+      copyThenUpload(contentUris.toArray(new Uri[contentUris.size()]),contentRemotePaths.toArray(new String[contentRemotePaths.size()]));
+    }
+ else     if (schemeFileCounter == 0) {
+      showErrorDialog(R.string.uploader_error_message_no_file_to_upload,R.string.uploader_error_title_no_file_to_upload);
+    }
+ else {
+      finish();
+    }
   }
-  if (!contentUris.isEmpty()) {
-    copyThenUpload(contentUris.toArray(new Uri[contentUris.size()]),contentRemotePaths.toArray(new String[contentRemotePaths.size()]));
+ catch (  SecurityException e) {
+    Log_OC.e(TAG,"Permissions fail",e);
+    showErrorDialog(R.string.uploader_error_message_read_permission_not_granted,R.string.uploader_error_title_file_cannot_be_uploaded);
   }
-  SharedPreferences.Editor appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
-  appPrefs.putString("last_upload_path",mUploadPath);
-  appPrefs.apply();
-  if (contentUris.isEmpty()) {
-    finish();
+catch (  Exception e) {
+    Log_OC.e(TAG,"Unexpted error",e);
+    showErrorDialog(R.string.common_error_unknown,R.string.uploader_error_title_file_cannot_be_uploaded);
+  }
+ finally {
+    SharedPreferences.Editor appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
+    appPrefs.putString("last_upload_path",mUploadPath);
+    appPrefs.apply();
   }
 }

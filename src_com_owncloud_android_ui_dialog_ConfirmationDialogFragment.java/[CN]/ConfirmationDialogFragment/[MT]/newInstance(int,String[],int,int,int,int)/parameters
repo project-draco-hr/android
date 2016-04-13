@@ -1,0 +1,6 @@
+int messageResId
+String[] messageArguments
+int titleResId
+int posBtn
+int neuBtn
+int negBtn

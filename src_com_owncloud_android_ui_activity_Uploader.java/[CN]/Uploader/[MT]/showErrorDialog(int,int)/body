@@ -1,0 +1,15 @@
+{
+  ConfirmationDialogFragment errorDialog=ConfirmationDialogFragment.newInstance(messageResId,new String[]{getString(R.string.app_name)},messageResTitle,R.string.common_back,-1,-1);
+  errorDialog.setCancelable(false);
+  errorDialog.setOnConfirmationListener(new ConfirmationDialogFragment.ConfirmationDialogFragmentListener(){
+    @Override public void onConfirmation(    String callerTag){
+      finish();
+    }
+    @Override public void onNeutral(    String callerTag){
+    }
+    @Override public void onCancel(    String callerTag){
+    }
+  }
+);
+  errorDialog.show(getSupportFragmentManager(),FTAG_ERROR_FRAGMENT);
+}

@@ -6,12 +6,7 @@ case R.id.uploader_choose_folder:
     mUploadPath+=p + OCFile.PATH_SEPARATOR;
   }
 Log_OC.d(TAG,"Uploading file to dir " + mUploadPath);
-try {
 uploadFiles();
-}
- catch (SecurityException e) {
-showDialog(DIALOG_STREAM_UNKNOWN);
-}
 break;
 case R.id.uploader_cancel:
 finish();
