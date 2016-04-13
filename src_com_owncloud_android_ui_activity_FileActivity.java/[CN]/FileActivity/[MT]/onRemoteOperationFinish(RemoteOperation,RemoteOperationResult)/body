@@ -9,6 +9,9 @@
       t.show();
     }
   }
+ else   if (!result.isSuccess() && ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED.equals(result.getCode())) {
+    showUntrustedCertDialog(result);
+  }
  else   if (operation == null || operation instanceof CreateShareWithShareeOperation || operation instanceof UnshareOperation || operation instanceof SynchronizeFolderOperation || operation instanceof UpdateShareViaLinkOperation || operation instanceof UpdateSharePermissionsOperation) {
     if (result.isSuccess()) {
       updateFileFromDB();

@@ -1,0 +1,9 @@
+{
+  FragmentManager fm=getSupportFragmentManager();
+  SslUntrustedCertDialog dialog=(SslUntrustedCertDialog)fm.findFragmentByTag(DIALOG_UNTRUSTED_CERT);
+  if (dialog == null) {
+    dialog=SslUntrustedCertDialog.newInstanceForFullSslError((CertificateCombinedException)result.getException());
+    FragmentTransaction ft=fm.beginTransaction();
+    dialog.show(ft,DIALOG_UNTRUSTED_CERT);
+  }
+}
