@@ -9,7 +9,7 @@
   }
   if (files.get(position).isFolder()) {
     OCFile folderToEnter=files.get(position);
-    startSyncFolderOperation(folderToEnter,false);
+    startSyncFolderOperation(folderToEnter);
     mParents.push(folderToEnter.getFileName());
     populateDirectoryList();
   }
