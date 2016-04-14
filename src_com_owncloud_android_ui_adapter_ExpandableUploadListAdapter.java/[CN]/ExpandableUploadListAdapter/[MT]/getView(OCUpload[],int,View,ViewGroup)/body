@@ -33,7 +33,6 @@
     accountNameTextView.setVisibility(View.VISIBLE);
     statusTextView.setVisibility(View.VISIBLE);
     progressBar.setVisibility(View.GONE);
-    progressBar.setVisibility(View.GONE);
     String status=getStatusText(upload);
 switch (upload.getUploadStatus()) {
 case UPLOAD_IN_PROGRESS:
