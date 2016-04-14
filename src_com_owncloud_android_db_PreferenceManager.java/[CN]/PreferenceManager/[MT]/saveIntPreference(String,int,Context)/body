@@ -1,0 +1,5 @@
+{
+  SharedPreferences.Editor appPreferences=getDefaultSharedPreferences(context.getApplicationContext()).edit();
+  appPreferences.putInt(key,value);
+  appPreferences.apply();
+}
