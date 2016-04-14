@@ -1,5 +1,5 @@
 {
-  boolean delayInstantPicture=(isInstantPicture() && PreferenceReader.instantPictureUploadViaWiFiOnly(mContext));
-  boolean delayInstantVideo=(isInstantVideo() && PreferenceReader.instantVideoUploadViaWiFiOnly(mContext));
+  boolean delayInstantPicture=(isInstantPicture() && PreferenceManager.instantPictureUploadViaWiFiOnly(mContext));
+  boolean delayInstantVideo=(isInstantVideo() && PreferenceManager.instantVideoUploadViaWiFiOnly(mContext));
   return ((delayInstantPicture || delayInstantVideo) && !ConnectivityUtils.isAppConnectedViaWiFi(mContext));
 }

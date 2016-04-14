@@ -1,0 +1,5 @@
+{
+  SharedPreferences.Editor appPrefs=android.preference.PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext()).edit();
+  appPrefs.putString(AUTO_PREF__LAST_UPLOAD_PATH,path);
+  appPrefs.apply();
+}

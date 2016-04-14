@@ -40,8 +40,6 @@ catch (  Exception e) {
     showErrorDialog(R.string.common_error_unknown,R.string.uploader_error_title_file_cannot_be_uploaded);
   }
  finally {
-    SharedPreferences.Editor appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
-    appPrefs.putString("last_upload_path",mUploadPath);
-    appPrefs.apply();
+    PreferenceManager.setLastUploadPath(mUploadPath,this);
   }
 }
