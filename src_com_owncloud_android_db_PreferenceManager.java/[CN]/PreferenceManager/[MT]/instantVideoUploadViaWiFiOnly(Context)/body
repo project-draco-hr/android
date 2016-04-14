@@ -1,3 +1,3 @@
 {
-  return android.preference.PreferenceManager.getDefaultSharedPreferences(context).getBoolean("instant_video_upload_on_wifi",false);
+  return android.preference.PreferenceManager.getDefaultSharedPreferences(context).getBoolean(PREF__INSTANT_VIDEO_UPLOAD_ON_WIFI,false);
 }

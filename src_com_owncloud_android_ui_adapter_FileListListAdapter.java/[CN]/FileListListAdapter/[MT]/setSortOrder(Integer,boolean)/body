@@ -1,8 +1,6 @@
 {
-  SharedPreferences.Editor editor=mAppPreferences.edit();
-  editor.putInt("sortOrder",order);
-  editor.putBoolean("sortAscending",ascending);
-  editor.commit();
+  PreferenceManager.setSortOrder(order,mContext);
+  PreferenceManager.setSortAscending(ascending,mContext);
   FileStorageUtils.mSortOrder=order;
   FileStorageUtils.mSortAscending=ascending;
   mFiles=FileStorageUtils.sortFolder(mFiles);

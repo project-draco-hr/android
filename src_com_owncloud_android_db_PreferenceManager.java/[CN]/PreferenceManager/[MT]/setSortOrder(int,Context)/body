@@ -1,0 +1,5 @@
+{
+  SharedPreferences.Editor appPreferences=android.preference.PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext()).edit();
+  appPreferences.putInt(AUTO_PREF__SORT_ORDER,order);
+  appPreferences.apply();
+}

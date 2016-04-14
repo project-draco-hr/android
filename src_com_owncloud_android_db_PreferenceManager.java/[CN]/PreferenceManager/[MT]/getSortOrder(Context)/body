@@ -1,0 +1,4 @@
+{
+  SharedPreferences appPreferences=android.preference.PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+  return appPreferences.getInt(AUTO_PREF__SORT_ORDER,FileStorageUtils.SORT_NAME);
+}
