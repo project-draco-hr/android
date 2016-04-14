@@ -63,14 +63,6 @@
     UploadFileOperation newUpload=null;
     try {
       for (int i=0; i < files.length; i++) {
-        newUpload=new UploadFileOperation(account,files[i],chunked,forceOverwrite,localAction,this);
-        newUpload.setCreatedBy(createdBy);
-        if (isCreateRemoteFolder) {
-          newUpload.setRemoteFolderToBeCreated();
-        }
-        newUpload.addDatatransferProgressListener(this);
-        newUpload.addDatatransferProgressListener((FileUploaderBinder)mBinder);
-        newUpload.addRenameUploadListener(this);
         OCUpload ocUpload=new OCUpload(files[i],account);
         ocUpload.setFileSize(files[i].getFileLength());
         ocUpload.setForceOverwrite(forceOverwrite);
@@ -78,6 +70,14 @@
         ocUpload.setCreatedBy(createdBy);
         ocUpload.setLocalAction(localAction);
         ocUpload.setUploadStatus(UploadStatus.UPLOAD_IN_PROGRESS);
+        newUpload=new UploadFileOperation(account,ocUpload,chunked,forceOverwrite,localAction,this);
+        newUpload.setCreatedBy(createdBy);
+        if (isCreateRemoteFolder) {
+          newUpload.setRemoteFolderToBeCreated();
+        }
+        newUpload.addDatatransferProgressListener(this);
+        newUpload.addDatatransferProgressListener((FileUploaderBinder)mBinder);
+        newUpload.addRenameUploadListener(this);
         Pair<String,String> putResult=mPendingUploads.putIfAbsent(account.name,files[i].getRemotePath(),newUpload);
         if (putResult != null) {
           uploadKey=putResult.first;

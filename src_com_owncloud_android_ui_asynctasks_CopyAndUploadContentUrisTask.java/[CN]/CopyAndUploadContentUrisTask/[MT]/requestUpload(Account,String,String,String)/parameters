@@ -1,0 +1,4 @@
+Account account
+String localPath
+String remotePath
+String mimeType

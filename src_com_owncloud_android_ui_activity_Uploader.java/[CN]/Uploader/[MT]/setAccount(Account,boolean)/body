@@ -17,8 +17,11 @@
       }
     }
   }
+ else   if (getIntent().getStringExtra(Intent.EXTRA_TEXT) != null) {
+    showErrorDialog(R.string.uploader_error_message_received_piece_of_text,R.string.uploader_error_title_no_file_to_upload);
+  }
  else {
-    showDialog(DIALOG_NO_STREAM);
+    showErrorDialog(R.string.uploader_error_message_no_file_to_upload,R.string.uploader_error_title_no_file_to_upload);
   }
   super.setAccount(account,savedAccount);
 }

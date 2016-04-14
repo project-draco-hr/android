@@ -1,34 +1,21 @@
 {
   final AlertDialog.Builder builder=new Builder(this);
 switch (id) {
-case DIALOG_WAITING:
-    final ProgressDialog pDialog=new ProgressDialog(this,R.style.ProgressDialogTheme);
-  pDialog.setIndeterminate(false);
-pDialog.setCancelable(false);
-pDialog.setMessage(getResources().getString(R.string.uploader_info_uploading));
-pDialog.setOnShowListener(new DialogInterface.OnShowListener(){
-@Override public void onShow(DialogInterface dialog){
-ProgressBar v=(ProgressBar)pDialog.findViewById(android.R.id.progress);
-v.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.color_accent),android.graphics.PorterDuff.Mode.MULTIPLY);
-}
-}
-);
-return pDialog;
 case DIALOG_NO_ACCOUNT:
-builder.setIcon(R.drawable.ic_warning);
-builder.setTitle(R.string.uploader_wrn_no_account_title);
+    builder.setIcon(R.drawable.ic_warning);
+  builder.setTitle(R.string.uploader_wrn_no_account_title);
 builder.setMessage(String.format(getString(R.string.uploader_wrn_no_account_text),getString(R.string.app_name)));
 builder.setCancelable(false);
 builder.setPositiveButton(R.string.uploader_wrn_no_account_setup_btn_text,new OnClickListener(){
 @Override public void onClick(DialogInterface dialog,int which){
 if (android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.ECLAIR_MR1) {
-Intent intent=new Intent(android.provider.Settings.ACTION_ADD_ACCOUNT);
-intent.putExtra("authorities",new String[]{MainApp.getAuthTokenType()});
-startActivityForResult(intent,REQUEST_CODE__SETUP_ACCOUNT);
+  Intent intent=new Intent(android.provider.Settings.ACTION_ADD_ACCOUNT);
+  intent.putExtra("authorities",new String[]{MainApp.getAuthTokenType()});
+  startActivityForResult(intent,REQUEST_CODE__SETUP_ACCOUNT);
 }
  else {
-Intent intent=new Intent(getBaseContext(),AccountAuthenticator.class);
-startActivityForResult(intent,REQUEST_CODE__SETUP_ACCOUNT);
+  Intent intent=new Intent(getBaseContext(),AccountAuthenticator.class);
+  startActivityForResult(intent,REQUEST_CODE__SETUP_ACCOUNT);
 }
 }
 }
@@ -61,18 +48,6 @@ builder.setOnCancelListener(new OnCancelListener(){
 @Override public void onCancel(DialogInterface dialog){
 mAccountSelectionShowing=false;
 dialog.cancel();
-finish();
-}
-}
-);
-return builder.create();
-case DIALOG_NO_STREAM:
-builder.setIcon(R.drawable.ic_warning);
-builder.setTitle(R.string.uploader_wrn_no_content_title);
-builder.setMessage(R.string.uploader_wrn_no_content_text);
-builder.setCancelable(false);
-builder.setNegativeButton(R.string.common_cancel,new OnClickListener(){
-@Override public void onClick(DialogInterface dialog,int which){
 finish();
 }
 }

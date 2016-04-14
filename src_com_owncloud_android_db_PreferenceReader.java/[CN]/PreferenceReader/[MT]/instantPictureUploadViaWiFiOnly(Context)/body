@@ -1,3 +1,0 @@
-{
-  return PreferenceManager.getDefaultSharedPreferences(context).getBoolean("instant_upload_on_wifi",false);
-}

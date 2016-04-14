@@ -1,76 +1,45 @@
 {
   try {
-    for (    Parcelable mStream : mStreamsToUpload) {
-      Uri uri=(Uri)mStream;
-      String data=null;
-      String filePath="";
-      if (uri != null) {
-        if (uri.getScheme().equals("content")) {
-          String mimeType=getContentResolver().getType(uri);
-          if (mimeType.contains("image")) {
-            String[] CONTENT_PROJECTION={Images.Media.DATA,Images.Media.DISPLAY_NAME,Images.Media.MIME_TYPE,Images.Media.SIZE};
-            Cursor c=getContentResolver().query(uri,CONTENT_PROJECTION,null,null,null);
-            c.moveToFirst();
-            int index=c.getColumnIndex(Images.Media.DATA);
-            data=c.getString(index);
-            filePath=mUploadPath + c.getString(c.getColumnIndex(Images.Media.DISPLAY_NAME));
-          }
- else           if (mimeType.contains("video")) {
-            String[] CONTENT_PROJECTION={Video.Media.DATA,Video.Media.DISPLAY_NAME,Video.Media.MIME_TYPE,Video.Media.SIZE,Video.Media.DATE_MODIFIED};
-            Cursor c=getContentResolver().query(uri,CONTENT_PROJECTION,null,null,null);
-            c.moveToFirst();
-            int index=c.getColumnIndex(Video.Media.DATA);
-            data=c.getString(index);
-            filePath=mUploadPath + c.getString(c.getColumnIndex(Video.Media.DISPLAY_NAME));
-          }
- else           if (mimeType.contains("audio")) {
-            String[] CONTENT_PROJECTION={Audio.Media.DATA,Audio.Media.DISPLAY_NAME,Audio.Media.MIME_TYPE,Audio.Media.SIZE};
-            Cursor c=getContentResolver().query(uri,CONTENT_PROJECTION,null,null,null);
-            c.moveToFirst();
-            int index=c.getColumnIndex(Audio.Media.DATA);
-            data=c.getString(index);
-            filePath=mUploadPath + c.getString(c.getColumnIndex(Audio.Media.DISPLAY_NAME));
-          }
- else {
-            Cursor cursor=getContentResolver().query(uri,new String[]{MediaStore.MediaColumns.DISPLAY_NAME},null,null,null);
-            cursor.moveToFirst();
-            int nameIndex=cursor.getColumnIndex(cursor.getColumnNames()[0]);
-            if (nameIndex >= 0) {
-              filePath=mUploadPath + cursor.getString(nameIndex);
-            }
-          }
+    List<Uri> contentUris=new ArrayList<>();
+    List<String> contentRemotePaths=new ArrayList<>();
+    int schemeFileCounter=0;
+    for (    Parcelable sourceStream : mStreamsToUpload) {
+      Uri sourceUri=(Uri)sourceStream;
+      if (sourceUri != null) {
+        String displayName=UriUtils.getDisplayNameForUri(sourceUri,this);
+        if (displayName == null) {
+          displayName=generateDiplayName();
         }
- else         if (uri.getScheme().equals("file")) {
-          filePath=Uri.decode(uri.toString()).replace(uri.getScheme() + "://","");
-          if (filePath.contains("mnt")) {
-            String splitedFilePath[]=filePath.split("/mnt");
-            filePath=splitedFilePath[1];
-          }
-          final File file=new File(filePath);
-          data=file.getAbsolutePath();
-          filePath=mUploadPath + file.getName();
+        String remotePath=mUploadPath + displayName;
+        if (ContentResolver.SCHEME_CONTENT.equals(sourceUri.getScheme())) {
+          contentUris.add(sourceUri);
+          contentRemotePaths.add(remotePath);
         }
- else {
-          throw new SecurityException();
+ else         if (ContentResolver.SCHEME_FILE.equals(sourceUri.getScheme())) {
+          requestUpload(sourceUri.getPath(),remotePath);
+          schemeFileCounter++;
         }
-        mRemoteCacheData.add(filePath);
-        CopyTmpFileAsyncTask copyTask=new CopyTmpFileAsyncTask(this);
-        Object[] params={uri,filePath,mRemoteCacheData.size() - 1,getAccount().name,getContentResolver()};
-        mNumCacheFile++;
-        showWaitingCopyDialog();
-        copyTask.execute(params);
       }
+    }
+    if (!contentUris.isEmpty()) {
+      copyThenUpload(contentUris.toArray(new Uri[contentUris.size()]),contentRemotePaths.toArray(new String[contentRemotePaths.size()]));
+    }
+ else     if (schemeFileCounter == 0) {
+      showErrorDialog(R.string.uploader_error_message_no_file_to_upload,R.string.uploader_error_title_no_file_to_upload);
+    }
  else {
-        throw new SecurityException();
-      }
-      SharedPreferences.Editor appPrefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
-      appPrefs.putString("last_upload_path",mUploadPath);
-      appPrefs.apply();
       finish();
     }
   }
  catch (  SecurityException e) {
-    String message=String.format(getString(R.string.uploader_error_forbidden_content),getString(R.string.app_name));
-    Toast.makeText(this,message,Toast.LENGTH_LONG).show();
+    Log_OC.e(TAG,"Permissions fail",e);
+    showErrorDialog(R.string.uploader_error_message_read_permission_not_granted,R.string.uploader_error_title_file_cannot_be_uploaded);
+  }
+catch (  Exception e) {
+    Log_OC.e(TAG,"Unexpted error",e);
+    showErrorDialog(R.string.common_error_unknown,R.string.uploader_error_title_file_cannot_be_uploaded);
+  }
+ finally {
+    PreferenceManager.setLastUploadPath(mUploadPath,this);
   }
 }

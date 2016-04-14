@@ -1,19 +1,15 @@
 {
   prepareStreamsToUpload();
   if (savedInstanceState == null) {
-    mParents=new Stack<String>();
+    mParents=new Stack<>();
     mAccountSelected=false;
     mAccountSelectionShowing=false;
-    mNumCacheFile=0;
-    mRemoteCacheData=new ArrayList<String>();
   }
  else {
     mParents=(Stack<String>)savedInstanceState.getSerializable(KEY_PARENTS);
     mFile=savedInstanceState.getParcelable(KEY_FILE);
     mAccountSelected=savedInstanceState.getBoolean(KEY_ACCOUNT_SELECTED);
     mAccountSelectionShowing=savedInstanceState.getBoolean(KEY_ACCOUNT_SELECTION_SHOWING);
-    mNumCacheFile=savedInstanceState.getInt(KEY_NUM_CACHE_FILE);
-    mRemoteCacheData=savedInstanceState.getStringArrayList(KEY_REMOTE_CACHE_DATA);
   }
   super.onCreate(savedInstanceState);
   if (mAccountSelected) {
@@ -23,4 +19,10 @@
   syncIntentFilter.addAction(RefreshFolderOperation.EVENT_SINGLE_FOLDER_SHARES_SYNCED);
   mSyncBroadcastReceiver=new SyncBroadcastReceiver();
   registerReceiver(mSyncBroadcastReceiver,syncIntentFilter);
+  FragmentManager fm=getSupportFragmentManager();
+  TaskRetainerFragment taskRetainerFragment=(TaskRetainerFragment)fm.findFragmentByTag(FTAG_TASK_RETAINER_FRAGMENT);
+  if (taskRetainerFragment == null) {
+    taskRetainerFragment=new TaskRetainerFragment();
+    fm.beginTransaction().add(taskRetainerFragment,FTAG_TASK_RETAINER_FRAGMENT).commit();
+  }
 }

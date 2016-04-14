@@ -1,0 +1,15 @@
+{
+  if (messageResId == -1) {
+    throw new IllegalStateException("Calling confirmation dialog without message resource");
+  }
+  ConfirmationDialogFragment frag=new ConfirmationDialogFragment();
+  Bundle args=new Bundle();
+  args.putInt(ARG_MESSAGE_RESOURCE_ID,messageResId);
+  args.putStringArray(ARG_MESSAGE_ARGUMENTS,messageArguments);
+  args.putInt(ARG_TITLE_ID,titleResId);
+  args.putInt(ARG_POSITIVE_BTN_RES,posBtn);
+  args.putInt(ARG_NEUTRAL_BTN_RES,neuBtn);
+  args.putInt(ARG_NEGATIVE_BTN_RES,negBtn);
+  frag.setArguments(args);
+  return frag;
+}

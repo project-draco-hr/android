@@ -1,0 +1,9 @@
+{
+  if (mTask != null) {
+    mTask.setListener(null);
+  }
+  mTask=task;
+  if (mTask != null && getContext() != null) {
+    task.setListener((CopyAndUploadContentUrisTask.OnCopyTmpFilesTaskListener)getContext());
+  }
+}

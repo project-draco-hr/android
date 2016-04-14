@@ -2,13 +2,12 @@
   if (getStorageManager() == null) {
     throw new IllegalStateException("Do not call this method before " + "initializing mStorageManager");
   }
-  SharedPreferences appPreferences=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-  String last_path=appPreferences.getString("last_upload_path","");
-  if (last_path.equals("/")) {
+  String lastPath=PreferenceManager.getLastUploadPath(this);
+  if (lastPath.equals("/")) {
     mParents.add("");
   }
  else {
-    String[] dir_names=last_path.split("/");
+    String[] dir_names=lastPath.split("/");
     mParents.clear();
     for (    String dir : dir_names)     mParents.add(dir);
   }

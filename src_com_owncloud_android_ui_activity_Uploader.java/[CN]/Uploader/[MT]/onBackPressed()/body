@@ -1,7 +1,6 @@
 {
   if (mParents.size() <= 1) {
     super.onBackPressed();
-    return;
   }
  else {
     mParents.pop();

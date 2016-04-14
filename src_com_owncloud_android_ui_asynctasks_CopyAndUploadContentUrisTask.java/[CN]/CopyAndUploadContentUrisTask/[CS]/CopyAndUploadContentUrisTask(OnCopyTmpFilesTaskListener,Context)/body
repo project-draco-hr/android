@@ -1,0 +1,4 @@
+{
+  mListener=new WeakReference<>(listener);
+  mAppContext=context.getApplicationContext();
+}

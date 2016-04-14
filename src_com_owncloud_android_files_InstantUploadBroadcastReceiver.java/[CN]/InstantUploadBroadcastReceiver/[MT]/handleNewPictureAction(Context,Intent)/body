@@ -4,7 +4,7 @@
   String file_name=null;
   String mime_type=null;
   Log_OC.i(TAG,"New photo received");
-  if (!PreferenceReader.instantPictureUploadEnabled(context)) {
+  if (!PreferenceManager.instantPictureUploadEnabled(context)) {
     Log_OC.d(TAG,"Instant picture upload disabled, ignoring new picture");
     return;
   }

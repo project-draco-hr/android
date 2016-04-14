@@ -1,0 +1,80 @@
+{
+  ResultCode result=ResultCode.UNKNOWN_ERROR;
+  InputStream inputStream=null;
+  FileOutputStream outputStream=null;
+  String fullTempPath=null;
+  Uri currentUri=null;
+  try {
+    Account account=(Account)params[0];
+    Uri[] uris=(Uri[])params[1];
+    String[] remotePaths=(String[])params[2];
+    ContentResolver leakedContentResolver=(ContentResolver)params[3];
+    String currentRemotePath;
+    for (int i=0; i < uris.length; i++) {
+      currentUri=uris[i];
+      currentRemotePath=remotePaths[i];
+      fullTempPath=FileStorageUtils.getTemporalPath(account.name) + currentRemotePath;
+      inputStream=leakedContentResolver.openInputStream(currentUri);
+      File cacheFile=new File(fullTempPath);
+      File tempDir=cacheFile.getParentFile();
+      if (!tempDir.exists()) {
+        tempDir.mkdirs();
+      }
+      cacheFile.createNewFile();
+      outputStream=new FileOutputStream(fullTempPath);
+      byte[] buffer=new byte[4096];
+      int count;
+      while ((count=inputStream.read(buffer)) > 0) {
+        outputStream.write(buffer,0,count);
+      }
+      requestUpload(account,fullTempPath,currentRemotePath,leakedContentResolver.getType(currentUri));
+      fullTempPath=null;
+    }
+    result=ResultCode.OK;
+  }
+ catch (  ArrayIndexOutOfBoundsException e) {
+    Log_OC.e(TAG,"Wrong number of arguments received ",e);
+  }
+catch (  ClassCastException e) {
+    Log_OC.e(TAG,"Wrong parameter received ",e);
+  }
+catch (  FileNotFoundException e) {
+    Log_OC.e(TAG,"Could not find source file " + currentUri,e);
+    result=ResultCode.LOCAL_FILE_NOT_FOUND;
+  }
+catch (  SecurityException e) {
+    Log_OC.e(TAG,"Not enough permissions to read source file " + currentUri,e);
+    result=ResultCode.FORBIDDEN;
+  }
+catch (  Exception e) {
+    Log_OC.e(TAG,"Exception while copying " + currentUri + " to temporary file",e);
+    result=ResultCode.LOCAL_STORAGE_NOT_COPIED;
+    if (fullTempPath != null) {
+      File f=new File(fullTempPath);
+      if (f.exists()) {
+        if (!f.delete()) {
+          Log_OC.e(TAG,"Could not delete temporary file " + fullTempPath);
+        }
+      }
+    }
+  }
+ finally {
+    if (inputStream != null) {
+      try {
+        inputStream.close();
+      }
+ catch (      Exception e) {
+        Log_OC.w(TAG,"Ignoring exception of inputStream closure");
+      }
+    }
+    if (outputStream != null) {
+      try {
+        outputStream.close();
+      }
+ catch (      Exception e) {
+        Log_OC.w(TAG,"Ignoring exception of outStream closure");
+      }
+    }
+  }
+  return result;
+}

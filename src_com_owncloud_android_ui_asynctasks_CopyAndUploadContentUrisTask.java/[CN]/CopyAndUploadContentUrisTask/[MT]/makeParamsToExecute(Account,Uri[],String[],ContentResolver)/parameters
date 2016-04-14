@@ -1,0 +1,4 @@
+Account account
+Uri[] sourceUris
+String[] remotePaths
+ContentResolver contentResolver

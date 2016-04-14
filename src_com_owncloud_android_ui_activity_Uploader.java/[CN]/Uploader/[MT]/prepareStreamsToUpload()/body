@@ -1,6 +1,6 @@
 {
   if (getIntent().getAction().equals(Intent.ACTION_SEND)) {
-    mStreamsToUpload=new ArrayList<Parcelable>();
+    mStreamsToUpload=new ArrayList<>();
     mStreamsToUpload.add(getIntent().getParcelableExtra(Intent.EXTRA_STREAM));
   }
  else   if (getIntent().getAction().equals(Intent.ACTION_SEND_MULTIPLE)) {
