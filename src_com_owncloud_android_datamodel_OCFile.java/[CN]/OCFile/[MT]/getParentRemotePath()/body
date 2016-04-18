@@ -1,4 +1,4 @@
 {
   String parentPath=new File(getRemotePath()).getParent();
-  return (parentPath.substring(parentPath.length() - 1).equals("/")) ? parentPath : (parentPath + "/");
+  return (parentPath.endsWith("/")) ? parentPath : (parentPath + "/");
 }
