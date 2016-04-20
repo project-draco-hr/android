@@ -35,6 +35,6 @@
     }
   }
  else {
-    Log_OC.wtf(TAG,"Trying to open a NULL OCFile");
+    Log_OC.e(TAG,"Trying to open a NULL OCFile");
   }
 }
