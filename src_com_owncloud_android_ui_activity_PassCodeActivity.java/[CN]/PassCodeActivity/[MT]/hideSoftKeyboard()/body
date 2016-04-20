@@ -1,0 +1,7 @@
+{
+  View focusedView=getCurrentFocus();
+  if (focusedView != null) {
+    InputMethodManager inputMethodManager=(InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+    inputMethodManager.hideSoftInputFromWindow(focusedView.getWindowToken(),0);
+  }
+}
