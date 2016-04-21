@@ -15,8 +15,8 @@
     Log_OC.e(TAG,"Error reading properties of file after successful upload; this is gonna hurt...");
   }
   if (mWasRenamed) {
-    OCFile oldFile=mOldFile;
-    if (oldFile.fileExists()) {
+    OCFile oldFile=getStorageManager().getFileByPath(mOldFile.getRemotePath());
+    if (oldFile != null) {
       oldFile.setStoragePath(null);
       getStorageManager().saveFile(oldFile);
       getStorageManager().saveConflict(oldFile,null);

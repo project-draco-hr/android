@@ -1,0 +1,32 @@
+{
+  if (result.isSuccess()) {
+    updateFileFromDB();
+    Intent intentToShareLink=new Intent(Intent.ACTION_SEND);
+    String link=((OCShare)(result.getData().get(0))).getShareLink();
+    intentToShareLink.putExtra(Intent.EXTRA_TEXT,link);
+    intentToShareLink.setType("text/plain");
+    String username=AccountUtils.getUsernameForAccount(getAccount());
+    if (username != null) {
+      intentToShareLink.putExtra(Intent.EXTRA_SUBJECT,getString(R.string.subject_user_shared_with_you,username,getFile().getFileName()));
+    }
+ else {
+      intentToShareLink.putExtra(Intent.EXTRA_SUBJECT,getString(R.string.subject_shared_with_you,getFile().getFileName()));
+    }
+    String[] packagesToExclude=new String[]{getPackageName()};
+    DialogFragment chooserDialog=ShareLinkToDialog.newInstance(intentToShareLink,packagesToExclude);
+    chooserDialog.show(getSupportFragmentManager(),FTAG_CHOOSER_DIALOG);
+  }
+ else {
+    String password=operation.getPassword();
+    if (result.getCode() == RemoteOperationResult.ResultCode.SHARE_FORBIDDEN && (password == null || password.length() == 0) && getCapabilities().getFilesSharingPublicEnabled().isUnknown()) {
+      ShareFileFragment shareFileFragment=getShareFileFragment();
+      if (shareFileFragment != null && shareFileFragment.isAdded()) {
+        shareFileFragment.requestPasswordForShareViaLink(true);
+      }
+    }
+ else {
+      Toast t=Toast.makeText(this,ErrorMessageAdapter.getErrorCauseMessage(result,operation,getResources()),Toast.LENGTH_LONG);
+      t.show();
+    }
+  }
+}

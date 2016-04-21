@@ -1,15 +1,21 @@
 {
   super.onCreate(savedInstanceState);
-  ClipboardManager clipboardManager=(ClipboardManager)this.getSystemService(CLIPBOARD_SERVICE);
-  Intent intent=getIntent();
-  CharSequence text=intent.getCharSequenceExtra(Intent.EXTRA_TEXT);
-  if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
-    ClipData clip=ClipData.newPlainText("ownCloud was here",text);
-    ((android.content.ClipboardManager)clipboardManager).setPrimaryClip(clip);
-  }
+  try {
+    ClipboardManager clipboardManager=(ClipboardManager)this.getSystemService(CLIPBOARD_SERVICE);
+    Intent intent=getIntent();
+    CharSequence text=intent.getCharSequenceExtra(Intent.EXTRA_TEXT);
+    if (text != null && text.length() > 0) {
+      ClipData clip=ClipData.newPlainText(getString(R.string.clipboard_label,getString(R.string.app_name)),text);
+      clipboardManager.setPrimaryClip(clip);
+      Toast.makeText(this,R.string.clipboard_text_copied,Toast.LENGTH_SHORT).show();
+    }
  else {
-    clipboardManager.setText(text);
+      Toast.makeText(this,R.string.clipboard_no_text_to_copy,Toast.LENGTH_SHORT).show();
+    }
   }
-  Toast.makeText(this,R.string.clipboard_text_copied,Toast.LENGTH_SHORT).show();
+ catch (  Exception e) {
+    Toast.makeText(this,R.string.clipboard_uxexpected_error,Toast.LENGTH_SHORT).show();
+    Log_OC.e(TAG,"Exception caught while copying to clipboard",e);
+  }
   finish();
 }

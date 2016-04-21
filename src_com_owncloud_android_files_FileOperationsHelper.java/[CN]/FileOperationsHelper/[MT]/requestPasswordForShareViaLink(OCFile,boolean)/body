@@ -1,4 +1,0 @@
-{
-  SharePasswordDialogFragment dialog=SharePasswordDialogFragment.newInstance(file,createShare);
-  dialog.show(mFileActivity.getSupportFragmentManager(),SharePasswordDialogFragment.PASSWORD_FRAGMENT);
-}

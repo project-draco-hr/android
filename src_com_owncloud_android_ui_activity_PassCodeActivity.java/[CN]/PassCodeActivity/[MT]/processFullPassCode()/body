@@ -1,6 +1,7 @@
 {
   if (ACTION_CHECK.equals(getIntent().getAction())) {
     if (checkPassCode()) {
+      hideSoftKeyboard();
       finish();
     }
  else {
@@ -12,6 +13,7 @@
       Intent resultIntent=new Intent();
       resultIntent.putExtra(KEY_CHECK_RESULT,true);
       setResult(RESULT_OK,resultIntent);
+      hideSoftKeyboard();
       finish();
     }
  else {

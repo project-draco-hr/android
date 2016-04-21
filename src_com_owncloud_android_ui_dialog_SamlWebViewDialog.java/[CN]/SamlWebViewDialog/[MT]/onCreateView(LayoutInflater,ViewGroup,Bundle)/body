@@ -8,11 +8,14 @@
     mSsoWebView.setClickable(true);
     WebSettings webSettings=mSsoWebView.getSettings();
     webSettings.setJavaScriptEnabled(true);
-    webSettings.setBuiltInZoomControls(false);
-    webSettings.setLoadWithOverviewMode(false);
     webSettings.setSavePassword(false);
     webSettings.setUserAgentString(MainApp.getUserAgent());
     webSettings.setSaveFormData(false);
+    webSettings.setUseWideViewPort(true);
+    webSettings.setLoadWithOverviewMode(true);
+    webSettings.setSupportZoom(true);
+    webSettings.setBuiltInZoomControls(true);
+    webSettings.setDisplayZoomControls(false);
     CookieManager cookieManager=CookieManager.getInstance();
     cookieManager.setAcceptCookie(true);
     cookieManager.removeAllCookie();
