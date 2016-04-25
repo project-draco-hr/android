@@ -1,8 +1,8 @@
 {
   LinearLayout shareWithUsersSection=(LinearLayout)view.findViewById(R.id.shareWithUsersSection);
   LinearLayout shareViaLinkSection=(LinearLayout)view.findViewById(R.id.shareViaLinkSection);
-  boolean shareViaLinkAllowed=getActivity().getString(R.string.share_via_link_feature).equalsIgnoreCase("on");
-  boolean shareWithUsersAllowed=getActivity().getString(R.string.share_with_users_feature).equalsIgnoreCase("on");
+  boolean shareViaLinkAllowed=getActivity().getResources().getBoolean(R.bool.share_via_link_feature);
+  boolean shareWithUsersAllowed=getActivity().getResources().getBoolean(R.bool.share_with_users_feature);
   if (!shareViaLinkAllowed) {
     shareViaLinkSection.setVisibility(View.GONE);
   }
