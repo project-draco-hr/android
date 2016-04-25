@@ -19,7 +19,6 @@
  else {
     size.setText(DisplayUtils.bytesToHumanReadable(mFile.getFileLength()));
   }
-  showShareSections(view);
   Button addUserGroupButton=(Button)view.findViewById(R.id.addUserButton);
   addUserGroupButton.setOnClickListener(new View.OnClickListener(){
     @Override public void onClick(    View view){
@@ -38,5 +37,6 @@
   initExpirationListener(view);
   initPasswordListener(view);
   initEditPermissionListener(view);
+  hideNotEnabledShareSections(view);
   return view;
 }
