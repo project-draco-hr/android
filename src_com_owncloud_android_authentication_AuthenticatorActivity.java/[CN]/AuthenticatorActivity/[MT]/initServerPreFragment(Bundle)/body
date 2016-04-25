@@ -1,4 +1,5 @@
 {
+  boolean checkHostUrl=false;
   boolean isUrlInputAllowed=getResources().getBoolean(R.bool.show_server_url_input);
   if (savedInstanceState == null) {
     if (mAccount != null) {
@@ -31,9 +32,13 @@
     mHostUrlInput.setFocusable(false);
   }
   if (isUrlInputAllowed) {
+    if (!mServerInfo.mBaseUrl.isEmpty()) {
+      checkHostUrl=true;
+    }
     mRefreshButton=findViewById(R.id.embeddedRefreshButton);
   }
  else {
+    checkHostUrl=true;
     findViewById(R.id.hostUrlFrame).setVisibility(View.GONE);
     mRefreshButton=findViewById(R.id.centeredRefreshButton);
   }
@@ -71,5 +76,5 @@
     }
   }
 );
-  mPendingAutoCheck=(savedInstanceState == null && (mAction != ACTION_CREATE || !isUrlInputAllowed));
+  mPendingAutoCheck=(savedInstanceState == null && (mAction != ACTION_CREATE || checkHostUrl));
 }
