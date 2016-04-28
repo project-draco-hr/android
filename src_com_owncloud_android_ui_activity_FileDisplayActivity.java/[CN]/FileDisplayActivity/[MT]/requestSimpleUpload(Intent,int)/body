@@ -32,12 +32,10 @@
         Log_OC.v(TAG,"Display Name: " + displayName);
         displayName.replace(File.separatorChar,'_');
         displayName.replace(File.pathSeparatorChar,'_');
+        remotePath+=displayName;
         int pos=displayName.lastIndexOf('.');
-        if (pos >= 0) {
-          remotePath+=displayName;
-        }
- else {
-          remotePath+=displayName + DisplayUtils.getComposedFileExtension(filePath);
+        if (pos < 0) {
+          remotePath+=DisplayUtils.getFileExtension(filePath);
         }
         Uri[] uris=new Uri[]{selectedFileUri};
         String[] remotePaths=new String[]{remotePath};
@@ -48,7 +46,7 @@
       }
     }
  catch (    Exception e) {
-      Log_OC.e(TAG,"Error while trying to copy and upload a content schema type file ",e);
+      Log_OC.e(TAG,"Error while trying to copy and upload a schema type content file ",e);
     }
   }
  else {
