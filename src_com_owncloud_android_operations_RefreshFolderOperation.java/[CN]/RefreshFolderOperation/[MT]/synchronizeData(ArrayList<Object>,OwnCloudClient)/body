@@ -28,7 +28,7 @@
       updatedFile.setStoragePath(localFile.getStoragePath());
       updatedFile.setEtag(localFile.getEtag());
       if (updatedFile.isFolder()) {
-        updatedFile.setFileLength(localFile.getFileLength());
+        updatedFile.setFileLength(remoteFile.getFileLength());
       }
  else       if (mRemoteFolderChanged && remoteFile.isImage() && remoteFile.getModificationTimestamp() != localFile.getModificationTimestamp()) {
         updatedFile.setNeedsUpdateThumbnail(true);

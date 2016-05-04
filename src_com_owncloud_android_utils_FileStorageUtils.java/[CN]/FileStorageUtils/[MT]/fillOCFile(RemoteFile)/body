@@ -1,7 +1,12 @@
 {
   OCFile file=new OCFile(remote.getRemotePath());
   file.setCreationTimestamp(remote.getCreationTimestamp());
-  file.setFileLength(remote.getLength());
+  if (remote.getMimeType().equalsIgnoreCase("DIR")) {
+    file.setFileLength(remote.getSize());
+  }
+ else {
+    file.setFileLength(remote.getLength());
+  }
   file.setMimetype(remote.getMimeType());
   file.setModificationTimestamp(remote.getModifiedTimestamp());
   file.setEtag(remote.getEtag());
