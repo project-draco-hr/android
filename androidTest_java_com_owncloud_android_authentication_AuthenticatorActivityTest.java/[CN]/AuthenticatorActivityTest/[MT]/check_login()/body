@@ -1,9 +1,9 @@
 {
   onView(withId(R.id.buttonOK)).check(matches(not(isEnabled())));
-  onView(withId(R.id.hostUrlInput)).perform(typeText(TEST_SERVER_URL),closeSoftKeyboard());
+  onView(withId(R.id.hostUrlInput)).perform(typeText(BuildConfig.TEST_SERVER_URL),closeSoftKeyboard());
   onView(withId(R.id.account_username)).perform(click());
-  onView(withId(R.id.account_username)).perform(typeText(TEST_USER),closeSoftKeyboard());
-  onView(withId(R.id.account_password)).perform(typeText(TEST_PASSWORD),closeSoftKeyboard());
+  onView(withId(R.id.account_username)).perform(typeText(BuildConfig.TEST_USER),closeSoftKeyboard());
+  onView(withId(R.id.account_password)).perform(typeText(BuildConfig.TEST_PASSWORD),closeSoftKeyboard());
   onView(withId(R.id.buttonOK)).perform(click());
   onView(withId(R.id.buttonOK)).check(matches(isEnabled()));
 }
