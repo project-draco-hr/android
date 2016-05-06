@@ -1,0 +1,7 @@
+{
+  final Intent intent=new Intent(Intent.ACTION_MAIN);
+  intent.addCategory(Intent.CATEGORY_HOME);
+  PackageManager pm=InstrumentationRegistry.getContext().getPackageManager();
+  ResolveInfo resolveInfo=pm.resolveActivity(intent,PackageManager.MATCH_DEFAULT_ONLY);
+  return resolveInfo.activityInfo.packageName;
+}
