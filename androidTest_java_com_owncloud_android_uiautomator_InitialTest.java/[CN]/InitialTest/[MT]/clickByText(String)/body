@@ -1,0 +1,4 @@
+{
+  UiObject obj=new UiObject(new UiSelector().text(text));
+  obj.clickAndWaitForNewWindow();
+}
