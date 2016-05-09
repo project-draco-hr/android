@@ -6,4 +6,14 @@
   onView(withId(R.id.account_password)).perform(typeText(BuildConfig.TEST_PASSWORD),closeSoftKeyboard());
   onView(withId(R.id.buttonOK)).perform(click());
   onView(withId(R.id.buttonOK)).check(matches(isEnabled()));
+  try {
+    Thread.sleep(WAIT_LOGIN);
+    Field f=Activity.class.getDeclaredField("mResultCode");
+    f.setAccessible(true);
+    mResultCode=f.getInt(mActivityRule.getActivity());
+  }
+ catch (  Exception e) {
+    e.printStackTrace();
+  }
+  assertTrue(errorMessage,mResultCode == Activity.RESULT_OK);
 }
