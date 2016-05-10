@@ -5,14 +5,9 @@
   onView(withId(R.id.account_username)).perform(typeText(BuildConfig.TEST_USER),closeSoftKeyboard());
   onView(withId(R.id.account_password)).perform(typeText(BuildConfig.TEST_PASSWORD),closeSoftKeyboard());
   onView(withId(R.id.buttonOK)).perform(click());
-  try {
-    Thread.sleep(WAIT_LOGIN);
-    Field f=Activity.class.getDeclaredField(RESULT_CODE);
-    f.setAccessible(true);
-    mResultCode=f.getInt(mActivityRule.getActivity());
-  }
- catch (  Exception e) {
-    e.printStackTrace();
-  }
+  Thread.sleep(WAIT_LOGIN);
+  Field f=Activity.class.getDeclaredField(RESULT_CODE);
+  f.setAccessible(true);
+  int mResultCode=f.getInt(mActivityRule.getActivity());
   assertTrue(ERROR_MESSAGE,mResultCode == Activity.RESULT_OK);
 }
