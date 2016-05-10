@@ -7,12 +7,12 @@
   onView(withId(R.id.buttonOK)).perform(click());
   try {
     Thread.sleep(WAIT_LOGIN);
-    Field f=Activity.class.getDeclaredField("mResultCode");
+    Field f=Activity.class.getDeclaredField(RESULT_CODE);
     f.setAccessible(true);
     mResultCode=f.getInt(mActivityRule.getActivity());
   }
  catch (  Exception e) {
     e.printStackTrace();
   }
-  assertTrue(errorMessage,mResultCode == Activity.RESULT_OK);
+  assertTrue(ERROR_MESSAGE,mResultCode == Activity.RESULT_OK);
 }
