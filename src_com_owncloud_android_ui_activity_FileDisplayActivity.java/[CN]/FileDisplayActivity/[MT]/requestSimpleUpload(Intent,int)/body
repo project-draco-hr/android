@@ -31,7 +31,6 @@
         String displayName=cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
         Log_OC.v(TAG,"Display Name: " + displayName);
         displayName=displayName.replace(File.separatorChar,'_');
-        displayName=displayName.replace(File.pathSeparatorChar,'_');
         remotePath+=displayName;
         int pos=displayName.lastIndexOf('.');
         if (pos < 0) {
