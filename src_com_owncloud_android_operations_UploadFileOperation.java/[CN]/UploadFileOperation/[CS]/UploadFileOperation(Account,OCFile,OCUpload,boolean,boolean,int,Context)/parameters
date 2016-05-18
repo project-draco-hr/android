@@ -1,4 +1,5 @@
 Account account
+OCFile file
 OCUpload upload
 boolean chunked
 boolean forceOverwrite
