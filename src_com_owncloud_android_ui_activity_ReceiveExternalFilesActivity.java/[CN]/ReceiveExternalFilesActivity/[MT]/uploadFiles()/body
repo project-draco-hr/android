@@ -1,4 +1,4 @@
 {
-  UriUploader uploader=new UriUploader(this,mStreamsToUpload,mUploadPath,getAccount(),getContentResolver());
+  UriUploader uploader=new UriUploader(this,mStreamsToUpload,mUploadPath,getAccount(),getContentResolver(),FileUploader.LOCAL_BEHAVIOUR_FORGET);
   uploader.uploadUris();
 }
