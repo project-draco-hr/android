@@ -1,7 +1,7 @@
 {
-  if (mActivity instanceof ReceiveExternalFilesActivity) {
-    ((ReceiveExternalFilesActivity)mActivity).showWaitingCopyDialog();
+  if (mShowWaitingDialog) {
+    mActivity.showLoadingDialog(mActivity.getResources().getString(R.string.wait_for_tmp_copy_from_private_storage));
   }
-  CopyAndUploadContentUrisTask copyTask=new CopyAndUploadContentUrisTask(this,mActivity);
+  CopyAndUploadContentUrisTask copyTask=new CopyAndUploadContentUrisTask((CopyAndUploadContentUrisTask.OnCopyTmpFilesTaskListener)mActivity,mActivity);
   copyTask.execute(CopyAndUploadContentUrisTask.makeParamsToExecute(mAccount,sourceUris,remotePaths,mActivity.getContentResolver()));
 }

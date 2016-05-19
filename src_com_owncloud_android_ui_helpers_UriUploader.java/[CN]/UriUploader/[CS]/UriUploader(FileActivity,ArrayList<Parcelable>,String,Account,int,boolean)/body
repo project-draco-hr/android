@@ -1,7 +1,8 @@
 {
-  mActivity=context;
+  mActivity=activity;
   mUrisToUpload=uris;
   mUploadPath=uploadPath;
   mAccount=account;
   mBehaviour=behaviour;
+  mShowWaitingDialog=showWaitingDialog;
 }

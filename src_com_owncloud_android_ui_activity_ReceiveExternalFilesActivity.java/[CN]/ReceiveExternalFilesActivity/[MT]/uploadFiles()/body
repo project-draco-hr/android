@@ -1,5 +1,5 @@
 {
-  UriUploader uploader=new UriUploader(this,mStreamsToUpload,mUploadPath,getAccount(),FileUploader.LOCAL_BEHAVIOUR_FORGET);
+  UriUploader uploader=new UriUploader(this,mStreamsToUpload,mUploadPath,getAccount(),FileUploader.LOCAL_BEHAVIOUR_FORGET,true);
   UriUploader.UriUploaderResultCode resultCode=uploader.uploadUris();
   if (resultCode == UriUploader.UriUploaderResultCode.OK) {
     finish();

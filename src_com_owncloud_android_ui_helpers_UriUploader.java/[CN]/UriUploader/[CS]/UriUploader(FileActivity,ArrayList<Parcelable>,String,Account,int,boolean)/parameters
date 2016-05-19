@@ -1,5 +1,6 @@
-Activity context
+FileActivity activity
 ArrayList<Parcelable> uris
 String uploadPath
 Account account
 int behaviour
+boolean showWaitingDialog
