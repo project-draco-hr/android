@@ -1,4 +1,0 @@
-{
-  CopyAndUploadContentUrisTask copyTask=new CopyAndUploadContentUrisTask(this,getApplicationContext());
-  copyTask.execute(CopyAndUploadContentUrisTask.makeParamsToExecute(getAccount(),sourceUris,remotePaths,getContentResolver()));
-}
