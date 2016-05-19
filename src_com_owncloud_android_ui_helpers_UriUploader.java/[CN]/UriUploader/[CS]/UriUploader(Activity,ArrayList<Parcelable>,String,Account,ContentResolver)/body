@@ -1,0 +1,7 @@
+{
+  mActivity=context;
+  mUrisToUpload=uris;
+  mUploadPath=uploadPath;
+  mAccount=account;
+  mContentResolver=contentResolver;
+}

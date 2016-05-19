@@ -1,0 +1,7 @@
+{
+  if (mActivity instanceof ReceiveExternalFilesActivity) {
+    ((ReceiveExternalFilesActivity)mActivity).showWaitingCopyDialog();
+  }
+  CopyAndUploadContentUrisTask copyTask=new CopyAndUploadContentUrisTask(this,mActivity);
+  copyTask.execute(CopyAndUploadContentUrisTask.makeParamsToExecute(mAccount,sourceUris,remotePaths,mContentResolver));
+}

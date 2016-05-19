@@ -1,0 +1,4 @@
+{
+  FileUploader.UploadRequester requester=new FileUploader.UploadRequester();
+  requester.uploadNewFile(mActivity,mAccount,localPath,remotePath,FileUploader.LOCAL_BEHAVIOUR_FORGET,null,false,UploadFileOperation.CREATED_BY_USER);
+}

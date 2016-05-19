@@ -1,0 +1,3 @@
+{
+  return mActivity.getString(R.string.common_unknown) + "-" + DisplayUtils.unixTimeToHumanReadable(System.currentTimeMillis());
+}

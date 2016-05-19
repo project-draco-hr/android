@@ -1,0 +1,6 @@
+{
+  if (mActivity instanceof ReceiveExternalFilesActivity) {
+    ((ReceiveExternalFilesActivity)mActivity).dismissWaitingCopyDialog();
+    mActivity.finish();
+  }
+}
