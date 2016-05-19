@@ -25,15 +25,15 @@
       copyThenUpload(contentUris.toArray(new Uri[contentUris.size()]),contentRemotePaths.toArray(new String[contentRemotePaths.size()]));
     }
  else     if (schemeFileCounter == 0) {
-      mCode=UriUploadCode.ERROR_NO_FILE_TO_UPLOAD;
+      mCode=UriUploaderResultCode.ERROR_NO_FILE_TO_UPLOAD;
     }
   }
  catch (  SecurityException e) {
-    mCode=UriUploadCode.ERROR_READ_PERMISSION_NOT_GRANTED;
+    mCode=UriUploaderResultCode.ERROR_READ_PERMISSION_NOT_GRANTED;
     Log_OC.e(TAG,"Permissions fail",e);
   }
 catch (  Exception e) {
-    mCode=UriUploadCode.ERROR_UNKNOWN;
+    mCode=UriUploaderResultCode.ERROR_UNKNOWN;
     Log_OC.e(TAG,"Unexpted error",e);
   }
  finally {

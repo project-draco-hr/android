@@ -2,5 +2,4 @@ Activity context
 ArrayList<Parcelable> uris
 String uploadPath
 Account account
-ContentResolver contentResolver
 int behaviour

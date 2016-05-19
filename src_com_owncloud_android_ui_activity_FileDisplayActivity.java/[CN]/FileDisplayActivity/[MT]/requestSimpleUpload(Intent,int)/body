@@ -8,6 +8,6 @@
 ;
   OCFile currentDir=getCurrentDir();
   String remotePath=(currentDir != null) ? currentDir.getRemotePath() : OCFile.ROOT_PATH;
-  UriUploader uploader=new UriUploader(this,mStreamsToUpload,remotePath,getAccount(),getContentResolver(),behaviour);
+  UriUploader uploader=new UriUploader(this,mStreamsToUpload,remotePath,getAccount(),behaviour);
   uploader.uploadUris();
 }

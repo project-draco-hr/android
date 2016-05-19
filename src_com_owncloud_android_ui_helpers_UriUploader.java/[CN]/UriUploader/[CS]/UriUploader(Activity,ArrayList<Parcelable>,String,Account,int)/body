@@ -3,6 +3,5 @@
   mUrisToUpload=uris;
   mUploadPath=uploadPath;
   mAccount=account;
-  mContentResolver=contentResolver;
   mBehaviour=behaviour;
 }
