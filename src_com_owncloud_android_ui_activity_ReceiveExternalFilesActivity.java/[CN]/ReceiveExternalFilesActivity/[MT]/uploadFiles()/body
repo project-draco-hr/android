@@ -18,5 +18,6 @@
       messageResId=R.string.common_error_unknown;
     }
     showErrorDialog(messageResId,messageResTitle);
+    PreferenceManager.setLastUploadPath(mUploadPath,this);
   }
 }

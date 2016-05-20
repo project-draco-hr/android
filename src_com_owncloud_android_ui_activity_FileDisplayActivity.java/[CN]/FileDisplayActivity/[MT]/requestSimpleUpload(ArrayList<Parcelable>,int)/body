@@ -1,13 +1,7 @@
 {
   int behaviour=(resultCode == UploadFilesActivity.RESULT_OK_AND_MOVE) ? FileUploader.LOCAL_BEHAVIOUR_MOVE : FileUploader.LOCAL_BEHAVIOUR_COPY;
-  ArrayList<Parcelable> mStreamsToUpload=new ArrayList<Parcelable>(){
-{
-      add(data.getData());
-    }
-  }
-;
   OCFile currentDir=getCurrentDir();
   String remotePath=(currentDir != null) ? currentDir.getRemotePath() : OCFile.ROOT_PATH;
-  UriUploader uploader=new UriUploader(this,mStreamsToUpload,remotePath,getAccount(),behaviour,false);
+  UriUploader uploader=new UriUploader(this,streamsToUpload,remotePath,getAccount(),behaviour,false);
   uploader.uploadUris();
 }

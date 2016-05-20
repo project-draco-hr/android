@@ -34,10 +34,7 @@
   }
 catch (  Exception e) {
     mCode=UriUploaderResultCode.ERROR_UNKNOWN;
-    Log_OC.e(TAG,"Unexpted error",e);
-  }
- finally {
-    PreferenceManager.setLastUploadPath(mUploadPath,mActivity);
+    Log_OC.e(TAG,"Unexpected error",e);
   }
   return mCode;
 }
