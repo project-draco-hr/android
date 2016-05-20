@@ -5,4 +5,5 @@
   mAccount=account;
   mBehaviour=behaviour;
   mShowWaitingDialog=showWaitingDialog;
+  mCopyTmpTaskListener=copyTmpTaskListener;
 }
