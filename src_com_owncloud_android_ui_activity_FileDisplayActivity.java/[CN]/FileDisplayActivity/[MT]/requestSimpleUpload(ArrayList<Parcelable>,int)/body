@@ -1,7 +1,0 @@
-{
-  int behaviour=(resultCode == UploadFilesActivity.RESULT_OK_AND_MOVE) ? FileUploader.LOCAL_BEHAVIOUR_MOVE : FileUploader.LOCAL_BEHAVIOUR_COPY;
-  OCFile currentDir=getCurrentDir();
-  String remotePath=(currentDir != null) ? currentDir.getRemotePath() : OCFile.ROOT_PATH;
-  UriUploader uploader=new UriUploader(this,streamsToUpload,remotePath,getAccount(),behaviour,false,null);
-  uploader.uploadUris();
-}

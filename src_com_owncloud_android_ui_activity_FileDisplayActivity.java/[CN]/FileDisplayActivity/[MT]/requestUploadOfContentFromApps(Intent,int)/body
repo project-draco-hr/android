@@ -1,0 +1,16 @@
+{
+  ArrayList<Parcelable> streamsToUpload=new ArrayList<>();
+  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN && contentIntent.getClipData() != null && contentIntent.getClipData().getItemCount() > 0) {
+    for (int i=0; i < contentIntent.getClipData().getItemCount(); i++) {
+      streamsToUpload.add(contentIntent.getClipData().getItemAt(i).getUri());
+    }
+  }
+ else {
+    streamsToUpload.add(contentIntent.getData());
+  }
+  int behaviour=(resultCode == UploadFilesActivity.RESULT_OK_AND_MOVE) ? FileUploader.LOCAL_BEHAVIOUR_MOVE : FileUploader.LOCAL_BEHAVIOUR_COPY;
+  OCFile currentDir=getCurrentDir();
+  String remotePath=(currentDir != null) ? currentDir.getRemotePath() : OCFile.ROOT_PATH;
+  UriUploader uploader=new UriUploader(this,streamsToUpload,remotePath,getAccount(),behaviour,false,null);
+  uploader.uploadUris();
+}
