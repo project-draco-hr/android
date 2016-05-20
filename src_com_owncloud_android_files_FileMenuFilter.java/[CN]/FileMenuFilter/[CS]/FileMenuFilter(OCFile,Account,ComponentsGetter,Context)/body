@@ -1,6 +1,3 @@
 {
-  mFile=targetFile;
-  mAccount=account;
-  mComponentsGetter=cg;
-  mContext=context;
+  this(targetFile,account,cg,context,false);
 }

@@ -12,17 +12,22 @@
  else {
         mAdapter.removeSelection(position);
       }
-      if (menu != null) {
-        menu.clear();
-        if (checkedCount == 1) {
-          createContextMenu(menu);
+      OCFile targetFile=null;
+      if (checkedCount > 0 && checkedCount <= MIN_FILES_FOR_MULTISELECT) {
+        targetFile=(checkedCount == MIN_FILES_FOR_MULTISELECT) ? mFile : mAdapter.getCheckedItems().get(0);
+        if (mContainerActivity.getStorageManager() != null) {
+          FileMenuFilter mf=new FileMenuFilter(targetFile,mContainerActivity.getStorageManager().getAccount(),mContainerActivity,getActivity(),mAdapter.getCheckedItems().size() == MIN_FILES_FOR_MULTISELECT);
+          mf.filter(menu);
         }
+      }
  else {
-          getActivity().getMenuInflater().inflate(R.menu.multiple_file_actions_menu,menu);
-        }
+        getListView().clearChoices();
+        menu.clear();
+        menu.close();
       }
     }
     @Override public boolean onCreateActionMode(    ActionMode mode,    Menu menu){
+      createContextActionBar(menu);
       this.menu=menu;
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
         getActivity().getWindow().setStatusBarColor(mStatusBarColorActionMode);
