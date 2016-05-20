@@ -1,5 +1,7 @@
 {
-  getListView().setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener(){
+  AbsListView listView=getListView();
+  setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+  setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener(){
     private Menu menu;
     @Override public void onItemCheckedStateChanged(    ActionMode mode,    int position,    long id,    boolean checked){
       final int checkedCount=getListView().getCheckedItemCount();
