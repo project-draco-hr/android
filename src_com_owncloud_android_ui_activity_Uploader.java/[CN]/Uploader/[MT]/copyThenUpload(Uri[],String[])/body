@@ -1,8 +1,0 @@
-{
-  showWaitingCopyDialog();
-  CopyAndUploadContentUrisTask copyTask=new CopyAndUploadContentUrisTask(this,this);
-  FragmentManager fm=getSupportFragmentManager();
-  TaskRetainerFragment taskRetainerFragment=(TaskRetainerFragment)fm.findFragmentByTag(FTAG_TASK_RETAINER_FRAGMENT);
-  taskRetainerFragment.setTask(copyTask);
-  copyTask.execute(CopyAndUploadContentUrisTask.makeParamsToExecute(getAccount(),sourceUris,remotePaths,getContentResolver()));
-}

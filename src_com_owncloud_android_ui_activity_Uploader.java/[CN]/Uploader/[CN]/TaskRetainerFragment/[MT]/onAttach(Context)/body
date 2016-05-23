@@ -1,6 +1,0 @@
-{
-  super.onAttach(context);
-  if (mTask != null) {
-    mTask.setListener((CopyAndUploadContentUrisTask.OnCopyTmpFilesTaskListener)context);
-  }
-}

@@ -1,0 +1,15 @@
+{
+  if (mTask != null) {
+    mTask.setListener(null);
+  }
+  mTask=task;
+  Context context=getContext();
+  if (mTask != null && context != null) {
+    if (context instanceof ReceiveExternalFilesActivity) {
+      task.setListener((CopyAndUploadContentUrisTask.OnCopyTmpFilesTaskListener)context);
+    }
+ else {
+      task.setListener(null);
+    }
+  }
+}
