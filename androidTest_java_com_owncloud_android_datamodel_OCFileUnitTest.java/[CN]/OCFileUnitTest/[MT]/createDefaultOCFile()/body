@@ -1,0 +1,3 @@
+{
+  mFile=new OCFile(PATH);
+}

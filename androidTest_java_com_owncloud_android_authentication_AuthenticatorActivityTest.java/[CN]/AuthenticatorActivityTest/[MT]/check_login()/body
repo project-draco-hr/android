@@ -1,0 +1,17 @@
+{
+  Bundle arguments=InstrumentationRegistry.getArguments();
+  String testUser=arguments.getString("TEST_USER");
+  String testPassword=arguments.getString("TEST_PASSWORD");
+  String testServerURL=arguments.getString("TEST_SERVER_URL");
+  onView(withId(R.id.buttonOK)).check(matches(not(isEnabled())));
+  onView(withId(R.id.hostUrlInput)).perform(typeText(testServerURL),closeSoftKeyboard());
+  onView(withId(R.id.account_username)).perform(click());
+  onView(withId(R.id.account_username)).perform(typeText(testUser),closeSoftKeyboard());
+  onView(withId(R.id.account_password)).perform(typeText(testPassword),closeSoftKeyboard());
+  onView(withId(R.id.buttonOK)).perform(click());
+  Thread.sleep(WAIT_LOGIN);
+  Field f=Activity.class.getDeclaredField(RESULT_CODE);
+  f.setAccessible(true);
+  int mResultCode=f.getInt(mActivityRule.getActivity());
+  assertTrue(ERROR_MESSAGE,mResultCode == Activity.RESULT_OK);
+}
