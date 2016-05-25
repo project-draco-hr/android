@@ -1,3 +1,3 @@
 {
-  return getUploads(ProviderTableMeta.UPLOADS_STATUS + "==" + UploadStatus.UPLOAD_IN_PROGRESS.value,null);
+  return getUploads(ProviderTableMeta.UPLOADS_STATUS + "==" + UploadStatus.UPLOAD_IN_PROGRESS.value+ " OR "+ ProviderTableMeta.UPLOADS_LAST_RESULT+ "=="+ UploadResult.DELAYED_FOR_WIFI.getValue(),null);
 }

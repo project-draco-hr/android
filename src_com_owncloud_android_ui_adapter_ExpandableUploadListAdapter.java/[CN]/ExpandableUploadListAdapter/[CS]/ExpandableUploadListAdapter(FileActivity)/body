@@ -15,7 +15,7 @@
 ;
   mUploadGroups[1]=new UploadGroup(mParentActivity.getString(R.string.uploads_view_group_failed_uploads)){
     @Override public void refresh(){
-      items=mUploadsStorageManager.getFailedUploads();
+      items=mUploadsStorageManager.getFailedButNotDelayedForWifiUploads();
       Arrays.sort(items,comparator);
     }
     @Override public int getGroupIcon(){
