@@ -20,11 +20,6 @@
           mf.filter(menu);
         }
       }
- else {
-        getListView().clearChoices();
-        menu.clear();
-        menu.close();
-      }
     }
     @Override public boolean onCreateActionMode(    ActionMode mode,    Menu menu){
       createContextActionBar(menu);
