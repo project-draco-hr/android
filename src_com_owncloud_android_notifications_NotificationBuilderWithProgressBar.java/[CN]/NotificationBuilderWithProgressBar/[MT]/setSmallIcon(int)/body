@@ -1,5 +1,0 @@
-{
-  super.setSmallIcon(icon);
-  mContentView.setImageViewResource(R.id.icon,icon);
-  return this;
-}

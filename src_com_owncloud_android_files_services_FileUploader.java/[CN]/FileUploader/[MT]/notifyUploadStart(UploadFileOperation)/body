@@ -1,6 +1,6 @@
 {
   mLastPercent=0;
-  mNotificationBuilder=NotificationBuilderWithProgressBar.newNotificationBuilderWithProgressBar(this);
+  mNotificationBuilder=NotificationUtils.newNotificationBuilder(this);
   mNotificationBuilder.setOngoing(true).setSmallIcon(R.drawable.notification_icon).setTicker(getString(R.string.uploader_upload_in_progress_ticker)).setContentTitle(getString(R.string.uploader_upload_in_progress_ticker)).setProgress(100,0,false).setContentText(String.format(getString(R.string.uploader_upload_in_progress_content),0,upload.getFileName()));
   Intent showUploadListIntent=new Intent(this,UploadListActivity.class);
   showUploadListIntent.putExtra(FileActivity.EXTRA_FILE,upload.getFile());

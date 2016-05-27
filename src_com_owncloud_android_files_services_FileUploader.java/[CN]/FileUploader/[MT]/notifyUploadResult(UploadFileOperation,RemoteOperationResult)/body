@@ -31,7 +31,7 @@
     mNotificationManager.notify(tickerId,mNotificationBuilder.build());
     if (uploadResult.isSuccess()) {
       mPendingUploads.remove(upload.getAccount().name,upload.getFile().getRemotePath());
-      NotificationDelayer.cancelWithDelay(mNotificationManager,R.string.uploader_upload_succeeded_ticker,2000);
+      NotificationUtils.cancelWithDelay(mNotificationManager,R.string.uploader_upload_succeeded_ticker,2000);
     }
   }
 }
