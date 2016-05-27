@@ -4,14 +4,27 @@
   setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener(){
     private Menu menu;
     @Override public void onItemCheckedStateChanged(    ActionMode mode,    int position,    long id,    boolean checked){
-      final int checkedCount=getListView().getCheckedItemCount();
-      mode.setTitle(checkedCount + " selected");
       if (checked) {
         mAdapter.setNewSelection(position,checked);
       }
  else {
         mAdapter.removeSelection(position);
       }
+      updateActionsMenu(mode);
+    }
+    @Override public boolean onCreateActionMode(    ActionMode mode,    Menu menu){
+      createContextActionBar(menu);
+      this.menu=menu;
+      updateActionsMenu(mode);
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        getActivity().getWindow().setStatusBarColor(mStatusBarColorActionMode);
+      }
+      setFabEnabled(false);
+      return true;
+    }
+    private void updateActionsMenu(    ActionMode mode){
+      final int checkedCount=getListView().getCheckedItemCount();
+      mode.setTitle(checkedCount + " selected");
       if (checkedCount > 0) {
         List<OCFile> targetFiles=mAdapter.getCheckedItems();
         if (mContainerActivity.getStorageManager() != null) {
@@ -19,15 +32,6 @@
           mf.filter(menu);
         }
       }
-    }
-    @Override public boolean onCreateActionMode(    ActionMode mode,    Menu menu){
-      createContextActionBar(menu);
-      this.menu=menu;
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        getActivity().getWindow().setStatusBarColor(mStatusBarColorActionMode);
-      }
-      setFabEnabled(false);
-      return true;
     }
     @Override public boolean onPrepareActionMode(    ActionMode mode,    Menu menu){
       return false;
