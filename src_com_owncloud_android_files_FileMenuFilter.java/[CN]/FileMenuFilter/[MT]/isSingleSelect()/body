@@ -1,0 +1,3 @@
+{
+  return mFiles.size() == SINGLE_SELECT_ITEMS;
+}

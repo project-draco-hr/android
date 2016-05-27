@@ -96,6 +96,11 @@ case R.id.action_sync_file:
 mContainerActivity.getFileOperationsHelper().syncFiles(mTargetFiles);
 return true;
 }
+case R.id.action_cancel_sync:
+{
+((FileDisplayActivity)mContainerActivity).cancelTransference(mTargetFiles);
+return true;
+}
 case R.id.action_move:
 {
 Intent action=new Intent(getActivity(),FolderPickerActivity.class);

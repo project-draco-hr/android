@@ -1,0 +1,9 @@
+{
+  if (account == null || files.isEmpty())   return false;
+  for (  OCFile file : files) {
+    if (mPendingDownloads.contains(account.name,file.getRemotePath())) {
+      return true;
+    }
+  }
+  return false;
+}

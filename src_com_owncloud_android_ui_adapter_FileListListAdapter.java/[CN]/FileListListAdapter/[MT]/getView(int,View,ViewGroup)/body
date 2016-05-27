@@ -80,7 +80,7 @@ FileDownloaderBinder downloaderBinder=mTransferServiceGetter.getFileDownloaderBi
 FileUploaderBinder uploaderBinder=mTransferServiceGetter.getFileUploaderBinder();
 OperationsServiceBinder opsBinder=mTransferServiceGetter.getOperationsServiceBinder();
 localStateView.setVisibility(View.INVISIBLE);
-if (opsBinder != null && opsBinder.isSynchronizing(mAccount,file.getRemotePath())) {
+if (opsBinder != null && opsBinder.isSynchronizing(mAccount,file)) {
 localStateView.setImageResource(R.drawable.ic_synchronizing);
 localStateView.setVisibility(View.VISIBLE);
 }

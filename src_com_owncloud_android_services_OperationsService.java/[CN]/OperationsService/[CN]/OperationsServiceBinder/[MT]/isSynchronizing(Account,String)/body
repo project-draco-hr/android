@@ -1,3 +1,0 @@
-{
-  return mSyncFolderHandler.isSynchronizing(account,remotePath);
-}

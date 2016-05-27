@@ -1,24 +1,24 @@
 {
   boolean synchronizing=false;
-  if (mComponentsGetter != null && mFile != null && mAccount != null) {
+  if (mComponentsGetter != null && !mFiles.isEmpty() && mAccount != null) {
     OperationsServiceBinder opsBinder=mComponentsGetter.getOperationsServiceBinder();
     FileUploaderBinder uploaderBinder=mComponentsGetter.getFileUploaderBinder();
     FileDownloaderBinder downloaderBinder=mComponentsGetter.getFileDownloaderBinder();
-    synchronizing=((opsBinder != null && opsBinder.isSynchronizing(mAccount,mFile.getRemotePath())) || (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,mFile)) || (uploaderBinder != null && uploaderBinder.isUploading(mAccount,mFile)));
+    synchronizing=((opsBinder != null && opsBinder.isSynchronizing(mAccount,mFiles)) || (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,mFiles)) || (uploaderBinder != null && uploaderBinder.isUploading(mAccount,mFiles)));
   }
-  if (mFile == null || mFile.isDown() || mFile.isFolder() || synchronizing) {
+  if (mFiles.isEmpty() || containsFolder() || anyFileDown()|| synchronizing) {
     toHide.add(R.id.action_download_file);
   }
  else {
     toShow.add(R.id.action_download_file);
   }
-  if (mFile == null || synchronizing || mMultiSelect) {
+  if (!isSingleSelect() || synchronizing) {
     toHide.add(R.id.action_rename_file);
   }
  else {
     toShow.add(R.id.action_rename_file);
   }
-  if (mFile == null || synchronizing) {
+  if (mFiles.isEmpty() || synchronizing) {
     toHide.add(R.id.action_move);
     toHide.add(R.id.action_copy);
   }
@@ -26,25 +26,25 @@
     toShow.add(R.id.action_move);
     toShow.add(R.id.action_copy);
   }
-  if (mFile == null || synchronizing) {
+  if (mFiles.isEmpty() || synchronizing) {
     toHide.add(R.id.action_remove_file);
   }
  else {
     toShow.add(R.id.action_remove_file);
   }
-  if (mFile == null || mFile.isFolder() || !mFile.isDown() || synchronizing || mMultiSelect) {
+  if (!isFile() || !anyFileDown() || synchronizing) {
     toHide.add(R.id.action_open_file_with);
   }
  else {
     toShow.add(R.id.action_open_file_with);
   }
-  if (mFile == null || !synchronizing) {
+  if (mFiles.isEmpty() || !synchronizing) {
     toHide.add(R.id.action_cancel_sync);
   }
  else {
     toShow.add(R.id.action_cancel_sync);
   }
-  if (mFile == null || (!mFile.isFolder() && !mFile.isDown()) || synchronizing) {
+  if (mFiles.isEmpty() || (!anyFileDown() && !containsFolder()) || synchronizing) {
     toHide.add(R.id.action_sync_file);
   }
  else {
@@ -54,32 +54,32 @@
   boolean shareWithUsersAllowed=(mContext != null && mContext.getResources().getBoolean(R.bool.share_with_users_feature));
   OCCapability capability=mComponentsGetter.getStorageManager().getCapability(mAccount.name);
   boolean shareApiEnabled=capability != null && (capability.getFilesSharingApiEnabled().isTrue() || capability.getFilesSharingApiEnabled().isUnknown());
-  if ((!shareViaLinkAllowed && !shareWithUsersAllowed) || mFile == null || !shareApiEnabled || mMultiSelect) {
+  if ((!shareViaLinkAllowed && !shareWithUsersAllowed) || !isSingleSelect() || !shareApiEnabled) {
     toHide.add(R.id.action_share_file);
   }
  else {
     toShow.add(R.id.action_share_file);
   }
-  if (mFile == null || mFile.isFolder() || mMultiSelect) {
+  if (!isFile()) {
     toHide.add(R.id.action_see_details);
   }
  else {
     toShow.add(R.id.action_see_details);
   }
   boolean sendAllowed=(mContext != null && mContext.getString(R.string.send_files_to_other_apps).equalsIgnoreCase("on"));
-  if (mFile == null || !sendAllowed || mFile.isFolder() || synchronizing || mMultiSelect) {
+  if (!isFile() || !sendAllowed || synchronizing) {
     toHide.add(R.id.action_send_file);
   }
  else {
     toShow.add(R.id.action_send_file);
   }
-  if (mFile == null || synchronizing || mFile.isFolder() || mFile.isFavorite() || mMultiSelect) {
+  if (!isFile() || synchronizing || allFavorites()) {
     toHide.add(R.id.action_favorite_file);
   }
  else {
     toShow.add(R.id.action_favorite_file);
   }
-  if (mFile == null || synchronizing || mFile.isFolder() || !mFile.isFavorite() || mMultiSelect) {
+  if (!isFile() || synchronizing || allUnfavorites()) {
     toHide.add(R.id.action_unfavorite_file);
   }
  else {

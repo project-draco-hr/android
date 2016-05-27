@@ -1,5 +1,4 @@
-OCFile targetFile
+List<OCFile> targetFiles
 Account account
 ComponentsGetter cg
 Context context
-boolean multiSelect

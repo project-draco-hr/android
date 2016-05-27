@@ -1,7 +1,6 @@
 {
-  mFile=targetFile;
+  mFiles=targetFiles;
   mAccount=account;
   mComponentsGetter=cg;
   mContext=context;
-  mMultiSelect=multiSelect;
 }
