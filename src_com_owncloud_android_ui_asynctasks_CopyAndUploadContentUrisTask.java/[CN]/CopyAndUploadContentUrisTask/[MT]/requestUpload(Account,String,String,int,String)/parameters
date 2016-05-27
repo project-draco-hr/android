@@ -1,4 +1,5 @@
 Account account
 String localPath
 String remotePath
+int behaviour
 String mimeType

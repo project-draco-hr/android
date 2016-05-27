@@ -8,7 +8,8 @@
     Account account=(Account)params[0];
     Uri[] uris=(Uri[])params[1];
     String[] remotePaths=(String[])params[2];
-    ContentResolver leakedContentResolver=(ContentResolver)params[3];
+    int behaviour=(Integer)params[3];
+    ContentResolver leakedContentResolver=(ContentResolver)params[4];
     String currentRemotePath;
     for (int i=0; i < uris.length; i++) {
       currentUri=uris[i];
@@ -27,7 +28,7 @@
       while ((count=inputStream.read(buffer)) > 0) {
         outputStream.write(buffer,0,count);
       }
-      requestUpload(account,fullTempPath,currentRemotePath,leakedContentResolver.getType(currentUri));
+      requestUpload(account,fullTempPath,currentRemotePath,behaviour,leakedContentResolver.getType(currentUri));
       fullTempPath=null;
     }
     result=ResultCode.OK;

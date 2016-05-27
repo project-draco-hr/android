@@ -8,5 +8,5 @@
   if (taskRetainerFragment != null) {
     taskRetainerFragment.setTask(copyTask);
   }
-  copyTask.execute(CopyAndUploadContentUrisTask.makeParamsToExecute(mAccount,sourceUris,remotePaths,mActivity.getContentResolver()));
+  copyTask.execute(CopyAndUploadContentUrisTask.makeParamsToExecute(mAccount,sourceUris,remotePaths,mBehaviour,mActivity.getContentResolver()));
 }
