@@ -1,8 +1,0 @@
-{
-  long result=getDB().delete(ProviderTableMeta.CONTENT_URI_UPLOADS,ProviderTableMeta.UPLOADS_STATUS + "==" + UploadStatus.UPLOAD_FAILED.value,null);
-  Log_OC.d(TAG,"delete all failed uploads");
-  if (result > 0) {
-    notifyObserversNow();
-  }
-  return result;
-}

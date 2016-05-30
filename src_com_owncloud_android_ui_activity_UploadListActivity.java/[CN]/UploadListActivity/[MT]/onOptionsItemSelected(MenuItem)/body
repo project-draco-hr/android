@@ -17,7 +17,7 @@ requester.retryFailedUploads(this,null,null);
 break;
 case R.id.action_clear_failed_uploads:
 storageManager=new UploadsStorageManager(getContentResolver());
-storageManager.clearFailedUploads();
+storageManager.clearFailedButNotDelayedForWifiUploads();
 uploadListFragment.updateUploads();
 break;
 case R.id.action_clear_successfull_uploads:
@@ -27,7 +27,7 @@ uploadListFragment.updateUploads();
 break;
 case R.id.action_clear_finished_uploads:
 storageManager=new UploadsStorageManager(getContentResolver());
-storageManager.clearAllFinishedUploads();
+storageManager.clearAllFinishedButNotDelayedForWifiUploads();
 uploadListFragment.updateUploads();
 break;
 default :
