@@ -1,5 +1,0 @@
-{
-  super(context);
-  mContentView=new RemoteViews(context.getPackageName(),R.layout.notification_with_progress_bar);
-  setContent(mContentView);
-}

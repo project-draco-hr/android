@@ -1,0 +1,3 @@
+{
+  return new NotificationCompat.Builder(context).setColor(context.getResources().getColor(R.color.primary));
+}
