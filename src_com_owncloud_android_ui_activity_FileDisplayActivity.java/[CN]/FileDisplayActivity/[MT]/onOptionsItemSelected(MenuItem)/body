@@ -23,7 +23,7 @@ case android.R.id.home:
   }
 case R.id.action_sort:
 {
-  Integer sortOrder=PreferenceManager.getSortOrder(this);
+  Integer sortOrder=getSortOrder(this);
   AlertDialog.Builder builder=new AlertDialog.Builder(this);
   builder.setTitle(R.string.actionbar_sort_title).setSingleChoiceItems(R.array.actionbar_sortby,sortOrder,new DialogInterface.OnClickListener(){
     public void onClick(    DialogInterface dialog,    int which){
