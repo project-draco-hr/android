@@ -1,0 +1,11 @@
+{
+  ArrayList<OCFile> files=new ArrayList<OCFile>();
+  if (mFiles != null && mFiles.size() != 0) {
+    for (    OCFile file : mFiles) {
+      if (mSelection.contains(file.getFileId())) {
+        files.add(file);
+      }
+    }
+  }
+  return files;
+}

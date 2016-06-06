@@ -1,0 +1,4 @@
+{
+  mSelection.clear();
+  notifyDataSetChanged();
+}

@@ -154,7 +154,7 @@ fileIcon.setImageResource(MimetypeIconUtil.getFileTypeIconId(file.getMimetype(),
 fileIcon.setImageResource(MimetypeIconUtil.getFolderTypeIconId(file.isSharedWithMe() || file.isSharedWithSharee(),file.isSharedViaLink()));
 }
 }
-if (mSelection.get(position) != null) {
+if (mSelection.contains(getItemId(position))) {
 view.setBackgroundColor(mContext.getResources().getColor(R.color.selected_item_background));
 }
  else {
