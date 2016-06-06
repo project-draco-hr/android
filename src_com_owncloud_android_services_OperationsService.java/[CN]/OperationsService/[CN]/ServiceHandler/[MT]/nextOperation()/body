@@ -10,7 +10,7 @@ synchronized (mPendingOperations) {
       if (mLastTarget == null || !mLastTarget.equals(next.first)) {
         mLastTarget=next.first;
         if (mLastTarget.mAccount != null) {
-          OwnCloudAccount ocAccount=new OwnCloudAccount(mLastTarget.mAccount,mService);
+          OwnCloudAccount ocAccount=OwnCloudAccountStorageManager.getOwnCloudAccount(mLastTarget.mAccount,mService);
           mOwnCloudClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,mService);
           OwnCloudVersion version=com.owncloud.android.authentication.AccountUtils.getServerVersion(mLastTarget.mAccount);
           mOwnCloudClient.setOwnCloudVersion(version);

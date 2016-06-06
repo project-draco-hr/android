@@ -13,6 +13,10 @@
       String permanentLocation=redirectionPath.getLastPermanentLocation();
       result.setLastPermanentLocation(permanentLocation);
     }
+    if (result.isSuccess()) {
+      GetRemoteUserNameOperation remoteUserNameOperation=new GetRemoteUserNameOperation();
+      result=remoteUserNameOperation.execute(client);
+    }
   }
  else {
     result=new RemoteOperationResult(RemoteOperationResult.ResultCode.UNKNOWN_ERROR);

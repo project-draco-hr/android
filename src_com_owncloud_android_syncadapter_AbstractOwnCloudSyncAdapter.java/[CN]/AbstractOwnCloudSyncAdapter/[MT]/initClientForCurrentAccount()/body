@@ -1,5 +1,4 @@
 {
-  AccountUtils.constructFullURLForAccount(getContext(),account);
-  OwnCloudAccount ocAccount=new OwnCloudAccount(account,getContext());
+  OwnCloudAccount ocAccount=OwnCloudAccountStorageManager.getOwnCloudAccount(account,getContext());
   mClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,getContext());
 }

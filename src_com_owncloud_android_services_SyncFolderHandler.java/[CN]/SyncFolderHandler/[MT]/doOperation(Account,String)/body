@@ -7,7 +7,7 @@
         mCurrentAccount=account;
         mStorageManager=new FileDataStorageManager(account,mService.getContentResolver());
       }
-      OwnCloudAccount ocAccount=new OwnCloudAccount(account,mService);
+      OwnCloudAccount ocAccount=OwnCloudAccountStorageManager.getOwnCloudAccount(account,mService);
       mOwnCloudClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,mService);
       result=mCurrentSyncOperation.execute(mOwnCloudClient,mStorageManager);
     }
