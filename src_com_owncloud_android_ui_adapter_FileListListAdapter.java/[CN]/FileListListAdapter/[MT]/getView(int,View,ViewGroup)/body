@@ -106,14 +106,17 @@ ImageView checkBoxV=(ImageView)view.findViewById(R.id.custom_checkbox);
 checkBoxV.setVisibility(View.GONE);
 AbsListView parentList=(AbsListView)parent;
 if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+view.setBackgroundColor(Color.WHITE);
 if (parentList.getChoiceMode() == AbsListView.CHOICE_MODE_NONE) {
 checkBoxV.setVisibility(View.GONE);
 }
  else if (parentList.getCheckedItemCount() > 0) {
 if (parentList.isItemChecked(position)) {
+view.setBackgroundColor(mContext.getResources().getColor(R.color.selected_item_background));
 checkBoxV.setImageResource(R.drawable.ic_checkbox_marked);
 }
  else {
+view.setBackgroundColor(Color.WHITE);
 checkBoxV.setImageResource(R.drawable.ic_checkbox_blank_outline);
 }
 checkBoxV.setVisibility(View.VISIBLE);
@@ -153,12 +156,6 @@ fileIcon.setImageResource(MimetypeIconUtil.getFileTypeIconId(file.getMimetype(),
  else {
 fileIcon.setImageResource(MimetypeIconUtil.getFolderTypeIconId(file.isSharedWithMe() || file.isSharedWithSharee(),file.isSharedViaLink()));
 }
-}
-if (mSelection.contains(getItemId(position))) {
-view.setBackgroundColor(mContext.getResources().getColor(R.color.selected_item_background));
-}
- else {
-view.setBackgroundColor(Color.WHITE);
 }
 return view;
 }

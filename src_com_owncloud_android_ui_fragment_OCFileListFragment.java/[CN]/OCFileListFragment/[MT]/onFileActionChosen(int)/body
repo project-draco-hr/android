@@ -1,6 +1,7 @@
 {
-  if (mAdapter.getCheckedItems().size() == 1) {
-    OCFile mTargetFile=mAdapter.getCheckedItems().get(0);
+  final ArrayList<OCFile> checkedItems=getCheckedItems();
+  if (checkedItems.size() == 1) {
+    OCFile mTargetFile=checkedItems.get(0);
 switch (menuId) {
 case R.id.action_share_file:
 {
@@ -82,7 +83,7 @@ return false;
 }
 }
  else {
-ArrayList<OCFile> mTargetFiles=mAdapter.getCheckedItems();
+ArrayList<OCFile> mTargetFiles=checkedItems;
 switch (menuId) {
 case R.id.action_remove_file:
 {
