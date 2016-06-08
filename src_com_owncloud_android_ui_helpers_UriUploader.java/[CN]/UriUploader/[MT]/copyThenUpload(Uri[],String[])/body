@@ -1,0 +1,12 @@
+{
+  if (mShowWaitingDialog) {
+    mActivity.showLoadingDialog(mActivity.getResources().getString(R.string.wait_for_tmp_copy_from_private_storage));
+  }
+  CopyAndUploadContentUrisTask copyTask=new CopyAndUploadContentUrisTask(mCopyTmpTaskListener,mActivity);
+  FragmentManager fm=mActivity.getSupportFragmentManager();
+  TaskRetainerFragment taskRetainerFragment=(TaskRetainerFragment)fm.findFragmentByTag(TaskRetainerFragment.FTAG_TASK_RETAINER_FRAGMENT);
+  if (taskRetainerFragment != null) {
+    taskRetainerFragment.setTask(copyTask);
+  }
+  copyTask.execute(CopyAndUploadContentUrisTask.makeParamsToExecute(mAccount,sourceUris,remotePaths,mBehaviour,mActivity.getContentResolver()));
+}

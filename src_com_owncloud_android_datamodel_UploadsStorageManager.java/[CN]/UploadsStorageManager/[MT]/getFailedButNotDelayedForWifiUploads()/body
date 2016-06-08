@@ -1,0 +1,3 @@
+{
+  return getUploads(ProviderTableMeta.UPLOADS_STATUS + "==" + UploadStatus.UPLOAD_FAILED.value+ " AND "+ ProviderTableMeta.UPLOADS_LAST_RESULT+ "<>"+ UploadResult.DELAYED_FOR_WIFI.getValue(),null);
+}

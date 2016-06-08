@@ -1,6 +1,6 @@
 {
   mLastPercent=0;
-  mNotificationBuilder=NotificationBuilderWithProgressBar.newNotificationBuilderWithProgressBar(this);
+  mNotificationBuilder=NotificationUtils.newNotificationBuilder(this);
   mNotificationBuilder.setSmallIcon(R.drawable.notification_icon).setTicker(getString(R.string.downloader_download_in_progress_ticker)).setContentTitle(getString(R.string.downloader_download_in_progress_ticker)).setOngoing(true).setProgress(100,0,download.getSize() < 0).setContentText(String.format(getString(R.string.downloader_download_in_progress_content),0,new File(download.getSavePath()).getName()));
   Intent showDetailsIntent=null;
   if (PreviewImageFragment.canBePreviewed(download.getFile())) {

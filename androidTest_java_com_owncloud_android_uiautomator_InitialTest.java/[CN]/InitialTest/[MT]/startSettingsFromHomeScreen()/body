@@ -1,0 +1,11 @@
+{
+  mDevice.pressHome();
+  final String launcherPackage=getLauncherPackageName();
+  assertThat(launcherPackage,notNullValue());
+  mDevice.wait(Until.hasObject(By.pkg(launcherPackage).depth(0)),LAUNCH_TIMEOUT);
+  Context context=InstrumentationRegistry.getContext();
+  final Intent intent=context.getPackageManager().getLaunchIntentForPackage(ANDROID_SETTINGS_PACKAGE);
+  intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+  context.startActivity(intent);
+  clickByText(SETTINGS_DATA_USAGE_OPTION);
+}

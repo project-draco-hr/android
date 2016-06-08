@@ -12,10 +12,6 @@ case 2:
 Intent settingsIntent=new Intent(getApplicationContext(),Preferences.class);
 startActivity(settingsIntent);
 break;
-case 3:
-Intent loggerIntent=new Intent(getApplicationContext(),LogHistoryActivity.class);
-startActivity(loggerIntent);
-break;
 }
 mDrawerLayout.closeDrawers();
 }

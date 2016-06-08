@@ -1,0 +1,40 @@
+{
+  try {
+    List<Uri> contentUris=new ArrayList<>();
+    List<String> contentRemotePaths=new ArrayList<>();
+    int schemeFileCounter=0;
+    for (    Parcelable sourceStream : mUrisToUpload) {
+      Uri sourceUri=(Uri)sourceStream;
+      if (sourceUri != null) {
+        String displayName=UriUtils.getDisplayNameForUri(sourceUri,mActivity);
+        if (displayName == null) {
+          displayName=generateDiplayName();
+        }
+        String remotePath=mUploadPath + displayName;
+        if (ContentResolver.SCHEME_CONTENT.equals(sourceUri.getScheme())) {
+          contentUris.add(sourceUri);
+          contentRemotePaths.add(remotePath);
+        }
+ else         if (ContentResolver.SCHEME_FILE.equals(sourceUri.getScheme())) {
+          requestUpload(sourceUri.getPath(),remotePath);
+          schemeFileCounter++;
+        }
+      }
+    }
+    if (!contentUris.isEmpty()) {
+      copyThenUpload(contentUris.toArray(new Uri[contentUris.size()]),contentRemotePaths.toArray(new String[contentRemotePaths.size()]));
+    }
+ else     if (schemeFileCounter == 0) {
+      mCode=UriUploaderResultCode.ERROR_NO_FILE_TO_UPLOAD;
+    }
+  }
+ catch (  SecurityException e) {
+    mCode=UriUploaderResultCode.ERROR_READ_PERMISSION_NOT_GRANTED;
+    Log_OC.e(TAG,"Permissions fail",e);
+  }
+catch (  Exception e) {
+    mCode=UriUploaderResultCode.ERROR_UNKNOWN;
+    Log_OC.e(TAG,"Unexpected error",e);
+  }
+  return mCode;
+}

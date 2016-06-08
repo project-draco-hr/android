@@ -1,7 +1,0 @@
-{
-  Fragment frag=getSupportFragmentManager().findFragmentByTag(DIALOG_WAIT_COPY_FILE);
-  if (frag != null) {
-    LoadingDialog loading=(LoadingDialog)frag;
-    loading.dismiss();
-  }
-}

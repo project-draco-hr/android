@@ -21,7 +21,7 @@
     mNotificationBuilder.setContentText(ErrorMessageAdapter.getErrorCauseMessage(downloadResult,download,getResources()));
     mNotificationManager.notify(tickerId,mNotificationBuilder.build());
     if (downloadResult.isSuccess()) {
-      NotificationDelayer.cancelWithDelay(mNotificationManager,R.string.downloader_download_succeeded_ticker,2000);
+      NotificationUtils.cancelWithDelay(mNotificationManager,R.string.downloader_download_succeeded_ticker,2000);
     }
   }
 }

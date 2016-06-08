@@ -70,7 +70,7 @@
         ocUpload.setCreatedBy(createdBy);
         ocUpload.setLocalAction(localAction);
         ocUpload.setUploadStatus(UploadStatus.UPLOAD_IN_PROGRESS);
-        newUpload=new UploadFileOperation(account,ocUpload,chunked,forceOverwrite,localAction,this);
+        newUpload=new UploadFileOperation(account,files[i],ocUpload,chunked,forceOverwrite,localAction,this);
         newUpload.setCreatedBy(createdBy);
         if (isCreateRemoteFolder) {
           newUpload.setRemoteFolderToBeCreated();
@@ -106,7 +106,7 @@ catch (    Exception e) {
       return START_NOT_STICKY;
     }
     OCUpload upload=intent.getParcelableExtra(KEY_RETRY_UPLOAD);
-    UploadFileOperation newUpload=new UploadFileOperation(account,upload,chunked,upload.isForceOverwrite(),upload.getLocalAction(),this);
+    UploadFileOperation newUpload=new UploadFileOperation(account,null,upload,chunked,upload.isForceOverwrite(),upload.getLocalAction(),this);
     newUpload.addDatatransferProgressListener(this);
     newUpload.addDatatransferProgressListener((FileUploaderBinder)mBinder);
     newUpload.addRenameUploadListener(this);

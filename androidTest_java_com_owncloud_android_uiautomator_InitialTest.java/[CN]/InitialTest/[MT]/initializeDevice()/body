@@ -1,0 +1,3 @@
+{
+  mDevice=UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
+}

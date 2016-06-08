@@ -1,0 +1,7 @@
+Account account
+OCFile file
+OCUpload upload
+boolean chunked
+boolean forceOverwrite
+int localBehaviour
+Context context

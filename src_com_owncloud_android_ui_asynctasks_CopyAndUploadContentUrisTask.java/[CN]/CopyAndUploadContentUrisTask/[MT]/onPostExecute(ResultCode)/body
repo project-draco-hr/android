@@ -4,7 +4,7 @@
     listener.onTmpFilesCopied(result);
   }
  else {
-    Log_OC.i(TAG,"User left Uploader activity before the temporal copies were finished ");
+    Log_OC.i(TAG,"User left the caller activity before the temporal copies were finished ");
     if (result != ResultCode.OK) {
       int messageId;
 switch (result) {

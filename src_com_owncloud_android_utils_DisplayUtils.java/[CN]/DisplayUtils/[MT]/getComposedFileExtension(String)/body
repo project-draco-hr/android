@@ -1,9 +1,0 @@
-{
-  String fileExtension="";
-  String fileNameInContentUri=filepath.substring(filepath.lastIndexOf("/"));
-  int pos=fileNameInContentUri.lastIndexOf('.');
-  if (pos >= 0) {
-    fileExtension=fileNameInContentUri.substring(pos);
-  }
-  return fileExtension;
-}

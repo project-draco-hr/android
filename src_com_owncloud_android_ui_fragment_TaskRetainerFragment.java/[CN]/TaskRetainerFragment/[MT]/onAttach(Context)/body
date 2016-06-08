@@ -1,0 +1,11 @@
+{
+  super.onAttach(context);
+  if (mTask != null) {
+    if (context instanceof ReceiveExternalFilesActivity) {
+      mTask.setListener((CopyAndUploadContentUrisTask.OnCopyTmpFilesTaskListener)context);
+    }
+ else {
+      mTask.setListener(null);
+    }
+  }
+}

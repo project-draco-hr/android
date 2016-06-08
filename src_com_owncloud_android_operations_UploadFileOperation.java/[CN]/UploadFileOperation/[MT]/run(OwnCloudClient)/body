@@ -64,6 +64,11 @@
     result=mUploadOperation.execute(client);
     if (result.isSuccess()) {
       if (mLocalBehaviour == FileUploader.LOCAL_BEHAVIOUR_FORGET) {
+        String temporalPath=FileStorageUtils.getTemporalPath(mAccount.name) + mFile.getRemotePath();
+        if (mOriginalStoragePath.equals(temporalPath)) {
+          temporalFile=new File(temporalPath);
+          temporalFile.delete();
+        }
         mFile.setStoragePath("");
       }
  else {

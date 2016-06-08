@@ -1,0 +1,11 @@
+{
+  UiDevice uiDevice=UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
+  try {
+    if (!uiDevice.isScreenOn()) {
+      uiDevice.wakeUp();
+    }
+  }
+ catch (  RemoteException e) {
+    e.printStackTrace();
+  }
+}

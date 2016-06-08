@@ -1,0 +1,6 @@
+{
+  when(mMockResources.getString(R.string.forbidden_permissions)).thenReturn(MOCK_FORBIDDEN_PERMISSIONS);
+  when(mMockResources.getString(R.string.forbidden_permissions_delete)).thenReturn(MOCK_TO_DELETE);
+  String errorMessage=ErrorMessageAdapter.getErrorCauseMessage(new RemoteOperationResult(RemoteOperationResult.ResultCode.FORBIDDEN),new RemoveFileOperation(PATH_TO_DELETE,false),mMockResources);
+  assertThat(errorMessage,is(EXPECTED_ERROR_MESSAGE));
+}

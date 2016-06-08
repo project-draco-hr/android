@@ -1,6 +1,0 @@
-Account account
-OCUpload upload
-boolean chunked
-boolean forceOverwrite
-int localBehaviour
-Context context
