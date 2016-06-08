@@ -1,0 +1,3 @@
+{
+  return mEtagInConflict != null && mEtagInConflict != "";
+}

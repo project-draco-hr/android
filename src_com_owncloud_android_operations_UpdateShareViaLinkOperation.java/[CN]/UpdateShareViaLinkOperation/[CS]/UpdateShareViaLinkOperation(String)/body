@@ -2,5 +2,5 @@
   mPath=path;
   mPassword=null;
   mExpirationDateInMillis=0;
-  mPublicUpload=false;
+  mPublicUpload=null;
 }
