@@ -10,7 +10,7 @@
           mCurrentAccount=mCurrentDownload.getAccount();
           mStorageManager=new FileDataStorageManager(mCurrentAccount,getContentResolver());
         }
-        OwnCloudAccount ocAccount=OwnCloudAccountStorageManager.getOwnCloudAccount(mCurrentAccount,this);
+        OwnCloudAccount ocAccount=new OwnCloudAccount(mCurrentAccount,this);
         mDownloadClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,this);
         downloadResult=mCurrentDownload.execute(mDownloadClient);
         if (downloadResult.isSuccess()) {

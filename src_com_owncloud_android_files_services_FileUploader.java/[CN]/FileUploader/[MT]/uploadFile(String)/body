@@ -15,7 +15,7 @@
         mCurrentAccount=mCurrentUpload.getAccount();
         mStorageManager=new FileDataStorageManager(mCurrentAccount,getContentResolver());
       }
-      OwnCloudAccount ocAccount=OwnCloudAccountStorageManager.getOwnCloudAccount(mCurrentAccount,this);
+      OwnCloudAccount ocAccount=new OwnCloudAccount(mCurrentAccount,this);
       mUploadClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,this);
       uploadResult=mCurrentUpload.execute(mUploadClient,mStorageManager);
     }

@@ -14,7 +14,7 @@
     response.putString(AccountManager.KEY_AUTHTOKEN,mPasswordInput.getText().toString());
     mAccountMgr.setPassword(mAccount,mPasswordInput.getText().toString());
   }
-  OwnCloudAccount ocAccount=OwnCloudAccountStorageManager.getOwnCloudAccount(mAccount,this);
+  OwnCloudAccount ocAccount=new OwnCloudAccount(mAccount,this);
   OwnCloudClientManagerFactory.getDefaultSingleton().removeClientFor(ocAccount);
   setAccountAuthenticatorResult(response);
   final Intent intent=new Intent();

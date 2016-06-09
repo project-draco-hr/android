@@ -4,7 +4,7 @@
       account=getAccount();
     }
     OwnCloudClient client;
-    OwnCloudAccount ocAccount=OwnCloudAccountStorageManager.getOwnCloudAccount(account,context);
+    OwnCloudAccount ocAccount=new OwnCloudAccount(account,context);
     client=(OwnCloudClientManagerFactory.getDefaultSingleton().removeClientFor(ocAccount));
     if (client != null) {
       OwnCloudCredentials cred=client.getCredentials();

@@ -7,7 +7,7 @@
     FileDataStorageManager fileDataStorageManager=(FileDataStorageManager)params[2];
     try {
       operation=new GetSharesForFileOperation(file.getRemotePath(),false,false);
-      OwnCloudAccount ocAccount=OwnCloudAccountStorageManager.getOwnCloudAccount(account,MainApp.getAppContext());
+      OwnCloudAccount ocAccount=new OwnCloudAccount(account,MainApp.getAppContext());
       OwnCloudClient client=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,MainApp.getAppContext());
       result=operation.execute(client,fileDataStorageManager);
     }

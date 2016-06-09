@@ -1,4 +1,4 @@
 {
-  OwnCloudAccount ocAccount=OwnCloudAccountStorageManager.getOwnCloudAccount(account,getContext());
+  OwnCloudAccount ocAccount=new OwnCloudAccount(account,getContext());
   mClient=OwnCloudClientManagerFactory.getDefaultSingleton().getClientFor(ocAccount,getContext());
 }
