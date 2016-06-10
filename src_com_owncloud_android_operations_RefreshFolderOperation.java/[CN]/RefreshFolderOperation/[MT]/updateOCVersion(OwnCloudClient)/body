@@ -4,7 +4,7 @@
   if (result.isSuccess()) {
     mIsShareSupported=update.getOCVersion().isSharedSupported();
     if (update.getOCVersion().isVersionWithCapabilitiesAPI()) {
-      updateCapabilities(client);
+      updateCapabilities();
     }
  else {
       Log_OC.d(TAG,"Capabilities API disabled");

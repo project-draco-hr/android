@@ -31,12 +31,17 @@
           setFile(currentFile);
         }
         mSyncInProgress=(!FileSyncAdapter.EVENT_FULL_SYNC_END.equals(event) && !RefreshFolderOperation.EVENT_SINGLE_FOLDER_SHARES_SYNCED.equals(event));
-        if (RefreshFolderOperation.EVENT_SINGLE_FOLDER_CONTENTS_SYNCED.equals(event) && synchResult != null && !synchResult.isSuccess()) {
-          if (ResultCode.UNAUTHORIZED.equals(synchResult.getCode()) || (synchResult.isException() && synchResult.getException() instanceof AuthenticatorException)) {
-            requestCredentialsUpdate(context);
+        if (RefreshFolderOperation.EVENT_SINGLE_FOLDER_CONTENTS_SYNCED.equals(event)) {
+          if (synchResult != null && !synchResult.isSuccess()) {
+            if (ResultCode.UNAUTHORIZED.equals(synchResult.getCode()) || (synchResult.isException() && synchResult.getException() instanceof AuthenticatorException)) {
+              requestCredentialsUpdate(context);
+            }
+ else             if (RemoteOperationResult.ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED.equals(synchResult.getCode())) {
+              showUntrustedCertDialog(synchResult);
+            }
           }
- else           if (RemoteOperationResult.ResultCode.SSL_RECOVERABLE_PEER_UNVERIFIED.equals(synchResult.getCode())) {
-            showUntrustedCertDialog(synchResult);
+          if (synchFolderRemotePath.equals(OCFile.ROOT_PATH)) {
+            setUsernameInDrawer(mDrawerLayout,getAccount());
           }
         }
       }
