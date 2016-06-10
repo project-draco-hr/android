@@ -1,0 +1,11 @@
+{
+  GetRemoteUserNameOperation getDisplayName=new GetRemoteUserNameOperation();
+  RemoteOperationResult result=getDisplayName.execute(client);
+  if (result.isSuccess()) {
+    AccountManager accountManager=AccountManager.get(MainApp.getAppContext());
+    String displayName=(String)result.getData().get(0);
+    Account storedAccount=getStorageManager().getAccount();
+    accountManager.setUserData(storedAccount,AccountUtils.Constants.KEY_DISPLAY_NAME,displayName);
+  }
+  return result;
+}
