@@ -45,8 +45,8 @@
     mAccountMgr.setUserData(mAccount,Constants.KEY_OC_BASE_URL,mServerInfo.mBaseUrl);
     if (authResult.getData() != null) {
       try {
-        String displayName=(String)authResult.getData().get(0);
-        mAccountMgr.setUserData(mAccount,Constants.KEY_DISPLAY_NAME,displayName);
+        UserInfo userInfo=(UserInfo)authResult.getData().get(0);
+        mAccountMgr.setUserData(mAccount,Constants.KEY_DISPLAY_NAME,userInfo.mDisplayName);
       }
  catch (      ClassCastException c) {
         Log_OC.w(TAG,"Couldn't get display name for " + username);

@@ -7,7 +7,7 @@
  else   if (operation instanceof OAuth2GetAccessToken) {
     onGetOAuthAccessTokenFinish(result);
   }
- else   if (operation instanceof GetRemoteUserNameOperation) {
+ else   if (operation instanceof GetRemoteUserInfoOperation) {
     onGetUserNameFinish(result);
   }
 }

@@ -62,7 +62,7 @@
         operation=new OAuth2GetAccessToken(getString(R.string.oauth2_client_id),getString(R.string.oauth2_redirect_uri),getString(R.string.oauth2_grant_type),oauth2QueryParameters);
       }
  else       if (action.equals(ACTION_GET_USER_NAME)) {
-        operation=new GetRemoteUserNameOperation();
+        operation=new GetRemoteUserInfoOperation();
       }
  else       if (action.equals(ACTION_RENAME)) {
         String remotePath=operationIntent.getStringExtra(EXTRA_REMOTE_PATH);

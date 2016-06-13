@@ -1,11 +1,11 @@
 {
-  GetRemoteUserNameOperation getDisplayName=new GetRemoteUserNameOperation();
+  GetRemoteUserInfoOperation getDisplayName=new GetRemoteUserInfoOperation();
   RemoteOperationResult result=getDisplayName.execute(client);
   if (result.isSuccess()) {
     AccountManager accountManager=AccountManager.get(MainApp.getAppContext());
-    String displayName=(String)result.getData().get(0);
+    UserInfo userInfo=(UserInfo)result.getData().get(0);
     Account storedAccount=getStorageManager().getAccount();
-    accountManager.setUserData(storedAccount,AccountUtils.Constants.KEY_DISPLAY_NAME,displayName);
+    accountManager.setUserData(storedAccount,AccountUtils.Constants.KEY_DISPLAY_NAME,userInfo.mDisplayName);
   }
   return result;
 }

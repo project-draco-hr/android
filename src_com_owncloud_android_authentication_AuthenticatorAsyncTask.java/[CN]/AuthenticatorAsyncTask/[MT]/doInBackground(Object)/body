@@ -14,7 +14,7 @@
       result.setLastPermanentLocation(permanentLocation);
     }
     if (result.isSuccess()) {
-      GetRemoteUserNameOperation remoteUserNameOperation=new GetRemoteUserNameOperation();
+      GetRemoteUserInfoOperation remoteUserNameOperation=new GetRemoteUserInfoOperation();
       result=remoteUserNameOperation.execute(client);
     }
   }
