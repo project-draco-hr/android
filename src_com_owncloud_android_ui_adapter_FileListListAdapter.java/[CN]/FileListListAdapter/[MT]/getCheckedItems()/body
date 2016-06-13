@@ -1,8 +1,12 @@
 {
   ArrayList<OCFile> files=new ArrayList<OCFile>();
+  OCFile checkedFile=null;
   for (  Map.Entry<Integer,Boolean> entry : mSelection.entrySet()) {
     if (entry.getValue()) {
-      files.add((OCFile)getItem(entry.getKey()));
+      checkedFile=(OCFile)getItem(entry.getKey());
+      if (checkedFile != null) {
+        files.add((OCFile)getItem(entry.getKey()));
+      }
     }
   }
   return files;
