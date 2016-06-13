@@ -1,3 +1,0 @@
-{
-  return getRelativeDateTimeString(context,file.getModificationTimestamp(),DateUtils.SECOND_IN_MILLIS,DateUtils.WEEK_IN_MILLIS,0);
-}
