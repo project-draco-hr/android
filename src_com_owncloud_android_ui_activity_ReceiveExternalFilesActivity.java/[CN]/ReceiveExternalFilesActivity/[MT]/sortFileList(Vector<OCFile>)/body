@@ -1,0 +1,6 @@
+{
+  FileStorageUtils.mSortOrder=PreferenceManager.getSortOrder(this);
+  FileStorageUtils.mSortAscending=PreferenceManager.getSortAscending(this);
+  files=FileStorageUtils.sortFolder(files);
+  return files;
+}

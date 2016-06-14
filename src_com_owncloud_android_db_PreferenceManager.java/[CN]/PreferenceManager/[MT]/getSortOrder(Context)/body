@@ -1,0 +1,3 @@
+{
+  return getDefaultSharedPreferences(context).getInt(AUTO_PREF__SORT_ORDER,FileStorageUtils.SORT_NAME);
+}

@@ -23,8 +23,7 @@ case android.R.id.home:
   }
 case R.id.action_sort:
 {
-  SharedPreferences appPreferences=PreferenceManager.getDefaultSharedPreferences(this);
-  Integer sortOrder=appPreferences.getInt("sortOrder",FileStorageUtils.SORT_NAME);
+  Integer sortOrder=getSortOrder(this);
   AlertDialog.Builder builder=new AlertDialog.Builder(this);
   builder.setTitle(R.string.actionbar_sort_title).setSingleChoiceItems(R.array.actionbar_sortby,sortOrder,new DialogInterface.OnClickListener(){
     public void onClick(    DialogInterface dialog,    int which){

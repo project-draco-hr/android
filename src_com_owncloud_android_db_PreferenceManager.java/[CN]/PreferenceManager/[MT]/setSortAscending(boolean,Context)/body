@@ -1,0 +1,3 @@
+{
+  saveBooleanPreference(AUTO_PREF__SORT_ASCENDING,ascending,context);
+}

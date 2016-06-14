@@ -1,15 +1,15 @@
 {
   setContentView(R.layout.uploader_layout);
   ListView mListView=(ListView)findViewById(android.R.id.list);
+  ActionBar actionBar=getSupportActionBar();
   String current_dir=mParents.peek();
   if (current_dir.equals("")) {
-    getSupportActionBar().setTitle(getString(R.string.default_display_name_for_root_folder));
+    actionBar.setTitle(getString(R.string.uploader_top_message));
   }
  else {
-    getSupportActionBar().setTitle(current_dir);
+    actionBar.setTitle(current_dir);
   }
   boolean notRoot=(mParents.size() > 1);
-  ActionBar actionBar=getSupportActionBar();
   actionBar.setDisplayHomeAsUpEnabled(notRoot);
   actionBar.setHomeButtonEnabled(notRoot);
   String full_path=generatePath(mParents);
@@ -17,9 +17,10 @@
   mFile=getStorageManager().getFileByPath(full_path);
   if (mFile != null) {
     Vector<OCFile> files=getStorageManager().getFolderContent(mFile);
-    List<HashMap<String,OCFile>> data=new LinkedList<>();
+    files=sortFileList(files);
+    List<HashMap<String,Object>> data=new LinkedList<>();
     for (    OCFile f : files) {
-      HashMap<String,OCFile> h=new HashMap<>();
+      HashMap<String,Object> h=new HashMap<>();
       h.put("dirname",f);
       data.add(h);
     }
