@@ -1,4 +1,0 @@
-{
-  mSelection.put(position,checked);
-  notifyDataSetChanged();
-}
