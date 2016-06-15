@@ -1,0 +1,8 @@
+{
+  long[] selectionStatePrimitive=new long[mSelection.size()];
+  int i=0;
+  for (  Long id : mSelection) {
+    selectionStatePrimitive[i++]=id;
+  }
+  outState.putLongArray(SELECTION_KEY,selectionStatePrimitive);
+}

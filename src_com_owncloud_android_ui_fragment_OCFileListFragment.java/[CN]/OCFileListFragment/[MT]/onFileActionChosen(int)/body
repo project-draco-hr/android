@@ -1,5 +1,5 @@
 {
-  final ArrayList<OCFile> checkedItems=getCheckedItems();
+  final ArrayList<OCFile> checkedItems=mAdapter.getCheckedItems();
   if (checkedItems.size() == 1) {
     OCFile mTargetFile=checkedItems.get(0);
 switch (menuId) {

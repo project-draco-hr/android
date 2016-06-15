@@ -1,7 +1,7 @@
 {
   setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener(){
     @Override public void onItemCheckedStateChanged(    ActionMode mode,    int position,    long id,    boolean checked){
-      mAdapter.notifyDataSetChanged();
+      mAdapter.setNewSelection(position,checked);
       mode.invalidate();
     }
     @Override public boolean onCreateActionMode(    ActionMode mode,    Menu menu){
@@ -18,7 +18,7 @@
       final int checkedCount=getListView().getCheckedItemCount();
       mode.setTitle(checkedCount + " selected");
       if (checkedCount > 0) {
-        List<OCFile> targetFiles=getCheckedItems();
+        List<OCFile> targetFiles=mAdapter.getCheckedItems();
         if (mContainerActivity.getStorageManager() != null) {
           FileMenuFilter mf=new FileMenuFilter(targetFiles,mContainerActivity.getStorageManager().getAccount(),mContainerActivity,getActivity());
           mf.filter(menu);
@@ -29,6 +29,7 @@
     @Override public void onDestroyActionMode(    ActionMode mode){
       mActiveActionMode=null;
       getListView().clearChoices();
+      mAdapter.clearSelection();
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
         getActivity().getWindow().setStatusBarColor(mStatusBarColor);
       }
