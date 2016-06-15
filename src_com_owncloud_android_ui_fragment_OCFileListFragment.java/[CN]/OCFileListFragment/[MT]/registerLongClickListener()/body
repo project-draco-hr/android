@@ -26,6 +26,9 @@
       }
       return true;
     }
+    @Override public boolean onActionItemClicked(    ActionMode mode,    MenuItem item){
+      return onFileActionChosen(item.getItemId());
+    }
     @Override public void onDestroyActionMode(    ActionMode mode){
       mActiveActionMode=null;
       getListView().clearChoices();

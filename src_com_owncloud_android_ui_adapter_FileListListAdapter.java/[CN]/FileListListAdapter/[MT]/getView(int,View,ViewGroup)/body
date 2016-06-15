@@ -1,4 +1,5 @@
 {
+  restoreGridViewSelection((AbsListView)parent);
   View view=convertView;
   OCFile file=null;
   LayoutInflater inflator=(LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

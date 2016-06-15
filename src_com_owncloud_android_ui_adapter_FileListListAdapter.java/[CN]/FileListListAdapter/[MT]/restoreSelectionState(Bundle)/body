@@ -9,4 +9,5 @@
       mSelection.add(id);
     }
   }
+  isGridViewSelectionRestored=false;
 }
