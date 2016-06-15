@@ -1,5 +1,4 @@
 {
-  setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
   setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener(){
     @Override public void onItemCheckedStateChanged(    ActionMode mode,    int position,    long id,    boolean checked){
       mAdapter.notifyDataSetChanged();

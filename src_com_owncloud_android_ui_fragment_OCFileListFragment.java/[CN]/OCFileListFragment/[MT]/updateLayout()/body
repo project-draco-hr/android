@@ -21,7 +21,6 @@
     OwnCloudVersion version=AccountUtils.getServerVersion(((FileActivity)mContainerActivity).getAccount());
     if (version != null && version.supportsRemoteThumbnails() && isGridViewPreferred(mFile)) {
       switchToGridView();
-      registerLongClickListener();
     }
  else {
       switchToListView();
