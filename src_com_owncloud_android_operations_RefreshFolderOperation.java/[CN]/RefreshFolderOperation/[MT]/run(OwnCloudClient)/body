@@ -5,6 +5,7 @@
   mForgottenLocalFiles.clear();
   if (OCFile.ROOT_PATH.equals(mLocalFolder.getRemotePath()) && !mSyncFullAccount) {
     updateOCVersion(client);
+    updateUserProfile();
   }
   result=checkForChanges(client);
   if (result.isSuccess()) {

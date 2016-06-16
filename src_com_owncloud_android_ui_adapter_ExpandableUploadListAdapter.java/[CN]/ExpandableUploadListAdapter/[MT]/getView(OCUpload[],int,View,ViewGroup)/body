@@ -24,7 +24,15 @@
     CharSequence dateString=DisplayUtils.getRelativeDateTimeString(mParentActivity,updateTime,DateUtils.SECOND_IN_MILLIS,DateUtils.WEEK_IN_MILLIS,0);
     uploadDateTextView.setText(dateString);
     TextView accountNameTextView=(TextView)view.findViewById(R.id.upload_account);
-    accountNameTextView.setText(upload.getAccountName());
+    try {
+      Account account=AccountUtils.getOwnCloudAccountByName(mParentActivity,upload.getAccountName());
+      OwnCloudAccount oca=new OwnCloudAccount(account,mParentActivity);
+      accountNameTextView.setText(oca.getDisplayName() + " @ " + DisplayUtils.convertIdn(account.name.substring(account.name.lastIndexOf("@") + 1),false));
+    }
+ catch (    Exception e) {
+      Log_OC.w(TAG,"Couldn't get display name for account, using old style");
+      accountNameTextView.setText(upload.getAccountName());
+    }
     TextView statusTextView=(TextView)view.findViewById(R.id.upload_status);
     ProgressBar progressBar=(ProgressBar)view.findViewById(R.id.upload_progress_bar);
     uploadDateTextView.setVisibility(View.VISIBLE);

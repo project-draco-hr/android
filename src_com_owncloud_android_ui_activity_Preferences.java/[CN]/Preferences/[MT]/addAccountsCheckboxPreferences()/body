@@ -9,10 +9,18 @@
     am.addAccount(MainApp.getAccountType(),null,null,null,this,null,null);
   }
  else {
+    OwnCloudAccount oca;
     for (    Account a : accounts) {
       RadioButtonPreference accountPreference=new RadioButtonPreference(this);
       accountPreference.setKey(a.name);
-      accountPreference.setTitle(DisplayUtils.convertIdn(a.name,false));
+      try {
+        oca=new OwnCloudAccount(a,this);
+        accountPreference.setTitle(oca.getDisplayName() + " @ " + DisplayUtils.convertIdn(a.name.substring(a.name.lastIndexOf("@") + 1),false));
+      }
+ catch (      Exception e) {
+        Log_OC.w(TAG,"Account not found right after being read :\\ ; using account name instead of display name");
+        accountPreference.setTitle(DisplayUtils.convertIdn(a.name,false));
+      }
       mAccountsPrefCategory.addPreference(accountPreference);
       if (a.name.equals(currentAccount.name)) {
         accountPreference.setChecked(true);

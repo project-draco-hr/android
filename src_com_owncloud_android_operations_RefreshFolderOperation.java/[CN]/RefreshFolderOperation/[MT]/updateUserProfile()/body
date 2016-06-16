@@ -1,0 +1,10 @@
+{
+  GetUserProfileOperation update=new GetUserProfileOperation();
+  RemoteOperationResult result=update.execute(mStorageManager,mContext);
+  if (!result.isSuccess()) {
+    Log_OC.w(TAG,"Couldn't update user profile from server");
+  }
+ else {
+    Log_OC.i(TAG,"Got display name: " + result.getData().get(0));
+  }
+}
