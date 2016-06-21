@@ -2,6 +2,6 @@
   final long docId=Long.parseLong(documentId);
   updateCurrentStorageManagerIfNeeded(docId);
   final FileCursor result=new FileCursor(projection);
-  result.addFile(mCurrentStorageManager.getFileById(docId));
+  if (result != null)   result.addFile(mCurrentStorageManager.getFileById(docId));
   return result;
 }
