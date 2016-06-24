@@ -35,4 +35,8 @@
       }
     }
   }
+ else   if (secondFragment != null && secondFragment instanceof PreviewTextFragment) {
+    PreviewTextFragment detailsFragment=(PreviewTextFragment)secondFragment;
+    detailsFragment.loadAndShowTextPreview();
+  }
 }
