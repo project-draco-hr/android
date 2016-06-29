@@ -1,0 +1,7 @@
+{
+  updateCurrentStorageManagerIfNeeded(rootId);
+  OCFile root=mCurrentStorageManager.getFileByPath("/");
+  FileCursor result=new FileCursor(projection);
+  for (  OCFile f : findFiles(root,query))   result.addFile(f);
+  return result;
+}
