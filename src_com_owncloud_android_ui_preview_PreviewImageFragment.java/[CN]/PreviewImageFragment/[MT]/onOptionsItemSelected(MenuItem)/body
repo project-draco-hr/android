@@ -42,6 +42,6 @@ mContainerActivity.getFileOperationsHelper().toggleFavorite(getFile(),false);
 return true;
 }
 default :
-return false;
+return super.onOptionsItemSelected(item);
 }
 }
