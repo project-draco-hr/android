@@ -2,25 +2,5 @@
   ComponentsGetter cg=(ComponentsGetter)getActivity();
   for (  OCFile targetFile : mTargetFiles) {
     cg.getFileOperationsHelper().removeFile(targetFile,true);
-    FileDataStorageManager storageManager=cg.getStorageManager();
-    boolean containsFavorite=false;
-    if (targetFile.isFolder()) {
-      Vector<OCFile> files=storageManager.getFolderContent(targetFile);
-      for (      OCFile file : files) {
-        containsFavorite=file.isFavorite() || containsFavorite;
-        if (containsFavorite)         break;
-      }
-    }
-    if (targetFile.isFavorite() || containsFavorite) {
-      OCFile folder=null;
-      if (targetFile.isFolder()) {
-        folder=targetFile;
-      }
- else {
-        folder=storageManager.getFileById(targetFile.getParentId());
-      }
-      folder.setEtag("");
-      storageManager.saveFile(folder);
-    }
   }
 }

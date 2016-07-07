@@ -11,13 +11,12 @@
     setFooterEnabled(true);
   }
   Bundle args=getArguments();
-  mJustFolders=(args == null) ? false : args.getBoolean(ARG_JUST_FOLDERS,false);
+  mJustFolders=(args != null) && args.getBoolean(ARG_JUST_FOLDERS,false);
   mAdapter=new FileListListAdapter(mJustFolders,getActivity(),mContainerActivity);
   mAdapter.restoreSelectionState(savedInstanceState);
   setListAdapter(mAdapter);
-  registerLongClickListener();
-  hideFab=(args != null) && args.getBoolean(ARG_HIDE_FAB,false);
-  if (hideFab) {
+  mHideFab=(args != null) && args.getBoolean(ARG_HIDE_FAB,false);
+  if (mHideFab) {
     setFabEnabled(false);
   }
  else {

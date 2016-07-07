@@ -1,8 +1,0 @@
-{
-  for (  OCFile file : files) {
-    if (isSynchronizing(account,file)) {
-      return true;
-    }
-  }
-  return false;
-}

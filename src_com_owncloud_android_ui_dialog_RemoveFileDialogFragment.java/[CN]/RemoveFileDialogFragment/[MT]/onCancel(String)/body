@@ -1,4 +1,0 @@
-{
-  ComponentsGetter cg=(ComponentsGetter)getActivity();
-  cg.getFileOperationsHelper().removeFile(mTargetFile,true);
-}

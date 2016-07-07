@@ -1,131 +1,84 @@
 {
-  final ArrayList<OCFile> checkedItems=mAdapter.getCheckedItems();
-  if (checkedItems.size() == 1) {
-    OCFile mTargetFile=checkedItems.get(0);
+  final ArrayList<OCFile> checkedFiles=mAdapter.getCheckedItems();
+  if (checkedFiles.size() <= 0)   return false;
+  if (checkedFiles.size() == 1) {
+    OCFile singleFile=checkedFiles.get(0);
 switch (menuId) {
 case R.id.action_share_file:
 {
-        mContainerActivity.getFileOperationsHelper().showShareFile(mTargetFile);
+        mContainerActivity.getFileOperationsHelper().showShareFile(singleFile);
         return true;
       }
 case R.id.action_open_file_with:
 {
-      mContainerActivity.getFileOperationsHelper().openFile(mTargetFile);
+      mContainerActivity.getFileOperationsHelper().openFile(singleFile);
       return true;
     }
 case R.id.action_rename_file:
 {
-    RenameFileDialogFragment dialog=RenameFileDialogFragment.newInstance(mTargetFile);
+    RenameFileDialogFragment dialog=RenameFileDialogFragment.newInstance(singleFile);
     dialog.show(getFragmentManager(),FileDetailFragment.FTAG_RENAME_FILE);
     return true;
   }
-case R.id.action_remove_file:
-{
-  RemoveFileDialogFragment dialog=RemoveFileDialogFragment.newInstance(mTargetFile);
-  dialog.show(getFragmentManager(),ConfirmationDialogFragment.FTAG_CONFIRMATION);
-  return true;
-}
-case R.id.action_download_file:
-case R.id.action_sync_file:
-{
-mContainerActivity.getFileOperationsHelper().syncFile(mTargetFile);
-return true;
-}
-case R.id.action_cancel_sync:
-{
-((FileDisplayActivity)mContainerActivity).cancelTransference(mTargetFile);
-return true;
-}
 case R.id.action_see_details:
 {
-mContainerActivity.showDetails(mTargetFile);
-return true;
+  mContainerActivity.showDetails(singleFile);
+  return true;
 }
 case R.id.action_send_file:
 {
-if (!mTargetFile.isDown()) {
-Log_OC.d(TAG,mTargetFile.getRemotePath() + " : File must be downloaded");
-((FileDisplayActivity)mContainerActivity).startDownloadForSending(mTargetFile);
+if (!singleFile.isDown()) {
+  Log_OC.d(TAG,singleFile.getRemotePath() + " : File must be downloaded");
+  ((FileDisplayActivity)mContainerActivity).startDownloadForSending(singleFile);
 }
  else {
-mContainerActivity.getFileOperationsHelper().sendDownloadedFile(mTargetFile);
+  mContainerActivity.getFileOperationsHelper().sendDownloadedFile(singleFile);
 }
 return true;
 }
-case R.id.action_move:
-{
-Intent action=new Intent(getActivity(),FolderPickerActivity.class);
-ArrayList files=new ArrayList();
-files.add(mTargetFile);
-action.putParcelableArrayListExtra(FolderPickerActivity.EXTRA_FILES,files);
-getActivity().startActivityForResult(action,FileDisplayActivity.REQUEST_CODE__MOVE_FILES);
-return true;
-}
-case R.id.action_favorite_file:
-{
-mContainerActivity.getFileOperationsHelper().toggleFavorite(mTargetFile,true);
-return true;
-}
-case R.id.action_unfavorite_file:
-{
-mContainerActivity.getFileOperationsHelper().toggleFavorite(mTargetFile,false);
-return true;
-}
-case R.id.action_copy:
-Intent action=new Intent(getActivity(),FolderPickerActivity.class);
-ArrayList files=new ArrayList();
-files.add(mTargetFile);
-action.putExtra(FolderPickerActivity.EXTRA_FILES,files);
-getActivity().startActivityForResult(action,FileDisplayActivity.REQUEST_CODE__COPY_FILES);
-return true;
-default :
-return false;
 }
 }
- else {
-ArrayList<OCFile> mTargetFiles=checkedItems;
 switch (menuId) {
 case R.id.action_remove_file:
 {
-RemoveFilesDialogFragment dialog=RemoveFilesDialogFragment.newInstance(mTargetFiles);
+RemoveFilesDialogFragment dialog=RemoveFilesDialogFragment.newInstance(checkedFiles);
 dialog.show(getFragmentManager(),ConfirmationDialogFragment.FTAG_CONFIRMATION);
 return true;
 }
 case R.id.action_download_file:
 case R.id.action_sync_file:
 {
-mContainerActivity.getFileOperationsHelper().syncFiles(mTargetFiles);
+mContainerActivity.getFileOperationsHelper().syncFiles(checkedFiles);
 return true;
 }
 case R.id.action_cancel_sync:
 {
-((FileDisplayActivity)mContainerActivity).cancelTransference(mTargetFiles);
+((FileDisplayActivity)mContainerActivity).cancelTransference(checkedFiles);
+return true;
+}
+case R.id.action_favorite_file:
+{
+mContainerActivity.getFileOperationsHelper().toggleFavorites(checkedFiles,true);
+return true;
+}
+case R.id.action_unfavorite_file:
+{
+mContainerActivity.getFileOperationsHelper().toggleFavorites(checkedFiles,false);
 return true;
 }
 case R.id.action_move:
 {
 Intent action=new Intent(getActivity(),FolderPickerActivity.class);
-action.putParcelableArrayListExtra(FolderPickerActivity.EXTRA_FILES,mTargetFiles);
+action.putParcelableArrayListExtra(FolderPickerActivity.EXTRA_FILES,checkedFiles);
 getActivity().startActivityForResult(action,FileDisplayActivity.REQUEST_CODE__MOVE_FILES);
-return true;
-}
-case R.id.action_favorite_file:
-{
-mContainerActivity.getFileOperationsHelper().toggleFavorites(mTargetFiles,true);
-return true;
-}
-case R.id.action_unfavorite_file:
-{
-mContainerActivity.getFileOperationsHelper().toggleFavorites(mTargetFiles,false);
 return true;
 }
 case R.id.action_copy:
 Intent action=new Intent(getActivity(),FolderPickerActivity.class);
-action.putParcelableArrayListExtra(FolderPickerActivity.EXTRA_FILES,mTargetFiles);
+action.putParcelableArrayListExtra(FolderPickerActivity.EXTRA_FILES,checkedFiles);
 getActivity().startActivityForResult(action,FileDisplayActivity.REQUEST_CODE__COPY_FILES);
 return true;
 default :
 return false;
-}
 }
 }

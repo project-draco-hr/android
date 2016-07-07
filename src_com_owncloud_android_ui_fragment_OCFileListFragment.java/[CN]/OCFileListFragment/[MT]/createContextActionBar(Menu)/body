@@ -1,8 +1,0 @@
-{
-  Bundle args=getArguments();
-  boolean allowContextualActions=(args == null) ? true : args.getBoolean(ARG_ALLOW_CONTEXTUAL_ACTIONS,true);
-  if (allowContextualActions) {
-    MenuInflater inflater=getActivity().getMenuInflater();
-    inflater.inflate(R.menu.file_actions_menu,menu);
-  }
-}

@@ -1,18 +1,12 @@
 {
-  boolean synchronizing=false;
-  if (mComponentsGetter != null && !mFiles.isEmpty() && mAccount != null) {
-    OperationsServiceBinder opsBinder=mComponentsGetter.getOperationsServiceBinder();
-    FileUploaderBinder uploaderBinder=mComponentsGetter.getFileUploaderBinder();
-    FileDownloaderBinder downloaderBinder=mComponentsGetter.getFileDownloaderBinder();
-    synchronizing=((opsBinder != null && opsBinder.isSynchronizing(mAccount,mFiles)) || (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,mFiles)) || (uploaderBinder != null && uploaderBinder.isUploading(mAccount,mFiles)));
-  }
+  boolean synchronizing=anyFileSynchronizing();
   if (mFiles.isEmpty() || containsFolder() || anyFileDown()|| synchronizing) {
     toHide.add(R.id.action_download_file);
   }
  else {
     toShow.add(R.id.action_download_file);
   }
-  if (!isSingleSelect() || synchronizing) {
+  if (!isSingleSelection() || synchronizing) {
     toHide.add(R.id.action_rename_file);
   }
  else {
@@ -54,7 +48,7 @@
   boolean shareWithUsersAllowed=(mContext != null && mContext.getResources().getBoolean(R.bool.share_with_users_feature));
   OCCapability capability=mComponentsGetter.getStorageManager().getCapability(mAccount.name);
   boolean shareApiEnabled=capability != null && (capability.getFilesSharingApiEnabled().isTrue() || capability.getFilesSharingApiEnabled().isUnknown());
-  if ((!shareViaLinkAllowed && !shareWithUsersAllowed) || !isSingleSelect() || !shareApiEnabled) {
+  if ((!shareViaLinkAllowed && !shareWithUsersAllowed) || !isSingleSelection() || !shareApiEnabled) {
     toHide.add(R.id.action_share_file);
   }
  else {

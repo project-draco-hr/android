@@ -1,0 +1,16 @@
+{
+  super.onAttach(context);
+  Log_OC.e(TAG,"onAttach");
+  try {
+    mContainerActivity=(FileFragment.ContainerActivity)context;
+  }
+ catch (  ClassCastException e) {
+    throw new ClassCastException(context.toString() + " must implement " + FileFragment.ContainerActivity.class.getSimpleName());
+  }
+  try {
+    setOnRefreshListener((OnEnforceableRefreshListener)context);
+  }
+ catch (  ClassCastException e) {
+    throw new ClassCastException(context.toString() + " must implement " + SwipeRefreshLayout.OnRefreshListener.class.getSimpleName());
+  }
+}

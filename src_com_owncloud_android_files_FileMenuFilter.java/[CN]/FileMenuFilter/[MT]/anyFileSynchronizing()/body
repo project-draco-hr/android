@@ -1,0 +1,10 @@
+{
+  boolean synchronizing=false;
+  if (mComponentsGetter != null && !mFiles.isEmpty() && mAccount != null) {
+    OperationsServiceBinder opsBinder=mComponentsGetter.getOperationsServiceBinder();
+    FileUploaderBinder uploaderBinder=mComponentsGetter.getFileUploaderBinder();
+    FileDownloaderBinder downloaderBinder=mComponentsGetter.getFileDownloaderBinder();
+    synchronizing=(anyFileSynchronizing(opsBinder) || anyFileDownloading(downloaderBinder) || anyFileUploading(uploaderBinder));
+  }
+  return synchronizing;
+}
