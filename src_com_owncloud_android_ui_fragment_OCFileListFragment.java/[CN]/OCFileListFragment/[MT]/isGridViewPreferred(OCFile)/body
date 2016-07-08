@@ -1,7 +1,7 @@
 {
   if (file != null) {
     OCFile fileToTest=file;
-    OCFile parentDir=null;
+    OCFile parentDir;
     String parentPath=null;
     FileDataStorageManager storageManager=mContainerActivity.getStorageManager();
     SharedPreferences setting=getActivity().getSharedPreferences(GRID_IS_PREFERED_PREFERENCE,Context.MODE_PRIVATE);

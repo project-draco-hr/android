@@ -1,9 +1,0 @@
-{
-  if (checked) {
-    mSelection.add(itemId);
-  }
- else {
-    mSelection.remove(itemId);
-  }
-  notifyDataSetChanged();
-}

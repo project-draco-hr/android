@@ -1,5 +1,5 @@
 {
-  final ArrayList<OCFile> checkedFiles=mAdapter.getCheckedItems();
+  final ArrayList<OCFile> checkedFiles=mAdapter.getCheckedItems(getListView());
   if (checkedFiles.size() <= 0)   return false;
   if (checkedFiles.size() == 1) {
     OCFile singleFile=checkedFiles.get(0);

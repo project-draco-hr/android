@@ -13,7 +13,6 @@
   Bundle args=getArguments();
   mJustFolders=(args != null) && args.getBoolean(ARG_JUST_FOLDERS,false);
   mAdapter=new FileListListAdapter(mJustFolders,getActivity(),mContainerActivity);
-  mAdapter.restoreSelectionState(savedInstanceState);
   setListAdapter(mAdapter);
   mHideFab=(args != null) && args.getBoolean(ARG_HIDE_FAB,false);
   if (mHideFab) {

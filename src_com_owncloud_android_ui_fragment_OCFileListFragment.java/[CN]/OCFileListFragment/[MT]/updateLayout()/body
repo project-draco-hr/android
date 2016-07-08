@@ -1,6 +1,6 @@
 {
   if (!mJustFolders) {
-    int filesCount=0, foldersCount=0, imagesCount=0;
+    int filesCount=0, foldersCount=0;
     int count=mAdapter.getCount();
     OCFile file;
     for (int i=0; i < count; i++) {
@@ -11,9 +11,6 @@
  else {
         if (!file.isHidden()) {
           filesCount++;
-          if (file.isImage()) {
-            imagesCount++;
-          }
         }
       }
     }

@@ -1,5 +1,4 @@
 {
   super.onSaveInstanceState(outState);
   outState.putParcelable(KEY_FILE,mFile);
-  mAdapter.saveSelectionState(outState);
 }

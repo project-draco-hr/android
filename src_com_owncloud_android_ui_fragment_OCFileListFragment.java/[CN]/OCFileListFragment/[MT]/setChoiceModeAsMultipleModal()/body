@@ -2,7 +2,7 @@
   setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
   setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener(){
     @Override public void onItemCheckedStateChanged(    ActionMode mode,    int position,    long id,    boolean checked){
-      mAdapter.updateSelection(id,checked);
+      getListView().invalidateViews();
       mode.invalidate();
     }
     @Override public boolean onCreateActionMode(    ActionMode mode,    Menu menu){
@@ -19,14 +19,12 @@
       return true;
     }
     @Override public boolean onPrepareActionMode(    ActionMode mode,    Menu menu){
-      List<OCFile> checkedFiles=mAdapter.getCheckedItems();
+      List<OCFile> checkedFiles=mAdapter.getCheckedItems(getListView());
       final int checkedCount=checkedFiles.size();
       String title=getResources().getQuantityString(R.plurals.items_selected_count,checkedCount,checkedCount);
       mode.setTitle(title);
-      if (checkedCount > 0) {
-        FileMenuFilter mf=new FileMenuFilter(checkedFiles,((FileActivity)getActivity()).getAccount(),mContainerActivity,getActivity());
-        mf.filter(menu);
-      }
+      FileMenuFilter mf=new FileMenuFilter(checkedFiles,((FileActivity)getActivity()).getAccount(),mContainerActivity,getActivity());
+      mf.filter(menu);
       return true;
     }
     @Override public boolean onActionItemClicked(    ActionMode mode,    MenuItem item){
@@ -34,7 +32,6 @@
     }
     @Override public void onDestroyActionMode(    ActionMode mode){
       mActiveActionMode=null;
-      mAdapter.clearSelection();
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
         getActivity().getWindow().setStatusBarColor(mStatusBarColor);
       }

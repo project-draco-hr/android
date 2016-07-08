@@ -1,0 +1,14 @@
+{
+  SparseBooleanArray checkedPositions=parentList.getCheckedItemPositions();
+  ArrayList<OCFile> files=new ArrayList<>();
+  Object item;
+  for (int i=0; i < checkedPositions.size(); i++) {
+    if (checkedPositions.valueAt(i)) {
+      item=getItem(checkedPositions.keyAt(i));
+      if (item != null) {
+        files.add((OCFile)item);
+      }
+    }
+  }
+  return files;
+}
