@@ -1,4 +1,0 @@
-{
-  mSelection.remove(getItemId(position));
-  notifyDataSetChanged();
-}
