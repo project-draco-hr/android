@@ -22,6 +22,9 @@ case R.id.action_rename_file:
   }
 case R.id.action_see_details:
 {
+  if (mActiveActionMode != null) {
+    mActiveActionMode.finish();
+  }
   mContainerActivity.showDetails(singleFile);
   return true;
 }
