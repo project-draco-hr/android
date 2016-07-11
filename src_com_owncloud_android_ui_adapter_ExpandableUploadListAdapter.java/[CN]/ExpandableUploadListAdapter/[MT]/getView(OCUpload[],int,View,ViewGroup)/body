@@ -80,7 +80,7 @@ break;
 statusTextView.setText(status);
 ImageButton rightButton=(ImageButton)view.findViewById(R.id.upload_right_button);
 if (upload.getUploadStatus() == UploadStatus.UPLOAD_IN_PROGRESS) {
-rightButton.setImageResource(R.drawable.ic_cancel);
+rightButton.setImageResource(R.drawable.ic_action_cancel_grey);
 rightButton.setVisibility(View.VISIBLE);
 rightButton.setOnClickListener(new OnClickListener(){
 @Override public void onClick(View v){
@@ -94,7 +94,7 @@ refreshView();
 );
 }
  else if (upload.getUploadStatus() == UploadStatus.UPLOAD_FAILED) {
-rightButton.setImageResource(R.drawable.ic_action_delete);
+rightButton.setImageResource(R.drawable.ic_action_delete_grey);
 rightButton.setVisibility(View.VISIBLE);
 rightButton.setOnClickListener(new OnClickListener(){
 @Override public void onClick(View v){
