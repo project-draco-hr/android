@@ -5,5 +5,5 @@
   service.putExtra(OperationsService.EXTRA_REMOTE_PATH,remotePath);
   service.putExtra(OperationsService.EXTRA_CREATE_FULL_PATH,createFullPath);
   mWaitingForOpId=mFileActivity.getOperationsServiceBinder().queueNewOperation(service);
-  mFileActivity.showLoadingDialog(mFileActivity.getApplicationContext().getString(R.string.wait_a_moment));
+  mFileActivity.showLoadingDialog(mFileActivity.getString(R.string.wait_a_moment));
 }

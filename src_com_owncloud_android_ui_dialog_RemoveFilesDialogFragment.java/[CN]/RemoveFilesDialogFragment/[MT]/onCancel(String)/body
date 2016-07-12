@@ -1,6 +1,4 @@
 {
   ComponentsGetter cg=(ComponentsGetter)getActivity();
-  for (  OCFile targetFile : mTargetFiles) {
-    cg.getFileOperationsHelper().removeFile(targetFile,true);
-  }
+  cg.getFileOperationsHelper().removeFiles(mTargetFiles,true);
 }

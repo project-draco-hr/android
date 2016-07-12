@@ -7,5 +7,5 @@
     service.putExtra(OperationsService.EXTRA_ACCOUNT,mFileActivity.getAccount());
     mWaitingForOpId=mFileActivity.getOperationsServiceBinder().queueNewOperation(service);
   }
-  mFileActivity.showLoadingDialog(mFileActivity.getApplicationContext().getString(R.string.wait_a_moment));
+  mFileActivity.showLoadingDialog(mFileActivity.getString(R.string.wait_a_moment));
 }
