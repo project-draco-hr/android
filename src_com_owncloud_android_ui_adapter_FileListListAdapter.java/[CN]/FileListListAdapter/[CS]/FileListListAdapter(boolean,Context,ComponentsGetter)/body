@@ -6,5 +6,4 @@
   FileStorageUtils.mSortOrder=PreferenceManager.getSortOrder(mContext);
   FileStorageUtils.mSortAscending=PreferenceManager.getSortAscending(mContext);
   new ThumbnailsCacheManager.InitDiskCacheTask().execute();
-  mGridMode=false;
 }

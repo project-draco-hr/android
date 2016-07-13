@@ -7,10 +7,9 @@
   }
  else   if (requestCode == REQUEST_CODE__MOVE_FILES && resultCode == RESULT_OK) {
     final Intent fData=data;
-    final int fResultCode=resultCode;
     getHandler().postDelayed(new Runnable(){
       @Override public void run(){
-        requestMoveOperation(fData,fResultCode);
+        requestMoveOperation(fData);
       }
     }
 ,DELAY_TO_REQUEST_OPERATIONS_LATER);
@@ -20,7 +19,7 @@
     final int fResultCode=resultCode;
     getHandler().postDelayed(new Runnable(){
       @Override public void run(){
-        requestCopyOperation(fData,fResultCode);
+        requestCopyOperation(fData);
       }
     }
 ,DELAY_TO_REQUEST_OPERATIONS_LATER);

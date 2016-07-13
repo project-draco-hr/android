@@ -1,6 +1,3 @@
 {
-  mFile=targetFile;
-  mAccount=account;
-  mComponentsGetter=cg;
-  mContext=context;
+  this(Arrays.asList(new OCFile[]{targetFile}),account,cg,context);
 }

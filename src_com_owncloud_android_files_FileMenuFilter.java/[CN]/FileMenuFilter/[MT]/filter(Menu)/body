@@ -1,20 +1,25 @@
 {
-  List<Integer> toShow=new ArrayList<Integer>();
-  List<Integer> toHide=new ArrayList<Integer>();
-  filter(toShow,toHide);
-  MenuItem item=null;
-  for (  int i : toShow) {
-    item=menu.findItem(i);
-    if (item != null) {
-      item.setVisible(true);
-      item.setEnabled(true);
-    }
+  if (mFiles == null || mFiles.size() <= 0) {
+    hideAll(menu);
   }
-  for (  int i : toHide) {
-    item=menu.findItem(i);
-    if (item != null) {
-      item.setVisible(false);
-      item.setEnabled(false);
+ else {
+    List<Integer> toShow=new ArrayList<Integer>();
+    List<Integer> toHide=new ArrayList<Integer>();
+    filter(toShow,toHide);
+    MenuItem item;
+    for (    int i : toShow) {
+      item=menu.findItem(i);
+      if (item != null) {
+        item.setVisible(true);
+        item.setEnabled(true);
+      }
+    }
+    for (    int i : toHide) {
+      item=menu.findItem(i);
+      if (item != null) {
+        item.setVisible(false);
+        item.setEnabled(false);
+      }
     }
   }
 }

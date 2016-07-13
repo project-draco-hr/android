@@ -1,0 +1,9 @@
+{
+  boolean downloading=false;
+  if (downloaderBinder != null) {
+    for (int i=0; !downloading && i < mFiles.size(); i++) {
+      downloading=downloaderBinder.isDownloading(mAccount,mFiles.get(i));
+    }
+  }
+  return downloading;
+}

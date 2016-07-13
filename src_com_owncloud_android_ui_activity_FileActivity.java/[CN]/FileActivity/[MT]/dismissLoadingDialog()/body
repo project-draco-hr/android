@@ -1,6 +1,7 @@
 {
   Fragment frag=getSupportFragmentManager().findFragmentByTag(DIALOG_WAIT_TAG);
   if (frag != null) {
+    Log_OC.d(TAG,"dismiss loading dialog");
     LoadingDialog loading=(LoadingDialog)frag;
     loading.dismiss();
   }

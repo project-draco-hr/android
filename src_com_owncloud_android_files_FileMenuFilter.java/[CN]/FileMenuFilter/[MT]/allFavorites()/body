@@ -1,0 +1,8 @@
+{
+  for (  OCFile file : mFiles) {
+    if (!file.isFavorite()) {
+      return false;
+    }
+  }
+  return true;
+}

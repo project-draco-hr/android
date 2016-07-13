@@ -1,0 +1,8 @@
+{
+  for (  OCFile file : mFiles) {
+    if (file.isFolder()) {
+      return true;
+    }
+  }
+  return false;
+}

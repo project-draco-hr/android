@@ -5,5 +5,5 @@
   service.putExtra(OperationsService.EXTRA_REMOTE_PATH,file.getRemotePath());
   service.putExtra(OperationsService.EXTRA_NEWNAME,newFilename);
   mWaitingForOpId=mFileActivity.getOperationsServiceBinder().queueNewOperation(service);
-  mFileActivity.showLoadingDialog(mFileActivity.getApplicationContext().getString(R.string.wait_a_moment));
+  mFileActivity.showLoadingDialog(mFileActivity.getString(R.string.wait_a_moment));
 }

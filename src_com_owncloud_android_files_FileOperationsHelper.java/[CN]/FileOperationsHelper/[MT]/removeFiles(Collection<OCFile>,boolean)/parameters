@@ -1,0 +1,2 @@
+Collection<OCFile> files
+boolean onlyLocalCopy

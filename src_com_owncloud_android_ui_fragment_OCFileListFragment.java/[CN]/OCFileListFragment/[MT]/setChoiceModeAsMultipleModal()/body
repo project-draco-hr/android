@@ -1,0 +1,44 @@
+{
+  setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+  setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener(){
+    @Override public void onItemCheckedStateChanged(    ActionMode mode,    int position,    long id,    boolean checked){
+      getListView().invalidateViews();
+      mode.invalidate();
+    }
+    @Override public boolean onCreateActionMode(    ActionMode mode,    Menu menu){
+      mActiveActionMode=mode;
+      MenuInflater inflater=getActivity().getMenuInflater();
+      inflater.inflate(R.menu.file_actions_menu,menu);
+      mode.invalidate();
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        Window w=getActivity().getWindow();
+        mStatusBarColor=w.getStatusBarColor();
+        w.setStatusBarColor(mStatusBarColorActionMode);
+      }
+      setFabEnabled(false);
+      return true;
+    }
+    @Override public boolean onPrepareActionMode(    ActionMode mode,    Menu menu){
+      List<OCFile> checkedFiles=mAdapter.getCheckedItems(getListView());
+      final int checkedCount=checkedFiles.size();
+      String title=getResources().getQuantityString(R.plurals.items_selected_count,checkedCount,checkedCount);
+      mode.setTitle(title);
+      FileMenuFilter mf=new FileMenuFilter(checkedFiles,((FileActivity)getActivity()).getAccount(),mContainerActivity,getActivity());
+      mf.filter(menu);
+      return true;
+    }
+    @Override public boolean onActionItemClicked(    ActionMode mode,    MenuItem item){
+      return onFileActionChosen(item.getItemId());
+    }
+    @Override public void onDestroyActionMode(    ActionMode mode){
+      mActiveActionMode=null;
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        getActivity().getWindow().setStatusBarColor(mStatusBarColor);
+      }
+      if (!mHideFab) {
+        setFabEnabled(true);
+      }
+    }
+  }
+);
+}

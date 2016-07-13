@@ -1,0 +1,8 @@
+{
+  MenuItem item;
+  for (int i=0; i < menu.size(); i++) {
+    item=menu.getItem(i);
+    item.setVisible(false);
+    item.setEnabled(false);
+  }
+}

@@ -1,0 +1,6 @@
+{
+  Dialog dialog=super.onCreateDialog(savedInstanceState);
+  mTargetFiles=getArguments().getParcelableArrayList(ARG_TARGET_FILES);
+  setOnConfirmationListener(this);
+  return dialog;
+}
