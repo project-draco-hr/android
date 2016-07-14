@@ -1,0 +1,8 @@
+{
+  super.onSaveInstanceState(outState);
+  Log_OC.v(TAG,"onSaveInstanceState");
+  outState.putParcelable(PreviewAudioFragment.EXTRA_FILE,getFile());
+  outState.putParcelable(PreviewAudioFragment.EXTRA_ACCOUNT,mAccount);
+  outState.putInt(PreviewAudioFragment.EXTRA_PLAY_POSITION,mMediaServiceBinder.getCurrentPosition());
+  outState.putBoolean(PreviewAudioFragment.EXTRA_PLAYING,mMediaServiceBinder.isPlaying());
+}

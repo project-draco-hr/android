@@ -4,8 +4,8 @@
     OCFile file=details.getFile();
     if (file != null) {
       file=getStorageManager().getFileByPath(file.getRemotePath());
-      if (details instanceof PreviewMediaFragment) {
-        ((PreviewMediaFragment)details).updateFile(file);
+      if (details instanceof PreviewAudioFragment) {
+        ((PreviewAudioFragment)details).updateFile(file);
       }
  else       if (details instanceof PreviewTextFragment) {
         ((PreviewTextFragment)details).updateFile(file);

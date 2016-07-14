@@ -17,8 +17,12 @@
         if (waitedPreview) {
           if (success) {
             mWaitingToPreview=getStorageManager().getFileById(mWaitingToPreview.getFileId());
-            if (PreviewMediaFragment.canBePreviewed(mWaitingToPreview)) {
-              startMediaPreview(mWaitingToPreview,0,true);
+            if (PreviewAudioFragment.canBePreviewed(mWaitingToPreview)) {
+              startAudioPreview(mWaitingToPreview,0,true);
+              detailsFragmentChanged=true;
+            }
+ else             if (PreviewVideoFragment.canBePreviewed(mWaitingToPreview)) {
+              startVideoPreview(mWaitingToPreview,0,true);
               detailsFragmentChanged=true;
             }
  else             if (PreviewTextFragment.canBePreviewed(mWaitingToPreview)) {
@@ -39,9 +43,13 @@
  else     if (secondFragment instanceof PreviewTextFragment) {
       ((PreviewTextFragment)secondFragment).loadAndShowTextPreview();
     }
- else     if (secondFragment instanceof PreviewMediaFragment) {
+ else     if (secondFragment instanceof PreviewAudioFragment) {
       OCFile file=getStorageManager().getFileByPath(downloadedRemotePath);
-      startMediaPreview(file,0,true);
+      startAudioPreview(file,0,true);
+    }
+ else     if (secondFragment instanceof PreviewVideoFragment) {
+      OCFile file=getStorageManager().getFileByPath(downloadedRemotePath);
+      startVideoPreview(file,0,true);
     }
   }
 }

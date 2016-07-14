@@ -1,0 +1,4 @@
+{
+  stopPreview();
+  mContainerActivity.getFileOperationsHelper().sendDownloadedFile(getFile());
+}

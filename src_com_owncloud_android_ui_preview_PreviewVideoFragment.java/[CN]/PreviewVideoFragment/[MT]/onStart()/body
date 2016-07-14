@@ -1,0 +1,9 @@
+{
+  super.onStart();
+  Log_OC.v(TAG,"onStart");
+  OCFile file=getFile();
+  if (file != null && file.isDown()) {
+    stopAudio();
+    playVideo();
+  }
+}

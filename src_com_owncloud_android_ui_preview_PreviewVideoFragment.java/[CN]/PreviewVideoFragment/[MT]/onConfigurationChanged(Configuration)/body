@@ -1,0 +1,3 @@
+{
+  Log_OC.v(TAG,"onConfigurationChanged " + this);
+}

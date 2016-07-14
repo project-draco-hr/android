@@ -1,0 +1,6 @@
+{
+  super();
+  mAccount=null;
+  mSavedPlaybackPosition=0;
+  mAutoplay=true;
+}

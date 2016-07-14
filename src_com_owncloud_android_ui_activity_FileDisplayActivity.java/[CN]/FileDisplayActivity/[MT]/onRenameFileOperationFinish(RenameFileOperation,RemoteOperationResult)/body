@@ -2,22 +2,32 @@
   OCFile renamedFile=operation.getFile();
   if (result.isSuccess()) {
     FileFragment details=getSecondFragment();
-    if (details != null) {
-      if (details instanceof FileDetailFragment && renamedFile.equals(details.getFile())) {
+    if (details != null && renamedFile.equals(details.getFile())) {
+      if (details instanceof FileDetailFragment) {
         ((FileDetailFragment)details).updateFileDetails(renamedFile,getAccount());
         showDetails(renamedFile);
       }
- else       if (details instanceof PreviewMediaFragment && renamedFile.equals(details.getFile())) {
-        ((PreviewMediaFragment)details).updateFile(renamedFile);
-        if (PreviewMediaFragment.canBePreviewed(renamedFile)) {
-          int position=((PreviewMediaFragment)details).getPosition();
-          startMediaPreview(renamedFile,position,true);
+ else       if (details instanceof PreviewAudioFragment) {
+        ((PreviewAudioFragment)details).updateFile(renamedFile);
+        if (PreviewAudioFragment.canBePreviewed(renamedFile)) {
+          int position=((PreviewAudioFragment)details).getPosition();
+          startAudioPreview(renamedFile,position,true);
         }
  else {
           getFileOperationsHelper().openFile(renamedFile);
         }
       }
- else       if (details instanceof PreviewTextFragment && renamedFile.equals(details.getFile())) {
+ else       if (details instanceof PreviewVideoFragment) {
+        ((PreviewVideoFragment)details).updateFile(renamedFile);
+        if (PreviewVideoFragment.canBePreviewed(renamedFile)) {
+          int position=((PreviewVideoFragment)details).getPosition();
+          startVideoPreview(renamedFile,position,true);
+        }
+ else {
+          getFileOperationsHelper().openFile(renamedFile);
+        }
+      }
+ else       if (details instanceof PreviewTextFragment) {
         ((PreviewTextFragment)details).updateFile(renamedFile);
         if (PreviewTextFragment.canBePreviewed(renamedFile)) {
           startTextPreview(renamedFile);

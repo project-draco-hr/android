@@ -1,0 +1,5 @@
+{
+  Log_OC.v(TAG,"onStop");
+  mPrepared=false;
+  super.onStop();
+}

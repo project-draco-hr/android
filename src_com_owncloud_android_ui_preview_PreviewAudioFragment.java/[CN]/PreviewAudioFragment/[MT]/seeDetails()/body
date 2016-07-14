@@ -1,0 +1,3 @@
+{
+  mContainerActivity.showDetails(getFile());
+}
