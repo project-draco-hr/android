@@ -11,7 +11,7 @@
         ((PreviewAudioFragment)details).updateFile(renamedFile);
         if (PreviewAudioFragment.canBePreviewed(renamedFile)) {
           int position=((PreviewAudioFragment)details).getPosition();
-          startAudioPreview(renamedFile,position,true);
+          startAudioPreview(renamedFile,position);
         }
  else {
           getFileOperationsHelper().openFile(renamedFile);
@@ -21,7 +21,7 @@
         ((PreviewVideoFragment)details).updateFile(renamedFile);
         if (PreviewVideoFragment.canBePreviewed(renamedFile)) {
           int position=((PreviewVideoFragment)details).getPosition();
-          startVideoPreview(renamedFile,position,true);
+          startVideoPreview(renamedFile,position);
         }
  else {
           getFileOperationsHelper().openFile(renamedFile);

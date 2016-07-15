@@ -1,7 +1,7 @@
 {
   FileFragment secondFragment=getSecondFragment();
   if (secondFragment != null) {
-    boolean waitedPreview=(mWaitingToPreview != null && mWaitingToPreview.getRemotePath().equals(downloadedRemotePath));
+    invalidateOptionsMenu();
     if (secondFragment instanceof FileDetailFragment) {
       FileDetailFragment detailsFragment=(FileDetailFragment)secondFragment;
       OCFile fileInFragment=detailsFragment.getFile();
@@ -14,15 +14,16 @@
       }
  else       if (downloadEvent.equals(FileDownloader.getDownloadFinishMessage())) {
         boolean detailsFragmentChanged=false;
+        boolean waitedPreview=(mWaitingToPreview != null && mWaitingToPreview.getRemotePath().equals(downloadedRemotePath));
         if (waitedPreview) {
           if (success) {
             mWaitingToPreview=getStorageManager().getFileById(mWaitingToPreview.getFileId());
             if (PreviewAudioFragment.canBePreviewed(mWaitingToPreview)) {
-              startAudioPreview(mWaitingToPreview,0,true);
+              startAudioPreview(mWaitingToPreview,0);
               detailsFragmentChanged=true;
             }
  else             if (PreviewVideoFragment.canBePreviewed(mWaitingToPreview)) {
-              startVideoPreview(mWaitingToPreview,0,true);
+              startVideoPreview(mWaitingToPreview,0);
               detailsFragmentChanged=true;
             }
  else             if (PreviewTextFragment.canBePreviewed(mWaitingToPreview)) {
@@ -40,16 +41,17 @@
         }
       }
     }
- else     if (secondFragment instanceof PreviewTextFragment) {
-      ((PreviewTextFragment)secondFragment).loadAndShowTextPreview();
-    }
- else     if (secondFragment instanceof PreviewAudioFragment) {
-      OCFile file=getStorageManager().getFileByPath(downloadedRemotePath);
-      startAudioPreview(file,0,true);
-    }
- else     if (secondFragment instanceof PreviewVideoFragment) {
-      OCFile file=getStorageManager().getFileByPath(downloadedRemotePath);
-      startVideoPreview(file,0,true);
+ else     if (success && downloadEvent.equals(FileDownloader.getDownloadFinishMessage())) {
+      if (secondFragment instanceof PreviewTextFragment) {
+        ((PreviewTextFragment)secondFragment).loadAndShowTextPreview();
+      }
+ else       if (secondFragment instanceof PreviewAudioFragment) {
+        OCFile file=getStorageManager().getFileByPath(downloadedRemotePath);
+        startAudioPreview(file,0);
+      }
+ else       if (secondFragment instanceof PreviewVideoFragment) {
+        ((PreviewVideoFragment)secondFragment).playVideo();
+      }
     }
   }
 }

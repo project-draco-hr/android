@@ -15,11 +15,11 @@
         mContainerActivity.getFileOperationsHelper().syncFile(file);
       }
  else       if (PreviewAudioFragment.canBePreviewed(file)) {
-        ((FileDisplayActivity)mContainerActivity).startAudioPreview(file,0,true);
+        ((FileDisplayActivity)mContainerActivity).startAudioPreview(file,0);
         mContainerActivity.getFileOperationsHelper().syncFile(file);
       }
  else       if (PreviewVideoFragment.canBePreviewed(file)) {
-        ((FileDisplayActivity)mContainerActivity).startVideoPreview(file,0,true);
+        ((FileDisplayActivity)mContainerActivity).startVideoPreview(file,0);
         mContainerActivity.getFileOperationsHelper().syncFile(file);
       }
  else       if (file.isDown()) {
