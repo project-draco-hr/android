@@ -2,6 +2,6 @@
   Log_OC.d(TAG,"Binding to MediaService...");
   if (mMediaServiceConnection == null) {
     mMediaServiceConnection=new MediaServiceConnection();
+    getActivity().bindService(new Intent(getActivity(),MediaService.class),mMediaServiceConnection,Context.BIND_AUTO_CREATE);
   }
-  getActivity().bindService(new Intent(getActivity(),MediaService.class),mMediaServiceConnection,Context.BIND_AUTO_CREATE);
 }

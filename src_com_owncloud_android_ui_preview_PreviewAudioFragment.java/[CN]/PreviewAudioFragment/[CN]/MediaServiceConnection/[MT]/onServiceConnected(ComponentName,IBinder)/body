@@ -5,7 +5,7 @@
       mMediaServiceBinder=(MediaServiceBinder)service;
       if (mMediaServiceBinder != null) {
         prepareMediaController();
-        playAudio();
+        playAudio(false);
         Log_OC.d(TAG,"Successfully bound to MediaService, MediaController ready");
       }
  else {

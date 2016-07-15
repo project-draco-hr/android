@@ -46,8 +46,7 @@
         ((PreviewTextFragment)secondFragment).loadAndShowTextPreview();
       }
  else       if (secondFragment instanceof PreviewAudioFragment) {
-        OCFile file=getStorageManager().getFileByPath(downloadedRemotePath);
-        startAudioPreview(file,0);
+        ((PreviewAudioFragment)secondFragment).playAudio(true);
       }
  else       if (secondFragment instanceof PreviewVideoFragment) {
         ((PreviewVideoFragment)secondFragment).playVideo();
