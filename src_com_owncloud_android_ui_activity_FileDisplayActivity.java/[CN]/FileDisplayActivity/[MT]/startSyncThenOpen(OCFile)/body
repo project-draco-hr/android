@@ -1,5 +1,5 @@
 {
-  Fragment detailFragment=FileDetailFragment.newInstance(file,getAccount());
+  FileDetailFragment detailFragment=FileDetailFragment.newInstance(file,getAccount());
   setSecondFragment(detailFragment);
   mWaitingToPreview=file;
   getFileOperationsHelper().syncFile(file);

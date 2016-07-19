@@ -1,0 +1,6 @@
+{
+  if (componentsGetter == null) {
+    throw new IllegalArgumentException("Received NULL componentsGetter");
+  }
+  mComponentsGetter=componentsGetter;
+}

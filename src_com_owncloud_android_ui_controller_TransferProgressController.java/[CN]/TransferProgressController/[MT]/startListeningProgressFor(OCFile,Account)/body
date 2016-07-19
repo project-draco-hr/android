@@ -1,0 +1,18 @@
+{
+  if (mComponentsGetter.getFileDownloaderBinder() != null) {
+    mComponentsGetter.getFileDownloaderBinder().addDatatransferProgressListener(this,account,file);
+  }
+ else {
+    Log_OC.e(TAG,"Download service not ready to notify progress");
+  }
+  if (mComponentsGetter.getFileUploaderBinder() != null) {
+    mComponentsGetter.getFileUploaderBinder().addDatatransferProgressListener(this,account,file);
+  }
+ else {
+    Log_OC.e(TAG,"Upload service not ready to notify progress");
+  }
+  if (mProgressBar != null) {
+    mProgressBar.setProgress(0);
+    mProgressBar.setIndeterminate(true);
+  }
+}

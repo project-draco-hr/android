@@ -21,9 +21,15 @@
     listOfFiles.listDirectory();
   }
   FileFragment secondFragment=getSecondFragment();
-  if (secondFragment != null && secondFragment instanceof FileDetailFragment) {
-    FileDetailFragment detailFragment=(FileDetailFragment)secondFragment;
-    detailFragment.listenForTransferProgress();
-    detailFragment.updateFileDetails(false,false);
+  if (secondFragment != null) {
+    if (secondFragment instanceof FileDetailFragment) {
+      FileDetailFragment detailFragment=(FileDetailFragment)secondFragment;
+      detailFragment.listenForTransferProgress();
+      detailFragment.updateFileDetails(false,false);
+    }
+ else     if (secondFragment instanceof PreviewAudioFragment) {
+      PreviewAudioFragment audioFragment=(PreviewAudioFragment)secondFragment;
+      audioFragment.listenForTransferProgress();
+    }
   }
 }

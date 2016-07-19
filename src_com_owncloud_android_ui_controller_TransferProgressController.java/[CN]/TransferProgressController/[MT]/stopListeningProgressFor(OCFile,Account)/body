@@ -1,0 +1,11 @@
+{
+  if (mComponentsGetter.getFileDownloaderBinder() != null) {
+    mComponentsGetter.getFileDownloaderBinder().removeDatatransferProgressListener(this,account,file);
+  }
+  if (mComponentsGetter.getFileUploaderBinder() != null) {
+    mComponentsGetter.getFileUploaderBinder().removeDatatransferProgressListener(this,account,file);
+  }
+  if (mProgressBar != null) {
+    mProgressBar.setIndeterminate(false);
+  }
+}

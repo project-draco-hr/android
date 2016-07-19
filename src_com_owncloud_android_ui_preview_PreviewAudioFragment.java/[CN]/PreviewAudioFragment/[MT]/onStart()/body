@@ -5,4 +5,5 @@
   if (file != null && file.isDown()) {
     bindMediaService();
   }
+  mProgressController.startListeningProgressFor(getFile(),mAccount);
 }

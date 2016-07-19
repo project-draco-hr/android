@@ -1,4 +1,4 @@
 {
   if (account == null || file == null || listener == null)   return;
-  mBoundListeners.put(file.getFileId(),listener);
+  mBoundListeners.put(file.getFileId(),new WeakReference<>(listener));
 }

@@ -1,5 +1,5 @@
 {
   if (account == null || file == null || listener == null)   return;
   String targetKey=buildRemoteName(account.name,file.getRemotePath());
-  mBoundListeners.put(targetKey,listener);
+  mBoundListeners.put(targetKey,new WeakReference<>(listener));
 }
