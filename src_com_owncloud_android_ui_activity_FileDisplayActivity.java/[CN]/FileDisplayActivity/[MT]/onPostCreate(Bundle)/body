@@ -18,6 +18,5 @@
   if (savedInstanceState == null) {
     createMinFragments();
   }
-  mProgressBar.setIndeterminate(mSyncInProgress);
   setBackgroundText();
 }

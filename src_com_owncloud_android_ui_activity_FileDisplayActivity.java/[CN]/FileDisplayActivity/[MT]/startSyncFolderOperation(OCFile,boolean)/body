@@ -6,7 +6,10 @@
         mSyncInProgress=true;
         RemoteOperation synchFolderOp=new RefreshFolderOperation(folder,currentSyncTime,false,getFileOperationsHelper().isSharedSupported(),ignoreETag,getStorageManager(),getAccount(),getApplicationContext());
         synchFolderOp.execute(getAccount(),MainApp.getAppContext(),FileDisplayActivity.this,null,null);
-        mProgressBar.setIndeterminate(true);
+        OCFileListFragment fileListFragment=getListOfFilesFragment();
+        if (fileListFragment != null) {
+          fileListFragment.setProgressBarAsIndeterminate(true);
+        }
         setBackgroundText();
       }
     }

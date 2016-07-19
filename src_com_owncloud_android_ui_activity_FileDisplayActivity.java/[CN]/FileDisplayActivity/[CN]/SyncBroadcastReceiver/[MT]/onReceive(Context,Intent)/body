@@ -46,8 +46,10 @@
         }
       }
       removeStickyBroadcast(intent);
-      Log_OC.d(TAG,"Setting progress visibility to " + mSyncInProgress);
-      mProgressBar.setIndeterminate(mSyncInProgress);
+      OCFileListFragment fileListFragment=getListOfFilesFragment();
+      if (fileListFragment != null) {
+        fileListFragment.setProgressBarAsIndeterminate(mSyncInProgress);
+      }
       setBackgroundText();
     }
     if (synchResult != null) {

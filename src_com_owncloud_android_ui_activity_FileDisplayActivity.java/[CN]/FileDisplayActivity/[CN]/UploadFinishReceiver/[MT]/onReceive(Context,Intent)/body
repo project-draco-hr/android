@@ -39,7 +39,10 @@
  else         if (PreviewTextFragment.canBePreviewed(ocFile))         startTextPreview(ocFile);
       }
     }
-    mProgressBar.setIndeterminate(false);
+    OCFileListFragment fileListFragment=getListOfFilesFragment();
+    if (fileListFragment != null) {
+      fileListFragment.setProgressBarAsIndeterminate(false);
+    }
   }
   finally {
     if (intent != null) {
