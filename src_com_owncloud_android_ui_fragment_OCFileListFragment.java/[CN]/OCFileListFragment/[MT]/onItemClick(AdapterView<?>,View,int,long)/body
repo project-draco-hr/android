@@ -22,11 +22,8 @@
         ((FileDisplayActivity)mContainerActivity).startVideoPreview(file,0);
         mContainerActivity.getFileOperationsHelper().syncFile(file);
       }
- else       if (file.isDown()) {
-        mContainerActivity.getFileOperationsHelper().openFile(file);
-      }
  else {
-        ((FileDisplayActivity)mContainerActivity).startDownloadForPreview(file);
+        ((FileDisplayActivity)mContainerActivity).startSyncThenOpen(file);
       }
     }
   }

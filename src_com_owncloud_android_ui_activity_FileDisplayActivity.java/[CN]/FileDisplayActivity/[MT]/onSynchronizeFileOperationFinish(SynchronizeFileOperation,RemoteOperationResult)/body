@@ -10,4 +10,9 @@
       msg.show();
     }
   }
+  boolean waitedForPreview=(mWaitingToPreview != null && mWaitingToPreview.equals(operation.getLocalFile()) && mWaitingToPreview.isDown());
+  if (!operation.transferWasRequested() & waitedForPreview) {
+    getFileOperationsHelper().openFile(mWaitingToPreview);
+    mWaitingToPreview=null;
+  }
 }
