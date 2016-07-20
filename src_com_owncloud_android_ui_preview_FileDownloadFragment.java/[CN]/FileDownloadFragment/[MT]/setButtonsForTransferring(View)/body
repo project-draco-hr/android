@@ -1,0 +1,9 @@
+{
+  rootView.findViewById(R.id.cancelBtn).setVisibility(View.VISIBLE);
+  rootView.findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
+  TextView progressText=(TextView)rootView.findViewById(R.id.progressText);
+  progressText.setText(R.string.downloader_download_in_progress_ticker);
+  progressText.setVisibility(View.VISIBLE);
+  rootView.findViewById(R.id.errorText).setVisibility(View.GONE);
+  rootView.findViewById(R.id.error_image).setVisibility(View.GONE);
+}

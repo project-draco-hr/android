@@ -1,6 +1,0 @@
-{
-  if (!mListening) {
-    listenForTransferProgress();
-  }
-  return super.getView() == null ? mView : super.getView();
-}

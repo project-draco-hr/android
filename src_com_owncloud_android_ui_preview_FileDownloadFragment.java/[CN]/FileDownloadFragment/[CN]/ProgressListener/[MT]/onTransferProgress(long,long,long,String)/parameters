@@ -1,4 +1,0 @@
-long progressRate
-long totalTransferredSoFar
-long totalToTransfer
-String filename

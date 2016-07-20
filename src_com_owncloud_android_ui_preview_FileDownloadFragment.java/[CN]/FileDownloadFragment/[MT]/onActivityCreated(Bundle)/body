@@ -1,0 +1,5 @@
+{
+  super.onActivityCreated(savedState);
+  mProgressController=new TransferProgressController(mContainerActivity);
+  mProgressController.setProgressBar(mProgressBar);
+}
