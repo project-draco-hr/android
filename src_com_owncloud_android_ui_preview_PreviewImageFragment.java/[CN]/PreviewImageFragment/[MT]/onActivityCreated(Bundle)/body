@@ -1,5 +1,7 @@
 {
   super.onActivityCreated(savedInstanceState);
+  mProgressController=new TransferProgressController(mContainerActivity);
+  mProgressController.setProgressBar(mProgressBar);
   if (savedInstanceState != null) {
     if (!mIgnoreFirstSavedState) {
       OCFile file=savedInstanceState.getParcelable(PreviewImageFragment.EXTRA_FILE);
@@ -8,6 +10,10 @@
  else {
       mIgnoreFirstSavedState=false;
     }
+  }
+  mAccount=getArguments().getParcelable(PreviewAudioFragment.EXTRA_ACCOUNT);
+  if (mAccount == null) {
+    throw new IllegalStateException("Instanced with a NULL ownCloud Account");
   }
   if (getFile() == null) {
     throw new IllegalStateException("Instanced with a NULL OCFile");

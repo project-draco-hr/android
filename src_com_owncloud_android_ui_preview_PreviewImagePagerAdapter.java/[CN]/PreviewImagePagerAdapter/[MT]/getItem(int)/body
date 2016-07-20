@@ -1,8 +1,8 @@
 {
   OCFile file=mImageFiles.get(i);
-  Fragment fragment=null;
+  Fragment fragment;
   if (file.isDown()) {
-    fragment=PreviewImageFragment.newInstance(file,mObsoletePositions.contains(Integer.valueOf(i)));
+    fragment=PreviewImageFragment.newInstance(file,mAccount,mObsoletePositions.contains(Integer.valueOf(i)));
   }
  else   if (mDownloadErrors.contains(Integer.valueOf(i))) {
     fragment=FileDownloadFragment.newInstance(file,mAccount,true);

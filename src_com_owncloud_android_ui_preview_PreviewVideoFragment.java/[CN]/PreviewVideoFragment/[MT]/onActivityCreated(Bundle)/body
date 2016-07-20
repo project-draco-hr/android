@@ -29,5 +29,7 @@
   if (!file.isVideo()) {
     throw new IllegalStateException("Not a video file");
   }
+  mProgressController=new TransferProgressController(mContainerActivity);
+  mProgressController.setProgressBar(mProgressBar);
   prepareVideo();
 }

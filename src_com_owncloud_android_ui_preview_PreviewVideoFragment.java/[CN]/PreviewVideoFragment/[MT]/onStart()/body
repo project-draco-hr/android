@@ -3,6 +3,7 @@
   Log_OC.v(TAG,"onStart");
   OCFile file=getFile();
   if (file != null && file.isDown()) {
+    mProgressController.startListeningProgressFor(file,mAccount);
     stopAudio();
     playVideo();
   }

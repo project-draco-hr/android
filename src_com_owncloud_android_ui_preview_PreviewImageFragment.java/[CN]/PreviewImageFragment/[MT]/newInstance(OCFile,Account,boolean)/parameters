@@ -1,2 +1,3 @@
-OCFile imageFile
+OCFile file
+Account account
 boolean ignoreFirstSavedState

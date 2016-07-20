@@ -1,5 +1,6 @@
 {
   Log_OC.d(TAG,"onStop starts");
+  mProgressController.stopListeningProgressFor(getFile(),mAccount);
   if (mLoadBitmapTask != null) {
     mLoadBitmapTask.cancel(true);
     mLoadBitmapTask=null;

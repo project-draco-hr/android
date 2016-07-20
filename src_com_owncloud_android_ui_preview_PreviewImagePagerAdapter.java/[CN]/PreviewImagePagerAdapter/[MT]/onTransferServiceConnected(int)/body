@@ -1,0 +1,6 @@
+{
+  FileFragment fragmentToUpdate=mCachedFragments.get(Integer.valueOf(position));
+  if (fragmentToUpdate != null) {
+    fragmentToUpdate.onTransferServiceConnected();
+  }
+}

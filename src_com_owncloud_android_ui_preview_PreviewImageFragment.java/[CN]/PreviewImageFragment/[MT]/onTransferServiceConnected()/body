@@ -1,2 +1,5 @@
 {
+  if (mProgressController != null) {
+    mProgressController.startListeningProgressFor(getFile(),mAccount);
+  }
 }

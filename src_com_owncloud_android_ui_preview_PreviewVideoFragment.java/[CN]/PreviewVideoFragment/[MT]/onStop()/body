@@ -1,5 +1,6 @@
 {
   Log_OC.v(TAG,"onStop");
+  mProgressController.stopListeningProgressFor(getFile(),mAccount);
   mPrepared=false;
   super.onStop();
 }
