@@ -1,18 +1,11 @@
 {
   if (component.equals(new ComponentName(PreviewImageActivity.this,FileDownloader.class))) {
+    Log_OC.e(TAG,"onServiceConnected, FileDownloader");
     mDownloaderBinder=(FileDownloaderBinder)service;
-    if (mRequestWaitingForBinder) {
-      mRequestWaitingForBinder=false;
-      Log_OC.d(TAG,"Simulating reselection of current page after connection " + "of download binder");
-      onPageSelected(mViewPager.getCurrentItem());
-      mPreviewImagePagerAdapter.onTransferServiceConnected(mViewPager.getCurrentItem());
-    }
   }
  else   if (component.equals(new ComponentName(PreviewImageActivity.this,FileUploader.class))) {
-    Log_OC.d(TAG,"Upload service connected");
+    Log_OC.e(TAG,"onServiceConnected, FileUploader");
     mUploaderBinder=(FileUploaderBinder)service;
   }
- else {
-    return;
-  }
+  mPreviewImagePagerAdapter.onTransferServiceConnected();
 }

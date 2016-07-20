@@ -1,0 +1,7 @@
+{
+  for (  FileFragment fragmentToUpdate : mCachedFragments.values()) {
+    if (fragmentToUpdate != null) {
+      fragmentToUpdate.onTransferServiceConnected();
+    }
+  }
+}

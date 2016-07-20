@@ -9,9 +9,12 @@
   int position=mHasSavedPosition ? mSavedPosition : mPreviewImagePagerAdapter.getFilePosition(getFile());
   position=(position >= 0) ? position : 0;
   mViewPager.setAdapter(mPreviewImagePagerAdapter);
-  mViewPager.setOnPageChangeListener(this);
+  mViewPager.addOnPageChangeListener(this);
   mViewPager.setCurrentItem(position);
-  if (position == 0 && !getFile().isDown()) {
-    mRequestWaitingForBinder=true;
+  mViewPager.post(new Runnable(){
+    @Override public void run(){
+      PreviewImageActivity.this.onPageSelected(mViewPager.getCurrentItem());
+    }
   }
+);
 }

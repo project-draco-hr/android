@@ -1,22 +1,9 @@
 {
-  if (isHoneycombOrHigher()) {
-    boolean visible=(mFullScreenAnchorView.getSystemUiVisibility() & View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) == 0;
-    if (visible) {
-      hideSystemUI(mFullScreenAnchorView);
-    }
- else {
-      showSystemUI(mFullScreenAnchorView);
-    }
+  boolean visible=(mFullScreenAnchorView.getSystemUiVisibility() & View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) == 0;
+  if (visible) {
+    hideSystemUI(mFullScreenAnchorView);
   }
  else {
-    ActionBar actionBar=getSupportActionBar();
-    if (!actionBar.isShowing()) {
-      actionBar.show();
-      mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-    }
- else {
-      actionBar.hide();
-      mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-    }
+    showSystemUI(mFullScreenAnchorView);
   }
 }

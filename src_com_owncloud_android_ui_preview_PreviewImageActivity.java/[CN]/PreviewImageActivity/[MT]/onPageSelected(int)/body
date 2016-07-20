@@ -1,16 +1,12 @@
 {
+  Log_OC.d(TAG,"onPageSelected " + position);
   mSavedPosition=position;
   mHasSavedPosition=true;
-  if (mDownloaderBinder == null) {
-    mRequestWaitingForBinder=true;
+  OCFile currentFile=mPreviewImagePagerAdapter.getFileAt(position);
+  getSupportActionBar().setTitle(currentFile.getFileName());
+  mDrawerToggle.setDrawerIndicatorEnabled(false);
+  if (!mPreviewImagePagerAdapter.pendingErrorAt(position)) {
+    getFileOperationsHelper().syncFile(currentFile);
   }
- else {
-    OCFile currentFile=mPreviewImagePagerAdapter.getFileAt(position);
-    getSupportActionBar().setTitle(currentFile.getFileName());
-    mDrawerToggle.setDrawerIndicatorEnabled(false);
-    if (!mPreviewImagePagerAdapter.pendingErrorAt(position)) {
-      getFileOperationsHelper().syncFile(currentFile);
-    }
-    ((PreviewImagePagerAdapter)mViewPager.getAdapter()).resetZoom();
-  }
+  ((PreviewImagePagerAdapter)mViewPager.getAdapter()).resetZoom();
 }
