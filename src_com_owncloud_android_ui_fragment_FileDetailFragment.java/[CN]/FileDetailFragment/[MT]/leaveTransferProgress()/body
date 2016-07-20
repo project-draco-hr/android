@@ -1,3 +1,0 @@
-{
-  mProgressController.stopListeningProgressFor(getFile(),mAccount);
-}

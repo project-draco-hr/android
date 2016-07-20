@@ -4,5 +4,5 @@
   mProgressController=new TransferProgressController((ComponentsGetter)getActivity());
   ProgressBar progressBar=(ProgressBar)mView.findViewById(R.id.fdProgressBar);
   DisplayUtils.colorPreLollipopHorizontalProgressBar(progressBar);
-  mProgressController.bindTo(progressBar);
+  mProgressController.setProgressBar(progressBar);
 }

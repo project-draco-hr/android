@@ -9,7 +9,6 @@
         mWaitingToPreview=null;
       }
  else       if (downloadEvent.equals(FileDownloader.getDownloadAddedMessage())) {
-        detailsFragment.listenForTransferProgress();
         detailsFragment.updateFileDetails(true,false);
       }
  else       if (downloadEvent.equals(FileDownloader.getDownloadFinishMessage())) {

@@ -30,8 +30,6 @@
     throw new IllegalStateException("Not an audio file");
   }
   extractAndSetCoverArt(file);
-  mProgressController=new TransferProgressController((ComponentsGetter)getActivity());
-  ProgressBar progressBar=(ProgressBar)(getView().findViewById(R.id.transferProgressBar));
-  DisplayUtils.colorPreLollipopHorizontalProgressBar(progressBar);
-  mProgressController.bindTo(progressBar);
+  mProgressController=new TransferProgressController(mContainerActivity);
+  mProgressController.setProgressBar(mProgressBar);
 }

@@ -1,4 +1,4 @@
 {
-  leaveTransferProgress();
+  mProgressController.stopListeningProgressFor(getFile(),mAccount);
   super.onStop();
 }
