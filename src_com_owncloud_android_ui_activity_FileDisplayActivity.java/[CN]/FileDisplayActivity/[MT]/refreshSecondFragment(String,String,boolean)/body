@@ -2,32 +2,26 @@
   FileFragment secondFragment=getSecondFragment();
   if (secondFragment != null) {
     invalidateOptionsMenu();
+    secondFragment.onDownloadEvent(downloadEvent,downloadedRemotePath,success);
     if (secondFragment instanceof FileDetailFragment) {
       FileDetailFragment detailsFragment=(FileDetailFragment)secondFragment;
       OCFile fileInFragment=detailsFragment.getFile();
       if (fileInFragment != null && !downloadedRemotePath.equals(fileInFragment.getRemotePath())) {
         mWaitingToPreview=null;
       }
- else       if (downloadEvent.equals(FileDownloader.getDownloadAddedMessage())) {
-        detailsFragment.updateFileDetails(true,false);
-      }
  else       if (downloadEvent.equals(FileDownloader.getDownloadFinishMessage())) {
-        boolean detailsFragmentChanged=false;
         boolean waitedPreview=(mWaitingToPreview != null && mWaitingToPreview.getRemotePath().equals(downloadedRemotePath));
         if (waitedPreview) {
           if (success) {
             mWaitingToPreview=getStorageManager().getFileById(mWaitingToPreview.getFileId());
             if (PreviewAudioFragment.canBePreviewed(mWaitingToPreview)) {
               startAudioPreview(mWaitingToPreview,0);
-              detailsFragmentChanged=true;
             }
  else             if (PreviewVideoFragment.canBePreviewed(mWaitingToPreview)) {
               startVideoPreview(mWaitingToPreview,0);
-              detailsFragmentChanged=true;
             }
  else             if (PreviewTextFragment.canBePreviewed(mWaitingToPreview)) {
               startTextPreview(mWaitingToPreview);
-              detailsFragmentChanged=true;
             }
  else {
               getFileOperationsHelper().openFile(mWaitingToPreview);
@@ -35,20 +29,6 @@
           }
           mWaitingToPreview=null;
         }
-        if (!detailsFragmentChanged) {
-          detailsFragment.updateFileDetails(false,(success));
-        }
-      }
-    }
- else     if (success && downloadEvent.equals(FileDownloader.getDownloadFinishMessage())) {
-      if (secondFragment instanceof PreviewTextFragment) {
-        ((PreviewTextFragment)secondFragment).loadAndShowTextPreview();
-      }
- else       if (secondFragment instanceof PreviewAudioFragment) {
-        ((PreviewAudioFragment)secondFragment).playAudio(true);
-      }
- else       if (secondFragment instanceof PreviewVideoFragment) {
-        ((PreviewVideoFragment)secondFragment).playVideo();
       }
     }
   }

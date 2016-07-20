@@ -1,0 +1,8 @@
+{
+  if (downloadEvent.equals(FileDownloader.getDownloadFinishMessage())) {
+    if (success) {
+      playVideo();
+    }
+    mProgressController.reset();
+  }
+}

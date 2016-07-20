@@ -2,6 +2,7 @@
   if (mProgressBar != null) {
     int percent=(int)(100.0 * ((double)totalTransferredSoFar) / ((double)totalToTransfer));
     if (percent != mLastPercent) {
+      mProgressBar.setIndeterminate(false);
       mProgressBar.setProgress(percent);
       mProgressBar.postInvalidate();
     }

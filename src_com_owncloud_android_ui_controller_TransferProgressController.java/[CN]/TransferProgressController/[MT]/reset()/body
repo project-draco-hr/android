@@ -1,0 +1,7 @@
+{
+  if (mProgressBar != null) {
+    mLastPercent=-1;
+    mProgressBar.setProgress(0);
+    mProgressBar.setIndeterminate(false);
+  }
+}
