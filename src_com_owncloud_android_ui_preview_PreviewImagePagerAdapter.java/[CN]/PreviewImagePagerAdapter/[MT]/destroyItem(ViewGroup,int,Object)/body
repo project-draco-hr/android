@@ -1,4 +1,4 @@
 {
-  mCachedFragments.remove(Integer.valueOf(position));
+  mCachedFragments.remove(position);
   super.destroyItem(container,position,object);
 }

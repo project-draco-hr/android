@@ -9,7 +9,13 @@
         updateWithDownloadError(position);
       }
     }
-    notifyDataSetChanged();
+    FileFragment fragment=mCachedFragments.get(position);
+    if (fragment instanceof FileDownloadFragment) {
+      notifyDataSetChanged();
+    }
+ else {
+      fragment.onDownloadEvent(action,file.getRemotePath(),success);
+    }
   }
  else {
     Log_OC.d(TAG,"Download finished, but the fragment is offscreen");

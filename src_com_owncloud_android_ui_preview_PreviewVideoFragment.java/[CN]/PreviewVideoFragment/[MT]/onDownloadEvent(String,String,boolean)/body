@@ -3,6 +3,5 @@
     if (success) {
       playVideo();
     }
-    mProgressController.reset();
   }
 }

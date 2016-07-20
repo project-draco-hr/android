@@ -3,6 +3,5 @@
     if (success) {
       loadAndShowImagePreview();
     }
-    mProgressController.reset();
   }
 }

@@ -3,6 +3,5 @@
     if (success) {
       playAudio(true);
     }
-    mProgressController.reset();
   }
 }
