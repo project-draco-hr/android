@@ -1,5 +1,6 @@
 {
   super.onStart();
   Log_OC.e(TAG,"onStart");
+  mProgressController.startListeningProgressFor(getFile(),mAccount);
   loadAndShowTextPreview();
 }
