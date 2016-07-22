@@ -11,10 +11,12 @@
   mViewPager.setAdapter(mPreviewImagePagerAdapter);
   mViewPager.addOnPageChangeListener(this);
   mViewPager.setCurrentItem(position);
-  mViewPager.post(new Runnable(){
-    @Override public void run(){
-      PreviewImageActivity.this.onPageSelected(mViewPager.getCurrentItem());
+  if (position == 0) {
+    mViewPager.post(new Runnable(){
+      @Override public void run(){
+        PreviewImageActivity.this.onPageSelected(mViewPager.getCurrentItem());
+      }
     }
-  }
 );
+  }
 }
