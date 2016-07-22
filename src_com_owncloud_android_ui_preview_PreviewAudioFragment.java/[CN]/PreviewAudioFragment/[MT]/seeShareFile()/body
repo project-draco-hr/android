@@ -1,3 +1,0 @@
-{
-  mContainerActivity.getFileOperationsHelper().showShareFile(getFile());
-}

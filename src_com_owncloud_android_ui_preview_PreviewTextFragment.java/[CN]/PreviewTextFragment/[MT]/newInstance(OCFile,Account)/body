@@ -1,0 +1,8 @@
+{
+  PreviewVideoFragment frag=new PreviewVideoFragment();
+  Bundle args=new Bundle();
+  args.putParcelable(EXTRA_FILE,file);
+  args.putParcelable(EXTRA_ACCOUNT,account);
+  frag.setArguments(args);
+  return frag;
+}

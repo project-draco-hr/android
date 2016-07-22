@@ -2,7 +2,7 @@
 switch (item.getItemId()) {
 case R.id.action_share_file:
 {
-      seeShareFile();
+      mContainerActivity.getFileOperationsHelper().showShareFile(getFile());
       return true;
     }
 case R.id.action_open_file_with:
@@ -23,7 +23,7 @@ return true;
 }
 case R.id.action_send_file:
 {
-sendFile();
+mContainerActivity.getFileOperationsHelper().sendDownloadedFile(getFile());
 return true;
 }
 case R.id.action_sync_file:

@@ -12,7 +12,7 @@
       }
     }
  else     if (PreviewTextFragment.canBePreviewed(file)) {
-      secondFragment=null;
+      secondFragment=PreviewTextFragment.newInstance(file,getAccount());
     }
  else {
       secondFragment=FileDetailFragment.newInstance(file,getAccount());
