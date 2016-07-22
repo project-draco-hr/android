@@ -1,4 +1,0 @@
-{
-  Log_OC.v(TAG,"onPause");
-  super.onPause();
-}

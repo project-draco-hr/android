@@ -2,8 +2,12 @@
   if (result.isSuccess()) {
     if (operation.transferWasRequested()) {
       OCFile syncedFile=operation.getLocalFile();
-      onTransferStateChanged(syncedFile,true,true);
-      refreshShowDetails();
+      refreshListOfFilesFragment(false);
+      FileFragment secondFragment=getSecondFragment();
+      if (secondFragment != null && syncedFile.equals(secondFragment.getFile())) {
+        secondFragment.onSyncEvent(FileDownloader.getDownloadAddedMessage(),false,null);
+        invalidateOptionsMenu();
+      }
     }
  else     if (getSecondFragment() == null) {
       Toast msg=Toast.makeText(this,ErrorMessageAdapter.getErrorCauseMessage(result,operation,getResources()),Toast.LENGTH_LONG);

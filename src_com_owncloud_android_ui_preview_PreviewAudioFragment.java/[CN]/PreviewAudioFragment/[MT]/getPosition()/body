@@ -1,4 +1,0 @@
-{
-  Log_OC.v(TAG,"getting position: " + mSavedPlaybackPosition);
-  return mSavedPlaybackPosition;
-}

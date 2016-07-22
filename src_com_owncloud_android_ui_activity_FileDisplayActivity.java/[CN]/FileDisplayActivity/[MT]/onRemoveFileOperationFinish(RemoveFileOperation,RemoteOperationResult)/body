@@ -15,7 +15,7 @@
       cleanSecondFragment();
     }
     if (getStorageManager().getFileById(removedFile.getParentId()).equals(getCurrentDir())) {
-      refreshListOfFilesFragment();
+      refreshListOfFilesFragment(true);
     }
     invalidateOptionsMenu();
   }

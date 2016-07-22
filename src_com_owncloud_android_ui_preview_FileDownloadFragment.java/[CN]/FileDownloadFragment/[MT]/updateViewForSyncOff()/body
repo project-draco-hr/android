@@ -1,0 +1,8 @@
+{
+  if (getFile().isDown()) {
+    setButtonsForDown(getView());
+  }
+ else {
+    setButtonsForRemote(getView());
+  }
+}

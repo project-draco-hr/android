@@ -1,8 +1,0 @@
-{
-  if (downloadEvent.equals(FileDownloader.getDownloadAddedMessage())) {
-    updateFileDetails(true,false);
-  }
- else   if (downloadEvent.equals(FileDownloader.getDownloadFinishMessage())) {
-    updateFileDetails(false,(success));
-  }
-}

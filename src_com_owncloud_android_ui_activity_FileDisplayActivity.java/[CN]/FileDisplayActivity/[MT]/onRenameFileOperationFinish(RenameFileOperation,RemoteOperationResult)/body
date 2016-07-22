@@ -3,42 +3,13 @@
   if (result.isSuccess()) {
     FileFragment details=getSecondFragment();
     if (details != null && renamedFile.equals(details.getFile())) {
-      if (details instanceof FileDetailFragment) {
-        ((FileDetailFragment)details).updateFileDetails(renamedFile,getAccount());
-        showDetails(renamedFile);
-      }
- else       if (details instanceof PreviewAudioFragment) {
-        ((PreviewAudioFragment)details).updateFile(renamedFile);
-        if (PreviewAudioFragment.canBePreviewed(renamedFile)) {
-          int position=((PreviewAudioFragment)details).getPosition();
-          startAudioPreview(renamedFile,position);
-        }
- else {
-          getFileOperationsHelper().openFile(renamedFile);
-        }
-      }
- else       if (details instanceof PreviewVideoFragment) {
-        ((PreviewVideoFragment)details).updateFile(renamedFile);
-        if (PreviewVideoFragment.canBePreviewed(renamedFile)) {
-          int position=((PreviewVideoFragment)details).getPosition();
-          startVideoPreview(renamedFile,position);
-        }
- else {
-          getFileOperationsHelper().openFile(renamedFile);
-        }
-      }
- else       if (details instanceof PreviewTextFragment) {
-        ((PreviewTextFragment)details).updateFile(renamedFile);
-        if (PreviewTextFragment.canBePreviewed(renamedFile)) {
-          startTextPreview(renamedFile);
-        }
- else {
-          getFileOperationsHelper().openFile(renamedFile);
-        }
-      }
+      renamedFile=getStorageManager().getFileById(renamedFile.getFileId());
+      setFile(renamedFile);
+      details.onFileMetadataChanged(renamedFile);
+      updateActionBarTitleAndHomeButton(renamedFile);
     }
     if (getStorageManager().getFileById(renamedFile.getParentId()).equals(getCurrentDir())) {
-      refreshListOfFilesFragment();
+      refreshListOfFilesFragment(true);
     }
   }
  else {

@@ -1,7 +1,0 @@
-{
-  if (downloadEvent.equals(FileDownloader.getDownloadFinishMessage())) {
-    if (success) {
-      loadAndShowTextPreview();
-    }
-  }
-}

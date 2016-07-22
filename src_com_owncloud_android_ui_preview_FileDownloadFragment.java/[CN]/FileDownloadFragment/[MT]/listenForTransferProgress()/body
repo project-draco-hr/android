@@ -1,8 +1,6 @@
 {
   if (mProgressController != null) {
     mProgressController.startListeningProgressFor(getFile(),mAccount);
-    if (getView() != null) {
-      setButtonsForTransferring(getView());
-    }
+    setButtonsForTransferring(getView());
   }
 }

@@ -1,0 +1,8 @@
+{
+  if (reloadData) {
+    listDirectory(null);
+  }
+ else {
+    getListView().invalidateViews();
+  }
+}

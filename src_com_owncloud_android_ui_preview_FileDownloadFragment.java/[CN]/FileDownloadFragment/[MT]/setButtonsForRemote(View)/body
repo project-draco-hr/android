@@ -1,7 +1,9 @@
 {
-  rootView.findViewById(R.id.cancelBtn).setVisibility(View.GONE);
-  rootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
-  rootView.findViewById(R.id.progressText).setVisibility(View.GONE);
-  rootView.findViewById(R.id.errorText).setVisibility(View.VISIBLE);
-  rootView.findViewById(R.id.error_image).setVisibility(View.VISIBLE);
+  if (rootView != null) {
+    rootView.findViewById(R.id.cancelBtn).setVisibility(View.GONE);
+    rootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
+    rootView.findViewById(R.id.progressText).setVisibility(View.GONE);
+    rootView.findViewById(R.id.errorText).setVisibility(View.VISIBLE);
+    rootView.findViewById(R.id.error_image).setVisibility(View.VISIBLE);
+  }
 }

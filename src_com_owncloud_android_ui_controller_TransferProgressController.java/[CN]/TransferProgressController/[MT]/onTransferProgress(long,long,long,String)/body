@@ -8,9 +8,6 @@
           mProgressBar.setIndeterminate(false);
           mProgressBar.setProgress(percent);
           mProgressBar.invalidate();
-          if (percent == mProgressBar.getMax()) {
-            mProgressBar.setVisibility(View.GONE);
-          }
         }
       }
 );

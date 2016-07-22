@@ -20,7 +20,6 @@
   }
  catch (  IOException e) {
     Log_OC.e(TAG,e.getMessage(),e);
-    finish();
   }
  finally {
     if (inputStream != null) {
@@ -29,7 +28,6 @@
       }
  catch (      IOException e) {
         Log_OC.e(TAG,e.getMessage(),e);
-        finish();
       }
     }
     if (sc != null) {

@@ -14,7 +14,7 @@
       notifyDataSetChanged();
     }
  else {
-      fragment.onDownloadEvent(action,file.getRemotePath(),success);
+      fragment.onSyncEvent(action,success,null);
     }
   }
  else {
