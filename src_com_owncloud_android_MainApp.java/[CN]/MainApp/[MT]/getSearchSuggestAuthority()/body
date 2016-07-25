@@ -1,0 +1,3 @@
+{
+  return getResources().getString(R.string.search_suggest_authority);
+}
