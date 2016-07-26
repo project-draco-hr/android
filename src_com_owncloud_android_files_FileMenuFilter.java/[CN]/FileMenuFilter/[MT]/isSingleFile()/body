@@ -1,0 +1,3 @@
+{
+  return isSingleSelection() && !mFiles.get(0).isFolder();
+}

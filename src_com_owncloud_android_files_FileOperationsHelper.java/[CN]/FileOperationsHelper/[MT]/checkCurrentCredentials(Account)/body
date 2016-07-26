@@ -3,5 +3,5 @@
   service.setAction(OperationsService.ACTION_CHECK_CURRENT_CREDENTIALS);
   service.putExtra(OperationsService.EXTRA_ACCOUNT,account);
   mWaitingForOpId=mFileActivity.getOperationsServiceBinder().queueNewOperation(service);
-  mFileActivity.showLoadingDialog(mFileActivity.getApplicationContext().getString(R.string.wait_checking_credentials));
+  mFileActivity.showLoadingDialog(mFileActivity.getString(R.string.wait_checking_credentials));
 }

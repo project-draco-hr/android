@@ -1,9 +1,0 @@
-{
-  Intent service=new Intent(mFileActivity,OperationsService.class);
-  service.setAction(OperationsService.ACTION_MOVE_FILE);
-  service.putExtra(OperationsService.EXTRA_NEW_PARENT_PATH,newfile.getRemotePath());
-  service.putExtra(OperationsService.EXTRA_REMOTE_PATH,currentFile.getRemotePath());
-  service.putExtra(OperationsService.EXTRA_ACCOUNT,mFileActivity.getAccount());
-  mWaitingForOpId=mFileActivity.getOperationsServiceBinder().queueNewOperation(service);
-  mFileActivity.showLoadingDialog(mFileActivity.getApplicationContext().getString(R.string.wait_a_moment));
-}

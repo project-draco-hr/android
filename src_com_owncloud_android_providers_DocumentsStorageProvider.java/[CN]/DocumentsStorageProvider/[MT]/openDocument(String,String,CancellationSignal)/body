@@ -1,0 +1,17 @@
+{
+  final long docId=Long.parseLong(documentId);
+  updateCurrentStorageManagerIfNeeded(docId);
+  OCFile file=mCurrentStorageManager.getFileById(docId);
+  if (!file.isDown()) {
+    Intent i=new Intent(getContext(),FileDownloader.class);
+    i.putExtra(FileDownloader.EXTRA_ACCOUNT,mCurrentStorageManager.getAccount());
+    i.putExtra(FileDownloader.EXTRA_FILE,file);
+    getContext().startService(i);
+    do {
+      if (!waitOrGetCancelled(cancellationSignal))       return null;
+      file=mCurrentStorageManager.getFileById(docId);
+    }
+ while (!file.isDown());
+  }
+  return ParcelFileDescriptor.open(new File(file.getStoragePath()),ParcelFileDescriptor.MODE_READ_ONLY);
+}

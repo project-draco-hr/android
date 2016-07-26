@@ -1,0 +1,8 @@
+{
+  for (  OCFile file : mFiles) {
+    if (file.isDown()) {
+      return true;
+    }
+  }
+  return false;
+}

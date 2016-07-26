@@ -1,0 +1,9 @@
+{
+  mRootIdToStorageManager=new HashMap<Long,FileDataStorageManager>();
+  ContentResolver contentResolver=getContext().getContentResolver();
+  for (  Account account : AccountUtils.getAccounts(getContext())) {
+    final FileDataStorageManager storageManager=new FileDataStorageManager(account,contentResolver);
+    final OCFile rootDir=storageManager.getFileByPath("/");
+    mRootIdToStorageManager.put(rootDir.getFileId(),storageManager);
+  }
+}

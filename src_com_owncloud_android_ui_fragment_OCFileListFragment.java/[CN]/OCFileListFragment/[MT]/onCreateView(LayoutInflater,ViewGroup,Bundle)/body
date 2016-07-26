@@ -1,6 +1,11 @@
 {
   Log_OC.i(TAG,"onCreateView() start");
   View v=super.onCreateView(inflater,container,savedInstanceState);
+  Bundle args=getArguments();
+  boolean allowContextualActions=(args != null) && args.getBoolean(ARG_ALLOW_CONTEXTUAL_ACTIONS,false);
+  if (allowContextualActions) {
+    setChoiceModeAsMultipleModal();
+  }
   Log_OC.i(TAG,"onCreateView() end");
   return v;
 }

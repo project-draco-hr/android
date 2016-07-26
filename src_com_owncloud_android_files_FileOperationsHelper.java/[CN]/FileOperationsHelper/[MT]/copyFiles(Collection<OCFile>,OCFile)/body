@@ -1,0 +1,11 @@
+{
+  for (  OCFile file : files) {
+    Intent service=new Intent(mFileActivity,OperationsService.class);
+    service.setAction(OperationsService.ACTION_COPY_FILE);
+    service.putExtra(OperationsService.EXTRA_NEW_PARENT_PATH,targetFolder.getRemotePath());
+    service.putExtra(OperationsService.EXTRA_REMOTE_PATH,file.getRemotePath());
+    service.putExtra(OperationsService.EXTRA_ACCOUNT,mFileActivity.getAccount());
+    mWaitingForOpId=mFileActivity.getOperationsServiceBinder().queueNewOperation(service);
+  }
+  mFileActivity.showLoadingDialog(mFileActivity.getString(R.string.wait_a_moment));
+}

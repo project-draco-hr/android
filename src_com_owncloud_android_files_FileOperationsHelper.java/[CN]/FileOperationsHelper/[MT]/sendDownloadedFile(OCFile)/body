@@ -11,6 +11,6 @@
     chooserDialog.show(mFileActivity.getSupportFragmentManager(),FTAG_CHOOSER_DIALOG);
   }
  else {
-    Log_OC.wtf(TAG,"Trying to send a NULL OCFile");
+    Log_OC.e(TAG,"Trying to send a NULL OCFile");
   }
 }

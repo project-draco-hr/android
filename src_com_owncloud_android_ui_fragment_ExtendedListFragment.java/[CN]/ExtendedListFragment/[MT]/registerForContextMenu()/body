@@ -1,6 +1,0 @@
-{
-  registerForContextMenu(mListView);
-  registerForContextMenu(mGridView);
-  mListView.setOnCreateContextMenuListener(this);
-  mGridView.setOnCreateContextMenuListener(this);
-}
