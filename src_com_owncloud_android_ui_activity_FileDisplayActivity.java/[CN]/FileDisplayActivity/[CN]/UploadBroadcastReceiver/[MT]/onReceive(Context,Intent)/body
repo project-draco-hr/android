@@ -23,6 +23,7 @@
         String newName=(new File(uploadedRemotePath)).getName();
         Toast msg=Toast.makeText(context,String.format(getString(R.string.filedetails_renamed_in_upload_msg),newName),Toast.LENGTH_LONG);
         msg.show();
+        updateActionBarTitleAndHomeButton(getFile());
       }
     }
   }

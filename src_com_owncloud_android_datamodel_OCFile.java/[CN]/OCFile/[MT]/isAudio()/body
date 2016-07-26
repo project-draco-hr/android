@@ -1,3 +1,3 @@
 {
-  return (mMimeType != null && mMimeType.startsWith("audio/"));
+  return ((mMimeType != null && mMimeType.startsWith("audio/")) || getMimeTypeFromName().startsWith("audio/"));
 }
