@@ -3,9 +3,11 @@
     setPermissionsListening(editShareView,false);
     int sharePermissions=mShare.getPermissions();
     boolean isFederated=ShareType.FEDERATED.equals(mShare.getShareType());
+    OwnCloudVersion serverVersion=AccountUtils.getServerVersion(mAccount);
+    boolean isNotReshareableFederatedSupported=(serverVersion != null && serverVersion.isNotReshareableFederatedSupported());
     CompoundButton compound;
     compound=(CompoundButton)editShareView.findViewById(R.id.canShareSwitch);
-    if (isFederated) {
+    if (isFederated && !isNotReshareableFederatedSupported) {
       compound.setVisibility(View.INVISIBLE);
     }
     compound.setChecked((sharePermissions & OCShare.SHARE_PERMISSION_FLAG) > 0);
