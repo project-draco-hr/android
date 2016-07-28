@@ -22,9 +22,9 @@
     Uri dataUri=null;
     int count=0;
     MainApp app=(MainApp)getContext().getApplicationContext();
-    Uri userBaseUri=new Uri.Builder().scheme(CONTENT).authority(app.getSearchSuggestAuthority() + DATA_USER_SUFFIX).build();
-    Uri groupBaseUri=new Uri.Builder().scheme(CONTENT).authority(app.getSearchSuggestAuthority() + DATA_GROUP_SUFFIX).build();
-    Uri remoteBaseUri=new Uri.Builder().scheme(CONTENT).authority(app.getSearchSuggestAuthority() + DATA_REMOTE_SUFFIX).build();
+    Uri userBaseUri=new Uri.Builder().scheme(CONTENT).authority(sSuggestAuthority + DATA_USER_SUFFIX).build();
+    Uri groupBaseUri=new Uri.Builder().scheme(CONTENT).authority(sSuggestAuthority + DATA_GROUP_SUFFIX).build();
+    Uri remoteBaseUri=new Uri.Builder().scheme(CONTENT).authority(sSuggestAuthority + DATA_REMOTE_SUFFIX).build();
     FileDataStorageManager manager=new FileDataStorageManager(account,getContext().getContentResolver());
     boolean federatedShareAllowed=manager.getCapability(account.name).getFilesSharingFederationOutgoing().isTrue();
     try {

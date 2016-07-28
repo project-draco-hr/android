@@ -1,12 +1,12 @@
 {
   try {
-    MainApp app=(MainApp)getContext().getApplicationContext();
-    sShareTypes.put(app.getSearchSuggestAuthority() + DATA_USER_SUFFIX,ShareType.USER);
-    sShareTypes.put(app.getSearchSuggestAuthority() + DATA_GROUP_SUFFIX,ShareType.GROUP);
-    sShareTypes.put(app.getSearchSuggestAuthority() + DATA_REMOTE_SUFFIX,ShareType.FEDERATED);
+    sSuggestAuthority=getContext().getResources().getString(R.string.search_suggest_authority);
+    sShareTypes.put(sSuggestAuthority + DATA_USER_SUFFIX,ShareType.USER);
+    sShareTypes.put(sSuggestAuthority + DATA_GROUP_SUFFIX,ShareType.GROUP);
+    sShareTypes.put(sSuggestAuthority + DATA_REMOTE_SUFFIX,ShareType.FEDERATED);
     mUriMatcher=new UriMatcher(UriMatcher.NO_MATCH);
-    mUriMatcher.addURI(app.getSearchSuggestAuthority(),SearchManager.SUGGEST_URI_PATH_QUERY + "/*",SEARCH);
-    sIntentAction=app.getString(R.string.search_suggest_intent_action);
+    mUriMatcher.addURI(sSuggestAuthority,SearchManager.SUGGEST_URI_PATH_QUERY + "/*",SEARCH);
+    sSuggestIntentAction=getContext().getResources().getString(R.string.search_suggest_intent_action);
     return true;
   }
  catch (  Throwable t) {
