@@ -14,7 +14,7 @@
       success=createAccount(result);
     }
  else {
-      if (!mUsernameInput.getText().toString().equals(username)) {
+      if (!mUsernameInput.getText().toString().trim().equals(username)) {
         result=new RemoteOperationResult(ResultCode.ACCOUNT_NOT_THE_SAME);
         mAuthToken="";
         updateAuthStatusIconAndText(result);
