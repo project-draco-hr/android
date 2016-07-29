@@ -1,5 +1,16 @@
 {
-  mUriMatcher=new UriMatcher(UriMatcher.NO_MATCH);
-  mUriMatcher.addURI(AUTHORITY,SearchManager.SUGGEST_URI_PATH_QUERY + "/*",SEARCH);
-  return true;
+  try {
+    sSuggestAuthority=getContext().getResources().getString(R.string.search_suggest_authority);
+    sShareTypes.put(sSuggestAuthority + DATA_USER_SUFFIX,ShareType.USER);
+    sShareTypes.put(sSuggestAuthority + DATA_GROUP_SUFFIX,ShareType.GROUP);
+    sShareTypes.put(sSuggestAuthority + DATA_REMOTE_SUFFIX,ShareType.FEDERATED);
+    mUriMatcher=new UriMatcher(UriMatcher.NO_MATCH);
+    mUriMatcher.addURI(sSuggestAuthority,SearchManager.SUGGEST_URI_PATH_QUERY + "/*",SEARCH);
+    sSuggestIntentAction=getContext().getResources().getString(R.string.search_suggest_intent_action);
+    return true;
+  }
+ catch (  Throwable t) {
+    Log_OC.e("TAG","Fail creating provider",t);
+    return false;
+  }
 }
