@@ -3,9 +3,11 @@
     setPermissionsListening(editShareView,false);
     int sharePermissions=mShare.getPermissions();
     boolean isFederated=ShareType.FEDERATED.equals(mShare.getShareType());
+    OwnCloudVersion serverVersion=AccountUtils.getServerVersion(mAccount);
+    boolean isNotReshareableFederatedSupported=(serverVersion != null && serverVersion.isNotReshareableFederatedSupported());
     CompoundButton compound;
     compound=(CompoundButton)editShareView.findViewById(R.id.canShareSwitch);
-    if (isFederated) {
+    if (isFederated && !isNotReshareableFederatedSupported) {
       compound.setVisibility(View.INVISIBLE);
     }
     compound.setChecked((sharePermissions & OCShare.SHARE_PERMISSION_FLAG) > 0);
@@ -13,16 +15,16 @@
     int anyUpdatePermission=OCShare.CREATE_PERMISSION_FLAG | OCShare.UPDATE_PERMISSION_FLAG | OCShare.DELETE_PERMISSION_FLAG;
     boolean canEdit=(sharePermissions & anyUpdatePermission) > 0;
     compound.setChecked(canEdit);
-    if (mFile.isFolder() && !isFederated) {
+    if (mFile.isFolder() && (!isFederated || isNotReshareableFederatedSupported)) {
       compound=(CompoundButton)editShareView.findViewById(R.id.canEditCreateCheckBox);
       compound.setChecked((sharePermissions & OCShare.CREATE_PERMISSION_FLAG) > 0);
-      compound.setVisibility(canEdit ? View.VISIBLE : View.GONE);
+      compound.setVisibility((canEdit && !isFederated) ? View.VISIBLE : View.GONE);
       compound=(CompoundButton)editShareView.findViewById(R.id.canEditChangeCheckBox);
       compound.setChecked((sharePermissions & OCShare.UPDATE_PERMISSION_FLAG) > 0);
-      compound.setVisibility(canEdit ? View.VISIBLE : View.GONE);
+      compound.setVisibility((canEdit && !isFederated) ? View.VISIBLE : View.GONE);
       compound=(CompoundButton)editShareView.findViewById(R.id.canEditDeleteCheckBox);
       compound.setChecked((sharePermissions & OCShare.DELETE_PERMISSION_FLAG) > 0);
-      compound.setVisibility(canEdit ? View.VISIBLE : View.GONE);
+      compound.setVisibility((canEdit && !isFederated) ? View.VISIBLE : View.GONE);
     }
     setPermissionsListening(editShareView,true);
   }

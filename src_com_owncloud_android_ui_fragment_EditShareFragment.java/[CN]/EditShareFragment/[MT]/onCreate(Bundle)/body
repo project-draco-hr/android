@@ -2,8 +2,13 @@
   super.onCreate(savedInstanceState);
   Log_OC.d(TAG,"onCreate");
   if (getArguments() != null) {
-    mShare=getArguments().getParcelable(ARG_SHARE);
     mFile=getArguments().getParcelable(ARG_FILE);
     mAccount=getArguments().getParcelable(ARG_ACCOUNT);
+    if (savedInstanceState == null) {
+      mShare=getArguments().getParcelable(ARG_SHARE);
+    }
+ else {
+      mShare=savedInstanceState.getParcelable(ARG_SHARE);
+    }
   }
 }

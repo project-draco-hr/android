@@ -13,10 +13,14 @@ Log_OC.v(TAG,"canEditCheckBox toggled to " + isChecked);
 boolean isFederated=ShareType.FEDERATED.equals(mShare.getShareType());
 if (mFile.isFolder()) {
 if (isChecked) {
-if (!isFederated) {
+OwnCloudVersion serverVersion=AccountUtils.getServerVersion(mAccount);
+boolean isNotReshareableFederatedSupported=(serverVersion != null && serverVersion.isNotReshareableFederatedSupported());
+if (!isFederated || isNotReshareableFederatedSupported) {
 for (int i=0; i < sSubordinateCheckBoxIds.length; i++) {
   subordinate=(CompoundButton)getView().findViewById(sSubordinateCheckBoxIds[i]);
-  subordinate.setVisibility(View.VISIBLE);
+  if (!isFederated) {
+    subordinate.setVisibility(View.VISIBLE);
+  }
   if (!subordinate.isChecked() && !mFile.isSharedWithMe()) {
     toggleDisablingListener(subordinate);
   }
