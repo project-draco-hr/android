@@ -1,7 +1,0 @@
-{
-  getView().findViewById(R.id.cancelBtn).setVisibility(View.GONE);
-  getView().findViewById(R.id.progressBar).setVisibility(View.GONE);
-  getView().findViewById(R.id.progressText).setVisibility(View.GONE);
-  getView().findViewById(R.id.errorText).setVisibility(View.VISIBLE);
-  getView().findViewById(R.id.error_image).setVisibility(View.VISIBLE);
-}

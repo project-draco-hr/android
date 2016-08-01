@@ -1,0 +1,33 @@
+{
+  FileFragment secondFragment=getSecondFragment();
+  if (secondFragment != null) {
+    if (!success && !getFile().fileExists()) {
+      cleanSecondFragment();
+    }
+ else {
+      OCFile file=getFile();
+      boolean fragmentReplaced=false;
+      if (success && secondFragment instanceof FileDetailFragment) {
+        fragmentReplaced=true;
+        if (PreviewImageFragment.canBePreviewed(file)) {
+          startImagePreview(file);
+        }
+ else         if (PreviewAudioFragment.canBePreviewed(file)) {
+          startAudioPreview(file,0);
+        }
+ else         if (PreviewVideoFragment.canBePreviewed(file)) {
+          startVideoPreview(file,0);
+        }
+ else         if (PreviewTextFragment.canBePreviewed(file)) {
+          startTextPreview(file);
+        }
+ else {
+          fragmentReplaced=false;
+        }
+      }
+      if (!fragmentReplaced) {
+        secondFragment.onSyncEvent(uploadEvent,success,file);
+      }
+    }
+  }
+}

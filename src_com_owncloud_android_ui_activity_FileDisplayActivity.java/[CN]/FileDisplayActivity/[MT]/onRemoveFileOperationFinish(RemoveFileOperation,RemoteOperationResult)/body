@@ -5,14 +5,17 @@
     OCFile removedFile=operation.getFile();
     FileFragment second=getSecondFragment();
     if (second != null && removedFile.equals(second.getFile())) {
-      if (second instanceof PreviewMediaFragment) {
-        ((PreviewMediaFragment)second).stopPreview(true);
+      if (second instanceof PreviewAudioFragment) {
+        ((PreviewAudioFragment)second).stopPreview();
+      }
+ else       if (second instanceof PreviewVideoFragment) {
+        ((PreviewVideoFragment)second).stopPreview();
       }
       setFile(getStorageManager().getFileById(removedFile.getParentId()));
       cleanSecondFragment();
     }
     if (getStorageManager().getFileById(removedFile.getParentId()).equals(getCurrentDir())) {
-      refreshListOfFilesFragment();
+      refreshListOfFilesFragment(true);
     }
     invalidateOptionsMenu();
   }

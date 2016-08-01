@@ -1,6 +1,6 @@
 {
   if (result.isSuccess()) {
-    refreshListOfFilesFragment();
+    refreshListOfFilesFragment(true);
   }
  else {
     try {

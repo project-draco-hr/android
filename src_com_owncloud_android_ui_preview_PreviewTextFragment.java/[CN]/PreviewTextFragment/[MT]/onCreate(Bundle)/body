@@ -1,14 +1,10 @@
 {
   super.onCreate(savedInstanceState);
-  OCFile file=getFile();
-  Bundle args=getArguments();
-  if (file == null) {
-    file=args.getParcelable(FileDisplayActivity.EXTRA_FILE);
-  }
-  if (mAccount == null) {
-    mAccount=args.getParcelable(FileDisplayActivity.EXTRA_ACCOUNT);
-  }
+  OCFile file;
   if (savedInstanceState == null) {
+    Bundle args=getArguments();
+    file=args.getParcelable(EXTRA_FILE);
+    mAccount=args.getParcelable(EXTRA_ACCOUNT);
     if (file == null) {
       throw new IllegalStateException("Instanced with a NULL OCFile");
     }

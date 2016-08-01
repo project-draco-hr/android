@@ -1,0 +1,31 @@
+{
+  if (syncEvent.equals(FileUploader.getUploadStartMessage())) {
+    updateViewForSyncInProgress();
+  }
+ else   if (syncEvent.equals(FileUploader.getUploadFinishMessage())) {
+    if (success) {
+      if (updatedFile != null) {
+        onFileMetadataChanged(updatedFile);
+      }
+ else {
+        onFileMetadataChanged();
+      }
+    }
+    updateViewForSyncOff();
+  }
+ else   if (syncEvent.equals(FileDownloader.getDownloadAddedMessage())) {
+    updateViewForSyncInProgress();
+  }
+ else   if (syncEvent.equals(FileDownloader.getDownloadFinishMessage())) {
+    if (success) {
+      if (updatedFile != null) {
+        onFileMetadataChanged(updatedFile);
+      }
+ else {
+        onFileMetadataChanged();
+      }
+      onFileContentChanged();
+    }
+    updateViewForSyncOff();
+  }
+}

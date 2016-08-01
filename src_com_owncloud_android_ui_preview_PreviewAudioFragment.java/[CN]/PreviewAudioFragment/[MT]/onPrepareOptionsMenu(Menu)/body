@@ -1,0 +1,20 @@
+{
+  super.onPrepareOptionsMenu(menu);
+  FileMenuFilter mf=new FileMenuFilter(getFile(),mAccount,mContainerActivity,getActivity());
+  mf.filter(menu);
+  MenuItem item=menu.findItem(R.id.action_rename_file);
+  if (item != null) {
+    item.setVisible(false);
+    item.setEnabled(false);
+  }
+  item=menu.findItem(R.id.action_move);
+  if (item != null) {
+    item.setVisible(false);
+    item.setEnabled(false);
+  }
+  item=menu.findItem(R.id.action_copy);
+  if (item != null) {
+    item.setVisible(false);
+    item.setEnabled(false);
+  }
+}

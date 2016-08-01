@@ -1,0 +1,4 @@
+{
+  stopPreview();
+  mContainerActivity.showDetails(getFile());
+}

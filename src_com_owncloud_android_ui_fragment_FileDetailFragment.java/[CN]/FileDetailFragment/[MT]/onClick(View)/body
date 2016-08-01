@@ -1,17 +1,11 @@
 {
 switch (v.getId()) {
-case R.id.fdFavorite:
-{
-      CheckBox cb=(CheckBox)getView().findViewById(R.id.fdFavorite);
-      mContainerActivity.getFileOperationsHelper().toggleFavorite(getFile(),cb.isChecked());
-      break;
-    }
 case R.id.fdCancelBtn:
 {
-    ((FileDisplayActivity)mContainerActivity).cancelTransference(getFile());
-    break;
-  }
+      ((FileDisplayActivity)mContainerActivity).cancelTransference(getFile());
+      break;
+    }
 default :
-Log_OC.e(TAG,"Incorrect view clicked!");
+  Log_OC.e(TAG,"Incorrect view clicked!");
 }
 }

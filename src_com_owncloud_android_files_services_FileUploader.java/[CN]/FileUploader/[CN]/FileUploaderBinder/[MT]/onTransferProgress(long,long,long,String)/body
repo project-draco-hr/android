@@ -1,7 +1,7 @@
 {
   String key=buildRemoteName(mCurrentUpload.getAccount().name,mCurrentUpload.getFile().getRemotePath());
-  OnDatatransferProgressListener boundListener=mBoundListeners.get(key);
-  if (boundListener != null) {
-    boundListener.onTransferProgress(progressRate,totalTransferredSoFar,totalToTransfer,fileName);
+  WeakReference<OnDatatransferProgressListener> boundListenerRef=mBoundListeners.get(key);
+  if (boundListenerRef != null && boundListenerRef.get() != null) {
+    boundListenerRef.get().onTransferProgress(progressRate,totalTransferredSoFar,totalToTransfer,fileName);
   }
 }

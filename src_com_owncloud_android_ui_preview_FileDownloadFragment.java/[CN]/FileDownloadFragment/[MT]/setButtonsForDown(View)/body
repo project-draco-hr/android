@@ -1,0 +1,11 @@
+{
+  if (rootView != null) {
+    rootView.findViewById(R.id.cancelBtn).setVisibility(View.GONE);
+    rootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
+    TextView progressText=(TextView)rootView.findViewById(R.id.progressText);
+    progressText.setText(R.string.common_loading);
+    progressText.setVisibility(View.VISIBLE);
+    rootView.findViewById(R.id.errorText).setVisibility(View.GONE);
+    rootView.findViewById(R.id.error_image).setVisibility(View.GONE);
+  }
+}

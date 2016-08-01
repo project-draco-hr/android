@@ -9,11 +9,9 @@
     setFiletype(file);
     setFilesize(file.getFileLength());
     setTimeModified(file.getModificationTimestamp());
-    CheckBox cb=(CheckBox)getView().findViewById(R.id.fdFavorite);
-    cb.setChecked(file.isFavorite());
     FileDownloaderBinder downloaderBinder=mContainerActivity.getFileDownloaderBinder();
     FileUploaderBinder uploaderBinder=mContainerActivity.getFileUploaderBinder();
-    if (transferring || (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,file)) || (uploaderBinder != null && uploaderBinder.isUploading(mAccount,file))) {
+    if (forcedTransferring || (downloaderBinder != null && downloaderBinder.isDownloading(mAccount,file)) || (uploaderBinder != null && uploaderBinder.isUploading(mAccount,file))) {
       setButtonsForTransferring();
     }
  else     if (file.isDown()) {

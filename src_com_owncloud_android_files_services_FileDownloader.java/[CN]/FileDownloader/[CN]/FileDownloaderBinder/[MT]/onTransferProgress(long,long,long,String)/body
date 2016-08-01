@@ -1,6 +1,6 @@
 {
-  OnDatatransferProgressListener boundListener=mBoundListeners.get(mCurrentDownload.getFile().getFileId());
-  if (boundListener != null) {
-    boundListener.onTransferProgress(progressRate,totalTransferredSoFar,totalToTransfer,fileName);
+  WeakReference<OnDatatransferProgressListener> boundListenerRef=mBoundListeners.get(mCurrentDownload.getFile().getFileId());
+  if (boundListenerRef != null && boundListenerRef.get() != null) {
+    boundListenerRef.get().onTransferProgress(progressRate,totalTransferredSoFar,totalToTransfer,fileName);
   }
 }

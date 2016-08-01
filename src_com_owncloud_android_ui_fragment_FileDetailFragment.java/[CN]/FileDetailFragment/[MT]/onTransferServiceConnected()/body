@@ -1,0 +1,6 @@
+{
+  if (mProgressController != null) {
+    mProgressController.startListeningProgressFor(getFile(),mAccount);
+  }
+  updateFileDetails(false,false);
+}

@@ -1,5 +1,5 @@
 {
   Object fragment=super.instantiateItem(container,position);
-  mCachedFragments.put(Integer.valueOf(position),(FileFragment)fragment);
+  mCachedFragments.put(position,(FileFragment)fragment);
   return fragment;
 }

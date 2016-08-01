@@ -1,9 +1,7 @@
 {
-  Bundle args=new Bundle();
-  args.putParcelable(EXTRA_FILE,file);
-  args.putParcelable(EXTRA_ACCOUNT,getAccount());
-  Fragment textPreviewFragment=Fragment.instantiate(getApplicationContext(),PreviewTextFragment.class.getName(),args);
+  Fragment textPreviewFragment=PreviewTextFragment.newInstance(file,getAccount());
   setSecondFragment(textPreviewFragment);
   updateFragmentsVisibility(true);
+  updateActionBarTitleAndHomeButton(file);
   setFile(file);
 }

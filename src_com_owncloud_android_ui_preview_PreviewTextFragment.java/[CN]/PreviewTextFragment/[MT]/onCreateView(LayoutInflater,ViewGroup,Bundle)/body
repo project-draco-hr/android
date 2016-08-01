@@ -1,7 +1,9 @@
 {
   super.onCreateView(inflater,container,savedInstanceState);
   Log_OC.e(TAG,"onCreateView");
-  View ret=inflater.inflate(R.layout.text_file_preview,container,false);
+  View ret=inflater.inflate(R.layout.preview_text_fragment,container,false);
+  mProgressBar=(ProgressBar)ret.findViewById(R.id.transferProgressBar);
+  DisplayUtils.colorPreLollipopHorizontalProgressBar(mProgressBar);
   mTextPreview=(TextView)ret.findViewById(R.id.text_preview);
   return ret;
 }

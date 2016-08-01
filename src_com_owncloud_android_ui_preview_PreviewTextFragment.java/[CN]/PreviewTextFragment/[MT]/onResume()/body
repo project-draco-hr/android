@@ -1,4 +1,0 @@
-{
-  super.onResume();
-  Log_OC.e(TAG,"onResume");
-}

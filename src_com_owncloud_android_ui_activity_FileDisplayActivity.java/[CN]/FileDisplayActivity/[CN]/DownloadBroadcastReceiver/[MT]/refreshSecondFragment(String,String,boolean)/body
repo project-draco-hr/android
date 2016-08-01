@@ -1,0 +1,38 @@
+{
+  FileFragment secondFragment=getSecondFragment();
+  if (secondFragment != null) {
+    boolean fragmentReplaced=false;
+    if (secondFragment instanceof FileDetailFragment) {
+      FileDetailFragment detailsFragment=(FileDetailFragment)secondFragment;
+      OCFile fileInFragment=detailsFragment.getFile();
+      if (fileInFragment != null && !downloadedRemotePath.equals(fileInFragment.getRemotePath())) {
+        mWaitingToPreview=null;
+      }
+ else       if (downloadEvent.equals(FileDownloader.getDownloadFinishMessage())) {
+        boolean waitedPreview=(mWaitingToPreview != null && mWaitingToPreview.getRemotePath().equals(downloadedRemotePath));
+        if (waitedPreview) {
+          if (success) {
+            mWaitingToPreview=getStorageManager().getFileById(mWaitingToPreview.getFileId());
+            fragmentReplaced=true;
+            if (PreviewAudioFragment.canBePreviewed(mWaitingToPreview)) {
+              startAudioPreview(mWaitingToPreview,0);
+            }
+ else             if (PreviewVideoFragment.canBePreviewed(mWaitingToPreview)) {
+              startVideoPreview(mWaitingToPreview,0);
+            }
+ else             if (PreviewTextFragment.canBePreviewed(mWaitingToPreview)) {
+              startTextPreview(mWaitingToPreview);
+            }
+ else {
+              getFileOperationsHelper().openFile(mWaitingToPreview);
+            }
+          }
+          mWaitingToPreview=null;
+        }
+      }
+    }
+    if (!fragmentReplaced && downloadedRemotePath.equals(secondFragment.getFile().getRemotePath())) {
+      secondFragment.onSyncEvent(downloadEvent,success,null);
+    }
+  }
+}

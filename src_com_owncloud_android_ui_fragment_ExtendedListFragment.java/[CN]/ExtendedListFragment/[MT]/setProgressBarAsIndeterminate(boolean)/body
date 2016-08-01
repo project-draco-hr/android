@@ -1,0 +1,5 @@
+{
+  Log_OC.d(TAG,"Setting progress visibility to " + indeterminate);
+  mProgressBar.setIndeterminate(indeterminate);
+  mProgressBar.postInvalidate();
+}

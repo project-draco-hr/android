@@ -1,7 +1,7 @@
 {
-  FileFragment fragmentToUpdate=mCachedFragments.get(Integer.valueOf(position));
+  FileFragment fragmentToUpdate=mCachedFragments.get(position);
   if (fragmentToUpdate != null) {
     mObsoleteFragments.add(fragmentToUpdate);
   }
-  mDownloadErrors.add(Integer.valueOf(position));
+  mDownloadErrors.add(position);
 }

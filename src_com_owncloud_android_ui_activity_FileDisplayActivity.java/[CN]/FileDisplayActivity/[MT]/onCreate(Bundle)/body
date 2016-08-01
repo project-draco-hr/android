@@ -17,8 +17,6 @@
   }
   setContentView(R.layout.files);
   initDrawer();
-  mProgressBar=(ProgressBar)findViewById(R.id.progressBar);
-  mProgressBar.setIndeterminateDrawable(ContextCompat.getDrawable(this,R.drawable.actionbar_progress_indeterminate_horizontal));
   mDualPane=getResources().getBoolean(R.bool.large_land_layout);
   mLeftFragmentContainer=findViewById(R.id.left_fragment_container);
   mRightFragmentContainer=findViewById(R.id.right_fragment_container);

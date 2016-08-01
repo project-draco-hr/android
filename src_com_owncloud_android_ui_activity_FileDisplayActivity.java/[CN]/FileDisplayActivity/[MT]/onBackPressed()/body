@@ -24,6 +24,7 @@
     }
     if (listOfFiles != null) {
       setFile(listOfFiles.getCurrentFile());
+      listOfFiles.listDirectory(false);
     }
     cleanSecondFragment();
   }

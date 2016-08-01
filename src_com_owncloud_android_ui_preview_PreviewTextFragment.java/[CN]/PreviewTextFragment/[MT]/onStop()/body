@@ -5,4 +5,5 @@
     mTextLoadTask.cancel(Boolean.TRUE);
     mTextLoadTask.dismissLoadingDialog();
   }
+  mProgressController.stopListeningProgressFor(getFile(),mAccount);
 }

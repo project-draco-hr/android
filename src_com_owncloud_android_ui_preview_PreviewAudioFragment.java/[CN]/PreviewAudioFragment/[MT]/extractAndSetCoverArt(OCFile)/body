@@ -1,0 +1,17 @@
+{
+  try {
+    MediaMetadataRetriever mmr=new MediaMetadataRetriever();
+    mmr.setDataSource(file.getStoragePath());
+    byte[] data=mmr.getEmbeddedPicture();
+    if (data != null) {
+      Bitmap bitmap=BitmapFactory.decodeByteArray(data,0,data.length);
+      mImagePreview.setImageBitmap(bitmap);
+    }
+ else {
+      mImagePreview.setImageResource(R.drawable.logo);
+    }
+  }
+ catch (  Throwable t) {
+    mImagePreview.setImageResource(R.drawable.logo);
+  }
+}

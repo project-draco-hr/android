@@ -1,0 +1,19 @@
+{
+  OCFile file=getFile();
+  if (restart) {
+    Log_OC.d(TAG,"restarting playback of " + file.getStoragePath());
+    mAutoplay=true;
+    mSavedPlaybackPosition=0;
+    mMediaServiceBinder.start(mAccount,file,true,0);
+  }
+ else   if (!mMediaServiceBinder.isPlaying(file)) {
+    Log_OC.d(TAG,"starting playback of " + file.getStoragePath());
+    mMediaServiceBinder.start(mAccount,file,mAutoplay,mSavedPlaybackPosition);
+  }
+ else {
+    if (!mMediaServiceBinder.isPlaying() && mAutoplay) {
+      mMediaServiceBinder.start();
+      mMediaController.updatePausePlay();
+    }
+  }
+}

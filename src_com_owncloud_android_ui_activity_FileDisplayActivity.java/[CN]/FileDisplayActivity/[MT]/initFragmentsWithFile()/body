@@ -16,7 +16,6 @@
     }
  else {
       cleanSecondFragment();
-      if (file.isDown() && PreviewTextFragment.canBePreviewed(file))       startTextPreview(file);
     }
   }
  else {

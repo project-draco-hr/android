@@ -1,0 +1,3 @@
+{
+  return ((mMimeType != null && mMimeType.startsWith(type)) || getMimeTypeFromName().startsWith(type));
+}
