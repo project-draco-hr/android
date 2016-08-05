@@ -4,17 +4,9 @@
   mConflictsFound=0;
   try {
     mLocalFolder=getStorageManager().getFileByPath(mRemotePath);
-    result=checkForChanges(client);
+    result=fetchAndSyncRemoteFolder(client);
     if (result.isSuccess()) {
-      if (mRemoteFolderChanged) {
-        result=fetchAndSyncRemoteFolder(client);
-      }
- else {
-        prepareOpsFromLocalKnowledge();
-      }
-      if (result.isSuccess()) {
-        syncContents(client);
-      }
+      syncContents(client);
     }
     if (mCancellationRequested.get()) {
       throw new OperationCancelledException();
