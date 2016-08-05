@@ -1,5 +1,8 @@
 {
   super.onCreate(savedInstanceState);
+  if (!BuildConfig.DEBUG) {
+    getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
+  }
   setContentView(R.layout.passcodelock);
   mBCancel=(Button)findViewById(R.id.cancel);
   mPassCodeHdr=(TextView)findViewById(R.id.header);

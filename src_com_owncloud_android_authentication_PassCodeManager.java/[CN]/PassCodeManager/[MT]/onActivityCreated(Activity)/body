@@ -1,8 +1,10 @@
 {
-  if (passCodeIsEnabled()) {
-    activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
-  }
+  if (!BuildConfig.DEBUG) {
+    if (passCodeIsEnabled()) {
+      activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
+    }
  else {
-    activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_SECURE);
+      activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_SECURE);
+    }
   }
 }
