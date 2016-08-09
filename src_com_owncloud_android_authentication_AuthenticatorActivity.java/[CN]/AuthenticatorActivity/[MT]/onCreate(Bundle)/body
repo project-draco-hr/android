@@ -1,5 +1,8 @@
 {
   super.onCreate(savedInstanceState);
+  if (!BuildConfig.DEBUG) {
+    getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
+  }
   if (getSupportActionBar() != null) {
     getSupportActionBar().hide();
     getSupportActionBar().setDisplayHomeAsUpEnabled(false);
