@@ -1,0 +1,7 @@
+{
+  Fragment mediaFragment=PreviewAudioFragment.newInstance(file,getAccount(),startPlaybackPosition,true);
+  setSecondFragment(mediaFragment);
+  updateFragmentsVisibility(true);
+  updateActionBarTitleAndHomeButton(file);
+  setFile(file);
+}

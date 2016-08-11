@@ -1,0 +1,8 @@
+{
+  PreviewTextFragment frag=new PreviewTextFragment();
+  Bundle args=new Bundle();
+  args.putParcelable(EXTRA_FILE,file);
+  args.putParcelable(EXTRA_ACCOUNT,account);
+  frag.setArguments(args);
+  return frag;
+}

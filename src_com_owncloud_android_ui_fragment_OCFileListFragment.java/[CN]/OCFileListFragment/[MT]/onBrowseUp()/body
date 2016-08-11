@@ -1,5 +1,5 @@
 {
-  OCFile parentDir=null;
+  OCFile parentDir;
   int moveCount=0;
   if (mFile != null) {
     FileDataStorageManager storageManager=mContainerActivity.getStorageManager();

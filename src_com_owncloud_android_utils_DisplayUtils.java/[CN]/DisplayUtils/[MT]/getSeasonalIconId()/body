@@ -3,6 +3,6 @@
     return R.drawable.winter_holidays_icon;
   }
  else {
-    return R.drawable.icon;
+    return R.mipmap.icon;
   }
 }

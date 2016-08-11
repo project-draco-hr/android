@@ -1,12 +1,9 @@
 {
-  if (mCurrentListView == mGridView) {
+  if (isGridEnabled()) {
     mGridView.setAdapter(null);
     mRefreshGridLayout.setVisibility(View.GONE);
-    if (mAdapter instanceof FileListListAdapter) {
-      ((FileListListAdapter)mAdapter).setGridMode(false);
-    }
-    mListView.setAdapter(mAdapter);
     mRefreshListLayout.setVisibility(View.VISIBLE);
     mCurrentListView=mListView;
+    setListAdapter(mAdapter);
   }
 }

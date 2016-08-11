@@ -1,0 +1,9 @@
+{
+  PreviewImageFragment frag=new PreviewImageFragment();
+  Bundle args=new Bundle();
+  args.putParcelable(ARG_FILE,file);
+  args.putParcelable(ARG_ACCOUNT,account);
+  args.putBoolean(ARG_IGNORE_FIRST,ignoreFirstSavedState);
+  frag.setArguments(args);
+  return frag;
+}

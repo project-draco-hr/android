@@ -1,0 +1,6 @@
+{
+  mProgressBar=progressBar;
+  if (mProgressBar != null) {
+    reset();
+  }
+}

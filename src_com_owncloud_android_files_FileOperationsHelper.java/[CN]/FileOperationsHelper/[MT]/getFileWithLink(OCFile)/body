@@ -9,7 +9,7 @@
       mWaitingForOpId=mFileActivity.getOperationsServiceBinder().queueNewOperation(service);
     }
  else {
-      Log_OC.wtf(TAG,"Trying to share a NULL OCFile");
+      Log_OC.e(TAG,"Trying to share a NULL OCFile");
     }
   }
  else {

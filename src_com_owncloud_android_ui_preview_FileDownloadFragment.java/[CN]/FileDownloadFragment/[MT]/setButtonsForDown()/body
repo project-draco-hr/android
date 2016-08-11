@@ -1,9 +1,0 @@
-{
-  getView().findViewById(R.id.cancelBtn).setVisibility(View.GONE);
-  getView().findViewById(R.id.progressBar).setVisibility(View.GONE);
-  TextView progressText=(TextView)getView().findViewById(R.id.progressText);
-  progressText.setText(R.string.common_loading);
-  progressText.setVisibility(View.VISIBLE);
-  getView().findViewById(R.id.errorText).setVisibility(View.GONE);
-  getView().findViewById(R.id.error_image).setVisibility(View.GONE);
-}

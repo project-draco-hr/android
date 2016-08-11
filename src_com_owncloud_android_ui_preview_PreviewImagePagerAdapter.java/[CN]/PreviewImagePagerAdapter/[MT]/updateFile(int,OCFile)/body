@@ -1,8 +1,8 @@
 {
-  FileFragment fragmentToUpdate=mCachedFragments.get(Integer.valueOf(position));
+  FileFragment fragmentToUpdate=mCachedFragments.get(position);
   if (fragmentToUpdate != null) {
     mObsoleteFragments.add(fragmentToUpdate);
   }
-  mObsoletePositions.add(Integer.valueOf(position));
+  mObsoletePositions.add(position);
   mImageFiles.set(position,file);
 }

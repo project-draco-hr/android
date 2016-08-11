@@ -1,5 +1,0 @@
-{
-  setFile(file);
-  mAccount=ocAccount;
-  updateFileDetails(false,false);
-}

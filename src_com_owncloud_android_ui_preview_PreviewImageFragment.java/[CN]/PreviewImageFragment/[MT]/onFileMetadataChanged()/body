@@ -1,0 +1,7 @@
+{
+  FileDataStorageManager storageManager=mContainerActivity.getStorageManager();
+  if (storageManager != null) {
+    setFile(storageManager.getFileByPath(getFile().getRemotePath()));
+  }
+  getActivity().invalidateOptionsMenu();
+}

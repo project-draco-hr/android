@@ -1,8 +1,7 @@
 {
   super();
   mAccount=null;
-  mProgressListener=null;
-  mListening=false;
+  mProgressController=null;
   mIgnoreFirstSavedState=false;
   mError=false;
 }

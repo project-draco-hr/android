@@ -1,0 +1,17 @@
+{
+  if (mProgressBar != null) {
+    final int percent=(int)(100.0 * ((double)totalTransferredSoFar) / ((double)totalToTransfer));
+    if (percent != mLastPercent) {
+      mProgressBar.post(new Runnable(){
+        @Override public void run(){
+          mProgressBar.setVisibility(View.VISIBLE);
+          mProgressBar.setIndeterminate(false);
+          mProgressBar.setProgress(percent);
+          mProgressBar.invalidate();
+        }
+      }
+);
+    }
+    mLastPercent=percent;
+  }
+}

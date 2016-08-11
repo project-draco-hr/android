@@ -1,0 +1,10 @@
+{
+  try {
+    Thread.sleep(1000);
+  }
+ catch (  InterruptedException e) {
+    return false;
+  }
+  if (cancellationSignal != null && cancellationSignal.isCanceled())   return false;
+  return true;
+}

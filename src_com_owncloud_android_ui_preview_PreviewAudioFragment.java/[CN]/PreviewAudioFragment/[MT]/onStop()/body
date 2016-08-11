@@ -1,0 +1,14 @@
+{
+  Log_OC.v(TAG,"onStop");
+  mProgressController.stopListeningProgressFor(getFile(),mAccount);
+  if (mMediaServiceConnection != null) {
+    Log_OC.d(TAG,"Unbinding from MediaService ...");
+    if (mMediaServiceBinder != null && mMediaController != null) {
+      mMediaServiceBinder.unregisterMediaController(mMediaController);
+    }
+    getActivity().unbindService(mMediaServiceConnection);
+    mMediaServiceConnection=null;
+    mMediaServiceBinder=null;
+  }
+  super.onStop();
+}

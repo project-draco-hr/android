@@ -1,18 +1,24 @@
 {
-  mSavedPosition=position;
-  mHasSavedPosition=true;
-  if (mDownloaderBinder == null) {
-    mRequestWaitingForBinder=true;
-  }
- else {
+  Log_OC.d(TAG,"onPageSelected " + position);
+  if (getOperationsServiceBinder() != null) {
+    mSavedPosition=position;
+    mHasSavedPosition=true;
     OCFile currentFile=mPreviewImagePagerAdapter.getFileAt(position);
     getSupportActionBar().setTitle(currentFile.getFileName());
     mDrawerToggle.setDrawerIndicatorEnabled(false);
-    if (!currentFile.isDown()) {
-      if (!mPreviewImagePagerAdapter.pendingErrorAt(position)) {
-        requestForDownload(currentFile);
-      }
+    if (!mPreviewImagePagerAdapter.pendingErrorAt(position)) {
+      getFileOperationsHelper().syncFile(currentFile);
     }
     ((PreviewImagePagerAdapter)mViewPager.getAdapter()).resetZoom();
+  }
+ else {
+    final int fPosition=position;
+    getHandler().post(new Runnable(){
+      @Override public void run(){
+        onPageSelected(fPosition);
+        ;
+      }
+    }
+);
   }
 }

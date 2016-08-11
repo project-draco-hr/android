@@ -1,0 +1,4 @@
+{
+  super.onSaveInstanceState(outState);
+  outState.putParcelable(ARG_SHARE,mShare);
+}

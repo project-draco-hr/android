@@ -1,0 +1,10 @@
+{
+  PreviewAudioFragment frag=new PreviewAudioFragment();
+  Bundle args=new Bundle();
+  args.putParcelable(EXTRA_FILE,file);
+  args.putParcelable(EXTRA_ACCOUNT,account);
+  args.putInt(EXTRA_PLAY_POSITION,startPlaybackPosition);
+  args.putBoolean(EXTRA_PLAYING,autoplay);
+  frag.setArguments(args);
+  return frag;
+}

@@ -10,22 +10,21 @@
       mIgnoreFirstSavedState=false;
     }
   }
-  mView=inflater.inflate(R.layout.file_download_fragment,container,false);
-  ProgressBar progressBar=(ProgressBar)mView.findViewById(R.id.progressBar);
-  DisplayUtils.colorPreLollipopHorizontalProgressBar(progressBar);
-  mProgressListener=new ProgressListener(progressBar);
-  (mView.findViewById(R.id.cancelBtn)).setOnClickListener(this);
-  (mView.findViewById(R.id.fileDownloadLL)).setOnClickListener(new OnClickListener(){
+  View rootView=inflater.inflate(R.layout.file_download_fragment,container,false);
+  mProgressBar=(ProgressBar)rootView.findViewById(R.id.progressBar);
+  DisplayUtils.colorPreLollipopHorizontalProgressBar(mProgressBar);
+  (rootView.findViewById(R.id.cancelBtn)).setOnClickListener(this);
+  (rootView.findViewById(R.id.fileDownloadLL)).setOnClickListener(new OnClickListener(){
     @Override public void onClick(    View v){
       ((PreviewImageActivity)getActivity()).toggleFullScreen();
     }
   }
 );
   if (mError) {
-    setButtonsForRemote();
+    setButtonsForRemote(rootView);
   }
  else {
-    setButtonsForTransferring();
+    setButtonsForTransferring(rootView);
   }
-  return mView;
+  return rootView;
 }

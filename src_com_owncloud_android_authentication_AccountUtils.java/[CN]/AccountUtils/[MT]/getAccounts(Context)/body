@@ -1,0 +1,4 @@
+{
+  AccountManager accountManager=AccountManager.get(context);
+  return accountManager.getAccountsByType(MainApp.getAccountType());
+}

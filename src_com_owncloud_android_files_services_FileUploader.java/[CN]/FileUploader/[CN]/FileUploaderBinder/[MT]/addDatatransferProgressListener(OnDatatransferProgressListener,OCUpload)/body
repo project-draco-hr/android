@@ -1,5 +1,5 @@
 {
   if (ocUpload == null || listener == null)   return;
   String targetKey=buildRemoteName(ocUpload.getAccountName(),ocUpload.getRemotePath());
-  mBoundListeners.put(targetKey,listener);
+  mBoundListeners.put(targetKey,new WeakReference<>(listener));
 }

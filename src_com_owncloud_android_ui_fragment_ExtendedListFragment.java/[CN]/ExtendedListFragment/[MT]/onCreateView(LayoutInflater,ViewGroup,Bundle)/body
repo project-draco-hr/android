@@ -1,6 +1,7 @@
 {
   Log_OC.d(TAG,"onCreateView");
   View v=inflater.inflate(R.layout.list_fragment,null);
+  mProgressBar=(ProgressBar)v.findViewById(R.id.syncProgressBar);
   mListView=(ExtendedListView)(v.findViewById(R.id.list_root));
   mListView.setOnItemClickListener(this);
   mListFooterView=inflater.inflate(R.layout.list_footer,null,false);
@@ -8,17 +9,6 @@
   mGridView.setNumColumns(GridView.AUTO_FIT);
   mGridView.setOnItemClickListener(this);
   mGridFooterView=inflater.inflate(R.layout.list_footer,null,false);
-  if (savedInstanceState != null) {
-    int referencePosition=savedInstanceState.getInt(KEY_SAVED_LIST_POSITION);
-    if (mCurrentListView == mListView) {
-      Log_OC.v(TAG,"Setting and centering around list position " + referencePosition);
-      mListView.setAndCenterSelection(referencePosition);
-    }
- else {
-      Log_OC.v(TAG,"Setting grid position " + referencePosition);
-      mGridView.setSelection(referencePosition);
-    }
-  }
   mRefreshListLayout=(SwipeRefreshLayout)v.findViewById(R.id.swipe_containing_list);
   mRefreshGridLayout=(SwipeRefreshLayout)v.findViewById(R.id.swipe_containing_grid);
   mRefreshEmptyLayout=(SwipeRefreshLayout)v.findViewById(R.id.swipe_containing_empty);
@@ -28,10 +18,24 @@
   onCreateSwipeToRefresh(mRefreshEmptyLayout);
   mListView.setEmptyView(mRefreshEmptyLayout);
   mGridView.setEmptyView(mRefreshEmptyLayout);
-  mCurrentListView=mListView;
   mFabMain=(FloatingActionsMenu)v.findViewById(R.id.fab_main);
   mFabUpload=(FloatingActionButton)v.findViewById(R.id.fab_upload);
   mFabMkdir=(FloatingActionButton)v.findViewById(R.id.fab_mkdir);
   mFabUploadFromApp=(FloatingActionButton)v.findViewById(R.id.fab_upload_from_app);
+  mCurrentListView=mListView;
+  if (savedInstanceState != null) {
+    if (savedInstanceState.getBoolean(KEY_IS_GRID_VISIBLE,false)) {
+      switchToGridView();
+    }
+    int referencePosition=savedInstanceState.getInt(KEY_SAVED_LIST_POSITION);
+    if (isGridEnabled()) {
+      Log_OC.v(TAG,"Setting grid position " + referencePosition);
+      mGridView.setSelection(referencePosition);
+    }
+ else {
+      Log_OC.v(TAG,"Setting and centering around list position " + referencePosition);
+      mListView.setAndCenterSelection(referencePosition);
+    }
+  }
   return v;
 }

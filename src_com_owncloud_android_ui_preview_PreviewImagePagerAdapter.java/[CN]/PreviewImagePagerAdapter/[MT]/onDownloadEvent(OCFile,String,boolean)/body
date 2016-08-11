@@ -1,0 +1,23 @@
+{
+  int position=getFilePosition(file);
+  if (position >= 0) {
+    if (action.equals(FileDownloader.getDownloadFinishMessage())) {
+      if (success) {
+        updateFile(position,file);
+      }
+ else {
+        updateWithDownloadError(position);
+      }
+    }
+    FileFragment fragment=mCachedFragments.get(position);
+    if (fragment instanceof FileDownloadFragment) {
+      notifyDataSetChanged();
+    }
+ else {
+      fragment.onSyncEvent(action,success,null);
+    }
+  }
+ else {
+    Log_OC.d(TAG,"Download finished, but the fragment is offscreen");
+  }
+}

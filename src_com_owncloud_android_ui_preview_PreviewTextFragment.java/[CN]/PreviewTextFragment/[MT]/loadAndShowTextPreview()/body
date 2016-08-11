@@ -1,4 +1,4 @@
 {
-  mTextLoadTask=new TextLoadAsyncTask(new WeakReference<TextView>(mTextPreview));
+  mTextLoadTask=new TextLoadAsyncTask(new WeakReference<>(mTextPreview));
   mTextLoadTask.execute(getFile().getStoragePath());
 }

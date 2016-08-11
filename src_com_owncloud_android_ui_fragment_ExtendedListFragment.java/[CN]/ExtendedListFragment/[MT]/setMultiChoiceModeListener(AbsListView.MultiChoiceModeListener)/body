@@ -1,0 +1,4 @@
+{
+  mListView.setMultiChoiceModeListener(listener);
+  mGridView.setMultiChoiceModeListener(listener);
+}

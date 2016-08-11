@@ -6,31 +6,23 @@
   ActionBar actionBar=getSupportActionBar();
   updateActionBarTitleAndHomeButton(null);
   actionBar.hide();
-  if (isHoneycombOrHigher()) {
-    mFullScreenAnchorView=getWindow().getDecorView();
-    mFullScreenAnchorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener(){
-      @SuppressLint("InlinedApi") @Override public void onSystemUiVisibilityChange(      int flags){
-        boolean visible=(flags & View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) == 0;
-        ActionBar actionBar=getSupportActionBar();
-        if (visible) {
-          actionBar.show();
-          mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-        }
+  mFullScreenAnchorView=getWindow().getDecorView();
+  mFullScreenAnchorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener(){
+    @SuppressLint("InlinedApi") @Override public void onSystemUiVisibilityChange(    int flags){
+      boolean visible=(flags & View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) == 0;
+      ActionBar actionBar=getSupportActionBar();
+      if (visible) {
+        actionBar.show();
+        mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+      }
  else {
-          actionBar.hide();
-          mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-        }
+        actionBar.hide();
+        mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
       }
     }
+  }
 );
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-      getWindow().setStatusBarColor(getResources().getColor(R.color.owncloud_blue_dark_transparent));
-    }
-  }
-  if (savedInstanceState != null) {
-    mRequestWaitingForBinder=savedInstanceState.getBoolean(KEY_WAITING_FOR_BINDER);
-  }
- else {
-    mRequestWaitingForBinder=false;
+  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+    getWindow().setStatusBarColor(getResources().getColor(R.color.owncloud_blue_dark_transparent));
   }
 }

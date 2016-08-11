@@ -1,0 +1,8 @@
+{
+  final long folderId=Long.parseLong(parentDocumentId);
+  updateCurrentStorageManagerIfNeeded(folderId);
+  final FileCursor result=new FileCursor(projection);
+  final OCFile browsedDir=mCurrentStorageManager.getFileById(folderId);
+  for (  OCFile file : mCurrentStorageManager.getFolderContent(browsedDir))   result.addFile(file);
+  return result;
+}

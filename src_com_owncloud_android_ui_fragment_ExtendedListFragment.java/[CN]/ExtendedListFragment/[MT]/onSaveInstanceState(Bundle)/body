@@ -1,6 +1,7 @@
 {
   super.onSaveInstanceState(savedInstanceState);
   Log_OC.d(TAG,"onSaveInstanceState()");
+  savedInstanceState.putBoolean(KEY_IS_GRID_VISIBLE,isGridEnabled());
   savedInstanceState.putInt(KEY_SAVED_LIST_POSITION,getReferencePosition());
   savedInstanceState.putIntegerArrayList(KEY_INDEXES,mIndexes);
   savedInstanceState.putIntegerArrayList(KEY_FIRST_POSITIONS,mFirstPositions);

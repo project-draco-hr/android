@@ -12,7 +12,7 @@ case R.id.action_open_file_with:
   }
 case R.id.action_remove_file:
 {
-  RemoveFileDialogFragment dialog=RemoveFileDialogFragment.newInstance(getFile());
+  RemoveFilesDialogFragment dialog=RemoveFilesDialogFragment.newInstance(getFile());
   dialog.show(getFragmentManager(),ConfirmationDialogFragment.FTAG_CONFIRMATION);
   return true;
 }
@@ -23,7 +23,7 @@ return true;
 }
 case R.id.action_send_file:
 {
-sendFile();
+mContainerActivity.getFileOperationsHelper().sendDownloadedFile(getFile());
 return true;
 }
 case R.id.action_sync_file:
@@ -31,7 +31,17 @@ case R.id.action_sync_file:
 mContainerActivity.getFileOperationsHelper().syncFile(getFile());
 return true;
 }
+case R.id.action_favorite_file:
+{
+mContainerActivity.getFileOperationsHelper().toggleFavorite(getFile(),true);
+return true;
+}
+case R.id.action_unfavorite_file:
+{
+mContainerActivity.getFileOperationsHelper().toggleFavorite(getFile(),false);
+return true;
+}
 default :
-return false;
+return super.onOptionsItemSelected(item);
 }
 }

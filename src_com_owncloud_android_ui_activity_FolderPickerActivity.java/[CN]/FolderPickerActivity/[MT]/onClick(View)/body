@@ -4,12 +4,10 @@
   }
  else   if (v == mChooseBtn) {
     Intent i=getIntent();
-    Parcelable targetFile=i.getParcelableExtra(FolderPickerActivity.EXTRA_FILE);
+    ArrayList<Parcelable> targetFiles=i.getParcelableArrayListExtra(FolderPickerActivity.EXTRA_FILES);
     Intent data=new Intent();
     data.putExtra(EXTRA_FOLDER,getCurrentFolder());
-    if (targetFile != null) {
-      data.putExtra(EXTRA_FILE,targetFile);
-    }
+    data.putParcelableArrayListExtra(EXTRA_FILES,targetFiles);
     setResult(RESULT_OK,data);
     finish();
   }

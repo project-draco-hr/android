@@ -1,7 +1,7 @@
 {
   super.onStart();
   if (getFile() != null) {
-    mLoadBitmapTask=new LoadBitmapTask(mImageView,mMessageView,mProgressWheel);
-    mLoadBitmapTask.execute(getFile());
+    mProgressController.startListeningProgressFor(getFile(),mAccount);
+    loadAndShowImage();
   }
 }

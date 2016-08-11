@@ -1,0 +1,6 @@
+{
+  if (updatedFile != null) {
+    setFile(updatedFile);
+  }
+  updateFileDetails(false,false);
+}

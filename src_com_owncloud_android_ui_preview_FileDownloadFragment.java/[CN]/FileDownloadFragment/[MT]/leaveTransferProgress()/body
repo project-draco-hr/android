@@ -1,8 +1,5 @@
 {
-  if (mProgressListener != null) {
-    if (mContainerActivity.getFileDownloaderBinder() != null) {
-      mContainerActivity.getFileDownloaderBinder().removeDatatransferProgressListener(mProgressListener,mAccount,getFile());
-      mListening=false;
-    }
+  if (mProgressController != null) {
+    mProgressController.stopListeningProgressFor(getFile(),mAccount);
   }
 }

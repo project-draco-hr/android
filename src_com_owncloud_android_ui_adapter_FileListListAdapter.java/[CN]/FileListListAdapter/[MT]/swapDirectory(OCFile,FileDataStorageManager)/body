@@ -1,13 +1,10 @@
 {
-  mFile=directory;
   if (updatedStorageManager != null && updatedStorageManager != mStorageManager) {
     mStorageManager=updatedStorageManager;
     mAccount=AccountUtils.getCurrentOwnCloudAccount(mContext);
   }
   if (mStorageManager != null) {
-    mFiles=mStorageManager.getFolderContent(mFile);
-    mFilesOrig.clear();
-    mFilesOrig.addAll(mFiles);
+    mFiles=mStorageManager.getFolderContent(folder);
     if (mJustFolders) {
       mFiles=getFolders(mFiles);
     }

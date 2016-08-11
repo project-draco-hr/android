@@ -1,5 +1,5 @@
 {
-  Account[] ocAccounts=AccountManager.get(context).getAccountsByType(MainApp.getAccountType());
+  Account[] ocAccounts=getAccounts(context);
   if (account != null && account.name != null) {
     int lastAtPos=account.name.lastIndexOf("@");
     String hostAndPort=account.name.substring(lastAtPos + 1);

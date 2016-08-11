@@ -1,0 +1,9 @@
+{
+  boolean uploading=false;
+  if (uploaderBinder != null) {
+    for (int i=0; !uploading && i < mFiles.size(); i++) {
+      uploading=uploaderBinder.isUploading(mAccount,mFiles.get(i));
+    }
+  }
+  return uploading;
+}

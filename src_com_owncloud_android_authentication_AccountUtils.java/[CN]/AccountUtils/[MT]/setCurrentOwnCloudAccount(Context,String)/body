@@ -1,9 +1,8 @@
 {
   boolean result=false;
   if (accountName != null) {
-    Account[] ocAccounts=AccountManager.get(context).getAccountsByType(MainApp.getAccountType());
     boolean found;
-    for (    Account account : ocAccounts) {
+    for (    Account account : getAccounts(context)) {
       found=(account.name.equals(accountName));
       if (found) {
         SharedPreferences.Editor appPrefs=PreferenceManager.getDefaultSharedPreferences(context).edit();

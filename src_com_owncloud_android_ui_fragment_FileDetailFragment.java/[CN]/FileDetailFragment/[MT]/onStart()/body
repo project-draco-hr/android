@@ -1,4 +1,4 @@
 {
   super.onStart();
-  listenForTransferProgress();
+  mProgressController.startListeningProgressFor(getFile(),mAccount);
 }

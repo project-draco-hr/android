@@ -1,0 +1,7 @@
+{
+  long docId=Long.parseLong(documentId);
+  updateCurrentStorageManagerIfNeeded(docId);
+  OCFile file=mCurrentStorageManager.getFileById(docId);
+  File realFile=new File(file.getStoragePath());
+  return new AssetFileDescriptor(ParcelFileDescriptor.open(realFile,ParcelFileDescriptor.MODE_READ_ONLY),0,AssetFileDescriptor.UNKNOWN_LENGTH);
+}

@@ -1,0 +1,35 @@
+{
+  super.onActivityCreated(savedInstanceState);
+  Log_OC.v(TAG,"onActivityCreated");
+  OCFile file;
+  if (savedInstanceState == null) {
+    Bundle args=getArguments();
+    file=args.getParcelable(PreviewVideoFragment.EXTRA_FILE);
+    setFile(file);
+    mAccount=args.getParcelable(PreviewVideoFragment.EXTRA_ACCOUNT);
+    mSavedPlaybackPosition=args.getInt(PreviewVideoFragment.EXTRA_PLAY_POSITION);
+    mAutoplay=args.getBoolean(PreviewVideoFragment.EXTRA_PLAYING);
+  }
+ else {
+    file=savedInstanceState.getParcelable(PreviewVideoFragment.EXTRA_FILE);
+    setFile(file);
+    mAccount=savedInstanceState.getParcelable(PreviewVideoFragment.EXTRA_ACCOUNT);
+    mSavedPlaybackPosition=savedInstanceState.getInt(PreviewVideoFragment.EXTRA_PLAY_POSITION);
+    mAutoplay=savedInstanceState.getBoolean(PreviewVideoFragment.EXTRA_PLAYING);
+  }
+  if (file == null) {
+    throw new IllegalStateException("Instanced with a NULL OCFile");
+  }
+  if (mAccount == null) {
+    throw new IllegalStateException("Instanced with a NULL ownCloud Account");
+  }
+  if (!file.isDown()) {
+    throw new IllegalStateException("There is no local file to preview");
+  }
+  if (!file.isVideo()) {
+    throw new IllegalStateException("Not a video file");
+  }
+  mProgressController=new TransferProgressController(mContainerActivity);
+  mProgressController.setProgressBar(mProgressBar);
+  prepareVideo();
+}

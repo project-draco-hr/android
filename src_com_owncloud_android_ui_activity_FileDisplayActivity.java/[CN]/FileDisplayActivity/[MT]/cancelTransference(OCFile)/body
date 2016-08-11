@@ -6,5 +6,15 @@
   if (mWaitingToSend != null && mWaitingToSend.getRemotePath().equals(file.getRemotePath())) {
     mWaitingToSend=null;
   }
-  onTransferStateChanged(file,false,false);
+  refreshListOfFilesFragment(false);
+  FileFragment secondFragment=getSecondFragment();
+  if (secondFragment != null && file.equals(secondFragment.getFile())) {
+    if (!file.fileExists()) {
+      cleanSecondFragment();
+    }
+ else {
+      secondFragment.onSyncEvent(FileDownloader.getDownloadFinishMessage(),false,null);
+    }
+  }
+  invalidateOptionsMenu();
 }

@@ -12,17 +12,18 @@
       }
  else       if (PreviewTextFragment.canBePreviewed(file)) {
         ((FileDisplayActivity)mContainerActivity).startTextPreview(file);
+        mContainerActivity.getFileOperationsHelper().syncFile(file);
       }
- else       if (file.isDown()) {
-        if (PreviewMediaFragment.canBePreviewed(file)) {
-          ((FileDisplayActivity)mContainerActivity).startMediaPreview(file,0,true);
-        }
- else {
-          mContainerActivity.getFileOperationsHelper().openFile(file);
-        }
+ else       if (PreviewAudioFragment.canBePreviewed(file)) {
+        ((FileDisplayActivity)mContainerActivity).startAudioPreview(file,0);
+        mContainerActivity.getFileOperationsHelper().syncFile(file);
+      }
+ else       if (PreviewVideoFragment.canBePreviewed(file)) {
+        ((FileDisplayActivity)mContainerActivity).startVideoPreview(file,0);
+        mContainerActivity.getFileOperationsHelper().syncFile(file);
       }
  else {
-        ((FileDisplayActivity)mContainerActivity).startDownloadForPreview(file);
+        ((FileDisplayActivity)mContainerActivity).startSyncThenOpen(file);
       }
     }
   }

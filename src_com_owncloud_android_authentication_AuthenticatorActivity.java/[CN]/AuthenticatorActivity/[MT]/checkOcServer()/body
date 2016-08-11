@@ -22,7 +22,7 @@
       mWaitingForOpId=mOperationsServiceBinder.queueNewOperation(getServerInfoIntent);
     }
  else {
-      Log_OC.wtf(TAG,"Server check tried with OperationService unbound!");
+      Log_OC.e(TAG,"Server check tried with OperationService unbound!");
     }
   }
  else {

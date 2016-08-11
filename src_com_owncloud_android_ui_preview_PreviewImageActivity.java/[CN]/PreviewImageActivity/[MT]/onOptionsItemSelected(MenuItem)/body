@@ -1,5 +1,5 @@
 {
-  boolean returnValue=false;
+  boolean returnValue;
 switch (item.getItemId()) {
 case android.R.id.home:
     if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {

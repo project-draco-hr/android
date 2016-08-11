@@ -1,0 +1,9 @@
+{
+  FileDetailFragment detailFragment=FileDetailFragment.newInstance(file,getAccount());
+  setSecondFragment(detailFragment);
+  mWaitingToPreview=file;
+  getFileOperationsHelper().syncFile(file);
+  updateFragmentsVisibility(true);
+  updateActionBarTitleAndHomeButton(file);
+  setFile(file);
+}

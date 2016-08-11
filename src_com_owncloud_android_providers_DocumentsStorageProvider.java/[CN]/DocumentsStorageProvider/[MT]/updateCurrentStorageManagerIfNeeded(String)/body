@@ -1,0 +1,3 @@
+{
+  for (  FileDataStorageManager data : mRootIdToStorageManager.values())   if (data.getAccount().name.equals(rootId))   mCurrentStorageManager=data;
+}

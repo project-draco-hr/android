@@ -18,12 +18,10 @@
   }
   OCFileListFragment listOfFiles=getListOfFilesFragment();
   if (listOfFiles != null) {
-    listOfFiles.listDirectory();
+    listOfFiles.listDirectory(false);
   }
   FileFragment secondFragment=getSecondFragment();
-  if (secondFragment != null && secondFragment instanceof FileDetailFragment) {
-    FileDetailFragment detailFragment=(FileDetailFragment)secondFragment;
-    detailFragment.listenForTransferProgress();
-    detailFragment.updateFileDetails(false,false);
+  if (secondFragment != null) {
+    secondFragment.onTransferServiceConnected();
   }
 }

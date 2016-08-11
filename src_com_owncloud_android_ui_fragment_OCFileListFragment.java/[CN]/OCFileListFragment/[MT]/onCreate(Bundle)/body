@@ -1,4 +1,5 @@
 {
   super.onCreate(savedInstanceState);
   setHasOptionsMenu(true);
+  mStatusBarColorActionMode=getResources().getColor(R.color.action_mode_status_bar_background);
 }

@@ -1,0 +1,4 @@
+{
+  mLoadBitmapTask=new LoadBitmapTask(mImageView,mMessageView,mProgressWheel);
+  mLoadBitmapTask.execute(getFile());
+}

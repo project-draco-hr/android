@@ -1,6 +1,0 @@
-{
-  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-    return true;
-  }
-  return false;
-}

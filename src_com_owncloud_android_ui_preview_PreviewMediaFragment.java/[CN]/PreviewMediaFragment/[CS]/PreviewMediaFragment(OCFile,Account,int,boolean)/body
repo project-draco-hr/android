@@ -1,6 +1,0 @@
-{
-  super(fileToDetail);
-  mAccount=ocAccount;
-  mSavedPlaybackPosition=startPlaybackPosition;
-  mAutoplay=autoplay;
-}

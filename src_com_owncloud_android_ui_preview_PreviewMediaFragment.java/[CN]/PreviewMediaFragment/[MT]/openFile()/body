@@ -1,5 +1,0 @@
-{
-  stopPreview(true);
-  mContainerActivity.getFileOperationsHelper().openFile(getFile());
-  finish();
-}

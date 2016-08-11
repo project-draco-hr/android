@@ -1,0 +1,12 @@
+{
+  Vector<OCFile> result=new Vector<OCFile>();
+  for (  OCFile f : mCurrentStorageManager.getFolderContent(root)) {
+    if (f.isFolder()) {
+      result.addAll(findFiles(f,query));
+    }
+ else {
+      if (f.getFileName().contains(query))       result.add(f);
+    }
+  }
+  return result;
+}

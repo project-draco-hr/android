@@ -1,0 +1,5 @@
+{
+  for (  OCFile file : files) {
+    cancelTransference(file);
+  }
+}

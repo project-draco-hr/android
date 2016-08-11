@@ -1,0 +1,6 @@
+{
+  initiateStorageMap();
+  final RootCursor result=new RootCursor(projection);
+  for (  Account account : AccountUtils.getAccounts(getContext()))   result.addRoot(account,getContext());
+  return result;
+}
