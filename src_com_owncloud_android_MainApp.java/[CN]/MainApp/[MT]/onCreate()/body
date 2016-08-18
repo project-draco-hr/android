@@ -13,7 +13,7 @@
   if (BuildConfig.DEBUG) {
     String dataFolder=getDataFolder();
     Log_OC.setLogDataFolder(dataFolder);
-    Log_OC.startLogging();
+    Log_OC.startLogging(Environment.getExternalStorageDirectory().getAbsolutePath());
     Log_OC.d("Debug","start logging");
   }
   registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks(){
