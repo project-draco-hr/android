@@ -1,7 +1,0 @@
-{
-  super(context,data,resource,from,to);
-  mAccount=account;
-  mStorageManager=storageManager;
-  mContext=context;
-  inflater=(LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-}

@@ -1,8 +1,9 @@
 {
   View vi=convertView;
-  if (convertView == null)   vi=inflater.inflate(R.layout.uploader_list_item_layout,null);
-  HashMap<String,OCFile> data=(HashMap<String,OCFile>)getItem(position);
-  OCFile file=data.get("dirname");
+  if (convertView == null) {
+    vi=mInflater.inflate(R.layout.uploader_list_item_layout,parent,false);
+  }
+  OCFile file=mFiles.get(position);
   TextView filename=(TextView)vi.findViewById(R.id.filename);
   filename.setText(file.getFileName());
   ImageView fileIcon=(ImageView)vi.findViewById(R.id.thumbnail);
@@ -11,15 +12,9 @@
   lastModV.setText(DisplayUtils.getRelativeTimestamp(mContext,file.getModificationTimestamp()));
   TextView fileSizeV=(TextView)vi.findViewById(R.id.file_size);
   TextView fileSizeSeparatorV=(TextView)vi.findViewById(R.id.file_separator);
-  if (!file.isFolder()) {
-    fileSizeV.setVisibility(View.VISIBLE);
-    fileSizeSeparatorV.setVisibility(View.VISIBLE);
-    fileSizeV.setText(DisplayUtils.bytesToHumanReadable(file.getFileLength()));
-  }
- else {
-    fileSizeV.setVisibility(View.GONE);
-    fileSizeSeparatorV.setVisibility(View.GONE);
-  }
+  fileSizeV.setVisibility(View.VISIBLE);
+  fileSizeSeparatorV.setVisibility(View.VISIBLE);
+  fileSizeV.setText(DisplayUtils.bytesToHumanReadable(file.getFileLength()));
   if (file.isImage() && file.getRemoteId() != null) {
     Bitmap thumbnail=ThumbnailsCacheManager.getBitmapFromDiskCache(String.valueOf(file.getRemoteId()));
     if (thumbnail != null && !file.needsUpdateThumbnail()) {

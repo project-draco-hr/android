@@ -1,0 +1,7 @@
+{
+  mFiles=files;
+  mAccount=account;
+  mStorageManager=storageManager;
+  mContext=context;
+  mInflater=(LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+}
