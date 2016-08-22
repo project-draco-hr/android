@@ -27,10 +27,7 @@
       updatedFile.setModificationTimestampAtLastSyncForData(localFile.getModificationTimestampAtLastSyncForData());
       updatedFile.setStoragePath(localFile.getStoragePath());
       updatedFile.setEtag(localFile.getEtag());
-      if (updatedFile.isFolder()) {
-        updatedFile.setFileLength(localFile.getFileLength());
-      }
- else       if (mRemoteFolderChanged && remoteFile.isImage() && remoteFile.getModificationTimestamp() != localFile.getModificationTimestamp()) {
+      if (!updatedFile.isFolder() && mRemoteFolderChanged && remoteFile.isImage()&& remoteFile.getModificationTimestamp() != localFile.getModificationTimestamp()) {
         updatedFile.setNeedsUpdateThumbnail(true);
         Log.d(TAG,"Image " + remoteFile.getFileName() + " updated on the server");
       }

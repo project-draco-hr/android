@@ -1,0 +1,8 @@
+{
+  if (mFiles == null || position < 0 || position >= mFiles.size()) {
+    return -1;
+  }
+ else {
+    return mFiles.get(position).getFileId();
+  }
+}
