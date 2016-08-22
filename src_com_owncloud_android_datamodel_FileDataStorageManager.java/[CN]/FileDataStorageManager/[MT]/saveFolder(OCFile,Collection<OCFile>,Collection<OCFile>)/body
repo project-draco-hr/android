@@ -61,7 +61,7 @@
   cv.put(ProviderTableMeta.FILE_MODIFIED,folder.getModificationTimestamp());
   cv.put(ProviderTableMeta.FILE_MODIFIED_AT_LAST_SYNC_FOR_DATA,folder.getModificationTimestampAtLastSyncForData());
   cv.put(ProviderTableMeta.FILE_CREATION,folder.getCreationTimestamp());
-  cv.put(ProviderTableMeta.FILE_CONTENT_LENGTH,0);
+  cv.put(ProviderTableMeta.FILE_CONTENT_LENGTH,folder.getFileLength());
   cv.put(ProviderTableMeta.FILE_CONTENT_TYPE,folder.getMimetype());
   cv.put(ProviderTableMeta.FILE_NAME,folder.getFileName());
   cv.put(ProviderTableMeta.FILE_PARENT,folder.getParentId());
