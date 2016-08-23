@@ -215,8 +215,9 @@
   toggleInstantPictureOptions(((CheckBoxPreference)mPrefInstantUpload).isChecked());
   mPrefInstantUpload.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
     @Override public boolean onPreferenceChange(    Preference preference,    Object newValue){
-      toggleInstantPictureOptions((Boolean)newValue);
-      toggleInstantUploadBehaviour(((CheckBoxPreference)mPrefInstantVideoUpload).isChecked(),(Boolean)newValue);
+      boolean enableInstantPicture=(Boolean)newValue;
+      toggleInstantPictureOptions(enableInstantPicture);
+      toggleInstantUploadBehaviour(((CheckBoxPreference)mPrefInstantVideoUpload).isChecked(),enableInstantPicture);
       return true;
     }
   }

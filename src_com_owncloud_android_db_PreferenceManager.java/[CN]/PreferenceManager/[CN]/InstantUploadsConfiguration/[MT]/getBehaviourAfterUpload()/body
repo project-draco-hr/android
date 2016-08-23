@@ -1,0 +1,6 @@
+{
+  if (mBehaviourAfterUpload.equalsIgnoreCase("MOVE")) {
+    return FileUploader.LOCAL_BEHAVIOUR_MOVE;
+  }
+  return FileUploader.LOCAL_BEHAVIOUR_FORGET;
+}

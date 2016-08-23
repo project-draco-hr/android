@@ -1,0 +1,16 @@
+{
+  Log_OC.d(TAG,"Got event " + event + " on FOLDER "+ mConfiguration.getSourcePath()+ " about "+ ((path != null) ? path : "")+ " (in thread '"+ Thread.currentThread().getName()+ "')");
+  if (path != null && path.length() > 0) {
+synchronized (mLock) {
+      if (((event & FileObserver.CREATE) != 0)) {
+        mChildrenInCreation.add(path);
+      }
+      if (((event & FileObserver.CLOSE_WRITE) != 0 && mChildrenInCreation.remove(path)) || ((event & FileObserver.MOVED_TO) != 0)) {
+        handleNewFile(path);
+      }
+    }
+  }
+  if ((event & IN_IGNORE) != 0 && (path == null || path.length() == 0)) {
+    Log_OC.d(TAG,"Stopping the observance on " + mConfiguration.getSourcePath());
+  }
+}

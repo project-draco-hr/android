@@ -3,9 +3,9 @@
   Cursor cursorOnKeptInSync=getContentResolver().query(ProviderTableMeta.CONTENT_URI,null,ProviderTableMeta.FILE_KEEP_IN_SYNC + " = ?",new String[]{String.valueOf(1)},null);
   if (cursorOnKeptInSync != null) {
     if (cursorOnKeptInSync.moveToFirst()) {
-      String localPath="";
-      String accountName="";
-      Account account=null;
+      String localPath;
+      String accountName;
+      Account account;
       do {
         localPath=cursorOnKeptInSync.getString(cursorOnKeptInSync.getColumnIndex(ProviderTableMeta.FILE_STORAGE_PATH));
         accountName=cursorOnKeptInSync.getString(cursorOnKeptInSync.getColumnIndex(ProviderTableMeta.FILE_ACCOUNT_OWNER));
@@ -19,4 +19,5 @@
     }
     cursorOnKeptInSync.close();
   }
+  updateInstantUploadsObservers();
 }

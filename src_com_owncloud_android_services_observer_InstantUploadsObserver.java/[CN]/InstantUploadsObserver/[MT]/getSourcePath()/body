@@ -1,0 +1,5 @@
+{
+synchronized (mLock) {
+    return mConfiguration.getSourcePath();
+  }
+}

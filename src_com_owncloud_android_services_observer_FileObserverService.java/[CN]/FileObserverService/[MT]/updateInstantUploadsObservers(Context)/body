@@ -1,0 +1,5 @@
+{
+  Intent intent=new Intent(context,FileObserverService.class);
+  intent.setAction(FileObserverService.ACTION_UPDATE_AUTO_UPLOAD_OBSERVERS);
+  context.startService(intent);
+}

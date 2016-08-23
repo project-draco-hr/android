@@ -2,8 +2,7 @@
   Log_OC.v(TAG,"onCreate() start");
   super.onCreate(savedInstanceState);
   if (savedInstanceState == null) {
-    Intent initObserversIntent=FileObserverService.makeInitIntent(this);
-    startService(initObserversIntent);
+    FileObserverService.initialize(this);
   }
   if (savedInstanceState != null) {
     mWaitingToPreview=(OCFile)savedInstanceState.getParcelable(FileDisplayActivity.KEY_WAITING_TO_PREVIEW);

@@ -7,5 +7,9 @@
   }
   mFolderObserversMap.clear();
   mFolderObserversMap=null;
+  if (mInstantUploadsObserver != null) {
+    mInstantUploadsObserver.stopWatching();
+    mInstantUploadsObserver=null;
+  }
   super.onDestroy();
 }

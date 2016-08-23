@@ -1,8 +1,7 @@
 {
   file.setFavorite(isFavorite);
   mFileActivity.getStorageManager().saveFile(file);
-  Intent observedFileIntent=FileObserverService.makeObservedFileIntent(mFileActivity,file,mFileActivity.getAccount(),isFavorite);
-  mFileActivity.startService(observedFileIntent);
+  FileObserverService.observeFile(mFileActivity,file,mFileActivity.getAccount(),isFavorite);
   if (file.isFavorite()) {
     syncFile(file);
   }
