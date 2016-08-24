@@ -210,14 +210,14 @@
 );
   }
   mPrefInstantUploadCategory=(PreferenceCategory)findPreference("instant_uploading_category");
-  mPrefInstantUploadPathWiFi=findPreference("instant_upload_on_wifi");
+  mPrefInstantUploadWiFi=findPreference("instant_upload_on_wifi");
   mPrefInstantUpload=findPreference("instant_uploading");
   toggleInstantPictureOptions(((CheckBoxPreference)mPrefInstantUpload).isChecked());
   mPrefInstantUpload.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
     @Override public boolean onPreferenceChange(    Preference preference,    Object newValue){
       boolean enableInstantPicture=(Boolean)newValue;
       toggleInstantPictureOptions(enableInstantPicture);
-      toggleInstantUploadBehaviour(((CheckBoxPreference)mPrefInstantVideoUpload).isChecked(),enableInstantPicture);
+      toggleInstantUploadCommonOptions(((CheckBoxPreference)mPrefInstantVideoUpload).isChecked(),enableInstantPicture);
       return true;
     }
   }
@@ -237,19 +237,35 @@
     }
 );
   }
-  mPrefInstantVideoUploadPathWiFi=findPreference("instant_video_upload_on_wifi");
+  mPrefInstantVideoUploadWiFi=findPreference("instant_video_upload_on_wifi");
   mPrefInstantVideoUpload=findPreference("instant_video_uploading");
   toggleInstantVideoOptions(((CheckBoxPreference)mPrefInstantVideoUpload).isChecked());
   mPrefInstantVideoUpload.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
     @Override public boolean onPreferenceChange(    Preference preference,    Object newValue){
       toggleInstantVideoOptions((Boolean)newValue);
-      toggleInstantUploadBehaviour((Boolean)newValue,((CheckBoxPreference)mPrefInstantUpload).isChecked());
+      toggleInstantUploadCommonOptions((Boolean)newValue,((CheckBoxPreference)mPrefInstantUpload).isChecked());
       return true;
     }
   }
 );
+  mPrefInstantUploadSourcePath=findPreference("instant_upload_source_path");
+  if (mPrefInstantUploadSourcePath != null) {
+    mPrefInstantUploadSourcePath.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+      @Override public boolean onPreferenceClick(      Preference preference){
+        if (!mSourcePath.endsWith(File.separator)) {
+          mSourcePath+=File.separator;
+        }
+        LocalFolderPickerActivity.startLocalFolderPickerActivityForResult(Preferences.this,mSourcePath,ACTION_SELECT_SOURCE_PATH);
+        return true;
+      }
+    }
+);
+  }
+ else {
+    Log_OC.e(TAG,"Lost preference instant_upload_source_path");
+  }
   mPrefInstantUploadBehaviour=findPreference("prefs_instant_behaviour");
-  toggleInstantUploadBehaviour(((CheckBoxPreference)mPrefInstantVideoUpload).isChecked(),((CheckBoxPreference)mPrefInstantUpload).isChecked());
+  toggleInstantUploadCommonOptions(((CheckBoxPreference)mPrefInstantVideoUpload).isChecked(),((CheckBoxPreference)mPrefInstantUpload).isChecked());
   pAboutApp=(Preference)findPreference("about_app");
   if (pAboutApp != null) {
     pAboutApp.setTitle(String.format(getString(R.string.about_android),getString(R.string.app_name)));
@@ -257,6 +273,7 @@
   }
   loadInstantUploadPath();
   loadInstantUploadVideoPath();
+  loadInstantUploadSourcePath();
   mDownloadServiceConnection=newTransferenceServiceConnection();
   if (mDownloadServiceConnection != null) {
     bindService(new Intent(this,FileDownloader.class),mDownloadServiceConnection,Context.BIND_AUTO_CREATE);

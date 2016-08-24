@@ -4,16 +4,11 @@
   if (savedInstanceState != null) {
     mFile=savedInstanceState.getParcelable(KEY_FILE);
   }
-  if (mJustFolders) {
-    setFooterEnabled(false);
-  }
- else {
-    setFooterEnabled(true);
-  }
-  Bundle args=getArguments();
-  mJustFolders=(args != null) && args.getBoolean(ARG_JUST_FOLDERS,false);
-  mAdapter=new FileListListAdapter(mJustFolders,getActivity(),mContainerActivity);
+  boolean justFolders=isShowingJustFolders();
+  setFooterEnabled(!justFolders);
+  mAdapter=new FileListListAdapter(justFolders,getActivity(),mContainerActivity);
   setListAdapter(mAdapter);
+  Bundle args=getArguments();
   mHideFab=(args != null) && args.getBoolean(ARG_HIDE_FAB,false);
   if (mHideFab) {
     setFabEnabled(false);

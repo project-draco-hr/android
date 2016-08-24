@@ -1,0 +1,12 @@
+{
+  ActionBar actionBar=getSupportActionBar();
+  if (actionBar != null) {
+    boolean mayBrowseUp=mayBrowseUp();
+    actionBar.setHomeButtonEnabled(mayBrowseUp);
+    actionBar.setDisplayHomeAsUpEnabled(mayBrowseUp);
+    actionBar.setTitle(mayBrowseUp ? mCurrentFolder.getName() : File.separator);
+  }
+ else {
+    Log_OC.w(TAG,"Action bar missing in action");
+  }
+}

@@ -1,0 +1,4 @@
+{
+  Bundle args=getArguments();
+  return ((args != null) && args.getBoolean(ARG_JUST_FOLDERS,false));
+}

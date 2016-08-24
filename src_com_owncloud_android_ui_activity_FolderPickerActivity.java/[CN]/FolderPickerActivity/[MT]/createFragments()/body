@@ -1,9 +1,5 @@
 {
-  OCFileListFragment listOfFiles=new OCFileListFragment();
-  Bundle args=new Bundle();
-  args.putBoolean(OCFileListFragment.ARG_JUST_FOLDERS,true);
-  args.putBoolean(OCFileListFragment.ARG_HIDE_FAB,true);
-  listOfFiles.setArguments(args);
+  OCFileListFragment listOfFiles=OCFileListFragment.newInstance(true,true,false);
   FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
   transaction.add(R.id.fragment_container,listOfFiles,TAG_LIST_OF_FOLDERS);
   transaction.commit();

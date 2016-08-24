@@ -1,0 +1,6 @@
+{
+  if (folder.isDirectory()) {
+    mCurrentFolder=folder;
+  }
+  updateActionBar();
+}

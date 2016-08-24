@@ -1,6 +1,15 @@
 {
-  mDirectory=directory;
-  mFiles=(mDirectory != null ? mDirectory.listFiles() : null);
+  if (directory == null) {
+    Log_OC.e(TAG,"Null received as directory to swap; ignoring");
+    return;
+  }
+  mFolder=directory;
+  mFiles=mFolder.listFiles(new FileFilter(){
+    @Override public boolean accept(    File file){
+      return (file.exists() && (!mJustFolders || file.isDirectory()));
+    }
+  }
+);
   if (mFiles != null) {
     Arrays.sort(mFiles,new Comparator<File>(){
       @Override public int compare(      File lhs,      File rhs){

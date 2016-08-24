@@ -1,4 +1,0 @@
-{
-  mContext=context;
-  swapDirectory(directory);
-}

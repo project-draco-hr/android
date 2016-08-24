@@ -4,7 +4,7 @@
   setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
   setSwipeEnabled(false);
   setFabEnabled(false);
-  setMessageForEmptyList(getString(R.string.local_file_list_empty));
+  setMessageForEmptyList(isShowingJustFolders() ? getString(R.string.local_file_list_empty_just_folders) : getString(R.string.local_file_list_empty));
   Log_OC.i(TAG,"onCreateView() end");
   return v;
 }

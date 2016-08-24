@@ -1,0 +1,9 @@
+{
+  OCFileListFragment frag=new OCFileListFragment();
+  Bundle args=new Bundle();
+  args.putBoolean(ARG_JUST_FOLDERS,justFolders);
+  args.putBoolean(ARG_HIDE_FAB,hideFAB);
+  args.putBoolean(ARG_ALLOW_CONTEXTUAL_MODE,allowContextualMode);
+  frag.setArguments(args);
+  return frag;
+}

@@ -1,5 +1,5 @@
 {
-  if (!mJustFolders) {
+  if (!isShowingJustFolders()) {
     int filesCount=0, foldersCount=0;
     int count=mAdapter.getCount();
     OCFile file;

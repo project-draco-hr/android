@@ -1,0 +1,6 @@
+{
+  Log_OC.d(TAG,"onResume() start");
+  super.onResume();
+  listFolder();
+  Log_OC.d(TAG,"onResume() end");
+}

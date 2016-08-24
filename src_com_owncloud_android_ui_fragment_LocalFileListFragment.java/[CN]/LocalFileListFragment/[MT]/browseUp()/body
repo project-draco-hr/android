@@ -1,0 +1,8 @@
+{
+  File parentDir=null;
+  if (mDirectory != null) {
+    parentDir=mDirectory.getParentFile();
+  }
+  listFolder(parentDir);
+  restoreIndexAndTopPosition();
+}

@@ -1,0 +1,6 @@
+{
+  LocalFileListFragment listOfFiles=LocalFileListFragment.newInstance(true);
+  FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
+  transaction.add(R.id.fragment_container,listOfFiles,FTAG_LIST_OF_FOLDERS);
+  transaction.commit();
+}

@@ -4,8 +4,8 @@
     return;
   }
   popDirname();
-  mFileListFragment.onNavigateUp();
-  mCurrentDir=mFileListFragment.getCurrentDirectory();
+  mFileListFragment.browseUp();
+  mCurrentDir=mFileListFragment.getCurrentFolder();
   if (mCurrentDir.getParentFile() == null) {
     ActionBar actionBar=getSupportActionBar();
     actionBar.setDisplayHomeAsUpEnabled(false);

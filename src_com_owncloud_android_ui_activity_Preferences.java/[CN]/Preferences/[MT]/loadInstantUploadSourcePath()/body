@@ -1,0 +1,5 @@
+{
+  SharedPreferences appPrefs=PreferenceManager.getDefaultSharedPreferences(this);
+  mSourcePath=appPrefs.getString("instant_upload_source_path",InstantUploadsConfiguration.DEFAULT_SOURCE_PATH);
+  mPrefInstantUploadSourcePath.setSummary(mSourcePath);
+}

@@ -49,9 +49,7 @@
  else {
           if (allowedToCreateNewThumbnail) {
             final ThumbnailsCacheManager.ThumbnailGenerationTask task=new ThumbnailsCacheManager.ThumbnailGenerationTask(fileIcon);
-            if (thumbnail == null) {
-              thumbnail=ThumbnailsCacheManager.mDefaultImg;
-            }
+            thumbnail=ThumbnailsCacheManager.mDefaultImg;
             final ThumbnailsCacheManager.AsyncDrawable asyncDrawable=new ThumbnailsCacheManager.AsyncDrawable(mContext.getResources(),thumbnail,task);
             fileIcon.setImageDrawable(asyncDrawable);
             task.execute(file);
