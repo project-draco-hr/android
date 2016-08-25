@@ -9,6 +9,7 @@ synchronized (mLock) {
         mObservedChildren.put(path,true);
       }
       if ((event & FileObserver.CLOSE_WRITE) != 0 && mObservedChildren.containsKey(path) && mObservedChildren.get(path)) {
+        mObservedChildren.remove(path);
         handleNewFile(path);
       }
       if ((event & FileObserver.MOVED_TO) != 0) {
