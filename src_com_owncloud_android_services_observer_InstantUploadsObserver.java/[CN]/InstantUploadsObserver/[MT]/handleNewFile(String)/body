@@ -5,6 +5,7 @@
   final boolean isVideo=mimeType.startsWith("video/");
   if (!isImage && !isVideo) {
     Log_OC.d(TAG,"Ignoring " + fileName);
+    return;
   }
   if (isImage && !mConfiguration.isEnabledForPictures()) {
     Log_OC.d(TAG,"Instant upload disabled for images, ignoring " + fileName);
