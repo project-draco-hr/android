@@ -2,10 +2,16 @@
   Log_OC.d(TAG,"Got event " + event + " on FOLDER "+ mConfiguration.getSourcePath()+ " about "+ ((path != null) ? path : "")+ " (in thread '"+ Thread.currentThread().getName()+ "')");
   if (path != null && path.length() > 0) {
 synchronized (mLock) {
-      if (((event & FileObserver.CREATE) != 0)) {
-        mChildrenInCreation.add(path);
+      if ((event & FileObserver.CREATE) != 0) {
+        mObservedChildren.put(path,false);
       }
-      if (((event & FileObserver.CLOSE_WRITE) != 0 && mChildrenInCreation.remove(path)) || ((event & FileObserver.MOVED_TO) != 0)) {
+      if (((event & FileObserver.MODIFY) != 0) && mObservedChildren.containsKey(path) && !mObservedChildren.get(path)) {
+        mObservedChildren.put(path,true);
+      }
+      if ((event & FileObserver.CLOSE_WRITE) != 0 && mObservedChildren.containsKey(path) && mObservedChildren.get(path)) {
+        handleNewFile(path);
+      }
+      if ((event & FileObserver.MOVED_TO) != 0) {
         handleNewFile(path);
       }
     }

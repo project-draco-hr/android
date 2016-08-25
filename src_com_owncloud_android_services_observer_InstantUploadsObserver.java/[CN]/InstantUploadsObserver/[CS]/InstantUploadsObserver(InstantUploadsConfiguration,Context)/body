@@ -5,5 +5,5 @@
   }
   mConfiguration=configuration;
   mContext=context;
-  mChildrenInCreation=new HashSet<>();
+  mObservedChildren=new HashMap<>();
 }
