@@ -17,6 +17,6 @@
     mInstantUploadsObserver.updateConfiguration(config);
   }
  else {
-    Log_OC.w(TAG,"No current observer for instant uploads, nothing to observe in configuration");
+    Log_OC.i(TAG,"Instant uploads are disabled, no current observer -> nothing to do");
   }
 }
