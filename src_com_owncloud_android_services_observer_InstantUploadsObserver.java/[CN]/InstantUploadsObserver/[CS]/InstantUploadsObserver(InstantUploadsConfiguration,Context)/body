@@ -1,5 +1,5 @@
 {
-  super(configuration.getSourcePath(),UPDATE_MASK);
+  super(configuration.getSourcePath(),ALL_EVENTS_EVEN_THOSE_NOT_DOCUMENTED);
   if (context == null) {
     throw new IllegalArgumentException("NULL context argument received");
   }

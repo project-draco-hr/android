@@ -33,7 +33,7 @@
         Log_OC.w(TAG,"No account found for instant upload, aborting upload");
         return;
       }
-      String remotePath=(isImage ? mConfiguration.getUploadPathForPictures() : mConfiguration.getUploadPathForVideos()) + File.separator + fileName;
+      String remotePath=(isImage ? mConfiguration.getUploadPathForPictures() : mConfiguration.getUploadPathForVideos()) + fileName;
       int createdBy=isImage ? UploadFileOperation.CREATED_AS_INSTANT_PICTURE : UploadFileOperation.CREATED_AS_INSTANT_VIDEO;
       FileUploader.UploadRequester requester=new FileUploader.UploadRequester();
       requester.uploadNewFile(mContext,account,localPath,remotePath,mConfiguration.getBehaviourAfterUpload(),mimeType,true,createdBy);
