@@ -1,8 +1,8 @@
 {
   Log_OC.i(TAG,"onActivityCreated() start");
   super.onActivityCreated(savedInstanceState);
-  mDirectory=mContainerActivity.getInitialDirectory();
-  mAdapter=new LocalFileListAdapter(mDirectory,getActivity());
+  mDirectory=mContainerActivity.getCurrentFolder();
+  mAdapter=new LocalFileListAdapter(mDirectory,isShowingJustFolders(),getActivity());
   setListAdapter(mAdapter);
   Log_OC.i(TAG,"onActivityCreated() stop");
 }

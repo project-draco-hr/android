@@ -1,0 +1,15 @@
+{
+  boolean retval=true;
+switch (item.getItemId()) {
+case android.R.id.home:
+{
+      if (mayBrowseUp()) {
+        onBackPressed();
+      }
+      break;
+    }
+default :
+  retval=super.onOptionsItemSelected(item);
+}
+return retval;
+}

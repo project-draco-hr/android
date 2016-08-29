@@ -1,18 +1,21 @@
 {
   super.onActivityResult(requestCode,resultCode,data);
   if (requestCode == ACTION_SELECT_UPLOAD_PATH && resultCode == RESULT_OK) {
-    OCFile folderToUpload=(OCFile)data.getParcelableExtra(UploadPathActivity.EXTRA_FOLDER);
+    OCFile folderToUpload=data.getParcelableExtra(UploadPathActivity.EXTRA_FOLDER);
     mUploadPath=folderToUpload.getRemotePath();
-    mUploadPath=DisplayUtils.getPathWithoutLastSlash(mUploadPath);
-    mPrefInstantUploadPath.setSummary(mUploadPath);
+    mPrefInstantUploadPath.setSummary(DisplayUtils.getPathWithoutLastSlash(mUploadPath));
     saveInstantUploadPathOnPreferences();
   }
  else   if (requestCode == ACTION_SELECT_UPLOAD_VIDEO_PATH && resultCode == RESULT_OK) {
-    OCFile folderToUploadVideo=(OCFile)data.getParcelableExtra(UploadPathActivity.EXTRA_FOLDER);
+    OCFile folderToUploadVideo=data.getParcelableExtra(UploadPathActivity.EXTRA_FOLDER);
     mUploadVideoPath=folderToUploadVideo.getRemotePath();
-    mUploadVideoPath=DisplayUtils.getPathWithoutLastSlash(mUploadVideoPath);
-    mPrefInstantVideoUploadPath.setSummary(mUploadVideoPath);
+    mPrefInstantVideoUploadPath.setSummary(DisplayUtils.getPathWithoutLastSlash(mUploadVideoPath));
     saveInstantUploadVideoPathOnPreferences();
+  }
+ else   if (requestCode == ACTION_SELECT_SOURCE_PATH && resultCode == RESULT_OK) {
+    mSourcePath=data.getStringExtra(LocalFolderPickerActivity.EXTRA_PATH);
+    mPrefInstantUploadSourcePath.setSummary(DisplayUtils.getPathWithoutLastSlash(mSourcePath));
+    saveInstantUploadSourcePathOnPreferences();
   }
  else   if (requestCode == ACTION_REQUEST_PASSCODE && resultCode == RESULT_OK) {
     String passcode=data.getStringExtra(PassCodeActivity.KEY_PASSCODE);

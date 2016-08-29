@@ -1,0 +1,22 @@
+{
+  PreferenceManager.InstantUploadsConfiguration config=PreferenceManager.getInstantUploadsConfiguration(this);
+  if ((config.isEnabledForPictures() || config.isEnabledForVideos()) && mInstantUploadsObserver == null) {
+    mInstantUploadsObserver=new InstantUploadsObserver(config,getApplicationContext());
+    mInstantUploadsObserver.startWatching();
+  }
+ else   if (!config.isEnabledForPictures() && !config.isEnabledForVideos() && mInstantUploadsObserver != null) {
+    mInstantUploadsObserver.stopWatching();
+    mInstantUploadsObserver=null;
+  }
+ else   if (mInstantUploadsObserver != null && !mInstantUploadsObserver.getSourcePath().equals(config.getSourcePath())) {
+    mInstantUploadsObserver.stopWatching();
+    mInstantUploadsObserver=new InstantUploadsObserver(config,getApplicationContext());
+    mInstantUploadsObserver.startWatching();
+  }
+ else   if (mInstantUploadsObserver != null) {
+    mInstantUploadsObserver.updateConfiguration(config);
+  }
+ else {
+    Log_OC.i(TAG,"Instant uploads are disabled, no current observer -> nothing to do");
+  }
+}

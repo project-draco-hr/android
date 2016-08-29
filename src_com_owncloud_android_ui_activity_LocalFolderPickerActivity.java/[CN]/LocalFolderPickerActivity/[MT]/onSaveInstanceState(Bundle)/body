@@ -1,0 +1,6 @@
+{
+  Log_OC.d(TAG,"onSaveInstanceState() start");
+  super.onSaveInstanceState(outState);
+  outState.putString(LocalFolderPickerActivity.EXTRA_PATH,mCurrentFolder.getAbsolutePath());
+  Log_OC.d(TAG,"onSaveInstanceState() end");
+}

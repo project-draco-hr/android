@@ -1,8 +1,14 @@
 {
   if ((PreferenceManager.instantPictureUploadEnabled(context) && PreferenceManager.instantPictureUploadViaWiFiOnly(context)) || (PreferenceManager.instantVideoUploadEnabled(context) && PreferenceManager.instantVideoUploadViaWiFiOnly(context))) {
-    Log_OC.d(TAG,"Requesting retry of instant uploads (& friends)");
-    FileUploader.UploadRequester requester=new FileUploader.UploadRequester();
-    requester.retryFailedUploads(context,null,UploadResult.NETWORK_CONNECTION);
-    requester.retryFailedUploads(context,null,UploadResult.DELAYED_FOR_WIFI);
+    Handler h=new Handler(Looper.getMainLooper());
+    h.postDelayed(new Runnable(){
+      @Override public void run(){
+        Log_OC.d(TAG,"Requesting retry of instant uploads (& friends)");
+        FileUploader.UploadRequester requester=new FileUploader.UploadRequester();
+        requester.retryFailedUploads(MainApp.getAppContext(),null,UploadResult.NETWORK_CONNECTION);
+        requester.retryFailedUploads(MainApp.getAppContext(),null,UploadResult.DELAYED_FOR_WIFI);
+      }
+    }
+,500);
   }
 }

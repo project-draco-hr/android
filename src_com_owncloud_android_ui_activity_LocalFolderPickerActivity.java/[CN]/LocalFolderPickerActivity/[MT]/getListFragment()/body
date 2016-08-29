@@ -1,0 +1,7 @@
+{
+  Fragment listOfFiles=getSupportFragmentManager().findFragmentByTag(FTAG_LIST_OF_FOLDERS);
+  if (listOfFiles != null) {
+    return (LocalFileListFragment)listOfFiles;
+  }
+  return null;
+}

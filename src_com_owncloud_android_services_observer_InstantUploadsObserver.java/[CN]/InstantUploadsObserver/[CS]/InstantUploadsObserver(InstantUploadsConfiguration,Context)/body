@@ -1,0 +1,9 @@
+{
+  super(configuration.getSourcePath(),ALL_EVENTS_EVEN_THOSE_NOT_DOCUMENTED);
+  if (context == null) {
+    throw new IllegalArgumentException("NULL context argument received");
+  }
+  mConfiguration=configuration;
+  mContext=context;
+  mObservedChildren=new HashMap<>();
+}

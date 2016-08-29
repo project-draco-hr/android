@@ -1,10 +1,10 @@
 {
   if (value) {
-    mPrefInstantUploadCategory.addPreference(mPrefInstantVideoUploadPathWiFi);
+    mPrefInstantUploadCategory.addPreference(mPrefInstantVideoUploadWiFi);
     mPrefInstantUploadCategory.addPreference(mPrefInstantVideoUploadPath);
   }
  else {
-    mPrefInstantUploadCategory.removePreference(mPrefInstantVideoUploadPathWiFi);
+    mPrefInstantUploadCategory.removePreference(mPrefInstantVideoUploadWiFi);
     mPrefInstantUploadCategory.removePreference(mPrefInstantVideoUploadPath);
   }
 }

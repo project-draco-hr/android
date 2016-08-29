@@ -1,0 +1,15 @@
+{
+  InstantUploadsConfiguration result=new InstantUploadsConfiguration();
+  SharedPreferences prefs=getDefaultSharedPreferences(context);
+  result.setEnabledForPictures(prefs.getBoolean(PREF__INSTANT_PICTURE_ENABLED,false));
+  result.setEnabledForVideos(prefs.getBoolean(PREF__INSTANT_VIDEO_ENABLED,false));
+  result.setWifiOnlyForPictures(prefs.getBoolean(PREF__INSTANT_PICTURE_WIFI_ONLY,false));
+  result.setWifiOnlyForVideos(prefs.getBoolean(PREF__INSTANT_VIDEO_WIFI_ONLY,false));
+  Account currentAccount=AccountUtils.getCurrentOwnCloudAccount(context);
+  result.setUploadAccountName(prefs.getString(PREF__INSTANT_UPLOAD_ACCOUNT_NAME,(currentAccount == null) ? "" : currentAccount.name));
+  result.setUploadPathForPictures(prefs.getString(PREF__INSTANT_PICTURE_UPLOAD_PATH,context.getString(R.string.instant_upload_path) + OCFile.PATH_SEPARATOR));
+  result.setUploadPathForVideos(prefs.getString(PREF__INSTANT_VIDEO_UPLOAD_PATH,context.getString(R.string.instant_upload_path) + OCFile.PATH_SEPARATOR));
+  result.setBehaviourAfterUpload(prefs.getString(PREF__INSTANT_UPLOAD_BEHAVIOUR,context.getResources().getStringArray(R.array.pref_behaviour_entryValues)[0]));
+  result.setSourcePath(prefs.getString(PREF__INSTANT_UPLOAD_SOURCE,InstantUploadsConfiguration.DEFAULT_SOURCE_PATH));
+  return result;
+}

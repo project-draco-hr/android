@@ -5,12 +5,15 @@
     return Service.START_STICKY;
   }
  else   if (ACTION_ADD_OBSERVED_FILE.equals(intent.getAction())) {
-    OCFile file=(OCFile)intent.getParcelableExtra(ARG_FILE);
-    Account account=(Account)intent.getParcelableExtra(ARG_ACCOUNT);
+    OCFile file=intent.getParcelableExtra(ARG_FILE);
+    Account account=intent.getParcelableExtra(ARG_ACCOUNT);
     addObservedFile(file,account);
   }
  else   if (ACTION_DEL_OBSERVED_FILE.equals(intent.getAction())) {
     removeObservedFile((OCFile)intent.getParcelableExtra(ARG_FILE),(Account)intent.getParcelableExtra(ARG_ACCOUNT));
+  }
+ else   if (ACTION_UPDATE_AUTO_UPLOAD_OBSERVERS.equals(intent.getAction())) {
+    updateInstantUploadsObservers();
   }
  else {
     Log_OC.e(TAG,"Unknown action recieved; ignoring it: " + intent.getAction());

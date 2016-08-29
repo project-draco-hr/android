@@ -1,0 +1,9 @@
+{
+  super.onAttach(context);
+  try {
+    mContainerActivity=(ContainerActivity)context;
+  }
+ catch (  ClassCastException e) {
+    throw new ClassCastException(context.toString() + " must implement " + LocalFileListFragment.ContainerActivity.class.getSimpleName());
+  }
+}

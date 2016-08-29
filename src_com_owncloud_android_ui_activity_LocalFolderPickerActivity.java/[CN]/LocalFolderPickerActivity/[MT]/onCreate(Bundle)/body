@@ -1,0 +1,42 @@
+{
+  Log_OC.d(TAG,"onCreate() start");
+  super.onCreate(savedInstanceState);
+  String startPath=(savedInstanceState != null) ? savedInstanceState.getString(LocalFolderPickerActivity.EXTRA_PATH) : getIntent().getStringExtra(EXTRA_PATH);
+  if (startPath != null) {
+    mCurrentFolder=new File(startPath);
+  }
+  if (mCurrentFolder == null || !mCurrentFolder.exists()) {
+    mCurrentFolder=Environment.getExternalStorageDirectory();
+  }
+ else   if (!mCurrentFolder.isDirectory()) {
+    mCurrentFolder=mCurrentFolder.getParentFile();
+  }
+  setContentView(R.layout.files_folder_picker);
+  if (savedInstanceState == null) {
+    createFragments();
+  }
+  mCancelBtn=(Button)findViewById(R.id.folder_picker_btn_cancel);
+  mCancelBtn.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View view){
+      setResult(RESULT_CANCELED);
+      finish();
+    }
+  }
+);
+  mChooseBtn=(Button)findViewById(R.id.folder_picker_btn_choose);
+  mChooseBtn.setOnClickListener(new View.OnClickListener(){
+    @Override public void onClick(    View view){
+      Intent data=new Intent();
+      data.putExtra(EXTRA_PATH,mCurrentFolder.getAbsolutePath());
+      setResult(RESULT_OK,data);
+      finish();
+    }
+  }
+);
+  ActionBar actionBar=getSupportActionBar();
+  if (actionBar != null) {
+    actionBar.setDisplayShowTitleEnabled(true);
+  }
+  updateActionBar();
+  Log_OC.d(TAG,"onCreate() end");
+}

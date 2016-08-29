@@ -1,3 +1,3 @@
 {
-  return getDefaultSharedPreferences(context).getBoolean(PREF__INSTANT_UPLOAD_ON_WIFI,false);
+  return getDefaultSharedPreferences(context).getBoolean(PREF__INSTANT_PICTURE_WIFI_ONLY,false);
 }

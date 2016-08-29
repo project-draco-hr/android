@@ -2,21 +2,21 @@
   File file=(File)mAdapter.getItem(position);
   if (file != null) {
     if (file.isDirectory()) {
-      listDirectory(file);
-      mContainerActivity.onDirectoryClick(file);
+      listFolder(file);
+      mContainerActivity.onFolderClicked(file);
       saveIndexAndTopPosition(position);
     }
  else {
       ImageView checkBoxV=(ImageView)v.findViewById(R.id.custom_checkbox);
       if (checkBoxV != null) {
-        if (((ListView)getListView()).isItemChecked(position)) {
+        if (getListView().isItemChecked(position)) {
           checkBoxV.setImageResource(R.drawable.ic_checkbox_marked);
         }
  else {
           checkBoxV.setImageResource(R.drawable.ic_checkbox_blank_outline);
         }
       }
-      mContainerActivity.onFileClick(file);
+      mContainerActivity.onFileClicked(file);
     }
   }
  else {

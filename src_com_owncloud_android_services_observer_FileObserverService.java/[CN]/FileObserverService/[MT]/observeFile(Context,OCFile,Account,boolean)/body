@@ -1,0 +1,7 @@
+{
+  Intent intent=new Intent(context,FileObserverService.class);
+  intent.setAction(watchIt ? FileObserverService.ACTION_ADD_OBSERVED_FILE : FileObserverService.ACTION_DEL_OBSERVED_FILE);
+  intent.putExtra(FileObserverService.ARG_FILE,file);
+  intent.putExtra(FileObserverService.ARG_ACCOUNT,account);
+  context.startService(intent);
+}

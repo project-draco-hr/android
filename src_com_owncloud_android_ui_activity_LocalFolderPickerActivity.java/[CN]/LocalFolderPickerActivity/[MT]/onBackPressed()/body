@@ -1,0 +1,15 @@
+{
+  if (!mayBrowseUp()) {
+    finish();
+    return;
+  }
+  LocalFileListFragment listFragment=getListFragment();
+  if (listFragment != null) {
+    listFragment.browseUp();
+    mCurrentFolder=listFragment.getCurrentFolder();
+    updateActionBar();
+  }
+ else {
+    Log_OC.e(TAG,"List of files not found - cannot browse up");
+  }
+}

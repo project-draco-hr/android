@@ -1,0 +1,7 @@
+{
+  LocalFileListFragment frag=new LocalFileListFragment();
+  Bundle args=new Bundle();
+  args.putBoolean(ARG_JUST_FOLDERS,justFolders);
+  frag.setArguments(args);
+  return frag;
+}

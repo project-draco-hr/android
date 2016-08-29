@@ -1,4 +1,5 @@
 {
+  FileObserverService.updateInstantUploadsObservers(Preferences.this);
   super.onStop();
   getDelegate().onStop();
 }

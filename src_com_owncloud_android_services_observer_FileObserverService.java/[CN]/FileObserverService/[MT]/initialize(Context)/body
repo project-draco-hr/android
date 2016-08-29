@@ -1,0 +1,5 @@
+{
+  Intent i=new Intent(context,FileObserverService.class);
+  i.setAction(ACTION_START_OBSERVE);
+  context.startService(i);
+}

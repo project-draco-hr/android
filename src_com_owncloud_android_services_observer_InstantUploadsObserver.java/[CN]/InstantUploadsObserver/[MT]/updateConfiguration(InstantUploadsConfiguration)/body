@@ -1,0 +1,11 @@
+{
+  if (configuration == null) {
+    throw new IllegalArgumentException("NULL configuration argument received");
+  }
+synchronized (mLock) {
+    if (!mConfiguration.getSourcePath().equals(configuration.getSourcePath())) {
+      throw new IllegalArgumentException("Source path in new configuration must match source path in the current one");
+    }
+    mConfiguration=configuration;
+  }
+}
