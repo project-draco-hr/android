@@ -1,8 +1,0 @@
-{
-  File sdCard=Environment.getExternalStorageDirectory();
-  String dataFolderPath=sdCard.getAbsolutePath() + "/" + MainApp.getDataFolder()+ "/";
-  if (fullPath.indexOf(dataFolderPath) == 0) {
-    return fullPath.substring(dataFolderPath.length());
-  }
-  return fullPath;
-}

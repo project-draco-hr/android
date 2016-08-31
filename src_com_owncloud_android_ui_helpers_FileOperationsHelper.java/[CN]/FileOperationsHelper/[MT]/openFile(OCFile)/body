@@ -1,16 +1,15 @@
 {
   if (file != null) {
     String storagePath=file.getStoragePath();
-    String encodedStoragePath=WebdavUtils.encodePath(storagePath);
     Intent intentForSavedMimeType=new Intent(Intent.ACTION_VIEW);
-    intentForSavedMimeType.setDataAndType(Uri.parse("file://" + encodedStoragePath),file.getMimetype());
+    intentForSavedMimeType.setDataAndType(file.getExposedFileUri(mFileActivity),file.getMimetype());
     intentForSavedMimeType.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
     Intent intentForGuessedMimeType=null;
     if (storagePath.lastIndexOf('.') >= 0) {
       String guessedMimeType=MimeTypeMap.getSingleton().getMimeTypeFromExtension(storagePath.substring(storagePath.lastIndexOf('.') + 1));
       if (guessedMimeType != null && !guessedMimeType.equals(file.getMimetype())) {
         intentForGuessedMimeType=new Intent(Intent.ACTION_VIEW);
-        intentForGuessedMimeType.setDataAndType(Uri.parse("file://" + encodedStoragePath),guessedMimeType);
+        intentForGuessedMimeType.setDataAndType(file.getExposedFileUri(mFileActivity),guessedMimeType);
         intentForGuessedMimeType.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
       }
     }
