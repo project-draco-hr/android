@@ -14,7 +14,7 @@
   TextView fileSizeSeparatorV=(TextView)vi.findViewById(R.id.file_separator);
   fileSizeV.setVisibility(View.VISIBLE);
   fileSizeSeparatorV.setVisibility(View.VISIBLE);
-  fileSizeV.setText(DisplayUtils.bytesToHumanReadable(file.getFileLength()));
+  fileSizeV.setText(DisplayUtils.bytesToHumanReadable(file.getFileLength(),mContext));
   if (file.isImage() && file.getRemoteId() != null) {
     Bitmap thumbnail=ThumbnailsCacheManager.getBitmapFromDiskCache(String.valueOf(file.getRemoteId()));
     if (thumbnail != null && !file.needsUpdateThumbnail()) {

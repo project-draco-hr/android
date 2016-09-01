@@ -1,10 +1,9 @@
 {
   if (file != null) {
     String storagePath=file.getStoragePath();
-    String encodedStoragePath=WebdavUtils.encodePath(storagePath);
     Intent sendIntent=new Intent(android.content.Intent.ACTION_SEND);
     sendIntent.setType(file.getMimetype());
-    sendIntent.putExtra(Intent.EXTRA_STREAM,Uri.parse("file://" + encodedStoragePath));
+    sendIntent.putExtra(Intent.EXTRA_STREAM,file.getExposedFileUri(mFileActivity));
     sendIntent.putExtra(Intent.ACTION_SEND,true);
     String[] packagesToExclude=new String[]{mFileActivity.getPackageName()};
     DialogFragment chooserDialog=ShareLinkToDialog.newInstance(sendIntent,packagesToExclude);

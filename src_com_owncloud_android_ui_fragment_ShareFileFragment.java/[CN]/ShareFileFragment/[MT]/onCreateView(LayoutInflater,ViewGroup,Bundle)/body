@@ -17,7 +17,7 @@
     size.setVisibility(View.GONE);
   }
  else {
-    size.setText(DisplayUtils.bytesToHumanReadable(mFile.getFileLength()));
+    size.setText(DisplayUtils.bytesToHumanReadable(mFile.getFileLength(),getActivity()));
   }
   Button addUserGroupButton=(Button)view.findViewById(R.id.addUserButton);
   addUserGroupButton.setOnClickListener(new View.OnClickListener(){

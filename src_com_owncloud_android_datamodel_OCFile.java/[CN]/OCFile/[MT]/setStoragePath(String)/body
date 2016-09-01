@@ -1,4 +1,5 @@
 {
   mLocalPath=storage_path;
   mLocalUri=null;
+  mExposedFileUri=null;
 }

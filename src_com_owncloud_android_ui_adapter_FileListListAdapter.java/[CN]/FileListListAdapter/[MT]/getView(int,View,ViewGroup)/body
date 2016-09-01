@@ -49,7 +49,7 @@ lastModV.setVisibility(View.VISIBLE);
 lastModV.setText(DisplayUtils.getRelativeTimestamp(mContext,file.getModificationTimestamp()));
 fileSizeSeparatorV.setVisibility(View.VISIBLE);
 fileSizeV.setVisibility(View.VISIBLE);
-fileSizeV.setText(DisplayUtils.bytesToHumanReadable(file.getFileLength()));
+fileSizeV.setText(DisplayUtils.bytesToHumanReadable(file.getFileLength(),mContext));
 case GRID_ITEM:
 fileName=(TextView)view.findViewById(R.id.Filename);
 name=file.getFileName();

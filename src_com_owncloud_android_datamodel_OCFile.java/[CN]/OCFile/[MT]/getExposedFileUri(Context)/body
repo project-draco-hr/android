@@ -1,0 +1,19 @@
+{
+  if (mLocalPath == null || mLocalPath.length() == 0) {
+    return null;
+  }
+  if (mExposedFileUri == null) {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+      mExposedFileUri=Uri.parse(ContentResolver.SCHEME_FILE + "://" + WebdavUtils.encodePath(mLocalPath));
+    }
+ else {
+      try {
+        mExposedFileUri=FileProvider.getUriForFile(context,context.getString(R.string.file_provider_authority),new File(mLocalPath));
+      }
+ catch (      IllegalArgumentException e) {
+        Log_OC.e(TAG,"File can't be exported");
+      }
+    }
+  }
+  return mExposedFileUri;
+}
