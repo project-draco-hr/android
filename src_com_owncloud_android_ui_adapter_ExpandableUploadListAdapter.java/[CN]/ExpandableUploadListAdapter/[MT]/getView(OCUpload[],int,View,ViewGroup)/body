@@ -18,7 +18,7 @@
     remoteParentPath=new File(remoteParentPath).getParent();
     pathTextView.setText(mParentActivity.getString(R.string.app_name) + remoteParentPath);
     TextView fileSizeTextView=(TextView)view.findViewById(R.id.upload_file_size);
-    fileSizeTextView.setText(DisplayUtils.bytesToHumanReadable(upload.getFileSize()) + ", ");
+    fileSizeTextView.setText(DisplayUtils.bytesToHumanReadable(upload.getFileSize(),mParentActivity) + ", ");
     TextView uploadDateTextView=(TextView)view.findViewById(R.id.upload_date);
     long updateTime=upload.getUploadEndTimestamp();
     CharSequence dateString=DisplayUtils.getRelativeDateTimeString(mParentActivity,updateTime,DateUtils.SECOND_IN_MILLIS,DateUtils.WEEK_IN_MILLIS,0);
