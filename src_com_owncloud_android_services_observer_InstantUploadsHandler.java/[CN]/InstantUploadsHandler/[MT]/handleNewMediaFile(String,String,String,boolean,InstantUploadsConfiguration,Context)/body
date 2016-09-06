@@ -1,0 +1,23 @@
+{
+  int permissionCheck=ContextCompat.checkSelfPermission(context,Manifest.permission.READ_EXTERNAL_STORAGE);
+  if (android.content.pm.PackageManager.PERMISSION_GRANTED != permissionCheck) {
+    Log_OC.w(TAG,"Read external storage permission isn't granted, aborting");
+    return false;
+  }
+  File localFile=new File(localPath);
+  if (!localFile.exists() || localFile.length() <= 0) {
+    Log_OC.w(TAG,"Camera app saved an empty or temporary file, ignoring " + fileName);
+    return false;
+  }
+  Account account=AccountUtils.getOwnCloudAccountByName(context,configuration.getUploadAccountName());
+  if (account == null) {
+    Log_OC.w(TAG,"No account found for instant upload, aborting upload");
+    return false;
+  }
+  String remotePath=(isImage ? configuration.getUploadPathForPictures() : configuration.getUploadPathForVideos()) + fileName;
+  int createdBy=isImage ? UploadFileOperation.CREATED_AS_INSTANT_PICTURE : UploadFileOperation.CREATED_AS_INSTANT_VIDEO;
+  FileUploader.UploadRequester requester=new FileUploader.UploadRequester();
+  requester.uploadNewFile(context,account,localPath,remotePath,configuration.getBehaviourAfterUpload(),mimeType,true,createdBy);
+  Log_OC.i(TAG,String.format("Requested upload of %1s to %2s in %3s",localPath,remotePath,account.name));
+  return true;
+}

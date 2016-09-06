@@ -1,0 +1,16 @@
+{
+  Log_OC.d(TAG,"Received: " + intent.getAction());
+  if (intent.getAction().equals(NEW_PHOTO_ACTION)) {
+    InstantUploadsHandler handler=new InstantUploadsHandler();
+    handler.handleNewPictureAction(intent,PreferenceManager.getInstantUploadsConfiguration(context),context);
+    Log_OC.d(TAG,"processed: android.hardware.action.NEW_PICTURE");
+  }
+ else   if (intent.getAction().equals(NEW_VIDEO_ACTION)) {
+    InstantUploadsHandler handler=new InstantUploadsHandler();
+    handler.handleNewVideoAction(intent,PreferenceManager.getInstantUploadsConfiguration(context),context);
+    Log_OC.d(TAG,"processed: android.hardware.action.NEW_VIDEO");
+  }
+ else {
+    Log_OC.e(TAG,"Incorrect intent received: " + intent.getAction());
+  }
+}

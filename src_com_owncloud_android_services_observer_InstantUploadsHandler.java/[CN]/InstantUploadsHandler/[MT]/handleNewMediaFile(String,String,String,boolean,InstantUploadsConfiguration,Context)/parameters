@@ -1,0 +1,6 @@
+String fileName
+String localPath
+String mimeType
+boolean isImage
+InstantUploadsConfiguration configuration
+Context context
