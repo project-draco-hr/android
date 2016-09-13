@@ -1,5 +1,5 @@
 {
-  if (sLastUploadedFilePath.equals(localPath)) {
+  if (sRecentlyUploadedFilePaths.contains(localPath)) {
     Log_OC.i(TAG,"Duplicate detection of " + localPath + ", ignoring");
     return false;
   }
@@ -22,7 +22,10 @@
   int createdBy=isImage ? UploadFileOperation.CREATED_AS_INSTANT_PICTURE : UploadFileOperation.CREATED_AS_INSTANT_VIDEO;
   FileUploader.UploadRequester requester=new FileUploader.UploadRequester();
   requester.uploadNewFile(context,account,localPath,remotePath,configuration.getBehaviourAfterUpload(),mimeType,true,createdBy);
-  sLastUploadedFilePath=localPath;
+  if (sRecentlyUploadedFilePaths.size() >= MAX_RECENTS) {
+    sRecentlyUploadedFilePaths.remove(sRecentlyUploadedFilePaths.iterator().next());
+  }
+  sRecentlyUploadedFilePaths.add(localPath);
   Log_OC.i(TAG,String.format("Requested upload of %1s to %2s in %3s",localPath,remotePath,account.name));
   return true;
 }
