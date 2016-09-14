@@ -1,0 +1,22 @@
+{
+  Log_OC.i(TAG,"New video received");
+  if (!configuration.isEnabledForVideos()) {
+    Log_OC.d(TAG,"Instant upload disabled for videos, ignoring new video");
+    return false;
+  }
+  String[] CONTENT_PROJECTION={MediaStore.Video.Media.DATA,MediaStore.Video.Media.DISPLAY_NAME,MediaStore.Video.Media.MIME_TYPE,MediaStore.Video.Media.SIZE};
+  Cursor c=context.getContentResolver().query(intent.getData(),CONTENT_PROJECTION,null,null,null);
+  if (c == null || !c.moveToFirst()) {
+    Log_OC.e(TAG,"Couldn't resolve given uri: " + intent.getDataString());
+    if (c != null) {
+      c.close();
+    }
+    return false;
+  }
+  String localPath=c.getString(c.getColumnIndex(MediaStore.Video.Media.DATA));
+  String fileName=c.getString(c.getColumnIndex(MediaStore.Video.Media.DISPLAY_NAME));
+  String mimeType=c.getString(c.getColumnIndex(MediaStore.Video.Media.MIME_TYPE));
+  c.close();
+  Log_OC.d(TAG,"Local path: " + localPath);
+  return handleNewMediaFile(fileName,localPath,mimeType,false,configuration,context);
+}

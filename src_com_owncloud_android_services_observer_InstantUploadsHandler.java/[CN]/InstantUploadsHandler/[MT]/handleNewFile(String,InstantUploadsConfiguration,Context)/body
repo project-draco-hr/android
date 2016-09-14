@@ -1,0 +1,21 @@
+{
+  Log_OC.d(TAG,"New file " + fileName);
+  String mimeType=MimetypeIconUtil.getBestMimeTypeByFilename(fileName);
+  boolean isImage=mimeType.startsWith("image/");
+  boolean isVideo=mimeType.startsWith("video/");
+  if (!isImage && !isVideo) {
+    Log_OC.d(TAG,"Ignoring " + fileName);
+    return false;
+  }
+  if (isImage && !configuration.isEnabledForPictures()) {
+    Log_OC.d(TAG,"Instant upload disabled for images, ignoring " + fileName);
+    return false;
+  }
+  if (isVideo && !configuration.isEnabledForVideos()) {
+    Log_OC.d(TAG,"Instant upload disabled for videos, ignoring " + fileName);
+    return false;
+  }
+  String localPath=configuration.getSourcePath() + File.separator + fileName;
+  Log_OC.d(TAG,"Local path: " + localPath);
+  return handleNewMediaFile(fileName,localPath,mimeType,isImage,configuration,context);
+}
